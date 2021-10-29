@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateUserDevicesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('user_devices', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->string('ip')->index();
+            $table->string('user_agent')->index();
+            $table->string('fingerprint')->nullable();
+            $table->string('name')->nullable();
+            $table->boolean('trusted')->nullable();
+            $table->timestamp('last_active_at')->nullable();
+            $table->timestamps();
+
+            $table->unique(['user_id', 'ip', 'user_agent', 'fingerprint'], 'user_ip_agent_index');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('user_devices');
+    }
+}
