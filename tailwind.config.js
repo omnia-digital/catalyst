@@ -11,8 +11,22 @@ module.exports = {
         './resources/js/**/*.vue',
     ],
 
-    darkMode: 'media',
+    darkMode: 'class',
     theme: {
+        themeVariants: [
+            'default',
+            'dark',
+            'newyear',
+            'valentines',
+            'patrick',
+            'easter',
+            'spring',
+            'summer',
+            'independence',
+            'fall',
+            'halloween',
+            'christmas',
+            'winter'],
         extend: {
             fontFamily: {
                 sans: ["Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Helvetica", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
@@ -20,9 +34,12 @@ module.exports = {
             colors: {
                 rose: colors.rose,
                 neutral: "#f5f7fa",
-                primary: "rgba(16, 185, 129)",
+                primary: "#10b981",
+                // primary: "#303956",
                 // primary: "#305653",
-                secondary: "#303956"
+                secondary: "#303956",
+                // secondary: "#10b981",
+                tertiary: "#384263"
             },
         },
     },
@@ -35,5 +52,7 @@ module.exports = {
 
     plugins: [
         require('@tailwindcss/forms'),
-        require('@tailwindcss/typography')],
+        require('@tailwindcss/typography'),
+        require('tailwindcss-multi-theme'),
+    ]
 };

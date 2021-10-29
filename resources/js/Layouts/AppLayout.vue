@@ -52,7 +52,7 @@
                     <p class="text-green-500 text-3xl font-bold">IGD</p>
                 </div>
                 <a :href="route('profile')">
-                    <div class="flex-shrink-0 pl-6 flex hover:bg-primary p-4">
+                    <div class="flex-shrink-0 pl-6 flex p-4 bg-tertiary">
                         <div class="flex items-center">
                             <div>
                                 <img class="inline-block h-12 w-12 rounded-full"
@@ -63,7 +63,7 @@
                                 <p class="text-lg font-medium text-white">
                                     Joshua Torres
                                 </p>
-                                <p class="text-base font-medium text-indigo-200 group-hover:text-white">
+                                <p class="text-base font-medium text-primary group-hover:text-white">
                                     Lvl 5 <span class="text-gold">5348</span>
                                 </p>
                             </div>
@@ -72,9 +72,9 @@
                 </a>
                 <div class="flex-1 flex pl-6 flex-col overflow-y-auto">
                     <nav class="flex-1 py-4 space-y-1">
-                        <a v-for="item in navigation" :key="item.name" :href="route(item.name)" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        <a v-for="item in navigation" :key="item.name" :href="route(item.name)" :class="[item.current ? 'bg-tertiary text-white' : 'text-gray-300 hover:bg-tertiary hover:text-white',
                         'group flex items-center px-2 py-2 text-lg font-medium rounded-md']">
-                            <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
+                            <component :is="item.icon" :class="[item.current ? 'text-white' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
                             {{ item.label }}
                         </a>
                     </nav>

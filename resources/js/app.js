@@ -1,5 +1,8 @@
 require('./bootstrap');
 
+require('@fortawesome/fontawesome-pro/js/fontawesome.min')
+require('@fortawesome/fontawesome-pro/js/all.min')
+
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
