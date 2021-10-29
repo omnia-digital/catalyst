@@ -15,10 +15,14 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Roboto","-apple-system", "BlinkMacSystemFont", "Segoe UI", "Helvetica", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
+                sans: ["Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Helvetica", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 rose: colors.rose,
+                neutral: "#f5f7fa",
+                primary: "rgba(16, 185, 129)",
+                // primary: "#305653",
+                secondary: "#303956"
             },
         },
     },

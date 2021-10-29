@@ -45,14 +45,14 @@
         <!-- Static sidebar for desktop -->
         <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 shadow-lg">
             <!-- Sidebar component, swap this element with another sidebar if you like -->
-            <div class="flex-1 flex flex-col min-h-0 bg-gray-800">
-                <div class="flex items-center pl-6 h-16 flex-shrink-0 bg-gray-900">
+            <div class="flex-1 flex flex-col min-h-0 bg-secondary">
+                <div class="flex items-center pl-6 h-16 flex-shrink-0">
                     <!-- desktop logo -->
                     <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
                     <p class="text-green-500 text-3xl font-bold">IGD</p>
                 </div>
-                <div class="flex-shrink-0 pl-6 flex border-t border-green-800 p-4">
-                    <a href="#" class="flex-shrink-0 w-full group block">
+                <a :href="route('profile')">
+                    <div class="flex-shrink-0 pl-6 flex hover:bg-primary p-4">
                         <div class="flex items-center">
                             <div>
                                 <img class="inline-block h-12 w-12 rounded-full"
@@ -68,8 +68,8 @@
                                 </p>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
                 <div class="flex-1 flex pl-6 flex-col overflow-y-auto">
                     <nav class="flex-1 py-4 space-y-1">
                         <a v-for="item in navigation" :key="item.name" :href="route(item.name)" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
@@ -81,50 +81,63 @@
                 </div>
             </div>
         </div>
-                <div class="md:pl-64 flex flex-col">
-                    <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
-                        <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden" @click="sidebarOpen = true">
-                            <span class="sr-only">Open sidebar</span>
-                            <MenuAlt2Icon class="h-6 w-6" aria-hidden="true" />
+        <div class="md:pl-64 flex flex-col">
+            <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
+                <!-- mobile menu button -->
+                <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden" @click="sidebarOpen = true">
+                    <span class="sr-only">Open sidebar</span>
+                    <MenuAlt2Icon class="h-6 w-6" aria-hidden="true"/>
+                </button>
+                <!-- top app header -->
+                <div class="flex-1 px-4 flex justify-between bg-neutral items-center">
+                    <h1 class="text-gray-600 ml-4 text-3xl">Community</h1>
+                    <!-- search -->
+<!--                    <div class="flex-1 flex">-->
+<!--                        <form class="w-full flex md:ml-0" action="#" method="GET">-->
+<!--                            <label for="search-field" class="sr-only">Search</label>-->
+<!--                            <div class="relative w-full text-gray-400 focus-within:text-gray-600">-->
+<!--                                <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">-->
+<!--                                    <SearchIcon class="h-5 w-5" aria-hidden="true"/>-->
+<!--                                </div>-->
+<!--                                <input id="search-field"-->
+<!--                                       class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"-->
+<!--                                       placeholder="Search" type="search" name="search"/>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <button type="button" class="p-1 mx-1 rounded-full text-gray-400 hover:text-primary focus:outline-none">
+                            <span class="sr-only">View notifications</span>
+                            <BookmarkIcon class="h-7 w-7" aria-hidden="true"/>
                         </button>
-                        <div class="flex-1 px-4 flex justify-between">
-                            <div class="flex-1 flex">
-                                <form class="w-full flex md:ml-0" action="#" method="GET">
-                                    <label for="search-field" class="sr-only">Search</label>
-                                    <div class="relative w-full text-gray-400 focus-within:text-gray-600">
-                                        <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                                            <SearchIcon class="h-5 w-5" aria-hidden="true" />
-                                        </div>
-                                        <input id="search-field" class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm" placeholder="Search" type="search" name="search" />
-                                    </div>
-                                </form>
+                        <button type="button" class="p-1 mr-2 rounded-full text-gray-400 hover:text-primary focus:outline-none">
+                            <span class="sr-only">View notifications</span>
+                            <BellIcon class="h-7 w-7" aria-hidden="true"/>
+                        </button>
+                        <!-- Profile dropdown -->
+                        <Menu as="div" class="ml-3 relative">
+                            <div>
+                                <MenuButton
+                                    class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary hover:ring-2 hover:ring-offset-2 hover:ring-primary">
+                                    <span class="sr-only">Open user menu</span>
+                                    <img class="h-12 w-12 rounded-full"
+                                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                         alt=""/>
+                                </MenuButton>
                             </div>
-                            <div class="ml-4 flex items-center md:ml-6">
-                                <button type="button" class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    <span class="sr-only">View notifications</span>
-                                    <BellIcon class="h-6 w-6" aria-hidden="true" />
-                                </button>
-
-                                <!-- Profile dropdown -->
-                                <Menu as="div" class="ml-3 relative">
-                                    <div>
-                                        <MenuButton class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            <span class="sr-only">Open user menu</span>
-                                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                        </MenuButton>
-                                    </div>
-                                    <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                                        <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                            <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                                                <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</a>
-                                            </MenuItem>
-                                        </MenuItems>
-                                    </transition>
-                                </Menu>
-                            </div>
-                        </div>
-                        </div>
+                            <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+                                        leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+                                <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
+                                        <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</a>
+                                    </MenuItem>
+                                </MenuItems>
+                            </transition>
+                        </Menu>
                     </div>
+                </div>
+            </div>
+        </div>
         <!-- Sub-App main layout -->
         <main class="md:pl-64 flex flex-col">
             <slot></slot>
@@ -135,7 +148,7 @@
 <script>
 import {ref} from 'vue'
 import {Dialog, DialogOverlay, Menu, MenuButton, MenuItem, MenuItems, TransitionChild, TransitionRoot,} from '@headlessui/vue'
-import {AcademicCapIcon, BellIcon, DotsHorizontalIcon, HomeIcon, MenuAlt2Icon, OfficeBuildingIcon, UsersIcon, MailIcon,CollectionIcon,InformationCircleIcon, XIcon} from '@heroicons/vue/outline'
+import {AcademicCapIcon, BellIcon, CollectionIcon, DotsHorizontalIcon, InformationCircleIcon, MailIcon, MenuAlt2Icon, OfficeBuildingIcon, UsersIcon, BookmarkIcon, XIcon} from '@heroicons/vue/outline'
 import {SearchIcon} from '@heroicons/vue/solid'
 import JetApplicationMark from '@/Jetstream/ApplicationMark.vue'
 import JetBanner from '@/Jetstream/Banner.vue'
@@ -170,6 +183,7 @@ export default {
         JetDropdownLink,
         JetNavLink,
         JetResponsiveNavLink,
+        BookmarkIcon,
         Link,
         Dialog,
         DialogOverlay,

@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <div class="min-h-screen bg-gray-100">
-            <Disclosure as="nav" class="bg-gray-200 border-b border-green-800" v-slot="{ open }">
+            <Disclosure as="nav" class=" border-b border-neutral" v-slot="{ open }">
                 <div class="max-w-4xl mx-auto">
                     <div class="flex h-16 justify-between">
                         <div class="-ml-2 mr-2 flex items-center md:hidden">
@@ -15,7 +15,7 @@
                         </div>
                         <div class="hidden md:flex md:items-center space-x-8">
                             <jet-nav-link v-for="item in navigation" :key="item.name" :href="route(item.name)" :active="route().current(item.name)">
-                                {{ item.label }}
+                                <component :is="item.icon" class="mr-3 flex-shrink-0 h-6 w-6" aria-hidden="true"/> {{ item.label }}
                             </jet-nav-link>
 <!--                            <a v-for="item in navigation" :key="item.name" :href="route(item.name)"-->
 <!--                               :class="[item.current ? 'bg-gray-900 text-white' : 'dark:text-gray-200 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-bold']"-->
@@ -86,7 +86,7 @@
 
 <script>
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPanel,} from '@headlessui/vue'
-import {AcademicCapIcon, BellIcon, HomeIcon, MenuIcon, OfficeBuildingIcon, UsersIcon, XIcon} from '@heroicons/vue/outline'
+import {AcademicCapIcon, BellIcon, HomeIcon, MenuIcon, HashtagIcon, UserGroupIcon, OfficeBuildingIcon, UsersIcon, XIcon} from '@heroicons/vue/outline'
 import {PlusSmIcon, SearchIcon} from '@heroicons/vue/solid'
 import AppLayout from "@/Layouts/AppLayout";
 import JetApplicationMark from '@/Jetstream/ApplicationMark.vue'
@@ -105,9 +105,9 @@ import {Head, Link} from '@inertiajs/inertia-vue3';
 // ]
 const navigation = [
     {label: 'Home', name: 'home', icon: HomeIcon, current: true},
-    {label: 'Explore', name: 'explore', icon: UsersIcon, current: false},
-    {label: 'Profile', name: 'profile', icon: AcademicCapIcon, current: false},
-    {label: 'Bookmarks', name: 'bookmarks', icon: OfficeBuildingIcon, current: false},
+    {label: 'Explore', name: 'explore', icon: HashtagIcon, current: false},
+    {label: 'Projects', name: 'projects', icon: OfficeBuildingIcon, current: false},
+    {label: 'Groups', name: 'groups', icon: UserGroupIcon, current: false},
 ]
 const userNavigation = [
     {name: 'Your Profile', href: '#'},
@@ -136,6 +136,9 @@ export default {
         MenuButton,
         MenuItem,
         MenuItems,
+        HomeIcon,
+        HashtagIcon,
+        UserGroupIcon,
         Head,
         JetApplicationMark,
         JetBanner,
