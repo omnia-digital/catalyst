@@ -7,6 +7,8 @@
 /public/*.js
 /public/mix-manifest.json
 /storage/*.key
+/storage/framework
+/storage/logs
 /vendor
 .env
 .env.backup
