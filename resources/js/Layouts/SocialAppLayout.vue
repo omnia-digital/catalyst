@@ -73,7 +73,7 @@
 
 <script>
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPanel,} from '@headlessui/vue'
-import {AcademicCapIcon, BellIcon, HomeIcon, MenuIcon, HashtagIcon, UserGroupIcon, OfficeBuildingIcon, UsersIcon, XIcon} from '@heroicons/vue/outline'
+import {AcademicCapIcon, BellIcon, HomeIcon, MenuIcon, HashtagIcon, UserGroupIcon, OfficeBuildingIcon, UserIcon, XIcon} from '@heroicons/vue/outline'
 import {PlusSmIcon, SearchIcon} from '@heroicons/vue/solid'
 import AppLayout from "@/Layouts/AppLayout";
 import JetApplicationMark from '@/Jetstream/ApplicationMark.vue'
@@ -93,6 +93,7 @@ import {Head, Link} from '@inertiajs/inertia-vue3';
 const navigation = [
     {label: 'Home', name: 'home', icon: HomeIcon, current: true},
     {label: 'Explore', name: 'explore', icon: HashtagIcon, current: false},
+    {label: 'Profile', name: 'profile', icon: UserIcon, current: false},
     {label: 'Projects', name: 'projects', icon: OfficeBuildingIcon, current: false},
     {label: 'Groups', name: 'groups', icon: UserGroupIcon, current: false},
 ]
@@ -120,6 +121,7 @@ export default {
         DisclosurePanel,
         PlusSmIcon,
         Menu,
+        UserIcon,
         MenuButton,
         MenuItem,
         MenuItems,
