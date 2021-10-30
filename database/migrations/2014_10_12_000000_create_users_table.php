@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('status')->nullable()->index();
-            $table->text('two_factor_secret')->nullable();
-            $table->text('two_factor_recovery_codes')->nullable();
+//            $table->text('two_factor_secret')->nullable();
+//            $table->text('two_factor_recovery_codes')->nullable();
             $table->boolean('2fa_enabled')->default(false);
             $table->string('2fa_secret')->nullable();
             $table->json('2fa_backup_codes')->nullable();
@@ -34,8 +34,8 @@ class CreateUsersTable extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamp('last_active_at')->nullable()->index();
             $table->timestamp('delete_after')->nullable();
-            $table->timestamps();
             $table->softDeletes()->index();
+            $table->timestamps();
         });
     }
 
