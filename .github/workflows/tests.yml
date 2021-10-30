@@ -1,0 +1,48 @@
+name: Run Automated Tests
+on:
+  push:
+    branches: [ main, dev ]
+jobs:
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.composer/cache/files
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql
+      - name: Copy environment config file
+        run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
+      - name: Run yarn
+        run: |
+          yarn --version
+          yarn && yarn dev
+      - name: Validate Composer
+        run: composer validate
+      - name: Install Composer dependencies
+        run: |
+          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+          composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
+          composer install --prefer-dist --no-interaction --no-suggest
+      #       - name: Run Tests
+      #         run: |
+      #           ./vendor/bin/phpunit --version
+      #           ./vendor/bin/phpunit --verbose
+      #         env:
+      #           APP_ENV: testing
+#      - name: Upload artifacts
+#        uses: actions/upload-artifact@v2
+#        if: failure()
+#        with:
+#          name: Logs
+#          path: ./storage/logs
