@@ -29,20 +29,31 @@
                             </h1>
                             <p class="text-sm text-gray-600">@SocksandGoats</p>
                         </div>
-                        <div class="mt-2">
+                        <div class="mt-2 text-sm">
                             <p>SocksGoat Indie Game Dev creating
-                                @_ProjectCanopy_
-                                Wishlist: https://bit.ly/2JFWHz4 Website: https://projectcanopygame.com YT: https://bit.ly/3gzERd2
-                                USAbuff.ly/3fA1hdQJoined March 2020
-                                1,645 Following
-                                1,191 Followers</p>
+                                <a href="#" class="text-primary">@_ProjectCanopy_</a>
+                                Wishlist: <a href="#" class="text-primary">https://bit.ly/2JFWHz4</a> Website: <a href="#" class="text-primary">https://projectcanopygame.com</a> YT:
+                                <a href="#" class="text-primary">https://bit.ly/3gzERd2</a>
+                            </p>
                         </div>
-                        <div class="flex">
+                        <div class="flex space-x-3 my-2 items-center">
                             <!-- Location -->
-                            <a>USA</a>
-                            <div>
-                                <font-awesome-icon icon="fa-light fa-link" />                                <a href="https://socksandgoats.com">socksandgoats.com</a>
+                            <div class="flex items-center space-x-1">
+                                <i class="fa-light fa-map-marker-alt"></i>
+                                <p>USA</p>
                             </div>
+                            <a href="https://socksandgoats.com" class="flex items-center space-x-1">
+                                <i class="fa-light fa-link"></i>
+                                <p class="text-primary">socksandgoats.com</p>
+                            </a>
+                            <div class="flex items-center space-x-1">
+                                <i class="fa-light fa-calendar-alt"></i>
+                                <p>Joined March 2020</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-5 my-2 items-center">
+                            <p><span class="font-bold">1,645</span> <span class="text-gray-600">Following</span></p>
+                            <p><span class="font-bold">1,191</span> <span class="text-gray-600">Followers</span></p>
                         </div>
                     </div>
 

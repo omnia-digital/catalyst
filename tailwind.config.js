@@ -31,6 +31,9 @@ module.exports = {
             fontFamily: {
                 sans: ["Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Helvetica", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
             },
+            fontSize: {
+                'sm': '0.95rem'
+            },
             colors: {
                 rose: colors.rose,
                 neutral: "#f5f7fa",
