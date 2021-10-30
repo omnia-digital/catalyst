@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models;
+    namespace App\Models;
 
-use Laravel\Jetstream\Membership as JetstreamMembership;
+    use Laravel\Jetstream\Membership as JetstreamMembership;
 
-class Membership extends JetstreamMembership
-{
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = true;
-}
+    class Membership extends JetstreamMembership
+    {
+        /**
+         * Indicates if the IDs are auto-incrementing.
+         *
+         * @var bool
+         */
+        public $incrementing = true;
+    }

@@ -56,6 +56,13 @@
         })->name('marketplace');
 
         Route::prefix('social')->group(function() {
+
+            // the way twitter works is
+            // /{username} for profile
+            // /{username}/status/{post_id} for any type of post, whether it's a post or reply
+            // /{messages}/{message_id} for messages
+
+
             Route::get('/', function () {
                 return Inertia::render('Social/Home');
             })->name('social-home');
@@ -63,7 +70,7 @@
                 return Inertia::render('Social/Home');
             })->name('explore');
             Route::get('/profile', function () {
-                return Inertia::render('Social/Home');
+                return Inertia::render('Social/Profile');
             })->name('profile');
             Route::get('/bookmarks', function () {
                 return Inertia::render('Social/Home');
