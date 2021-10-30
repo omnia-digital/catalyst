@@ -18,3 +18,7 @@ h3 {
 .sub-app-sub-header {
     @apply py-2
 }
+
+/*a {*/
+/*    @apply text-primary*/
+/*}*/
