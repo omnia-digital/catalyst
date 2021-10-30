@@ -1,29 +1,30 @@
 <?php
 
-namespace App\Models;
+    namespace App\Models;
 
-use Laravel\Jetstream\Jetstream;
-use Laravel\Jetstream\TeamInvitation as JetstreamTeamInvitation;
+    use Illuminate\Database\Eloquent\Relations\BelongsTo;
+    use Laravel\Jetstream\Jetstream;
+    use Laravel\Jetstream\TeamInvitation as JetstreamTeamInvitation;
 
-class TeamInvitation extends JetstreamTeamInvitation
-{
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
-    protected $fillable = [
-        'email',
-        'role',
-    ];
-
-    /**
-     * Get the team that the invitation belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function team()
+    class TeamInvitation extends JetstreamTeamInvitation
     {
-        return $this->belongsTo(Jetstream::teamModel());
+        /**
+         * The attributes that are mass assignable.
+         *
+         * @var string[]
+         */
+        protected $fillable = [
+            'email',
+            'role',
+        ];
+
+        /**
+         * Get the team that the invitation belongs to.
+         *
+         * @return BelongsTo
+         */
+        public function team()
+        {
+            return $this->belongsTo(Jetstream::teamModel());
+        }
     }
-}
