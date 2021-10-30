@@ -63,7 +63,7 @@
                 return Inertia::render('Social/Home');
             })->name('explore');
             Route::get('/profile', function () {
-                return Inertia::render('Social/Home');
+                return Inertia::render('Social/Profile');
             })->name('profile');
             Route::get('/bookmarks', function () {
                 return Inertia::render('Social/Home');

@@ -2,7 +2,7 @@
     <app-layout>
         <div class="min-h-screen bg-gray-100">
             <Disclosure as="nav" class=" border-b border-neutral" v-slot="{ open }">
-                <div class="max-w-4xl mx-auto">
+                <div class="max-w-5xl mx-auto">
                     <div class="flex h-16 justify-between">
                         <div class="-ml-2 mr-2 flex items-center md:hidden">
                             <!-- Mobile menu button -->
@@ -17,9 +17,6 @@
                             <jet-nav-link v-for="item in navigation" :key="item.name" :href="route(item.name)" :active="route().current(item.name)">
                                 <component :is="item.icon" class="mr-3 flex-shrink-0 h-6 w-6" aria-hidden="true"/> {{ item.label }}
                             </jet-nav-link>
-<!--                            <a v-for="item in navigation" :key="item.name" :href="route(item.name)"-->
-<!--                               :class="[item.current ? 'bg-gray-900 text-white' : 'dark:text-gray-200 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-bold']"-->
-<!--                               :aria-current="item.current ? 'page' : undefined">{{ item.label }}</a>-->
                         </div>
                         <div class="flex justify-center px-2 lg:ml-6 lg:justify-end items-center">
                             <div class="max-w-lg w-full lg:max-w-xs">
@@ -67,16 +64,6 @@
                     </div>
                 </DisclosurePanel>
             </Disclosure>
-
-            <!--            <div class="sub-app-header">-->
-            <!--            </div>-->
-
-            <!-- Sub App Header -->
-            <!--            <div class="sub-app-sub-header hidden space-x-12 sm:-my-px sm:ml-4 sm:flex">-->
-            <!--                <jet-nav-link v-for="item in navigation" :key="item.name" :href="route(item.name)" :active="route().current(item.name)">-->
-            <!--                    {{ item.label }}-->
-            <!--                </jet-nav-link>-->
-            <!--            </div>-->
 
             <!-- Page content -->
             <slot></slot>
