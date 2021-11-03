@@ -1,7 +1,5 @@
 name: Run Automated Tests
-on:
-  push:
-    branches: [ main, dev ]
+on: [pull_request]
 jobs:
   tests:
     name: Run tests
