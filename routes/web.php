@@ -3,6 +3,7 @@
     use Illuminate\Foundation\Application;
     use Illuminate\Support\Facades\Route;
     use Inertia\Inertia;
+    use App\Http\Controllers\Pages\Social\Profile;
 
     /*
     |--------------------------------------------------------------------------
@@ -69,9 +70,7 @@
             Route::get('/explore', function () {
                 return Inertia::render('Social/Home');
             })->name('explore');
-            Route::get('/profile', function () {
-                return Inertia::render('Social/Profile');
-            })->name('profile');
+            Route::get('/profile', [Profile::class, 'show'])->name('profile');
             Route::get('/bookmarks', function () {
                 return Inertia::render('Social/Home');
             })->name('bookmarks');

@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
     {
         User::truncate();
 
-        User::factory(1)->withPersonalTeam()->create([
+        User::factory(1)->withPersonalTeam()->withProfile()->create([
             'email' => 'admin@omniadigital.io',
             'password' => bcrypt('testing')
         ]);
