@@ -2,18 +2,15 @@
 
     namespace App\Models;
 
-    use App\HasSnowflakePrimary;
-    use App\Services\FollowerService;
     use App\Util\Lexer\PrettyNumber;
-    use Auth;
-    use Cache;
-    use DB;
-    use Illuminate\Database\Eloquent\{Model, SoftDeletes};
-    use Storage;
+    use Illuminate\Support\Facades\Cache;
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Storage;
+    use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
 
     class Profile extends Model
     {
-        use HasSnowflakePrimary, SoftDeletes;
+        use SoftDeletes, HasFactory;
 
         /**
          * Indicates if the IDs are auto-incrementing.
@@ -303,5 +300,19 @@
         public function reported()
         {
             return $this->hasMany(Report::class, 'object_id');
+        }
+
+        public function fields()
+        {
+            return [
+                ['Phone', '(555) 123-4567'],
+                ['Email', 'ricardocooper@example.com'],
+                ['Title', 'Senior Front-End Developer'],
+                ['Team', 'Product Development'],
+                ['Location', 'San Francisco'],
+                ['Sits', 'Oasis, 4th floor'],
+                ['Salary', '$145,000'],
+                ['Birthday', 'June 8, 1990'],
+            ];
         }
     }

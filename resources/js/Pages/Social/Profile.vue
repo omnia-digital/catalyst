@@ -490,9 +490,11 @@ export default defineComponent({
             tabs,
             questions,
             whoToFollow,
-            trendingPosts,
-            profile
+            trendingPosts
         }
+    },
+    props: {
+        profile: Object,
     },
 })
 </script>
