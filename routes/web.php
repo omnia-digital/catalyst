@@ -59,8 +59,8 @@
         Route::prefix('social')->group(function() {
 
             // the way twitter works is
-            // /{username} for profile
-            // /{username}/status/{post_id} for any type of post, whether it's a post or reply
+            // /{handle} for profile
+            // /{handle}/status/{post_id} for any type of post, whether it's a post or reply
             // /{messages}/{message_id} for messages
 
 

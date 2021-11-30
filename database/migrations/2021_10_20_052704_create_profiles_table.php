@@ -16,8 +16,7 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->nullable();
-            $table->string('domain')->nullable()->index();
-            $table->string('username')->nullable()->index();
+            $table->string('handle')->nullable()->index();
             $table->string('status')->nullable()->index();
             $table->string('name')->nullable();
             $table->text('bio')->nullable();
@@ -33,7 +32,6 @@ class CreateProfilesTable extends Migration
             $table->string('sharedInbox')->nullable()->index();
             $table->string('inbox_url')->nullable();
             $table->string('outbox_url')->nullable();
-            $table->string('key_id')->nullable()->unique();
             $table->string('follower_url')->nullable();
             $table->string('following_url')->nullable();
             $table->text('private_key')->nullable();
@@ -50,7 +48,7 @@ class CreateProfilesTable extends Migration
             $table->string('webfinger')->nullable()->unique();
             $table->string('avatar_url')->nullable();
 
-            $table->unique(['domain', 'username']);
+            $table->unique(['handle']);
         });
     }
 

@@ -25,8 +25,6 @@
          * @var array
          */
         protected $fillable = [
-            'name',
-            'username',
             'email',
             'password',
         ];
@@ -57,7 +55,17 @@
 
         public function url()
         {
-            return url(config('app.url') . '/' . $this->username);
+            return url(config('app.url') . '/' . $this->handle);
+        }
+
+        public function receivesBroadcastNotificationsOn()
+        {
+            return 'App.User.' . $this->id;
+        }
+
+        public function storageUsedKey()
+        {
+            return 'profile:storage:used:' . $this->id;
         }
 
         public function settings()
@@ -75,19 +83,9 @@
             return $this->hasMany(UserFilter::class, 'user_id', 'profile_id');
         }
 
-        public function receivesBroadcastNotificationsOn()
-        {
-            return 'App.User.' . $this->id;
-        }
-
         public function devices()
         {
             return $this->hasMany(UserDevice::class);
-        }
-
-        public function storageUsedKey()
-        {
-            return 'profile:storage:used:' . $this->id;
         }
 
         public function accountLog()
@@ -99,5 +97,4 @@
         {
             return $this->hasMany(AccountInterstitial::class);
         }
-
     }

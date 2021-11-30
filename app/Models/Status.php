@@ -2,7 +2,7 @@
 
     namespace App\Models;
 
-    use App\HasSnowflakePrimary;
+
     use App\Http\Controllers\StatusController;
     use App\Models\Poll;
     use Auth;
@@ -14,7 +14,7 @@
 
     class Status extends Model
     {
-        use HasSnowflakePrimary, SoftDeletes;
+        use SoftDeletes;
 
         const STATUS_TYPES = [
             'text',
@@ -113,8 +113,8 @@
                 return $forceLocal ? "/i/web/post/_/{$this->profile_id}/{$this->id}" : $this->uri;
             } else {
                 $id       = $this->id;
-                $username = $this->profile->username;
-                $path     = url(config('app.url') . "/p/{$username}/{$id}");
+                $handle = $this->profile->handle;
+                $path     = url(config('app.url') . "/p/{$handle}/{$id}");
 
                 return $path;
             }
@@ -224,14 +224,14 @@
 
         public function replyToText()
         {
-            $actorName = $this->profile->username;
+            $actorName = $this->profile->handle;
 
             return "{$actorName} " . __('notification.commented');
         }
 
         public function replyToHtml()
         {
-            $actorName = $this->profile->username;
+            $actorName = $this->profile->handle;
             $actorUrl  = $this->profile->url();
 
             return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . __('notification.commented');
@@ -239,14 +239,14 @@
 
         public function shareToText()
         {
-            $actorName = $this->profile->username;
+            $actorName = $this->profile->handle;
 
             return "{$actorName} " . __('notification.shared');
         }
 
         public function shareToHtml()
         {
-            $actorName = $this->profile->username;
+            $actorName = $this->profile->handle;
             $actorUrl  = $this->profile->url();
 
             return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . __('notification.shared');
@@ -366,8 +366,8 @@
         public function permalink($suffix = '/activity')
         {
             $id       = $this->id;
-            $username = $this->profile->username;
-            $path     = config('app.url') . "/p/{$username}/{$id}{$suffix}";
+            $handle = $this->profile->handle;
+            $path     = config('app.url') . "/p/{$handle}/{$id}{$suffix}";
 
             return url($path);
         }

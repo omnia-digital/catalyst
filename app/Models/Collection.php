@@ -2,12 +2,11 @@
 
     namespace App\Models;
 
-    use App\HasSnowflakePrimary;
+
     use Illuminate\Database\Eloquent\Model;
 
     class Collection extends Model
     {
-        use HasSnowflakePrimary;
 
         /**
          * Indicates if the IDs are auto-incrementing.

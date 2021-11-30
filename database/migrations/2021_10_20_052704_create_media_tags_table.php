@@ -18,7 +18,7 @@ class CreateMediaTagsTable extends Migration
             $table->unsignedBigInteger('status_id')->nullable()->index();
             $table->unsignedBigInteger('media_id')->index();
             $table->unsignedBigInteger('profile_id')->index();
-            $table->string('tagged_username')->nullable();
+            $table->string('tagged_handle')->nullable();
             $table->boolean('is_public')->default(true)->index();
             $table->json('metadata')->nullable();
             $table->timestamps();

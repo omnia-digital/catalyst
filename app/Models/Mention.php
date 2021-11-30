@@ -28,14 +28,14 @@
 
         public function toText()
         {
-            $actorName = $this->status->profile->username;
+            $actorName = $this->status->profile->handle;
 
             return "{$actorName} " . __('notification.mentionedYou');
         }
 
         public function toHtml()
         {
-            $actorName = $this->status->profile->username;
+            $actorName = $this->status->profile->handle;
             $actorUrl  = $this->status->profile->url();
 
             return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . __('notification.mentionedYou');

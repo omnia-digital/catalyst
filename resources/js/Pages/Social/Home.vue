@@ -131,7 +131,7 @@
                                 </h2>
                                 <div class="mt-6 flow-root">
                                     <ul role="list" class="-my-4 divide-y divide-gray-200">
-                                        <li v-for="user in whoToFollow" :key="user.handle" class="flex items-center py-4 space-x-3">
+                                        <li v-for="user in whoToFollow" :key="user.profile.handle" class="flex items-center py-4 space-x-3">
                                             <div class="flex-shrink-0">
                                                 <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt=""/>
                                             </div>
@@ -140,7 +140,7 @@
                                                     <a :href="user.href">{{ user.name }}</a>
                                                 </p>
                                                 <p class="text-sm text-gray-500">
-                                                    <a :href="user.href">{{ '@' + user.handle }}</a>
+                                                    <a :href="user.href">{{ '@' + user.profile.handle }}</a>
                                                 </p>
                                             </div>
                                             <div class="flex-shrink-0">

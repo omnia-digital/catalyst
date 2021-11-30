@@ -16,7 +16,6 @@ class CreateModLogsTable extends Migration
         Schema::create('mod_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
-            $table->string('user_username')->nullable();
             $table->unsignedBigInteger('object_uid')->nullable()->index();
             $table->unsignedBigInteger('object_id')->nullable()->index();
             $table->string('object_type')->nullable()->index();

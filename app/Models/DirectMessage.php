@@ -29,14 +29,14 @@
 
         public function toText()
         {
-            $actorName = $this->author->username;
+            $actorName = $this->author->handle;
 
             return "{$actorName} sent a direct message.";
         }
 
         public function toHtml()
         {
-            $actorName = $this->author->username;
+            $actorName = $this->author->handle;
             $actorUrl  = $this->author->url();
             $url       = $this->url();
 

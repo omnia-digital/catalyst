@@ -23,14 +23,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-2 min-w-0 flex-1">
+                    <div class="flex justify-start mt-2 min-w-0 flex-1">
                         <h1 class="text-2xl font-bold text-gray-900 truncate">
                             {{ profile.name }}
                         </h1>
-                        <p class="text-sm text-gray-600">@SocksandGoats</p>
+                        <p class="text-sm text-gray-600">{{ user.profile.handle }}</p>
                     </div>
                     <div class="mt-2 text-sm">
-                        <p>SocksGoat Indie Game Dev creating
+                        <p>Indie Game Dev creating
                             <a href="#" class="text-primary">@_ProjectCanopy_</a>
                             Wishlist: <a href="#" class="text-primary">https://bit.ly/2JFWHz4</a> Website: <a href="#" class="text-primary">https://projectcanopygame.com</a> YT:
                             <a href="#" class="text-primary">https://bit.ly/3gzERd2</a>
@@ -191,7 +191,7 @@
                                 </h2>
                                 <div class="mt-6 flow-root">
                                     <ul role="list" class="-my-4 divide-y divide-gray-200">
-                                        <li v-for="user in whoToFollow" :key="user.handle" class="flex items-center py-4 space-x-3">
+                                        <li v-for="user in whoToFollow" :key="user.profile.handle" class="flex items-center py-4 space-x-3">
                                             <div class="flex-shrink-0">
                                                 <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt=""/>
                                             </div>
@@ -200,7 +200,7 @@
                                                     <a :href="user.href">{{ user.name }}</a>
                                                 </p>
                                                 <p class="text-sm text-gray-500">
-                                                    <a :href="user.href">{{ '@' + user.handle }}</a>
+                                                    <a :href="user.href">{{ '@' + user.profile.handle }}</a>
                                                 </p>
                                             </div>
                                             <div class="flex-shrink-0">

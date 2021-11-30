@@ -29,7 +29,7 @@
 
         public function toText($type = 'post')
         {
-            $actorName = $this->actor->username;
+            $actorName = $this->actor->handle;
             $msg       = $type == 'post' ? __('notification.likedPhoto') : __('notification.likedComment');
 
             return "{$actorName} " . $msg;
@@ -37,7 +37,7 @@
 
         public function toHtml($type = 'post')
         {
-            $actorName = $this->actor->username;
+            $actorName = $this->actor->handle;
             $actorUrl  = $this->actor->url();
             $msg       = $type == 'post' ? __('notification.likedPhoto') : __('notification.likedComment');
 

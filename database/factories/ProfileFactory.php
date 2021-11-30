@@ -23,7 +23,7 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->company(),
+            'name' => $this->faker->name(),
             'user_id' => User::factory(),
             'bio' => $this->faker->text,
         ];

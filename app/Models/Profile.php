@@ -3,65 +3,74 @@
     namespace App\Models;
 
     use App\Util\Lexer\PrettyNumber;
+    use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Storage;
-    use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
+    use Spatie\Sluggable\HasSlug;
+    use Spatie\Sluggable\SlugOptions;
 
     class Profile extends Model
     {
-        use SoftDeletes, HasFactory;
+        use SoftDeletes, HasFactory, HasSlug;
 
-        /**
-         * Indicates if the IDs are auto-incrementing.
-         *
-         * @var bool
-         */
         public $incrementing = false;
 
         protected $dates = [
             'deleted_at',
             'last_fetched_at'
         ];
-        protected $hidden = ['private_key'];
-        protected $visible = ['id', 'user_id', 'username', 'name'];
-        protected $fillable = ['user_id'];
 
-        public function user()
+        protected $hidden = ['private_key'];
+
+        protected $visible = [
+            'id',
+            'name',
+            'handle',
+            'user_id',
+        ];
+
+        protected $fillable = [
+            'name',
+            'user_id',
+        ];
+
+        public function getSlugOptions(): SlugOptions
         {
-            return $this->belongsTo(User::class);
+            return SlugOptions::create()
+                              ->generateSlugsFrom('name')
+                              ->saveSlugsTo('handle');
         }
+
+        public function fields()
+        {
+            return [
+                ['Phone', '(123) 123-1234'], // $this->phone
+                ['Email', $this->user->email],
+                ['Title', 'Senior Front-End Developer'],
+                ['Team', 'Product Development'],
+                ['Location', 'San Francisco'],
+                ['Sits', 'Oasis, 4th floor'],
+                ['Salary', '$145,000'],
+                ['Birthday', 'June 8, 1990'],
+            ];
+        }
+
 
         public function url($suffix = null)
         {
-            return $this->remote_url ?? url($this->username . $suffix);
+            return $this->remote_url ?? url($this->handle . $suffix);
         }
 
         public function localUrl($suffix = null)
         {
-            return url($this->username . $suffix);
-        }
-
-        public function emailUrl()
-        {
-            if ($this->domain) {
-                return $this->username;
-            }
-
-            $domain = parse_url(config('app.url'), PHP_URL_HOST);
-
-            return $this->username . '@' . $domain;
-        }
-
-        public function statuses()
-        {
-            return $this->hasMany(Status::class);
+            return url($this->handle . $suffix);
         }
 
         public function followingCount($short = false)
         {
             $count = Cache::remember('profile:following_count:' . $this->id, now()->addMonths(1), function () {
-                if ($this->domain == null && $this->user->settings->show_profile_following_count == false) {
+                if ($this->user->settings->show_profile_following_count == false) {
                     return 0;
                 }
                 $count = DB::table('followers')->where('profile_id', $this->id)->count();
@@ -79,7 +88,7 @@
         public function followerCount($short = false)
         {
             $count = Cache::remember('profile:follower_count:' . $this->id, now()->addMonths(1), function () {
-                if ($this->domain == null && $this->user->settings->show_profile_follower_count == false) {
+                if ($this->user->settings->show_profile_follower_count == false) {
                     return 0;
                 }
                 $count = DB::table('followers')->where('following_id', $this->id)->count();
@@ -99,16 +108,6 @@
             return $this->status_count;
         }
 
-        public function following()
-        {
-            return $this->belongsToMany(self::class, 'followers', 'profile_id', 'following_id');
-        }
-
-        public function followers()
-        {
-            return $this->belongsToMany(self::class, 'followers', 'following_id', 'profile_id');
-        }
-
         public function follows($profile): bool
         {
             return Follower::whereProfileId($this->id)->whereFollowingId($profile->id)->exists();
@@ -117,16 +116,6 @@
         public function followedBy($profile): bool
         {
             return Follower::whereProfileId($profile->id)->whereFollowingId($this->id)->exists();
-        }
-
-        public function bookmarks()
-        {
-            return $this->belongsToMany(Status::class, 'bookmarks', 'profile_id', 'status_id');
-        }
-
-        public function likes()
-        {
-            return $this->hasMany(Like::class);
         }
 
         public function avatar()
@@ -164,20 +153,9 @@
             return collect([]);
         }
 
-        // deprecated
-
-        public function keyId()
-        {
-            if ($this->remote_url) {
-                return;
-            }
-
-            return $this->permalink('#main-key');
-        }
-
         public function permalink($suffix = null)
         {
-            return $this->remote_url ?? url('users/' . $this->username . $suffix);
+            return $this->remote_url ?? url('users/' . $this->handle . $suffix);
         }
 
         public function mutedProfileUrls()
@@ -206,6 +184,36 @@
         public function blockedIds()
         {
             return UserFilter::whereUserId($this->id)->whereFilterableType('App\Profile')->whereFilterType('block')->pluck('filterable_id');
+        }
+
+        public function statuses()
+        {
+            return $this->hasMany(Status::class);
+        }
+
+        public function bookmarks()
+        {
+            return $this->belongsToMany(Status::class, 'bookmarks', 'profile_id', 'status_id');
+        }
+
+        public function following()
+        {
+            return $this->belongsToMany(self::class, 'followers', 'profile_id', 'following_id');
+        }
+
+        public function followers()
+        {
+            return $this->belongsToMany(self::class, 'followers', 'following_id', 'profile_id');
+        }
+
+        public function likes()
+        {
+            return $this->hasMany(Like::class);
+        }
+
+        public function user()
+        {
+            return $this->belongsTo(User::class);
         }
 
         public function reports()
@@ -296,23 +304,8 @@
             return $this->hasMany(Story::class);
         }
 
-
         public function reported()
         {
             return $this->hasMany(Report::class, 'object_id');
-        }
-
-        public function fields()
-        {
-            return [
-                ['Phone', '(555) 123-4567'],
-                ['Email', 'ricardocooper@example.com'],
-                ['Title', 'Senior Front-End Developer'],
-                ['Team', 'Product Development'],
-                ['Location', 'San Francisco'],
-                ['Sits', 'Oasis, 4th floor'],
-                ['Salary', '$145,000'],
-                ['Birthday', 'June 8, 1990'],
-            ];
         }
     }
