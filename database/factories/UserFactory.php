@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Nwidart\Modules\Module;
 
 class UserFactory extends Factory
 {
@@ -74,6 +75,8 @@ class UserFactory extends Factory
      */
     public function withProfile()
     {
+        if (!class_exists(\Modules\Social\Models\Profile::class)) return;
+
         return $this->has(
             Profile::factory()
                 ->state(function (array $attributes, User $user) {

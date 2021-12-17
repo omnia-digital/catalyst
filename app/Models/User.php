@@ -62,39 +62,4 @@
         {
             return 'App.User.' . $this->id;
         }
-
-        public function storageUsedKey()
-        {
-            return 'profile:storage:used:' . $this->id;
-        }
-
-        public function settings()
-        {
-            return $this->hasOne(UserSetting::class);
-        }
-
-        public function statuses()
-        {
-            return $this->hasManyThrough(Status::class, Profile::class);
-        }
-
-        public function filters()
-        {
-            return $this->hasMany(UserFilter::class, 'user_id', 'profile_id');
-        }
-
-        public function devices()
-        {
-            return $this->hasMany(UserDevice::class);
-        }
-
-        public function accountLog()
-        {
-            return $this->hasMany(AccountLog::class);
-        }
-
-        public function interstitials()
-        {
-            return $this->hasMany(AccountInterstitial::class);
-        }
     }
