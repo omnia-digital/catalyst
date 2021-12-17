@@ -1,0 +1,13 @@
+{
+    "name": "Advice",
+    "alias": "advice",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Advice\\Providers\\AdviceServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
