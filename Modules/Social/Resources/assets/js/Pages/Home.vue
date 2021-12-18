@@ -1,7 +1,7 @@
 <template>
     <social-app-layout title="Home">
         <!-- Page Heading -->
-        <div class="my-6 max-w-5xl mx-auto lg:grid lg:grid-cols-9 lg:gap-9">
+        <div class="my-6 lg:grid lg:grid-cols-9 lg:gap-9">
             <div class="lg:col-span-6 xl:col-span-6">
                 <div class="px-4 sm:px-0">
                     <div class="sm:hidden">
@@ -87,12 +87,12 @@
                                             <div class="min-w-0 flex-1">
                                                 <p class="text-sm text-gray-800">{{ post.body }}</p>
                                                 <div class="mt-2 flex">
-                            <span class="inline-flex items-center text-sm">
-                              <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                                <ChatAltIcon class="h-5 w-5" aria-hidden="true"/>
-                                <span class="font-medium text-gray-900">{{ post.comments }}</span>
-                              </button>
-                            </span>
+                                                    <span class="inline-flex items-center text-sm">
+                                                      <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                                                        <ChatAltIcon class="h-5 w-5" aria-hidden="true"/>
+                                                        <span class="font-medium text-gray-900">{{ post.comments }}</span>
+                                                      </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </li>

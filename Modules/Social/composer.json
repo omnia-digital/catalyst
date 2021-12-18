@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/social",
+    "name": "omniadigital/social",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Joshua Torres",
+            "email": "info@omniadigital.io"
         }
     ],
     "extra": {
