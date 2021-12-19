@@ -6,12 +6,15 @@
     use Illuminate\Database\Eloquent\SoftDeletes;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
+    use Laravel\Fortify\TwoFactorAuthenticatable;
+    use Laravel\Jetstream\HasProfilePhoto;
     use Laravel\Jetstream\HasTeams;
+    use Laravel\Sanctum\HasApiTokens;
     use Modules\Social\Models\Profile;
 
     class User extends Authenticatable
     {
-        use Notifiable, SoftDeletes, HasFactory, HasTeams;
+        use HasApiTokens, HasProfilePhoto, TwoFactorAuthenticatable, Notifiable, SoftDeletes, HasFactory, HasTeams;
 
         /**
          * The attributes that should be mutated to dates.
@@ -41,12 +44,14 @@
             'is_admin',
             'remember_token',
             'email_verified_at',
-            '2fa_enabled',
-            '2fa_secret',
-            '2fa_backup_codes',
-            '2fa_setup_at',
+            'two_factor_recovery_codes',
+            'two_factor_secret',
             'deleted_at',
             'updated_at'
+        ];
+
+        protected $appends = [
+            'profile_photo_url'
         ];
 
         public function profile()

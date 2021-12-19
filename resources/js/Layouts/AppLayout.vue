@@ -131,6 +131,9 @@ const userNavigation = [
 ]
 
 export default {
+    props: {
+        user: Object
+    },
     components: {
         Head,
         JetApplicationMark,

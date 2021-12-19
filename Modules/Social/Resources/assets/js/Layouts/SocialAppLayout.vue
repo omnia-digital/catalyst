@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <app-layout :user="user">
         <template v-slot:header>
             <div class="flex-1 flex px-4 sm justify-between bg-neutral items-center">
                 <h1 class="text-gray-600 ml-4 text-3xl">Community</h1>
@@ -97,8 +97,8 @@
                                     <img class="h-10 w-10 rounded-full" :src="user?.imageUrl" alt=""/>
                                 </div>
                                 <div class="ml-3">
-                                    <div class="text-base font-medium text-white">{{ user.name }}</div>
-                                    <div class="text-sm font-medium text-gray-400">{{ user.email }}</div>
+                                    <div class="text-base font-medium text-white">{{ user?.name }}</div>
+                                    <div class="text-sm font-medium text-gray-400">{{ user?.email }}</div>
                                 </div>
                                 <button type="button"
                                         class="ml-auto flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -157,17 +157,20 @@ const userNavigation = [
     {name: 'Sign out', href: '#'},
 ]
 
-const user = {
-    name: 'Chelsea Hagon',
-    handle: 'chelseahagon',
-    email: 'chelseahagon@example.com',
-    role: 'Human Resources Manager',
-    imageId: '1550525811-e5869dd03032',
-    imageUrl:
-        'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+// const user = {
+//     name: 'Chelsea Hagon',
+//     handle: 'chelseahagon',
+//     email: 'chelseahagon@example.com',
+//     role: 'Human Resources Manager',
+//     imageId: '1550525811-e5869dd03032',
+//     imageUrl:
+//         'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+// }
 
 export default defineComponent({
+    props: {
+        user: Object
+    },
     components: {
         AppLayout,
         BookmarkIcon,
@@ -201,7 +204,6 @@ export default defineComponent({
     },
     setup() {
         return {
-            user,
             navigation,
             userNavigation,
         }

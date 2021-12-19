@@ -25,9 +25,9 @@ class CreateUsersTable extends Migration
             $table->json('2fa_backup_codes')->nullable();
             $table->timestamp('2fa_setup_at')->nullable();
             $table->rememberToken();
-            $table->boolean('has_interstitial')->default(false)->index();
             $table->string('language')->nullable()->index();
             $table->foreignId('current_team_id')->nullable();
+            $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamp('last_active_at')->nullable()->index();
             $table->timestamp('delete_after')->nullable();
             $table->softDeletes()->index();
