@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <template v-slot:header>
-            <div class="flex-1 flex px-4 justify-between bg-neutral items-center">
+            <div class="flex-1 flex px-4 sm justify-between bg-neutral items-center">
                 <h1 class="text-gray-600 ml-4 text-3xl">Community</h1>
                 <!-- search -->
                 <!--                    <div class="flex-1 flex">-->
@@ -50,9 +50,9 @@
             </div>
         </template>
         <template v-slot:content>
-            <div class="min-h-screen bg-gray-100">
+            <div class="min-h-screen bg-gray-100 px-4 sm:px-0">
                 <Disclosure as="nav" class="max-w-6xl mx-auto border-b border-neutral" v-slot="{ open }">
-                    <div class="max-w-5xl mx-auto">
+                    <div>
                         <div class="flex h-16 justify-between">
                             <div class="-ml-2 mr-2 flex items-center md:hidden">
                                 <!-- Mobile menu button -->
@@ -136,6 +136,7 @@ import JetDropdownLink from '@/Jetstream/DropdownLink.vue'
 import JetNavLink from '@/Jetstream/NavLink.vue'
 import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import {defineComponent} from "vue";
 
 // const navigation = [
 //     {label: 'Home', name: 'home', icon: HomeIcon, current: true},
@@ -166,7 +167,7 @@ const user = {
         'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 
-export default {
+export default defineComponent({
     components: {
         AppLayout,
         BookmarkIcon,
@@ -205,5 +206,5 @@ export default {
             userNavigation,
         }
     },
-}
+})
 </script>

@@ -3,19 +3,25 @@
         <div class="flex-shrink-0">
             <img class="inline-block h-10 w-10 rounded-full" :src="user?.imageUrl" alt="" />
         </div>
+        <div>
+        </div>
         <div class="min-w-0 flex-1">
             <form action="#" class="relative">
-                <div class="rounded-lg overflow-hidden">
-                    <label for="comment" class="sr-only">What's going on?</label>
-                    <textarea rows="1" name="comment" id="comment" class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm" placeholder="What's going on?" />
 
-                    <!-- Spacer element to match the height of the toolbar -->
-                    <div class="py-2" aria-hidden="true">
-                        <!-- Matches height of button in toolbar (1px border + 36px content height) -->
-                        <div class="py-px">
-                            <div class="h-9" />
+                <div class="flex justify-between">
+                    <div class="flex-1 px-2 rounded-lg overflow-hidden">
+                        <label for="comment" class="sr-only">What's going on?</label>
+                        <textarea rows="1" name="comment" id="comment" class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm" placeholder="What's going on?" />
+
+                        <!-- Spacer element to match the height of the toolbar -->
+                        <div class="py-2" aria-hidden="true">
+                            <!-- Matches height of button in toolbar (1px border + 36px content height) -->
+                            <div class="py-px">
+                                <div class="h-9" />
+                            </div>
                         </div>
                     </div>
+                    <Dropdown :options="postTypes"/>
                 </div>
 
                 <div class="absolute bottom-0 border-t border-gray-100 inset-x-0 pl-3 pr-2 pt-2 flex justify-between">
@@ -33,20 +39,20 @@
                                 </ListboxLabel>
                                 <div class="relative">
                                     <ListboxButton class="relative -m-2.5 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-500">
-                    <span class="flex items-center justify-center">
-                      <span v-if="selected.value === null">
-                        <EmojiHappyIcon class="flex-shrink-0 h-5 w-5" aria-hidden="true" />
-                        <span class="sr-only">
-                          Add your mood
-                        </span>
-                      </span>
-                      <span v-if="!(selected.value === null)">
-                        <div :class="[selected.bgColor, 'w-8 h-8 rounded-full flex items-center justify-center']">
-                          <component :is="selected.icon" class="flex-shrink-0 h-5 w-5 text-white" aria-hidden="true" />
-                        </div>
-                        <span class="sr-only">{{ selected.name }}</span>
-                      </span>
-                    </span>
+                                        <span class="flex items-center justify-center">
+                                          <span v-if="selected.value === null">
+                                            <EmojiHappyIcon class="flex-shrink-0 h-5 w-5" aria-hidden="true" />
+                                            <span class="sr-only">
+                                              Add your mood
+                                            </span>
+                                          </span>
+                                          <span v-if="!(selected.value === null)">
+                                            <div :class="[selected.bgColor, 'w-8 h-8 rounded-full flex items-center justify-center']">
+                                              <component :is="selected.icon" class="flex-shrink-0 h-5 w-5 text-white" aria-hidden="true" />
+                                            </div>
+                                            <span class="sr-only">{{ selected.name }}</span>
+                                          </span>
+                                        </span>
                                     </ListboxButton>
 
                                     <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
@@ -93,6 +99,8 @@ import {
     XIcon,
 } from '@heroicons/vue/solid'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
+// import Dropdown from "@/Jetstream/Dropdown";
+import Dropdown from '@/Components/Dropdown'
 
 const moods = [
     { name: 'Excited', value: 'excited', icon: FireIcon, iconColor: 'text-white', bgColor: 'bg-red-500' },
@@ -103,10 +111,26 @@ const moods = [
     { name: 'I feel nothing', value: null, icon: XIcon, iconColor: 'text-gray-400', bgColor: 'bg-transparent' },
 ]
 
+const postTypes = [
+    {
+        label: 'General',
+        icon: 'HeartIcon',
+        selected: true
+    },
+    {
+        label: 'Announcement',
+        icon: 'HeartIcon'
+    }
+]
+
 export default defineComponent({
     name: "NewPostBox",
-    props: ['user'],
+    props: {
+        user: Object
+    },
+
     components: {
+        Dropdown,
         Listbox,
         ListboxButton,
         ListboxLabel,
@@ -121,6 +145,7 @@ export default defineComponent({
         return {
             moods,
             selected,
+            postTypes
         }
     },
 })
