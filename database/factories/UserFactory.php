@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Profile;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Modules\Social\Models\Profile;
 use Nwidart\Modules\Module;
 
 class UserFactory extends Factory

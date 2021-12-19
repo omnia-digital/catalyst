@@ -7,6 +7,7 @@
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Storage;
+    use Modules\Social\Database\Factories\ProfileFactory;
     use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
 
@@ -34,6 +35,11 @@
             'name',
             'user_id',
         ];
+
+        protected static function newFactory()
+        {
+            return ProfileFactory::new();
+        }
 
         public function getSlugOptions(): SlugOptions
         {

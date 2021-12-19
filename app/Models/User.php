@@ -7,6 +7,7 @@
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
     use Laravel\Jetstream\HasTeams;
+    use Modules\Social\Models\Profile;
 
     class User extends Authenticatable
     {
@@ -50,6 +51,7 @@
 
         public function profile()
         {
+            if (!class_exists(Profile::class)) return;
             return $this->hasOne(Profile::class);
         }
 

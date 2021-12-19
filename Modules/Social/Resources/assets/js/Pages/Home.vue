@@ -122,12 +122,12 @@ import NewPostBox from "../Components/NewPostBox";
 import PostListItem from "../Components/PostListItem";
 
 
-const user = {
-    name: 'Chelsea Hagon',
-    email: 'chelseahagon@example.com',
-    imageUrl:
-        'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+// const user = {
+//     name: 'Chelsea Hagon',
+//     email: 'chelseahagon@example.com',
+//     imageUrl:
+//         'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+// }
 const navigation = [
     {label: 'Home', name: 'home', icon: HomeIcon, current: true},
     {label: 'Explore', name: 'explore', icon: TrendingUpIcon, current: false},
@@ -299,6 +299,10 @@ const trendingPosts = [
 ]
 
 export default defineComponent({
+    name: 'Social Home',
+    props: {
+        user: Object
+    },
     components: {
         PostListItem,
         NewPostBox,
@@ -326,7 +330,6 @@ export default defineComponent({
     },
     setup() {
         return {
-            user,
             navigation,
             userNavigation,
             communities,

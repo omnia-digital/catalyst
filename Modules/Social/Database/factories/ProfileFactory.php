@@ -2,9 +2,9 @@
 
 namespace Modules\Social\Database\Factories;
 
-use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Social\Models\Profile;
 
 class ProfileFactory extends Factory
 {
