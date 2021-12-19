@@ -22,7 +22,8 @@
                         </TransitionChild>
                         <div class="flex-shrink-0 flex items-center px-4">
                             <!-- mobile logo -->
-                            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow"/>
+                            <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Indie Game Dev logo">
+                            <p class="text-green-500 text-3xl font-bold">IGD</p>
                         </div>
                         <div class="mt-5 flex-1 h-0 overflow-y-auto">
                             <!-- mobile nav -->
