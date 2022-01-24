@@ -1,0 +1,23 @@
+{
+    "name": "omniadigital/social",
+    "description": "",
+    "authors": [
+        {
+            "name": "Joshua Torres",
+            "email": "info@omniadigital.io"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Social\\": ""
+        }
+    }
+}

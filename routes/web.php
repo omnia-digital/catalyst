@@ -3,6 +3,7 @@
     use Illuminate\Foundation\Application;
     use Illuminate\Support\Facades\Route;
     use Inertia\Inertia;
+    use Modules\Social\Http\Controllers\Pages\Social\Home;
 
     /*
     |--------------------------------------------------------------------------
@@ -15,13 +16,8 @@
     |
     */
 
-    Route::get('/', function () {
-        return Inertia::render('Welcome', [
-            'canLogin'       => Route::has('login'),
-            'canRegister'    => Route::has('register'),
-            'laravelVersion' => Application::VERSION,
-            'phpVersion'     => PHP_VERSION,
-        ]);
+    Route::get('/', function (\Illuminate\Http\Request $request) {
+        return redirect('social/home');
     });
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -30,51 +26,13 @@
 
     Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
-        // This home route we could make configurable to point to different pages
-        // For now, let's point it to use the social/home
-        Route::get('/home', function () {
-            return Inertia::render('Social/Home');
-        })->name('home');
+//        Route::get('/home', [Home::class,'show'])->name('home');
 
-        Route::get('/messages', function () {
-            return Inertia::render('Social/Home');
-        })->name('messages');
-        Route::get('/notifications', function () {
-            return Inertia::render('Social/Home');
-        })->name('notifications');
-        Route::get('/projects', function () {
-            return Inertia::render('Social/Home');
-        })->name('projects');
-        Route::get('/groups', function () {
-            return Inertia::render('Social/Home');
-        })->name('groups');
-        Route::get('/learn', function () {
-            return Inertia::render('Social/Home');
-        })->name('learn');
-        Route::get('/marketplace', function () {
-            return Inertia::render('Social/Home');
-        })->name('marketplace');
-
-        Route::prefix('social')->group(function() {
-
-            // the way twitter works is
-            // /{username} for profile
-            // /{username}/status/{post_id} for any type of post, whether it's a post or reply
-            // /{messages}/{message_id} for messages
-
-
-            Route::get('/', function () {
-                return Inertia::render('Social/Home');
-            })->name('social-home');
-            Route::get('/explore', function () {
-                return Inertia::render('Social/Home');
-            })->name('explore');
-            Route::get('/profile', function () {
-                return Inertia::render('Social/Profile');
-            })->name('profile');
-            Route::get('/bookmarks', function () {
-                return Inertia::render('Social/Home');
-            })->name('bookmarks');
-        });
+        Route::get('/messages', [Home::class,'show'])->name('messages');
+        Route::get('/notifications', [Home::class,'show'])->name('notifications');
+        Route::get('/projects', [Home::class,'show'])->name('projects');
+        Route::get('/groups', [Home::class,'show'])->name('groups');
+        Route::get('/learn', [Home::class,'show'])->name('learn');
+        Route::get('/marketplace', [Home::class,'show'])->name('marketplace');
     });
 

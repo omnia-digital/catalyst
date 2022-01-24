@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Modules\Social\Models\Profile;
+use Nwidart\Modules\Module;
 
 class UserFactory extends Factory
 {
@@ -25,7 +27,6 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -64,6 +65,25 @@ class UserFactory extends Factory
                     return ['name' => $user->name.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
                 }),
             'ownedTeams'
+        );
+    }
+
+    /**
+     * Indicate that the user should have a profile.
+     *
+     * @return $this
+     */
+    public function withProfile()
+    {
+        if (!class_exists(\Modules\Social\Models\Profile::class)) return;
+
+        return $this->has(
+            Profile::factory()
+                ->state(function (array $attributes, User $user) {
+                    return [
+                        'user_id' => $user->id
+                    ];
+                })
         );
     }
 }
