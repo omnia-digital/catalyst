@@ -1,29 +1,45 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\Models\Team;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Jetstream\Http\Livewire\DeleteTeamForm;
+use Livewire\Livewire;
+use Tests\TestCase;
 
-test('teams can be deleted', function () {
-    $this->actingAs($user = User::factory()->withPersonalTeam()->create());
+class DeleteTeamTest extends TestCase
+{
+    use RefreshDatabase;
 
-    $user->ownedTeams()->save($team = Team::factory()->make([
-        'personal_team' => false,
-    ]));
+    public function test_teams_can_be_deleted()
+    {
+        $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-    $team->users()->attach(
-        $otherUser = User::factory()->create(), ['role' => 'test-role']
-    );
+        $user->ownedTeams()->save($team = Team::factory()->make([
+            'personal_team' => false,
+        ]));
 
-    $response = $this->delete('/teams/'.$team->id);
+        $team->users()->attach(
+            $otherUser = User::factory()->create(), ['role' => 'test-role']
+        );
 
-    expect($team->fresh())->toBeNull();
-    expect($otherUser->fresh()->teams)->toHaveCount(0);
-});
+        $component = Livewire::test(DeleteTeamForm::class, ['team' => $team->fresh()])
+                                ->call('deleteTeam');
 
-test('personal teams cant be deleted', function () {
-    $this->actingAs($user = User::factory()->withPersonalTeam()->create());
+        $this->assertNull($team->fresh());
+        $this->assertCount(0, $otherUser->fresh()->teams);
+    }
 
-    $response = $this->delete('/teams/'.$user->currentTeam->id);
+    public function test_personal_teams_cant_be_deleted()
+    {
+        $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-    expect($user->currentTeam->fresh())->not->toBeNull();
-});
+        $component = Livewire::test(DeleteTeamForm::class, ['team' => $user->currentTeam])
+                                ->call('deleteTeam')
+                                ->assertHasErrors(['team']);
+
+        $this->assertNotNull($user->currentTeam->fresh());
+    }
+}

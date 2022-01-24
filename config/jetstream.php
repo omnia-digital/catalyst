@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'stack' => 'inertia',
+    'stack' => 'livewire',
 
     /*
      |--------------------------------------------------------------------------
@@ -46,7 +46,7 @@ return [
         // Features::profilePhotos(),
         // Features::api(),
         Features::teams(['invitations' => true]),
-//        Features::accountDeletion(),
+        Features::accountDeletion(),
     ],
 
     /*

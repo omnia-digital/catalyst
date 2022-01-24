@@ -1,29 +1,45 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Jetstream\Http\Livewire\TeamMemberManager;
+use Livewire\Livewire;
+use Tests\TestCase;
 
-test('team members can be removed from teams', function () {
-    $this->actingAs($user = User::factory()->withPersonalTeam()->create());
+class RemoveTeamMemberTest extends TestCase
+{
+    use RefreshDatabase;
 
-    $user->currentTeam->users()->attach(
-        $otherUser = User::factory()->create(), ['role' => 'admin']
-    );
+    public function test_team_members_can_be_removed_from_teams()
+    {
+        $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-    $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
+        $user->currentTeam->users()->attach(
+            $otherUser = User::factory()->create(), ['role' => 'admin']
+        );
 
-    expect($user->currentTeam->fresh()->users)->toHaveCount(0);
-});
+        $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
+                        ->set('teamMemberIdBeingRemoved', $otherUser->id)
+                        ->call('removeTeamMember');
 
-test('only team owner can remove team members', function () {
-    $user = User::factory()->withPersonalTeam()->create();
+        $this->assertCount(0, $user->currentTeam->fresh()->users);
+    }
 
-    $user->currentTeam->users()->attach(
-        $otherUser = User::factory()->create(), ['role' => 'admin']
-    );
+    public function test_only_team_owner_can_remove_team_members()
+    {
+        $user = User::factory()->withPersonalTeam()->create();
 
-    $this->actingAs($otherUser);
+        $user->currentTeam->users()->attach(
+            $otherUser = User::factory()->create(), ['role' => 'admin']
+        );
 
-    $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$user->id);
+        $this->actingAs($otherUser);
 
-    $response->assertStatus(403);
-});
+        $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
+                        ->set('teamMemberIdBeingRemoved', $user->id)
+                        ->call('removeTeamMember')
+                        ->assertStatus(403);
+    }
+}
