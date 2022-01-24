@@ -19,9 +19,18 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('status')->nullable()->index();
+            $table->boolean('2fa_enabled')->default(false);
+            $table->string('2fa_secret')->nullable();
+            $table->json('2fa_backup_codes')->nullable();
+            $table->timestamp('2fa_setup_at')->nullable();
             $table->rememberToken();
+            $table->string('language')->nullable()->index();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->timestamp('last_active_at')->nullable()->index();
+            $table->timestamp('delete_after')->nullable();
+            $table->softDeletes()->index();
             $table->timestamps();
         });
     }
