@@ -17,7 +17,7 @@
     */
 
     Route::get('/', function (\Illuminate\Http\Request $request) {
-        return redirect('social/home');
+        return redirect()->route('dashboard');
     });
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -25,6 +25,7 @@
     })->name('dashboard');
 
     Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+        Route::view('/dashboard', 'dashboard')->name('dashboard');
 
 //        Route::get('/home', [Home::class,'show'])->name('home');
 
