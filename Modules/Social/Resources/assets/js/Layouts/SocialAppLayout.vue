@@ -1,6 +1,5 @@
 <template>
-    <app-layout :user="user">
-        <template v-slot:header>
+    <div>
             <div class="flex-1 flex px-4 sm justify-between bg-neutral items-center">
                 <h1 class="text-gray-600 ml-4 text-3xl">Community</h1>
                 <!-- search -->
@@ -48,8 +47,7 @@
                     </Menu>
                 </div>
             </div>
-        </template>
-        <template v-slot:content>
+
             <div class="min-h-screen bg-gray-100 px-4 sm:px-0">
                 <Disclosure as="nav" class="max-w-6xl mx-auto border-b border-neutral" v-slot="{ open }">
                     <div>
@@ -83,6 +81,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <DisclosurePanel class="md:hidden">
                         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -120,21 +119,17 @@
                     <slot></slot>
                 </div>
             </div>
-        </template>
-    </app-layout>
+    </div>
 </template>
 
 <script>
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPanel,} from '@headlessui/vue'
 import {AcademicCapIcon, BookmarkIcon, BellIcon, HomeIcon, MenuIcon, HashtagIcon, UserGroupIcon, OfficeBuildingIcon, UserIcon, XIcon} from '@heroicons/vue/outline'
 import {PlusSmIcon, SearchIcon} from '@heroicons/vue/solid'
-import AppLayout from "@/Layouts/AppLayout";
 import JetApplicationMark from '@/Jetstream/ApplicationMark.vue'
 import JetBanner from '@/Jetstream/Banner.vue'
 import JetDropdown from '@/Jetstream/Dropdown.vue'
 import JetDropdownLink from '@/Jetstream/DropdownLink.vue'
-import JetNavLink from '@/Jetstream/NavLink.vue'
-import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import {defineComponent} from "vue";
 
@@ -172,7 +167,6 @@ export default defineComponent({
         user: Object
     },
     components: {
-        AppLayout,
         BookmarkIcon,
         Disclosure,
         DisclosureButton,
@@ -191,9 +185,6 @@ export default defineComponent({
         JetBanner,
         JetDropdown,
         JetDropdownLink,
-        JetNavLink,
-        JetResponsiveNavLink,
-        Link,
         Popover,
         PopoverButton,
         PopoverPanel,

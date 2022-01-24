@@ -1,5 +1,4 @@
 <template>
-    <social-app-layout title="Home" :user="user">
         <!-- Page Heading -->
         <div class="my-6 lg:grid lg:grid-cols-9 lg:gap-9">
             <div class="lg:col-span-6 xl:col-span-6">
@@ -109,14 +108,14 @@
                 </div>
             </aside>
         </div>
-    </social-app-layout>
 </template>
 
 <script>
 import {Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPanel} from '@headlessui/vue'
 import {ChatAltIcon, CodeIcon, DotsVerticalIcon, EyeIcon, FlagIcon, PlusSmIcon, SearchIcon, ShareIcon, StarIcon, ThumbUpIcon,} from '@heroicons/vue/solid'
 import {BellIcon, FireIcon, HomeIcon, MenuIcon, TrendingUpIcon, UserGroupIcon, XIcon} from '@heroicons/vue/outline'
-import SocialAppLayout from '../Layouts/SocialAppLayout.vue'
+import SocialAppLayout from '../Layouts/SocialAppLayout'
+import AppLayout from "@/Layouts/AppLayout";
 import {defineComponent} from 'vue'
 import NewPostBox from "../Components/NewPostBox";
 import PostListItem from "../Components/PostListItem";
@@ -300,13 +299,13 @@ const trendingPosts = [
 
 export default defineComponent({
     name: 'Social Home',
+    layout: [AppLayout, SocialAppLayout],
     props: {
         user: Object
     },
     components: {
         PostListItem,
         NewPostBox,
-        SocialAppLayout,
         Menu,
         MenuButton,
         MenuItem,

@@ -16,7 +16,7 @@
     use Modules\Social\Http\Controllers\Pages\Home;
     use Modules\Social\Models\Profile;
 
-    Route::prefix('social')->group(function () {
+    Route::prefix('social')->middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/', 'SocialController@index');
 
         // the way twitter works is
