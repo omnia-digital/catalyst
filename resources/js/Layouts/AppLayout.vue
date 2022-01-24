@@ -73,11 +73,13 @@
                 </a>
                 <div class="flex-1 flex pl-6 flex-col overflow-y-auto">
                     <nav class="flex-1 py-4 space-y-1">
-                        <a v-for="item in navigation" :key="item.name" :href="route(item.name)" :class="[item.current ? 'bg-tertiary text-white' : 'text-gray-300 hover:bg-tertiary hover:text-white',
+                        <Link v-for="item in navigation" :key="item.name" :href="route(item.name)"
+                              :class="[$page.component === '' ? 'bg-tertiary text-white' :
+                        'text-gray-300 hover:bg-tertiary hover:text-white',
                         'group flex items-center px-2 py-2 text-lg font-medium rounded-md']">
                             <component :is="item.icon" :class="[item.current ? 'text-white' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
                             {{ item.label }}
-                        </a>
+                        </Link>
                     </nav>
                 </div>
             </div>
@@ -140,10 +142,8 @@ export default {
         JetBanner,
         JetDropdown,
         JetDropdownLink,
-        JetNavLink,
         JetResponsiveNavLink,
         BookmarkIcon,
-        Link,
         Dialog,
         DialogOverlay,
         MailIcon,
