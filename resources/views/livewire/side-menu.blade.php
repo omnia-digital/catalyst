@@ -1,57 +1,4 @@
 <div>
-    @php
-        use \App\Models\HeroIcons;
-        $navigation = [
-            collect([
-                'label' => 'Community',
-                'name' => 'social.home',
-                'icon' => function($classList) { return HeroIcons::UsersIcon(...$classList); },
-                'current' => false
-            ]),
-            collect([
-                'label' => 'Notifications',
-                'name' => 'notifications',
-                'icon' => function($classList) { return HeroIcons::BellIcon(...$classList); },
-                'current' => false
-            ]),
-            collect([
-                'label' => 'Messages',
-                'name' => 'messages',
-                'icon' => function($classList) { return HeroIcons::MailIcon(...$classList); },
-                'current' => false
-            ]),
-            collect([
-                'label' => 'Projects',
-                'name' => 'projects',
-                'icon' => function($classList) { return HeroIcons::CollectionIcon(...$classList); },
-                'current' => false
-            ]),
-            collect([
-                'label' => 'Groups',
-                'name' => 'groups',
-                'icon' => function($classList) { return HeroIcons::InformationCircleIcon(...$classList); },
-                'current' => false
-            ]),
-            collect([
-                'label' => 'Learn',
-                'name' => 'learn',
-                'icon' => function($classList) { return HeroIcons::AcademicCapIcon(...$classList); },
-                'current' => false
-            ]),
-            collect([
-                'label' => 'Marketplace',
-                'name' => 'marketplace',
-                'icon' => function($classList) { return HeroIcons::OfficeBuildingIcon(...$classList); },
-                'current' => false
-            ]),
-            collect([
-                'label' => 'More',
-                'name' => 'home',
-                'icon' => function($classList) { return HeroIcons::DotsHorizontalIcon(...$classList); },
-                'current' => false
-            ]),
-        ];
-    @endphp
     <!-- mobile slideout sidebar -->
     @if ($isOpen)
         <div>
@@ -104,7 +51,7 @@
                 <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
                 <p class="text-green-500 text-3xl font-bold">IGD</p>
             </div>
-            <a href="{{ route('home') }}">
+{{--            <a href="{{ route('home') }}">--}}
                 <div class="flex-shrink-0 pl-6 flex p-4 bg-tertiary">
                     <div class="flex items-center">
                         <div>
@@ -122,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-            </a>
+{{--            </a>--}}
             <div class="flex-1 flex pl-6 flex-col overflow-y-auto">
                 <nav class="flex-1 py-4 space-y-1">
                     @foreach ($navigation as $item)
