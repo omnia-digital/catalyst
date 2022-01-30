@@ -1,9 +1,6 @@
 <?php
 
-    use Illuminate\Foundation\Application;
     use Illuminate\Support\Facades\Route;
-    use Inertia\Inertia;
-    use Modules\Social\Http\Controllers\Pages\Social\Home;
 
     /*
     |--------------------------------------------------------------------------
@@ -16,24 +13,45 @@
     |
     */
 
-    Route::get('/', function (\Illuminate\Http\Request $request) {
+    Route::get('/', function () {
         return redirect()->route('dashboard');
     });
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        return view('dashboard');
     })->name('dashboard');
 
     Route::middleware(['auth:sanctum', 'verified'])->group(function() {
-        Route::view('/dashboard', 'dashboard')->name('dashboard');
-
-//        Route::get('/home', [Home::class,'show'])->name('home');
-
-        Route::get('/messages', [Home::class,'show'])->name('messages');
-        Route::get('/notifications', [Home::class,'show'])->name('notifications');
-        Route::get('/projects', [Home::class,'show'])->name('projects');
-        Route::get('/groups', [Home::class,'show'])->name('groups');
-        Route::get('/learn', [Home::class,'show'])->name('learn');
-        Route::get('/marketplace', [Home::class,'show'])->name('marketplace');
+        Route::get('/home', function () {
+            return "Home";
+        })->name('home');
+        
+        Route::get('/profile', function () {
+            return "Profile";
+        })->name('user.profile');
+    
+        Route::get('/messages', function () {
+            return "Messages";
+        })->name('messages');
+    
+        Route::get('/notifications', function () {
+            return "Notifications";
+        })->name('notifications');
+    
+        Route::get('/projects', function () {
+            return "Projects";
+        })->name('projects');
+    
+        Route::get('/groups', function () {
+            return "Groups";
+        })->name('groups');
+    
+        Route::get('/learn', function () {
+            return "Learn";
+        })->name('learn');
+    
+        Route::get('/marketplace', function () {
+            return "Marketplace";
+        })->name('marketplace');
     });
 
