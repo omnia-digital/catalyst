@@ -3,51 +3,51 @@
         use \App\Models\HeroIcons;
         $navigation = [
             collect([
-                'label' => 'Community', 
-                'name' => 'home', 
+                'label' => 'Community',
+                'name' => 'social.home',
                 'icon' => function($classList) { return HeroIcons::UsersIcon(...$classList); },
                 'current' => false
             ]),
             collect([
-                'label' => 'Notifications',    
-                'name' => 'notifications', 
-                'icon' => function($classList) { return HeroIcons::BellIcon(...$classList); }, 
+                'label' => 'Notifications',
+                'name' => 'notifications',
+                'icon' => function($classList) { return HeroIcons::BellIcon(...$classList); },
                 'current' => false
             ]),
             collect([
-                'label' => 'Messages',     
-                'name' => 'messages', 
-                'icon' => function($classList) { return HeroIcons::MailIcon(...$classList); }, 
+                'label' => 'Messages',
+                'name' => 'messages',
+                'icon' => function($classList) { return HeroIcons::MailIcon(...$classList); },
                 'current' => false
             ]),
             collect([
-                'label' => 'Projects', 
-                'name' => 'projects', 
-                'icon' => function($classList) { return HeroIcons::CollectionIcon(...$classList); }, 
+                'label' => 'Projects',
+                'name' => 'projects',
+                'icon' => function($classList) { return HeroIcons::CollectionIcon(...$classList); },
                 'current' => false
             ]),
             collect([
-                'label' => 'Groups', 
-                'name' => 'groups', 
-                'icon' => function($classList) { return HeroIcons::InformationCircleIcon(...$classList); }, 
+                'label' => 'Groups',
+                'name' => 'groups',
+                'icon' => function($classList) { return HeroIcons::InformationCircleIcon(...$classList); },
                 'current' => false
             ]),
             collect([
-                'label' => 'Learn', 
-                'name' => 'learn', 
-                'icon' => function($classList) { return HeroIcons::AcademicCapIcon(...$classList); }, 
+                'label' => 'Learn',
+                'name' => 'learn',
+                'icon' => function($classList) { return HeroIcons::AcademicCapIcon(...$classList); },
                 'current' => false
             ]),
             collect([
-                'label' => 'Marketplace', 
-                'name' => 'marketplace', 
-                'icon' => function($classList) { return HeroIcons::OfficeBuildingIcon(...$classList); }, 
+                'label' => 'Marketplace',
+                'name' => 'marketplace',
+                'icon' => function($classList) { return HeroIcons::OfficeBuildingIcon(...$classList); },
                 'current' => false
             ]),
             collect([
-                'label' => 'More', 
-                'name' => 'home', 
-                'icon' => function($classList) { return HeroIcons::DotsHorizontalIcon(...$classList); }, 
+                'label' => 'More',
+                'name' => 'home',
+                'icon' => function($classList) { return HeroIcons::DotsHorizontalIcon(...$classList); },
                 'current' => false
             ]),
         ];
@@ -59,9 +59,9 @@
                 <div aria-hidden="true" class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
                 <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800">
                     <div class="absolute top-0 right-0 -mr-12 pt-2">
-                        <button 
-                            type="button" 
-                            class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" 
+                        <button
+                            type="button"
+                            class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                             tabindex="0"
                             wire:click="closeMobileMenu"
                         >
@@ -78,8 +78,8 @@
                         <!-- mobile nav -->
                         <nav class="px-2 space-y-1">
                             @foreach ($navigation as $item)
-                                <a 
-                                    href="{{ route($item['name']) }}" 
+                                <a
+                                    href="{{ route($item['name']) }}"
                                     class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-base font-medium rounded-md' }}">
                                     {!! $item['icon']([$item['current'] ? 'text-white' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']) !!}
                                     {{ $item['label'] }}
@@ -126,8 +126,8 @@
             <div class="flex-1 flex pl-6 flex-col overflow-y-auto">
                 <nav class="flex-1 py-4 space-y-1">
                     @foreach ($navigation as $item)
-                        <a 
-                            href="{{ route($item['name']) }}" 
+                        <a
+                            href="{{ route($item['name']) }}"
                             class="{{ request()->routeIs($item['name']) ? 'bg-tertiary text-white' : 'text-gray-300 hover:bg-tertiary hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-lg font-medium rounded-md' }}">
                             {!! $item['icon']([$item['current'] ? 'text-white' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']) !!}
                             {{ $item['label'] }}
@@ -148,9 +148,9 @@
     <div class="md:pl-64 flex flex-col">
         <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
             <!-- mobile menu button -->
-            <button 
-                type="button" 
-                class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden" 
+            <button
+                type="button"
+                class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
                 wire:click="openMobileMenu"
             >
                 <span class="sr-only">Open sidebar</span>
