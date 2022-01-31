@@ -1,13 +1,42 @@
 <?php
 
-namespace Modules\Social\Http\Livewire;
+    namespace Modules\Social\Http\Livewire;
 
-use Livewire\Component;
+    use Livewire\Component;
 
-class Home extends Component
-{
-    public function render()
+    class Home extends Component
     {
-        return view('social::livewire.home');
+        public $tabs = [
+            [
+                'name'    => 'Recent',
+                'href'    => '#',
+                'current' => true
+            ],
+            [
+                'name'    => 'Most Liked',
+                'href'    => '#',
+                'current' => false,
+            ],
+            [
+                'name'    => 'Most Answers',
+                'href'    => '#',
+                'current' => false
+            ]
+        ];
+
+        public string $orderBy = 'created_at';
+
+        public function render()
+        {
+            return view('social::livewire.home');
+        }
+
+        public function sortBy(string $orderBy)
+        {
+            if ($orderBy === $this->orderBy) {
+                return;
+            }
+
+            $this->orderBy = $orderBy;
+        }
     }
-}

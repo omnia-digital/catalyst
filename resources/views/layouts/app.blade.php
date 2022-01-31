@@ -22,9 +22,10 @@
     <body class="font-sans antialiased">
         <x-jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+        <div class="min-h-full bg-gray-100 lg:pl-64 flex flex-col">
+{{--            @livewire('navigation-menu')--}}
             @livewire('side-menu')
+
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -36,7 +37,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="flex-1">
                 {{ $slot }}
             </main>
         </div>
