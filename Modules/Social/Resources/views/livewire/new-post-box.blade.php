@@ -31,46 +31,66 @@
                         </button>
                     </div>
                     <div class="flex items-center">
-                        <Listbox as="div" v-model="selected">
-                            <ListboxLabel class="sr-only">
+                        <div wire:model="selected">
+                            <span class="sr-only">
                                 Your mood
-                            </ListboxLabel>
+                            </span>
                             <div class="relative">
-                                <ListboxButton class="relative -m-2.5 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-500">
+                                <button class="relative -m-2.5 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-500">
                                         <span class="flex items-center justify-center">
-                                          <span v-if="selected.value === null">
+                                            @if (is_null($selected->value))
+                                                <x-heroicons-o-emoji-happy class="flex-shrink-0 h-5 w-5" aria-hidden="true"  />
+                                                <span class="sr-only">
+                                                    Add your mood
+                                                  </span>
+                                            @endif
+                                            @if (!is_null($selected->value))
+                                                <div :class="[$selected->bgColor, 'w-8 h-8 rounded-full flex items-center justify-center']">
+                                                    <x-dynamic-component :component="$selected->icon" class="flex-shrink-0 h-5 w-5 text-white" aria-hidden="true"  />
+                                                </div>
+                                                <span class="sr-only">{{ $selected->name }}</span>
+                                            @endif
+                                          {{-- <span v-if="selected.value === null">
                                             <EmojiHappyIcon class="flex-shrink-0 h-5 w-5" aria-hidden="true" />
                                             <span class="sr-only">
                                               Add your mood
                                             </span>
-                                          </span>
-                                          <span v-if="!(selected.value === null)">
-                                            <div :class="[selected.bgColor, 'w-8 h-8 rounded-full flex items-center justify-center']">
-                                              <component :is="selected.icon" class="flex-shrink-0 h-5 w-5 text-white" aria-hidden="true" />
-                                            </div>
-{{--                                            <span class="sr-only">{{ selected.name }}</span>--}}
-                                          </span>
+                                          </span> --}}
+                                            {{--     <span v-if="!(selected.value === null)">
+                                                <div :class="[selected.bgColor, 'w-8 h-8 rounded-full flex items-center justify-center']">
+                                                <component :is="selected.icon" class="flex-shrink-0 h-5 w-5 text-white" aria-hidden="true" />
+                                                </div>
+                                                <span class="sr-only">{{ selected.name }}</span>
+                                            </span> --}}
                                         </span>
-                                </ListboxButton>
+                                    </button>
 
                                 <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                                    <ListboxOptions class="absolute z-10 mt-1 -ml-6 w-60 bg-white shadow rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:ml-auto sm:w-64 sm:text-sm">
-                                        <ListboxOption as="template" v-for="mood in moods" :key="mood.value" :value="mood" v-slot="{ active }">
+                                    <ul class="absolute z-10 mt-1 -ml-6 w-60 bg-white shadow rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:ml-auto sm:w-64 sm:text-sm">
+                                        @foreach ($moods as $mood)
+                                            <li class="bg-white cursor-default select-none relative py-2 px-3">
+                                                <div class="flex items-center">
+                                                    <div :class="[$mood->bgColor, 'w-8 h-8 rounded-full flex items-center justify-center']">
+                                                        <x-dynamic-component :component="$mood->icon" :class="[$mood->iconColor, 'flex-shrink-0 h-5 w-5']" aria-hidden="true"  />
+                                                    </div>
+                                                    <span class="ml-3 block font-medium truncate">{{ $mood->name }}</span>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                        {{-- <ListboxOption as="template" v-for="mood in moods" :key="mood.value" :value="mood" v-slot="{ active }">
                                             <li :class="[active ? 'bg-gray-100' : 'bg-white', 'cursor-default select-none relative py-2 px-3']">
                                                 <div class="flex items-center">
                                                     <div :class="[mood.bgColor, 'w-8 h-8 rounded-full flex items-center justify-center']">
-{{--                                                        <component :is="mood.icon" :class="[mood.iconColor, 'flex-shrink-0 h-5 w-5']" aria-hidden="true" />--}}
+                                                        <component :is="mood.icon" :class="[mood.iconColor, 'flex-shrink-0 h-5 w-5']" aria-hidden="true" />
                                                     </div>
-                                                    <span class="ml-3 block font-medium truncate">
-{{--                              {{ mood.name }}--}}
-                            </span>
+                                                    <span class="ml-3 block font-medium truncate">{{ mood.name }}</span>
                                                 </div>
                                             </li>
-                                        </ListboxOption>
-                                    </ListboxOptions>
+                                        </ListboxOption> --}}
+                                    </ul>
                                 </transition>
                             </div>
-                        </Listbox>
+                        </div>
                     </div>
                 </div>
                 <div class="flex-shrink-0">
