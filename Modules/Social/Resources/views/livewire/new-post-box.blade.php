@@ -26,7 +26,7 @@
                 <div class="flex items-center space-x-5">
                     <div class="flex items-center">
                         <button type="button" class="-m-2.5 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-500">
-                            <x-heroicons.paper-clip-icon class="h-5 w-5" aria-hidden="true" />
+                            <x-heroicon-o-paper-clip class="h-5 w-5" aria-hidden="true" />
                             <span class="sr-only">Attach a file</span>
                         </button>
                     </div>

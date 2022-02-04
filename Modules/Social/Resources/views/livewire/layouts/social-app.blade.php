@@ -4,11 +4,11 @@
             <div class="ml-4 flex items-center md:ml-6">
                 <button type="button" class="p-1 mx-1 rounded-full text-gray-400 hover:text-primary focus:outline-none">
                     <span class="sr-only">View notifications</span>
-                    <x-bookmark-icon />
+                    <x-heroicon-o-bookmark />
                 </button>
                 <button type="button" class="p-1 mr-2 rounded-full text-gray-400 hover:text-primary focus:outline-none">
                     <span class="sr-only">View notifications</span>
-                    <x-bell-icon />
+                    <x-heroicon-o-bell />
                 </button>
                 <!-- Profile dropdown -->
                 <Menu as="div" class="ml-3 relative">
@@ -42,8 +42,8 @@
                             <DisclosureButton
                                 class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                                 <span class="sr-only">Open main menu</span>
-                                <x-menu-icon v-if="!open" class="block h-6 w-6" aria-hidden="true"/>
-                                <x-x-icon v-else class="block h-6 w-6" aria-hidden="true"/>
+                                <x-heroicon-o-menu v-if="!open" class="block h-6 w-6" aria-hidden="true"/>
+                                <x-heroicon-o-x v-else class="block h-6 w-6" aria-hidden="true"/>
                             </DisclosureButton>
                         </div>
                         <div class="hidden md:flex md:items-center space-x-8">
@@ -56,7 +56,7 @@
                                 <label for="search" class="sr-only">Search</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <x-search-icon class="h-5 w-5 dark:text-gray-400" aria-hidden="true" />
+                                        <x-heroicon-o-search class="h-5 w-5 dark:text-gray-400" aria-hidden="true" />
                                     </div>
                                     <input id="search" name="search"
                                             class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 dark:bg-gray-700 text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 sm:text-sm"
@@ -87,7 +87,7 @@
                             <button type="button"
                                     class="ml-auto flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                 <span class="sr-only">View notifications</span>
-                                <x-bell-icon class="h-6 w-6" aria-hidden="true"/>
+                                <x-heroicon-o-bell class="h-6 w-6" aria-hidden="true"/>
                             </button>
                         </div>
                         <div class="mt-3 px-2 space-y-1 sm:px-3">
