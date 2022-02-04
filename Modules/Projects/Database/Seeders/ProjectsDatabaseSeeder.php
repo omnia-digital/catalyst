@@ -19,6 +19,6 @@ class ProjectsDatabaseSeeder extends Seeder
 
         // $this->call("OthersTableSeeder");
 
-        Project::factory(20);
+        Project::factory()->count(20)->create();
     }
 }
