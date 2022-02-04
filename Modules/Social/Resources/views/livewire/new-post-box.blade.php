@@ -38,17 +38,17 @@
                             <div class="relative">
                                 <button class="relative -m-2.5 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-500">
                                         <span class="flex items-center justify-center">
-                                            @if (is_null($selected->value))
-                                                <x-heroicons-o-emoji-happy class="flex-shrink-0 h-5 w-5" aria-hidden="true"  />
+                                            @if (is_null($selected['value']))
+                                                <x-heroicon-o-emoji-happy class="flex-shrink-0 h-5 w-5" aria-hidden="true"  />
                                                 <span class="sr-only">
                                                     Add your mood
                                                   </span>
                                             @endif
-                                            @if (!is_null($selected->value))
-                                                <div :class="[$selected->bgColor, 'w-8 h-8 rounded-full flex items-center justify-center']">
-                                                    <x-dynamic-component :component="$selected->icon" class="flex-shrink-0 h-5 w-5 text-white" aria-hidden="true"  />
+                                            @if (!is_null($selected['value']))
+                                                <div :class="$selected['bgColor'] . ' w-8 h-8 rounded-full flex items-center justify-center'">
+                                                    <x-dynamic-component :component="$selected['icon']" class="flex-shrink-0 h-5 w-5 text-white" aria-hidden="true"  />
                                                 </div>
-                                                <span class="sr-only">{{ $selected->name }}</span>
+                                                <span class="sr-only">{{ $selected['name'] }}</span>
                                             @endif
                                           {{-- <span v-if="selected.value === null">
                                             <EmojiHappyIcon class="flex-shrink-0 h-5 w-5" aria-hidden="true" />
@@ -70,10 +70,10 @@
                                         @foreach ($moods as $mood)
                                             <li class="bg-white cursor-default select-none relative py-2 px-3">
                                                 <div class="flex items-center">
-                                                    <div :class="[$mood->bgColor, 'w-8 h-8 rounded-full flex items-center justify-center']">
-                                                        <x-dynamic-component :component="$mood->icon" :class="[$mood->iconColor, 'flex-shrink-0 h-5 w-5']" aria-hidden="true"  />
+                                                    <div :class="$mood['bgColor'] . ' w-8 h-8 rounded-full flex items-center justify-center'">
+                                                        <x-dynamic-component :component="$mood['icon']" :class="$mood['iconColor'] . ' flex-shrink-0 h-5 w-5'" aria-hidden="true"  />
                                                     </div>
-                                                    <span class="ml-3 block font-medium truncate">{{ $mood->name }}</span>
+                                                    <span class="ml-3 block font-medium truncate">{{ $mood['name'] }}</span>
                                                 </div>
                                             </li>
                                         @endforeach
