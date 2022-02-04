@@ -19,12 +19,13 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     </head>
-    <body class="font-sans antialiased">
+    <body class="h-full font-sans antialiased">
         <x-jet-banner />
+
+        @livewire('side-menu')
 
         <div class="min-h-full bg-gray-100 lg:pl-64 flex flex-col">
 {{--            @livewire('navigation-menu')--}}
-            @livewire('side-menu')
 
 
             <!-- Page Heading -->
