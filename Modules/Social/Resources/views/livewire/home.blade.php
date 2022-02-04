@@ -25,10 +25,12 @@
                 </div>
             </div>
             <div class="mt-4">
-                <new-post-box class="my-6" :user="user"></new-post-box>
-
+                <livewire:social::new-post-box class="my-6" :user="auth()->user()" />
                 <h1 class="sr-only">Recent Posts</h1>
                 <ul role="list" class="space-y-4">
+                    @foreach ($questions as $question)
+                        
+                    @endforeach
                     <li v-for="question in questions" :key="question.id">
                         <post-list-item :post="question"></post-list-item>
                     </li>
