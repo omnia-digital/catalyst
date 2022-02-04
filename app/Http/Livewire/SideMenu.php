@@ -3,7 +3,6 @@
     namespace App\Http\Livewire;
 
     use Livewire\Component;
-    use App\Models\HeroIcons;
 
     class SideMenu extends Component
     {
@@ -16,57 +15,43 @@
                 [
                     'label'   => 'Community',
                     'name'    => 'social.home',
-                    'icon'    => function ($classList) {
-                        return HeroIcons::UsersIcon(...$classList);
-                    },
+                    'icon'    => 'heroicon-o-users',
                     'current' => false
                 ],
                 [
                     'label'   => 'Notifications',
                     'name'    => 'notifications',
-                    'icon'    => function ($classList) {
-                        return HeroIcons::BellIcon(...$classList);
-                    },
+                    'icon'    => 'heroicon-o-bell',
                     'current' => false
                 ],
                 [
                     'label'   => 'Messages',
                     'name'    => 'messages',
-                    'icon'    => function ($classList) {
-                        return HeroIcons::MailIcon(...$classList);
-                    },
+                    'icon'    => 'heroicon-o-mail',
                     'current' => false
                 ],
                 [
                     'label'   => 'Projects',
                     'name'    => 'projects',
-                    'icon'    => function ($classList) {
-                        return HeroIcons::CollectionIcon(...$classList);
-                    },
+                    'icon'    => 'heroicon-o-collection',
                     'current' => false
                 ],
                 [
                     'label'   => 'Groups',
                     'name'    => 'groups',
-                    'icon'    => function ($classList) {
-                        return HeroIcons::InformationCircleIcon(...$classList);
-                    },
+                    'icon'    => 'heroicon-o-information-circle',
                     'current' => false
                 ],
                 [
                     'label'   => 'Learn',
                     'name'    => 'learn',
-                    'icon'    => function ($classList) {
-                        return HeroIcons::AcademicCapIcon(...$classList);
-                    },
+                    'icon'    => 'heroicon-o-academic-cap',
                     'current' => false
                 ],
                 [
                     'label'   => 'Marketplace',
                     'name'    => 'marketplace',
-                    'icon'    => function ($classList) {
-                        return HeroIcons::OfficeBuildingIcon(...$classList);
-                    },
+                    'icon'    => 'heroicon-o-office-building',
                     'current' => false
                 ]
             ];
