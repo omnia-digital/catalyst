@@ -1,4 +1,4 @@
-<div>
+<x-app-layout>
         <div class="flex-1 flex px-4 sm justify-between bg-neutral items-center">
             <h1 class="text-gray-600 ml-4 text-3xl">Community</h1>
             <div class="ml-4 flex items-center md:ml-6">
@@ -101,7 +101,7 @@
 
             <!-- Page content -->
             <div class="max-w-6xl mx-auto">
-                <slot></slot>
+                {{ $slot }}
             </div>
         </div>
-</div>
+</x-app-layout>
