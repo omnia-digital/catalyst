@@ -14,7 +14,7 @@
                 <div class="hidden sm:block">
                     <nav class="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
                         @foreach($tabs as $tab)
-                            <x-sort-button :orderBy="$orderBy">
+                            <x-sort-button key="created_at" :orderBy="$orderBy">
                                 {{ $tab['name'] }}
                             </x-sort-button>
                         @endforeach

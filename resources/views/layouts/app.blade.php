@@ -24,7 +24,7 @@
 
         @livewire('side-menu')
 
-        <div class="min-h-full bg-gray-100 lg:pl-64 flex flex-col">
+        <div class="min-h-full bg-gray-100 md:pl-64 flex flex-col">
 {{--            @livewire('navigation-menu')--}}
 
 
@@ -46,5 +46,8 @@
         @stack('modals')
         @stack('scripts')
         @livewireScripts
+        @env ('local')
+            <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>
+        @endenv
     </body>
 </html>
