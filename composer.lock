@@ -64,21 +64,21 @@
         },
         {
             "name": "bacon/bacon-qr-code",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bacon/BaconQrCode.git",
-                "reference": "7190fc6c20370e0e93da6717b182b8249d5b8e71"
+                "reference": "0069435e2a01a57193b25790f105a5d3168653c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/7190fc6c20370e0e93da6717b182b8249d5b8e71",
-                "reference": "7190fc6c20370e0e93da6717b182b8249d5b8e71",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/0069435e2a01a57193b25790f105a5d3168653c1",
+                "reference": "0069435e2a01a57193b25790f105a5d3168653c1",
                 "shasum": ""
             },
             "require": {
                 "dasprid/enum": "^1.0.3",
-                "extv": "*",
+                "ext-iconv": "*",
                 "php": "^7.1 || ^8.0"
             },
             "require-dev": {
@@ -112,9 +112,9 @@
             "homepage": "https://github.com/Bacon/BaconQrCode",
             "support": {
                 "issues": "https://github.com/Bacon/BaconQrCode/issues",
-                "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.5"
+                "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.6"
             },
-            "time": "2022-01-31T00:43:09+00:00"
+            "time": "2022-02-04T20:16:05+00:00"
         },
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -131,7 +131,7 @@
                 "shasum": ""
             },
             "require": {
-                "blade-ui-kit/blades": "^1.1",
+                "blade-ui-kit/blade-icons": "^1.1",
                 "illuminate/support": "^8.0|^9.0",
                 "php": "^7.4|^8.0"
             },
@@ -186,16 +186,16 @@
             "time": "2022-01-20T13:19:23+00:00"
         },
         {
-            "name": "blade-ui-kit/blades",
+            "name": "blade-ui-kit/blade-icons",
             "version": "1.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/blade-ui-kit/blades.git",
+                "url": "https://github.com/blade-ui-kit/blade-icons.git",
                 "reference": "5cfafd041b86bf513f0c2652a131f7861bdfe90c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blade-ui-kit/blades/zipball/5cfafd041b86bf513f0c2652a131f7861bdfe90c",
+                "url": "https://api.github.com/repos/blade-ui-kit/blade-icons/zipball/5cfafd041b86bf513f0c2652a131f7861bdfe90c",
                 "reference": "5cfafd041b86bf513f0c2652a131f7861bdfe90c",
                 "shasum": ""
             },
@@ -214,7 +214,7 @@
                 "phpunit/phpunit": "^9.0"
             },
             "bin": [
-                "bin/blades-generate"
+                "bin/blade-icons-generate"
             ],
             "type": "library",
             "extra": {
@@ -243,7 +243,7 @@
                 }
             ],
             "description": "A package to easily make use of icons in your Laravel Blade views.",
-            "homepage": "https://github.com/blade-ui-kit/blades",
+            "homepage": "https://github.com/blade-ui-kit/blade-icons",
             "keywords": [
                 "blade",
                 "icons",
@@ -251,8 +251,8 @@
                 "svg"
             ],
             "support": {
-                "issues": "https://github.com/blade-ui-kit/blades/issues",
-                "source": "https://github.com/blade-ui-kit/blades"
+                "issues": "https://github.com/blade-ui-kit/blade-icons/issues",
+                "source": "https://github.com/blade-ui-kit/blade-icons"
             },
             "funding": [
                 {
@@ -2971,7 +2971,7 @@
             },
             "suggest": {
                 "ext-gd": "to use Image",
-                "extv": "to use Strings::webalize(), toAscii(), chr() and reverse()",
+                "ext-iconv": "to use Strings::webalize(), toAscii(), chr() and reverse()",
                 "ext-intl": "to use Strings::webalize(), toAscii(), normalize() and compare()",
                 "ext-json": "to use Nette\\Utils\\Json",
                 "ext-mbstring": "to use Strings::lower() etc...",
@@ -6218,7 +6218,7 @@
             "require": {
                 "egulias/email-validator": "^2.0|^3.1",
                 "php": ">=7.0.0",
-                "symfony/polyfillv": "^1.0",
+                "symfony/polyfill-iconv": "^1.0",
                 "symfony/polyfill-intl-idn": "^1.10",
                 "symfony/polyfill-mbstring": "^1.0"
             },
@@ -7155,16 +7155,16 @@
             "time": "2021-10-20T20:35:02+00:00"
         },
         {
-            "name": "symfony/polyfillv",
+            "name": "symfony/polyfill-iconv",
             "version": "v1.24.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/polyfillv.git",
+                "url": "https://github.com/symfony/polyfill-iconv.git",
                 "reference": "f1aed619e28cb077fc83fac8c4c0383578356e40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfillv/zipball/f1aed619e28cb077fc83fac8c4c0383578356e40",
+                "url": "https://api.github.com/repos/symfony/polyfill-iconv/zipball/f1aed619e28cb077fc83fac8c4c0383578356e40",
                 "reference": "f1aed619e28cb077fc83fac8c4c0383578356e40",
                 "shasum": ""
             },
@@ -7172,10 +7172,10 @@
                 "php": ">=7.1"
             },
             "provide": {
-                "extv": "*"
+                "ext-iconv": "*"
             },
             "suggest": {
-                "extv": "For best performance"
+                "ext-iconv": "For best performance"
             },
             "type": "library",
             "extra": {
@@ -7219,7 +7219,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfillv/tree/v1.24.0"
+                "source": "https://github.com/symfony/polyfill-iconv/tree/v1.24.0"
             },
             "funding": [
                 {
@@ -8405,14 +8405,14 @@
                 "symfony/console": "<4.4"
             },
             "require-dev": {
-                "extv": "*",
+                "ext-iconv": "*",
                 "symfony/console": "^4.4|^5.0|^6.0",
                 "symfony/process": "^4.4|^5.0|^6.0",
                 "symfony/uid": "^5.1|^6.0",
                 "twig/twig": "^2.13|^3.0.4"
             },
             "suggest": {
-                "extv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfillv in case extv cannot be used).",
+                "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
                 "ext-intl": "To show region name in time zone dump",
                 "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
             },
@@ -9028,7 +9028,7 @@
                 "doctrine/orm": "Required to use Faker\\ORM\\Doctrine",
                 "ext-curl": "Required by Faker\\Provider\\Image to download images.",
                 "ext-dom": "Required by Faker\\Provider\\HtmlLorem for generating random HTML.",
-                "extv": "Required by Faker\\Provider\\ru_RU\\Text::realText() for generating real Russian text.",
+                "ext-iconv": "Required by Faker\\Provider\\ru_RU\\Text::realText() for generating real Russian text.",
                 "ext-mbstring": "Required for multibyte Unicode string functionality."
             },
             "type": "library",
