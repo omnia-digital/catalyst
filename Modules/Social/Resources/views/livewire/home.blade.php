@@ -14,19 +14,9 @@
                 <div class="hidden sm:block">
                     <nav class="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
                         @foreach($tabs as $tab)
-                            <x-sort-button key="created_at" :orderBy="$orderBy">
+                            <x-sort-button :orderBy="$orderBy">
                                 {{ $tab['name'] }}
                             </x-sort-button>
-                            <a 
-                                href="{{ $tab['href'] }}" 
-                                aria-current="{{ $tab['current'] ? 'page' : 'undefined' }}"
-                                class="{{ $tab['current'] ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700' }} 
-                                    {{ $loop->first ? 'rounded-l-lg' : '' }} {{ $loop->last ? 'rounded-r-lg' : '' }} 
-                                    group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
-                            >
-                                <span>{{ $tab['name'] }}</span>
-                                <span aria-hidden="true" class="{{  $tab['current'] ? 'bg-rose-500' : 'bg-transparent' }} absolute inset-x-0 bottom-0 h-0.5"></span>
-                            </a>
                         @endforeach
                     </nav>
                 </div>
@@ -56,27 +46,30 @@
                             </h2>
                             <div class="mt-6 flow-root">
                                 <ul role="list" class="-my-4 divide-y divide-gray-200">
-                                    <li v-for="user in whoToFollow" :key="user.profile.handle" class="flex items-center py-4 space-x-3">
-                                        <div class="flex-shrink-0">
-                                            <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt=""/>
-                                        </div>
-                                        <div class="min-w-0 flex-1">
-                                            <p class="text-sm font-medium text-gray-900">
-                                                {{--                                                <a :href="user.href">{{ user.name }}</a>--}}
-                                            </p>
-                                            <p class="text-sm text-gray-500">
-                                                {{--                                                <a :href="user.href">{{ '@' + user.profile.handle }}</a>--}}
-                                            </p>
-                                        </div>
-                                        <div class="flex-shrink-0">
-                                            <button type="button" class="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100">
-                                                <PlusSmIcon class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" aria-hidden="true"/>
-                                                <span>
-                                                      Follow
+                                    @foreach ($whoToFollow as $user)
+                                        <li class="flex items-center py-4 space-x-3">
+                                            <div class="flex-shrink-0">
+                                                <img class="h-8 w-8 rounded-full" src="{{ $user['imageUrl'] }}" alt="" />
+                                            </div>
+                                            <div class="min-w-0 flex-1">
+                                                <p class="text-sm font-medium text-gray-900">
+                                                    <a href="{{ $user['href'] }}">{{ $user['name'] }}</a>
+                                                </p>
+                                                <p class="text-sm text-gray-500">
+                                                    <a href="{{ $user['href'] }}">{{ '@' . $user['profile']['handle'] }}</a>
+                                                </p>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <button type="button" class="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100">
+                                                    <x-heroicon-o-plus-sm class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" aria-hidden="true" />
+                                                    <span>
+                                                        Follow
                                                     </span>
-                                            </button>
-                                        </div>
-                                    </li>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="mt-6">
@@ -95,22 +88,24 @@
                             </h2>
                             <div class="mt-6 flow-root">
                                 <ul role="list" class="-my-4 divide-y divide-gray-200">
-                                    <li v-for="post in trendingPosts" :key="post.id" class="flex py-4 space-x-3">
-                                        <div class="flex-shrink-0">
-                                            <img class="h-8 w-8 rounded-full" :src="post.user.imageUrl" :alt="post.user.name"/>
-                                        </div>
-                                        <div class="min-w-0 flex-1">
-                                            {{--                                            <p class="text-sm text-gray-800">{{ post.body }}</p>--}}
-                                            <div class="mt-2 flex">
-                                                    <span class="inline-flex items-center text-sm">
-                                                      <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                                                        <ChatAltIcon class="h-5 w-5" aria-hidden="true"/>
-{{--                                                        <span class="font-medium text-gray-900">{{ post.comments }}</span>--}}
-                                                      </button>
-                                                    </span>
+                                    @foreach ($trendingPosts as $post)
+                                        <li class="flex py-4 space-x-3">
+                                            <div class="flex-shrink-0">
+                                                <img class="h-8 w-8 rounded-full" src="{{ $post['user']['imageUrl'] }}" alt="{{ $post['user']['name'] }}"/>
                                             </div>
-                                        </div>
-                                    </li>
+                                            <div class="min-w-0 flex-1">
+                                                <p class="text-sm text-gray-800">{{ $post['body'] }}</p>
+                                                <div class="mt-2 flex">
+                                                    <span class="inline-flex items-center text-sm">
+                                                        <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                                                            <x-heroicon-o-chat-alt class="h-5 w-5" aria-hidden="true" />
+                                                            <span class="font-medium text-gray-900">{{ $post['comments'] }}</span>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="mt-6">
