@@ -53,7 +53,7 @@
                 <p class="text-green-500 text-3xl font-bold">IGD</p>
             </div>
             <a href="{{ route('social.home') }}">
-                <div class="flex-shrink-0 pl-6 flex p-4 bg-tertiary">
+                <div class="flex-shrink-0 pl-6 flex p-4">
                     <div class="flex items-center">
                         <div>
                             <img class="inline-block h-12 w-12 rounded-full"
@@ -71,12 +71,14 @@
                     </div>
                 </div>
             </a>
-            <div class="flex-1 flex pl-6 flex-col overflow-y-auto">
+            <div class="flex-1 flex flex-col overflow-y-auto">
                 <nav class="flex-1 py-4 space-y-1">
                     @foreach ($navigation as $item)
                         <a
                             href="{{ route($item['name']) }}"
-                            class="{{ request()->routeIs($item['name']) ? 'bg-tertiary text-white' : 'text-gray-300 hover:bg-tertiary hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-lg font-medium rounded-md' }}">
+                            class="{{ request()->routeIs($item['name']) ? 'bg-tertiary text-white' : 'text-gray-300 hover:bg-tertiary hover:text-white' }} {{ 'w-full pl-6 group flex items-center
+                            px-2 py-2
+                            text-lg font-medium rounded-md' }}">
                             <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-gray-400 group-hover:text-gray-300' }} mr-3 flex-shrink-0 h-6 w-6"
                                                  aria-hidden="true"/>
                             {{ $item['label'] }}
