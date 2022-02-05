@@ -6,7 +6,9 @@
                 <div class="sm:hidden">
                     <label for="question-tabs" class="sr-only">Select a tab</label>
                     <select id="question-tabs" class="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500">
-                        {{--                        <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">{{ tab.name }}</option>--}}
+                        @foreach ($tabs as $tab)
+                            <option :selected="$tab['current']">{{ $tab['name'] }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="hidden sm:block">
@@ -15,11 +17,16 @@
                             <x-sort-button key="created_at" :orderBy="$orderBy">
                                 {{ $tab['name'] }}
                             </x-sort-button>
-{{--                        <a href="{{ $tab['href'] }}" aria-current="{{ $tab['current'] }} ? 'page' : undefined"--}}
-{{--                           class="[{{ $tab['current'] }} ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700', tabIdx === 0 ? 'rounded-l-lg' : '', tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '', 'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10']">--}}
-{{--                            --}}{{--                            <span>{{ tab.name }}</span>--}}
-{{--                            <span aria-hidden="true" :class="[tab.current ? 'bg-rose-500' : 'bg-transparent', 'absolute inset-x-0 bottom-0 h-0.5']"/>--}}
-{{--                        </a>--}}
+                            <a 
+                                href="{{ $tab['href'] }}" 
+                                aria-current="{{ $tab['current'] ? 'page' : 'undefined' }}"
+                                class="{{ $tab['current'] ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700' }} 
+                                    {{ $loop->first ? 'rounded-l-lg' : '' }} {{ $loop->last ? 'rounded-r-lg' : '' }} 
+                                    group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
+                            >
+                                <span>{{ $tab['name'] }}</span>
+                                <span aria-hidden="true" class="{{  $tab['current'] ? 'bg-rose-500' : 'bg-transparent' }} absolute inset-x-0 bottom-0 h-0.5"></span>
+                            </a>
                         @endforeach
                     </nav>
                 </div>
@@ -29,11 +36,13 @@
                 <h1 class="sr-only">Recent Posts</h1>
                 <ul role="list" class="space-y-4">
                     @foreach ($questions as $question)
-                        
+                        <li>
+                            <livewire:social::post-list-item :post="$question" />
+                        </li>
                     @endforeach
-                    <li v-for="question in questions" :key="question.id">
+                    {{-- <li v-for="question in questions" :key="question.id">
                         <post-list-item :post="question"></post-list-item>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
