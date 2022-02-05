@@ -16,10 +16,10 @@
 //        Route::get('/', function () {
 ////            return Inertia::render('Social/Home');
 //        })->name('social-home');
-        Route::get('/explore', function () {
-        })->name('explore');
+//        Route::get('/explore', function () {
+//        })->name('explore');
 //        Route::get('/profile', [Profile::class, 'show'])->name('profile');
-        Route::get('/bookmarks', function () {
-        })->name('bookmarks');
+//        Route::get('/bookmarks', function () {
+//        })->name('bookmarks');
     });
 

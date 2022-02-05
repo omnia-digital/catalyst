@@ -1,6 +1,9 @@
+@extends('social::livewire.layouts.social-app')
+
+@section('content')
 <div>
     <!-- Page Heading -->
-    <div class="my-6 lg:grid lg:grid-cols-9 lg:gap-9">
+    <div class="lg:grid lg:grid-cols-9 lg:gap-9">
         <div class="lg:col-span-6 xl:col-span-6">
             <div class="px-4 sm:px-0">
                 <div class="sm:hidden">
@@ -120,3 +123,4 @@
         </aside>
     </div>
 </div>
+@endsection
