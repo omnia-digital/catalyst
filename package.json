@@ -32,6 +32,7 @@
     "dependencies": {
         "@headlessui/vue": "^1.4.1",
         "@heroicons/vue": "^1.0.5",
+        "@tailwindcss/aspect-ratio": "^0.4.0",
         "autoprefixer": "^10.4.0",
         "laravel-mix-merge-manifest": "^2.0.0",
         "resolve-url-loader": "^4.0.0",

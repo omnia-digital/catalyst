@@ -5,11 +5,11 @@
             <div class="ml-4 flex items-center md:ml-6">
                 <button type="button" class="p-1 mx-1 rounded-full text-gray-400 hover:text-primary focus:outline-none">
                     <span class="sr-only">View notifications</span>
-                    <x-heroicon-o-bookmark />
+                    <x-heroicon-o-bookmark class="h-6 w-6" />
                 </button>
                 <button type="button" class="p-1 mr-2 rounded-full text-gray-400 hover:text-primary focus:outline-none">
                     <span class="sr-only">View notifications</span>
-                    <x-heroicon-o-bell />
+                    <x-heroicon-o-bell class="h-6 w-6" />
                 </button>
                 <!-- Profile dropdown -->
 {{--                <Menu as="div" class="ml-3 relative">--}}
