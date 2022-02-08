@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description')->nullable();
+            $table->foreignIdFor(\App\Models\User::class, 'owner_id');
 
             $table->timestamps();
         });
