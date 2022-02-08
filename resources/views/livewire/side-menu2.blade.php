@@ -81,7 +81,7 @@
                             text-lg font-medium rounded-md' }}">
                             <x-dynamic-component :component="$item['icon']" class="mr-3 flex-shrink-0 h-6 w-6"
                                                  aria-hidden="true" />
-                            {{ $item['label'] }} @if($item['name'] == 'social.home') <span class="ml-4 text-sm w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>@endif
+                            {{ $item['label'] }} @if($item['name'] == 'social.home')<span class="ml-4 text-sm w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>@endif
                         </a>
                     @endforeach
                     {{-- <Link v-for="item in navigation" :key="item.name" :href="route(item.name)"
@@ -97,9 +97,9 @@
                     <div x-data="setup()">
                         <ul class="flex justify-center items-center my-4">
                             <template x-for="(tab, index) in tabs" :key="index">
-                                <li class="cursor-pointer py-2 px-8 text-gray-500 border-b-2"
+                                <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-gray-500 border-b-2"
                                     :class="activeTab===index ? 'text-black font-bold border-black' : ''" @click="activeTab = index"
-                                    x-text="tab"></li>
+                                    x-html="tab + notifications"></li>
                             </template>
                         </ul>
 
@@ -152,7 +152,8 @@
             tabs: [
                 'Invitations',
                 'Requests',
-            ]
+            ],
+            notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>',
         }
     }
 </script>
