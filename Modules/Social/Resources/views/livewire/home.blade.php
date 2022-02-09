@@ -3,9 +3,9 @@
 @section('content')
 <div>
     <!-- Page Heading -->
-    <div class="lg:grid lg:grid-cols-9 lg:gap-9">
-        <div class="lg:col-span-6 xl:col-span-6">
-            <div class="px-4 sm:px-0">
+    <div class="xl:grid xl:grid-cols-9 xl:gap-9">
+        <div class="xl:col-span-6">
+            <div>
                 <div class="sm:hidden">
                     <label for="question-tabs" class="sr-only">Select a tab</label>
                     <select id="question-tabs" class="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500">
@@ -23,6 +23,13 @@
                         @endforeach
                     </nav>
                 </div>
+            </div>
+            <div class="mt-4">
+                <ul role="list" class="mt-6 space-y-4">
+                @foreach ($activities as $activity)
+                    <livewire:social::partials.activity-list-item :activity="$activity" />
+                @endforeach
+                </ul>
             </div>
             <div class="mt-4">
                 <livewire:social::new-post-box class="my-6" :user="auth()->user()" />
