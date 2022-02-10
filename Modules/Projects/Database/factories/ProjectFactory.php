@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Projects\Database\factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProjectFactory extends Factory
@@ -21,7 +22,8 @@ class ProjectFactory extends Factory
     {
         return [
             'title' => $this->faker->company,
-            'description' => $this->faker->text
+            'description' => $this->faker->text,
+            'owner_id' => User::factory()
         ];
     }
 }
