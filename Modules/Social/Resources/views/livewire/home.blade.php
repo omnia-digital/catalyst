@@ -25,6 +25,9 @@
                 </div>
             </div>
             <div class="mt-4">
+                <livewire:social::map />
+            </div>
+            <div class="mt-4">
                 <ul role="list" class="mt-6 space-y-4">
                 @foreach ($activities as $activity)
                     <livewire:social::partials.activity-list-item :activity="$activity" />
