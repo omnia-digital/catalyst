@@ -5,26 +5,26 @@
     <!-- Page Heading -->
     <div class="xl:grid xl:grid-cols-9 xl:gap-9">
         <div class="xl:col-span-6">
-            <div>
-                <div class="sm:hidden">
-                    <label for="question-tabs" class="sr-only">Select a tab</label>
-                    <select id="question-tabs" class="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500">
-                        @foreach ($tabs as $tab)
-                            <option :selected="$tab['current']">{{ $tab['name'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="hidden sm:block">
-                    <nav class="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
-                        @foreach($tabs as $tab)
-                            <x-sort-button key="created_at" :orderBy="$orderBy">
-                                {{ $tab['name'] }}
-                            </x-sort-button>
-                        @endforeach
-                    </nav>
-                </div>
-            </div>
-            <div class="mt-4">
+{{--            <div>--}}
+{{--                <div class="sm:hidden">--}}
+{{--                    <label for="question-tabs" class="sr-only">Select a tab</label>--}}
+{{--                    <select id="question-tabs" class="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500">--}}
+{{--                        @foreach ($tabs as $tab)--}}
+{{--                            <option :selected="$tab['current']">{{ $tab['name'] }}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+{{--                </div>--}}
+{{--                <div class="hidden sm:block">--}}
+{{--                    <nav class="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">--}}
+{{--                        @foreach($tabs as $tab)--}}
+{{--                            <x-sort-button key="created_at" :orderBy="$orderBy">--}}
+{{--                                {{ $tab['name'] }}--}}
+{{--                            </x-sort-button>--}}
+{{--                        @endforeach--}}
+{{--                    </nav>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+            <div class="">
                 <livewire:social::map />
             </div>
             <div class="mt-4">
