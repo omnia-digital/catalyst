@@ -5,11 +5,11 @@
             <div class="ml-4 flex items-center md:ml-6">
                 <button type="button" class="p-1 mx-1 rounded-full text-gray-400 hover:text-primary focus:outline-none">
                     <span class="sr-only">View notifications</span>
-                    <x-heroicon-o-bookmark />
+                    <x-heroicon-o-bookmark class="h-6 w-6" />
                 </button>
                 <button type="button" class="p-1 mr-2 rounded-full text-gray-400 hover:text-primary focus:outline-none">
                     <span class="sr-only">View notifications</span>
-                    <x-heroicon-o-bell />
+                    <x-heroicon-o-bell class="h-6 w-6" />
                 </button>
                 <!-- Profile dropdown -->
 {{--                <Menu as="div" class="ml-3 relative">--}}
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-        <div class="min-h-screen bg-gray-100 px-4 sm:px-0">
+        <div class="min-h-screen bg-gray-100 px-4">
             <div as="nav" class="max-w-7xl mx-auto border-b border-neutral">
                 <div>
                     <div class="flex h-16 justify-between">
@@ -56,7 +56,7 @@
 {{--                                {{ $item->label }}--}}
                             </jet-nav-link>
                         </div>
-                        <div class="flex justify-center px-2 lg:ml-6 lg:justify-end items-center">
+                        <div class="flex justify-center lg:ml-6 lg:justify-end items-center">
                             <div class="max-w-lg w-full lg:max-w-xs">
                                 <label for="search" class="sr-only">Search</label>
                                 <div class="relative">
@@ -87,7 +87,7 @@
                     <div class="pt-4 pb-3 border-t border-gray-700">
                         <div class="flex items-center px-5 sm:px-6">
                             <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full" :src="user?.imageUrl" alt=""/>
+                                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""/>
                             </div>
                             <div class="ml-3">
 {{--                                <div class="text-base font-medium text-white">{{ $user?->name }}</div>--}}

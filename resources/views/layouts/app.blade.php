@@ -22,9 +22,9 @@
     <body class="h-full font-sans antialiased">
 
         <div class="flex">
-            @livewire('side-menu')
+            @livewire('side-menu2')
 
-            <main class="md:pl-64 flex-1">
+            <main class="md:pl-80 flex-1">
                 {{ $slot }}
             </main>
         </div>

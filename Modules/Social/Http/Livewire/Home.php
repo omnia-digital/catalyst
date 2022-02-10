@@ -2,11 +2,13 @@
 
     namespace Modules\Social\Http\Livewire;
 
-    use Livewire\Component;
+use Illuminate\Support\Facades\Date;
+use Livewire\Component;
 
     class Home extends Component
     {
         public $tabs = [];
+        public $activities = [];
         public $questions = [];
         public $whoToFollow = [];
         public $trendingPosts = [];
@@ -29,6 +31,200 @@
                     'href'    => '#',
                     'current' => false
                 ]
+            ];
+
+            $this->activities = [
+                [
+                    'id' => 0,
+                    'title' => 'Your project «Project title» has began',
+                    'message' => 'Tincidunt dolor odio vulputate faucibus tempor. Nunc ullamcorper nunc eget eget orci, congue. Imperdie…',
+                    'created_at' => now(),
+                    'user' => [
+                        'avatar' => null,
+                    ],
+                    'members' => [
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                    ],
+                    'project' => [
+                        'link' => route('projects.home'),
+                    ],
+                ],
+                [
+                    'id' => 1,
+                    'title' => 'Robert Fox created a new project «Project title»',
+                    'message' => 'Tincidunt dolor odio vulputate faucibus tempor. Nunc ullamcorper nunc eget eget orci, congue. Imperdie…',
+                    'created_at' => Date::parse('Dec 02, 2021 at 9:15 AM'),
+                    'user' => [
+                        'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                    ],
+                    'members' => null,
+                    'project' => [
+                        'link' => route('projects.home'),
+                    ],
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'Kate Wills joined to your project «Project title»',
+                    'message' => 'Tincidunt dolor odio vulputate faucibus tempor. Nunc ullamcorper nunc eget eget orci, congue. Imperdie…',
+                    'created_at' => Date::parse('Dec 02, 2021 at 8:45 AM'),
+                    'user' => [
+                        'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                    ],
+                    'members' => null,
+                    'project' => [
+                        'link' => route('projects.home'),
+                    ],
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'Your request to participate in «Project title» is accepted ',
+                    'message' => 'Tincidunt dolor odio vulputate faucibus tempor. Nunc ullamcorper nunc eget eget orci, congue. Imperdie…',
+                    'created_at' => Date::parse('Dec 02, 2021 at 8:45 AM'),
+                    'user' => [
+                        'avatar' => null,
+                    ],
+                    'members' => null,
+                    'project' => [
+                        'link' => route('projects.home'),
+                    ],
+                ],
+                [
+                    'id' => 4,
+                    'title' => 'Jane Cooper attended project «Project title»',
+                    'message' => 'Tincidunt dolor odio vulputate faucibus tempor. Nunc ullamcorper nunc eget eget orci, congue. Imperdie…',
+                    'created_at' => Date::parse('Dec 01, 2021 at 5:00 PM'),
+                    'user' => [
+                        'avatar' => '',
+                    ],
+                    'members' => [
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                    ],
+                    'project' => [
+                        'link' => route('projects.home'),
+                    ],
+                ],
+                [
+                    'id' => 5,
+                    'title' => 'Wade Warren raised his level to «Gold member»',
+                    'message' => null,
+                    'created_at' => Date::parse('Dec 01, 2021 at 2:24 PM'),
+                    'user' => [
+                        'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1'
+                    ],
+                    'memebers' => null,
+                    'project' => null,
+                ],
+                [
+                    'id' => 6,
+                    'title' => 'Kate Willis attended project «Project title»',
+                    'message' => 'Tincidunt dolor odio vulputate faucibus tempor. Nunc ullamcorper nunc eget eget orci, congue. Imperdie…',
+                    'created_at' => Date::parse('Dec 01, 2021 at 5:00 PM'),
+                    'user' => [
+                        'avatar' => '',
+                    ],
+                    'members' => [
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                        [
+                            'avatar' => 'https://source.unsplash.com/24x24/?face&crop-face&v=1',
+                        ],
+                    ],
+                    'project' => [
+                        'link' => route('projects.home'),
+                    ],
+                ],
             ];
 
             $this->questions = [

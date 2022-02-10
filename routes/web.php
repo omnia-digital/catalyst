@@ -34,6 +34,10 @@
             return "Messages";
         })->name('messages');
 
+        Route::get('/contacts', function () {
+            return "Contacts";
+        })->name('contacts');
+
         Route::get('/notifications', function () {
             return "Notifications";
         })->name('notifications');
@@ -42,9 +46,17 @@
             return "Projects";
         })->name('projects');
 
+        Route::get('/my-projects', function () {
+            return "My Projects";
+        })->name('my-projects');
+
         Route::get('/groups', function () {
             return "Groups";
         })->name('groups');
+
+        Route::get('/favorites', function () {
+            return "Favorites";
+        })->name('favorites');
 
         Route::get('/learn', function () {
             return "Learn";
