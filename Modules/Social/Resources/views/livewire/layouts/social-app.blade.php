@@ -1,5 +1,5 @@
 <div>
-    <div class="max-w-7xl mx-auto bg-neutral">
+    <div class="bg-neutral">
         <div class="flex-1 flex justify-between items-center">
             <h1 class="py-4 ml-4 text-3xl">Community</h1>
             <div class="ml-4 flex items-center md:ml-6">
@@ -110,7 +110,7 @@
             </div>
 
             <!-- Page content -->
-            <div class="max-w-7xl mx-auto">
+            <div class="mx-auto">
                 @yield('content')
             </div>
         </div>
