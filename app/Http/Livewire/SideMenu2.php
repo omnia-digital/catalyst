@@ -21,7 +21,7 @@ class SideMenu2 extends Component
             ],
             [
                 'label'   => 'My Projects',
-                'name'    => 'my-projects',
+                'name'    => 'projects',
                 'icon'    => 'heroicon-o-globe',
                 'current' => false
             ],
