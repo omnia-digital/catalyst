@@ -12,11 +12,10 @@
     use Laravel\Jetstream\HasTeams;
     use Laravel\Sanctum\HasApiTokens;
     use Modules\Social\Models\Profile;
-    use Spatie\Permission\Traits\HasRoles;
 
-    class User extends Authenticatable
+    class User extends Authenticatable implements MustVerifyEmail
     {
-        use HasRoles, HasApiTokens, HasProfilePhoto, TwoFactorAuthenticatable, Notifiable, SoftDeletes, HasFactory, HasTeams;
+        use HasApiTokens, HasProfilePhoto, TwoFactorAuthenticatable, Notifiable, SoftDeletes, HasFactory, HasTeams;
 
         /**
          * The attributes that should be mutated to dates.
