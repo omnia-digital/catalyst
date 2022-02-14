@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Teams\Http\Livewire;
+namespace App\Http\Livewire;
 
 use App\Models\Team;
 use Livewire\Component;
 
 class Teams extends Component
 {
-    public $teams = [];
+    public $projects = [];
 
     public function mount()
     {
-        $this->teams = Team::all();
+        $this->projects = Team::all();
     }
 
     public function render()

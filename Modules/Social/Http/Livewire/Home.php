@@ -76,7 +76,7 @@ use Livewire\Component;
                         ],
                     ],
                     'project' => [
-                        'link' => route('projects.home'),
+                        'link' => route('teams.home'),
                     ],
                 ],
                 [
@@ -89,7 +89,7 @@ use Livewire\Component;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('projects.home'),
+                        'link' => route('teams.home'),
                     ],
                 ],
                 [
@@ -102,7 +102,7 @@ use Livewire\Component;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('projects.home'),
+                        'link' => route('teams.home'),
                     ],
                 ],
                 [
@@ -115,7 +115,7 @@ use Livewire\Component;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('projects.home'),
+                        'link' => route('teams.home'),
                     ],
                 ],
                 [
@@ -162,7 +162,7 @@ use Livewire\Component;
                         ],
                     ],
                     'project' => [
-                        'link' => route('projects.home'),
+                        'link' => route('teams.home'),
                     ],
                 ],
                 [
@@ -220,7 +220,7 @@ use Livewire\Component;
                         ],
                     ],
                     'project' => [
-                        'link' => route('projects.home'),
+                        'link' => route('teams.home'),
                     ],
                 ],
             ];

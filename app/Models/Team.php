@@ -29,6 +29,8 @@
         protected $fillable = [
             'name',
             'personal_team',
+            'description',
+            'thumbnail'
         ];
 
         /**
@@ -41,4 +43,11 @@
             'updated' => TeamUpdated::class,
             'deleted' => TeamDeleted::class,
         ];
+
+        public function getThumbnailAttribute($value)
+        {
+            if (empty($value)) {
+                return 'https://via.placeholder.com/200';
+            }
+        }
     }

@@ -32,7 +32,7 @@
                 ],
                 [
                     'label'   => 'Projects',
-                    'name'    => 'projects.home',
+                    'name'    => 'teams.home',
                     'icon'    => 'heroicon-o-collection',
                     'current' => false
                 ],

@@ -17,14 +17,17 @@
 //        return redirect()->route('dashboard');
     });
 
-    Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+    Route::middleware(['auth', 'verified'])->group(function() {
 //        Route::get('/home', function () {
 //            return "Home";
 //        })->name('home');
+
+        Route::get('/teams', App\Http\Livewire\Teams::class)->name('teams.home');
+
 
         Route::get('/profile', function () {
             return "Profile";
