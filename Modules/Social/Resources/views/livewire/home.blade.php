@@ -24,12 +24,13 @@
 {{--                    </nav>--}}
 {{--                </div>--}}
 {{--            </div>--}}
-            <div class="">
-                <livewire:social::map />
-            </div>
+
             <div class="mt-4">
                 <ul role="list" class="mt-6 space-y-4">
                 @foreach ($activities as $activity)
+                    @if($loop->index = 3)
+                            <livewire:social::map />
+                    @endif
                     <livewire:social::partials.activity-list-item :activity="$activity" />
                 @endforeach
                 </ul>
