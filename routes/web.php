@@ -17,14 +17,17 @@
 //        return redirect()->route('dashboard');
     });
 
-    Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+    Route::middleware(['auth', 'verified'])->group(function() {
 //        Route::get('/home', function () {
 //            return "Home";
 //        })->name('home');
+
+        Route::get('/projects', App\Http\Livewire\Teams::class)->name('projects');
+
 
         Route::get('/profile', function () {
             return "Profile";
@@ -41,14 +44,6 @@
         Route::get('/notifications', function () {
             return "Notifications";
         })->name('notifications');
-
-        Route::get('/projects', function () {
-            return "Projects";
-        })->name('projects');
-
-        Route::get('/my-projects', function () {
-            return "My Projects";
-        })->name('my-projects');
 
         Route::get('/groups', function () {
             return "Groups";

@@ -2,8 +2,8 @@
 
 namespace Modules\Social\Database\Seeders;
 
-use App\Models\Profile;
 use Illuminate\Database\Seeder;
+use Modules\Social\Models\Profile;
 
 class ProfilesTableSeeder extends Seeder
 {

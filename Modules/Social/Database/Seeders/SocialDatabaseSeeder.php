@@ -16,6 +16,6 @@ class SocialDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+         $this->call(ProfilesTableSeeder::class);
     }
 }
