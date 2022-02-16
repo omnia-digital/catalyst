@@ -21,14 +21,12 @@
     </head>
     <body class="h-full font-sans antialiased">
 
-        <div>
-            @livewire('navigation-menu')
-            @livewire('side-menu2')
+        @livewire('navigation-menu')
+        @livewire('side-menu2')
 
-            <main class="md:pl-24 flex-1">
-                {{ $slot }}
-            </main>
-        </div>
+        <main class="md:pl-24 flex-1">
+            {{ $slot }}
+        </main>
 
         @stack('modals')
         @stack('scripts')

@@ -50,8 +50,8 @@
                 </div>
 
                 <!-- Teams Dropdown -->
-                @if (/* Laravel\Jetstream\Jetstream::hasTeamFeatures() */0)
-                    <div class="ml-3 relative">
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                    <div class="ml-3 ">
                         <x-jet-dropdown align="right" width="60">
                             <x-slot name="trigger">
                                 <span class="inline-flex rounded-md">
