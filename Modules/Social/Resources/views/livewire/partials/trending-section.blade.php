@@ -1,7 +1,6 @@
 <section aria-labelledby="trending-heading">
-    <div class="bg-white rounded-lg shadow">
         <div class="p-6">
-            <h2 id="trending-heading" class="text-base font-medium text-gray-900">
+            <h2 id="trending-heading" class="text-xl font-medium text-gray-900">
                 Trending
             </h2>
             <div class="mt-6 flow-root">
@@ -32,5 +31,4 @@
                 </a>
             </div>
         </div>
-    </div>
 </section>

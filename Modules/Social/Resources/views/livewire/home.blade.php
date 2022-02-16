@@ -17,7 +17,10 @@
 
             </div>
             <div class="mt-4">
+                <!-- Featured Section -->
                 <livewire:social::map/>
+
+                <!-- Posts -->
                 <ul role="list" class="mt-6 space-y-4">
                     @foreach ($activities as $activity)
                         <livewire:social::partials.activity-list-item :activity="$activity"/>
@@ -27,7 +30,7 @@
         </div>
 
         <aside class="hidden xl:block xl:col-span-3">
-            <div class="sticky top-4 space-y-4">
+            <div class="sticky top-4 space-y-1 bg-white shadow rounded-lg">
                 <livewire:social::partials.trending-section/>
                 <livewire:social::partials.who-to-follow-section/>
             </div>
