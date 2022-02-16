@@ -13,6 +13,21 @@
 
         Route::get('/home', Home::class)->name('home');
 
+        Route::get('/projects', function () {
+            return "Projects";
+        })->name('projects');
+
+        Route::get('/crm', function () {
+            return "CRM";
+        })->name('crm');
+
+        Route::get('/learn', function () {
+            return "Learn";
+        })->name('learn');
+
+        Route::get('/marketplace', function () {
+            return "Marketplace";
+        })->name('marketplace');
 //        Route::get('/', function () {
 ////            return Inertia::render('Social/Home');
 //        })->name('social-home');

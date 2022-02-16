@@ -15,8 +15,8 @@ class CreateProjectPositionTable extends Migration
     {
         Schema::create('project_position', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Modules\Projects\Models\Project::class, 'project_id');
-            $table->foreignIdFor(\App\Modules\Projects\Models\Position::class, 'position_id');
+            $table->foreignIdFor(\Modules\Projects\Models\Project::class, 'project_id');
+            $table->foreignIdFor(\Modules\Projects\Models\Position::class, 'position_id');
             $table->foreignIdFor(\App\Models\User::class, 'owner_id');
             $table->timestamp('position_filled');
             $table->bigInteger('points');

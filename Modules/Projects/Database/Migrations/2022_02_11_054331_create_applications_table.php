@@ -16,7 +16,7 @@ class CreateApplicationsTable extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
-            $table->foreignIdFor(\App\Modules\Projects\Models\ProjectPosition::class, 'project_position_id');
+            $table->foreignIdFor(\Modules\Projects\Models\ProjectPosition::class, 'project_position_id');
             $table->string('title');
             $table->string('sumamry');
             $table->string('description');
