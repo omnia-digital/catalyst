@@ -20,21 +20,27 @@ class SideMenu2 extends Component
                 'current' => false
             ],
             [
-                'label'   => 'My Projects',
-                'name'    => 'my-projects',
+                'label'   => 'Projects',
+                'name'    => 'social.projects',
                 'icon'    => 'heroicon-o-globe',
                 'current' => false
             ],
             [
-                'label'   => 'Contacts',
-                'name'    => 'contacts',
+                'label'   => 'CRM',
+                'name'    => 'social.crm',
                 'icon'    => 'heroicon-o-users',
                 'current' => false
             ],
             [
-                'label'   => 'Favorites',
-                'name'    => 'favorites',
-                'icon'    => 'heroicon-o-star',
+                'label'   => 'Learn',
+                'name'    => 'social.learn',
+                'icon'    => 'heroicon-o-academic-cap',
+                'current' => false
+            ],
+            [
+                'label'   => 'Marketplace',
+                'name'    => 'social.marketplace',
+                'icon'    => 'heroicon-o-shopping-bag',
                 'current' => false
             ],
         ];

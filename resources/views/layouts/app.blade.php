@@ -21,10 +21,11 @@
     </head>
     <body class="h-full font-sans antialiased">
 
-        <div class="flex">
+        <div>
+            @livewire('navigation-menu')
             @livewire('side-menu2')
 
-            <main class="md:pl-80 flex-1">
+            <main class="md:pl-24 flex-1">
                 {{ $slot }}
             </main>
         </div>
