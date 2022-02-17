@@ -34,6 +34,7 @@
                 <livewire:social::partials.trending-section/>
                 <livewire:social::partials.who-to-follow-section/>
                 <livewire:social::partials.applications/>
+
             </div>
         </aside>
     </div>
