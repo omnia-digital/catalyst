@@ -27,7 +27,7 @@
             <div x-data="setup()">
                 <ul class="flex justify-center items-center my-4">
                     <template x-for="(tab, index) in tabs" :key="tab.id">
-                        <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-gray-500 border-b-2 justify-center"
+                        <li class="flex flex-1 text-sm cursor-pointer py-2 text-gray-500 border-b-2 justify-center"
                             :class="activeTab===tab.id ? 'text-black font-bold border-black' : ''"
                             @click="activeTab = tab.id"
                             x-html="tab.title + notifications"></li>
@@ -69,9 +69,10 @@
         </div>
 
         <aside class="hidden xl:block xl:col-span-3">
-            <div class="sticky top-4 space-y-4">
+            <div class="sticky h-screen overflow-y-scroll scrollbar-hide top-4 pb-36 space-y-4">
                 <livewire:social::partials.trending-section/>
                 <livewire:social::partials.who-to-follow-section/>
+                <livewire:social::partials.applications/>
             </div>
         </aside>
     </div>
