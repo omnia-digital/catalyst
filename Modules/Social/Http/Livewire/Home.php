@@ -4,7 +4,6 @@
 
 use Illuminate\Support\Facades\Date;
 use Livewire\Component;
-use Modules\Social\Models\FeedCategories;
 use Modules\Social\Models\Post;
 
     class Home extends Component
@@ -310,10 +309,6 @@ use Modules\Social\Models\Post;
                     `,
                 ],
             ];
-        }
-
-        public function feedCategoriesJSON() {
-            return FeedCategories::all()->toJson();
         }
 
         public function getPostsProperty() {
