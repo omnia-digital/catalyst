@@ -4,9 +4,12 @@
 
 use Illuminate\Support\Facades\Date;
 use Livewire\Component;
+use Modules\Social\Models\FeedCategories;
+use Modules\Social\Models\Post;
 
     class Home extends Component
     {
+        public $feedCategories;
         public $tabs = [];
         public $activities = [];
         public $questions = [];
@@ -307,6 +310,14 @@ use Livewire\Component;
                     `,
                 ],
             ];
+        }
+
+        public function feedCategoriesJSON() {
+            return FeedCategories::all()->toJson();
+        }
+
+        public function getPostsProperty() {
+            return Post::get();
         }
 
         public function render()

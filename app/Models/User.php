@@ -11,7 +11,8 @@
     use Laravel\Jetstream\HasProfilePhoto;
     use Laravel\Jetstream\HasTeams;
     use Laravel\Sanctum\HasApiTokens;
-    use Modules\Social\Models\Profile;
+use Modules\Social\Models\Post;
+use Modules\Social\Models\Profile;
 
     class User extends Authenticatable implements MustVerifyEmail
     {
@@ -55,10 +56,20 @@
             'profile_photo_url'
         ];
 
+        public function getNameAttribute()
+        {
+            return $this->first_name . " " . $this->last_name;
+        }
+
         public function profile()
         {
             if (!class_exists(Profile::class)) return;
             return $this->hasOne(Profile::class);
+        }
+        public function posts()
+        {
+            if (!class_exists(Post::class)) return;
+            return $this->hasMany(Post::class);
         }
 
         public function url()

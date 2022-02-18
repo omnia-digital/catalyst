@@ -17,6 +17,14 @@
             return "Projects";
         })->name('projects');
 
+        Route::get('/posts', function () {
+            return "Posts";
+        })->name('posts');
+
+        Route::get('/posts/{post}', function () {
+            return "Show a post";
+        })->name('posts.show');
+
         Route::get('/crm', function () {
             return "CRM";
         })->name('crm');

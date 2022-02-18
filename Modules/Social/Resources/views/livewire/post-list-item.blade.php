@@ -1,17 +1,17 @@
 <div class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
-    <article aria-labelledby="{{ 'question-title-' . $post['id'] }}">
+    <article aria-labelledby="{{ 'post-' . $post->id }}">
         <div>
             <div class="flex space-x-3">
                 <div class="flex-shrink-0">
-                    <img class="h-10 w-10 rounded-full" src="{{ $post['author']['imageUrl'] }}" alt="" />
+                    <img class="h-10 w-10 rounded-full" src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->name }}" />
                 </div>
                 <div class="min-w-0 flex-1">
                     <p class="text-sm font-medium text-gray-900">
-                        <a href="{{ $post['author']['href'] }}" class="hover:underline">{{ $post['author']['name'] }}</a>
+                        <a href="{{ route('profile.show') }}" class="hover:underline">{{ $post->user->name }}</a>
                     </p>
                     <p class="text-sm text-gray-500">
-                        <a href="{{ $post['href'] }}" class="hover:underline">
-                            <time datetime="{{ $post['datetime'] }}">{{ $post['date'] }}</time>
+                        <a href="{{ route('social.posts.show', $post) }}" class="hover:underline">
+                            <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</time>
                         </a>
                     </p>
                 </div>
@@ -78,31 +78,31 @@
                     </div>
                 </div>
             </div>
-            <h2 id="{{ 'question-title-' . $post['id'] }}" class="mt-4 text-base font-medium text-gray-900">
-                {{ $post['title'] }}
+            <h2 id="{{ 'post-' . $post->id }}" class="mt-4 text-base font-medium text-gray-900">
+                {{ $post->title }}
             </h2>
         </div>
-        <div class="mt-2 text-sm text-gray-700 space-y-4">{{ $post['body'] }}</div>
+        <div class="mt-2 text-sm text-gray-700 space-y-4">{{ $post->body }}</div>
         <div class="mt-6 flex justify-between space-x-8">
             <div class="flex space-x-6">
                 <span class="inline-flex items-center text-sm">
                     <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <x-heroicon-o-thumb-up class="h-5 w-5" aria-hidden="true" />
-                        <span class="font-medium text-gray-900">{{ $post['likes'] }}</span>
+                        <span class="font-medium text-gray-900">{{ $post->likes }}</span>
                         <span class="sr-only">likes</span>
                     </button>
                 </span>
                 <span class="inline-flex items-center text-sm">
                     <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <x-heroicon-o-chat-alt class="h-5 w-5" aria-hidden="true" />
-                        <span class="font-medium text-gray-900">{{ $post['replies'] }}</span>
+                        <span class="font-medium text-gray-900">{{ $post->replies }}</span>
                         <span class="sr-only">replies</span>
                     </button>
                 </span>
                 <span class="inline-flex items-center text-sm">
                     <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <x-heroicon-o-eye class="h-5 w-5" aria-hidden="true" />
-                        <span class="font-medium text-gray-900">{{ $post['views'] }}</span>
+                        <span class="font-medium text-gray-900">{{ $post->views }}</span>
                         <span class="sr-only">views</span>
                     </button>
                 </span>
