@@ -92,13 +92,12 @@
                         <span class="sr-only">likes</span>
                     </button>
                 </span>
-                <span class="inline-flex items-center text-sm">
-                    <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <x-heroicon-o-chat-alt class="h-5 w-5" aria-hidden="true" />
-                        <span class="font-medium text-gray-900">{{ $post->replies }}</span>
-                        <span class="sr-only">replies</span>
-                    </button>
-                </span>
+                
+                <x-social.comments-modal :post="$post">
+                    <x-heroicon-o-chat-alt class="h-5 w-5" aria-hidden="true" />
+                    <span class="font-medium text-gray-900">{{ $post->comments()->count() }}</span>
+                    <span class="sr-only">replies</span>
+                </x-social.comments-modal>
                 <span class="inline-flex items-center text-sm">
                     <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <x-heroicon-o-eye class="h-5 w-5" aria-hidden="true" />

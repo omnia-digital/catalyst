@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UsersTableSeeder::class);
         $this->call(PostsTableSeeder::class);
+        $this->call(CommentsTableSeeder::class);
         
         if (DB::connection() instanceof \Illuminate\Database\MySqlConnection) {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
