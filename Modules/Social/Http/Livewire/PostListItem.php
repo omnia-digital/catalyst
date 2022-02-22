@@ -3,7 +3,6 @@
 namespace Modules\Social\Http\Livewire;
 
 use Livewire\Component;
-use Modules\Social\Models\FeedCategories;
 use Modules\Social\Models\Post;
 
 class PostListItem extends Component
@@ -13,6 +12,10 @@ class PostListItem extends Component
 
     public function mount(Post $post) {
         $this->post = $post;
+    }
+
+    public function like() {
+        $this->post->like();
     }
 
     public function getAuthorAttribute() {

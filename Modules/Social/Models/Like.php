@@ -43,4 +43,12 @@
 
             return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . $msg;
         }
+
+        public function likable() {
+            return $this->morphTo();
+        }
+
+        public function posts() {
+            return $this->hasOne(Post::class, 'id', 'likable_id');
+        }
     }

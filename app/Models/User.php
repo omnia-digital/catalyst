@@ -72,6 +72,10 @@ use Modules\Social\Models\Profile;
             return $this->hasMany(Post::class);
         }
 
+        public function likedPosts() {
+            return $this->likes->map->posts->flatten();
+        }
+
         public function url()
         {
             return url(config('app.url') . '/' . $this->handle);

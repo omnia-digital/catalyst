@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Likable;
 
     protected $fillable = [];
     
@@ -25,4 +25,9 @@ class Post extends Model
     public function comments() {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
+    public function likes() {
+        return $this->morphMany(Like::class, 'likable')->whereDeletedAt(null);
+    }
+
 }

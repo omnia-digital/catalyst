@@ -48,30 +48,18 @@
                                         <x-heroicon-o-star class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
                                         <span>Add to favorites</span>
                                     </a>
-                                    {{-- <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'flex px-4 py-2 text-sm']">
-                                        <StarIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true"/>
-                                        <span>Add to favorites</span>
-                                    </a> --}}
                                 </div>
                                 <div> {{-- MenuItem v-slot="{ active }" --}}
                                     <a href="#" class="text-gray-700 flex px-4 py-2 text-sm">
                                         <x-heroicon-o-code class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
                                         <span>Embed</span>
                                     </a>
-                                    {{-- <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'flex px-4 py-2 text-sm']">
-                                        <CodeIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true"/>
-                                        <span>Embed</span>
-                                    </a> --}}
                                 </div>
                                 <div> {{-- MenuItem v-slot="{ active }" --}}
                                     <a href="#" class="text-gray-700 flex px-4 py-2 text-sm">
                                         <x-heroicon-o-flag class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
                                         <span>Report content</span>
                                     </a>
-                                {{--  <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'flex px-4 py-2 text-sm']">
-                                        <FlagIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true"/>
-                                        <span>Report content</span>
-                                    </a> --}}
                                 </div>
                             </div>
                         </div>
@@ -86,9 +74,13 @@
         <div class="mt-6 flex justify-between space-x-8">
             <div class="flex space-x-6">
                 <span class="inline-flex items-center text-sm">
-                    <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                        <x-heroicon-o-thumb-up class="h-5 w-5" aria-hidden="true" />
-                        <span class="font-medium text-gray-900">{{ $post->likes }}</span>
+                    <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500" wire:click="like">
+                        @if ($post->isLiked)
+                            <x-heroicon-s-thumb-up class="h-5 w-5" aria-hidden="true" />
+                        @else
+                            <x-heroicon-o-thumb-up class="h-5 w-5" aria-hidden="true" />
+                        @endif
+                        <span class="font-medium text-gray-900">{{ $post->likesCount() }}</span>
                         <span class="sr-only">likes</span>
                     </button>
                 </span>
