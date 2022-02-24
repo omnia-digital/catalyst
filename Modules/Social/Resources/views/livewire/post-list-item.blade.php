@@ -1,4 +1,7 @@
-<div class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
+<div 
+    class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg"
+    x-data="{ openOptions: false }"
+>
     <article aria-labelledby="{{ 'post-' . $post->id }}">
         <div>
             <div class="flex space-x-3">
@@ -17,7 +20,7 @@
                 </div>
                 <div class="flex-shrink-0 self-center flex">
                     <!-- Livewire Headless UI Menu -->
-                    <div x-data="{ openOptions: false }" class="relative inline-block text-left"> <!-- x-menu -->
+                    <div class="relative inline-block text-left"> <!-- x-menu -->
                         <div>
                             <button 
                                 class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" 
@@ -74,7 +77,7 @@
         <div class="mt-6 flex justify-between space-x-8">
             <div class="flex space-x-6">
                 <livewire:social::partials.like-button :model="$post" />
-                <livewire:social::comments-modal :post="$post" />
+                <livewire:social::comments-modal :comments="$post->comments" :commentsCount="$post->comments()->count()" />
                 <span class="inline-flex items-center text-sm">
                     <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <x-heroicon-o-eye class="h-5 w-5" aria-hidden="true" />

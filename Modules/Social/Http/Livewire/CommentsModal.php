@@ -3,14 +3,15 @@
 namespace Modules\Social\Http\Livewire;
 
 use Livewire\Component;
-use Modules\Social\Models\Post;
 
 class CommentsModal extends Component
 {
-    public Post $post;
+    public $comments;
+    public $commentsCount;
 
-    public function mount(Post $post) {
-        $this->post = $post;
+    public function mount($comments, $commentsCount) {
+        $this->comments = $comments;
+        $this->commentsCount = $commentsCount;
     }
 
     public function render()

@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory, Likable;
 
-    protected $fillable = [];
+    protected $fillable = ['title', 'body'];
     
     protected static function newFactory()
     {

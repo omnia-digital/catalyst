@@ -1,10 +1,11 @@
 <div class="inline-flex items-center text-sm" x-data="{ commentsModalOpen: false }">
-    <button type="button" 
+    <button 
+        type="button" 
         class="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
-        @click="commentsModalOpen = true"
+        x-on:click="($wire.commentsCount) ? commentsModalOpen = true : false"
     >
         <x-heroicon-o-chat-alt class="h-5 w-5" aria-hidden="true" />
-        <span class="font-medium text-gray-900">{{ $post->comments()->count() }}</span>
+        <span class="font-medium text-gray-900">{{ $commentsCount }}</span>
         <span class="sr-only">replies</span>
     </button>
     <div
@@ -41,7 +42,7 @@
                 </header>
                 <section class="p-3 text-center">
                     <ul class="space-y-4 divide-y-1 h-full overflow-y-auto">
-                        @foreach ($post->comments as $comment)
+                        @foreach ($comments as $comment)
                             <li>
                                 <div>
                                     <div class="flex space-x-3">

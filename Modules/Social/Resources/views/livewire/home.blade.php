@@ -14,9 +14,14 @@
                 </ul>
 
                 <div class="mx-auto">
-                    <livewire:social::new-post-box class="my-6" :user="auth()->user()" />
+                    <livewire:social::new-post-box class="my-6" />
                     <h1 class="sr-only">Recent Posts</h1>
                     <ul role="list" class="mt-6 space-y-4">
+                        @if ($recentlyAddedPost)
+                            <li>
+                                <livewire:social::post-list-item :post="$recentlyAddedPost" :wire:key="$recentlyAddedPost->id" />
+                            </li>
+                        @endif
                         @foreach ($this->posts as $post)
                             <li>
                                 <livewire:social::post-list-item :post="$post" :wire:key="$post->id" />
