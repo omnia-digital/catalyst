@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
-    use HasFactory, Likable;
+    use HasFactory, Likable, Commentable;
 
     protected $fillable = ['title', 'body'];
     

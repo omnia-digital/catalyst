@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
     {
         use HasFactory;
 
-        protected $fillable = [];
+        protected $fillable = ['user_id', 'parent_id', 'body', 'commentable_id', 'commentable_type'];
         
         protected static function newFactory()
         {

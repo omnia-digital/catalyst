@@ -2,7 +2,7 @@
     <button 
         type="button" 
         class="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
-        x-on:click="($wire.commentsCount) ? commentsModalOpen = true : false"
+        x-on:click="commentsModalOpen = true"
     >
         <x-heroicon-o-chat-alt class="h-5 w-5" aria-hidden="true" />
         <span class="font-medium text-gray-900">{{ $commentsCount }}</span>
@@ -30,7 +30,7 @@
             x-transition:leave-start="scale-100"
             x-transition:leave-end="scale-0"
             >
-                <header class="flex flex-row justify-between p-6 bg-white border-b border-gray-200">
+                <header class="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-t-lg">
                     <h2 class="font-semibold text-3xl text-gray-800">Comments</h2>
                     <button
                         class=""
@@ -42,30 +42,42 @@
                 </header>
                 <section class="p-3 text-center">
                     <ul class="space-y-4 divide-y-1 h-full overflow-y-auto">
-                        @foreach ($comments as $comment)
-                            <li>
-                                <div>
-                                    <div class="flex space-x-3">
-                                        <div class="flex-shrink-0">
-                                            <img class="h-10 w-10 rounded-full" src="{{ $comment->user->profile_photo_url }}" alt="{{ $comment->user->name }}" />
-                                        </div>
-                                        <div class="min-w-0 flex-1">
-                                            <p class="text-sm font-medium text-gray-900">
-                                                <a href="{{ route('profile.show') }}" class="hover:underline">{{ $comment->user->name }}</a>
-                                            </p>
-                                            <p class="text-sm text-gray-500">
-                                                <a href="#" class="hover:underline">
-                                                    <time datetime="{{ $comment->created_at }}">{{ $comment->created_at->diffForHumans() }}</time>
-                                                </a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-2 text-sm text-gray-700 space-y-4">{{ $comment->body }}</div>
-                            </li>
+                        @foreach ($post->comments as $comment)
+                            <x-social.partials.comment-list-item :comment="$comment" />
                         @endforeach
+                        @if ($recentlyAddedComment)
+                            <x-social.partials.comment-list-item :comment="$recentlyAddedComment" />
+                        @endif
                     </ul>
                 </section>
+                <footer class="flex justify-center bg-transparent border-t border-gray-200">
+                    <form action="#" class="relative w-full" wire:submit.prevent="saveComment">
+                        <!-- Spacer element to match the height of the toolbar -->
+                        <div class="py-2" aria-hidden="true">
+                            <!-- Matches height of button in toolbar (1px border + 36px content height) -->
+                            <div class="py-px">
+                                <div class="h-9"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 px-2 rounded-lg overflow-hidden">
+                            <label for="body" class="sr-only">What's going on?</label>
+                            <input 
+                                type="text"  name="body" id="body" 
+                                class="block w-full py-3 border-y border-gray-500 resize-none focus:ring-0 sm:text-sm" 
+                                wire:model.defer="body"
+                            >
+                            @error('body') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="flex">
+                            <div class="ml-auto">
+                                <button 
+                                    type="submit" 
+                                    class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                >Comment</button>
+                            </div>
+                        </div>
+                    </form>
+                </footer>
             </div>
         </div>
     </div>

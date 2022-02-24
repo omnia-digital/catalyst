@@ -77,7 +77,7 @@
         <div class="mt-6 flex justify-between space-x-8">
             <div class="flex space-x-6">
                 <livewire:social::partials.like-button :model="$post" />
-                <livewire:social::comments-modal :comments="$post->comments" :commentsCount="$post->comments()->count()" />
+                <livewire:social::comments-modal :post="$post" :wire:key="'post-' . $post->id . '-comments'" />
                 <span class="inline-flex items-center text-sm">
                     <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <x-heroicon-o-eye class="h-5 w-5" aria-hidden="true" />

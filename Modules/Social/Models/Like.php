@@ -53,7 +53,7 @@ use Illuminate\Database\Eloquent\Model;
             return $this->belongsTo(User::class);
         }
 
-        public function posts() {
+        public function post() {
             return $this->hasOne(Post::class, 'id', 'likable_id');
         }
     }
