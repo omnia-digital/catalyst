@@ -8,7 +8,6 @@ use Modules\Social\Models\Post;
 
     class Home extends Component
     {
-        public $feedCategories;
         public $tabs = [];
         public $activities = [];
         public $questions = [];

@@ -1,6 +1,6 @@
 <div class="flex items-start bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
     <div class="flex-shrink-0">
-        <img class="inline-block h-10 w-10 rounded-full" src="{{ $user->imageUrl }}" alt="" />
+        <img class="inline-block h-10 w-10 rounded-full" src="{{ $user->profile_photo_url }}" alt="" />
     </div>
     <div></div>
     <div class="min-w-0 flex-1">

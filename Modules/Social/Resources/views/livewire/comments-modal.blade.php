@@ -1,9 +1,11 @@
-<span class="inline-flex items-center text-sm" x-data="{ commentsModalOpen: false }">
+<div class="inline-flex items-center text-sm" x-data="{ commentsModalOpen: false }">
     <button type="button" 
         class="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
         @click="commentsModalOpen = true"
     >
-        {{ $slot }}
+        <x-heroicon-o-chat-alt class="h-5 w-5" aria-hidden="true" />
+        <span class="font-medium text-gray-900">{{ $post->comments()->count() }}</span>
+        <span class="sr-only">replies</span>
     </button>
     <div
       class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
@@ -66,4 +68,4 @@
             </div>
         </div>
     </div>
-</span>
+</div>
