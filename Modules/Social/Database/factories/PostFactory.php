@@ -3,6 +3,7 @@ namespace Modules\Social\Database\factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Social\Models\Post;
 
 class PostFactory extends Factory
 {
@@ -21,9 +22,8 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->realText(80),
-            'body' => $this->faker->paragraph(4),
             'user_id' => User::all()->random()->id,
+            'body' => $this->faker->paragraph(4),
             'created_at' => now(),
             'updated_at' => now(),
         ];

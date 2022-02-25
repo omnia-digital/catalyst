@@ -16,6 +16,10 @@ class PostsTableSeeder extends Seeder
     {
         Post::truncate();
 
-        Post::factory(10)->create();
+        Post::factory(15)->create();
+        Post::factory(15)->create([
+            'postable_id' => Post::all()->random()->id,
+            'postable_type' => Post::class,
+        ]);
     }
 }

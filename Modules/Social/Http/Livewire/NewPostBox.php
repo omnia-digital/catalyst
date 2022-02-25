@@ -10,11 +10,9 @@
         public $postTypes = [];
         public $moods = [];
         public $selected;
-        public $title;
         public $body;
 
         protected $rules = [
-            'title' => 'required|min:6',
             'body' => 'required|min:6',
         ];
         
@@ -89,8 +87,8 @@
 
             $post = $this->user->posts()->create($validatedData);
             
-            $this->emit('postAdded', $post->id);
-            $this->reset(['title', 'body']);
+            $this->emitUp('postAdded', $post->id);
+            $this->reset(['body']);
         }
 
         public function getUserProperty()

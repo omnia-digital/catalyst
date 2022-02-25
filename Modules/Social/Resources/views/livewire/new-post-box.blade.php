@@ -7,16 +7,7 @@
         <form action="#" class="relative" wire:submit.prevent="savePost">
 
             <div class="flex justify-between">
-                <div class="flex-1 px-2 rounded-lg overflow-hidden">
-                    <label for="title" class="sr-only">Post Title</label>
-                    <input 
-                        type="text"  name="title" id="title" 
-                        class="block w-full py-1 border-0 resize-none focus:ring-0 sm:text-sm" 
-                        placeholder="Title" 
-                        wire:model.defer="title"
-                    >
-                    @error('title') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-                    
+                <div class="flex-1 px-2 rounded-lg overflow-hidden">                    
                     <label for="body" class="sr-only">What's going on?</label>
                     <input 
                         type="text"  name="body" id="body" 

@@ -69,15 +69,12 @@
                     </div>
                 </div>
             </div>
-            <h2 id="{{ 'post-' . $post->id }}" class="mt-4 text-base font-medium text-gray-900">
-                {{ $post->title }}
-            </h2>
         </div>
         <div class="mt-2 text-sm text-gray-700 space-y-4">{{ $post->body }}</div>
         <div class="mt-6 flex justify-between space-x-8">
             <div class="flex space-x-6">
                 <livewire:social::partials.like-button :model="$post" />
-                <livewire:social::comments-modal :post="$post" :wire:key="'post-' . $post->id . '-comments'" />
+                <livewire:social::replies-modal :post="$post" :wire:key="'post-' . $post->id . '-replies'" />
                 <span class="inline-flex items-center text-sm">
                     <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                         <x-heroicon-o-eye class="h-5 w-5" aria-hidden="true" />

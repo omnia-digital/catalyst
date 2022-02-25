@@ -16,8 +16,10 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
-            $table->string('title');
+            $table->unsignedBigInteger('team_id')->nullable();
             $table->text('body');
+            $table->integer('postable_id')->nullable();
+            $table->string('postable_type')->nullable();
             $table->timestamps();
         });
     }

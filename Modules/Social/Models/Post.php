@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
-    use HasFactory, Likable, Commentable;
+    use HasFactory, Likable, Postable;
 
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['user_id', 'team_id', 'body', 'postable_id', 'postable_type'];
     
     protected static function newFactory()
     {
@@ -22,8 +22,8 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments() {
-        return $this->morphMany(Comment::class, 'commentable');
+    public function replies() {
+        return $this->morphMany(Post::class, 'postable');
     }
 
 }

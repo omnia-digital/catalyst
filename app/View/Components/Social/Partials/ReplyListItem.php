@@ -3,21 +3,21 @@
 namespace App\View\Components\Social\Partials;
 
 use Illuminate\View\Component;
-use Modules\Social\Models\Comment;
+use Modules\Social\Models\Post;
 
-class CommentListItem extends Component
+class ReplyListItem extends Component
 {
 
-    public Comment $comment;
+    public Post $reply;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(Comment $comment)
+    public function __construct(Post $reply)
     {
-        $this->comment = $comment;
+        $this->reply = $reply;
     }
 
     /**
@@ -27,6 +27,6 @@ class CommentListItem extends Component
      */
     public function render()
     {
-        return view('components.social.partials.comment-list-item');
+        return view('components.social.partials.reply-list-item');
     }
 }

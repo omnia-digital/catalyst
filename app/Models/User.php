@@ -72,11 +72,6 @@
             return $this->hasMany(Post::class);
         }
 
-        public function comments() {
-            if (!class_exists(Comment::class)) return;
-            return $this->hasMany(Comment::class);
-        }
-
         public function likes() {
             if (!class_exists(Like::class)) return;
             return $this->hasMany(Like::class);
