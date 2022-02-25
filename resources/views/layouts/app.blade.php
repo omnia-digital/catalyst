@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         @livewireStyles
+        @libraryStyles
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
@@ -29,9 +30,13 @@
             </main>
         </div>
 
+        @libraryScripts
+
         @stack('modals')
         @stack('scripts')
+
         @livewireScripts
+
         @env ('local')
             <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>
         @endenv
