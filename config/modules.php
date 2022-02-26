@@ -211,10 +211,10 @@ return [
     */
 
     'composer' => [
-        'vendor' => 'nwidart',
+        'vendor' => 'omnia-digital',
         'author' => [
-            'name' => 'Nicolas Widart',
-            'email' => 'n.widart@gmail.com',
+            'name' => 'Joshua Torres',
+            'email' => 'josht@omniadigital.io',
         ],
     ],
 

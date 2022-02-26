@@ -2347,16 +2347,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.0.9",
+            "version": "3.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "fb0801a60b7f9ea4188f01c25cb48aed26db7fb6"
+                "reference": "bbc5026adb5a423dfcdcecec74c7e15943ff6115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/fb0801a60b7f9ea4188f01c25cb48aed26db7fb6",
-                "reference": "fb0801a60b7f9ea4188f01c25cb48aed26db7fb6",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/bbc5026adb5a423dfcdcecec74c7e15943ff6115",
+                "reference": "bbc5026adb5a423dfcdcecec74c7e15943ff6115",
                 "shasum": ""
             },
             "require": {
@@ -2364,6 +2364,7 @@
                 "php": "^8.0.2"
             },
             "conflict": {
+                "aws/aws-sdk-php": "3.209.31 || 3.210.0",
                 "guzzlehttp/guzzle": "<7.0",
                 "guzzlehttp/ringphp": "<1.1.1",
                 "symfony/http-client": "<5.2"
@@ -2416,7 +2417,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.0.9"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.0.10"
             },
             "funding": [
                 {
@@ -2432,7 +2433,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-22T07:37:40+00:00"
+            "time": "2022-02-26T11:09:13+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -3308,12 +3309,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:omnia-digital/library.git",
-                "reference": "1549097250bcb468ba36246ec20db53ad4719c96"
+                "reference": "ce0a3cbbe5752576bf95f69839aaf7ed28f4bfb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/1549097250bcb468ba36246ec20db53ad4719c96",
-                "reference": "1549097250bcb468ba36246ec20db53ad4719c96",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/ce0a3cbbe5752576bf95f69839aaf7ed28f4bfb4",
+                "reference": "ce0a3cbbe5752576bf95f69839aaf7ed28f4bfb4",
                 "shasum": ""
             },
             "require": {
@@ -3371,6 +3372,11 @@
                     "name": "Omnia",
                     "email": "phuc@omniadigital.io",
                     "role": "Developer"
+                },
+                {
+                    "name": "Omnia",
+                    "email": "josht@omniadigital.io",
+                    "role": "Developer"
                 }
             ],
             "description": "Offer a bunch of components for modern web",
@@ -3390,7 +3396,7 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2022-02-25T20:57:51+00:00"
+            "time": "2022-02-26T20:24:31+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",

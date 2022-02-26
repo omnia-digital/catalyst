@@ -7,12 +7,12 @@
         <form action="#" class="relative" wire:submit.prevent="savePost">
 
             <div class="flex justify-between">
-                <div class="flex-1 px-2 rounded-lg overflow-hidden">                    
+                <div class="flex-1 px-2 rounded-lg overflow-hidden">
                     <label for="body" class="sr-only">What's going on?</label>
-                    <input 
-                        type="text"  name="body" id="body" 
-                        class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm" 
-                        placeholder="What's going on?" 
+                    <input
+                        type="text"  name="body" id="body"
+                        class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm"
+                        placeholder="What's going on?"
                         wire:model.defer="body"
                     >
                     @error('body') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
@@ -41,8 +41,8 @@
                                 Your mood
                             </span>
                             <div x-data="{ open: false }" class="relative">
-                                <button  
-                                    @click="open = true" 
+                                <button
+                                    @click="open = true"
                                     type="button"
                                     class="relative -m-2.5 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-500"
                                 >
@@ -74,7 +74,7 @@
                                     </span>
                                 </button>
 
-                                <div 
+                                <div
                                     x-show="open" @click.away="open = false"
                                     x-transition:enter.duration.100ms
                                     x-transition:enter.opacity.0

@@ -83,7 +83,7 @@ use Modules\Social\Models\Post;
                         ],
                     ],
                     'project' => [
-                        'link' => route('projects'),
+                        'link' => route('projects.home'),
                     ],
                 ],
                 [
@@ -96,7 +96,7 @@ use Modules\Social\Models\Post;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('projects'),
+                        'link' => route('projects.home'),
                     ],
                 ],
                 [
@@ -109,7 +109,7 @@ use Modules\Social\Models\Post;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('projects'),
+                        'link' => route('projects.home'),
                     ],
                 ],
                 [
@@ -122,7 +122,7 @@ use Modules\Social\Models\Post;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('projects'),
+                        'link' => route('projects.home'),
                     ],
                 ],
                 [
@@ -169,7 +169,7 @@ use Modules\Social\Models\Post;
                         ],
                     ],
                     'project' => [
-                        'link' => route('projects'),
+                        'link' => route('projects.home'),
                     ],
                 ],
                 [
@@ -227,7 +227,7 @@ use Modules\Social\Models\Post;
                         ],
                     ],
                     'project' => [
-                        'link' => route('projects'),
+                        'link' => route('projects.home'),
                     ],
                 ],
             ];
