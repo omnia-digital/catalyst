@@ -2,17 +2,21 @@
 
     namespace Modules\Social\Http\Livewire;
 
+    use App\Models\User;
     use Livewire\Component;
 
     class NewPostBox extends Component
     {
-        public $user;
         public $postTypes = [];
         public $moods = [];
         public $selected;
+        public $body;
+
+        protected $rules = [
+            'body' => 'required|min:6',
+        ];
         
-        public function mount($user) {
-            $this->user = $user;
+        public function mount() {
             $this->postTypes = [
                 [
                     'label' => 'General',
@@ -70,6 +74,26 @@
             ];
 
             $this->selected = $this->moods[5];
+        }
+
+        public function updated($propertyName) 
+        {
+            $this->validateOnly($propertyName);
+        }
+
+        public function savePost()
+        {
+            $validatedData = $this->validate();
+
+            $post = $this->user->posts()->create($validatedData);
+            
+            $this->emitUp('postAdded', $post->id);
+            $this->reset(['body']);
+        }
+
+        public function getUserProperty()
+        {
+            return User::find(auth()->id());
         }
 
         public function render()

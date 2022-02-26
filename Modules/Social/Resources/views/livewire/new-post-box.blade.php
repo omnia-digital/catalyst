@@ -1,16 +1,21 @@
 <div class="flex items-start bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
     <div class="flex-shrink-0">
-        <img class="inline-block h-10 w-10 rounded-full" src="{{ $user->imageUrl }}" alt="" />
+        <img class="inline-block h-10 w-10 rounded-full" src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" />
     </div>
     <div></div>
     <div class="min-w-0 flex-1">
-        <form action="#" class="relative">
+        <form action="#" class="relative" wire:submit.prevent="savePost">
 
             <div class="flex justify-between">
-                <div class="flex-1 px-2 rounded-lg overflow-hidden">
-                    <label for="comment" class="sr-only">What's going on?</label>
-                    <textarea rows="1" name="comment" id="comment" class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm" placeholder="What's going on?"></textarea>
-
+                <div class="flex-1 px-2 rounded-lg overflow-hidden">                    
+                    <label for="body" class="sr-only">What's going on?</label>
+                    <input 
+                        type="text"  name="body" id="body" 
+                        class="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm" 
+                        placeholder="What's going on?" 
+                        wire:model.defer="body"
+                    >
+                    @error('body') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                     <!-- Spacer element to match the height of the toolbar -->
                     <div class="py-2" aria-hidden="true">
                         <!-- Matches height of button in toolbar (1px border + 36px content height) -->
@@ -106,6 +111,7 @@
                     </div>
                 </div>
                 <div class="flex-shrink-0">
+                    <button type="submit" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Post</button>
 {{--                    <Link href="/social/home"--}}
 {{--                          as="button"--}}
 {{--                          type="submit"--}}

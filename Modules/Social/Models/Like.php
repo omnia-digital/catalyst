@@ -2,7 +2,8 @@
 
     namespace Modules\Social\Models;
 
-    use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\SoftDeletes;
 
     class Like extends Model
@@ -15,7 +16,7 @@
          * @var array
          */
         protected $dates = ['deleted_at'];
-        protected $fillable = ['profile_id', 'status_id'];
+        protected $fillable = ['user_id', 'likable_id', 'likable_type', 'liked', 'deleted_at', 'created_at', 'updated_at'];
 
         public function actor()
         {
@@ -42,5 +43,17 @@
             $msg       = $type == 'post' ? __('notification.likedPhoto') : __('notification.likedComment');
 
             return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . $msg;
+        }
+
+        public function likable() {
+            return $this->morphTo();
+        }
+
+        public function user() {
+            return $this->belongsTo(User::class);
+        }
+
+        public function post() {
+            return $this->hasOne(Post::class, 'id', 'likable_id');
         }
     }

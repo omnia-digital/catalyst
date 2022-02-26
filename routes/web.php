@@ -14,7 +14,7 @@
     */
 
     Route::get('/', function () {
-//        return redirect()->route('dashboard');
+        return redirect()->route('social.home');
     });
 
     Route::middleware(['auth', 'verified'])->get('/dashboard', function () {

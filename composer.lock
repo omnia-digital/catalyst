@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9fa32eccea8189d7dd9a55a615767ac4",
+    "content-hash": "7c20561467e168bb09e45e68c7622bb2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -325,6 +325,59 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "calebporzio/sushi",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/calebporzio/sushi.git",
+                "reference": "cec0768285971add48f3ccebfefad856be6f5078"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/calebporzio/sushi/zipball/cec0768285971add48f3ccebfefad856be6f5078",
+                "reference": "cec0768285971add48f3ccebfefad856be6f5078",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.8 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/support": "^5.8 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "php": "^7.1.3|^8.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^2.9",
+                "orchestra/database": "3.8.* || 3.9.* || ^4.0 || ^5.0 || ^6.0 || ^7.0",
+                "orchestra/testbench": "3.8.* || 3.9.* || ^4.0 || ^6.0 || ^7.0",
+                "phpunit/phpunit": "^7.5 || ^8.4 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sushi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Porzio",
+                    "email": "calebporzio@gmail.com"
+                }
+            ],
+            "description": "Eloquent's missing \"array\" driver.",
+            "support": {
+                "source": "https://github.com/calebporzio/sushi/tree/v2.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/calebporzio",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-01-18T22:48:40+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -3244,96 +3297,6 @@
                 }
             ],
             "time": "2022-02-10T20:30:19+00:00"
-        },
-        {
-            "name": "omnia-digital/library",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:omnia-digital/library.git",
-                "reference": "1549097250bcb468ba36246ec20db53ad4719c96"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/1549097250bcb468ba36246ec20db53ad4719c96",
-                "reference": "1549097250bcb468ba36246ec20db53ad4719c96",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^8.0 || ^9.0",
-                "php": "^8.0",
-                "spatie/laravel-package-tools": "^1.9.2"
-            },
-            "require-dev": {
-                "nunomaduro/collision": "^6.0",
-                "orchestra/testbench": "^7.0",
-                "pestphp/pest": "^1.21",
-                "pestphp/pest-plugin-laravel": "^1.1",
-                "phpunit/phpunit": "^9.5",
-                "spatie/laravel-ray": "^1.26"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "OmniaDigital\\OmniaLibrary\\OmniaLibraryServiceProvider"
-                    ],
-                    "aliases": {
-                        "OmniaLibrary": "OmniaDigital\\OmniaLibrary\\Facades\\OmniaLibrary"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "OmniaDigital\\OmniaLibrary\\": "src",
-                    "OmniaDigital\\OmniaLibrary\\Database\\Factories\\": "database/factories"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "OmniaDigital\\OmniaLibrary\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "analyse": [
-                    "vendor/bin/phpstan analyse"
-                ],
-                "test": [
-                    "vendor/bin/pest"
-                ],
-                "test-coverage": [
-                    "vendor/bin/pest --coverage"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Omnia",
-                    "email": "phuc@omniadigital.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Offer a bunch of components for modern web",
-            "homepage": "https://github.com/omnia-digital/library",
-            "keywords": [
-                "laravel",
-                "library",
-                "omnia-digital"
-            ],
-            "support": {
-                "source": "https://github.com/omnia-digital/library/tree/main",
-                "issues": "https://github.com/omnia-digital/library/issues"
-            },
-            "funding": [
-                {
-                    "type": "github",
-                    "url": "https://github.com/omnia-digital"
-                }
-            ],
-            "time": "2022-02-25T20:57:51+00:00"
         },
         {
             "name": "opis/closure",
@@ -9796,9 +9759,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "omnia-digital/library": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
