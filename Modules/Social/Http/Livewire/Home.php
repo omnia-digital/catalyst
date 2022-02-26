@@ -83,7 +83,7 @@ use Modules\Social\Models\Post;
                         ],
                     ],
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects'),
                     ],
                 ],
                 [
@@ -96,7 +96,7 @@ use Modules\Social\Models\Post;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects'),
                     ],
                 ],
                 [
@@ -109,7 +109,7 @@ use Modules\Social\Models\Post;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects'),
                     ],
                 ],
                 [
@@ -122,7 +122,7 @@ use Modules\Social\Models\Post;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects'),
                     ],
                 ],
                 [
@@ -169,7 +169,7 @@ use Modules\Social\Models\Post;
                         ],
                     ],
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects'),
                     ],
                 ],
                 [
@@ -227,7 +227,7 @@ use Modules\Social\Models\Post;
                         ],
                     ],
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects'),
                     ],
                 ],
             ];
