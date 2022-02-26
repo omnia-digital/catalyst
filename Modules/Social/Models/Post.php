@@ -10,8 +10,8 @@ class Post extends Model
 {
     use HasFactory, Likable, Postable;
 
-    protected $fillable = ['user_id', 'team_id', 'body', 'postable_id', 'postable_type'];
-    
+    protected $fillable = ['user_id', 'team_id', 'type', 'body', 'postable_id', 'postable_type'];
+
     protected static function newFactory()
     {
         return \Modules\Social\Database\factories\PostFactory::new();

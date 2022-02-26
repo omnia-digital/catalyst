@@ -26,7 +26,7 @@
 //            return "Home";
 //        })->name('home');
 
-        Route::get('/teams', App\Http\Livewire\Teams::class)->name('teams.home');
+        Route::get('/projects', App\Http\Livewire\Teams::class)->name('projects');
 
 
         Route::get('/profile', function () {
@@ -44,14 +44,6 @@
         Route::get('/notifications', function () {
             return "Notifications";
         })->name('notifications');
-
-        Route::get('/projects', function () {
-            return "Projects";
-        })->name('projects');
-
-        Route::get('/my-projects', function () {
-            return "My Projects";
-        })->name('my-projects');
 
         Route::get('/groups', function () {
             return "Groups";

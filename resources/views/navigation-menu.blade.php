@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white relative z-10 border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class=" px-4 sm:px-6">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -11,8 +11,8 @@
                 </div> --}}
                 <div class="flex items-center h-16 flex-shrink-0">
                     <!-- desktop logo -->
-                    <div class="mx-2">
-                        <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
+                    <div class="mx-2 bg-gray-800 p-4 rounded-lg">
+{{--                        <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">--}}
                     </div>
                     <p class="text-base font-bold">Evangelism Alliance</p>
                 </div>
@@ -50,8 +50,8 @@
                 </div>
 
                 <!-- Teams Dropdown -->
-                @if (/* Laravel\Jetstream\Jetstream::hasTeamFeatures() */0)
-                    <div class="ml-3 relative">
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                    <div class="ml-3 ">
                         <x-jet-dropdown align="right" width="60">
                             <x-slot name="trigger">
                                 <span class="inline-flex rounded-md">
@@ -105,7 +105,7 @@
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()?->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
