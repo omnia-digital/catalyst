@@ -3,8 +3,11 @@
 namespace Modules\Social\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Modules\Social\Database\Factories\PostFactory;
+use Modules\Social\Traits\Likable;
+use Modules\Social\Traits\Postable;
 
 class Post extends Model
 {
@@ -14,7 +17,7 @@ class Post extends Model
 
     protected static function newFactory()
     {
-        return \Modules\Social\Database\factories\PostFactory::new();
+        return PostFactory::new();
     }
 
     public function user()

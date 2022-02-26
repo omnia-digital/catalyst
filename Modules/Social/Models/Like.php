@@ -2,8 +2,8 @@
 
     namespace Modules\Social\Models;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
+    use App\Models\User;
+    use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\SoftDeletes;
 
     class Like extends Model
@@ -45,15 +45,18 @@ use Illuminate\Database\Eloquent\Model;
             return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . $msg;
         }
 
-        public function likable() {
+        public function likable()
+        {
             return $this->morphTo();
         }
 
-        public function user() {
+        public function user()
+        {
             return $this->belongsTo(User::class);
         }
 
-        public function post() {
+        public function post()
+        {
             return $this->hasOne(Post::class, 'id', 'likable_id');
         }
     }
