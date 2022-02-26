@@ -25,7 +25,7 @@
             </div>
             <div class="text-xs ml-3 w-60 space-y-1">
                 @if (!is_null($activity['project']))
-                    <a href="#" class="flex items-center"><span>View Project</span><x-heroicon-o-chevron-right class="w-3 h-3 ml-2" /></a>
+                    <a href="{{ $activity['project']['link'] }}" class="flex items-center"><span>View Project</span><x-heroicon-o-chevron-right class="w-3 h-3 ml-2" /></a>
                 @endif
                 @if (!is_null($activity['user']['avatar']) && !is_null($activity['project']))
                 <a href="#" class="flex items-center"><x-heroicon-o-star class="w-3 h-3 mr-2" /><span>Add to favorites</span></a>

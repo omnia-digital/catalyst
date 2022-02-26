@@ -21,14 +21,11 @@
         return view('dashboard');
     })->name('dashboard');
 
+    Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {
+        Route::get('/', App\Http\Livewire\Teams::class)->name('home');
+    });
+
     Route::middleware(['auth', 'verified'])->group(function() {
-//        Route::get('/home', function () {
-//            return "Home";
-//        })->name('home');
-
-        Route::get('/projects', App\Http\Livewire\Teams::class)->name('projects');
-
-
         Route::get('/profile', function () {
             return "Profile";
         })->name('user.profile');

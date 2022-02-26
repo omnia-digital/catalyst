@@ -20,28 +20,28 @@ class SideMenu2 extends Component
             ],
             [
                 'label'   => 'Projects',
-                'name'    => 'social.projects',
+                'name'    => 'projects.home',
                 'icon'    => 'heroicon-o-globe',
                 'current' => false
             ],
-            [
-                'label'   => 'CRM',
-                'name'    => 'social.crm',
-                'icon'    => 'heroicon-o-users',
-                'current' => false
-            ],
-            [
-                'label'   => 'Learn',
-                'name'    => 'social.learn',
-                'icon'    => 'heroicon-o-academic-cap',
-                'current' => false
-            ],
-            [
-                'label'   => 'Marketplace',
-                'name'    => 'social.marketplace',
-                'icon'    => 'heroicon-o-shopping-bag',
-                'current' => false
-            ],
+//            [
+//                'label'   => 'CRM',
+//                'name'    => 'crm',
+//                'icon'    => 'heroicon-o-users',
+//                'current' => false
+//            ],
+//            [
+//                'label'   => 'Learn',
+//                'name'    => 'learn',
+//                'icon'    => 'heroicon-o-academic-cap',
+//                'current' => false
+//            ],
+//            [
+//                'label'   => 'Marketplace',
+//                'name'    => 'marketplace',
+//                'icon'    => 'heroicon-o-shopping-bag',
+//                'current' => false
+//            ],
             [
                 'label'   => 'Resources',
                 'name'    => 'resources.home',
@@ -50,7 +50,7 @@ class SideMenu2 extends Component
             ],
         ];
 
-        
+
     }
 
     public function openMobileMenu()
