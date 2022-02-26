@@ -13,6 +13,6 @@
 
     use Modules\Resources\Http\Livewire\Pages\Home;
 
-    Route::name('resources.')->prefix('resources')->group(function () {
+    Route::name('resources.')->prefix('resources')->middleware(['auth','verified'])->group(function () {
         Route::get('/', Home::class)->name('home');
     });

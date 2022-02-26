@@ -1,4 +1,4 @@
-<div 
+<div
     class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg"
     x-data="{ openOptions: false }"
 >
@@ -6,7 +6,7 @@
         <div>
             <div class="flex space-x-3">
                 <div class="flex-shrink-0">
-                    <img class="h-10 w-10 rounded-full" src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->name }}" />
+                    <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}" />
                 </div>
                 <div class="min-w-0 flex-1">
                     <p class="text-sm font-medium text-gray-900">
@@ -22,11 +22,11 @@
                     <!-- Livewire Headless UI Menu -->
                     <div class="relative inline-block text-left"> <!-- x-menu -->
                         <div>
-                            <button 
-                                class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" 
-                                type="button" 
-                                aria-haspopup="true" 
-                                aria-expanded="true" 
+                            <button
+                                class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600"
+                                type="button"
+                                aria-haspopup="true"
+                                aria-expanded="true"
                                 aria-controls="post-list-item-options-menu-items"
                                 @click="openOptions = true"
                             > <!-- x-menu-button -->
@@ -34,8 +34,8 @@
                                 <x-heroicon-o-dots-vertical class="h-5 w-5" aria-hidden="true" />
                             </button>
                         </div>
-                        <div 
-                            id="post-list-item-options-menu-items" 
+                        <div
+                            id="post-list-item-options-menu-items"
                             class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                             x-show="openOptions" @click.away="openOptions = false"
                             x-transition:enter.duration.100ms
