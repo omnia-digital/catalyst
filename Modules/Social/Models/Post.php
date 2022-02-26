@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
-    use HasFactory, Likable, Postable;
+    use HasFactory, Likable, Postable, Attachable;
 
     protected $fillable = ['user_id', 'team_id', 'body', 'postable_id', 'postable_type'];
     

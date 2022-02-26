@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
             $table->unsignedBigInteger('team_id')->nullable();
             $table->text('body');
-            $table->integer('postable_id')->nullable();
+            $table->unsignedBigInteger('postable_id')->nullable();
             $table->string('postable_type')->nullable();
             $table->timestamps();
         });
