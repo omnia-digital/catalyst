@@ -43,6 +43,12 @@ class SideMenu2 extends Component
                 'icon'    => 'heroicon-o-shopping-bag',
                 'current' => false
             ],
+            [
+                'label'   => 'Resources',
+                'name'    => 'resources.home',
+                'icon'    => 'heroicon-o-newspaper',
+                'current' => false
+            ],
         ];
 
         $this->invitations = [
