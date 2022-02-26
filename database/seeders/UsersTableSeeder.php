@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('testing')
         ]);
 
-        User::factory(15)->withPersonalTeam()->create();
+        User::factory(15)->withPersonalTeam()->withProfile()->create();
 
     }
 }
