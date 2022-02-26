@@ -1,10 +1,13 @@
 <?php
 
-namespace Modules\Social\Models;
+namespace Modules\Social\Traits;
+
+use Modules\Social\Models\Like;
+use function auth;
 
 trait Likable
 {
-    
+
     /**
      * Get the model's likes
      */
@@ -74,7 +77,7 @@ trait Likable
             );
 
         }
-        
+
     }
 
     /**
@@ -97,6 +100,6 @@ trait Likable
             );
 
         }
-        
+
     }
 }

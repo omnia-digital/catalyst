@@ -1,6 +1,8 @@
 <?php
 
-namespace Modules\Social\Models;
+namespace Modules\Social\Traits;
+
+use Modules\Social\Models\Post;
 
 trait Postable
 {
