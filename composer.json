@@ -62,6 +62,7 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi",
+            "@php artisan vendor:publish --tag=library-assets",
             "@php artisan vendor:publish --tag=library-config",
             "@php artisan vendor:publish --tag=library-views"
         ],
