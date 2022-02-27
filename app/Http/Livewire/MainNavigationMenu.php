@@ -15,6 +15,43 @@
             'refresh-navigation-menu' => '$refresh',
         ];
 
+        public function mount() {
+            $this->navigation = [
+//                [
+//                    'label'   => 'Projects',
+//                    'name'    => 'projects.home',
+//                    'icon'    => 'heroicon-o-globe',
+//                    'current' => false
+//                ],
+                //            [
+                //                'label'   => 'CRM',
+                //                'name'    => 'crm',
+                //                'icon'    => 'heroicon-o-users',
+                //                'current' => false
+                //            ],
+                //            [
+                //                'label'   => 'Learn',
+                //                'name'    => 'learn',
+                //                'icon'    => 'heroicon-o-academic-cap',
+                //                'current' => false
+                //            ],
+                //            [
+                //                'label'   => 'Marketplace',
+                //                'name'    => 'marketplace',
+                //                'icon'    => 'heroicon-o-shopping-bag',
+                //                'current' => false
+                //            ],
+                [
+                    'label'   => 'Resources',
+                    'name'    => 'resources.home',
+                    'icon'    => 'heroicon-o-newspaper',
+                    'current' => false
+                ],
+            ];
+
+
+        }
+
         /**
          * Render the component.
          *
