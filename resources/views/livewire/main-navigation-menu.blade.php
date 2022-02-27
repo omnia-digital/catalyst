@@ -14,7 +14,7 @@
                     <div class="mx-2 bg-gray-800 p-4 rounded-lg">
 {{--                        <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">--}}
                     </div>
-                    <p class="text-base font-bold">Evangelism Alliance</p>
+                    <p class="text-base font-bold">{{ env('APP_NAME') }}</p>
                 </div>
 
                 <!-- Navigation Links -->
