@@ -1,6 +1,6 @@
-<nav x-data="{ open: false }" class="bg-white relative z-10 border-b border-gray-100">
+<nav x-data="{ open: false }" class="fixed w-full bg-white z-10 border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class=" px-4 sm:px-6">
+    <div class="px-4 md:px-6">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -25,9 +25,9 @@
                 </div> --}}
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden md:flex md:items-center md:ml-6">
                 <!-- Search -->
-                <div class="flex justify-center lg:ml-6 lg:justify-end items-center">
+                <div class="hidden md:flex justify-center lg:ml-6 lg:justify-end items-center">
                     <div class="max-w-lg w-full lg:max-w-xs">
                         <label for="search" class="sr-only">Search</label>
                         <div class="relative">
@@ -51,7 +51,7 @@
 
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                    <div class="ml-3 ">
+                    <div class="hidden ml-3 md:relative">
                         <x-jet-dropdown align="right" width="60">
                             <x-slot name="trigger">
                                 <span class="inline-flex rounded-md">
