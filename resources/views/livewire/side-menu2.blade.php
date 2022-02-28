@@ -59,10 +59,10 @@
                         </div>
                         <div class="bg-black flex items-center rounded-md -m-2 p-1">
                             <div class="bg-white text-xxs rounded-md p-1">
-                                48
+                                {{ Auth::user()->level ?? '48' }}
                             </div>
                             <div class="text-xxs text-white p-1">
-                                3758
+                                {{ Auth::user()->score ?? '3758' }}
                             </div>
                         </div>
                     </div>
