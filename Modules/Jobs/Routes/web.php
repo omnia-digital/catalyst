@@ -15,4 +15,5 @@ use Modules\Jobs\Http\Livewire\Pages\Home;
 
 Route::name('jobs.')->prefix('jobs')->middleware(['auth','verified'])->group(function () {
     Route::get('/', Home::class)->name('home');
+    Route::get('/create', Home::class)->name('create');
 });

@@ -2,8 +2,10 @@
 
 namespace Modules\Jobs\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Jobs\View\Component\Job\Item as JobItem;
 
 class JobsServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,7 @@ class JobsServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        Blade::component('job.item', JobItem::class);
     }
 
     /**
