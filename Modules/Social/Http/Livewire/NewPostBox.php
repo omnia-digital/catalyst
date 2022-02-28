@@ -11,10 +11,18 @@
         public $moods = [];
         public $selected;
         public $body;
+        public $attachments = [];
+
+        protected $listeners = ['filesAdded'];
 
         protected $rules = [
             'body' => 'required|min:6',
         ];
+
+        public function filesAdded($files)
+        {
+            $this->attachments = $files;
+        }
 
         public function mount() {
             $this->postTypes = [
@@ -37,35 +45,35 @@
                     'name' => 'Excited',
                     'value' => 'excited',
                     'icon' => 'heroicon-o-fire',
-                    'iconColor' => 'text-white',
+                    'iconColor' => 'text-gray-400',
                     'bgColor' => 'bg-red-500' ,
                 ],
                 [
                     'name' => 'Loved',
                     'value' => 'loved',
                     'icon' => 'heroicon-o-heart',
-                    'iconColor' => 'text-white',
+                    'iconColor' => 'text-gray-400',
                     'bgColor' => 'bg-pink-400' ,
                 ],
                 [
                     'name' => 'Happy',
                     'value' => 'happy',
                     'icon' => 'heroicon-o-emoji-happy',
-                    'iconColor' => 'text-white',
+                    'iconColor' => 'text-gray-400',
                     'bgColor' => 'bg-green-400' ,
                 ],
                 [
                     'name' => 'Sad',
                     'value' => 'sad',
                     'icon' => 'heroicon-o-emoji-sad',
-                    'iconColor' => 'text-white',
+                    'iconColor' => 'text-gray-400',
                     'bgColor' => 'bg-yellow-400' ,
                 ],
                 [
                     'name' => 'Thumbsy',
                     'value' => 'thumbsy',
                     'icon' => 'heroicon-o-thumb-up',
-                    'iconColor' => 'text-white',
+                    'iconColor' => 'text-gray-400',
                     'bgColor' => 'bg-blue-500' ,
                 ],
                 [
