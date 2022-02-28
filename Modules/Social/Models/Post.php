@@ -11,7 +11,7 @@ use Modules\Social\Traits\Postable;
 
 class Post extends Model
 {
-    use HasFactory, Likable, Postable;
+    use HasFactory, Likable, Postable, Attachable;
 
     protected $fillable = ['user_id', 'team_id', 'type', 'body', 'postable_id', 'postable_type'];
 

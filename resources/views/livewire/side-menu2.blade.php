@@ -74,19 +74,19 @@
                         <a
                             href="{{ route($item['name']) }}"
                             title="{{ $item['label'] }}"
-                            class="{{ request()->routeIs($item['name']) ? 'bg-gray-200 font-semibold text-black' : 'text-gray-400 hover:text-black hover:bg-gray-200' }} 
+                            class="{{ request()->routeIs($item['name']) ? 'bg-gray-200 font-semibold text-black' : 'text-gray-400 hover:text-black hover:bg-gray-200' }}
                             {{ 'w-full py-2 px-6 group flex flex-col justify-center items-center relative text-xs font-medium rounded-md' }}"
                         >
-                            <x-dynamic-component 
-                                :component="$item['icon']" 
+                            <x-dynamic-component
+                                :component="$item['icon']"
                                 class="flex-shrink-0 h-6 w-6"
-                                aria-hidden="true" 
+                                aria-hidden="true"
                             />
                             {{ $item['label'] }}
                         </a>
                     @endforeach
                 </nav>
-                
+
             </div>
         </div>
     </div>
@@ -95,9 +95,9 @@
     <div class="md:pl-24 flex flex-col md:hidden">
         <div class="flex-shrink-0 flex h-16 bg-white shadow">
             <!-- mobile menu button -->
-            <button 
-                type="button" 
-                class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden" 
+            <button
+                type="button"
+                class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
                 @click="open = true"
             >
                 <span class="sr-only">Open sidebar</span>

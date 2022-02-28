@@ -7,14 +7,14 @@ use Modules\Social\Models\Post;
 trait Postable
 {
     /**
-     * Get the model's comments
+     * Get the replies for the current model
      */
     public function replies() {
         return $this->morphMany(Post::class, 'postable');
     }
 
     /**
-     * Handles creating the comment of the current model
+     * Handles creating the reply for the current model
      */
     public function reply($data, $userID) {
         return $this->replies()->create([

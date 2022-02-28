@@ -2,9 +2,6 @@
 
 namespace Modules\Resources\Http\Livewire\Pages;
 
-use Carbon\Carbon;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Models\Post;

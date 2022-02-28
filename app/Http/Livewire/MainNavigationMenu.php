@@ -1,0 +1,64 @@
+<?php
+
+    namespace App\Http\Livewire;
+
+    use Livewire\Component;
+
+    class MainNavigationMenu extends Component
+    {
+        /**
+         * The component's listeners.
+         *
+         * @var array
+         */
+        protected $listeners = [
+            'refresh-navigation-menu' => '$refresh',
+        ];
+
+        public function mount() {
+            $this->navigation = [
+//                [
+//                    'label'   => 'Projects',
+//                    'name'    => 'projects.home',
+//                    'icon'    => 'heroicon-o-globe',
+//                    'current' => false
+//                ],
+                //            [
+                //                'label'   => 'CRM',
+                //                'name'    => 'crm',
+                //                'icon'    => 'heroicon-o-users',
+                //                'current' => false
+                //            ],
+                //            [
+                //                'label'   => 'Learn',
+                //                'name'    => 'learn',
+                //                'icon'    => 'heroicon-o-academic-cap',
+                //                'current' => false
+                //            ],
+                //            [
+                //                'label'   => 'Marketplace',
+                //                'name'    => 'marketplace',
+                //                'icon'    => 'heroicon-o-shopping-bag',
+                //                'current' => false
+                //            ],
+                [
+                    'label'   => 'Resources',
+                    'name'    => 'resources.home',
+                    'icon'    => 'heroicon-o-newspaper',
+                    'current' => false
+                ],
+            ];
+
+
+        }
+
+        /**
+         * Render the component.
+         *
+         * @return \Illuminate\View\View
+         */
+        public function render(): \Illuminate\View\View
+        {
+            return view('livewire.main-navigation-menu');
+        }
+    }

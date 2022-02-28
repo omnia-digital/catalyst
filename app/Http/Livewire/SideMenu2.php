@@ -4,6 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
+/**
+ * Side Menu should pull from Module's navigation
+ */
 class SideMenu2 extends Component
 {
     public $isOpen = false;
