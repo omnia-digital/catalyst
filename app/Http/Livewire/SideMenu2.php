@@ -48,6 +48,12 @@ class SideMenu2 extends Component
                 'icon'    => 'heroicon-o-newspaper',
                 'current' => false
             ],
+            [
+                'label'   => 'Jobs',
+                'name'    => 'jobs.home',
+                'icon'    => 'heroicon-o-briefcase',
+                'current' => false
+            ],
         ];
 
 
