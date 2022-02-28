@@ -3,14 +3,19 @@
 namespace Modules\Social\Http\Livewire;
 
 use Livewire\Component;
+use Modules\Social\Models\Post;
 
 class PostListItem extends Component
 {
-    public $post;
+    public Post $post;
     public $optionsMenuOpen = false;
 
-    public function mount($post) {
+    public function mount(Post $post) {
         $this->post = $post;
+    }
+    
+    public function getAuthorAttribute() {
+        return $this->post->user;
     }
 
     public function render()

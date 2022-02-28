@@ -31,6 +31,7 @@ module.exports = {
                 sans: ["Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Helvetica", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
+                'xxs': '0.65rem',
                 'sm': '0.95rem'
             },
             colors: {
@@ -57,5 +58,6 @@ module.exports = {
         require('@tailwindcss/typography'),
         require('tailwindcss-multi-theme'),
         require('@tailwindcss/aspect-ratio'),
+        require('tailwind-scrollbar-hide'),
     ]
 };

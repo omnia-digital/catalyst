@@ -39,6 +39,7 @@
         "laravel-mix-merge-manifest": "^2.0.0",
         "resolve-url-loader": "^4.0.0",
         "sass-loader": "^12.3.0",
+        "tailwind-scrollbar-hide": "^1.1.7",
         "tailwindcss-multi-theme": "^1.0.4"
     }
 }

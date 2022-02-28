@@ -8,6 +8,9 @@
     use Laravel\Jetstream\Events\TeamUpdated;
     use Laravel\Jetstream\Team as JetstreamTeam;
 
+    /**
+     * Projects are just Teams
+     */
     class Team extends JetstreamTeam
     {
         use HasFactory;

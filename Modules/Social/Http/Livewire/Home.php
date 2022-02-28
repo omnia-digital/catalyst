@@ -4,13 +4,20 @@
 
 use Illuminate\Support\Facades\Date;
 use Livewire\Component;
+use Modules\Social\Models\Post;
 
     class Home extends Component
     {
+        public $recentlyAddedPost;
         public $tabs = [];
         public $activities = [];
         public $questions = [];
         public string $orderBy = 'created_at';
+        protected $listeners = ['postAdded' => '$refresh'];
+
+        public function postAdded(Post $post) {
+            $this->recentlyAddedPost = $post;
+        }
 
         public function mount() {
             $this->tabs = [
@@ -76,7 +83,7 @@ use Livewire\Component;
                         ],
                     ],
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects.home'),
                     ],
                 ],
                 [
@@ -89,7 +96,7 @@ use Livewire\Component;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects.home'),
                     ],
                 ],
                 [
@@ -102,7 +109,7 @@ use Livewire\Component;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects.home'),
                     ],
                 ],
                 [
@@ -115,7 +122,7 @@ use Livewire\Component;
                     ],
                     'members' => null,
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects.home'),
                     ],
                 ],
                 [
@@ -162,7 +169,7 @@ use Livewire\Component;
                         ],
                     ],
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects.home'),
                     ],
                 ],
                 [
@@ -220,7 +227,7 @@ use Livewire\Component;
                         ],
                     ],
                     'project' => [
-                        'link' => route('teams.home'),
+                        'link' => route('projects.home'),
                     ],
                 ],
             ];
@@ -307,6 +314,10 @@ use Livewire\Component;
                     `,
                 ],
             ];
+        }
+
+        public function getPostsProperty() {
+            return Post::latest()->get();
         }
 
         public function render()
