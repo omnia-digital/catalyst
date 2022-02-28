@@ -25,10 +25,7 @@
         <!-- App Navigation -->
         <livewire:main-navigation-menu/>
 
-        <!-- Module Navigation -->
-        <livewire:side-menu2/>
-
-        <main class="md:pl-24 md:pt-16 flex-1">
+        <main class="md:pt-16 flex-1">
             {{ $slot }}
         </main>
 

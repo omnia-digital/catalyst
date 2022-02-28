@@ -2,7 +2,6 @@
 
 @section('content')
     <div>
-
         <!-- Page Heading -->
         <div class="xl:grid xl:grid-cols-9 xl:gap-9">
             <div class="xl:col-span-6 bg-black">
@@ -15,7 +14,6 @@
 {{--                                x-html="tab.title + notifications"></li>--}}
 {{--                        </template>--}}
                     </ul>
-{{--{{ Str::markdown($post->body) }}--}}
                 </div>
                 <div class="mt-4">
                     <!-- Featured Section -->
