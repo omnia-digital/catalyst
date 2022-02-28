@@ -15,4 +15,5 @@
 
     Route::name('resources.')->prefix('resources')->middleware(['auth','verified'])->group(function () {
         Route::get('/', Home::class)->name('home');
+        Route::get('bookmarks', Home::class)->name('bookmarks');
     });
