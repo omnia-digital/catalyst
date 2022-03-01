@@ -9,14 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Jetstream;
 use Modules\Jobs\Enums\JobAddons;
-use Modules\Jobs\Support\Coupon\HasCoupon;
-use Modules\Jobs\Support\Transaction\HasTransaction;
+use App\Support\Coupon\HasCoupon;
+use App\Support\Transaction\HasTransaction;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Tags\HasTags;
 
 class Job extends Model
 {
-    use HasFactory, HasTransaction, HasCoupon, HasSlug;
+    use HasFactory, HasTransaction, HasCoupon, HasSlug, HasTags;
 
     protected $fillable = [
         'title',
@@ -40,7 +41,7 @@ class Job extends Model
         'is_active' => 'boolean'
     ];
 
-    protected $table = 'contracts';
+    protected $table = 'job_positions';
 
     protected static function booted()
     {
@@ -61,14 +62,6 @@ class Job extends Model
         return SlugOptions::create()
                           ->generateSlugsFrom('title')
                           ->saveSlugsTo('slug');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
     }
 
     /**

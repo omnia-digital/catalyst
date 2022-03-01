@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Jobs\Support\Coupon;
+namespace App\Support\Coupon;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Jobs\Models\Coupon;

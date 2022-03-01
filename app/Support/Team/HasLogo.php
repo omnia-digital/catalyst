@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Jobs\Support\Team;
+namespace App\Support\Team;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;

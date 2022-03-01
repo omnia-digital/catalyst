@@ -13,7 +13,7 @@ class CreateJobAddonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('job_addons', function (Blueprint $table) {
+        Schema::create('job_position_addons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
@@ -30,6 +30,6 @@ class CreateJobAddonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_addons');
+        Schema::dropIfExists('job_position_addons');
     }
 }

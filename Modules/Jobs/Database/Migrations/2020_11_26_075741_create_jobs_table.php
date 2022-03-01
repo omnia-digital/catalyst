@@ -13,7 +13,7 @@ class CreateJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contracts', function (Blueprint $table) {
+        Schema::create('job_positions', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
@@ -46,7 +46,7 @@ class CreateJobsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contracts');
+        Schema::dropIfExists('job_positions');
         Schema::dropIfExists('job_tag');
     }
 }

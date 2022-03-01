@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Jobs\Support\Transaction;
+namespace App\Support\Transaction;
 
 trait HasTransaction
 {
