@@ -18,7 +18,7 @@
                 ],
                 [
                     'label'   => 'Browse',
-                    'name'    => 'resources.home',
+                    'name'    => 'resources.browse',
                     'icon'    => 'heroicon-o-newspaper',
                     'current' => false
                 ],
