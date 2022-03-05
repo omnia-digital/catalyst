@@ -23,7 +23,8 @@
         "spatie/laravel-sluggable": "^3.1",
         "squirephp/countries-en": "^3.3",
         "tightenco/ziggy": "^1.4",
-        "omnia-digital/library": "dev-main"
+        "omnia-digital/library": "*",
+        "phuclh/media-manager": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -36,8 +37,12 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/omnia-digital/library.git"
+            "type": "path",
+            "url": "../omnia-library"
+        },
+        {
+            "type": "path",
+            "url": "../media-manager"
         }
     ],
     "autoload": {
