@@ -12,8 +12,20 @@
             $this->navigation = [
                 [
                     'label'   => 'Home',
-                    'name'    => 'social.home',
+                    'name'    => 'resources.home',
                     'icon'    => 'heroicon-o-home',
+                    'current' => false
+                ],
+                [
+                    'label'   => 'Browse',
+                    'name'    => 'resources.browse',
+                    'icon'    => 'heroicon-o-newspaper',
+                    'current' => false
+                ],
+                [
+                    'label'   => 'Bookmarks',
+                    'name'    => 'resources.bookmarks',
+                    'icon'    => 'heroicon-o-bookmark',
                     'current' => false
                 ],
             ];
