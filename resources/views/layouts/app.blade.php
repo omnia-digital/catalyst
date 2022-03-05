@@ -22,13 +22,12 @@
     </head>
     <body class="h-full font-sans antialiased">
 
-        <div class="flex">
-            @livewire('side-menu2')
+        <!-- App Navigation -->
+        <livewire:main-navigation-menu/>
 
-            <main class="md:pl-80 flex-1">
-                {{ $slot }}
-            </main>
-        </div>
+        <main class="md:pt-16 flex-1">
+            {{ $slot }}
+        </main>
 
         @libraryScripts
 
