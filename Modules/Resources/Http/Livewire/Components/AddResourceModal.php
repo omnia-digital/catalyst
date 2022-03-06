@@ -1,9 +1,11 @@
 <?php
 
-namespace Modules\Resources\Http\Livewire;
+namespace Modules\Resources\Http\Livewire\Components;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use function view;
+
 //use Phuclh\MediaManager\WithMediaManager;
 
 class AddResourceModal extends Component
@@ -54,6 +56,6 @@ class AddResourceModal extends Component
 
     public function render()
     {
-        return view('resources::livewire.add-resource-modal');
+        return view('resources::livewire.components.add-resource-modal');
     }
 }

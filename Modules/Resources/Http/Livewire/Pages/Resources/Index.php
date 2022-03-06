@@ -1,13 +1,14 @@
 <?php
 
-namespace Modules\Resources\Http\Livewire\Pages;
+namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
+use function view;
 
-class Browse extends Component
+class Index extends Component
 {
     use WithPagination, WithCachedRows;
 
@@ -15,7 +16,7 @@ class Browse extends Component
 
     public array $filters = [
         'date_created' => '',
-//        'has_attachment' => false,
+        //        'has_attachment' => false,
     ];
 
     public string $orderBy = 'date_created';
@@ -42,7 +43,7 @@ class Browse extends Component
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-//        return Post::where('type','=','resource');
+        //        return Post::where('type','=','resource');
         return Post::query();
     }
 
@@ -55,7 +56,7 @@ class Browse extends Component
 
     public function render()
     {
-        return view('resources::livewire.pages.browse', [
+        return view('resources::livewire.pages.resources.index', [
             'resources' => $this->rows
         ]);
     }

@@ -1,6 +1,11 @@
 @extends('resources::livewire.layouts.main-layout')
 
 @section('content')
+    <x-library::button x-data="" x-on:click.prevent="$openModal('add-resource-modal')">
+        Add Resource
+    </x-library::button>
+
+    <livewire:resources::components.add-resource-modal/>
 
     <!-- Filters -->
     @include('livewire.partials.filters')
