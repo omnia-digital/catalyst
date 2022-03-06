@@ -39,6 +39,6 @@ class SideMenu extends Component
 
     public function render()
     {
-        return view('livewire.side-menu2');
+        return view('livewire.side-menu');
     }
 }
