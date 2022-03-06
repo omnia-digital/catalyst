@@ -3,5 +3,5 @@
         Add Resource
     </x-library::button>
 
-    <livewire:resource::add-resource-modal/>
+    <livewire:resources::add-resource-modal/>
 </div>
