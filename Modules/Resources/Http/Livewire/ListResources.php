@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Resource\Http\Livewire;
+namespace Modules\Resources\Http\Livewire;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class ListResources extends Component
 {
     public function render()
     {
-        return view('resource::livewire.list-resources');
+        return view('resources::livewire.list-resources');
     }
 }

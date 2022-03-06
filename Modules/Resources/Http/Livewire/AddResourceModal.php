@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\Resource\Http\Livewire;
+namespace Modules\Resources\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Phuclh\MediaManager\WithMediaManager;
+//use Phuclh\MediaManager\WithMediaManager;
 
 class AddResourceModal extends Component
 {
-    use WithMediaManager;
+//    use WithMediaManager;
 
     public ?string $title = null;
 
@@ -54,6 +54,6 @@ class AddResourceModal extends Component
 
     public function render()
     {
-        return view('resource::livewire.add-resource-modal');
+        return view('resources::livewire.add-resource-modal');
     }
 }
