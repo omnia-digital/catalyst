@@ -3,10 +3,12 @@
     namespace App\Models;
 
     use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Relations\HasMany;
     use Laravel\Jetstream\Events\TeamCreated;
     use Laravel\Jetstream\Events\TeamDeleted;
     use Laravel\Jetstream\Events\TeamUpdated;
     use Laravel\Jetstream\Team as JetstreamTeam;
+    use Modules\Resource\Models\Resource;
 
     /**
      * Projects are just Teams
@@ -52,5 +54,12 @@
             if (empty($value)) {
                 return 'https://via.placeholder.com/200';
             }
+
+            return $value;
+        }
+
+        public function resources(): HasMany
+        {
+            return $this->hasMany(Resource::class);
         }
     }
