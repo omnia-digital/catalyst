@@ -13,35 +13,18 @@ class SideMenu2 extends Component
 
     public $navigation = [];
 
-    public function mount() {
-        $this->navigation = [
-            [
-                'label'   => 'Home',
-                'name'    => 'social.home',
-                'icon'    => 'heroicon-o-home',
-                'current' => false
-            ],
-            [
-                'label'   => 'Projects',
-                'name'    => 'projects.home',
-                'icon'    => 'heroicon-o-globe',
-                'current' => false
-            ],
-            [
-                'label'   => 'Resources',
-                'name'    => 'resources.home',
-                'icon'    => 'heroicon-o-newspaper',
-                'current' => false
-            ],
-            [
-                'label'   => 'Jobs',
-                'name'    => 'jobs.home',
-                'icon'    => 'heroicon-o-briefcase',
-                'current' => false
-            ],
-        ];
-
-
+    public function mount()
+    {
+        if (empty($this->navigation)) {
+            $this->navigation = [
+                [
+                    'label'   => 'No Module Navigation Items',
+                    'name'    => 'social.home',
+                    'icon'    => 'heroicon-o-x',
+                    'current' => false
+                ],
+            ];
+        }
     }
 
     public function openMobileMenu()
