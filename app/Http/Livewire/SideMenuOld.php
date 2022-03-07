@@ -32,7 +32,7 @@
                 ],
                 [
                     'label'   => 'Projects',
-                    'name'    => 'projects',
+                    'name'    => 'projects.home',
                     'icon'    => 'heroicon-o-collection',
                     'current' => false
                 ],
@@ -69,6 +69,6 @@
 
         public function render()
         {
-            return view('livewire.side-menu');
+            return view('livewire.side-menu-old');
         }
     }
