@@ -28,5 +28,4 @@ class Post extends Model
     public function replies() {
         return $this->morphMany(Post::class, 'postable');
     }
-
 }

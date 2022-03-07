@@ -14,7 +14,7 @@
                 <!-- Navigation Links -->
                 <nav class="hidden items-center space-x-4 sm:-my-px sm:ml-10 sm:flex">
                     @foreach ($navigation as $item)
-                        <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->routeIs($item['name'])">
+                        <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->route()->named($item['module'] . '*')">
                             <x-dynamic-component
                                 :component="$item['icon']"
                                 class="flex-shrink-0 h-6 w-6 mr-2"

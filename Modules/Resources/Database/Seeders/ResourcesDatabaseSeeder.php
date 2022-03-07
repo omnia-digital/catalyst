@@ -4,6 +4,7 @@ namespace Modules\Resources\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Social\Models\Post;
 
 class ResourcesDatabaseSeeder extends Seeder
 {
@@ -16,6 +17,6 @@ class ResourcesDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        Post::factory(10)->withType('resource');
     }
 }
