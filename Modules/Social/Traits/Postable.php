@@ -2,24 +2,45 @@
 
 namespace Modules\Social\Traits;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Social\Models\Post;
 
 trait Postable
 {
     /**
-     * Get the replies for the current model
+     * Get the posts for the current model
      */
-    public function replies() {
+    public function posts(): MorphMany
+    {
         return $this->morphMany(Post::class, 'postable');
     }
 
     /**
-     * Handles creating the reply for the current model
+     * Handles creating the post for the current model
      */
-    public function reply($data, $userID) {
-        return $this->replies()->create([
-            'user_id' => $userID,
+    public function createPost($data, $userId): Model|Post
+    {
+        return $this->posts()->create([
+            'user_id' => $userId,
             'body' => $data['body'],
         ]);
+    }
+
+    //** Aliases **//
+    /**
+     * Alias for posts()
+     */
+    public function comments(): MorphMany
+    {
+        return $this->posts();
+    }
+
+    /**
+     * Alias for createPost()
+     */
+    public function createComment($data, $userId): Model|Post
+    {
+        return $this->createPost($data, $userId);
     }
 }
