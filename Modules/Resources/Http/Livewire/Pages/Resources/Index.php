@@ -43,8 +43,7 @@ class Index extends Component
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-        //        return Post::where('type','=','resource');
-        return Post::query();
+        return Post::where('type','=','resource');
     }
 
     public function getRowsProperty()
