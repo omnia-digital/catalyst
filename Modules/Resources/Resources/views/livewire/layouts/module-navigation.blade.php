@@ -1,1 +1,1 @@
-<livewire:side-menu2 :navigation="$navigation"/>
+<livewire:side-menu :navigation="$navigation"/>
