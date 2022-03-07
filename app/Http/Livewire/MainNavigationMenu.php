@@ -22,12 +22,14 @@ class MainNavigationMenu extends Component
                 'label'   => 'Community',
                 'name'    => 'social.home',
                 'icon'    => 'heroicon-o-globe',
+                'module'  => 'social',
                 'current' => false
             ],
             [
                 'label'   => 'Resources',
                 'name'    => 'resources.home',
                 'icon'    => 'heroicon-o-newspaper',
+                'module'  => 'resources',
                 'current' => false
             ],
             //                [
