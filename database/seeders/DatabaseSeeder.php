@@ -5,7 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Modules\Resources\Database\Seeders\ResourcesDatabaseSeeder;
 use Modules\Social\Database\Seeders\PostsTableSeeder;
+use Modules\Social\Database\Seeders\SocialDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,8 +25,9 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call(UsersTableSeeder::class);
-        $this->call(PostsTableSeeder::class);
-        
+        $this->call(SocialDatabaseSeeder::class);
+        $this->call(ResourcesDatabaseSeeder::class);
+
         if (DB::connection() instanceof \Illuminate\Database\MySqlConnection) {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
         }
