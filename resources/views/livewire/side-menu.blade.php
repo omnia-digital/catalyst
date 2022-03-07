@@ -46,7 +46,7 @@
     </div>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden pt-16 w-24 md:flex md:flex-col md:fixed md:inset-y-0 shadow-lg">
+    <div class="hidden pt-16 w-24 bg-white md:flex md:flex-col md:fixed md:inset-y-0 shadow-lg">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex-1 flex flex-col min-h-0 ">
             <a href="{{ route('social.home') }}">

@@ -16,7 +16,7 @@ class Index extends Component
 
     public array $filters = [
         'date_created' => '',
-        //        'has_attachment' => false,
+        'has_attachment' => false,
     ];
 
     public string $orderBy = 'date_created';

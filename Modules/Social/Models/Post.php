@@ -17,7 +17,17 @@ class Post extends Model
 {
     use HasFactory, Likable, Postable, Attachable;
 
-    protected $fillable = ['user_id', 'team_id', 'type', 'body', 'postable_id', 'postable_type'];
+    protected $fillable = ['user_id', 'team_id', 'title', 'type', 'body', 'postable_id', 'postable_type'];
+
+    public function getMainImageAttribute($value)
+    {
+        if (empty($value)) {
+            return "https://www.crs.org/sites/default/files/styles/hero/public/landing-page-banners/hero_440_ukraine_conflict_pol2022071201.jpg?itok=g_NgR3w1";
+        } else {
+            return $value;
+        }
+    }
+
 
     protected static function newFactory()
     {

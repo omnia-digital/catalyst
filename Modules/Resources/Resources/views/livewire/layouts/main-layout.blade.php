@@ -1,35 +1,25 @@
 <div>
     <livewire:resources::layouts.module-navigation/>
 
-    <div class="md:pl-24">
-        <div class="bg-neutral">
+    <div class="min-h-screen md:ml-24 md:pt-8 md:pr-6 md:pl-6 bg-gray-100">
+        <div class="flex justify-between items-center">
             <div class="flex-1 flex items-center">
-                <h1 class="py-4 ml-4 text-3xl">Resources</h1>
-                <x-heroicon-o-cog class="mt-1 ml-3 w-6 h-6"/>
+                <h1 class="py-4 text-3xl">Resources</h1>
+{{--                <x-heroicon-o-cog class="mt-1 ml-3 w-6 h-6"/>--}}
             </div>
+
+            <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent="$openModal('add-resource-modal')">
+                Add Resource
+            </x-library::button>
         </div>
 
-        <div class="min-h-screen bg-gray-100 px-4">
-            <nav class="max-w-7xl mx-auto border-b border-neutral">
-                <div class="md:hidden">
-                    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        {{--                        @foreach($navigation as $item)--}}
-                        {{--                            <x-jet-button as="a" href="{{$item->href}}"--}}
-                        {{--                                                class="[{{$item->current}} ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base--}}
-                        {{--                                                font-medium']"--}}
-                        {{--                                             aria-current="{{$item->current}} ? 'page' : ''">--}}
-                        {{--                                   {{ $item->name }}--}}
-                        {{--                            </x-jet-button>--}}
-                        {{--                        @endforeach--}}
-                    </div>
-                </div>
-            </nav>
-
+        <div class="">
             <!-- Page content -->
             <div class="mx-auto">
                 @yield('content')
             </div>
         </div>
+        <livewire:resources::components.add-resource-modal/>
     </div>
 </div>
 

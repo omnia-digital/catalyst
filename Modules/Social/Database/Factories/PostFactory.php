@@ -44,6 +44,13 @@ class PostFactory extends Factory
         ]);
     }
 
+    public function asResource(): PostFactory
+    {
+        return $this->withType('resource')->state([
+            'title' => $this->faker->company()
+        ]);
+    }
+
     /**
      * @return $this
      */
