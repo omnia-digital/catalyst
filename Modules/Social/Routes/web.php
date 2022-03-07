@@ -13,9 +13,9 @@
 
         Route::get('/home', Home::class)->name('home');
 
-        Route::get('/projects', function () {
-            return "Projects";
-        })->name('projects');
+//        Route::get('/projects', function () {
+//            return "Projects";
+//        })->name('projects');
 
         Route::get('/posts', function () {
             return "Posts";
