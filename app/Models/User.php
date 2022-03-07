@@ -11,7 +11,6 @@
     use Laravel\Jetstream\HasProfilePhoto;
     use Laravel\Jetstream\HasTeams;
     use Laravel\Sanctum\HasApiTokens;
-    use Modules\Social\Models\Comment;
     use Modules\Social\Models\Like;
     use Modules\Social\Models\Post;
     use Modules\Social\Models\Profile;
@@ -66,7 +65,7 @@
             if (!class_exists(Profile::class)) return;
             return $this->hasOne(Profile::class);
         }
-        
+
         public function posts() {
             if (!class_exists(Post::class)) return;
             return $this->hasMany(Post::class);
