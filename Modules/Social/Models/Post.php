@@ -22,7 +22,7 @@ class Post extends Model
     public function getMainImageAttribute($value)
     {
         if (empty($value)) {
-            return "https://www.crs.org/sites/default/files/styles/hero/public/landing-page-banners/hero_440_ukraine_conflict_pol2022071201.jpg?itok=g_NgR3w1";
+            return "/storage/images/hero_440_ukraine_conflict_pol2022071201.jpeg";
         } else {
             return $value;
         }
