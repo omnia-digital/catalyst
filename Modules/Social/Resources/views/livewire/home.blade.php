@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.social-app')
+@extends('social::livewire.layouts.main-layout')
 
 @section('content')
 <div>
