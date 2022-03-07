@@ -15,8 +15,12 @@ class ResourcesDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
+//        Model::unguard();
 
-        Post::factory(10)->withType('resource');
+//        Post::factory(10)->withType('resource');
+
+        Post::factory(15)->create([
+            'type' => 'resource'
+        ]);
     }
 }
