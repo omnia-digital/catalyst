@@ -20,6 +20,7 @@
         "omnia-digital/library": "dev-main",
         "pestphp/pest": "^1.16",
         "pestphp/pest-plugin-laravel": "^1.1",
+        "phuclh/media-manager": "^0.0.1",
         "spatie/laravel-activitylog": "^4.4",
         "spatie/laravel-sluggable": "^3.1",
         "spatie/laravel-tags": "^4.3",
