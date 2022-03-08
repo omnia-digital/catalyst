@@ -21,14 +21,14 @@ class RepliesModal extends Component
         $this->replyCount = $this->post->replies()->count();
     }
 
-    
+
 
     public function mount($post) {
         $this->post = $post;
         $this->replyCount = $post->replies()->count();
     }
 
-    public function updated($propertyName) 
+    public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
@@ -36,8 +36,8 @@ class RepliesModal extends Component
     public function saveReply()
     {
         $validatedData = $this->validate();
-       
-        $reply = $this->post->reply($validatedData, auth()->id());
+
+        $reply = $this->post->createComment($validatedData, auth()->id());
 
         $this->reset(['body']);
         $this->emitSelf('replyAdded', $reply->id);

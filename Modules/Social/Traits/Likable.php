@@ -2,65 +2,73 @@
 
 namespace Modules\Social\Traits;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Social\Models\Like;
 use function auth;
 
 trait Likable
 {
-
     /**
      * Get the model's likes
      */
-    public function likes() {
+    public function likes(): MorphMany
+    {
         return $this->morphMany(Like::class, 'likable');
     }
 
     /**
      * Check if the current model is liked by the user that is logged in
      */
-    public function getIsLikedAttribute() {
+    public function getIsLikedAttribute(): bool
+    {
         return (bool) $this->likes()->where('user_id', auth()->id())->where('liked', true)->count();
     }
 
     /**
      * Check if the current model was previously liked by the user that is logged in
      */
-    public function getWasLikedAttribute() {
+    public function getWasLikedAttribute(): bool
+    {
         return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked', true)->whereNotNull('deleted_at')->count();
     }
 
     /**
      * Check if the current model is disliked by the user that is logged in
      */
-    public function getIsDislikedAttribute() {
+    public function getIsDislikedAttribute(): bool
+    {
         return (bool) $this->likes()->where('user_id', auth()->id())->where('liked', false)->count();
     }
 
     /**
      * Check if the current model was previously diliked by the user that is logged in
      */
-    public function getWasDislikedAttribute() {
+    public function getWasDislikedAttribute(): bool
+    {
         return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked', false)->whereNotNull('deleted_at')->count();
     }
 
     /**
      * Return the total number of likes the current model has
      */
-    public function likesCount() {
+    public function likesCount(): int
+    {
         return $this->likes()->where('liked', true)->count();
     }
 
     /**
      * Return the total number of dislikes the current model has
      */
-    public function dislikesCount() {
+    public function dislikesCount(): int
+    {
         return $this->likes()->where('liked', false)->count();
     }
 
     /**
      * Handles the like functionality of the current model
      */
-    public function like() {
+    public function like(): void
+    {
         if ($this->isLiked) {
             // If the current model is liked by the user then remove the like
             $this->likes()->where('user_id', auth()->id())->where('liked', true)->delete();
@@ -75,15 +83,14 @@ trait Likable
                 ['user_id' => auth()->id()],
                 ['liked' => true]
             );
-
         }
-
     }
 
     /**
      * Handles the dislike functionality of the current model
      */
-    public function dislike() {
+    public function dislike(): void
+    {
         if ($this->isDisliked) {
             // If the current model is disliked by the user then remove the like
             $this->likes()->where('user_id', auth()->id())->where('liked', false)->delete();
@@ -98,8 +105,6 @@ trait Likable
                 ['user_id' => auth()->id()],
                 ['liked' => false]
             );
-
         }
-
     }
 }

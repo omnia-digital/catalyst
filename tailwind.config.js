@@ -9,6 +9,7 @@ module.exports = {
         './vendor/phuclh/media-manager/resources/views/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './Modules/*/Resources/views/**/*.blade.php',
     ],
 
     darkMode: 'class',
