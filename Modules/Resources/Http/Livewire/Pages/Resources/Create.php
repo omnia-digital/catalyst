@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Resources\Http\Livewire\Pages;
+namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -54,6 +54,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('resources::livewire.pages.create');
+        return view('resources::livewire.pages.resources.create');
     }
 }
