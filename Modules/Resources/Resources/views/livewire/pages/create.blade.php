@@ -1,8 +1,8 @@
 <div>
-    <x-library::modal id="add-resource-modal">
+    <x-library::modal id="add-resource-modal" maxWidth="5xl">
         <x-slot name="title">Add Resource</x-slot>
         <x-slot name="content">
-            <div>
+            <div class="mt-4">
                 <x-library::input.text label="Title" wire:model.defer="title"/>
                 <x-library::input.error for="title"/>
             </div>
@@ -12,7 +12,7 @@
             </div>
             <div class="mt-4">
                 <x-library::input.label value="Body"/>
-                <x-library::input.textarea wire:model.defer="body" placeholder="Body"/>
+                <x-library::input.trix wire:model.defer="body"/>
                 <x-library::input.error for="body"/>
                 <x-library::input.help value="Maximum is 500 characters"/>
             </div>

@@ -2,6 +2,12 @@
 
 @section('content')
     <div>
+        <x-library::button x-data="" x-on:click.prevent="$openModal('add-resource-modal')">
+            Add Resource
+        </x-library::button>
+
+        <livewire:resources::pages.create/>
+
         <!-- Page Heading -->
         <div class="xl:grid xl:grid-cols-9 xl:gap-9">
             <div class="xl:col-span-6 bg-black">
