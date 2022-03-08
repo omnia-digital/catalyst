@@ -1,16 +1,14 @@
 <?php
 
-namespace Modules\Resources\Http\Livewire\Components;
+namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use function view;
+use Phuclh\MediaManager\WithMediaManager;
 
-//use Phuclh\MediaManager\WithMediaManager;
-
-class AddResourceModal extends Component
+class Create extends Component
 {
-//    use WithMediaManager;
+    use WithMediaManager;
 
     public ?string $title = null;
 
@@ -39,7 +37,7 @@ class AddResourceModal extends Component
         );
 
         $this->reset('title', 'url', 'body', 'image');
-        $this->redirectRoute('resources.show-resource', $resource);
+        $this->redirectRoute('resources.show', $resource);
     }
 
     public function setFeaturedImage(array $image)
@@ -56,6 +54,6 @@ class AddResourceModal extends Component
 
     public function render()
     {
-        return view('resources::livewire.components.add-resource-modal');
+        return view('resources::livewire.pages.resources.create');
     }
 }
