@@ -42,7 +42,7 @@
                 </header>
                 <section class="p-3 text-center">
                     <ul class="space-y-4 divide-y-1 h-full overflow-y-auto">
-                        @foreach ($post->replies as $reply)
+                        @foreach ($post->comments as $reply)
                             <x-social.partials.reply-list-item :reply="$reply" />
                         @endforeach
                     </ul>
