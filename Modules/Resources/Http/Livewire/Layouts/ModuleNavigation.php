@@ -16,12 +16,12 @@
                     'icon'    => 'heroicon-o-home',
                     'current' => false
                 ],
-//                [
-//                    'label'   => 'Bookmarks',
-//                    'name'    => 'resources.bookmarks',
-//                    'icon'    => 'heroicon-o-bookmark',
-//                    'current' => false
-//                ],
+                [
+                    'label'   => 'Bookmarks',
+                    'name'    => 'social.bookmarks',
+                    'icon'    => 'heroicon-o-bookmark',
+                    'current' => false
+                ],
             ];
         }
 

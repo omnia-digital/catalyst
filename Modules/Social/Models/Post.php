@@ -7,15 +7,15 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\Social\Database\Factories\PostFactory;
+use Modules\Social\Traits\Bookmarkable;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 
 class Post extends Model
 {
-    use HasFactory, Likable, Postable, Attachable;
+    use HasFactory, Likable, Postable, Attachable, Bookmarkable;
 
     protected $fillable = ['user_id', 'team_id', 'title', 'type', 'body', 'postable_id', 'postable_type'];
 

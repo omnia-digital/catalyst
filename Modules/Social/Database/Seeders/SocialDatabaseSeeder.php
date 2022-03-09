@@ -17,5 +17,6 @@ class SocialDatabaseSeeder extends Seeder
         Model::unguard();
 
          $this->call(PostsTableSeeder::class);
+         $this->call(BookmarksTableSeeder::class);
     }
 }

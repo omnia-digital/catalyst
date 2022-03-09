@@ -2,6 +2,7 @@
 
     use Illuminate\Support\Facades\Route;
     use Modules\Social\Http\Livewire\Home;
+use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
 
     Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->group(function () {
 //        Route::get('/', 'SocialController@index');
@@ -12,6 +13,7 @@
         // /{messages}/{message_id} for messages
 
         Route::get('/home', Home::class)->name('home');
+        Route::get('bookmarks', Index::class)->name('bookmarks');
 
 //        Route::get('/projects', function () {
 //            return "Projects";

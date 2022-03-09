@@ -16,6 +16,12 @@
                     'icon'    => 'heroicon-o-home',
                     'current' => false
                 ],
+                [
+                    'label'   => 'Bookmarks',
+                    'name'    => 'social.bookmarks',
+                    'icon'    => 'heroicon-o-bookmark',
+                    'current' => false
+                ],
             ];
         }
 
