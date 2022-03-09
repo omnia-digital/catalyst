@@ -30,7 +30,7 @@
                         @foreach ($navigation as $item)
                             <a
                                 href="{{ route($item['name']) }}"
-                                class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-base font-medium rounded-md' }}">
+                                class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-base font-medium' }}">
                                 <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-gray-400 group-hover:text-gray-300' }} mr-3 flex-shrink-0 h-6 w-6"
                                                         aria-hidden="true"/>
                                 {{ $item['label'] }}
@@ -75,7 +75,7 @@
                             href="{{ route($item['name']) }}"
                             title="{{ $item['label'] }}"
                             class="{{ request()->routeIs($item['name']) ? 'bg-gray-200 font-semibold text-black' : 'text-gray-400 hover:text-black hover:bg-gray-200' }}
-                            {{ 'w-full py-2 px-6 group flex flex-col justify-center items-center relative text-xs font-medium rounded-md' }}"
+                            {{ 'w-full py-2 px-6 group flex flex-col justify-center items-center relative text-xs font-medium' }}"
                         >
                             <x-dynamic-component
                                 :component="$item['icon']"
