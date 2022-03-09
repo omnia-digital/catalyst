@@ -14,10 +14,18 @@
     use Modules\Social\Models\Like;
     use Modules\Social\Models\Post;
     use Modules\Social\Models\Profile;
+    use Modules\Social\Traits\HasBookmarks;
 
     class User extends Authenticatable implements MustVerifyEmail
     {
-        use HasApiTokens, HasProfilePhoto, TwoFactorAuthenticatable, Notifiable, SoftDeletes, HasFactory, HasTeams;
+        use HasApiTokens,
+            HasProfilePhoto,
+            TwoFactorAuthenticatable,
+            Notifiable,
+            SoftDeletes,
+            HasFactory,
+            HasTeams,
+            HasBookmarks;
 
         /**
          * The attributes that should be mutated to dates.
