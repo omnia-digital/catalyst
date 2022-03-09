@@ -11,6 +11,8 @@
             <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent="$openModal('add-resource-modal')">
                 Add Resource
             </x-library::button>
+
+            <livewire:resources::pages.resources.create/>
         </div>
 
         <div class="">
@@ -19,7 +21,6 @@
                 @yield('content')
             </div>
         </div>
-        <livewire:resources::components.add-resource-modal/>
     </div>
 </div>
 

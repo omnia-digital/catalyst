@@ -8,7 +8,7 @@
     use Laravel\Jetstream\Events\TeamDeleted;
     use Laravel\Jetstream\Events\TeamUpdated;
     use Laravel\Jetstream\Team as JetstreamTeam;
-    use Modules\Resource\Models\Resource;
+    use Modules\Resources\Models\Resource;
 
     /**
      * Projects are just Teams
