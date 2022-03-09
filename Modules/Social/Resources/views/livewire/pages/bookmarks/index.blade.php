@@ -9,8 +9,13 @@
         <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2">
             @foreach($bookmarks as $bookmark)
                 <li>
-                    <livewire:social::components.bookmark-card
-                            :post="$bookmark->bookmarkable()->first()"/>
+                    @if($bookmark->bookmarkable()->first()->type === 'resource')
+                        <livewire:resources::components.resource-card
+                                :post="$bookmark->bookmarkable()->first()"/>
+                    @else
+                        <livewire:social::components.bookmark-card
+                                :post="$bookmark->bookmarkable()->first()"/>
+                    @endif
                 </li>
             @endforeach
         </ul>

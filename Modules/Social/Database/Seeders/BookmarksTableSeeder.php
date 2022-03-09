@@ -18,6 +18,6 @@ class BookmarksTableSeeder extends Seeder
 //        Bookmark::truncate();
 
         // Posts
-        Bookmark::factory(15)->create();
+        Bookmark::factory(25)->create();
     }
 }

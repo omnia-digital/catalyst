@@ -4,6 +4,7 @@ namespace Modules\Resources\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Social\Database\Seeders\BookmarksTableSeeder;
 use Modules\Social\Models\Post;
 
 class ResourcesDatabaseSeeder extends Seeder
@@ -16,5 +17,7 @@ class ResourcesDatabaseSeeder extends Seeder
     public function run()
     {
         Post::factory(15)->asResource()->create();
+        $this->call(BookmarksTableSeeder::class);
+
     }
 }
