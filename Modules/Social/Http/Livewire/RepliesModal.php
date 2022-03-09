@@ -18,14 +18,14 @@ class RepliesModal extends Component
 
     public function replyAdded(Post $reply) {
         $this->recentlyAddedReply = $reply;
-        $this->replyCount = $this->post->replies()->count();
+        $this->replyCount = $this->post->comments()->count();
     }
 
 
 
     public function mount($post) {
         $this->post = $post;
-        $this->replyCount = $post->replies()->count();
+        $this->replyCount = $post->comments()->count();
     }
 
     public function updated($propertyName)
