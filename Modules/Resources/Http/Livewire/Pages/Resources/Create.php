@@ -32,12 +32,15 @@ class Create extends Component
     {
         $validated = $this->validate();
 
-        $resource = Auth::user()->currentTeam->resources()->create(
-            array_merge($validated, ['user_id' => Auth::id()])
+        $resource = Auth::user()->posts()->create(
+            array_merge($validated, [
+                'team_id' => Auth::user()->currentTeam->id,
+                'type'  => 'resource'
+            ])
         );
 
         $this->reset('title', 'url', 'body', 'image');
-        $this->redirectRoute('resources.show', $resource);
+        $this->redirectRoute('resources.home', $resource);
     }
 
     public function setFeaturedImage(array $image)

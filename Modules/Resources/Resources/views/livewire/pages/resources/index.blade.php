@@ -1,21 +1,35 @@
 @extends('resources::livewire.layouts.main-layout')
 
 @section('content')
+    <div class="xl:grid xl:grid-cols-9 xl:gap-9">
+        <div class="xl:col-span-6">
+            <!-- Filters -->
+            @include('livewire.partials.filters')
 
+            <div class="">
+                <ul role="list" class="space-y-4">
+                    @foreach($resources as $resource)
+                        <li>
+                            <livewire:resources::components.resource-card
+                                    as="li"
+                                    :post="$resource"/>
+                        </li>
+                    @endforeach
+                </ul>
 
-    <!-- Filters -->
-    @include('livewire.partials.filters')
+                <div class="pb-6">
+                    {{ $resources->onEachSide(1)->links() }}
+                </div>
+            </div>
+        </div>
 
-    <div class="">
-        <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            @foreach($resources as $resource)
-                <li>
-                    <livewire:resources::components.resource-card
-                            as="li"
-                            :post="$resource"/>
-                </li>
-            @endforeach
-        </ul>
+        <aside class="hidden xl:block xl:col-span-3">
+            <div class="sticky h-screen overflow-y-scroll scrollbar-hide top-4 space-y-4 pb-36 bg-white shadow rounded-lg">
+                <livewire:social::partials.trending-section title="Top Resources" type="resource"/>
+                <livewire:social::partials.who-to-follow-section/>
+                <livewire:social::partials.applications/>
+            </div>
+        </aside>
     </div>
 @endsection
 @push('scripts')

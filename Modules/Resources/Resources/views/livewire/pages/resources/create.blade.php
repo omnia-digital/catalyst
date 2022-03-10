@@ -23,6 +23,7 @@
                         setImageAction="setFeaturedImage"
                         removeImageAction="removeFeaturedImage"
                         :file="$image ?? null"
+                        label="Add Image (Upload, Unsplash, URL)"
                 />
                 <x-library::input.error for="image"/>
             </div>
