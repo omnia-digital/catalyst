@@ -1,11 +1,11 @@
 <div class="inline-flex items-center text-sm" x-data="{ repliesModalOpen: false }">
-    <button 
-        type="button" 
+    <button
+        type="button"
         class="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
         x-on:click="repliesModalOpen = true"
     >
-        <x-heroicon-o-chat-alt class="h-5 w-5" aria-hidden="true" />
-        <span class="font-medium text-gray-900">{{ $replyCount }}</span>
+        <x-heroicon-o-chat-alt :class="$show ? 'h-6 w-6' : 'h-5 w-5'" aria-hidden="true" />
+        <span class="font-medium text-gray-900">{{ $replyCount > 0 ? $replyCount : '' }}</span>
         <span class="sr-only">replies</span>
     </button>
     <div
@@ -58,17 +58,17 @@
                         </div>
                         <div class="flex-1 px-2 rounded-lg overflow-hidden">
                             <label for="body" class="sr-only">What's going on?</label>
-                            <input 
-                                type="text"  name="body" id="body" 
-                                class="block w-full py-3 border-y border-gray-500 resize-none focus:ring-0 sm:text-sm" 
+                            <input
+                                type="text"  name="body" id="body"
+                                class="block w-full py-3 border-y border-gray-500 resize-none focus:ring-0 sm:text-sm"
                                 wire:model.defer="body"
                             >
                             @error('body') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
                         </div>
                         <div class="flex">
                             <div class="ml-auto">
-                                <button 
-                                    type="submit" 
+                                <button
+                                    type="submit"
                                     class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                                 >Reply</button>
                             </div>

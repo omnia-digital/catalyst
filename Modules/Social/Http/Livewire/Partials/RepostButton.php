@@ -4,10 +4,9 @@ namespace Modules\Social\Http\Livewire\Partials;
 
 use Livewire\Component;
 
-class LikeButton extends Component
+class RepostButton extends Component
 {
     public $model;
-
     public $show;
 
     public function mount($model, $show = false) {
@@ -15,12 +14,8 @@ class LikeButton extends Component
         $this->show = $show;
     }
 
-    public function like() {
-        $this->model->like();
-    }
-
     public function render()
     {
-        return view('social::livewire.partials.like-button');
+        return view('social::livewire.partials.repost-button');
     }
 }

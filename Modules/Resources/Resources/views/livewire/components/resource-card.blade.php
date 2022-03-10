@@ -6,7 +6,7 @@
         </div>
         <div class="flex-1 space-y-2 py-4 px-6">
             <div class="flex items-center space-x-3">
-                <h3 class="text-gray-900 text-2xl font-bold truncate">{{ $post->title }}</h3>
+                <h3 class="text-gray-900 text-2xl hover:underline font-bold"><a href="{{ route('resources.show', ['resource' => $post]) }}">{{ $post->title }}</a></h3>
                 @empty(!$post->is_verified)
                     <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
                 @endempty
@@ -22,7 +22,7 @@
                 @endforeach
             </div>
             @endempty
-            <div class="w-full line-clamp-3">
+            <div class="w-full">
                 {{ $post->body }}
             </div>
         </div>

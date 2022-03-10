@@ -11,6 +11,7 @@ class RepliesModal extends Component
     public $replyCount;
     public $body;
     public $post;
+    public $show;
     protected $rules = [
         'body' => 'required|min:6',
     ];
@@ -23,9 +24,10 @@ class RepliesModal extends Component
 
 
 
-    public function mount($post) {
+    public function mount($post, $show = false) {
         $this->post = $post;
         $this->replyCount = $post->comments()->count();
+        $this->show = $show;
     }
 
     public function updated($propertyName)
