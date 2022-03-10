@@ -27,6 +27,9 @@ class Index extends Component
 
     public function mount()
     {
+        if (!\App::environment('production')) {
+            $this->useCache = false;
+        }
     }
 
     public function updatedFilters()
@@ -49,7 +52,7 @@ class Index extends Component
     public function getRowsProperty()
     {
         return $this->cache(function () {
-            return $this->rowsQuery->paginate(24);
+            return $this->rowsQuery->paginate(100);
         });
     }
 

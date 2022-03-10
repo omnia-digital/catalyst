@@ -1,8 +1,9 @@
-<div class="col-span-1 bg-white rounded-lg shadow">
+<div class="col-span-1 bg-white rounded-lg shadow max-h-68">
     <!-- Content -->
     <div class="w-full flex justify-between">
-        <img class="rounded-tl-lg rounded-br-lg h-full object-contain w-1/3 bg-gray-300 flex-shrink-0"
-             src="{{$post->main_image}}" alt="">
+        <div class="w-1/3">
+            <img class="rounded-tl-lg rounded-br-lg h-full object-cover bg-gray-300 flex-shrink-0" src="{{$post->main_image}}" alt="{{$post->title}}">
+        </div>
         <div class="flex-1 space-y-2 py-4 px-6">
             <div class="flex items-center space-x-3">
                 <h3 class="text-gray-900 text-2xl font-bold truncate">{{ $post->title }}</h3>
@@ -21,7 +22,7 @@
                 @endforeach
             </div>
             @endempty
-            <div class="w-full">
+            <div class="w-full line-clamp-3">
                 {{ $post->body }}
             </div>
         </div>
