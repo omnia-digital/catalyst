@@ -1,26 +1,25 @@
 <section aria-labelledby="trending-heading">
-        <div class="p-6">
-            <h2 id="trending-heading" class="text-xl font-medium text-gray-900">
-                Trending
+        <div class="">
+            <h2 id="trending-heading" class="p-3 text-xl font-medium text-gray-900">
+                {{ $title }}
             </h2>
             <div class="mt-6 flow-root">
-                <ul role="list" class="-my-4 divide-y divide-gray-200">
-                    @foreach ($trendingPosts as $post)
-                        <li class="flex py-4 space-x-3">
-                            <div class="flex-shrink-0">
-                                <img class="h-8 w-8 rounded-full" src="{{ $post['user']['imageUrl'] }}" alt="{{ $post['user']['name'] }}"/>
-                            </div>
-                            <div class="min-w-0 flex-1">
-                                <p class="text-sm text-gray-800">{{ $post['body'] }}</p>
-                                <div class="mt-2 flex">
-                                                    <span class="inline-flex items-center text-sm">
-                                                        <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                                                            <x-heroicon-o-chat-alt class="h-5 w-5" aria-hidden="true" />
-                                                            <span class="font-medium text-gray-900">{{ $post['comments'] }}</span>
-                                                        </button>
-                                                    </span>
+                <ul role="list" class="-my-4">
+                    @foreach ($posts as $post)
+                        <li class="p-4 hover:bg-gray-300">
+                        <a href="{{ route('social.posts.show', ['post' => $post]) }}" class="flex justify-between">
+                            <div class="flex-1">
+                                <div class="font-bold">
+                                    {{ $post->title ?? $post->user->name }}
+                                </div>
+                                <div class="line-clamp-2">
+                                    {{ $post->body }}
                                 </div>
                             </div>
+                            <div class="w-1/6">
+                                <img class="rounded-lg flex-shrink-0 h-full object-cover" src="{{ $post->main_image }}" alt="{{ $post->user->name }}"/>
+                            </div>
+                        </a>
                         </li>
                     @endforeach
                 </ul>
