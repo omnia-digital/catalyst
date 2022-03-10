@@ -3,49 +3,49 @@
 namespace Modules\Social\Http\Livewire\Partials;
 
 use Livewire\Component;
+use Livewire\WithPagination;
+use Modules\Social\Models\Post;
+use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class TrendingSection extends Component
 {
-    public $trendingPosts = [];
+    use WithPagination, WithCachedRows;
 
-    public function mount($trendingPosts = null)
+    public $title = 'Trending';
+
+    public $type;
+
+    public function mount($type = null)
     {
-        $this->trendingPosts = [
-            [
-                'id' => 1,
-                'user' => [
-                    'name' => 'Floyd Miles',
-                    'imageUrl' =>
-                        'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-                ],
-                'body' => 'What books do you have on your bookshelf just to look smarter than you actually are?',
-                'comments' => 291,
-            ],
-            [
-                'id' => 1,
-                'user' => [
-                    'name' => 'Floyd Miles',
-                    'imageUrl' =>
-                        'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-                ],
-                'body' => 'What books do you have on your bookshelf just to look smarter than you actually are?',
-                'comments' => 291,
-            ],
-            [
-                'id' => 1,
-                'user' => [
-                    'name' => 'Floyd Miles',
-                    'imageUrl' =>
-                        'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-                ],
-                'body' => 'What books do you have on your bookshelf just to look smarter than you actually are?',
-                'comments' => 291,
-            ],
-        ];
+        if (!\App::environment('production')) {
+            $this->useCache = false;
+        }
+
+        if (!empty($type)) {
+            $this->type = $type;
+        }
+    }
+
+    public function getRowsQueryProperty()
+    {
+        if (empty($type)) {
+            return Post::query();
+        } else {
+            return Post::where('type','=','resource');
+        }
+    }
+
+    public function getRowsProperty()
+    {
+        return $this->cache(function () {
+            return $this->rowsQuery->paginate(5);
+        });
     }
 
     public function render()
     {
-        return view('social::livewire.partials.trending-section');
+        return view('social::livewire.partials.trending-section', [
+            'posts' => $this->rows
+        ]);
     }
 }
