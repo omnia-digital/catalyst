@@ -3,6 +3,17 @@
 @section('content')
     <div class="xl:grid xl:grid-cols-9 xl:gap-9">
         <div class="xl:col-span-6">
+            <div class="flex justify-between items-center">
+                <div class="flex-1 flex items-center">
+                    <h1 class="py-2 text-3xl">Resources</h1>
+                </div>
+
+                <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent="$openModal('add-resource-modal')">
+                    Add Resource
+                </x-library::button>
+                <livewire:resources::pages.resources.create/>
+            </div>
+
             <!-- Filters -->
             @include('livewire.partials.filters')
 
