@@ -32,6 +32,13 @@ class MainNavigationMenu extends Component
                 'module'  => 'resources',
                 'current' => false
             ],
+            [
+                'label'   => 'Jobs',
+                'name'    => 'jobs.home',
+                'icon'    => 'heroicon-o-briefcase',
+                'module'  => 'jobs',
+                'current' => false
+            ],
             //                [
             //                    'label'   => 'Projects',
             //                    'name'    => 'projects.home',
