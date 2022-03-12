@@ -3509,12 +3509,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:omnia-digital/library.git",
-                "reference": "6611ae2ed9802f121067f0c95451a996092d2cf2"
+                "reference": "7b9b94bb68db1cf45955e83268296693441adc26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/6611ae2ed9802f121067f0c95451a996092d2cf2",
-                "reference": "6611ae2ed9802f121067f0c95451a996092d2cf2",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/7b9b94bb68db1cf45955e83268296693441adc26",
+                "reference": "7b9b94bb68db1cf45955e83268296693441adc26",
                 "shasum": ""
             },
             "require": {
@@ -3596,7 +3596,7 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2022-03-09T19:42:57+00:00"
+            "time": "2022-03-11T07:57:28+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -10286,16 +10286,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "1.0.6",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "d349854331789aba9205fd755e0c1d1934ef1463"
+                "reference": "ea3a5401b631e8a2ce10581c1fec10c240b8e36e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/d349854331789aba9205fd755e0c1d1934ef1463",
-                "reference": "d349854331789aba9205fd755e0c1d1934ef1463",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/ea3a5401b631e8a2ce10581c1fec10c240b8e36e",
+                "reference": "ea3a5401b631e8a2ce10581c1fec10c240b8e36e",
                 "shasum": ""
             },
             "require": {
@@ -10369,7 +10369,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-15T11:02:15+00:00"
+            "time": "2022-03-10T12:29:54+00:00"
         }
     ],
     "aliases": [],
