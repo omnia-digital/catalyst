@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5c8d1f769114321a1dabf34c04e033a",
+    "content-hash": "45388c66c63f12fc13b6874c6dd76467",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3506,16 +3506,10 @@
         {
             "name": "omnia-digital/library",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:omnia-digital/library.git",
-                "reference": "6611ae2ed9802f121067f0c95451a996092d2cf2"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/6611ae2ed9802f121067f0c95451a996092d2cf2",
-                "reference": "6611ae2ed9802f121067f0c95451a996092d2cf2",
-                "shasum": ""
+                "type": "path",
+                "url": "../omnia-library",
+                "reference": "576f131f6ccd4d66494c3aeee96d756d34d2fc3b"
             },
             "require": {
                 "illuminate/contracts": "^8.0 || ^9.0",
@@ -3530,7 +3524,6 @@
                 "phpunit/phpunit": "^9.5",
                 "spatie/laravel-ray": "^1.26"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -3586,17 +3579,9 @@
                 "library",
                 "omnia-digital"
             ],
-            "support": {
-                "source": "https://github.com/omnia-digital/library/tree/main",
-                "issues": "https://github.com/omnia-digital/library/issues"
-            },
-            "funding": [
-                {
-                    "type": "github",
-                    "url": "https://github.com/omnia-digital"
-                }
-            ],
-            "time": "2022-03-09T19:42:57+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -10286,16 +10271,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "1.0.6",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "d349854331789aba9205fd755e0c1d1934ef1463"
+                "reference": "ea3a5401b631e8a2ce10581c1fec10c240b8e36e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/d349854331789aba9205fd755e0c1d1934ef1463",
-                "reference": "d349854331789aba9205fd755e0c1d1934ef1463",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/ea3a5401b631e8a2ce10581c1fec10c240b8e36e",
+                "reference": "ea3a5401b631e8a2ce10581c1fec10c240b8e36e",
                 "shasum": ""
             },
             "require": {
@@ -10369,7 +10354,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-15T11:02:15+00:00"
+            "time": "2022-03-10T12:29:54+00:00"
         }
     ],
     "aliases": [],
