@@ -19,7 +19,16 @@ class Post extends Model
 {
     use HasFactory, Likable, Postable, Attachable, Bookmarkable;
 
-    protected $fillable = ['user_id', 'team_id', 'title', 'type', 'body', 'postable_id', 'postable_type'];
+    protected $fillable = [
+        'user_id',
+        'team_id',
+        'title',
+        'type',
+        'body',
+        'image',
+        'postable_id',
+        'postable_type'
+    ];
 
     protected static function booted()
     {
