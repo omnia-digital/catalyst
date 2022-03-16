@@ -1,4 +1,7 @@
-<div x-data="{ reactionMenuOpen: false, attachmentDrawer: false }" class="flex items-start w-full bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
+<div x-data="{ reactionMenuOpen: false, attachmentDrawer: false }" class="flex relative items-start w-full bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
+    <div wire:loading.flex wire:target="savePost" class="absolute z-10 inset-0 justify-center items-center bg-white opacity-50">
+        <x-loading-icon class="h-12 w-12 text-black" />
+    </div>
     <div class="flex-shrink-0">
         <img class="inline-block h-10 w-10 rounded-full" src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" />
     </div>
@@ -93,7 +96,12 @@
                     </div> --}}
                 </div>
                 <div class="flex-shrink-0">
-                    <button type="submit" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Post</button>
+                    <button 
+                        wire:loading.attr="disabled"
+                        type="submit" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                    >
+                        Post
+                    </button>
                 </div>
                 <div x-show="attachmentDrawer" class="basis-full h-2"></div>
                 <div x-show="attachmentDrawer" class="w-full">
