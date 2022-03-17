@@ -4,6 +4,7 @@
 
     use App\Models\User;
     use Livewire\Component;
+use Modules\Social\Models\Post;
 
     class NewPostBox extends Component
     {
@@ -12,6 +13,7 @@
         public $selected;
         public $body;
         public $attachments = [];
+        public $parentPostID;
 
         protected $listeners = ['filesAdded'];
 
@@ -24,7 +26,8 @@
             $this->attachments = $files;
         }
 
-        public function mount() {
+        public function mount($parentPostID = null) {
+            $this->parentPostID = $parentPostID;
             $this->postTypes = [
                 [
                     'label' => 'General',
@@ -97,7 +100,12 @@
         {
             $validatedData = $this->validate();
 
-            $post = $this->user->posts()->create($validatedData);
+            if (is_null($this->parentPostID)) {
+                $post = $this->user->posts()->create($validatedData);
+            } else {
+                $parentPost = Post::find($this->parentPostID);
+                $post = $parentPost->createComment($validatedData, auth()->id());
+            }
 
             $this->emitUp('postAdded', $post->id);
             $this->reset(['body']);

@@ -2,7 +2,6 @@
         class="bg-white pt-4 shadow sm:px-3 sm:rounded-lg"
         x-data="{ openOptions: false }"
 >
-{{--    <a href="{{ route('social.posts.show', ['post' => $post]) }}">--}}
         <article aria-labelledby="{{ 'post-' . $post->id }}" class="flex justify-start">
             <div class="mr-2">
                 <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}"/>
@@ -11,7 +10,7 @@
                 <div class="flex justify-between">
                     <div class="min-w-0 flex justify-start">
                         <div class="text-sm font-bold text-gray-900 mr-2">
-                            <a href="{{ route('profile.show') }}" class="hover:underline">{{ $post->user->name }}</a>
+                            <a href="{{ route('profile.show', ['user' => $post->user]) }}" class="hover:underline">{{ $post->user->name }}</a>
                         </div>
                         <div class="text-sm text-gray-500">
                             <a href="{{ route('social.posts.show', $post) }}" class="hover:underline">
@@ -28,7 +27,7 @@
                                         type="button"
                                         aria-haspopup="true"
                                         aria-expanded="true"
-                                        aria-controls="post-list-item-options-menu-items"
+                                        id="post-list-item-{{ $post->id }}-options-menu-items"
                                         @click="openOptions = true"
                                 > <!-- x-menu-button -->
                                     <span class="sr-only">Open options</span>
@@ -36,7 +35,7 @@
                                 </button>
                             </div>
                             <div
-                                    id="post-list-item-options-menu-items"
+                                    aria-labelledby="post-list-item-{{ $post->id }}-options-menu-items"
                                     class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     x-show="openOptions" @click.away="openOptions = false"
                                     x-transition:enter.duration.100ms
@@ -74,5 +73,4 @@
                 <livewire:social::partials.post-actions :post="$post"/>
             </div>
         </article>
-{{--    </a>--}}
 </div>

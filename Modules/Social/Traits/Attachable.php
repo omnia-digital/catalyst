@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Models;
+namespace Modules\Social\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 

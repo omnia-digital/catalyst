@@ -1,10 +1,10 @@
-@extends('resources::livewire.layouts.main-layout')
+@extends('jobs::livewire.layouts.main-layout')
 
 @section('content')
 <div>
-    <div class="xl:grid xl:grid-cols-9 xl:gap-9">
+    <div class=":grid grid-cols-9 gap-9">
         {{--  Latest Jobs  --}}
-        <div class="mt-10">
+        <div class="col-span-9 mt-10">
             <h2 class="text-xl font-medium text-gray-700 py-2">Latest Jobs</h2>
 
             <div class="bg-white shadow overflow-hidden sm:rounded-md">

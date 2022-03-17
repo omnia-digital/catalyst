@@ -4,11 +4,13 @@ namespace Modules\Social\Models;
 
 use App\Models\Team;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\Social\Database\Factories\PostFactory;
+use Modules\Social\Traits\Attachable;
 use Modules\Social\Traits\Bookmarkable;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
@@ -19,6 +21,13 @@ class Post extends Model
 
     protected $fillable = ['user_id', 'team_id', 'title', 'type', 'body', 'postable_id', 'postable_type'];
 
+    protected static function booted()
+    {
+        static::addGlobalScope('parent', function (Builder $builder) {
+            $builder->whereNull('postable_id');
+        });
+    }
+
     public function getMainImageAttribute($value)
     {
         if (empty($value)) {
@@ -27,7 +36,6 @@ class Post extends Model
             return $value;
         }
     }
-
 
     protected static function newFactory()
     {

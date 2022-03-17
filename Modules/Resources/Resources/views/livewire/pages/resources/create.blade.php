@@ -1,5 +1,5 @@
 <div>
-    <x-library::modal id="add-resource-modal" maxWidth="7xl" open="true">
+    <x-library::modal id="add-resource-modal" maxWidth="7xl">
         <x-slot name="title">Add Resource</x-slot>
         <x-slot name="content">
             <div class="mt-4">
