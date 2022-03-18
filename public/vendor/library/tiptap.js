@@ -8050,6 +8050,114 @@ const BulletList = _tiptap_core__WEBPACK_IMPORTED_MODULE_0__.Node.create({
 
 /***/ }),
 
+/***/ "./node_modules/@tiptap/extension-character-count/dist/tiptap-extension-character-count.esm.js":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/@tiptap/extension-character-count/dist/tiptap-extension-character-count.esm.js ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CharacterCount": () => (/* binding */ CharacterCount),
+/* harmony export */   "default": () => (/* binding */ CharacterCount)
+/* harmony export */ });
+/* harmony import */ var _tiptap_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tiptap/core */ "./node_modules/@tiptap/core/dist/tiptap-core.esm.js");
+/* harmony import */ var prosemirror_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prosemirror-state */ "./node_modules/prosemirror-state/dist/index.es.js");
+
+
+
+const CharacterCount = _tiptap_core__WEBPACK_IMPORTED_MODULE_1__.Extension.create({
+    name: 'characterCount',
+    addOptions() {
+        return {
+            limit: null,
+            mode: 'textSize',
+        };
+    },
+    addStorage() {
+        return {
+            characters: () => 0,
+            words: () => 0,
+        };
+    },
+    onBeforeCreate() {
+        this.storage.characters = options => {
+            const node = (options === null || options === void 0 ? void 0 : options.node) || this.editor.state.doc;
+            const mode = (options === null || options === void 0 ? void 0 : options.mode) || this.options.mode;
+            if (mode === 'textSize') {
+                const text = node.textBetween(0, node.content.size, undefined, ' ');
+                return text.length;
+            }
+            return node.nodeSize;
+        };
+        this.storage.words = options => {
+            const node = (options === null || options === void 0 ? void 0 : options.node) || this.editor.state.doc;
+            const text = node.textBetween(0, node.content.size, ' ', ' ');
+            const words = text
+                .split(' ')
+                .filter(word => word !== '');
+            return words.length;
+        };
+    },
+    addProseMirrorPlugins() {
+        return [
+            new prosemirror_state__WEBPACK_IMPORTED_MODULE_0__.Plugin({
+                key: new prosemirror_state__WEBPACK_IMPORTED_MODULE_0__.PluginKey('characterCount'),
+                filterTransaction: (transaction, state) => {
+                    const limit = this.options.limit;
+                    // Nothing has changed or no limit is defined. Ignore it.
+                    if (!transaction.docChanged || limit === 0 || limit === null || limit === undefined) {
+                        return true;
+                    }
+                    const oldSize = this.storage.characters({ node: state.doc });
+                    const newSize = this.storage.characters({ node: transaction.doc });
+                    // Everything is in the limit. Good.
+                    if (newSize <= limit) {
+                        return true;
+                    }
+                    // The limit has already been exceeded but will be reduced.
+                    if (oldSize > limit && newSize > limit && newSize <= oldSize) {
+                        return true;
+                    }
+                    // The limit has already been exceeded and will be increased further.
+                    if (oldSize > limit && newSize > limit && newSize > oldSize) {
+                        return false;
+                    }
+                    const isPaste = transaction.getMeta('paste');
+                    // Block all exceeding transactions that were not pasted.
+                    if (!isPaste) {
+                        return false;
+                    }
+                    // For pasted content, we try to remove the exceeding content.
+                    const pos = transaction.selection.$head.pos;
+                    const over = newSize - limit;
+                    const from = pos - over;
+                    const to = pos;
+                    // It’s probably a bad idea to mutate transactions within `filterTransaction`
+                    // but for now this is working fine.
+                    transaction.deleteRange(from, to);
+                    // In some situations, the limit will continue to be exceeded after trimming.
+                    // This happens e.g. when truncating within a complex node (e.g. table)
+                    // and ProseMirror has to close this node again.
+                    // If this is the case, we prevent the transaction completely.
+                    const updatedSize = this.storage.characters({ node: transaction.doc });
+                    if (updatedSize > limit) {
+                        return false;
+                    }
+                    return true;
+                },
+            }),
+        ];
+    },
+});
+
+
+//# sourceMappingURL=tiptap-extension-character-count.esm.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/@tiptap/extension-code-block-lowlight/dist/tiptap-extension-code-block-lowlight.esm.js":
 /*!*************************************************************************************************************!*\
   !*** ./node_modules/@tiptap/extension-code-block-lowlight/dist/tiptap-extension-code-block-lowlight.esm.js ***!
@@ -12584,6 +12692,85 @@ const Paragraph = _tiptap_core__WEBPACK_IMPORTED_MODULE_0__.Node.create({
 
 
 //# sourceMappingURL=tiptap-extension-paragraph.esm.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@tiptap/extension-placeholder/dist/tiptap-extension-placeholder.esm.js":
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/@tiptap/extension-placeholder/dist/tiptap-extension-placeholder.esm.js ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Placeholder": () => (/* binding */ Placeholder),
+/* harmony export */   "default": () => (/* binding */ Placeholder)
+/* harmony export */ });
+/* harmony import */ var _tiptap_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @tiptap/core */ "./node_modules/@tiptap/core/dist/tiptap-core.esm.js");
+/* harmony import */ var prosemirror_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prosemirror-view */ "./node_modules/prosemirror-view/dist/index.es.js");
+/* harmony import */ var prosemirror_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prosemirror-state */ "./node_modules/prosemirror-state/dist/index.es.js");
+
+
+
+
+const Placeholder = _tiptap_core__WEBPACK_IMPORTED_MODULE_2__.Extension.create({
+    name: 'placeholder',
+    addOptions() {
+        return {
+            emptyEditorClass: 'is-editor-empty',
+            emptyNodeClass: 'is-empty',
+            placeholder: 'Write something …',
+            showOnlyWhenEditable: true,
+            showOnlyCurrent: true,
+            includeChildren: false,
+        };
+    },
+    addProseMirrorPlugins() {
+        return [
+            new prosemirror_state__WEBPACK_IMPORTED_MODULE_1__.Plugin({
+                props: {
+                    decorations: ({ doc, selection }) => {
+                        const active = this.editor.isEditable || !this.options.showOnlyWhenEditable;
+                        const { anchor } = selection;
+                        const decorations = [];
+                        if (!active) {
+                            return;
+                        }
+                        doc.descendants((node, pos) => {
+                            const hasAnchor = anchor >= pos && anchor <= (pos + node.nodeSize);
+                            const isEmpty = !node.isLeaf && !node.childCount;
+                            if ((hasAnchor || !this.options.showOnlyCurrent) && isEmpty) {
+                                const classes = [this.options.emptyNodeClass];
+                                if (this.editor.isEmpty) {
+                                    classes.push(this.options.emptyEditorClass);
+                                }
+                                const decoration = prosemirror_view__WEBPACK_IMPORTED_MODULE_0__.Decoration.node(pos, pos + node.nodeSize, {
+                                    class: classes.join(' '),
+                                    'data-placeholder': typeof this.options.placeholder === 'function'
+                                        ? this.options.placeholder({
+                                            editor: this.editor,
+                                            node,
+                                            pos,
+                                            hasAnchor,
+                                        })
+                                        : this.options.placeholder,
+                                });
+                                decorations.push(decoration);
+                            }
+                            return this.options.includeChildren;
+                        });
+                        return prosemirror_view__WEBPACK_IMPORTED_MODULE_0__.DecorationSet.create(doc, decorations);
+                    },
+                },
+            }),
+        ];
+    },
+});
+
+
+//# sourceMappingURL=tiptap-extension-placeholder.esm.js.map
 
 
 /***/ }),
@@ -70628,9 +70815,6 @@ var macBaseKeymap = {
 };
 for (var key in pcBaseKeymap) { macBaseKeymap[key] = pcBaseKeymap[key]; }
 
-pcBaseKeymap.Home = selectTextblockStart;
-pcBaseKeymap.End = selectTextblockEnd;
-
 // declare global: os, navigator
 var mac = typeof navigator != "undefined" ? /Mac|iP(hone|[oa]d)/.test(navigator.platform)
           : typeof os != "undefined" ? os.platform() == "darwin" : false;
@@ -82525,7 +82709,10 @@ ViewTreeUpdater.prototype.addHackNode = function addHackNode (nodeName) {
     this.index++;
   } else {
     var dom = document.createElement(nodeName);
-    if (nodeName == "IMG") { dom.className = "ProseMirror-separator"; }
+    if (nodeName == "IMG") {
+      dom.className = "ProseMirror-separator";
+      dom.alt = "";
+    }
     if (nodeName == "BR") { dom.className = "ProseMirror-trailingBreak"; }
     this.top.children.splice(this.index++, 0, new TrailingHackViewDesc(this.top, nothing, dom, null));
     this.changed = true;
@@ -85885,6 +86072,7 @@ function updateCursorWrapper(view) {
     var dom = document.createElement("img");
     dom.className = "ProseMirror-separator";
     dom.setAttribute("mark-placeholder", "true");
+    dom.setAttribute("alt", "");
     view.cursorWrapper = {dom: dom, deco: Decoration.widget(view.state.selection.head, dom, {raw: true, marks: view.markCursor})};
   } else {
     view.cursorWrapper = null;
@@ -89081,7 +89269,7 @@ var __webpack_exports__ = {};
   !*** ./resources/js/tiptap/tiptap.js ***!
   \***************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tiptap_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @tiptap/core */ "./node_modules/@tiptap/core/dist/tiptap-core.esm.js");
+/* harmony import */ var _tiptap_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @tiptap/core */ "./node_modules/@tiptap/core/dist/tiptap-core.esm.js");
 /* harmony import */ var _tiptap_starter_kit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tiptap/starter-kit */ "./node_modules/@tiptap/starter-kit/dist/tiptap-starter-kit.esm.js");
 /* harmony import */ var _extensions_custom_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./extensions/custom-image */ "./resources/js/tiptap/extensions/custom-image.js");
 /* harmony import */ var _extensions_custom_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./extensions/custom-link */ "./resources/js/tiptap/extensions/custom-link.js");
@@ -89096,6 +89284,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tiptap_extension_code_block_lowlight__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @tiptap/extension-code-block-lowlight */ "./node_modules/@tiptap/extension-code-block-lowlight/dist/tiptap-extension-code-block-lowlight.esm.js");
 /* harmony import */ var lowlight__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lowlight */ "./node_modules/lowlight/index.js");
 /* harmony import */ var lowlight__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(lowlight__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _tiptap_extension_character_count__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @tiptap/extension-character-count */ "./node_modules/@tiptap/extension-character-count/dist/tiptap-extension-character-count.esm.js");
+/* harmony import */ var _tiptap_extension_placeholder__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @tiptap/extension-placeholder */ "./node_modules/@tiptap/extension-placeholder/dist/tiptap-extension-placeholder.esm.js");
+
+
 
 
 
@@ -89157,7 +89349,7 @@ document.addEventListener('alpine:init', function () {
 
         var _this = this;
 
-        _editor = new _tiptap_core__WEBPACK_IMPORTED_MODULE_13__.Editor({
+        _editor = new _tiptap_core__WEBPACK_IMPORTED_MODULE_15__.Editor({
           element: this.$refs.editorReference,
           extensions: [_tiptap_starter_kit__WEBPACK_IMPORTED_MODULE_0__["default"].configure({
             codeBlock: false
@@ -89241,10 +89433,16 @@ document.addEventListener('alpine:init', function () {
             tippyOptions: {
               theme: 'light'
             }
+          }), _tiptap_extension_character_count__WEBPACK_IMPORTED_MODULE_13__["default"].configure({
+            limit: this.characterLimit ? this.characterLimit : null,
+            mode: 'textSize'
+          }), _tiptap_extension_placeholder__WEBPACK_IMPORTED_MODULE_14__["default"].configure({
+            emptyEditorClass: this.placeholderClass,
+            placeholder: this.placeholderText
           })],
           editorProps: {
             attributes: {
-              "class": 'prose prose-sm sm:prose lg:prose-lg xl:prose-xl sm:max-w-none m-5 min-h-[500px] focus:outline-none'
+              "class": 'prose prose-sm sm:prose lg:prose-lg xl:prose-xl sm:max-w-none m-5 focus:outline-none' + ' ' + this.heightClass
             }
           },
           content: this.content,
@@ -89263,6 +89461,19 @@ document.addEventListener('alpine:init', function () {
             _this.updatedAt = Date.now();
             _this.content = editor.getHTML();
           }
+        });
+        this.$watch('content', function () {
+          _this2.wordCount = _this2.wordCountType === 'word' ? _editor.storage.characterCount.words() : _editor.storage.characterCount.characters(); // If the new content matches TipTap's then we just skip.
+
+          if (_this2.content === _editor.getHTML()) {
+            return;
+          } // Otherwise, it means that a force external to TipTap
+          // is modifying the data on this Alpine component,
+          // which could be Livewire itself.
+          // In this case, we just need to update TipTap's content.
+
+
+          _editor.commands.setContent(_this2.content, false);
         });
         window.addEventListener('media-manager:file-selected', function (event) {
           if (event.detail.id === editorMediaManagerId) {
