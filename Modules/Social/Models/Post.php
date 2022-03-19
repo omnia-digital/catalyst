@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\Social\Database\Factories\PostFactory;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Traits\Attachable;
 use Modules\Social\Traits\Bookmarkable;
 use Modules\Social\Traits\Likable;

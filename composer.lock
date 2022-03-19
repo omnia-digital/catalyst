@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5c8d1f769114321a1dabf34c04e033a",
+    "content-hash": "5e0e5cf0fb2fa9cf83f1a4969e982e16",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3509,12 +3509,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:omnia-digital/library.git",
-                "reference": "20fbab54d1e5e45a45bf0a1c2d948243caa85df5"
+                "reference": "6a160761f9a4f2646f3a3097112888d9fca4def3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/20fbab54d1e5e45a45bf0a1c2d948243caa85df5",
-                "reference": "20fbab54d1e5e45a45bf0a1c2d948243caa85df5",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/6a160761f9a4f2646f3a3097112888d9fca4def3",
+                "reference": "6a160761f9a4f2646f3a3097112888d9fca4def3",
                 "shasum": ""
             },
             "require": {
@@ -3597,7 +3597,7 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2022-03-17T18:56:07+00:00"
+            "time": "2022-03-18T05:38:01+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -10380,7 +10380,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0"
+        "php": "^8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"
