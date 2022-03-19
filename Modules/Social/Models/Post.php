@@ -5,11 +5,13 @@ namespace Modules\Social\Models;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\Social\Database\Factories\PostFactory;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Traits\Attachable;
 use Modules\Social\Traits\Bookmarkable;
 use Modules\Social\Traits\Likable;
@@ -35,6 +37,14 @@ class Post extends Model
         static::addGlobalScope('parent', function (Builder $builder) {
             $builder->whereNull('postable_id');
         });
+    }
+
+    public function type(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => PostType::tryFrom($value),
+            set: fn($value) => $value->value
+        );
     }
 
     protected static function newFactory()
