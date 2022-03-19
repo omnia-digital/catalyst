@@ -15,6 +15,7 @@
     use Modules\Social\Models\Post;
     use Modules\Social\Models\Profile;
     use Modules\Social\Traits\HasBookmarks;
+    use Overtrue\LaravelFollow\Followable;
 
     class User extends Authenticatable implements MustVerifyEmail
     {
@@ -25,7 +26,8 @@
             SoftDeletes,
             HasFactory,
             HasTeams,
-            HasBookmarks;
+            HasBookmarks,
+            Followable;
 
         /**
          * The attributes that should be mutated to dates.
@@ -66,6 +68,9 @@
         ];
 
         public function getNameAttribute() {
+            if ($this->profile()->exists()) {
+               return $this->profile->name;
+            }
             return $this->first_name . " " . $this->last_name;
         }
 
@@ -89,7 +94,7 @@
         }
 
         public function url() {
-            return url(config('app.url') . '/' . $this->handle);
+            return $this->profile()->exists() ? url(config('app.url') . '/' . $this->profile->handle) : '#';
         }
 
         public function receivesBroadcastNotificationsOn() {
