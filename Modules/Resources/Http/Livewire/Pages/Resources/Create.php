@@ -32,12 +32,7 @@ class Create extends Component
     {
         $validated = $this->validate();
 
-        $resource = Auth::user()->posts()->create(
-            array_merge($validated, [
-                'team_id' => Auth::user()->currentTeam->id,
-                'type'  => 'resource'
-            ])
-        );
+        //$resource = (new );
 
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);

@@ -19,22 +19,22 @@ class Post extends Model
 {
     use HasFactory, Likable, Postable, Attachable, Bookmarkable;
 
-    protected $fillable = ['user_id', 'team_id', 'title', 'type', 'body', 'postable_id', 'postable_type'];
+    protected $fillable = [
+        'user_id',
+        'team_id',
+        'title',
+        'type',
+        'body',
+        'postable_id',
+        'postable_type',
+        'image'
+    ];
 
     protected static function booted()
     {
         static::addGlobalScope('parent', function (Builder $builder) {
             $builder->whereNull('postable_id');
         });
-    }
-
-    public function getMainImageAttribute($value)
-    {
-        if (empty($value)) {
-            return "/storage/images/hero_440_ukraine_conflict_pol2022071201.jpeg";
-        } else {
-            return $value;
-        }
     }
 
     protected static function newFactory()
