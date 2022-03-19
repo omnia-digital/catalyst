@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\Social\Database\Factories\PostFactory;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Traits\Attachable;
 use Modules\Social\Traits\Bookmarkable;
 use Modules\Social\Traits\Likable;
@@ -20,6 +21,10 @@ class Post extends Model
     use HasFactory, Likable, Postable, Attachable, Bookmarkable;
 
     protected $fillable = ['user_id', 'team_id', 'title', 'type', 'body', 'postable_id', 'postable_type'];
+
+    protected $casts = [
+        'type' => PostType::class
+    ];
 
     protected static function booted()
     {

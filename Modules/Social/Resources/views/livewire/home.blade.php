@@ -19,6 +19,7 @@
             <div class="mt-0">
                 <div class="mx-auto">
                     <livewire:social::post-editor/>
+
                     <h1 class="sr-only">Recent Posts</h1>
                     <ul role="list" class="mt-6 space-y-4">
                         @if ($recentlyAddedPost)

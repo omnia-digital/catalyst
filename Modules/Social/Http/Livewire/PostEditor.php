@@ -12,6 +12,11 @@ class PostEditor extends Component
 
     public array $config = [];
 
+    protected $listeners = [
+        'validationFailed' => 'handleValidationFailed',
+        'postSaved'        => 'handlePostSaved'
+    ];
+
     public function mount(?string $editorId = null, array $config = [])
     {
         $this->editorId = $editorId;
@@ -24,7 +29,15 @@ class PostEditor extends Component
             'id'      => $this->editorId,
             'content' => $this->content,
         ]);
+    }
 
+    public function handleValidationFailed($errorBag)
+    {
+        $this->setErrorBag($errorBag);
+    }
+
+    public function handlePostSaved()
+    {
         $this->reset('content');
     }
 
