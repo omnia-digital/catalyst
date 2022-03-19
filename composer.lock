@@ -3509,15 +3509,16 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:omnia-digital/library.git",
-                "reference": "7b9b94bb68db1cf45955e83268296693441adc26"
+                "reference": "20fbab54d1e5e45a45bf0a1c2d948243caa85df5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/7b9b94bb68db1cf45955e83268296693441adc26",
-                "reference": "7b9b94bb68db1cf45955e83268296693441adc26",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/20fbab54d1e5e45a45bf0a1c2d948243caa85df5",
+                "reference": "20fbab54d1e5e45a45bf0a1c2d948243caa85df5",
                 "shasum": ""
             },
             "require": {
+                "codeat3/blade-coolicons": "^1.2",
                 "illuminate/contracts": "^8.0 || ^9.0",
                 "php": "^8.0",
                 "spatie/laravel-package-tools": "^1.9.2"
@@ -3596,7 +3597,7 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2022-03-11T07:57:28+00:00"
+            "time": "2022-03-17T18:56:07+00:00"
         },
         {
             "name": "overtrue/laravel-follow",
@@ -10354,16 +10355,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "1.0.9",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "d7b223300d511145eea87fdabae1663c7c0088aa"
+                "reference": "71df77cad94aae4db904aaef1cc2f06950daed76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/d7b223300d511145eea87fdabae1663c7c0088aa",
-                "reference": "d7b223300d511145eea87fdabae1663c7c0088aa",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/71df77cad94aae4db904aaef1cc2f06950daed76",
+                "reference": "71df77cad94aae4db904aaef1cc2f06950daed76",
                 "shasum": ""
             },
             "require": {
@@ -10437,7 +10438,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-11T14:19:27+00:00"
+            "time": "2022-03-17T11:01:36+00:00"
         }
     ],
     "aliases": [],
