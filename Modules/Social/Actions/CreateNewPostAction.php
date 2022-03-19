@@ -47,7 +47,7 @@ class CreateNewPostAction
 
         return $user->posts()->create([
             'body'          => $content,
-            'team_id'       => $user->current_team_id,
+            'team_id'       => $options['team_id'] ?? $user->current_team_id,
             'title'         => $options['title'] ?? null,
             'type'          => $this->type,
             'postable_id'   => $this->postable->id ?? $options['postable_id'] ?? null,

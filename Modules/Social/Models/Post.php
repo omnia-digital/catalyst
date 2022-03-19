@@ -22,10 +22,6 @@ class Post extends Model
 
     protected $fillable = ['user_id', 'team_id', 'title', 'type', 'body', 'postable_id', 'postable_type'];
 
-    protected $casts = [
-        'type' => PostType::class
-    ];
-
     protected static function booted()
     {
         static::addGlobalScope('parent', function (Builder $builder) {
