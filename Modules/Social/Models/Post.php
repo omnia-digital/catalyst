@@ -5,6 +5,7 @@ namespace Modules\Social\Models;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,7 +21,16 @@ class Post extends Model
 {
     use HasFactory, Likable, Postable, Attachable, Bookmarkable;
 
-    protected $fillable = ['user_id', 'team_id', 'title', 'type', 'body', 'postable_id', 'postable_type'];
+    protected $fillable = [
+        'user_id',
+        'team_id',
+        'title',
+        'type',
+        'body',
+        'postable_id',
+        'postable_type',
+        'image'
+    ];
 
     protected static function booted()
     {
@@ -29,13 +39,12 @@ class Post extends Model
         });
     }
 
-    public function getMainImageAttribute($value)
+    public function type(): Attribute
     {
-        if (empty($value)) {
-            return "/storage/images/hero_440_ukraine_conflict_pol2022071201.jpeg";
-        } else {
-            return $value;
-        }
+        return Attribute::make(
+            get: fn ($value) => PostType::tryFrom($value),
+            set: fn($value) => $value->value
+        );
     }
 
     protected static function newFactory()

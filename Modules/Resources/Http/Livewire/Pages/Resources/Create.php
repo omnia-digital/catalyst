@@ -4,6 +4,8 @@ namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Modules\Social\Actions\CreateNewPostAction;
+use Modules\Social\Enums\PostType;
 use Phuclh\MediaManager\WithMediaManager;
 
 class Create extends Component
@@ -32,12 +34,13 @@ class Create extends Component
     {
         $validated = $this->validate();
 
-        $resource = Auth::user()->posts()->create(
-            array_merge($validated, [
-                'team_id' => Auth::user()->currentTeam->id,
-                'type'  => 'resource'
-            ])
-        );
+        $resource = (new CreateNewPostAction)
+            ->type(PostType::RESOURCE)
+            ->execute($validated['body'], [
+                'title' => $validated['title'],
+                'url'   => $validated['url'],
+                'image' => $validated['image']
+            ]);
 
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);
