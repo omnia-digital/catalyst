@@ -13,7 +13,8 @@ trait Postable
      */
     public function posts(): MorphMany
     {
-        return $this->morphMany(Post::class, 'postable');
+        return $this->morphMany(Post::class, 'postable')
+            ->withoutGlobalScope('parent');
     }
 
     /**

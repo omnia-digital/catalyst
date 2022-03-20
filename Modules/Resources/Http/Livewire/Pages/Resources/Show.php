@@ -4,7 +4,6 @@ namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
 use Livewire\Component;
 use Modules\Social\Models\Post;
-use function view;
 
 class Show extends Component
 {
@@ -12,8 +11,8 @@ class Show extends Component
 
     public function mount(Post $resource)
     {
-        if ($resource->type != 'resource') {
-            return $this->redirectRoute('social.posts.show', $resource);
+        if ($resource->type->value !== 'resource') {
+            $this->redirectRoute('social.posts.show', $resource);
         }
     }
 

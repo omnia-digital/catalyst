@@ -43,7 +43,7 @@ class Post extends Model
     {
         return Attribute::make(
             get: fn ($value) => PostType::tryFrom($value),
-            set: fn($value) => $value->value
+            set: fn($value) => $value?->value
         );
     }
 

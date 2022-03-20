@@ -29,13 +29,14 @@
         "tightenco/ziggy": "^1.4"
     },
     "require-dev": {
-        "spatie/laravel-ignition": "^1.0",
+        "barryvdh/laravel-debugbar": "^3.6",
         "fakerphp/faker": "^1.9.1",
         "laracademy/generators": "^3.4",
         "laravel/sail": "^1.12",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10"
+        "phpunit/phpunit": "^9.5.10",
+        "spatie/laravel-ignition": "^1.0"
     },
     "repositories": [
         {
