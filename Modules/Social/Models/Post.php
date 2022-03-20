@@ -43,7 +43,7 @@ class Post extends Model
     public function type(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => PostType::tryFrom($value),
+            get: fn($value) => PostType::tryFrom($value),
             set: fn($value) => $value?->value
         );
     }
@@ -66,5 +66,19 @@ class Post extends Model
     public function postable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function getUrl(): string
+    {
+        if ($this->type === PostType::RESOURCE) {
+            return route('resources.show', $this);
+        }
+
+        return route('social.posts.show', $this);
+    }
+
+    public function isParent(): bool
+    {
+        return is_null($this->postable_id) && is_null($this->postable_type);
     }
 }
