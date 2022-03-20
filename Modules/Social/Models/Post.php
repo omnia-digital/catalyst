@@ -34,6 +34,7 @@ class Post extends Model
 
     protected static function booted()
     {
+        // @NOTE - this is so we don't accidentally pull in comments when we are trying to just get regular posts
         static::addGlobalScope('parent', function (Builder $builder) {
             $builder->whereNull('postable_id');
         });
