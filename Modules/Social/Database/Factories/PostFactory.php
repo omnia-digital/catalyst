@@ -51,6 +51,14 @@ class PostFactory extends Factory
         ]);
     }
 
+    public function asQuestion(): PostFactory
+    {
+        return $this->withType('question')->state([
+            'title' => $this->faker->sentence,
+            'body' => $this->faker->paragraph(6)
+        ]);
+    }
+
     /**
      * @return $this
      */

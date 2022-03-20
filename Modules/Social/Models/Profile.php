@@ -168,4 +168,18 @@
         {
             return $this->belongsTo(User::class);
         }
+
+        /**
+         * Advice
+         */
+
+        /**
+         * Credibility Rating for Advice
+         *
+         * @return void
+         */
+        public function getCredibilityRatingAttribute()
+        {
+
+        }
     }
