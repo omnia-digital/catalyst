@@ -7,18 +7,14 @@ use Modules\Social\Models\Post;
 
 class RepliesModal extends Component
 {
-    public $recentlyAddedReply;
+    public $modalOpen = false;
     public $replyCount;
-    public $body;
     public $post;
     public $show;
-    protected $rules = [
-        'body' => 'required|min:6',
-    ];
-    protected $listeners = ['replyAdded'];
+    protected $listeners = ['postAdded'];
 
-    public function replyAdded(Post $reply) {
-        $this->recentlyAddedReply = $reply;
+    public function postAdded(Post $post) {
+        $this->modalOpen = false;
         $this->replyCount = $this->post->comments()->count();
     }
 
@@ -28,21 +24,6 @@ class RepliesModal extends Component
         $this->post = $post;
         $this->replyCount = $post->comments()->count();
         $this->show = $show;
-    }
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
-    public function saveReply()
-    {
-        $validatedData = $this->validate();
-
-        $reply = $this->post->createComment($validatedData, auth()->id());
-
-        $this->reset(['body']);
-        $this->emitSelf('replyAdded', $reply->id);
     }
 
     public function render()

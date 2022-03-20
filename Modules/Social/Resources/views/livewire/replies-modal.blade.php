@@ -1,8 +1,8 @@
-<div class="inline-flex items-center text-sm" x-data="{ repliesModalOpen: false }">
+<div class="inline-flex items-center text-sm" x-data="{ repliesModalOpen: @entangle('modalOpen').defer }">
     <button
         type="button"
         class="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
-        x-on:click="repliesModalOpen = true"
+        @click="repliesModalOpen = true"
     >
         <x-heroicon-o-chat-alt :class="$show ? 'h-6 w-6' : 'h-5 w-5'" aria-hidden="true" />
         <span class="font-medium text-gray-900">{{ $replyCount > 0 ? $replyCount : '' }}</span>
@@ -21,8 +21,8 @@
         <div class="relative sm:w-3/4 md:w-1/2 mx-2 sm:mx-auto mt-10 mb-24 opacity-100">
             <div
             class="relative bg-white shadow-lg rounded-lg text-gray-900 z-20"
-            @click.away="repliesModalOpen = false"
             x-show="repliesModalOpen"
+            @click.away="repliesModalOpen = false"
             x-transition:enter="transition transform duration-300"
             x-transition:enter-start="scale-0"
             x-transition:enter-end="scale-100"
