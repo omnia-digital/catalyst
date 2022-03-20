@@ -2,9 +2,18 @@
 
 @section('content')
     <div class="mb-4 flex items-center">
-        <div class="mr-4 hover:bg-gray-300 p-2 rounded-full"><a href="{{ route('resources.home') }}" class="">
-                <x-heroicon-o-arrow-left class="h-6"/>
-            </a></div>
+        <div class="mr-4 hover:bg-gray-300 p-2 rounded-full">
+            @if ($resource->isParent())
+                <a href="{{ route('resources.home') }}">
+                    <x-heroicon-o-arrow-left class="h-6"/>
+                </a>
+            @else
+                <a href="{{ route('resources.show', $resource->postable) }}">
+                    <x-heroicon-o-arrow-left class="h-6"/>
+                </a>
+            @endif
+        </div>
+
         <h1 class="py-2 text-3xl">Resource</h1>
     </div>
     <div class="xl:grid xl:grid-cols-9 xl:gap-9">
@@ -67,7 +76,9 @@
                     <livewire:social::partials.post-actions :post="$resource"/>
                 </div>
 
-                <livewire:social::comment-section :post="$resource"/>
+                @if ($resource->isParent())
+                    <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::RESOURCE"/>
+                @endif
             </div>
         </div>
 
