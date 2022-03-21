@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "759371e66eed06081321f77ec47f46c0",
+    "content-hash": "563063d20f8b1d35ba9d2e7efd4013f0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3597,75 +3597,6 @@
                 }
             ],
             "time": "2022-03-11T07:57:28+00:00"
-        },
-        {
-            "name": "overtrue/laravel-follow",
-            "version": "4.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/overtrue/laravel-follow.git",
-                "reference": "3b344cfe39ec2a9d4b83a50d276becb7be213563"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-follow/zipball/3b344cfe39ec2a9d4b83a50d276becb7be213563",
-                "reference": "3b344cfe39ec2a9d4b83a50d276becb7be213563",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^9.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^7.0",
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Overtrue\\LaravelFollow\\FollowServiceProvider"
-                    ]
-                },
-                "hooks": {
-                    "pre-commit": [
-                        "composer fix-style",
-                        "composer test"
-                    ],
-                    "pre-push": [
-                        "composer test",
-                        "composer check-style"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Overtrue\\LaravelFollow\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "overtrue",
-                    "email": "anzhengchao@gmail.com"
-                }
-            ],
-            "description": "User follow unfollow system for Laravel.",
-            "support": {
-                "issues": "https://github.com/overtrue/laravel-follow/issues",
-                "source": "https://github.com/overtrue/laravel-follow/tree/4.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/overtrue",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-02-10T07:02:53+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -9852,6 +9783,69 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
             "time": "2021-03-09T10:59:23+00:00"
+        },
+        {
+            "name": "wimil/followers",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wimil/laravel-followers.git",
+                "reference": "7a1f92315835a990faf94431313c36095ebf73df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wimil/laravel-followers/zipball/7a1f92315835a990faf94431313c36095ebf73df",
+                "reference": "7a1f92315835a990faf94431313c36095ebf73df",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.5|~6.0|~7.0|~8.0|^9.2",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2",
+                "phpunit/phpunit": "~8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wimil\\Followers\\Provider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wimil\\Followers\\": "src/"
+                },
+                "classmap": [
+                    "src/Facades"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andy Reynaldo",
+                    "email": "rldev25@gmail.com"
+                }
+            ],
+            "description": "Follow and followers for laravel eloquent",
+            "keywords": [
+                "Follow",
+                "Followers",
+                "following",
+                "laravel-follow",
+                "laravel-followers",
+                "system followers"
+            ],
+            "support": {
+                "issues": "https://github.com/wimil/laravel-followers/issues",
+                "source": "https://github.com/wimil/laravel-followers/tree/1.0"
+            },
+            "time": "2022-02-27T16:41:15+00:00"
         }
     ],
     "packages-dev": [
