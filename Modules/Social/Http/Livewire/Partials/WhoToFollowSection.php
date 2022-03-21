@@ -12,13 +12,12 @@ class WhoToFollowSection extends Component
         return User::query();
     }
 
-    public function getTrendingUsersProperty()
+    public function getWhoToFollowProperty()
     {
         return $this
             ->usersQuery
-            ->leftJoin('user_follower', 'user_follower.following_id', 'users.id')
-            ->whereMonth('user_follower.created_at', now()->month)
-            ->orderByFollowersCountDesc()
+            ->withCount(['followers'])
+            ->orderBy('followers_count', 'desc')
             ->distinct()
             ->limit(3)->get();
     }

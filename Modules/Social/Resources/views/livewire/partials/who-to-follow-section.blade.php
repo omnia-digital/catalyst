@@ -5,7 +5,7 @@
             </h2>
             <div class="mt-6 flow-root">
                 <ul role="list" class="-my-4 divide-y divide-gray-200">
-                    @foreach ($this->trendingUsers as $user)
+                    @forelse ($this->whoToFollow as $user)
                         <li class="flex items-center py-4 space-x-3">
                             <div class="flex-shrink-0">
                                 <img class="h-8 w-8 rounded-full" src="{{ $user->profile_photo_url }}" alt="" />
@@ -22,14 +22,23 @@
                                 <livewire:social::partials.follow-button :model="$user"/>
                             </div>
                         </li>
-
-                    @endforeach
+                    @empty
+                        <li class="flex items-center py-4 space-x-3">
+                            <div class="min-w-0 flex-1">
+                                <p class="text-sm font-medium text-gray-900">
+                                    No one to follow
+                                </p>
+                            </div>
+                        </li>
+                    @endforelse
                 </ul>
             </div>
             <div class="mt-6">
-                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                    View all
-                </a>
+                @if ($this->whoToFollow->count())
+                    <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        View all
+                    </a>
+                @endif
             </div>
         </div>
 </section>
