@@ -15,7 +15,7 @@
     use Modules\Social\Models\Post;
     use Modules\Social\Models\Profile;
     use Modules\Social\Traits\HasBookmarks;
-    use Overtrue\LaravelFollow\Followable;
+    use Wimil\Followers\Traits\Followable;
 
     class User extends Authenticatable implements MustVerifyEmail
     {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5c8d1f769114321a1dabf34c04e033a",
+    "content-hash": "563063d20f8b1d35ba9d2e7efd4013f0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9783,6 +9783,69 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
             "time": "2021-03-09T10:59:23+00:00"
+        },
+        {
+            "name": "wimil/followers",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wimil/laravel-followers.git",
+                "reference": "7a1f92315835a990faf94431313c36095ebf73df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wimil/laravel-followers/zipball/7a1f92315835a990faf94431313c36095ebf73df",
+                "reference": "7a1f92315835a990faf94431313c36095ebf73df",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.5|~6.0|~7.0|~8.0|^9.2",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2",
+                "phpunit/phpunit": "~8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wimil\\Followers\\Provider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wimil\\Followers\\": "src/"
+                },
+                "classmap": [
+                    "src/Facades"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andy Reynaldo",
+                    "email": "rldev25@gmail.com"
+                }
+            ],
+            "description": "Follow and followers for laravel eloquent",
+            "keywords": [
+                "Follow",
+                "Followers",
+                "following",
+                "laravel-follow",
+                "laravel-followers",
+                "system followers"
+            ],
+            "support": {
+                "issues": "https://github.com/wimil/laravel-followers/issues",
+                "source": "https://github.com/wimil/laravel-followers/tree/1.0"
+            },
+            "time": "2022-02-27T16:41:15+00:00"
         }
     ],
     "packages-dev": [
