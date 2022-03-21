@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
 use Modules\Social\Http\Livewire\Home;
 use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
 use Modules\Social\Http\Livewire\Pages\Posts\Show;
@@ -19,6 +20,10 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     //        Route::get('/projects', function () {
     //            return "Projects";
     //        })->name('projects');
+
+    Route::name('profile.')->prefix('profiles')->group(function() {
+        Route::get('{profile}',\Modules\Social\Http\Livewire\Pages\Profiles\Show::class)->name('show');
+    });
 
     Route::get('/posts/{post}', Show::class)->name('posts.show');
 

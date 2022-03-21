@@ -30,6 +30,6 @@
 
     <!-- Social Actions -->
     <div>
-        <livewire:social::partials.post-actions/>
+        <livewire:social::partials.post-actions :post="$post"/>
     </div>
 </div>
