@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Social\Http\Livewire\Home;
 use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
-use Modules\Social\Http\Livewire\Pages\Posts\Show;
+use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
 
 Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->group(function () {
     //        Route::get('/', 'SocialController@index');
@@ -20,7 +20,8 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     //            return "Projects";
     //        })->name('projects');
 
-    Route::get('/posts/{post}', Show::class)->name('posts.show');
+    Route::get('/posts/{post}', ShowPosts::class)->name('posts.show');
+    
 
     Route::get('/crm', function () {
         return "CRM";
