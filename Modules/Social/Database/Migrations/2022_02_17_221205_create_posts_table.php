@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->string('type')->nullable();
             $table->string('image')->nullable();
-            $table->morphs('postable');
+            $table->nullableMorphs('postable');
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use App\Models\User;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Laravel\Jetstream\Features;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Modules\Social\Models\Profile;
 
@@ -46,7 +47,7 @@ class PostFactory extends Factory
 
     public function asResource(): PostFactory
     {
-        return $this->withType('resource')->state([
+        return $this->withType(PostType::RESOURCE)->state([
             'title' => $this->faker->company()
         ]);
     }
