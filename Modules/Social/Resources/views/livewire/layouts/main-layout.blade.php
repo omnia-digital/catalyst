@@ -2,7 +2,7 @@
     <livewire:social::layouts.module-navigation/>
 
     <div class="md:pl-24">
-        @if (Route::currentRouteName() !== 'user.profile')
+        @if (Route::currentRouteName() !== 'social.profile.show')
             <div class="bg-neutral">
                 <div class="flex-1 flex items-center">
                     <h1 class="py-4 ml-4 text-3xl">Community</h1>

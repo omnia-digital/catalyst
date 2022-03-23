@@ -1,7 +1,6 @@
 <?php
 
     use Illuminate\Support\Facades\Route;
-    use Modules\Social\Http\Livewire\Pages\Profile\Show as ShowProfile;
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +25,6 @@
         Route::get('/', App\Http\Livewire\Teams::class)->name('home');
     });
 
-    Route::get('/{profile:handle}', ShowProfile::class)->name('user.profile');
     Route::middleware(['auth', 'verified'])->group(function() {
 
         Route::get('/messages', function () {

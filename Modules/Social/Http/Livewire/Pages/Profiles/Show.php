@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Profile;
+namespace Modules\Social\Http\Livewire\Pages\Profiles;
 
 use Livewire\Component;
 use Modules\Social\Models\Profile;
