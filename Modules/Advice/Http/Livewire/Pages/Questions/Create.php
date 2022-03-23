@@ -1,11 +1,9 @@
 <?php
 
-namespace Modules\Resources\Http\Livewire\Pages\Resources;
+namespace Modules\Advice\Http\Livewire\Pages\Questions;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Modules\Social\Actions\CreateNewPostAction;
-use Modules\Social\Enums\PostType;
 use Phuclh\MediaManager\WithMediaManager;
 
 class Create extends Component
@@ -34,13 +32,12 @@ class Create extends Component
     {
         $validated = $this->validate();
 
-        $resource = (new CreateNewPostAction)
-            ->type(PostType::RESOURCE)
-            ->execute($validated['body'], [
-                'title' => $validated['title'],
-                'url'   => $validated['url'],
-                'image' => $validated['image']
-            ]);
+        $resource = Auth::user()->posts()->create(
+            array_merge($validated, [
+                'team_id' => Auth::user()->currentTeam->id,
+                'type'  => 'resource'
+            ])
+        );
 
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);
@@ -60,6 +57,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('resources::livewire.pages.resources.create');
+        return view('advice::livewire.pages.questions.create');
     }
 }
