@@ -30,6 +30,11 @@
             <div class="text-xl my-6">
                 {{ $resource->body }}
             </div>
+
+            <a href="{{ $resource->url }}" target="_blank" class="bg-white hover:shadow-lg rounded-lg px-4 py-2 text-xl inline-flex items-center space-x-2">
+                    <p>Go to Resource</p>
+                    <x-heroicon-o-arrow-right class="h-6 w-6"/>
+            </a>
         </div>
 
         <aside class="hidden xl:block xl:col-span-3">
