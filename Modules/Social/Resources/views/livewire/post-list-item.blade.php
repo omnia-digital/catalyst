@@ -10,7 +10,7 @@
                 <div class="flex justify-between">
                     <div class="min-w-0 flex justify-start">
                         <div class="text-sm font-bold text-gray-900 mr-2">
-                            <a href="{{ route('profile.show', ['user' => $post->user]) }}" class="hover:underline">{{ $post->user->name }}</a>
+                            <a href="{{ route('social.profile.show', $post->user->handle) }}" class="hover:underline">{{ $post->user->name }}</a>
                         </div>
                         <div class="text-sm text-gray-500">
                             <a href="{{ route('social.posts.show', $post) }}" class="hover:underline">

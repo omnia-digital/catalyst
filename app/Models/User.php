@@ -92,6 +92,10 @@
             return url(config('app.url') . '/' . $this->handle);
         }
 
+        public function getHandleAttribute() {
+            return $this->profile->handle;
+        }
+
         public function receivesBroadcastNotificationsOn() {
             return 'App.User.' . $this->id;
         }

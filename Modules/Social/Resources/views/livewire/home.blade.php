@@ -47,14 +47,7 @@
                 </ul>
             </div>
         </div>
-
-        <aside class="hidden xl:block xl:col-span-3">
-            <div class="sticky h-screen overflow-y-scroll scrollbar-hide top-4 space-y-4 pb-36 bg-white shadow rounded-lg">
-                <livewire:social::partials.trending-section/>
-                <livewire:social::partials.who-to-follow-section/>
-                <livewire:social::partials.applications/>
-            </div>
-        </aside>
+        <x-sidebar-column />
     </div>
 </div>
 @endsection
