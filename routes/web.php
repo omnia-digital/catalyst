@@ -26,9 +26,6 @@
     });
 
     Route::middleware(['auth', 'verified'])->group(function() {
-        Route::get('/profile', function () {
-            return "Profile";
-        })->name('user.profile');
 
         Route::get('/messages', function () {
             return "Messages";
