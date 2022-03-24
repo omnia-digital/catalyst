@@ -11,7 +11,6 @@
     use Modules\Social\Database\Factories\ProfileFactory;
     use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
-    use App\Models\User;
 
     class Profile extends Model
     {
