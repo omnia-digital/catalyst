@@ -3,17 +3,19 @@
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
 use Livewire\Component;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
-use function view;
 
 class Show extends Component
 {
-    public Post $resource;
+    public $resource;
 
-    public function mount(Post $resource)
+    public function mount($resource)
     {
-        if ($resource->type != 'resource') {
-            return $this->redirectRoute('social.posts.show', $resource);
+        $this->resource = Post::withoutGlobalScope('parent')->find($resource);
+
+        if ($this->resource->type !== PostType::RESOURCE) {
+            $this->redirectRoute('social.posts.show', $this->resource);
         }
     }
 

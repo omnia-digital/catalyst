@@ -13,7 +13,9 @@ trait Postable
      */
     public function posts(): MorphMany
     {
-        return $this->morphMany(Post::class, 'postable');
+        // @NOTE - we have to remove the 'parent' globalscope in order to retrieve comments
+        return $this->morphMany(Post::class, 'postable')
+            ->withoutGlobalScope('parent');
     }
 
     /**

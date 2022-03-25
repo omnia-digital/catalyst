@@ -4,6 +4,7 @@ namespace Modules\Advice\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Social\Models\Post;
 
 class AdviceDatabaseSeeder extends Seeder
 {
@@ -16,6 +17,6 @@ class AdviceDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        Post::factory(15)->asQuestion()->create();
     }
 }

@@ -97,6 +97,10 @@
             return $this->profile()->exists() ? url(config('app.url') . '/' . $this->profile->handle) : '#';
         }
 
+        public function getHandleAttribute() {
+            return $this->profile->handle;
+        }
+
         public function receivesBroadcastNotificationsOn() {
             return 'App.User.' . $this->id;
         }

@@ -18,7 +18,8 @@
             </div>
             <div class="mt-0">
                 <div class="mx-auto">
-                    <livewire:social::new-post-box class="my-6" />
+                    <livewire:social::post-editor/>
+
                     <h1 class="sr-only">Recent Posts</h1>
                     <ul role="list" class="mt-6 space-y-4">
                         @if ($recentlyAddedPost)
@@ -46,14 +47,7 @@
                 </ul>
             </div>
         </div>
-
-        <aside class="hidden xl:block xl:col-span-3">
-            <div class="sticky h-screen overflow-y-scroll scrollbar-hide top-4 space-y-4 pb-36 bg-white shadow rounded-lg">
-                <livewire:social::partials.trending-section/>
-                <livewire:social::partials.who-to-follow-section/>
-                <livewire:social::partials.applications/>
-            </div>
-        </aside>
+        <x-sidebar-column />
     </div>
 </div>
 @endsection
