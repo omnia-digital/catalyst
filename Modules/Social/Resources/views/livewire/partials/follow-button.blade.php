@@ -1,11 +1,11 @@
 <div class="inline-flex items-center text-md">
-    <button type="button" class="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100" wire:click="follow">
-        @if ($model->isFollowedBy($this->authUser))
-            <x-heroicon-o-minus-sm class="-ml-1 mr-0.5 h-5 w-5 text-rose-700" aria-hidden="true" />
-            <span>Unfollow</span>
-        @else
-            <x-heroicon-o-plus-sm class="-ml-1 mr-0.5 h-5 w-5 text-rose-700" aria-hidden="true" />
+    @if ($model->isFollowedBy($this->authUser))
+        <button type="button" class="inline-flex items-center px-4 py-2 rounded-full bg-white text-black text-sm tracking-wide font-medium border border-black hover:bg-gray-200" wire:click="follow">
+            <span>Following</span>
+        </button>
+    @else
+        <button type="button" class="inline-flex items-center px-4 py-2 rounded-full bg-black text-white text-sm tracking-wide font-medium hover:opacity-75" wire:click="follow">
             <span>Follow</span>
-        @endif
-    </button>
+        </button>
+    @endif
 </div>
