@@ -21,6 +21,6 @@ class Show extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.profile.show');
+        return view('social::livewire.pages.profiles.show');
     }
 }
