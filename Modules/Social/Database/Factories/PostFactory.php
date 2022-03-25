@@ -54,7 +54,7 @@ class PostFactory extends Factory
 
     public function asQuestion(): PostFactory
     {
-        return $this->withType('question')->state([
+        return $this->withType(PostType::QUESTION)->state([
             'title' => $this->faker->sentence,
             'body' => $this->faker->paragraph(6)
         ]);
