@@ -4,11 +4,11 @@
                 Who to follow
             </h2>
             <div class="mt-6 flow-root">
-                <ul role="list" class="-my-4 divide-y divide-gray-200">
+                <ul role="list" class="-my-4">
                     @forelse ($this->whoToFollow as $user)
                         <li class="flex items-center py-4 space-x-3">
                             <div class="flex-shrink-0">
-                                <img class="h-8 w-8 rounded-full" src="{{ $user->profile_photo_url }}" alt="" />
+                                <img class="h-10 w-10 rounded-full" src="{{ $user->profile_photo_url }}" alt="" />
                             </div>
                             <div class="min-w-0 flex-1">
                                 <p class="text-sm font-medium text-gray-900">
