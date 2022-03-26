@@ -20,7 +20,7 @@
         "omnia-digital/library": "dev-main",
         "pestphp/pest": "^1.16",
         "pestphp/pest-plugin-laravel": "^1.1",
-        "phuclh/media-manager": "dev-main",
+        "phuclh/media-manager": "^0.0.2",
         "spatie/laravel-activitylog": "^4.4",
         "spatie/laravel-medialibrary": "^10.0.0",
         "spatie/laravel-sluggable": "^3.1",
@@ -44,10 +44,6 @@
         {
             "type": "path",
             "url": "../omnia-library"
-        },
-        {
-            "type": "path",
-            "url": "../media-manager"
         }
     ],
     "autoload": {

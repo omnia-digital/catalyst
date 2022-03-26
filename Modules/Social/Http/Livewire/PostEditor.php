@@ -42,11 +42,24 @@ class PostEditor extends Component
     public function handlePostSaved()
     {
         $this->reset('content', 'images');
+
+        $this->dispatchBrowserEvent('post-editor:image-set', $this->images);
     }
 
     public function setImage($image)
     {
         array_push($this->images, $image['url']);
+
+        $this->dispatchBrowserEvent('post-editor:image-set', $this->images);
+    }
+
+    public function removeImage($index)
+    {
+        if (isset($this->images[$index])) {
+            unset($this->images[$index]);
+        }
+
+        $this->dispatchBrowserEvent('post-editor:image-set', $this->images);
     }
 
     public function render()
