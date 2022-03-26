@@ -109,7 +109,7 @@ use Modules\Social\Models\Post;
             }
             
             $this->postSent = true;
-            $this->emitUp('postAdded', $post);
+            $this->emit('postAdded', $post);
             $this->reset(['body']);
         }
 
