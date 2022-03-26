@@ -13,7 +13,7 @@ class PostListItem extends Component
     public function mount(Post $post) {
         $this->post = $post;
     }
-    
+
     public function getAuthorAttribute() {
         return $this->post->user;
     }

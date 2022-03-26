@@ -2,6 +2,7 @@
 
     namespace Modules\Social\Models;
 
+    use App\Models\User;
     use App\Util\Lexer\PrettyNumber;
     use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     use Illuminate\Support\Facades\Cache;
@@ -10,7 +11,6 @@
     use Modules\Social\Database\Factories\ProfileFactory;
     use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
-    use App\Models\User;
 
     class Profile extends Model
     {
@@ -167,5 +167,19 @@
         public function user()
         {
             return $this->belongsTo(User::class);
+        }
+
+        /**
+         * Advice
+         */
+
+        /**
+         * Credibility Rating for Advice
+         *
+         * @return void
+         */
+        public function getCredibilityRatingAttribute()
+        {
+
         }
     }

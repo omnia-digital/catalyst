@@ -11,6 +11,10 @@
 |
 */
 
-Route::prefix('advice')->group(function() {
-    Route::get('/', 'AdviceController@index');
+use Modules\Advice\Http\Livewire\Pages\Questions\Index;
+use Modules\Advice\Http\Livewire\Pages\Questions\Show;
+
+Route::name('advice.')->prefix('advice')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', Index::class)->name('home');
+    Route::get('{question}', Show::class)->name('show');
 });

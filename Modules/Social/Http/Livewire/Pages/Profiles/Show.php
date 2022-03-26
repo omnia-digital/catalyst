@@ -8,15 +8,15 @@ use Modules\Social\Models\Profile;
 class Show extends Component
 {
     public $profile;
-
-    public function mount(Profile $profile)
-    {
-        $this->profile = $profile;
-    }
-
+  
     public function getUserProperty()
     {
         return $this->profile->user;
+    }
+
+    public function mount(Profile $profile)
+    {
+        $this->profile = $profile->load('user');
     }
 
     public function render()

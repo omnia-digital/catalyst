@@ -2,7 +2,6 @@
         class="bg-white pt-4 shadow sm:px-3 sm:rounded-lg"
         x-data="{ openOptions: false }"
 >
-{{--    <a href="{{ route('social.posts.show', ['post' => $post]) }}">--}}
         <article aria-labelledby="{{ 'post-' . $post->id }}" class="flex justify-start">
             <div class="mr-2">
                 <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}"/>
@@ -36,6 +35,7 @@
                                 </button>
                             </div>
                             <div
+                                x-cloak
                                     aria-labelledby="post-list-item-{{ $post->id }}-options-menu-items"
                                     class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     x-show="openOptions" @click.away="openOptions = false"
@@ -74,5 +74,4 @@
                 <livewire:social::partials.post-actions :post="$post"/>
             </div>
         </article>
-{{--    </a>--}}
 </div>

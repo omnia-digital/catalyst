@@ -15,13 +15,14 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class, 'user_id');
-            $table->unsignedBigInteger('team_id')->nullable();
-            $table->text('title')->nullable();
+            $table->foreignIdFor(\App\Models\User::class, 'user_id')->index();
+            $table->unsignedBigInteger('team_id')->nullable()->index();
+            $table->string('title')->nullable();
+            $table->string('url')->nullable();
             $table->text('body');
-            $table->text('type')->nullable();
-            $table->unsignedBigInteger('postable_id')->nullable();
-            $table->string('postable_type')->nullable();
+            $table->string('type')->nullable();
+            $table->string('image')->nullable();
+            $table->nullableMorphs('postable');
             $table->timestamps();
         });
     }

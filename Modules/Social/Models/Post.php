@@ -4,11 +4,14 @@ namespace Modules\Social\Models;
 
 use App\Models\Team;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\Social\Database\Factories\PostFactory;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Traits\Attachable;
 use Modules\Social\Traits\Bookmarkable;
 use Modules\Social\Traits\Likable;
@@ -18,17 +21,32 @@ class Post extends Model
 {
     use HasFactory, Likable, Postable, Attachable, Bookmarkable;
 
-    protected $fillable = ['user_id', 'team_id', 'title', 'type', 'body', 'postable_id', 'postable_type'];
+    protected $fillable = [
+        'user_id',
+        'team_id',
+        'title',
+        'type',
+        'body',
+        'postable_id',
+        'postable_type',
+        'image'
+    ];
 
-    public function getMainImageAttribute($value)
+    protected static function booted()
     {
-        if (empty($value)) {
-            return "/storage/images/hero_440_ukraine_conflict_pol2022071201.jpeg";
-        } else {
-            return $value;
-        }
+        // @NOTE - this is so we don't accidentally pull in comments when we are trying to just get regular posts
+        static::addGlobalScope('parent', function (Builder $builder) {
+            $builder->whereNull('postable_id');
+        });
     }
 
+    public function type(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => PostType::tryFrom($value),
+            set: fn($value) => $value?->value
+        );
+    }
 
     protected static function newFactory()
     {
@@ -48,5 +66,19 @@ class Post extends Model
     public function postable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function getUrl(): string
+    {
+        if ($this->type === PostType::RESOURCE) {
+            return route('resources.show', $this);
+        }
+
+        return route('social.posts.show', $this);
+    }
+
+    public function isParent(): bool
+    {
+        return is_null($this->postable_id) && is_null($this->postable_type);
     }
 }

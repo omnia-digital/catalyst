@@ -2,13 +2,17 @@
 
 @section('content')
     <div class="mb-4 flex items-center">
-        <div class="mr-4 hover:bg-gray-300 p-2 rounded-full"><a href="{{ route('resources.home') }}" class=""><x-heroicon-o-arrow-left class="h-6"/></a></div>
+        <div class="mr-4 hover:bg-gray-300 p-2 rounded-full">
+            <a href="{{ route('resources.home') }}">
+                <x-heroicon-o-arrow-left class="h-6"/>
+            </a>
+        </div>
         <h1 class="py-2 text-3xl">Resource</h1>
     </div>
     <div class="xl:grid xl:grid-cols-9 xl:gap-9">
         <div class="xl:col-span-6">
             <div>
-                <img class="rounded-lg w-full object-cover max-h-96 bg-gray-300 flex-shrink-0" src="{{$resource->main_image}}" alt="{{$resource->title}}">
+                <img class="rounded-lg w-full object-cover max-h-96 bg-gray-300 flex-shrink-0" src="{{$resource->image}}" alt="{{$resource->title}}">
             </div>
             <div class="flex mt-6">
                 <h3 class="text-gray-900 text-4xl hover:underline font-bold">{{ $resource->title }}</h3>
@@ -27,9 +31,21 @@
                     @endforeach
                 </div>
             @endempty
+
             <div class="text-xl my-6">
-                {{ $resource->body }}
+                {!! Purify::clean($resource->body) !!}
             </div>
+
+            <div class="py-4">
+                @if ($resource->isParent())
+                    <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::RESOURCE"/>
+                @endif
+            </div>
+
+            <a href="{{ $resource->url }}" target="_blank" class="bg-white hover:shadow-lg rounded-lg px-4 py-2 text-xl inline-flex items-center space-x-2">
+                <p>Go to Resource</p>
+                <x-heroicon-o-arrow-right class="h-6 w-6"/>
+            </a>
         </div>
 
         <aside class="hidden xl:block xl:col-span-3">
