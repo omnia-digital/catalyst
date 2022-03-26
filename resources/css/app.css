@@ -19,6 +19,7 @@ h3 {
     @apply py-2
 }
 
+[x-cloak] { display: none !important; }
 /*a {*/
 /*    @apply text-primary*/
 /*}*/
