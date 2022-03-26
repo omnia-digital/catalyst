@@ -6,7 +6,7 @@
             </div>
             <div class="min-w-0 flex-1">
                 <p class="text-sm font-medium text-gray-900">
-                    <a href="{{ route('profile.show') }}" class="hover:underline">{{ $reply->user->name }}</a>
+                    <a href="{{ route('user.profile', $reply->user->handle) }}" class="hover:underline">{{ $reply->user->name }}</a>
                 </p>
                 <p class="text-sm text-gray-500">
                     <a href="#" class="hover:underline">

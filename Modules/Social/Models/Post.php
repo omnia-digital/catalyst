@@ -36,6 +36,7 @@ class Post extends Model implements HasMedia
 
     protected static function booted()
     {
+        // @NOTE - this is so we don't accidentally pull in comments when we are trying to just get regular posts
         static::addGlobalScope('parent', function (Builder $builder) {
             $builder->whereNull('postable_id');
         });
@@ -77,5 +78,19 @@ class Post extends Model implements HasMedia
         }
 
         return $this;
+    }
+
+    public function getUrl(): string
+    {
+        if ($this->type === PostType::RESOURCE) {
+            return route('resources.show', $this);
+        }
+
+        return route('social.posts.show', $this);
+    }
+
+    public function isParent(): bool
+    {
+        return is_null($this->postable_id) && is_null($this->postable_type);
     }
 }

@@ -2,43 +2,24 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
+use App\Models\User;
 use Livewire\Component;
 
 class WhoToFollowSection extends Component
 {
-    public $whoToFollow = [];
-
-    public function mount($whoToFollow = null)
+    public function getUsersQueryProperty()
     {
-        $this->whoToFollow = [
-            [
-                'name' => 'Leonard Krasner',
-                'profile' => [
-                    'handle' => 'leonardkrasner',
-                ],
-                'href' => '#',
-                'imageUrl' =>
-                    'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-            ],
-            [
-                'name' => 'Leonard Krasner',
-                'profile' => [
-                    'handle' => 'leonardkrasner',
-                ],
-                'href' => '#',
-                'imageUrl' =>
-                    'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-            ],
-            [
-                'name' => 'Leonard Krasner',
-                'profile' => [
-                    'handle' => 'leonardkrasner',
-                ],
-                'href' => '#',
-                'imageUrl' =>
-                    'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-            ],
-        ];
+        return User::query();
+    }
+
+    public function getWhoToFollowProperty()
+    {
+        return $this
+            ->usersQuery
+            ->withCount(['followers'])
+            ->orderBy('followers_count', 'desc')
+            ->distinct()
+            ->limit(3)->get();
     }
 
     public function render()

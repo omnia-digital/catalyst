@@ -3,17 +3,15 @@
 namespace Modules\Social\Http\Livewire;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Validator;
 use Livewire\Component;
 use Modules\Social\Actions\CreateNewPostAction;
 use Modules\Social\Models\Post;
 use Modules\Social\Support\Livewire\WithPostEditor;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
-use OmniaDigital\OmniaLibrary\Livewire\WithValidationFails;
 
 class Home extends Component
 {
-    use WithValidationFails, WithPostEditor, WithNotification;
+    use WithPostEditor, WithNotification;
 
     public $recentlyAddedPost;
 
@@ -66,8 +64,7 @@ class Home extends Component
     {
         $this->content = strip_tags($data['content']);
 
-        $this->whenFails(fn(Validator $validator) => $this->emitPostValidated($validator))
-            ->validate(['content' => ['required']]);
+        $this->validatePostEditor();
 
         DB::transaction(function () use ($data) {
             $post = (new CreateNewPostAction)->execute($data['content']);
