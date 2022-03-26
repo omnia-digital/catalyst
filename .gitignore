@@ -9,6 +9,7 @@
 /storage/*.key
 /storage/framework/*
 /storage/logs/*
+/storage/debugbar/*
 /vendor
 .env
 .env.backup

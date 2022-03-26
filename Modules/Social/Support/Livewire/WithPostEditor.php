@@ -3,7 +3,6 @@
 namespace Modules\Social\Support\Livewire;
 
 use Illuminate\Validation\Validator;
-use Modules\Social\Models\Post;
 
 trait WithPostEditor
 {

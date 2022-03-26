@@ -2,16 +2,18 @@
 
 namespace Modules\Social\Http\Livewire;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Validator;
 use Livewire\Component;
 use Modules\Social\Actions\CreateNewPostAction;
 use Modules\Social\Models\Post;
 use Modules\Social\Support\Livewire\WithPostEditor;
+use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithValidationFails;
 
 class Home extends Component
 {
-    use WithValidationFails, WithPostEditor;
+    use WithValidationFails, WithPostEditor, WithNotification;
 
     public $recentlyAddedPost;
 
@@ -67,9 +69,13 @@ class Home extends Component
         $this->whenFails(fn(Validator $validator) => $this->emitPostValidated($validator))
             ->validate(['content' => ['required']]);
 
-        (new CreateNewPostAction)->execute($data['content']);
+        DB::transaction(function () use ($data) {
+            $post = (new CreateNewPostAction)->execute($data['content']);
+            $post->attachMedia($data['images'] ?? []);
+        });
 
         $this->emitPostSaved();
+        $this->success('Post is created successfully!');
     }
 
     public function getPostsProperty()

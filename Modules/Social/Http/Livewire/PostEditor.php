@@ -12,6 +12,8 @@ class PostEditor extends Component
 
     public array $config = [];
 
+    public array $images = [];
+
     protected $listeners = [
         'validationFailed' => 'handleValidationFailed',
         'postSaved'        => 'handlePostSaved'
@@ -28,6 +30,7 @@ class PostEditor extends Component
         $this->emitUp('post-editor:submitted', [
             'id'      => $this->editorId,
             'content' => $this->content,
+            'images'  => $this->images
         ]);
     }
 
@@ -38,7 +41,12 @@ class PostEditor extends Component
 
     public function handlePostSaved()
     {
-        $this->reset('content');
+        $this->reset('content', 'images');
+    }
+
+    public function setImage($image)
+    {
+        array_push($this->images, $image['url']);
     }
 
     public function render()
