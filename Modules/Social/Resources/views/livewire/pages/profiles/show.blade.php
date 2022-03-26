@@ -4,6 +4,20 @@
 <div>
     <!-- Page Heading -->
     <div class="lg:grid lg:grid-cols-2 lg:gap-4">
+        <div class="col-span-2 h-36 bg-[url('https://source.unsplash.com/random')] -mx-4 -mt-4 bg-cover bg-no-repeat"></div>
+        <div class="col-span-2">
+            <nav>
+                <ol class="list-reset flex items-center">
+                  <li><a href="#" class="font-bold">All initiatives</a></li>
+                  <li><x-heroicon-s-chevron-right class="h-5 w-5 mx-2" /></li>
+                  <li><a href="#" class="font-bold">Initiative title</a></li>
+                  <li><x-heroicon-s-chevron-right class="h-5 w-5 mx-2" /></li>
+                  <li><a href="#" class="font-bold">Members</a></li>
+                  <li><x-heroicon-s-chevron-right class="h-5 w-5 mx-2" /></li>
+                  <li><span class="font-bold">{{ $this->user->name }}</span></li>
+                </ol>
+            </nav>
+        </div>
         <!-- Profile Data -->
         <div class=" mt-0">
             <div class="flex justify-start">

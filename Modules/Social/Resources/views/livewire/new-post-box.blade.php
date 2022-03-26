@@ -110,8 +110,8 @@
                         Post
                     </button>
                 </div>
-                <div x-show="attachmentDrawer" class="basis-full h-2"></div>
-                <div x-show="attachmentDrawer" class="w-full">
+                <div x-cloak x-show="attachmentDrawer" class="basis-full h-2"></div>
+                <div x-cloak x-show="attachmentDrawer" class="w-full">
                     <livewire:social::partials.attachment-drawer />
                 </div>
             </div>

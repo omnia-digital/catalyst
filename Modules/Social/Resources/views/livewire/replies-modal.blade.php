@@ -10,6 +10,7 @@
     </button>
     <div
       class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
+      x-cloak
       x-show="repliesModalOpen"
       x-transition:enter="transition duration-300"
       x-transition:enter-start="opacity-0"
@@ -21,6 +22,7 @@
         <div class="relative sm:w-3/4 md:w-1/2 mx-2 sm:mx-auto mt-10 mb-24 opacity-100">
             <div
             class="relative bg-white shadow-lg rounded-lg text-gray-900 z-20"
+            x-cloak
             x-show="repliesModalOpen"
             @click.away="repliesModalOpen = false"
             x-transition:enter="transition transform duration-300"
