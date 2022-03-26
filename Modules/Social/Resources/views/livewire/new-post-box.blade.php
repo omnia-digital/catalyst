@@ -1,6 +1,13 @@
-<div x-data="{ reactionMenuOpen: false, attachmentDrawer: false }" class="flex relative items-start w-full bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
+<div x-data="{ reactionMenuOpen: false, attachmentDrawer: false, postSent: @entangle('postSent') }" class="flex relative items-start w-full bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
     <div wire:loading.flex wire:target="savePost" class="absolute z-10 inset-0 justify-center items-center bg-white opacity-50">
         <x-loading-icon class="h-12 w-12 text-black" />
+    </div>
+    <div 
+        x-init="@this.on('postAdded', post => { setTimeout(() => { postSent = false }, 1500) })" 
+        x-show="postSent" 
+        class="absolute z-10 inset-0 flex justify-center items-center bg-white opacity-75"
+    >
+        <x-heroicon-o-badge-check class="h-24 w-24 text-green-600" />
     </div>
     <div class="flex-shrink-0">
         <img class="inline-block h-10 w-10 rounded-full" src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" />
@@ -103,11 +110,16 @@
                         Post
                     </button>
                 </div>
-                <div x-show="attachmentDrawer" class="basis-full h-2"></div>
-                <div x-show="attachmentDrawer" class="w-full">
+                <div x-cloak x-show="attachmentDrawer" class="basis-full h-2"></div>
+                <div x-cloak x-show="attachmentDrawer" class="w-full">
                     <livewire:social::partials.attachment-drawer />
                 </div>
             </div>
         </form>
     </div>
 </div>
+@push('scripts')
+<script>
+    
+</script>
+@endpush
