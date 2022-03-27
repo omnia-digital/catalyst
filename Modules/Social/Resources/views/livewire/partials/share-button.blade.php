@@ -8,6 +8,7 @@
     <!-- component -->
     <!-- CONTAINER MODAL-->
     <div 
+        x-cloak
         class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
         x-show="openModal"
         x-transition:enter="transition duration-300"

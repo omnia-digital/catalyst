@@ -35,6 +35,7 @@
                                 </button>
                             </div>
                             <div
+                                x-cloak
                                     aria-labelledby="post-list-item-{{ $post->id }}-options-menu-items"
                                     class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     x-show="openOptions" @click.away="openOptions = false"

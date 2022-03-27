@@ -14,6 +14,7 @@ use Modules\Social\Models\Post;
         public $body;
         public $attachments = [];
         public $parentPostID;
+        public $postSent = false;
 
         protected $listeners = ['filesAdded'];
 
@@ -103,11 +104,12 @@ use Modules\Social\Models\Post;
             if (is_null($this->parentPostID)) {
                 $post = $this->user->posts()->create($validatedData);
             } else {
-                $parentPost = Post::find($this->parentPostID);
+                $parentPost = Post::withoutGlobalScope('parent')->find($this->parentPostID);
                 $post = $parentPost->createComment($validatedData, auth()->id());
             }
-
-            $this->emitUp('postAdded', $post->id);
+            
+            $this->postSent = true;
+            $this->emit('postAdded', $post);
             $this->reset(['body']);
         }
 
