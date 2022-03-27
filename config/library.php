@@ -38,11 +38,11 @@ return [
         ],
 
         'bubble_menu' => [
-            'enabled' => true,
+            'enabled' => false,
         ],
 
         'floating_menu' => [
-            'enabled' => true,
+            'enabled' => false,
         ],
 
         'external_links' => [
