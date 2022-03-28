@@ -10,7 +10,7 @@
                     </select>
                 </div>
                 <div class="hidden sm:block">
-                    <nav class="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
+                    <nav class="relative z-0 rounded-lg shadow flex divide-x divide-neutral-light" aria-label="Tabs">
                         <a v-for="(tab, tabIdx) in tabs" :key="tab.name" :href="tab.href" :aria-current="tab.current ? 'page' : undefined"
                            :class="[tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700', tabIdx === 0 ? 'rounded-l-lg' : '', tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '', 'group relative min-w-0 flex-1 overflow-hidden bg-primary py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10']">
 {{--                            <span>{{ tab.name }}</span>--}}
@@ -39,7 +39,7 @@
                                 Who to follow
                             </h2>
                             <div class="mt-6 flow-root">
-                                <ul role="list" class="-my-4 divide-y divide-gray-200">
+                                <ul role="list" class="-my-4 divide-y divide-neutral-light">
                                     <li v-for="user in whoToFollow" :key="user.profile.handle" class="flex items-center py-4 space-x-3">
                                         <div class="flex-shrink-0">
                                             <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt=""/>
@@ -78,7 +78,7 @@
                                 Trending
                             </h2>
                             <div class="mt-6 flow-root">
-                                <ul role="list" class="-my-4 divide-y divide-gray-200">
+                                <ul role="list" class="-my-4 divide-y divide-neutral-light">
                                     <li v-for="post in trendingPosts" :key="post.id" class="flex py-4 space-x-3">
                                         <div class="flex-shrink-0">
                                             <img class="h-8 w-8 rounded-full" :src="post.user.imageUrl" :alt="post.user.name"/>

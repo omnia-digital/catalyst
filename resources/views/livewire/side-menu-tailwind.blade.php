@@ -109,7 +109,7 @@
     </div>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-neutral">
+    <div class="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-neutral-light lg:pt-5 lg:pb-4 lg:bg-neutral">
         <div class="flex items-center flex-shrink-0 px-6">
             <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-purple-500-mark-gray-700-text.svg" alt="Workflow">
         </div>
@@ -118,7 +118,7 @@
             <!-- User account dropdown -->
             <div class="px-3 relative inline-block text-left">
                 <div>
-                    <button type="button" class="group w-full bg-neutral rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500" id="options-menu-button" aria-expanded="false" aria-haspopup="true">
+                    <button type="button" class="group w-full bg-neutral rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-neutral-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500" id="options-menu-button" aria-expanded="false" aria-haspopup="true">
             <span class="flex w-full justify-between items-center">
               <span class="flex min-w-0 items-center justify-between space-x-3">
                 <img class="w-10 h-10 bg-neutral-dark rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
@@ -145,7 +145,7 @@
                     From: "transform opacity-100 scale-100"
                     To: "transform opacity-0 scale-95"
                 -->
-                <div class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-button" tabindex="-1">
+                <div class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-button" tabindex="-1">
                     <div class="py-1" role="none">
                         <!-- Active: "bg-neutral text-gray-900", Not Active: "text-gray-700" -->
                         <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-item-0">View profile</a>
@@ -177,8 +177,8 @@
             <!-- Navigation -->
             <nav class="px-3 mt-6">
                 <div class="space-y-1">
-                    <!-- Current: "bg-gray-200 text-gray-900", Default: "text-gray-700 hover:text-gray-900 hover:bg-gray-50" -->
-                    <a href="#" class="bg-gray-200 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md" aria-current="page">
+                    <!-- Current: "bg-neutral-light text-gray-900", Default: "text-gray-700 hover:text-gray-900 hover:bg-gray-50" -->
+                    <a href="#" class="bg-neutral-light text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md" aria-current="page">
                         <!--
                           Heroicon name: outline/home
 
@@ -232,9 +232,9 @@
     <!-- Main column -->
     <div class="lg:pl-64 flex flex-col">
         <!-- Search header -->
-        <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-primary border-b border-gray-200 lg:hidden">
+        <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-primary border-b border-neutral-light lg:hidden">
             <!-- Sidebar toggle, controls the 'sidebarOpen' sidebar state. -->
-            <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden">
+            <button type="button" class="px-4 border-r border-neutral-light text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden">
                 <span class="sr-only">Open sidebar</span>
                 <!-- Heroicon name: outline/menu-alt-1 -->
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -276,7 +276,7 @@
                             From: "transform opacity-100 scale-100"
                             To: "transform opacity-0 scale-95"
                         -->
-                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <div class="py-1" role="none">
                                 <!-- Active: "bg-neutral text-gray-900", Not Active: "text-gray-700" -->
                                 <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-0">View profile</a>
@@ -297,7 +297,7 @@
         </div>
         <main class="flex-1">
             <!-- Page title & actions -->
-            <div class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+            <div class="border-b border-neutral-light px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Home</h1>
                 </div>
@@ -312,7 +312,7 @@
                 <ul role="list" class="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-3">
                     <li class="relative col-span-1 flex shadow-sm rounded-md">
                         <div class="flex-shrink-0 flex items-center justify-center w-16 bg-pink-600 text-white text-sm font-medium rounded-l-md">GA</div>
-                        <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-primary rounded-r-md truncate">
+                        <div class="flex-1 flex items-center justify-between border-t border-r border-b border-neutral-light bg-primary rounded-r-md truncate">
                             <div class="flex-1 px-4 py-2 text-sm truncate">
                                 <a href="#" class="text-gray-900 font-medium hover:text-gray-600"> GraphQL API </a>
                                 <p class="text-gray-500">12 Members</p>
@@ -336,7 +336,7 @@
                                     From: "transform opacity-100 scale-100"
                                     To: "transform opacity-0 scale-95"
                                 -->
-                                <div class="z-10 mx-3 origin-top-right absolute right-10 top-3 w-48 mt-1 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="pinned-project-options-menu-0-button" tabindex="-1">
+                                <div class="z-10 mx-3 origin-top-right absolute right-10 top-3 w-48 mt-1 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="pinned-project-options-menu-0-button" tabindex="-1">
                                     <div class="py-1" role="none">
                                         <!-- Active: "bg-neutral text-gray-900", Not Active: "text-gray-700" -->
                                         <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="pinned-project-options-menu-0-item-0">View</a>
@@ -359,7 +359,7 @@
                 <div class="px-4 sm:px-6">
                     <h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">Projects</h2>
                 </div>
-                <ul role="list" class="mt-3 border-t border-gray-200 divide-y divide-gray-100">
+                <ul role="list" class="mt-3 border-t border-neutral-light divide-y divide-gray-100">
                     <li>
                         <a href="#" class="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6">
               <span class="flex items-center truncate space-x-3">
@@ -382,16 +382,16 @@
 
             <!-- Projects table (small breakpoint and up) -->
             <div class="hidden mt-8 sm:block">
-                <div class="align-middle inline-block min-w-full border-b border-gray-200">
+                <div class="align-middle inline-block min-w-full border-b border-neutral-light">
                     <table class="min-w-full">
                         <thead>
-                        <tr class="border-t border-gray-200">
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <tr class="border-t border-neutral-light">
+                            <th class="px-6 py-3 border-b border-neutral-light bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 <span class="lg:pl-2">Project</span>
                             </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Members</th>
-                            <th class="hidden md:table-cell px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Last updated</th>
-                            <th class="pr-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                            <th class="px-6 py-3 border-b border-neutral-light bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Members</th>
+                            <th class="hidden md:table-cell px-6 py-3 border-b border-neutral-light bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Last updated</th>
+                            <th class="pr-6 py-3 border-b border-neutral-light bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
                         </tr>
                         </thead>
                         <tbody class="bg-primary divide-y divide-gray-100">

@@ -187,7 +187,7 @@
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
+        <div class="pt-4 pb-1 border-t border-neutral-light">
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 mr-3">
@@ -226,7 +226,7 @@
 
                 <!-- Team Management -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                    <div class="border-t border-gray-200"></div>
+                    <div class="border-t border-neutral-light"></div>
 
                     <div class="block px-4 py-2 text-xs text-gray-400">
                         {{ __('Manage Team') }}
@@ -243,7 +243,7 @@
                         </x-jet-responsive-nav-link>
                     @endcan
 
-                    <div class="border-t border-gray-200"></div>
+                    <div class="border-t border-neutral-light"></div>
 
                     <!-- Team Switcher -->
                     <div class="block px-4 py-2 text-xs text-gray-400">

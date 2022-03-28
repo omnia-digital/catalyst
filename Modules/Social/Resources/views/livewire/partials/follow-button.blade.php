@@ -1,6 +1,6 @@
 <div class="inline-flex items-center text-md">
     @if ($model->isFollowedBy($this->authUser))
-        <button type="button" class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-black text-sm tracking-wide font-medium border border-black hover:bg-gray-200" wire:click="follow">
+        <button type="button" class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-black text-sm tracking-wide font-medium border border-black hover:bg-neutral-light" wire:click="follow">
             <span>Following</span>
         </button>
     @else

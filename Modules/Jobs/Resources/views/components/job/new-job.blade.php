@@ -271,7 +271,7 @@
                                         </div>
                                         <div class="mt-2 bg-primary rounded-md -space-y-px">
                                             <div
-                                                x-bind:class="{'bg-secondary border-secondary z-10': paymentMethod === 'new-card', 'border-gray-200': paymentMethod !== 'new-card'}"
+                                                x-bind:class="{'bg-secondary border-secondary z-10': paymentMethod === 'new-card', 'border-neutral-light': paymentMethod !== 'new-card'}"
                                                 class="relative border rounded-tl-md rounded-tr-md p-4 flex {{ !Auth::user()->hasDefaultPaymentMethod() ? 'border rounded-bl-md rounded-br-md' : '' }}"
                                             >
                                                 <x-input.radio x-model="paymentMethod" value="new-card" id="new-card"/>
@@ -287,7 +287,7 @@
 
                                             @if (Auth::user()->hasDefaultPaymentMethod())
                                                 <div
-                                                    x-bind:class="{'bg-secondary border-secondary z-10': paymentMethod === 'previous-card', 'border-gray-200': paymentMethod !== 'previous-card'}"
+                                                    x-bind:class="{'bg-secondary border-secondary z-10': paymentMethod === 'previous-card', 'border-neutral-light': paymentMethod !== 'previous-card'}"
                                                     class="relative border rounded-bl-md rounded-br-md p-4 flex"
                                                 >
                                                     <x-input.radio x-model="paymentMethod" value="previous-card" id="previous-card"/>

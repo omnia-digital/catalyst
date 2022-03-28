@@ -21,7 +21,7 @@
             </div>
         @endif
     </div>
-    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-primary rounded-r-md">
+    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-neutral-light bg-primary rounded-r-md">
         <div class="px-4 py-4 sm:px-6 w-full">
             <div class="flex items-center justify-between">
                 <p class="font-medium text-secondary truncate">

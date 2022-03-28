@@ -32,7 +32,7 @@
             x-transition:leave-end="scale-0"
             >
                 <!--MODAL HEADER-->
-                <div class="flex justify-between items center border-b border-gray-200 py-3">
+                <div class="flex justify-between items center border-b border-neutral-light py-3">
                     <div class="flex items-center justify-center">
                         <p class="text-xl font-bold text-gray-800">Share Modal</p>
                     </div>
@@ -103,7 +103,7 @@
                     </div>
 
                     <!--BOX LINK-->
-                    <div class="border-2 border-gray-200 flex justify-between items-center mt-4 py-2 space-x-6">
+                    <div class="border-2 border-neutral-light flex justify-between items-center mt-4 py-2 space-x-6">
                         <input x-model="shareLink" class="flex-1 outline-none bg-transparent disabled" disabled type="text" placeholder="link">
 
                         <button

@@ -6,7 +6,7 @@
             <div class="mt-6 flow-root">
                 <ul role="list" class="-my-4">
                     @foreach ($posts as $post)
-                        <li class="p-4 hover:bg-neutral-dark">
+                        <li class="p-4 hover:bg-neutral-hover">
                         <a href="{{ route('social.posts.show', ['post' => $post]) }}" class="flex justify-between">
                             <div class="flex-1">
                                 <div class="font-bold">

@@ -12,7 +12,7 @@
                     @forelse($jobs as $job)
                         <x-job.item
                             wire:key="latest-job-{{ $job->id }}"
-                            class="{{ $loop->first ? 'border-t border-gray-200' : '' }}"
+                            class="{{ $loop->first ? 'border-t border-neutral-light' : '' }}"
                             :job="$job"/>
                     @empty
                         <li class="p-20 text-lg text-gray-600 text-center">

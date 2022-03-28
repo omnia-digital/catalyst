@@ -1,6 +1,6 @@
 <section aria-labelledby="activity-title" class="mt-4 xl:mt-6">
     <div>
-        <div class="divide-y divide-gray-200">
+        <div class="divide-y divide-neutral-light">
             <div class="pb-4">
                 <h2 id="activity-title" class="text-lg font-medium text-gray-900">Comments</h2>
             </div>

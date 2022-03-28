@@ -32,7 +32,7 @@
             x-transition:leave-start="scale-100"
             x-transition:leave-end="scale-0"
             >
-                <header class="flex flex-row justify-between p-6 bg-primary border-b border-gray-200 rounded-t-lg">
+                <header class="flex flex-row justify-between p-6 bg-primary border-b border-neutral-light rounded-t-lg">
                     <h2 class="font-semibold text-3xl text-gray-800">Comment</h2>
                     <button
                         class=""
@@ -42,7 +42,7 @@
                         <span class="sr-only">Close</span>
                     </button>
                 </header>
-                <footer class="flex justify-center bg-transparent border-t border-gray-200">
+                <footer class="flex justify-center bg-transparent border-t border-neutral-light">
                     <livewire:social::new-post-box :parentPostID="$post->id" :wire:key="'new-post-' . $post->id" class="my-6" />
                 </footer>
             </div>

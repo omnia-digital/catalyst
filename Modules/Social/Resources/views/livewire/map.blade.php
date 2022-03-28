@@ -140,7 +140,7 @@
                                 </div>
                             </div>
 
-                            <div class="border-b border-gray-200 pb-2">
+                            <div class="border-b border-neutral-light pb-2">
                                 <div class="px-6">
                                     <nav class="-mb-px flex flex-wrap justify-center -mx-4">
                                         <a wire:click="selectCategory('All')" href="#"
@@ -165,7 +165,7 @@
                                 </div>
                             </div>
 
-                            <ul wire:loading.class="opacity-50" wire:target="selectCategory" class="divide-y divide-gray-200 overflow-y-auto">
+                            <ul wire:loading.class="opacity-50" wire:target="selectCategory" class="divide-y divide-neutral-light overflow-y-auto">
                                 @foreach($contacts as $contact)
                                     <li class="px-6 py-5 relative">
                                         <div class="group flex justify-between items-center">
@@ -204,8 +204,8 @@
                                 <h3 class="text-lg leading-6 font-medium text-gray-900" x-text="title"></h3>
                                 <p class="mt-1 max-w-2xl text-sm text-gray-500" x-text="description"></p>
                             </div>
-                            <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
-                                <dl class="sm:divide-y sm:divide-gray-200">
+                            <div class="border-t border-neutral-light px-4 py-5 sm:p-0">
+                                <dl class="sm:divide-y sm:divide-neutral-light">
                                     <template x-for="column in columns" :key="column.id">
                                         <div x-show="column.value" class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                             <dt class="text-sm font-medium text-gray-500" x-text="column.label"></dt>

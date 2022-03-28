@@ -40,6 +40,7 @@ module.exports = {
             colors: {
                 neutral: 'var(--neutral)',
                 'neutral-dark': 'var(--neutral-dark)',
+                'neutral-hover': 'var(--neutral-hover)',
                 primary: 'var(--primary)',
                 secondary: 'var(--secondary)',
                 tertiary: 'var(--tertiary)'

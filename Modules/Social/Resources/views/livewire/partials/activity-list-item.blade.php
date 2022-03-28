@@ -38,7 +38,7 @@
             @foreach ($activity['members'] as $user)
                 @if ($loop->index >= 5)
                     <div class="w-6">
-                        <div class="w-full rounded-full bg-gray-200 text-sm">+{{ $loop->count - $loop->index }}</div>
+                        <div class="w-full rounded-full bg-neutral-light text-sm">+{{ $loop->count - $loop->index }}</div>
                     </div>
                     @break;
                 @else

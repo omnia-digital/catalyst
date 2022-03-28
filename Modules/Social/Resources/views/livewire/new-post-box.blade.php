@@ -5,7 +5,7 @@
     <div
         x-init="@this.on('postAdded', post => { setTimeout(() => { postSent = false }, 1500) })"
         x-show="postSent"
-        class="absolute z-10 inset-0 flex justify-center items-center bg-primary opacity-75"
+        class="absolute z-10 inset-0 flex justify-center items-center bg-secondary opacity-75"
     >
         <x-heroicon-o-badge-check class="h-24 w-24 text-green-600" />
     </div>
@@ -105,7 +105,7 @@
                 <div class="flex-shrink-0">
                     <button
                         wire:loading.attr="disabled"
-                        type="submit" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-primary hover:bg-gray-50"
+                        type="submit" class="w-full block text-center px-4 py-2 border border-neutral shadow-sm text-sm font-medium rounded-md text-neutral bg-secondary hover:bg-neutral-light"
                     >
                         Post
                     </button>

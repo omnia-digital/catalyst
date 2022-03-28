@@ -18,7 +18,7 @@
                 @if ($post->tags)
                     <div class="flex justify-start space-x-2">
                         @foreach($post->tags as $tag)
-                            <x-library::tag class="bg-gray-200">{{ $tag }}</x-library::tag>
+                            <x-library::tag class="bg-neutral-light">{{ $tag }}</x-library::tag>
                         @endforeach
                     </div>
                 @endif

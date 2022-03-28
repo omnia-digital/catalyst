@@ -74,7 +74,7 @@
                         <a
                             href="{{ route($item['name']) }}"
                             title="{{ $item['label'] }}"
-                            class="{{ request()->routeIs($item['name']) ? 'bg-gray-200 font-semibold text-black' : 'text-gray-400 hover:text-black hover:bg-gray-200' }}
+                            class="{{ request()->routeIs($item['name']) ? 'bg-neutral-light font-semibold text-black' : 'text-gray-400 hover:text-black hover:bg-neutral-light' }}
                             {{ 'w-full py-2 px-6 group flex flex-col justify-center items-center relative text-xs font-medium' }}"
                         >
                             <x-dynamic-component
@@ -97,7 +97,7 @@
             <!-- mobile menu button -->
             <button
                 type="button"
-                class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary md:hidden"
+                class="px-4 border-r border-neutral-light text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary md:hidden"
                 @click="open = true"
             >
                 <span class="sr-only">Open sidebar</span>

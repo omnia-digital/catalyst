@@ -1,8 +1,8 @@
 <div>
     <div class="bg-primary p7 rounded w-9/12 mx-auto">
-        <div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
+        <div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-gray-400 border border-neutral-light rounded">
             <div x-ref="dnd"
-                class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
+                class="relative flex flex-col text-gray-400 border border-neutral-light border-dashed rounded cursor-pointer">
                 <input accept="*" type="file" multiple
                     class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
                     @change="addFiles($event)"

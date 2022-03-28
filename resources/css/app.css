@@ -4,7 +4,8 @@
 
 :root {
     --neutral: #F3F4F6;
-    --neutral-dark: #D1D5DBFF;
+    --neutral-hover: #D1D5DBFF;
+    --neutral-dark: #6b7280;
     --primary: white;
     --secondary: #171E2C;
     --tertiary: #384263;

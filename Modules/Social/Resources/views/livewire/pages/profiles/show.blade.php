@@ -126,7 +126,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4 mt-4">
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4 rounded">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4 rounded">
                     <div class="bg-gray-400 text-gray-900 rounded-full mr-2 p-2">
                         <x-heroicon-o-academic-cap class="h-5 w-5" />
                     </div>
@@ -139,7 +139,7 @@
                         <p class="text-gray-400 text-xs">Courtney Henry became a gold user</p>
                     </div>
                 </div>
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4 rounded">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4 rounded">
                     <div class="bg-gray-400 text-gray-900 rounded-full mr-2 p-2">
                         <x-heroicon-o-academic-cap class="h-5 w-5" />
                     </div>
@@ -152,7 +152,7 @@
                         <p class="text-gray-400 text-xs">Courtney Henry became a gold user</p>
                     </div>
                 </div>
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4 rounded">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4 rounded">
                     <div class="bg-gray-400 text-gray-900 rounded-full mr-2 p-2">
                         <x-heroicon-o-academic-cap class="h-5 w-5" />
                     </div>
@@ -165,7 +165,7 @@
                         <p class="text-gray-400 text-xs">Courtney Henry became a gold user</p>
                     </div>
                 </div>
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4 rounded">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4 rounded">
                     <div class="bg-gray-400 text-gray-900 rounded-full mr-2 p-2">
                         <x-heroicon-o-academic-cap class="h-5 w-5" />
                     </div>
@@ -191,7 +191,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4 mt-4">
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4 rounded">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4 rounded">
                     <div class="space-y-2">
                         <p class="text-gray-900 font-semibold text-xs">Initiative title</p>
                         <div class="flex items-center text-gray-500">
@@ -211,7 +211,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4 rounded">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4 rounded">
                     <div class="space-y-2">
                         <p class="text-gray-900 font-semibold text-xs">Another initiative title</p>
                         <div class="flex items-center text-gray-500">
@@ -231,7 +231,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4 rounded">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4 rounded">
                     <div class="space-y-2">
                         <p class="text-gray-900 font-semibold text-xs">Tincidunt dolor odio vulputate faucibus tempor. Nunc ullamcorper nunc</p>
                         <div class="flex items-center text-gray-500">
@@ -251,7 +251,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4 rounded">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4 rounded">
                     <div class="space-y-2">
                         <p class="text-gray-900 font-semibold text-xs">Initiative title</p>
                         <div class="flex items-center text-gray-500">
@@ -283,7 +283,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 gap-4 mt-4">
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4">
                     <div class="mr-2">
                         <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1" alt="Arlene McCoy" />
                     </div>
@@ -299,7 +299,7 @@
                         <x-heroicon-s-star class="h-5 w-5" />
                     </div>
                 </div>
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4">
                     <div class="mr-2">
                         <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=2" alt="Darrell Steward" />
                     </div>
@@ -315,7 +315,7 @@
                         <x-heroicon-s-star class="h-5 w-5" />
                     </div>
                 </div>
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4">
                     <div class="mr-2">
                         <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=3" alt="Albert Flores" />
                     </div>
@@ -331,7 +331,7 @@
                         <x-heroicon-s-star class="h-5 w-5" />
                     </div>
                 </div>
-                <div class="flex justify-start items-start bg-primary border border-gray-200 p-4">
+                <div class="flex justify-start items-start bg-primary border border-neutral-light p-4">
                     <div class="mr-2">
                         <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=4" alt="Albert Flores" />
                     </div>
@@ -360,7 +360,7 @@
             </div>
             <div class="grid grid-cols-4 gap-4 mt-4">
                 <!-- Post Tile -->
-                <div class="bg-primary border border-gray-200 rounded">
+                <div class="bg-primary border border-neutral-light rounded">
                     <div class="h-36 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat">
                     </div>
                     <div class="space-y-2 p-4">
@@ -376,12 +376,12 @@
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=3">
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=4">
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=5">
-                            <div class="h-6 w-6 rounded-full bg-gray-200 flex justify-center items-center text-xxs p-2">+5</div>
+                            <div class="h-6 w-6 rounded-full bg-neutral-light flex justify-center items-center text-xxs p-2">+5</div>
                         </div>
                     </div>
                 </div>
                 <!-- Post Tile -->
-                <div class="bg-primary border border-gray-200 rounded">
+                <div class="bg-primary border border-neutral-light rounded">
                     <div class="h-36 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat">
                     </div>
                     <div class="space-y-2 p-4">
@@ -397,12 +397,12 @@
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=3">
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=4">
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=5">
-                            <div class="h-6 w-6 rounded-full bg-gray-200 flex justify-center items-center text-xxs p-2">+5</div>
+                            <div class="h-6 w-6 rounded-full bg-neutral-light flex justify-center items-center text-xxs p-2">+5</div>
                         </div>
                     </div>
                 </div>
                 <!-- Post Tile -->
-                <div class="bg-primary border border-gray-200 rounded">
+                <div class="bg-primary border border-neutral-light rounded">
                     <div class="h-36 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat">
                     </div>
                     <div class="space-y-2 p-4">
@@ -418,12 +418,12 @@
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=3">
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=4">
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=5">
-                            <div class="h-6 w-6 rounded-full bg-gray-200 flex justify-center items-center text-xxs p-2">+5</div>
+                            <div class="h-6 w-6 rounded-full bg-neutral-light flex justify-center items-center text-xxs p-2">+5</div>
                         </div>
                     </div>
                 </div>
                 <!-- Post Tile -->
-                <div class="bg-primary border border-gray-200 rounded">
+                <div class="bg-primary border border-neutral-light rounded">
                     <div class="h-36 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat">
                     </div>
                     <div class="space-y-2 p-4">
@@ -439,7 +439,7 @@
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=3">
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=4">
                             <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=5">
-                            <div class="h-6 w-6 rounded-full bg-gray-200 flex justify-center items-center text-xxs p-2">+5</div>
+                            <div class="h-6 w-6 rounded-full bg-neutral-light flex justify-center items-center text-xxs p-2">+5</div>
                         </div>
                     </div>
                 </div>
