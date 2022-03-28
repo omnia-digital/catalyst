@@ -1,10 +1,16 @@
 @extends('social::livewire.layouts.main-layout')
 
 @section('content')
-<div>
+<div class="max-w-7xl mx-auto">
+    <div class="bg-neutral">
+        <div class="flex-1 flex items-center">
+            <h1 class="py-4 ml-4 text-3xl">Home</h1>
+            <x-heroicon-o-cog class="mt-1 ml-3 w-6 h-6"/>
+        </div>
+    </div>
     <!-- Page Heading -->
     <div class="xl:grid xl:grid-cols-9 xl:gap-9">
-        <div class="xl:col-span-6">
+        <div class="xl:col-span-5">
             <div x-data="setup()">
                 <ul class="flex justify-center items-center my-4">
                     <template x-for="(tab, index) in tabs" :key="tab.id">
@@ -47,7 +53,7 @@
                 </ul>
             </div>
         </div>
-        <x-sidebar-column />
+        <x-sidebar-column class="xl:col-span-4" />
     </div>
 </div>
 @endsection
@@ -71,11 +77,6 @@
                         id: 2,
                         title: 'Newest',
                         component: 'social.newest'
-                    },
-                    {
-                        id: 3,
-                        title: 'Favorites',
-                        component: 'social.favorites'
                     },
                     {
                         id: 4,

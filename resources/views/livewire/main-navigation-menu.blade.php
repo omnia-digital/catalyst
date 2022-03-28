@@ -2,7 +2,7 @@
     <!-- Desktop Navigation Menu -->
     <div class="px-4 md:px-6">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="flex w-1/3">
                 <!-- Logo -->
                 <div class="flex items-center h-16 flex-shrink-0">
                     <div class="mx-2 bg-gray-800 p-4 rounded-lg">
@@ -11,22 +11,24 @@
                     <p class="text-base font-bold">{{ env('APP_NAME') }}</p>
                 </div>
 
-                <!-- Navigation Links -->
-                <nav class="hidden items-center space-x-4 sm:-my-px sm:ml-10 sm:flex">
-                    @foreach ($navigation as $item)
+
+            </div>
+            <!-- Navigation Links -->
+            <nav class="w-1/3 flex justify-center hidden items-center space-x-4 sm:-my-px sm:ml-10 sm:flex">
+                @foreach ($navigation as $item)
+{{--                    @if(\Nwidart\Modules\Module::isModuleEnabled($item['module']))--}}
                         <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->route()->named($item['module'] . '*')">
                             <x-dynamic-component
-                                :component="$item['icon']"
-                                class="flex-shrink-0 h-6 w-6 mr-2"
-                                aria-hidden="true"
+                                    :component="$item['icon']"
+                                    class="flex-shrink-0 h-6 w-6 mr-2"
+                                    aria-hidden="true"
                             />
                             {{ $item['label'] }}
                         </x-main-nav-link>
-                    @endforeach
-                </nav>
-            </div>
-
-            <div class="hidden md:flex md:items-center md:ml-6">
+{{--                    @endif--}}
+                @endforeach
+            </nav>
+            <div class="w-1/3 hidden md:flex justify-end md:items-center md:ml-6">
                 <!-- Search -->
                 <div class="hidden md:flex justify-center lg:ml-6 lg:justify-end items-center">
                     <div class="max-w-lg w-full lg:max-w-xs">
