@@ -38,14 +38,11 @@ module.exports = {
                 'sm': '0.95rem'
             },
             colors: {
-                rose: colors.rose,
-                neutral: "#f5f7fa",
-                primary: "#10b981",
-                // primary: "#303956",
-                // primary: "#305653",
-                secondary: "#303956",
-                // secondary: "#10b981",
-                tertiary: "#384263"
+                neutral: 'var(--neutral)',
+                'neutral-dark': 'var(--neutral-dark)',
+                primary: 'var(--primary)',
+                secondary: 'var(--secondary)',
+                tertiary: 'var(--tertiary)'
             },
         },
     },

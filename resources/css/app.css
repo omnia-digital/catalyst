@@ -2,6 +2,26 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+.theme-startup {
+    --color-primary: 255 115 179;
+    --color-secondary: 111 114 185;
+}
+
+.newyear .newyear\:bg-primary {
+    background-color: black;
+}
+
+:root {
+    --neutral: #F3F4F6;
+    --neutral-dark: #D1D5DBFF;
+    --primary: white;
+    --secondary: #171E2C;
+    --tertiary: black;
+    /*--primary: "#305653";*/
+    /*--secondary: "#303956";*/
+    /*--tertiary: "#384263";*/
+}
+
 h1 {
     @apply text-2xl font-bold leading-10;
 }
