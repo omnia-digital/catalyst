@@ -6,9 +6,9 @@
                 <input accept="*" type="file" multiple
                     class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
                     @change="addFiles($event)"
-                    @dragover="$refs.dnd.classList.add('border-blue-400'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
-                    @dragleave="$refs.dnd.classList.remove('border-blue-400'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
-                    @drop="$refs.dnd.classList.remove('border-blue-400'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
+                    @dragover="$refs.dnd.classList.add('border-secondary'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
+                    @dragleave="$refs.dnd.classList.remove('border-secondary'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
+                    @drop="$refs.dnd.classList.remove('border-secondary'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
                     title=""
                     x-ref="attachedFiles"
                     wire:model="attached_files" />
