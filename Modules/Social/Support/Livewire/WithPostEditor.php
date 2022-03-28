@@ -34,5 +34,6 @@ trait WithPostEditor
     public function emitPostSaved()
     {
         $this->emitTo('social::post-editor', 'postSaved');
+        $this->emitTo('social::news-feed', 'postSaved');
     }
 }

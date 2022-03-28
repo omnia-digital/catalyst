@@ -59,7 +59,7 @@
                         x-transition
                         role="list"
                         class="p-4 grid gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
-                        x-bind:class="{'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6': images.length > 2, 'grid-cols-1': images.length === 1}"
+                        x-bind:class="{'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6': images.length > 2, 'grid-cols-1': images.length === 1, 'grid-cols-2': images.length === 2}"
                 >
                     <template x-for="(image, index) in images" :key="index">
                         <li class="relative cursor-pointer">

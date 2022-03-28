@@ -2,8 +2,10 @@
 
 namespace Modules\Social\Http\Livewire;
 
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Social\Actions\CreateNewPostAction;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Modules\Social\Support\Livewire\WithPostEditor;
 
@@ -17,6 +19,8 @@ class RepliesModal extends Component
 
     public bool $show;
 
+    public ?PostType $type = null;
+
     public ?string $content = null;
 
     protected $listeners = [
@@ -29,11 +33,12 @@ class RepliesModal extends Component
         $this->replyCount = $this->post->comments()->count();
     }
 
-    public function mount($post, $show = false)
+    public function mount($post, $show = false, $type = null)
     {
         $this->post = $post;
         $this->replyCount = $post->comments()->count();
         $this->show = $show;
+        $this->type = $type;
     }
 
     public function saveComment($data)
@@ -42,9 +47,14 @@ class RepliesModal extends Component
 
         $this->validatePostEditor();
 
-        (new CreateNewPostAction)
-            ->asComment($this->post)
-            ->execute($data['content']);
+        DB::transaction(function () use ($data) {
+            $comment = (new CreateNewPostAction)
+                ->asComment($this->post)
+                ->type($this->type)
+                ->execute($data['content']);
+
+            $comment->attachMedia($data['images'] ?? []);
+        });
 
         $this->emitPostSaved();
         $this->redirectRoute('social.posts.show', $this->post);

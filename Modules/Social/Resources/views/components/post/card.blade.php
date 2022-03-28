@@ -14,7 +14,7 @@
                 </a>
             </p>
             <p class="text-sm text-gray-500">
-                @if (!$post->isParent())
+                @if ($post->isParent())
                     <a href="{{ $post->getUrl() }}" class="hover:underline">
                         {{ $post->created_at->diffForHumans() }}
                     </a>
@@ -45,6 +45,12 @@
     @if ($post->image)
         <div class="block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden pt-2">
             <img src="{{ $post->image }}" alt="{{ $post->title }}" class="object-cover">
+        </div>
+    @endif
+
+    @if ($mediaUrl = $post->getFirstMediaUrl())
+        <div class="block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden pt-2">
+            <img src="{{ $mediaUrl }}" alt="{{ $post->title }}" class="object-cover">
         </div>
     @endif
 

@@ -18,16 +18,10 @@
                 </div>
                 <div class="mt-0">
                     <div class="mx-auto">
-                        <livewire:social::post-editor :wire:key="uniqid()"/>
+                        <livewire:social::news-feed-editor />
 
-                        <h1 class="sr-only">Recent Posts</h1>
                         <div class="mt-6 space-y-4">
-                            @if ($recentlyAddedPost)
-                                <x-social::post.card wire:key="post-{{ $post->id }}" :post="$post"/>
-                            @endif
-                            @foreach ($this->posts as $post)
-                                <x-social::post.card wire:key="post-{{ $post->id }}" :post="$post"/>
-                            @endforeach
+                            <livewire:social::news-feed/>
                         </div>
                     </div>
                 </div>
