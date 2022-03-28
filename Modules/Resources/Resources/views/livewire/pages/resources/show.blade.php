@@ -11,9 +11,11 @@
     </div>
     <div class="xl:grid xl:grid-cols-9 xl:gap-9">
         <div class="xl:col-span-6">
-            <div>
-                <img class="rounded-lg w-full object-cover max-h-96 bg-gray-300 flex-shrink-0" src="{{$resource->image}}" alt="{{$resource->title}}">
-            </div>
+            @if($resource->image)
+                <div>
+                    <img class="rounded-lg w-full object-cover max-h-96 bg-gray-300 flex-shrink-0" src="{{$resource->image}}" alt="{{$resource->title}}">
+                </div>
+            @endif
             <div class="flex mt-6">
                 <h3 class="text-gray-900 text-4xl hover:underline font-bold">{{ $resource->title }}</h3>
                 @empty(!$resource->is_verified)
@@ -36,16 +38,19 @@
                 {!! Purify::clean($resource->body) !!}
             </div>
 
+            @if($resource->url)
+                <a href="{{ $resource->url }}" target="_blank" class="bg-white hover:shadow-lg rounded-lg px-4 py-2 text-xl inline-flex items-center space-x-2">
+                    <p>Go to website</p>
+                    <x-heroicon-o-arrow-right class="h-6 w-6"/>
+                </a>
+            @endif
+
             <div class="py-4">
                 @if ($resource->isParent())
                     <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::RESOURCE"/>
                 @endif
             </div>
 
-            <a href="{{ $resource->url }}" target="_blank" class="bg-white hover:shadow-lg rounded-lg px-4 py-2 text-xl inline-flex items-center space-x-2">
-                <p>Go to Resource</p>
-                <x-heroicon-o-arrow-right class="h-6 w-6"/>
-            </a>
         </div>
 
         <aside class="hidden xl:block xl:col-span-3">

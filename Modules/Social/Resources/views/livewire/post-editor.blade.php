@@ -4,7 +4,7 @@
             heightClass="min-h-[80px]"
             wordCountType="character"
             characterLimit="500"
-            placeholder="What\\'s happening?"
+            :placeholder="$placeholderText"
     />
 
     <div class="flex justify-between">

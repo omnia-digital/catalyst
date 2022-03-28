@@ -12,6 +12,8 @@ class PostEditor extends Component
 
     public array $config = [];
 
+    public string $placeholderText = "Write something...";
+
     protected $listeners = [
         'validationFailed' => 'handleValidationFailed',
         'postSaved'        => 'handlePostSaved'

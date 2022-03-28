@@ -24,9 +24,8 @@ class Create extends Component
     {
         return [
             'title' => ['required', 'max:255'],
-            'url'   => ['required', 'url', 'max:255'],
+            'url'   => ['url', 'max:255'],
             'body'  => ['required', 'max:500'],
-            'image' => ['required', 'max:255'],
         ];
     }
 
