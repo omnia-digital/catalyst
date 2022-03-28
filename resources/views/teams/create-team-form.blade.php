@@ -16,7 +16,7 @@
 
                 <div class="ml-4 leading-tight">
                     <div>{{ $this->user->name }}</div>
-                    <div class="text-gray-700 text-sm">{{ $this->user->email }}</div>
+                    <div class="text-color-dark text-sm">{{ $this->user->email }}</div>
                 </div>
             </div>
         </div>

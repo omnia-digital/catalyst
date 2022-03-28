@@ -25,7 +25,7 @@
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                     <div class="bg-primary py-6 px-4 space-y-6 sm:p-6">
                         <div>
-                            <h2 class="text-lg leading-6 font-medium text-gray-900">New Job</h2>
+                            <h2 class="text-lg leading-6 font-medium text-color-dark">New Job</h2>
                         </div>
 
                         <div class="grid grid-cols-3 gap-6">
@@ -91,7 +91,7 @@
                                 <x-input.label value="Budget (Optional)" for="budget"/>
                                 <x-input.text wire:model="budget" id="budget" placeholder="Budget">
                                     <x-slot name="icon">
-                                        <x-heroicon-o-currency-dollar class="h-5 w-5 text-gray-400"/>
+                                        <x-heroicon-o-currency-dollar class="h-5 w-5 text-color-light"/>
                                     </x-slot>
                                 </x-input.text>
                                 <x-input.error for="budget"/>
@@ -104,7 +104,7 @@
                                         <x-input.label class="pl-4 font-bold" value="{{ $project['title'] }}"/>
                                     </div>
                                     <div class="pl-8 pt-1">
-                                        <p class="mt-1 text-sm leading-5 text-gray-500">{{ $project['description'] }}</p>
+                                        <p class="mt-1 text-sm leading-5 text-color-base">{{ $project['description'] }}</p>
                                     </div>
 
                                 @endforeach
@@ -123,8 +123,8 @@
                             <div class="col-span-3 space-y-1 sm:col-span-2">
                                 <fieldset>
                                     <div class="mb-2">
-                                        <h2 class="text-lg leading-6 font-medium text-gray-900">Job Addons</h2>
-                                        <p class="mt-1 text-sm leading-5 text-gray-500">This information will be displayed publicly so be careful what you share.</p>
+                                        <h2 class="text-lg leading-6 font-medium text-color-dark">Job Addons</h2>
+                                        <p class="mt-1 text-sm leading-5 text-color-base">This information will be displayed publicly so be careful what you share.</p>
                                     </div>
 
                                     <ul class="space-y-6">
@@ -140,18 +140,18 @@
                                                             <span class="form-radio text-secondary group-focus:bg-red-500"></span>
                                                         </div>
                                                         <div class="text-sm leading-5">
-                                                            <p class="block font-medium text-gray-900">
+                                                            <p class="block font-medium text-color-dark">
                                                                 {{ $addon->name }}
                                                             </p>
                                                             @if ($addon->description)
-                                                                <div class="text-gray-500">
+                                                                <div class="text-color-base">
                                                                     <span class="block sm:inline">{{ $addon->description }}</span>
                                                                 </div>
                                                             @endif
                                                         </div>
                                                     </div>
                                                     <div class="mt-2 flex text-sm leading-5 space-x-1 sm:mt-0 sm:block sm:space-x-0 sm:text-right">
-                                                        <div class="font-medium text-gray-900">{{ \App\LaraContract::money($addon->price) }}</div>
+                                                        <div class="font-medium text-color-dark">{{ \App\LaraContract::money($addon->price) }}</div>
                                                     </div>
                                                 </div>
                                                 <div
@@ -266,8 +266,8 @@
                                 >
                                     <fieldset>
                                         <div>
-                                            <h2 class="text-lg leading-6 font-medium text-gray-900">Payment</h2>
-                                            <p class="mt-1 text-sm leading-5 text-gray-500">This information will be displayed publicly so be careful what you share.</p>
+                                            <h2 class="text-lg leading-6 font-medium text-color-dark">Payment</h2>
+                                            <p class="mt-1 text-sm leading-5 text-color-base">This information will be displayed publicly so be careful what you share.</p>
                                         </div>
                                         <div class="mt-2 bg-primary rounded-md -space-y-px">
                                             <div
@@ -277,7 +277,7 @@
                                                 <x-input.radio x-model="paymentMethod" value="new-card" id="new-card"/>
                                                 <x-input.label for="new-card" class="ml-3 flex flex-col cursor-pointer">
                                             <span
-                                                x-bind:class="{'text-secondary': paymentMethod === 'new-card', 'text-gray-900': paymentMethod !== 'new-card'}"
+                                                x-bind:class="{'text-secondary': paymentMethod === 'new-card', 'text-color-dark': paymentMethod !== 'new-card'}"
                                                 class="block text-sm leading-5 font-medium"
                                             >
                                                 Add a new card
@@ -293,7 +293,7 @@
                                                     <x-input.radio x-model="paymentMethod" value="previous-card" id="previous-card"/>
                                                     <x-input.label for="previous-card" class="ml-3 flex flex-col cursor-pointer">
                                                 <span
-                                                    x-bind:class="{'text-secondary': paymentMethod === 'previous-card', 'text-gray-900': paymentMethod !== 'previous-card'}"
+                                                    x-bind:class="{'text-secondary': paymentMethod === 'previous-card', 'text-color-dark': paymentMethod !== 'previous-card'}"
                                                     class="block text-sm leading-5 font-medium"
                                                 >
                                                     Use {{ ucfirst(Auth::user()->card_brand) }} ending with {{ Auth::user()->card_last_four }}
@@ -306,7 +306,7 @@
 
                                     {{--   Card info and bliing address    --}}
                                     <div x-show="paymentMethod === 'new-card' && !isPaymentMethodUpdated" class="col-span-3 sm:col-span-2 space-y-4">
-                                        <p class="mb-2 text-sm leading-5 text-gray-500">Please fill in your card information and billing address.</p>
+                                        <p class="mb-2 text-sm leading-5 text-color-base">Please fill in your card information and billing address.</p>
 
                                         <div>
                                             <x-input.label for="line1" value="Address"/>
@@ -383,7 +383,7 @@
                         </div>
                         {{--  Preview Job  --}}
                         <div class="rounded border-2 mt-10">
-                            <h2 class="text-xl text-center font-medium text-gray-700 py-2">Preview</h2>
+                            <h2 class="text-xl text-center font-medium text-color-dark py-2">Preview</h2>
                             <p class="text-center font-bold">Here's a preview of how your jobpost will look like</p>
                             <p class="text-center">Don't worry if it's not perfect the first time: your job is fully editable for free after posting it!</p>
 

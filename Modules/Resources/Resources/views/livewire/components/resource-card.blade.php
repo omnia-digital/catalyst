@@ -4,7 +4,7 @@
         <div class="space-y-2 py-4 px-6">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3 align-middle">
-                    <h3 class="flex items-center text-gray-900 text-lg hover:underline font-bold">
+                    <h3 class="flex items-center text-color-dark text-lg hover:underline font-bold">
                         <a href="{{ route('resources.show', ['resource' => $post]) }}">{{ $post->title }}</a>
                     </h3>
 
@@ -12,7 +12,7 @@
                         <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
                     @endempty
 
-                    <h3 class="text-gray-500 text-md">{{ $post->created_at->diffInDays() < 2 ? $post->created_at->shortAbsoluteDiffForHumans() : $post->created_at->format('M d') }}</h3>
+                    <h3 class="text-color-base text-md">{{ $post->created_at->diffInDays() < 2 ? $post->created_at->shortAbsoluteDiffForHumans() : $post->created_at->format('M d') }}</h3>
                 </div>
 
                 @if ($post->tags)

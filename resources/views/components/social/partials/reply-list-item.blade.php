@@ -5,10 +5,10 @@
                 <img class="h-10 w-10 rounded-full" src="{{ $reply->user->profile_photo_url }}" alt="{{ $reply->user->name }}" />
             </div>
             <div class="min-w-0 flex-1">
-                <p class="text-sm font-medium text-gray-900">
+                <p class="text-sm font-medium text-color-dark">
                     <a href="{{ route('user.profile', $reply->user->handle) }}" class="hover:underline">{{ $reply->user->name }}</a>
                 </p>
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-color-base">
                     <a href="#" class="hover:underline">
                         <time datetime="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</time>
                     </a>
@@ -16,5 +16,5 @@
             </div>
         </div>
     </div>
-    <div class="mt-2 text-sm text-gray-700 space-y-4">{{ $reply->body }}</div>
+    <div class="mt-2 text-sm text-color-dark space-y-4">{{ $reply->body }}</div>
 </li>

@@ -1,8 +1,8 @@
 <div x-data="shareButton()">
     <div class="inline-flex items-center text-sm">
-        <button @click="openModal = true" type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+        <button @click="openModal = true" type="button" class="inline-flex space-x-2 text-color-light hover:text-color-base">
             <x-heroicon-o-share :class="$show ? 'h-6 w-6' : 'h-5 w-5'" aria-hidden="true"/>
-            <span class="font-medium text-gray-900 sr-only">Share</span>
+            <span class="font-medium text-color-dark sr-only">Share</span>
         </button>
     </div>
     <!-- component -->
@@ -21,7 +21,7 @@
     <!--MODAL ITEM-->
         <div class="relative sm:w-3/4 md:w-1/2 mx-2 sm:mx-auto mt-10 mb-24 opacity-100">
             <div
-            class="relative bg-primary shadow-lg rounded-lg text-gray-900 z-20"
+            class="relative bg-primary shadow-lg rounded-lg text-color-dark z-20"
             @click.away="openModal = false"
             x-show="openModal"
             x-transition:enter="transition transform duration-300"
@@ -34,12 +34,12 @@
                 <!--MODAL HEADER-->
                 <div class="flex justify-between items center border-b border-neutral-light py-3">
                     <div class="flex items-center justify-center">
-                        <p class="text-xl font-bold text-gray-800">Share Modal</p>
+                        <p class="text-xl font-bold text-color-dark">Share Modal</p>
                     </div>
 
                     <div
                         @click="openModal = false"
-                        class="bg-neutral-dark hover:bg-gray-500 cursor-pointer hover:text-gray-300 font-sans text-gray-500 w-8 h-8 flex items-center justify-center rounded-full">
+                        class="bg-neutral-dark hover:bg-gray-500 cursor-pointer hover:text-color-light font-sans text-color-base w-8 h-8 flex items-center justify-center rounded-full">
                         x
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                         <button
                             @click="copyLink(shareLink)"
                             x-text="copyText"
-                            class="text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-primary hover:bg-gray-50">
+                            class="text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-color-dark bg-primary hover:bg-gray-50">
                             Copy
                         </button>
                     </div>

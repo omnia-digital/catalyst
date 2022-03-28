@@ -5,14 +5,14 @@
             <div class="px-4 sm:px-0">
                 <div class="sm:hidden">
                     <label for="question-tabs" class="sr-only">Select a tab</label>
-                    <select id="question-tabs" class="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500">
+                    <select id="question-tabs" class="block w-full rounded-md border-gray-300 text-color-base font-medium text-color-dark shadow-sm focus:border-rose-500 focus:ring-rose-500">
 {{--                        <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">{{ tab.name }}</option>--}}
                     </select>
                 </div>
                 <div class="hidden sm:block">
                     <nav class="relative z-0 rounded-lg shadow flex divide-x divide-neutral-light" aria-label="Tabs">
                         <a v-for="(tab, tabIdx) in tabs" :key="tab.name" :href="tab.href" :aria-current="tab.current ? 'page' : undefined"
-                           :class="[tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700', tabIdx === 0 ? 'rounded-l-lg' : '', tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '', 'group relative min-w-0 flex-1 overflow-hidden bg-primary py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10']">
+                           :class="[tab.current ? 'text-color-dark' : 'text-color-base hover:text-color-dark', tabIdx === 0 ? 'rounded-l-lg' : '', tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '', 'group relative min-w-0 flex-1 overflow-hidden bg-primary py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10']">
 {{--                            <span>{{ tab.name }}</span>--}}
                             <span aria-hidden="true" :class="[tab.current ? 'bg-rose-500' : 'bg-transparent', 'absolute inset-x-0 bottom-0 h-0.5']"/>
                         </a>
@@ -35,7 +35,7 @@
                 <section aria-labelledby="who-to-follow-heading">
                     <div class="bg-primary rounded-lg shadow">
                         <div class="p-6">
-                            <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
+                            <h2 id="who-to-follow-heading" class="text-color-base font-medium text-color-dark">
                                 Who to follow
                             </h2>
                             <div class="mt-6 flow-root">
@@ -45,10 +45,10 @@
                                             <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt=""/>
                                         </div>
                                         <div class="min-w-0 flex-1">
-                                            <p class="text-sm font-medium text-gray-900">
+                                            <p class="text-sm font-medium text-color-dark">
 {{--                                                <a :href="user.href">{{ user.name }}</a>--}}
                                             </p>
-                                            <p class="text-sm text-gray-500">
+                                            <p class="text-sm text-color-base">
 {{--                                                <a :href="user.href">{{ '@' + user.profile.handle }}</a>--}}
                                             </p>
                                         </div>
@@ -64,7 +64,7 @@
                                 </ul>
                             </div>
                             <div class="mt-6">
-                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-primary hover:bg-gray-50">
+                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-color-dark bg-primary hover:bg-gray-50">
                                     View all
                                 </a>
                             </div>
@@ -74,7 +74,7 @@
                 <section aria-labelledby="trending-heading">
                     <div class="bg-primary rounded-lg shadow">
                         <div class="p-6">
-                            <h2 id="trending-heading" class="text-base font-medium text-gray-900">
+                            <h2 id="trending-heading" class="text-color-base font-medium text-color-dark">
                                 Trending
                             </h2>
                             <div class="mt-6 flow-root">
@@ -84,12 +84,12 @@
                                             <img class="h-8 w-8 rounded-full" :src="post.user.imageUrl" :alt="post.user.name"/>
                                         </div>
                                         <div class="min-w-0 flex-1">
-{{--                                            <p class="text-sm text-gray-800">{{ post.body }}</p>--}}
+{{--                                            <p class="text-sm text-color-dark">{{ post.body }}</p>--}}
                                             <div class="mt-2 flex">
                                                     <span class="inline-flex items-center text-sm">
-                                                      <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                                                      <button type="button" class="inline-flex space-x-2 text-color-light hover:text-color-base">
                                                         <ChatAltIcon class="h-5 w-5" aria-hidden="true"/>
-{{--                                                        <span class="font-medium text-gray-900">{{ post.comments }}</span>--}}
+{{--                                                        <span class="font-medium text-color-dark">{{ post.comments }}</span>--}}
                                                       </button>
                                                     </span>
                                             </div>
@@ -98,7 +98,7 @@
                                 </ul>
                             </div>
                             <div class="mt-6">
-                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-primary hover:bg-gray-50">
+                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-color-dark bg-primary hover:bg-gray-50">
                                     View all
                                 </a>
                             </div>

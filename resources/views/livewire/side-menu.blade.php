@@ -30,8 +30,8 @@
                         @foreach ($navigation as $item)
                             <a
                                 href="{{ route($item['name']) }}"
-                                class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-base font-medium' }}">
-                                <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-gray-400 group-hover:text-gray-300' }} mr-3 flex-shrink-0 h-6 w-6"
+                                class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-color-light hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-color-base font-medium' }}">
+                                <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-color-light group-hover:text-color-light' }} mr-3 flex-shrink-0 h-6 w-6"
                                                         aria-hidden="true"/>
                                 {{ $item['label'] }}
                             </a>
@@ -74,7 +74,7 @@
                         <a
                             href="{{ route($item['name']) }}"
                             title="{{ $item['label'] }}"
-                            class="{{ request()->routeIs($item['name']) ? 'bg-neutral-light font-semibold text-black' : 'text-gray-400 hover:text-black hover:bg-neutral-light' }}
+                            class="{{ request()->routeIs($item['name']) ? 'bg-neutral-light font-semibold text-black' : 'text-color-light hover:text-black hover:bg-neutral-light' }}
                             {{ 'w-full py-2 px-6 group flex flex-col justify-center items-center relative text-xs font-medium' }}"
                         >
                             <x-dynamic-component
@@ -97,7 +97,7 @@
             <!-- mobile menu button -->
             <button
                 type="button"
-                class="px-4 border-r border-neutral-light text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary md:hidden"
+                class="px-4 border-r border-neutral-light text-color-base focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary md:hidden"
                 @click="open = true"
             >
                 <span class="sr-only">Open sidebar</span>

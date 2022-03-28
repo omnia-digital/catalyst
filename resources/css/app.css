@@ -3,6 +3,9 @@
 @import 'tailwindcss/utilities';
 
 :root {
+    --text-color-base: #374151;
+    --text-color-light: #9ca3af;
+    --text-color-dark: #272d38;
     --neutral: #F3F4F6;
     --neutral-hover: #D1D5DBFF;
     --neutral-dark: #6b7280;

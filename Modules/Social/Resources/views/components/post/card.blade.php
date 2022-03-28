@@ -8,12 +8,12 @@
             <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="{{ $post->user->profile->name }}">
         </div>
         <div class="min-w-0 flex-1">
-            <p class="text-sm font-medium text-gray-900">
+            <p class="text-sm font-medium text-color-dark">
                 <a href="#" class="hover:underline">
                     {{ $post->user->profile->name }}
                 </a>
             </p>
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-color-base">
                 @if (!$post->isParent())
                     <a href="{{ $post->getUrl() }}" class="hover:underline">
                         {{ $post->created_at->diffForHumans() }}
@@ -27,7 +27,7 @@
             <div class="relative z-30 inline-block text-left">
                 <x-library::dropdown>
                     <x-slot name="trigger">
-                        <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
+                        <button type="button" class="-m-2 p-2 rounded-full flex items-center text-color-light hover:text-color-base" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
                             <span class="sr-only">Open options</span>
                             <x-heroicon-s-dots-vertical class="h-5 w-5"/>
                         </button>
