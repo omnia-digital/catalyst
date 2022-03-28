@@ -8,7 +8,7 @@
                     <div class="mx-2 bg-gray-800 p-4 rounded-lg">
                         {{--                        <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-secondary.svg" alt="Workflow">--}}
                     </div>
-                    <p class="text-color-base font-bold">{{ env('APP_NAME') }}</p>
+                    <p class="text-base-text-color font-bold">{{ env('APP_NAME') }}</p>
                 </div>
 
 
@@ -35,17 +35,17 @@
                         <label for="search" class="sr-only">Search</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <x-heroicon-o-search class="h-5 w-5 dark:text-color-light" aria-hidden="true"/>
+                                <x-heroicon-o-search class="h-5 w-5 dark:text-light-text-color" aria-hidden="true"/>
                             </div>
                             <input id="search" name="search"
-                                   class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 dark:bg-gray-700 text-color-light placeholder-gray-400 focus:outline-none focus:bg-primary focus:border-white focus:ring-white focus:text-color-dark sm:text-sm"
+                                   class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-gray-400 focus:outline-none focus:bg-primary focus:border-white focus:ring-white focus:text-dark-text-color sm:text-sm"
                                    placeholder="Search for Projects" type="search"/>
                         </div>
                     </div>
                 </div>
                 <!-- Notifications -->
                 <div class="ml-4 flex items-center md:ml-6">
-                    <button type="button" class="p-1 mr-2 relative rounded-full text-color-light hover:text-primary focus:outline-none">
+                    <button type="button" class="p-1 mr-2 relative rounded-full text-light-text-color hover:text-primary focus:outline-none">
                         <span class="sr-only">View notifications</span>
                         <x-heroicon-o-bell class="h-6 w-6"/>
                         <span class="ml-2 w-3 h-3 text-xxs absolute top-0 right-0 flex items-center justify-center text-white bg-black rounded-full">3</span>
@@ -59,7 +59,7 @@
                             <x-slot name="trigger">
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-color-base bg-primary hover:bg-gray-50 hover:text-color-dark focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-base-text-color bg-primary hover:bg-gray-50 hover:text-dark-text-color focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
                                         {{ Auth::user()->currentTeam->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -74,7 +74,7 @@
                             <x-slot name="content">
                                 <div class="w-60">
                                     <!-- Team Management -->
-                                    <div class="block px-4 py-2 text-xs text-color-light">
+                                    <div class="block px-4 py-2 text-xs text-light-text-color">
                                         {{ __('Manage Team') }}
                                     </div>
 
@@ -92,7 +92,7 @@
                                     <div class="border-t border-gray-100"></div>
 
                                     <!-- Team Switcher -->
-                                    <div class="block px-4 py-2 text-xs text-color-light">
+                                    <div class="block px-4 py-2 text-xs text-light-text-color">
                                         {{ __('Switch Teams') }}
                                     </div>
 
@@ -116,7 +116,7 @@
                             @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-color-base bg-primary hover:text-color-dark focus:outline-none transition">
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-base-text-color bg-primary hover:text-dark-text-color focus:outline-none transition">
                                         {{ Auth::user()->name }}
                                         <div>
                                             <img class="inline-block h-8 w-8 rounded-full"
@@ -134,7 +134,7 @@
 
                         <x-slot name="content">
                             <!-- Account Management -->
-                            <div class="block px-4 py-2 text-xs text-color-light">
+                            <div class="block px-4 py-2 text-xs text-light-text-color">
                                 {{ __('Manage Account') }}
                             </div>
 
@@ -168,7 +168,7 @@
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-color-light hover:text-color-base hover:bg-neutral focus:outline-none focus:bg-neutral focus:text-color-base transition">
+                        class="inline-flex items-center justify-center p-2 rounded-md text-light-text-color hover:text-base-text-color hover:bg-neutral focus:outline-none focus:bg-neutral focus:text-base-text-color transition">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -196,8 +196,8 @@
                 @endif
 
                 <div>
-                    <div class="font-medium text-color-base text-color-dark">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-color-base">{{ Auth::user()->email }}</div>
+                    <div class="font-medium text-base-text-color text-dark-text-color">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-base-text-color">{{ Auth::user()->email }}</div>
                 </div>
             </div>
 
@@ -228,7 +228,7 @@
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="border-t border-neutral-light"></div>
 
-                    <div class="block px-4 py-2 text-xs text-color-light">
+                    <div class="block px-4 py-2 text-xs text-light-text-color">
                         {{ __('Manage Team') }}
                     </div>
 
@@ -246,7 +246,7 @@
                     <div class="border-t border-neutral-light"></div>
 
                     <!-- Team Switcher -->
-                    <div class="block px-4 py-2 text-xs text-color-light">
+                    <div class="block px-4 py-2 text-xs text-light-text-color">
                         {{ __('Switch Teams') }}
                     </div>
 

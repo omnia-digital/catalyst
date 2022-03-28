@@ -42,7 +42,7 @@
                     <div class="flex items-center">
                         <button
                             type="button"
-                            class="-m-2.5 w-10 h-10 rounded-full flex items-center justify-center text-color-light hover:text-color-base"
+                            class="-m-2.5 w-10 h-10 rounded-full flex items-center justify-center text-light-text-color hover:text-base-text-color"
                             x-on:click="attachmentDrawer = !attachmentDrawer"
                         >
                             <x-heroicon-o-paper-clip class="h-5 w-5" aria-hidden="true" />
@@ -58,7 +58,7 @@
                                 <button
                                     @click="reactionMenuOpen = true"
                                     type="button"
-                                    class="relative -m-2.5 w-10 h-10 rounded-full flex items-center justify-center text-color-light hover:text-color-base"
+                                    class="relative -m-2.5 w-10 h-10 rounded-full flex items-center justify-center text-light-text-color hover:text-base-text-color"
                                 >
                                     <span class="flex items-center justify-center">
                                         @if (is_null($selected))
@@ -85,7 +85,7 @@
                                     x-transition:leave.opacity.100
                                     x-transition:leave.scale.100
                                 >
-                                    <ul class="absolute z-10 mt-1 -ml-6 w-60 bg-primary shadow rounded-lg py-3 text-color-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:ml-auto sm:w-64 sm:text-sm">
+                                    <ul class="absolute z-10 mt-1 -ml-6 w-60 bg-primary shadow rounded-lg py-3 text-base-text-color ring-1 ring-black ring-opacity-5 focus:outline-none sm:ml-auto sm:w-64 sm:text-sm">
                                         @foreach ($moods as $mood)
                                             <li class="bg-primary cursor-default select-none relative py-2 px-3">
                                                 <div class="flex items-center">

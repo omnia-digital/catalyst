@@ -37,20 +37,20 @@
             <div class="mt-2 sm:flex sm:justify-between">
                 <div class="sm:flex">
                     @if ($episode->mainSpeaker)
-                        <p class="flex items-center text-sm text-color-base">
-                            <x-heroicon-s-user class="flex-shrink-0 mr-1.5 h-5 w-5 text-color-light"/>
+                        <p class="flex items-center text-sm text-base-text-color">
+                            <x-heroicon-s-user class="flex-shrink-0 mr-1.5 h-5 w-5 text-light-text-color"/>
                             {{ $episode->mainSpeaker->name }}
                         </p>
                     @endif
                 </div>
-                <div class="mt-2 flex items-center text-sm text-color-base sm:mt-0">
-                    <x-heroicon-s-calendar class="flex-shrink-0 mr-1.5 h-5 w-5 text-color-light"/>
+                <div class="mt-2 flex items-center text-sm text-base-text-color sm:mt-0">
+                    <x-heroicon-s-calendar class="flex-shrink-0 mr-1.5 h-5 w-5 text-light-text-color"/>
                     <time datetime="2020-01-07">{{ $episode->date_recorded->format('M jS, Y') }}</time>
                 </div>
             </div>
             <div class="mt-2 sm:flex sm:justify-between">
                 <div class="sm:flex">
-                    <p class="flex items-center space-x-2 text-sm text-color-base">
+                    <p class="flex items-center space-x-2 text-sm text-base-text-color">
                         <span>Published</span>
                         <span>
                             @if($episode->is_published)
@@ -67,12 +67,12 @@
                         </span>
                     </p>
                 </div>
-                <div class="text-color-base">
+                <div class="text-base-text-color">
                     <span>{{ number_format($episode->views) }} views</span>
                 </div>
             </div>
             <div class="mt-4">
-                <p class="text-sm text-color-base line-clamp-2">{{ $episode->description }}</p>
+                <p class="text-sm text-base-text-color line-clamp-2">{{ $episode->description }}</p>
             </div>
         </div>
     </div>

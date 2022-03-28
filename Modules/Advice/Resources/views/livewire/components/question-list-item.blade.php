@@ -11,13 +11,13 @@
             <div class="flex-1">
                 <div class="flex justify-between">
                     <div class="min-w-0 flex justify-start">
-                        <div class="text-sm font-bold text-color-dark mr-2">
+                        <div class="text-sm font-bold text-dark-text-color mr-2">
                             <a href="{{ route('profile.show', ['user' => $post->user]) }}" class="hover:underline">{{ $post->title }}</a>
                         </div>
-                        <div class="text-sm font-bold text-color-dark mr-2">
+                        <div class="text-sm font-bold text-dark-text-color mr-2">
                             <a href="{{ route('profile.show', ['user' => $post->user]) }}" class="hover:underline">{{ $post->user->name }}</a>
                         </div>
-                        <div class="text-sm text-color-base">
+                        <div class="text-sm text-base-text-color">
                             <a href="{{ route('social.posts.show', $post) }}" class="hover:underline">
                                 <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans(short: true) }}</time>
                             </a>
@@ -28,7 +28,7 @@
                         <div class="relative inline-block text-left"> <!-- x-menu -->
                             <div>
                                 <button
-                                        class="-m-2 p-2 rounded-full flex items-center text-color-light hover:text-color-base"
+                                        class="-m-2 p-2 rounded-full flex items-center text-light-text-color hover:text-base-text-color"
                                         type="button"
                                         aria-haspopup="true"
                                         aria-expanded="true"
@@ -52,20 +52,20 @@
                             > <!-- MenuItems -->
                                 <div class="py-1">
                                     <div> <!-- MenuItem v-slot="{ active }" -->
-                                        <a href="#" class="text-color-dark flex px-4 py-2 text-sm">
-                                            <x-heroicon-o-star class="mr-3 h-5 w-5 text-color-light" aria-hidden="true"/>
+                                        <a href="#" class="text-dark-text-color flex px-4 py-2 text-sm">
+                                            <x-heroicon-o-star class="mr-3 h-5 w-5 text-light-text-color" aria-hidden="true"/>
                                             <span>Add to favorites</span>
                                         </a>
                                     </div>
                                     <div> <!-- MenuItem v-slot="{ active }" -->
-                                        <a href="#" class="text-color-dark flex px-4 py-2 text-sm">
-                                            <x-heroicon-o-code class="mr-3 h-5 w-5 text-color-light" aria-hidden="true"/>
+                                        <a href="#" class="text-dark-text-color flex px-4 py-2 text-sm">
+                                            <x-heroicon-o-code class="mr-3 h-5 w-5 text-light-text-color" aria-hidden="true"/>
                                             <span>Embed</span>
                                         </a>
                                     </div>
                                     <div> <!-- MenuItem v-slot="{ active }" -->
-                                        <a href="#" class="text-color-dark flex px-4 py-2 text-sm">
-                                            <x-heroicon-o-flag class="mr-3 h-5 w-5 text-color-light" aria-hidden="true"/>
+                                        <a href="#" class="text-dark-text-color flex px-4 py-2 text-sm">
+                                            <x-heroicon-o-flag class="mr-3 h-5 w-5 text-light-text-color" aria-hidden="true"/>
                                             <span>Report content</span>
                                         </a>
                                     </div>
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-2 text-sm text-color-dark">{{ $post->body }}</div>
+                <div class="mt-2 text-sm text-dark-text-color">{{ $post->body }}</div>
                 <livewire:social::partials.post-actions :post="$post"/>
             </div>
         </article>

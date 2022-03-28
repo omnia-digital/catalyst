@@ -3,7 +3,7 @@
 @php
 $classes = ($active ?? false)
             ? 'bg-secondary px-2 py-1 rounded-lg inline-flex items-center text-sm font-bold text-neutral focus:outline-none focus:bg-secondary transition uppercase'
-            : 'px-2 py-1 inline-flex items-center rounded-lg text-sm font-bold text-color-base hover:text-neutral hover:bg-secondary focus:outline-none focus:text-neutral focus:bg-secondary
+            : 'px-2 py-1 inline-flex items-center rounded-lg text-sm font-bold text-base-text-color hover:text-neutral hover:bg-secondary focus:outline-none focus:text-neutral focus:bg-secondary
             transition uppercase';
 @endphp
 

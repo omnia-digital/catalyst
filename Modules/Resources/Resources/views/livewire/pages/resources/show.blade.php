@@ -17,14 +17,14 @@
                 </div>
             @endif
             <div class="flex mt-6">
-                <h3 class="text-color-dark text-4xl hover:underline font-bold">{{ $resource->title }}</h3>
+                <h3 class="text-dark-text-color text-4xl hover:underline font-bold">{{ $resource->title }}</h3>
                 @empty(!$resource->is_verified)
                     <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
                 @endempty
             </div>
             <div class="flex justify-start my-2">
                 <x-heroicon-o-calendar class="w-5 h-5"/>
-                <p class="ml-2 text-color-base text-md truncate">{{ $resource->created_at->format('M d, Y') }}</p>
+                <p class="ml-2 text-base-text-color text-md truncate">{{ $resource->created_at->format('M d, Y') }}</p>
             </div>
             @empty(!$resource->tags)
                 <div class="flex justify-start space-x-2">

@@ -5,7 +5,7 @@
     <div class=":grid grid-cols-9 gap-9">
         {{--  Latest Jobs  --}}
         <div class="col-span-9 mt-10">
-            <h2 class="text-xl font-medium text-color-dark py-2">Latest Jobs</h2>
+            <h2 class="text-xl font-medium text-dark-text-color py-2">Latest Jobs</h2>
 
             <div class="bg-primary shadow overflow-hidden sm:rounded-md">
                 <ul>
@@ -15,7 +15,7 @@
                             class="{{ $loop->first ? 'border-t border-neutral-light' : '' }}"
                             :job="$job"/>
                     @empty
-                        <li class="p-20 text-lg text-color-base text-center">
+                        <li class="p-20 text-lg text-base-text-color text-center">
                             Looking for contractors? We are currently offering new job posts at a discount for a limited time.
                             <p>
                                 <a href="{{ route('jobs.create') }}"

@@ -40,7 +40,7 @@
                     <x-library::dropdown>
                         <x-slot name="trigger">
                             <span class="-ml-px relative block">
-                                <button type="button" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-primary text-sm font-medium text-color-base hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
+                                <button type="button" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-primary text-sm font-medium base-text-color hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
                                     <span class="sr-only">Open options</span>
                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>

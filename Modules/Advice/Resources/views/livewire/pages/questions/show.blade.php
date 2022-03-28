@@ -18,7 +18,7 @@
             </div>
             <div class="flex justify-start my-2">
                 <x-heroicon-o-calendar class="w-5 h-5"/>
-                <p class="ml-2 text-color-base text-md truncate">{{ $resource->created_at->format('M d, Y') }}</p>
+                <p class="ml-2 text-base-text-color text-md truncate">{{ $resource->created_at->format('M d, Y') }}</p>
             </div>
             @empty(!$resource->tags)
                 <div class="flex justify-start space-x-2">

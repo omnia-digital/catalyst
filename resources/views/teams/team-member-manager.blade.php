@@ -15,7 +15,7 @@
 
                 <x-slot name="form">
                     <div class="col-span-6">
-                        <div class="max-w-xl text-sm text-color-base">
+                        <div class="max-w-xl text-sm text-base-text-color">
                             {{ __('Please provide the email address of the person you would like to add to this team.') }}
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                                         <div class="{{ isset($addTeamMemberForm['role']) && $addTeamMemberForm['role'] !== $role->key ? 'opacity-50' : '' }}">
                                             <!-- Role Name -->
                                             <div class="flex items-center">
-                                                <div class="text-sm text-color-base {{ $addTeamMemberForm['role'] == $role->key ? 'font-semibold' : '' }}">
+                                                <div class="text-sm text-base-text-color {{ $addTeamMemberForm['role'] == $role->key ? 'font-semibold' : '' }}">
                                                     {{ $role->name }}
                                                 </div>
 
@@ -50,7 +50,7 @@
                                             </div>
 
                                             <!-- Role Description -->
-                                            <div class="mt-2 text-xs text-color-base text-left">
+                                            <div class="mt-2 text-xs text-base-text-color text-left">
                                                 {{ $role->description }}
                                             </div>
                                         </div>
@@ -92,7 +92,7 @@
                     <div class="space-y-6">
                         @foreach ($team->teamInvitations as $invitation)
                             <div class="flex items-center justify-between">
-                                <div class="text-color-base">{{ $invitation->email }}</div>
+                                <div class="text-base-text-color">{{ $invitation->email }}</div>
 
                                 <div class="flex items-center">
                                     @if (Gate::check('removeTeamMember', $team))
@@ -138,11 +138,11 @@
                                 <div class="flex items-center">
                                     <!-- Manage Team Member Role -->
                                     @if (Gate::check('addTeamMember', $team) && Laravel\Jetstream\Jetstream::hasRoles())
-                                        <button class="ml-2 text-sm text-color-light underline" wire:click="manageRole('{{ $user->id }}')">
+                                        <button class="ml-2 text-sm text-light-text-color underline" wire:click="manageRole('{{ $user->id }}')">
                                             {{ Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name }}
                                         </button>
                                     @elseif (Laravel\Jetstream\Jetstream::hasRoles())
-                                        <div class="ml-2 text-sm text-color-light">
+                                        <div class="ml-2 text-sm text-light-text-color">
                                             {{ Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name }}
                                         </div>
                                     @endif
@@ -182,7 +182,7 @@
                         <div class="{{ $currentRole !== $role->key ? 'opacity-50' : '' }}">
                             <!-- Role Name -->
                             <div class="flex items-center">
-                                <div class="text-sm text-color-base {{ $currentRole == $role->key ? 'font-semibold' : '' }}">
+                                <div class="text-sm text-base-text-color {{ $currentRole == $role->key ? 'font-semibold' : '' }}">
                                     {{ $role->name }}
                                 </div>
 
@@ -192,7 +192,7 @@
                             </div>
 
                             <!-- Role Description -->
-                            <div class="mt-2 text-xs text-color-base">
+                            <div class="mt-2 text-xs text-base-text-color">
                                 {{ $role->description }}
                             </div>
                         </div>

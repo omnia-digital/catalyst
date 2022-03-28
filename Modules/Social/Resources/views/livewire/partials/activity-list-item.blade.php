@@ -11,15 +11,15 @@
                         @endif
                     </div>
                     <div class="min-w-0 flex-1">
-                        <span class="text-sm font-medium text-color-dark">
+                        <span class="text-sm font-medium text-dark-text-color">
                             {{ $activity['title'] }}
                         </span>
-                        <span class="text-sm text-color-base">
+                        <span class="text-sm text-base-text-color">
                             <time datetime="{{ $activity['created_at'] }}">{{ $activity['created_at'] }}</time>
                         </span>
                     </div>
                 </div>
-                <p id="{{ 'activity-title-' . $activity['id'] }}" class="mt-4 text-color-base font-medium text-color-dark">
+                <p id="{{ 'activity-title-' . $activity['id'] }}" class="mt-4 text-base-text-color font-medium text-dark-text-color">
                     {{ $activity['message'] }}
                 </p>
             </div>

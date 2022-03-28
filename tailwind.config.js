@@ -38,9 +38,9 @@ module.exports = {
                 'sm': '0.95rem'
             },
             colors: {
-                'text-base': 'var(--text)',
-                'text-light': 'var(--text-light)',
-                'text-dark': 'var(--text-dark)',
+                'base-text-color': 'var(--base-text-color)',
+                'light-text-color': 'var(--light-text-color)',
+                'dark-text-color': 'var(--dark-text-color)',
                 neutral: 'var(--neutral)',
                 'neutral-dark': 'var(--neutral-dark)',
                 'neutral-hover': 'var(--neutral-hover)',

@@ -27,8 +27,8 @@
                             @foreach ($navigation as $item)
                                 <a
                                     href="{{ route($item['name']) }}"
-                                    class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-color-light hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-color-base font-medium rounded-md' }}">
-                                    <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-color-light group-hover:text-color-light' }} mr-3 flex-shrink-0 h-6 w-6"
+                                    class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-light-text-color hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-base-text-color font-medium rounded-md' }}">
+                                    <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
                                                          aria-hidden="true"/>
                                     {{ $item['label'] }}
                                 </a>
@@ -64,7 +64,7 @@
                             <p class="text-lg font-medium text-white">
                                 Joshua Torres
                             </p>
-                            <p class="text-color-base font-medium text-primary group-hover:text-white">
+                            <p class="text-base-text-color font-medium text-primary group-hover:text-white">
                                 Lvl 5 <span class="text-gold">5348</span>
                             </p>
                         </div>
@@ -76,19 +76,19 @@
                     @foreach ($navigation as $item)
                         <a
                             href="{{ route($item['name']) }}"
-                            class="{{ request()->routeIs($item['name']) ? 'bg-tertiary text-white' : 'text-color-light hover:bg-tertiary hover:text-white' }} {{ 'w-full pl-6 group flex items-center
+                            class="{{ request()->routeIs($item['name']) ? 'bg-tertiary text-white' : 'text-light-text-color hover:bg-tertiary hover:text-white' }} {{ 'w-full pl-6 group flex items-center
                             px-2 py-2
                             text-lg font-medium rounded-md' }}">
-                            <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-color-light group-hover:text-color-light' }} mr-3 flex-shrink-0 h-6 w-6"
+                            <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
                                                  aria-hidden="true"/>
                             {{ $item['label'] }}
                         </a>
                     @endforeach
                     {{-- <Link v-for="item in navigation" :key="item.name" :href="route(item.name)"
                           :class="[$page.component === '' ? 'bg-tertiary text-white' :
-                    'text-color-light hover:bg-tertiary hover:text-white',
+                    'text-light-text-color hover:bg-tertiary hover:text-white',
                     'group flex items-center px-2 py-2 text-lg font-medium rounded-md']">
-                        <component :is="item.icon" :class="[item.current ? 'text-white' : 'text-color-light group-hover:text-color-light', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
+                        <component :is="item.icon" :class="[item.current ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
                         {{ item.label }}
                     </Link> --}}
                 </nav>

@@ -1,6 +1,6 @@
 <section aria-labelledby="trending-heading">
         <div class="">
-            <h2 id="trending-heading" class="p-3 text-xl font-medium text-color-dark">
+            <h2 id="trending-heading" class="p-3 text-xl font-medium text-dark-text-color">
                 {{ $title }}
             </h2>
             <div class="mt-6 flow-root">
@@ -25,7 +25,7 @@
                 </ul>
             </div>
             <div class="mt-6">
-                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-color-dark bg-primary hover:bg-gray-50">
+                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-gray-50">
                     View all
                 </a>
             </div>

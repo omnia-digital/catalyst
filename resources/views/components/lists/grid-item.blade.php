@@ -26,5 +26,5 @@
 {{--            </div>--}}
 {{--        @endif--}}
 {{--    </div>--}}
-{{--    <p class="mt-2 block text-sm font-medium text-color-dark line-clamp-2 pointer-events-none">{{ $item->title }}</p>--}}
+{{--    <p class="mt-2 block text-sm font-medium text-dark-text-color line-clamp-2 pointer-events-none">{{ $item->title }}</p>--}}
 </li>
