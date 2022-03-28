@@ -13,7 +13,7 @@ class NewsFeed extends Component
 
     public function getRowsProperty()
     {
-        return Post::with(['user', 'user.profile'])->latest()->get();
+        return Post::with(['user', 'user.profile', 'media'])->latest()->get();
     }
 
     public function render()

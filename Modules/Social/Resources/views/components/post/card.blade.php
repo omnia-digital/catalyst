@@ -48,9 +48,9 @@
         </div>
     @endif
 
-    @if ($mediaUrl = $post->getFirstMediaUrl())
+    @if ($media = $post->media[0] ?? null)
         <div class="block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden pt-2">
-            <img src="{{ $mediaUrl }}" alt="{{ $post->title }}" class="object-cover">
+            <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover">
         </div>
     @endif
 
