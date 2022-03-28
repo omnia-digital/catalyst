@@ -21,7 +21,7 @@ class PostEditor extends Component
 
     public function mount(?string $editorId = null, array $config = [])
     {
-        $this->editorId = $editorId;
+        $this->editorId = $editorId ?? uniqid();
         $this->config = $config;
     }
 
@@ -43,14 +43,14 @@ class PostEditor extends Component
     {
         $this->reset('content', 'images');
 
-        $this->dispatchBrowserEvent('post-editor:image-set', $this->images);
+        $this->emitImagesSet();
     }
 
     public function setImage($image)
     {
         array_push($this->images, $image['url']);
 
-        $this->dispatchBrowserEvent('post-editor:image-set', $this->images);
+        $this->emitImagesSet();
     }
 
     public function removeImage($index)
@@ -59,7 +59,15 @@ class PostEditor extends Component
             unset($this->images[$index]);
         }
 
-        $this->dispatchBrowserEvent('post-editor:image-set', $this->images);
+        $this->emitImagesSet();
+    }
+
+    private function emitImagesSet(): void
+    {
+        $this->dispatchBrowserEvent('post-editor:image-set', [
+            'id'     => $this->editorId,
+            'images' => $this->images
+        ]);
     }
 
     public function render()

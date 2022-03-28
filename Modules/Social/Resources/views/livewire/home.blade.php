@@ -18,7 +18,7 @@
                 </div>
                 <div class="mt-0">
                     <div class="mx-auto">
-                        <livewire:social::post-editor/>
+                        <livewire:social::post-editor :wire:key="uniqid()"/>
 
                         <h1 class="sr-only">Recent Posts</h1>
                         <div class="mt-6 space-y-4">
@@ -45,6 +45,8 @@
             </div>
             <x-sidebar-column/>
         </div>
+
+        <livewire:media-manager :handleUploadProcess="false"/>
     </div>
 @endsection
 @push('scripts')

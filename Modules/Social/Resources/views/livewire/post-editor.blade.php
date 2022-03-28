@@ -19,7 +19,7 @@
                 'media-manager',
                 'media-manager:show',
                 {
-                    id: 'post-editor',
+                    id: '{{ $editorId }}',
                     file: file,
                     metadata: metadata
                 }
@@ -27,13 +27,15 @@
         },
 
         setImage(event) {
-            if (event.detail.id === 'post-editor') {
+            if (event.detail.id === '{{ $editorId }}') {
                 this.$wire.call('setImage', event.detail);
             }
         },
 
         setImages(event) {
-            this.images = event.detail
+            if (event.detail.id === '{{ $editorId }}') {
+                this.images = event.detail.images
+            }
         },
 
         removeImage(index) {
@@ -52,7 +54,13 @@
     >
         <x-slot name="footer">
             <div class="pb-4">
-                <ul x-show="showImages" x-transition role="list" class="p-4 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-6 xl:gap-x-8">
+                <ul
+                        x-show="showImages"
+                        x-transition
+                        role="list"
+                        class="p-4 grid gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
+                        x-bind:class="{'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6': images.length > 2, 'grid-cols-1': images.length === 1}"
+                >
                     <template x-for="(image, index) in images" :key="index">
                         <li class="relative cursor-pointer">
                             <button
@@ -100,6 +108,4 @@
             </x-library::button>
         </div>
     </div>
-
-    @livewire('media-manager', ['handleUploadProcess' => false])
 </div>
