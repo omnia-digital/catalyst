@@ -18,7 +18,7 @@
                     </div>
                     <div class="flex-shrink-0 flex items-center px-4">
                         <!-- mobile logo -->
-                        <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Indie Game Dev logo">
+                        <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-secondary.svg" alt="Indie Game Dev logo">
                         <p class="text-green-500 text-3xl font-bold">IGD</p>
                     </div>
                     <div class="mt-5 flex-1 h-0 overflow-y-auto">
@@ -49,7 +49,7 @@
         <div class="flex-1 flex flex-col min-h-0 bg-secondary">
             <div class="flex items-center pl-6 h-16 flex-shrink-0">
                 <!-- desktop logo -->
-                <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
+                <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-secondary.svg" alt="Workflow">
                 <p class="text-green-500 text-3xl font-bold">IGD</p>
             </div>
             <a href="{{ route('social.home') }}">

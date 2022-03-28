@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="mb-4 flex items-center">
-        <div class="mr-4 hover:bg-gray-300 p-2 rounded-full">
+        <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full">
             <a href="{{ route('resources.home') }}">
                 <x-heroicon-o-arrow-left class="h-6"/>
             </a>
@@ -13,7 +13,7 @@
         <div class="xl:col-span-6">
             @if($resource->image)
                 <div>
-                    <img class="rounded-lg w-full object-cover max-h-96 bg-gray-300 flex-shrink-0" src="{{$resource->image}}" alt="{{$resource->title}}">
+                    <img class="rounded-lg w-full object-cover max-h-96 bg-neutral-dark flex-shrink-0" src="{{$resource->image}}" alt="{{$resource->title}}">
                 </div>
             @endif
             <div class="flex mt-6">
@@ -39,7 +39,7 @@
             </div>
 
             @if($resource->url)
-                <a href="{{ $resource->url }}" target="_blank" class="bg-white hover:shadow-lg rounded-lg px-4 py-2 text-xl inline-flex items-center space-x-2">
+                <a href="{{ $resource->url }}" target="_blank" class="bg-primary hover:shadow-lg rounded-lg px-4 py-2 text-xl inline-flex items-center space-x-2">
                     <p>Go to website</p>
                     <x-heroicon-o-arrow-right class="h-6 w-6"/>
                 </a>
@@ -54,7 +54,7 @@
         </div>
 
         <aside class="hidden xl:block xl:col-span-3">
-            <div class="sticky h-screen overflow-y-scroll scrollbar-hide top-4 space-y-4 pb-36 bg-white shadow rounded-lg">
+            <div class="sticky h-screen overflow-y-scroll scrollbar-hide top-4 space-y-4 pb-36 bg-primary shadow rounded-lg">
                 <livewire:social::partials.trending-section title="Top Resources" type="resource"/>
                 <livewire:social::partials.who-to-follow-section/>
                 <livewire:social::partials.applications/>

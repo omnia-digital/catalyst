@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="fixed w-full bg-white z-10 border-b border-gray-100">
+<nav x-data="{ open: false }" class="fixed w-full bg-primary z-10 border-b border-gray-100">
     <!-- Desktop Navigation Menu -->
     <div class="px-4 md:px-6">
         <div class="flex justify-between h-16">
@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex items-center h-16 flex-shrink-0">
                     <div class="mx-2 bg-gray-800 p-4 rounded-lg">
-                        {{--                        <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">--}}
+                        {{--                        <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-secondary.svg" alt="Workflow">--}}
                     </div>
                     <p class="text-base font-bold">{{ env('APP_NAME') }}</p>
                 </div>
@@ -38,7 +38,7 @@
                                 <x-heroicon-o-search class="h-5 w-5 dark:text-gray-400" aria-hidden="true"/>
                             </div>
                             <input id="search" name="search"
-                                   class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 dark:bg-gray-700 text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 sm:text-sm"
+                                   class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 dark:bg-gray-700 text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-primary focus:border-white focus:ring-white focus:text-gray-900 sm:text-sm"
                                    placeholder="Search for Projects" type="search"/>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                             <x-slot name="trigger">
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-primary hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
                                         {{ Auth::user()->currentTeam->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -116,7 +116,7 @@
                             @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-primary hover:text-gray-700 focus:outline-none transition">
                                         {{ Auth::user()->name }}
                                         <div>
                                             <img class="inline-block h-8 w-8 rounded-full"
@@ -168,7 +168,7 @@
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-neutral focus:outline-none focus:bg-neutral focus:text-gray-500 transition">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>

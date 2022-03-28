@@ -21,7 +21,7 @@
                 </div>
                 <div class="flex-shrink-0 flex items-center px-4">
                     <!-- mobile logo -->
-                    <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Indie Game Dev logo">
+                    <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-secondary.svg" alt="Indie Game Dev logo">
                     <p class="text-green-500 text-3xl font-bold">IGD</p>
                 </div>
                 <div class="mt-5 flex-1 h-0 overflow-y-auto">
@@ -46,7 +46,7 @@
     </div>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden pt-16 w-24 bg-white md:flex md:flex-col md:fixed md:inset-y-0 shadow-lg">
+    <div class="hidden pt-16 w-24 bg-primary md:flex md:flex-col md:fixed md:inset-y-0 shadow-lg">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex-1 flex flex-col min-h-0 ">
             <a href="{{ route('social.home') }}">
@@ -58,7 +58,7 @@
                                  alt=""/>
                         </div>
                         <div class="bg-black flex items-center rounded-md -m-2 p-1">
-                            <div class="bg-white text-xxs rounded-md p-1">
+                            <div class="bg-primary text-xxs rounded-md p-1">
                                 {{ Auth::user()->level ?? '48' }}
                             </div>
                             <div class="text-xxs text-white p-1">
@@ -93,11 +93,11 @@
 
     <!-- Header -->
     <div class="md:pl-24 flex flex-col md:hidden">
-        <div class="flex-shrink-0 flex h-16 bg-white shadow">
+        <div class="flex-shrink-0 flex h-16 bg-primary shadow">
             <!-- mobile menu button -->
             <button
                 type="button"
-                class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
+                class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary md:hidden"
                 @click="open = true"
             >
                 <span class="sr-only">Open sidebar</span>

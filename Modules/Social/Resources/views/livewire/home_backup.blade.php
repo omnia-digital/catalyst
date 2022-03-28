@@ -12,7 +12,7 @@
                 <div class="hidden sm:block">
                     <nav class="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
                         <a v-for="(tab, tabIdx) in tabs" :key="tab.name" :href="tab.href" :aria-current="tab.current ? 'page' : undefined"
-                           :class="[tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700', tabIdx === 0 ? 'rounded-l-lg' : '', tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '', 'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10']">
+                           :class="[tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700', tabIdx === 0 ? 'rounded-l-lg' : '', tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '', 'group relative min-w-0 flex-1 overflow-hidden bg-primary py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10']">
 {{--                            <span>{{ tab.name }}</span>--}}
                             <span aria-hidden="true" :class="[tab.current ? 'bg-rose-500' : 'bg-transparent', 'absolute inset-x-0 bottom-0 h-0.5']"/>
                         </a>
@@ -33,7 +33,7 @@
         <aside class="hidden xl:block xl:col-span-3">
             <div class="sticky top-4 space-y-4">
                 <section aria-labelledby="who-to-follow-heading">
-                    <div class="bg-white rounded-lg shadow">
+                    <div class="bg-primary rounded-lg shadow">
                         <div class="p-6">
                             <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
                                 Who to follow
@@ -64,7 +64,7 @@
                                 </ul>
                             </div>
                             <div class="mt-6">
-                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-primary hover:bg-gray-50">
                                     View all
                                 </a>
                             </div>
@@ -72,7 +72,7 @@
                     </div>
                 </section>
                 <section aria-labelledby="trending-heading">
-                    <div class="bg-white rounded-lg shadow">
+                    <div class="bg-primary rounded-lg shadow">
                         <div class="p-6">
                             <h2 id="trending-heading" class="text-base font-medium text-gray-900">
                                 Trending
@@ -98,7 +98,7 @@
                                 </ul>
                             </div>
                             <div class="mt-6">
-                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-primary hover:bg-gray-50">
                                     View all
                                 </a>
                             </div>

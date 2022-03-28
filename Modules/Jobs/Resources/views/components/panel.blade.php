@@ -1,4 +1,4 @@
-<div class="bg-white shadow sm:rounded-lg">
+<div class="bg-primary shadow sm:rounded-lg">
     <div class="px-4 py-5 sm:p-6 flex justify-between">
         <div class="mt-2 sm:items-center">
             <h3 class="text-lg leading-6 font-medium text-gray-900">

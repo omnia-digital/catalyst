@@ -2,8 +2,8 @@
 
 @php
 $classes = ($active ?? false)
-            ? 'bg-primary px-2 py-1 rounded-lg inline-flex items-center text-sm font-bold text-white focus:outline-none focus:bg-primary transition uppercase'
-            : 'px-2 py-1 inline-flex items-center rounded-lg text-sm font-bold text-gray-500 hover:text-white hover:bg-primary focus:outline-none focus:text-white focus:bg-primary
+            ? 'bg-secondary px-2 py-1 rounded-lg inline-flex items-center text-sm font-bold text-neutral focus:outline-none focus:bg-secondary transition uppercase'
+            : 'px-2 py-1 inline-flex items-center rounded-lg text-sm font-bold text-gray-500 hover:text-neutral hover:bg-secondary focus:outline-none focus:text-neutral focus:bg-secondary
             transition uppercase';
 @endphp
 

@@ -4,11 +4,11 @@
 ])
 
 @php
-    $class = $job->hasAddon(\Modules\Jobs\Enums\JobAddons::HIGHLIGHT_JOB) ? 'bg-yellow-50' : 'bg-white';
+    $class = $job->hasAddon(\Modules\Jobs\Enums\JobAddons::HIGHLIGHT_JOB) ? 'bg-yellow-50' : 'bg-primary';
 @endphp
 
 <li {{ $attributes->merge(['class' => $class]) }}>
-    <a href="{{ $editable ? route('jobs.update', $job) : route('jobs.show', ['team' => $job->company, 'job' => $job]) }}" class="block hover:bg-light-blue-50 hover:shadow-2xl focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+    <a href="{{ $editable ? route('jobs.update', $job) : route('jobs.show', ['team' => $job->company, 'job' => $job]) }}" class="block hover:bg-secondary hover:shadow-2xl focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
         <div class="flex items-center px-4 py-4 sm:px-6">
             <div class="min-w-0 flex-1 flex items-center">
                 <div class="flex-shrink-0">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                     <div>
-                        <div class="text-base leading-5 font-medium text-light-blue-600 truncate">{{ $job->title }}</div>
+                        <div class="text-base leading-5 font-medium text-secondary truncate">{{ $job->title }}</div>
                         <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
                             <div class="sm:flex">
                                 <div class="mr-6 flex items-center text-sm leading-5 text-gray-500">

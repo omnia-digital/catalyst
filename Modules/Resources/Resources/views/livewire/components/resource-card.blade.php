@@ -1,4 +1,4 @@
-<div class="col-span-1 bg-white rounded-lg shadow max-h-68">
+<div class="col-span-1 bg-primary rounded-lg shadow max-h-68">
     <!-- Content -->
     <div class="w-full">
         <div class="space-y-2 py-4 px-6">

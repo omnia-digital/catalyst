@@ -78,7 +78,7 @@ use Modules\Social\Models\Post;
                     'value' => 'thumbsy',
                     'icon' => 'heroicon-o-thumb-up',
                     'iconColor' => 'text-gray-400',
-                    'bgColor' => 'bg-blue-500' ,
+                    'bgColor' => 'bg-secondary' ,
                 ],
                 [
                     'name' => 'I feel nothing',
@@ -107,7 +107,7 @@ use Modules\Social\Models\Post;
                 $parentPost = Post::withoutGlobalScope('parent')->find($this->parentPostID);
                 $post = $parentPost->createComment($validatedData, auth()->id());
             }
-            
+
             $this->postSent = true;
             $this->emit('postAdded', $post);
             $this->reset(['body']);

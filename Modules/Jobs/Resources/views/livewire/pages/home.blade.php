@@ -7,7 +7,7 @@
         <div class="col-span-9 mt-10">
             <h2 class="text-xl font-medium text-gray-700 py-2">Latest Jobs</h2>
 
-            <div class="bg-white shadow overflow-hidden sm:rounded-md">
+            <div class="bg-primary shadow overflow-hidden sm:rounded-md">
                 <ul>
                     @forelse($jobs as $job)
                         <x-job.item

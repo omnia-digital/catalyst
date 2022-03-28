@@ -1,5 +1,5 @@
 <div>
-    <div class="bg-white p7 rounded w-9/12 mx-auto">
+    <div class="bg-primary p7 rounded w-9/12 mx-auto">
         <div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
             <div x-ref="dnd"
                 class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
@@ -12,7 +12,7 @@
                     title=""
                     x-ref="attachedFiles"
                     wire:model="attached_files" />
-        
+
                 <div class="flex flex-col items-center justify-center py-10 text-center">
                     <svg class="w-6 h-6 mr-1 text-current-50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -22,15 +22,15 @@
                     <p class="m-0">Drag your files here or click in this area.</p>
                 </div>
             </div>
-        
+
             <template x-if="files.length > 0">
                 <div class="grid grid-cols-2 gap-4 mt-4 md:grid-cols-6" @drop.prevent="drop($event)"
                     @dragover.prevent="$event.dataTransfer.dropEffect = 'move'">
                     <template x-for="(_, index) in Array.from({ length: files.length })">
-                        <div class="relative flex flex-col items-center overflow-hidden text-center bg-gray-100 border rounded cursor-move select-none"
+                        <div class="relative flex flex-col items-center overflow-hidden text-center bg-neutral border rounded cursor-move select-none"
                             style="padding-top: 100%;" @dragstart="dragstart($event)" @dragend="fileDragging = null"
-                            :class="{'border-blue-600': fileDragging == index}" draggable="true" :data-index="index">
-                            <button class="absolute top-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none" type="button" @click="remove(index)">
+                            :class="{'border-secondary': fileDragging == index}" draggable="true" :data-index="index">
+                            <button class="absolute top-0 right-0 z-50 p-1 bg-primary rounded-bl focus:outline-none" type="button" @click="remove(index)">
                                 <svg class="w-4 h-4 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -61,16 +61,16 @@
                                     <fileDragging x-bind:src="loadFile(files[index])" type="video/mp4">
                                 </video>
                             </template>
-        
-                            <div class="absolute bottom-0 left-0 right-0 flex flex-col p-2 text-xs bg-white bg-opacity-50">
+
+                            <div class="absolute bottom-0 left-0 right-0 flex flex-col p-2 text-xs bg-primary bg-opacity-50">
                                 <span class="w-full font-bold text-gray-900 truncate"
                                     x-text="files[index].name">Loading</span>
                                 <span class="text-xs text-gray-900" x-text="humanFileSize(files[index].size)">...</span>
                             </div>
-        
+
                             <div class="absolute inset-0 z-40 transition-colors duration-300" @dragenter="dragenter($event)"
                                 @dragleave="fileDropping = null"
-                                :class="{'bg-blue-200 bg-opacity-80': fileDropping == index && fileDragging != index}">
+                                :class="{'bg-secondary-light bg-opacity-80': fileDropping == index && fileDragging != index}">
                             </div>
                         </div>
                     </template>
@@ -79,7 +79,7 @@
         </div>
     </div>
 </div>
-@push('scripts')    
+@push('scripts')
     {{-- source: https://tailwindcomponents.com/component/dragdrop-sortable-file-upload --}}
     <script src="https://unpkg.com/create-file-list"></script>
     <script>
@@ -99,24 +99,24 @@
             remove(index) {
                 let files = [...this.files];
                 files.splice(index, 1);
-    
+
                 this.files = createFileList(files);
             },
             drop(e) {
                 let removed, add;
                 let files = [...this.files];
-    
+
                 removed = files.splice(this.fileDragging, 1);
                 files.splice(this.fileDropping, 0, ...removed);
-    
+
                 this.files = createFileList(files);
-    
+
                 this.fileDropping = null;
                 this.fileDragging = null;
             },
             dragenter(e) {
                 let targetElem = e.target.closest("[draggable]");
-    
+
                 this.fileDropping = targetElem.getAttribute("data-index");
             },
             dragstart(e) {
@@ -128,13 +128,13 @@
             loadFile(file) {
                 const preview = document.querySelectorAll(".preview");
                 const blobUrl = URL.createObjectURL(file);
-    
+
                 preview.forEach(elem => {
                     elem.onload = () => {
                         URL.revokeObjectURL(elem.src); // free memory
                     };
                 });
-    
+
                 return blobUrl;
             },
             addFiles(e) {

@@ -1,4 +1,4 @@
-<div class="bg-white px-2 rounded-lg mb-6 border-t border-b border-gray-100 py-2 sm:flex sm:items-center sm:justify-between">
+<div class="bg-primary px-2 rounded-lg mb-6 border-t border-b border-gray-100 py-2 sm:flex sm:items-center sm:justify-between">
     <div class="flex-1 min-w-0">
         <div class="filters flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
             <div class="w-full relative">

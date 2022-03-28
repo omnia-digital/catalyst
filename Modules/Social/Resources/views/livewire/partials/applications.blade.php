@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg shadow">
+<div class="bg-primary rounded-lg shadow">
     <div class="flex-1 p-6 space-y-1 overflow-y-auto">
         <h2 class="text-base font-bold">Applications</h2>
         <div x-data="applicationsSetup()">
@@ -10,7 +10,7 @@
                 </template>
             </ul>
 
-            <div class="bg-white mx-auto">
+            <div class="bg-primary mx-auto">
                 <div x-show="activeTab===0">
                     <div class="flex justify-between">
                         <div class="flex flex-col divide-y">

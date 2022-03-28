@@ -1,7 +1,7 @@
-<div class="col-span-1 bg-white rounded-lg shadow">
+<div class="col-span-1 bg-primary rounded-lg shadow">
     <!-- Content -->
     <div class="w-full flex justify-between">
-        <img class="rounded-tl-lg rounded-br-lg h-full object-contain w-1/3 bg-gray-300 flex-shrink-0"
+        <img class="rounded-tl-lg rounded-br-lg h-full object-contain w-1/3 bg-neutral-dark flex-shrink-0"
              src="{{$post->main_image}}" alt="">
         <div class="flex-1 space-y-2 py-4 px-6">
             <div class="flex items-center space-x-3">

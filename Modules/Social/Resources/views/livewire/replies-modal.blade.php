@@ -21,7 +21,7 @@
     >
         <div class="relative sm:w-3/4 md:w-1/2 mx-2 sm:mx-auto mt-10 mb-24 opacity-100">
             <div
-            class="relative bg-white shadow-lg rounded-lg text-gray-900 z-20"
+            class="relative bg-primary shadow-lg rounded-lg text-gray-900 z-20"
             x-cloak
             x-show="repliesModalOpen"
             @click.away="repliesModalOpen = false"
@@ -32,7 +32,7 @@
             x-transition:leave-start="scale-100"
             x-transition:leave-end="scale-0"
             >
-                <header class="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-t-lg">
+                <header class="flex flex-row justify-between p-6 bg-primary border-b border-gray-200 rounded-t-lg">
                     <h2 class="font-semibold text-3xl text-gray-800">Comment</h2>
                     <button
                         class=""

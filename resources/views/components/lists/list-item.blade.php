@@ -4,12 +4,12 @@
 ])
 
 @php
-    $class = $selected ? 'ring-2 ring-offset-2 ring-blue-500' : 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-blue-500';
+    $class = $selected ? 'ring-2 ring-offset-2 ring-secondary' : 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-secondary';
     $class .= ' col-span-1 flex shadow-sm rounded-md cursor-pointer';
 @endphp
 
 <li {{ $attributes->merge(['class' => $class]) }}>
-    <div class="group block w-1/3 aspect-w-10 aspect-h-2 rounded-l-md bg-gray-100 overflow-hidden relative">
+    <div class="group block w-1/3 aspect-w-10 aspect-h-2 rounded-l-md bg-neutral overflow-hidden relative">
         <img class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none" src="{{ $episode->thumbnail }}" alt="{{ $episode->title }}">
 
         @if ($episode->isLive())
@@ -21,10 +21,10 @@
             </div>
         @endif
     </div>
-    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md">
+    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-primary rounded-r-md">
         <div class="px-4 py-4 sm:px-6 w-full">
             <div class="flex items-center justify-between">
-                <p class="font-medium text-blue-600 truncate">
+                <p class="font-medium text-secondary truncate">
                     {{ Str::limit($episode->title, 40) }}
                 </p>
                 <div class="ml-2 flex-shrink-0 flex">
