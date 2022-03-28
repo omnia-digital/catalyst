@@ -29,6 +29,7 @@ class Post extends Model
         'body',
         'postable_id',
         'postable_type',
+        'published_at',
         'image'
     ];
 
