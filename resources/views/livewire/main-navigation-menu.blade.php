@@ -1,10 +1,10 @@
 <nav x-data="{ open: false }" class="fixed w-full bg-primary z-10 shadow-sm">
     <!-- Desktop Navigation Menu -->
-    <div class="max-w-8xl mx-auto grid grid-cols-10 gap-2 h-13">
+    <div class="max-w-8xl mx-auto grid grid-cols-10 gap-2 h-14">
         <!-- Left side header -->
         <div class="col-span-2">
             <!-- Logo -->
-            <div class="flex items-center h-13 flex-shrink-0">
+            <div class="flex items-center h-14 flex-shrink-0">
                 <a href="{{ route('social.home') }}"
                    title="{{ env('APP_NAME') }}"
                    class="bg-neutral-light font-semibold text-black py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
@@ -19,7 +19,7 @@
         </div>
         <!-- Right side header -->
         <div class="col-span-8">
-            <div class="flex space-x-6 items-center h-13">
+            <div class="flex space-x-6 items-center h-14">
                 <!-- Navigation Links -->
                 <nav class="hidden sm:block mx-auto max-w-2xl items-center space-x-4">
                     @foreach ($navigation as $item)

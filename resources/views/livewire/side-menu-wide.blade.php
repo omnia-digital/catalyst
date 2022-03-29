@@ -5,12 +5,11 @@
             x-transition:enter.duration.100ms
             x-transition:leave.duration.75ms
     >
-        <div class="fixed inset-0 flex z-40 md:hidden">
-            <div aria-hidden="true" class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
+        <div class="sticky inset-0 flex z-40 md:hidden">
+            <div aria-hidden="true" class="sticky inset-0 bg-gray-600 bg-opacity-75"></div>
             <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800">
                 <div class="absolute top-0 right-0 -mr-12 pt-2">
-                    <button
-                            type="button"
+                    <button type="button"
                             class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                             tabindex="0"
                             @click="open = false"
@@ -59,11 +58,11 @@
     </div>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden pt-16 md:flex md:flex-col md:fixed md:inset-y-0">
+    <div class="hidden md:flex md:flex-col md:sticky md:inset-y-0">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex flex-col min-h-0 ">
             <div class="flex">
-                <nav class="py-4 space-y-3">
+                <nav class="pt-4 space-y-3">
                     @foreach ($navigation as $item)
                         <a href="{{ route($item['name']) }}"
                            title="{{ $item['label'] }}"
