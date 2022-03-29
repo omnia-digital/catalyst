@@ -34,5 +34,5 @@
         </x-slot>
     </x-library::modal>
 
-    @livewire('media-manager')
+    <livewire:media-manager/>
 </div>

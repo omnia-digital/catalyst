@@ -49,42 +49,42 @@ use Modules\Social\Models\Post;
                     'name' => 'Excited',
                     'value' => 'excited',
                     'icon' => 'heroicon-o-fire',
-                    'iconColor' => 'text-gray-400',
+                    'iconColor' => 'text-light-text-color',
                     'bgColor' => 'bg-red-500' ,
                 ],
                 [
                     'name' => 'Loved',
                     'value' => 'loved',
                     'icon' => 'heroicon-o-heart',
-                    'iconColor' => 'text-gray-400',
+                    'iconColor' => 'text-light-text-color',
                     'bgColor' => 'bg-pink-400' ,
                 ],
                 [
                     'name' => 'Happy',
                     'value' => 'happy',
                     'icon' => 'heroicon-o-emoji-happy',
-                    'iconColor' => 'text-gray-400',
+                    'iconColor' => 'text-light-text-color',
                     'bgColor' => 'bg-green-400' ,
                 ],
                 [
                     'name' => 'Sad',
                     'value' => 'sad',
                     'icon' => 'heroicon-o-emoji-sad',
-                    'iconColor' => 'text-gray-400',
+                    'iconColor' => 'text-light-text-color',
                     'bgColor' => 'bg-yellow-400' ,
                 ],
                 [
                     'name' => 'Thumbsy',
                     'value' => 'thumbsy',
                     'icon' => 'heroicon-o-thumb-up',
-                    'iconColor' => 'text-gray-400',
-                    'bgColor' => 'bg-blue-500' ,
+                    'iconColor' => 'text-light-text-color',
+                    'bgColor' => 'bg-secondary' ,
                 ],
                 [
                     'name' => 'I feel nothing',
                     'value' => null,
                     'icon' => 'heroicon-o-x',
-                    'iconColor' => 'text-gray-400',
+                    'iconColor' => 'text-light-text-color',
                     'bgColor' => 'bg-transparent',
                 ],
             ];
@@ -107,7 +107,7 @@ use Modules\Social\Models\Post;
                 $parentPost = Post::withoutGlobalScope('parent')->find($this->parentPostID);
                 $post = $parentPost->createComment($validatedData, auth()->id());
             }
-            
+
             $this->postSent = true;
             $this->emit('postAdded', $post);
             $this->reset(['body']);

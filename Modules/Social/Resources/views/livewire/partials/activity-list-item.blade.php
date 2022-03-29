@@ -1,25 +1,25 @@
-<div class="bg-white px-4 py-6 shadow sm:p-6 ">
+<div class="bg-primary px-4 py-6 shadow sm:p-6 ">
     <article aria-labelledby="{{ 'activity-item-' . $activity['id'] }}">
         <div class="flex justify-beetween items-center">
             <div>
                 <div class="flex space-x-3">
                     <div class="flex-shrink-0">
                         @if(!is_null($activity['user']['avatar']))
-                            <img class="h-10 w-10 rounded-full bg-gray-300" src="{{ $activity['user']['avatar'] }}" alt="" />
+                            <img class="h-10 w-10 rounded-full bg-neutral-dark" src="{{ $activity['user']['avatar'] }}" alt="" />
                         @else
-                            <x-heroicon-o-check class="h-10 w-10 rounded-full bg-gray-300" />
+                            <x-heroicon-o-check class="h-10 w-10 rounded-full bg-neutral-dark" />
                         @endif
                     </div>
                     <div class="min-w-0 flex-1">
-                        <span class="text-sm font-medium text-gray-900">
+                        <span class="text-sm font-medium text-dark-text-color">
                             {{ $activity['title'] }}
                         </span>
-                        <span class="text-sm text-gray-500">
+                        <span class="text-sm text-base-text-color">
                             <time datetime="{{ $activity['created_at'] }}">{{ $activity['created_at'] }}</time>
                         </span>
                     </div>
                 </div>
-                <p id="{{ 'activity-title-' . $activity['id'] }}" class="mt-4 text-base font-medium text-gray-900">
+                <p id="{{ 'activity-title-' . $activity['id'] }}" class="mt-4 text-base-text-color font-medium text-dark-text-color">
                     {{ $activity['message'] }}
                 </p>
             </div>
@@ -38,7 +38,7 @@
             @foreach ($activity['members'] as $user)
                 @if ($loop->index >= 5)
                     <div class="w-6">
-                        <div class="w-full rounded-full bg-gray-200 text-sm">+{{ $loop->count - $loop->index }}</div>
+                        <div class="w-full rounded-full bg-neutral-light text-sm">+{{ $loop->count - $loop->index }}</div>
                     </div>
                     @break;
                 @else

@@ -23,9 +23,9 @@
 
             <form wire:submit.prevent="{{ Auth::guest() ? 'showRegisterModal' : 'save' }}" action="#" method="POST">
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
-                    <div class="bg-white py-6 px-4 space-y-6 sm:p-6">
+                    <div class="bg-primary py-6 px-4 space-y-6 sm:p-6">
                         <div>
-                            <h2 class="text-lg leading-6 font-medium text-gray-900">New Job</h2>
+                            <h2 class="text-lg leading-6 font-medium text-dark-text-color">New Job</h2>
                         </div>
 
                         <div class="grid grid-cols-3 gap-6">
@@ -91,7 +91,7 @@
                                 <x-input.label value="Budget (Optional)" for="budget"/>
                                 <x-input.text wire:model="budget" id="budget" placeholder="Budget">
                                     <x-slot name="icon">
-                                        <x-heroicon-o-currency-dollar class="h-5 w-5 text-gray-400"/>
+                                        <x-heroicon-o-currency-dollar class="h-5 w-5 text-light-text-color"/>
                                     </x-slot>
                                 </x-input.text>
                                 <x-input.error for="budget"/>
@@ -104,9 +104,9 @@
                                         <x-input.label class="pl-4 font-bold" value="{{ $project['title'] }}"/>
                                     </div>
                                     <div class="pl-8 pt-1">
-                                        <p class="mt-1 text-sm leading-5 text-gray-500">{{ $project['description'] }}</p>
+                                        <p class="mt-1 text-sm leading-5 text-base-text-color">{{ $project['description'] }}</p>
                                     </div>
-                                    
+
                                 @endforeach
                                 <x-input.error for="job.project_size_id"/>
                                 <x-input.label value="Active"/>
@@ -123,8 +123,8 @@
                             <div class="col-span-3 space-y-1 sm:col-span-2">
                                 <fieldset>
                                     <div class="mb-2">
-                                        <h2 class="text-lg leading-6 font-medium text-gray-900">Job Addons</h2>
-                                        <p class="mt-1 text-sm leading-5 text-gray-500">This information will be displayed publicly so be careful what you share.</p>
+                                        <h2 class="text-lg leading-6 font-medium text-dark-text-color">Job Addons</h2>
+                                        <p class="mt-1 text-sm leading-5 text-base-text-color">This information will be displayed publicly so be careful what you share.</p>
                                     </div>
 
                                     <ul class="space-y-6">
@@ -134,28 +134,28 @@
                                                 wire:click="toggleAddon({{ $addon->id }})"
                                                 class="group relative rounded-lg shadow-sm cursor-pointer focus:outline-none focus:shadow-outline-blue">
                                                 <div
-                                                    class="rounded-lg border border-gray-300 bg-white px-6 py-4 hover:border-gray-400 group-focus:border-blue-300 sm:flex sm:justify-between sm:space-x-4">
+                                                    class="rounded-lg border border-gray-300 bg-primary px-6 py-4 hover:border-gray-400 group-focus:border-secondary sm:flex sm:justify-between sm:space-x-4">
                                                     <div class="flex items-center space-x-0">
                                                         <div class="flex-shrink-0 flex items-center hidden">
-                                                            <span class="form-radio text-indigo-600 group-focus:bg-red-500"></span>
+                                                            <span class="form-radio text-secondary group-focus:bg-red-500"></span>
                                                         </div>
                                                         <div class="text-sm leading-5">
-                                                            <p class="block font-medium text-gray-900">
+                                                            <p class="block font-medium text-dark-text-color">
                                                                 {{ $addon->name }}
                                                             </p>
                                                             @if ($addon->description)
-                                                                <div class="text-gray-500">
+                                                                <div class="text-base-text-color">
                                                                     <span class="block sm:inline">{{ $addon->description }}</span>
                                                                 </div>
                                                             @endif
                                                         </div>
                                                     </div>
                                                     <div class="mt-2 flex text-sm leading-5 space-x-1 sm:mt-0 sm:block sm:space-x-0 sm:text-right">
-                                                        <div class="font-medium text-gray-900">{{ \App\LaraContract::money($addon->price) }}</div>
+                                                        <div class="font-medium text-dark-text-color">{{ \App\LaraContract::money($addon->price) }}</div>
                                                     </div>
                                                 </div>
                                                 <div
-                                                    class="{{ in_array($addon->id, $selected_addons) ? 'border-light-blue-500' : 'border-transparent"' }} absolute inset-0 rounded-lg border-2 pointer-events-none"></div>
+                                                    class="{{ in_array($addon->id, $selected_addons) ? 'border-secondary' : 'border-transparent"' }} absolute inset-0 rounded-lg border-2 pointer-events-none"></div>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -266,18 +266,18 @@
                                 >
                                     <fieldset>
                                         <div>
-                                            <h2 class="text-lg leading-6 font-medium text-gray-900">Payment</h2>
-                                            <p class="mt-1 text-sm leading-5 text-gray-500">This information will be displayed publicly so be careful what you share.</p>
+                                            <h2 class="text-lg leading-6 font-medium text-dark-text-color">Payment</h2>
+                                            <p class="mt-1 text-sm leading-5 text-base-text-color">This information will be displayed publicly so be careful what you share.</p>
                                         </div>
-                                        <div class="mt-2 bg-white rounded-md -space-y-px">
+                                        <div class="mt-2 bg-primary rounded-md -space-y-px">
                                             <div
-                                                x-bind:class="{'bg-light-blue-50 border-light-blue-200 z-10': paymentMethod === 'new-card', 'border-gray-200': paymentMethod !== 'new-card'}"
+                                                x-bind:class="{'bg-secondary border-secondary z-10': paymentMethod === 'new-card', 'border-neutral-light': paymentMethod !== 'new-card'}"
                                                 class="relative border rounded-tl-md rounded-tr-md p-4 flex {{ !Auth::user()->hasDefaultPaymentMethod() ? 'border rounded-bl-md rounded-br-md' : '' }}"
                                             >
                                                 <x-input.radio x-model="paymentMethod" value="new-card" id="new-card"/>
                                                 <x-input.label for="new-card" class="ml-3 flex flex-col cursor-pointer">
                                             <span
-                                                x-bind:class="{'text-light-blue-900': paymentMethod === 'new-card', 'text-gray-900': paymentMethod !== 'new-card'}"
+                                                x-bind:class="{'text-secondary': paymentMethod === 'new-card', 'text-dark-text-color': paymentMethod !== 'new-card'}"
                                                 class="block text-sm leading-5 font-medium"
                                             >
                                                 Add a new card
@@ -287,13 +287,13 @@
 
                                             @if (Auth::user()->hasDefaultPaymentMethod())
                                                 <div
-                                                    x-bind:class="{'bg-light-blue-50 border-light-blue-200 z-10': paymentMethod === 'previous-card', 'border-gray-200': paymentMethod !== 'previous-card'}"
+                                                    x-bind:class="{'bg-secondary border-secondary z-10': paymentMethod === 'previous-card', 'border-neutral-light': paymentMethod !== 'previous-card'}"
                                                     class="relative border rounded-bl-md rounded-br-md p-4 flex"
                                                 >
                                                     <x-input.radio x-model="paymentMethod" value="previous-card" id="previous-card"/>
                                                     <x-input.label for="previous-card" class="ml-3 flex flex-col cursor-pointer">
                                                 <span
-                                                    x-bind:class="{'text-light-blue-900': paymentMethod === 'previous-card', 'text-gray-900': paymentMethod !== 'previous-card'}"
+                                                    x-bind:class="{'text-secondary': paymentMethod === 'previous-card', 'text-dark-text-color': paymentMethod !== 'previous-card'}"
                                                     class="block text-sm leading-5 font-medium"
                                                 >
                                                     Use {{ ucfirst(Auth::user()->card_brand) }} ending with {{ Auth::user()->card_last_four }}
@@ -306,7 +306,7 @@
 
                                     {{--   Card info and bliing address    --}}
                                     <div x-show="paymentMethod === 'new-card' && !isPaymentMethodUpdated" class="col-span-3 sm:col-span-2 space-y-4">
-                                        <p class="mb-2 text-sm leading-5 text-gray-500">Please fill in your card information and billing address.</p>
+                                        <p class="mb-2 text-sm leading-5 text-base-text-color">Please fill in your card information and billing address.</p>
 
                                         <div>
                                             <x-input.label for="line1" value="Address"/>
@@ -356,7 +356,7 @@
                                             <button
                                                 x-on:click.prevent="confirmCard"
                                                 x-bind:disabled="loading"
-                                                x-bind:class="{'bg-indigo-600 hover:bg-indigo-500 focus:bg-indigo-500 active:bg-indigo-600': !loading, 'bg-gray-600 cursor-not-allowed': loading}"
+                                                x-bind:class="{'bg-secondary hover:bg-secondary focus:bg-secondary active:bg-secondary': !loading, 'bg-gray-600 cursor-not-allowed': loading}"
                                                 class="py-1 px-4 border border-transparent text-sm text-white font-medium rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out">
                                                 Update payment method
                                             </button>
@@ -383,13 +383,13 @@
                         </div>
                         {{--  Preview Job  --}}
                         <div class="rounded border-2 mt-10">
-                            <h2 class="text-xl text-center font-medium text-gray-700 py-2">Preview</h2>
+                            <h2 class="text-xl text-center font-medium text-dark-text-color py-2">Preview</h2>
                             <p class="text-center font-bold">Here's a preview of how your jobpost will look like</p>
                             <p class="text-center">Don't worry if it's not perfect the first time: your job is fully editable for free after posting it!</p>
 
-                            <div class="bg-white shadow overflow-hidden sm:rounded-md">
+                            <div class="bg-primary shadow overflow-hidden sm:rounded-md">
                                 <ul>
-                                    <x-job.item-preview 
+                                    <x-job.item-preview
                                         :logoUrl="$logo ? $logo->temporaryUrl() : Auth::user()->currentTeam->logoUrl"
                                         :title="$title"
                                         :companyName="Arr::first($companies, fn($company) => $company->id === $team_id)->name"

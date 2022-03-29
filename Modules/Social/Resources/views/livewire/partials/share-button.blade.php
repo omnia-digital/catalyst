@@ -1,13 +1,13 @@
 <div x-data="shareButton()">
     <div class="inline-flex items-center text-sm">
-        <button @click="openModal = true" type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+        <button @click="openModal = true" type="button" class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color">
             <x-heroicon-o-share :class="$show ? 'h-6 w-6' : 'h-5 w-5'" aria-hidden="true"/>
-            <span class="font-medium text-gray-900 sr-only">Share</span>
+            <span class="font-medium text-dark-text-color sr-only">Share</span>
         </button>
     </div>
     <!-- component -->
     <!-- CONTAINER MODAL-->
-    <div 
+    <div
         x-cloak
         class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
         x-show="openModal"
@@ -21,7 +21,7 @@
     <!--MODAL ITEM-->
         <div class="relative sm:w-3/4 md:w-1/2 mx-2 sm:mx-auto mt-10 mb-24 opacity-100">
             <div
-            class="relative bg-white shadow-lg rounded-lg text-gray-900 z-20"
+            class="relative bg-primary shadow-lg rounded-lg text-dark-text-color z-20"
             @click.away="openModal = false"
             x-show="openModal"
             x-transition:enter="transition transform duration-300"
@@ -32,14 +32,14 @@
             x-transition:leave-end="scale-0"
             >
                 <!--MODAL HEADER-->
-                <div class="flex justify-between items center border-b border-gray-200 py-3">
+                <div class="flex justify-between items center border-b border-neutral-light py-3">
                     <div class="flex items-center justify-center">
-                        <p class="text-xl font-bold text-gray-800">Share Modal</p>
+                        <p class="text-xl font-bold text-dark-text-color">Share Modal</p>
                     </div>
 
-                    <div 
+                    <div
                         @click="openModal = false"
-                        class="bg-gray-300 hover:bg-gray-500 cursor-pointer hover:text-gray-300 font-sans text-gray-500 w-8 h-8 flex items-center justify-center rounded-full">
+                        class="bg-neutral-dark hover:bg-gray-500 cursor-pointer hover:text-light-text-color font-sans text-base-text-color w-8 h-8 flex items-center justify-center rounded-full">
                         x
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div class="flex justify-around my-4">
                         <!--FACEBOOK ICON-->
                         <div
-                            class="border hover:bg-[#1877f2] w-12 h-12 fill-[#1877f2] hover:fill-white border-blue-200 rounded-full flex items-center justify-center shadow-xl hover:shadow-blue-500/50 cursor-pointer">
+                            class="border hover:bg-[#1877f2] w-12 h-12 fill-[#1877f2] hover:fill-white border-secondary-light rounded-full flex items-center justify-center shadow-xl hover:shadow-secondary/50 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path
                                     d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z">
@@ -60,7 +60,7 @@
                         </div>
                         <!--TWITTER ICON-->
                         <div
-                            class="border hover:bg-[#1d9bf0] w-12 h-12 fill-[#1d9bf0] hover:fill-white border-blue-200 rounded-full flex items-center justify-center shadow-xl hover:shadow-sky-500/50 cursor-pointer">
+                            class="border hover:bg-[#1d9bf0] w-12 h-12 fill-[#1d9bf0] hover:fill-white border-secondary-light rounded-full flex items-center justify-center shadow-xl hover:shadow-sky-500/50 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path
                                     d="M19.633 7.997c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 0 0 5.001-1.721 4.036 4.036 0 0 1-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 0 1-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 0 1-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 0 0 8.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 0 1 4.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 0 0 2.556-.973 4.02 4.02 0 0 1-1.771 2.22 8.073 8.073 0 0 0 2.319-.624 8.645 8.645 0 0 1-2.019 2.083z">
@@ -103,13 +103,13 @@
                     </div>
 
                     <!--BOX LINK-->
-                    <div class="border-2 border-gray-200 flex justify-between items-center mt-4 py-2 space-x-6">
+                    <div class="border-2 border-neutral-light flex justify-between items-center mt-4 py-2 space-x-6">
                         <input x-model="shareLink" class="flex-1 outline-none bg-transparent disabled" disabled type="text" placeholder="link">
 
-                        <button 
+                        <button
                             @click="copyLink(shareLink)"
                             x-text="copyText"
-                            class="text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                            class="text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-gray-50">
                             Copy
                         </button>
                     </div>
@@ -121,7 +121,7 @@
         <script>
             function shareButton() {
                 return {
-                    openModal: false, 
+                    openModal: false,
                     shareLink: "{{ route('social.posts.show', $model) }}",
                     copyText: "Copy",
                     copyLink(link) {
@@ -130,7 +130,7 @@
                         setTimeout(() => {
                             this.copyText = "Copy";
                         }, 3000);
-                        
+
                     }
                 }
             }

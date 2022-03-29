@@ -15,11 +15,11 @@ class Index extends Component
     public ?string $search = null;
 
     public array $filters = [
-        'date_created' => '',
+        'published_at' => '',
         'has_attachment' => false,
     ];
 
-    public string $orderBy = 'date_created';
+    public string $orderBy = 'published_at';
 
     protected $queryString = [
         'search'
@@ -46,7 +46,7 @@ class Index extends Component
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-        return Post::where('type','=','resource')->orderByDesc('updated_at');
+        return Post::where('type','=','resource')->orderByDesc('published_at');
     }
 
     public function getRowsProperty()

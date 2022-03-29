@@ -31,21 +31,30 @@ module.exports = {
             'winter'],
         extend: {
             fontFamily: {
-                sans: ["Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Helvetica", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
+                sans: ["SF Pro Display", "Helvetica", "Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
                 'xxs': '0.65rem',
                 'sm': '0.95rem'
             },
+            height: {
+                '13': '3.2rem'
+            },
+            maxWidth: {
+                'sm': '22rem',
+                '2xl': '40rem',
+                '8xl': '84rem'
+            },
             colors: {
-                rose: colors.rose,
-                neutral: "#f5f7fa",
-                primary: "#10b981",
-                // primary: "#303956",
-                // primary: "#305653",
-                secondary: "#303956",
-                // secondary: "#10b981",
-                tertiary: "#384263"
+                'base-text-color': 'var(--base-text-color)',
+                'light-text-color': 'var(--light-text-color)',
+                'dark-text-color': 'var(--dark-text-color)',
+                neutral: 'var(--neutral)',
+                'neutral-dark': 'var(--neutral-dark)',
+                'neutral-hover': 'var(--neutral-hover)',
+                primary: 'var(--primary)',
+                secondary: 'var(--secondary)',
+                tertiary: 'var(--tertiary)'
             },
         },
     },

@@ -18,7 +18,7 @@
                     </div>
                     <div class="flex-shrink-0 flex items-center px-4">
                         <!-- mobile logo -->
-                        <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Indie Game Dev logo">
+                        <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-secondary.svg" alt="Indie Game Dev logo">
                         <p class="text-green-500 text-3xl font-bold">IGD</p>
                     </div>
                     <div class="mt-5 flex-1 h-0 overflow-y-auto">
@@ -27,8 +27,8 @@
                             @foreach ($navigation as $item)
                                 <a
                                     href="{{ route($item['name']) }}"
-                                    class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-base font-medium rounded-md' }}">
-                                    <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-gray-400 group-hover:text-gray-300' }} mr-3 flex-shrink-0 h-6 w-6"
+                                    class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-light-text-color hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-base-text-color font-medium rounded-md' }}">
+                                    <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
                                                          aria-hidden="true"/>
                                     {{ $item['label'] }}
                                 </a>
@@ -49,7 +49,7 @@
         <div class="flex-1 flex flex-col min-h-0 bg-secondary">
             <div class="flex items-center pl-6 h-16 flex-shrink-0">
                 <!-- desktop logo -->
-                <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
+                <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-secondary.svg" alt="Workflow">
                 <p class="text-green-500 text-3xl font-bold">IGD</p>
             </div>
             <a href="{{ route('social.home') }}">
@@ -64,7 +64,7 @@
                             <p class="text-lg font-medium text-white">
                                 Joshua Torres
                             </p>
-                            <p class="text-base font-medium text-primary group-hover:text-white">
+                            <p class="text-base-text-color font-medium text-primary group-hover:text-white">
                                 Lvl 5 <span class="text-gold">5348</span>
                             </p>
                         </div>
@@ -76,19 +76,19 @@
                     @foreach ($navigation as $item)
                         <a
                             href="{{ route($item['name']) }}"
-                            class="{{ request()->routeIs($item['name']) ? 'bg-tertiary text-white' : 'text-gray-300 hover:bg-tertiary hover:text-white' }} {{ 'w-full pl-6 group flex items-center
+                            class="{{ request()->routeIs($item['name']) ? 'bg-tertiary text-white' : 'text-light-text-color hover:bg-tertiary hover:text-white' }} {{ 'w-full pl-6 group flex items-center
                             px-2 py-2
                             text-lg font-medium rounded-md' }}">
-                            <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-gray-400 group-hover:text-gray-300' }} mr-3 flex-shrink-0 h-6 w-6"
+                            <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
                                                  aria-hidden="true"/>
                             {{ $item['label'] }}
                         </a>
                     @endforeach
                     {{-- <Link v-for="item in navigation" :key="item.name" :href="route(item.name)"
                           :class="[$page.component === '' ? 'bg-tertiary text-white' :
-                    'text-gray-300 hover:bg-tertiary hover:text-white',
+                    'text-light-text-color hover:bg-tertiary hover:text-white',
                     'group flex items-center px-2 py-2 text-lg font-medium rounded-md']">
-                        <component :is="item.icon" :class="[item.current ? 'text-white' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
+                        <component :is="item.icon" :class="[item.current ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
                         {{ item.label }}
                     </Link> --}}
                 </nav>

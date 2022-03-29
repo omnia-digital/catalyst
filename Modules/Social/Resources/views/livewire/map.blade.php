@@ -74,9 +74,9 @@
         x-on:refresh-map.window="reloadMarker($event.detail)"
         x-on:show-modal.window="showDetail = true; populateData($event.detail)"
         x-on:focus-to-country.window="focusToCountry($event.detail)"
-        @keydown.window.escape="open = !open;" class="overflow-hidden relative bg-gray-100"
+        @keydown.window.escape="open = !open;" class="overflow-hidden relative bg-neutral"
     >
-        <div class="h-12 text-sm bg-white flex items-center justify-between">
+        <div class="h-12 text-sm bg-primary flex items-center justify-between">
             <div class="px-4 flex items-center space-x-4">
                 <button role="button" class="flex items-center"><span class="font-semibold mr-2">Sort:</span> By Date <x-heroicon-o-arrow-sm-down class="w-4 h-4" /></button>
                 <button role="button" class="flex items-center"><x-heroicon-o-filter class="w-4 h-4" /><span class="ml-2 font-semibold">Filter (2)</span></button>
@@ -107,15 +107,15 @@
                     id="side-menu"
                     class="w-screen max-w-md"
                 >
-                    <div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
+                    <div class="h-full flex flex-col bg-primary shadow-xl overflow-y-scroll">
                         <div class="p-6">
                             <div class="flex items-start justify-between">
                                 <x-heroicon-s-arrow-narrow-left x-on:click="showDetail = false" x-show="showDetail" class="w-5 h-5 cursor-pointer"/>
-                                <h2 id="slide-over-heading" class="text-lg font-medium text-gray-900">
+                                <h2 id="slide-over-heading" class="text-lg font-medium text-dark-text-color">
                                     Contacts
                                 </h2>
                                 <div class="ml-3 h-7 flex items-center">
-                                    <button @click="open = false; setTimeout(() => open = true, 1000);" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500">
+                                    <button @click="open = false; setTimeout(() => open = true, 1000);" class="bg-primary rounded-md text-light-text-color hover:text-base-text-color focus:ring-2 focus:ring-secondary">
                                         <span class="sr-only">Close panel</span>
                                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -129,8 +129,8 @@
                         <div x-show="!showDetail">
                             <div class="w-full max-w-xs mx-auto mb-5">
                                 <div>
-                                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-                                    <select wire:model="filters.country" id="country" name="country" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                    <label for="country" class="block text-sm font-medium text-dark-text-color">Country</label>
+                                    <select wire:model="filters.country" id="country" name="country" class="mt-1 block w-full pl-3 pr-10 py-2 text-base-text-color border-gray-300 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm rounded-md">
                                         <option selected>All</option>
 
                                         @foreach ($countries as $country)
@@ -140,23 +140,23 @@
                                 </div>
                             </div>
 
-                            <div class="border-b border-gray-200 pb-2">
+                            <div class="border-b border-neutral-light pb-2">
                                 <div class="px-6">
                                     <nav class="-mb-px flex flex-wrap justify-center -mx-4">
                                         <a wire:click="selectCategory('All')" href="#"
-                                           class="{{'All' === $selectedCategoryId ? 'border-indigo-500 text-indigo-600 whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' }}" aria-current="page">
+                                           class="{{'All' === $selectedCategoryId ? 'border-secondary text-secondary whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' : 'border-transparent text-base-text-color hover:text-dark-text-color hover:border-gray-300 whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' }}" aria-current="page">
                                             All
                                         </a>
 
                                         @foreach($categories as $category)
                                             @if ($category->id == $selectedCategoryId)
                                                 <a wire:click="selectCategory('{{ $category->id }}')" href="#"
-                                                   class="border-indigo-500 text-indigo-600 whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm" aria-current="page">
+                                                   class="border-secondary text-secondary whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm" aria-current="page">
                                                     {{ $category->name }}
                                                 </a>
                                             @else
                                                 <a wire:click="selectCategory('{{ $category->id }}')" href="#"
-                                                   class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm">
+                                                   class="border-transparent text-base-text-color hover:text-dark-text-color hover:border-gray-300 whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm">
                                                     {{ $category->name }}
                                                 </a>
                                             @endif
@@ -165,7 +165,7 @@
                                 </div>
                             </div>
 
-                            <ul wire:loading.class="opacity-50" wire:target="selectCategory" class="divide-y divide-gray-200 overflow-y-auto">
+                            <ul wire:loading.class="opacity-50" wire:target="selectCategory" class="divide-y divide-neutral-light overflow-y-auto">
                                 @foreach($contacts as $contact)
                                     <li class="px-6 py-5 relative">
                                         <div class="group flex justify-between items-center">
@@ -176,9 +176,9 @@
                                                 <div class="absolute inset-0 group-hover:bg-gray-50" aria-hidden="true"></div>
                                                 <div class="flex-1 flex items-center min-w-0 relative">
                                                     <div class="ml-4 truncate">
-                                                        <p class="text-sm font-medium text-gray-900 truncate">{{ $contact->name }}</p>
-                                                        <p class="text-sm text-gray-500 truncate"><span></span>{{ $contact->ministry_name }}</p>
-                                                        <p class="text-sm text-gray-500 truncate">
+                                                        <p class="text-sm font-medium text-dark-text-color truncate">{{ $contact->name }}</p>
+                                                        <p class="text-sm text-base-text-color truncate"><span></span>{{ $contact->ministry_name }}</p>
+                                                        <p class="text-sm text-base-text-color truncate">
                                                             @if ($contact->city)
                                                                 <span>{{ $contact->city }} </span>
                                                             @endif
@@ -201,15 +201,15 @@
                         <!-- Show Contact Detail -->
                         <div x-show="showDetail">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900" x-text="title"></h3>
-                                <p class="mt-1 max-w-2xl text-sm text-gray-500" x-text="description"></p>
+                                <h3 class="text-lg leading-6 font-medium text-dark-text-color" x-text="title"></h3>
+                                <p class="mt-1 max-w-2xl text-sm text-base-text-color" x-text="description"></p>
                             </div>
-                            <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
-                                <dl class="sm:divide-y sm:divide-gray-200">
+                            <div class="border-t border-neutral-light px-4 py-5 sm:p-0">
+                                <dl class="sm:divide-y sm:divide-neutral-light">
                                     <template x-for="column in columns" :key="column.id">
                                         <div x-show="column.value" class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-medium text-gray-500" x-text="column.label"></dt>
-                                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" x-text="column.value"></dd>
+                                            <dt class="text-sm font-medium text-base-text-color" x-text="column.label"></dt>
+                                            <dd class="mt-1 text-sm text-dark-text-color sm:mt-0 sm:col-span-2" x-text="column.value"></dd>
                                         </div>
                                     </template>
                                 </dl>

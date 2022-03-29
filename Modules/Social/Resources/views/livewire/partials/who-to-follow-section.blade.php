@@ -15,7 +15,7 @@
                                     <a href="{{ $user->url() }}">{{ $user->name }}</a>
                                 </p>
                                 <p class="text-sm text-gray-500">
-                                    <a href="{{ $user->url() }}">{{ '@' . $user->profile->handle }}</a>
+                                    <a href="{{ $user->url() }}">{{ '@' . $user->profile?->handle }}</a>
                                 </p>
                             </div>
                             <div class="flex-shrink-0">

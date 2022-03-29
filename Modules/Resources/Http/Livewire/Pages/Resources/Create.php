@@ -2,7 +2,6 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Social\Actions\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
@@ -24,9 +23,8 @@ class Create extends Component
     {
         return [
             'title' => ['required', 'max:255'],
-            'url'   => ['required', 'url', 'max:255'],
+            'url'   => ['url', 'max:255'],
             'body'  => ['required', 'max:500'],
-            'image' => ['required', 'max:255'],
         ];
     }
 

@@ -2,6 +2,18 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+:root {
+    --base-text-color: #6b7280;
+    --light-text-color: #9ca3af;
+    --dark-text-color: #272d38;
+    --neutral: #F3F4F6;
+    --neutral-hover: #D1D5DBFF;
+    --neutral-dark: #6b7280;
+    --primary: white;
+    --secondary: #171E2C;
+    --tertiary: #384263;
+}
+
 h1 {
     @apply text-2xl font-bold leading-10;
 }
