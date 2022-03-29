@@ -31,11 +31,19 @@ module.exports = {
             'winter'],
         extend: {
             fontFamily: {
-                sans: ["Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Helvetica", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
+                sans: ["SF Pro Display", "Helvetica", "Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
                 'xxs': '0.65rem',
                 'sm': '0.95rem'
+            },
+            height: {
+                '13': '3.2rem'
+            },
+            maxWidth: {
+                'sm': '22rem',
+                '2xl': '40rem',
+                '8xl': '84rem'
             },
             colors: {
                 'base-text-color': 'var(--base-text-color)',

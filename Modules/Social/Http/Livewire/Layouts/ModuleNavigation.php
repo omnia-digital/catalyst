@@ -6,6 +6,7 @@
 
     class ModuleNavigation extends Component
     {
+        public string $class;
         public array $navigation = [];
 
         public function mount() {
@@ -14,6 +15,36 @@
                     'label'   => 'Home',
                     'name'    => 'social.home',
                     'icon'    => 'heroicon-o-home',
+                    'current' => false
+                ],
+                [
+                    'label'   => 'Explore',
+                    'name'    => 'social.bookmarks',
+                    'icon'    => 'heroicon-o-hashtag',
+                    'current' => false
+                ],
+                [
+                    'label'   => 'Notifications',
+                    'name'    => 'social.bookmarks',
+                    'icon'    => 'heroicon-o-bell',
+                    'current' => false
+                ],
+                [
+                    'label'   => 'Messages',
+                    'name'    => 'social.bookmarks',
+                    'icon'    => 'heroicon-o-chat',
+                    'current' => false
+                ],
+                [
+                    'label'   => 'Groups',
+                    'name'    => 'social.bookmarks',
+                    'icon'    => 'heroicon-o-user-group',
+                    'current' => false
+                ],
+                [
+                    'label'   => 'Contacts',
+                    'name'    => 'social.bookmarks',
+                    'icon'    => 'heroicon-o-users',
                     'current' => false
                 ],
                 [

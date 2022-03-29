@@ -2,7 +2,7 @@
     'post'
 ])
 
-<div {{ $attributes->merge(['class' => 'bg-white px-4 py-5 sm:px-6 border-t border-gray-200']) }}>
+<div {{ $attributes->merge(['class' => 'bg-white px-4 py-5 sm:px-6 shadow-sm rounded-lg']) }}>
     <div class="flex space-x-3">
         <div class="flex-shrink-0">
             <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="{{ $post->user->profile->name }}">
@@ -29,7 +29,7 @@
                     <x-slot name="trigger">
                         <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
                             <span class="sr-only">Open options</span>
-                            <x-heroicon-s-dots-vertical class="h-5 w-5"/>
+                            <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
                         </button>
                     </x-slot>
                     <x-library::dropdown.item>Report</x-library::dropdown.item>

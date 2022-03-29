@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'abbr' => env('APP_ABBR', 'APP'),
 
     /*
     |--------------------------------------------------------------------------
@@ -162,7 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Wimil\Followers\Provider::class,
-        
+
         /*
          * Package Service Providers...
          */

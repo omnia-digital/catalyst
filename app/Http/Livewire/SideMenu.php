@@ -9,6 +9,8 @@ use Livewire\Component;
  */
 class SideMenu extends Component
 {
+    public string $class;
+
     public $isOpen = false;
 
     public $navigation = [];
@@ -39,6 +41,6 @@ class SideMenu extends Component
 
     public function render()
     {
-        return view('livewire.side-menu');
+        return view('livewire.side-menu-wide');
     }
 }

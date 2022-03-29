@@ -1,7 +1,7 @@
-<div>
-    <livewire:social::layouts.module-navigation/>
+<div class="grid grid-cols-10 gap-2 bg-neutral">
+    <livewire:social::layouts.module-navigation class="col-span-2"/>
 
-    <div class="md:pl-24 bg-neutral">
+    <div class="col-span-8">
         <div class="">
 {{--            @if (Route::currentRouteName() !== 'social.profile.show')--}}
 {{--                <div class="bg-neutral">--}}
@@ -12,7 +12,7 @@
 {{--                </div>--}}
 {{--            @endif--}}
 
-            <div class="min-h-screen p-4">
+            <div class="min-h-screen ml-4">
                 <!-- Page content -->
                 <div class="mx-auto">
                     @yield('content')

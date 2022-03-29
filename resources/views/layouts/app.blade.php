@@ -21,12 +21,12 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body class="h-full font-sans antialiased">
+    <body class="h-full bg-neutral font-sans antialiased">
 
         <!-- App Navigation -->
         <livewire:main-navigation-menu/>
 
-        <main class="md:pt-16 flex-1">
+        <main class="max-w-8xl mx-auto md:pt-16">
             {{ $slot }}
         </main>
 
