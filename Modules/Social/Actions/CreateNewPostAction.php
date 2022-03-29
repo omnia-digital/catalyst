@@ -34,7 +34,7 @@ class CreateNewPostAction
         return $this;
     }
 
-    public function type(PostType $type): self
+    public function type(?PostType $type): self
     {
         $this->type = $type;
 

@@ -60,6 +60,8 @@
                 <livewire:social::partials.applications/>
             </div>
         </aside>
+
+        <livewire:media-manager/>
     </div>
 @endsection
 @push('scripts')

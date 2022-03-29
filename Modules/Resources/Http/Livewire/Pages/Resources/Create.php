@@ -2,7 +2,6 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Social\Actions\CreateNewPostAction;
 use Modules\Social\Enums\PostType;

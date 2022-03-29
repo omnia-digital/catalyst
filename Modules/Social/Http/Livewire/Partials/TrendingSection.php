@@ -28,11 +28,8 @@ class TrendingSection extends Component
 
     public function getRowsQueryProperty()
     {
-        if (empty($type)) {
-            return Post::query();
-        } else {
-            return Post::where('type','=','resource');
-        }
+        return Post::with('user')
+            ->when($this->type, fn($query) => $query->where('type', $this->type));
     }
 
     public function getRowsProperty()

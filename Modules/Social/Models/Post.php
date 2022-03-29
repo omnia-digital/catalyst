@@ -16,10 +16,12 @@ use Modules\Social\Traits\Attachable;
 use Modules\Social\Traits\Bookmarkable;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory, Likable, Postable, Attachable, Bookmarkable;
+    use HasFactory, Likable, Postable, Attachable, Bookmarkable, InteractsWithMedia;
 
     protected $fillable = [
         'user_id',
@@ -67,6 +69,16 @@ class Post extends Model
     public function postable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function attachMedia(array $mediaUrls): self
+    {
+        /** @var string $mediaUrl */
+        foreach ($mediaUrls as $mediaUrl) {
+            $this->addMediaFromUrl($mediaUrl)->toMediaCollection();
+        }
+
+        return $this;
     }
 
     public function getUrl(): string

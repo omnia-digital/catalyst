@@ -1,61 +1,47 @@
 @extends('social::livewire.layouts.main-layout')
 
 @section('content')
-<div class="max-w-7xl mx-auto">
-    <div class="bg-neutral">
-        <div class="flex-1 flex items-center">
-            <h1 class="py-4 ml-4 text-3xl">Home</h1>
-            <x-heroicon-o-cog class="mt-1 ml-3 w-6 h-6"/>
-        </div>
-    </div>
-    <!-- Page Heading -->
-    <div class="xl:grid xl:grid-cols-9 xl:gap-9">
-        <div class="xl:col-span-5">
-            <div x-data="setup()">
-                <ul class="flex justify-center items-center my-4">
-                    <template x-for="(tab, index) in tabs" :key="tab.id">
-                        <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-base-text-color border-b-2 justify-center"
-                            :class="activeTab===tab.id ? 'text-black font-bold border-black' : ''"
-                            @click="activeTab = tab.id"
-                            x-html="tab.title + notifications"></li>
-                    </template>
-                </ul>
+    <div>
+        <!-- Page Heading -->
+        <div class="xl:grid xl:grid-cols-9 xl:gap-9">
+            <div class="xl:col-span-6">
+                <div x-data="setup()">
+                    <ul class="flex justify-center items-center my-4">
+                        <template x-for="(tab, index) in tabs" :key="tab.id">
+                            <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-gray-500 border-b-2 justify-center"
+                                :class="activeTab===tab.id ? 'text-black font-bold border-black' : ''"
+                                @click="activeTab = tab.id"
+                                x-html="tab.title + notifications"></li>
+                        </template>
+                    </ul>
 
-            </div>
-            <div class="mt-0">
-                <div class="mx-auto">
-                    <livewire:social::post-editor/>
+                </div>
+                <div class="mt-0">
+                    <div class="mx-auto">
+                        <livewire:social::news-feed-editor />
 
-                    <h1 class="sr-only">Recent Posts</h1>
+                        <div class="mt-6 space-y-4">
+                            <livewire:social::news-feed/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <!-- Featured Section -->
+                    <livewire:social::map/>
+
+                    <!-- Posts -->
                     <ul role="list" class="mt-6 space-y-4">
-                        @if ($recentlyAddedPost)
-                            <li role="listitem">
-                                <livewire:social::post-list-item :post="$recentlyAddedPost" :wire:key="$recentlyAddedPost->id" />
-                            </li>
-                        @endif
-                        @foreach ($this->posts as $post)
-                            <li role="listitem">
-                                <livewire:social::post-list-item :post="$post" :wire:key="$post->id" />
-                            </li>
+                        @foreach ($activities as $activity)
+                            <livewire:social::partials.activity-list-item :activity="$activity"/>
                         @endforeach
                     </ul>
                 </div>
             </div>
-            <div class="mt-4">
-                <!-- Featured Section -->
-                <livewire:social::map/>
-
-                <!-- Posts -->
-                <ul role="list" class="mt-6 space-y-4">
-                    @foreach ($activities as $activity)
-                        <livewire:social::partials.activity-list-item :activity="$activity"/>
-                    @endforeach
-                </ul>
-            </div>
+            <x-sidebar-column/>
         </div>
-        <x-sidebar-column class="xl:col-span-4" />
+
+        <livewire:media-manager :handleUploadProcess="false"/>
     </div>
-</div>
 @endsection
 @push('scripts')
     <script>
@@ -79,6 +65,11 @@
                         component: 'social.newest'
                     },
                     {
+                        id: 3,
+                        title: 'Favorites',
+                        component: 'social.favorites'
+                    },
+                    {
                         id: 4,
                         title: 'Undiscovered',
                         component: 'social.undiscovered'
@@ -88,4 +79,4 @@
             }
         }
     </script>
-    @endpush
+@endpush

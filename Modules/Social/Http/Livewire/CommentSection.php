@@ -3,6 +3,7 @@
 namespace Modules\Social\Http\Livewire;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Social\Actions\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
@@ -17,7 +18,7 @@ class CommentSection extends Component
 
     public Collection $comments;
 
-    public PostType $type;
+    public ?PostType $type = null;
 
     public ?string $content = null;
 
@@ -25,7 +26,7 @@ class CommentSection extends Component
         'post-editor:submitted' => 'saveComment'
     ];
 
-    public function mount(Post $post, ?PostType $type = null)
+    public function mount(Post $post, $type = null)
     {
         $this->post = $post;
         $this->type = $type;
@@ -39,10 +40,14 @@ class CommentSection extends Component
 
         $this->validatePostEditor();
 
-        (new CreateNewPostAction)
-            ->asComment($this->post)
-            ->type($this->type)
-            ->execute($data['content']);
+        DB::transaction(function () use ($data) {
+            $comment = (new CreateNewPostAction)
+                ->asComment($this->post)
+                ->type($this->type)
+                ->execute($data['content']);
+
+            $comment->attachMedia($data['images'] ?? []);
+        });
 
         $this->loadComments();
         $this->emitPostSaved();
