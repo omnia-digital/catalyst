@@ -26,7 +26,7 @@
         <!-- App Navigation -->
         <livewire:main-navigation-menu/>
 
-        <main class="max-w-8xl mx-auto md:pt-16">
+        <main class="">
             {{ $slot }}
         </main>
 

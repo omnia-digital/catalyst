@@ -1,10 +1,13 @@
 @extends('social::livewire.layouts.main-layout')
 
+@section('full-width-header')
+    <div class="col-span-2 h-36 bg-[url('https://source.unsplash.com/random')] -mx-4 -mt-4 bg-cover bg-no-repeat"></div>
+@endsection
+
 @section('content')
 <div>
     <!-- Page Heading -->
     <div class="lg:grid lg:grid-cols-2 lg:gap-4">
-        <div class="col-span-2 h-36 bg-[url('https://source.unsplash.com/random')] -mx-4 -mt-4 bg-cover bg-no-repeat"></div>
         <div class="col-span-2">
             <nav>
                 <ol class="list-reset flex items-center">

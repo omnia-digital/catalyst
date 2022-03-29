@@ -35,7 +35,7 @@ module.exports = {
             },
             fontSize: {
                 'xxs': '0.65rem',
-                'sm': '0.95rem'
+                'sm': '0.94rem',
             },
             height: {
                 '13': '3.2rem'
@@ -43,7 +43,7 @@ module.exports = {
             maxWidth: {
                 'sm': '22rem',
                 '2xl': '40rem',
-                '8xl': '84rem'
+                '8xl': '82rem'
             },
             colors: {
                 'base-text-color': 'var(--base-text-color)',

@@ -14,6 +14,10 @@
     --tertiary: #384263;
 }
 
+p, a {
+    @apply text-sm;
+}
+
 h1 {
     @apply text-2xl font-bold leading-10;
 }

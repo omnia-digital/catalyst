@@ -2,7 +2,7 @@
     <div class="w-full flex relative text-left">
         <div>
             <div type="button"
-                 class="group w-full bg-gray-200 px-5 flex rounded-md py-4 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2
+                 class="group w-full bg-gray-200 border border-neutral-hover px-5 flex rounded-md py-4 text-sm text-left font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2
                  focus:ring-offset-2
                  focus:ring-offset-gray-100 focus:ring-purple-500"
                  id="options-menu-button" aria-expanded="false" aria-haspopup="true">
