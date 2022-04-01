@@ -50,7 +50,7 @@
             heightClass="min-h-[80px]"
             wordCountType="character"
             characterLimit="500"
-            placeholder="What\\'s happening?"
+            :placeholder="$placeholder"
     >
         <x-slot name="footer">
             <div class="pb-4">
