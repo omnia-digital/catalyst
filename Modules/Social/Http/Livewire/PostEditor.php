@@ -14,6 +14,8 @@ class PostEditor extends Component
 
     public array $images = [];
 
+    public string $placeholder = '';
+
     protected $listeners = [
         'validationFailed' => 'handleValidationFailed',
         'postSaved'        => 'handlePostSaved'

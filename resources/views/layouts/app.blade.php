@@ -20,6 +20,8 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <script src="https://kit.fontawesome.com/d81fb76c88.js" crossorigin="anonymous"></script>
     </head>
     <body class="h-full bg-neutral font-sans antialiased">
 
