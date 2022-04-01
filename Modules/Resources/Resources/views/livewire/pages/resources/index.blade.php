@@ -8,9 +8,12 @@
                     <h1 class="py-2 text-3xl">Resources</h1>
                 </div>
 
+                <h2>
+
                 <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent="$openModal('add-resource-modal')">
                     Add Resource
                 </x-library::button>
+                </h2>
                 <livewire:resources::pages.resources.create/>
             </div>
 

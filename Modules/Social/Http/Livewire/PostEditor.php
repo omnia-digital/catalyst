@@ -16,6 +16,8 @@ class PostEditor extends Component
 
     public string $placeholder = '';
 
+    public string $submitButtonText = 'Post';
+
     protected $listeners = [
         'validationFailed' => 'handleValidationFailed',
         'postSaved'        => 'handlePostSaved'

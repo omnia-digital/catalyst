@@ -45,12 +45,18 @@
     x-on:media-manager:file-selected.window="setImage"
     x-on:post-editor:image-set.window="setImages"
 >
+    <div class="mt-4">
+        <x-library::input.text label="Title" wire:model.defer="title"/>
+        <x-library::input.error for="title"/>
+    </div>
+
     <x-library::tiptap
             wire:model.defer="content"
             heightClass="min-h-[80px]"
             wordCountType="character"
             characterLimit="500"
             :placeholder="$placeholder"
+            class="focus-within:ring-1 focus-within:ring-neutral-dark focus-within:border-neutral-dark"
     >
         <x-slot name="footer">
             <div class="pb-4">
@@ -90,7 +96,7 @@
 
                 <div class="flex items-center space-x-2 px-4">
                     <button x-on:click.prevent.stop="setShowImages" type="button">
-                        <x-heroicon-o-paper-clip class="w-5 h-5 text-gray-500"/>
+                        <i class="fa-solid fa-image w-5 h-5 text-gray-500"></i>
                     </button>
                 </div>
             </div>
@@ -104,7 +110,7 @@
 
         <div class="flex justify-end my-2">
             <x-library::button wire:click="submit" wire:target="submit">
-                Post
+                {{ $submitButtonText }}
             </x-library::button>
         </div>
     </div>

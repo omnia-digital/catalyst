@@ -42,10 +42,12 @@
                             <a href="{{ route($item['name']) }}"
                                class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-light-text-color hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center
                                px-2 py-2 text-base-text-color font-medium' }}">
-                                <x-dynamic-component :component="$item['icon']"
-                                                     class="{{ $item['current'] ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
-                                                     aria-hidden="true"/>
-                                <span>{{ $item['label'] }}</span>
+                                <h2>
+                                    <x-dynamic-component :component="$item['icon']"
+                                                         class="{{ $item['current'] ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
+                                                         aria-hidden="true"/>
+                                    <span>{{ $item['label'] }}</span>
+                                </h2>
                             </a>
                         @endforeach
                     </nav>
