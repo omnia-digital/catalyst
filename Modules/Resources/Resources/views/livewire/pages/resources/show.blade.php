@@ -38,6 +38,10 @@
                 {!! Purify::clean($resource->body) !!}
             </div>
 
+            <div>
+                <livewire:social::partials.post-actions wire:key="resource-actions-{{ $resource->id }}" :post="$resource"/>
+            </div>
+
             @if($resource->url)
                 <a href="{{ $resource->url }}" target="_blank" class="bg-primary hover:shadow-lg rounded-lg px-4 py-2 text-xl inline-flex items-center space-x-2">
                     <p>Go to website</p>
