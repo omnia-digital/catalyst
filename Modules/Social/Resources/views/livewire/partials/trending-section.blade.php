@@ -1,12 +1,12 @@
-<section aria-labelledby="trending-heading">
+<section aria-labelledby="trending-heading" class="card">
         <div class="">
-            <h2 id="trending-heading" class="p-3 text-xl font-medium text-dark-text-color">
+            <h2 id="trending-heading" class="px-3 py-2 text-xl font-medium text-dark-text-color">
                 {{ $title }}
             </h2>
-            <div class="mt-6 flow-root">
-                <ul role="list" class="-my-4">
+            <div class="flow-root">
+                <ul role="list" class="">
                     @foreach ($posts as $post)
-                        <li class="p-4 hover:bg-neutral-hover">
+                        <li class="py-3 px-4 hover:bg-neutral-hover">
                         <a href="{{ route('social.posts.show', ['post' => $post]) }}" class="flex justify-between">
                             <div class="flex-1">
                                 <div class="font-bold">
@@ -24,8 +24,8 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="mt-6">
-                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-gray-50">
+            <div class="">
+                <a href="#" class="w-full block text-center px-4 py-4 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-neutral-hover">
                     View all
                 </a>
             </div>

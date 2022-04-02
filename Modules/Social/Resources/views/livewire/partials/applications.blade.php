@@ -1,4 +1,4 @@
-<div class="bg-primary rounded-lg shadow">
+<div class="card">
     <div class="flex-1 p-6 space-y-1 overflow-y-auto">
         <h2 class="text-base-text-color font-bold">Applications</h2>
         <div x-data="applicationsSetup()">
