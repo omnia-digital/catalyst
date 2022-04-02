@@ -77,7 +77,7 @@
                         </li>
                     </template>
 
-                    <li class="relative">
+                    <li x-show="showImages" class="relative" style="display: none">
                         <button
                                 x-on:click.prevent="showMediaManager(null, {})"
                                 type="button"
