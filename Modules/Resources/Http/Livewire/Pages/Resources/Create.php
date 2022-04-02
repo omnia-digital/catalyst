@@ -25,6 +25,7 @@ class Create extends Component
             'title' => ['required', 'max:255'],
             'url'   => ['url', 'max:255'],
             'body'  => ['required', 'max:500'],
+            'image' => ['nullable','string'],
         ];
     }
 
@@ -37,6 +38,7 @@ class Create extends Component
             ->execute($validated['body'], [
                 'title' => $validated['title'],
                 'url'   => $validated['url'],
+                'image' => $validated['image']
             ]);
 
         $this->reset('title', 'url', 'body', 'image');

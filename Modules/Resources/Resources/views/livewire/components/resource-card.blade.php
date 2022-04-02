@@ -34,6 +34,12 @@
                     <img src="{{ $post->image }}" alt="{{ $post->title }}" class="object-cover">
                 </div>
             @endif
+
+            @if ($media = $post->media[0] ?? null)
+                <div class="mt-3 block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden">
+                    <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover">
+                </div>
+            @endif
         </div>
     </div>
 
