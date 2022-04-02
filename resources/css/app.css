@@ -7,25 +7,39 @@
     --light-text-color: #9ca3af;
     --dark-text-color: #272d38;
     --neutral: #F3F4F6;
-    --neutral-hover: #D1D5DBFF;
+    --neutral-hover: #eff0f2;
     --neutral-dark: #6b7280;
     --primary: white;
     --secondary: #171E2C;
     --tertiary: #384263;
 }
 
-p, a {
-    @apply text-sm;
+p {
+    @apply text-base;
 }
 
+h3 a, h4 a, h5 a, h6 a {
+    @apply hover:underline;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    @apply text-dark-text-color;
+    @apply font-bold;
+}
 h1 {
-    @apply text-2xl font-bold leading-10;
+    @apply text-2xl;
 }
 h2 {
     @apply text-xl;
 }
 h3 {
     @apply text-lg;
+}
+h4 {
+    @apply text-base;
+}
+h5 {
+    @apply text-sm;
 }
 
 .sub-app-header {
@@ -39,3 +53,7 @@ h3 {
 /*a {*/
 /*    @apply text-primary*/
 /*}*/
+
+.card {
+    @apply pt-1 bg-primary shadow rounded-lg;
+}

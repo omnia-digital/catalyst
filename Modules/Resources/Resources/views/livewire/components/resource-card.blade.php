@@ -4,15 +4,16 @@
         <div class="space-y-2 py-4 px-6">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3 align-middle">
-                    <h3 class="flex items-center text-dark-text-color text-lg hover:underline font-bold">
+                    <h4 class="flex items-center">
                         <a href="{{ route('resources.show', ['resource' => $post]) }}">{{ $post->title }}</a>
-                    </h3>
+                    </h4>
 
                     @empty(!$post->is_verified)
                         <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
                     @endempty
 
-                    <h3 class="text-base-text-color text-md">{{ $post->created_at->diffInDays() < 2 ? $post->created_at->shortAbsoluteDiffForHumans() : $post->created_at->format('M d') }}</h3>
+                    <h4 class="text-base-text-color text-md font-normal">{{ $post->created_at->diffInDays() < 2 ? $post->created_at->shortAbsoluteDiffForHumans() : $post->created_at->format('M d')
+                    }}</h4>
                 </div>
 
                 @if ($post->tags)
@@ -31,6 +32,12 @@
             @if($post->image)
                 <div class="block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden">
                     <img src="{{ $post->image }}" alt="{{ $post->title }}" class="object-cover">
+                </div>
+            @endif
+
+            @if ($media = $post->media[0] ?? null)
+                <div class="mt-3 block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden">
+                    <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover">
                 </div>
             @endif
         </div>

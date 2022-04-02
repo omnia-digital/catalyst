@@ -1,16 +1,19 @@
 @extends('resources::livewire.layouts.main-layout')
 
 @section('content')
-    <div class="xl:grid xl:grid-cols-9 xl:gap-9">
-        <div class="xl:col-span-6">
+    <div class="flex space-x-6">
+        <div class="max-w-2xl mx-auto">
             <div class="mb-2 flex justify-between items-center">
                 <div class="flex-1 flex items-center">
                     <h1 class="py-2 text-3xl">Resources</h1>
                 </div>
 
+                <h2>
+
                 <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent="$openModal('add-resource-modal')">
                     Add Resource
                 </x-library::button>
+                </h2>
                 <livewire:resources::pages.resources.create/>
             </div>
 
@@ -34,13 +37,7 @@
             </div>
         </div>
 
-        <aside class="hidden xl:block xl:col-span-3">
-            <div class="sticky h-screen overflow-y-scroll scrollbar-hide top-4 space-y-4 pb-36 bg-primary shadow rounded-lg">
-                <livewire:social::partials.trending-section title="Top Resources" type="resource"/>
-                <livewire:social::partials.who-to-follow-section/>
-                <livewire:social::partials.applications/>
-            </div>
-        </aside>
+        <x-sidebar-column class="max-w-sm" post-type="resource"/>
     </div>
 @endsection
 @push('scripts')

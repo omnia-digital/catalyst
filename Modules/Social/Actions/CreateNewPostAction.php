@@ -52,7 +52,7 @@ class CreateNewPostAction
             'type'          => $this->type,
             'postable_id'   => $this->postable->id ?? $options['postable_id'] ?? null,
             'postable_type' => $this->postable ? get_class($this->postable) : ($options['postable_type'] ?? null),
-            'image'         => $options['image'] ?? null
+            'image'         => $options['image'] ?? null,
         ]);
     }
 }

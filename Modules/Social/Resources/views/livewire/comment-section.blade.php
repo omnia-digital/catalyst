@@ -5,14 +5,8 @@
                 <h2 id="activity-title" class="text-lg font-medium text-dark-text-color">Comments</h2>
             </div>
             <div class="pt-6">
-                <div class="flex space-x-3">
-                    <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=256&amp;h=256&amp;q=80" alt="">
-                    </div>
-                    <div class="min-w-0 flex-1">
+
                         <livewire:social::post-editor placeholder="Reply..."/>
-                    </div>
-                </div>
 
                 <div class="mt-4">
                     @foreach($comments as $comment)

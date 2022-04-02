@@ -1,5 +1,5 @@
 <div>
-    <x-library::modal id="add-resource-modal" maxWidth="7xl">
+    <x-library::modal id="add-resource-modal" maxWidth="5xl">
         <x-slot name="title">Add Resource</x-slot>
         <x-slot name="content">
             <div class="mt-4">
@@ -12,7 +12,7 @@
             </div>
             <div class="mt-4">
                 <x-library::input.label value="Body"/>
-{{--                <x-library::input.trix wire:model.defer="body"/>--}}
+                {{--                <x-library::input.trix wire:model.defer="body"/>--}}
                 <x-library::tiptap wire:model.defer="body"/>
                 <x-library::input.error for="body"/>
                 <x-library::input.help value="Maximum is 500 characters"/>
@@ -31,6 +31,8 @@
         </x-slot>
         <x-slot name="actions">
             <x-library::button wire:click="addResource">Add Resource</x-library::button>
+
+            {{--            <livewire:social::post-editor :title :wire:key="uniqid()" submit-text="Add Resource"/>--}}
         </x-slot>
     </x-library::modal>
 
