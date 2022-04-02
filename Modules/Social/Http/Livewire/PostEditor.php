@@ -14,9 +14,13 @@ class PostEditor extends Component
 
     public array $images = [];
 
-    public string $placeholder = '';
+    public string $placeholder = "What\'s on your mind?";
 
     public string $submitButtonText = 'Post';
+
+    public bool $includeTitle = false;
+
+    public bool $openState = false;
 
     protected $listeners = [
         'validationFailed' => 'handleValidationFailed',

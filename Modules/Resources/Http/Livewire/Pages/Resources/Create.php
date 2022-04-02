@@ -37,7 +37,6 @@ class Create extends Component
             ->execute($validated['body'], [
                 'title' => $validated['title'],
                 'url'   => $validated['url'],
-                'image' => $validated['image']
             ]);
 
         $this->reset('title', 'url', 'body', 'image');
