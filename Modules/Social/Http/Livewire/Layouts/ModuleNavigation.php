@@ -43,7 +43,7 @@
                 ],
                 [
                     'label'   => 'Contacts',
-                    'name'    => 'social.bookmarks',
+                    'name'    => 'social.contacts.show',
                     'icon'    => 'heroicon-o-users',
                     'current' => false
                 ],
