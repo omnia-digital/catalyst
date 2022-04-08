@@ -4,10 +4,13 @@ namespace Modules\Resources\Http\Livewire\Components;
 
 use Illuminate\Support\Facades\Auth;
 use Modules\Social\Http\Livewire\PostListItem;
+use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use function view;
 
 class ResourceCard extends PostListItem
 {
+    use WithNotification;
+
     public ?string $title = null;
 
     public ?string $body = null;
@@ -48,6 +51,23 @@ class ResourceCard extends PostListItem
         $this->image = null;
 
         $this->removeFileFromMediaManager();
+    }
+
+    public function toggleBookmark()
+    {
+        if ($this->post->isBookmarked()) {
+            $this->post->removeBookmark();
+            $this->post->refresh();
+
+            $this->success('Remove bookmark successfully!');
+
+            return;
+        }
+
+        $this->post->markAsBookmark();
+        $this->post->refresh();
+
+        $this->success('Bookmark the resource successfully!');
     }
 
     public function render()
