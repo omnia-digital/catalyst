@@ -94,11 +94,11 @@
         }
 
         public function url() {
-            return $this->profile()->exists() ? url(config('app.url') . '/' . $this->profile->handle) : '#';
+            return route('social.profile.show', $this->handle);
         }
 
         public function getHandleAttribute() {
-            return $this->profile->handle;
+            return $this->profile?->handle;
         }
 
         public function receivesBroadcastNotificationsOn() {
