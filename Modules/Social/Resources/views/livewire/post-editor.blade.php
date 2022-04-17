@@ -49,7 +49,7 @@
 
         <x-library::tiptap
                 wire:model.defer="content"
-                heightClass="{{ $openState == false ?? 'min-h-[80px]'}} m-1"
+                heightClass="{{ $openState == false ?? 'min-h-[80px]'}} m-1 text-lg"
                 wordCountType="character"
                 characterLimit="500"
                 :placeholder="$placeholder"
@@ -108,7 +108,7 @@
             </div>
 
             <div class="flex justify-end my-2">
-                <x-library::button wire:click="submit" wire:target="submit" class="py-1">
+                <x-library::button wire:click="submit" wire:target="submit" class="py-1 px-3 text-lg">
                     {{ $submitButtonText }}
                 </x-library::button>
             </div>
