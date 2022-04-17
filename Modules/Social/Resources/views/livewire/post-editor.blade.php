@@ -34,7 +34,7 @@
     }"
         x-on:media-manager:file-selected.window="setImage"
         x-on:post-editor:image-set.window="setImages"
-        class="bg-primary p-2 rounded-lg flex justify-start pt-4"
+        class="bg-primary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4"
 >
     <div class="mr-3 flex-shrink-0">
         <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->profile->name }}"/>
@@ -95,7 +95,7 @@
             </x-slot>
         </x-library::tiptap>
         <hr class="text-neutral-light"/>
-        <div class="flex justify-between items-center pt-1">
+        <div class="flex justify-between items-center pt-3 pb-2">
             @if($openState == false)
                 <div class="flex items-center space-x-2 px-4">
                     <button x-on:click.prevent.stop="showMediaManager(null, {})" type="button">
@@ -107,7 +107,7 @@
                 <x-library::input.error for="content" class="mt-2"/>
             </div>
 
-            <div class="flex justify-end my-2 mr-3">
+            <div class="flex justify-end items-center">
                 <x-library::button wire:click="submit" wire:target="submit" class="py-1 px-3 text-base">
                     {{ $submitButtonText }}
                 </x-library::button>
