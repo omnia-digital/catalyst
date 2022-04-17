@@ -1,6 +1,10 @@
 @extends('resources::livewire.layouts.main-layout')
 
 @section('content')
+    @empty($resource)
+        <h2>No Resource</h2>
+    @else
+
     <div class="mb-4 flex items-center">
         <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full">
             <a href="{{ route('resources.home') }}">
@@ -67,6 +71,8 @@
 
         <livewire:media-manager/>
     </div>
+    @endif
+
 @endsection
 @push('scripts')
     <script>

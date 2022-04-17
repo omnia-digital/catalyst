@@ -32,7 +32,7 @@
                                         type="button"
                                         aria-haspopup="true"
                                         aria-expanded="true"
-                                        id="post-list-item-{{ $post->id }}-options-menu-items"
+                                        id="post-card-{{ $post->id }}-options-menu-items"
                                         @click="openOptions = true"
                                 > <!-- x-menu-button -->
                                     <span class="sr-only">Open options</span>
@@ -40,7 +40,7 @@
                                 </button>
                             </div>
                             <div
-                                    aria-labelledby="post-list-item-{{ $post->id }}-options-menu-items"
+                                    aria-labelledby="post-card-{{ $post->id }}-options-menu-items"
                                     class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     x-show="openOptions" @click.away="openOptions = false"
                                     x-transition:enter.duration.100ms

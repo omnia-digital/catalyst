@@ -1,8 +1,4 @@
-@props([
-    'post'
-])
-
-<article {{ $attributes->merge(['class' => 'flex justify-start bg-white pl-3 pr-5 pt-4 shadow-sm rounded-lg']) }}>
+<article class="flex justify-start bg-white pl-3 pr-5 pt-4 shadow-sm rounded-lg">
     <div class="mr-3 flex-shrink-0">
         <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->profile->name }}"/>
     </div>
@@ -15,15 +11,16 @@
                     </div>
                     <div class="text-base-text-color">
                         @if ($post->isParent())
-                        <a href="{{ $post->getUrl() }}" class="hover:underline">
-                            <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans(short: true) }}</time>
-                        </a>
+                            <a href="{{ $post->getUrl() }}" class="hover:underline">
+                                <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans(short: true) }}</time>
+                            </a>
                         @else
                             {{ $post->created_at->diffForHumans() }}
                         @endif
                     </div>
                 </div>
             </div>
+
             <div class="flex-shrink-0 self-center flex">
                 <div class="relative z-30 inline-block text-left">
                     <x-library::dropdown>
@@ -33,7 +30,9 @@
                                 <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
                             </button>
                         </x-slot>
-                        <x-library::dropdown.item>Report</x-library::dropdown.item>
+                        <x-library::dropdown.item wire:click.prevent="toggleBookmark">
+                            {{ $post->isBookmarked() ? 'Un-bookmark' : 'Bookmark' }}
+                        </x-library::dropdown.item>
                     </x-library::dropdown>
                 </div>
             </div>
