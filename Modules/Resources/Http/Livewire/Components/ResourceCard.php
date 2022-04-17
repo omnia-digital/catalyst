@@ -3,10 +3,11 @@
 namespace Modules\Resources\Http\Livewire\Components;
 
 use Illuminate\Support\Facades\Auth;
-use Modules\Social\Http\Livewire\PostListItem;
+use Modules\Social\Http\Livewire\Components\PostCard;
+use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use function view;
 
-class ResourceCard extends PostListItem
+class ResourceCard extends PostCard
 {
     public ?string $title = null;
 

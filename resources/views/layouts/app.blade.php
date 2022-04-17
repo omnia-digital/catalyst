@@ -32,6 +32,8 @@
             {{ $slot }}
         </main>
 
+        <x-library::notification/>
+
         @libraryScripts
 
         @stack('modals')

@@ -23,6 +23,22 @@
                         @endforeach
                     </div>
                 @endif
+
+                <div class="flex-shrink-0 self-center flex">
+                    <div class="relative z-30 inline-block text-left">
+                        <x-library::dropdown>
+                            <x-slot name="trigger">
+                                <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
+                                    <span class="sr-only">Open options</span>
+                                    <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
+                                </button>
+                            </x-slot>
+                            <x-library::dropdown.item wire:click.prevent="toggleBookmark">
+                                {{ $post->isBookmarked() ? 'Un-bookmark' : 'Bookmark' }}
+                            </x-library::dropdown.item>
+                        </x-library::dropdown>
+                    </div>
+                </div>
             </div>
 
             <div class="w-full">

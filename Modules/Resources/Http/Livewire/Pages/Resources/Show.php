@@ -14,7 +14,7 @@ class Show extends Component
     {
         $this->resource = Post::withoutGlobalScope('parent')->find($resource);
 
-        if ($this->resource->type !== PostType::RESOURCE) {
+        if (!empty($this->resource) && $this->resource->type !== PostType::RESOURCE) {
             $this->redirectRoute('social.posts.show', $this->resource);
         }
     }

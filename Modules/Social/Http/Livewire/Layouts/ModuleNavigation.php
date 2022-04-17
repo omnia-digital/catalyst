@@ -17,30 +17,30 @@
                     'icon'    => 'heroicon-o-home',
                     'current' => false
                 ],
-                [
-                    'label'   => 'Explore',
-                    'name'    => 'social.bookmarks',
-                    'icon'    => 'heroicon-o-hashtag',
-                    'current' => false
-                ],
-                [
-                    'label'   => 'Notifications',
-                    'name'    => 'social.bookmarks',
-                    'icon'    => 'heroicon-o-bell',
-                    'current' => false
-                ],
-                [
-                    'label'   => 'Messages',
-                    'name'    => 'social.bookmarks',
-                    'icon'    => 'heroicon-o-chat',
-                    'current' => false
-                ],
-                [
-                    'label'   => 'Groups',
-                    'name'    => 'social.bookmarks',
-                    'icon'    => 'heroicon-o-user-group',
-                    'current' => false
-                ],
+//                [
+//                    'label'   => 'Explore',
+//                    'name'    => 'social.bookmarks',
+//                    'icon'    => 'heroicon-o-hashtag',
+//                    'current' => false
+//                ],
+//                [
+//                    'label'   => 'Notifications',
+//                    'name'    => 'social.bookmarks',
+//                    'icon'    => 'heroicon-o-bell',
+//                    'current' => false
+//                ],
+//                [
+//                    'label'   => 'Messages',
+//                    'name'    => 'social.bookmarks',
+//                    'icon'    => 'heroicon-o-chat',
+//                    'current' => false
+//                ],
+//                [
+//                    'label'   => 'Groups',
+//                    'name'    => 'social.bookmarks',
+//                    'icon'    => 'heroicon-o-user-group',
+//                    'current' => false
+//                ],
                 [
                     'label'   => 'Contacts',
                     'name'    => 'social.contacts.show',

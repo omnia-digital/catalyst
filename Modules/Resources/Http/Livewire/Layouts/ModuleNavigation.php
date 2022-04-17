@@ -19,7 +19,7 @@
                 ],
                 [
                     'label'   => 'Bookmarks',
-                    'name'    => 'social.bookmarks',
+                    'name'    => 'resources.bookmarks',
                     'icon'    => 'heroicon-o-bookmark',
                     'current' => false
                 ],

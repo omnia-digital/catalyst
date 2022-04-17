@@ -25,7 +25,7 @@
                 <h1 class="sr-only">Recent Posts</h1>
                 <ul role="list" class="space-y-4">
                     <li v-for="question in questions" :key="question.id">
-                        <post-list-item :post="question"></post-list-item>
+                        <post-card :post="question"></post-card>
                     </li>
                 </ul>
             </div>
@@ -118,7 +118,7 @@
 {{--    import AppLayout from "@/Layouts/AppLayout";--}}
 {{--    import {defineComponent} from 'vue'--}}
 {{--    import NewPostBox from "../Components/NewPostBox";--}}
-{{--    import PostListItem from "../Components/PostListItem";--}}
+{{--    import PostCard from "../Components/PostCard";--}}
 
 
 {{--    // const user = {--}}
@@ -304,7 +304,7 @@
 {{--            user: Object--}}
 {{--        },--}}
 {{--        components: {--}}
-{{--            PostListItem,--}}
+{{--            PostCard,--}}
 {{--            NewPostBox,--}}
 {{--            Menu,--}}
 {{--            MenuButton,--}}

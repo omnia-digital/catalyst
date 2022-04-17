@@ -4,7 +4,7 @@
             @yield('full-width-header')
         </div>
     @endif
-    <div class="max-w-8xl mx-auto grid grid-cols-10 gap-2 bg-neutral @hasSection('full-width-header') pt-4 @else pt-16 @endif">
+    <div class="max-w-8xl mx-auto grid grid-cols-10 gap-2 bg-neutral @hasSection('full-width-header') pt-4 @else pt-20 @endif">
         <!-- SideMenu -->
         <livewire:resources::layouts.module-navigation class="col-span-2"/>
 
