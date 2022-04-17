@@ -60,7 +60,7 @@
     </div>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden md:flex md:flex-col md:sticky md:inset-y-0">
+    <div class="hidden md:flex md:flex-col scrollbar-hide md:sticky top-20 pt-4 md:inset-y-2">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex flex-col min-h-0 ">
             <div class="flex">

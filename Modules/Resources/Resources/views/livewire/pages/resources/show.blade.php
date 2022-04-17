@@ -61,13 +61,7 @@
 
         </div>
 
-        <aside class="hidden xl:block xl:col-span-3">
-            <div class="sticky h-screen overflow-y-scroll scrollbar-hide top-4 space-y-4 pb-36 bg-primary shadow rounded-lg">
-                <livewire:social::partials.trending-section title="Top Resources" type="resource"/>
-                <livewire:social::partials.who-to-follow-section/>
-                <livewire:social::partials.applications/>
-            </div>
-        </aside>
+        <x-sidebar-column class="max-w-sm" post-type="resource"/>
 
         <livewire:media-manager/>
     </div>

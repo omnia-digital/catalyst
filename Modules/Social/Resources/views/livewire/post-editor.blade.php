@@ -49,7 +49,7 @@
 
         <x-library::tiptap
                 wire:model.defer="content"
-                heightClass="{{ $openState == false ?? 'min-h-[80px]'}}"
+                heightClass="{{ $openState == false ?? 'min-h-[80px]'}} m-1"
                 wordCountType="character"
                 characterLimit="500"
                 :placeholder="$placeholder"
