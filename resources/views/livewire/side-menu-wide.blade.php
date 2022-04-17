@@ -64,7 +64,7 @@
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex flex-col min-h-0 ">
             <div class="flex">
-                <nav class="pt-4 space-y-3">
+                <nav class="space-y-3">
                     @foreach ($navigation as $item)
                         <a href="{{ route($item['name']) }}"
                            title="{{ $item['label'] }}"
