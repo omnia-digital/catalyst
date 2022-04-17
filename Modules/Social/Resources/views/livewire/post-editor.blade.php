@@ -107,8 +107,8 @@
                 <x-library::input.error for="content" class="mt-2"/>
             </div>
 
-            <div class="flex justify-end my-2">
-                <x-library::button wire:click="submit" wire:target="submit" class="py-1 px-3 text-lg">
+            <div class="flex justify-end my-2 mr-3">
+                <x-library::button wire:click="submit" wire:target="submit" class="py-1 px-3 text-base">
                     {{ $submitButtonText }}
                 </x-library::button>
             </div>
