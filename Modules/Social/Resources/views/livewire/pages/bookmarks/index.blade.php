@@ -1,29 +1,43 @@
 @extends('social::livewire.layouts.main-layout')
 
 @section('content')
+    <div class="flex space-x-6">
+        <div class="max-w-2xl mx-auto">
+            <div class="mb-2 flex justify-between items-center">
+                <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full">
+                    <a href="{{ route('social.home') }}">
+                        <x-heroicon-o-arrow-left class="h-6"/>
+                    </a>
+                </div>
+                <div class="flex-1 flex items-center">
+                    <h1 class="py-2 text-3xl">Bookmarks</h1>
+                </div>
+            </div>
 
-    <!-- Filters -->
-    @include('livewire.partials.filters')
+            <!-- Filters -->
+            @include('livewire.partials.filters')
 
-    @if(empty($bookmarks))
-        <h2>No Bookmarked Resources</h2>
-    @else
-        <div class="">
-            <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                @foreach($bookmarks as $bookmark)
-                    <li>
-                        @if($bookmark->bookmarkable()->first()->type === \Modules\Social\Enums\PostType::RESOURCE)
-                            <livewire:resources::components.resource-card
-                                    :post="$bookmark->bookmarkable()->first()"/>
-                        @else
-                            <livewire:social::components.post-card
-                                    :post="$bookmark->bookmarkable()->first()"/>
-                        @endif
-                    </li>
-                @endforeach
-            </ul>
+            @if(empty($bookmarks))
+                <h2>No Bookmarked Resources</h2>
+            @else
+                <div class="">
+                    <ul role="list" class="grid grid-cols-1 gap-6">
+                        @foreach($bookmarks as $bookmark)
+                            <li>
+                                <livewire:social::components.post-card :post="$bookmark->bookmarkable()->first()"/>
+                            </li>
+                        @endforeach
+                    </ul>
+
+                    <div class="pb-6">
+                        {{ $bookmarks->onEachSide(1)->links() }}
+                    </div>
+                </div>
+            @endif
         </div>
-    @endif
+
+        <x-sidebar-column class="max-w-sm"/>
+    </div>
 @endsection
 @push('scripts')
     <script>
