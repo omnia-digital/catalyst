@@ -31,6 +31,7 @@ class Post extends Model implements HasMedia
         'body',
         'postable_id',
         'postable_type',
+        'repost_original_id',
         'published_at',
         'image'
     ];
@@ -69,6 +70,16 @@ class Post extends Model implements HasMedia
     public function postable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function repostOriginal(): BelongsTo
+    {
+        return $this->belongsTo(self::class);
+    }
+
+    public function isRepost(): bool
+    {
+        return !is_null($this->repost_original_id);
     }
 
     public function attachMedia(array $mediaUrls): self

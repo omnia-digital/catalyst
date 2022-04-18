@@ -56,7 +56,7 @@ class RepliesModal extends Component
             $comment->attachMedia($data['images'] ?? []);
         });
 
-        $this->emitPostSaved();
+        $this->emitPostSaved($data['id']);
         $this->redirectRoute('social.posts.show', $this->post);
     }
 

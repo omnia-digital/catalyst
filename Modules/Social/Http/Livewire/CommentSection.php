@@ -50,7 +50,7 @@ class CommentSection extends Component
         });
 
         $this->loadComments();
-        $this->emitPostSaved();
+        $this->emitPostSaved($data['id']);
     }
 
     private function loadComments(): void
