@@ -36,6 +36,10 @@ class Post extends Model implements HasMedia
         'image'
     ];
 
+    protected $dates = [
+        'published_at'
+    ];
+
     protected static function booted()
     {
         // @NOTE - this is so we don't accidentally pull in comments when we are trying to just get regular posts
@@ -50,6 +54,11 @@ class Post extends Model implements HasMedia
             get: fn($value) => PostType::tryFrom($value),
             set: fn($value) => $value?->value
         );
+    }
+
+    public function scopeOfType($query, $type)
+    {
+        return $query->where('type', $type);
     }
 
     protected static function newFactory()

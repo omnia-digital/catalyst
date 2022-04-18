@@ -32,20 +32,20 @@ class MainNavigationMenu extends Component
                 'module'  => 'resources',
                 'current' => false
             ],
-            [
-                'label'   => 'Jobs',
-                'name'    => 'jobs.home',
-                'icon'    => 'heroicon-o-briefcase',
-                'module'  => 'jobs',
-                'current' => false
-            ],
-            [
-                'label'   => 'Advice',
-                'name'    => 'advice.home',
-                'icon'    => 'heroicon-o-briefcase',
-                'module'  => 'advice',
-                'current' => false
-            ],
+//            [
+//                'label'   => 'Jobs',
+//                'name'    => 'jobs.home',
+//                'icon'    => 'heroicon-o-briefcase',
+//                'module'  => 'jobs',
+//                'current' => false
+//            ],
+//            [
+//                'label'   => 'Advice',
+//                'name'    => 'advice.home',
+//                'icon'    => 'heroicon-o-briefcase',
+//                'module'  => 'advice',
+//                'current' => false
+//            ],
             //                [
             //                    'label'   => 'Projects',
             //                    'name'    => 'projects.home',

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="divide-y">
-    <x-social::post.card wire:key="post-{{ $post->id }}" :post="$post"/>
+    <livewire:social::components.post-card wire:key="post-{{ $post->id }}" :post="$post"/>
 
     <livewire:social::comment-section :post="$post"/>
 
