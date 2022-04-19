@@ -31,9 +31,9 @@ trait WithPostEditor
         );
     }
 
-    public function emitPostSaved()
+    public function emitPostSaved(string $editorId)
     {
-        $this->emitTo('social::post-editor', 'postSaved');
+        $this->emitTo('social::post-editor', 'postSaved:' . $editorId);
         $this->emitTo('social::news-feed', 'postSaved');
     }
 }
