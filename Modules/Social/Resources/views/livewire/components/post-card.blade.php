@@ -54,6 +54,46 @@
             </div>
         @endif
 
+        <div>
+            @if ($post->isRepost())
+                <article class="mt-4 w-full flex bg-white p-4 shadow-sm border border-gray-200 rounded-md">
+                    <div class="mr-3 flex-shrink-0">
+                        <img class="h-10 w-10 rounded-full" src="{{ $post->repostOriginal->user?->profile_photo_url }}" alt="{{ $post->repostOriginal->user->profile->name }}"/>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex space-x-3">
+                            <div class="min-w-0 flex-1">
+                                <div class="min-w-0 flex justify-start">
+                                    <div class="font-bold text-dark-text-color mr-2">
+                                        <a href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}" class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
+                                    </div>
+                                    <div class="text-base-text-color">
+                                        {{ $post->repostOriginal->created_at->diffForHumans() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full">
+                            {!! Purify::clean($post->repostOriginal->body) !!}
+                        </div>
+
+                        @if ($post->repostOriginal->image)
+                            <div class="mt-3 block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden">
+                                <img src="{{ $post->repostOriginal->image }}" alt="{{ $post->repostOriginal->title }}" class="object-cover">
+                            </div>
+                        @endif
+
+                        @if ($media = $post->repostOriginal->media[0] ?? null)
+                            <div class="mt-3 block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden">
+                                <img src="{{ $media->getUrl() }}" alt="{{ $post->repostOriginal->title }}" class="object-cover">
+                            </div>
+                        @endif
+                    </div>
+                </article>
+            @endif
+        </div>
+
         <div class="">
             <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
         </div>

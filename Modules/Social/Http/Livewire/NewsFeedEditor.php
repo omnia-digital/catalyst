@@ -29,7 +29,7 @@ class NewsFeedEditor extends Component
             $post->attachMedia($data['images'] ?? []);
         });
 
-        $this->emitPostSaved();
+        $this->emitPostSaved($data['id']);
         $this->success('Post is created successfully!');
     }
 

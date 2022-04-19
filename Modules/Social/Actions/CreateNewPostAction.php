@@ -18,6 +18,8 @@ class CreateNewPostAction
 
     protected ?Model $postable = null;
 
+    protected ?Model $repost = null;
+
     protected ?PostType $type = null;
 
     public function user(User|Authenticatable $user): self
@@ -34,6 +36,13 @@ class CreateNewPostAction
         return $this;
     }
 
+    public function asRepost(Model $repost): self
+    {
+        $this->repost = $repost;
+
+        return $this;
+    }
+
     public function type(?PostType $type): self
     {
         $this->type = $type;
@@ -46,13 +55,14 @@ class CreateNewPostAction
         $user = $this->user ?? Auth::user();
 
         return $user->posts()->create([
-            'body'          => $content,
-            'team_id'       => $options['team_id'] ?? $user->current_team_id,
-            'title'         => $options['title'] ?? null,
-            'type'          => $this->type,
-            'postable_id'   => $this->postable->id ?? $options['postable_id'] ?? null,
-            'postable_type' => $this->postable ? get_class($this->postable) : ($options['postable_type'] ?? null),
-            'image'         => $options['image'] ?? null,
+            'body'               => $content,
+            'team_id'            => $options['team_id'] ?? $user->current_team_id,
+            'title'              => $options['title'] ?? null,
+            'type'               => $this->type,
+            'postable_id'        => $this->postable?->id ?? $options['postable_id'] ?? null,
+            'postable_type'      => $this->postable ? get_class($this->postable) : ($options['postable_type'] ?? null),
+            'repost_original_id' => $this->repost?->id,
+            'image'              => $options['image'] ?? null,
         ]);
     }
 }
