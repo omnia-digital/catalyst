@@ -30,11 +30,7 @@
         Route::get('/messages', function () {
             return "Messages";
         })->name('messages');
-
-        Route::get('/contacts', function () {
-            return "Contacts";
-        })->name('contacts');
-
+        
         Route::get('/notifications', function () {
             return "Notifications";
         })->name('notifications');

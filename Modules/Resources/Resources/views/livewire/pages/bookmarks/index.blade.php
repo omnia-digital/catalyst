@@ -1,39 +1,43 @@
-@extends('advice::livewire.layouts.main-layout')
+@extends('resources::livewire.layouts.main-layout')
 
 @section('content')
-    <div class="xl:grid xl:grid-cols-9 xl:gap-9">
-        <div class="xl:col-span-6">
+    <div class="flex space-x-6">
+        <div class="max-w-2xl mx-auto">
             <div class="mb-2 flex justify-between items-center">
-                <div class="flex-1 flex items-center">
-                    <h1 class="py-2 text-3xl">Questions</h1>
+                <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full">
+                    <a href="{{ route('resources.home') }}">
+                        <x-heroicon-o-arrow-left class="h-6"/>
+                    </a>
                 </div>
-
-                <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent="$openModal('add-resource-modal')">
-                    Ask a New Question
-                </x-library::button>
-                <livewire:advice::pages.questions.create/>
+                <div class="flex-1 flex items-center">
+                    <h1 class="py-2 text-3xl">Bookmarks</h1>
+                </div>
             </div>
 
             <!-- Filters -->
             @include('livewire.partials.filters')
 
-            <div class="">
-                <ul role="list" class="space-y-4">
-                    @foreach($questions as $question)
-                        <li>
-                            <livewire:social::components.post-card :post="$question" :wire:key="$question->id" />
-                        </li>
-                    @endforeach
-                </ul>
+            @if(empty($bookmarks))
+                <h2>No Bookmarked Resources</h2>
+            @else
+                <div class="">
+                    <ul role="list" class="grid grid-cols-1 gap-6">
+                        @foreach($bookmarks as $bookmark)
+                            <li>
+                                <livewire:resources::components.resource-card
+                                        :post="$bookmark->bookmarkable()->first()"/>
+                            </li>
+                        @endforeach
+                    </ul>
 
-                <div class="pb-6">
-                    {{ $questions->onEachSide(1)->links() }}
+                    <div class="pb-6">
+                        {{ $bookmarks->onEachSide(1)->links() }}
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
 
         <x-sidebar-column class="max-w-sm" post-type="resource"/>
-
     </div>
 @endsection
 @push('scripts')

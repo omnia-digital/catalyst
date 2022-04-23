@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Resources\Http\Livewire\Pages\Resources;
+namespace Modules\Resources\Http\Livewire\Pages\Bookmarks;
 
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Enums\PostType;
-use Modules\Social\Models\Post;
+use Modules\Social\Models\Bookmark;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
-use function view;
 
 class Index extends Component
 {
@@ -16,11 +16,11 @@ class Index extends Component
     public ?string $search = null;
 
     public array $filters = [
-        'published_at' => '',
+        'date_created' => '',
         'has_attachment' => false,
     ];
 
-    public string $orderBy = 'published_at';
+    public string $orderBy = 'date_created';
 
     protected $queryString = [
         'search'
@@ -28,9 +28,6 @@ class Index extends Component
 
     public function mount()
     {
-        if (!\App::environment('production')) {
-            $this->useCache = false;
-        }
     }
 
     public function updatedFilters()
@@ -47,20 +44,22 @@ class Index extends Component
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-        return Post::where('type','=',PostType::RESOURCE)->orderByDesc('published_at');
+        return Bookmark::where('user_id', '=', \Auth::user()->id)->whereHas('bookmarkable', function(Builder $query) {
+            return $query->scopes(['ofType' => PostType::RESOURCE]);
+        });
     }
 
     public function getRowsProperty()
     {
         return $this->cache(function () {
-            return $this->rowsQuery->paginate(100);
+            return $this->rowsQuery->paginate(24);
         });
     }
 
     public function render()
     {
-        return view('resources::livewire.pages.resources.index', [
-            'resources' => $this->rows
+        return view('resources::livewire.pages.bookmarks.index', [
+            'bookmarks' => $this->rows
         ]);
     }
 }

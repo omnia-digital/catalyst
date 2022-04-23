@@ -2,16 +2,50 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Modules\Social\Actions\CreateNewPostAction;
+use Modules\Social\Models\Post;
+use Modules\Social\Support\Livewire\WithPostEditor;
+use OmniaDigital\OmniaLibrary\Livewire\WithModal;
+use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class RepostButton extends Component
 {
-    public $model;
-    public $show;
+    use WithModal, WithNotification, WithPostEditor;
 
-    public function mount($model, $show = false) {
-        $this->model = $model;
-        $this->show = $show;
+    public Post $model;
+
+    public ?string $content = null;
+
+    protected $listeners = [
+        'post-editor:submitted' => 'createRepost'
+    ];
+
+    public function showRepostModal()
+    {
+        $this->openModal('repost-modal-' . $this->model->id);
+    }
+
+    public function createRepost($data)
+    {
+        $this->content = strip_tags($data['content']);
+
+        $this->validatePostEditor();
+
+        $repost = DB::transaction(function () use ($data) {
+            $repost = (new CreateNewPostAction)
+                ->asRepost($this->model)
+                ->execute($data['content']);
+
+            $repost->attachMedia($data['images'] ?? []);
+
+            return $repost;
+        });
+
+        $this->emitPostSaved($data['id']);
+        $this->closeModal('repost-modal-' . $this->model->id);
+        $this->redirectRoute('social.posts.show', $repost);
     }
 
     public function render()

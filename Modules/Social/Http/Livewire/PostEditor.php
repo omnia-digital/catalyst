@@ -22,10 +22,13 @@ class PostEditor extends Component
 
     public bool $openState = false;
 
-    protected $listeners = [
-        'validationFailed' => 'handleValidationFailed',
-        'postSaved'        => 'handlePostSaved'
-    ];
+    protected function getListeners()
+    {
+        return [
+            'validationFailed:' . $this->editorId => 'handleValidationFailed',
+            'postSaved:' . $this->editorId        => 'handlePostSaved'
+        ];
+    }
 
     public function mount(?string $editorId = null, array $config = [])
     {

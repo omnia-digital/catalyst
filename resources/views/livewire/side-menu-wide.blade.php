@@ -60,11 +60,11 @@
     </div>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden md:flex md:flex-col md:sticky md:inset-y-0">
+    <div class="hidden md:flex md:flex-col scrollbar-hide md:sticky top-20 pt-4 md:inset-y-2">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex flex-col min-h-0 ">
-            <div class="flex">
-                <nav class="pt-4 space-y-3">
+            <div class="flex mb-4">
+                <nav class="space-y-3">
                     @foreach ($navigation as $item)
                         <a href="{{ route($item['name']) }}"
                            title="{{ $item['label'] }}"

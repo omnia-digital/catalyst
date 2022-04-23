@@ -9,16 +9,16 @@
                     <div class="mx-auto">
                         <livewire:social::news-feed-editor />
 
-                        <div x-data="setup()">
-                            <ul class="flex justify-center items-center my-4">
-                                <template x-for="(tab, index) in tabs" :key="tab.id">
-                                    <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-gray-500 border-b-2 justify-center"
-                                        :class="activeTab===tab.id ? 'text-black font-bold border-black' : ''"
-                                        @click="activeTab = tab.id"
-                                        x-html="tab.title + notifications"></li>
-                                </template>
-                            </ul>
-                        </div>
+{{--                        <div x-data="setup()">--}}
+{{--                            <ul class="flex justify-center items-center my-4">--}}
+{{--                                <template x-for="(tab, index) in tabs" :key="tab.id">--}}
+{{--                                    <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-gray-500 border-b-2 justify-center"--}}
+{{--                                        :class="activeTab===tab.id ? 'text-black font-bold border-black' : ''"--}}
+{{--                                        @click="activeTab = tab.id"--}}
+{{--                                        x-html="tab.title + notifications"></li>--}}
+{{--                                </template>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
                         <div class="mt-4 space-y-4">
                             <livewire:social::news-feed/>
                         </div>

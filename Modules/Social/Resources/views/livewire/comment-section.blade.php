@@ -10,7 +10,7 @@
 
                 <div class="mt-4">
                     @foreach($comments as $comment)
-                        <x-social::post.card wire:key="comment-{{ $comment->id }}" :post="$comment"/>
+                        <livewire:social::components.post-card wire:key="comment-{{ $comment->id }}" :post="$comment"/>
                     @endforeach
                 </div>
             </div>
