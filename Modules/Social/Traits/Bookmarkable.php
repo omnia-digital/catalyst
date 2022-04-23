@@ -2,6 +2,9 @@
 
 namespace Modules\Social\Traits;
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
 use Modules\Social\Models\Bookmark;
@@ -11,19 +14,21 @@ trait Bookmarkable
     /**
      * Get the bookmarks that all Users have created for this model
      */
-    public function bookmark(): MorphOne
+    public function bookmarks(): MorphMany
     {
-        return $this->morphOne(Bookmark::class, 'bookmarkable');
+        return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
-    public function isBookmarked(): bool
+    public function isBookmarkedBy(User|Authenticatable|null $user = null): bool
     {
-        return (bool)$this->bookmark;
+        is_null($user) && $user = Auth::user();
+
+        return $this->bookmarks->where('user_id', $user->id)->isNotEmpty();
     }
 
     public function markAsBookmark(): self
     {
-        $this->bookmark()->create([
+        $this->bookmarks()->create([
             'user_id' => Auth::id(),
             'team_id' => Auth::user()->currentTeam->id
         ]);
@@ -33,7 +38,7 @@ trait Bookmarkable
 
     public function removeBookmark(): self
     {
-        $this->bookmark()->delete();
+        $this->bookmarks()->where('user_id', Auth::id())->delete();
 
         return $this;
     }

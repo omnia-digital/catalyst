@@ -34,7 +34,7 @@
                                 </button>
                             </x-slot>
                             <x-library::dropdown.item wire:click.prevent="toggleBookmark">
-                                {{ $post->isBookmarked() ? 'Un-bookmark' : 'Bookmark' }}
+                                {{ $post->isBookmarkedBy() ? 'Un-bookmark' : 'Bookmark' }}
                             </x-library::dropdown.item>
                         </x-library::dropdown>
                     </div>
@@ -61,6 +61,6 @@
 
     <!-- Social Actions -->
     <div class="px-6">
-        <livewire:social::partials.post-actions :post="$post"/>
+        <livewire:social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
     </div>
 </div>

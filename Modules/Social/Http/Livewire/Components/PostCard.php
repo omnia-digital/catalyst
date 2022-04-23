@@ -24,7 +24,7 @@ class PostCard extends Component
 
     public function toggleBookmark()
     {
-        if ($this->post->isBookmarked()) {
+        if ($this->post->isBookmarkedBy()) {
             $this->post->removeBookmark();
             $this->post->refresh();
 
