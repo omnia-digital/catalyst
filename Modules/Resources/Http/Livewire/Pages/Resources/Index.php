@@ -47,7 +47,9 @@ class Index extends Component
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-        return Post::where('type','=',PostType::RESOURCE)->orderByDesc('published_at');
+        return Post::where('type','=',PostType::RESOURCE)
+            ->withCount('bookmarks')
+            ->orderByDesc('published_at');
     }
 
     public function getRowsProperty()

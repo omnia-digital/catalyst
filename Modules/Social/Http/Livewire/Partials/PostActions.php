@@ -7,13 +7,16 @@ use Modules\Social\Models\Post;
 
 class PostActions extends Component
 {
-    public $post;
+    public Post $post;
 
-    public $show;
+    public bool $show;
 
-    public function mount(Post $post, $show = false) {
+    public bool $showBookmarkButton = false;
+
+    public function mount(Post $post, $show = false, $showBookmarkButton = false) {
         $this->post = $post;
         $this->show = $show;
+        $this->showBookmarkButton = $showBookmarkButton;
     }
 
     public function render()
