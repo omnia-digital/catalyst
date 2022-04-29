@@ -73,7 +73,9 @@ class Post extends Model implements HasMedia
 
     public function team(): BelongsTo
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Team::class)->withDefault([
+            'name' => 'No Project',
+        ]);
     }
 
     public function postable(): MorphTo

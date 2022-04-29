@@ -1,6 +1,7 @@
 <?php
 
-    use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Pages\Teams\Show as ShowTeam;
+use Illuminate\Support\Facades\Route;
 
     /*
     |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@
 
     Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {
         Route::get('/', App\Http\Livewire\Teams::class)->name('home');
+        Route::get('{team}', ShowTeam::class)->name('show');
     });
 
     Route::middleware(['auth', 'verified'])->group(function() {
