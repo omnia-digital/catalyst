@@ -46,7 +46,7 @@
                                 </div>
                                 <input id="search" name="search"
                                        class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-gray-400 focus:outline-none focus:bg-primary focus:border-white focus:ring-white focus:text-dark-text-color sm:text-sm"
-                                       placeholder="" type="search"/>
+                                       placeholder="Search for Projects" type="search"/>
                             </div>
                         </div>
                     </div>
