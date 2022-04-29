@@ -18,10 +18,11 @@ use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Tags\HasTags;
 
 class Post extends Model implements HasMedia
 {
-    use HasFactory, Likable, Postable, Attachable, Bookmarkable, InteractsWithMedia;
+    use HasFactory, Likable, Postable, Attachable, Bookmarkable, InteractsWithMedia, HasTags;
 
     protected $fillable = [
         'user_id',

@@ -16,15 +16,15 @@
                     }}</h4>
                 </div>
 
-                @if ($post->tags)
-                    <div class="flex justify-start space-x-2">
-                        @foreach($post->tags as $tag)
-                            <x-library::tag class="bg-neutral-light">{{ $tag }}</x-library::tag>
-                        @endforeach
-                    </div>
-                @endif
-
+                
                 <div class="flex-shrink-0 self-center flex">
+                    @if ($post->tags)
+                        <div class="flex justify-start space-x-2 mr-2">
+                            @foreach($post->tags as $tag)
+                                <x-library::tag class="bg-neutral text-xxs text-grey-500 uppercase">{{ $tag->name }}</x-library::tag>
+                            @endforeach
+                        </div>
+                    @endif
                     <div class="relative z-30 inline-block text-left">
                         <x-library::dropdown>
                             <x-slot name="trigger">
