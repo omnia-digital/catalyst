@@ -22,7 +22,7 @@ class Teams extends Component
         'location' => null,
         'date' => null,
         'members' => [0, 0],
-        'rating' => [1],
+        'rating' => [],
         'search' => null
     ];
 

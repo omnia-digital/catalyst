@@ -64,9 +64,17 @@
 
                             <div>
                                 <x-library::input.label>Rating</x-library::input.label>
-                                <x-library::input.range-slider
-                                        wire:model.defer="filters.rating"
-                                        :min="1" :max="5" :step="1" :decimals="0" :options="['tooltips' => true]"/>
+
+                                <div class="mt-2 grid grid-cols-3 gap-3 sm:grid-cols-5">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        <x-library::input.checkbox-card wire:model="filters.rating" wire:key="rating-{{ $i }}" :value="$i">
+                                            <div class="flex items-center space-x-1">
+                                                <span>{{ $i }}</span>
+                                                <x-heroicon-o-star class="w-4 h-4"/>
+                                            </div>
+                                        </x-library::input.checkbox-card>
+                                    @endfor
+                                </div>
                             </div>
                         </div>
 
