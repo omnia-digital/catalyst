@@ -1,9 +1,17 @@
 <div class="max-w-7xl mx-auto flex flex-col md:px-8 xl:px-0 pt-20">
     <main class="flex-1">
         <div class="py-6">
-            <div class="px-4 sm:px-6 md:px-0">
-                <h1 class="text-2xl font-semibold text-gray-900">Projects</h1>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex-1 min-w-0">
+                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+                        Projects
+                    </h2>
+                </div>
+                <div class="mt-4 flex md:mt-0 md:ml-4">
+                    <x-library::button x-data="" x-on:click.prevent="$openModal('create-team')">Create Project</x-library::button>
+                </div>
             </div>
+
             <div class="flex items-center space-x-4">
                 <div class="flex items-center space-x-2">
                     <p class="font-bold">Sort</p>
@@ -84,17 +92,78 @@
                             </x-library::button>
                         </div>
                     </div>
-                    <div class="col-span-2">
-                        <div>
-                            @foreach($projects as $project)
-                                <div>
-                                    {{ $project->name }} - {{ $project->location }}
-                                </div>
-                            @endforeach
-                        </div>
+                    <div class="col-span-2 grid grid-cols-3 gap-3">
+                        @foreach($projects as $project)
+                            <div>
+                                <a href="#" class="block p-4 rounded-lg shadow-sm bg-white">
+                                    <img
+                                            alt="{{ $project->name }}"
+                                            src="https://images.unsplash.com/photo-1554995207-c18c203602cb"
+                                            class="object-cover w-full h-56 rounded-md"
+                                    />
+
+                                    <div class="mt-2">
+                                        <dl>
+                                            <div>
+                                                <dt class="sr-only">
+                                                    Location
+                                                </dt>
+
+                                                <dd class="text-sm text-gray-500 flex items-center space-x-1">
+                                                    <x-heroicon-o-location-marker class="w-4 h-4"/>
+                                                    <span>{{ $project->location }}</span>
+                                                </dd>
+                                            </div>
+
+                                            <div>
+                                                <dt class="sr-only">
+                                                    Name
+                                                </dt>
+
+                                                <dd class="font-medium">
+                                                    {{ $project->name }}
+                                                </dd>
+                                            </div>
+                                        </dl>
+
+                                        <dl class="flex items-center mt-6 space-x-8 text-xs">
+                                            <div class="sm:inline-flex sm:items-center sm:shrink-0">
+                                                <x-heroicon-o-user-group class="w-4 h-4 text-indigo-700"/>
+
+                                                <div class="sm:ml-3 mt-1.5 sm:mt-0">
+                                                    <dt class="text-gray-500">
+                                                        Members
+                                                    </dt>
+
+                                                    <dd class="font-medium">
+                                                        {{ $project->members }}
+                                                    </dd>
+                                                </div>
+                                            </div>
+
+                                            <div class="sm:inline-flex sm:items-center sm:shrink-0">
+                                                <x-heroicon-o-star class="w-4 h-4 text-indigo-700"/>
+
+                                                <div class="sm:ml-3 mt-1.5 sm:mt-0">
+                                                    <dt class="text-gray-500">
+                                                        Rating
+                                                    </dt>
+
+                                                    <dd class="font-medium">
+                                                        {{ $project->rating }}
+                                                    </dd>
+                                                </div>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <livewire:create-team-modal/>
 </div>
