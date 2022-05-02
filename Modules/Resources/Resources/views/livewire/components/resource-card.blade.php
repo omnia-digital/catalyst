@@ -51,9 +51,15 @@
                 </div>
             @endif
 
-            @if ($media = $post->media[0] ?? null)
-                <div class="mt-3 block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden">
-                    <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover">
+            @if ($post->media ?? null)
+                <div class="mt-3 rounded-lg overflow-hidden">
+                    <div class="grid grid-cols-{{ sizeof($post->media) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($post->media) > 2 ? '2 h-80' : '1' }} gap-px">
+                        @foreach ($post->media as $media)
+                            <div class="w-full overflow-hidden @if($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">
+                                <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover w-full">
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             @endif
         </div>
