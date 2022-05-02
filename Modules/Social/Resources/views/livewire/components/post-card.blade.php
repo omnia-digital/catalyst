@@ -22,6 +22,11 @@
             </div>
 
             <div class="flex-shrink-0 self-center flex">
+                @if (!is_null($post->team_id))
+                    <div class="relative inline-block text-xs font-semibold mr-3">
+                        <a href="{{ $post->team->projectLink() }}" class="underline hover:no-underline">{{ $post->team->name }}</a>
+                    </div>
+                @endif
                 <div class="relative z-30 inline-block text-left">
                     <x-library::dropdown>
                         <x-slot name="trigger">

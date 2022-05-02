@@ -62,4 +62,8 @@
         {
             return $this->hasMany(Resource::class);
         }
+
+        public function projectLink() {
+            return route('projects.show', $this->id);
+        }
     }
