@@ -57,3 +57,7 @@ h5 {
 .card {
     @apply pt-1 bg-primary shadow rounded-lg;
 }
+
+.fill-row-span > * {
+    @apply h-full;
+}
