@@ -16,11 +16,12 @@ class Index extends Component
     public ?string $search = null;
 
     public array $filters = [
-        'published_at' => '',
+        'created_at' => '',
         'has_attachment' => false,
     ];
 
-    public string $orderBy = 'published_at';
+    public string $orderBy = 'title';
+    public bool $sortDesc = true;
 
     protected $queryString = [
         'search'
@@ -38,6 +39,16 @@ class Index extends Component
         $this->resetPage();
     }
 
+    public function sortBy($key)
+    {
+        if($this->orderBy === $key) {
+            $this->sortDesc = !$this->sortDesc;
+        } else {
+            $this->orderBy = $key;
+            $this->sertDesc = true;
+        }
+    }
+
     public function getRowsQueryProperty()
     {
         $query = clone $this->rowsQueryWithoutFilters;
@@ -52,7 +63,8 @@ class Index extends Component
     {
         return Post::where('type','=',PostType::RESOURCE)
             ->withCount('bookmarks')
-            ->orderByDesc('created_at');
+            ->withCount('likes')
+            ->orderBy($this->orderBy, $this->sortDesc ? 'desc' : 'asc');
     }
 
     public function getRowsProperty()
