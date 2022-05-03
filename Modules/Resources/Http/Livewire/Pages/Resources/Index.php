@@ -42,14 +42,17 @@ class Index extends Component
     {
         $query = clone $this->rowsQueryWithoutFilters;
 
-        return $query;
+        return $query->where(function($q) {
+            $q->where('title', 'like', "%{$this->search}%")
+            ->orWhere('body', 'like', "%{$this->search}%");
+        });
     }
 
     public function getRowsQueryWithoutFiltersProperty()
     {
         return Post::where('type','=',PostType::RESOURCE)
             ->withCount('bookmarks')
-            ->orderByDesc('published_at');
+            ->orderByDesc('created_at');
     }
 
     public function getRowsProperty()
