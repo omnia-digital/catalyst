@@ -20,6 +20,14 @@ class Index extends Component
         'has_attachment' => false,
     ];
 
+    public array $sortLabels = [
+        'title' => 'Title', 
+        'bookmarks_count' => 'Bookmarks', 
+        'likes_count' => 'Likes', 
+        'user_id' => 'User', 
+        'created_at' => 'Date'
+    ];
+
     public string $orderBy = 'title';
     public bool $sortDesc = true;
 

@@ -14,7 +14,10 @@
 >
     <span class="flex">
         {{ $slot }}
-        <x-heroicon-o-sort-ascending class="w-3 {{ ($selected && !$sortDesc) ? 'text-dark-text-color' : 'text-gray-400' }}" />
-        <x-heroicon-o-sort-descending class="w-3 {{ ($selected && $sortDesc) ? 'text-dark-text-color' : 'text-gray-400' }}" />
+        @if ($selected && !$sortDesc)
+            <x-heroicon-s-arrow-narrow-up class="w-3 text-dark-text-color" wire:click.prevent="$toggle('sortDesc')" />
+        @else
+            <x-heroicon-s-arrow-narrow-down class="w-3 text-dark-text-color" wire:click.prevent="$toggle('sortDesc')" />
+        @endif
     </span>
 </a>

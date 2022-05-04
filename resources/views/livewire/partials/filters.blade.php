@@ -1,6 +1,24 @@
 <div>
-    <div class="bg-primary px-2 rounded-lg mb-6 border-t border-b border-gray-100 py-2 sm:flex sm:items-center sm:justify-between">
-        <div class="flex-1 min-w-0">
+    <div class="mb-6 border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
+        <div class="flex items-center pr-8">
+            <span class="mr-3">Sort:</span>
+            {{-- <x-library::input.select 
+                :options="['title', 'bookmarks', 'likes', 'user', 'date']" 
+                class="border-transparent shadow-none mt-0 pr-3" 
+            /> --}}
+            <x-library::dropdown.index>
+                <x-slot:trigger class=" hover:cursor-pointer text-base-text-color hover:text-black">{{ $sortLabels[$orderBy] }}</x-slot>
+                @foreach ($sortLabels as $key => $item)
+                    <x-library::dropdown.item class="hover:bg-gray-300" wire:click.prevent="sortBy('{{ $key }}')">{{ $item }}</x-library::dropdown.item>
+                @endforeach
+            </x-library::dropdown.index>
+            @if (!$sortDesc)
+                <x-heroicon-o-arrow-narrow-up class="w-4 ml-2 hover:cursor-pointer text-dark-text-color" wire:click.prevent="$toggle('sortDesc')" />
+            @else
+                <x-heroicon-o-arrow-narrow-down class="w-4 ml-2 hover:cursor-pointer text-dark-text-color" wire:click.prevent="$toggle('sortDesc')" />
+            @endif
+        </div>
+        <div class="flex-1 min-w-0 bg-primary p-2 rounded-lg">
             <div class="filters flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
                 <div class="w-full relative">
                     <x-library::input.text type="search" wire:model.debounce.500ms="search" placeholder="Search..." class="px-4 py-2 pl-8 bg-neutral border-1 border-secondary"/>
@@ -12,14 +30,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="bg-primary px-6 rounded-lg mb-6 border-t border-b border-gray-100 py-2 sm:flex sm:items-center sm:justify-between">
-        <div class="font-bold">Sort</div>
-        <x-sort-button key="title" :orderBy="$orderBy" :sortDesc="$sortDesc">Title</x-sort-button>
-        <x-sort-button key="bookmarks_count" :orderBy="$orderBy" :sortDesc="$sortDesc">Bookmarks</x-sort-button>
-        <x-sort-button key="likes_count" :orderBy="$orderBy" :sortDesc="$sortDesc">Likes</x-sort-button>
-        <x-sort-button key="user_id" :orderBy="$orderBy" :sortDesc="$sortDesc">User</x-sort-button>
-        <x-sort-button key="created_at" :orderBy="$orderBy" :sortDesc="$sortDesc">Date</x-sort-button>
     </div>
     <div class="bg-primary px-6 rounded-lg mb-6 border-t border-b border-gray-100 py-2 sm:flex sm:items-center sm:justify-between">
         <div class="font-bold">
