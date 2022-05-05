@@ -6,10 +6,10 @@
                 :options="['title', 'bookmarks', 'likes', 'user', 'date']" 
                 class="border-transparent shadow-none mt-0 pr-3" 
             /> --}}
-            <x-library::dropdown.index :position="'left'" class="z-10">
+            <x-library::dropdown.index :position="'left'" class="z-10" :dropdownClasses="'bg-white border-none shadow-md'">
                 <x-slot:trigger class=" hover:cursor-pointer text-base-text-color hover:text-black">{{ $sortLabels[$orderBy] }}</x-slot>
                 @foreach ($sortLabels as $key => $item)
-                    <x-library::dropdown.item class="hover:bg-gray-300" wire:click.prevent="sortBy('{{ $key }}')">{{ $item }}</x-library::dropdown.item>
+                    <x-library::dropdown.item class="bg-white border-none" wire:click.prevent="sortBy('{{ $key }}')">{{ $item }}</x-library::dropdown.item>
                 @endforeach
             </x-library::dropdown.index>
             @if (!$sortDesc)
