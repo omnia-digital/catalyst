@@ -5,7 +5,7 @@
 
     <livewire:social::partials.like-button :model="$post" :show="$show"/>
     <livewire:social::partials.repost-button :model="$post" :show="$show"/>
-    <livewire:social::partials.share-button :model="$post" :show="$show"/>
+    <livewire:social::partials.share-button :url="route('social.posts.show', $post)" :show="$show"/>
 
     @if ($showBookmarkButton)
         <livewire:social::partials.bookmark-button :model="$post"/>

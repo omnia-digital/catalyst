@@ -33,7 +33,7 @@
             @empty(!$resource->tags)
                 <div class="flex justify-start space-x-2">
                     @foreach($resource->tags as $tag)
-                        <x-library::tag>{{ $tag }}</x-library::tag>
+                        <x-library::tag>{{ $tag->name }}</x-library::tag>
                     @endforeach
                 </div>
             @endempty

@@ -6,17 +6,28 @@ use Livewire\Component;
 
 class ShareButton extends Component
 {
-    public $model;
-    public $show;
+    public $url;
+    public $links = [];
+    public $showButton;
+    public $showModal = false;
 
-    public function mount($model, $show = false) {
-        $this->model = $model;
-        $this->show = $show;
-
+    public function mount($url = '', $showButton = true)
+    {
+        $this->url  = $url;
+        $this->showButton = $showButton;
     }
 
-    public function like() {
-        $this->model->like();
+    public function openModal()
+    {
+        $this->getLinks();
+        $this->showModal = true;
+//        $this->dispatchBrowserEvent('openModal');
+    }
+
+    public function getLinks()
+    {
+        $this->links = \Share::page($this->url)->facebook()->twitter()->linkedin()->whatsapp()->telegram()->reddit()->getRawLinks();
+        return $this->links;
     }
 
     public function render()

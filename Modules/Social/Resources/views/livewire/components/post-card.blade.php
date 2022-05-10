@@ -1,4 +1,5 @@
-<article wire:click.prevent.stop="showPost" class="flex justify-start bg-white pl-3 pr-5 pt-4 shadow-sm rounded-lg cursor-pointer border border-2 border-transparent hover:border-secondary z-10">
+<article wire:click.prevent.stop="showPost" class="flex justify-start bg-white pl-3 pr-5 pt-4 shadow-sm rounded-lg border border-2 border-transparent
+{{ $post->isParent() ? '' : 'hover:border-secondary cursor-pointer' }} z-10">
     <div class="mr-3 flex-shrink-0">
         <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->profile->name }}"/>
     </div>
