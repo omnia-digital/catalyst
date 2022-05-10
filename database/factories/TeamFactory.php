@@ -29,7 +29,9 @@ class TeamFactory extends Factory
             'personal_team' => true,
             'title' => $this->faker->jobTitle(),
             'description' => $this->faker->paragraphs(7),
+            'summary' => $this->faker->paragraph(),
             'organizer_id' => User::factory(),
+            'location' => $this->faker->city() . ", " . ucfirst($this->faker->word()) . ", " . $this->faker->countryCode(),
             'launch_date' => Carbon::now()->addMonths(3)
         ];
     }
