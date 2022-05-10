@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1eca2c12790d1ce34cbca44ae78f27b",
+    "content-hash": "80240e87d62d68353272acecd7c42dc2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4126,7 +4126,6 @@
                 "phpunit/phpunit": "^9.5",
                 "spatie/laravel-ray": "^1.26"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -4192,7 +4191,10 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2022-05-05T18:30:07+00:00"
+            "time": "2022-05-05T18:30:07+00:00",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "paragonie/constant_time_encoding",
