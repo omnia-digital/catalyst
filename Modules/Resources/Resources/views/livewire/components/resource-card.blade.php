@@ -15,7 +15,7 @@
                     <h4 class="text-base-text-color text-md font-normal">{{ $post->created_at->diffInDays() < 2 ? $post->created_at->shortAbsoluteDiffForHumans() : $post->created_at->format('M d') }}</h4>
                 </div>
 
-                
+
                 <div class="flex-shrink-0 self-center flex">
                     @if ($post->tags)
                         <div class="flex justify-start space-x-2 mr-2">
@@ -32,7 +32,7 @@
                                     <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
                                 </button>
                             </x-slot>
-                            <x-library::dropdown.item wire:click.prevent="toggleBookmark">
+                            <x-library::dropdown.item wire:click.prevent.stop="toggleBookmark">
                                 {{ $post->isBookmarkedBy() ? 'Un-bookmark' : 'Bookmark' }}
                             </x-library::dropdown.item>
                         </x-library::dropdown>

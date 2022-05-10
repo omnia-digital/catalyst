@@ -51,11 +51,12 @@ module.exports = {
                 'light-text-color': 'var(--light-text-color)',
                 'dark-text-color': 'var(--dark-text-color)',
                 neutral: 'var(--neutral)',
+                'neutral-light': 'var(--neutral-light)',
                 'neutral-dark': 'var(--neutral-dark)',
                 'neutral-hover': 'var(--neutral-hover)',
                 primary: 'var(--primary)',
                 secondary: 'var(--secondary)',
-                tertiary: 'var(--tertiary)'
+                tertiary: 'var(--tertiary)',
             },
         },
     },

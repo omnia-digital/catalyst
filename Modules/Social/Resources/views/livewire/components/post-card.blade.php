@@ -1,4 +1,4 @@
-<article class="flex justify-start bg-white pl-3 pr-5 pt-4 shadow-sm rounded-lg">
+<article wire:click.prevent.stop="showPost" class="flex justify-start bg-white pl-3 pr-5 pt-4 shadow-sm rounded-lg cursor-pointer border border-2 border-transparent hover:border-secondary z-10">
     <div class="mr-3 flex-shrink-0">
         <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->profile->name }}"/>
     </div>
@@ -34,7 +34,7 @@
                                 <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
                             </button>
                         </x-slot>
-                        <x-library::dropdown.item wire:click.prevent="toggleBookmark">
+                        <x-library::dropdown.item wire:click.prevent.stop="toggleBookmark">
                             {{ $post->isBookmarkedBy() ? 'Un-bookmark' : 'Bookmark' }}
                         </x-library::dropdown.item>
                     </x-library::dropdown>
@@ -104,7 +104,7 @@
             @endif
         </div>
 
-        <div class="">
+        <div class="z-20">
             <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
         </div>
     </div>

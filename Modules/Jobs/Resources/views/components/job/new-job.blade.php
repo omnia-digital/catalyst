@@ -354,7 +354,7 @@
 
                                         <div class="py-2 flex justify-end">
                                             <button
-                                                x-on:click.prevent="confirmCard"
+                                                x-on:click.prevent.stop="confirmCard"
                                                 x-bind:disabled="loading"
                                                 x-bind:class="{'bg-secondary hover:bg-secondary focus:bg-secondary active:bg-secondary': !loading, 'bg-gray-600 cursor-not-allowed': loading}"
                                                 class="py-1 px-4 border border-transparent text-sm text-white font-medium rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out">

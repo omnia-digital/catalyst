@@ -10,7 +10,7 @@
             <div class="bg-primary overflow-hidden shadow-xl sm:rounded-lg min-h-screen p-8">
                 <h3 class="py-4 text-xl font-bold">Modal</h3>
 
-                <button x-data x-on:click.prevent="$openModal('test-modal')" type="button" class="border border-black px-4 py-2">
+                <button x-data x-on:click.prevent.stop="$openModal('test-modal')" type="button" class="border border-black px-4 py-2">
                     Open Modal
                 </button>
 

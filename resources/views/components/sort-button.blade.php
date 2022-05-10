@@ -7,7 +7,7 @@
     $selected = ($orderBy === $key);
 @endphp
 <a
-    wire:click.prevent="sortBy('{{ $key }}')"
+    wire:click.prevent.stop="sortBy('{{ $key }}')"
     href="#"
     aria-current="page"
     class="{{ $selected ? 'text-secondary' : 'text-base-text-color hover:text-dark-text-color' }} whitespace-nowrap my-2 px-1 font-medium text-sm"
