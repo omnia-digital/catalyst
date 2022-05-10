@@ -5,28 +5,27 @@
     <div class="flex-1">
         <div class="flex space-x-3">
             <div class="min-w-0 flex-1">
-                <div class="min-w-0 flex justify-start">
-                    <div class="font-bold text-dark-text-color mr-2">
-                        <a href="{{ route('social.profile.show', $post->user->handle) }}" class="hover:underline">{{ $post->user->name }}</a>
+                <div class="min-w-0">
+                    <div class="mr-2 font leading-5">
+                        <a href="{{ route('social.profile.show', $post->user->handle) }}" class="hover:underline block font-bold text-dark-text-color">{{ $post->user->name }}</a>
+
                     </div>
-                    <div class="text-base-text-color">
-                        @if ($post->isParent())
-                            <a href="{{ $post->getUrl() }}" class="hover:underline">
-                                <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans(short: true) }}</time>
-                            </a>
-                        @else
-                            {{ $post->created_at->diffForHumans() }}
-                        @endif
+                    <div class="flex content-center space-x-1 text-base-text-color">
+                        <a href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
+                        <x-dot/>
+                        <a href="{{ $post->getUrl() }}" class="hover:underline">
+                            <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans(short: true) }}</time>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <div class="flex-shrink-0 self-center flex">
-                @if (!is_null($post->team_id))
-                    <div class="relative inline-block text-xs font-semibold mr-3">
-                        <a href="{{ $post->team->projectLink() }}" class="underline hover:no-underline">{{ $post->team->name }}</a>
-                    </div>
-                @endif
+            <div class=" flex align-top">
+{{--                @if (!is_null($post->team_id))--}}
+{{--                    <div class="text-base-text-color text-xs font-semibold mr-3">--}}
+{{--                        <a href="{{ $post->team->projectLink() }}" class=" hover:no-underline">{{ $post->team->name }}</a>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
                 <div class="relative z-30 inline-block text-left">
                     <x-library::dropdown>
                         <x-slot name="trigger">

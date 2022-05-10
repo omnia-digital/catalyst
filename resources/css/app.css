@@ -14,7 +14,7 @@
     --tertiary: #384263;
 }
 
-p {
+p,a, body  {
     @apply text-base;
 }
 
