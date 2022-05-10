@@ -1,6 +1,6 @@
-<div x-data="shareButton()">
+<div x-data="shareButton()" x-on:click.stop="">
     <div class="inline-flex items-center text-sm">
-        <button @click="openModal = true" type="button" class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color">
+        <button @click.prevent.stop="openModal = true" type="button" class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color">
             <x-heroicon-o-share :class="$show ? 'h-6 w-6' : 'h-5 w-5'" aria-hidden="true"/>
             <span class="font-medium text-dark-text-color sr-only">Share</span>
         </button>
@@ -22,7 +22,7 @@
         <div class="relative sm:w-3/4 md:w-1/2 mx-2 sm:mx-auto mt-10 mb-24 opacity-100">
             <div
             class="relative bg-primary shadow-lg rounded-lg text-dark-text-color z-20"
-            @click.away="openModal = false"
+            @click.away.stop="openModal = false"
             x-show="openModal"
             x-transition:enter="transition transform duration-300"
             x-transition:enter-start="scale-0"
@@ -107,7 +107,7 @@
                         <input x-model="shareLink" class="flex-1 outline-none bg-transparent disabled" disabled type="text" placeholder="link">
 
                         <button
-                            @click="copyLink(shareLink)"
+                            @click.prevent.stop="copyLink(shareLink)"
                             x-text="copyText"
                             class="text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-gray-50">
                             Copy

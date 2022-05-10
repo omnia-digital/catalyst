@@ -82,7 +82,7 @@
 
                         {{--                    <li class="relative">--}}
                         {{--                        <button--}}
-                        {{--                                x-on:click.prevent="showMediaManager(null, {})"--}}
+                        {{--                                x-on:click.prevent.stop="showMediaManager(null, {})"--}}
                         {{--                                type="button"--}}
                         {{--                                class="relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-2 text-center hover:border-gray-400 focus:outline-none focus:ring-2--}}
                         {{--                                focus:ring-offset-2 focus:ring-gray-500"--}}

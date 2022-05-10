@@ -10,7 +10,7 @@
 
                 <h2>
 
-                <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent="$openModal('add-resource-modal')">
+                <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent.stop="$openModal('add-resource-modal')">
                     Add Resource
                 </x-library::button>
                 </h2>

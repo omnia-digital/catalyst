@@ -1,4 +1,4 @@
-<div class="inline-flex items-center text-sm">
+<div class="inline-flex items-center text-sm" x-data x-on:click.stop="">
     <button
         type="button"
         class="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
