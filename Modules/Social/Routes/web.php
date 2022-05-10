@@ -7,6 +7,7 @@ use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
 use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
 use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
 use Modules\Social\Http\Livewire\Pages\Contacts\Show as ShowContacts;
+use Modules\Social\Http\Livewire\Pages\Projects\MyProjects;
 
 Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->group(function () {
     //        Route::get('/', 'SocialController@index');
@@ -26,6 +27,8 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     Route::name('profile.')->prefix('profiles')->group(function() {
         Route::get('{profile:handle}', ShowProfile::class)->name('show');
     });
+
+    Route::get('/my-projects', MyProjects::class)->name('my-projects');
 
     Route::get('/posts/{post}', ShowPosts::class)->name('posts.show');
 
