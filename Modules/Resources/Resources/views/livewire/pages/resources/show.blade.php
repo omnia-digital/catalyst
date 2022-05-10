@@ -13,7 +13,7 @@
         </div>
         <h1 class="py-2 text-3xl">Resource</h1>
     </div>
-    <div class="xl:grid xl:grid-cols-9 xl:gap-9">
+    <div class="flex space-x-6">
         <div class="xl:col-span-6">
             @if($resource->image)
                 <div>
@@ -63,8 +63,8 @@
 
         <x-sidebar-column class="max-w-sm" post-type="resource"/>
 
-        <livewire:media-manager/>
     </div>
+        <livewire:media-manager/>
     @endif
 
 @endsection

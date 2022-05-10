@@ -34,8 +34,9 @@ module.exports = {
                 sans: ["SF Pro Display", "Helvetica", "Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
+                'dot': '.15rem',
                 'xxs': '0.65rem',
-                'base': '0.94rem',
+                'base': '0.9375rem',
             },
             height: {
                 '13': '3.2rem'
