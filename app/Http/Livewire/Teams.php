@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithPagination;
+use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 use OmniaDigital\OmniaLibrary\Livewire\WithSorting;
 
 /**
@@ -16,11 +17,21 @@ use OmniaDigital\OmniaLibrary\Livewire\WithSorting;
  */
 class Teams extends Component
 {
-    use WithSorting, WithPagination;
+    use WithSorting, WithPagination, WithPlace;
+
+    protected function placeApiKey(): ?string
+    {
+        return 'AIzaSyBpR-w9j3z1nyJas1Q2_XEagAcyssh7_gY';
+    }
+
+    public function find()
+    {
+        dd($this->findPlace()->addressLine2());
+    }
 
     public array $filters = [
         'location' => null,
-        'date' => null,
+        'start_date' => null,
         'members' => [0, 0],
         'rating' => [],
         'search' => null
@@ -39,11 +50,12 @@ class Teams extends Component
     public function getRowsQueryProperty()
     {
         return Team::query()
+            ->with('teamLocation')
             ->withCount('users as members')
-            ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->where('location', $location))
-            ->when(Arr::get($this->filters, 'date'), fn(Builder $query, $date) => $query->whereDate('created_at', $date))
+            ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->whereHas('teamLocation', fn(Builder $query) => $query->search($location)))
+            ->when(Arr::get($this->filters, 'start_date'), fn(Builder $query, $date) => $query->whereDate('start_date', $date))
             ->when(Arr::get($this->filters, 'members'), fn(Builder $query, $members) => $query->havingBetween('members', $members))
-            ->when(Arr::get($this->filters, 'rating'), fn(Builder $query, $rating) => $query->whereIn('rating', $rating))
+            //->when(Arr::get($this->filters, 'rating'), fn(Builder $query, $rating) => $query->whereIn('rating', $rating))
             ->when(Arr::get($this->filters, 'search'), fn(Builder $query, $search) => $query->search($search));
     }
 
@@ -52,11 +64,6 @@ class Teams extends Component
         $query = $this->applySorting($this->rowsQuery);
 
         return $query->paginate(25);
-    }
-
-    public function filter()
-    {
-        $this->callMethod('$refresh');
     }
 
     public function render()
