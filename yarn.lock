@@ -14,6 +14,11 @@
   dependencies:
     focus-trap "^6.6.1"
 
+"@alpinejs/intersect@^3.10.2":
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/@alpinejs/intersect/-/intersect-3.10.2.tgz#8f44c6eaefffdd1bc9c55f55ccf757540b88eeb1"
+  integrity sha512-BP6rO7lwqDF2mpa6ami3FPPu8zK622sWLQ27Ru5Hu4YzFhMUnX05jwZc1pEsZzY46QWyeInDLgMTB+XyH5e6sQ==
+
 "@ampproject/remapping@^2.1.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.1.2.tgz#4edca94973ded9630d20101cd8559cedb8d8bd34"
@@ -3732,6 +3737,11 @@ interpret@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-2.2.0.tgz#1a78a0b5965c40a5416d007ad6f50ad27c417df9"
   integrity sha512-Ju0Bz/cEia55xDwUWEa8+olFpCiQoypjnQySseKtmjNrnps3P+xfpUmGr90T7yjlVJmOtybRvPXhKMbHr+fWnw==
+
+intersection-observer@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.12.0.tgz#6c84628f67ce8698e5f9ccf857d97718745837aa"
+  integrity sha512-2Vkz8z46Dv401zTWudDGwO7KiGHNDkMv417T5ItcNYfmvHR/1qCTVBO9vwH8zZmQ0WkA/1ARwpysR9bsnop4NQ==
 
 ip@^1.1.0:
   version "1.1.5"
