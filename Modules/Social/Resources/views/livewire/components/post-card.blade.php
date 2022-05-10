@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="w-full">
+        <div class="w-full mt-1">
             {!! Purify::clean($post->body) !!}
         </div>
 

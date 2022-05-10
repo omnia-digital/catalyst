@@ -19,7 +19,7 @@
 {{--                                </template>--}}
 {{--                            </ul>--}}
 {{--                        </div>--}}
-                        <div class="mt-4 space-y-4">
+                        <div class="mt-4">
                             <livewire:social::news-feed/>
                         </div>
                     </div>
