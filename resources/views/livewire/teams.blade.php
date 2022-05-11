@@ -1,9 +1,4 @@
 <div class="max-w-7xl mx-auto flex flex-col md:px-8 xl:px-0 pt-20">
-    <div class="py-10">
-        <x-library::input.place/>
-        <x-library::button wire:click="find">Submit</x-library::button>
-    </div>
-
     <main class="flex-1">
         <div class="py-6">
             <div class="md:flex md:items-center md:justify-between">
@@ -35,7 +30,7 @@
 
                         <x-library::dropdown.item wire:click.prevent="sortBy('name')">By name</x-library::dropdown.item>
                         <x-library::dropdown.item wire:click.prevent="sortBy('members')">By members</x-library::dropdown.item>
-{{--                        <x-library::dropdown.item wire:click.prevent="sortBy('rating')">By rating</x-library::dropdown.item>--}}
+                        {{--                        <x-library::dropdown.item wire:click.prevent="sortBy('rating')">By rating</x-library::dropdown.item>--}}
                     </x-library::dropdown>
                 </div>
                 <div class="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
@@ -63,7 +58,7 @@
                     <x-library::input.date wire:model="filters.start_date" placeholder="Select Date"/>
                 </div>
 
-                <div class="flex items-center">
+                <div class="flex items-center w-full z-50">
                     <x-library::input.label value="Members" class="mr-8 font-bold"/>
                     <x-library::input.range-slider
                             wire:model.defer="filters.members"
@@ -115,8 +110,8 @@
                                         </div>
 
                                         <div class="text-sm text-gray-500 flex items-center p-2">
-                                            <x-heroicon-o-location-marker class="w-4 h-4"/>
-                                            <span>{{ $project->teamLocation?->city }}, {{ $project->teamLocation?->state }}</span>
+                                            <x-heroicon-o-location-marker class="w-4 h-4 mr-2"/>
+                                                <span>{{ $project->teamLocation?->name ?? 'Not set' }}</span>
                                         </div>
                                     </div>
                                 </a>

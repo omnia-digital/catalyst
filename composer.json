@@ -43,8 +43,8 @@
     },
     "repositories": [
         {
-            "type": "path",
-            "url": "../omnia-library"
+            "type": "vcs",
+            "url": "https://github.com/omnia-digital/library.git"
         }
     ],
     "autoload": {

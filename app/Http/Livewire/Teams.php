@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithPagination;
-use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 use OmniaDigital\OmniaLibrary\Livewire\WithSorting;
 
 /**
@@ -17,17 +16,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithSorting;
  */
 class Teams extends Component
 {
-    use WithSorting, WithPagination, WithPlace;
-
-    protected function placeApiKey(): ?string
-    {
-        return 'AIzaSyBpR-w9j3z1nyJas1Q2_XEagAcyssh7_gY';
-    }
-
-    public function find()
-    {
-        dd($this->findPlace()->addressLine2());
-    }
+    use WithSorting, WithPagination;
 
     public array $filters = [
         'location' => null,

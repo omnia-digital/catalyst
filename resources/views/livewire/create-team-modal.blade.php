@@ -7,11 +7,6 @@
             <x-library::input.error for="name"/>
         </div>
         <div class="mt-6">
-            <x-library::input.label value="Location" required/>
-            <x-library::input.place/>
-            <x-library::input.error for="location"/>
-        </div>
-        <div class="mt-6">
             <x-library::input.label value="Start Date"/>
             <x-library::input.date wire:model.defer="startDate" placeholder="Pick a date"/>
             <x-library::input.error for="startDate"/>
