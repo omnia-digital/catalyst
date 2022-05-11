@@ -7,14 +7,15 @@
     --light-text-color: #9ca3af;
     --dark-text-color: #272d38;
     --neutral: #F3F4F6;
-    --neutral-hover: #eff0f2;
+    --neutral-light: #f6f7f8;
     --neutral-dark: #6b7280;
+    --neutral-hover: #eff0f2;
     --primary: white;
     --secondary: #171E2C;
     --tertiary: #384263;
 }
 
-p {
+p,a, body  {
     @apply text-base;
 }
 
@@ -56,4 +57,8 @@ h5 {
 
 .card {
     @apply pt-1 bg-primary shadow rounded-lg;
+}
+
+.fill-row-span > * {
+    @apply h-full;
 }
