@@ -170,7 +170,7 @@
                                     <li class="px-6 py-5 relative">
                                         <div class="group flex justify-between items-center">
                                             <a
-                                                x-on:click.prevent="selectContact({{ $contact }})"
+                                                x-on:click.prevent.stop="selectContact({{ $contact }})"
                                                 href="#" class="-m-1 p-1 block"
                                             >
                                                 <div class="absolute inset-0 group-hover:bg-gray-50" aria-hidden="true"></div>

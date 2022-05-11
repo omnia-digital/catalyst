@@ -34,8 +34,9 @@ module.exports = {
                 sans: ["SF Pro Display", "Helvetica", "Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
+                'dot': '.15rem',
                 'xxs': '0.65rem',
-                'base': '0.94rem',
+                'base': '0.9375rem',
             },
             height: {
                 '13': '3.2rem'
@@ -50,11 +51,12 @@ module.exports = {
                 'light-text-color': 'var(--light-text-color)',
                 'dark-text-color': 'var(--dark-text-color)',
                 neutral: 'var(--neutral)',
+                'neutral-light': 'var(--neutral-light)',
                 'neutral-dark': 'var(--neutral-dark)',
                 'neutral-hover': 'var(--neutral-hover)',
                 primary: 'var(--primary)',
                 secondary: 'var(--secondary)',
-                tertiary: 'var(--tertiary)'
+                tertiary: 'var(--tertiary)',
             },
         },
     },

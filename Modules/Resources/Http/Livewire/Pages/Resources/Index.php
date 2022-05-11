@@ -16,11 +16,20 @@ class Index extends Component
     public ?string $search = null;
 
     public array $filters = [
-        'published_at' => '',
+        'created_at' => '',
         'has_attachment' => false,
     ];
 
-    public string $orderBy = 'published_at';
+    public array $sortLabels = [
+        'title' => 'Title', 
+        'bookmarks_count' => 'Bookmarks', 
+        'likes_count' => 'Likes', 
+        'user_id' => 'User', 
+        'created_at' => 'Date'
+    ];
+
+    public string $orderBy = 'title';
+    public bool $sortDesc = true;
 
     protected $queryString = [
         'search'
@@ -38,16 +47,32 @@ class Index extends Component
         $this->resetPage();
     }
 
+    public function sortBy($key)
+    {
+        if($this->orderBy === $key) {
+            $this->sortDesc = !$this->sortDesc;
+        } else {
+            $this->orderBy = $key;
+            $this->sertDesc = true;
+        }
+    }
+
     public function getRowsQueryProperty()
     {
         $query = clone $this->rowsQueryWithoutFilters;
 
-        return $query;
+        return $query->where(function($q) {
+            $q->where('title', 'like', "%{$this->search}%")
+            ->orWhere('body', 'like', "%{$this->search}%");
+        });
     }
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-        return Post::where('type','=',PostType::RESOURCE)->orderByDesc('published_at');
+        return Post::where('type','=',PostType::RESOURCE)
+            ->withCount('bookmarks')
+            ->withCount('likes')
+            ->orderBy($this->orderBy, $this->sortDesc ? 'desc' : 'asc');
     }
 
     public function getRowsProperty()
