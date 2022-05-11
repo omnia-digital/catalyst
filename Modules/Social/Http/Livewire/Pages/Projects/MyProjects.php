@@ -12,9 +12,10 @@ class MyProjects extends Component
 
     public function render()
     {
-        $this->projects = Team::factory(15)
+        /* $this->projects = Team::factory(15)
                             ->has(User::factory(random_int(3, 9)))
-                            ->make();
+                            ->make(); */
+        $this->projects = Team::where('user_id', auth()->id())->get();
 
         return view('social::livewire.pages.projects.my-projects');
     }

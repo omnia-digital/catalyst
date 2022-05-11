@@ -11,7 +11,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 
 class CreateTeamModal extends Component
 {
-    use WithModal, WithPlace;
+    use WithModal,  WithPlace;
 
     public ?string $name = null;
 
@@ -45,7 +45,7 @@ class CreateTeamModal extends Component
             /** @var Team $team */
             $team = Auth::user()->ownedTeams()->create([
                 'name' => $this->name,
-                'location' => $this->location,
+                /* 'location' => $this->location, */
                 'start_date' => $this->startDate,
                 'summary' => $this->summary,
                 'personal_team' => false,

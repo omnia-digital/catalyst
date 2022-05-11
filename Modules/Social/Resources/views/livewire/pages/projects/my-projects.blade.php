@@ -15,7 +15,7 @@
 
                 <h2>
 
-                <x-library::button x-data="" class="py-2 w-60 h-10">
+                <x-library::button x-data="" x-on:click.prevent="$openModal('create-team')" class="py-2 w-60 h-10">
                     Create Project
                 </x-library::button>
                 </h2>
@@ -34,5 +34,6 @@
             </div>
         </div>
     </div>
+    <livewire:create-team-modal/>
 </div>
 @endsection

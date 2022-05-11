@@ -78,6 +78,15 @@ class Team extends JetstreamTeam
         return $this->hasOne(TeamLocation::class);
     }
 
+    public function getLocationAttribute()
+    {
+        if($this->teamLocation) {
+            return $this->teamLocation->city . " " . $this->teamLocation->state . " " . $this->teamLocation->country;
+        }
+
+        return null;
+    }
+
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         return $query->where('name', 'LIKE', "%$search%");
