@@ -37,8 +37,8 @@ jobs:
           composer install --prefer-dist --no-interaction --no-suggest
       - name: Run Tests
         run: |
-        ./vendor/bin/phpunit --version
-        ./vendor/bin/phpunit --verbose
+          ./vendor/bin/phpunit --version
+          ./vendor/bin/phpunit --verbose
         env:
           APP_ENV: testing
       - name: Upload artifacts
