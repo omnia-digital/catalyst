@@ -1,5 +1,9 @@
 name: Run Automated Tests
-on: [pull_request]
+on: [
+    pull_request:
+    push:
+      branches: [ dev ]
+]
 jobs:
   tests:
     name: Run tests
@@ -17,7 +21,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.1'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql
       - name: Copy environment config file
         run: php -r "file_exists('.env') || copy('.env.testing', '.env');"

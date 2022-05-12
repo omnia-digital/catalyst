@@ -3,25 +3,10 @@ on:
   push:
     branches: [ main, dev ]
 jobs:
-  sentry:
-    name: Notify Sentry
-    runs-on: ubuntu-latest
-    steps:
-      - name: Sentry Release
-        uses: getsentry/action-release@v1
-        if: github.ref == 'refs/heads/main'
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-        with:
-          environment:
-            production
   deploy:
-    name: Deploy to Vapor (disabled)
+    name: Deploy to Vapor
     runs-on: ubuntu-latest
-      if: github.ref == 'false'
-#      if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
     needs: tests
     steps:
       - name: Check out code
@@ -43,3 +28,27 @@ jobs:
           composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
           composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
           composer install --prefer-dist --no-interaction --no-suggest
+#      - name: Require Vapor CLI
+#        run: composer global require laravel/vapor-cli
+#      - name: Deploy Environment
+#        env:
+#          VAPOR_ENV: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+#          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
+#        run: vapor deploy ${{ env.VAPOR_ENV }}
+#      - name: Upload artifacts
+#        uses: actions/upload-artifact@v2
+#        if: failure()
+#        with:
+#          name: Logs
+#          path: ./storage/logs
+      - name: Sentry Release
+        uses: getsentry/action-release@v1
+        if: github.ref == 'refs/heads/main'
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment:
+            production
+
