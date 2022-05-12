@@ -25,12 +25,11 @@ class TeamFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->company(),
-            'user_id' => User::factory(),
-            'personal_team' => true,
-            'title' => $this->faker->jobTitle(),
-            'description' => $this->faker->paragraphs(7),
-            'organizer_id' => User::factory(),
-            'launch_date' => Carbon::now()->addMonths(3)
+            'user_id' => User::inRandomOrder()->first()->id,
+            'personal_team' => false,
+            'content' => implode(' ', $this->faker->paragraphs(7)),
+            'summary' => $this->faker->paragraph(),
+            'start_date' => $this->faker->date()
         ];
     }
 }
