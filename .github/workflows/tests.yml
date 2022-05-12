@@ -35,15 +35,15 @@ jobs:
           composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
           composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
           composer install --prefer-dist --no-interaction --no-suggest
-      #       - name: Run Tests
-      #         run: |
-      #           ./vendor/bin/phpunit --version
-      #           ./vendor/bin/phpunit --verbose
-      #         env:
-      #           APP_ENV: testing
-#      - name: Upload artifacts
-#        uses: actions/upload-artifact@v2
-#        if: failure()
-#        with:
-#          name: Logs
-#          path: ./storage/logs
+      - name: Run Tests
+        run: |
+        ./vendor/bin/phpunit --version
+        ./vendor/bin/phpunit --verbose
+        env:
+          APP_ENV: testing
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: Logs
+          path: ./storage/logs

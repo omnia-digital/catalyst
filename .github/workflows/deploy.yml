@@ -6,6 +6,7 @@ jobs:
   deploy:
     name: Deploy to Vapor
     runs-on: ubuntu-latest
+#    if: github.ref == 'false'
     if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
     needs: tests
     steps:
@@ -17,10 +18,6 @@ jobs:
           php-version: 8.1
           tools: composer:v2
           coverage: none
-      #      - name: Run yarn
-      #        run: |
-      #          yarn --version
-      #          yarn && yarn prod && yarn run omnia-script
       - name: Validate Composer
         run: composer validate
       - name: Install Composer dependencies
@@ -28,19 +25,19 @@ jobs:
           composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
           composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
           composer install --prefer-dist --no-interaction --no-suggest
-#      - name: Require Vapor CLI
-#        run: composer global require laravel/vapor-cli
-#      - name: Deploy Environment
-#        env:
-#          VAPOR_ENV: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
-#          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
-#        run: vapor deploy ${{ env.VAPOR_ENV }}
-#      - name: Upload artifacts
-#        uses: actions/upload-artifact@v2
-#        if: failure()
-#        with:
-#          name: Logs
-#          path: ./storage/logs
+      - name: Require Vapor CLI
+        run: composer global require laravel/vapor-cli
+      - name: Deploy Environment
+        env:
+          VAPOR_ENV: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
+        run: vapor deploy ${{ env.VAPOR_ENV }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: Logs
+          path: ./storage/logs
       - name: Sentry Release
         uses: getsentry/action-release@v1
         if: github.ref == 'refs/heads/main'
