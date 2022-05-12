@@ -62,3 +62,11 @@ h5 {
 .fill-row-span > * {
     @apply h-full;
 }
+
+.hover-trigger .hover-slide-up {
+    @apply h-0 transition-all delay-75 duration-300;
+}
+
+.hover-trigger:hover  .hover-slide-up{
+    @apply h-13;
+}

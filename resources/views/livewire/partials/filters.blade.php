@@ -2,10 +2,6 @@
     <div class="mb-6 border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
         <div class="flex items-center pr-8">
             <span class="mr-3">Sort:</span>
-            {{-- <x-library::input.select
-                :options="['title', 'bookmarks', 'likes', 'user', 'date']"
-                class="border-transparent shadow-none mt-0 pr-3"
-            /> --}}
             <x-library::dropdown.index :position="'left'" class="z-10" :dropdownClasses="'bg-white border-none shadow-md'">
                 <x-slot:trigger class=" hover:cursor-pointer text-base-text-color hover:text-black">{{ $sortLabels[$orderBy] }}</x-slot>
                 @foreach ($sortLabels as $key => $item)

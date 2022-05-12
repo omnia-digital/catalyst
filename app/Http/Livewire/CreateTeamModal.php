@@ -9,7 +9,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 
 class CreateTeamModal extends Component
 {
-    use WithModal,  WithPlace;
+    use WithModal;
 
     public ?string $name = null;
 

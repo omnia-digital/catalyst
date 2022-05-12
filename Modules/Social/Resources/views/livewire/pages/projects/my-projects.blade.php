@@ -29,11 +29,11 @@
         <div class="mt-6">
             <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 mt-4">
                 @foreach ($projects as $project)
-                    <livewire:social::components.project-card :project="$project" />
+                    <livewire:social::components.project-card :project="$project" wire:key="project-{{ $project->id }}" />
                 @endforeach
             </div>
         </div>
     </div>
-    <livewire:create-team-modal/>
+    <livewire:create-team-modal />
 </div>
 @endsection
