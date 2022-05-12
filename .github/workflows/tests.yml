@@ -36,12 +36,12 @@ jobs:
           composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
           composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
           composer install --prefer-dist --no-interaction --no-suggest
-      - name: Run Tests
-        run: |
-          ./vendor/bin/phpunit --version
-          ./vendor/bin/phpunit --verbose
-        env:
-          APP_ENV: testing
+#      - name: Run Tests
+#        run: |
+#          ./vendor/bin/pest --version
+#          ./vendor/bin/pest --verbose
+#        env:
+#          APP_ENV: testing
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         if: failure()
