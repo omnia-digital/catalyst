@@ -6,8 +6,8 @@ jobs:
   deploy:
     name: Deploy to Vapor
     runs-on: ubuntu-latest
-#    if: github.ref == 'false'
-    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
+    if: github.ref == 'false'
+#    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
     needs: tests
     steps:
       - name: Check out code
