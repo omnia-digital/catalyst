@@ -24,6 +24,7 @@ jobs:
         run: |
           composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
           composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
+          composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
           composer install --prefer-dist --no-interaction --no-suggest
       - name: Require Vapor CLI
         run: composer global require laravel/vapor-cli
