@@ -1,9 +1,13 @@
 name: Run Automated Tests
-on: [pull_request]
+on:
+  pull_request:
+  push:
+    branches: [ dev ]
 jobs:
   tests:
     name: Run tests
     runs-on: ubuntu-latest
+    if: github.ref == 'false'
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -17,7 +21,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.1'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql
       - name: Copy environment config file
         run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
@@ -31,16 +35,17 @@ jobs:
         run: |
           composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
           composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
+          composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
           composer install --prefer-dist --no-interaction --no-suggest
-      #       - name: Run Tests
-      #         run: |
-      #           ./vendor/bin/phpunit --version
-      #           ./vendor/bin/phpunit --verbose
-      #         env:
-      #           APP_ENV: testing
-#      - name: Upload artifacts
-#        uses: actions/upload-artifact@v2
-#        if: failure()
-#        with:
-#          name: Logs
-#          path: ./storage/logs
+#      - name: Run Tests
+#        run: |
+#          ./vendor/bin/pest --version
+#          ./vendor/bin/pest --verbose
+#        env:
+#          APP_ENV: testing
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: Logs
+          path: ./storage/logs

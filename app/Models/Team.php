@@ -63,12 +63,25 @@ class Team extends JetstreamTeam
 
     public function resources(): HasMany
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Resource::class);
+    }
+
+    public function projectLink() {
+        return route('projects.show', $this->id);
     }
 
     public function teamLocation(): HasOne
     {
         return $this->hasOne(TeamLocation::class);
+    }
+
+    public function getLocationAttribute()
+    {
+        if($this->teamLocation) {
+            return $this->teamLocation->city . " " . $this->teamLocation->state . " " . $this->teamLocation->country;
+        }
+
+        return null;
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder
