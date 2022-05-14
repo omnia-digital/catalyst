@@ -39,7 +39,7 @@
             @endempty
 
             <div class="text-xl my-6">
-                {!! Purify::clean($resource->body) !!}
+                {!! $resource->body !!}
             </div>
 
             <div>

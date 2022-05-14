@@ -41,7 +41,7 @@
             </div>
 
             <div class="w-full">
-                {!! Purify::clean($post->body) !!}
+                {!! $post->body !!}
             </div>
 
             @if($post->image)

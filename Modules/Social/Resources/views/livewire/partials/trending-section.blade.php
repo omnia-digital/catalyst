@@ -13,7 +13,7 @@
                                     {{ $post->title ?? $post->user->name }}
                                 </div>
                                 <div class="line-clamp-2">
-                                    {!! Purify::clean($post->body) !!}
+                                    {!! $post->body !!}
                                 </div>
                             </div>
                             <div class="w-1/6">
