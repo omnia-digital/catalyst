@@ -1,0 +1,99 @@
+name: Test and Deploy
+on:
+  pull_request:
+  push:
+    branches: [ main, dev ]
+jobs:
+  tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+#    if: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.composer/cache/files
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql
+      - name: Copy environment config file
+        run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
+      - name: Run yarn
+        run: |
+          yarn --version
+          yarn && yarn dev
+      - name: Validate Composer
+        run: composer validate
+      - name: Install Composer dependencies
+        run: |
+          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+          composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
+          composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
+          composer install --prefer-dist --no-interaction --no-suggest
+      #      - name: Run Tests
+      #        run: |
+      #          ./vendor/bin/pest --version
+      #          ./vendor/bin/pest --verbose
+      #        env:
+      #          APP_ENV: testing
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: Logs
+          path: ./storage/logs
+
+  deploy:
+    name: Deploy to Vapor
+    runs-on: ubuntu-latest
+    if: github.ref == 'false'
+#    if: ${{ github.event.pull_request.merged && github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main' }}
+    needs: tests
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          tools: composer:v2
+          coverage: none
+      - name: Validate Composer
+        run: composer validate
+      - name: Install Composer dependencies
+        run: |
+          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+          composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
+          composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
+          composer install --prefer-dist --no-interaction --no-suggest
+      - name: Require Vapor CLI
+        run: composer global require laravel/vapor-cli
+      - name: Deploy Environment
+        env:
+          VAPOR_ENV: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
+        run: vapor deploy ${{ env.VAPOR_ENV }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: Logs
+          path: ./storage/logs
+      - name: Sentry Release
+        uses: getsentry/action-release@v1
+        if: github.ref == 'refs/heads/main'
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment:
+            production
+
