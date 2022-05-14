@@ -41,6 +41,10 @@ class Post extends Model implements HasMedia
         'published_at'
     ];
 
+    protected $appends = [
+        'published_at',
+    ];
+
     protected static function booted()
     {
         // @NOTE - this is so we don't accidentally pull in comments when we are trying to just get regular posts
@@ -65,6 +69,15 @@ class Post extends Model implements HasMedia
     protected static function newFactory()
     {
         return PostFactory::new();
+    }
+
+    public function getPublishedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return $this->created_at;
+        } else {
+            return $value;
+        }
     }
 
     public function user(): BelongsTo
