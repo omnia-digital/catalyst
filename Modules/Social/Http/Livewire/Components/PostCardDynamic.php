@@ -7,7 +7,7 @@ use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use function view;
 
-class PostCardDynamic extends Component
+class PostCardDynamic extends PostCard
 {
     public Post $post;
     public function mount(Post $post) {
