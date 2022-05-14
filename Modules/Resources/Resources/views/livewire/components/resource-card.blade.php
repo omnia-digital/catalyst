@@ -1,4 +1,4 @@
-<article wire:click.prevent.stop="showPost" class="pl-4 pr-5 pt-4 shadow-sm rounded-lg cursor-pointer border border-2 border-transparent hover:border-secondary z-10 bg-primary">
+<article wire:click.prevent.stop="showPost" class="pl-5 pr-5 pt-4 shadow-sm rounded-lg cursor-pointer border border-2 border-transparent hover:border-secondary z-10 bg-primary">
     <!-- Content -->
     <div class="w-full">
         <div class="space-y-2">
@@ -20,7 +20,7 @@
                     @if ($post->tags)
                         <div class="flex justify-start space-x-2 mr-2">
                             @foreach($post->tags as $tag)
-                                <x-library::tag class="bg-neutral text-xxs text-grey-500 uppercase">{{ $tag->name }}</x-library::tag>
+                                <x-tag :name="$tag->name"/>
                             @endforeach
                         </div>
                     @endif
