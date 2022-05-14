@@ -1,7 +1,7 @@
-<div class="col-span-1 bg-primary rounded-lg shadow max-h-68">
+<article wire:click.prevent.stop="showPost" class="pl-5 pr-5 pt-4 shadow-sm rounded-lg cursor-pointer border border-2 border-transparent hover:border-secondary z-10 bg-primary">
     <!-- Content -->
     <div class="w-full">
-        <div class="space-y-2 py-4 px-6">
+        <div class="space-y-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3 align-middle">
                     <h4 class="flex items-center">
@@ -20,13 +20,13 @@
                     @if ($post->tags)
                         <div class="flex justify-start space-x-2 mr-2">
                             @foreach($post->tags as $tag)
-                                <x-library::tag class="bg-neutral text-xxs text-grey-500 uppercase">{{ $tag->name }}</x-library::tag>
+                                <x-tag :name="$tag->name"/>
                             @endforeach
                         </div>
                     @endif
-                    <div class="relative z-30 inline-block text-left">
+                    <div class="relative z-1 inline-block text-left">
                         <x-library::dropdown>
-                            <x-slot name="trigger">
+                            <x-slot name="trigger" x-on:click.stop="">
                                 <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
                                     <span class="sr-only">Open options</span>
                                     <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
@@ -65,7 +65,7 @@
     </div>
 
     <!-- Social Actions -->
-    <div class="px-6">
+    <div class="z-20">
         <livewire:social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
     </div>
-</div>
+</article>

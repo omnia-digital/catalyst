@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Observers;
 
+use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 
 class PostObserver
@@ -15,6 +16,12 @@ class PostObserver
     public function created(Post $post)
     {
         $post->published_at = $post->published_at;
+
+        if ($post->type == PostType::RESOURCE) {
+            $post->attachTags(['resource']);
+        }
+
+
         $post->save();
     }
 
