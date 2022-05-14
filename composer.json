@@ -10,6 +10,7 @@
         "calebporzio/sushi": "^2.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "jorenvanhocht/laravel-share": "^4.2",
         "laravel/framework": "^9.0",
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.11",
