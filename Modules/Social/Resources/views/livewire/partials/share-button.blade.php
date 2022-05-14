@@ -1,66 +1,21 @@
-<div x-data="{
-            showModal: false,
-            links: [],
-
-            openModal() {
-                this.$wire.getLinks()
-                    .then(result => {
-                            this.links = result;
-                            this.showModal = true
-                        }
-                    );
-            }
-        }" x-on:click.stop="" >
+<div x-on:click.stop="">
     <div class="inline-flex items-center text-md">
-        <button x-on:click="openModal()" type="button" class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color">
+        <button wire:click.prevent.stop="showShareModal" type="button" class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color">
             <x-heroicon-o-share :class="'h-5 w-5'" aria-hidden="true"/>
+{{--            <span class="font-medium text-dark-text-color">{{ $model->shares ?? '' }}</span>--}}
             <span class="font-medium text-dark-text-color sr-only">Share</span>
         </button>
     </div>
-    <!-- component -->
-    <!-- CONTAINER MODAL-->
-    <div x-cloak
-        class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
-        x-show="showModal"
-        x-transition:enter="transition duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition duration-300"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-    >
-        <!--MODAL ITEM-->
-        <div class="relative sm:w-3/4 md:w-1/2 mx-2 sm:mx-auto mt-10 mb-24 opacity-100">
-            <div
-                    x-on:click.away.stop="showModal = false"
-                    class="relative bg-primary shadow-lg rounded-lg text-dark-text-color z-20"
-                    x-show="showModal"
-                    x-transition:enter="transition transform duration-300"
-                    x-transition:enter-start="scale-0"
-                    x-transition:enter-end="scale-100"
-                    x-transition:leave="transition transform duration-300"
-                    x-transition:leave-start="scale-100"
-                    x-transition:leave-end="scale-0"
-            >
-                <!--MODAL HEADER-->
-                <div class="flex justify-between items center border-b border-neutral-light py-3">
-                    <div class="flex items-center justify-center">
-                        <p class="text-xl font-bold text-dark-text-color">Share Modal</p>
-                    </div>
+@once
+    <!-- Share Modal -->
+        <x-library::modal id="share-modal-{{ $model->id }}" maxWidth="md" hideCancelButton>
+            <x-slot name="title">Share</x-slot>
 
-                    <div x-on:click.prevent="showModal = false"
-                            class="bg-neutral-dark hover:bg-gray-500 cursor-pointer hover:text-light-text-color font-sans text-base-text-color w-8 h-8 flex items-center justify-center rounded-full">
-                        x
-                    </div>
-                </div>
-
-                <!--MODAL BODY-->
-                <div class="my-4">
-                    <p class="text-sm">Share this link via</p>
-
-                    <div class="flex justify-around my-4">
+            <x-slot name="content">
+                @if($links)
+                    <div class="flex my-4 space-x-4">
                         <!--FACEBOOK ICON-->
-                        <a :href="links.facebook" target="_blank">
+                        <a href="{{ $links['facebook'] }}" target="_blank">
                             <div class="border hover:bg-[#1877f2] w-12 h-12 fill-[#1877f2] hover:fill-white border-secondary-light rounded-full flex items-center justify-center shadow-xl hover:shadow-secondary/50 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <path
@@ -71,7 +26,7 @@
                         </a>
 
                         <!--TWITTER ICON-->
-                        <a :href="links.twitter" target="_blank">
+                        <a href="{{ $links['twitter'] }}" target="_blank">
                             <div class="border hover:bg-[#1d9bf0] w-12 h-12 fill-[#1d9bf0] hover:fill-white border-secondary-light rounded-full flex items-center justify-center shadow-xl hover:shadow-sky-500/50 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <path
@@ -81,16 +36,16 @@
                             </div>
                         </a>
                         <!--REDDIT ICON-->
-                        <a :href="links.reddit" target="_blank">
+                        <a href="{{ $links['reddit'] }}" target="_blank">
                             <div class="text-[#FF4500] hover:text-white border hover:bg-[#FF4500] w-12 h-12 fill-[#FF4500] hover:fill-white border-secondary-light rounded-full flex items-center
-                            justify-center
-                            shadow-xl
-                            hover:shadow-sky-500/50 cursor-pointer">
+                                justify-center
+                                shadow-xl
+                                hover:shadow-sky-500/50 cursor-pointer">
                                 <i class="text-lg fa-brands fa-reddit-alien"></i>
                             </div>
                         </a>
                         <!--WHATSAPP ICON-->
-                        <a :href="links.whatsapp" target="_blank">
+                        <a href="{{ $links['whatsapp'] }}" target="_blank">
 
                             <div class="border hover:bg-[#25D366] w-12 h-12 fill-[#25D366] hover:fill-white border-green-200 rounded-full flex items-center justify-center shadow-xl hover:shadow-green-500/50 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -101,7 +56,7 @@
                             </div>
                         </a>
                         <!--TELEGRAM ICON-->
-                        <a href="{{ $links['telegram'] ?? '' }}" target="_blank">
+                        <a href="{{ $links['telegram'] }}" target="_blank">
                             <div class="border hover:bg-[#229ED9] w-12 h-12 fill-[#229ED9] hover:fill-white border-sky-200 rounded-full flex items-center justify-center shadow-xl hover:shadow-sky-500/50 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <path
@@ -110,33 +65,25 @@
                                 </svg>
                             </div>
                         </a>
-                    </div>
 
-                    <!--BOX LINK-->
-                    <div class="border-2 border-neutral-light flex justify-between items-center mt-4 py-2 space-x-6">
-                        {{--                        <input x-model="shareLink" class="flex-1 outline-none bg-transparent disabled" disabled type="text" placeholder="link">--}}
-
-                        <button x-data="{
-                                    text: 'Copy Link',
-
+                        <a x-data="{
                                     url: '{{ $url }}',
 
                                     copy() {
                                         this.$clipboard(this.url);
-
-                                        this.text = 'Copied';
-                                        setTimeout(() => { this.text = 'Copy Link' }, 2000);
                                     }
                                 }"
-                                x-on:click.prevent="copy" x-text="text"
-                                class="text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-gray-50">
-                            Copy
-                        </button>
-
-                        <i class="fa-solid fa-paste"></i>
+                           x-on:click.prevent.stop="copy">
+                            <div class="border w-12 h-12 fill-grey-100  border-grey-100 rounded-full flex
+                            items-center justify-center shadow-xl cursor-pointer
+                            hover:bg-neutral active:text-primary hover:fill-neutral
+                            active:bg-secondary active:text-primary active:fill-secondary">
+                                <i class="fa-solid fa-link"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                @endif
+            </x-slot>
+        </x-library::modal>
+    @endonce
 </div>

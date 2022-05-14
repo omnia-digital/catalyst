@@ -10,8 +10,7 @@ Alpine.plugin(collapse)
 Alpine.plugin(Clipboard)
 
 window.Alpine = Alpine;
-
-Alpine.start();
+window.Alpine.start()
 
 
 
