@@ -44,7 +44,7 @@
         </div>
 
         <div class="w-full mt-1">
-            {!! Purify::clean($post->body) !!}
+            {!! $post->body !!}
         </div>
 
         @if ($post->image)
@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="w-full">
-                            {!! Purify::clean($post->repostOriginal->body) !!}
+                            {!! $post->repostOriginal->body !!}
                         </div>
 
                         @if ($post->repostOriginal->image)
