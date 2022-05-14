@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex space-x-6">
-        <div class="max-w-2xl mx-auto">
+        <div class="max-w-2xl w-full mx-auto">
             <div class="mb-2 flex justify-between items-center">
                 <div class="flex-1 flex items-center">
                     <h1 class="py-2 text-3xl">Resources</h1>

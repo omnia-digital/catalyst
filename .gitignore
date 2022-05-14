@@ -7,8 +7,6 @@
 /public/*.js
 /public/mix-manifest.json
 /storage/*.key
-/storage/framework/*
-/storage/logs/*
 /storage/debugbar/*
 /vendor
 .env
@@ -23,3 +21,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/.vapor

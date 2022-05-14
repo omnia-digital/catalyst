@@ -16,19 +16,19 @@ class Index extends Component
     public ?string $search = null;
 
     public array $filters = [
-        'created_at' => '',
+        'published_at' => '',
         'has_attachment' => false,
     ];
 
     public array $sortLabels = [
-        'title' => 'Title', 
-        'bookmarks_count' => 'Bookmarks', 
-        'likes_count' => 'Likes', 
-        'user_id' => 'User', 
-        'created_at' => 'Date'
+        'title' => 'Title',
+        'bookmarks_count' => 'Bookmarks',
+        'likes_count' => 'Likes',
+        'user_id' => 'User',
+        'published_at' => 'Published Date'
     ];
 
-    public string $orderBy = 'title';
+    public string $orderBy = 'published_at';
     public bool $sortDesc = true;
 
     protected $queryString = [

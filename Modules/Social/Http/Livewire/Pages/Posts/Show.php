@@ -3,6 +3,7 @@
 namespace Modules\Social\Http\Livewire\Pages\Posts;
 
 use Livewire\Component;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 
 class Show extends Component
@@ -18,6 +19,10 @@ class Show extends Component
 
     public function mount(Post $post)
     {
+        if ($post->type === PostType::RESOURCE) {
+            return $this->redirectRoute('resources.show', $post->id);
+        }
+
         $this->post = $post->load('comments');
     }
 

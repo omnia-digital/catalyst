@@ -17,6 +17,12 @@
                     'icon'    => 'heroicon-o-home',
                     'current' => false
                 ],
+                [
+                    'label'   => 'My Projects',
+                    'name'    => 'social.my-projects',
+                    'icon'    => 'heroicon-o-briefcase',
+                    'current' => false
+                ],
 //                [
 //                    'label'   => 'Explore',
 //                    'name'    => 'social.bookmarks',

@@ -1,4 +1,4 @@
-<article wire:click.prevent.stop="showPost" class="flex justify-start bg-white pl-3 pr-5 pt-4 shadow-sm rounded-lg border border-2 border-transparent
+<article wire:click.prevent.stop="showPost" class="flex justify-start bg-primary pl-3 pr-5 pt-4 shadow-sm rounded-lg border border-2 border-transparent
 {{ $post->isParent() ? '' : 'hover:border-secondary cursor-pointer' }} z-10">
     <div class="mr-3 flex-shrink-0">
         <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->profile->name }}"/>
@@ -27,9 +27,9 @@
 {{--                        <a href="{{ $post->team->projectLink() }}" class=" hover:no-underline">{{ $post->team->name }}</a>--}}
 {{--                    </div>--}}
 {{--                @endif--}}
-                <div class="relative z-30 inline-block text-left">
+                <div class="relative z-1 inline-block text-left">
                     <x-library::dropdown>
-                        <x-slot name="trigger">
+                        <x-slot name="trigger" x-on:click.stop="">
                             <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
                                 <span class="sr-only">Open options</span>
                                 <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
