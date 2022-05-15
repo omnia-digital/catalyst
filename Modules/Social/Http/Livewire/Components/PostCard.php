@@ -23,9 +23,7 @@ class PostCard extends Component
     }
 
     public function showPost() {
-        if (!$this->post->isParent()) {
-            return $this->redirectRoute('social.posts.show', $this->post);
-        }
+        return $this->redirectRoute('social.posts.show', $this->post);
     }
 
     public function toggleBookmark()
