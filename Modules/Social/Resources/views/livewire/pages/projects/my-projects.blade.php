@@ -1,7 +1,7 @@
 @extends('social::livewire.layouts.main-layout')
 
 @section('full-width-header')
-    <div class="col-span-2 h-36 bg-[url('https://source.unsplash.com/random')] -mx-4 -mt-4 bg-cover bg-no-repeat"></div>
+    <div class="col-span-2 h-36 bg-[url('https://source.unsplash.com/random')] -mx-4 bg-cover bg-no-repeat"></div>
 @endsection
 
 @section('content')

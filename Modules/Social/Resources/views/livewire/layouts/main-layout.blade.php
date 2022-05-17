@@ -20,7 +20,7 @@
                 {{--                </div>--}}
                 {{--            @endif--}}
 
-                <div class="min-h-screen ml-4">
+                <div class="min-h-screen mx-4">
                     <!-- Page content -->
                     <div class="mx-auto">
                         @yield('content')
