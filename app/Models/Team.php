@@ -111,6 +111,11 @@ class Team extends JetstreamTeam
         return $this->allUsers();
     }
 
+    public function profile()
+    {
+        return route('social.projects.show', $this->id);
+    }
+
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         return $query->where('name', 'LIKE', "%$search%");

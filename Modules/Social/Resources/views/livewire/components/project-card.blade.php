@@ -16,4 +16,5 @@
         </div>
         <p class="text-light-text-color text-xs line-clamp-3 hover-slide-up">{{ $project->summary }}</p>
     </div>
+    <a href="{{ $project->profile() }}" class="stretched-link"></a>
 </div>
