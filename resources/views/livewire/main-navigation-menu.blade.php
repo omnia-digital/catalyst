@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="fixed w-full bg-primary z-10 shadow-sm">
+<nav x-data="{ open: false }" class="fixed w-full bg-primary z-20 shadow-sm">
     <!-- Desktop Navigation Menu -->
     <div class="max-w-8xl mx-auto grid grid-cols-10 gap-2 h-14">
         <!-- Left side header -->
@@ -7,7 +7,7 @@
             <div class="flex items-center h-14 flex-shrink-0">
                 <a href="{{ route('social.home') }}"
                    title="{{ env('APP_NAME') }}"
-                   class="bg-neutral-light font-semibold text-black py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
+                   class="bg-neutral-light text-black py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
                     <x-dynamic-component
                             component="heroicon-s-globe-alt"
                             class="flex-shrink-0 h-6 w-6"

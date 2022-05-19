@@ -42,6 +42,7 @@ class Team extends JetstreamTeam
         'start_date',
         'personal_team',
         'summary',
+        'target_audience',
         'content',
     ];
 
@@ -96,14 +97,6 @@ class Team extends JetstreamTeam
     public function getReviewStatusAttribute()
     {
         return null;
-    }
-
-    public function targetAudience(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => empty($value) ? 'This project is open for anyone to join.' : $value,
-
-        );
     }
 
     public function members()

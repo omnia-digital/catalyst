@@ -28,6 +28,7 @@ class Show extends Component
     {
         return $this->project->posts()->take(2)->get();
     }
+    
     public function mount(Team $team)
     {
         $this->project = $team->load('owner');

@@ -114,7 +114,7 @@
                     <div>
                         <p class="text-black font-semibold">Is this project relevant to you?</p>
                         <div class="mt-4 bg-white p-4">
-                            <p class="text-dark-text-color">{{ $project->target_audience }}</p>
+                            <p class="text-dark-text-color">{{ $project->target_audience ?? 'This project is open for anyone to join.' }}</p>
                         </div>
                     </div>
                 </div>

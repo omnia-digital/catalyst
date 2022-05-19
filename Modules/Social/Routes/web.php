@@ -7,6 +7,7 @@ use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
 use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
 use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
 use Modules\Social\Http\Livewire\Pages\Contacts\Show as ShowContacts;
+use Modules\Social\Http\Livewire\Pages\Projects\Edit as EditProject;
 use Modules\Social\Http\Livewire\Pages\Projects\Show as ShowProject;
 use Modules\Social\Http\Livewire\Pages\Projects\MyProjects;
 
@@ -31,6 +32,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
 
     Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {
         Route::get('{team}', ShowProject::class)->name('show');
+        Route::get('{team}/edit', EditProject::class)->name('edit');
     });
 
     Route::get('/my-projects', MyProjects::class)->name('my-projects');

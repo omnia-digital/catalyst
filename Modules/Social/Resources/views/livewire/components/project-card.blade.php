@@ -1,4 +1,4 @@
-<div class="bg-primary border border-neutral-light rounded hover-trigger relative bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat">
+<div class="bg-primary border border-neutral-light rounded group relative bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat hover:ring-1 hover:ring-black">
     <div class="h-80 rounded"></div>
     <div class="space-y-2 p-4 bg-primary rounded absolute bottom-0 right-0 left-0">
         <div class="flex justify-between">
@@ -14,7 +14,7 @@
                 <span class="text-dark-text-color text-xs">{{ $project->location }}</span>
             @endisset
         </div>
-        <p class="text-light-text-color text-xs line-clamp-3 hover-slide-up">{{ $project->summary }}</p>
+        <p class="text-light-text-color text-xs line-clamp-3 h-0 transition-all delay-75 duration-300 group-hover:h-13">{{ $project->summary }}</p>
     </div>
-    <a href="{{ $project->profile() }}" class="stretched-link"></a>
+    <a href="{{ $project->profile() }}" class="stretched-link hover:cursor-pointer"></a>
 </div>
