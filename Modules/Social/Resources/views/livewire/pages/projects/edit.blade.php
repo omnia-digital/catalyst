@@ -145,12 +145,12 @@
                     {
                         id: 0,
                         title: 'Basic Info',
-                        component: 'social::pages.teams.partials.edit-project-basic'
+                        component: 'social::pages.projects.partials.edit-project-basic'
                     },
                     {
                         id: 1,
                         title: 'Locations',
-                        component: 'social::pages.teams.partials.edit-project-locations'
+                        component: 'social::pages.projects.partials.edit-project-locations'
                     }
                 ]
             }
