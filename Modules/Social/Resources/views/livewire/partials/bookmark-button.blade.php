@@ -1,4 +1,4 @@
-<div class="inline-flex items-center text-md">
+<div class="inline-flex items-center text-md" x-data x-on:click.stop="">
     <button wire:click="toggleBookmark" type="button" class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color">
         @if ($model->isBookmarkedBy())
             <x-heroicon-s-bookmark class="h-5 w-5"/>

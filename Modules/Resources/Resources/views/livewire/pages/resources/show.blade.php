@@ -33,13 +33,13 @@
             @empty(!$resource->tags)
                 <div class="flex justify-start space-x-2">
                     @foreach($resource->tags as $tag)
-                        <x-library::tag>{{ $tag }}</x-library::tag>
+                        <x-tag :name="$tag->name" bg-color="neutral-dark" text-color="primary"/>
                     @endforeach
                 </div>
             @endempty
 
             <div class="text-xl my-6">
-                {!! Purify::clean($resource->body) !!}
+                {!! $resource->body !!}
             </div>
 
             <div>
