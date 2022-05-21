@@ -80,10 +80,19 @@ class Team extends JetstreamTeam
         return $this->hasOne(TeamLocation::class);
     }
 
+    public function getLocationShortAttribute()
+    {
+        if($this->teamLocation) {
+            return $this->teamLocation->name;
+        }
+
+        return null;
+    }
+
     public function getLocationAttribute()
     {
         if($this->teamLocation) {
-            return $this->teamLocation->city . " " . $this->teamLocation->state . " " . $this->teamLocation->country;
+            return $this->teamLocation->full;
         }
 
         return null;

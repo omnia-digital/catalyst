@@ -3,64 +3,89 @@
 namespace Modules\Social\Http\Livewire\Pages\Projects;
 
 use App\Models\Team;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 
 class Edit extends Component
 {
-    public $project;
+    use WithPlace;
 
-    public ?string $name;
+    public Team $team;
 
-    public ?string $startDate;
+    public $selected;
 
-    public ?string $summary;
-    
-    public ?string $targetAudience;
-    
-    public ?string $content;
+    public array $newAddress = [];
+
+    public bool $removeAddress = false;
 
     protected function rules(): array
     {
         return [
-            'name' => ['required', 'max:254'],
-            'startDate' => ['required', 'date'],
-            'summary' => ['required', 'max:280'],
-            'targetAudience' => ['required', 'max:254'],
-            'content' => ['required', 'max:65500'],
+            'team.name' => ['required', 'max:254'],
+            'team.start_date' => ['required', 'date'],
+            'team.summary' => ['required', 'max:280'],
+            'team.target_audience' => ['required', 'max:254'],
+            'team.content' => ['required', 'max:65500'],
         ];
     }
 
     public function mount(Team $team)
     {
-        $this->project = $team->load('owner');
-        $this->name = $team->name;
-        $this->startDate = $team->start_date;
-        $this->summary = $team->summary;
-        $this->targetAudience = $team->target_audience;
-        $this->content = $team->content;
+        $this->team = $team->load('owner');
     }
 
+    public function setAddress()
+    {
+        $place = $this->findPlace();
+        $this->newAddress = [
+            'address'          => $place->address(),
+            'address_line_2'   => $place->addressLine2(),
+            'city'             => $place->city(),
+            'state'            => $place->state(),
+            'postal_code'      => $place->postalCode(),
+            'country'          => $place->country()
+        ];
+        
+    }
+    
     public function saveChanges()
     {
         $this->validate();
-
-        /** @var Team $project */
-        $this->project->update([
-            'name' => $this->name,
-            'start_date' => $this->startDate,
-            'summary' => $this->summary,
-            'target_audience' => $this->targetAudience,
-            'content' => $this->content,
-        ]);
         
-        Auth::user()->switchTeam($this->project);
+        $this->team->save();
+        
+        $this->removeAddress && $this->team->teamLocation()->delete();
+
+        if(!empty($this->newAddress)) {
+            $this->team->teamLocation()->updateOrCreate(
+                ['team_id' => $this->team->id],
+                $this->newAddress
+            );
+        }
 
         $this->emit('changes_saved');
+
+        $this->team->refresh();
+
+        $this->reset('newAddress', 'removeAddress');
+    }
+
+    public function getSelectedAddressProperty()
+    {
+        $address = '';
+        $address .= $this->newAddress['address'];
+
+        if ($this->newAddress['address_line_2']) {
+            $address .= " " . $this->newAddress['address_line_2'];
+        }
+
+        $address .= ", " . $this->newAddress['city'] . ', ' . $this->newAddress['state'] . ', ' . $this->newAddress['postal_code'] . " " . $this->newAddress['country'];
+
+        return $address;
     }
 
     public function render()
     {
-        return view('social::livewire.pages.projects.edit');
+        return view('social::livewire.pages.teams.edit');
     }
 }
