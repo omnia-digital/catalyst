@@ -15,13 +15,14 @@ use Modules\Social\Models\Post;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\Tags\HasTags;
+use Wimil\Followers\Traits\CanBeFollowed;
 
 /**
  * Projects are just Teams
  */
 class Team extends JetstreamTeam
 {
-    use HasFactory, Likable, Postable, HasTags;
+    use HasFactory, Likable, Postable, HasTags, CanBeFollowed;
 
     /**
      * The attributes that should be cast.
@@ -72,7 +73,7 @@ class Team extends JetstreamTeam
     }
 
     public function projectLink() {
-        return route('projects.show', $this->id);
+        return route('teams.show', $this->id);
     }
 
     public function teamLocation(): HasOne
@@ -115,7 +116,7 @@ class Team extends JetstreamTeam
 
     public function profile()
     {
-        return route('social.projects.show', $this->id);
+        return route('social.teams.show', $this->id);
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder
