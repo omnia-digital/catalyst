@@ -43,12 +43,23 @@ class Create extends Component
                 'url'   => $validated['url'],
                 'image' => $validated['image']
             ]);
-        
+
         $tags = $this->getTags($hashtags);
+        $tags = $this->addResourceTag($tags);
         $resource->attachTags($tags);
 
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);
+    }
+
+    // Add Resource tag to all resources
+    public function addResourceTag($tags) : array
+    {
+        if (!array_key_exists('resource', $tags)) {
+            $tags[] = 'resource';
+        }
+
+        return $tags;
     }
 
     public function setFeaturedImage(array $image)
@@ -69,7 +80,7 @@ class Create extends Component
         $hashtags = array();
 
         preg_match_all($regexForHashtags, $text, $hashtags);
-        
+
         return $hashtags[1];
     }
 

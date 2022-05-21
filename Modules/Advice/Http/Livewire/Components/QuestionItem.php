@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Advice\Http\Livewire;
+namespace Modules\Advice\Http\Livewire\Components;
 
 use Livewire\Component;
 use Modules\Social\Models\Post;
 
-class QuestionListItem extends Component
+class QuestionItem extends Component
 {
     public Post $post;
     public $optionsMenuOpen = false;
