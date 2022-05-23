@@ -116,7 +116,7 @@ class Team extends JetstreamTeam
 
     public function profile()
     {
-        return route('social.teams.show', $this->id);
+        return route('social.projects.show', $this->id);
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder
