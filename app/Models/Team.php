@@ -6,18 +6,21 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Social\Models\Post;
+use Modules\Social\Traits\Likable;
+use Spatie\Tags\HasTags;
 
 /**
  * Projects are just Teams
  */
 class Team extends JetstreamTeam
 {
-    use HasFactory;
+    use HasFactory, HasTags, Likable;
 
     /**
      * The attributes that should be cast.
@@ -73,6 +76,11 @@ class Team extends JetstreamTeam
     public function teamLocation(): HasOne
     {
         return $this->hasOne(TeamLocation::class);
+    }
+
+    public function visits(): Relation
+    {
+        return visits($this)->relation();
     }
 
     public function getLocationAttribute()

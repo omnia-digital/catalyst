@@ -17,6 +17,8 @@ class CreateTeamLocationsTable extends Migration
             $table->string('state');
             $table->string('postal_code');
             $table->string('country');
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
             $table->timestamps();
         });
     }

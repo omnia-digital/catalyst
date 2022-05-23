@@ -12,6 +12,8 @@ class Show extends Component
     public function mount(Team $team)
     {
         $this->project = $team;
+
+        visits($team)->increment();
     }
 
     public function render()

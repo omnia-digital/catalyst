@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Livewire\Pages\Teams\Discover;
+use App\Http\Livewire\Pages\Teams\Index;
 use App\Http\Livewire\Pages\Teams\Show as ShowTeam;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +25,8 @@ use Illuminate\Support\Facades\Route;
     })->name('dashboard');
 
     Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {
-        Route::get('/', App\Http\Livewire\Teams::class)->name('home');
+        Route::get('/', Index::class)->name('home');
+        Route::get('/discover', Discover::class)->name('discover');
         Route::get('{team}', ShowTeam::class)->name('show');
     });
 
