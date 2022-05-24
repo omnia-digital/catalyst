@@ -133,6 +133,12 @@
                 </div>
             @endif
         </div>
+        <div x-show="activeTab === 2" class="mt-6 space-y-6">
+            @livewire('teams.team-member-manager', ['team' => $team])
+        </div>
+        <div x-show="activeTab === 3" class="mt-6 space-y-6">
+            
+        </div>
     </div>
 </div>
 @endsection
@@ -145,12 +151,23 @@
                     {
                         id: 0,
                         title: 'Basic Info',
-                        component: 'social::pages.projects.partials.edit-project-basic'
+                        /* component: 'social::pages.projects.partials.edit-project-basic' */
                     },
                     {
                         id: 1,
                         title: 'Locations',
-                        component: 'social::pages.projects.partials.edit-project-locations'
+                        /* component: 'social::pages.projects.partials.edit-project-locations' */
+                    },
+                    {
+                        id: 2,
+                        title: 'Invitations',
+                        component: 'teams.team-member-manager'
+                    }
+                    },
+                    {
+                        id: 3,
+                        title: 'Applications',
+                        /* component: */
                     }
                 ]
             }
