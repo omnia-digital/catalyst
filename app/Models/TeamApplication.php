@@ -30,4 +30,9 @@ class TeamApplication extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeHasUser($query, $userID)
+    {
+        return $query->where('user_id', $userID)->exists();
+    }
 }

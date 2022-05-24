@@ -4,7 +4,7 @@
 @section('content')
 <div class="-mx-4">
     <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
-    <livewire:social::components.project-navigation :project="$project" />
+    <x-teams.overview-navigation :team="$project" />
 </div>
 <div class="flex space-x-6 mt-4 -mx-4">
     <div>

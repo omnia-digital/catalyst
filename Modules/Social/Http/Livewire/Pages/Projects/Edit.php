@@ -2,7 +2,11 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Projects;
 
+use App\Actions\Teams\ApplyToTeam;
 use App\Models\Team;
+use App\Models\TeamApplication;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 
@@ -70,6 +74,45 @@ class Edit extends Component
         $this->reset('newAddress', 'removeAddress');
     }
 
+    /**
+     * Add a new team member to a team.
+     *
+     * @param  string  $email
+     * @return void
+     */
+    public function addTeamMember($email)
+    {
+        $this->resetErrorBag();
+
+        app(AddsTeamMembers::class)->add(
+            $this->user,
+            $this->team,
+            $email,
+            'editor'
+        );
+
+        $this->team = $this->team->fresh();
+
+        $this->emit('saved');
+    }
+
+    /**
+     * Deny a pending team member's application.
+     *
+     * @param  int  $applicationId
+     * @return void
+     */
+    public function denyTeamApplication($applicationId)
+    {
+        if (! empty($applicationId)) {
+            $model = TeamApplication::class;
+
+            $model::whereKey($applicationId)->delete();
+        }
+
+        $this->team = $this->team->fresh();
+    }
+
     public function getSelectedAddressProperty()
     {
         $address = '';
@@ -82,6 +125,16 @@ class Edit extends Component
         $address .= ", " . $this->newAddress['city'] . ', ' . $this->newAddress['state'] . ', ' . $this->newAddress['postal_code'] . " " . $this->newAddress['country'];
 
         return $address;
+    }
+
+    /**
+     * Get the current user of the application.
+     *
+     * @return mixed
+     */
+    public function getUserProperty()
+    {
+        return Auth::user();
     }
 
     public function render()

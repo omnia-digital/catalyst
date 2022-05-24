@@ -67,6 +67,11 @@
             'profile_photo_url'
         ];
 
+        public static function findByEmail($email)
+        {
+            return User::where('email', $email)->first();
+        }
+
         public function getNameAttribute() {
             if ($this->profile()->exists()) {
                return $this->profile->name;

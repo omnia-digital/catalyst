@@ -67,6 +67,16 @@ class Team extends JetstreamTeam
         return $value;
     }
 
+    /**
+     * Get all of the pending user applications for the team.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function teamApplications(): HasMany
+    {
+        return $this->hasMany(TeamApplication::class);
+    }
+
     public function resources(): HasMany
     {
         return $this->hasMany(Resource::class);

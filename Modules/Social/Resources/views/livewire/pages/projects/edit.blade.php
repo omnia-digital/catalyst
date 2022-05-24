@@ -86,6 +86,7 @@
                 <x-library::input.textarea id="content" wire:model.defer="team.content" :rows="8"/>
                 <x-library::input.error for="content"/>
             </div>
+            @livewire('teams.delete-team-form', ['team' => $team])
         </div>
         <div x-show="activeTab === 1" class="mt-6 space-y-6">
             <div>
@@ -137,7 +138,45 @@
             @livewire('teams.team-member-manager', ['team' => $team])
         </div>
         <div x-show="activeTab === 3" class="mt-6 space-y-6">
-            
+            <x-jet-section-border />
+
+            <!-- Team Member Applications -->
+            <div class="mt-10 sm:mt-0">
+                <x-jet-action-section>
+                    <x-slot name="title">
+                        {{ __('Pending Team Applications') }}
+                    </x-slot>
+
+                    <x-slot name="description">
+                        {{ __('These people have applied to your team. They may join the team after you accept their application.') }}
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <div class="space-y-6">
+                            @forelse ($team->teamApplications as $application)
+                                <div class="flex items-center justify-between">
+                                    <div class="text-base-text-color">{{ $application->user->name }} ({{ $application->user->email }})</div>
+
+                                    <div class="flex items-center">
+                                        <x-library::button.index wire:click.prevent="addTeamMember({{ $application->user->email }})">Accept</x-library::button.index>
+                                        @if (Gate::check('removeTeamMember', $team))
+                                            <!-- Deny Team Application -->
+                                            <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
+                                                wire:click="denyTeamApplication({{ $application->id }})">
+                                                {{ __('Deny') }}
+                                            </button>
+                                        @endif
+                                    </div>
+                                </div>
+                            @empty
+                                <div>
+                                    <p>No current applications</p>
+                                </div>
+                            @endforelse
+                        </div>
+                    </x-slot>
+                </x-jet-action-section>
+            </div>
         </div>
     </div>
 </div>
@@ -161,8 +200,7 @@
                     {
                         id: 2,
                         title: 'Invitations',
-                        component: 'teams.team-member-manager'
-                    }
+                        /* component: 'teams.team-member-manager' */
                     },
                     {
                         id: 3,
