@@ -20,7 +20,7 @@ class Teams extends Component
 
     public array $filters = [
         'location' => null,
-        'date' => null,
+        'start_date' => null,
         'members' => [0, 0],
         'rating' => [],
         'search' => null
@@ -39,11 +39,12 @@ class Teams extends Component
     public function getRowsQueryProperty()
     {
         return Team::query()
+            ->with('teamLocation')
             ->withCount('users as members')
-            ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->where('location', $location))
-            ->when(Arr::get($this->filters, 'date'), fn(Builder $query, $date) => $query->whereDate('created_at', $date))
+            ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->whereHas('teamLocation', fn(Builder $query) => $query->search($location)))
+            ->when(Arr::get($this->filters, 'start_date'), fn(Builder $query, $date) => $query->whereDate('start_date', $date))
             ->when(Arr::get($this->filters, 'members'), fn(Builder $query, $members) => $query->havingBetween('members', $members))
-            ->when(Arr::get($this->filters, 'rating'), fn(Builder $query, $rating) => $query->whereIn('rating', $rating))
+            //->when(Arr::get($this->filters, 'rating'), fn(Builder $query, $rating) => $query->whereIn('rating', $rating))
             ->when(Arr::get($this->filters, 'search'), fn(Builder $query, $search) => $query->search($search));
     }
 
@@ -52,11 +53,6 @@ class Teams extends Component
         $query = $this->applySorting($this->rowsQuery);
 
         return $query->paginate(25);
-    }
-
-    public function filter()
-    {
-        $this->callMethod('$refresh');
     }
 
     public function render()

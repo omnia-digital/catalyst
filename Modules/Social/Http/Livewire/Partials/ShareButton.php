@@ -3,20 +3,34 @@
 namespace Modules\Social\Http\Livewire\Partials;
 
 use Livewire\Component;
+use Modules\Social\Models\Post;
+use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 
 class ShareButton extends Component
 {
-    public $model;
-    public $show;
+    use withModal;
 
-    public function mount($model, $show = false) {
+    public Post $model;
+    public ?string $url;
+    public array $links = [];
+    public ?string $content = null;
+
+    public function mount(Post $model, $url = '')
+    {
         $this->model = $model;
-        $this->show = $show;
-
+        $this->url = $model->getUrl() ?? $url;
     }
 
-    public function like() {
-        $this->model->like();
+    public function showShareModal()
+    {
+        $this->getLinks();
+        $this->openModal('share-modal-' . $this->model->id);
+    }
+
+    public function getLinks()
+    {
+        $this->links = \Share::page($this->url)->facebook()->twitter()->linkedin()->whatsapp()->telegram()->reddit()->getRawLinks();
+        return $this->links;
     }
 
     public function render()

@@ -13,7 +13,7 @@
         </div>
         <h1 class="py-2 text-3xl">Resource</h1>
     </div>
-    <div class="xl:grid xl:grid-cols-9 xl:gap-9">
+    <div class="flex space-x-6">
         <div class="xl:col-span-6">
             @if($resource->image)
                 <div>
@@ -33,13 +33,13 @@
             @empty(!$resource->tags)
                 <div class="flex justify-start space-x-2">
                     @foreach($resource->tags as $tag)
-                        <x-library::tag>{{ $tag }}</x-library::tag>
+                        <x-tag :name="$tag->name" bg-color="neutral-dark" text-color="primary"/>
                     @endforeach
                 </div>
             @endempty
 
             <div class="text-xl my-6">
-                {!! Purify::clean($resource->body) !!}
+                {!! $resource->body !!}
             </div>
 
             <div>
@@ -63,8 +63,8 @@
 
         <x-sidebar-column class="max-w-sm" post-type="resource"/>
 
-        <livewire:media-manager/>
     </div>
+        <livewire:media-manager/>
     @endif
 
 @endsection

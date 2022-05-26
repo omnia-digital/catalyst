@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
@@ -34,9 +35,10 @@ class Team extends JetstreamTeam
      */
     protected $fillable = [
         'name',
+        'start_date',
         'personal_team',
-        'description',
-        'thumbnail'
+        'summary',
+        'content',
     ];
 
     /**
@@ -61,14 +63,29 @@ class Team extends JetstreamTeam
 
     public function resources(): HasMany
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Resource::class);
+    }
+
+    public function projectLink() {
+        return route('projects.show', $this->id);
+    }
+
+    public function teamLocation(): HasOne
+    {
+        return $this->hasOne(TeamLocation::class);
+    }
+
+    public function getLocationAttribute()
+    {
+        if($this->teamLocation) {
+            return $this->teamLocation->city . " " . $this->teamLocation->state . " " . $this->teamLocation->country;
+        }
+
+        return null;
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
-        return $query->where(function (Builder $query) use ($search) {
-            $query->where('name', 'LIKE', "%$search%")
-                ->orWhere('location', 'LIKE', "%$search%");
-        });
+        return $query->where('name', 'LIKE', "%$search%");
     }
 }

@@ -6,6 +6,7 @@ use Livewire\Component;
 use Modules\Social\Actions\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
 use Phuclh\MediaManager\WithMediaManager;
+use Spatie\Tags\Tag;
 
 class Create extends Component
 {
@@ -33,6 +34,8 @@ class Create extends Component
     {
         $validated = $this->validate();
 
+        $hashtags = $this->pullTags($validated['body']);
+
         $resource = (new CreateNewPostAction)
             ->type(PostType::RESOURCE)
             ->execute($validated['body'], [
@@ -41,8 +44,22 @@ class Create extends Component
                 'image' => $validated['image']
             ]);
 
+        $tags = $this->getTags($hashtags);
+        $tags = $this->addResourceTag($tags);
+        $resource->attachTags($tags);
+
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);
+    }
+
+    // Add Resource tag to all resources
+    public function addResourceTag($tags) : array
+    {
+        if (!array_key_exists('resource', $tags)) {
+            $tags[] = 'resource';
+        }
+
+        return $tags;
     }
 
     public function setFeaturedImage(array $image)
@@ -55,6 +72,27 @@ class Create extends Component
         $this->image = null;
 
         $this->removeFileFromMediaManager();
+    }
+
+    public function pullTags($text)
+    {
+        $regexForHashtags = "/\B#([a-z0-9_-]+)/i";
+        $hashtags = array();
+
+        preg_match_all($regexForHashtags, $text, $hashtags);
+
+        return $hashtags[1];
+    }
+
+    public function getTags($hashtags)
+    {
+        $tags = array();
+
+        foreach ($hashtags as $hashtag) {
+            $tags[] = Tag::findOrCreateFromString($hashtag);
+        }
+
+        return $tags;
     }
 
     public function render()

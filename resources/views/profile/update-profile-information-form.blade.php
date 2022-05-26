@@ -38,7 +38,7 @@
                     </span>
                 </div>
 
-                <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
+                <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent.stop="$refs.photo.click()">
                     {{ __('Select A New Photo') }}
                 </x-jet-secondary-button>
 

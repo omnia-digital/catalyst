@@ -1,5 +1,5 @@
-<div class="inline-flex items-center text-md">
-    <button class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color" wire:click="like">
+<div class="inline-flex items-center text-md" x-data x-on:click.stop="">
+    <button class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color" wire:click.prevent.stop="like">
         @if ($model->isLiked)
             <x-heroicon-s-thumb-up :class="$show ? 'h-6 w-6' : 'h-5 w-5'" aria-hidden="true" />
         @else

@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('type')->nullable();
             $table->string('image')->nullable();
             $table->nullableMorphs('postable');
-            $table->timestamp('published_at')->nullable()->default(now());
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }
