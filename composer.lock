@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43f30500f2e9822f8313e8a3096c0364",
+    "content-hash": "0ec36068aacb5271d89a9142d1a03ebe",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -114,16 +114,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.222.11",
+            "version": "3.222.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "458d322b7f913a54dfc10dd25d3fbb35bb3f7502"
+                "reference": "8503d393b3ebef20241931b1abc20cb2af494cb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/458d322b7f913a54dfc10dd25d3fbb35bb3f7502",
-                "reference": "458d322b7f913a54dfc10dd25d3fbb35bb3f7502",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8503d393b3ebef20241931b1abc20cb2af494cb2",
+                "reference": "8503d393b3ebef20241931b1abc20cb2af494cb2",
                 "shasum": ""
             },
             "require": {
@@ -199,9 +199,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.11"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.12"
             },
-            "time": "2022-05-12T18:17:33+00:00"
+            "time": "2022-05-13T18:15:34+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -1145,57 +1145,6 @@
                 }
             ],
             "time": "2021-10-11T09:18:27+00:00"
-        },
-        {
-            "name": "ezyang/htmlpurifier",
-            "version": "v4.14.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "12ab42bd6e742c70c0a52f7b82477fcd44e64b75"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/12ab42bd6e742c70c0a52f7b82477fcd44e64b75",
-                "reference": "12ab42bd6e742c70c0a52f7b82477fcd44e64b75",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "library/HTMLPurifier.composer.php"
-                ],
-                "psr-0": {
-                    "HTMLPurifier": "library/"
-                },
-                "exclude-from-classmap": [
-                    "/library/HTMLPurifier/Language/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Edward Z. Yang",
-                    "email": "admin@htmlpurifier.org",
-                    "homepage": "http://ezyang.com"
-                }
-            ],
-            "description": "Standards compliant HTML filter written in PHP",
-            "homepage": "http://htmlpurifier.org/",
-            "keywords": [
-                "html"
-            ],
-            "support": {
-                "issues": "https://github.com/ezyang/htmlpurifier/issues",
-                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.14.0"
-            },
-            "time": "2021-12-25T01:21:49+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -2299,6 +2248,69 @@
             "time": "2020-06-13T08:05:20+00:00"
         },
         {
+            "name": "jorenvanhocht/laravel-share",
+            "version": "4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jorenvh/laravel-share.git",
+                "reference": "86af334068038a840567ed62f2082fe3ac981476"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jorenvh/laravel-share/zipball/86af334068038a840567ed62f2082fe3ac981476",
+                "reference": "86af334068038a840567ed62f2082fe3ac981476",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.13|^7.0",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jorenvh\\Share\\Providers\\ShareServiceProvider"
+                    ],
+                    "aliases": {
+                        "Share": "Jorenvh\\Share\\ShareFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jorenvh\\Share\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joren Van Hocht",
+                    "email": "joren@codeswitch.be",
+                    "homepage": "https://codeswitch.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Optional package for Laravel to generate social share links.",
+            "homepage": "https://github.com/jorenvh/laravel-share",
+            "keywords": [
+                "laravel",
+                "share",
+                "social links",
+                "social share links"
+            ],
+            "support": {
+                "issues": "https://github.com/jorenvh/laravel-share/issues",
+                "source": "https://github.com/jorenvh/laravel-share/tree/4.2.0"
+            },
+            "time": "2022-02-11T17:20:09+00:00"
+        },
+        {
             "name": "laravel/fortify",
             "version": "v1.13.0",
             "source": {
@@ -2542,16 +2554,16 @@
         },
         {
             "name": "laravel/jetstream",
-            "version": "v2.8.0",
+            "version": "v2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/jetstream.git",
-                "reference": "4aafe1f26dba30dff8dcb1420f0fb534ba3c7271"
+                "reference": "50ca355fa7cff5a851bbc0fa6addaa0010493c8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/jetstream/zipball/4aafe1f26dba30dff8dcb1420f0fb534ba3c7271",
-                "reference": "4aafe1f26dba30dff8dcb1420f0fb534ba3c7271",
+                "url": "https://api.github.com/repos/laravel/jetstream/zipball/50ca355fa7cff5a851bbc0fa6addaa0010493c8d",
+                "reference": "50ca355fa7cff5a851bbc0fa6addaa0010493c8d",
                 "shasum": ""
             },
             "require": {
@@ -2604,7 +2616,7 @@
                 "issues": "https://github.com/laravel/jetstream/issues",
                 "source": "https://github.com/laravel/jetstream"
             },
-            "time": "2022-05-10T14:20:57+00:00"
+            "time": "2022-05-13T14:06:46+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -3004,16 +3016,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "32a49eb2b38fe5e5c417ab748a45d0beaab97955"
+                "reference": "cb36fee279f7fca01d5d9399ddd1b37e48e2eca1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/32a49eb2b38fe5e5c417ab748a45d0beaab97955",
-                "reference": "32a49eb2b38fe5e5c417ab748a45d0beaab97955",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/cb36fee279f7fca01d5d9399ddd1b37e48e2eca1",
+                "reference": "cb36fee279f7fca01d5d9399ddd1b37e48e2eca1",
                 "shasum": ""
             },
             "require": {
@@ -3106,7 +3118,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-07T22:37:05+00:00"
+            "time": "2022-05-14T15:37:39+00:00"
         },
         {
             "name": "league/config",
@@ -4617,16 +4629,16 @@
         },
         {
             "name": "omnia-digital/library",
-            "version": "dev-add_classes_attribute_to_dropdown_panel",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "git@github.com:omnia-digital/library.git",
-                "reference": "dc9b883841f51d3d6eeb89bd4a9ef6c6938a9597"
+                "reference": "999a28b5ca50908f007e52540a671d52433da17b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/dc9b883841f51d3d6eeb89bd4a9ef6c6938a9597",
-                "reference": "dc9b883841f51d3d6eeb89bd4a9ef6c6938a9597",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/999a28b5ca50908f007e52540a671d52433da17b",
+                "reference": "999a28b5ca50908f007e52540a671d52433da17b",
                 "shasum": ""
             },
             "require": {
@@ -4643,6 +4655,7 @@
                 "phpunit/phpunit": "^9.5",
                 "spatie/laravel-ray": "^1.26"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -4699,7 +4712,7 @@
                 "omnia-digital"
             ],
             "support": {
-                "source": "https://github.com/omnia-digital/library/tree/add_classes_attribute_to_dropdown_panel",
+                "source": "https://github.com/omnia-digital/library/tree/main",
                 "issues": "https://github.com/omnia-digital/library/issues"
             },
             "funding": [
@@ -4708,7 +4721,7 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2022-05-05T03:24:55+00:00"
+            "time": "2022-05-14T18:40:47+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -9347,71 +9360,6 @@
                 "source": "https://github.com/squirephp/squire"
             },
             "time": "2022-02-08T08:51:11+00:00"
-        },
-        {
-            "name": "stevebauman/purify",
-            "version": "v4.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stevebauman/purify.git",
-                "reference": "e56289062ed8a25c78c88f35e9106f00d01369c1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stevebauman/purify/zipball/e56289062ed8a25c78c88f35e9106f00d01369c1",
-                "reference": "e56289062ed8a25c78c88f35e9106f00d01369c1",
-                "shasum": ""
-            },
-            "require": {
-                "ezyang/htmlpurifier": "^4.9.0",
-                "illuminate/support": "~5.5|~6.0|~7.0|~8.0|~9.0",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.7|~4.0|~5.0|~6.0|~7.0",
-                "phpunit/phpunit": "~7.0|~8.0|~9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Stevebauman\\Purify\\PurifyServiceProvider"
-                    ],
-                    "aliases": {
-                        "Purify": "Stevebauman\\Purify\\Facades\\Purify"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Stevebauman\\Purify\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Steve Bauman",
-                    "email": "steven_bauman@outlook.com"
-                }
-            ],
-            "description": "An HTML Purifier / Sanitizer for Laravel",
-            "keywords": [
-                "Purifier",
-                "clean",
-                "cleaner",
-                "html",
-                "laravel",
-                "purification",
-                "purify"
-            ],
-            "support": {
-                "issues": "https://github.com/stevebauman/purify/issues",
-                "source": "https://github.com/stevebauman/purify/tree/v4.0.1"
-            },
-            "time": "2022-01-21T21:41:41+00:00"
         },
         {
             "name": "symfony/console",
