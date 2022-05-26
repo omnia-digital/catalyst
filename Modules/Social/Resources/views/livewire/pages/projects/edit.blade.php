@@ -45,9 +45,9 @@
             <nav class="flex items-center justify-between text-xs">
                 <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-10">
                     <template x-for="(tab, index) in tabs" :key="tab.id">
-                        <li>
+                        <li class="pb-px">
                             <a href="#" 
-                                class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-3 hover:border-dark-text-color focus:border-dark-text-color"
+                                class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:border-dark-text-color focus:border-dark-text-color"
                                 :class="(activeTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
                                 x-on:click.prevent="activeTab = tab.id;"
                                 x-text="tab.title"
@@ -59,7 +59,7 @@
             </nav>
         </div>
         
-    
+        <!-- Edit Basic Team Info -->
         <div x-show="activeTab === 0" class="mt-6 space-y-6">
             <div>
                 <x-library::input.label value="Name" class="inline"/><span class="text-red-600 text-sm">*</span>
@@ -88,6 +88,8 @@
             </div>
             @livewire('teams.delete-team-form', ['team' => $team])
         </div>
+
+        <!-- Edit Team Location -->                
         <div x-show="activeTab === 1" class="mt-6 space-y-6">
             <div>
                 <h3 class="text-lg">Current Project Location</h3>
@@ -133,50 +135,6 @@
                     <p class="text-xxs text-red-600">Please save changes to use this address</p>
                 </div>
             @endif
-        </div>
-        <div x-show="activeTab === 2" class="mt-6 space-y-6">
-            @livewire('teams.team-member-manager', ['team' => $team])
-        </div>
-        <div x-show="activeTab === 3" class="mt-6 space-y-6">
-            <x-jet-section-border />
-
-            <!-- Team Member Applications -->
-            <div class="mt-10 sm:mt-0">
-                <x-jet-action-section>
-                    <x-slot name="title">
-                        {{ __('Pending Team Applications') }}
-                    </x-slot>
-
-                    <x-slot name="description">
-                        {{ __('These people have applied to your team. They may join the team after you accept their application.') }}
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <div class="space-y-6">
-                            @forelse ($team->teamApplications as $application)
-                                <div class="flex items-center justify-between">
-                                    <div class="text-base-text-color">{{ $application->user->name }} ({{ $application->user->email }})</div>
-
-                                    <div class="flex items-center">
-                                        <x-library::button.index wire:click.prevent="addTeamMember({{ $application->user->email }})">Accept</x-library::button.index>
-                                        @if (Gate::check('removeTeamMember', $team))
-                                            <!-- Deny Team Application -->
-                                            <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
-                                                wire:click="denyTeamApplication({{ $application->id }})">
-                                                {{ __('Deny') }}
-                                            </button>
-                                        @endif
-                                    </div>
-                                </div>
-                            @empty
-                                <div>
-                                    <p>No current applications</p>
-                                </div>
-                            @endforelse
-                        </div>
-                    </x-slot>
-                </x-jet-action-section>
-            </div>
         </div>
     </div>
 </div>

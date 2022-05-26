@@ -3,6 +3,7 @@
 namespace Modules\Social\Http\Livewire\Pages\Projects;
 
 use App\Actions\Teams\ApplyToTeam;
+use App\Actions\Teams\RemoveTeamApplication;
 use App\Models\Team;
 use App\Models\TeamApplication;
 use Illuminate\Support\Facades\Auth;
@@ -55,11 +56,8 @@ class Show extends Component
      */
     public function removeApplication()
     {
-        $application = $this->project->teamApplications()->where('user_id', Auth::id())->first();
-
-        if (! is_null($application)) {
-            $application->delete();
-        }
+        app(RemoveTeamApplication::class)
+            ->remove($this->project, Auth()->id());
 
         $this->emit('application_removed');
 

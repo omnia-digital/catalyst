@@ -3,8 +3,8 @@
 
 @section('content')
 <div class="-mx-4">
-    <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
-    <x-teams.overview-navigation :team="$project" />
+    <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat relative overlay before:bg-black"></div>
+    <x-teams.overview-navigation class="bg-gray-300" :team="$project" />
 </div>
 <div class="flex space-x-6 mt-4 -mx-4">
     <div>

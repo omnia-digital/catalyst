@@ -74,45 +74,6 @@ class Edit extends Component
         $this->reset('newAddress', 'removeAddress');
     }
 
-    /**
-     * Add a new team member to a team.
-     *
-     * @param  string  $email
-     * @return void
-     */
-    public function addTeamMember($email)
-    {
-        $this->resetErrorBag();
-
-        app(AddsTeamMembers::class)->add(
-            $this->user,
-            $this->team,
-            $email,
-            'editor'
-        );
-
-        $this->team = $this->team->fresh();
-
-        $this->emit('saved');
-    }
-
-    /**
-     * Deny a pending team member's application.
-     *
-     * @param  int  $applicationId
-     * @return void
-     */
-    public function denyTeamApplication($applicationId)
-    {
-        if (! empty($applicationId)) {
-            $model = TeamApplication::class;
-
-            $model::whereKey($applicationId)->delete();
-        }
-
-        $this->team = $this->team->fresh();
-    }
-
     public function getSelectedAddressProperty()
     {
         $address = '';

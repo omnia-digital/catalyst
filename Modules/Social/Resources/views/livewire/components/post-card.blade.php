@@ -1,6 +1,6 @@
 <article wire:click.prevent.stop="showPost" class="flex justify-start bg-primary pl-3 pr-5 pt-4 shadow-sm rounded-lg border border-2 border-transparent hover:border-secondary cursor-pointer z-10">
     <div class="mr-3 flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->profile->name }}"/>
+        <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}"/>
     </div>
     <div class="flex-1">
         <div class="flex space-x-3">
@@ -67,7 +67,7 @@
             @if ($post->isRepost())
                 <article class="mt-4 w-full flex bg-white p-4 shadow-sm border border-gray-200 rounded-md">
                     <div class="mr-3 flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full" src="{{ $post->repostOriginal->user?->profile_photo_url }}" alt="{{ $post->repostOriginal->user->profile->name }}"/>
+                        <img class="h-10 w-10 rounded-full" src="{{ $post->repostOriginal->user?->profile_photo_url }}" alt="{{ $post->repostOriginal->user->name }}"/>
                     </div>
                     <div class="flex-1">
                         <div class="flex space-x-3">

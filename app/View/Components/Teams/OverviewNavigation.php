@@ -9,10 +9,10 @@ class OverviewNavigation extends Component
 {
 
     public $team;
-    public $pageView = 'overview';
+    public $pageView;
     
     public $nav = [
-        'overview' => 'Overview',
+        'show' => 'Overview',
         'members' => 'Members',
         'followers' => 'Followers'
     ];
@@ -22,9 +22,10 @@ class OverviewNavigation extends Component
      *
      * @return void
      */
-    public function __construct(Team $team)
+    public function __construct(Team $team, $pageView = 'show')
     {
         $this->team = $team;
+        $this->pageView = $pageView;
     }
 
     /**

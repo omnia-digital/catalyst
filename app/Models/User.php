@@ -17,7 +17,7 @@
     use Modules\Social\Traits\HasBookmarks;
     use Wimil\Followers\Traits\Followable;
 
-    class User extends Authenticatable implements MustVerifyEmail
+    class User extends Authenticatable
     {
         use HasApiTokens,
             HasProfilePhoto,
@@ -42,6 +42,8 @@
          * @var array
          */
         protected $fillable = [
+            'first_name',
+            'last_name',
             'email',
             'password',
         ];
