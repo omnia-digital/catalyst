@@ -28,7 +28,6 @@ class Edit extends Component
             'team.name' => ['required', 'max:254'],
             'team.start_date' => ['required', 'date'],
             'team.summary' => ['required', 'max:280'],
-            'team.target_audience' => ['required', 'max:254'],
             'team.content' => ['required', 'max:65500'],
         ];
     }

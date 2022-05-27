@@ -43,7 +43,6 @@ class Team extends JetstreamTeam
         'start_date',
         'personal_team',
         'summary',
-        'target_audience',
         'content',
     ];
 

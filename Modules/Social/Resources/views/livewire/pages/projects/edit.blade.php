@@ -77,11 +77,6 @@
                 <x-library::input.error for="summary"/>
             </div>
             <div>
-                <x-library::input.label value="Who is this Project relevant to?"/>
-                <x-library::input.text id="targetAudience" wire:model.defer="team.target_audience"/>
-                <x-library::input.error for="targetAudience"/>
-            </div>
-            <div>
                 <x-library::input.label value="About this Project"/>
                 <x-library::input.textarea id="content" wire:model.defer="team.content" :rows="8"/>
                 <x-library::input.error for="content"/>
@@ -154,16 +149,6 @@
                         id: 1,
                         title: 'Locations',
                         /* component: 'social::pages.projects.partials.edit-project-locations' */
-                    },
-                    {
-                        id: 2,
-                        title: 'Invitations',
-                        /* component: 'teams.team-member-manager' */
-                    },
-                    {
-                        id: 3,
-                        title: 'Applications',
-                        /* component: */
                     }
                 ]
             }

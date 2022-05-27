@@ -125,7 +125,7 @@
                     <div>
                         <p class="text-black font-semibold">Is this project relevant to you?</p>
                         <div class="mt-4 bg-white p-4">
-                            <p class="text-dark-text-color">{{ $project->target_audience ?? 'This project is open for anyone to join.' }}</p>
+                            <p class="text-dark-text-color">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione consequuntur hic aperiam adipisci cupiditate repellat quibusdam molestias praesentium sunt velit! Totam illum vero deleniti, sint est illo atque sequi quo.</p>
                         </div>
                     </div>
                 </div>
