@@ -7,53 +7,18 @@
     <livewire:social::components.project-navigation :project="$project" />
 </div>
 <div class="flex space-x-6 mt-4 -mx-4">
-    <div>
-        <div class="lg:grid lg:grid-cols-3 lg:gap-4">
-            <div class="col-span-2 space-y-6">
-                <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
-                <div>
-                    <div>
-                        <p class="text-black font-semibold">About this Project</p>
-                        <div class="mt-4 bg-white p-4">
-                            <p class="text-dark-text-color">{{ $project->content }}</p>
-                        </div>
-                    </div>
+    <div class="space-y-4">
+        <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
+            <div class="col-span-2 row-span-1 flex flex-col">
+                <div class="flex-1 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
+                <div class="flex w-full mt-2 space-x-1">
+                    @foreach ([1, 2, 3, 4] as $num)
+                        <img src="https://source.unsplash.com/random" alt="project-display-img-{{ $num }}" class="w-1/4 h-24">
+                        
+                    @endforeach
                 </div>
-                <!-- Post Tile -->
-                @if ($this->recentPosts->count())
-                    <div>
-                        <div class="flex justify-between items-center text-black font-semibold">
-                            <p class="text-sm">Posts</p>
-                            <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            @foreach ($this->recentPosts as $post)
-                                <div class="bg-primary border border-neutral-light rounded">
-                                    <div class="h-36 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat">
-                                    </div>
-                                    <div class="space-y-2 p-4">
-                                        <p class="text-dark-text-color font-semibold text-xs">{{ $post->title }}</p>
-                                        <div class="flex items-center text-base-text-color">
-                                            <x-heroicon-o-calendar class="h-5 w-5 mr-2" />
-                                            <span class="text-neutral-900 text-xs">{{ $post->published_at->toFormattedDateString() }}</span>
-                                        </div>
-                                        <p class="text-light-text-color text-xs line-clamp-2">{{ $post->body }}</p>
-                                        <div class="text-base-text-color text-xs flex items-center -space-x-1 pt-6">
-                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1">
-                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=2">
-                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=3">
-                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=4">
-                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=5">
-                                            <div class="h-6 w-6 rounded-full bg-neutral-light flex justify-center items-center text-xxs p-2">+5</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
             </div>
-            <div class="col-span-1">
+            <div class="col-span-1 row-span-1">
                 <div class="bg-white rounded">
                     <div class="h-44 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
                     <div class="p-2 space-y-4">
@@ -106,11 +71,57 @@
                 @if ($project->tags)
                     <div class="flex justify-start space-x-2 mt-2">
                         @foreach($project->tags as $tag)
-                            <x-library::tag class=" bg-gray-500 text-xxs text-white uppercase">{{ $tag->name }}</x-library::tag>
+                            <x-library::tag class=" bg-gray-700 text-xxs text-white uppercase">{{ $tag->name }}</x-library::tag>
                         @endforeach
                     </div>
                 @endif
-                <div class="mt-6">
+            </div>
+        </div>
+        <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
+            <div class="col-span-2 row-span-1 space-y-6 flex flex-col">
+                <div class="flex-1 flex flex-col">
+                    <p class="text-black font-semibold">About this Project</p>
+                    <div class="flex-1 mt-4 bg-white p-4">
+                        <p class="text-dark-text-color">{{ $project->content }}</p>
+                    </div>
+                </div>
+                <!-- Post Tile -->
+                @if (/* $this->recentPosts->count() */1)
+                    <div>
+                        <div class="flex justify-between items-center text-black font-semibold">
+                            <p class="text-sm">Posts</p>
+                            <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
+                        </div>
+                        <div class="space-y-2">
+                            @foreach (\Modules\Social\Models\Post::take(2)->get() as $post)
+                                <div class="bg-primary border border-neutral-light rounded p-4 flex space-x-4">
+                                    <div class="w-1/3 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat rounded-md">
+                                    </div>
+                                    <div class="w-2/3 space-y-2">
+                                        <p class="text-dark-text-color font-semibold text-xs">{{ $post->title }}</p>
+                                        <div class="flex items-center text-base-text-color">
+                                            <x-heroicon-o-calendar class="h-5 w-5 mr-2" />
+                                            <span class="text-neutral-900 text-xs">{{ $post->created_at->toFormattedDateString() }}</span>
+                                        </div>
+                                        <p class="text-light-text-color text-xs line-clamp-2">{{ $post->body }}</p>
+                                        <div class="text-base-text-color text-xs flex items-center -space-x-1 pt-6">
+                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1">
+                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=2">
+                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=3">
+                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=4">
+                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=5">
+                                            <div class="h-6 w-6 rounded-full bg-neutral-light flex justify-center items-center text-xxs p-2">+5</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
+            <div class="col-span-1 row-span-1 space-y-6">
+                <!-- Project Relevence -->
+                <div>
                     <div>
                         <p class="text-black font-semibold">Is this project relevant to you?</p>
                         <div class="mt-4 bg-white p-4">
@@ -118,13 +129,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-6">
+                <!-- Project Location -->
+                <div>
                     <div>
                         <p class="text-black font-semibold">Location</p>
                         <livewire:social::map />
                     </div>
                 </div>
-                <div class="mt-6">
+                <!-- Project Languages -->
+                <div>
                     <div>
                         <p class="text-black font-semibold">Languages</p>
                         <div class="mt-4 bg-white p-4">
@@ -132,7 +145,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-6">
+                <!-- Project Awards -->
+                <div>
                     <div>
                         <div class="flex justify-between items-center text-black font-semibold">
                             <p class="text-sm">Awards</p>
