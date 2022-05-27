@@ -13,6 +13,11 @@ class ProjectCard extends Component
     {
         $this->project = $project;
     }
+
+    public function showProject()
+    {
+        return redirect($this->project->profile());
+    }
     
     public function render()
     {
