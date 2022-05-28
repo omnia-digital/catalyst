@@ -17,7 +17,7 @@
                     <template x-for="(tab, index) in tabs" :key="tab.id">
                         <li class="pb-px">
                             <a href="#" 
-                                class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:border-dark-text-color focus:border-dark-text-color"
+                                class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-3 hover:border-dark-text-color focus:border-dark-text-color"
                                 :class="(activeTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
                                 x-on:click.prevent="activeTab = tab.id;"
                                 x-text="tab.title"
