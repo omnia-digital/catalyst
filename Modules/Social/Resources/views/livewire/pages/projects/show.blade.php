@@ -18,57 +18,57 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-span-1 row-span-1">
-                <div class="bg-white rounded">
+            <div class="col-span-1 row-span-1 flex flex-col">
+                <div class="flex-1 bg-white rounded">
                     <div class="h-44 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
                     <div class="p-2 space-y-4">
                         <p class="text-sm">{{ $project->summary }}</p>
-                        <ul>
-                            <li class="grid grid-cols-3 gap-1">
-                                <span class="col-span-1 text-gray-400 text-xs uppercase">Launch Date</span>
-                                <div class="col-span-2 flex items-center space-x-2">
-                                    <x-heroicon-o-calendar class="w-4 h-4" />
-                                    <span>{{ \Carbon\Carbon::parse($project->start_date)->toFormattedDateString() }}</span>
-                                </div>
-                            </li>
-                            <li class="grid grid-cols-3 gap-1">
-                                <span class="col-span-1 text-gray-400 text-xs uppercase">Location:</span>
-                                <div class="col-span-2 flex items-center space-x-2">
-                                    <x-heroicon-o-location-marker class="w-4 h-4" />
-                                    <span>{{ $project->location ?? "Not Set"}}</span>
-                                </div>
-                            </li>
-                            <li class="grid grid-cols-3 gap-1">
-                                <span class="col-span-1 text-gray-400 text-xs uppercase ">Organizer:</span>
-                                <div class="col-span-2 flex items-center space-x-2">
-                                    <x-heroicon-s-user-circle class="w-4 h-4" />
-                                    <span>{{ $this->owner->name }}</span>
-                                </div>
-                            </li>
-                            <li class="grid grid-cols-3 gap-1">
-                                <span class="col-span-1 text-gray-400 text-xs uppercase">Reviews:</span>
-                                <div class="col-span-2 flex items-center space-x-2 text-xxs">
-                                    <div class="bg-black flex items-center rounded-md mr-1 p-1">
-                                        <div class="flex items-center text-white">
-                                            <x-heroicon-s-star class="w-4 h-4" />
-                                            {{ $project->reviewScore ?? '3758' }}
-                                        </div>
+                        <div class="text-xs grid grid-cols-4 grid-rows-4 gap-1 items-center">
+                            <span class="col-span-1 text-gray-400 text-xxs uppercase">Launch Date</span>
+                            <div class="col-span-3 flex items-center space-x-2">
+                                <x-heroicon-o-calendar class="w-4 h-4" />
+                                <span>{{ \Carbon\Carbon::parse($project->start_date)->toFormattedDateString() }}</span>
+                            </div>
+                            <span class="col-span-1 text-gray-400 text-xxs uppercase">Location:</span>
+                            <div class="col-span-3 flex items-center space-x-2">
+                                <x-heroicon-o-location-marker class="w-4 h-4" />
+                                <span>{{ $project->location ?? "Not Set"}}</span>
+                            </div>
+                            <span class="col-span-1 text-gray-400 text-xxs uppercase ">Organizer:</span>
+                            <div class="col-span-3 flex items-center space-x-2">
+                                <x-heroicon-s-user-circle class="w-4 h-4" />
+                                <span>{{ $this->owner->name }}</span>
+                            </div>
+                            <span class="col-span-1 text-gray-400 text-xxs uppercase">Reviews:</span>
+                            <div class="col-span-3 flex items-center space-x-2">
+                                <div class="bg-black flex items-center rounded-md mr-1 p-1">
+                                    <div class="flex items-center text-white text-xs font-semibold">
+                                        <x-heroicon-s-star class="w-4 h-4" />
+                                        {{ $project->reviewScore ?? '3758' }}
                                     </div>
-                                    <span class="text-gray-400">{{ $project->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $project->reviews()->count */'296,418' }})</span>
                                 </div>
-                            </li>
-                        </ul>
+                                <span class="text-gray-400 text-xxs">{{ $project->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $project->reviews()->count */'296,418' }})</span>
+                            </div>
+                        </div>
                         <div class="flex justify-between items-center">
                             @foreach ($additionalInfo as $item)
                                 <div>
-                                    <p class="text-light-text-color text-xs">{{ $item }}</p>
-                                    <p class="text-dark-text-color font-semibold text-2xl">{{ $project->$item()->count() }}</p>
+                                    <p class="text-light-text-color text-xxs">{{ $item }}</p>
+                                    <p class="text-dark-text-color font-semibold text-lg">{{ $project->$item()->count() }}</p>
                                 </div>
                             @endforeach
+                            <div>
+                                <p class="text-light-text-color text-xxs">views</p>
+                                <p class="text-dark-text-color font-semibold text-lg">843</p>
+                            </div>
+                            <div>
+                                <p class="text-light-text-color text-xxs">volunteers</p>
+                                <p class="text-dark-text-color font-semibold text-lg">485</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                @if ($project->tags)
+                @if ($project->tags()->count() > 0)
                     <div class="flex justify-start space-x-2 mt-2">
                         @foreach($project->tags as $tag)
                             <x-library::tag class=" bg-gray-700 text-xxs text-white uppercase">{{ $tag->name }}</x-library::tag>
