@@ -82,7 +82,7 @@ class Team extends JetstreamTeam
     }
 
     public function projectLink() {
-        return route('teams.show', $this->id);
+        return route('social.projects.show', $this->id);
     }
 
     public function teamLocation(): HasOne
