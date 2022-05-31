@@ -33,7 +33,7 @@
         <div x-show="activeTab === 0" class="mt-6 space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
                 @foreach ($team->members() as $member)
-                    <livewire:social::user-tile :user="$member"  />
+                    <livewire:social::user-tile :user="$member" :key="'member-' . $member->id" />
                 @endforeach
             </div>
         </div>
@@ -65,7 +65,10 @@
                                     <div class="text-base-text-color">{{ $application->user->name }} ({{ $application->user->email }})</div>
 
                                     <div class="flex items-center">
-                                        <x-library::button.index wire:click.prevent="addTeamMember({{ $application->user->email }})">Accept</x-library::button.index>
+                                        <button type="button" 
+                                            class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-black text-sm tracking-wide font-medium border border-black hover:bg-neutral-light" 
+                                            wire:click.prevent="addTeamMember({{ $application->user->id }})"
+                                        >Accept</button>
                                         @if (Gate::check('removeTeamMember', $team))
                                             <!-- Deny Team Application -->
                                             <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"

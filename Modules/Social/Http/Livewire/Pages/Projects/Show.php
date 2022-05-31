@@ -63,6 +63,10 @@ class Show extends Component
 
         $this->project = $this->project->fresh();
     }
+
+    public function showPost($post) {
+        return $this->redirectRoute('social.posts.show', $post['id']);
+    }
     
     public function mount(Team $team)
     {
