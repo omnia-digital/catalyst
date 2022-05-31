@@ -15,13 +15,14 @@ use Modules\Social\Models\Post;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\Tags\HasTags;
+use Wimil\Followers\Traits\CanBeFollowed;
 
 /**
  * Projects are just Teams
  */
 class Team extends JetstreamTeam
 {
-    use HasFactory, Likable, Postable, HasTags;
+    use HasFactory, Likable, Postable, HasTags, CanBeFollowed;
 
     /**
      * The attributes that should be cast.
@@ -42,6 +43,7 @@ class Team extends JetstreamTeam
         'start_date',
         'personal_team',
         'summary',
+        'target_audience',
         'content',
     ];
 
@@ -71,7 +73,7 @@ class Team extends JetstreamTeam
     }
 
     public function projectLink() {
-        return route('projects.show', $this->id);
+        return route('teams.show', $this->id);
     }
 
     public function teamLocation(): HasOne
@@ -79,10 +81,19 @@ class Team extends JetstreamTeam
         return $this->hasOne(TeamLocation::class);
     }
 
+    public function getLocationShortAttribute()
+    {
+        if($this->teamLocation) {
+            return $this->teamLocation->name;
+        }
+
+        return null;
+    }
+
     public function getLocationAttribute()
     {
         if($this->teamLocation) {
-            return $this->teamLocation->city . " " . $this->teamLocation->state . " " . $this->teamLocation->country;
+            return $this->teamLocation->full;
         }
 
         return null;
@@ -96,14 +107,6 @@ class Team extends JetstreamTeam
     public function getReviewStatusAttribute()
     {
         return null;
-    }
-
-    public function targetAudience(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => empty($value) ? 'This project is open for anyone to join.' : $value,
-
-        );
     }
 
     public function members()

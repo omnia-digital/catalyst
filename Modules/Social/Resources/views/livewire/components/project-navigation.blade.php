@@ -27,8 +27,8 @@
             </div>
         </div>
         <div class="flex">
-            <a href="#" class="py-4 mx-4 whitespace-nowrap">Edit Project</a>
-            <livewire:social::partials.follow-button :model="$project->owner" class="py-4 mx-4"/>
+            <a href="{{ route('social.projects.edit', $project->id) }}" class="py-4 mx-4 whitespace-nowrap">Edit Project</a>
+            <livewire:social::partials.follow-button :model="$project" class="py-4 mx-4"/>
             <div class="inline-flex items-center text-md">
                 <button class="p-2 mx-2 inline-flex items-center text-sm rounded-full bg-primary">Apply</button>
             </div>
