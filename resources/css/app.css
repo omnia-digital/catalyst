@@ -70,3 +70,8 @@ h5 {
 .hover-trigger:hover  .hover-slide-up{
     @apply h-13;
 }
+
+.stretched-link::after {
+    content: "";
+    @apply z-10 absolute inset-0 bg-transparent pointer-events-auto;
+}

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -11,13 +12,16 @@ use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Social\Models\Post;
+use Modules\Social\Traits\Likable;
+use Modules\Social\Traits\Postable;
+use Spatie\Tags\HasTags;
 
 /**
  * Projects are just Teams
  */
 class Team extends JetstreamTeam
 {
-    use HasFactory;
+    use HasFactory, Likable, Postable, HasTags;
 
     /**
      * The attributes that should be cast.
@@ -82,6 +86,34 @@ class Team extends JetstreamTeam
         }
 
         return null;
+    }
+
+    public function getReviewScoreAttribute()
+    {
+        return null;
+    }
+
+    public function getReviewStatusAttribute()
+    {
+        return null;
+    }
+
+    public function targetAudience(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => empty($value) ? 'This project is open for anyone to join.' : $value,
+
+        );
+    }
+
+    public function members()
+    {
+        return $this->allUsers();
+    }
+
+    public function profile()
+    {
+        return route('social.projects.show', $this->id);
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder
