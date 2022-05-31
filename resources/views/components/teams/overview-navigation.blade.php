@@ -62,7 +62,7 @@
             @if ($team->teamApplications()->hasUser(auth()->id()))
                 <button 
                     class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-primary whitespace-nowrap"
-                    wire:click="removeApplication()"
+                    wire:click="removeApplication"
                 >Remove Application</button>
             @elseif(!$team->hasUser(auth()->user()))
                 <div class="absolute -top-9 right-0 w-96">

@@ -4,13 +4,20 @@ namespace Modules\Social\Http\Livewire\Pages\Projects;
 
 use App\Models\Team;
 use App\Actions\Teams\ApplyToTeam;
+use App\Actions\Teams\RemoveTeamApplication;
 use App\Models\TeamApplication;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Livewire\Component;
 
 class Members extends Component
 {
     public $team;
+
+    protected $listeners = [
+        'member_added' => '$refresh',
+    ];
 
     public function mount(Team $team)
     {
@@ -25,7 +32,7 @@ class Members extends Component
     public function applyToTeam()
     {
         app(ApplyToTeam::class)->apply(
-            $this->project,
+            $this->team,
             Auth::id(),
             'editor'
         );
@@ -41,33 +48,36 @@ class Members extends Component
     public function removeApplication()
     {
         app(RemoveTeamApplication::class)
-            ->remove($this->project, Auth()->id());
+            ->remove($this->team, Auth()->id());
 
         $this->emit('application_removed');
 
-        $this->project = $this->project->fresh();
+        $this->team = $this->team->fresh();
     }
 
     /**
      * Add a new team member to a team.
      *
-     * @param  string  $email
+     * @param  string  $userID
      * @return void
      */
-    public function addTeamMember($email)
+    public function addTeamMember($userID)
     {
         $this->resetErrorBag();
 
+        $user = User::find($userID);
+
         app(AddsTeamMembers::class)->add(
-            $this->user,
+            Auth::user(),
             $this->team,
-            $email,
+            $user->email,
             'editor'
         );
 
+        $this->team->teamApplications()->where('user_id', $userID)->delete();
         $this->team = $this->team->fresh();
 
-        $this->emit('saved');
+        $this->emit('member_added');
     }
 
     /**

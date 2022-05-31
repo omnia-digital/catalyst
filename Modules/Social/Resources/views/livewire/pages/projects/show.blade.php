@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="-mx-4">
-    <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat relative overlay before:bg-black"></div>
+    <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat relative overlay before:bg-black before:inset-0 before:opacity-60"></div>
     <x-teams.overview-navigation class="bg-gray-300" :team="$project" />
 </div>
 <div class="flex space-x-6 mt-4 -mx-4">
@@ -21,7 +21,7 @@
             <div class="col-span-1 row-span-1 flex flex-col">
                 <div class="flex-1 bg-white rounded">
                     <div class="h-44 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
-                    <div class="p-2 space-y-4">
+                    <div class="p-[15px] space-y-4">
                         <p class="text-sm">{{ $project->summary }}</p>
                         <div class="text-xs grid grid-cols-4 grid-rows-4 gap-1 items-center">
                             <span class="col-span-1 text-gray-400 text-xxs uppercase">Launch Date</span>
@@ -32,7 +32,7 @@
                             <span class="col-span-1 text-gray-400 text-xxs uppercase">Location:</span>
                             <div class="col-span-3 flex items-center space-x-2">
                                 <x-heroicon-o-location-marker class="w-4 h-4" />
-                                <span>{{ $project->location ?? "Not Set"}}</span>
+                                <span>{{ $project->location_short ?? "Not Set"}}</span>
                             </div>
                             <span class="col-span-1 text-gray-400 text-xxs uppercase ">Organizer:</span>
                             <div class="col-span-3 flex items-center space-x-2">
@@ -94,7 +94,7 @@
                         </div>
                         <div class="space-y-2">
                             @foreach (\Modules\Social\Models\Post::take(2)->get() as $post)
-                                <div class="bg-primary border border-neutral-light rounded p-4 flex space-x-4">
+                                <div wire:click.prevent.stop="showPost({{ $post }})" class="bg-primary border border-neutral-light rounded p-4 flex space-x-4 hover:cursor-pointer hover:ring-1 hover:ring-black">
                                     <div class="w-1/3 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat rounded-md">
                                     </div>
                                     <div class="w-2/3 space-y-2">
