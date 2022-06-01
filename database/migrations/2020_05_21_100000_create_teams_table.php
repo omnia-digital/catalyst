@@ -21,6 +21,8 @@ class CreateTeamsTable extends Migration
             $table->text('summary')->nullable();
             $table->text('content')->nullable();
             $table->boolean('personal_team');
+            $table->string('location')->nullable();
+            $table->integer('rating')->nullable();
             $table->timestamps();
         });
     }
