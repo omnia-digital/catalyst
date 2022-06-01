@@ -2,7 +2,11 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Projects;
 
+use App\Actions\Teams\ApplyToTeam;
 use App\Models\Team;
+use App\Models\TeamApplication;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 
@@ -24,7 +28,6 @@ class Edit extends Component
             'team.name' => ['required', 'max:254'],
             'team.start_date' => ['required', 'date'],
             'team.summary' => ['required', 'max:280'],
-            'team.target_audience' => ['required', 'max:254'],
             'team.content' => ['required', 'max:65500'],
         ];
     }
@@ -82,6 +85,16 @@ class Edit extends Component
         $address .= ", " . $this->newAddress['city'] . ', ' . $this->newAddress['state'] . ', ' . $this->newAddress['postal_code'] . " " . $this->newAddress['country'];
 
         return $address;
+    }
+
+    /**
+     * Get the current user of the application.
+     *
+     * @return mixed
+     */
+    public function getUserProperty()
+    {
+        return Auth::user();
     }
 
     public function render()

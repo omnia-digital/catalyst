@@ -43,7 +43,6 @@ class Team extends JetstreamTeam
         'start_date',
         'personal_team',
         'summary',
-        'target_audience',
         'content',
     ];
 
@@ -67,13 +66,23 @@ class Team extends JetstreamTeam
         return $value;
     }
 
+    /**
+     * Get all of the pending user applications for the team.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function teamApplications(): HasMany
+    {
+        return $this->hasMany(TeamApplication::class);
+    }
+
     public function resources(): HasMany
     {
         return $this->hasMany(Resource::class);
     }
 
     public function projectLink() {
-        return route('teams.show', $this->id);
+        return route('social.projects.show', $this->id);
     }
 
     public function teamLocation(): HasOne

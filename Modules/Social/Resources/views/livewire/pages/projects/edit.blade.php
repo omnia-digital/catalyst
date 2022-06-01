@@ -45,9 +45,9 @@
             <nav class="flex items-center justify-between text-xs">
                 <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-10">
                     <template x-for="(tab, index) in tabs" :key="tab.id">
-                        <li>
+                        <li class="pb-px">
                             <a href="#" 
-                                class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-3 hover:border-dark-text-color focus:border-dark-text-color"
+                                class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:border-dark-text-color focus:border-dark-text-color"
                                 :class="(activeTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
                                 x-on:click.prevent="activeTab = tab.id;"
                                 x-text="tab.title"
@@ -59,7 +59,7 @@
             </nav>
         </div>
         
-    
+        <!-- Edit Basic Team Info -->
         <div x-show="activeTab === 0" class="mt-6 space-y-6">
             <div>
                 <x-library::input.label value="Name" class="inline"/><span class="text-red-600 text-sm">*</span>
@@ -77,16 +77,14 @@
                 <x-library::input.error for="summary"/>
             </div>
             <div>
-                <x-library::input.label value="Who is this Project relevant to?"/>
-                <x-library::input.text id="targetAudience" wire:model.defer="team.target_audience"/>
-                <x-library::input.error for="targetAudience"/>
-            </div>
-            <div>
                 <x-library::input.label value="About this Project"/>
                 <x-library::input.textarea id="content" wire:model.defer="team.content" :rows="8"/>
                 <x-library::input.error for="content"/>
             </div>
+            @livewire('teams.delete-team-form', ['team' => $team])
         </div>
+
+        <!-- Edit Team Location -->                
         <div x-show="activeTab === 1" class="mt-6 space-y-6">
             <div>
                 <h3 class="text-lg">Current Project Location</h3>
@@ -145,12 +143,12 @@
                     {
                         id: 0,
                         title: 'Basic Info',
-                        component: 'social::pages.projects.partials.edit-project-basic'
+                        /* component: 'social::pages.projects.partials.edit-project-basic' */
                     },
                     {
                         id: 1,
                         title: 'Locations',
-                        component: 'social::pages.projects.partials.edit-project-locations'
+                        /* component: 'social::pages.projects.partials.edit-project-locations' */
                     }
                 ]
             }
