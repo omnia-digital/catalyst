@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('type')->nullable();
             $table->string('image')->nullable();
             $table->nullableMorphs('postable');
+            $table->unsignedBigInteger('repost_original_id')->index()->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
