@@ -2,6 +2,7 @@
 
 namespace App\Actions\Jetstream;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -17,21 +18,25 @@ class InviteTeamMember implements InvitesTeamMembers
     /**
      * Invite a new team member to the given team.
      *
-     * @param  mixed  $user
+     * @param  mixed  $inviter
      * @param  mixed  $team
      * @param  string  $email
      * @param  string|null  $role
      * @return void
      */
-    public function invite($user, $team, string $email, string $role = null)
+    public function invite($inviter, $team, string $email, string $role = null)
     {
-        Gate::forUser($user)->authorize('addTeamMember', $team);
+        Gate::forUser($inviter)->authorize('addTeamMember', $team);
+
+        $user = User::findByEmail($email);
 
         $this->validate($team, $email, $role);
 
         InvitingTeamMember::dispatch($team, $email, $role);
 
         $invitation = $team->teamInvitations()->create([
+            'user_id' => optional($user)->id,
+            'inviter_id' => $inviter->id,
             'email' => $email,
             'role' => $role,
         ]);
