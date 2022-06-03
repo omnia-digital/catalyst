@@ -1,7 +1,7 @@
 <div class="card">
     <div class="flex-1 p-6 space-y-1 overflow-y-auto">
         <div class="flex justify-between items-center">
-            <h3 class="text-base-text-color text-base font-semibold">Projects</h3>
+            <h3 class="text-base-text-color text-base font-semibold" wire:click="testClick">Projects</h3>
             <div x-data="{show: false, message: ''}"
                 x-cloak 
                 x-show="show"
@@ -15,7 +15,25 @@
                 <p class="text-sm text-green-600" x-text="message"></p>
             </div>
         </div>
-        <div x-data="applicationsSetup">
+        <div 
+            x-data="{
+                activeTab: 0, 
+                tabs: [
+                    { 
+                        label: 'Invitations',
+                        count: {{ $invitations->count() }}
+                    }, 
+                    {
+                        label: 'Requests',
+                        count: {{ $applications->count() }}
+                    }
+                ]
+            }"
+            x-init="@this.on('project_action', (eventMessage) => {
+                tabs[0].count = $wire.invitationsCount();
+                tabs[1].count = $wire.applicationsCount();
+            })"
+        >
             <ul class="flex justify-center items-center my-4"> 
                 <template x-for="(tab, index) in tabs" :key="index">
                     <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-base-text-color border-b-2 justify-center"
@@ -27,30 +45,14 @@
                         </template>
                     </li>
                 </template>
-                {{-- <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-base-text-color border-b-2 justify-center"
-                    :class="activeTab===0 ? 'text-black font-bold border-black' : ''" @click="activeTab = 0"
-                >
-                    <span>Invitations</span>
-                    @if ($invitations->count() > 0)
-                        <span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">{{ $invitations->count() }}</span>
-                    @endif
-                </li>
-                <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-base-text-color border-b-2 justify-center"
-                    :class="activeTab===1 ? 'text-black font-bold border-black' : ''" @click="activeTab = 1"
-                >
-                    <span>Requests</span>
-                    @if ($applications->count() > 0)
-                        <span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">{{ $requests->count() }}</span>
-                    @endif
-                </li> --}}
             </ul>
 
             <div class="bg-primary mx-auto">
                 <div x-show="activeTab===0">
                     <div class="flex justify-between">
-                        <div class="flex flex-col divide-y">
+                        <div class="flex flex-col divide-y space-y-3">
                             @forelse ($invitations as $invitation)
-                                <div class="py-3 space-y-3">
+                                <div class="py-3">
                                     <div class="flex items-center">
                                         <div class="mr-3 w-10 h-10 rounded-full">
                                             <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $invitation->user?->profile_photo_url }}" alt="{{ $invitation->user->name }}" />
@@ -59,11 +61,13 @@
                                             <h3 class="mb-2 sm:mb-1 text-dark-text-color text-sm font-normal leading-5"><span class="font-bold">{{ $invitation->inviter->name }}</span> wants you to join <span class="font-bold">{{ $invitation->team->name }}</span></h3>
                                         </div>
                                     </div>
+                                    @if ($invitation->message)
+                                        <div>
+                                            <p class="test-dark-test-color text-sm line-clamp-3">{{ $invitation->message }}</p>
+                                        </div>
+                                    @endif
                                     <div>
-                                        <p class="test-dark-test-color text-sm line-clamp-3">{{ $invitation->message }}</p>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-center divide-x mt-5">
+                                        <div class="flex justify-center divide-x">
                                             <button type="button" 
                                                 wire:click="addTeamMember({{ $invitation->id }})"
                                                 class="flex items-center text-sm px-6 rounded-md font-semibold hover:underline">
@@ -80,7 +84,7 @@
                                     </div>
                                 </div>
                             @empty
-                                <div class="py-3">
+                                <div>
                                     <p>There are no pending invitations.</p>
                                 </div>
                             @endforelse
@@ -89,9 +93,9 @@
                 </div>
                 <div x-cloak x-show="activeTab===1">
                     <div class="flex justify-between">
-                        <div class="flex flex-col divide-y">
+                        <div class="flex flex-col divide-y space-y-3">
                             @forelse ($applications as $application)
-                                <div class="py-3 space-y-3">
+                                <div>
                                     <div class="flex items-center">
                                         <div class="mr-3 w-10 h-10 rounded-full">
                                             <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $application->team->owner?->profile_photo_url }}" alt="{{ $application->team->owner->name }}" />
@@ -101,9 +105,9 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="flex justify-end divide-x mt-5">
+                                        <div class="flex justify-end divide-x">
                                             <button type="button" 
-                                                wire:click=""
+                                                wire:click="removeApplication({{ $application->id }})"
                                                 class="flex items-center text-sm px-6 rounded-md text-red-500 font-semibold hover:underline">
                                                 Cancel
                                             </button>
@@ -111,7 +115,7 @@
                                     </div>
                                 </div>
                             @empty
-                                <div class="py-3">
+                                <div>
                                     <p>There are no pending applications.</p>
                                 </div>
                             @endforelse
@@ -122,22 +126,3 @@
         </div>
     </div>
 </div>
-@push('scripts')
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('applicationsSetup', () => ({
-            activeTab: 0, 
-            tabs: [
-                { 
-                    label: 'Invitations',
-                    count: @js($invitations->count())
-                }, 
-                {
-                    label: 'Requests',
-                    count: @js($applications->count())
-                }
-            ]
-        }))
-    })
-</script>
-@endpush

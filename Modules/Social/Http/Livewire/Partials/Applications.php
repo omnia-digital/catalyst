@@ -2,7 +2,9 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
+use App\Actions\Teams\RemoveTeamApplication;
 use App\Models\Team;
+use App\Models\TeamApplication;
 use App\Models\TeamInvitation;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -12,27 +14,13 @@ use Livewire\Component;
 class Applications extends Component
 {
     public $invitations;
-    public $invitationsCount = 0;
     public $applications;
-    public $applicationsCount = 0;
-
-    protected $listeners = [
-        'project_action' => 'projectAction'
-    ];
-
-    public function projectAction()
-    {
-        $this->invitationsCount = $this->invitations->count();
-        $this->applicationsCount = $this->applications->count();
-    }
 
     public function mount()
     {
         $this->invitations = $this->user->teamInvitations;
-        $this->invitationsCount = $this->invitations->count();
 
         $this->applications = $this->user->teamApplications;
-        $this->applicationsCount = $this->applications->count();
     }
 
     /**
@@ -56,9 +44,8 @@ class Applications extends Component
 
         $invitation->delete();
 
-        $this->emit('project_action', "Invitation accepted");
-
         $this->invitations = $this->invitations->fresh();
+        $this->emit('project_action', "Invitation accepted");
     }
 
     /**
@@ -73,9 +60,38 @@ class Applications extends Component
             TeamInvitation::find($invitationID)->delete();
         }
 
-        $this->emit('project_action', "Invitation denied");
-
         $this->invitations = $this->invitations->fresh();
+        $this->emit('project_action', "Invitation declined");
+    }
+
+    /**
+     * Remove application to a team.
+     *
+     * @return void
+     */
+    public function removeApplication($applicationID)
+    {
+        if (! empty($applicationID)) {
+            TeamApplication::find($applicationID)->delete();
+        }
+
+        $this->applications = $this->applications->fresh();
+        $this->emit('project_action', 'Application removed');
+    }
+
+    public function invitationsCount()
+    {
+        return $this->invitations->count();
+    }
+
+    public function applicationsCount()
+    {
+        return $this->applications->count();
+    }
+
+    public function testClick()
+    {
+        $this->emit('project_action', "Invitation declined");
     }
     
     public function getUserProperty()
