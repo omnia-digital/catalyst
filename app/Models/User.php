@@ -4,6 +4,7 @@
 
     use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Relations\HasMany;
     use Illuminate\Database\Eloquent\SoftDeletes;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
@@ -76,7 +77,7 @@
 
         public function getNameAttribute() {
             if ($this->profile()->exists()) {
-               return $this->profile->name;
+                return $this->profile->name;
             }
             return $this->first_name . " " . $this->last_name;
         }
@@ -106,6 +107,26 @@
 
         public function getHandleAttribute() {
             return $this->profile?->handle;
+        }
+
+        /**
+         * Get all of the pending invitations for the user.
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\HasMany
+         */
+        public function teamInvitations(): HasMany
+        {
+            return $this->hasMany(TeamInvitation::class);
+        }
+
+        /**
+         * Get all of the pending applications for the user.
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\HasMany
+         */
+        public function teamApplications(): HasMany
+        {
+            return $this->hasMany(TeamApplication::class);
         }
 
         public function receivesBroadcastNotificationsOn() {

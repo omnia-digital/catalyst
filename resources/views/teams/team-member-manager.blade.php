@@ -59,6 +59,13 @@
                             </div>
                         </div>
                     @endif
+
+                    <!-- Invitation Message -->
+                    {{-- <div class="col-span-6 sm:col-span-4">
+                        <x-jet-label for="message" value="{{ __('Message') }}" />
+                        <x-jet-input id="message" type="text" class="mt-1 block w-full" wire:model.defer="addTeamMemberForm.message" />
+                        <x-jet-input-error for="message" class="mt-2" />
+                    </div> --}}
                 </x-slot>
 
                 <x-slot name="actions">
@@ -139,11 +146,11 @@
                                     <!-- Manage Team Member Role -->
                                     @if (Gate::check('addTeamMember', $team) && Laravel\Jetstream\Jetstream::hasRoles())
                                         <button class="ml-2 text-sm text-light-text-color underline" wire:click="manageRole('{{ $user->id }}')">
-                                            {{ Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name }}
+                                            {{ $user->membership->role ? Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name : '' }}
                                         </button>
                                     @elseif (Laravel\Jetstream\Jetstream::hasRoles())
                                         <div class="ml-2 text-sm text-light-text-color">
-                                            {{ Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name }}
+                                            {{ $user->membership->role ? Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name : '' }}
                                         </div>
                                     @endif
 
