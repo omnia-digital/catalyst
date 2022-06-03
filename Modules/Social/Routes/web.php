@@ -29,6 +29,9 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
 
     Route::name('profile.')->prefix('profiles')->group(function() {
         Route::get('{profile:handle}', ShowProfile::class)->name('show');
+        Route::get('{profile:handle}/edit', function() {})->name('edit');
+        Route::get('{profile:handle}/media', function() {})->name('media');
+        Route::get('{profile:handle}/followers', function() {})->name('followers');
     });
 
     Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {

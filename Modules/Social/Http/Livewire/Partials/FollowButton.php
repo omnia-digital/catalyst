@@ -23,6 +23,11 @@ class FollowButton extends Component
         return User::find(auth()->id());
     }
 
+    public function getCountProperty()
+    {
+        return $this->model->followables()->count();
+    }
+
     public function render()
     {
         return view('social::livewire.partials.follow-button');
