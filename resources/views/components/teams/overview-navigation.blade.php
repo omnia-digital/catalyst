@@ -4,10 +4,10 @@
             @foreach ($nav as $key => $item)
                 <a 
                     href="{{ route('social.projects.' . $key, $team) }}" 
-                    class="py-4 mx-[10px] border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
+                    class="py-4 mx-[10px] flex border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
                     {{ $item }}
                     @if ($key === 'followers')
-                        <span class="ml-2 px-1 flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $team->followables()->count() }}</span>
+                        <span class="ml-2 px-1 flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $team->followers()->count() }}</span>
                     @endif
                 </a>
             @endforeach
