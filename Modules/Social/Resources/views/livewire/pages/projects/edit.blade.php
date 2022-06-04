@@ -85,7 +85,7 @@
         </div>
 
         <!-- Edit Team Location -->                
-        <div x-show="activeTab === 1" class="mt-6 space-y-6">
+        <div x-cloak x-show="activeTab === 1" class="mt-6 space-y-6">
             <div>
                 <h3 class="text-lg">Current Project Location</h3>
                     @if ($team->teamLocation()->exists())
