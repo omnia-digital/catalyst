@@ -18,12 +18,16 @@ class PostCard extends Component
         $this->post = $post;
     }
 
-    public function getAuthorAttribute() {
+    public function getAuthorProperty() {
         return $this->post->user;
     }
 
     public function showPost() {
         return $this->redirectRoute('social.posts.show', $this->post);
+    }
+
+    public function showProfile() {
+        return $this->redirectRoute('social.profile.show', $this->author->handle);
     }
 
     public function toggleBookmark()
