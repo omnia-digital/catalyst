@@ -2,49 +2,48 @@
 
 
 @section('content')
-<div class="flex space-x-6">
+<div class="flex space-x-4">
     <div class="mx-auto max-w-3xl">
-        <div class="-mx-4">
-            <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat relative overlay before:bg-black before:inset-0 before:opacity-60"></div>
+        <div class="-ml-4">
+            <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat relative overlay before:bg-black before:inset-0 before:opacity-60">
+                <div class="mb-1 mx-[15px] absolute bottom-0 left-0 right-0 flex justify-between items-end">
+                    <div class="flex items-end">
+                        <div class="mr-3 z-10 -mb-12">
+                            <img class="h-24 w-24 rounded-full" src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" />
+                        </div>
+                        <div>
+                            <h1 class="text-3xl text-white">{{ $this->user->name  }}</h1>
+                            <p class="text-sm text-white">{{ '@' .  $this->user->handle }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-white text-3xl font-semibold">
+                        <x-heroicon-s-star class="w-6 h-6" />
+                        {{ $this->user->reviewScore ?? '3758' }}
+                    </div>
+                </div>
+            </div>
             <x-profiles.overview-navigation class="bg-gray-300" :user="$this->user" />
         </div>
-        <div class="flex space-x-6 mt-4 -mx-4">
+        <div class="flex space-x-6 mt-4 -ml-4">
             <div class="space-y-4">
                 <div class="p-[15px] rounded bg-primary space-y-3 text-base-text-color">
-                    <div class="flex justify-end text-sm">
+                    <div class="flex justify-start text-sm space-x-4">
                         <div class="flex items-center space-x-2">
-                            <x-heroicon-o-calendar class="w-3 h-3" />
+                            <x-heroicon-o-location-marker class="w-4 h-4" />
+                            <span>{{ $profile->country }}</span>
+                        </div>
+                        @isset ($profile->website)
+                            <div class="flex items-center space-x-2">
+                                <x-heroicon-o-link class="w-4 h-4" />
+                                <span>{{ $profile->website }}</span>
+                            </div>
+                        @endisset
+                        <div class="flex items-center space-x-2">
+                            <x-heroicon-o-calendar class="w-4 h-4" />
                             <span>{{ $this->user->created_at->toFormattedDateString() }}</span>
                         </div>
                     </div>
                     <div>{{ $this->user->profile->bio }}</div>
-                </div>
-
-                <!-- Rating -->
-                <div class="flex justify-between items-center">
-                    <div class="flex">
-                        <span>Rating</span>
-                        <div class="bg-black flex items-center rounded-md ml-3 p-1">
-                            <div class="flex items-center text-white text-xs font-semibold">
-                                <x-heroicon-s-star class="w-4 h-4" />
-                                {{ $project->reviewScore ?? '3758' }}
-                            </div>
-                        </div>
-                    </div>
-                    @foreach ($additionalInfo as $item)
-                        <div>
-                            <p class="text-light-text-color text-xxs">{{ $item }}</p>
-                            <p class="text-dark-text-color font-semibold text-lg">{{ /* $profile->$item()->count() */ 28 }}</p>
-                        </div>
-                    @endforeach
-                    {{-- <div>
-                        <p class="text-light-text-color text-xxs">views</p>
-                        <p class="text-dark-text-color font-semibold text-lg">843</p>
-                    </div>
-                    <div>
-                        <p class="text-light-text-color text-xxs">volunteers</p>
-                        <p class="text-dark-text-color font-semibold text-lg">485</p>
-                    </div> --}}
                 </div>
 
                 <!-- Profile Awards -->
@@ -70,6 +69,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Profile Reviews -->
                 <div>
                     <div class="flex justify-between items-center text-black font-semibold">
@@ -94,6 +94,7 @@
                     </div>
                 </div>
 
+                <!-- User Posts -->
                 <div>
                     <div class="flex justify-between items-center text-black font-semibold">
                         <p class="text-sm flex">Timeline <span class="bg-gray-400 rounded-full ml-2 w-5 h-5 flex justify-center items-center">{{ $this->user->posts()->count() }}</span></p>
