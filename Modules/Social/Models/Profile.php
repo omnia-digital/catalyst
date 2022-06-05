@@ -68,6 +68,11 @@
             return $this->is_private == true ? 'private' : 'public';
         }
 
+        public function getCountryAttribute()
+        {
+            return 'USA';
+        }
+
         public function followingCount($short = false)
         {
             $count = Cache::remember('profile:following_count:' . $this->id, now()->addMonths(1), function () {

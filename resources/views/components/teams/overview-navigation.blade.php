@@ -1,17 +1,15 @@
-<nav {{ $attributes->merge(['class' => 'flex relative']) }}>
-    <div class="-mt-20 absolute bottom-2 left-8 flex">
-        <div class="mr-2">
-            <img class="h-24 w-24 rounded-full" src="{{ $team->owner?->profile_photo_url }}" alt="{{ $team->owner->name }}" />
-        </div>
-        <div class="-mt-4">
-            <h1 class="text-3xl text-white">{{ $team->name  }}</h1>
-            <p class="text-sm text-white">{{ '@' .  $team->owner->handle }}</p>
-        </div>
-    </div>
+<nav {{ $attributes->merge(['class' => 'flex relative rounded-b']) }}>
     <div class="flex justify-between items-center w-full ml-32 relative z-10">
         <div class="flex">
             @foreach ($nav as $key => $item)
-                <a href="{{ route('social.projects.' . $key, $team) }}" class="py-4 mx-4 border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">{{ $item }}</a>
+                <a 
+                    href="{{ route('social.projects.' . $key, $team) }}" 
+                    class="py-4 mx-[10px] flex border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
+                    {{ $item }}
+                    @if ($key === 'followers')
+                        <span class="ml-2 px-1 flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $team->followers()->count() }}</span>
+                    @endif
+                </a>
             @endforeach
             <x-library::dropdown>
                 <x-slot name="trigger">
@@ -75,7 +73,7 @@
             @endif
         </div>
         <div class="inline-flex items-center text-md">
-            <button class="p-2 mx-2 inline-flex items-center text-sm rounded-full bg-primary"><x-heroicon-s-plus class="h-4 w-4" /></button>
+            <button class="p-2 mx-[15px] inline-flex items-center text-sm rounded-full bg-primary"><x-heroicon-s-plus class="h-4 w-4" /></button>
         </div>
     </div>
 </nav>

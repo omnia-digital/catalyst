@@ -1,4 +1,4 @@
-<article wire:click.prevent.stop="showPost" class="flex justify-start bg-primary pl-3 pr-5 pt-4 shadow-sm rounded-lg border border-2 border-transparent hover:border-secondary cursor-pointer z-10">
+<article wire:click.prevent.stop="showPost" class="flex justify-start bg-primary pl-3 pr-5 pt-4 shadow-sm rounded-lg border-2 border-transparent hover:border-secondary cursor-pointer z-10">
     <div class="mr-3 flex-shrink-0">
         <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}"/>
     </div>
@@ -7,10 +7,10 @@
             <div class="min-w-0 flex-1">
                 <div class="min-w-0">
                     <div class="mr-2 font leading-5">
-                        <a href="{{ route('social.profile.show', $post->user->handle) }}" class="hover:underline block font-bold text-dark-text-color">{{ $post->user->name }}</a>
+                        <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="hover:underline block font-bold text-dark-text-color">{{ $post->user->name }}</a>
                     </div>
                     <div class="flex content-center space-x-1 text-base-text-color">
-                        <a href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
+                        <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
                         <x-dot/>
                         <a href="{{ $post->getUrl() }}" class="hover:underline">
                             <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans(short: true) }}</time>

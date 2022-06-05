@@ -3,10 +3,26 @@
 
 @section('content')
 <div class="-mx-4">
-    <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat relative overlay before:bg-black before:inset-0 before:opacity-60"></div>
+    <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat relative overlay before:bg-black before:inset-0 before:opacity-60">
+        <div class="mb-1 mx-[15px] absolute bottom-0 left-0 right-0 flex justify-between items-end">
+            <div class="flex items-end">
+                <div class="mr-3 z-10 -mb-12">
+                    <img class="h-24 w-24 rounded-full" src="{{ $this->owner->profile_photo_url }}" alt="{{ $this->owner->name }}" />
+                </div>
+                <div>
+                    <h1 class="text-3xl text-white">{{ $project->name  }}</h1>
+                    <p class="text-sm text-white">{{ '@' .  $this->owner->handle }}</p>
+                </div>
+            </div>
+            <div class="flex items-center text-white text-3xl font-semibold">
+                <x-heroicon-s-star class="w-6 h-6" />
+                {{ $this->owner->reviewScore ?? '3758' }}
+            </div>
+        </div>
+    </div>
     <x-teams.overview-navigation class="bg-gray-300" :team="$project" />
 </div>
-<div class="flex space-x-6 mt-4 -mx-4">
+<div class="flex space-x-4 mt-4 -mx-4">
     <div class="space-y-4">
         <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
             <div class="col-span-2 row-span-1 flex flex-col">
