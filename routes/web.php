@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Pages\Notifications;
 use Illuminate\Support\Facades\Route;
 
     /*
@@ -31,9 +32,7 @@ use Illuminate\Support\Facades\Route;
             return "Messages";
         })->name('messages');
         
-        Route::get('/notifications', function () {
-            return "Notifications";
-        })->name('notifications');
+        Route::get('/notifications', Notifications::class)->name('notifications');
 
         Route::get('/groups', function () {
             return "Groups";
