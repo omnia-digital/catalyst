@@ -8,6 +8,7 @@
     <livewire:social::components.post-card wire:key="post-{{ $post->id }}"
                                            :post="$post"
                                            :show-post-actions="false"
+                                           :clickable="$clickable"
 
     />
 @endif
