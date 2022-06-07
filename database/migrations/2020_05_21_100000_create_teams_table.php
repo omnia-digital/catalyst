@@ -23,6 +23,7 @@ class CreateTeamsTable extends Migration
             $table->boolean('personal_team');
             $table->string('location')->nullable();
             $table->integer('rating')->nullable();
+            $table->string('languages')->default('English');
             $table->timestamps();
         });
     }
