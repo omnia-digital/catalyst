@@ -74,10 +74,10 @@
                                     }
                                 }"
                            x-on:click.prevent.stop="copy">
-                            <div class="border w-12 h-12 fill-grey-100  border-grey-100 rounded-full flex
+                            <div class="border w-12 h-12 text-base-text-color fill-base-text-color  border-base-text-color rounded-full flex
                             items-center justify-center shadow-xl cursor-pointer
-                            hover:bg-neutral active:text-primary hover:fill-neutral
-                            active:bg-secondary active:text-primary active:fill-secondary">
+                            hover:bg-base-text-color hover:text-primary hover:fill-base-text-color
+                            active:bg-base-text-color active:text-primary active:fill-base-text-color">
                                 <i class="fa-solid fa-link"></i>
                             </div>
                         </a>
