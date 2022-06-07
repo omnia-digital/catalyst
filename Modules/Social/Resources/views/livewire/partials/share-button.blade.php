@@ -71,6 +71,7 @@
 
                                     copy() {
                                         this.$clipboard(this.url);
+                                        $dispatch('copied');
                                     }
                                 }"
                            x-on:click.prevent.stop="copy">
@@ -81,6 +82,17 @@
                                 <i class="fa-solid fa-link"></i>
                             </div>
                         </a>
+
+                        <div
+                            style="display: none;"
+                            x-data="{show: false}"
+                            x-show="show"
+                            x-transition:leave.opacity.duration.1500ms 
+                            @copied.window=" 
+                                show = true; 
+                                setTimeout(() => { show = false; }, 3000);
+                            "
+                            class="absolute bottom-8 left-0 right-0 mx-auto flex justify-center">Link Copied!</div>
                     </div>
                 @endif
             </x-slot>
