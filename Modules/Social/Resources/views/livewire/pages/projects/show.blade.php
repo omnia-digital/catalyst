@@ -171,8 +171,8 @@
                         <p class="text-sm">Awards</p>
                         <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
                     </div>
-                    <div class="mt-4 space-x-2">
-                        @forelse ($team->awards as $award)
+                    <div class="mt-4 flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2">
+                        @forelse ($team->awards()->take(2)->get() as $award)
                             <x-awards-banner :award="$award" />
                         @empty
                             <div class="bg-white p-4">
