@@ -13,9 +13,11 @@ class PostCard extends Component
 
     public Post $post;
     public $optionsMenuOpen = false;
+    public $clickable;
 
-    public function mount(Post $post) {
+    public function mount(Post $post, $clickable = true) {
         $this->post = $post;
+        $this->clickable = $clickable;
     }
 
     public function getAuthorProperty() {
@@ -23,7 +25,9 @@ class PostCard extends Component
     }
 
     public function showPost() {
-        return $this->redirectRoute('social.posts.show', $this->post);
+        if ($this->clickable) {
+            return $this->redirectRoute('social.posts.show', $this->post);
+        }
     }
 
     public function showProfile() {
