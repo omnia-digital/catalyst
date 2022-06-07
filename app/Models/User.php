@@ -15,6 +15,7 @@
     use Modules\Social\Models\Like;
     use Modules\Social\Models\Post;
     use Modules\Social\Models\Profile;
+    use Modules\Social\Traits\Awardable;
     use Modules\Social\Traits\HasBookmarks;
     use Wimil\Followers\Traits\Followable;
 
@@ -28,7 +29,8 @@
             HasFactory,
             HasTeams,
             HasBookmarks,
-            Followable;
+            Followable,
+            Awardable;
 
         /**
          * The attributes that should be mutated to dates.

@@ -10,17 +10,18 @@
                     <img class="h-24 w-24 rounded-full" src="{{ $this->owner->profile_photo_url }}" alt="{{ $this->owner->name }}" />
                 </div>
                 <div>
-                    <h1 class="text-3xl text-white">{{ $project->name  }}</h1>
+                    <h1 class="text-3xl text-white">{{ $team->name  }}</h1>
                     <p class="text-sm text-white">{{ '@' .  $this->owner->handle }}</p>
                 </div>
             </div>
-            <div class="flex items-center text-white text-3xl font-semibold">
+            {{-- No program to calculate reviwScore yet
+                <div class="flex items-center text-white text-3xl font-semibold">
                 <x-heroicon-s-star class="w-6 h-6" />
                 {{ $this->owner->reviewScore ?? '3758' }}
-            </div>
+            </div> --}}
         </div>
     </div>
-    <x-teams.overview-navigation class="bg-gray-300" :team="$project" />
+    <x-teams.overview-navigation class="bg-gray-300" :team="$team" />
 </div>
 <div class="flex space-x-4 mt-4 -mx-4">
     <div class="space-y-4">
@@ -38,17 +39,17 @@
                 <div class="flex-1 bg-white rounded">
                     <div class="h-44 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
                     <div class="p-[15px] space-y-4">
-                        <p class="text-sm">{{ $project->summary }}</p>
+                        <p class="text-sm">{{ $team->summary }}</p>
                         <div class="text-xs grid grid-cols-4 grid-rows-4 gap-1 items-center">
                             <span class="col-span-1 text-gray-400 text-xxs uppercase">Launch Date</span>
                             <div class="col-span-3 flex items-center space-x-2">
                                 <x-heroicon-o-calendar class="w-4 h-4" />
-                                <span>{{ \Carbon\Carbon::parse($project->start_date)->toFormattedDateString() }}</span>
+                                <span>{{ \Carbon\Carbon::parse($team->start_date)->toFormattedDateString() }}</span>
                             </div>
                             <span class="col-span-1 text-gray-400 text-xxs uppercase">Location:</span>
                             <div class="col-span-3 flex items-center space-x-2">
                                 <x-heroicon-o-location-marker class="w-4 h-4" />
-                                <span>{{ $project->location_short ?? "Not Set"}}</span>
+                                <span>{{ $team->location_short ?? "Not Set"}}</span>
                             </div>
                             <span class="col-span-1 text-gray-400 text-xxs uppercase ">Organizer:</span>
                             <div class="col-span-3 flex items-center space-x-2">
@@ -60,17 +61,17 @@
                                 <div class="bg-black flex items-center rounded-md mr-1 p-1">
                                     <div class="flex items-center text-white text-xs font-semibold">
                                         <x-heroicon-s-star class="w-4 h-4" />
-                                        {{ $project->reviewScore ?? '3758' }}
+                                        {{ $team->reviewScore ?? '3758' }}
                                     </div>
                                 </div>
-                                <span class="text-gray-400 text-xxs">{{ $project->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $project->reviews()->count */'296,418' }})</span>
+                                <span class="text-gray-400 text-xxs">{{ $team->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $team->reviews()->count */'296,418' }})</span>
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
                             @foreach ($additionalInfo as $item)
                                 <div>
                                     <p class="text-light-text-color text-xxs">{{ $item }}</p>
-                                    <p class="text-dark-text-color font-semibold text-lg">{{ $project->$item()->count() }}</p>
+                                    <p class="text-dark-text-color font-semibold text-lg">{{ $team->$item()->count() }}</p>
                                 </div>
                             @endforeach
                             <div>
@@ -84,9 +85,9 @@
                         </div>
                     </div>
                 </div>
-                @if ($project->tags()->count() > 0)
+                @if ($team->tags()->count() > 0)
                     <div class="flex justify-start space-x-2 mt-2">
-                        @foreach($project->tags as $tag)
+                        @foreach($team->tags as $tag)
                             <x-library::tag class=" bg-gray-700 text-xxs text-white uppercase">{{ $tag->name }}</x-library::tag>
                         @endforeach
                     </div>
@@ -98,11 +99,11 @@
                 <div class="flex-1 flex flex-col">
                     <p class="text-black font-semibold">About this Project</p>
                     <div class="flex-1 mt-4 bg-white p-4">
-                        <p class="text-dark-text-color">{{ $project->content }}</p>
+                        <p class="text-dark-text-color">{{ $team->content }}</p>
                     </div>
                 </div>
                 <!-- Post Tile -->
-                @if (/* $this->recentPosts->count() */1)
+                @if ($this->recentPosts->count())
                     <div>
                         <div class="flex justify-between items-center text-black font-semibold">
                             <p class="text-sm">Posts</p>
@@ -138,44 +139,46 @@
             <div class="col-span-1 row-span-1 space-y-6">
                 <!-- Project Relevence -->
                 <div>
-                    <div>
-                        <p class="text-black font-semibold">Is this project relevant to you?</p>
-                        <div class="mt-4 bg-white p-4">
-                            <p class="text-dark-text-color">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione consequuntur hic aperiam adipisci cupiditate repellat quibusdam molestias praesentium sunt velit! Totam illum vero deleniti, sint est illo atque sequi quo.</p>
-                        </div>
+                    <div class="text-black font-semibold">
+                        <p class="text-sm">Is this project relevant to you?</p>
+                    </div>
+                    <div class="mt-4 bg-white p-4">
+                        <p class="text-dark-text-color text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione consequuntur hic aperiam adipisci cupiditate repellat quibusdam molestias praesentium sunt velit! Totam illum vero deleniti, sint est illo atque sequi quo.</p>
                     </div>
                 </div>
                 <!-- Project Location -->
                 <div>
-                    <div>
-                        <p class="text-black font-semibold">Location</p>
+                    <div class="text-black font-semibold">
+                        <p class="text-sm">Location</p>
+                    </div>
+                    <div class="mt-4 bg-white">
                         <livewire:social::map />
                     </div>
                 </div>
                 <!-- Project Languages -->
                 <div>
-                    <div>
-                        <p class="text-black font-semibold">Languages</p>
-                        <div class="mt-4 bg-white p-4">
-                            <p class="text-dark-text-color">English, Russian, German, Swahili</p>
-                        </div>
+                    <div class="text-black font-semibold">
+                        <p class="text-sm">Languages</p>
+                    </div>
+                    <div class="mt-4 bg-white p-4">
+                        <p class="text-dark-text-color">{{ $team->languages }}</p>
                     </div>
                 </div>
+
                 <!-- Project Awards -->
                 <div>
-                    <div>
-                        <div class="flex justify-between items-center text-black font-semibold">
-                            <p class="text-sm">Awards</p>
-                            <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
-                        </div>
-                        <div class="mt-4 space-x-2">
-                            <div class="bg-white p-2 flex items-center">
-                                <div class="rounded-full bg-gray-500 mr-4 p-2">
-                                    <x-heroicon-s-academic-cap class="w-4 h-4" />
-                                </div>
-                                <p class="whitespace-nowrap">Gold user</p>
+                    <div class="flex justify-between items-center text-black font-semibold">
+                        <p class="text-sm">Awards</p>
+                        <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
+                    </div>
+                    <div class="mt-4 space-x-2">
+                        @forelse ($team->awards as $award)
+                            <x-awards-banner :award="$award" />
+                        @empty
+                            <div class="bg-white p-4">
+                                <p class="text-dark-text-color">No awards to show.</p>
                             </div>
-                        </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -189,10 +192,10 @@
                         <div class="bg-black flex items-center rounded-md mr-1 p-1">
                             <div class="flex items-center text-white">
                                 <x-heroicon-s-star class="w-4 h-4" />
-                                {{ $project->reviewScore ?? '3758' }}
+                                {{ $team->reviewScore ?? '3758' }}
                             </div>
                         </div>
-                        <span class="text-gray-400">{{ $project->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $project->reviews()->count */'296,418' }})</span>
+                        <span class="text-gray-400">{{ $team->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $team->reviews()->count */'296,418' }})</span>
                     </div>
                 </div>
                 <div>
@@ -222,10 +225,10 @@
                         <div class="bg-black flex items-center rounded-md mr-1 p-1">
                             <div class="flex items-center text-white">
                                 <x-heroicon-s-star class="w-4 h-4" />
-                                {{ $project->reviewScore ?? '3758' }}
+                                {{ $team->reviewScore ?? '3758' }}
                             </div>
                         </div>
-                        <span class="text-gray-400">{{ $project->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $project->reviews()->count */'2,418' }})</span>
+                        <span class="text-gray-400">{{ $team->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $team->reviews()->count */'2,418' }})</span>
                     </div>
                 </div>
                 <div>
