@@ -2,17 +2,24 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Projects;
 
+use App\Models\Team;
 use Livewire\Component;
 
 class Followers extends Component
 {
-    public $project;
+    public $team;
 
     public $pageView = 'followers';
 
+        
+    public function mount(Team $team)
+    {
+        $this->team = $team->load('owner');
+    }
+
     public function getOwnerProperty()
     {
-        return $this->project->owner;
+        return $this->team->owner;
     }
 
     public function render()

@@ -2,27 +2,7 @@
 
 
 @section('content')
-<div class="-mx-4">
-    <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat relative overlay before:bg-black before:inset-0 before:opacity-60">
-        <div class="mb-1 mx-[15px] absolute bottom-0 left-0 right-0 flex justify-between items-end">
-            <div class="flex items-end">
-                <div class="mr-3 z-10 -mb-12">
-                    <img class="h-24 w-24 rounded-full" src="{{ $this->owner->profile_photo_url }}" alt="{{ $this->owner->name }}" />
-                </div>
-                <div>
-                    <h1 class="text-3xl text-white">{{ $team->name  }}</h1>
-                    <p class="text-sm text-white">{{ '@' .  $this->owner->handle }}</p>
-                </div>
-            </div>
-            {{-- No program to calculate reviwScore yet
-                <div class="flex items-center text-white text-3xl font-semibold">
-                <x-heroicon-s-star class="w-6 h-6" />
-                {{ $this->owner->reviewScore ?? '3758' }}
-            </div> --}}
-        </div>
-    </div>
-    <x-teams.overview-navigation class="bg-gray-300" :team="$team" />
-</div>
+<livewire:social::pages.projects.partials.header :team="$team" />
 <div class="flex space-x-4 mt-4 -mx-4">
     <div class="space-y-4">
         <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
@@ -171,9 +151,9 @@
                         <p class="text-sm">Awards</p>
                         <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
                     </div>
-                    <div class="mt-4 flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2">
+                    <div class="mt-4 flex space-x-2">
                         @forelse ($team->awards()->take(2)->get() as $award)
-                            <x-awards-banner :award="$award" />
+                            <x-awards-banner class="flex-1" :award="$award" />
                         @empty
                             <div class="bg-white p-4">
                                 <p class="text-dark-text-color">No awards to show.</p>

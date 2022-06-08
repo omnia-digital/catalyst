@@ -3,6 +3,7 @@
 namespace App\View\Components\Teams;
 
 use App\Models\Team;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
 class OverviewNavigation extends Component
@@ -22,10 +23,10 @@ class OverviewNavigation extends Component
      *
      * @return void
      */
-    public function __construct(Team $team, $pageView = 'show')
+    public function __construct(Team $team)
     {
         $this->team = $team;
-        $this->pageView = $pageView;
+        $this->pageView = array_slice(explode('.', Route::currentRouteName()), -1)[0];
     }
 
     /**
