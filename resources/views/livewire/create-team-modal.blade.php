@@ -8,7 +8,7 @@
         </div>
         <div class="mt-6">
             <x-library::input.label value="Start Date"/>
-            <x-library::input.date wire:model.defer="startDate" placeholder="Pick a date"/>
+            <x-library::input.date wire:model.defer="startDate" placeholder="Project Launch Date"/>
             <x-library::input.error for="startDate"/>
         </div>
         <div class="mt-6">

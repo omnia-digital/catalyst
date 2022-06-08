@@ -68,7 +68,7 @@
             </div>
             <div>
                 <x-library::input.label value="Start Date"/>
-                <x-library::input.date id="startDate" wire:model.defer="team.start_date" placeholder="Pick a date"/>
+                <x-library::input.date id="startDate" wire:model.defer="team.start_date" placeholder="Project Launch Date"/>
                 <x-library::input.error for="startDate"/>
             </div>
             <div>

@@ -33,7 +33,7 @@
             Filters
         </div>
         <div class="w-full relative md:w-1/3">
-            <x-library::input.date wire:model="filters.published_at" class="pl-8" placeholder="Select Date"/>
+            <x-library::input.date wire:model="filters.start_date" class="pl-8" placeholder="Project Launch Date"/>
             <div class="absolute top-0 flex items-center h-full ml-3">
                 <x-heroicon-o-calendar class="w-4 text-dark-text-color" />
             </div>

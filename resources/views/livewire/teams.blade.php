@@ -55,7 +55,7 @@
                 </div>
 
                 <div>
-                    <x-library::input.date wire:model="filters.start_date" placeholder="Select Date"/>
+                    <x-library::input.date wire:model="filters.start_date" placeholder="Project Launch Date"/>
                 </div>
 
                 <div class="flex items-center w-full z-50">

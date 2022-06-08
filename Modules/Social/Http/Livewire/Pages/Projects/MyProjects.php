@@ -13,7 +13,7 @@ class MyProjects extends Component
     use WithPagination, WithCachedRows;
 
     public array $filters = [
-        'created_at' => '',
+        'start_date' => '',
         'has_attachment' => false,
     ];
 
@@ -66,7 +66,8 @@ class MyProjects extends Component
     public function render()
     {
         return view('social::livewire.pages.projects.my-projects', [
-            'projects' => $this->rows
+            'projects' => $this->rows,
+            'projectsCount' => $this->rowsQuery->count()
         ]);
     }
 }
