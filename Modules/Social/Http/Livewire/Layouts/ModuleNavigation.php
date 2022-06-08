@@ -18,6 +18,12 @@
                     'current' => false
                 ],
                 [
+                    'label'   => 'Discover',
+                    'name'    => 'social.discover',
+                    'icon'    => 'heroicon-o-collection',
+                    'current' => false
+                ],
+                [
                     'label'   => 'My Projects',
                     'name'    => 'social.my-projects',
                     'icon'    => 'heroicon-o-briefcase',
@@ -49,7 +55,7 @@
 //                ],
                 [
                     'label'   => 'Contacts',
-                    'name'    => 'social.contacts.show',
+                    'name'    => 'social.contacts.index',
                     'icon'    => 'heroicon-o-users',
                     'current' => false
                 ],

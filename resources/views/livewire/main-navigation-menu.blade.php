@@ -42,10 +42,10 @@
                             <label for="search" class="sr-only">Search</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <x-heroicon-o-search class="h-5 w-5 dark:text-light-text-color" aria-hidden="true"/>
+                                    <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
                                 </div>
                                 <input id="search" name="search"
-                                       class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-gray-400 focus:outline-none focus:bg-primary focus:border-white focus:ring-white focus:text-dark-text-color sm:text-sm"
+                                       class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
                                        placeholder="Search for Projects" type="search"/>
                             </div>
                         </div>

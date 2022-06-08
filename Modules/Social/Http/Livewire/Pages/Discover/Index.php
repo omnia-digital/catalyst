@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Partials;
+namespace Modules\Social\Http\Livewire\Pages\Discover;
 
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -8,14 +8,12 @@ use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 use Illuminate\Support\Facades\App;
 
-class TrendingSection extends Component
+class Index extends Component
 {
     use WithPagination, WithCachedRows;
 
-    public $title = 'Trending';
-
     public $type;
-
+    
     public function mount($type = null)
     {
         if (!App::environment('production')) {
@@ -27,10 +25,6 @@ class TrendingSection extends Component
         }
     }
     
-    public function showProfile($url) {
-        return $this->redirect($url);
-    }
-
     public function getRowsQueryProperty()
     {
         return Post::with('user')
@@ -46,7 +40,7 @@ class TrendingSection extends Component
 
     public function render()
     {
-        return view('social::livewire.partials.trending-section', [
+        return view('social::livewire.pages.discover.index', [
             'posts' => $this->rows
         ]);
     }

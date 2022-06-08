@@ -12,6 +12,7 @@ use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Social\Models\Post;
+use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\Tags\HasTags;
@@ -22,7 +23,7 @@ use Wimil\Followers\Traits\CanBeFollowed;
  */
 class Team extends JetstreamTeam
 {
-    use HasFactory, Likable, Postable, HasTags, CanBeFollowed;
+    use HasFactory, Likable, Postable, HasTags, CanBeFollowed, Awardable;
 
     /**
      * The attributes that should be cast.

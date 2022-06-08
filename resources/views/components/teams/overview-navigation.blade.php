@@ -11,6 +11,7 @@
                     @endif
                 </a>
             @endforeach
+           {{-- No items for dropdown at this time
             <x-library::dropdown>
                 <x-slot name="trigger">
                     <button type="button" class="py-4 mx-4 flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
@@ -21,10 +22,10 @@
                 <x-library::dropdown.item>
                     Some dropdown item
                 </x-library::dropdown.item>
-            </x-library::dropdown>
+            </x-library::dropdown> --}}
         </div>
     </div>
-    <div class="flex">
+    <div class="flex pr-[15px]">
         <a href="{{ route('social.projects.edit', $team->id) }}" class="py-4 mx-4 whitespace-nowrap">Edit Project</a>
         <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
         <div class="inline-flex items-center text-md relative">
@@ -72,8 +73,9 @@
                 >Apply</button>
             @endif
         </div>
+        {{-- Lists functionality not currently setup
         <div class="inline-flex items-center text-md">
             <button class="p-2 mx-[15px] inline-flex items-center text-sm rounded-full bg-primary"><x-heroicon-s-plus class="h-4 w-4" /></button>
-        </div>
+        </div> --}}
     </div>
 </nav>

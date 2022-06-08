@@ -11,26 +11,17 @@ use Livewire\Component;
 
 class Show extends Component
 {
-    public $project;
-
-    public $pageView = 'overview';
+    public $team;
 
     public $additionalInfo = [
         'likes',
-        /* 'views', */
         'comments',
-        /* 'volunteers', */
         'members'
     ];
-  
-    public function getOwnerProperty()
-    {
-        return $this->project->owner;
-    }
 
     public function getRecentPostsProperty()
     {
-        return $this->project->posts()->take(2)->get();
+        return $this->team->posts()->take(2)->get();
     }
 
     /**
@@ -41,7 +32,7 @@ class Show extends Component
     public function applyToTeam()
     {
         app(ApplyToTeam::class)->apply(
-            $this->project,
+            $this->team,
             Auth::id(),
             'editor'
         );
@@ -57,11 +48,11 @@ class Show extends Component
     public function removeApplication()
     {
         app(RemoveTeamApplication::class)
-            ->remove($this->project, Auth()->id());
+            ->remove($this->team, Auth()->id());
 
         $this->emit('application_removed');
 
-        $this->project = $this->project->fresh();
+        $this->team = $this->team->fresh();
     }
 
     public function showPost($post) {
@@ -70,7 +61,7 @@ class Show extends Component
     
     public function mount(Team $team)
     {
-        $this->project = $team->load('owner');
+        $this->team = $team->load('owner');
     }
 
     public function render()
