@@ -1,4 +1,4 @@
-<article wire:click.prevent.stop="showPost" class="flex justify-start bg-primary pl-3 pr-5 pt-4 shadow-sm rounded-lg border-2 border-transparent hover:border-secondary cursor-pointer z-10">
+<article wire:click.prevent.stop="showPost" class="flex justify-start bg-primary pl-3 pr-5 pt-4 shadow-sm rounded-lg border-2 border-transparent z-10 {{ $clickable ? 'hover:border-secondary cursor-pointer' : '' }}">
     <div class="mr-3 flex-shrink-0">
         <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}"/>
     </div>

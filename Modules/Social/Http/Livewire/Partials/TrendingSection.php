@@ -25,6 +25,10 @@ class TrendingSection extends Component
             $this->type = $type;
         }
     }
+    
+    public function showProfile($url) {
+        return $this->redirect($url);
+    }
 
     public function getRowsQueryProperty()
     {
