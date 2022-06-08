@@ -38,12 +38,13 @@
                             </div>
                             <span class="col-span-1 text-gray-400 text-xxs uppercase">Reviews:</span>
                             <div class="col-span-3 flex items-center space-x-2">
-                                <div class="bg-black flex items-center rounded-md mr-1 p-1">
+                                {{-- Review score algorithm not set 
+                                    <div class="bg-black flex items-center rounded-md mr-1 p-1">
                                     <div class="flex items-center text-white text-xs font-semibold">
                                         <x-heroicon-s-star class="w-4 h-4" />
                                         {{ $team->reviewScore ?? '3758' }}
                                     </div>
-                                </div>
+                                </div> --}}
                                 <span class="text-gray-400 text-xxs">{{ $team->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $team->reviews()->count */'296,418' }})</span>
                             </div>
                         </div>
@@ -54,14 +55,6 @@
                                     <p class="text-dark-text-color font-semibold text-lg">{{ $team->$item()->count() }}</p>
                                 </div>
                             @endforeach
-                            <div>
-                                <p class="text-light-text-color text-xxs">views</p>
-                                <p class="text-dark-text-color font-semibold text-lg">843</p>
-                            </div>
-                            <div>
-                                <p class="text-light-text-color text-xxs">volunteers</p>
-                                <p class="text-dark-text-color font-semibold text-lg">485</p>
-                            </div>
                         </div>
                     </div>
                 </div>
