@@ -34,7 +34,7 @@
                             <span class="col-span-1 text-gray-400 text-xxs uppercase ">Organizer:</span>
                             <div class="col-span-3 flex items-center space-x-2">
                                 <x-heroicon-s-user-circle class="w-4 h-4" />
-                                <span>{{ $this->owner->name }}</span>
+                                <span>{{ $team->owner->name }}</span>
                             </div>
                             <span class="col-span-1 text-gray-400 text-xxs uppercase">Reviews:</span>
                             <div class="col-span-3 flex items-center space-x-2">
@@ -149,7 +149,7 @@
                 <div>
                     <div class="flex justify-between items-center text-black font-semibold">
                         <p class="text-sm">Awards</p>
-                        <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
+                        <a href="{{ route('social.projects.awards', $team->id) }}" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
                     </div>
                     <div class="mt-4 flex space-x-2">
                         @forelse ($team->awards()->take(2)->get() as $award)

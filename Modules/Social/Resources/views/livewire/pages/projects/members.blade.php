@@ -2,10 +2,7 @@
 
 
 @section('content')
-<div class="-mx-4">
-    <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat relative overlay before:bg-black"></div>
-    <x-teams.overview-navigation class="bg-gray-300" :team="$team" pageView="members" />
-</div>
+<livewire:social::pages.projects.partials.header :team="$team" />
 <div class="mt-4 -mx-4">
     <h2 class="text-black font-semibold text-2xl">Members</h2>
 

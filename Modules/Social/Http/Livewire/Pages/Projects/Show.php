@@ -13,18 +13,11 @@ class Show extends Component
 {
     public $team;
 
-    public $pageView = 'overview';
-
     public $additionalInfo = [
         'likes',
         'comments',
         'members'
     ];
-  
-    public function getOwnerProperty()
-    {
-        return $this->team->owner;
-    }
 
     public function getRecentPostsProperty()
     {

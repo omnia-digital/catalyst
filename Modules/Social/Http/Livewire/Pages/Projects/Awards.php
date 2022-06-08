@@ -5,7 +5,7 @@ namespace Modules\Social\Http\Livewire\Pages\Projects;
 use App\Models\Team;
 use Livewire\Component;
 
-class Followers extends Component
+class Awards extends Component
 {
     public $team;
         
@@ -16,6 +16,6 @@ class Followers extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.projects.followers');
+        return view('social::livewire.pages.projects.awards');
     }
 }
