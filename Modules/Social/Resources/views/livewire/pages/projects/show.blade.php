@@ -36,7 +36,7 @@
                                 <x-heroicon-s-user-circle class="w-4 h-4" />
                                 <span>{{ $team->owner->name }}</span>
                             </div>
-                            <span class="col-span-1 text-gray-400 text-xxs uppercase">Reviews:</span>
+                            {{-- <span class="col-span-1 text-gray-400 text-xxs uppercase">Reviews:</span>
                             <div class="col-span-3 flex items-center space-x-2">
                                 {{-- Review score algorithm not set 
                                     <div class="bg-black flex items-center rounded-md mr-1 p-1">
@@ -44,9 +44,9 @@
                                         <x-heroicon-s-star class="w-4 h-4" />
                                         {{ $team->reviewScore ?? '3758' }}
                                     </div>
-                                </div> --}}
+                                </div> 
                                 <span class="text-gray-400 text-xxs">{{ $team->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $team->reviews()->count */'296,418' }})</span>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="flex justify-between items-center">
                             @foreach ($additionalInfo as $item)
@@ -111,14 +111,14 @@
             </div>
             <div class="col-span-1 row-span-1 space-y-6">
                 <!-- Project Relevence -->
-                <div>
+                {{-- <div>
                     <div class="text-black font-semibold">
                         <p class="text-sm">Is this project relevant to you?</p>
                     </div>
                     <div class="mt-4 bg-white p-4">
                         <p class="text-dark-text-color text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione consequuntur hic aperiam adipisci cupiditate repellat quibusdam molestias praesentium sunt velit! Totam illum vero deleniti, sint est illo atque sequi quo.</p>
                     </div>
-                </div>
+                </div> --}}
                 <!-- Project Location -->
                 <div>
                     <div class="text-black font-semibold">
@@ -156,7 +156,7 @@
                 </div>
             </div>
         </div>
-        <p class="text-black font-semibold">Project Reviews</p>
+        {{-- <p class="text-black font-semibold">Project Reviews</p>
         <div class="lg:grid lg:grid-cols-2 lg:gap-4">
             <div class="col-span-1">
                 <div class="bg-white p-4">
@@ -224,7 +224,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection
