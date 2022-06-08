@@ -1,6 +1,6 @@
 <div class="space-y-2">
     <div class="bg-primary px-6 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
-        <div class="flex items-center pr-8">
+        <div class="flex items-center pr-3">
             <span class="mr-3 font-bold">Sort</span>
             <x-library::dropdown.index :position="'left'" class="z-10 p-2 rounded-md bg-neutral" :dropdownClasses="'bg-white border-none shadow-md'">
                 <x-slot:trigger class=" hover:cursor-pointer text-base-text-color hover:text-black">
