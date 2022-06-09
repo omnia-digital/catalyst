@@ -8,6 +8,14 @@ use Modules\Social\Models\Profile;
 class Show extends Component
 {
     public $profile;
+
+    public $additionalInfo = [
+        'likes',
+        'views',
+        'comments',
+        'volunteers',
+        'members'
+    ];
   
     public function getUserProperty()
     {

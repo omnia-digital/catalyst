@@ -14,11 +14,16 @@ class Index extends Component
     public ?string $search = null;
 
     public array $filters = [
-        'date_created' => '',
+        'created_at' => '',
         'has_attachment' => false,
     ];
 
-    public string $orderBy = 'date_created';
+    public array $sortLabels = [
+        'created_at' => 'Date Created', 
+    ];
+
+    public string $orderBy = 'created_at';
+    public bool $sortDesc = true;
 
     protected $queryString = [
         'search'

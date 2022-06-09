@@ -11,15 +11,18 @@ use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\Likable;
+use Modules\Social\Traits\Postable;
 use Spatie\Tags\HasTags;
+use Wimil\Followers\Traits\CanBeFollowed;
 
 /**
  * Projects are just Teams
  */
 class Team extends JetstreamTeam
 {
-    use HasFactory, HasTags, Likable, HasLocation;
+    use HasFactory, Likable, Postable, HasTags, CanBeFollowed, Awardable, HasLocation;
 
     /**
      * The attributes that should be cast.
@@ -63,18 +66,49 @@ class Team extends JetstreamTeam
         return $value;
     }
 
+    /**
+     * Get all of the pending user applications for the team.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function teamApplications(): HasMany
+    {
+        return $this->hasMany(TeamApplication::class);
+    }
+
     public function resources(): HasMany
     {
         return $this->hasMany(Resource::class);
     }
 
-    public function projectLink() {
-        return route('projects.show', $this->id);
+    public function projectLink()
+    {
+        return route('social.projects.show', $this->id);
     }
 
     public function visits(): Relation
     {
         return visits($this)->relation();
+    }
+
+    public function getReviewScoreAttribute()
+    {
+        return null;
+    }
+
+    public function getReviewStatusAttribute()
+    {
+        return null;
+    }
+
+    public function members()
+    {
+        return $this->allUsers();
+    }
+
+    public function profile()
+    {
+        return route('social.projects.show', $this->id);
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder

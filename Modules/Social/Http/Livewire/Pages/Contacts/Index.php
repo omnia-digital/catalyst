@@ -4,10 +4,11 @@ namespace Modules\Social\Http\Livewire\Pages\Contacts;
 
 use Livewire\Component;
 
-class Show extends Component
+class Index extends Component
 {
+    
     public function render()
     {
-        return view('social::livewire.pages.contacts.show');
+        return view('social::livewire.pages.contacts.index');
     }
 }

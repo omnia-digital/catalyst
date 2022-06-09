@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="fixed w-full bg-primary z-10 shadow-sm">
+<nav x-data="{ open: false }" class="fixed w-full bg-primary z-20 shadow-sm">
     <!-- Desktop Navigation Menu -->
     <div class="max-w-8xl mx-auto grid grid-cols-10 gap-2 h-14">
         <!-- Left side header -->
@@ -7,7 +7,7 @@
             <div class="flex items-center h-14 flex-shrink-0">
                 <a href="{{ route('social.home') }}"
                    title="{{ env('APP_NAME') }}"
-                   class="bg-neutral-light font-semibold text-black py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
+                   class="bg-neutral-light text-black py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
                     <x-dynamic-component
                             component="heroicon-s-globe-alt"
                             class="flex-shrink-0 h-6 w-6"
@@ -42,10 +42,10 @@
                             <label for="search" class="sr-only">Search</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <x-heroicon-o-search class="h-5 w-5 dark:text-light-text-color" aria-hidden="true"/>
+                                    <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
                                 </div>
                                 <input id="search" name="search"
-                                       class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-gray-400 focus:outline-none focus:bg-primary focus:border-white focus:ring-white focus:text-dark-text-color sm:text-sm"
+                                       class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
                                        placeholder="Search for Projects" type="search"/>
                             </div>
                         </div>
