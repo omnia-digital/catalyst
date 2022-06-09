@@ -9,20 +9,20 @@ use App\Actions\Teams\GetPopularUpcomingTeamsAction;
 use App\Actions\Teams\GetTeamCategoriesAction;
 use App\Actions\Teams\GetTrendingTeamsAction;
 use App\Lenses\Teams\NewReleaseTeamsLens;
-use App\Models\TeamLocation;
+use App\Models\Location;
 use Livewire\Component;
 
 class Discover extends Component
 {
     public function getPlacesProperty()
     {
-        $places = TeamLocation::select(['lat', 'lng', 'team_id'])
+        $places = Location::select(['lat', 'lng', 'team_id'])
             ->hasCoordinates()
             ->with('team')
             ->get()
-            ->map(function (TeamLocation $teamLocation) {
+            ->map(function (Location $teamLocation) {
                 return [
-                    'name' => $teamLocation->team->name,
+                    'name' => $teamLocation->model->name,
                     'lat' => $teamLocation->lat,
                     'lng' => $teamLocation->lng,
                 ];

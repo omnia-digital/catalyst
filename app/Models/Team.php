@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasLocation;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
-use Modules\Social\Models\Post;
 use Modules\Social\Traits\Likable;
 use Spatie\Tags\HasTags;
 
@@ -20,7 +19,7 @@ use Spatie\Tags\HasTags;
  */
 class Team extends JetstreamTeam
 {
-    use HasFactory, HasTags, Likable;
+    use HasFactory, HasTags, Likable, HasLocation;
 
     /**
      * The attributes that should be cast.
@@ -73,23 +72,9 @@ class Team extends JetstreamTeam
         return route('projects.show', $this->id);
     }
 
-    public function teamLocation(): HasOne
-    {
-        return $this->hasOne(TeamLocation::class);
-    }
-
     public function visits(): Relation
     {
         return visits($this)->relation();
-    }
-
-    public function getLocationAttribute()
-    {
-        if($this->teamLocation) {
-            return $this->teamLocation->city . " " . $this->teamLocation->state . " " . $this->teamLocation->country;
-        }
-
-        return null;
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder

@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('teams', function (Blueprint $table) {
-            $table->string('location')->nullable()->after('personal_team');
-            $table->integer('rating')->nullable()->after('location');
+            $table->integer('rating')->nullable();
         });
     }
 
@@ -27,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('teams', function (Blueprint $table) {
-            //
+            $table->dropColumn('rating');
         });
     }
 };

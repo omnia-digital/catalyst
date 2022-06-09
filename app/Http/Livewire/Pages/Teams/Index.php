@@ -50,9 +50,9 @@ class Index extends Component
     public function getRowsQueryProperty()
     {
         return Team::query()
-            ->with('teamLocation')
+            ->with('location')
             ->withCount('users as members')
-            ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->whereHas('teamLocation', fn(Builder $query) => $query->search($location)))
+            ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->whereHas('location', fn(Builder $query) => $query->search($location)))
             ->when(Arr::get($this->filters, 'start_date'), fn(Builder $query, $date) => $query->whereDate('start_date', $date))
             ->when(Arr::get($this->filters, 'members'), fn(Builder $query, $members) => $query->havingBetween('members', $members))
             ->when(Arr::get($this->filters, 'tags'), fn(Builder $query, $tags) => $query->withAnyTags($tags))

@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="flex items-center text-base-text-color">
-            @isset($project->teamLocation)
+            @isset($project->location)
                 <x-heroicon-o-location-marker class="h-5 w-5 mr-2" />
                 <span class="text-dark-text-color text-xs">{{ $project->location }}</span>
             @endisset

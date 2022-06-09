@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Team;
-use App\Models\TeamLocation;
+use App\Models\Location;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,7 +19,7 @@ class TeamTableSeeder extends Seeder
     {
         //Team::truncate();
 
-        $teams = Team::factory(10)->has(TeamLocation::factory(1))->create();
+        $teams = Team::factory(10)->has(Location::factory(1))->create();
 
         foreach (User::all() as $user) {
             $user->teams()->attach(

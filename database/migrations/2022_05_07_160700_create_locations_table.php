@@ -4,13 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeamLocationsTable extends Migration
+class CreateLocationsTable extends Migration
 {
     public function up()
     {
-        Schema::create('team_locations', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Team::class)->index();
+            $table->morphs('model');
             $table->string('address');
             $table->string('address_line_2')->nullable();
             $table->string('city');
