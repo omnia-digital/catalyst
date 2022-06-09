@@ -16,9 +16,9 @@ class Discover extends Component
 {
     public function getPlacesProperty()
     {
-        $places = Location::select(['lat', 'lng', 'team_id'])
+        $places = Location::select(['lat', 'lng', 'model_id'])
             ->hasCoordinates()
-            ->with('team')
+            ->with('model')
             ->get()
             ->map(function (Location $teamLocation) {
                 return [
