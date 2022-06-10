@@ -16,6 +16,8 @@ use Modules\Social\Models\Post;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
 use Wimil\Followers\Traits\CanBeFollowed;
 
@@ -24,7 +26,14 @@ use Wimil\Followers\Traits\CanBeFollowed;
  */
 class Team extends JetstreamTeam
 {
-    use HasFactory, Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto;
+    use HasFactory, 
+        Likable, 
+        Postable, 
+        HasTags, 
+        CanBeFollowed, 
+        Awardable, 
+        HasProfilePhoto, 
+        HasSlug;
 
     /**
      * The attributes that should be cast.
@@ -42,6 +51,7 @@ class Team extends JetstreamTeam
      */
     protected $fillable = [
         'name',
+        'handle',
         'start_date',
         'personal_team',
         'summary',
@@ -62,6 +72,23 @@ class Team extends JetstreamTeam
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+                            ->generateSlugsFrom('name')
+                            ->saveSlugsTo('handle');
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'handle';
+    }
 
     public function getThumbnailAttribute($value)
     {
@@ -85,10 +112,6 @@ class Team extends JetstreamTeam
     public function resources(): HasMany
     {
         return $this->hasMany(Resource::class);
-    }
-
-    public function projectLink() {
-        return route('social.projects.show', $this->id);
     }
 
     public function teamLocation(): HasOne
@@ -131,7 +154,7 @@ class Team extends JetstreamTeam
 
     public function profile()
     {
-        return route('social.projects.show', $this->id);
+        return route('social.projects.show', $this);
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder

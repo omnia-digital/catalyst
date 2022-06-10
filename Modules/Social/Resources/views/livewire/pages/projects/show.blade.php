@@ -142,7 +142,7 @@
                 <div>
                     <div class="flex justify-between items-center text-black font-semibold">
                         <p class="text-sm">Awards</p>
-                        <a href="{{ route('social.projects.awards', $team->id) }}" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
+                        <a href="{{ route('social.projects.awards', $team) }}" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
                     </div>
                     <div class="mt-4 flex space-x-2">
                         @forelse ($team->awards()->take(2)->get() as $award)

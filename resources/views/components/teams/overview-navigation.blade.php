@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="flex pr-[15px]">
-        <a href="{{ route('social.projects.edit', $team->id) }}" class="py-4 mx-4 whitespace-nowrap">Edit Project</a>
+        <a href="{{ route('social.projects.edit', $team) }}" class="py-4 mx-4 whitespace-nowrap">Edit Project</a>
         <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
         <div class="inline-flex items-center text-md relative">
             <div class="absolute inset-auto -translate-y-12 p-2 rounded-md bg-black text-white" 

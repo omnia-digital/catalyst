@@ -22,7 +22,7 @@
             <div class=" flex align-top">
 {{--                @if (!is_null($post->team_id))--}}
 {{--                    <div class="text-base-text-color text-xs font-semibold mr-3">--}}
-{{--                        <a href="{{ $post->team->projectLink() }}" class=" hover:no-underline">{{ $post->team->name }}</a>--}}
+{{--                        <a href="{{ $post->team->profile() }}" class=" hover:no-underline">{{ $post->team->name }}</a>--}}
 {{--                    </div>--}}
 {{--                @endif--}}
                 <div class="relative z-1 inline-block text-left">

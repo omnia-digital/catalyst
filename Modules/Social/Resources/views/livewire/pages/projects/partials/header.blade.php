@@ -7,7 +7,7 @@
                 </div>
                 <div>
                     <h1 class="text-3xl text-white">{{ $team->name  }}</h1>
-                    <p class="text-sm text-white">{{ '@' .  $team->owner->handle }}</p>
+                    <p class="text-sm text-white">{{ '@' .  $team->handle }}</p>
                 </div>
             </div>
             {{-- No program to calculate reviewScore yet
