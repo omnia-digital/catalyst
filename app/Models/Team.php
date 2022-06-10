@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
+use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Social\Models\Post;
 use Modules\Social\Traits\Awardable;
@@ -23,7 +24,7 @@ use Wimil\Followers\Traits\CanBeFollowed;
  */
 class Team extends JetstreamTeam
 {
-    use HasFactory, Likable, Postable, HasTags, CanBeFollowed, Awardable;
+    use HasFactory, Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto;
 
     /**
      * The attributes that should be cast.
@@ -45,6 +46,10 @@ class Team extends JetstreamTeam
         'personal_team',
         'summary',
         'content',
+    ];
+
+    protected $appends = [
+        'profile_photo_url'
     ];
 
     /**
