@@ -103,7 +103,7 @@
             @endif
         </div>
 
-        <div class="z-20">
+        <div wire:click.prevent.stop="" class="z-20">
             <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
         </div>
     </div>
