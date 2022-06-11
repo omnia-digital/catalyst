@@ -27,13 +27,13 @@
                             <!-- Leave Team -->
                             @if (auth()->id() === $user->id)
                                 <x-library::dropdown.item class="cursor-pointer ml-6 text-sm text-red-500" wire:click="$toggle('confirmingLeavingTeam')">
-                                    {{ __('Leave') }}
+                                    {{ __('Leave Team') }}
                                 </x-library::dropdown.item>
     
                             <!-- Remove Team Member -->
                             @elseif (Gate::check('removeTeamMember', $team))
                                 <x-library::dropdown.item class="cursor-pointer ml-6 text-sm text-red-500" wire:click="confirmTeamMemberRemoval('{{ $user->id }}')">
-                                    {{ __('Remove') }}
+                                    {{ __('Remove Member') }}
                                 </x-library::dropdown.item>
                             @endif
                         </x-library::dropdown>
