@@ -11,10 +11,10 @@
                     <x-library::dropdown.item class="bg-white border-none" wire:click.prevent="sortBy('{{ $key }}')">{{ $item }}</x-library::dropdown.item>
                 @endforeach
             </x-library::dropdown.index>
-            @if (!$sortDesc)
-                <x-heroicon-o-arrow-narrow-up class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-black" wire:click.prevent="$toggle('sortDesc')" />
+            @if ($sortOrder === 'asc')
+                <x-heroicon-o-arrow-narrow-up class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-black" wire:click.prevent="$toggleSortOrder()" />
             @else
-                <x-heroicon-o-arrow-narrow-down class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-black" wire:click.prevent="$toggle('sortDesc')" />
+                <x-heroicon-o-arrow-narrow-down class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-black" wire:click.prevent="$toggleSortOrder()" />
             @endif
         </div>
         <div class="flex-1 min-w-0 bg-primary p-2 rounded-lg">
@@ -34,7 +34,7 @@
             Filters
         </div>
         <div class="w-full relative md:w-1/3">
-            <x-library::input.date wire:model="filters.start_date" class="pl-8" placeholder="Project Launch Date"/>
+            <x-library::input.date wire:model="filters.created_at" class="pl-8" placeholder="Date Created"/>
             <div class="absolute top-0 flex items-center h-full ml-3">
                 <x-heroicon-o-calendar class="w-4 text-dark-text-color" />
             </div>

@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Bookmarks;
 
+use App\Traits\WithSortAndFilters;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Models\Bookmark;
@@ -9,7 +10,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class Index extends Component
 {
-    use WithPagination, WithCachedRows;
+    use WithPagination, WithCachedRows, WithSortAndFilters;
 
     public ?string $search = null;
 
@@ -22,20 +23,12 @@ class Index extends Component
         'created_at' => 'Date Created', 
     ];
 
-    public string $orderBy = 'created_at';
-    public bool $sortDesc = true;
-
     protected $queryString = [
         'search'
     ];
 
     public function mount()
     {
-    }
-
-    public function updatedFilters()
-    {
-        $this->resetPage();
     }
 
     public function getRowsQueryProperty()
