@@ -11,7 +11,7 @@
                     @endif
                 </a>
             @endforeach
-            <x-library::dropdown>
+            {{-- <x-library::dropdown>
                 <x-slot name="trigger">
                     <button type="button" class="py-4 mx-4 flex items-center text-light-text-color hover:text-base-text-color" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
                         <span class="sr-only">Open options</span>
@@ -21,7 +21,7 @@
                 <x-library::dropdown.item>
                     Some dropdown item
                 </x-library::dropdown.item>
-            </x-library::dropdown>
+            </x-library::dropdown> --}}
         </div>
     </div>
     <div class="flex">

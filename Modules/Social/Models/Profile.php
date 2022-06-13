@@ -68,6 +68,10 @@
             return $this->is_private == true ? 'private' : 'public';
         }
 
+        public function url() {
+            return route('social.profile.show', $this->handle);
+        }
+
         public function getCountryAttribute()
         {
             return 'USA';
