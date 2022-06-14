@@ -2,7 +2,7 @@
 
 
 @section('content')
-<livewire:social::pages.projects.partials.header :team="$team" />
+<x-teams.partials.header  :team="$team" />
 <div class="flex space-x-4 mt-4 -ml-4">
     <div class="space-y-4">
         <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
