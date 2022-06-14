@@ -3,7 +3,7 @@
 
 @section('content')
 <livewire:social::pages.projects.partials.header :team="$team" />
-<div class="flex space-x-4 mt-4 -mx-4">
+<div class="flex space-x-4 mt-4 -ml-4">
     <div class="space-y-4">
         <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
             <div class="col-span-2 row-span-1 flex flex-col">
@@ -142,7 +142,7 @@
                 <div>
                     <div class="flex justify-between items-center text-black font-semibold">
                         <p class="text-sm">Awards</p>
-                        <a href="{{ route('social.projects.awards', $team->id) }}" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
+                        <a href="{{ route('social.projects.awards', $team) }}" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
                     </div>
                     <div class="mt-4 flex space-x-2">
                         @forelse ($team->awards()->take(2)->get() as $award)
