@@ -8,6 +8,8 @@ use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
 use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
 use Modules\Social\Http\Livewire\Pages\Contacts\Index as ContactsIndex;
 use Modules\Social\Http\Livewire\Pages\Discover\Index as DiscoverIndex;
+use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
+use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Projects\Awards as ProjectAwards;
 use Modules\Social\Http\Livewire\Pages\Projects\Edit as EditProject;
 use Modules\Social\Http\Livewire\Pages\Projects\Followers as ProjectFollowers;
@@ -30,9 +32,9 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
 
     Route::name('profile.')->prefix('profiles')->group(function() {
         Route::get('{profile:handle}', ShowProfile::class)->name('show');
-        Route::get('{profile:handle}/edit', function() {})->name('edit');
+        Route::get('{profile:handle}/edit', EditProfile::class)->name('edit');
         Route::get('{profile:handle}/media', function() {})->name('media');
-        Route::get('{profile:handle}/followers', function() {})->name('followers');
+        Route::get('{profile:handle}/followers', ProfileFollowers::class)->name('followers');
     });
 
     Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {

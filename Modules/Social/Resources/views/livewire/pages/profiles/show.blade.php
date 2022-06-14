@@ -4,26 +4,7 @@
 @section('content')
 <div class="flex space-x-4">
     <div class="mx-auto max-w-3xl">
-        <div class="-ml-4">
-            <div class="h-60 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat relative overlay before:bg-black before:inset-0 before:opacity-60">
-                <div class="mb-1 mx-[15px] absolute bottom-0 left-0 right-0 flex justify-between items-end">
-                    <div class="flex items-end">
-                        <div class="mr-3 z-10 -mb-12">
-                            <img class="h-24 w-24 rounded-full" src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" />
-                        </div>
-                        <div>
-                            <h1 class="text-3xl text-white">{{ $this->user->name  }}</h1>
-                            <p class="text-sm text-white">{{ '@' .  $this->user->handle }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center text-white text-3xl font-semibold">
-                        <x-heroicon-s-star class="w-6 h-6" />
-                        {{ $this->user->reviewScore ?? '3758' }}
-                    </div>
-                </div>
-            </div>
-            <x-profiles.overview-navigation class="bg-gray-300" :user="$this->user" />
-        </div>
+        <x-profiles.partials.header :user="$this->user" />
         <div class="flex space-x-6 mt-4 -ml-4">
             <div class="space-y-4">
                 <div class="p-[15px] rounded bg-primary space-y-3 text-base-text-color">

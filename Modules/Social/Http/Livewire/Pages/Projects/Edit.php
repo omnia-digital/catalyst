@@ -2,11 +2,8 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Projects;
 
-use App\Actions\Teams\ApplyToTeam;
 use App\Models\Team;
-use App\Models\TeamApplication;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 
