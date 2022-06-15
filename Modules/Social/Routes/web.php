@@ -16,6 +16,7 @@ use Modules\Social\Http\Livewire\Pages\Projects\Followers as ProjectFollowers;
 use Modules\Social\Http\Livewire\Pages\Projects\Members as ProjectMembers;
 use Modules\Social\Http\Livewire\Pages\Projects\Show as ShowProject;
 use Modules\Social\Http\Livewire\Pages\Projects\MyProjects;
+use Modules\Social\Models\Profile;
 
 Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->group(function () {
     //        Route::get('/', 'SocialController@index');
@@ -31,15 +32,15 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     Route::get('/discover', DiscoverIndex::class)->name('discover');
 
     Route::name('profile.')->prefix('profiles')->group(function() {
-        Route::get('{profile:handle}', ShowProfile::class)->name('show');
-        Route::get('{profile:handle}/edit', EditProfile::class)->can('update-profile', 'profile')->name('edit');
-        Route::get('{profile:handle}/media', function() {})->name('media');
-        Route::get('{profile:handle}/followers', ProfileFollowers::class)->name('followers');
+        Route::get('{profile}', ShowProfile::class)->name('show');
+        Route::get('{profile}/edit', EditProfile::class)->name('edit');
+        Route::get('{profile}/media', function() {})->name('media');
+        Route::get('{profile}/followers', ProfileFollowers::class)->name('followers');
     });
 
     Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {
         Route::get('{team}', ShowProject::class)->name('show');
-        Route::get('{team}/edit', EditProject::class)->can('update-team', 'team')->name('edit');
+        Route::get('{team}/edit', EditProject::class)->name('edit');
         Route::get('{team}/members', ProjectMembers::class)->name('members');
         Route::get('{team}/followers', ProjectFollowers::class)->name('followers');
         Route::get('{team}/awards', ProjectAwards::class)->name('awards');
