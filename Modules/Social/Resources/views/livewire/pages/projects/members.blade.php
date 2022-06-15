@@ -2,9 +2,9 @@
 
 
 @section('content')
-<div>
+<div class="mx-auto max-w-4xl">
     <x-teams.partials.header :team="$team" />
-    <div class="mt-4 -mx-4">
+    <div class="mt-4 -ml-4">
         <h2 class="text-black font-semibold text-2xl">Members</h2>
     
         <div x-data="setup()">
