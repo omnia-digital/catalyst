@@ -25,7 +25,9 @@
         </div>
     </div>
     <div class="flex">
-        <a href="{{ route('social.profile.edit', $user->id) }}" class="py-4 mx-4 whitespace-nowrap">Edit Profile</a>
+        @if ($user->is(auth()->user()))
+            <a href="{{ route('social.profile.edit', $user->handle) }}" class="py-4 mx-4 whitespace-nowrap">Edit Profile</a>
+        @endif
         <livewire:social::partials.follow-button :model="$user" class="py-4 mx-4"/>
         <div class="inline-flex items-center text-md">
             <button class="p-2 mx-[15px] inline-flex items-center text-sm rounded-full bg-primary"><x-heroicon-s-plus class="h-4 w-4" /></button>

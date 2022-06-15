@@ -32,14 +32,14 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
 
     Route::name('profile.')->prefix('profiles')->group(function() {
         Route::get('{profile:handle}', ShowProfile::class)->name('show');
-        Route::get('{profile:handle}/edit', EditProfile::class)->name('edit');
+        Route::get('{profile:handle}/edit', EditProfile::class)->can('update-profile', 'profile')->name('edit');
         Route::get('{profile:handle}/media', function() {})->name('media');
         Route::get('{profile:handle}/followers', ProfileFollowers::class)->name('followers');
     });
 
     Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {
         Route::get('{team}', ShowProject::class)->name('show');
-        Route::get('{team}/edit', EditProject::class)->name('edit');
+        Route::get('{team}/edit', EditProject::class)->can('update-team', 'team')->name('edit');
         Route::get('{team}/members', ProjectMembers::class)->name('members');
         Route::get('{team}/followers', ProjectFollowers::class)->name('followers');
         Route::get('{team}/awards', ProjectAwards::class)->name('awards');

@@ -3,13 +3,14 @@
 namespace Modules\Social\Http\Livewire\Pages\Projects;
 
 use App\Models\Team;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 
 class Edit extends Component
 {
-    use WithPlace;
+    use WithPlace, AuthorizesRequests;
 
     public Team $team;
 
@@ -31,6 +32,7 @@ class Edit extends Component
 
     public function mount(Team $team)
     {
+        $this->authorize('update-team', $team);
         $this->team = $team->load('owner');
     }
 
