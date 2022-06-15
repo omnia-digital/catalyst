@@ -71,9 +71,15 @@
             <div class="col-span-2 row-span-1 space-y-6 flex flex-col">
                 <div class="flex-1 flex flex-col">
                     <p class="text-black font-semibold">About this Project</p>
-                    <div class="flex-1 mt-4 bg-white p-4">
-                        <p class="text-dark-text-color">{{ $team->content }}</p>
-                    </div>
+                    @if ($team->content)
+                        <div 
+                            x-data="{readMore: false, longText: @js(strlen($team->content) > 410)}" 
+                            class="mt-4 bg-white p-4 relative"
+                        >
+                            <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden" :class="(longText && readMore) ? 'h-full max-h-96' : 'max-h-24'">{{ $team->content }}</p>
+                            <div x-show="longText && !readMore" class="bg-gradient-to-t from-white to-transparent absolute bottom-1 left-4 right-2 pt-8"><a class="block w-full text-right" href="#" @click.prevent="readMore = !readMore">Read More</a></div>
+                        </div>
+                    @endif
                 </div>
                 <!-- Post Tile -->
                 @if ($this->recentPosts->count())
