@@ -2,6 +2,7 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
+use App\Traits\WithSortAndFilters;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Enums\PostType;
@@ -11,12 +12,12 @@ use function view;
 
 class Index extends Component
 {
-    use WithPagination, WithCachedRows;
+    use WithPagination, WithCachedRows, WithSortAndFilters;
 
     public ?string $search = null;
 
     public array $filters = [
-        'published_at' => '',
+        'created_at' => '',
         'has_attachment' => false,
     ];
 
@@ -28,32 +29,16 @@ class Index extends Component
         'published_at' => 'Published Date'
     ];
 
-    public string $orderBy = 'published_at';
-    public bool $sortDesc = true;
-
     protected $queryString = [
         'search'
     ];
 
     public function mount()
     {
+        $this->orderBy = 'published_at';
+
         if (!\App::environment('production')) {
             $this->useCache = false;
-        }
-    }
-
-    public function updatedFilters()
-    {
-        $this->resetPage();
-    }
-
-    public function sortBy($key)
-    {
-        if($this->orderBy === $key) {
-            $this->sortDesc = !$this->sortDesc;
-        } else {
-            $this->orderBy = $key;
-            $this->sertDesc = true;
         }
     }
 
@@ -72,7 +57,7 @@ class Index extends Component
         return Post::where('type','=',PostType::RESOURCE)
             ->withCount('bookmarks')
             ->withCount('likes')
-            ->orderBy($this->orderBy, $this->sortDesc ? 'desc' : 'asc');
+            ->orderBy($this->orderBy, $this->sortOrder);
     }
 
     public function getRowsProperty()

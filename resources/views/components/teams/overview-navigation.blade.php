@@ -4,10 +4,10 @@
             @foreach ($nav as $key => $item)
                 <a 
                     href="{{ route('social.projects.' . $key, $team) }}" 
-                    class="py-4 mx-[10px] flex border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
+                    class="py-4 mx-[10px] flex items-center border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
                     {{ $item }}
                     @if ($key === 'followers')
-                        <span class="ml-2 px-1 flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $team->followers()->count() }}</span>
+                        <span class="ml-2 px-1 w-[21px] h-[22px] flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $team->followers()->count() }}</span>
                     @endif
                 </a>
             @endforeach
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="flex pr-[15px]">
-        <a href="{{ route('social.projects.edit', $team->id) }}" class="py-4 mx-4 whitespace-nowrap">Edit Project</a>
+        <a href="{{ route('social.projects.edit', $team) }}" class="py-4 mx-4 whitespace-nowrap">Edit Project</a>
         <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
         <div class="inline-flex items-center text-md relative">
             <div class="absolute inset-auto -translate-y-12 p-2 rounded-md bg-black text-white" 
