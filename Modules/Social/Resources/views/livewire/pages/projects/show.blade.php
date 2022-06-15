@@ -129,14 +129,16 @@
                     </div>
                 </div>
                 <!-- Project Languages -->
-                <div>
-                    <div class="text-black font-semibold">
-                        <p class="text-sm">Languages</p>
+                @if ($team->languages)
+                    <div>
+                        <div class="text-black font-semibold">
+                            <p class="text-sm">Languages</p>
+                        </div>
+                        <div class="mt-4 bg-white p-4">
+                            <p class="text-dark-text-color">{{ $team->languages }}</p>
+                        </div>
                     </div>
-                    <div class="mt-4 bg-white p-4">
-                        <p class="text-dark-text-color">{{ $team->languages }}</p>
-                    </div>
-                </div>
+                @endif
 
                 <!-- Project Awards -->
                 <div>
