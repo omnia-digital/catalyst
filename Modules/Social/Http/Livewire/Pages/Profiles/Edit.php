@@ -2,11 +2,14 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Profiles;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Modules\Social\Models\Profile;
 
 class Edit extends Component
 {
+    use AuthorizesRequests;
+
     public Profile $profile;
 
     protected function rules(): array
@@ -25,6 +28,7 @@ class Edit extends Component
 
     public function mount(Profile $profile)
     {
+        $this->authorize('update-profile', $profile);
         $this->profile = $profile->load('user');
     }
     
