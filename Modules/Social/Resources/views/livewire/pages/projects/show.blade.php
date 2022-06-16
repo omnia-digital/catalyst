@@ -129,20 +129,24 @@
                     </div>
                 </div>
                 <!-- Project Languages -->
-                <div>
-                    <div class="text-black font-semibold">
-                        <p class="text-sm">Languages</p>
+                @if ($team->languages)
+                    <div>
+                        <div class="text-black font-semibold">
+                            <p class="text-sm">Languages</p>
+                        </div>
+                        <div class="mt-4 bg-white p-4">
+                            <p class="text-dark-text-color">{{ $team->languages }}</p>
+                        </div>
                     </div>
-                    <div class="mt-4 bg-white p-4">
-                        <p class="text-dark-text-color">{{ $team->languages }}</p>
-                    </div>
-                </div>
+                @endif
 
                 <!-- Project Awards -->
                 <div>
                     <div class="flex justify-between items-center text-black font-semibold">
                         <p class="text-sm">Awards</p>
-                        <a href="{{ route('social.projects.awards', $team) }}" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
+                        @if($team->awards()->count())
+                            <a href="{{ route('social.projects.awards', $team) }}" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
+                        @endif
                     </div>
                     <div class="mt-4 flex space-x-2">
                         @forelse ($team->awards()->take(2)->get() as $award)
