@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="flex space-x-4">
-    <div class="mx-auto max-w-3xl">
+    <div class="mx-auto max-w-4xl">
         <x-profiles.partials.header :user="$this->user" />
         <div class="flex space-x-6 mt-4 -ml-4">
             <div class="space-y-4">
