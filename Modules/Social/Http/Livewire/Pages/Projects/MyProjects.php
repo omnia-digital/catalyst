@@ -4,16 +4,17 @@ namespace Modules\Social\Http\Livewire\Pages\Projects;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Traits\WithSortAndFilters;
 use Livewire\Component;
 use Livewire\WithPagination;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class MyProjects extends Component
 {
-    use WithPagination, WithCachedRows;
+    use WithPagination, WithCachedRows, WithSortAndFilters;
 
     public array $filters = [
-        'created_at' => '',
+        'start_date' => '',
         'has_attachment' => false,
     ];
 
@@ -23,28 +24,12 @@ class MyProjects extends Component
         'start_date' => 'Launch Date'
     ];
 
-    public string $orderBy = 'name';
-    public bool $sortDesc = true;
-
     public function mount()
     {
+        $this->orderBy = 'name';
+        
         if (!\App::environment('production')) {
             $this->useCache = false;
-        }
-    }
-
-    public function updatedFilters()
-    {
-        $this->resetPage();
-    }
-
-    public function sortBy($key)
-    {
-        if($this->orderBy === $key) {
-            $this->sortDesc = !$this->sortDesc;
-        } else {
-            $this->orderBy = $key;
-            $this->sertDesc = true;
         }
     }
 
@@ -53,7 +38,7 @@ class MyProjects extends Component
         return 
             Team::where('user_id', auth()->id())
                 ->withCount('users')
-                ->orderBy($this->orderBy, $this->sortDesc ? 'desc' : 'asc');
+                ->orderBy($this->orderBy, $this->sortOrder);
     }
 
     public function getRowsProperty()
@@ -66,7 +51,8 @@ class MyProjects extends Component
     public function render()
     {
         return view('social::livewire.pages.projects.my-projects', [
-            'projects' => $this->rows
+            'projects' => $this->rows,
+            'projectsCount' => $this->rowsQuery->count()
         ]);
     }
 }

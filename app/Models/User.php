@@ -4,6 +4,7 @@
 
     use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Relations\HasMany;
     use Illuminate\Database\Eloquent\SoftDeletes;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
@@ -14,10 +15,11 @@
     use Modules\Social\Models\Like;
     use Modules\Social\Models\Post;
     use Modules\Social\Models\Profile;
+    use Modules\Social\Traits\Awardable;
     use Modules\Social\Traits\HasBookmarks;
     use Wimil\Followers\Traits\Followable;
 
-    class User extends Authenticatable implements MustVerifyEmail
+    class User extends Authenticatable
     {
         use HasApiTokens,
             HasProfilePhoto,
@@ -27,7 +29,8 @@
             HasFactory,
             HasTeams,
             HasBookmarks,
-            Followable;
+            Followable,
+            Awardable;
 
         /**
          * The attributes that should be mutated to dates.
@@ -42,6 +45,8 @@
          * @var array
          */
         protected $fillable = [
+            'first_name',
+            'last_name',
             'email',
             'password',
         ];
@@ -67,9 +72,14 @@
             'profile_photo_url'
         ];
 
+        public static function findByEmail($email)
+        {
+            return User::where('email', $email)->first();
+        }
+
         public function getNameAttribute() {
             if ($this->profile()->exists()) {
-               return $this->profile->name;
+                return $this->profile->name;
             }
             return $this->first_name . " " . $this->last_name;
         }
@@ -99,6 +109,26 @@
 
         public function getHandleAttribute() {
             return $this->profile?->handle;
+        }
+
+        /**
+         * Get all of the pending invitations for the user.
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\HasMany
+         */
+        public function teamInvitations(): HasMany
+        {
+            return $this->hasMany(TeamInvitation::class);
+        }
+
+        /**
+         * Get all of the pending applications for the user.
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\HasMany
+         */
+        public function teamApplications(): HasMany
+        {
+            return $this->hasMany(TeamApplication::class);
         }
 
         public function receivesBroadcastNotificationsOn() {

@@ -1,16 +1,16 @@
-<article wire:click.prevent.stop="showPost" class="flex justify-start bg-primary pl-3 pr-5 pt-4 shadow-sm rounded-lg border border-2 border-transparent hover:border-secondary cursor-pointer z-10">
+<article wire:click.prevent.stop="showPost" class="flex justify-start bg-primary pl-3 pr-5 pt-4 shadow-sm rounded-lg border-2 border-transparent z-10 {{ $clickable ? 'hover:border-secondary cursor-pointer' : '' }}">
     <div class="mr-3 flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->profile->name }}"/>
+        <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}"/>
     </div>
     <div class="flex-1">
         <div class="flex space-x-3">
             <div class="min-w-0 flex-1">
                 <div class="min-w-0">
                     <div class="mr-2 font leading-5">
-                        <a href="{{ route('social.profile.show', $post->user->handle) }}" class="hover:underline block font-bold text-dark-text-color">{{ $post->user->name }}</a>
+                        <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="hover:underline block font-bold text-dark-text-color">{{ $post->user->name }}</a>
                     </div>
                     <div class="flex content-center space-x-1 text-base-text-color">
-                        <a href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
+                        <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
                         <x-dot/>
                         <a href="{{ $post->getUrl() }}" class="hover:underline">
                             <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans(short: true) }}</time>
@@ -22,7 +22,7 @@
             <div class=" flex align-top">
 {{--                @if (!is_null($post->team_id))--}}
 {{--                    <div class="text-base-text-color text-xs font-semibold mr-3">--}}
-{{--                        <a href="{{ $post->team->projectLink() }}" class=" hover:no-underline">{{ $post->team->name }}</a>--}}
+{{--                        <a href="{{ $post->team->profile() }}" class=" hover:no-underline">{{ $post->team->name }}</a>--}}
 {{--                    </div>--}}
 {{--                @endif--}}
                 <div class="relative z-1 inline-block text-left">
@@ -67,7 +67,7 @@
             @if ($post->isRepost())
                 <article class="mt-4 w-full flex bg-white p-4 shadow-sm border border-gray-200 rounded-md">
                     <div class="mr-3 flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full" src="{{ $post->repostOriginal->user?->profile_photo_url }}" alt="{{ $post->repostOriginal->user->profile->name }}"/>
+                        <img class="h-10 w-10 rounded-full" src="{{ $post->repostOriginal->user?->profile_photo_url }}" alt="{{ $post->repostOriginal->user->name }}"/>
                     </div>
                     <div class="flex-1">
                         <div class="flex space-x-3">
@@ -103,7 +103,7 @@
             @endif
         </div>
 
-        <div class="z-20">
+        <div wire:click.prevent.stop="" class="z-20">
             <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
         </div>
     </div>

@@ -7,13 +7,17 @@
             <x-library::input.error for="name"/>
         </div>
         <div class="mt-6">
-            <x-library::input.label value="Start Date"/>
-            <x-library::input.date wire:model.defer="startDate" placeholder="Pick a date"/>
+            <div class="flex items-center">
+                <x-library::input.label value="Start Date"/><span class="text-red-600 text-sm ml-1">*</span>
+            </div>
+            <x-library::input.date wire:model.defer="startDate" placeholder="Project Launch Date"/>
             <x-library::input.error for="startDate"/>
         </div>
         <div class="mt-6">
-            <x-library::input.label value="Summary"/>
-            <x-library::input.textarea wire:model.defer="summary" placeholder="Summary"/>
+            <div class="flex items-center">
+                <x-library::input.label value="Summary"/><span class="text-red-600 text-sm ml-1">*</span>
+            </div>
+            <x-library::input.textarea wire:model.defer="summary" placeholder="Summary" />
             <x-library::input.error for="summary"/>
         </div>
     </x-slot>

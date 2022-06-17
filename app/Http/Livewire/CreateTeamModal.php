@@ -43,7 +43,7 @@ class CreateTeamModal extends Component
         $this->closeModal('create-team');
         $this->reset();
 
-        $this->redirectRoute('teams.show', $team);
+        $this->redirectRoute('social.projects.show', $team);
     }
 
     public function render()

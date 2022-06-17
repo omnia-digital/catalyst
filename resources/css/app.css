@@ -63,10 +63,11 @@ h5 {
     @apply h-full;
 }
 
-.hover-trigger .hover-slide-up {
-    @apply h-0 transition-all delay-75 duration-300;
+.stretched-link::after {
+    content: "";
+    @apply z-10 absolute inset-0 bg-transparent pointer-events-auto;
 }
 
-.hover-trigger:hover  .hover-slide-up{
-    @apply h-13;
+.overlay::before {
+    @apply content-[''] absolute w-full inset-0 opacity-75;
 }

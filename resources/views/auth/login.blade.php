@@ -44,5 +44,16 @@
                 </x-jet-button>
             </div>
         </form>
+
+        <x-slot name="additionalCard">
+            <div class="flex items-center justify-center">
+                <p class="text-sm text-base-text-color">
+                    Don't have an account?&nbsp;
+                    <a class="underline text-sm text-base-text-color hover:text-dark-text-color" href="{{ route('register') }}">
+                        {{ __('Sign Up') }}
+                    </a>
+                </p>
+            </div>
+        </x-slot>
     </x-jet-authentication-card>
 </x-guest-layout>

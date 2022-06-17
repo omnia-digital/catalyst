@@ -6,8 +6,17 @@ use Modules\Social\Http\Livewire\Home;
 use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
 use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
 use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
-use Modules\Social\Http\Livewire\Pages\Contacts\Show as ShowContacts;
+use Modules\Social\Http\Livewire\Pages\Contacts\Index as ContactsIndex;
+use Modules\Social\Http\Livewire\Pages\Discover\Index as DiscoverIndex;
+use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
+use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
+use Modules\Social\Http\Livewire\Pages\Projects\Awards as ProjectAwards;
+use Modules\Social\Http\Livewire\Pages\Projects\Edit as EditProject;
+use Modules\Social\Http\Livewire\Pages\Projects\Followers as ProjectFollowers;
+use Modules\Social\Http\Livewire\Pages\Projects\Members as ProjectMembers;
+use Modules\Social\Http\Livewire\Pages\Projects\Show as ShowProject;
 use Modules\Social\Http\Livewire\Pages\Projects\MyProjects;
+use Modules\Social\Models\Profile;
 
 Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->group(function () {
     //        Route::get('/', 'SocialController@index');
@@ -20,12 +29,21 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     Route::get('/home', Home::class)->name('home');
     Route::get('bookmarks', Index::class)->name('bookmarks');
 
-    //        Route::get('/projects', function () {
-    //            return "Projects";
-    //        })->name('projects');
+    Route::get('/discover', DiscoverIndex::class)->name('discover');
 
     Route::name('profile.')->prefix('profiles')->group(function() {
-        Route::get('{profile:handle}', ShowProfile::class)->name('show');
+        Route::get('{profile}', ShowProfile::class)->name('show');
+        Route::get('{profile}/edit', EditProfile::class)->name('edit');
+        Route::get('{profile}/media', function() {})->name('media');
+        Route::get('{profile}/followers', ProfileFollowers::class)->name('followers');
+    });
+
+    Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {
+        Route::get('{team}', ShowProject::class)->name('show');
+        Route::get('{team}/edit', EditProject::class)->name('edit');
+        Route::get('{team}/members', ProjectMembers::class)->name('members');
+        Route::get('{team}/followers', ProjectFollowers::class)->name('followers');
+        Route::get('{team}/awards', ProjectAwards::class)->name('awards');
     });
 
     Route::get('/my-projects', MyProjects::class)->name('my-projects');
@@ -33,7 +51,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     Route::get('/posts/{post}', ShowPosts::class)->name('posts.show');
 
     Route::name('contacts.')->prefix('contacts')->group(function () {
-        Route::get('/', ShowContacts::class)->name('show');
+        Route::get('/', ContactsIndex::class)->name('index');
     });
 
     Route::get('/crm', function () {

@@ -10,7 +10,7 @@
                         <a href="{{ route('social.posts.show', ['post' => $post]) }}" class="flex justify-between">
                             <div class="flex-1">
                                 <div class="font-bold">
-                                    {{ $post->title ?? $post->user->name }}
+                                    <span wire:click.prevent.stop="showProfile('{{ $post->user->url() }}')" class="hover:underline">{{ $post->title ?? $post->user->name }}</span>
                                 </div>
                                 <div class="line-clamp-2">
                                     {!! $post->body !!}
@@ -25,7 +25,7 @@
                 </ul>
             </div>
             <div class="">
-                <a href="#" class="w-full block text-center px-4 py-4 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-neutral-hover">
+                <a href="{{ route('social.discover') }}" class="w-full block text-center px-4 py-4 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-neutral-hover">
                     View all
                 </a>
             </div>

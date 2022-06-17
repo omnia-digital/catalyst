@@ -71,16 +71,28 @@
 
                                     copy() {
                                         this.$clipboard(this.url);
+                                        $dispatch('copied');
                                     }
                                 }"
                            x-on:click.prevent.stop="copy">
-                            <div class="border w-12 h-12 fill-grey-100  border-grey-100 rounded-full flex
+                            <div class="border w-12 h-12 text-base-text-color fill-base-text-color  border-base-text-color rounded-full flex
                             items-center justify-center shadow-xl cursor-pointer
-                            hover:bg-neutral active:text-primary hover:fill-neutral
-                            active:bg-secondary active:text-primary active:fill-secondary">
+                            hover:bg-base-text-color hover:text-primary hover:fill-base-text-color
+                            active:bg-base-text-color active:text-primary active:fill-base-text-color">
                                 <i class="fa-solid fa-link"></i>
                             </div>
                         </a>
+
+                        <div
+                            style="display: none;"
+                            x-data="{show: false}"
+                            x-show="show"
+                            x-transition:leave.opacity.duration.1500ms 
+                            @copied.window=" 
+                                show = true; 
+                                setTimeout(() => { show = false; }, 3000);
+                            "
+                            class="absolute bottom-8 left-0 right-0 mx-auto flex justify-center">Link Copied!</div>
                     </div>
                 @endif
             </x-slot>

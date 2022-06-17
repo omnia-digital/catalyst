@@ -2,6 +2,7 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Bookmarks;
 
+use App\Traits\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,16 +12,18 @@ use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class Index extends Component
 {
-    use WithPagination, WithCachedRows;
+    use WithPagination, WithCachedRows, WithSortAndFilters;
 
     public ?string $search = null;
 
     public array $filters = [
-        'date_created' => '',
+        'created_at' => '',
         'has_attachment' => false,
     ];
 
-    public string $orderBy = 'date_created';
+    public array $sortLabels = [
+        'created_at' => 'Date Created',
+    ];
 
     protected $queryString = [
         'search'
@@ -28,11 +31,7 @@ class Index extends Component
 
     public function mount()
     {
-    }
-
-    public function updatedFilters()
-    {
-        $this->resetPage();
+        $this->orderBy = 'created_at';
     }
 
     public function getRowsQueryProperty()
@@ -46,7 +45,8 @@ class Index extends Component
     {
         return Bookmark::where('user_id', '=', \Auth::user()->id)->whereHas('bookmarkable', function(Builder $query) {
             return $query->scopes(['ofType' => PostType::RESOURCE]);
-        });
+        })
+            ->orderBy($this->orderBy, $this->sortOrder);
     }
 
     public function getRowsProperty()
@@ -55,6 +55,8 @@ class Index extends Component
             return $this->rowsQuery->paginate(24);
         });
     }
+
+    
 
     public function render()
     {

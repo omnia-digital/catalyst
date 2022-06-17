@@ -20,6 +20,24 @@ class TeamLocation extends Model
         );
     }
 
+    public function full(): Attribute
+    {
+        return new Attribute(
+            get: function ($value, $attributes) {
+                $address = '';
+                $address .= $attributes['address'];
+
+                if ($attributes['address_line_2']) {
+                    $address .= " " . $attributes['address_line_2'];
+                }
+
+                $address .= ", " . $attributes['city'] . ', ' . $attributes['state'] . ', ' . $attributes['postal_code'] . " " . $attributes['country'];
+
+                return $address;
+            }
+        );
+    }
+
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         return $query->where(function (Builder $query) use ($search) {
