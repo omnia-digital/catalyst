@@ -2,13 +2,13 @@
 
 namespace App\Actions\Jetstream;
 
+use App\Contracts\InvitesTeamMembers;
+use App\Events\InvitingTeamMember;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Laravel\Jetstream\Contracts\InvitesTeamMembers;
-use Laravel\Jetstream\Events\InvitingTeamMember;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Mail\TeamInvitation;
 use Laravel\Jetstream\Rules\Role;
@@ -22,23 +22,25 @@ class InviteTeamMember implements InvitesTeamMembers
      * @param  mixed  $team
      * @param  string  $email
      * @param  string|null  $role
+     * @param  string  $message
      * @return void
      */
-    public function invite($inviter, $team, string $email, string $role = null)
+    public function invite($inviter, $team, string $email, string $role = null, string $message = '')
     {
         Gate::forUser($inviter)->authorize('addTeamMember', $team);
 
         $user = User::findByEmail($email);
 
-        $this->validate($team, $email, $role);
+        $this->validate($team, $email, $role, $message);
 
-        InvitingTeamMember::dispatch($team, $email, $role);
+        InvitingTeamMember::dispatch($team, $email, $role, $message);
 
         $invitation = $team->teamInvitations()->create([
             'user_id' => optional($user)->id,
             'inviter_id' => $inviter->id,
             'email' => $email,
             'role' => $role,
+            'message' => $message,
         ]);
 
         Mail::to($email)->send(new TeamInvitation($invitation));
@@ -50,13 +52,15 @@ class InviteTeamMember implements InvitesTeamMembers
      * @param  mixed  $team
      * @param  string  $email
      * @param  string|null  $role
+     * @param  string  $message
      * @return void
      */
-    protected function validate($team, string $email, ?string $role)
+    protected function validate($team, string $email, ?string $role, string $message)
     {
         Validator::make([
             'email' => $email,
             'role' => $role,
+            'message' => $message,
         ], $this->rules($team), [
             'email.unique' => __('This user has already been invited to the team.'),
         ])->after(
@@ -79,6 +83,7 @@ class InviteTeamMember implements InvitesTeamMembers
             'role' => Jetstream::hasRoles()
                             ? ['required', 'string', new Role]
                             : null,
+            'message' => ['max:255'],
         ]);
     }
 
