@@ -52,7 +52,7 @@
                     <div class="flex justify-between">
                         <div class="flex flex-col divide-y space-y-3">
                             @forelse ($invitations as $invitation)
-                                <div class="py-3">
+                                <div class="py-3 space-y-4">
                                     <div class="flex items-center">
                                         <div class="mr-3 w-10 h-10 rounded-full">
                                             <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $invitation->user?->profile_photo_url }}" alt="{{ $invitation->user->name }}" />
