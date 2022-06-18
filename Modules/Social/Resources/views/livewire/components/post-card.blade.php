@@ -74,7 +74,7 @@
                             <div class="min-w-0 flex-1">
                                 <div class="min-w-0 flex justify-start">
                                     <div class="font-bold text-dark-text-color mr-2">
-                                        <a href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}" class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
+                                        <a wire:click.prevent.stop="showProfile('{{ $post->repostOriginal->user->handle }}')" href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}" class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
                                     </div>
                                     <div class="text-base-text-color">
                                         {{ $post->repostOriginal->created_at->diffForHumans() }}
