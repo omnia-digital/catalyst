@@ -3,6 +3,7 @@
 namespace Modules\Social\Http\Livewire\Partials;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class WhoToFollowSection extends Component
@@ -17,6 +18,7 @@ class WhoToFollowSection extends Component
         return $this
             ->usersQuery
             ->withCount(['followers'])
+            ->where('id', '<>', Auth::id())
             ->orderBy('followers_count', 'desc')
             ->distinct()
             ->limit(3)->get();
