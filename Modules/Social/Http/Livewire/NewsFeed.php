@@ -3,17 +3,40 @@
 namespace Modules\Social\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use Modules\Social\Models\Post;
 
 class NewsFeed extends Component
 {
-    protected $listeners = [
-        'postSaved' => '$refresh'
-    ];
+    use WithPagination;
+
+    public $perPage = 6;
+
+    protected $listeners = ['postSaved'];
+
+    public function postSaved()
+    {
+        $this->resetPage();
+    }
+
+    public function loadMore()
+    {
+        $this->perPage += 6;
+    }
+
+    public function hasMore()
+    {
+        return $this->perPage < $this->rowsQuery->count();
+    }
+
+    public function getRowsQueryProperty()
+    {
+        return Post::with(['user', 'user.profile', 'media'])->latest();
+    }
 
     public function getRowsProperty()
     {
-        return Post::with(['user', 'user.profile', 'media'])->latest()->get();
+        return $this->rowsQuery->paginate($this->perPage);
     }
 
     public function render()
