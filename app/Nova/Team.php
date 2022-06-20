@@ -54,9 +54,9 @@ class Team extends Resource
 
             Date::make('Start Date', 'start_date'),
 //
-            Textarea::make('Summary'),
+            Textarea::make('Summary')->alwaysShow(),
 //
-            Textarea::make('Content'),
+            Textarea::make('Content')->alwaysShow(),
 //
             Boolean::make('Personal Team'),
 //

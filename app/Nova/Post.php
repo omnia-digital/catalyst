@@ -52,7 +52,8 @@ class Post extends Resource
                 ->rules('required', 'max:255'),
 
             Textarea::make('Body')
-                ->sortable(),
+                ->sortable()
+                ->alwaysShow(),
 
             BelongsTo::make('User'),
 
