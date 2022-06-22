@@ -12,6 +12,7 @@ use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\Likable;
@@ -26,13 +27,13 @@ use Wimil\Followers\Traits\CanBeFollowed;
  */
 class Team extends JetstreamTeam
 {
-    use HasFactory, 
-        Likable, 
-        Postable, 
-        HasTags, 
-        CanBeFollowed, 
-        Awardable, 
-        HasProfilePhoto, 
+    use HasFactory,
+        Likable,
+        Postable,
+        HasTags,
+        CanBeFollowed,
+        Awardable,
+        HasProfilePhoto,
         HasSlug;
 
     /**
@@ -56,6 +57,10 @@ class Team extends JetstreamTeam
         'personal_team',
         'summary',
         'content',
+    ];
+
+    protected $dates = [
+        'start_date'
     ];
 
     protected $appends = [
@@ -111,7 +116,7 @@ class Team extends JetstreamTeam
 
     public function resources(): HasMany
     {
-        return $this->hasMany(Resource::class);
+        return $this->hasMany(Post::class)->ofType(PostType::RESOURCE);
     }
 
     public function teamLocation(): HasOne

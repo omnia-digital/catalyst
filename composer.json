@@ -13,6 +13,7 @@
         "jorenvanhocht/laravel-share": "^4.2",
         "laravel/framework": "^9.0",
         "laravel/jetstream": "^2.4",
+        "laravel/nova": "^4.9",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/vapor-cli": "^1.38",
@@ -48,6 +49,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/omnia-digital/library.git"
+        },
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
         }
     ],
     "autoload": {
