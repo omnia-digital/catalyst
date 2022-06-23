@@ -54,9 +54,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
         Route::get('/', ContactsIndex::class)->name('index');
     });
 
-    Route::get('/crm', function () {
-        return "CRM";
-    })->name('crm');
+    Route::get('/crm', \Modules\Social\Http\Livewire\Pages\Crm\Index::class)->name('crm');
 
     Route::get('/learn', function () {
         return "Learn";

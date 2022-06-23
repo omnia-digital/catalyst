@@ -54,6 +54,12 @@
 //                    'current' => false
 //                ],
                 [
+                    'label'   => 'Crm',
+                    'name'    => 'social.crm',
+                    'icon'    => 'heroicon-o-user-group',
+                    'current' => false
+                ],
+                [
                     'label'   => 'Contacts',
                     'name'    => 'social.contacts.index',
                     'icon'    => 'heroicon-o-users',
