@@ -7,7 +7,7 @@
                     class="py-4 mx-[10px] flex border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
                     {{ $item }}
                     @if ($key === 'followers')
-                        <span class="ml-2 px-1 w-[21px] h-[22px] flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $user->followers()->count() }}</span>
+                        <span class="ml-2 p-1 flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $user->followers()->count() }}</span>
                     @endif
                 </a>
             @endforeach
