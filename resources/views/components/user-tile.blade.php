@@ -2,7 +2,7 @@
     <div class="relative">
         <div class="h-24 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
         <div class="absolute -bottom-12 left-5">
-            <img class="h-20 w-20 rounded-full border-4 border-white bg-white" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
+            <img class="h-20 w-20 rounded-full border-4 border-primary bg-primary" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
         </div>
     </div>
     <div class="space-y-2 p-4">

@@ -52,12 +52,12 @@
                                 </svg>
                             </template>
                             <template x-if="files[index].type.includes('image/')">
-                                <img class="absolute inset-0 z-0 object-cover w-full h-full border-4 border-white preview"
+                                <img class="absolute inset-0 z-0 object-cover w-full h-full border-4 border-primary preview"
                                     x-bind:src="loadFile(files[index])" />
                             </template>
                             <template x-if="files[index].type.includes('video/')">
                                 <video
-                                    class="absolute inset-0 object-cover w-full h-full border-4 border-white pointer-events-none preview">
+                                    class="absolute inset-0 object-cover w-full h-full border-4 border-primary pointer-events-none preview">
                                     <fileDragging x-bind:src="loadFile(files[index])" type="video/mp4">
                                 </video>
                             </template>

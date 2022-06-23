@@ -5,7 +5,7 @@
 <div class="mx-auto max-w-4xl">
     <x-teams.partials.header :team="$team" />
     <div class="mt-4 -ml-4">
-        <h2 class="text-black font-semibold text-2xl">Members</h2>
+        <h2 class="text-secondary font-semibold text-2xl">Members</h2>
     
         <div x-data="setup()">
             <!-- Project Members Navigation -->
@@ -231,7 +231,7 @@
     
                                         <div class="flex items-center">
                                             <button type="button" 
-                                                class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-black text-sm tracking-wide font-medium border border-black hover:bg-neutral-light" 
+                                                class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-secondary text-sm tracking-wide font-medium border border-secondary hover:bg-neutral-light" 
                                                 wire:click.prevent="addTeamMemberUsingID({{ $application->user->id }})"
                                             >Accept</button>
                                             @if (Gate::check('removeTeamMember', $team))
@@ -315,9 +315,9 @@
                         {{ __('Cancel') }}
                     </x-jet-secondary-button>
         
-                    <x-jet-danger-button class="ml-2" wire:click="leaveTeam" wire:loading.attr="disabled">
+                    <x-jet-red-button class="ml-2" wire:click="leaveTeam" wire:loading.attr="disabled">
                         {{ __('Leave') }}
-                    </x-jet-danger-button>
+                    </x-jet-red-button>
                 </x-slot>
             </x-jet-confirmation-modal>
 
@@ -336,9 +336,9 @@
                         {{ __('Cancel') }}
                     </x-jet-secondary-button>
         
-                    <x-jet-danger-button class="ml-2" wire:click="removeTeamMember" wire:loading.attr="disabled">
+                    <x-jet-red-button class="ml-2" wire:click="removeTeamMember" wire:loading.attr="disabled">
                         {{ __('Remove') }}
-                    </x-jet-danger-button>
+                    </x-jet-red-button>
                 </x-slot>
             </x-jet-confirmation-modal>
         @endonce

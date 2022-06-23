@@ -3,7 +3,7 @@
 
     <x-slot name="content">
         <div>
-            <x-library::input.text wire:model.defer="name" class="bg-white" label="Name" placeholder="Name" required/>
+            <x-library::input.text wire:model.defer="name" class="bg-primary" label="Name" placeholder="Name" required/>
             <x-library::input.error for="name"/>
         </div>
         <div class="mt-6">
@@ -26,7 +26,7 @@
             <div class="flex items-center">
                 <x-library::input.label value="Banner Image" /><span class="text-red-600 text-sm ml-1">*</span>  
             </div>
-            <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-white rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+            <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
                 <input type="text" class="flex-1 border-none" wire:model="bannerImageName" placeholder="Upload file for banner" readonly>
                 <label>
                     <input type="file" wire:model="bannerImage" hidden required />
@@ -43,7 +43,7 @@
             <div class="flex items-center">
                 <x-library::input.label value="Main Image" /><span class="text-red-600 text-sm ml-1">*</span>  
             </div>
-            <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-white rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+            <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
                 <input type="text" class="flex-1 border-none" wire:model="mainImageName" placeholder="Upload file for banner" readonly>
                 <label>
                     <input type="file" wire:model="mainImage" hidden required />
@@ -60,7 +60,7 @@
             <div class="flex items-center">
                 <x-library::input.label value="Sample Media" /><span class="text-red-600 text-sm ml-1">*</span>  
             </div>
-            <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-white rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+            <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
                 <p class="flex-1 py-2 px-3 text-[1rem] text-base-text-color">Upload multiple images about your project to be displayed</p>
                 <label>
                     <input type="file" wire:model="sampleMedia" hidden multiple required />

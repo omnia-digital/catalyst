@@ -10,7 +10,7 @@
             <div class="bg-primary overflow-hidden shadow-xl sm:rounded-lg min-h-screen p-8">
                 <h3 class="py-4 text-xl font-bold">Modal</h3>
 
-                <button x-data x-on:click.prevent.stop="$openModal('test-modal')" type="button" class="border border-black px-4 py-2">
+                <button x-data x-on:click.prevent.stop="$openModal('test-modal')" type="button" class="border border-secondary px-4 py-2">
                     Open Modal
                 </button>
 
@@ -79,7 +79,7 @@
                             Message
                         </label>
 
-                        <input id="message" x-model="content" type="text" class="mt-1 block w-full border border-black rounded px-3 py-2">
+                        <input id="message" x-model="content" type="text" class="mt-1 block w-full border border-secondary rounded px-3 py-2">
                     </div>
 
                     <div class="mt-4">
@@ -87,14 +87,14 @@
                             Type
                         </label>
 
-                        <select id="type" x-model="type" type="text" class="mt-1 block w-full border border-black rounded px-3 py-2">
+                        <select id="type" x-model="type" type="text" class="mt-1 block w-full border border-secondary rounded px-3 py-2">
                             <option value="info">Info</option>
                             <option value="success">Success</option>
                             <option value="error">Error</option>
                         </select>
                     </div>
 
-                    <button class="mt-6 inline-flex border border-black rounded shadow px-4 py-2">
+                    <button class="mt-6 inline-flex border border-secondary rounded shadow px-4 py-2">
                         Dispatch notification
                     </button>
                 </form>
@@ -120,7 +120,7 @@
                         x-data
                         x-tooltip="I am a tooltip!"
                         type="button"
-                        class="border border-black rounded shadow px-4 py-2"
+                        class="border border-secondary rounded shadow px-4 py-2"
                     >
                         Hover over me
                     </button>
@@ -129,7 +129,7 @@
                         x-data
                         @click="$tooltip('I am a tooltip!')"
                         type="button"
-                        class="border border-black rounded shadow px-4 py-2"
+                        class="border border-secondary rounded shadow px-4 py-2"
                     >
                         Click me
                     </button>

@@ -41,13 +41,13 @@
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
                                 </div>
-                                <input wire:model.debounce.400ms="filters.search" id="search" name="search" class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm" placeholder="Search" type="search">
+                                <input wire:model.debounce.400ms="filters.search" id="search" name="search" class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-neutral-dark text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm" placeholder="Search" type="search">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="border border-gray-200 bg-white shadow-sm rounded-md flex items-center space-x-4 px-4 py-2">
+            <div class="border border-gray-200 bg-primary shadow-sm rounded-md flex items-center space-x-4 px-4 py-2">
                 <x-library::heading.3>Filters</x-library::heading.3>
 
                 <div>
@@ -84,7 +84,7 @@
                     <div class="col-span-2 grid grid-cols-3 gap-3">
                         @foreach($projects as $project)
                             <div>
-                                <a href="#" class="block rounded-lg shadow-sm bg-white">
+                                <a href="#" class="block rounded-lg shadow-sm bg-primary">
                                     <img
                                             alt="{{ $project->name }}"
                                             src="https://images.unsplash.com/photo-1554995207-c18c203602cb"

@@ -30,19 +30,19 @@
                 <!-- Profile Awards -->
                 <div>
                     <div>
-                        <div class="flex justify-between items-center text-black font-semibold">
+                        <div class="flex justify-between items-center text-secondary font-semibold">
                             <p class="text-sm">Awards</p>
                             <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
                         </div>
                         <div class="mt-2 flex space-x-2">
-                            <div class="bg-white p-2 flex-1 flex items-center">
-                                <div class="rounded-full bg-gray-500 mr-4 p-2">
+                            <div class="bg-primary p-2 flex-1 flex items-center">
+                                <div class="rounded-full bg-neutral-dark mr-4 p-2">
                                     <x-heroicon-s-academic-cap class="w-4 h-4" />
                                 </div>
                                 <p class="whitespace-nowrap">Gold user</p>
                             </div>
-                            <div class="bg-white p-2 flex-1 flex items-center">
-                                <div class="rounded-full bg-gray-500 mr-4 p-2">
+                            <div class="bg-primary p-2 flex-1 flex items-center">
+                                <div class="rounded-full bg-neutral-dark mr-4 p-2">
                                     <x-heroicon-s-academic-cap class="w-4 h-4" />
                                 </div>
                                 <p class="whitespace-nowrap">Gold user</p>
@@ -53,7 +53,7 @@
 
                 <!-- Profile Reviews -->
                 <div>
-                    <div class="flex justify-between items-center text-black font-semibold">
+                    <div class="flex justify-between items-center text-secondary font-semibold">
                         <p class="text-sm">Reviews</p>
                         <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
                     </div>
@@ -77,8 +77,8 @@
 
                 <!-- User Posts -->
                 <div>
-                    <div class="flex justify-between items-center text-black font-semibold">
-                        <p class="text-sm flex">Timeline <span class="bg-gray-400 rounded-full ml-2 w-5 h-5 flex justify-center items-center">{{ $this->user->posts()->count() }}</span></p>
+                    <div class="flex justify-between items-center text-secondary font-semibold">
+                        <p class="text-sm flex">Timeline <span class="bg-light-text-color rounded-full ml-2 w-5 h-5 flex justify-center items-center">{{ $this->user->posts()->count() }}</span></p>
                         <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
                     </div>
                     <div class="mt-2 space-y-2">

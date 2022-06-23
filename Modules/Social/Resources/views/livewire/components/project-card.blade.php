@@ -1,5 +1,5 @@
 <div wire:click.prevent.stop="showProject" 
-    class="bg-primary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
+    class="border border-neutral-light rounded group relative bg-secondary hover:cursor-pointer hover:ring-1 hover:ring-secondary"
     @if ($project->getMedia('team_main_images')->count())
         style="background-image: url({{ $project->getMedia('team_main_images')->first()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
     @endif

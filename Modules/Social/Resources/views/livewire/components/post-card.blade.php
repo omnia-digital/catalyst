@@ -65,7 +65,7 @@
 
         <div>
             @if ($post->isRepost())
-                <article class="mt-4 w-full flex bg-white p-4 shadow-sm border border-gray-200 rounded-md">
+                <article class="mt-4 w-full flex bg-primary p-4 shadow-sm border border-gray-200 rounded-md">
                     <div class="mr-3 flex-shrink-0">
                         <img class="h-10 w-10 rounded-full" src="{{ $post->repostOriginal->user?->profile_photo_url }}" alt="{{ $post->repostOriginal->user->name }}"/>
                     </div>

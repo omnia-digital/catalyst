@@ -31,7 +31,7 @@
                             />
                         </li>
                     @empty
-                        <li class="p-4 bg-white rounded-md text-base-text-color">No resources to show</li>
+                        <li class="p-4 bg-primary rounded-md text-base-text-color">No resources to show</li>
                     @endforelse
                 </ul>
 
@@ -75,7 +75,7 @@
                             component: 'social.undiscovered'
                         },
                     ],
-                    notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>',
+                    notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-primary bg-secondary rounded-full">3</span>',
                 }
             }
         </script>

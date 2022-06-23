@@ -7,7 +7,7 @@
                     class="py-4 mx-[10px] flex items-center border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
                     {{ $item }}
                     @if ($key === 'followers')
-                        <span class="ml-2 p-1 flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $team->followers()->count() }}</span>
+                        <span class="ml-2 p-1 flex justify-center items-center rounded-full bg-neutral-dark text-primary text-xs font-semibold">{{ $team->followers()->count() }}</span>
                     @endif
                 </a>
             @endforeach
@@ -31,7 +31,7 @@
         @endcan
         <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
         <div class="inline-flex items-center text-md relative">
-            <div class="absolute inset-auto -translate-y-12 p-2 rounded-md bg-black text-white" 
+            <div class="absolute inset-auto -translate-y-12 p-2 rounded-md bg-secondary text-primary" 
                 x-data="{show: false}" 
                 x-show="show"
                 x-transition:enter-start="opacity-0 translate-y-0"
@@ -45,7 +45,7 @@
             >
                 <span>Application Submitted</span>
             </div>
-            <div class="absolute inset-auto -translate-y-12 rounded-md p-2 bg-black text-white" 
+            <div class="absolute inset-auto -translate-y-12 rounded-md p-2 bg-secondary text-primary" 
                 x-data="{show: false}" 
                 x-show="show"
                 x-transition:enter="transition ease-out duration-300"
@@ -70,7 +70,7 @@
                     <x-jet-input-error for="user_id" class="mt-2" />
                 </div>
                 <button 
-                    class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-secondary text-white"
+                    class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-secondary text-primary"
                     wire:click="applyToTeam"
                 >Apply</button>
             @endif
