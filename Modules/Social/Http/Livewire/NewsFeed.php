@@ -7,9 +7,19 @@ use Modules\Social\Models\Post;
 
 class NewsFeed extends Component
 {
-    protected $listeners = [
-        'postSaved' => '$refresh'
-    ];
+    protected $listeners = ['postSaved'];
+
+    public $feed;
+
+    public function postSaved()
+    {
+        $this->feed = $this->rows;
+    }
+
+    public function mount()
+    {
+        $this->feed = $this->rows;
+    }
 
     public function getRowsProperty()
     {
@@ -18,8 +28,6 @@ class NewsFeed extends Component
 
     public function render()
     {
-        return view('social::livewire.news-feed', [
-            'feed' => $this->rows
-        ]);
+        return view('social::livewire.news-feed');
     }
 }
