@@ -111,6 +111,11 @@
             return $this->profile?->handle;
         }
 
+        public function getMedia()
+        {
+            
+        }
+
         /**
          * Get all of the pending invitations for the user.
          *
