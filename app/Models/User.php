@@ -118,6 +118,18 @@
                 ->where('model_type', Post::class);
         }
 
+        public function allTeams()
+        {
+            return $this->joinedTeams()->orWhere('user_id', $this->id);
+        }
+
+        public function joinedTeams()
+        {
+            return Team::whereHas('users', function($query) { 
+                $query->where('team_user.user_id', $this->id); 
+            });
+        }
+
         /**
          * Get all of the pending invitations for the user.
          *
