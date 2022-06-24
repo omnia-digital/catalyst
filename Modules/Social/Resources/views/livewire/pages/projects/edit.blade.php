@@ -37,7 +37,7 @@
             <div class="mr-auto">
                 <p class="text-sm text-red-600">This form has errors:</p>
                 @foreach ($errors->all() as $error)
-                    <p> class="text-sm text-red-600"{{ $error }}</p>
+                    <p class="text-sm text-red-600">{{ $error }}</p>
                 @endforeach
             </div>
         @endif
