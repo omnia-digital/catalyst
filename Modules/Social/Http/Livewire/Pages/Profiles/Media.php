@@ -18,7 +18,7 @@ class Media extends Component
     public function mount(Profile $profile)
     {
         $this->profile = $profile->load('user');
-        
+        $this->media = $this->user->postMedia;
     }
 
     public function render()

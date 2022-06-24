@@ -17,6 +17,7 @@
     use Modules\Social\Models\Profile;
     use Modules\Social\Traits\Awardable;
     use Modules\Social\Traits\HasBookmarks;
+    use Spatie\MediaLibrary\MediaCollections\Models\Media;
     use Wimil\Followers\Traits\Followable;
 
     class User extends Authenticatable
@@ -111,9 +112,10 @@
             return $this->profile?->handle;
         }
 
-        public function getMedia()
+        public function postMedia()
         {
-            
+            return $this->hasManyThrough(Media::class, Post::class, 'user_id', 'model_id')
+                ->where('model_type', Post::class);
         }
 
         /**
