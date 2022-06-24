@@ -6,11 +6,12 @@ use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 
 class Edit extends Component
 {
-    use WithPlace, AuthorizesRequests;
+    use WithPlace, AuthorizesRequests, WithFileUploads;
 
     public Team $team;
 
@@ -20,6 +21,17 @@ class Edit extends Component
 
     public bool $removeAddress = false;
 
+    public $bannerImage;
+    public $bannerImageName;
+
+    public $mainImage;
+    public $mainImageName;
+
+    public $sampleMedia = [];
+    public $sampleMediaNames = [];
+
+    public $test = '';
+
     protected function rules(): array
     {
         return [
@@ -28,6 +40,35 @@ class Edit extends Component
             'team.summary' => ['required', 'max:280'],
             'team.content' => ['required', 'max:65500'],
         ];
+    }
+
+    public function updatedBannerImage()
+    {
+        $this->validate([
+            'bannerImage' => 'image',
+        ]);
+
+        $this->bannerImageName = $this->bannerImage->getClientOriginalName();
+    }
+
+    public function updatedMainImage()
+    {
+        $this->validate([
+            'mainImage' => 'image',
+        ]);
+
+        $this->mainImageName = $this->mainImage->getClientOriginalName();
+    }
+
+    public function updatedSampleMedia()
+    {
+        $this->validate([
+            'sampleMedia.*' => 'image',
+        ]);
+
+        foreach ($this->sampleMedia as $key => $media) {
+            $this->sampleMediaNames[$key] = $media->getClientOriginalName();
+        }
     }
 
     public function mount(Team $team)
@@ -52,7 +93,7 @@ class Edit extends Component
     
     public function saveChanges()
     {
-        $this->validate();
+        $this->validate()->validateWithBag('basicInfo');
         
         $this->team->save();
         
@@ -65,11 +106,30 @@ class Edit extends Component
             );
         }
 
+        $this->test .= 'banner: ' . $this->bannerImage . '||| currentCount: ' . $this->team->bannerImage()->count() . '||| ';
+
+        if(!is_null($this->bannerImage) && $this->team->bannerImage()->count()) {
+            $this->test .= "banner exists";
+            $this->team->bannerImage()->delete();
+        } 
+        $this->bannerImage &&
+            $this->team->addMedia($this->bannerImage)->toMediaCollection('team_banner_images');
+
+        if($this->mainImage && $this->team->mainImage()->count()) {
+            $this->team->mainImage()->delete();
+        } 
+        $this->mainImage && 
+            $this->team->addMedia($this->mainImage)->toMediaCollection('team_main_images');
+        
+        foreach ($this->sampleMedia as $media) {
+            $this->team->addMedia($media)->toMediaCollection('team_sample_images');
+        }
+
         $this->emit('changes_saved');
 
         $this->team->refresh();
 
-        $this->reset('newAddress', 'removeAddress');
+        $this->reset('newAddress', 'removeAddress', 'bannerImage', 'mainImage');
     }
 
     public function getSelectedAddressProperty()
