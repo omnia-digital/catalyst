@@ -2,7 +2,8 @@
 
     namespace App\Models;
 
-    use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\HasNoPersonalTeam;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Relations\HasMany;
     use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,10 +28,13 @@
             Notifiable,
             SoftDeletes,
             HasFactory,
-            HasTeams,
             HasBookmarks,
             Followable,
             Awardable;
+        use HasNoPersonalTeam, HasTeams {
+            HasNoPersonalTeam::ownsTeam insteadof HasTeams;
+            HasNoPersonalTeam::isCurrentTeam insteadof HasTeams;
+        }
 
         /**
          * The attributes that should be mutated to dates.
