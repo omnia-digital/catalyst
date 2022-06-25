@@ -130,8 +130,4 @@
         {
             return $this->hasMany(TeamApplication::class);
         }
-
-        public function receivesBroadcastNotificationsOn() {
-            return 'App.User.' . $this->id;
-        }
     }
