@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Livewire\Notifications;
+use App\Http\Livewire\Pages\Teams\Discover;
+use App\Http\Livewire\Pages\Teams\Index;
+use App\Http\Livewire\Pages\Teams\Show as ShowTeam;
 use Illuminate\Support\Facades\Route;
 
     /*
@@ -23,7 +26,9 @@ use Illuminate\Support\Facades\Route;
     })->name('dashboard');
 
     Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {
-        Route::get('/', App\Http\Livewire\Teams::class)->name('home');
+        Route::get('/', Index::class)->name('home');
+        Route::get('/discover', Discover::class)->name('discover');
+        Route::get('{team}', ShowTeam::class)->name('show');
     });
 
     Route::middleware(['auth', 'verified'])->group(function() {
@@ -31,7 +36,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('/messages', function () {
             return "Messages";
         })->name('messages');
-        
+
         Route::get('/notifications', Notifications::class)->name('notifications');
 
         Route::get('/groups', function () {

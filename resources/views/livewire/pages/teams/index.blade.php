@@ -4,13 +4,8 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-                        Projects
+                        {{ $lens ? str($lens)->headline() : 'All Projects' }}
                     </h2>
-                </div>
-                <div class="mt-4 flex md:mt-0 md:ml-4">
-                    <x-library::button x-data="" x-on:click.prevent="$openModal('create-team')">
-                        Create Project
-                    </x-library::button>
                 </div>
             </div>
 
@@ -58,6 +53,10 @@
                     <x-library::input.date wire:model="filters.start_date" placeholder="Project Launch Date"/>
                 </div>
 
+                <div class="w-96">
+                    <x-library::input.selects wire:model="filters.tags" :options="$tags"/>
+                </div>
+
                 <div class="flex items-center w-full z-50">
                     <x-library::input.label value="Members" class="mr-8 font-bold"/>
                     <x-library::input.range-slider
@@ -82,46 +81,12 @@
             <div class="px-4 sm:px-6 md:px-0">
                 <div class="py-4">
                     <div class="col-span-2 grid grid-cols-3 gap-3">
-                        @foreach($projects as $project)
-                            <div>
-                                <a href="#" class="block rounded-lg shadow-sm bg-primary">
-                                    <img
-                                            alt="{{ $project->name }}"
-                                            src="https://images.unsplash.com/photo-1554995207-c18c203602cb"
-                                            class="object-cover w-full h-56 rounded-t-md"
-                                    />
-
-                                    <div class="mt-2">
-                                        <div class="flex items-center justify-between px-2">
-                                            <div class="font-medium">
-                                                {{ $project->name }}
-                                            </div>
-
-                                            <div class="sm:inline-flex sm:items-center sm:shrink-0">
-                                                <x-heroicon-o-user-group class="w-4 h-4 text-indigo-700"/>
-
-                                                <div class="sm:ml-3 mt-1.5 sm:mt-0">
-
-                                                    <div class="font-medium">
-                                                        {{ $project->members }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="text-sm text-gray-500 flex items-center p-2">
-                                            <x-heroicon-o-location-marker class="w-4 h-4 mr-2"/>
-                                                <span>{{ $project->teamLocation?->name ?? 'Not set' }}</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                        @foreach($teams as $team)
+                            <x-teams.card :team="$team"/>
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
-    <livewire:create-team-modal/>
 </div>
