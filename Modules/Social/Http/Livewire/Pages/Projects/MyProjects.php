@@ -5,6 +5,7 @@ namespace Modules\Social\Http\Livewire\Pages\Projects;
 use App\Models\Team;
 use App\Models\User;
 use App\Traits\WithSortAndFilters;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
@@ -44,6 +45,11 @@ class MyProjects extends Component
         return $this->cache(function () {
             return $this->rowsQuery->paginate(100);
         });
+    }
+
+    public function getUserProperty()
+    {
+        return User::find(Auth::id());
     }
 
     public function render()

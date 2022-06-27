@@ -60,7 +60,7 @@
                    </div> --}}
 
                     <!-- Teams Dropdown -->
-                   @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                   @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->isMemberOfATeam())
                        <div class="ml-3 md:relative">
                            <x-jet-dropdown align="right" width="60">
                                <x-slot name="trigger">
@@ -226,7 +226,7 @@
                 </form>
 
                 <!-- Team Management -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->isMemberOfATeam())
                     <div class="border-t border-neutral-light"></div>
 
                     <div class="block px-4 py-2 text-xs text-light-text-color">
