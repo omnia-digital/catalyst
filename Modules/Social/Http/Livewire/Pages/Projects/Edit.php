@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Edit extends Component
 {
@@ -30,7 +31,8 @@ class Edit extends Component
     public $sampleMedia = [];
     public $sampleMediaNames = [];
 
-    public $test = '';
+    public $confirmingRemoveMedia = false;
+    public $mediaToRemove;
 
     protected function rules(): array
     {
@@ -93,7 +95,7 @@ class Edit extends Component
     
     public function saveChanges()
     {
-        $this->validate()->validateWithBag('basicInfo');
+        $this->validate();
         
         $this->team->save();
         
@@ -106,10 +108,7 @@ class Edit extends Component
             );
         }
 
-        $this->test .= 'banner: ' . $this->bannerImage . '||| currentCount: ' . $this->team->bannerImage()->count() . '||| ';
-
         if(!is_null($this->bannerImage) && $this->team->bannerImage()->count()) {
-            $this->test .= "banner exists";
             $this->team->bannerImage()->delete();
         } 
         $this->bannerImage &&
@@ -121,15 +120,36 @@ class Edit extends Component
         $this->mainImage && 
             $this->team->addMedia($this->mainImage)->toMediaCollection('team_main_images');
         
-        foreach ($this->sampleMedia as $media) {
-            $this->team->addMedia($media)->toMediaCollection('team_sample_images');
+        if (sizeof($this->sampleMedia)) {
+            foreach ($this->sampleMedia as $media) {
+                $this->team->addMedia($media)->toMediaCollection('team_sample_images');
+            }
         }
 
         $this->emit('changes_saved');
 
         $this->team->refresh();
 
-        $this->reset('newAddress', 'removeAddress', 'bannerImage', 'mainImage');
+        $this->reset('newAddress', 'removeAddress', 'bannerImage', 'bannerImageName', 'mainImage', 'mainImageName', 'sampleMedia', 'sampleMediaNames');
+    }
+
+    public function confirmRemoval(Media $media)
+    {
+        $this->confirmingRemoveMedia = true;
+        $this->mediaToRemove = $media;
+    }
+    public function removeMedia()
+    {
+        $this->mediaToRemove->delete();
+        $this->confirmingRemoveMedia = false;
+        $this->team->refresh();
+        $this->reset('mediaToRemove');
+    }
+
+    public function removeNewMedia($key)
+    {
+        unset($this->sampleMedia[$key]);
+        unset($this->sampleMediaNames[$key]);
     }
 
     public function getSelectedAddressProperty()
