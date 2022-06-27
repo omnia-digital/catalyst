@@ -135,29 +135,6 @@ class Team extends JetstreamTeam implements HasMedia
         return visits($this)->relation();
     }
 
-//    public function teamLocation(): HasOne
-//    {
-//        return $this->hasOne(TeamLocation);
-//    }
-
-    public function getLocationShortAttribute()
-    {
-        if($this->teamLocation) {
-            return $this->teamLocation->name;
-        }
-
-        return null;
-    }
-
-    public function getLocationAttribute()
-    {
-        if($this->teamLocation) {
-            return $this->teamLocation->full;
-        }
-
-        return null;
-    }
-
     public function getReviewScoreAttribute()
     {
         return null;
