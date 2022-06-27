@@ -17,6 +17,7 @@
     use Modules\Social\Models\Profile;
     use Modules\Social\Traits\Awardable;
     use Modules\Social\Traits\HasBookmarks;
+    use Spatie\MediaLibrary\MediaCollections\Models\Media;
     use Wimil\Followers\Traits\Followable;
 
     class User extends Authenticatable
@@ -109,6 +110,24 @@
 
         public function getHandleAttribute() {
             return $this->profile?->handle;
+        }
+
+        public function postMedia()
+        {
+            return $this->hasManyThrough(Media::class, Post::class, 'user_id', 'model_id')
+                ->where('model_type', Post::class);
+        }
+
+        public function allTeams()
+        {
+            return $this->joinedTeams()->orWhere('user_id', $this->id);
+        }
+
+        public function joinedTeams()
+        {
+            return Team::whereHas('users', function($query) { 
+                $query->where('team_user.user_id', $this->id); 
+            });
         }
 
         /**
