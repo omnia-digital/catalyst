@@ -4,26 +4,34 @@ namespace App\Models;
 
 use App\Models\Traits\HasLocation;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
+use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use Modules\Social\Enums\PostType;
+use Modules\Social\Models\Post;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
 use Wimil\Followers\Traits\CanBeFollowed;
 
 /**
  * Projects are just Teams
  */
-class Team extends JetstreamTeam
+class Team extends JetstreamTeam implements HasMedia
 {
-    use HasFactory, Likable, Postable, HasTags, CanBeFollowed, Awardable, HasLocation;
-
+    use HasFactory, Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto, HasSlug, HasLocation, InteractsWithMedia;
     /**
      * The attributes that should be cast.
      *
@@ -40,10 +48,19 @@ class Team extends JetstreamTeam
      */
     protected $fillable = [
         'name',
+        'handle',
         'start_date',
         'personal_team',
         'summary',
         'content',
+    ];
+
+    protected $dates = [
+        'start_date'
+    ];
+
+    protected $appends = [
+        'profile_photo_url'
     ];
 
     /**
@@ -57,6 +74,23 @@ class Team extends JetstreamTeam
         'deleted' => TeamDeleted::class,
     ];
 
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+                            ->generateSlugsFrom('name')
+                            ->saveSlugsTo('handle');
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'handle';
+    }
+
     public function getThumbnailAttribute($value)
     {
         if (empty($value)) {
@@ -64,6 +98,16 @@ class Team extends JetstreamTeam
         }
 
         return $value;
+    }
+
+    public function attachMedia(array $mediaUrls): self
+    {
+        /** @var string $mediaUrl */
+        foreach ($mediaUrls as $mediaUrl) {
+            $this->addMediaFromUrl($mediaUrl)->toMediaCollection();
+        }
+
+        return $this;
     }
 
     /**
@@ -78,7 +122,7 @@ class Team extends JetstreamTeam
 
     public function resources(): HasMany
     {
-        return $this->hasMany(Resource::class);
+        return $this->hasMany(Post::class)->ofType(PostType::RESOURCE);
     }
 
     public function projectLink()
@@ -89,6 +133,29 @@ class Team extends JetstreamTeam
     public function visits(): Relation
     {
         return visits($this)->relation();
+    }
+
+    public function teamLocation(): HasOne
+    {
+        return $this->hasOne(TeamLocation::class);
+    }
+
+    public function getLocationShortAttribute()
+    {
+        if($this->teamLocation) {
+            return $this->teamLocation->name;
+        }
+
+        return null;
+    }
+
+    public function getLocationAttribute()
+    {
+        if($this->teamLocation) {
+            return $this->teamLocation->full;
+        }
+
+        return null;
     }
 
     public function getReviewScoreAttribute()
@@ -108,7 +175,7 @@ class Team extends JetstreamTeam
 
     public function profile()
     {
-        return route('social.projects.show', $this->id);
+        return route('social.projects.show', $this);
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder

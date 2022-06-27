@@ -11,6 +11,7 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './Modules/*/Resources/views/**/*.blade.php',
+        './vendor/filament/**/*.blade.php',
     ],
 
     darkMode: 'class',
@@ -57,6 +58,9 @@ module.exports = {
                 primary: 'var(--primary)',
                 secondary: 'var(--secondary)',
                 tertiary: 'var(--tertiary)',
+                danger: colors.rose,
+                success: colors.green,
+                warning: colors.yellow,
             },
         },
     },

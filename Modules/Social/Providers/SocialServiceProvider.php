@@ -2,8 +2,12 @@
 
 namespace Modules\Social\Providers;
 
+use App\Models\Team;
+use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\Facades\Gate;
+use Modules\Social\Models\Profile;
 
 class SocialServiceProvider extends ServiceProvider
 {
@@ -28,6 +32,16 @@ class SocialServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        Gate::define('update-profile', function (User $user, Profile $profile) {
+            return $user->id === $profile->user_id;
+        });
+
+        Gate::define('update-team', function (User $user, Team $team) {
+            return $user->belongsToTeam($team) && 
+                ($user->hasTeamRole($team, 'admin') ||
+                $user->ownsTeam($team));
+        });
     }
 
     /**

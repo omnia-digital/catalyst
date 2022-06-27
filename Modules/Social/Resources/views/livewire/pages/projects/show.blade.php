@@ -2,22 +2,36 @@
 
 
 @section('content')
-<livewire:social::pages.projects.partials.header :team="$team" />
-<div class="flex space-x-4 mt-4 -mx-4">
+<x-teams.partials.header  :team="$team" />
+<div class="flex space-x-4 mt-4">
     <div class="space-y-4">
         <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
             <div class="col-span-2 row-span-1 flex flex-col">
-                <div class="flex-1 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
-                <div class="flex w-full mt-2 space-x-1">
-                    @foreach ([1, 2, 3, 4] as $num)
-                        <img src="https://source.unsplash.com/random" alt="project-display-img-{{ $num }}" class="w-1/4 h-24">
-                        
-                    @endforeach
+                <div class="flex-1 bg-black"
+                    @if ($team->getMedia('team_sample_images')->count())
+                        style="background-image: url({{ $displayUrl }}); background-size: cover; background-repeat: no-repeat;"
+                    @endif
+                ></div>
+                @if ($team->getMedia('team_sample_images')->count())
+                <div class="flex w-full mt-1 space-x-1 overflow-x-scroll h-20" style="scrollbar-width: thin;">
+                    <div class="flex">
+                        @foreach ($team->getMedia('team_sample_images') as $media)
+                            <span class="w-36 pr-1 last:pr-0 cursor-pointer" wire:click="setImage('{{ $media->getFullUrl() }}')">
+                                {{ $media->img()->attributes(['class' => 'w-full h-full']) }}
+                            </span>
+                        @endforeach
+                    </div>
                 </div>
+                @endif
             </div>
             <div class="col-span-1 row-span-1 flex flex-col">
                 <div class="flex-1 bg-white rounded">
-                    <div class="h-44 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
+                    <div 
+                        class="h-44 bg-black"
+                        @if ($team->getMedia('team_main_images')->count())
+                            style="background-image: url({{ $team->getMedia('team_main_images')->first()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
+                        @endif
+                    ></div>
                     <div class="p-[15px] space-y-4">
                         <p class="text-sm">{{ $team->summary }}</p>
                         <div class="text-xs grid grid-cols-4 grid-rows-4 gap-1 items-center">
@@ -69,12 +83,18 @@
         </div>
         <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
             <div class="col-span-2 row-span-1 space-y-6 flex flex-col">
-                <div class="flex-1 flex flex-col">
-                    <p class="text-black font-semibold">About this Project</p>
-                    <div class="flex-1 mt-4 bg-white p-4">
-                        <p class="text-dark-text-color">{{ $team->content }}</p>
+                @if ($team->content)
+                    <div class="flex-1 flex flex-col">
+                        <p class="text-black font-semibold">About this Project</p>
+                        <div 
+                            x-data="{readMore: false, longText: @js(strlen($team->content) > 410)}" 
+                            class="mt-4 bg-white p-4 relative"
+                        >
+                            <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden" :class="(longText && readMore) ? 'h-full max-h-96' : 'max-h-24'">{{ $team->content }}</p>
+                            <div x-show="longText && !readMore" class="bg-gradient-to-t from-white to-transparent absolute bottom-1 left-4 right-2 pt-8"><a class="block w-full text-right" href="#" @click.prevent="readMore = !readMore">Read More</a></div>
+                        </div>
                     </div>
-                </div>
+                @endif
                 <!-- Post Tile -->
                 @if ($this->recentPosts->count())
                     <div>
@@ -129,20 +149,24 @@
                     </div>
                 </div>
                 <!-- Project Languages -->
-                <div>
-                    <div class="text-black font-semibold">
-                        <p class="text-sm">Languages</p>
+                @if ($team->languages)
+                    <div>
+                        <div class="text-black font-semibold">
+                            <p class="text-sm">Languages</p>
+                        </div>
+                        <div class="mt-4 bg-white p-4">
+                            <p class="text-dark-text-color">{{ $team->languages }}</p>
+                        </div>
                     </div>
-                    <div class="mt-4 bg-white p-4">
-                        <p class="text-dark-text-color">{{ $team->languages }}</p>
-                    </div>
-                </div>
+                @endif
 
                 <!-- Project Awards -->
                 <div>
                     <div class="flex justify-between items-center text-black font-semibold">
                         <p class="text-sm">Awards</p>
-                        <a href="{{ route('social.projects.awards', $team->id) }}" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
+                        @if($team->awards()->count())
+                            <a href="{{ route('social.projects.awards', $team) }}" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
+                        @endif
                     </div>
                     <div class="mt-4 flex space-x-2">
                         @forelse ($team->awards()->take(2)->get() as $award)

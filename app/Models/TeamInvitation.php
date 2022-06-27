@@ -18,6 +18,7 @@
             'role',
             'inviter_id',
             'user_id',
+            'message',
         ];
 
         /**

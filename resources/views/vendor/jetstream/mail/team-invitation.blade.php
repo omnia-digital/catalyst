@@ -1,8 +1,16 @@
 @component('mail::message')
-{{ __('You have been invited to join the :team team!', ['team' => $invitation->team->name]) }}
+
+<strong>{{ $invitation->inviter->name }}</strong> has invited you to join the <strong>{{ $invitation->team->name }}</strong> project as a(n) <strong>{{ Laravel\Jetstream\Jetstream::findRole($invitation->role)->name }}</strong>!
+
+<hr><br>
+
+{{ $invitation->inviter->name }} says:<br>
+"{{ __(':message', ['message' => $invitation->message]) }}"
+
+<br><hr><br>
 
 @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::registration()))
-{{ __('If you do not have an account, you may create one by clicking the button below. After creating an account, you may click the invitation acceptance button in this email to accept the team invitation:') }}
+{{ __('If you do not have an account, you may create one by clicking the button below. After creating an account, you may click the invitation acceptance button in this email to accept the project invitation:') }}
 
 @component('mail::button', ['url' => route('register')])
 {{ __('Create Account') }}
@@ -19,5 +27,5 @@
 {{ __('Accept Invitation') }}
 @endcomponent
 
-{{ __('If you did not expect to receive an invitation to this team, you may discard this email.') }}
+{{ __('If you did not expect to receive an invitation to this project, you may discard this email.') }}
 @endcomponent

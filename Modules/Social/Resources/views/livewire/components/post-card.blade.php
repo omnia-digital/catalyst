@@ -22,7 +22,7 @@
             <div class=" flex align-top">
 {{--                @if (!is_null($post->team_id))--}}
 {{--                    <div class="text-base-text-color text-xs font-semibold mr-3">--}}
-{{--                        <a href="{{ $post->team->projectLink() }}" class=" hover:no-underline">{{ $post->team->name }}</a>--}}
+{{--                        <a href="{{ $post->team->profile() }}" class=" hover:no-underline">{{ $post->team->name }}</a>--}}
 {{--                    </div>--}}
 {{--                @endif--}}
                 <div class="relative z-1 inline-block text-left">
@@ -74,7 +74,7 @@
                             <div class="min-w-0 flex-1">
                                 <div class="min-w-0 flex justify-start">
                                     <div class="font-bold text-dark-text-color mr-2">
-                                        <a href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}" class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
+                                        <a wire:click.prevent.stop="showProfile('{{ $post->repostOriginal->user->handle }}')" href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}" class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
                                     </div>
                                     <div class="text-base-text-color">
                                         {{ $post->repostOriginal->created_at->diffForHumans() }}
@@ -103,7 +103,7 @@
             @endif
         </div>
 
-        <div class="z-20">
+        <div wire:click.prevent.stop="" class="z-20">
             <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
         </div>
     </div>
