@@ -15,6 +15,7 @@ class MyProjects extends Component
 
     public array $filters = [
         'start_date' => '',
+        'created_at' => '',
         'has_attachment' => false,
     ];
 
