@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasLocation;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
@@ -29,16 +31,7 @@ use Wimil\Followers\Traits\CanBeFollowed;
  */
 class Team extends JetstreamTeam implements HasMedia
 {
-    use HasFactory, 
-        Likable, 
-        Postable, 
-        HasTags, 
-        CanBeFollowed, 
-        Awardable, 
-        HasProfilePhoto, 
-        HasSlug,
-        InteractsWithMedia;
-
+    use HasFactory, Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto, HasSlug, HasLocation, InteractsWithMedia;
     /**
      * The attributes that should be cast.
      *
@@ -132,27 +125,14 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->hasMany(Post::class)->ofType(PostType::RESOURCE);
     }
 
-    public function teamLocation(): HasOne
+    public function projectLink()
     {
-        return $this->hasOne(TeamLocation::class);
+        return route('social.projects.show', $this->id);
     }
 
-    public function getLocationShortAttribute()
+    public function visits(): Relation
     {
-        if($this->teamLocation) {
-            return $this->teamLocation->name;
-        }
-
-        return null;
-    }
-
-    public function getLocationAttribute()
-    {
-        if($this->teamLocation) {
-            return $this->teamLocation->full;
-        }
-
-        return null;
+        return visits($this)->relation();
     }
 
     public function getReviewScoreAttribute()

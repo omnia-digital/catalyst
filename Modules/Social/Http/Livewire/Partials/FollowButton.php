@@ -3,6 +3,7 @@
 namespace Modules\Social\Http\Livewire\Partials;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Modules\Social\Notifications\NewFollowerNotification;
 
@@ -11,7 +12,7 @@ use Modules\Social\Notifications\NewFollowerNotification;
  */
 class FollowButton extends Component
 {
-    public User $model;
+    public Model $model;
 
     public function mount($model)
     {

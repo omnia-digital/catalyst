@@ -49,6 +49,7 @@ return [
             'rel' => ['nofollow', 'noopener', 'noreferrer']
         ],
     ],
+
     'place' => [
         'google' => [
             'api_key' => env('GOOGLE_PLACE_API_KEY')
