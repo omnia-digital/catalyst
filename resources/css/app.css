@@ -1,3 +1,4 @@
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -14,6 +15,9 @@
     --secondary: #171E2C;
     --tertiary: #384263;
 }
+
+@import '../../vendor/filament/forms/dist/module.esm.css';
+
 
 p,a, body  {
     @apply text-base;

@@ -53,7 +53,7 @@ class MainNavigationMenu extends Component
             //                    'current' => false
             //                ],
             //            [
-            //                'label'   => 'CRM',
+            //                'label'   => 'Crm',
             //                'name'    => 'crm',
             //                'icon'    => 'heroicon-o-users',
             //                'current' => false
