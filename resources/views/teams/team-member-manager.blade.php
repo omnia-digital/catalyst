@@ -234,9 +234,9 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="leaveTeam" wire:loading.attr="disabled">
+            <x-jet-red-button class="ml-2" wire:click="leaveTeam" wire:loading.attr="disabled">
                 {{ __('Leave') }}
-            </x-jet-danger-button>
+            </x-jet-red-button>
         </x-slot>
     </x-jet-confirmation-modal>
 
@@ -255,9 +255,9 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="removeTeamMember" wire:loading.attr="disabled">
+            <x-jet-red-button class="ml-2" wire:click="removeTeamMember" wire:loading.attr="disabled">
                 {{ __('Remove') }}
-            </x-jet-danger-button>
+            </x-jet-red-button>
         </x-slot>
     </x-jet-confirmation-modal>
 </div>

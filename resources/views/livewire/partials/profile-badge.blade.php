@@ -4,13 +4,13 @@
             <x-slot name="trigger">
                 <div type="button"
                         class="group w-full bg-gray-200 border border-neutral-hover px-5 flex rounded-md py-4 text-sm text-left font-medium text-gray-700 
-                        hover:bg-gray-300 hover:cursor-pointer focus:outline-none focus:ring-2
+                        hover:bg-neutral hover:cursor-pointer focus:outline-none focus:ring-2
                         focus:ring-offset-2
                         focus:ring-offset-gray-100 focus:ring-purple-500"
                         id="options-menu-button" aria-expanded="false" aria-haspopup="true">
                     <div class="flex w-full justify-between items-center">
                         <div class="flex min-w-0 items-center justify-between space-x-3">
-                            <img class="w-20 h-20 bg-gray-300 rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2
+                            <img class="w-20 h-20 bg-neutral rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2
                     .1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
                             <div class="min-w-0">
                                 <div class="">
@@ -18,11 +18,11 @@
                                     <p class="-mt-1 text-gray-500 text-xs truncate">{{ '@'.Auth::user()->profile?->handle }}</p>
                                 </div>
                                 <div class="flex mt-1">
-                                    <div class="bg-black flex items-center rounded-lg p-1">
+                                    <div class="bg-secondary flex items-center rounded-lg p-1">
                                         <div class="grow-0 bg-primary text-xs rounded-md p-1">
                                             {{ Auth::user()->level ?? '48' }}
                                         </div>
-                                        <div class="grow-0 text-xs text-white px-1">
+                                        <div class="grow-0 text-xs text-primary px-1">
                                             {{ Auth::user()->score ?? '3758' }}
                                         </div>
                                     </div>

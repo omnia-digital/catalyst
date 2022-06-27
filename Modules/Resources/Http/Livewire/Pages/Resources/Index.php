@@ -16,11 +16,6 @@ class Index extends Component
 
     public ?string $search = null;
 
-    public array $filters = [
-        'created_at' => '',
-        'has_attachment' => false,
-    ];
-
     public array $sortLabels = [
         'title' => 'Title',
         'bookmarks_count' => 'Bookmarks',
@@ -46,18 +41,20 @@ class Index extends Component
     {
         $query = clone $this->rowsQueryWithoutFilters;
 
-        return $query->where(function($q) {
-            $q->where('title', 'like', "%{$this->search}%")
-            ->orWhere('body', 'like', "%{$this->search}%");
-        });
+        $query = $this->applyFilters($query);
+
+        return $query
+                ->where(function($q) {
+                    $q->where('title', 'like', "%{$this->search}%")
+                    ->orWhere('body', 'like', "%{$this->search}%");
+                })
+                ->orderBy($this->orderBy, $this->sortOrder);
     }
 
     public function getRowsQueryWithoutFiltersProperty()
     {
         return Post::where('type','=',PostType::RESOURCE)
-            ->withCount('bookmarks')
-            ->withCount('likes')
-            ->orderBy($this->orderBy, $this->sortOrder);
+            ->withCount(['bookmarks', 'likes', 'media']);
     }
 
     public function getRowsProperty()

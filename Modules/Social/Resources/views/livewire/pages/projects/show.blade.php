@@ -6,18 +6,18 @@
 <div class="flex space-x-4 mt-4">
     <div class="space-y-4">
         <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
-            <div class="col-span-2 row-span-1 flex flex-col">
-                <div class="flex-1 bg-black"
+            <div class="col-span-2 row-span-1 flex flex-col min-h-[512px]">
+                <div class="flex-1 bg-secondary"
                     @if ($team->getMedia('team_sample_images')->count())
-                        style="background-image: url({{ $displayUrl }}); background-size: cover; background-repeat: no-repeat;"
+                        style="background-image: url({{ $displayUrl }}); background-size: contain; background-position: center; background-repeat: no-repeat;"
                     @endif
                 ></div>
                 @if ($team->getMedia('team_sample_images')->count())
-                <div class="flex w-full mt-1 space-x-1 overflow-x-scroll h-20" style="scrollbar-width: thin;">
-                    <div class="flex">
+                <div class="flex w-full mt-1 space-x-1 overflow-x-scroll h-40" style="scrollbar-width: thin;">
+                    <div class="flex h-36 pl-2">
                         @foreach ($team->getMedia('team_sample_images') as $media)
-                            <span class="w-36 pr-1 last:pr-0 cursor-pointer" wire:click="setImage('{{ $media->getFullUrl() }}')">
-                                {{ $media->img()->attributes(['class' => 'w-full h-full']) }}
+                            <span class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative pr-1 last:pr-0 cursor-pointer hover:ring-4 hover:ring-neutral-dark active:ring-4 active:ring-neutral-dark focus:ring-4 focus:ring-neutral-dark {{ ($media->id === $displayID) ? 'ring-2 ring-neutral-dark' : '' }}" wire:click="setImage({{ $media->id }})">
+                                {{ $media->img()->attributes(['class' => 'max-w-[152px] max-h-[120px]']) }}
                             </span>
                         @endforeach
                     </div>
@@ -25,41 +25,41 @@
                 @endif
             </div>
             <div class="col-span-1 row-span-1 flex flex-col">
-                <div class="flex-1 bg-white rounded">
+                <div class="flex flex-col flex-1 bg-primary rounded">
                     <div 
-                        class="h-44 bg-black"
+                        class="h-44 bg-secondary"
                         @if ($team->getMedia('team_main_images')->count())
                             style="background-image: url({{ $team->getMedia('team_main_images')->first()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
                         @endif
                     ></div>
-                    <div class="p-[15px] space-y-4">
-                        <p class="text-sm">{{ $team->summary }}</p>
+                    <div class="p-[15px] flex flex-col flex-1">
+                        <p class="text-sm flex-1">{{ $team->summary }}</p>
                         <div class="text-xs grid grid-cols-4 grid-rows-4 gap-1 items-center">
-                            <span class="col-span-1 text-gray-400 text-xxs uppercase">Launch Date</span>
+                            <span class="col-span-1 text-light-text-color text-xxs uppercase">Launch Date</span>
                             <div class="col-span-3 flex items-center space-x-2">
                                 <x-heroicon-o-calendar class="w-4 h-4" />
                                 <span>{{ \Carbon\Carbon::parse($team->start_date)->toFormattedDateString() }}</span>
                             </div>
-                            <span class="col-span-1 text-gray-400 text-xxs uppercase">Location:</span>
+                            <span class="col-span-1 text-light-text-color text-xxs uppercase">Location:</span>
                             <div class="col-span-3 flex items-center space-x-2">
                                 <x-heroicon-o-location-marker class="w-4 h-4" />
                                 <span>{{ $team->location_short ?? "Not Set"}}</span>
                             </div>
-                            <span class="col-span-1 text-gray-400 text-xxs uppercase ">Organizer:</span>
+                            <span class="col-span-1 text-light-text-color text-xxs uppercase ">Organizer:</span>
                             <div class="col-span-3 flex items-center space-x-2">
                                 <x-heroicon-s-user-circle class="w-4 h-4" />
                                 <span>{{ $team->owner->name }}</span>
                             </div>
-                            {{-- <span class="col-span-1 text-gray-400 text-xxs uppercase">Reviews:</span>
+                            {{-- <span class="col-span-1 text-light-text-color text-xxs uppercase">Reviews:</span>
                             <div class="col-span-3 flex items-center space-x-2">
                                 {{-- Review score algorithm not set 
-                                    <div class="bg-black flex items-center rounded-md mr-1 p-1">
-                                    <div class="flex items-center text-white text-xs font-semibold">
+                                    <div class="bg-secondary flex items-center rounded-md mr-1 p-1">
+                                    <div class="flex items-center text-primary text-xs font-semibold">
                                         <x-heroicon-s-star class="w-4 h-4" />
                                         {{ $team->reviewScore ?? '3758' }}
                                     </div>
                                 </div> 
-                                <span class="text-gray-400 text-xxs">{{ $team->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $team->reviews()->count */'296,418' }})</span>
+                                <span class="text-light-text-color text-xxs">{{ $team->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $team->reviews()->count */'296,418' }})</span>
                             </div> --}}
                         </div>
                         <div class="flex justify-between items-center">
@@ -75,7 +75,7 @@
                 @if ($team->tags()->count() > 0)
                     <div class="flex justify-start space-x-2 mt-2">
                         @foreach($team->tags as $tag)
-                            <x-library::tag class=" bg-gray-700 text-xxs text-white uppercase">{{ $tag->name }}</x-library::tag>
+                            <x-library::tag class="bg-neutral-dark text-xxs text-primary uppercase">{{ $tag->name }}</x-library::tag>
                         @endforeach
                     </div>
                 @endif
@@ -85,33 +85,33 @@
             <div class="col-span-2 row-span-1 space-y-6 flex flex-col">
                 @if ($team->content)
                     <div class="flex-1 flex flex-col">
-                        <p class="text-black font-semibold">About this Project</p>
+                        <p class="text-secondary font-semibold">About this Project</p>
                         <div 
                             x-data="{readMore: false, longText: @js(strlen($team->content) > 410)}" 
-                            class="mt-4 bg-white p-4 relative"
+                            class="mt-4 bg-primary p-4 relative"
                         >
                             <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden" :class="(longText && readMore) ? 'h-full max-h-96' : 'max-h-24'">{{ $team->content }}</p>
-                            <div x-show="longText && !readMore" class="bg-gradient-to-t from-white to-transparent absolute bottom-1 left-4 right-2 pt-8"><a class="block w-full text-right" href="#" @click.prevent="readMore = !readMore">Read More</a></div>
+                            <div x-show="longText && !readMore" class="bg-gradient-to-t from-primary to-transparent absolute bottom-1 left-4 right-2 pt-8"><a class="block w-full text-right" href="#" @click.prevent="readMore = !readMore">Read More</a></div>
                         </div>
                     </div>
                 @endif
                 <!-- Post Tile -->
                 @if ($this->recentPosts->count())
                     <div>
-                        <div class="flex justify-between items-center text-black font-semibold">
+                        <div class="flex justify-between items-center text-secondary font-semibold">
                             <p class="text-sm">Posts</p>
                             <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
                         </div>
                         <div class="space-y-2">
                             @foreach (\Modules\Social\Models\Post::take(2)->get() as $post)
-                                <div wire:click.prevent.stop="showPost({{ $post }})" class="bg-primary border border-neutral-light rounded p-4 flex space-x-4 hover:cursor-pointer hover:ring-1 hover:ring-black">
+                                <div wire:click.prevent.stop="showPost({{ $post }})" class="bg-primary border border-neutral-light rounded p-4 flex space-x-4 hover:cursor-pointer hover:ring-1 hover:ring-secondary">
                                     <div class="w-1/3 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat rounded-md">
                                     </div>
                                     <div class="w-2/3 space-y-2">
                                         <p class="text-dark-text-color font-semibold text-xs">{{ $post->title }}</p>
                                         <div class="flex items-center text-base-text-color">
                                             <x-heroicon-o-calendar class="h-5 w-5 mr-2" />
-                                            <span class="text-neutral-900 text-xs">{{ $post->created_at->toFormattedDateString() }}</span>
+                                            <span class="text-neutral-dark text-xs">{{ $post->created_at->toFormattedDateString() }}</span>
                                         </div>
                                         <p class="text-light-text-color text-xs line-clamp-2">{{ $post->body }}</p>
                                         <div class="text-base-text-color text-xs flex items-center -space-x-1 pt-6">
@@ -132,29 +132,29 @@
             <div class="col-span-1 row-span-1 space-y-6">
                 <!-- Project Relevence -->
                 {{-- <div>
-                    <div class="text-black font-semibold">
+                    <div class="text-secondary font-semibold">
                         <p class="text-sm">Is this project relevant to you?</p>
                     </div>
-                    <div class="mt-4 bg-white p-4">
+                    <div class="mt-4 bg-primary p-4">
                         <p class="text-dark-text-color text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione consequuntur hic aperiam adipisci cupiditate repellat quibusdam molestias praesentium sunt velit! Totam illum vero deleniti, sint est illo atque sequi quo.</p>
                     </div>
                 </div> --}}
                 <!-- Project Location -->
                 <div>
-                    <div class="text-black font-semibold">
+                    <div class="text-secondary font-semibold">
                         <p class="text-sm">Location</p>
                     </div>
-                    <div class="mt-4 bg-white">
+                    <div class="mt-4 bg-primary">
                         <livewire:social::map />
                     </div>
                 </div>
                 <!-- Project Languages -->
                 @if ($team->languages)
                     <div>
-                        <div class="text-black font-semibold">
+                        <div class="text-secondary font-semibold">
                             <p class="text-sm">Languages</p>
                         </div>
-                        <div class="mt-4 bg-white p-4">
+                        <div class="mt-4 bg-primary p-4">
                             <p class="text-dark-text-color">{{ $team->languages }}</p>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
 
                 <!-- Project Awards -->
                 <div>
-                    <div class="flex justify-between items-center text-black font-semibold">
+                    <div class="flex justify-between items-center text-secondary font-semibold">
                         <p class="text-sm">Awards</p>
                         @if($team->awards()->count())
                             <a href="{{ route('social.projects.awards', $team) }}" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
@@ -172,7 +172,7 @@
                         @forelse ($team->awards()->take(2)->get() as $award)
                             <x-awards-banner class="flex-1" :award="$award" />
                         @empty
-                            <div class="bg-white p-4">
+                            <div class="bg-primary p-4">
                                 <p class="text-dark-text-color">No awards to show.</p>
                             </div>
                         @endforelse
@@ -180,14 +180,14 @@
                 </div>
             </div>
         </div>
-        {{-- <p class="text-black font-semibold">Project Reviews</p>
+        {{-- <p class="text-secondary font-semibold">Project Reviews</p>
         <div class="lg:grid lg:grid-cols-2 lg:gap-4">
             <div class="col-span-1">
-                <div class="bg-white p-4">
+                <div class="bg-primary p-4">
                     <p class="text-xxs">Overall Reviews:</p>
                     <div class="flex items-center space-x-2 text-xxs">
-                        <div class="bg-black flex items-center rounded-md mr-1 p-1">
-                            <div class="flex items-center text-white">
+                        <div class="bg-secondary flex items-center rounded-md mr-1 p-1">
+                            <div class="flex items-center text-primary">
                                 <x-heroicon-s-star class="w-4 h-4" />
                                 {{ $team->reviewScore ?? '3758' }}
                             </div>
@@ -216,11 +216,11 @@
                 </div>
             </div>
             <div class="col-span-1">
-                <div class="bg-white p-4">
+                <div class="bg-primary p-4">
                     <p class="text-xxs">Recent Reviews:</p>
                     <div class="flex items-center space-x-2 text-xxs">
-                        <div class="bg-black flex items-center rounded-md mr-1 p-1">
-                            <div class="flex items-center text-white">
+                        <div class="bg-secondary flex items-center rounded-md mr-1 p-1">
+                            <div class="flex items-center text-primary">
                                 <x-heroicon-s-star class="w-4 h-4" />
                                 {{ $team->reviewScore ?? '3758' }}
                             </div>

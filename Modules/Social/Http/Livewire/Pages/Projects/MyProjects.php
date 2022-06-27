@@ -14,12 +14,6 @@ class MyProjects extends Component
 {
     use WithPagination, WithCachedRows, WithSortAndFilters;
 
-    public array $filters = [
-        'start_date' => '',
-        'created_at' => '',
-        'has_attachment' => false,
-    ];
-
     public array $sortLabels = [
         'name' => 'Name', 
         'users_count' => 'Users', 
@@ -37,9 +31,13 @@ class MyProjects extends Component
 
     public function getRowsQueryProperty()
     {
-        return $this->user->allTeams()
-                ->withCount('users')
-                ->orderBy($this->orderBy, $this->sortOrder);
+        $query = Team::where('user_id', auth()->id())
+                ->withCount(['users', 'media']);
+        
+        $query = $this->applyFilters($query)
+            ->orderBy($this->orderBy, $this->sortOrder);
+        
+        return $query;
     }
 
     public function getRowsProperty()

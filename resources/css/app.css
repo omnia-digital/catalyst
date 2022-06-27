@@ -10,6 +10,7 @@
     --neutral: #F3F4F6;
     --neutral-light: #f6f7f8;
     --neutral-dark: #6b7280;
+    --neutral-dark-75: rgb(107 114 128 / .75);
     --neutral-hover: #eff0f2;
     --primary: white;
     --secondary: #171E2C;

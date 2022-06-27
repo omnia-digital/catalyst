@@ -22,7 +22,7 @@
 
             <div class="">
                 <ul role="list" class="space-y-4">
-                    @foreach($resources as $resource)
+                    @forelse($resources as $resource)
                         <li>
                             <livewire:resources::components.resource-card
                                 as="li"
@@ -30,7 +30,9 @@
                                 :wire:key="'resource-card-' . $resource->id"
                             />
                         </li>
-                    @endforeach
+                    @empty
+                        <li class="p-4 bg-primary rounded-md text-base-text-color">No resources to show</li>
+                    @endforelse
                 </ul>
 
                 <div class="pb-6">
@@ -73,7 +75,7 @@
                             component: 'social.undiscovered'
                         },
                     ],
-                    notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>',
+                    notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-primary bg-secondary rounded-full">3</span>',
                 }
             }
         </script>

@@ -1,6 +1,6 @@
 <div x-data="{ reactionMenuOpen: false, attachmentDrawer: false, postSent: @entangle('postSent') }" class="flex relative items-start w-full bg-primary px-4 py-6 shadow sm:p-6 sm:rounded-lg">
     <div wire:loading.flex wire:target="savePost" class="absolute z-10 inset-0 justify-center items-center bg-primary opacity-50">
-        <x-loading-icon class="h-12 w-12 text-black" />
+        <x-loading-icon class="h-12 w-12 text-secondary" />
     </div>
     <div
         x-init="@this.on('postAdded', post => { setTimeout(() => { postSent = false }, 1500) })"
@@ -85,7 +85,7 @@
                                     x-transition:leave.opacity.100
                                     x-transition:leave.scale.100
                                 >
-                                    <ul class="absolute z-10 mt-1 -ml-6 w-60 bg-primary shadow rounded-lg py-3 text-base-text-color ring-1 ring-black ring-opacity-5 focus:outline-none sm:ml-auto sm:w-64 sm:text-sm">
+                                    <ul class="absolute z-10 mt-1 -ml-6 w-60 bg-primary shadow rounded-lg py-3 text-base-text-color ring-1 ring-secondary ring-opacity-5 focus:outline-none sm:ml-auto sm:w-64 sm:text-sm">
                                         @foreach ($moods as $mood)
                                             <li class="bg-primary cursor-default select-none relative py-2 px-3">
                                                 <div class="flex items-center">

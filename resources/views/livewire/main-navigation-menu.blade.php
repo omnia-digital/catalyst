@@ -7,7 +7,7 @@
             <div class="flex items-center h-14 flex-shrink-0">
                 <a href="{{ route('social.home') }}"
                    title="{{ env('APP_NAME') }}"
-                   class="bg-neutral-light text-black py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
+                   class="bg-neutral-light text-secondary py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
                     <x-dynamic-component
                             component="heroicon-s-globe-alt"
                             class="flex-shrink-0 h-6 w-6"
@@ -45,7 +45,7 @@
                                     <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
                                 </div>
                                 <input id="search" name="search"
-                                       class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
+                                       class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-neutral-dark text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
                                        placeholder="Search for Projects" type="search"/>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                        <button type="button" class="p-1 mr-2 relative rounded-full text-light-text-color hover:text-primary focus:outline-none">
                            <span class="sr-only">View notifications</span>
                            <x-heroicon-o-bell class="h-6 w-6"/>
-                           <span class="ml-2 w-3 h-3 text-xxs absolute top-0 right-0 flex items-center justify-center text-white bg-black rounded-full">3</span>
+                           <span class="ml-2 w-3 h-3 text-xxs absolute top-0 right-0 flex items-center justify-center text-primary bg-secondary rounded-full">3</span>
                        </button>
                    </div> --}}
 

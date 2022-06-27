@@ -100,7 +100,7 @@
                         component: 'social.undiscovered'
                     },
                 ],
-                notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>',
+                notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-primary bg-secondary rounded-full">3</span>',
             }
         }
     </script>

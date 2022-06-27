@@ -70,7 +70,7 @@
                     <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-primary bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
                 </label>
             </div>
-            <x-library::input.error for="mainImage" />
+            <x-library::input.error for="sampleMedia" />
             @if (sizeof($sampleMedia))
                 <div>
                     <p>Sample Media Preview:</p>

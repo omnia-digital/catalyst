@@ -3,17 +3,17 @@
     @if ($isOpen)
         <div>
             <div class="fixed inset-0 flex z-40 md:hidden">
-                <div aria-hidden="true" class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
-                <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800">
+                <div aria-hidden="true" class="fixed inset-0 bg-neutral-dark bg-opacity-75"></div>
+                <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-dark-text-color">
                     <div class="absolute top-0 right-0 -mr-12 pt-2">
                         <button
                             type="button"
-                            class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                            class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
                             tabindex="0"
                             wire:click="closeMobileMenu"
                         >
                             <span class="sr-only">Close sidebar</span>
-                            <x-heroicon-o-x class="text-white"/>
+                            <x-heroicon-o-x class="text-primary"/>
                         </button>
                     </div>
                     <div class="flex-shrink-0 flex items-center px-4">
@@ -27,8 +27,8 @@
                             @foreach ($navigation as $item)
                                 <a
                                     href="{{ route($item['name']) }}"
-                                    class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-light-text-color hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-base-text-color font-medium rounded-md' }}">
-                                    <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
+                                    class="{{ request()->routeIs($item['name']) ? 'bg-secondary text-primary' : 'text-light-text-color hover:bg-neutral-dark hover:text-primary' }} {{ 'group flex items-center px-2 py-2 text-base-text-color font-medium rounded-md' }}">
+                                    <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-primary' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
                                                          aria-hidden="true"/>
                                     {{ $item['label'] }}
                                 </a>
@@ -61,10 +61,10 @@
                                  alt=""/>
                         </div>
                         <div class="ml-3">
-                            <p class="text-lg font-medium text-white">
+                            <p class="text-lg font-medium text-primary">
                                 Joshua Torres
                             </p>
-                            <p class="text-base-text-color font-medium text-primary group-hover:text-white">
+                            <p class="text-base-text-color font-medium text-primary group-hover:text-primary">
                                 Lvl 5 <span class="text-gold">5348</span>
                             </p>
                         </div>
@@ -76,19 +76,19 @@
                     @foreach ($navigation as $item)
                         <a
                             href="{{ route($item['name']) }}"
-                            class="{{ request()->routeIs($item['name']) ? 'bg-tertiary text-white' : 'text-light-text-color hover:bg-tertiary hover:text-white' }} {{ 'w-full pl-6 group flex items-center
+                            class="{{ request()->routeIs($item['name']) ? 'bg-tertiary text-primary' : 'text-light-text-color hover:bg-tertiary hover:text-primary' }} {{ 'w-full pl-6 group flex items-center
                             px-2 py-2
                             text-lg font-medium rounded-md' }}">
-                            <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
+                            <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-primary' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
                                                  aria-hidden="true"/>
                             {{ $item['label'] }}
                         </a>
                     @endforeach
                     {{-- <Link v-for="item in navigation" :key="item.name" :href="route(item.name)"
-                          :class="[$page.component === '' ? 'bg-tertiary text-white' :
-                    'text-light-text-color hover:bg-tertiary hover:text-white',
+                          :class="[$page.component === '' ? 'bg-tertiary text-primary' :
+                    'text-light-text-color hover:bg-tertiary hover:text-primary',
                     'group flex items-center px-2 py-2 text-lg font-medium rounded-md']">
-                        <component :is="item.icon" :class="[item.current ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
+                        <component :is="item.icon" :class="[item.current ? 'text-primary' : 'text-light-text-color group-hover:text-light-text-color', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
                         {{ item.label }}
                     </Link> --}}
                 </nav>
