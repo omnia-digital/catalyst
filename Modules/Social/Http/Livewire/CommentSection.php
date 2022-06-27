@@ -3,11 +3,13 @@
 namespace Modules\Social\Http\Livewire;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Social\Actions\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
+use Modules\Social\Notifications\NewCommentNotification;
 use Modules\Social\Support\Livewire\WithPostEditor;
 
 class CommentSection extends Component
@@ -40,14 +42,18 @@ class CommentSection extends Component
 
         $this->validatePostEditor();
 
-        DB::transaction(function () use ($data) {
+        $comment = DB::transaction(function () use ($data) {
             $comment = (new CreateNewPostAction)
                 ->asComment($this->post)
                 ->type($this->type)
                 ->execute($data['content']);
 
             $comment->attachMedia($data['images'] ?? []);
+
+            return $comment;
         });
+
+        $this->post->user->notify(new NewCommentNotification($comment, Auth::user()));
 
         $this->loadComments();
         $this->emitPostSaved($data['id']);

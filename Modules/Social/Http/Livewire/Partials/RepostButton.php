@@ -2,10 +2,12 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Social\Actions\CreateNewPostAction;
 use Modules\Social\Models\Post;
+use Modules\Social\Notifications\PostWasRepostedNotification;
 use Modules\Social\Support\Livewire\WithPostEditor;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
@@ -33,6 +35,7 @@ class RepostButton extends Component
 
         $this->validatePostEditor();
 
+        /** @var Post $repost */
         $repost = DB::transaction(function () use ($data) {
             $repost = (new CreateNewPostAction)
                 ->asRepost($this->model)
@@ -42,6 +45,9 @@ class RepostButton extends Component
 
             return $repost;
         });
+
+
+        $this->model->user->notify(new PostWasRepostedNotification($repost, Auth::user()));
 
         $this->emitPostSaved($data['id']);
         $this->closeModal('repost-modal-' . $this->model->id);

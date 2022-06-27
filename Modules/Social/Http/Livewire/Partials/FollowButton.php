@@ -4,18 +4,29 @@ namespace Modules\Social\Http\Livewire\Partials;
 
 use App\Models\User;
 use Livewire\Component;
+use Modules\Social\Notifications\NewFollowerNotification;
 
+/**
+ * @property User $authUser
+ */
 class FollowButton extends Component
 {
-    public $model;
+    public User $model;
 
     public function mount($model)
     {
         $this->model = $model;
     }
+
     public function follow()
     {
-        $this->authUser->toggleFollow($this->model);
+        if ($this->authUser->isFollowing($this->model)) {
+            $this->authUser->unfollow($this->model);
+        } else {
+            $this->authUser->follow($this->model);
+
+            $this->model->notify(new NewFollowerNotification($this->authUser));
+        }
     }
 
     public function getAuthUserProperty()

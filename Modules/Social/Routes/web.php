@@ -10,6 +10,7 @@ use Modules\Social\Http\Livewire\Pages\Contacts\Index as ContactsIndex;
 use Modules\Social\Http\Livewire\Pages\Discover\Index as DiscoverIndex;
 use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
 use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
+use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
 use Modules\Social\Http\Livewire\Pages\Projects\Awards as ProjectAwards;
 use Modules\Social\Http\Livewire\Pages\Projects\Edit as EditProject;
 use Modules\Social\Http\Livewire\Pages\Projects\Followers as ProjectFollowers;
@@ -34,7 +35,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     Route::name('profile.')->prefix('profiles')->group(function() {
         Route::get('{profile}', ShowProfile::class)->name('show');
         Route::get('{profile}/edit', EditProfile::class)->name('edit');
-        Route::get('{profile}/media', function() {})->name('media');
+        Route::get('{profile}/media', ProfileMedia::class)->name('media');
         Route::get('{profile}/followers', ProfileFollowers::class)->name('followers');
     });
 
@@ -54,9 +55,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
         Route::get('/', ContactsIndex::class)->name('index');
     });
 
-    Route::get('/crm', function () {
-        return "CRM";
-    })->name('crm');
+    Route::get('/crm', \Modules\Social\Http\Livewire\Pages\Crm\Index::class)->name('crm');
 
     Route::get('/learn', function () {
         return "Learn";

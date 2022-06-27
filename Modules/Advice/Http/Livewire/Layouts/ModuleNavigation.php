@@ -17,6 +17,12 @@
                     'icon'    => 'heroicon-o-home',
                     'current' => false
                 ],
+                [
+                    'label'   => 'Notification',
+                    'name'    => 'notifications',
+                    'icon'    => 'heroicon-o-bell',
+                    'current' => false
+                ],
             ];
         }
 
