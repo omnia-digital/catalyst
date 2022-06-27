@@ -12,6 +12,8 @@ class Show extends Component
 
     public $team;
 
+    public $displayUrl = null;
+
     public $additionalInfo = [
         'likes',
         'comments',
@@ -26,10 +28,16 @@ class Show extends Component
     public function showPost($post) {
         return $this->redirectRoute('social.posts.show', $post['id']);
     }
+
+    public function setImage($url)
+    {
+        $this->displayUrl = $url;
+    }
     
     public function mount(Team $team)
     {
         $this->team = $team->load('owner');
+        $this->displayUrl = optional($team->getMedia('team_sample_images')->first())->getFullUrl();
     }
 
     public function render()

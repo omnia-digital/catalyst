@@ -2,7 +2,8 @@
 
     namespace App\Models;
 
-    use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\HasNoPersonalTeam;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Relations\HasMany;
     use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,7 @@
     use Modules\Social\Models\Profile;
     use Modules\Social\Traits\Awardable;
     use Modules\Social\Traits\HasBookmarks;
+    use Spatie\MediaLibrary\MediaCollections\Models\Media;
     use Wimil\Followers\Traits\Followable;
 
     class User extends Authenticatable
@@ -27,10 +29,13 @@
             Notifiable,
             SoftDeletes,
             HasFactory,
-            HasTeams,
             HasBookmarks,
             Followable,
             Awardable;
+        use HasNoPersonalTeam, HasTeams {
+            HasNoPersonalTeam::ownsTeam insteadof HasTeams;
+            HasNoPersonalTeam::isCurrentTeam insteadof HasTeams;
+        }
 
         /**
          * The attributes that should be mutated to dates.
@@ -111,6 +116,24 @@
             return $this->profile?->handle;
         }
 
+        public function postMedia()
+        {
+            return $this->hasManyThrough(Media::class, Post::class, 'user_id', 'model_id')
+                ->where('model_type', Post::class);
+        }
+
+        public function allTeams()
+        {
+            return $this->joinedTeams()->orWhere('user_id', $this->id);
+        }
+
+        public function joinedTeams()
+        {
+            return Team::whereHas('users', function($query) { 
+                $query->where('team_user.user_id', $this->id); 
+            });
+        }
+
         /**
          * Get all of the pending invitations for the user.
          *
@@ -129,9 +152,5 @@
         public function teamApplications(): HasMany
         {
             return $this->hasMany(TeamApplication::class);
-        }
-
-        public function receivesBroadcastNotificationsOn() {
-            return 'App.User.' . $this->id;
         }
     }

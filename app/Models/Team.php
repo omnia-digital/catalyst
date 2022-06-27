@@ -17,6 +17,8 @@ use Modules\Social\Models\Post;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
@@ -25,16 +27,17 @@ use Wimil\Followers\Traits\CanBeFollowed;
 /**
  * Projects are just Teams
  */
-class Team extends JetstreamTeam
+class Team extends JetstreamTeam implements HasMedia
 {
-    use HasFactory,
-        Likable,
-        Postable,
-        HasTags,
-        CanBeFollowed,
-        Awardable,
-        HasProfilePhoto,
-        HasSlug;
+    use HasFactory, 
+        Likable, 
+        Postable, 
+        HasTags, 
+        CanBeFollowed, 
+        Awardable, 
+        HasProfilePhoto, 
+        HasSlug,
+        InteractsWithMedia;
 
     /**
      * The attributes that should be cast.
@@ -102,6 +105,16 @@ class Team extends JetstreamTeam
         }
 
         return $value;
+    }
+
+    public function attachMedia(array $mediaUrls): self
+    {
+        /** @var string $mediaUrl */
+        foreach ($mediaUrls as $mediaUrl) {
+            $this->addMediaFromUrl($mediaUrl)->toMediaCollection();
+        }
+
+        return $this;
     }
 
     /**

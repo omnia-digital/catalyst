@@ -1,5 +1,5 @@
 <div class="space-y-2">
-    <div class="bg-primary px-6 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
+    <div class="bg-primary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
         <div class="flex items-center pr-3">
             <span class="mr-3 font-bold">Sort By</span>
             <x-library::dropdown.index :position="'left'" class="z-10 p-2 rounded-md bg-neutral" :dropdownClasses="'bg-white border-none shadow-md'">
@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="bg-primary px-6 rounded-lg mb-6 border-t border-b border-gray-100 py-2 sm:flex sm:items-center sm:justify-between">
+    <div class="bg-primary px-6 py-2 rounded-lg mb-6 border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
         <div class="font-bold">
             {{-- <x-input.select wire:model="filters.speaker" :options="$speakers" placeholder="All Speakers" enableDefaultOption/> --}}
             Filters
@@ -42,9 +42,10 @@
                 <x-heroicon-o-chevron-down class="w-4 text-dark-text-color" />
             </div>
         </div>
-        <div class="w-full md:w-1/2 flex items-center justify-end space-x-2">
+        <div class="w-full py-2 md:w-1/2 flex items-center justify-end space-x-2">
             <x-library::input.toggle wire:model="filters.has_attachment"/>
             <div class="text-sm text-base-text-color">Has Media</div>
         </div>
     </div>
+    <div></div>
 </div>
