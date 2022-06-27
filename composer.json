@@ -26,6 +26,7 @@
         "pestphp/pest": "^1.16",
         "pestphp/pest-plugin-laravel": "^1.1",
         "phuclh/media-manager": "^0.0.2",
+        "pusher/pusher-php-server": "^7.0",
         "sentry/sentry-laravel": "^2.11",
         "spatie/laravel-activitylog": "^4.4",
         "spatie/laravel-medialibrary": "^10.0.0",

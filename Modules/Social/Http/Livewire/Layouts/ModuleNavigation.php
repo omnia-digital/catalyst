@@ -18,6 +18,12 @@
                     'current' => false
                 ],
                 [
+                    'label'   => 'Notification',
+                    'name'    => 'notifications',
+                    'icon'    => 'heroicon-o-bell',
+                    'current' => false
+                ],
+                [
                     'label'   => 'Discover',
                     'name'    => 'social.discover',
                     'icon'    => 'heroicon-o-collection',
