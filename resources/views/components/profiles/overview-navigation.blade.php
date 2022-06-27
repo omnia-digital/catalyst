@@ -19,18 +19,19 @@
                     </button>
                 </x-slot>
                 <x-library::dropdown.item>
-                    Some dropdown item
+                    Invite to "{{ auth()->user()->currentTeam->name }}"
                 </x-library::dropdown.item>
             </x-library::dropdown> --}}
         </div>
     </div>
-    <div class="flex">
+    <div class="flex pr-[15px]">
         @can('update-profile', $user->profile)
             <a href="{{ route('social.profile.edit', $user->handle) }}" class="py-4 mx-4 whitespace-nowrap">Edit Profile</a>
         @endcan
         <livewire:social::partials.follow-button :model="$user" class="py-4 mx-4"/>
+        {{-- Lists functionality not currently setup
         <div class="inline-flex items-center text-md">
             <button class="p-2 mx-[15px] inline-flex items-center text-sm rounded-full bg-primary"><x-heroicon-s-plus class="h-4 w-4" /></button>
-        </div>
+        </div> --}}
     </div>
 </nav>

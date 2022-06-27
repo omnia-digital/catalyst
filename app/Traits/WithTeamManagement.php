@@ -4,15 +4,17 @@ namespace App\Traits;
 
 use App\Actions\Teams\ApplyToTeam;
 use App\Actions\Teams\RemoveTeamApplication;
+use App\Contracts\InvitesTeamMembers;
 use App\Models\TeamApplication;
 use App\Models\TeamInvitation;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
-use Laravel\Jetstream\Contracts\InvitesTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\Role;
 
 trait WithTeamManagement
 {
@@ -66,6 +68,7 @@ trait WithTeamManagement
     public $addTeamMemberForm = [
         'email' => '',
         'role' => null,
+        'message' => '',
     ];
 
     /**
@@ -109,7 +112,8 @@ trait WithTeamManagement
                 $this->user,
                 $this->team,
                 $this->addTeamMemberForm['email'],
-                $this->addTeamMemberForm['role']
+                $this->addTeamMemberForm['role'],
+                $this->addTeamMemberForm['message']
             );
         } else {
             app(AddsTeamMembers::class)->add(
@@ -123,6 +127,7 @@ trait WithTeamManagement
         $this->addTeamMemberForm = [
             'email' => '',
             'role' => null,
+            'message' => '',
         ];
 
         $this->team = $this->team->fresh();
@@ -240,6 +245,49 @@ trait WithTeamManagement
     }
 
     /**
+     * Allow the given user's role to be managed.
+     *
+     * @param  int  $userId
+     * @return void
+     */
+    public function manageRole($userId)
+    {
+        $this->currentlyManagingRole = true;
+        $this->managingRoleFor = Jetstream::findUserByIdOrFail($userId);
+        $this->currentRole = $this->managingRoleFor->teamRole($this->team)->key ?? 'no-role';
+    }
+
+    /**
+     * Save the role for the user being managed.
+     *
+     * @param  \Laravel\Jetstream\Actions\UpdateTeamMemberRole  $updater
+     * @return void
+     */
+    public function updateRole(UpdateTeamMemberRole $updater)
+    {
+        $updater->update(
+            $this->user,
+            $this->team,
+            $this->managingRoleFor->id,
+            $this->currentRole
+        );
+
+        $this->team = $this->team->fresh();
+
+        $this->stopManagingRole();
+    }
+
+    /**
+     * Stop managing the role of a given user.
+     *
+     * @return void
+     */
+    public function stopManagingRole()
+    {
+        $this->currentlyManagingRole = false;
+    }
+
+    /**
      * Get the current user of the application.
      *
      * @return mixed
@@ -247,5 +295,23 @@ trait WithTeamManagement
     public function getUserProperty()
     {
         return Auth::user();
+    }
+
+    /**
+     * Get the available team member roles.
+     *
+     * @return array
+     */
+    public function getRolesProperty()
+    {
+        return collect(Jetstream::$roles)->transform(function ($role) {
+            return with($role->jsonSerialize(), function ($data) {
+                return (new Role(
+                    $data['key'],
+                    $data['name'],
+                    $data['permissions']
+                ))->description($data['description']);
+            });
+        })->values()->all();
     }
 }
