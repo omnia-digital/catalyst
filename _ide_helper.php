@@ -16795,6 +16795,17 @@
      
 }
 
+    namespace Awssat\Visits { 
+            /**
+     * 
+     *
+     */ 
+        class Visits {
+         
+    }
+     
+}
+
     namespace Barryvdh\Debugbar\Facades { 
             /**
      * 
@@ -23588,6 +23599,7 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
+            class Visits extends \Awssat\Visits\Visits {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}
