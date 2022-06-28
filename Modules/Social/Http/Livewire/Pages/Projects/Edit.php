@@ -106,7 +106,7 @@ class Edit extends Component
 
         if(!empty($this->newAddress)) {
             $this->team->teamLocation()->updateOrCreate(
-                ['team_id' => $this->team->id],
+                ['model_id' => $this->team->id, 'model_type' => Team::class],
                 $this->newAddress
             );
         }
