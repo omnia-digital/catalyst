@@ -13,9 +13,9 @@
         </div>
 
         <div class="mt-5">
-            <x-jet-red-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
+            <x-jet-danger-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
                 {{ __('Delete Team') }}
-            </x-jet-red-button>
+            </x-jet-danger-button>
         </div>
 
         <!-- Delete Team Confirmation Modal -->
@@ -33,9 +33,9 @@
                     {{ __('Cancel') }}
                 </x-jet-secondary-button>
 
-                <x-jet-red-button class="ml-2" wire:click="deleteTeam" wire:loading.attr="disabled">
+                <x-jet-danger-button class="ml-2" wire:click="deleteTeam" wire:loading.attr="disabled">
                     {{ __('Delete Team') }}
-                </x-jet-red-button>
+                </x-jet-danger-button>
             </x-slot>
         </x-jet-confirmation-modal>
     </x-slot>
