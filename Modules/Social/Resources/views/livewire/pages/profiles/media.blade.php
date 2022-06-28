@@ -1,8 +1,8 @@
 @extends('social::livewire.layouts.user-profile-layout')
 
 
-@section('content')
-<div x-data="{ open : false, imageSrc : '' }" class="mx-auto max-w-4xl">
+@section('main-content')
+<div x-data="{ open : false, imageSrc : '' }">
     <x-profiles.partials.header :user="$this->user" />
     <div class="mt-4 -ml-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">

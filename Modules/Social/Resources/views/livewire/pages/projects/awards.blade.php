@@ -2,7 +2,6 @@
 
 
 @section('content')
-<div class="mx-auto max-w-4xl">
     <x-teams.partials.header  :team="$team" />
     <div class="mt-4 -ml-4">
         <h2 class="text-black font-semibold text-2xl">Awards</h2>
@@ -12,5 +11,4 @@
             @endforeach
         </div>
     </div>
-</div>
 @endsection
