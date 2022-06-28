@@ -1,10 +1,11 @@
-@extends('social::livewire.layouts.two-column-layout')
+@extends('social::livewire.layouts.main-layout')
 
-@section('main-content')
-    @yield('content')
+
+@section('content')
+    <div class="flex space-x-4">
+        <div class="mx-auto max-w-4xl">
+            @yield('main-content')
+        </div>
+        <x-sidebar-column class="max-w-sm"/>
+    </div>
 @endsection
-
-@section('sidebar')
-    <x-sidebar-column class="max-w-sm"/>
-@endsection
-

@@ -1,7 +1,7 @@
 @extends('social::livewire.layouts.main-layout')
 
 @section('content')
-    <div>
+    <div class="pt-6">
         <!-- Page Heading -->
         <div class="flex space-x-6">
             <div class="mx-auto max-w-2xl">

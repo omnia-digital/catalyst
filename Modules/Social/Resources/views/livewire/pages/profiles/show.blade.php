@@ -1,6 +1,6 @@
 @extends('social::livewire.layouts.user-profile-layout')
 
-@section('content')
+@section('main-content')
     <x-profiles.partials.header :user="$this->user" />
         <div class="flex space-x-6 mt-4">
             <div class="space-y-4">
@@ -33,7 +33,7 @@
                         </div>
                         <div class="mt-2 flex space-x-2">
                             <div class="bg-white p-2 flex-1 flex items-center">
-                                <div class="rounded-full bg-gray-500 mr-4 p-2">
+                                <div class="rounded-full bg-gray-500 mr-4 ml-2 p-2">
                                     <x-heroicon-s-academic-cap class="w-4 h-4" />
                                 </div>
                                 <p class="whitespace-nowrap">Gold user</p>
@@ -55,7 +55,7 @@
                         <a href="#" class="text-xs flex items-center">See all <x-heroicon-s-chevron-right class="ml-2 w-4 h-4" /></a>
                     </div>
                     <div class="flex justify-start items-start mt-2 bg-primary border border-neutral-light p-4">
-                        <div class="mr-2">
+                        <div class="mr-4">
                             <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1" alt="Arlene McCoy" />
                         </div>
                         <div class="flex-1 space-y-2">
