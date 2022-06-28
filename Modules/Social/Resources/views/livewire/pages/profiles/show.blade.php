@@ -1,11 +1,8 @@
-@extends('social::livewire.layouts.main-layout')
-
+@extends('social::livewire.layouts.user-profile-layout')
 
 @section('content')
-<div class="flex space-x-4">
-    <div class="mx-auto max-w-4xl">
-        <x-profiles.partials.header :user="$this->user" />
-        <div class="flex space-x-6 mt-4 -ml-4">
+    <x-profiles.partials.header :user="$this->user" />
+        <div class="flex space-x-6 mt-4">
             <div class="space-y-4">
                 <div class="p-[15px] rounded bg-primary space-y-3 text-base-text-color">
                     <div class="flex justify-start text-sm space-x-4">
@@ -89,7 +86,4 @@
                 </div>
             </div>
         </div>
-    </div>
-    <x-sidebar-column class="max-w-sm"/>
-</div>
 @endsection

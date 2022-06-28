@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.main-layout')
+@extends('social::livewire.layouts.user-profile-layout')
 
 
 @section('content')
