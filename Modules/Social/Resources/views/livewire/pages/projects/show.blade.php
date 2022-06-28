@@ -13,7 +13,7 @@
                     @endif
                 ></div>
                 @if ($team->getMedia('team_sample_images')->count())
-                <div class="flex w-full mt-1 space-x-1 overflow-x-scroll h-40" style="scrollbar-width: thin;">
+                <div class="flex w-full mt-1 space-x-1 overflow-y-hidden overflow-x-scroll h-40" style="scrollbar-width: thin;">
                     <div class="flex h-36 pl-2">
                         @foreach ($team->getMedia('team_sample_images') as $media)
                             <span class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative pr-1 last:pr-0 cursor-pointer hover:ring-4 hover:ring-neutral-dark active:ring-4 active:ring-neutral-dark focus:ring-4 focus:ring-neutral-dark {{ ($media->id === $displayID) ? 'ring-2 ring-neutral-dark' : '' }}" wire:click="setImage({{ $media->id }})">

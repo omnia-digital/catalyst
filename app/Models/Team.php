@@ -165,7 +165,7 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function sampleImages()
     {
-        return optional($this->getMedia('team_sample_images'));
+        return $this->getMedia('team_sample_images');
     }
 
     public function getReviewScoreAttribute()
