@@ -125,9 +125,27 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->hasMany(Post::class)->ofType(PostType::RESOURCE);
     }
 
-    public function projectLink()
+    public function teamLocation(): HasOne
     {
-        return route('social.projects.show', $this->id);
+        return $this->hasOne(TeamLocation::class);
+    }
+
+    public function getLocationShortAttribute()
+    {
+        if($this->teamLocation) {
+            return $this->teamLocation->name;
+        }
+
+        return null;
+    }
+
+    public function getLocationAttribute()
+    {
+        if($this->teamLocation) {
+            return $this->teamLocation->full;
+        }
+
+        return null;
     }
 
     public function visits(): Relation
