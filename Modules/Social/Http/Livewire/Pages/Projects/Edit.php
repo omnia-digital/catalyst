@@ -81,6 +81,9 @@ class Edit extends Component
 
     public function setAddress()
     {
+        if(is_null($this->placeId)) {
+            return;
+        }
         $place = $this->findPlace();
         $this->newAddress = [
             'address'          => $place->address(),
