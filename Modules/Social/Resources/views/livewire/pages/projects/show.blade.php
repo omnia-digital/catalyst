@@ -8,14 +8,14 @@
         <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
             <div class="col-span-2 row-span-1 flex flex-col min-h-[512px]">
                 <div class="flex-1 bg-black"
-                    @if ($team->getMedia('team_sample_images')->count())
+                    @if ($team->sampleImages()->count())
                         style="background-image: url({{ $displayUrl }}); background-size: contain; background-position: center; background-repeat: no-repeat;"
                     @endif
                 ></div>
-                @if ($team->getMedia('team_sample_images')->count())
+                @if ($team->sampleImages()->count())
                 <div class="flex w-full mt-1 space-x-1 overflow-x-scroll h-40" style="scrollbar-width: thin;">
                     <div class="flex h-36 pl-2">
-                        @foreach ($team->getMedia('team_sample_images') as $media)
+                        @foreach ($team->sampleImages() as $media)
                             <span class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative pr-1 last:pr-0 cursor-pointer hover:ring-4 hover:ring-neutral-dark active:ring-4 active:ring-neutral-dark focus:ring-4 focus:ring-neutral-dark {{ ($media->id === $displayID) ? 'ring-2 ring-neutral-dark' : '' }}" wire:click="setImage({{ $media->id }})">
                                 {{ $media->img()->attributes(['class' => 'max-w-[152px] max-h-[120px]']) }}
                             </span>
@@ -28,8 +28,8 @@
                 <div class="flex flex-col flex-1 bg-primary rounded">
                     <div 
                         class="h-44 bg-black"
-                        @if ($team->getMedia('team_main_images')->count())
-                            style="background-image: url({{ $team->getMedia('team_main_images')->first()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
+                        @if ($team->mainImage()->count())
+                            style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
                         @endif
                     ></div>
                     <div class="p-[15px] flex flex-col flex-1">
