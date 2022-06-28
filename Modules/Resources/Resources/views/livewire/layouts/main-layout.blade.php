@@ -24,6 +24,8 @@
                     <!-- Page content -->
                     <div class="mx-auto">
                         @yield('content')
+
+                        <livewire:notification-global/>
                     </div>
                 </div>
             </div>

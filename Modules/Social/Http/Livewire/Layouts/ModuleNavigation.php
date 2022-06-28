@@ -18,6 +18,12 @@
                     'current' => false
                 ],
                 [
+                    'label'   => 'Notification',
+                    'name'    => 'notifications',
+                    'icon'    => 'heroicon-o-bell',
+                    'current' => false
+                ],
+                [
                     'label'   => 'Discover',
                     'name'    => 'social.discover',
                     'icon'    => 'heroicon-o-collection',
@@ -53,6 +59,12 @@
 //                    'icon'    => 'heroicon-o-user-group',
 //                    'current' => false
 //                ],
+                [
+                    'label'   => 'Crm',
+                    'name'    => 'social.crm',
+                    'icon'    => 'heroicon-o-user-group',
+                    'current' => false
+                ],
                 [
                     'label'   => 'Contacts',
                     'name'    => 'social.contacts.index',
