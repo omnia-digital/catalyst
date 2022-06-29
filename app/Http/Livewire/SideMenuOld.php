@@ -31,8 +31,8 @@
                     'current' => false
                 ],
                 [
-                    'label'   => 'Projects',
-                    'name'    => 'projects.home',
+                    'label'   => 'Teams',
+                    'name'    => 'social.teams.home',
                     'icon'    => 'heroicon-o-collection',
                     'current' => false
                 ],

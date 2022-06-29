@@ -19849,6 +19849,18 @@
      
 }
 
+    namespace Arcanedev\LaravelLang\Entities { 
+            /**
+     * Class     LocaleCollection
+     *
+     * @author ARCANEDEV <arcanedev.maroc@gmail.com>
+     */ 
+        class LocaleCollection {
+         
+    }
+     
+}
+
 
 namespace  { 
             class App extends \Illuminate\Support\Facades\App {}

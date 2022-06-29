@@ -8,13 +8,14 @@
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Storage;
+    use Laravel\Jetstream\HasProfilePhoto;
     use Modules\Social\Database\Factories\ProfileFactory;
     use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
 
     class Profile extends Model
     {
-        use SoftDeletes, HasFactory, HasSlug;
+        use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto;
 
         public $incrementing = false;
 
@@ -27,13 +28,15 @@
 
         protected $visible = [
             'id',
-            'name',
+            'first_name',
+            'last_name',
             'handle',
             'user_id',
         ];
 
         protected $fillable = [
-            'name',
+            'first_name',
+            'last_name',
             'user_id',
         ];
 
@@ -45,6 +48,11 @@
         public function getRouteKeyName()
         {
             return 'handle';
+        }
+
+        public function getNameAttribute()
+        {
+            return $this->first_name . " " . $this->last_name;
         }
 
         protected static function newFactory()

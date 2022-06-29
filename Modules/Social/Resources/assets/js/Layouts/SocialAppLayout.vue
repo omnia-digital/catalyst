@@ -143,7 +143,7 @@ const navigation = [
     {label: 'Home', name: 'home', icon: HomeIcon, current: true},
     {label: 'Explore', name: 'explore', icon: HashtagIcon, current: false},
     {label: 'Profile', name: 'profile', icon: UserIcon, current: false},
-    {label: 'Projects', name: 'projects', icon: OfficeBuildingIcon, current: false},
+    {label: 'Projects', name: 'teams', icon: OfficeBuildingIcon, current: false},
     {label: 'Groups', name: 'groups', icon: UserGroupIcon, current: false},
 ]
 const userNavigation = [

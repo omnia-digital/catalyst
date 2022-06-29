@@ -1,7 +1,7 @@
 <div>
     <div class="h-60 relative overlay before:bg-black before:inset-0 before:opacity-60 bg-black"
-        @if ($team->getMedia('team_banner_images')->count())
-            style="background-image: url({{ $team->getMedia('team_banner_images')->first()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
+        @if ($team->bannerImage()->count())
+            style="background-image: url({{ $team->bannerImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
         @endif
         >
         <div class="mb-1 mx-[15px] absolute bottom-0 left-0 right-0 flex justify-between items-end">

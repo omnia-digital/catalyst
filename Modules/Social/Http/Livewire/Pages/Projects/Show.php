@@ -1,10 +1,11 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Projects;
+namespace Modules\Social\Http\Livewire\Pages\Teams;
 
 use App\Models\Team;
 use App\Traits\WithTeamManagement;
 use Livewire\Component;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Show extends Component
 {
@@ -13,6 +14,8 @@ class Show extends Component
     public $team;
 
     public $displayUrl = null;
+
+    public $displayID = null;
 
     public $additionalInfo = [
         'likes',
@@ -29,19 +32,21 @@ class Show extends Component
         return $this->redirectRoute('social.posts.show', $post['id']);
     }
 
-    public function setImage($url)
+    public function setImage(Media $media)
     {
-        $this->displayUrl = $url;
+        $this->displayUrl = $media->getFullUrl();
+        $this->displayID = $media->id;
     }
     
     public function mount(Team $team)
     {
         $this->team = $team->load('owner');
         $this->displayUrl = optional($team->getMedia('team_sample_images')->first())->getFullUrl();
+        $this->displayID = optional($team->getMedia('team_sample_images')->first())->id;
     }
 
     public function render()
     {
-        return view('social::livewire.pages.projects.show');
+        return view('social::livewire.pages.teams.show');
     }
 }

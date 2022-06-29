@@ -3,7 +3,7 @@
         <x-library::dropdown>
             <x-slot name="trigger">
                 <div type="button"
-                        class="group w-full bg-gray-200 border border-neutral-hover px-5 flex rounded-md py-4 text-sm text-left font-medium text-gray-700 
+                        class="group w-full bg-gray-200 border border-neutral-hover px-5 flex rounded-md py-4 text-sm text-left font-medium text-gray-700
                         hover:bg-gray-300 hover:cursor-pointer focus:outline-none focus:ring-2
                         focus:ring-offset-2
                         focus:ring-offset-gray-100 focus:ring-purple-500"
@@ -15,7 +15,7 @@
                             <div class="min-w-0">
                                 <div class="">
                                     <p class="text-gray-900 text-md font-medium truncate">{{ Auth::user()->name }}</p>
-                                    <p class="-mt-1 text-gray-500 text-xs truncate">{{ '@'.Auth::user()->profile?->handle }}</p>
+                                    <p class="-mt-1 text-gray-500 text-xs truncate">{{ '@'.Auth::user()?->handle }}</p>
                                 </div>
                                 <div class="flex mt-1">
                                     <div class="bg-black flex items-center rounded-lg p-1">
@@ -46,15 +46,15 @@
             </x-jet-responsive-nav-link>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <x-jet-responsive-nav-link 
+                <x-jet-responsive-nav-link
                     href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                     this.closest('form').submit();"
                 >
-                    {{ __('Log Out') }}
+                    {{ \Trans::get('Log Out') }}
                 </x-jet-responsive-nav-link>
             </form>
         </x-library::dropdown>
     </div>
-    
+
 </div>

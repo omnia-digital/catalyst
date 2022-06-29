@@ -167,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        \App\Providers\PlatformTranslateServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -235,6 +236,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Trans' => \App\Util\Platform\Facades\TranslateFacade::class,
     ],
 
 ];

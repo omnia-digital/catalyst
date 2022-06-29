@@ -53,7 +53,7 @@
                     {
                         id: 1,
                         title: 'Top',
-                        component: 'social.top-projects'
+                        component: 'social.top-teams'
                     },
                     {
                         id: 2,

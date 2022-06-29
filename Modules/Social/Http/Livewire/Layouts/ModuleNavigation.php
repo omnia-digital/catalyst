@@ -19,7 +19,7 @@
                 ],
                 [
                     'label'   => 'Discover',
-                    'name'    => 'projects.discover',
+                    'name'    => 'social.teams.discover',
                     'icon'    => 'heroicon-o-globe',
                     'current' => false
                 ],
@@ -30,8 +30,8 @@
                     'current' => false
                 ],
                 [
-                    'label'   => 'My Projects',
-                    'name'    => 'social.my-projects',
+                    'label'   => \Trans::get('My Teams'),
+                    'name'    => 'social.teams.my-teams',
                     'icon'    => 'heroicon-o-briefcase',
                     'current' => false
                 ],

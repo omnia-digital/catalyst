@@ -16,8 +16,6 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('profile_id')->nullable()->unique();
-            $table->string('first_name');
-            $table->string('last_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -29,7 +27,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('language')->nullable()->index();
             $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamp('last_active_at')->nullable()->index();
             $table->timestamp('delete_after')->nullable();
             $table->softDeletes()->index();

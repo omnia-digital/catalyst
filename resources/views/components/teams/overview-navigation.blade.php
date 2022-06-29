@@ -2,12 +2,12 @@
     <div class="flex justify-between items-center w-full ml-32 relative z-10">
         <div class="flex">
             @foreach ($nav as $key => $item)
-                <a 
-                    href="{{ route('social.projects.' . $key, $team) }}" 
+                <a
+                    href="{{ route('social.teams.' . $key, $team) }}"
                     class="py-4 mx-[10px] flex items-center border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
                     {{ $item }}
                     @if ($key === 'followers')
-                        <span class="ml-2 px-1 w-[21px] h-[22px] flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $team->followers()->count() }}</span>
+                        <span class="ml-2 p-1 flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $team->followers()->count() }}</span>
                     @endif
                 </a>
             @endforeach
@@ -25,54 +25,54 @@
             </x-library::dropdown> --}}
         </div>
     </div>
-    <div class="flex pr-[15px]">
+    <div class="flex pr-2">
         @can('update-team', $team)
-            <a href="{{ route('social.projects.edit', $team) }}" class="py-4 mx-4 whitespace-nowrap">Edit Project</a>
+            <a href="{{ route('social.teams.edit', $team) }}" class="py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Edit Team') }}</a>
         @endcan
         <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
         <div class="inline-flex items-center text-md relative">
-            <div class="absolute inset-auto -translate-y-12 p-2 rounded-md bg-black text-white" 
-                x-data="{show: false}" 
+            <div class="absolute inset-auto -translate-y-12 p-2 rounded-md bg-black text-white"
+                x-data="{show: false}"
                 x-show="show"
                 x-transition:enter-start="opacity-0 translate-y-0"
                 x-transition:enter-end="opacity-100 -translate-y-12"
-                x-transition:leave.opacity.duration.1500ms 
-                x-init="@this.on('applied', () => { 
-                    show = true; 
+                x-transition:leave.opacity.duration.1500ms
+                x-init="@this.on('applied', () => {
+                    show = true;
                     setTimeout(() => { show = false; }, 3000);
                 })"
                 style="display: none;"
             >
-                <span>Application Submitted</span>
+                <span>{{ \Trans::get('Application Submitted') }}</span>
             </div>
-            <div class="absolute inset-auto -translate-y-12 rounded-md p-2 bg-black text-white" 
-                x-data="{show: false}" 
+            <div class="absolute inset-auto -translate-y-12 rounded-md p-2 bg-black text-white"
+                x-data="{show: false}"
                 x-show="show"
                 x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 translate-y-0"
                 x-transition:enter-end="opacity-100 -translate-y-12"
-                x-transition:leave.opacity.duration.1500ms 
-                x-init="@this.on('application_removed', () => { 
-                    show = true; 
+                x-transition:leave.opacity.duration.1500ms
+                x-init="@this.on('application_removed', () => {
+                    show = true;
                     setTimeout(() => { show = false; }, 3000);
                 })"
                 style="display: none;"
             >
-                <span>Application Removed</span>
+                <span>{{ \Trans::get('Application Removed') }}</span>
             </div>
             @if ($team->teamApplications()->hasUser(auth()->id()))
-                <button 
+                <button
                     class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-primary whitespace-nowrap"
                     wire:click="removeApplication"
-                >Remove Application</button>
+                >{{ \Trans::get('Remove Application') }}</button>
             @elseif(!$team->hasUser(auth()->user()))
                 <div class="absolute -top-9 right-0 w-96">
                     <x-jet-input-error for="user_id" class="mt-2" />
                 </div>
-                <button 
+                <button
                     class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-secondary text-white"
                     wire:click="applyToTeam"
-                >Apply</button>
+                >{{ \Trans::get('Apply') }}</button>
             @endif
         </div>
         {{-- Lists functionality not currently setup

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
@@ -27,11 +28,13 @@ use Spatie\Tags\HasTags;
 use Wimil\Followers\Traits\CanBeFollowed;
 
 /**
- * Projects are just Teams
+ * Teams are just Teams
  */
 class Team extends JetstreamTeam implements HasMedia
 {
-    use HasFactory, Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto, HasSlug, HasLocation, InteractsWithMedia;
+    use HasFactory, Notifiable,
+        Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto, HasSlug, HasLocation, InteractsWithMedia;
+
     /**
      * The attributes that should be cast.
      *
@@ -125,14 +128,29 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->hasMany(Post::class)->ofType(PostType::RESOURCE);
     }
 
-    public function projectLink()
+    public function teamLink()
     {
-        return route('social.projects.show', $this->id);
+        return route('social.teams.show', $this->id);
     }
 
     public function visits(): Relation
     {
         return visits($this)->relation();
+    }
+
+    public function bannerImage()
+    {
+        return optional($this->getMedia('team_banner_images')->first());
+    }
+
+    public function mainImage()
+    {
+        return optional($this->getMedia('team_main_images')->first());
+    }
+
+    public function sampleImages()
+    {
+        return $this->getMedia('team_sample_images');
     }
 
     public function getReviewScoreAttribute()
@@ -152,7 +170,7 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function profile()
     {
-        return route('social.projects.show', $this);
+        return route('social.teams.show', $this);
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder

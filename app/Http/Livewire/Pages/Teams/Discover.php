@@ -20,11 +20,11 @@ class Discover extends Component
             ->hasCoordinates()
             ->with('model')
             ->get()
-            ->map(function (Location $teamLocation) {
+            ->map(function (Location $location) {
                 return [
-                    'name' => $teamLocation->model->name,
-                    'lat' => $teamLocation->lat,
-                    'lng' => $teamLocation->lng,
+                    'name' => $location->model->name,
+                    'lat' => $location->lat,
+                    'lng' => $location->lng,
                 ];
             });
 
