@@ -10,12 +10,14 @@
     use Illuminate\Support\Facades\Storage;
     use Laravel\Jetstream\HasProfilePhoto;
     use Modules\Social\Database\Factories\ProfileFactory;
+    use Spatie\MediaLibrary\HasMedia;
+    use Spatie\MediaLibrary\InteractsWithMedia;
     use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
 
-    class Profile extends Model
+    class Profile extends Model implements HasMedia
     {
-        use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto;
+        use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto, InteractsWithMedia;
 
         public $incrementing = false;
 
@@ -88,6 +90,11 @@
 
         public function url() {
             return route('social.profile.show', $this->handle);
+        }
+
+        public function bannerImage()
+        {
+            return optional($this->getMedia('profile_banner_images')->first());
         }
 
         public function getCountryAttribute()
