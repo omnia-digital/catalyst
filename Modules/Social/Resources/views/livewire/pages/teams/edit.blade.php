@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.pages.default-page-layout')
+@extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('full-width-header')
     <div class="col-span-2 h-36 bg-[url('https://source.unsplash.com/random')] -mx-4 bg-cover bg-no-repeat"></div>
@@ -10,7 +10,7 @@
         <div class="space-y-8">
             <nav>
                 <ol class="list-reset flex items-center">
-                    <li><a href="{{ route('social.my-teams') }}" class="font-bold hover:underline">My {{ Trans::get('teams') }}</a></li>
+                    <li><a href="{{ route('social.teams.my-teams') }}" class="font-bold hover:underline">My {{ Trans::get('teams') }}</a></li>
                     <li>
                         <x-heroicon-s-chevron-right class="h-4 w-4 mx-2"/>
                     </li>
@@ -98,7 +98,7 @@
         <div x-cloak x-show="activeTab === 1" class="mt-6 space-y-6">
             <div>
                 <h3 class="text-lg">Current Team Location</h3>
-                @if ($team->teamLocation()->exists())
+                @if ($team->location()->exists())
                     <div class="flex items-center space-x-4 py-4">
                         <p class="{{ $removeAddress ? 'line-through' : '' }}">{{ $team->location }}</p>
                         @if ($removeAddress)

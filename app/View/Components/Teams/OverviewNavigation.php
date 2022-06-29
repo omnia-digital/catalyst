@@ -9,9 +9,9 @@ use Illuminate\View\Component;
 class OverviewNavigation extends Component
 {
 
-    public $team;
+    public Team $team;
     public $pageView;
-    
+
     public $nav = [
         'show' => 'Overview',
         'members' => 'Members',

@@ -24,7 +24,7 @@
                 </div>
                 @endif
             </div>
-        
+
             <div class="col-span-1 row-span-1 flex flex-col">
                 <div class="flex flex-col flex-1 bg-primary rounded">
                     <div
@@ -86,17 +86,17 @@
                 <div class="col-span-2 row-span-1 space-y-6 flex flex-col">
                     @if ($team->content)
                         <div class="flex-1 flex flex-col">
-                            <p class="text-black font-semibold">About this Team</p>
+                            <p class="text-black font-semibold">{{ \Trans::get('About this Team') }}</p>
                             <div
                                     x-data="{readMore: false, longText: @js(strlen($team->content) > 410)}"
                                     class="mt-4 bg-white p-4 relative"
                             >
                                 <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden" :class="(longText && readMore) ? 'h-full max-h-96' : 'max-h-24'">{{ $team->content }}</p>
-                                <div x-show="longText && !readMore" 
+                                <div x-show="longText && !readMore"
                                     class="bg-gradient-to-t from-white to-transparent absolute bottom-1 left-4 right-2 pt-8">
-                                    <a class="block w-full text-right" 
+                                    <a class="block w-full text-right"
                                         href="#"
-                                        @click.prevent="readMore = !readMore">Read More</a>
+                                        @click.prevent="readMore = !readMore">{{ \Trans::get('Read More') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -105,8 +105,8 @@
                     @if ($this->recentPosts->count())
                         <div>
                             <div class="flex justify-between items-center text-black font-semibold">
-                                <p class="text-sm">Posts</p>
-                                <a href="#" class="text-xs flex items-center">See all
+                                <p class="text-sm">{{ \Trans::get('Posts') }}</p>
+                                <a href="#" class="text-xs flex items-center">{{ \Trans::get('Read More') }}
                                     <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                                 </a>
                             </div>
@@ -151,7 +151,7 @@
                     <!-- Team Location -->
                     <div>
                         <div class="text-black font-semibold">
-                            <p class="text-sm">Location</p>
+                            <p class="text-sm">{{ \Trans::get('Location') }}</p>
                         </div>
                         <div class="mt-4 bg-white">
                             <livewire:social::map/>
@@ -161,7 +161,7 @@
                     @if ($team->languages)
                         <div>
                             <div class="text-black font-semibold">
-                                <p class="text-sm">Languages</p>
+                                <p class="text-sm">{{ \Trans::get('Languages') }}</p>
                             </div>
                             <div class="mt-4 bg-white p-4">
                                 <p class="text-dark-text-color">{{ $team->languages }}</p>
@@ -172,9 +172,9 @@
                     <!-- Team Awards -->
                     <div>
                         <div class="flex justify-between items-center text-black font-semibold">
-                            <p class="text-sm">Awards</p>
+                            <p class="text-sm">{{ \Trans::get('Awards') }}</p>
                             @if($team->awards()->count())
-                                <a href="{{ route('social.teams.awards', $team) }}" class="text-xs flex items-center">See all
+                                <a href="{{ route('social.teams.awards', $team) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                                     <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                                 </a>
                             @endif
@@ -184,7 +184,7 @@
                                 <x-awards-banner class="flex-1" :award="$award"/>
                             @empty
                                 <div class="bg-white p-4">
-                                    <p class="text-dark-text-color">No awards to show.</p>
+                                    <p class="text-dark-text-color">{{ \Trans::get('No awards to show.') }}</p>
                                 </div>
                             @endforelse
                         </div>
