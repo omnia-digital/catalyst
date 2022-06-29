@@ -18,15 +18,15 @@
                     'current' => false
                 ],
                 [
-                    'label'   => 'Notification',
-                    'name'    => 'notifications',
-                    'icon'    => 'heroicon-o-bell',
+                    'label'   => 'Discover',
+                    'name'    => 'projects.discover',
+                    'icon'    => 'heroicon-o-globe',
                     'current' => false
                 ],
                 [
-                    'label'   => 'Discover',
-                    'name'    => 'social.discover',
-                    'icon'    => 'heroicon-o-collection',
+                    'label'   => 'Notifications',
+                    'name'    => 'notifications',
+                    'icon'    => 'heroicon-o-bell',
                     'current' => false
                 ],
                 [
@@ -35,46 +35,28 @@
                     'icon'    => 'heroicon-o-briefcase',
                     'current' => false
                 ],
-//                [
-//                    'label'   => 'Explore',
-//                    'name'    => 'social.bookmarks',
-//                    'icon'    => 'heroicon-o-hashtag',
-//                    'current' => false
-//                ],
-//                [
-//                    'label'   => 'Notifications',
-//                    'name'    => 'social.bookmarks',
-//                    'icon'    => 'heroicon-o-bell',
-//                    'current' => false
-//                ],
-//                [
-//                    'label'   => 'Messages',
-//                    'name'    => 'social.bookmarks',
-//                    'icon'    => 'heroicon-o-chat',
-//                    'current' => false
-//                ],
-//                [
-//                    'label'   => 'Groups',
-//                    'name'    => 'social.bookmarks',
-//                    'icon'    => 'heroicon-o-user-group',
-//                    'current' => false
-//                ],
                 [
-                    'label'   => 'Crm',
-                    'name'    => 'social.crm',
-                    'icon'    => 'heroicon-o-user-group',
+                    'label'   => 'Trending Posts',
+                    'name'    => 'social.discover',
+                    'icon'    => 'heroicon-o-collection',
                     'current' => false
                 ],
                 [
-                    'label'   => 'Contacts',
-                    'name'    => 'social.contacts.index',
-                    'icon'    => 'heroicon-o-users',
+                    'label'   => 'Resources',
+                    'name'    => 'resources.home',
+                    'icon'    => 'heroicon-o-book-open',
                     'current' => false
                 ],
                 [
                     'label'   => 'Bookmarks',
                     'name'    => 'social.bookmarks',
                     'icon'    => 'heroicon-o-bookmark',
+                    'current' => false
+                ],
+                [
+                    'label'   => 'Contacts',
+                    'name'    => 'social.contacts.index',
+                    'icon'    => 'heroicon-o-users',
                     'current' => false
                 ],
             ];

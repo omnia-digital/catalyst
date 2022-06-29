@@ -1,4 +1,4 @@
-@extends('advice::livewire.layouts.main-layout')
+@extends('advice::livewire.layouts.pages.default-page-layout')
 
 @section('content')
     <div class="xl:grid xl:grid-cols-9 xl:gap-9">
