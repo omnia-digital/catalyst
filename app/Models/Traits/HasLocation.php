@@ -14,19 +14,11 @@ trait HasLocation
 
     public function getLocationShortAttribute()
     {
-        if($this->location) {
-            return $this->location->name;
-        }
-
-        return null;
+        return $this->location()?->first()?->name;
     }
 
     public function getLocationAttribute()
     {
-        if($this->location) {
-            return $this->location->full;
-        }
-
-        return null;
+        return $this->location()?->first()?->full;
     }
 }
