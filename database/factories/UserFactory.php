@@ -62,7 +62,7 @@ class UserFactory extends Factory
         return $this->has(
             Team::factory()
                 ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->profile->name.'\'s Team'];
+                    return ['name' => $user->profile->name.'\'s ' . \Trans::get('Team')];
                 }),
             'teams'
         );

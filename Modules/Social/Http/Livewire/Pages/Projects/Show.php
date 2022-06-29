@@ -37,10 +37,10 @@ class Show extends Component
         $this->displayUrl = $media->getFullUrl();
         $this->displayID = $media->id;
     }
-    
+
     public function mount(Team $team)
     {
-        $this->team = $team->load('owner');
+        $team->owner;
         $this->displayUrl = optional($team->getMedia('team_sample_images')->first())->getFullUrl();
         $this->displayID = optional($team->getMedia('team_sample_images')->first())->id;
     }

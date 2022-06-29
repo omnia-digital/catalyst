@@ -35,6 +35,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
             HasTeams::hasTeamRole insteadof JetstreamHasTeams;
             HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
             HasTeams::ownedTeams insteadof JetstreamHasTeams;
+            HasTeams::currentTeam insteadof JetstreamHasTeams;
         }
 
         protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
@@ -110,18 +111,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
         {
             return $this->hasManyThrough(Media::class, Post::class, 'user_id', 'model_id')
                 ->where('model_type', Post::class);
-        }
-
-        public function allTeams()
-        {
-            return $this->joinedTeams()->orWhere('user_id', $this->id);
-        }
-
-        public function joinedTeams()
-        {
-            return Team::whereHas('users', function($query) {
-                $query->where('team_user.user_id', $this->id);
-            });
         }
 
         public function teamInvitations(): HasMany

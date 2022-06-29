@@ -6,12 +6,20 @@ use Laravel\Jetstream\Jetstream;
 
 trait HasTeams
 {
-    /**
-     * Determine if the given team is the current team.
-     *
-     * @param  mixed  $team
-     * @return bool
-     */
+    public function currentTeam()
+    {
+        if (!$this->teams()->exists()) { return false;}
+
+        if (is_null($this->current_team_id) && $this->id) {
+            $team = $this->ownedTeams()->first() ?? $this->teams()->first();
+            $this->switchTeam($team);
+            $this->current_team_id = $team->id;
+            $this->save();
+        }
+
+        return $this->belongsTo(Jetstream::teamModel(), 'current_team_id');
+    }
+
     public function isCurrentTeam($team)
     {
         if (is_null($team)) {
@@ -22,13 +30,20 @@ trait HasTeams
 
     public function isMemberOfATeam(): bool
     {
-        dd($this->teams()->count());
-        return dd((bool) ($this->teams()->count() || $this->ownedTeams()->count()));
+        return (bool) ($this->teams()->count() > 0);
+    }
+
+    public function hasMultipleTeams(): bool
+    {
+        return (bool) ($this->teams()->count() > 1);
     }
 
     public function ownedTeams()
     {
-        return $this->hasMany(Jetstream::teamModel());
+        return $this->belongsToMany(Jetstream::teamModel(), Jetstream::membershipModel())->where(['role'=>'owner'])
+                    ->withPivot('role')
+                    ->withTimestamps()
+                    ->as('membership');
     }
 
     /**
