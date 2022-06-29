@@ -1,10 +1,13 @@
-@extends('resources::livewire.layouts.main-layout')
+@extends('resources::livewire.layouts.pages.default-page-layout')
 
 @section('content')
-    <div class="flex space-x-6">
-        <div class="max-w-2xl w-full mx-auto">
             <div class="mb-2 flex justify-between items-center">
                 <div class="flex-1 flex items-center">
+{{--                    <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full">--}}
+{{--                        <a href="{{ route('social.home') }}">--}}
+{{--                            <x-heroicon-o-arrow-left class="h-6"/>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
                     <h1 class="py-2 text-3xl">Resources</h1>
                 </div>
 
@@ -37,10 +40,6 @@
                     {{ $resources->onEachSide(1)->links() }}
                 </div>
             </div>
-        </div>
-
-        <x-sidebar-column class="max-w-sm" post-type="resource"/>
-    </div>
     @push('scripts')
         <script>
             function setup() {

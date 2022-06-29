@@ -8,6 +8,6 @@
     {
         public function render()
         {
-            return view('jobs::livewire.layouts.main-layout');
+            return view('jobs::livewire.layouts.pages.default-page-layout');
         }
     }

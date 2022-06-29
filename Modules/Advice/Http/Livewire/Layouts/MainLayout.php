@@ -8,6 +8,6 @@
     {
         public function render()
         {
-            return view('advice::livewire.layouts.main-layout');
+            return view('advice::livewire.layouts.pages.default-page-layout');
         }
     }

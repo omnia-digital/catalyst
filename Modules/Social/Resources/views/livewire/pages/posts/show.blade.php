@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.main-layout')
+@extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
     <div class="flex space-x-6">

@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.main-layout')
+@extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('full-width-header')
     <div class="col-span-2 h-36 bg-[url('https://source.unsplash.com/random')] -mx-4 bg-cover bg-no-repeat"></div>
@@ -28,7 +28,7 @@
                  x-show="show"
                  x-transition:leave.opacity.duration.1500ms
                  x-init="@this.on('changes_saved', () => {
-                show = true; 
+                show = true;
                 setTimeout(() => { show = false; }, 3000);
             })"
                  style="display: none;"

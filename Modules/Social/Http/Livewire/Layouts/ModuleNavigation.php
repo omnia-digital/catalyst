@@ -18,13 +18,13 @@
                     'current' => false
                 ],
                 [
-                    'label'   => 'Notification',
+                    'label'   => 'Notifications',
                     'name'    => 'notifications',
                     'icon'    => 'heroicon-o-bell',
                     'current' => false
                 ],
                 [
-                    'label'   => 'Discover',
+                    'label'   => 'Trending',
                     'name'    => 'social.discover',
                     'icon'    => 'heroicon-o-collection',
                     'current' => false
@@ -35,12 +35,12 @@
                     'icon'    => 'heroicon-o-briefcase',
                     'current' => false
                 ],
-//                [
-//                    'label'   => 'Explore',
-//                    'name'    => 'social.bookmarks',
-//                    'icon'    => 'heroicon-o-hashtag',
-//                    'current' => false
-//                ],
+                [
+                    'label'   => 'Resources',
+                    'name'    => 'resources.home',
+                    'icon'    => 'heroicon-o-book-open',
+                    'current' => false
+                ],
 //                [
 //                    'label'   => 'Notifications',
 //                    'name'    => 'social.bookmarks',
@@ -59,12 +59,12 @@
 //                    'icon'    => 'heroicon-o-user-group',
 //                    'current' => false
 //                ],
-                [
-                    'label'   => 'Crm',
-                    'name'    => 'social.crm',
-                    'icon'    => 'heroicon-o-user-group',
-                    'current' => false
-                ],
+//                [
+//                    'label'   => 'Crm',
+//                    'name'    => 'social.crm',
+//                    'icon'    => 'heroicon-o-user-group',
+//                    'current' => false
+//                ],
                 [
                     'label'   => 'Contacts',
                     'name'    => 'social.contacts.index',

@@ -1,17 +1,15 @@
-@extends('social::livewire.layouts.main-layout')
+@extends('social::livewire.layouts.pages.default-page-layout')
 
 
 @section('content')
-<div class="p-4">
-    <div>
-        <h1 class="text-2xl font-bold text-dark-text-color">Discover</h1>
-    </div>
-    <div>
-        <div class="mt-2 space-y-2">
-            @foreach ($posts as $post)
-                <livewire:social::components.post-card :post="$post" />
-            @endforeach
+        <div>
+            <x-library::heading.2 boldClass="py-2 text-3xl">Trending</x-library::heading.2>
         </div>
-    </div>
-</div>
+        <div>
+            <div class="mt-2 space-y-2">
+                @foreach ($posts as $post)
+                    <livewire:social::components.post-card :post="$post"/>
+                @endforeach
+            </div>
+        </div>
 @endsection

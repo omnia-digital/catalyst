@@ -4,9 +4,9 @@
             @yield('full-width-header')
         </div>
     @endif
-    <div class="max-w-8xl mx-auto grid grid-cols-10 gap-2 bg-neutral @hasSection('full-width-header') pt-4 @else pt-20 @endif">
+    <div class="max-w-8xl mx-auto grid grid-cols-10 gap-4 bg-neutral @hasSection('full-width-header') pt-6 @else  @endif">
         <!-- SideMenu -->
-        <livewire:social::layouts.module-navigation class="col-span-2"/>
+        <livewire:social::layouts.module-navigation class="col-span-2 pt-6"/>
 
         <!-- Main Content -->
         <div class="col-span-8">
@@ -20,10 +20,10 @@
                 {{--                </div>--}}
                 {{--            @endif--}}
 
-                <div class="min-h-screen ml-4">
+                <div class="min-h-screen">
                     <!-- Page content -->
                     <div class="mx-auto">
-                        @yield('content')
+                        @yield('page-layout')
                     </div>
                 </div>
             </div>
