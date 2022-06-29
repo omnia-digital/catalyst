@@ -75,7 +75,7 @@ class Edit extends Component
 
     public function mount(Team $team)
     {
-//        $this->authorize('update-team', $team);
+        $this->authorize('update-team', $team);
         $this->team = $team->load('owner');
     }
 
