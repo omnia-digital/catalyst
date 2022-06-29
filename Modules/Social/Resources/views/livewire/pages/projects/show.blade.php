@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.pages.default-page-layout')
+@extends('social::livewire.layouts.pages.full-page-layout')
 
 
 @section('content')
@@ -26,15 +26,15 @@
             </div>
         
             <div class="col-span-1 row-span-1 flex flex-col">
-                <div class="flex-1 bg-white rounded">
+                <div class="flex flex-col flex-1 bg-primary rounded">
                     <div
-                        class="h-44 bg-black"
+                        class="h-44 bg-secondary"
                         @if ($team->mainImage()->count())
                             style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
                         @endif
                     ></div>
-                    <div class="p-[15px] space-y-4">
-                        <p class="text-sm">{{ $team->summary }}</p>
+                    <div class="p-[15px] flex flex-col flex-1">
+                        <p class="text-sm flex-1">{{ $team->summary }}</p>
                         <div class="text-xs grid grid-cols-4 grid-rows-4 gap-1 items-center">
                             <span class="col-span-1 text-gray-400 text-xxs uppercase">Launch Date</span>
                             <div class="col-span-3 flex items-center space-x-2">
