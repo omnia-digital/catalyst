@@ -27,6 +27,8 @@ class Show extends Component
     public function getPlacesProperty()
     {
         $places = Location::select(['lat', 'lng', 'model_id'])
+            ->where('model_id', $this->team->id)
+            ->where('model_type', Team::class)
             ->hasCoordinates()
             ->with('model')
             ->get()
