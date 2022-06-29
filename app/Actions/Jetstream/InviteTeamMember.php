@@ -62,7 +62,7 @@ class InviteTeamMember implements InvitesTeamMembers
             'role' => $role,
             'message' => $message,
         ], $this->rules($team), [
-            'email.unique' => __('This user has already been invited to the team.'),
+            'email.unique' => \Trans::get('This user has already been invited to the team.'),
         ])->after(
             $this->ensureUserIsNotAlreadyOnTeam($team, $email)
         )->validateWithBag('addTeamMember');
@@ -100,7 +100,7 @@ class InviteTeamMember implements InvitesTeamMembers
             $validator->errors()->addIf(
                 $team->hasUserWithEmail($email),
                 'email',
-                __('This user already belongs to the team.')
+                \Trans::get('This user already belongs to the team.')
             );
         };
     }

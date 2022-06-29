@@ -1,40 +1,40 @@
 <div class="card">
     <div class="flex-1 p-6 space-y-1 overflow-y-auto">
         <div class="flex justify-between items-center">
-            <h3 class="text-base-text-color text-base font-semibold" wire:click="testClick">Projects</h3>
+            <h3 class="text-base-text-color text-base font-semibold" wire:click="testClick"> {{ Trans::get('teams') }}</h3>
             <div x-data="{show: false, message: ''}"
-                x-cloak 
+                x-cloak
                 x-show="show"
-                x-transition:leave.opacity.duration.1500ms 
-                x-init="@this.on('project_action', (eventMessage) => { 
+                x-transition:leave.opacity.duration.1500ms
+                x-init="@this.on('team_action', (eventMessage) => {
                     message = eventMessage;
-                    show = true; 
+                    show = true;
                     setTimeout(() => { show = false; }, 3000);
                 })"
             >
                 <p class="text-sm text-green-600" x-text="message"></p>
             </div>
         </div>
-        <div 
+        <div
             x-data="{
-                activeTab: 0, 
+                activeTab: 0,
                 tabs: [
-                    { 
+                    {
                         label: 'Invitations',
                         count: {{ $invitations->count() }}
-                    }, 
+                    },
                     {
                         label: 'Requests',
                         count: {{ $applications->count() }}
                     }
                 ]
             }"
-            x-init="@this.on('project_action', (eventMessage) => {
+            x-init="@this.on('team_action', (eventMessage) => {
                 tabs[0].count = $wire.invitationsCount();
                 tabs[1].count = $wire.applicationsCount();
             })"
         >
-            <ul class="flex justify-center items-center my-4"> 
+            <ul class="flex justify-center items-center my-4">
                 <template x-for="(tab, index) in tabs" :key="index">
                     <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-base-text-color border-b-2 justify-center"
                         :class="activeTab===index ? 'text-black font-bold border-black' : ''" @click="activeTab = index"
@@ -68,13 +68,13 @@
                                     @endif
                                     <div>
                                         <div class="flex justify-center divide-x">
-                                            <button type="button" 
+                                            <button type="button"
                                                 wire:click="addTeamMember({{ $invitation->id }})"
                                                 class="flex items-center text-sm px-6 rounded-md font-semibold hover:underline">
                                                 <x-heroicon-o-check class="w-4 h-4 mr-2" />
                                                 Accept
                                             </button>
-                                            <button type="button" 
+                                            <button type="button"
                                                 wire:click="cancelTeamInvitation({{ $invitation->id }})"
                                                 class="flex items-center text-sm px-6 rounded-md font-semibold hover:underline">
                                                 <x-heroicon-o-x class="w-4 h-4 mr-2" />
@@ -106,7 +106,7 @@
                                     </div>
                                     <div>
                                         <div class="flex justify-end divide-x">
-                                            <button type="button" 
+                                            <button type="button"
                                                 wire:click="removeApplication({{ $application->id }})"
                                                 class="flex items-center text-sm px-6 rounded-md text-red-500 font-semibold hover:underline">
                                                 Cancel

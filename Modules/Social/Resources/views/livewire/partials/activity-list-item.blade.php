@@ -24,10 +24,10 @@
                 </p>
             </div>
             <div class="text-xs ml-3 w-60 space-y-1">
-                @if (!is_null($activity['project']))
-                    <a href="{{ $activity['project']['link'] }}" class="flex items-center"><span>View Project</span><x-heroicon-o-chevron-right class="w-3 h-3 ml-2" /></a>
+                @if (!is_null($activity['team']))
+                    <a href="{{ $activity['team']['link'] }}" class="flex items-center"><span>View Team</span><x-heroicon-o-chevron-right class="w-3 h-3 ml-2" /></a>
                 @endif
-                @if (!is_null($activity['user']['avatar']) && !is_null($activity['project']))
+                @if (!is_null($activity['user']['avatar']) && !is_null($activity['team']))
                 <a href="#" class="flex items-center"><x-heroicon-o-star class="w-3 h-3 mr-2" /><span>Add to favorites</span></a>
                 <a href="#" class="flex items-center"><x-heroicon-o-mail class="w-3 h-3 mr-2" /><span>Request to join</span></a>
                 @endif

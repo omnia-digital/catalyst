@@ -31,7 +31,7 @@
         public function toText($type = 'post')
         {
             $actorName = $this->actor->handle;
-            $msg       = $type == 'post' ? __('notification.likedPhoto') : __('notification.likedComment');
+            $msg       = $type == 'post' ? \Trans::get('notification.likedPhoto') : \Trans::get('notification.likedComment');
 
             return "{$actorName} " . $msg;
         }
@@ -40,7 +40,7 @@
         {
             $actorName = $this->actor->handle;
             $actorUrl  = $this->actor->url();
-            $msg       = $type == 'post' ? __('notification.likedPhoto') : __('notification.likedComment');
+            $msg       = $type == 'post' ? \Trans::get('notification.likedPhoto') : \Trans::get('notification.likedComment');
 
             return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . $msg;
         }

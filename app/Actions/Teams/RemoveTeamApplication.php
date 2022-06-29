@@ -47,7 +47,7 @@ class RemoveTeamApplication
             'user_id' => $userID,
             'role' => $role,
         ], $this->rules($team), [
-            'user_id.unique' => __('You have already applied to this team.'),
+            'user_id.unique' => \Trans::get('You have already applied to this team.'),
         ])->after(
             $this->ensureUserIsNotAlreadyOnTeam($team, $userID)
         )->validateWithBag('addTeamMember');
@@ -86,7 +86,7 @@ class RemoveTeamApplication
             $validator->errors()->addIf(
                 $team->hasUser($user),
                 'user_id',
-                __('This user already belongs to the team.')
+                \Trans::get('This user already belongs to the team.')
             );
         };
     }
