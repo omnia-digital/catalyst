@@ -161,7 +161,11 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function members()
     {
-        return $this->allUsers();
+        return $this->users()->wherePivotNotIn('role', ['owner']);
+    }
+
+    public function allUsers() {
+        return $this->users();
     }
 
     public function profile()

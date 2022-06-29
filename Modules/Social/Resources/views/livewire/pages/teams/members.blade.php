@@ -40,34 +40,34 @@
                                 </div>
                             </div>
                         </div>
-                        @foreach ($team->users->sortBy('name') as $user)
+                        @foreach ($team->members->sortBy('name') as $member)
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img class="w-8 h-8 rounded-full" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
-                                    <div class="ml-4">{{ $user->name }}</div>
+                                    <img class="w-8 h-8 rounded-full" src="{{ $member->profile_photo_url }}" alt="{{ $member->name }}">
+                                    <div class="ml-4">{{ $member->name }}</div>
                                 </div>
 
                                 <div class="flex items-center">
                                     <!-- Manage Team Member Role -->
                                     @if (Gate::check('addTeamMember', $team) && Laravel\Jetstream\Jetstream::hasRoles())
-                                        <button class="ml-2 text-sm text-light-text-color underline hover:no-underline active:no-underline" wire:click="manageRole('{{ $user->id }}')">
-                                            {{ $user->membership->role ? Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name : 'No Role' }}
+                                        <button class="ml-2 text-sm text-light-text-color underline hover:no-underline active:no-underline" wire:click="manageRole('{{ $member->id }}')">
+                                            {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role) : 'No Role' }}
                                         </button>
                                     @elseif (Laravel\Jetstream\Jetstream::hasRoles())
                                         <div class="ml-2 text-sm text-light-text-color">
-                                            {{ $user->membership->role ? Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name : '' }}
+                                            {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role) : '' }}
                                         </div>
                                     @endif
 
                                     <!-- Leave Team -->
-                                    @if ($this->user->id === $user->id)
+                                    @if ($this->user->id === $member->id)
                                         <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="$toggle('confirmingLeavingTeam')">
                                             {{ \Trans::get('Leave') }}
                                         </button>
 
                                         <!-- Remove Team Member -->
                                     @elseif (Gate::check('removeTeamMember', $team))
-                                        <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="confirmTeamMemberRemoval('{{ $user->id }}')">
+                                        <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="confirmTeamMemberRemoval('{{ $member->id }}')">
                                             {{ \Trans::get('Remove') }}
                                         </button>
                                     @endif
