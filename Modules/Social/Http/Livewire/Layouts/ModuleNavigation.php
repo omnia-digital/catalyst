@@ -19,7 +19,7 @@
                 ],
                 [
                     'label'   => 'Discover',
-                    'name'    => 'projects.discover',
+                    'name'    => 'teams.discover',
                     'icon'    => 'heroicon-o-globe',
                     'current' => false
                 ],
@@ -30,8 +30,8 @@
                     'current' => false
                 ],
                 [
-                    'label'   => 'My Projects',
-                    'name'    => 'social.my-projects',
+                    'label'   => 'My Teams',
+                    'name'    => 'social.my-teams',
                     'icon'    => 'heroicon-o-briefcase',
                     'current' => false
                 ],

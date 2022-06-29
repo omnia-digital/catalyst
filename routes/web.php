@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
         return view('dashboard');
     })->name('dashboard');
 
-    Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {
+    Route::name('teams.')->prefix('teams')->middleware(['auth','verified'])->group(function () {
         Route::get('/', Index::class)->name('home');
         Route::get('/discover', Discover::class)->name('discover');
         Route::get('{team}', ShowTeam::class)->name('show');

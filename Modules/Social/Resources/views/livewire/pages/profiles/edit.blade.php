@@ -34,7 +34,7 @@
         </div>
 
         <div x-data="setup()">
-            <!-- Project Edit Navigation -->
+            <!-- Team Edit Navigation -->
             <div class="w-full mt-6"
             <nav class="flex items-center justify-between text-xs">
                 <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-10">

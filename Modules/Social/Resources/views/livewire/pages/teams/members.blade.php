@@ -8,7 +8,7 @@
             <h2 class="text-black font-semibold text-2xl">Members</h2>
 
             <div x-data="setup()">
-                <!-- Project Members Navigation -->
+                <!-- Team Members Navigation -->
                 <div class="w-full mt-6">
                     <nav class="flex items-center justify-between text-xs">
                         <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-10">
@@ -363,7 +363,7 @@
                     {
                         id: 0,
                         title: 'All',
-                        /* component: 'social::pages.projects.partials.edit-project-basic' */
+                        /* component: 'social::pages.teams.partials.edit-team-basic' */
                     },
                     {
                         id: 1,

@@ -85,7 +85,7 @@
                 <div class="col-span-2 row-span-1 space-y-6 flex flex-col">
                     @if ($team->content)
                         <div class="flex-1 flex flex-col">
-                            <p class="text-black font-semibold">About this Project</p>
+                            <p class="text-black font-semibold">About this Team</p>
                             <div
                                     x-data="{readMore: false, longText: @js(strlen($team->content) > 410)}"
                                     class="mt-4 bg-white p-4 relative"
@@ -135,16 +135,16 @@
                     @endif
                 </div>
                 <div class="col-span-1 row-span-1 space-y-6">
-                    <!-- Project Relevence -->
+                    <!-- Team Relevence -->
                     {{-- <div>
                         <div class="text-black font-semibold">
-                            <p class="text-sm">Is this project relevant to you?</p>
+                            <p class="text-sm">Is this team relevant to you?</p>
                         </div>
                         <div class="mt-4 bg-white p-4">
                             <p class="text-dark-text-color text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione consequuntur hic aperiam adipisci cupiditate repellat quibusdam molestias praesentium sunt velit! Totam illum vero deleniti, sint est illo atque sequi quo.</p>
                         </div>
                     </div> --}}
-                    <!-- Project Location -->
+                    <!-- Team Location -->
                     <div>
                         <div class="text-black font-semibold">
                             <p class="text-sm">Location</p>
@@ -153,7 +153,7 @@
                             <livewire:social::map/>
                         </div>
                     </div>
-                    <!-- Project Languages -->
+                    <!-- Team Languages -->
                     @if ($team->languages)
                         <div>
                             <div class="text-black font-semibold">
@@ -165,12 +165,12 @@
                         </div>
                     @endif
 
-                    <!-- Project Awards -->
+                    <!-- Team Awards -->
                     <div>
                         <div class="flex justify-between items-center text-black font-semibold">
                             <p class="text-sm">Awards</p>
                             @if($team->awards()->count())
-                                <a href="{{ route('social.projects.awards', $team) }}" class="text-xs flex items-center">See all
+                                <a href="{{ route('social.teams.awards', $team) }}" class="text-xs flex items-center">See all
                                     <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                                 </a>
                             @endif
@@ -187,7 +187,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <p class="text-black font-semibold">Project Reviews</p>
+            {{-- <p class="text-black font-semibold">Team Reviews</p>
             <div class="lg:grid lg:grid-cols-2 lg:gap-4">
                 <div class="col-span-1">
                     <div class="bg-white p-4">

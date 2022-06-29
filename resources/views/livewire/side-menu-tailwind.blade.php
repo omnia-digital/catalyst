@@ -306,9 +306,9 @@
                     <button type="button" class="order-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">Create</button>
                 </div>
             </div>
-            <!-- Pinned projects -->
+            <!-- Pinned teams -->
             <div class="px-4 mt-6 sm:px-6 lg:px-8">
-                <h2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Pinned Projects</h2>
+                <h2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Pinned Teams</h2>
                 <ul role="list" class="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-3">
                     <li class="relative col-span-1 flex shadow-sm rounded-md">
                         <div class="flex-shrink-0 flex items-center justify-center w-16 bg-pink-600 text-white text-sm font-medium rounded-l-md">GA</div>
@@ -318,7 +318,7 @@
                                 <p class="text-base-text-color">12 Members</p>
                             </div>
                             <div class="flex-shrink-0 pr-2">
-                                <button type="button" class="w-8 h-8 bg-primary inline-flex items-center justify-center text-light-text-color rounded-full hover:text-base-text-color focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" id="pinned-project-options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                                <button type="button" class="w-8 h-8 bg-primary inline-flex items-center justify-center text-light-text-color rounded-full hover:text-base-text-color focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" id="pinned-team-options-menu-0-button" aria-expanded="false" aria-haspopup="true">
                                     <span class="sr-only">Open options</span>
                                     <!-- Heroicon name: solid/dots-vertical -->
                                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -336,14 +336,14 @@
                                     From: "transform opacity-100 scale-100"
                                     To: "transform opacity-0 scale-95"
                                 -->
-                                <div class="z-10 mx-3 origin-top-right absolute right-10 top-3 w-48 mt-1 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="pinned-project-options-menu-0-button" tabindex="-1">
+                                <div class="z-10 mx-3 origin-top-right absolute right-10 top-3 w-48 mt-1 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="pinned-team-options-menu-0-button" tabindex="-1">
                                     <div class="py-1" role="none">
                                         <!-- Active: "bg-neutral text-dark-text-color", Not Active: "text-dark-text-color" -->
-                                        <a href="#" class="text-dark-text-color block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="pinned-project-options-menu-0-item-0">View</a>
+                                        <a href="#" class="text-dark-text-color block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="pinned-team-options-menu-0-item-0">View</a>
                                     </div>
                                     <div class="py-1" role="none">
-                                        <a href="#" class="text-dark-text-color block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="pinned-project-options-menu-0-item-1">Removed from pinned</a>
-                                        <a href="#" class="text-dark-text-color block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="pinned-project-options-menu-0-item-2">Share</a>
+                                        <a href="#" class="text-dark-text-color block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="pinned-team-options-menu-0-item-1">Removed from pinned</a>
+                                        <a href="#" class="text-dark-text-color block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="pinned-team-options-menu-0-item-2">Share</a>
                                     </div>
                                 </div>
                             </div>
@@ -354,10 +354,10 @@
                 </ul>
             </div>
 
-            <!-- Projects list (only on smallest breakpoint) -->
+            <!-- Teams list (only on smallest breakpoint) -->
             <div class="mt-10 sm:hidden">
                 <div class="px-4 sm:px-6">
-                    <h2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Projects</h2>
+                    <h2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Teams</h2>
                 </div>
                 <ul role="list" class="mt-3 border-t border-neutral-light divide-y divide-gray-100">
                     <li>
@@ -376,18 +376,18 @@
                         </a>
                     </li>
 
-                    <!-- More projects... -->
+                    <!-- More teams... -->
                 </ul>
             </div>
 
-            <!-- Projects table (small breakpoint and up) -->
+            <!-- Teams table (small breakpoint and up) -->
             <div class="hidden mt-8 sm:block">
                 <div class="align-middle inline-block min-w-full border-b border-neutral-light">
                     <table class="min-w-full">
                         <thead>
                         <tr class="border-t border-neutral-light">
                             <th class="px-6 py-3 border-b border-neutral-light bg-gray-50 text-left text-xs font-medium text-base-text-color uppercase tracking-wider">
-                                <span class="lg:pl-2">Project</span>
+                                <span class="lg:pl-2">Team</span>
                             </th>
                             <th class="px-6 py-3 border-b border-neutral-light bg-gray-50 text-left text-xs font-medium text-base-text-color uppercase tracking-wider">Members</th>
                             <th class="hidden md:table-cell px-6 py-3 border-b border-neutral-light bg-gray-50 text-right text-xs font-medium text-base-text-color uppercase tracking-wider">Last updated</th>
@@ -428,7 +428,7 @@
                             </td>
                         </tr>
 
-                        <!-- More projects... -->
+                        <!-- More teams... -->
                         </tbody>
                     </table>
                 </div>

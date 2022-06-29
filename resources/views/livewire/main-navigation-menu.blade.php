@@ -46,7 +46,7 @@
                                 </div>
                                 <input id="search" name="search"
                                        class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
-                                       placeholder="Search for Projects" type="search"/>
+                                       placeholder="Search for  {{ Terms::get('team', 2) }}" type="search"/>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
 
                                        <!-- Team Settings -->
                                        <x-jet-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                           {{ __('Team Settings') }}
+                                           {{ Terms::get('Team Settings') }}
                                        </x-jet-dropdown-link>
 
                                        @can('create', Laravel\Jetstream\Jetstream::newTeamModel())

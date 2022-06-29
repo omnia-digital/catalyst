@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Projects;
+namespace Modules\Social\Http\Livewire\Pages\Teams;
 
 use App\Models\Team;
 use App\Models\User;
@@ -10,7 +10,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
-class MyProjects extends Component
+class MyTeams extends Component
 {
     use WithPagination, WithCachedRows, WithSortAndFilters;
 
@@ -56,9 +56,9 @@ class MyProjects extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.projects.my-projects', [
-            'projects' => $this->rows,
-            'projectsCount' => $this->rowsQuery->count()
+        return view('social::livewire.pages.teams.my-teams', [
+            'teams' => $this->rows,
+            'teamsCount' => $this->rowsQuery->count()
         ]);
     }
 }

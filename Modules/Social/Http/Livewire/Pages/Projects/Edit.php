@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Projects;
+namespace Modules\Social\Http\Livewire\Pages\Teams;
 
 use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -98,6 +98,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.projects.edit');
+        return view('social::livewire.pages.teams.edit');
     }
 }

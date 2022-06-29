@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Projects;
+namespace Modules\Social\Http\Livewire\Pages\Teams;
 
 use App\Models\Team;
 use App\Traits\WithTeamManagement;
@@ -23,6 +23,6 @@ class Members extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.projects.members');
+        return view('social::livewire.pages.teams.members');
     }
 }

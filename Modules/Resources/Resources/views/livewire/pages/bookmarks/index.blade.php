@@ -53,8 +53,8 @@
                     },
                     {
                         id: 1,
-                        title: 'Top Projects',
-                        component: 'social.top-projects'
+                        title: 'Top ' . Terms::get('team', 2),
+                        component: 'social.top-teams'
                     },
                     {
                         id: 2,

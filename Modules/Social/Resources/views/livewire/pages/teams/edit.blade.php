@@ -10,7 +10,7 @@
         <div class="space-y-8">
             <nav>
                 <ol class="list-reset flex items-center">
-                    <li><a href="{{ route('social.my-projects') }}" class="font-bold hover:underline">My Projects</a></li>
+                    <li><a href="{{ route('social.my-teams') }}" class="font-bold hover:underline">My {{ Terms::get('team', 2) }}</a></li>
                     <li>
                         <x-heroicon-s-chevron-right class="h-4 w-4 mx-2"/>
                     </li>
@@ -18,7 +18,7 @@
                 </ol>
             </nav>
             <div class="border-b-2 border-b-light-text-color pb-1">
-                <h1 class="text-3xl"><span class="text-dark-text-color">Project Admin Page: </span><span class="text-light-text-color">{{ $team->name }}</span></h1>
+                <h1 class="text-3xl"><span class="text-dark-text-color"> {{ Terms::get('team') }} Admin Page: </span><span class="text-light-text-color">{{ $team->name }}</span></h1>
             </div>
         </div>
 
@@ -33,7 +33,7 @@
             })"
                  style="display: none;"
             >
-                <p class="text-sm opa text-green-600">Project saved.</p>
+                <p class="text-sm opa text-green-600">Team saved.</p>
             </div>
             <div class="mr-4"><a href="{{ $team->profile() }}" class="hover:underline">Cancel</a></div>
             <x-library::button.index
@@ -43,7 +43,7 @@
         </div>
 
         <div x-data="setup()">
-            <!-- Project Edit Navigation -->
+            <!-- Team Edit Navigation -->
             <div class="w-full mt-6"
             <nav class="flex items-center justify-between text-xs">
                 <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-10">
@@ -72,7 +72,7 @@
             </div>
             <div>
                 <x-library::input.label value="Start Date"/>
-                <x-library::input.date id="startDate" wire:model.defer="team.start_date" placeholder="Project Launch Date"/>
+                <x-library::input.date id="startDate" wire:model.defer="team.start_date" placeholder="Team Launch Date"/>
                 <x-library::input.error for="startDate"/>
             </div>
             <div>
@@ -81,7 +81,7 @@
                 <x-library::input.error for="summary"/>
             </div>
             <div>
-                <x-library::input.label value="About this Project"/>
+                <x-library::input.label value="About this Team"/>
                 <x-library::input.textarea id="content" wire:model.defer="team.content" :rows="8"/>
                 <x-library::input.error for="content"/>
             </div>
@@ -91,7 +91,7 @@
         <!-- Edit Team Location -->
         <div x-cloak x-show="activeTab === 1" class="mt-6 space-y-6">
             <div>
-                <h3 class="text-lg">Current Project Location</h3>
+                <h3 class="text-lg">Current Team Location</h3>
                 @if ($team->teamLocation()->exists())
                     <div class="flex items-center space-x-4 py-4">
                         <p class="{{ $removeAddress ? 'line-through' : '' }}">{{ $team->location }}</p>
@@ -112,7 +112,7 @@
                     </div>
                 @else
                     <div>
-                        <p>No Location has been selected for this project.</p>
+                        <p>No Location has been selected for this team.</p>
                     </div>
                 @endif
             </div>
@@ -131,7 +131,7 @@
             </div>
             @if (!empty($newAddress))
                 <div>
-                    <h3 class="text-lg">New Project Location</h3>
+                    <h3 class="text-lg">New Team Location</h3>
                     <p>{{ $this->selectedAddress }}</p>
                     <p class="text-xxs text-red-600">Please save changes to use this address</p>
                 </div>
@@ -148,12 +148,12 @@
                     {
                         id: 0,
                         title: 'Basic Info',
-                        /* component: 'social::pages.projects.partials.edit-project-basic' */
+                        /* component: 'social::pages.teams.partials.edit-team-basic' */
                     },
                     {
                         id: 1,
                         title: 'Locations',
-                        /* component: 'social::pages.projects.partials.edit-project-locations' */
+                        /* component: 'social::pages.teams.partials.edit-team-locations' */
                     }
                 ]
             }
