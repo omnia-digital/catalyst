@@ -21,7 +21,7 @@ use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\MyTeams;
 
 
-Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->group(function () {
+Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'team'])->group(function () {
     //        Route::get('/', 'SocialController@index');
 
     // the way twitter works is
