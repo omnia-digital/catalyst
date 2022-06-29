@@ -53,7 +53,7 @@
 
                 <div class="flex justify-between space-x-2 py-4">
                     @foreach ($categories as $category)
-                        <x-library::button.link :href="route('social.teams.home', ['lens' => str($category)->slug()->value()])" class="w-full h-16">
+                        <x-library::button.link :href="route('social.teams.home', ['lens' => str($category)->slug()->value()])" class="w-full h-16 text-base-text-color">
                             {{ $category }}
                         </x-library::button.link>
                     @endforeach
