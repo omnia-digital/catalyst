@@ -53,8 +53,8 @@
                     },
                     {
                         id: 1,
-                        title: 'Top Projects',
-                        component: 'social.top-projects'
+                        title: 'Top ' . {{ \Trans::get('teams') }},
+                        component: 'social.top-teams'
                     },
                     {
                         id: 2,

@@ -69,12 +69,12 @@ return [
     | Leaving one, or both of these, empty or null will not trigger the remote
     | URL changes and Debugbar will treat your editor links as local files.
     |
-    | "remote_sites_path" is an absolute base path for your sites or projects
+    | "remote_sites_path" is an absolute base path for your sites or teams
     | in Homestead, Vagrant, Docker, or another remote development server.
     |
     | Example value: "/home/vagrant/Code"
     |
-    | "local_sites_path" is an absolute base path for your sites or projects
+    | "local_sites_path" is an absolute base path for your sites or teams
     | on your local computer where your IDE or code editor is running on.
     |
     | Example values: "/Users/<name>/Code", "C:\Users\<name>\Documents\Code"

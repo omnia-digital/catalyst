@@ -88,7 +88,7 @@ class Post extends Model implements HasMedia
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class)->withDefault([
-            'name' => 'No Project',
+            'name' => 'No Team',
         ]);
     }
 

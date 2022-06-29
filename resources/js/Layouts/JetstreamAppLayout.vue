@@ -50,11 +50,11 @@
                                                 </div>
 
                                                 <!-- Team Settings -->
-                                                <jet-dropdown-link :href="route('teams.show', $page.props.user.current_team)">
+                                                <jet-dropdown-link :href="route('social.teams.show', $page.props.user.current_team)">
                                                     Team Settings
                                                 </jet-dropdown-link>
 
-                                                <jet-dropdown-link :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
+                                                <jet-dropdown-link :href="route('social.teams.create')" v-if="$page.props.jetstream.canCreateTeams">
                                                     Create New Team
                                                 </jet-dropdown-link>
 
@@ -185,11 +185,11 @@
                                 </div>
 
                                 <!-- Team Settings -->
-                                <jet-responsive-nav-link :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
+                                <jet-responsive-nav-link :href="route('social.teams.show', $page.props.user.current_team)" :active="route().current('social.teams.show')">
                                     Team Settings
                                 </jet-responsive-nav-link>
 
-                                <jet-responsive-nav-link :href="route('teams.create')" :active="route().current('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
+                                <jet-responsive-nav-link :href="route('social.teams.create')" :active="route().current('social.teams.create')" v-if="$page.props.jetstream.canCreateTeams">
                                     Create New Team
                                 </jet-responsive-nav-link>
 

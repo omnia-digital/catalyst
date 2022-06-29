@@ -10,7 +10,7 @@ class EnsureHasTeam
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->user()->isMemberOfATeam()) {
-            return redirect()->route('my-projects');
+            return redirect()->route('my-teams');
         }
         $this->ensureUserHasCurrentTeamSet();
         return $next($request);

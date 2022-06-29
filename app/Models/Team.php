@@ -27,11 +27,12 @@ use Spatie\Tags\HasTags;
 use Wimil\Followers\Traits\CanBeFollowed;
 
 /**
- * Projects are just Teams
+ * Teams are just Teams
  */
 class Team extends JetstreamTeam implements HasMedia
 {
     use HasFactory, Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto, HasSlug, HasLocation, InteractsWithMedia;
+
     /**
      * The attributes that should be cast.
      *
@@ -125,9 +126,9 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->hasMany(Post::class)->ofType(PostType::RESOURCE);
     }
 
-    public function projectLink()
+    public function teamLink()
     {
-        return route('social.projects.show', $this->id);
+        return route('social.teams.show', $this->id);
     }
 
     public function visits(): Relation
@@ -152,7 +153,7 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function profile()
     {
-        return route('social.projects.show', $this);
+        return route('social.teams.show', $this);
     }
 
     public function scopeSearch(Builder $query, ?string $search): Builder

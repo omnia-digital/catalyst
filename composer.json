@@ -42,10 +42,13 @@
         "wimil/followers": "^1.0"
     },
     "require-dev": {
+        "arcanedev/laravel-lang": "^10.0",
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
         "laracademy/generators": "^3.4",
+        "laravel-lang/lang": "^10.9",
+        "laravel-lang/publisher": "^13.0",
         "laravel/sail": "^1.12",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",

@@ -120,7 +120,7 @@ const navigation = [
     {label: 'Community', name: 'home', icon: UsersIcon, current: true},
     {label: 'Notifications', name: 'notifications', icon: BellIcon, current: false},
     {label: 'Messages', name: 'messages', icon: MailIcon, current: false},
-    {label: 'Projects', name: 'projects', icon: CollectionIcon, current: false},
+    {label: 'Projects', name: 'teams', icon: CollectionIcon, current: false},
     {label: 'Groups', name: 'groups', icon: InformationCircleIcon, current: false},
     {label: 'Learn', name: 'learn', icon: AcademicCapIcon, current: false},
     {label: 'Marketplace', name: 'marketplace', icon: OfficeBuildingIcon, current: false},
