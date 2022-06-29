@@ -15,7 +15,7 @@
                             <div class="min-w-0">
                                 <div class="">
                                     <p class="text-gray-900 text-md font-medium truncate">{{ Auth::user()->name }}</p>
-                                    <p class="-mt-1 text-gray-500 text-xs truncate">{{ '@'.Auth::user()->profile?->handle }}</p>
+                                    <p class="-mt-1 text-gray-500 text-xs truncate">{{ '@'.Auth::user()?->handle }}</p>
                                 </div>
                                 <div class="flex mt-1">
                                     <div class="bg-black flex items-center rounded-lg p-1">

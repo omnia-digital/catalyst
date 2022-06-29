@@ -24,7 +24,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
     class User extends Authenticatable
     {
         use HasApiTokens,
-            HasProfilePhoto,
             TwoFactorAuthenticatable,
             Notifiable,
             SoftDeletes,
@@ -33,22 +32,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
             Followable,
             Awardable;
         use HasNoPersonalTeam, HasTeams {
-            HasNoPersonalTeam::ownsTeam insteadof HasTeams;
+            HasNoPersonalTeam::hasTeamRole insteadof HasTeams;
             HasNoPersonalTeam::isCurrentTeam insteadof HasTeams;
         }
 
-        /**
-         * The attributes that should be mutated to dates.
-         *
-         * @var array
-         */
         protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
 
-        /**
-         * The attributes that are mass assignable.
-         *
-         * @var array
-         */
         protected $fillable = [
             'first_name',
             'last_name',
@@ -56,11 +45,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
             'password',
         ];
 
-        /**
-         * The attributes that should be hidden for arrays.
-         *
-         * @var array
-         */
         protected $hidden = [
             'email',
             'password',
@@ -77,17 +61,30 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
             'profile_photo_url'
         ];
 
-        public static function findByEmail($email)
-        {
-            return User::where('email', $email)->first();
+        //// Attributes ////
+
+        public function getHandleAttribute() {
+            return $this->profile?->handle;
         }
 
-        public function getNameAttribute() {
+        public function getNameAttribute()
+        {
             if ($this->profile()->exists()) {
                 return $this->profile->name;
             }
-            return $this->first_name . " " . $this->last_name;
         }
+
+        public function setProfilePhotoUrlAttribute($value)
+        {
+            return $this->profile->profile_photo_url = $value;
+        }
+
+        public function getProfilePhotoUrlAttribute()
+        {
+            return $this->profile()->select(['profile_photo_path'])->first()->profile_photo_url;
+        }
+
+        //// Relations ////
 
         public function profile() {
             if (!class_exists(Profile::class)) return;
@@ -108,14 +105,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
             return $this->likes->map->post->flatten();
         }
 
-        public function url() {
-            return route('social.profile.show', $this->handle);
-        }
-
-        public function getHandleAttribute() {
-            return $this->profile?->handle;
-        }
-
         public function postMedia()
         {
             return $this->hasManyThrough(Media::class, Post::class, 'user_id', 'model_id')
@@ -129,28 +118,28 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 
         public function joinedTeams()
         {
-            return Team::whereHas('users', function($query) { 
-                $query->where('team_user.user_id', $this->id); 
+            return Team::whereHas('users', function($query) {
+                $query->where('team_user.user_id', $this->id);
             });
         }
 
-        /**
-         * Get all of the pending invitations for the user.
-         *
-         * @return \Illuminate\Database\Eloquent\Relations\HasMany
-         */
         public function teamInvitations(): HasMany
         {
             return $this->hasMany(TeamInvitation::class);
         }
-
-        /**
-         * Get all of the pending applications for the user.
-         *
-         * @return \Illuminate\Database\Eloquent\Relations\HasMany
-         */
         public function teamApplications(): HasMany
         {
             return $this->hasMany(TeamApplication::class);
+        }
+
+        //// Helper Methods ////
+
+        public function url() {
+            return route('social.profile.show', $this->handle);
+        }
+
+        public static function findByEmail($email)
+        {
+            return User::where('email', $email)->first();
         }
     }

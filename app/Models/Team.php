@@ -136,6 +136,21 @@ class Team extends JetstreamTeam implements HasMedia
         return visits($this)->relation();
     }
 
+    public function bannerImage()
+    {
+        return optional($this->getMedia('team_banner_images')->first());
+    }
+
+    public function mainImage()
+    {
+        return optional($this->getMedia('team_main_images')->first());
+    }
+
+    public function sampleImages()
+    {
+        return $this->getMedia('team_sample_images');
+    }
+
     public function getReviewScoreAttribute()
     {
         return null;

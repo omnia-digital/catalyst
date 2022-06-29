@@ -11,4 +11,14 @@ trait HasLocation
     {
         return $this->morphOne(Location::class, 'model');
     }
+
+    public function getLocationShortAttribute()
+    {
+        return $this->location()?->first()?->name;
+    }
+
+    public function getLocationAttribute()
+    {
+        return $this->location()?->first()?->full;
+    }
 }

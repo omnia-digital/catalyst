@@ -32,12 +32,10 @@ class CreateNewUser implements CreatesNewUsers
 
         return DB::transaction(function () use ($input) {
             return tap(User::create([
-                'first_name' => $input['first_name'],
-                'last_name' => $input['last_name'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
-            ]), function (User $user) {
-                $this->createProfile($user);
+            ]), function (User $user) use ($input) {
+                $this->createProfile($user, $input);
                 //$this->createTeam($user);
             });
         });
@@ -64,10 +62,11 @@ class CreateNewUser implements CreatesNewUsers
      * @param  \App\Models\User  $user
      * @return void
      */
-    protected function createProfile(User $user)
+    protected function createProfile(User $user, $input)
     {
         $user->profile()->create([
-            'name' => $user->first_name . " " . $user->last_name,
+            'first_name' => $input['first_name'],
+            'last_name' => $input['last_name'],
         ]);
     }
 }

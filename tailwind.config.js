@@ -54,6 +54,7 @@ module.exports = {
                 neutral: 'var(--neutral)',
                 'neutral-light': 'var(--neutral-light)',
                 'neutral-dark': 'var(--neutral-dark)',
+                'neutral-dark\/75': 'var(--neutral-dark-75)',
                 'neutral-hover': 'var(--neutral-hover)',
                 primary: 'var(--primary)',
                 secondary: 'var(--secondary)',

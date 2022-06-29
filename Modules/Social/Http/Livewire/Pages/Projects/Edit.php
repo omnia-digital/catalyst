@@ -6,11 +6,13 @@ use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Edit extends Component
 {
-    use WithPlace, AuthorizesRequests;
+    use WithPlace, AuthorizesRequests, WithFileUploads;
 
     public Team $team;
 
@@ -19,6 +21,18 @@ class Edit extends Component
     public array $newAddress = [];
 
     public bool $removeAddress = false;
+
+    public $bannerImage;
+    public $bannerImageName;
+
+    public $mainImage;
+    public $mainImageName;
+
+    public $sampleMedia = [];
+    public $sampleMediaNames = [];
+
+    public $confirmingRemoveMedia = false;
+    public $mediaToRemove;
 
     protected function rules(): array
     {
@@ -30,6 +44,35 @@ class Edit extends Component
         ];
     }
 
+    public function updatedBannerImage()
+    {
+        $this->validate([
+            'bannerImage' => 'image',
+        ]);
+
+        $this->bannerImageName = $this->bannerImage->getClientOriginalName();
+    }
+
+    public function updatedMainImage()
+    {
+        $this->validate([
+            'mainImage' => 'image',
+        ]);
+
+        $this->mainImageName = $this->mainImage->getClientOriginalName();
+    }
+
+    public function updatedSampleMedia()
+    {
+        $this->validate([
+            'sampleMedia.*' => 'image',
+        ]);
+
+        foreach ($this->sampleMedia as $key => $media) {
+            $this->sampleMediaNames[$key] = $media->getClientOriginalName();
+        }
+    }
+
     public function mount(Team $team)
     {
         $this->authorize('update-team', $team);
@@ -38,6 +81,9 @@ class Edit extends Component
 
     public function setAddress()
     {
+        if(is_null($this->placeId)) {
+            return;
+        }
         $place = $this->findPlace();
         $this->newAddress = [
             'address'          => $place->address(),
@@ -47,29 +93,66 @@ class Edit extends Component
             'postal_code'      => $place->postalCode(),
             'country'          => $place->country()
         ];
-        
+
     }
-    
+
     public function saveChanges()
     {
         $this->validate();
-        
+
         $this->team->save();
-        
-        $this->removeAddress && $this->team->teamLocation()->delete();
+
+        $this->removeAddress && $this->team->location()->delete();
 
         if(!empty($this->newAddress)) {
-            $this->team->teamLocation()->updateOrCreate(
-                ['team_id' => $this->team->id],
+            $this->team->location()->updateOrCreate(
+                ['model_id' => $this->team->id, 'model_type' => Team::class],
                 $this->newAddress
             );
+        }
+
+        if(!is_null($this->bannerImage) && $this->team->bannerImage()->count()) {
+            $this->team->bannerImage()->delete();
+        }
+        $this->bannerImage &&
+            $this->team->addMedia($this->bannerImage)->toMediaCollection('team_banner_images');
+
+        if($this->mainImage && $this->team->mainImage()->count()) {
+            $this->team->mainImage()->delete();
+        }
+        $this->mainImage &&
+            $this->team->addMedia($this->mainImage)->toMediaCollection('team_main_images');
+
+        if (sizeof($this->sampleMedia)) {
+            foreach ($this->sampleMedia as $media) {
+                $this->team->addMedia($media)->toMediaCollection('team_sample_images');
+            }
         }
 
         $this->emit('changes_saved');
 
         $this->team->refresh();
 
-        $this->reset('newAddress', 'removeAddress');
+        $this->reset('newAddress', 'removeAddress', 'bannerImage', 'bannerImageName', 'mainImage', 'mainImageName', 'sampleMedia', 'sampleMediaNames');
+    }
+
+    public function confirmRemoval(Media $media)
+    {
+        $this->confirmingRemoveMedia = true;
+        $this->mediaToRemove = $media;
+    }
+    public function removeMedia()
+    {
+        $this->mediaToRemove->delete();
+        $this->confirmingRemoveMedia = false;
+        $this->team->refresh();
+        $this->reset('mediaToRemove');
+    }
+
+    public function removeNewMedia($key)
+    {
+        unset($this->sampleMedia[$key]);
+        unset($this->sampleMediaNames[$key]);
     }
 
     public function getSelectedAddressProperty()

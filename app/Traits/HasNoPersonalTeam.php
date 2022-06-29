@@ -2,21 +2,10 @@
 
 namespace App\Traits;
 
+use Laravel\Jetstream\Jetstream;
+
 trait HasNoPersonalTeam
 {
-
-    /**
-     * Determine if the user owns the given team.
-     *
-     * @param  mixed  $team
-     * @return bool
-     */
-    public function ownsTeam($team)
-    {
-        // return $this->id == $team->user_id;
-        return $this->id == optional($team)->user_id;
-    }
-
     /**
      * Determine if the given team is the current team.
      *
@@ -25,7 +14,10 @@ trait HasNoPersonalTeam
      */
     public function isCurrentTeam($team)
     {
-        return optional($team)->id === $this->currentTeam->id;
+        if (is_null($team)) {
+            return false;
+        }
+        return $team?->id === $this->currentTeam->id;
     }
 
     /**
@@ -37,6 +29,24 @@ trait HasNoPersonalTeam
     public function isMemberOfATeam(): bool
     {
         return (bool) ($this->teams()->count() || $this->ownedTeams()->count());
+    }
+
+    /**
+     * Determine if the user has the given role on the given team.
+     *
+     * @param  mixed  $team
+     * @param  string  $role
+     * @return bool
+     */
+    public function hasTeamRole($team, string $role)
+    {
+        if ($this->ownsTeam($team)) {
+            return true;
+        }
+
+        return $this->belongsToTeam($team) && optional(Jetstream::findRole($team->users->where(
+                'id', $this->id
+            )->first()?->membership?->role))->key === $role;
     }
 
 }
