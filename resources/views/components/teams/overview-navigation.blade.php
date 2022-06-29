@@ -1,4 +1,4 @@
-{{--<nav {{ $attributes->merge(['class' => 'flex relative rounded-b']) }}>--}}
+<nav {{ $attributes->merge(['class' => 'flex relative rounded-b']) }}>
     <div class="flex justify-between items-center w-full ml-32 relative z-10">
         <div class="flex">
             @foreach ($nav as $key => $item)
@@ -25,7 +25,7 @@
             </x-library::dropdown> --}}
         </div>
     </div>
-    <div class="flex pr-1">
+    <div class="flex pr-2">
         @can('update-team', $team)
             <a href="{{ route('social.teams.edit', $team) }}" class="py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Edit Team') }}</a>
         @endcan

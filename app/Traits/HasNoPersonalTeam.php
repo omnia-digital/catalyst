@@ -44,9 +44,11 @@ trait HasNoPersonalTeam
             return true;
         }
 
-        return $this->belongsToTeam($team) && optional(Jetstream::findRole($team->users->where(
-                'id', $this->id
-            )->first()?->membership?->role))->key === $role;
+        $userOnTeam = $team->users->where('id', $this->id)->first();
+
+        if (empty($userOnTeam?->membership?->role)) { return false; }
+
+        return $this->belongsToTeam($team) && optional(Jetstream::findRole($userOnTeam->membership->role))->key === $role;
     }
 
 }

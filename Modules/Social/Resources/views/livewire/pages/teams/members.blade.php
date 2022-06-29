@@ -1,11 +1,9 @@
-@extends('social::livewire.layouts.pages.default-page-layout')
+@extends('social::livewire.layouts.pages.team-profile-layout')
 
 
 @section('content')
-    <div class="mx-auto max-w-4xl">
-        <x-teams.partials.header :team="$team"/>
-        <div class="mt-4 -ml-4">
-            <h2 class="text-black font-semibold text-2xl">Members</h2>
+        <div class="mt-4">
+            <h2 class="text-black font-semibold text-2xl mx-6 ">{{ \Trans::get('Members') }}</h2>
 
             <div x-data="setup()">
                 <!-- Team Members Navigation -->
@@ -352,7 +350,6 @@
                 </x-jet-confirmation-modal>
             @endonce
         </div>
-    </div>
 @endsection
 @push('scripts')
     <script>
