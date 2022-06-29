@@ -1,8 +1,7 @@
-@extends('social::livewire.layouts.pages.full-page-layout')
+@extends('social::livewire.layouts.pages.team-profile-layout')
 
 
 @section('content')
-<x-teams.partials.header  :team="$team" />
 <div class="flex space-x-4 mt-4">
     <div class="space-y-4">
         <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
