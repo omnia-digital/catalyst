@@ -12,9 +12,9 @@
                 @endforeach
             </x-library::dropdown.index>
             @if ($sortOrder === 'asc')
-                <x-heroicon-o-arrow-narrow-up class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-secondary" wire:click.prevent="$toggleSortOrder()" />
+                <x-heroicon-o-arrow-narrow-up class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-secondary" wire:click.prevent="toggleSortOrder()" />
             @else
-                <x-heroicon-o-arrow-narrow-down class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-secondary" wire:click.prevent="$toggleSortOrder()" />
+                <x-heroicon-o-arrow-narrow-down class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-secondary" wire:click.prevent="toggleSortOrder()" />
             @endif
         </div>
         <div class="flex-1 min-w-0 bg-primary p-2 rounded-lg">
