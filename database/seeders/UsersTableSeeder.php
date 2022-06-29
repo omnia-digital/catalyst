@@ -11,12 +11,12 @@ class UsersTableSeeder extends Seeder
     {
         User::truncate();
 
-        User::factory(1)->withPersonalTeam()->withProfile()->create([
+        User::factory(1)->withProfile()->withTeam()->create([
             'email' => 'admin@omniadigital.io',
             'password' => bcrypt('testing')
         ]);
 
-        User::factory(15)->withPersonalTeam()->withProfile()->create();
+        User::factory(15)->withProfile()->withTeam()->create();
 
     }
 }
