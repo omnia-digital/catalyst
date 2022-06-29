@@ -23,7 +23,7 @@
                 <div class="min-h-screen">
                     <!-- Page content -->
                     <div class="mx-auto">
-                        @yield('content')
+                        @yield('page-layout')
                     </div>
                 </div>
             </div>

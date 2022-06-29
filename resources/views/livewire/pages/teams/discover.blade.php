@@ -1,8 +1,8 @@
-@extends('social::livewire.layouts.main-layout')
+@extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
     <div class="space-y-8">
-        <x-library::heading.2 boldClass="font-bold">Discover</x-library::heading.2>
+        <h1 class="py-2 text-3xl">Discover</h1>
 
         <div>
             <x-library::heading.3 class="uppercase">Featured & Recommended</x-library::heading.3>

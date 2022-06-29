@@ -1,4 +1,4 @@
-@extends('jobs::livewire.layouts.main-layout')
+@extends('jobs::livewire.layouts.pages.default-page-layout')
 
 @section('content')
 <div>
