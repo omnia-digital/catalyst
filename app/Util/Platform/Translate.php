@@ -4,27 +4,37 @@ namespace App\Util\Platform;
 
 class Translate
 {
-    public function get($string, $amount = 1, $capitalized = true): string
+    public function get($string): string
     {
-        $words = explode(' ', $string);
+        $wordsInString = explode(' ', $string);
 
-        $formattedString = '';
-        foreach($words as $word) {
-            $word = strtolower($word);
-            $singular = \Str::singular($word);
-            $plural = \Str::plural($word);
+        $newWordString = '';
+        foreach($wordsInString as $originalWord) {
+            $lowercase = strtolower($originalWord);
+            $capitalized = ucfirst($originalWord);
+            $singular = \Str::singular($lowercase);
+            $plural = \Str::plural($lowercase);
+            $newWord = $lowercase;
             if (\Lang::has('platform_terms.' . $singular) ) {
-                if ($word == $plural) {
+                $amount = 1;
+                if ($lowercase == $plural) {
                     $amount = 2;
                 }
-                $word = trans_choice('platform_terms.' . $singular, $amount);
+                $newWord = trans_choice('platform_terms.' . $singular, $amount);
             }
-            $word = $capitalized ? ucfirst($word) : $word;
-            $formattedString .= $word . ' ';
+
+            // Checks if first letter is capitalized of the original word
+            if (ctype_upper(substr($originalWord,0,1))) {
+                $newWord = ucfirst($newWord);
+            } else {
+                $newWord = strtolower($newWord);
+            }
+
+            $newWordString .= $newWord . ' ';
         }
 
-        $formattedString = rtrim($formattedString);
+        $newWordString = rtrim($newWordString);
 
-        return __($formattedString);
+        return __($newWordString);
     }
 }

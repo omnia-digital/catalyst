@@ -48,7 +48,7 @@ class MainNavigationMenu extends Component
 //            ],
             //                [
             //                    'label'   => 'Teams',
-            //                    'name'    => 'teams.home',
+            //                    'name'    => 'social.teams.home',
             //                    'icon'    => 'heroicon-o-globe',
             //                    'current' => false
             //                ],

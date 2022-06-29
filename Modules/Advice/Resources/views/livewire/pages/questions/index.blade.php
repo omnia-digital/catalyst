@@ -49,7 +49,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top ' . Trans::get('team', 2),
+                        title: 'Top ' . {{ \Trans::get('teams') }},
                         component: 'social.top-teams'
                     },
                     {

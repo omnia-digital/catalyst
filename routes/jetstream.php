@@ -30,7 +30,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
             Route::get('/user/api-tokens', [ApiTokenController::class, 'index'])->name('api-tokens.index');
         }
 
-        // Teams...
+        // teams..
         if (Jetstream::hasTeamFeatures()) {
             Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
             Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');

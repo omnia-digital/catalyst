@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <p>
-                    <a href="{{ route('teams.home') }}" class="font-bold">View All Teams</a>
+                    <a href="{{ route('social.teams.home') }}" class="font-bold">View All Teams</a>
                 </p>
             </div>
             <x-library::map.google class="h-96" :places="$places"/>
@@ -41,7 +41,7 @@
 
             <div class="flex justify-between px-8 py-4">
                 @foreach ($categories as $category)
-                    <x-library::button.link :href="route('teams.home', ['lens' => str($category)->slug()->value()])">
+                    <x-library::button.link :href="route('social.teams.home', ['lens' => str($category)->slug()->value()])">
                         {{ $category }}
                     </x-library::button.link>
                 @endforeach
@@ -51,7 +51,7 @@
         <div>
             <div class="flex items-center space-x-2">
                 <x-library::heading.3 class="uppercase">Curated</x-library::heading.3>
-                <a href="{{ route('teams.home', ['filters[tags][0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>
+                <a href="{{ route('social.teams.home', ['filters[tags][0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>
             </div>
 
             <div class="px-4 sm:px-6 md:px-0">
@@ -68,7 +68,7 @@
         <div>
             <div class="flex items-center space-x-2">
                 <x-library::heading.3 class="uppercase">Popular Indies</x-library::heading.3>
-                <a href="{{ route('teams.home', ['lens' => 'popular-indies']) }}" class="text-gray-500 text-xs">View All</a>
+                <a href="{{ route('social.teams.home', ['lens' => 'popular-indies']) }}" class="text-gray-500 text-xs">View All</a>
             </div>
 
             <div class="px-4 sm:px-6 md:px-0">
@@ -85,7 +85,7 @@
         <div>
             <div class="flex items-center space-x-2">
                 <x-library::heading.3 class="uppercase">Popular Upcoming</x-library::heading.3>
-                <a href="{{ route('teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">View All</a>
+                <a href="{{ route('social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">View All</a>
             </div>
 
             <div class="px-4 sm:px-6 md:px-0">

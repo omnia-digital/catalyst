@@ -46,7 +46,7 @@
                                 </div>
                                 <input id="search" name="search"
                                        class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
-                                       placeholder="Search for  {{ Trans::get('team', 2) }}" type="search"/>
+                                       placeholder="Search for  {{ Trans::get('teams') }}" type="search"/>
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                                        </div>
 
                                        <!-- Team Settings -->
-                                       <x-jet-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
+                                       <x-jet-dropdown-link href="{{ route('social.teams.show', Auth::user()->currentTeam->id) }}">
                                            {{ Trans::get('Team Settings') }}
                                        </x-jet-dropdown-link>
 
@@ -234,7 +234,7 @@
                     </div>
 
                     <!-- Team Settings -->
-                    <x-jet-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
+                    <x-jet-responsive-nav-link href="{{ route('social.teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
                         {{ \Trans::get('Team Settings') }}
                     </x-jet-responsive-nav-link>
 

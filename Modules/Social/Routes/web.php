@@ -11,13 +11,15 @@ use Modules\Social\Http\Livewire\Pages\Discover\Index as DiscoverIndex;
 use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
 use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
+use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
+use App\Http\Livewire\Pages\Teams\Index as AllTeams;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Edit as EditTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Followers as TeamFollowers;
 use Modules\Social\Http\Livewire\Pages\Teams\Members as TeamMembers;
 use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\MyTeams;
-use Modules\Social\Models\Profile;
+
 
 Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->group(function () {
     //        Route::get('/', 'SocialController@index');
@@ -39,15 +41,16 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
         Route::get('{profile}/followers', ProfileFollowers::class)->name('followers');
     });
 
-    Route::name('teams.')->prefix('teams')->middleware(['auth','verified'])->group(function () {
+    Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {
+        Route::get('/discover', DiscoverTeams::class)->name('discover');
+        Route::get('/my-' . \Trans::get('teams'), MyTeams::class)->name('my-teams');
         Route::get('{team}', ShowTeam::class)->name('show');
         Route::get('{team}/edit', EditTeam::class)->name('edit');
         Route::get('{team}/members', TeamMembers::class)->name('members');
         Route::get('{team}/followers', TeamFollowers::class)->name('followers');
         Route::get('{team}/awards', TeamAwards::class)->name('awards');
+        Route::get('/', AllTeams::class)->name('home');
     });
-
-    Route::get('/my-teams', MyTeams::class)->name('my-teams');
 
     Route::get('/posts/{post}', ShowPosts::class)->name('posts.show');
 

@@ -6,12 +6,12 @@
             <div class="">
                 <div class="mb-2 flex justify-between items-center">
                     <div class="flex-1 flex items-center">
-                        <h1 class="py-2 text-3xl">My  {{ Trans::get('team', 2) }}</h1>
+                        <h1 class="py-2 text-3xl">{{ Trans::get('My Projects') }}</h1>
                         <span class="bg-gray-400 text-xs rounded-full ml-2 w-5 h-5 flex items-center justify-center">{{ $teamsCount }}</span>
                     </div>
 
                     <x-library::button x-data="" x-on:click.prevent="$openModal('create-team')" class="py-2 w-60 h-10">
-                        Create Team
+                        {{ Trans::get('Create Project') }}
                     </x-library::button>
                 </div>
             </div>

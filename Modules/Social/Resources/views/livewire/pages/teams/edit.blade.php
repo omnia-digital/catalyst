@@ -10,7 +10,7 @@
         <div class="space-y-8">
             <nav>
                 <ol class="list-reset flex items-center">
-                    <li><a href="{{ route('social.my-teams') }}" class="font-bold hover:underline">My {{ Trans::get('team', 2) }}</a></li>
+                    <li><a href="{{ route('social.my-teams') }}" class="font-bold hover:underline">My {{ Trans::get('teams') }}</a></li>
                     <li>
                         <x-heroicon-s-chevron-right class="h-4 w-4 mx-2"/>
                     </li>

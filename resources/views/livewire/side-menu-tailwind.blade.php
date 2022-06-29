@@ -376,7 +376,7 @@
                         </a>
                     </li>
 
-                    <!-- More teams... -->
+                    <!-- More teams.. -->
                 </ul>
             </div>
 
@@ -428,7 +428,7 @@
                             </td>
                         </tr>
 
-                        <!-- More teams... -->
+                        <!-- More teams.. -->
                         </tbody>
                     </table>
                 </div>

@@ -1,7 +1,7 @@
 <div class="card">
     <div class="flex-1 p-6 space-y-1 overflow-y-auto">
         <div class="flex justify-between items-center">
-            <h3 class="text-base-text-color text-base font-semibold" wire:click="testClick"> {{ Trans::get('team', 2) }}</h3>
+            <h3 class="text-base-text-color text-base font-semibold" wire:click="testClick"> {{ Trans::get('teams') }}</h3>
             <div x-data="{show: false, message: ''}"
                 x-cloak
                 x-show="show"
