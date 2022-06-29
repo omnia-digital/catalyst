@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-color-dark leading-tight">
-            {{ __('Dashboard') }}
+            {{ \Trans::get('Dashboard') }}
         </h2>
     </x-slot>
 

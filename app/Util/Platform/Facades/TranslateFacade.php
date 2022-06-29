@@ -4,7 +4,7 @@ namespace App\Util\Platform\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class TermsFacade extends Facade
+class TranslateFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class TermsFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'terms';
+        return 'trans';
     }
 }

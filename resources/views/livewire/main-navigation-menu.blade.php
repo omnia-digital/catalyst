@@ -46,7 +46,7 @@
                                 </div>
                                 <input id="search" name="search"
                                        class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
-                                       placeholder="Search for  {{ Terms::get('team', 2) }}" type="search"/>
+                                       placeholder="Search for  {{ Trans::get('team', 2) }}" type="search"/>
                             </div>
                         </div>
                     </div>
@@ -74,17 +74,17 @@
                                    <div class="w-60">
                                        <!-- Team Management -->
                                        <div class="block px-4 py-2 text-xs text-light-text-color">
-                                           {{ __('Manage Team') }}
+                                           {{ \Trans::get('Manage Team') }}
                                        </div>
 
                                        <!-- Team Settings -->
                                        <x-jet-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                           {{ Terms::get('Team Settings') }}
+                                           {{ Trans::get('Team Settings') }}
                                        </x-jet-dropdown-link>
 
                                        @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                            <x-jet-dropdown-link href="{{ route('teams.create') }}">
-                                               {{ __('Create New Team') }}
+                                               {{ \Trans::get('Create New Team') }}
                                            </x-jet-dropdown-link>
                                        @endcan
 
@@ -92,7 +92,7 @@
 
                                        <!-- Team Switcher -->
                                        <div class="block px-4 py-2 text-xs text-light-text-color">
-                                           {{ __('Switch Teams') }}
+                                           {{ \Trans::get('Switch Teams') }}
                                        </div>
 
                                        @foreach (Auth::user()->allTeams() as $team)
@@ -135,16 +135,16 @@
 {{--                            <x-slot name="content">--}}
 {{--                                <!-- Account Management -->--}}
 {{--                                <div class="block px-4 py-2 text-xs text-light-text-color">--}}
-{{--                                    {{ __('Manage Account') }}--}}
+{{--                                    {{ \Trans::get('Manage Account') }}--}}
 {{--                                </div>--}}
 
 {{--                                <x-jet-dropdown-link href="{{ route('profile.show') }}">--}}
-{{--                                    {{ __('Profile') }}--}}
+{{--                                    {{ \Trans::get('Profile') }}--}}
 {{--                                </x-jet-dropdown-link>--}}
 
 {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
 {{--                                    <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">--}}
-{{--                                        {{ __('API Tokens') }}--}}
+{{--                                        {{ \Trans::get('API Tokens') }}--}}
 {{--                                    </x-jet-dropdown-link>--}}
 {{--                                @endif--}}
 
@@ -157,7 +157,7 @@
 {{--                                    <x-jet-dropdown-link href="{{ route('logout') }}"--}}
 {{--                                                         onclick="event.preventDefault();--}}
 {{--                                                                    this.closest('form').submit();">--}}
-{{--                                        {{ __('Log Out') }}--}}
+{{--                                        {{ \Trans::get('Log Out') }}--}}
 {{--                                    </x-jet-dropdown-link>--}}
 {{--                                </form>--}}
 {{--                            </x-slot>--}}
@@ -183,7 +183,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ \Trans::get('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
 
@@ -205,12 +205,12 @@
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Profile') }}
+                    {{ \Trans::get('Profile') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                        {{ __('API Tokens') }}
+                        {{ \Trans::get('API Tokens') }}
                     </x-jet-responsive-nav-link>
                 @endif
 
@@ -221,7 +221,7 @@
                     <x-jet-responsive-nav-link href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ \Trans::get('Log Out') }}
                     </x-jet-responsive-nav-link>
                 </form>
 
@@ -230,17 +230,17 @@
                     <div class="border-t border-neutral-light"></div>
 
                     <div class="block px-4 py-2 text-xs text-light-text-color">
-                        {{ __('Manage Team') }}
+                        {{ \Trans::get('Manage Team') }}
                     </div>
 
                     <!-- Team Settings -->
                     <x-jet-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
-                        {{ __('Team Settings') }}
+                        {{ \Trans::get('Team Settings') }}
                     </x-jet-responsive-nav-link>
 
                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                         <x-jet-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
-                            {{ __('Create New Team') }}
+                            {{ \Trans::get('Create New Team') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
@@ -248,7 +248,7 @@
 
                     <!-- Team Switcher -->
                     <div class="block px-4 py-2 text-xs text-light-text-color">
-                        {{ __('Switch Teams') }}
+                        {{ \Trans::get('Switch Teams') }}
                     </div>
 
                     @foreach (Auth::user()->allTeams() as $team)

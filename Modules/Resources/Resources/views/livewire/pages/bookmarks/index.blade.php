@@ -53,7 +53,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top ' . Terms::get('team', 2),
+                        title: 'Top ' . Trans::get('team', 2),
                         component: 'social.top-teams'
                     },
                     {

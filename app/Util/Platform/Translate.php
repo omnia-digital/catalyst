@@ -2,7 +2,7 @@
 
 namespace App\Util\Platform;
 
-class Terms
+class Translate
 {
     public function get($string, $amount = 1, $capitalized = true): string
     {
@@ -10,6 +10,7 @@ class Terms
 
         $formattedString = '';
         foreach($words as $word) {
+            $word = strtolower($word);
             $singular = \Str::singular($word);
             $plural = \Str::plural($word);
             if (\Lang::has('platform_terms.' . $singular) ) {

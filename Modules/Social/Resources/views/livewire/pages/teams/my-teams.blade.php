@@ -6,7 +6,7 @@
             <div class="">
                 <div class="mb-2 flex justify-between items-center">
                     <div class="flex-1 flex items-center">
-                        <h1 class="py-2 text-3xl">My  {{ Terms::get('team', 2) }}</h1>
+                        <h1 class="py-2 text-3xl">My  {{ Trans::get('team', 2) }}</h1>
                         <span class="bg-gray-400 text-xs rounded-full ml-2 w-5 h-5 flex items-center justify-center">{{ $teamsCount }}</span>
                     </div>
 

@@ -3,7 +3,7 @@
         <x-library::dropdown>
             <x-slot name="trigger">
                 <div type="button"
-                        class="group w-full bg-gray-200 border border-neutral-hover px-5 flex rounded-md py-4 text-sm text-left font-medium text-gray-700 
+                        class="group w-full bg-gray-200 border border-neutral-hover px-5 flex rounded-md py-4 text-sm text-left font-medium text-gray-700
                         hover:bg-gray-300 hover:cursor-pointer focus:outline-none focus:ring-2
                         focus:ring-offset-2
                         focus:ring-offset-gray-100 focus:ring-purple-500"
@@ -46,15 +46,15 @@
             </x-jet-responsive-nav-link>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <x-jet-responsive-nav-link 
+                <x-jet-responsive-nav-link
                     href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                     this.closest('form').submit();"
                 >
-                    {{ __('Log Out') }}
+                    {{ \Trans::get('Log Out') }}
                 </x-jet-responsive-nav-link>
             </form>
         </x-library::dropdown>
     </div>
-    
+
 </div>

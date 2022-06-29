@@ -10,7 +10,7 @@
         <div class="space-y-8">
             <nav>
                 <ol class="list-reset flex items-center">
-                    <li><a href="{{ route('social.my-teams') }}" class="font-bold hover:underline">My {{ Terms::get('team', 2) }}</a></li>
+                    <li><a href="{{ route('social.my-teams') }}" class="font-bold hover:underline">My {{ Trans::get('team', 2) }}</a></li>
                     <li>
                         <x-heroicon-s-chevron-right class="h-4 w-4 mx-2"/>
                     </li>
@@ -18,7 +18,7 @@
                 </ol>
             </nav>
             <div class="border-b-2 border-b-light-text-color pb-1">
-                <h1 class="text-3xl"><span class="text-dark-text-color"> {{ Terms::get('team') }} Admin Page: </span><span class="text-light-text-color">{{ $team->name }}</span></h1>
+                <h1 class="text-3xl"><span class="text-dark-text-color"> {{ Trans::get('team') }} Admin Page: </span><span class="text-light-text-color">{{ $team->name }}</span></h1>
             </div>
         </div>
 
