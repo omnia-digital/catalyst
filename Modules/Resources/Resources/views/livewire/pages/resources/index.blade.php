@@ -25,7 +25,7 @@
 
             <div class="">
                 <ul role="list" class="space-y-4">
-                    @foreach($resources as $resource)
+                    @forelse($resources as $resource)
                         <li>
                             <livewire:resources::components.resource-card
                                 as="li"
@@ -33,7 +33,9 @@
                                 :wire:key="'resource-card-' . $resource->id"
                             />
                         </li>
-                    @endforeach
+                    @empty
+                        <li class="p-4 bg-primary rounded-md text-base-text-color">No resources to show</li>
+                    @endforelse
                 </ul>
 
                 <div class="pb-6">

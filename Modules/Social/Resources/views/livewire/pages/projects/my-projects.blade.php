@@ -22,9 +22,11 @@
             <!-- Initiatives -->
             <div class="mt-6">
                 <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 mt-4">
-                    @foreach ($projects as $project)
+                    @forelse ($projects as $project)
                         <livewire:social::components.project-card :project="$project" wire:key="project-{{ $project->id }}"/>
-                    @endforeach
+                    @empty
+                        <p class="p-4 bg-primary rounded-md text-base-text-color">No Results</p>
+                    @endforelse
                 </div>
             </div>
         </div>
