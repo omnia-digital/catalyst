@@ -148,7 +148,7 @@
                                     {{ \Trans::get('Manage Account') }}
                                 </div>
 
-                                <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                <x-jet-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
                                     {{ \Trans::get('Profile') }}
                                 </x-jet-dropdown-link>
 
