@@ -93,19 +93,19 @@ class Edit extends Component
             'postal_code'      => $place->postalCode(),
             'country'          => $place->country()
         ];
-        
+
     }
-    
+
     public function saveChanges()
     {
         $this->validate();
-        
+
         $this->team->save();
-        
-        $this->removeAddress && $this->team->teamLocation()->delete();
+
+        $this->removeAddress && $this->team->location()->delete();
 
         if(!empty($this->newAddress)) {
-            $this->team->teamLocation()->updateOrCreate(
+            $this->team->location()->updateOrCreate(
                 ['model_id' => $this->team->id, 'model_type' => Team::class],
                 $this->newAddress
             );
@@ -113,14 +113,14 @@ class Edit extends Component
 
         if(!is_null($this->bannerImage) && $this->team->bannerImage()->count()) {
             $this->team->bannerImage()->delete();
-        } 
+        }
         $this->bannerImage &&
             $this->team->addMedia($this->bannerImage)->toMediaCollection('team_banner_images');
 
         if($this->mainImage && $this->team->mainImage()->count()) {
             $this->team->mainImage()->delete();
-        } 
-        $this->mainImage && 
+        }
+        $this->mainImage &&
             $this->team->addMedia($this->mainImage)->toMediaCollection('team_main_images');
 
         if (sizeof($this->sampleMedia)) {

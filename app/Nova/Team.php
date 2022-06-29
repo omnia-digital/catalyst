@@ -62,7 +62,7 @@ class Team extends Resource
 //
 //            HasMany::make('Resources', Post::class),
 //
-//            HasOne::make('TeamLocation')
+//            HasOne::make('location')
         ];
     }
 

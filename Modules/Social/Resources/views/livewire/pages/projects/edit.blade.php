@@ -96,7 +96,7 @@
         <div x-cloak x-show="activeTab === 1" class="mt-6 space-y-6">
             <div>
                 <h3 class="text-lg">Current Project Location</h3>
-                @if ($team->teamLocation()->exists())
+                @if ($team->location()->exists())
                     <div class="flex items-center space-x-4 py-4">
                         <p class="{{ $removeAddress ? 'line-through' : '' }}">{{ $team->location }}</p>
                         @if ($removeAddress)
@@ -148,7 +148,7 @@
                 <!-- Banner Image -->
                 <div>
                     <div class="flex items-center">
-                        <x-library::input.label value="Banner Image" /><span class="text-red-600 text-sm ml-1">*</span>  
+                        <x-library::input.label value="Banner Image" /><span class="text-red-600 text-sm ml-1">*</span>
                     </div>
                     <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
                         <input type="text" class="flex-1 border-none" wire:model="bannerImageName" placeholder="Upload file for banner" readonly>
@@ -179,7 +179,7 @@
                 <hr class="my-4 border-neutral-dark">
                 <div>
                     <div class="flex items-center">
-                        <x-library::input.label value="Main Image" /><span class="text-red-600 text-sm">*</span>  
+                        <x-library::input.label value="Main Image" /><span class="text-red-600 text-sm">*</span>
                     </div>
                     <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
                         <input type="text" class="flex-1 border-none" wire:model="mainImageName" placeholder="Upload file for banner" readonly>
@@ -210,7 +210,7 @@
                 <hr class="my-4 border-neutral-dark">
                 <div>
                     <div class="flex items-center">
-                        <x-library::input.label value="Sample Media" /><span class="text-red-600 text-sm ml-1">*</span>  
+                        <x-library::input.label value="Sample Media" /><span class="text-red-600 text-sm ml-1">*</span>
                     </div>
                     <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
                         <p class="flex-1 py-2 px-3 text-[1rem] text-base-text-color">Upload multiple images about your project to be displayed</p>
