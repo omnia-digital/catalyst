@@ -32,8 +32,7 @@ class TeamResource extends Resource
                 Forms\Components\Textarea::make('summary')
                     ->maxLength(65535),
                 Forms\Components\Textarea::make('content')
-                    ->maxLength(65535),
-                Forms\Components\Toggle::make('personal_team')
+                    ->maxLength(65535)
                     ->required(),
                 Forms\Components\TextInput::make('location')
                     ->maxLength(255),
@@ -54,7 +53,6 @@ class TeamResource extends Resource
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('summary'),
                 Tables\Columns\TextColumn::make('content'),
-                Tables\Columns\BooleanColumn::make('personal_team'),
                 Tables\Columns\TextColumn::make('location'),
                 Tables\Columns\TextColumn::make('rating'),
                 Tables\Columns\TextColumn::make('languages'),
@@ -74,14 +72,14 @@ class TeamResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -90,5 +88,5 @@ class TeamResource extends Resource
             'view' => Pages\ViewTeam::route('/{record}'),
             'edit' => Pages\EditTeam::route('/{record}/edit'),
         ];
-    }    
+    }
 }

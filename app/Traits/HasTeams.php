@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use Laravel\Jetstream\Jetstream;
 
-trait HasNoPersonalTeam
+trait HasTeams
 {
     /**
      * Determine if the given team is the current team.
@@ -20,15 +20,15 @@ trait HasNoPersonalTeam
         return $team?->id === $this->currentTeam->id;
     }
 
-    /**
-     * Determine if the user is apart of any team.
-     *
-     * @param  mixed  $team
-     * @return bool
-     */
     public function isMemberOfATeam(): bool
     {
-        return (bool) ($this->teams()->count() || $this->ownedTeams()->count());
+        dd($this->teams()->count());
+        return dd((bool) ($this->teams()->count() || $this->ownedTeams()->count()));
+    }
+
+    public function ownedTeams()
+    {
+        return $this->hasMany(Jetstream::teamModel());
     }
 
     /**

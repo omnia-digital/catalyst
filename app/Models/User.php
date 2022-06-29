@@ -2,7 +2,7 @@
 
     namespace App\Models;
 
-use App\Traits\HasNoPersonalTeam;
+use App\Traits\HasTeams;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,7 +11,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Notifications\Notifiable;
     use Laravel\Fortify\TwoFactorAuthenticatable;
     use Laravel\Jetstream\HasProfilePhoto;
-    use Laravel\Jetstream\HasTeams;
+    use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
     use Laravel\Sanctum\HasApiTokens;
     use Modules\Social\Models\Like;
     use Modules\Social\Models\Post;
@@ -31,9 +31,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
             HasBookmarks,
             Followable,
             Awardable;
-        use HasNoPersonalTeam, HasTeams {
-            HasNoPersonalTeam::hasTeamRole insteadof HasTeams;
-            HasNoPersonalTeam::isCurrentTeam insteadof HasTeams;
+        use HasTeams, JetstreamHasTeams {
+            HasTeams::hasTeamRole insteadof JetstreamHasTeams;
+            HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
+            HasTeams::ownedTeams insteadof JetstreamHasTeams;
         }
 
         protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];

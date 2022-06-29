@@ -74,12 +74,11 @@ class CreateTeamModal extends Component
             'name' => $this->name,
             'start_date' => $this->startDate,
             'summary' => $this->summary,
-            'personal_team' => false,
         ]);
 
         $team->addMedia($this->bannerImage)->toMediaCollection('team_banner_images');
         $team->addMedia($this->mainImage)->toMediaCollection('team_main_images');
-        
+
         foreach ($this->sampleMedia as $media) {
             $team->addMedia($media)->toMediaCollection('team_sample_images');
         }

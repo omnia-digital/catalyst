@@ -36,15 +36,6 @@ class Team extends JetstreamTeam implements HasMedia
         Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto, HasSlug, HasLocation, InteractsWithMedia;
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'personal_team' => 'boolean',
-    ];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var string[]
@@ -53,7 +44,6 @@ class Team extends JetstreamTeam implements HasMedia
         'name',
         'handle',
         'start_date',
-        'personal_team',
         'summary',
         'content',
     ];
