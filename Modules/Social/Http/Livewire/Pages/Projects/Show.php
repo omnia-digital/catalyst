@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Teams;
 
+use App\Models\Location;
 use App\Models\Team;
 use App\Traits\WithTeamManagement;
 use Livewire\Component;
@@ -22,6 +23,23 @@ class Show extends Component
         'comments',
         'members'
     ];
+
+    public function getPlacesProperty()
+    {
+        $places = Location::select(['lat', 'lng', 'model_id'])
+            ->hasCoordinates()
+            ->with('model')
+            ->get()
+            ->map(function (Location $location) {
+                return [
+                    'name' => $location->model->name,
+                    'lat' => $location->lat,
+                    'lng' => $location->lng,
+                ];
+            });
+
+        return $places->all();
+    }
 
     public function getRecentPostsProperty()
     {
