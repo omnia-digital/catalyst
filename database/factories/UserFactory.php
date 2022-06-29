@@ -62,7 +62,22 @@ class UserFactory extends Factory
         return $this->has(
             Team::factory()
                 ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->name.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
+                    return ['name' => $user->profile->name.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
+                }),
+            'ownedTeams'
+        );
+    }
+
+    public function withTeam()
+    {
+        if (! Features::hasTeamFeatures()) {
+            return $this->state([]);
+        }
+
+        return $this->has(
+            Team::factory()
+                ->state(function (array $attributes, User $user) {
+                    return ['name' => $user->profile->name .'\'s Team', 'user_id' => $user->id, 'personal_team' => false];
                 }),
             'ownedTeams'
         );
@@ -81,7 +96,9 @@ class UserFactory extends Factory
             Profile::factory()
                 ->state(function (array $attributes, User $user) {
                     return [
-                        'user_id' => $user->id
+                        'user_id' => $user->id,
+                        'first_name' => $attributes['first_name'],
+                        'last_name' => $attributes['last_name'],
                     ];
                 })
         );
