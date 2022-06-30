@@ -297,7 +297,7 @@ const user = {
 const navigation = [
     {label: 'Home', name: 'home', icon: HomeIcon, current: true},
     {label: 'Explore', name: 'explore', icon: TrendingUpIcon, current: false},
-    {label: 'Projects', name: 'teams', icon: FireIcon, current: false},
+    {label: 'Teams', name: 'teams', icon: FireIcon, current: false},
     {label: 'My Profile', name: 'profile', icon: UserGroupIcon, current: false},
 ]
 const userNavigation = [

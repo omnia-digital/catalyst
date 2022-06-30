@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Actions\Teams\CreateTeam;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -69,21 +70,14 @@ class CreateTeamModal extends Component
     {
         $this->validate();
 
-        /** @var Team $team */
-        $team = Auth::user()->ownedTeams()->create([
+        $team = (new CreateTeam())->create(Auth::user(), [
             'name' => $this->name,
             'start_date' => $this->startDate,
             'summary' => $this->summary,
+            'bannerImage' => $this->bannerImage,
+            'mainImage' => $this->mainImage,
+            'sampleMedia' => $this->sampleMedia,
         ]);
-
-        $team->addMedia($this->bannerImage)->toMediaCollection('team_banner_images');
-        $team->addMedia($this->mainImage)->toMediaCollection('team_main_images');
-
-        foreach ($this->sampleMedia as $media) {
-            $team->addMedia($media)->toMediaCollection('team_sample_images');
-        }
-
-        Auth::user()->switchTeam($team);
 
         $this->closeModal('create-team');
         $this->reset();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Pages\Teams;
 
+use App\Actions\Teams\GetTeamCategoriesAction;
 use App\Lenses\Teams\NewReleaseTeamsLens;
 use App\Lenses\WithLenses;
 use App\Models\Team;
@@ -68,11 +69,17 @@ class Index extends Component
         return $query->paginate(25);
     }
 
+    public function getCategoriesProperty()
+    {
+        return (new GetTeamCategoriesAction)->execute();
+    }
+
     public function render()
     {
         return view('livewire.pages.teams.index', [
             'teams' => $this->rows,
-            'tags' => $this->tags
+            'tags' => $this->tags,
+            'categories' => $this->categories,
         ]);
     }
 }

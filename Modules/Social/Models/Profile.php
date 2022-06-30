@@ -127,6 +127,11 @@
             return 'USA';
         }
 
+        public function getAwardsAttribute()
+        {
+            return $this->user->awards;
+        }
+
         public function followingCount($short = false)
         {
             $count = Cache::remember('profile:following_count:' . $this->id, now()->addMonths(1), function () {

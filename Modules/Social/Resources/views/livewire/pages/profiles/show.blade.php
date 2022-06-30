@@ -26,32 +26,27 @@
 
             <!-- Profile Awards -->
             <div>
-                <div>
-                    <div class="flex justify-between items-center text-black font-semibold">
-                        <p class="text-sm">Awards</p>
-                        <a href="#" class="text-xs flex items-center">See all
+                <div class="flex justify-between items-center text-black font-semibold">
+                    <p class="text-sm">{{ \Trans::get('Awards') }}</p>
+                    @if($this->user->awards()->count())
+                        <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                         </a>
-                    </div>
-                    <div class="mt-2 flex space-x-2">
-                        <div class="bg-white p-2 flex-1 flex items-center">
-                            <div class="rounded-full bg-gray-500 mr-4 ml-2 p-2">
-                                <x-heroicon-s-academic-cap class="w-4 h-4"/>
-                            </div>
-                            <p class="whitespace-nowrap">Gold user</p>
+                    @endif
+                </div>
+                <div class="mt-4 flex space-x-2">
+                    @forelse ($this->user->awards()->take(2)->get() as $award)
+                        <x-awards-banner class="flex-1" :award="$award"/>
+                    @empty
+                        <div class="bg-white p-4 flex-1">
+                            <p class="text-dark-text-color">{{ \Trans::get('No awards to show.') }}</p>
                         </div>
-                        <div class="bg-white p-2 flex-1 flex items-center">
-                            <div class="rounded-full bg-gray-500 mr-4 p-2">
-                                <x-heroicon-s-academic-cap class="w-4 h-4"/>
-                            </div>
-                            <p class="whitespace-nowrap">Gold user</p>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
 
             <!-- Profile Reviews -->
-            <div>
+            {{-- <div>
                 <div class="flex justify-between items-center text-black font-semibold">
                     <p class="text-sm">Reviews</p>
                     <a href="#" class="text-xs flex items-center">See all
@@ -74,7 +69,7 @@
                         <x-heroicon-s-star class="h-5 w-5"/>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- User Posts -->
             <div>

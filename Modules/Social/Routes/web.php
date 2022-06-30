@@ -13,6 +13,7 @@ use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
 use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
 use App\Http\Livewire\Pages\Teams\Index as AllTeams;
+use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Edit as EditTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Followers as TeamFollowers;
@@ -39,6 +40,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
         Route::get('{profile}/edit', EditProfile::class)->name('edit');
         Route::get('{profile}/media', ProfileMedia::class)->name('media');
         Route::get('{profile}/followers', ProfileFollowers::class)->name('followers');
+        Route::get('{profile}/awards', ProfileAwards::class)->name('awards');
     });
 
     Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {

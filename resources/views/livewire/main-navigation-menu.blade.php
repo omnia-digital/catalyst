@@ -76,18 +76,8 @@
                                         <div class="block px-4 py-2 text-xs text-light-text-color">
                                             {{ \Trans::get('Current Team') }}
                                         </div>
-                                        <x-jet-dropdown-link href="{{ route('social.teams.show', Auth::user()->currentTeam->id) }}">
-                                            {{  Auth::user()->currentTeam->name }}
-                                        </x-jet-dropdown-link>
-
-                                        <!-- Team Management -->
-{{--                                        <div class="block px-4 py-2 text-xs text-light-text-color">--}}
-{{--                                            {{ \Trans::get('Manage Team') }}--}}
-{{--                                        </div>--}}
-
-                                        <!-- Team Settings -->
                                         <x-jet-dropdown-link href="{{ route('social.teams.show', Auth::user()->currentTeam->handle) }}">
-                                            {{ Trans::get('View Team Profile') }}
+                                            {{  Auth::user()->currentTeam->name }}
                                         </x-jet-dropdown-link>
 
 {{--                                        @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
@@ -148,8 +138,8 @@
                                     {{ \Trans::get('Manage Account') }}
                                 </div>
 
-                                <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                    {{ \Trans::get('Profile') }}
+                                <x-jet-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
+                                    {{ auth()->user()->name }}
                                 </x-jet-dropdown-link>
 
                                 {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
