@@ -153,7 +153,7 @@
                             <p class="text-sm">{{ \Trans::get('Location') }}</p>
                         </div>
                         <div class="mt-4 bg-white">
-                            <livewire:social::map/>
+                            <x-library::map.google class="h-96" :places="$this->places"/>
                         </div>
                     </div>
                     <!-- Team Languages -->
