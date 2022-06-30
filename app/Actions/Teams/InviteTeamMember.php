@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Jetstream;
+namespace App\Actions\Teams;
 
 use App\Contracts\InvitesTeamMembers;
 use App\Events\InvitingTeamMember;
