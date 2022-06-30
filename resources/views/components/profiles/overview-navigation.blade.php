@@ -24,7 +24,7 @@
             </x-library::dropdown> --}}
         </div>
     </div>
-    <div class="flex pr-2">
+    <div class="flex pr-4 items-center">
         @can('update-profile', $user->profile)
             <a href="{{ route('social.profile.edit', $user->handle) }}" class="py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Edit Profile') }}</a>
         @endcan

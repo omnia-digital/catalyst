@@ -25,11 +25,11 @@
             </x-library::dropdown> --}}
         </div>
     </div>
-    <div class="flex pr-2">
+    <div class="flex pr-4 items-center">
         @can('update-team', $team)
             <a href="{{ route('social.teams.edit', $team) }}" class="py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Edit Team') }}</a>
         @endcan
-        <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
+        <livewire:social::partials.follow-button :model="$team" class="py-4 mr-4"/>
         <div class="inline-flex items-center text-md relative">
             <div class="absolute inset-auto -translate-y-12 p-2 rounded-md bg-black text-white"
                 x-data="{show: false}"
