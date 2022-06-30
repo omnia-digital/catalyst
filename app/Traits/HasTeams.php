@@ -40,7 +40,8 @@ trait HasTeams
 
     public function ownedTeams()
     {
-        return $this->belongsToMany(Jetstream::teamModel(), Jetstream::membershipModel())->where(['role'=>'owner'])
+        return $this->belongsToMany(Jetstream::teamModel(), Jetstream::membershipModel())
+                    ->where(['role'=>'owner'])
                     ->withPivot('role')
                     ->withTimestamps()
                     ->as('membership');

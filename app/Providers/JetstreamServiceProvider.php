@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
-use App\Actions\Jetstream\AddTeamMember;
-use App\Actions\Jetstream\CreateTeam;
-use App\Actions\Jetstream\DeleteTeam;
 use App\Actions\Jetstream\DeleteUser;
-use App\Actions\Jetstream\InviteTeamMember;
-use App\Actions\Jetstream\RemoveTeamMember;
-use App\Actions\Jetstream\UpdateTeamName;
+use App\Actions\Teams\AddTeamMember;
+use App\Actions\Teams\CreateTeam;
+use App\Actions\Teams\DeleteTeam;
+use App\Actions\Teams\InviteTeamMember;
+use App\Actions\Teams\RemoveTeamMember;
+use App\Actions\Teams\UpdateTeamName;
 use App\Contracts\InvitesTeamMembers;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
