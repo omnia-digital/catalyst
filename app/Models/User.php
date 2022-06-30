@@ -34,6 +34,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
         use HasTeams, JetstreamHasTeams {
             HasTeams::hasTeamRole insteadof JetstreamHasTeams;
             HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
+            HasTeams::ownsTeam insteadof JetstreamHasTeams;
             HasTeams::ownedTeams insteadof JetstreamHasTeams;
             HasTeams::currentTeam insteadof JetstreamHasTeams;
         }

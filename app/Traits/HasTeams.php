@@ -6,6 +6,21 @@ use Laravel\Jetstream\Jetstream;
 
 trait HasTeams
 {
+    /**
+     * Determine if the user owns the given team.
+     *
+     * @param  mixed  $team
+     * @return bool
+     */
+    public function ownsTeam($team)
+    {
+        if (is_null($team)) {
+            return false;
+        }
+
+        return $this->teams()->wherePivot('team_id', $team->id)->wherePivot('role', 'owner')->exists();
+    }
+    
     public function currentTeam()
     {
         if (!$this->teams()->exists()) { return false;}
