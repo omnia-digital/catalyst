@@ -139,6 +139,21 @@ class Team extends JetstreamTeam implements HasMedia
         return optional($this->getMedia('team_main_images')->first());
     }
 
+    public function profilePhoto()
+    {
+        return optional($this->getMedia('team_profile_photos')->first());
+    }
+
+    /**
+     * Get the URL to the team's profile photo.
+     *
+     * @return string
+     */
+    public function getProfilePhotoUrlAttribute()
+    {
+        return $this->profilePhoto()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
+    }
+
     public function sampleImages()
     {
         return $this->getMedia('team_sample_images');

@@ -20,11 +20,11 @@
             <div class="flex items-center">
                 <x-library::input.label value="{{ \Trans::get('Summary') }}"/><span class="text-red-600 text-sm ml-1">*</span>
             </div>
-            <x-library::input.textarea wire:model.defer="summary" placeholder="{{ \Trans::get('Summary') }}" />
+            <x-library::input.textarea wire:model.defer="summary" maxlength="280" placeholder="{{ \Trans::get('Summary') }}" />
             <x-library::input.error for="summary"/>
         </div>
         <div class="mt-6">
-            <hr class="text-neutral-light mt-6 mb-4"/>
+            <hr class="border-neutral-dark mt-6 mb-4"/>
             <h3 class="text-xl mb-4">{{ \Trans::get('Media') }}</h3>
             <div class="flex items-center">
                 <x-library::input.label value="{{ \Trans::get('Banner Image') }}" /><span class="text-red-600 text-sm ml-1">*</span>
@@ -43,6 +43,31 @@
                     <img class="w-full h-52" src="{{ $bannerImage->temporaryUrl() }}" alt="{{ $bannerImageName }} Preview">
                 </div>
             @endif
+
+            <!-- Profile Photo -->
+            <hr class="my-4 border-neutral-light">
+            <div>
+                <div class="flex items-center">
+                    <x-library::input.label value="{{ Trans::get('Team') }} Profile Photo" /><span class="text-red-600 text-sm ml-1">*</span>
+                </div>
+                <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                    <input type="text" class="flex-1 border-none" wire:model="profilePhotoName" placeholder="Upload file for profile photo" readonly>
+                    <label>
+                        <input type="file" wire:model="profilePhoto" hidden required />
+                        <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                    </label>
+                </div>
+                <x-library::input.error for="profilePhoto" />
+                @if ($profilePhoto)
+                    <div>
+                        <p>New Photo:</p>
+                        <img class="w-full h-32" src="{{ $profilePhoto->temporaryUrl() }}" alt="{{ $profilePhotoName }}">
+                    </div>
+                @endif
+            </div>
+
+            <!-- Main Image -->
+            <hr class="my-4 border-neutral-light">
             <div class="flex items-center mt-4">
                 <x-library::input.label value="{{ \Trans::get('Main Image') }}" /><span class="text-red-600 text-sm ml-1">*</span>
             </div>
@@ -60,6 +85,9 @@
                     <img class="w-full h-52" src="{{ $mainImage->temporaryUrl() }}" alt="{{ $mainImageName }}">
                 </div>
             @endif
+
+            <!-- Sample Images -->
+            <hr class="my-4 border-neutral-light">
             <div class="flex items-center mt-4">
                 <x-library::input.label value="{{ \Trans::get('Sample Media') }}" /><span class="text-red-600 text-sm ml-1">*</span>
             </div>

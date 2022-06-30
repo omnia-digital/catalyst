@@ -33,6 +33,7 @@ class CreateTeam implements CreatesTeams
 
         $team->addMedia($input['bannerImage'])->toMediaCollection('team_banner_images');
         $team->addMedia($input['mainImage'])->toMediaCollection('team_main_images');
+        $team->addMedia($input['profilePhoto'])->toMediaCollection('team_profile_photos');
 
         foreach ($input['sampleMedia'] as $media) {
             $team->addMedia($media)->toMediaCollection('team_sample_images');
