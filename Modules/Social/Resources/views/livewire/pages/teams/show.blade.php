@@ -182,7 +182,7 @@
                             @forelse ($team->awards()->take(2)->get() as $award)
                                 <x-awards-banner class="flex-1" :award="$award"/>
                             @empty
-                                <div class="bg-white p-4">
+                                <div class="bg-white flex-1 p-4">
                                     <p class="text-dark-text-color">{{ \Trans::get('No awards to show.') }}</p>
                                 </div>
                             @endforelse
