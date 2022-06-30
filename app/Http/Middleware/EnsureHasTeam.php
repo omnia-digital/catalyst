@@ -10,7 +10,7 @@ class EnsureHasTeam
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->user()->isMemberOfATeam()) {
-            return redirect()->route('my-teams');
+            return redirect()->route('dashboard');
         }
         $this->ensureUserHasCurrentTeamSet();
         return $next($request);
@@ -20,7 +20,7 @@ class EnsureHasTeam
     {
         if (is_null(auth()->user()->current_team_id)) {
             $user = auth()->user();
-            $user->current_team_id = $user->allTeams()->first()->id;
+            $user->current_team_id = $user->teams()->first()->id;
             $user->save();
         }
     }

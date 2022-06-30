@@ -10,7 +10,8 @@
     use Illuminate\Support\Facades\Storage;
     use Laravel\Jetstream\HasProfilePhoto;
     use Modules\Social\Database\Factories\ProfileFactory;
-    use Spatie\Sluggable\HasSlug;
+use Modules\Social\Traits\Awardable;
+use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
 
     class Profile extends Model
@@ -93,6 +94,11 @@
         public function getCountryAttribute()
         {
             return 'USA';
+        }
+
+        public function getAwardsAttribute()
+        {
+            return $this->user->awards;
         }
 
         public function followingCount($short = false)

@@ -14,6 +14,7 @@ use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
@@ -36,15 +37,6 @@ class Team extends JetstreamTeam implements HasMedia
         Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto, HasSlug, HasLocation, InteractsWithMedia;
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'personal_team' => 'boolean',
-    ];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var string[]
@@ -53,7 +45,6 @@ class Team extends JetstreamTeam implements HasMedia
         'name',
         'handle',
         'start_date',
-        'personal_team',
         'summary',
         'content',
     ];
@@ -163,9 +154,18 @@ class Team extends JetstreamTeam implements HasMedia
         return null;
     }
 
+    public function owner()
+    {
+        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id');
+    }
+
     public function members()
     {
-        return $this->allUsers();
+        return $this->users()->wherePivotNotIn('role', ['owner']);
+    }
+
+    public function allUsers() {
+        return $this->users();
     }
 
     public function profile()

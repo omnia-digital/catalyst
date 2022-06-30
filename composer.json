@@ -18,7 +18,7 @@
         "jorenvanhocht/laravel-share": "^4.2",
         "laravel/framework": "^9.0",
         "laravel/jetstream": "^2.4",
-        "laravel/nova": "^4.9",
+        "laravel/nova": "^3.9",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/vapor-cli": "^1.38",

@@ -16796,6 +16796,27 @@
      
 }
 
+    namespace App\Util\Platform\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class TranslateFacade {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function get($string)
+        {
+                        /** @var \App\Util\Platform\Translate $instance */
+                        return $instance->get($string);
+        }
+         
+    }
+     
+}
+
     namespace Awssat\Visits { 
             /**
      * 
@@ -23612,6 +23633,7 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
+            class Trans extends \App\Util\Platform\Facades\TranslateFacade {}
             class Visits extends \Awssat\Visits\Visits {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Image extends \Intervention\Image\Facades\Image {}

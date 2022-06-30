@@ -15,15 +15,15 @@ class MyTeams extends Component
     use WithPagination, WithCachedRows, WithSortAndFilters;
 
     public array $sortLabels = [
-        'name' => 'Name', 
-        'users_count' => 'Users', 
+        'name' => 'Name',
+        'users_count' => 'Users',
         'start_date' => 'Launch Date'
     ];
 
     public function mount()
     {
         $this->orderBy = 'name';
-        
+
         if (!\App::environment('production')) {
             $this->useCache = false;
         }
@@ -31,7 +31,7 @@ class MyTeams extends Component
 
     public function getRowsQueryProperty()
     {
-        $query = Team::where('user_id', auth()->id())
+        $query = auth()->user()->ownedTeams()
             ->withCount(['users', 'media']);
 
         $query = $this->applyFilters($query)
