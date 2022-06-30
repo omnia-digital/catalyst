@@ -76,18 +76,8 @@
                                         <div class="block px-4 py-2 text-xs text-light-text-color">
                                             {{ \Trans::get('Current Team') }}
                                         </div>
-                                        <x-jet-dropdown-link href="{{ route('social.teams.show', Auth::user()->currentTeam->id) }}">
-                                            {{  Auth::user()->currentTeam->name }}
-                                        </x-jet-dropdown-link>
-
-                                        <!-- Team Management -->
-{{--                                        <div class="block px-4 py-2 text-xs text-light-text-color">--}}
-{{--                                            {{ \Trans::get('Manage Team') }}--}}
-{{--                                        </div>--}}
-
-                                        <!-- Team Settings -->
                                         <x-jet-dropdown-link href="{{ route('social.teams.show', Auth::user()->currentTeam->handle) }}">
-                                            {{ Trans::get('View Team Profile') }}
+                                            {{  Auth::user()->currentTeam->name }}
                                         </x-jet-dropdown-link>
 
 {{--                                        @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
@@ -104,7 +94,7 @@
                                                 {{ \Trans::get('Switch Teams') }}
                                             </div>
 
-                                            @foreach (Auth::user()->teams() as $team)
+                                            @foreach (Auth::user()->teams as $team)
                                                 <x-jet-switchable-team :team="$team"/>
                                             @endforeach
                                         @endif
@@ -149,7 +139,7 @@
                                 </div>
 
                                 <x-jet-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
-                                    {{ \Trans::get('Profile') }}
+                                    {{ auth()->user()->name }}
                                 </x-jet-dropdown-link>
 
                                 {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
@@ -262,7 +252,7 @@
                             {{ \Trans::get('Switch Teams') }}
                         </div>
 
-                        @foreach (Auth::user()->teams() as $team)
+                        @foreach (Auth::user()->teams as $team)
                             <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link"/>
                         @endforeach
                     @endif
