@@ -33,13 +33,22 @@
             'first_name',
             'last_name',
             'handle',
+            'bio',
+            'website',
             'user_id',
         ];
 
         protected $fillable = [
             'first_name',
             'last_name',
+            'bio',
+            'website',
             'user_id',
+        ];
+
+        protected $appends = [
+            'name',
+            'profile_photo_url'
         ];
 
         /**
@@ -87,6 +96,7 @@
         {
             return $this->is_private == true ? 'private' : 'public';
         }
+        
 
         public function url() {
             return route('social.profile.show', $this->handle);
@@ -95,6 +105,21 @@
         public function bannerImage()
         {
             return optional($this->getMedia('profile_banner_images')->first());
+        }
+
+        public function photo()
+        {
+            return optional($this->getMedia('profile_photos')->first());
+        }
+
+        /**
+         * Get the URL to the user's profile photo.
+         *
+         * @return string
+         */
+        public function getProfilePhotoUrlAttribute()
+        {
+            return $this->photo()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
         }
 
         public function getCountryAttribute()

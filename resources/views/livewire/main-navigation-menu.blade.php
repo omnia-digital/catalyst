@@ -104,7 +104,7 @@
                                                 {{ \Trans::get('Switch Teams') }}
                                             </div>
 
-                                            @foreach (Auth::user()->teams() as $team)
+                                            @foreach (Auth::user()->teams as $team)
                                                 <x-jet-switchable-team :team="$team"/>
                                             @endforeach
                                         @endif
@@ -262,7 +262,7 @@
                             {{ \Trans::get('Switch Teams') }}
                         </div>
 
-                        @foreach (Auth::user()->teams() as $team)
+                        @foreach (Auth::user()->teams as $team)
                             <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link"/>
                         @endforeach
                     @endif

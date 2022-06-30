@@ -10,7 +10,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
     use Laravel\Fortify\TwoFactorAuthenticatable;
-    use Laravel\Jetstream\HasProfilePhoto;
     use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
     use Laravel\Sanctum\HasApiTokens;
     use Modules\Social\Models\Like;
@@ -76,14 +75,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
             }
         }
 
-        public function setProfilePhotoUrlAttribute($value)
-        {
-            return $this->profile->profile_photo_url = $value;
-        }
-
         public function getProfilePhotoUrlAttribute()
         {
-            return $this->profile()->select(['profile_photo_path'])->first()->profile_photo_url;
+            return $this->profile->profile_photo_url;
         }
 
         //// Relations ////
