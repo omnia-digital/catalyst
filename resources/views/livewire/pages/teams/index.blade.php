@@ -62,17 +62,17 @@
                 </div>
 
                 <div>
-                    <x-library::input.date wire:model="filters.start_date" placeholder="{{ Trans::get('Team Launch Date') }}"/>
+                    <x-library::input.date wire:model="startDate" placeholder="{{ Trans::get('Team Launch Date') }}"/>
                 </div>
 
                 <div class="w-96">
-                    <x-library::input.selects wire:model="filters.tags" :options="$tags"/>
+                    <x-library::input.selects wire:model="tags" :options="$allTags"/>
                 </div>
 
                 <div class="flex items-center w-full z-50">
                     <x-library::input.label value="Members" class="mr-8 font-bold"/>
                     <x-library::input.range-slider
-                            wire:model.defer="filters.members"
+                            wire:model.defer="members"
                             :min="0" :max="100" :step="5" :decimals="0"/>
                 </div>
 

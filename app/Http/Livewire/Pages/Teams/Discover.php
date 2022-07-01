@@ -9,28 +9,10 @@ use App\Actions\Teams\GetPopularUpcomingTeamsAction;
 use App\Actions\Teams\GetTeamCategoriesAction;
 use App\Actions\Teams\GetTrendingTeamsAction;
 use App\Lenses\Teams\NewReleaseTeamsLens;
-use App\Models\Location;
 use Livewire\Component;
 
 class Discover extends Component
 {
-    public function getPlacesProperty()
-    {
-        $places = Location::select(['lat', 'lng', 'model_id'])
-            ->hasCoordinates()
-            ->with('model')
-            ->get()
-            ->map(function (Location $location) {
-                return [
-                    'name' => $location->model->name,
-                    'lat' => $location->lat,
-                    'lng' => $location->lng,
-                ];
-            });
-
-        return $places->all();
-    }
-
     public function getCategoriesProperty()
     {
         return (new GetTeamCategoriesAction)->execute();
@@ -64,7 +46,6 @@ class Discover extends Component
     public function render()
     {
         return view('livewire.pages.teams.discover', [
-            'places' => $this->places,
             'featuredTeams' => $this->featuredTeams,
             'trendingTeams' => $this->trendingTeams,
             'categories' => $this->categories,

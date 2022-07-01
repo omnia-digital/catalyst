@@ -21,17 +21,40 @@ class Index extends Component
 
     protected $queryString = [
         'lens',
-        'filters'
+        'filters',
+        'tags',
+        'members',
+        'startDate'
     ];
 
     public array $filters = [
         'location' => null,
-        'start_date' => null,
-        'members' => [0, 0],
         'rating' => [],
         'search' => null,
-        'tags' => []
     ];
+
+    // Below properties should be nested in $filters,
+    // but there is an error with Livewire cannot detect nested property.
+    // When the error is fixed, put them back to $filters.
+    // https://omniaapp.slack.com/archives/G01LA6L3H60/p1656660776169019
+    public array $members = [0, 0];
+    public array $tags = [];
+    public ?string $startDate = null;
+
+    public function updatedMembers()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedTags()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedStartDate()
+    {
+        $this->resetPage();
+    }
 
     public function updatedFilters()
     {
@@ -43,7 +66,7 @@ class Index extends Component
         $this->defaultSorting('name', 'asc');
     }
 
-    public function getTagsProperty()
+    public function getAllTagsProperty()
     {
         return Tag::all()->mapWithKeys(fn(Tag $tag) => [$tag->name => $tag->name])->all();
     }
@@ -54,9 +77,9 @@ class Index extends Component
             ->with('location')
             ->withCount('users as members')
             ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->whereHas('location', fn(Builder $query) => $query->search($location)))
-            ->when(Arr::get($this->filters, 'start_date'), fn(Builder $query, $date) => $query->whereDate('start_date', $date))
-            ->when(Arr::get($this->filters, 'members'), fn(Builder $query, $members) => $query->havingBetween('members', $members))
-            ->when(Arr::get($this->filters, 'tags'), fn(Builder $query, $tags) => $query->withAnyTags($tags))
+            ->when($this->startDate, fn(Builder $query, $date) => $query->whereDate('start_date', $date))
+            ->when(max($this->members) > 0, fn(Builder $query) => $query->havingBetween('members', $this->members))
+            ->when(!empty($this->tags), fn(Builder $query) => $query->withAnyTags($this->tags))
             //->when(Arr::get($this->filters, 'rating'), fn(Builder $query, $rating) => $query->whereIn('rating', $rating))
             ->when(Arr::get($this->filters, 'search'), fn(Builder $query, $search) => $query->search($search));
     }
@@ -78,7 +101,7 @@ class Index extends Component
     {
         return view('livewire.pages.teams.index', [
             'teams' => $this->rows,
-            'tags' => $this->tags,
+            'allTags' => $this->allTags,
             'categories' => $this->categories,
         ]);
     }

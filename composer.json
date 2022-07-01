@@ -57,8 +57,8 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/omnia-digital/library.git"
+            "type": "path",
+            "url": "../omnia-library"
         },
         {
             "type": "composer",

@@ -11,24 +11,11 @@
         </div>
 
         <div>
-            <x-library::heading.3 class="uppercase">{{ \Trans::get('Find Teams') }}</x-library::heading.3>
-            <div class="bg-white flex justify-between items-center mt-2 px-4 py-3">
-                <div class="flex items-center space-x-4">
-                    <x-heroicon-o-calendar class="w-5 h-5"/>
-                    <div class="flex items-center space-x-1">
-                        <x-heroicon-o-filter class="w-5 h-5"/>
-                        <p>{{ \Trans::get('Filter') }} (2)</p>
-                    </div>
-                </div>
-                <p>
-                    <a href="{{ route('social.teams.home') }}" class="font-bold">{{ \Trans::get('View All Teams') }}</a>
-                </p>
-            </div>
-            <x-library::map.google class="h-96" :places="$places"/>
+            <livewire:social::components.find-projects/>
         </div>
 
-        @if($trendingTeams->count())
-            <div>
+        <div>
+            @if($trendingTeams->count())
                 <div class="flex items-center space-x-2">
                     <x-library::heading.3 class="uppercase">{{ \Trans::get('Trending') }}</x-library::heading.3>
                 </div>
@@ -36,16 +23,16 @@
                     <div class="py-4">
                         <div class="col-span-2 grid grid-cols-5 gap-3">
                             @foreach($trendingTeams as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                                <livewire:social::components.team-card :team="$team" wire:key="trending-team-{{ $team->id }}"/>
                             @endforeach
                         </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif
+        </div>
 
-        @if(count($categories))
-            <div>
+        <div>
+            @if(count($categories))
                 <div class="flex items-center space-x-2">
                     <x-library::heading.3 class="uppercase">{{ \Trans::get('Categories') }} ({{ count($categories) }})</x-library::heading.3>
                     <a href="#" class="text-gray-500 text-xs"></a>
@@ -58,27 +45,27 @@
                         </x-library::button.link>
                     @endforeach
                 </div>
-            </div>
-        @endif
+            @endif
+        </div>
 
-        @if($curatedTeams->count())
-            <div>
+        <div>
+            @if($curatedTeams->count())
                 <div class="flex items-center space-x-2">
                     <x-library::heading.3 class="uppercase">{{ \Trans::get('Curated') }}</x-library::heading.3>
-                    <a href="{{ route('social.teams.home', ['filters[tags][0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>
+                    <a href="{{ route('social.teams.home', ['tags[0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>
                 </div>
 
                 <div class="px-4 sm:px-6 md:px-0">
                     <div class="py-4">
                         <div class="col-span-2 grid grid-cols-5 gap-3">
                             @foreach($curatedTeams as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                                <livewire:social::components.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>
                             @endforeach
                         </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif
+        </div>
 
         {{--        <div>--}}
         {{--            <div class="flex items-center space-x-2">--}}
@@ -97,8 +84,8 @@
         {{--            </div>--}}
         {{--        </div>--}}
 
-        @if($popularIndiesTeams->count())
-            <div>
+        <div>
+            @if($popularIndiesTeams->count())
                 <div class="flex items-center space-x-2">
                     <x-library::heading.3 class="uppercase">{{ \Trans::get('Popular Upcoming') }}</x-library::heading.3>
                     <a href="{{ route('social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">{{ \Trans::get('View All') }}</a>
@@ -108,12 +95,12 @@
                     <div class="py-4">
                         <div class="col-span-2 grid grid-cols-5 gap-3">
                             @foreach($popularIndiesTeams as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                                <livewire:social::components.team-card :team="$team" wire:key="popular-indies-team-{{ $team->id }}"/>
                             @endforeach
                         </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif
+        </div>
     </div>
 @endsection
