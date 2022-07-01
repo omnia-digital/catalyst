@@ -45,7 +45,8 @@ module.exports = {
             maxWidth: {
                 'sm': '22rem',
                 '2xl': '40rem',
-                '8xl': '82rem'
+                '8xl': '82rem',
+                '9xl': '90rem'
             },
             colors: {
                 'base-text-color': 'var(--base-text-color)',
