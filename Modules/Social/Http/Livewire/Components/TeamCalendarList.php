@@ -21,6 +21,8 @@ class TeamCalendarList extends Component
         'start_date' => 'Launch Date'
     ];
 
+    public $selectedID;
+
     public function getRowsQueryProperty()
     {
         $query = Team::query()
@@ -61,6 +63,12 @@ class TeamCalendarList extends Component
             });
 
         return $places->all();
+    }
+
+    public function selectEvent($eventID)
+    {
+        $this->selectedID = $eventID;
+        $this->emit('select_event', $eventID);
     }
 
     public function toggleMapCalendar($tab)

@@ -3,7 +3,7 @@
 @section('content')
     <div class="mt-6">
         <div class="grid grid-cols-12 gap-6">
-            <div class="col-span-3">
+            <div class="col-span-3 h-[1300px]">
                 <livewire:social::components.team-calendar-list />
             </div>
             <div 

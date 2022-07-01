@@ -1,6 +1,6 @@
-<div>
-    <div class="flex flex-col sticky h-screen overflow-y-scroll scrollbar-hide top-20 md:inset-y-2">
-        <div>
+<div class="h-full">
+    <div class="flex flex-col sticky h-full top-20 inset-y-2">
+        <div class="h-full flex flex-col">
             <div 
                 x-data="{
                     activeTab: 'calendar'
@@ -35,9 +35,14 @@
             <!-- Filters -->
             @include('livewire.partials.filters-sm')
 
-            <div class="bg-primary space-y-2 pt-4">
+            <div class="bg-primary space-y-2 pt-4 flex-1 overflow-y-scroll scrollbar-hide">
                 @forelse ($teams as $team)
-                    <div class="space-y-2 mx-2 p-4 bg-primary rounded-lg border border-neutral">
+                    <div 
+                        class="space-y-2 mx-2 p-4 bg-primary rounded-lg border border-neutral cursor-pointer 
+                            {{ ($selectedID === $team->id) ? 'shadow-md ring-1 ring-neutral-dark' : '' }}
+                            hover:shadow-lg  hover:ring-2 hover:ring-neutral-dark active:shadow-lg active:ring-2 active:ring-neutral-dark focus:shadow-lg focus:ring-2 focus:ring-neutral-dark"
+                        wire:click="selectEvent({{ $team->id }})"
+                    >
                         <div class="flex justify-between">
                             <p class="text-dark-text-color font-semibold text-base">{{ $team->name }}</p>
                             
