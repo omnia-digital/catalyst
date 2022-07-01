@@ -2,16 +2,18 @@
 
 namespace Modules\Social\Http\Livewire\Components;
 
+use App\Models\Location;
 use App\Models\Team;
 use App\Models\User;
 use App\Traits\WithSortAndFilters;
 use Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class TeamCalendarList extends Component
 {
-    use WithCachedRows, WithSortAndFilters;
+    use WithPagination, WithCachedRows, WithSortAndFilters;
 
     public array $sortLabels = [
         'name' => 'Name',
@@ -40,6 +42,30 @@ class TeamCalendarList extends Component
     public function getUserProperty()
     {
         return User::find(Auth::id());
+    }
+
+    public function getPlacesProperty()
+    {
+        $places = Location::select(['lat', 'lng', 'model_id'])
+            ->whereIn('model_id', $this->rows->pluck('id')->toArray())
+            ->where('model_type', Team::class)
+            ->hasCoordinates()
+            ->with('model')
+            ->get()
+            ->map(function (Location $location) {
+                return [
+                    'name' => $location->model->name,
+                    'lat' => $location->lat,
+                    'lng' => $location->lng,
+                ];
+            });
+
+        return $places->all();
+    }
+
+    public function toggleMapCalendar($tab)
+    {
+        $this->emitUp('toggle_map_calendar', $tab, $this->places);
     }
 
     public function mount()

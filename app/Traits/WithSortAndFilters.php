@@ -15,6 +15,8 @@ trait WithSortAndFilters {
         'has_attachment' => false,
     ];
 
+    public $filterCount = 0;
+
     public function sortBy($key)
     {
         $this->sortOrder = $this->defaultSortOrder;
@@ -29,6 +31,7 @@ trait WithSortAndFilters {
     
     public function updatedFilters()
     {
+        $this->filterCount = sizeof(array_filter($this->filters));
         $this->resetPage();
     }
 

@@ -11,7 +11,7 @@
                 <x-heroicon-o-chevron-left class="w-8 h-8" />
             </button>
             <button class="text-light-text-color hover:text-secondary active:text-secondary focus:text-secondary"
-            wire:click="goToNextMonth"
+                wire:click="goToNextMonth"
             >
                 <x-heroicon-o-chevron-right class="w-8 h-8" />
             </button>
