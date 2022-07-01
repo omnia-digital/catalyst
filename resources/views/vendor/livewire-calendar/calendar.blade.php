@@ -1,4 +1,4 @@
-<div
+<div class="h-full-minus-[56px]"
     @if($pollMillis !== null && $pollAction !== null)
         wire:poll.{{ $pollMillis }}ms="{{ $pollAction }}"
     @elseif($pollMillis !== null)
@@ -10,7 +10,7 @@
     </div>
 
     <div class="flex">
-        <div class="overflow-x-auto w-full">
+        <div class="overflow-x-auto scrollbar-hide w-full h-full-minus-[133px]">
             <div class="inline-block min-w-full overflow-hidden">
 
                 <div class="w-full flex flex-row">

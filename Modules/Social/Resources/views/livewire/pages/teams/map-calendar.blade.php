@@ -1,9 +1,9 @@
-@extends('social::livewire.layouts.pages.team-calendar-layout')
+@extends('social::livewire.layouts.pages.team-map-calendar-layout')
 
 @section('content')
-    <div class="mt-6">
+    <div>
         <div class="grid grid-cols-12 gap-6">
-            <div class="col-span-3 h-[1300px]">
+            <div class="col-span-3 h-full-minus-[56px]">
                 <livewire:social::components.team-calendar-list />
             </div>
             <div 
@@ -16,8 +16,8 @@
                         event-view="calendar-views.event-item"
                     />
                 </div>    
-                <div x-show="currentTab === 'map'">
-                    <x-library::map.google class="h-screen" :places="$places"/>
+                <div x-cloak x-show="currentTab === 'map'">
+                    <x-library::map.google class="h-full-minus-[56px]" :places="$places"/>
                 </div>
             </div>
         </div>

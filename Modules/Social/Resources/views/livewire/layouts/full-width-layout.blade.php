@@ -10,7 +10,7 @@
         <div class="col-span-10">
             <div class="">
 
-                <div class="min-h-screen">
+                <div>
                     <!-- Page content -->
                     <div class="mx-auto">
                         @yield('page-layout')

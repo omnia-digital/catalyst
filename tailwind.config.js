@@ -1,3 +1,4 @@
+const plugin = require('tailwindcss/plugin');
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors')
 
@@ -40,7 +41,8 @@ module.exports = {
                 'base': '0.9375rem',
             },
             height: {
-                '13': '3.2rem'
+                '13': '3.2rem',
+                'full-with-nav': 'calc(100vh - 56px)'
             },
             maxWidth: {
                 'sm': '22rem',
@@ -80,5 +82,21 @@ module.exports = {
         require('@tailwindcss/aspect-ratio'),
         require('tailwind-scrollbar-hide'),
         require('@tailwindcss/line-clamp'),
+        plugin(function({ matchUtilities, theme }) {
+            matchUtilities(
+                {
+                    'h-full-minus': (value) => {
+                        return {
+                            height: 'calc(100vh - ' + value + ')',
+                        }
+                    },
+                    'max-h-full-minus': (value) => {
+                        return {
+                            maxHeight: 'calc(100vh - ' + value + ')',
+                        }
+                    },
+                },
+            )
+        }),
     ]
 };
