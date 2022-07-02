@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aba5e4ec003c8b759826b0de8a65996d",
+    "content-hash": "4541235d06992e815f9ce4d7b7b5cca2",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -73,6 +73,80 @@
                 "source": "https://github.com/akaunting/laravel-money/tree/3.0.1"
             },
             "time": "2022-05-11T06:34:38+00:00"
+        },
+        {
+            "name": "asantibanez/livewire-calendar",
+            "version": "dev-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Osimba/livewire-calendar.git",
+                "reference": "73e6286cc23f6876a18cb89d76b596ea2d28d275"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Osimba/livewire-calendar/zipball/73e6286cc23f6876a18cb89d76b596ea2d28d275",
+                "reference": "73e6286cc23f6876a18cb89d76b596ea2d28d275",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "livewire/livewire": "^2.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Asantibanez\\LivewireCalendar\\LivewireCalendarServiceProvider"
+                    ],
+                    "aliases": {
+                        "LivewireCalendar": "Asantibanez\\LivewireCalendar\\LivewireCalendarFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Asantibanez\\LivewireCalendar\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Asantibanez\\LivewireCalendar\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrés Santibáñez",
+                    "email": "santibanez.andres@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Livewire calendar component",
+            "homepage": "https://github.com/asantibanez/livewire-calendar",
+            "keywords": [
+                "asantibanez",
+                "livewire-calendar"
+            ],
+            "support": {
+                "source": "https://github.com/Osimba/livewire-calendar/tree/dev"
+            },
+            "time": "2022-07-01T06:09:36+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -5742,7 +5816,7 @@
             "dist": {
                 "type": "path",
                 "url": "../omnia-library",
-                "reference": "6398d17fca8fcc6e97c510d3e1d7697aa26acadf"
+                "reference": "6854141b688ebd094eaac8754f9e33ab7b0de26c"
             },
             "require": {
                 "codeat3/blade-coolicons": "^1.2",

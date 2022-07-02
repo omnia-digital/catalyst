@@ -40,6 +40,7 @@
         @stack('scripts')
 
         @livewireScripts
+        @livewireCalendarScripts
 
         @env ('local')
             <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>
