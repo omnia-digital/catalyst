@@ -4,14 +4,14 @@
             style="background-image: url({{ $team->bannerImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
         @endif
         >
-        <div class="mb-1 mx-[15px] absolute bottom-0 left-0 right-0 flex justify-between items-end">
+        <div class="mb-1 mx-4 absolute bottom-0 left-0 right-0 flex justify-between items-end">
             <div class="flex items-end">
                 <div class="mr-3 z-10 -mb-12">
                     <img class="h-24 w-24 rounded-full" src="{{ $team->profile_photo_url }}" alt="{{ $team->name }}" />
                 </div>
                 <div>
-                    <h1 class="text-3xl text-white">{{ $team->name  }}</h1>
-                    <p class="text-sm text-white">{{ '@' .  $team->handle }}</p>
+                    <h1 class="text-3xl text-primary">{{ $team->name  }}</h1>
+                    <p class="text-sm text-primary">{{ '@' .  $team->handle }}</p>
                 </div>
             </div>
             {{-- No program to calculate reviewScore yet

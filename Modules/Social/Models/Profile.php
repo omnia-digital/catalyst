@@ -10,13 +10,14 @@
     use Illuminate\Support\Facades\Storage;
     use Laravel\Jetstream\HasProfilePhoto;
     use Modules\Social\Database\Factories\ProfileFactory;
-use Modules\Social\Traits\Awardable;
-use Spatie\Sluggable\HasSlug;
+    use Spatie\MediaLibrary\HasMedia;
+    use Spatie\MediaLibrary\InteractsWithMedia;
+    use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
 
-    class Profile extends Model
+    class Profile extends Model implements HasMedia
     {
-        use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto;
+        use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto, InteractsWithMedia;
 
         public $incrementing = false;
 
@@ -32,13 +33,22 @@ use Spatie\Sluggable\HasSlug;
             'first_name',
             'last_name',
             'handle',
+            'bio',
+            'website',
             'user_id',
         ];
 
         protected $fillable = [
             'first_name',
             'last_name',
+            'bio',
+            'website',
             'user_id',
+        ];
+
+        protected $appends = [
+            'name',
+            'profile_photo_url'
         ];
 
         /**
@@ -86,9 +96,30 @@ use Spatie\Sluggable\HasSlug;
         {
             return $this->is_private == true ? 'private' : 'public';
         }
+        
 
         public function url() {
             return route('social.profile.show', $this->handle);
+        }
+
+        public function bannerImage()
+        {
+            return optional($this->getMedia('profile_banner_images')->first());
+        }
+
+        public function photo()
+        {
+            return optional($this->getMedia('profile_photos')->first());
+        }
+
+        /**
+         * Get the URL to the user's profile photo.
+         *
+         * @return string
+         */
+        public function getProfilePhotoUrlAttribute()
+        {
+            return $this->photo()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
         }
 
         public function getCountryAttribute()

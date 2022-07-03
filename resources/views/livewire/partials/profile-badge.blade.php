@@ -10,8 +10,7 @@
                         id="options-menu-button" aria-expanded="false" aria-haspopup="true">
                     <div class="flex w-full justify-between items-center">
                         <div class="flex min-w-0 items-center justify-between space-x-3">
-                            <img class="w-20 h-20 bg-gray-300 rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2
-                    .1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">
+                            <img class="w-20 h-20 bg-gray-300 rounded-full flex-shrink-0" src="{{ Auth::user()->profile_photo_url }}" alt="">
                             <div class="min-w-0">
                                 <div class="">
                                     <p class="text-gray-900 text-md font-medium truncate">{{ Auth::user()->name }}</p>

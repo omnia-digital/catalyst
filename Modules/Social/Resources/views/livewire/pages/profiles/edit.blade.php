@@ -59,24 +59,86 @@
                 <x-library::input.label value="First Name" class="inline"/>
                 <span class="text-red-600 text-sm">*</span>
                 <x-library::input.text id="first_name" wire:model.defer="profile.first_name" required/>
-                <x-library::input.error for="first_name"/>
+                <x-library::input.error for="profile.first_name"/>
             </div>
             <div>
                 <x-library::input.label value="Last Name" class="inline"/>
                 <span class="text-red-600 text-sm">*</span>
                 <x-library::input.text id="last_name" wire:model.defer="profile.last_name" required/>
-                <x-library::input.error for="last_name"/>
+                <x-library::input.error for="profile.last_name"/>
             </div>
             <div>
                 <x-library::input.label value="Bio"/>
-                <x-library::input.textarea id="bio" wire:model.defer="profile.bio"/>
-                <x-library::input.error for="bio"/>
+                <x-library::input.textarea id="bio" wire:model.defer="profile.bio" />
+                <x-library::input.error for="profile.bio"/>
             </div>
         </div>
 
-        <!-- Edit Team Location -->
+        <!-- Edit Team Media -->
         <div x-cloak x-show="activeTab === 1" class="mt-6 space-y-6">
-
+            <div class="space-y-4">
+                <!-- Banner Image -->
+                <div>
+                    <div class="flex items-center">
+                        <x-library::input.label value="Banner Image" /><span class="text-red-600 text-sm ml-1">*</span>
+                    </div>
+                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                        <input type="text" class="flex-1 border-none" wire:model="bannerImageName" placeholder="Upload file for banner" readonly>
+                        <label>
+                            <input type="file" wire:model="bannerImage" hidden required />
+                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                        </label>
+                    </div>
+                    <x-library::input.error for="bannerImage" />
+                    <div class="flex mt-4 space-x-2">
+                        <div>
+                            <p>Current Banner:</p>
+                            @if ($profile->bannerImage()->count())
+                                <img src="{{ $profile->bannerImage()->getFullUrl() }}" alt="{{ $profile->bannerImage()->name }}" title="{{ $profile->bannerImage()->name }}" class="w-full h-32">
+                            @else
+                                <p>No image set for banner</p>
+                            @endif
+                        </div>
+                        @if ($bannerImage)
+                            <div>
+                                <p>New Banner:</p>
+                                <img class="w-full h-32" src="{{ $bannerImage->temporaryUrl() }}" alt="{{ $bannerImageName }} Preview">
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <!-- Profile Photo -->
+                <hr class="my-4 border-neutral-dark">
+                <div>
+                    <div class="flex items-center">
+                        <x-library::input.label value="Profile Photos" /><span class="text-red-600 text-sm ml-1">*</span>
+                    </div>
+                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                        <input type="text" class="flex-1 border-none" wire:model="photoName" placeholder="Upload file for banner" readonly>
+                        <label>
+                            <input type="file" wire:model="photo" hidden required />
+                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                        </label>
+                    </div>
+                    <x-library::input.error for="photo" />
+                    <div class="flex mt-4 space-x-2">
+                        <div>
+                            <p>Current Photo:</p>
+                            @if ($profile->photo()->count())
+                                <img src="{{ $profile->photo()->getFullUrl() }}" alt="{{ $profile->photo()->name }}" title="{{ $profile->photo()->name }}" class="w-full h-32">
+                            @else
+                                <p>No image set for photo</p>
+                            @endif
+                        </div>
+                        @if ($photo)
+                            <div>
+                                <p>New Photo:</p>
+                                <img class="w-full h-32" src="{{ $photo->temporaryUrl() }}" alt="{{ $photoName }}">
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     </div>
@@ -93,7 +155,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Other',
+                        title: 'Media',
                     }
                 ]
             }
