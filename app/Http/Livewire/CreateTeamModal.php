@@ -25,6 +25,9 @@ class CreateTeamModal extends Component
     public $mainImage;
     public $mainImageName;
 
+    public $profilePhoto;
+    public $profilePhotoName;
+
     public $sampleMedia = [];
     public $sampleMediaNames = [];
 
@@ -44,6 +47,15 @@ class CreateTeamModal extends Component
         ]);
 
         $this->mainImageName = $this->mainImage->getClientOriginalName();
+    }
+
+    public function updatedProfilePhoto()
+    {
+        $this->validate([
+            'profilePhoto' => 'image',
+        ]);
+
+        $this->profilePhotoName = $this->profilePhoto->getClientOriginalName();
     }
 
     public function updatedSampleMedia()
@@ -76,6 +88,7 @@ class CreateTeamModal extends Component
             'summary' => $this->summary,
             'bannerImage' => $this->bannerImage,
             'mainImage' => $this->mainImage,
+            'profilePhoto' => $this->profilePhoto,
             'sampleMedia' => $this->sampleMedia,
         ]);
 

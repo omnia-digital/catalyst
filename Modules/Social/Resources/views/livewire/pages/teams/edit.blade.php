@@ -18,7 +18,7 @@
                 </ol>
             </nav>
             <div class="border-b-2 border-b-light-text-color pb-1">
-                <h1 class="text-3xl"><span class="text-dark-text-color"> {{ Trans::get('team') }} Admin Page: </span><span class="text-light-text-color">{{ $team->name }}</span></h1>
+                <h1 class="text-3xl"><span class="text-dark-text-color"> {{ Trans::get('Team') }} Admin Page: </span><span class="text-light-text-color">{{ $team->name }}</span></h1>
             </div>
         </div>
 
@@ -177,6 +177,39 @@
                         @endif
                     </div>
                 </div>
+
+                <!-- Profile Photo -->
+                <hr class="my-4 border-neutral-dark">
+                <div>
+                    <div class="flex items-center">
+                        <x-library::input.label value="{{ Trans::get('Team') }} Profile Photo" /><span class="text-red-600 text-sm ml-1">*</span>
+                    </div>
+                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                        <input type="text" class="flex-1 border-none" wire:model="profilePhotoName" placeholder="Upload file for banner" readonly>
+                        <label>
+                            <input type="file" wire:model="profilePhoto" hidden required />
+                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                        </label>
+                    </div>
+                    <x-library::input.error for="profilePhoto" />
+                    <div class="flex mt-4 space-x-2">
+                        <div>
+                            <p>Current Profile Photo:</p>
+                            @if ($team->profilePhoto()->count())
+                                <img src="{{ $team->profilePhoto()->getFullUrl() }}" alt="{{ $team->profilePhoto()->name }}" title="{{ $team->profilePhoto()->name }}" class="w-full h-32">
+                            @else
+                                <p>No image set for profile photo</p>
+                            @endif
+                        </div>
+                        @if ($profilePhoto)
+                            <div>
+                                <p>New Profile Photo:</p>
+                                <img class="w-full h-32" src="{{ $profilePhoto->temporaryUrl() }}" alt="{{ $profilePhotoName }}">
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
                 <!-- Main Image -->
                 <hr class="my-4 border-neutral-dark">
                 <div>

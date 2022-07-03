@@ -31,7 +31,7 @@ class MyTeams extends Component
 
     public function getRowsQueryProperty()
     {
-        $query = auth()->user()->ownedTeams()
+        $query = $this->user->teams()
             ->withCount(['users', 'media']);
 
         $query = $this->applyFilters($query)

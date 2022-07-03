@@ -28,6 +28,9 @@ class Edit extends Component
     public $mainImage;
     public $mainImageName;
 
+    public $profilePhoto;
+    public $profilePhotoName;
+
     public $sampleMedia = [];
     public $sampleMediaNames = [];
 
@@ -60,6 +63,15 @@ class Edit extends Component
         ]);
 
         $this->mainImageName = $this->mainImage->getClientOriginalName();
+    }
+
+    public function updatedProfilePhoto()
+    {
+        $this->validate([
+            'profilePhoto' => 'image',
+        ]);
+
+        $this->profilePhotoName = $this->profilePhoto->getClientOriginalName();
     }
 
     public function updatedSampleMedia()
@@ -123,6 +135,12 @@ class Edit extends Component
         $this->mainImage &&
             $this->team->addMedia($this->mainImage)->toMediaCollection('team_main_images');
 
+        if($this->profilePhoto && $this->team->profilePhoto()->count()) {
+            $this->team->profilePhoto()->delete();
+        }
+        $this->profilePhoto &&
+            $this->team->addMedia($this->profilePhoto)->toMediaCollection('team_profile_photos');
+
         if (sizeof($this->sampleMedia)) {
             foreach ($this->sampleMedia as $media) {
                 $this->team->addMedia($media)->toMediaCollection('team_sample_images');
@@ -133,7 +151,7 @@ class Edit extends Component
 
         $this->team->refresh();
 
-        $this->reset('newAddress', 'removeAddress', 'bannerImage', 'bannerImageName', 'mainImage', 'mainImageName', 'sampleMedia', 'sampleMediaNames');
+        $this->reset('newAddress', 'removeAddress', 'bannerImage', 'bannerImageName', 'profilePhoto', 'profilePhotoName', 'mainImage', 'mainImageName', 'sampleMedia', 'sampleMediaNames');
     }
 
     public function confirmRemoval(Media $media)
