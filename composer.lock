@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dcbd6b9df46aca546683c452641bcac7",
+    "content-hash": "36a284224a1024431281abac337834b5",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -73,6 +73,80 @@
                 "source": "https://github.com/akaunting/laravel-money/tree/3.0.1"
             },
             "time": "2022-05-11T06:34:38+00:00"
+        },
+        {
+            "name": "asantibanez/livewire-calendar",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Butochnikov/livewire-calendar.git",
+                "reference": "0ac01114fda781b48945e0e068fc2612d151ca1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Butochnikov/livewire-calendar/zipball/0ac01114fda781b48945e0e068fc2612d151ca1e",
+                "reference": "0ac01114fda781b48945e0e068fc2612d151ca1e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "livewire/livewire": "^2.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Asantibanez\\LivewireCalendar\\LivewireCalendarServiceProvider"
+                    ],
+                    "aliases": {
+                        "LivewireCalendar": "Asantibanez\\LivewireCalendar\\LivewireCalendarFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Asantibanez\\LivewireCalendar\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Asantibanez\\LivewireCalendar\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrés Santibáñez",
+                    "email": "santibanez.andres@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Livewire calendar component",
+            "homepage": "https://github.com/asantibanez/livewire-calendar",
+            "keywords": [
+                "asantibanez",
+                "livewire-calendar"
+            ],
+            "support": {
+                "source": "https://github.com/Butochnikov/livewire-calendar/tree/master"
+            },
+            "time": "2022-02-11T00:52:42+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -182,16 +256,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.229.0",
+            "version": "3.229.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5e01f0809682060dc5018bf5f267f40c32f4944d"
+                "reference": "5cffc0b16d1f33029628586313e9cf140f18b06d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5e01f0809682060dc5018bf5f267f40c32f4944d",
-                "reference": "5e01f0809682060dc5018bf5f267f40c32f4944d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5cffc0b16d1f33029628586313e9cf140f18b06d",
+                "reference": "5cffc0b16d1f33029628586313e9cf140f18b06d",
                 "shasum": ""
             },
             "require": {
@@ -267,9 +341,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.229.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.229.1"
             },
-            "time": "2022-06-29T18:15:30+00:00"
+            "time": "2022-06-30T18:16:30+00:00"
         },
         {
             "name": "awssat/laravel-visits",
@@ -1922,16 +1996,16 @@
         },
         {
             "name": "filament/filament",
-            "version": "v2.13.13",
+            "version": "v2.13.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/admin.git",
-                "reference": "f7954d49389faf2bc4fb151d0f3c24293bcf1a70"
+                "reference": "88324f6375c1af1ede797b48ad6f25ddeecbc632"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/admin/zipball/f7954d49389faf2bc4fb151d0f3c24293bcf1a70",
-                "reference": "f7954d49389faf2bc4fb151d0f3c24293bcf1a70",
+                "url": "https://api.github.com/repos/filamentphp/admin/zipball/88324f6375c1af1ede797b48ad6f25ddeecbc632",
+                "reference": "88324f6375c1af1ede797b48ad6f25ddeecbc632",
                 "shasum": ""
             },
             "require": {
@@ -1979,20 +2053,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-06-29T21:09:33+00:00"
+            "time": "2022-06-30T11:55:54+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v2.13.13",
+            "version": "v2.13.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "aa2de592b012e5a7fea84692d75ac1c3081afc87"
+                "reference": "c40a067644b8b0bf40a17b236b22d2ef31489a8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/aa2de592b012e5a7fea84692d75ac1c3081afc87",
-                "reference": "aa2de592b012e5a7fea84692d75ac1c3081afc87",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/c40a067644b8b0bf40a17b236b22d2ef31489a8d",
+                "reference": "c40a067644b8b0bf40a17b236b22d2ef31489a8d",
                 "shasum": ""
             },
             "require": {
@@ -2036,11 +2110,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-06-29T21:09:08+00:00"
+            "time": "2022-06-30T11:56:23+00:00"
         },
         {
             "name": "filament/support",
-            "version": "v2.13.13",
+            "version": "v2.13.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
@@ -2089,16 +2163,16 @@
         },
         {
             "name": "filament/tables",
-            "version": "v2.13.13",
+            "version": "v2.13.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
-                "reference": "89f907b5cb2458e70fcc742617d351ababc8a4c4"
+                "reference": "3d60211628dc237d98727c4deb157b0897a936fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/tables/zipball/89f907b5cb2458e70fcc742617d351ababc8a4c4",
-                "reference": "89f907b5cb2458e70fcc742617d351ababc8a4c4",
+                "url": "https://api.github.com/repos/filamentphp/tables/zipball/3d60211628dc237d98727c4deb157b0897a936fb",
+                "reference": "3d60211628dc237d98727c4deb157b0897a936fb",
                 "shasum": ""
             },
             "require": {
@@ -2139,7 +2213,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-06-29T21:09:10+00:00"
+            "time": "2022-06-30T11:55:52+00:00"
         },
         {
             "name": "filp/whoops",
@@ -14183,16 +14257,16 @@
         },
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v3.6.7",
+            "version": "v3.6.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "b96f9820aaf1ff9afe945207883149e1c7afb298"
+                "reference": "814b36a08a60f4159cdcbb1c466a6a0027440b6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/b96f9820aaf1ff9afe945207883149e1c7afb298",
-                "reference": "b96f9820aaf1ff9afe945207883149e1c7afb298",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/814b36a08a60f4159cdcbb1c466a6a0027440b6c",
+                "reference": "814b36a08a60f4159cdcbb1c466a6a0027440b6c",
                 "shasum": ""
             },
             "require": {
@@ -14252,7 +14326,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
-                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.6.7"
+                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.6.8"
             },
             "funding": [
                 {
@@ -14264,7 +14338,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-09T07:52:32+00:00"
+            "time": "2022-06-08T15:03:05+00:00"
         },
         {
             "name": "barryvdh/laravel-ide-helper",
