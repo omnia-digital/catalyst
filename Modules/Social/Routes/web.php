@@ -15,7 +15,7 @@ use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
 use App\Http\Livewire\Pages\Teams\Index as AllTeams;
 use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
-use Modules\Social\Http\Livewire\Pages\Teams\MapCalendar as TeamMapCalendar;
+use Modules\Social\Http\Livewire\Pages\Teams\Calendar as TeamMapCalendar;
 use Modules\Social\Http\Livewire\Pages\Teams\Edit as EditTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Followers as TeamFollowers;
 use Modules\Social\Http\Livewire\Pages\Teams\Members as TeamMembers;
@@ -46,7 +46,8 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
 
     Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {
         Route::get('/discover', DiscoverTeams::class)->name('discover');
-        Route::get('/map-calendar', TeamMapCalendar::class)->name('map-calendar');
+        Route::get('/calendar', TeamMapCalendar::class)->name('calendar');
+        Route::get('/map', Modules\Social\Http\Livewire\Pages\Teams\Map::class)->name('map');
         Route::get('/my-' . \Trans::get('teams'), MyTeams::class)->name('my-teams');
         Route::get('{team}', ShowTeam::class)->name('show');
         Route::get('{team}/edit', EditTeam::class)->name('edit');

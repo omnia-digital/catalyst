@@ -12037,16 +12037,6 @@
         {
                         return \Illuminate\Http\Request::hasValidSignatureWhileIgnoring($ignoreQuery, $absolute);
         }
-                    /**
-         * 
-         *
-         * @see \Inertia\ServiceProvider::registerRequestMacro()
-         * @static 
-         */ 
-        public static function inertia()
-        {
-                        return \Illuminate\Http\Request::inertia();
-        }
          
     }
             /**
@@ -13208,19 +13198,6 @@
         {
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->macroCall($method, $parameters);
-        }
-                    /**
-         * 
-         *
-         * @see \Inertia\ServiceProvider::registerRouterMacro()
-         * @param mixed $uri
-         * @param mixed $component
-         * @param mixed $props
-         * @static 
-         */ 
-        public static function inertia($uri, $component, $props = [])
-        {
-                        return \Illuminate\Routing\Router::inertia($uri, $component, $props);
         }
                     /**
          * 
@@ -16629,6 +16606,18 @@
      *
      */ 
         class Str {
+                    /**
+         * 
+         *
+         * @see \Filament\Support\SupportServiceProvider::packageBooted()
+         * @param string $html
+         * @return string 
+         * @static 
+         */ 
+        public static function sanitizeHtml($html)
+        {
+                        return \Illuminate\Support\Str::sanitizeHtml($html);
+        }
          
     }
             /**
@@ -16659,6 +16648,24 @@
         public static function isAssoc()
         {
                         return \Illuminate\Support\Collection::isAssoc();
+        }
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class Stringable {
+                    /**
+         * 
+         *
+         * @see \Filament\Support\SupportServiceProvider::packageBooted()
+         * @return \Illuminate\Support\Stringable 
+         * @static 
+         */ 
+        public static function sanitizeHtml()
+        {
+                        return \Illuminate\Support\Stringable::sanitizeHtml();
         }
          
     }
@@ -19497,16 +19504,6 @@
         {
                         return \Illuminate\Http\Request::hasValidSignatureWhileIgnoring($ignoreQuery, $absolute);
         }
-                    /**
-         * 
-         *
-         * @see \Inertia\ServiceProvider::registerRequestMacro()
-         * @static 
-         */ 
-        public static function inertia()
-        {
-                        return \Illuminate\Http\Request::inertia();
-        }
          
     }
             /**
@@ -19548,19 +19545,6 @@
      * @mixin \Illuminate\Routing\RouteRegistrar
      */ 
         class Router {
-                    /**
-         * 
-         *
-         * @see \Inertia\ServiceProvider::registerRouterMacro()
-         * @param mixed $uri
-         * @param mixed $component
-         * @param mixed $props
-         * @static 
-         */ 
-        public static function inertia($uri, $component, $props = [])
-        {
-                        return \Illuminate\Routing\Router::inertia($uri, $component, $props);
-        }
                     /**
          * 
          *
@@ -19614,27 +19598,6 @@
      * @mixin \Illuminate\Http\Response
      */ 
         class TestResponse {
-                    /**
-         * 
-         *
-         * @see \Inertia\Testing\TestResponseMacros::assertInertia()
-         * @param \Closure|null $callback
-         * @static 
-         */ 
-        public static function assertInertia($callback = null)
-        {
-                        return \Illuminate\Testing\TestResponse::assertInertia($callback);
-        }
-                    /**
-         * 
-         *
-         * @see \Inertia\Testing\TestResponseMacros::inertiaPage()
-         * @static 
-         */ 
-        public static function inertiaPage()
-        {
-                        return \Illuminate\Testing\TestResponse::inertiaPage();
-        }
                     /**
          * 
          *
@@ -19812,45 +19775,6 @@
      *
      */ 
         class Module {
-         
-    }
-     
-}
-
-    namespace Illuminate\Database\Eloquent\Relations { 
-            /**
-     * 
-     *
-     */ 
-        class BelongsToMany {
-         
-    }
-            /**
-     * 
-     *
-     */ 
-        class Relation {
-                    /**
-         * 
-         *
-         * @see \Laravel\Nova\Query\Mixin\BelongsToMany::getDefaultPivotAttributes()
-         * @static 
-         */ 
-        public static function getDefaultPivotAttributes()
-        {
-                        return \Illuminate\Database\Eloquent\Relations\Relation::getDefaultPivotAttributes();
-        }
-                    /**
-         * 
-         *
-         * @see \Laravel\Nova\Query\Mixin\BelongsToMany::applyDefaultPivotQuery()
-         * @param mixed $query
-         * @static 
-         */ 
-        public static function applyDefaultPivotQuery($query)
-        {
-                        return \Illuminate\Database\Eloquent\Relations\Relation::applyDefaultPivotQuery($query);
-        }
          
     }
      

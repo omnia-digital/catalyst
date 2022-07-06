@@ -53,6 +53,10 @@ return [
     'place' => [
         'google' => [
             'api_key' => env('GOOGLE_PLACE_API_KEY')
+        ],
+
+        'mapbox' => [
+            'api_key' => env('MAPBOX_API_KEY')
         ]
     ]
 

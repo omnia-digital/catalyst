@@ -1,34 +1,25 @@
 <div class="h-full">
     <div class="flex flex-col sticky h-full top-20 inset-y-2">
         <div class="h-full flex flex-col">
-            <div 
-                x-data="{
-                    activeTab: 'calendar'
-                }" 
-                class="bg-primary flex justify-between items-center text-xl h-16 px-4 "
-            >
+            <div class="bg-primary flex justify-between items-center text-xl h-16 px-4">
                 <div class="font-medium">
                     <div class="text-xl">{{ \Trans::get('Teams') }}</div>
                 </div>
                 <div class="flex items-center space-x-4">
-                        <button role="button" 
-                            class="text-light-text-color hover:text-secondary active:text-secondary focus:text-secondary"
-                            :class="(activeTab === 'map') && 'text-secondary'"
-                            x-on:click.prevent="activeTab = 'map';"
-                            wire:click="toggleMapCalendar('map')"
-                        >
+                        <a href="{{ route('social.teams.map') }}" @class([
+		                    'text-light-text-color hover:text-secondary active:text-secondary focus:text-secondary',
+		                    'text-secondary' => request()->routeIs('social.teams.map')
+]                       )>
                             <span class="sr-only" x-text="'Map'"></span>
                             <span><x-heroicon-o-map class="h-6 w-6" /></span>
-                        </button>
-                        <button role="button" 
-                            class="text-light-text-color hover:text-secondary active:text-secondary focus:text-secondary"
-                            :class="(activeTab === 'calendar') && 'text-secondary'"
-                            x-on:click.prevent="activeTab = 'calendar';"
-                            wire:click="toggleMapCalendar('calendar')"
-                        >
+                        </a>
+                        <a href="{{ route('social.teams.calendar') }}" @class([
+		                    'text-light-text-color hover:text-secondary active:text-secondary focus:text-secondary',
+		                    'text-secondary' => request()->routeIs('social.teams.calendar')
+]                       )>
                             <span class="sr-only" x-text="'Calendar'"></span>
                             <span><x-heroicon-o-calendar class="h-6 w-6" /></span>
-                        </button>
+                        </a>
                 </div>
             </div>
             
