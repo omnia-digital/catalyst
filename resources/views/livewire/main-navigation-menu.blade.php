@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="fixed w-full bg-primary z-20 shadow-sm">
+<nav x-data="{ open: false }" class="fixed w-full bg-primary z-50 shadow-sm">
     <!-- Desktop Navigation Menu -->
     <div class="max-w-8xl mx-auto grid grid-cols-10 gap-2 h-14">
         <!-- Left side header -->

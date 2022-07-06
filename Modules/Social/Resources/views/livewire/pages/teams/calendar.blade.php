@@ -1,6 +1,4 @@
-@extends('social::livewire.layouts.pages.team-map-calendar-layout')
 
-@section('content')
     <div>
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-3 h-full-minus-[56px]">
@@ -14,4 +12,3 @@
             </div>
         </div>
     </div>
-@endsection
