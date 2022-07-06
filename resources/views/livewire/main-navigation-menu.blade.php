@@ -7,7 +7,7 @@
             <div class="flex items-center h-14 flex-shrink-0">
                 <a href="{{ route('social.home') }}"
                    title="{{ env('APP_NAME') }}"
-                   class="bg-neutral-light text-black py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
+                   class="text-black py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
                     <x-dynamic-component
                             component="heroicon-s-globe-alt"
                             class="flex-shrink-0 h-6 w-6"

@@ -1,4 +1,4 @@
-@extends('resources::livewire.layouts.pages.default-page-layout')
+@extends('resources::livewire.layouts.pages.full-page-layout')
 
 @section('content')
     @empty($resource)
@@ -25,9 +25,15 @@
                     <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
                 @endempty
             </div>
-            <div class="flex justify-start my-2">
-                <x-heroicon-o-calendar class="w-5 h-5"/>
-                <p class="ml-2 text-base-text-color text-md truncate">{{ $resource->created_at->format('M d, Y') }}</p>
+            <div class="flex justify-start my-2 space-x-3">
+                <div class="flex">
+                    <x-heroicon-o-calendar class="w-5 h-5"/>
+                    <p class="ml-2 text-base-text-color text-md">{{ $resource->created_at->format('M d, Y') }}</p>
+                </div>
+                <div class="flex space-x-2">
+                    <p>by</p>
+                    <a href="{{ route('social.profile.show', $resource->user->handle) }}" class="hover:underline block text-base-text-color">{{  $resource->user->name }}</a>
+                </div>
             </div>
             @empty(!$resource->tags)
                 <div class="flex justify-start space-x-2">
@@ -42,7 +48,7 @@
             </div>
 
             <div>
-                <livewire:social::partials.post-actions wire:key="resource-actions-{{ $resource->id }}" :post="$resource"/>
+                <livewire:social::partials.post-actions wire:key="resource-actions-{{ $resource->id }}" :post="$resource" :show-comment-button="false" :show-bookmark-button="true"/>
             </div>
 
             @if($resource->url)

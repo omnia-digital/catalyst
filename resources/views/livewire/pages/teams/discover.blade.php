@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="space-y-8">
-        <h1 class="py-2 text-3xl">{{ \Trans::get('Discover') }}</h1>
+        <h1 class="py-2 text-3xl">{{ \Trans::get('Discover New Teams') }}</h1>
 
         <div>
             <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured & Recommended') }}</x-library::heading.3>

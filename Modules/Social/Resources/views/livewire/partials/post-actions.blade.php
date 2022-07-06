@@ -1,11 +1,17 @@
-<div wire:model="$show" class="py-4 flex text-light-text-color  justify-between space-x-24 pr-24">
-    @if ($post->isParent())
+<div wire:model="$show" class="w-full py-4 flex text-light-text-color justify-between">
+    @if ($showCommentButton && $post->isParent())
         <livewire:social::replies-modal :post="$post" wire:key="replies-post-{{ $post->id }}" :show="$show"/>
     @endif
 
-    <livewire:social::partials.like-button :model="$post"/>
-    <livewire:social::partials.repost-button :model="$post" :show="$show"/>
-    <livewire:social::partials.share-button :model="$post" :show="$show"/>
+    @if ($showLikeButton)
+        <livewire:social::partials.like-button :model="$post"/>
+    @endif
+    @if ($showRepostButton)
+        <livewire:social::partials.repost-button :model="$post" :show="$show"/>
+    @endif
+    @if ($showShareButton)
+        <livewire:social::partials.share-button :model="$post" :show="$show"/>
+    @endif
 
     @if ($showBookmarkButton)
         <livewire:social::partials.bookmark-button :model="$post"/>

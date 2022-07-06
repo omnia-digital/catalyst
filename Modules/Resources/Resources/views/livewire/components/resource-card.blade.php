@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="w-full">
+            <div class="w-full line-clamp-5">
                 {!! $post->body !!}
             </div>
 
@@ -65,7 +65,7 @@
     </div>
 
     <!-- Social Actions -->
-    <div class="z-20">
+    <div class="z-20 w-full">
         <livewire:social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
     </div>
 </article>
