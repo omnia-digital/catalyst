@@ -2,7 +2,7 @@
 
 @section('content')
     <x-profiles.partials.header :user="$this->user"/>
-    <div class="flex space-x-6 mt-4">
+    <div class="flex space-x-6">
         <div class="space-y-4">
             <div class="p-[15px] rounded bg-primary space-y-3 text-base-text-color">
                 <div class="flex justify-start text-sm space-x-4">
@@ -18,7 +18,7 @@
                     @endisset
                     <div class="flex items-center space-x-2">
                         <x-heroicon-o-calendar class="w-4 h-4"/>
-                        <span>{{ $this->user->created_at->toFormattedDateString() }}</span>
+                        <span>Joined {{ $this->user->created_at->toFormattedDateString() }}</span>
                     </div>
                 </div>
                 <div>{{ $this->user->profile->bio }}</div>
@@ -42,6 +42,52 @@
                             <p class="text-dark-text-color">{{ \Trans::get('No awards to show.') }}</p>
                         </div>
                     @endforelse
+                </div>
+            </div>
+
+            {{-- Skills --}}
+            <div>
+                <div class="flex justify-between items-center text-black font-semibold">
+                    <p class="text-sm">{{ \Trans::get('Skills') }}</p>
+                    @if($this->user->awards()->count())
+                        <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
+                            <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
+                        </a>
+                    @endif
+                </div>
+                <div class="mt-4 flex space-x-2">
+                    @forelse ($this->user->awards()->take(2)->get() as $award)
+                        <x-awards-banner class="flex-1" :award="$award"/>
+                    @empty
+                        <div class="bg-white p-4 flex-1">
+                            <p class="text-dark-text-color">{{ \Trans::get('No awards to show.') }}</p>
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+
+            {{-- Teams --}}
+            <div>
+                <div class="flex justify-between items-center text-black font-semibold">
+                    <p class="text-sm">{{ \Trans::get('Teams') }}</p>
+                    @if($this->user->teams()->count())
+                        <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
+                            <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
+                        </a>
+                    @endif
+                </div>
+                <div class="mt-4 flex space-x-2">
+                    @if($this->user->teams()->count())
+                        <div class="w-full grid {{ $this->user->teams()->count() > 1 ? 'grid-cols-2' : '' }} gap-2">
+                            @foreach ($this->user->teams->take(2) as $team)
+                                <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="bg-white p-4 flex-1">
+                            <p class="text-dark-text-color">{{ \Trans::get('No teams to show.') }}</p>
+                        </div>
+                    @endif
                 </div>
             </div>
 
