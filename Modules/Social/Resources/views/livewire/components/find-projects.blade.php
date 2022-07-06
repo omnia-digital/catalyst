@@ -22,7 +22,7 @@
             </x-jet-dropdown>
         </div>
         <p>
-            <a href="{{ route('social.teams.home') }}" class="font-bold">{{ \Trans::get('View All Teams') }}</a>
+            <a href="{{ route('social.teams.map') }}" class="font-bold">{{ \Trans::get('View All Teams') }}</a>
         </p>
     </div>
 

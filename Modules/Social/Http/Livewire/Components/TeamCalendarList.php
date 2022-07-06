@@ -7,6 +7,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Traits\WithSortAndFilters;
 use Auth;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
@@ -48,9 +49,7 @@ class TeamCalendarList extends Component
 
     public function getPlacesProperty()
     {
-        $places = Location::select(['lat', 'lng', 'model_id'])
-            ->whereIn('model_id', $this->rows->pluck('id')->toArray())
-            ->where('model_type', Team::class)
+        $places = Location::query()
             ->hasCoordinates()
             ->with('model')
             ->get()
@@ -59,6 +58,12 @@ class TeamCalendarList extends Component
                     'name' => $location->model->name,
                     'lat' => $location->lat,
                     'lng' => $location->lng,
+                    'address' => $location->address,
+                    'address_line_2' => $location->address_line_2,
+                    'city' => $location->city,
+                    'state' => $location->state,
+                    'postal_code' => $location->postal_code,
+                    'country' => $location->country,
                 ];
             });
 
