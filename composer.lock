@@ -5955,12 +5955,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:omnia-digital/library.git",
-                "reference": "8999d0fe3821879804bf1d94c5e26450ddc09d58"
+                "reference": "64590dd8b0c4808c4e3a88aefe631e417f5c8738"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/8999d0fe3821879804bf1d94c5e26450ddc09d58",
-                "reference": "8999d0fe3821879804bf1d94c5e26450ddc09d58",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/64590dd8b0c4808c4e3a88aefe631e417f5c8738",
+                "reference": "64590dd8b0c4808c4e3a88aefe631e417f5c8738",
                 "shasum": ""
             },
             "require": {
@@ -6043,7 +6043,7 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2022-07-06T03:47:09+00:00"
+            "time": "2022-07-06T16:10:00+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",

@@ -20,7 +20,7 @@ class Map extends Component
     {
         $team = Team::find($eventId);
 
-        if (!$team || !($location = $team->location()->first())) {
+        if (!$team || !($location = $team->location()->first()) || !($location->lng) || !($location->lat)) {
             $this->error('Cannot find the project or location. Please refresh the page and try again!');
 
             return;
