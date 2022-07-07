@@ -1,9 +1,8 @@
 @extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
-    <!-- Page Heading -->
-    <div class="flex space-x-6">
-        <div class="mx-auto max-w-2xl">
+    <div>
+
             <div class="mt-0">
                 <div class="mx-auto">
                     <livewire:social::news-feed-editor/>
@@ -18,14 +17,19 @@
                     {{--                                </template>--}}
                     {{--                            </ul>--}}
                     {{--                        </div>--}}
+
+
+                    <!-- Featured Section -->
+                    <div class="mt-4">
+                        <livewire:social::map/>
+
+                    </div>
                     <div class="mt-4">
                         <livewire:social::news-feed/>
                     </div>
                 </div>
             </div>
-            <div class="mt-4">
-                <!-- Featured Section -->
-                {{--                    <livewire:social::map/>--}}
+            <div class="my-4">
 
                 <!-- Posts -->
                 <ul role="list" class="mt-6 space-y-4">
@@ -34,10 +38,9 @@
                     @endforeach
                 </ul>
             </div>
-        </div>
+    </div>
 
         <livewire:media-manager :handleUploadProcess="false"/>
-    </div>
 @endsection
 @push('scripts')
     <script>
