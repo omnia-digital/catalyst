@@ -222,7 +222,7 @@
                             </x-slot>
 
                             <x-slot name="description">
-                                {{ \Trans::get('These people have applied to your team. They may join the team after you accept their application.') }}
+                                {{ \Trans::get('These people have applied to your team and may join after you accept their application.') }}
                             </x-slot>
 
                             <x-slot name="content">

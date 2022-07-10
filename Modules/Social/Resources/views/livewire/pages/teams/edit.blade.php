@@ -10,7 +10,7 @@
         <div class="space-y-8">
             <nav>
                 <ol class="list-reset flex items-center">
-                    <li><a href="{{ route('social.teams.my-teams') }}" class="font-bold hover:underline">My {{ Trans::get('teams') }}</a></li>
+                    <li><a href="{{ route('social.teams.my-teams') }}" class="font-bold hover:underline">{{ Trans::get('My Teams') }}</a></li>
                     <li>
                         <x-heroicon-s-chevron-right class="h-4 w-4 mx-2"/>
                     </li>
@@ -18,7 +18,7 @@
                 </ol>
             </nav>
             <div class="border-b-2 border-b-light-text-color pb-1">
-                <h1 class="text-3xl"><span class="text-dark-text-color"> {{ Trans::get('Team') }} Admin Page: </span><span class="text-light-text-color">{{ $team->name }}</span></h1>
+                <h1 class="text-3xl"><span class="text-dark-text-color"> {{ Trans::get('Team') }}{{ Trans::get('Admin Page') }}: </span><span class="text-light-text-color">{{ $team->name }}</span></h1>
             </div>
         </div>
 
@@ -33,25 +33,25 @@
             })"
                  style="display: none;"
             >
-                <p class="text-sm opa text-green-600">Team saved.</p>
+                <p class="text-sm opa text-green-600">{{ \Trans::get('Team info saved!') }}</p>
             </div>
             @if ($errors->any())
                 <div class="mr-auto">
-                    <p class="text-sm text-red-600">This form has errors:</p>
+                    <p class="text-sm text-red-600">{{ \Trans::get('This form has errors') }}:</p>
                     @foreach ($errors->all() as $error)
                         <p class="text-sm text-red-600">{{ $error }}</p>
                     @endforeach
                 </div>
             @endif
-            <div class="mr-4"><a href="{{ $team->profile() }}" class="hover:underline">Cancel</a></div>
+            <div class="mr-4"><a href="{{ $team->profile() }}" class="hover:underline">{{ \Trans::get('Cancel') }}</a></div>
             <x-library::button.index
                     wire:click.prevent="saveChanges"
-            >Save Changes</x-library::button.index>
+            >{{ \Trans::get('Save Changes') }}</x-library::button.index>
         </div>
 
         <div x-data="setup()">
             <!-- Team Edit Navigation -->
-            <div class="w-full mt-6"
+            <div class="w-full mt-6"></div>
             <nav class="flex items-center justify-between text-xs">
                 <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-10">
                     <template x-for="(tab, index) in tabs" :key="tab.id">
@@ -82,12 +82,12 @@
                 <x-library::input.error for="startDate"/>
             </div>
             <div>
-                <x-library::input.label value="Summary"/>
+                <x-library::input.label value="{{ \Trans::get('Summary') }}"/>
                 <x-library::input.textarea id="summary" wire:model.defer="team.summary"/>
                 <x-library::input.error for="team.summary"/>
             </div>
             <div>
-                <x-library::input.label value="About this Team"/>
+                <x-library::input.label value="{{ \Trans::get('About this Team') }}"/>
                 <x-library::input.textarea id="content" wire:model.defer="team.content" :rows="8"/>
                 <x-library::input.error for="team.content"/>
             </div>
