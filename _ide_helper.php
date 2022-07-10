@@ -17372,6 +17372,127 @@
      
 }
 
+    namespace BezhanSalleh\FilamentGoogleAnalytics\Facades { 
+            /**
+     * 
+     *
+     * @see \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics
+     */ 
+        class FilamentGoogleAnalytics {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function for($value = null)
+        {
+                        return \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics::for($value);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function previous($previous)
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->previous($previous);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function format($format)
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->format($format);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function compute()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->compute();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function trajectoryValue()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryValue();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function trajectoryValueAsTimeString()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryValueAsTimeString();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function trajectoryLabel()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryLabel();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function trajectoryColor()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryColor();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function trajectoryIcon()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryIcon();
+        }
+                    /**
+         * Undocumented function
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function trajectoryDescription()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryDescription();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function thousandsFormater($value)
+        {
+                        return \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics::thousandsFormater($value);
+        }
+         
+    }
+     
+}
+
     namespace Intervention\Image\Facades { 
             /**
      * 
@@ -23954,6 +24075,7 @@ namespace  {
             class Trans extends \App\Util\Platform\Facades\TranslateFacade {}
             class Visits extends \Awssat\Visits\Visits {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
+            class FilamentGoogleAnalytics extends \BezhanSalleh\FilamentGoogleAnalytics\Facades\FilamentGoogleAnalytics {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}
             class Nova extends \Laravel\Nova\Nova {}
