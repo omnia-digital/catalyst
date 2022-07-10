@@ -3,28 +3,26 @@
 namespace Modules\Games\Http\Livewire\Components;
 
 use Livewire\Component;
+use Modules\Games\Models\Game;
 
 class GameCard extends Component
 {
-    public $game;
+    protected ?Game $game = null;
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct($game)
+    public function mount(Game $game)
     {
         $this->game = $game;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|string
-     */
+    public function showGame()
+    {
+        return redirect($this->game?->profile());
+    }
+
     public function render()
     {
-        return view('games::components.game-card');
+        return view('games::livewire.components.game-card', [
+            'game' => $this->game
+        ]);
     }
 }

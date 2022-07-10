@@ -2,10 +2,10 @@
 
 namespace Modules\Games\Http\Livewire\Components;
 
-use App\Models\Game;
 use Carbon\Carbon;
 use Livewire\Component;
 use MarcReichel\IGDBLaravel\Models\Cover;
+use Modules\Games\Models\Game;
 
 class RecentlyReviewed extends Component
 {

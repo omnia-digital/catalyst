@@ -11,11 +11,12 @@
 |
 */
 
+use Modules\Games\Http\Controllers\GamesController;
 use Modules\Games\Http\Livewire\Home;
 
 Route::name('games.')->prefix('games')->middleware(['auth', 'verified'])->group(function() {
     Route::get('/', Home::class)->name('home');
-    Route::get('/games/{slug}', 'GamesController@show')->name('show');
+    Route::get('/{slug}', [GamesController::class, 'show'])->name('show');
 //    Route::get('/games/{slug}', 'GamesController@show')->name('reviews');
 //    Route::get('/games/{slug}', 'GamesController@show')->name('coming-soon');
 });

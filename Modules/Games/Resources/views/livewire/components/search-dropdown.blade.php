@@ -33,8 +33,8 @@
                                 class="block hover:bg-gray-700 flex items-center transition ease-in-out duration-150 px-3 py-3"
                                 @if ($loop->last) @keydown.tab="isVisible=false" @endif
                             >
-                                @if (isset($game['cover']))
-                                    <img src="{{ Str::replaceFirst('thumb', 'cover_small', $game['cover']['url']) }}" alt="cover" class="w-10">
+                                @if (isset($game->cover_url))
+                                    <img src="{{ $game->cover_url }}" alt="cover" class="w-10">
                                 @else
                                     <img src="https://via.placeholder.com/264x352" alt="game cover" class="w-10">
                                 @endif

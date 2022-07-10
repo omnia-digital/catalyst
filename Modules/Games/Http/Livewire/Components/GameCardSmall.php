@@ -3,28 +3,23 @@
 namespace Modules\Games\Http\Livewire\Components;
 
 use Livewire\Component;
+use Modules\Games\Models\Game;
 
 class GameCardSmall extends Component
 {
-    public $game;
+    protected ?Game $game = null;
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct($game)
+    public function mount($game_id = null)
     {
-        $this->game = $game;
+        if ($game_id) {
+            $this->game = Game::find((int)$game_id);
+        }
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|string
-     */
     public function render()
     {
-        return view('games::components.game-card-small');
+        return view('games::livewire.components.game-card-small', [
+            'game' => $this->game
+        ]);
     }
 }

@@ -2,8 +2,8 @@
     @forelse ($comingSoon as $game)
         <livewire:games::components.game-card-small :game="$game" />
     @empty
-{{--        @foreach (range(1, 4) as $game)--}}
-{{--            <livewire:games::components.game-card-small-skeleton />--}}
-{{--        @endforeach--}}
+        @foreach (range(1, 4) as $game)
+            <livewire:games::components.game-card-small-skeleton />
+        @endforeach
     @endforelse
 </div>

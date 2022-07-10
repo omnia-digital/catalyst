@@ -2,9 +2,9 @@
 
 namespace Modules\Games\Http\Livewire\Components;
 
-use App\Models\Game;
 use Carbon\Carbon;
 use Livewire\Component;
+use Modules\Games\Models\Game;
 
 class MostAnticipated extends Component
 {

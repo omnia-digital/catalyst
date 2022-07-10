@@ -23,6 +23,6 @@ class GameCardSmallSkeleton extends Component
      */
     public function render()
     {
-        return view('games::components.game-card-small-skeleton');
+        return view('games::livewire.components.game-card-small-skeleton');
     }
 }

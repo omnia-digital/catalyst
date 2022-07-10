@@ -2,22 +2,26 @@
 
 namespace Modules\Games\Models;
 
+use Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use MarcReichel\IGDBLaravel\Enums\Website\Category;
+use MarcReichel\IGDBLaravel\Models\AgeRating;
 use MarcReichel\IGDBLaravel\Models\Cover;
 use MarcReichel\IGDBLaravel\Models\Game as IGDBGame;
 use MarcReichel\IGDBLaravel\Models\GameVideo;
 use MarcReichel\IGDBLaravel\Models\InvolvedCompany;
+use MarcReichel\IGDBLaravel\Models\Website;
 
 class Game extends IGDBGame
 {
     use HasFactory;
 
-    public function getCoverUrlAttribute()
+    public function getCoverUrl()
     {
         $coverUrl = Cover::where('id', $this->cover)->first()?->url;
-        $coverUrl = Str::replaceFirst('thumb', 'cover_big', $coverUrl ?? '');
+        $coverUrl = $coverUrl ? Str::replaceFirst('thumb', 'cover_big', $coverUrl) : null;
 
         return $coverUrl ?? 'https://via.placeholder.com/264x352';
     }
@@ -29,15 +33,36 @@ class Game extends IGDBGame
         return $companies;
     }
 
-    public function getVideosAttribute()
+    public function getVideos()
     {
-        $videos = GameVideo::where('game', $this->id)->get();
+        $videos = collect();
+        if (!$this->videos) {
+            return $videos;
+        }
+        foreach($this->videos as $video) {
+            $videos->push(GameVideo::where('id', $video)->first());
+        }
 
         return $videos;
     }
 
-    public function getTrailerAttribute()
+    public function getTrailer()
     {
-        return $this->videos->first() ?? null;
+        return $this->getVideos()->first() ?? null;
+    }
+
+    public function getWebsitesAttribute()
+    {
+        return Website::where('game', $this->id)->get();
+    }
+
+    public function getRating()
+    {
+        return AgeRating::where('id', $this->rating)->first() ?? null;
+    }
+
+    public function profile()
+    {
+        return route('games.show', $this->slug);
     }
 }
