@@ -2,53 +2,30 @@
 
 namespace Modules\Social\Http\Livewire\Components;
 
-use App\Models\Location;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
-use OmniaDigital\OmniaLibrary\Livewire\WithMap;
 
 /**
  * @property array $places
  */
 class FindProjects extends Component
 {
-    use WithMap;
-
     public ?string $startDate = null;
+
+    public string $current = 'map';
 
     public function updatedStartDate()
     {
-        $this->addPlaces('project-map', $this->places);
-    }
+        $component = $this->current === 'map'
+            ? 'social::components.team-map'
+            : 'social::components.current-week-team-calendar';
 
-    public function getPlacesProperty()
-    {
-        $places = Location::query()
-            ->hasCoordinates()
-            ->with('model')
-            ->when($this->startDate, fn(Builder $query) => $query->whereHas('model', fn(Builder $query) => $query->whereDate('start_date', $this->startDate)))
-            ->get()
-            ->map(function (Location $location) {
-                return [
-                    'name' => $location->model->name,
-                    'lat' => $location->lat,
-                    'lng' => $location->lng,
-                    'address' => $location->address,
-                    'address_line_2' => $location->address_line_2,
-                    'city' => $location->city,
-                    'state' => $location->state,
-                    'postal_code' => $location->postal_code,
-                    'country' => $location->country,
-                ];
-            });
-
-        return $places->all();
+        $this->emitTo($component, 'startDateUpdated', [
+            'start_date' => $this->startDate
+        ]);
     }
 
     public function render()
     {
-        return view('social::livewire.components.find-projects', [
-            'places' => $this->places,
-        ]);
+        return view('social::livewire.components.find-projects');
     }
 }
