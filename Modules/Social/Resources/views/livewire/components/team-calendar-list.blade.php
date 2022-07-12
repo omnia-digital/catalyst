@@ -1,4 +1,4 @@
-<div class="h-full z-20 absolute left-0 top-0 w-1/3 mx-2 my-2">
+<div class="h-full z-20 absolute left-0 top-0 w-1/3 min-w-[295px] p-2">
     <div class="flex flex-col sticky h-full top-20 inset-y-2">
         <div class="h-full flex flex-col">
             <div class="bg-primary flex justify-between items-center text-xl h-16 px-4">
