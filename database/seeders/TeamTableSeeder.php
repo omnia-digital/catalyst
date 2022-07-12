@@ -24,8 +24,8 @@ class TeamTableSeeder extends Seeder
                      ->create();
 
         foreach ($teams as $team) {
-            $team->attachTags(['curated','popular','indie'], 'team');
-            $team->attachTags(['church','missionary','non-profit organization'], 'team_type');
+            $team->attachTags(['Curated','Popular','Indie'], 'team');
+            $team->attachTags(['Church','Missionary','Non-Profit Organization'], 'team_type');
         }
     }
 }
