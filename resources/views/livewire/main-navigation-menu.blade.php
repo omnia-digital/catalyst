@@ -23,16 +23,16 @@
                 <!-- Navigation Links -->
                 <nav class="hidden sm:block mx-auto max-w-2xl items-center space-x-4">
                     @foreach ($navigation as $item)
-                        {{--                    @if(\Nwidart\Modules\Module::isModuleEnabled($item['module']))--}}
-                        <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->route()->named($item['module'] . '*')">
-                            <x-dynamic-component
-                                    :component="$item['icon']"
-                                    class="flex-shrink-0 h-6 w-6 mr-2"
-                                    aria-hidden="true"
-                            />
-                            {{ $item['label'] }}
-                        </x-main-nav-link>
-                        {{--                    @endif--}}
+                        @if(\Nwidart\Modules\Module::isModuleEnabled($item['module']))
+                            <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->route()->named($item['module'] . '*')">
+                                <x-dynamic-component
+                                        :component="$item['icon']"
+                                        class="flex-shrink-0 h-6 w-6 mr-2"
+                                        aria-hidden="true"
+                                />
+                                {{ $item['label'] }}
+                            </x-main-nav-link>
+                        @endif
                     @endforeach
                 </nav>
                 <div class="hidden sm:flex max-w-sm w-full justify-between md:items-center">
@@ -80,11 +80,11 @@
                                             {{  Auth::user()->currentTeam->name }}
                                         </x-jet-dropdown-link>
 
-{{--                                        @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
-{{--                                            <x-jet-dropdown-link href="{{ route('teams.create') }}">--}}
-{{--                                                {{ \Trans::get('Create New Team') }}--}}
-{{--                                            </x-jet-dropdown-link>--}}
-{{--                                        @endcan--}}
+                                        {{--                                        @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
+                                        {{--                                            <x-jet-dropdown-link href="{{ route('teams.create') }}">--}}
+                                        {{--                                                {{ \Trans::get('Create New Team') }}--}}
+                                        {{--                                            </x-jet-dropdown-link>--}}
+                                        {{--                                        @endcan--}}
 
                                         @if(Auth::user()->hasMultipleTeams())
                                             <div class="border-t border-gray-100"></div>
@@ -229,9 +229,9 @@
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->isMemberOfATeam())
                     <div class="border-t border-neutral-light"></div>
 
-{{--                    <div class="block px-4 py-2 text-xs text-light-text-color">--}}
-{{--                        {{ \Trans::get('Manage Team') }}--}}
-{{--                    </div>--}}
+                    {{--                    <div class="block px-4 py-2 text-xs text-light-text-color">--}}
+                    {{--                        {{ \Trans::get('Manage Team') }}--}}
+                    {{--                    </div>--}}
 
                     <!-- Team Settings -->
                     <x-jet-responsive-nav-link href="{{ route('social.teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
