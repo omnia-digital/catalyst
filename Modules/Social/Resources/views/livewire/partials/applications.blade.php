@@ -1,7 +1,9 @@
 <div class="card">
-    <div class="flex-1 p-6 space-y-1 overflow-y-auto">
-        <div class="flex justify-between items-center">
-            <h3 class="text-base-text-color text-base font-semibold" wire:click="testClick"> {{ Trans::get('teams') }}</h3>
+    <div class="py-3 flex-1 space-y-1 overflow-y-auto">
+        <div class="pl-4 flex justify-between items-center">
+            <h2 class="text-xl font-medium text-gray-900">
+                {{ Trans::get('Teams') }}
+            </h2>
             <div x-data="{show: false, message: ''}"
                 x-cloak
                 x-show="show"
@@ -20,11 +22,11 @@
                 activeTab: 0,
                 tabs: [
                     {
-                        label: 'Invitations',
+                        label: '{{ \Trans::get('Invitations') }}',
                         count: {{ $invitations->count() }}
                     },
                     {
-                        label: 'Requests',
+                        label: '{{ \Trans::get('Requests') }}',
                         count: {{ $applications->count() }}
                     }
                 ]
@@ -50,7 +52,7 @@
             <div class="bg-primary mx-auto">
                 <div x-show="activeTab===0">
                     <div class="flex justify-between">
-                        <div class="flex flex-col divide-y space-y-3">
+                        <div class="px-6 flex flex-col divide-y space-y-3">
                             @forelse ($invitations as $invitation)
                                 <div class="py-3 space-y-4">
                                     <div class="flex items-center">
@@ -85,7 +87,7 @@
                                 </div>
                             @empty
                                 <div>
-                                    <p>There are no pending invitations.</p>
+                                    <p>{{ \Trans::get('There are no pending invitations') }}</p>
                                 </div>
                             @endforelse
                         </div>
@@ -93,7 +95,7 @@
                 </div>
                 <div x-cloak x-show="activeTab===1">
                     <div class="flex justify-between">
-                        <div class="flex flex-col divide-y space-y-3">
+                        <div class="px-6 flex flex-col divide-y space-y-3">
                             @forelse ($applications as $application)
                                 <div>
                                     <div class="flex items-center">
@@ -116,7 +118,7 @@
                                 </div>
                             @empty
                                 <div>
-                                    <p>There are no pending applications.</p>
+                                    <p>{{ \Trans::get('There are no pending applications') }}</p>
                                 </div>
                             @endforelse
                         </div>
