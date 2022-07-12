@@ -3,15 +3,22 @@
 @section('content')
     <div>
         <div class="border-b border-gray-200">
-            <div class="sm:flex sm:items-baseline">
-                <h1 class="py-2 text-3xl">Notifications ({{ number_format($notifications->whereNull('read_at')->count()) }})</h1>
-
+            <div class="sm:flex sm:items-baseline items-center">
+                <div class="flex items-center">
+                    <h1 class="py-2 text-3xl">Notifications</h1>
+                    @if(Auth::user()->notifications()->whereNull('read_at')->count() > 0 )
+                        <span class="ml-2 w-6 h-6 text-md flex items-center justify-center text-white bg-danger-600 rounded-full">
+                            {{ Auth::user()->notifications()->whereNull('read_at')->count() }}
+                        </span>
+                    @endif
+                </div>
                 <div class="mt-4 sm:mt-0 sm:ml-10">
                     <nav class="-mb-px flex space-x-8">
                         <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
-                        <a href="#" class="border-indigo-500 text-indigo-600 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm" aria-current="page"> All </a>
+                        <a href="#" class="border-indigo-500 text-indigo-600 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm" aria-current="page"> {{ \Trans::get('All') }} </a>
 
-                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm"> Mentions </a>
+                        <a href="#"
+                           class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm"> {{ \Trans::get('Mentions') }} </a>
                     </nav>
                 </div>
             </div>
@@ -38,8 +45,9 @@
 
             @if ($notifications->count() < $allNotificationCount)
                 <div class="mt-6">
-                    <a wire:click.prevent="loadMore" href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                        Load More
+                    <a wire:click.prevent="loadMore" href="#"
+                       class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        {{ \Trans::get('Load More') }}
                     </a>
                 </div>
             @endif

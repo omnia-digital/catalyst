@@ -46,66 +46,78 @@
                                 </div>
                                 <input id="search" name="search"
                                        class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
-                                       placeholder="Search for  {{ Trans::get('teams') }}" type="search"/>
+                                       placeholder="Search" type="search"/>
                             </div>
                         </div>
                     </div>
                     <!-- Notifications -->
-                    {{--                    <div class="ml-4 flex items-center md:ml-6">
-                                           <button type="button" class="p-1 mr-2 relative rounded-full text-light-text-color hover:text-primary focus:outline-none">
-                                               <span class="sr-only">View notifications</span>
-                                               <x-heroicon-o-bell class="h-6 w-6"/>
-                                               <span class="ml-2 w-3 h-3 text-xxs absolute top-0 right-0 flex items-center justify-center text-white bg-black rounded-full">3</span>
-                                           </button>
-                                       </div> --}}
+                    <div class="mx-3 flex items-center">
+                        <a href="{{ route('notifications') }}"
+                           title="Notifications"
+                           class="{{ request()->routeIs('notifications') ? 'font-semibold text-secondary' : 'text-light-text-color hover:text-secondary' }}
+                           {{ 'relative rounded-full w-full p-1 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
+                           aria-current="page">
+                            <x-dynamic-component
+                                    component="heroicon-o-bell"
+                                    class="flex-shrink-0 h-6 w-6"
+                                    aria-hidden="true"
+                            />
+                                @if(Auth::user()
+               ->notifications()->whereNull('read_at')->count() > 0 )
+                                    <span class="ml-2 w-3 h-3 text-xxs absolute top-0 right-0 flex items-center justify-center text-white bg-danger-600 rounded-full">{{ Auth::user()
+                ->notifications()->whereNull('read_at')->count() }}</span>
+                                @endif
+                                <span class="sr-only">View notifications</span>
+                        </a>
+                    </div>
 
                     <!-- Teams Dropdown -->
-                    @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->isMemberOfATeam())
-                        <div class="ml-3 md:relative">
-                            <x-jet-dropdown align="right" width="60">
-                                <x-slot name="trigger">
-                                    <button type="button"
-                                            class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                        <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->currentTeam->profile_photo_url }}" alt="{{ Auth::user()->currentTeam->name }}"/>
-                                    </button>
-                                </x-slot>
+{{--                    @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->isMemberOfATeam())--}}
+{{--                        <div class="md:relative">--}}
+{{--                            <x-jet-dropdown align="right" width="60">--}}
+{{--                                <x-slot name="trigger">--}}
+{{--                                    <button type="button"--}}
+{{--                                            class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">--}}
+{{--                                        <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->currentTeam->profile_photo_url }}" alt="{{ Auth::user()->currentTeam->name }}"/>--}}
+{{--                                    </button>--}}
+{{--                                </x-slot>--}}
 
-                                <x-slot name="content">
-                                    <div class="w-60">
-                                        <!-- Current Team -->
-                                        <div class="block px-4 py-2 text-xs text-light-text-color">
-                                            {{ \Trans::get('Current Team') }}
-                                        </div>
-                                        <x-jet-dropdown-link href="{{ route('social.teams.show', Auth::user()->currentTeam->handle) }}">
-                                            {{  Auth::user()->currentTeam->name }}
-                                        </x-jet-dropdown-link>
+{{--                                <x-slot name="content">--}}
+{{--                                    <div class="w-60">--}}
+{{--                                        <!-- Current Team -->--}}
+{{--                                        <div class="block px-4 py-2 text-xs text-light-text-color">--}}
+{{--                                            {{ \Trans::get('Current Team') }}--}}
+{{--                                        </div>--}}
+{{--                                        <x-jet-dropdown-link href="{{ route('social.teams.show', Auth::user()->currentTeam->handle) }}">--}}
+{{--                                            {{  Auth::user()->currentTeam->name }}--}}
+{{--                                        </x-jet-dropdown-link>--}}
 
-{{--                                        @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
-{{--                                            <x-jet-dropdown-link href="{{ route('teams.create') }}">--}}
-{{--                                                {{ \Trans::get('Create New Team') }}--}}
-{{--                                            </x-jet-dropdown-link>--}}
-{{--                                        @endcan--}}
+{{--                                        --}}{{--                                        @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
+{{--                                        --}}{{--                                            <x-jet-dropdown-link href="{{ route('teams.create') }}">--}}
+{{--                                        --}}{{--                                                {{ \Trans::get('Create New Team') }}--}}
+{{--                                        --}}{{--                                            </x-jet-dropdown-link>--}}
+{{--                                        --}}{{--                                        @endcan--}}
 
-                                        @if(Auth::user()->hasMultipleTeams())
-                                            <div class="border-t border-gray-100"></div>
+{{--                                        @if(Auth::user()->hasMultipleTeams())--}}
+{{--                                            <div class="border-t border-gray-100"></div>--}}
 
-                                            <!-- Team Switcher -->
-                                            <div class="block px-4 py-2 text-xs text-light-text-color">
-                                                {{ \Trans::get('Switch Teams') }}
-                                            </div>
+{{--                                            <!-- Team Switcher -->--}}
+{{--                                            <div class="block px-4 py-2 text-xs text-light-text-color">--}}
+{{--                                                {{ \Trans::get('Switch Teams') }}--}}
+{{--                                            </div>--}}
 
-                                            @foreach (Auth::user()->teams as $team)
-                                                <x-jet-switchable-team :team="$team"/>
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                </x-slot>
-                            </x-jet-dropdown>
-                        </div>
-                    @endif
+{{--                                            @foreach (Auth::user()->teams as $team)--}}
+{{--                                                <x-jet-switchable-team :team="$team"/>--}}
+{{--                                            @endforeach--}}
+{{--                                        @endif--}}
+{{--                                    </div>--}}
+{{--                                </x-slot>--}}
+{{--                            </x-jet-dropdown>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
 
                     <!-- Settings Dropdown -->
-                    <div class="ml-3 relative flex">
+                    <div class="relative flex">
                         <x-jet-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -229,9 +241,9 @@
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->isMemberOfATeam())
                     <div class="border-t border-neutral-light"></div>
 
-{{--                    <div class="block px-4 py-2 text-xs text-light-text-color">--}}
-{{--                        {{ \Trans::get('Manage Team') }}--}}
-{{--                    </div>--}}
+                    {{--                    <div class="block px-4 py-2 text-xs text-light-text-color">--}}
+                    {{--                        {{ \Trans::get('Manage Team') }}--}}
+                    {{--                    </div>--}}
 
                     <!-- Team Settings -->
                     <x-jet-responsive-nav-link href="{{ route('social.teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
