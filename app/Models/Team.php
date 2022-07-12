@@ -192,4 +192,11 @@ class Team extends JetstreamTeam implements HasMedia
     {
         return $query->where('name', 'LIKE', "%$search%");
     }
+
+    public function scopeWithuser(Builder $query, User $user): Builder
+    {
+        return $query
+            ->leftJoin('team_user', 'teams.id', '=', 'team_user.team_id')
+            ->where('team_user.user_id', $user->id);
+    }
 }

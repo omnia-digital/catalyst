@@ -21,19 +21,23 @@
             <x-slot:trigger class="flex items-center hover:cursor-pointer text-base-text-color hover:text-secondary">
                 <x-heroicon-o-filter class="w-4 h-4" /><span class="ml-2 font-semibold">Filter {{ $filterCount ? "({$filterCount})" : '' }}</span>
             </x-slot>
-            <x-library::dropdown.item class="bg-primary relative border-none">
-                <x-library::input.date wire:model="filters.created_at" class="pl-8 text-xs" placeholder="Date Created"/>
-                <div class="absolute top-0 flex items-center h-full ml-3">
-                    <x-heroicon-o-calendar class="w-4 text-dark-text-color" />
-                </div>
-                <div class="absolute top-0 right-2 flex items-center h-full mr-3">
-                    <x-heroicon-o-chevron-down class="w-4 text-dark-text-color" />
-                </div>
-            </x-library::dropdown.item>
-            <x-library::dropdown.item class="bg-primary border-none flex items-center">
-                <x-library::input.toggle wire:model="filters.has_attachment"/>
-                <div class="text-xs text-base-text-color ml-2">Has Media</div>
-            </x-library::dropdown.item>
+            @empty($skipFilters['created_at'])
+                <x-library::dropdown.item class="bg-primary relative border-none">
+                    <x-library::input.date wire:model="filters.created_at" class="pl-8 text-xs" placeholder="Date Created"/>
+                    <div class="absolute top-0 flex items-center h-full ml-3">
+                        <x-heroicon-o-calendar class="w-4 text-dark-text-color" />
+                    </div>
+                    <div class="absolute top-0 right-2 flex items-center h-full mr-3">
+                        <x-heroicon-o-chevron-down class="w-4 text-dark-text-color" />
+                    </div>
+                </x-library::dropdown.item>
+            @endempty
+            @empty($skipFilters['has_attachment'])
+                <x-library::dropdown.item class="bg-primary border-none flex items-center">
+                    <x-library::input.toggle wire:model="filters.has_attachment"/>
+                    <div class="text-xs text-base-text-color ml-2">Has Media</div>
+                </x-library::dropdown.item>
+            @endempty
         </x-library::dropdown.index>
     </div>
 </div>
