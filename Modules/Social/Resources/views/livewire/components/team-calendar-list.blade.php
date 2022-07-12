@@ -52,7 +52,7 @@
                             </div>
                             <div class="flex items-center">
                                 <x-heroicon-o-calendar class="h-4 w-4 mr-2" />
-                                <p>{{ $team->start_date->toFormattedDateString() }}</p>
+                                <p>{{ $team->start_date?->toFormattedDateString() }}</p>
                             </div>
                         </div>
                     </div>

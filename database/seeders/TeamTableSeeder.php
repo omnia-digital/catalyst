@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Team;
 use App\Models\Location;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Tags\Tag;
 
@@ -25,7 +24,8 @@ class TeamTableSeeder extends Seeder
                      ->create();
 
         foreach ($teams as $team) {
-            $team->attachTags(['curated','popular','indie']);
+            $team->attachTags(['Curated','Popular','Indie'], 'team');
+            $team->attachTags(['Church','Missionary','Non-Profit Organization'], 'team_type');
         }
     }
 }
