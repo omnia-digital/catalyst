@@ -24,7 +24,7 @@
             </div>
 
             <!-- Filters -->
-            @include('livewire.partials.filters-sm')
+            @include('livewire.partials.filters-sm', ['skipFilters' => ['has_attachment' => true]])
 
             <div class="bg-primary space-y-2 pt-4 flex-1 overflow-y-scroll scrollbar-hide">
                 @forelse ($teams as $team)
@@ -48,7 +48,7 @@
                         <div class="flex items-center space-x-4">
                             <div class="flex items-center">
                                 <x-heroicon-o-users class="h-4 w-4 mr-2" />
-                                <p>{{ $team->users()->count() }}</p>
+                                <p>{{ $team->users_count }}</p>
                             </div>
                             <div class="flex items-center">
                                 <x-heroicon-o-calendar class="h-4 w-4 mr-2" />
