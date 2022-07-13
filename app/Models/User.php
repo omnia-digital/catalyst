@@ -17,6 +17,7 @@ use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Permission\Traits\HasRoles;
 use Wimil\Followers\Traits\Followable;
 
 class User extends Authenticatable
@@ -28,8 +29,10 @@ class User extends Authenticatable
             HasFactory,
             HasBookmarks,
             Followable,
-            Awardable;
+            Awardable,
+            HasRoles;
         use HasTeams, JetstreamHasTeams {
+            HasTeams::teams insteadof JetstreamHasTeams;
             HasTeams::hasTeamRole insteadof JetstreamHasTeams;
             HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
             HasTeams::ownsTeam insteadof JetstreamHasTeams;

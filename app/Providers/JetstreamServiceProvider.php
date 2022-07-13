@@ -10,6 +10,7 @@ use App\Actions\Teams\InviteTeamMember;
 use App\Actions\Teams\RemoveTeamMember;
 use App\Actions\Teams\UpdateTeamName;
 use App\Contracts\InvitesTeamMembers;
+use App\Models\Membership;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 
@@ -34,6 +35,8 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->configurePermissions();
 
+        Jetstream::useMembershipModel(Membership::class);
+
         Jetstream::createTeamsUsing(CreateTeam::class);
         Jetstream::updateTeamNamesUsing(UpdateTeamName::class);
         Jetstream::addTeamMembersUsing(AddTeamMember::class);
@@ -53,17 +56,24 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         Jetstream::defaultApiTokenPermissions(['read']);
 
-        Jetstream::role('admin', 'Administrator', [
-            'create',
-            'read',
-            'update',
-            'delete',
-        ])->description('Administrator users can perform any action.');
-
-        Jetstream::role('editor', 'Editor', [
-            'read',
-            'create',
-            'update',
-        ])->description('Editor users have the ability to read, create, and update.');
+//        Jetstream::role('owner', 'Owner', [
+//            'team:create',
+//            'team:read',
+//            'team:update',
+//            'team:delete',
+//            'team:post'
+//        ])->description('Owners can perform any action.');
+//
+//        Jetstream::role('admin', 'Administrator', [
+//            'team:read',
+//            'team:update',
+//            'team:post'
+//        ])->description('Administrator users can update the team.');
+//
+//        Jetstream::role('editor', 'Editor', [
+//            'read',
+//            'create',
+//            'update',
+//        ])->description('Editor users have the ability to read, create, and update.');
     }
 }

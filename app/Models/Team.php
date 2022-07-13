@@ -12,6 +12,7 @@ use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
@@ -101,6 +102,11 @@ class Team extends JetstreamTeam implements HasMedia
         return $this;
     }
 
+    public function getDefaultRoleAttribute($value)
+    {
+        return config('platform.teams.default_member_role');
+    }
+
     /**
      * Get all of the pending user applications for the team.
      *
@@ -168,7 +174,17 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function owner()
     {
-        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id');
+        return $this->users()->where('role_id', $this->roles()->where('name', 'owner')->first()->id);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,Jetstream::membershipModel(),'team_id','model_id')->where('model_type','App\Models\User');
+    }
+
+    public function roles()
+    {
+        return $this->hasMany(Membership::class, 'team_id');
     }
 
     public function members()
