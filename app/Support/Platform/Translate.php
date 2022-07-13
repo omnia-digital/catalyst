@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Util\Platform;
+namespace App\Support\Platform;
 
 class Translate
 {
