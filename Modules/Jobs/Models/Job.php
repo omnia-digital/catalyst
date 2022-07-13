@@ -3,14 +3,14 @@
 namespace Modules\Jobs\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Coupon\HasCoupon;
+use App\Traits\Transaction\HasTransaction;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Jetstream;
 use Modules\Jobs\Enums\JobAddons;
-use App\Support\Coupon\HasCoupon;
-use App\Support\Transaction\HasTransaction;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;

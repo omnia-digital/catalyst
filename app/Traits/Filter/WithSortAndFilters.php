@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\Filter;
 
 trait WithSortAndFilters {
 
@@ -30,7 +30,7 @@ trait WithSortAndFilters {
     {
         $this->sortOrder = ($this->sortOrder === 'asc') ? 'desc' : 'asc';
     }
-    
+
     public function updatedFilters()
     {
         $this->filterCount = sizeof(array_filter($this->filters));

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Util\Lexer;
+namespace App\Support\Lexer;
 
 class PrettyNumber
 {

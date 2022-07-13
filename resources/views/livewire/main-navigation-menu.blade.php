@@ -23,16 +23,16 @@
                 <!-- Navigation Links -->
                 <nav class="hidden sm:block mx-auto max-w-2xl items-center space-x-4">
                     @foreach ($navigation as $item)
-                        {{--                    @if(\Nwidart\Modules\Module::isModuleEnabled($item['module']))--}}
-                        <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->route()->named($item['module'] . '*')">
-                            <x-dynamic-component
-                                    :component="$item['icon']"
-                                    class="flex-shrink-0 h-6 w-6 mr-2"
-                                    aria-hidden="true"
-                            />
-                            {{ $item['label'] }}
-                        </x-main-nav-link>
-                        {{--                    @endif--}}
+                        @if(\Platform::isModuleEnabled($item['module']))
+                            <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->route()->named($item['module'] . '*')">
+                                <x-dynamic-component
+                                        :component="$item['icon']"
+                                        class="flex-shrink-0 h-6 w-6 mr-2"
+                                        aria-hidden="true"
+                                />
+                                {{ $item['label'] }}
+                            </x-main-nav-link>
+                        @endif
                     @endforeach
                 </nav>
                 <div class="hidden sm:flex max-w-sm w-full justify-between md:items-center">

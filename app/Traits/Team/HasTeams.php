@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\Team;
 
 use Laravel\Jetstream\Jetstream;
 
@@ -20,7 +20,7 @@ trait HasTeams
 
         return $this->teams()->wherePivot('team_id', $team->id)->wherePivot('role', 'owner')->exists();
     }
-    
+
     public function currentTeam()
     {
         if (!$this->teams()->exists()) { return false;}

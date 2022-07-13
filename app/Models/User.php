@@ -2,25 +2,24 @@
 
     namespace App\Models;
 
-use App\Traits\HasTeams;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-    use Illuminate\Database\Eloquent\Factories\HasFactory;
-    use Illuminate\Database\Eloquent\Relations\HasMany;
-    use Illuminate\Database\Eloquent\SoftDeletes;
-    use Illuminate\Foundation\Auth\User as Authenticatable;
-    use Illuminate\Notifications\Notifiable;
-    use Laravel\Fortify\TwoFactorAuthenticatable;
-    use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
-    use Laravel\Sanctum\HasApiTokens;
-    use Modules\Social\Models\Like;
-    use Modules\Social\Models\Post;
-    use Modules\Social\Models\Profile;
-    use Modules\Social\Traits\Awardable;
-    use Modules\Social\Traits\HasBookmarks;
-    use Spatie\MediaLibrary\MediaCollections\Models\Media;
-    use Wimil\Followers\Traits\Followable;
+use App\Traits\Team\HasTeams;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
+use Laravel\Sanctum\HasApiTokens;
+use Modules\Social\Models\Like;
+use Modules\Social\Models\Post;
+use Modules\Social\Models\Profile;
+use Modules\Social\Traits\Awardable;
+use Modules\Social\Traits\HasBookmarks;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Wimil\Followers\Traits\Followable;
 
-    class User extends Authenticatable
+class User extends Authenticatable
     {
         use HasApiTokens,
             TwoFactorAuthenticatable,

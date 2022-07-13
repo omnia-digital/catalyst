@@ -4,7 +4,7 @@ namespace Modules\Social\Http\Livewire\Pages\Teams;
 
 use App\Models\Location;
 use App\Models\Team;
-use App\Traits\WithTeamManagement;
+use App\Traits\Team\WithTeamManagement;
 use Livewire\Component;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
