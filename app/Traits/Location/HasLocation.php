@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Traits;
+namespace App\Traits\Location;
 
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Relations\MorphOne;

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Support\Transaction;
+namespace App\Traits\Transaction;
+
+use App\Support\Transaction\Transaction;
 
 trait HasTransaction
 {

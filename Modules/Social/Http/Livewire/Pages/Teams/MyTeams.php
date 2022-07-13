@@ -4,7 +4,7 @@ namespace Modules\Social\Http\Livewire\Pages\Teams;
 
 use App\Models\Team;
 use App\Models\User;
-use App\Traits\WithSortAndFilters;
+use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
