@@ -21,7 +21,7 @@
 
                     <!-- Featured Section -->
                     <div class="mt-4">
-                        <livewire:social::map/>
+                        <livewire:social::pages.teams.map/>
 
                     </div>
                     <div class="mt-4">

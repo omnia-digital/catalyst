@@ -1,8 +1,8 @@
-<article wire:click.prevent.stop="showPost" class="pl-5 pr-5 pt-4 shadow-sm rounded-lg cursor-pointer border border-2 border-transparent hover:border-secondary z-10 bg-primary">
+<article wire:click.prevent.stop="showPost" class="pt-4 shadow-sm rounded-lg cursor-pointer border border-2 hover:border-secondary z-10 bg-primary">
     <!-- Content -->
     <div class="w-full">
         <div class="space-y-2">
-            <div class="flex items-center justify-between">
+            <div class="px-5 flex items-center justify-between">
                 <div class="flex items-center space-x-3 align-middle">
                     <h4 class="flex items-center">
                         <a href="{{ route('resources.show', ['resource' => $post]) }}">{{ $post->title }}</a>
@@ -40,12 +40,12 @@
                 </div>
             </div>
 
-            <div class="w-full line-clamp-5">
+            <div class="px-5 w-full line-clamp-5">
                 {!! $post->body !!}
             </div>
 
             @if($post->image)
-                <div class="block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden">
+                <div class="block w-full aspect-w-10 aspect-h-3 overflow-hidden">
                     <img src="{{ $post->image }}" alt="{{ $post->title }}" class="object-cover">
                 </div>
             @endif

@@ -31,8 +31,9 @@ class MyTeams extends Component
 
     public function getRowsQueryProperty()
     {
-        $query = $this->user->teams()
-            ->withCount(['users', 'media']);
+        $query = Team::query()
+            ->withUser($this->user)
+            ->withCount(['users']);
 
         $query = $this->applyFilters($query)
             ->orderBy($this->orderBy, $this->sortOrder);

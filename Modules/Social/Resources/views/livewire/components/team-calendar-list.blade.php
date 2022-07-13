@@ -1,4 +1,4 @@
-<div class="h-full z-20 absolute left-0 top-0 w-1/3 mx-2 my-2">
+<div class="h-full z-20 absolute left-0 top-0 w-1/3 min-w-[295px] p-2">
     <div class="flex flex-col sticky h-full top-20 inset-y-2">
         <div class="h-full flex flex-col">
             <div class="bg-primary flex justify-between items-center text-xl h-16 px-4">
@@ -24,7 +24,7 @@
             </div>
 
             <!-- Filters -->
-            @include('livewire.partials.filters-sm')
+            @include('livewire.partials.filters-sm', ['skipFilters' => ['has_attachment' => true]])
 
             <div class="bg-primary space-y-2 pt-4 flex-1 overflow-y-scroll scrollbar-hide">
                 @forelse ($teams as $team)
@@ -48,11 +48,11 @@
                         <div class="flex items-center space-x-4">
                             <div class="flex items-center">
                                 <x-heroicon-o-users class="h-4 w-4 mr-2" />
-                                <p>{{ $team->users()->count() }}</p>
+                                <p>{{ $team->users_count }}</p>
                             </div>
                             <div class="flex items-center">
                                 <x-heroicon-o-calendar class="h-4 w-4 mr-2" />
-                                <p>{{ $team->start_date->toFormattedDateString() }}</p>
+                                <p>{{ $team->start_date?->toFormattedDateString() }}</p>
                             </div>
                         </div>
                     </div>

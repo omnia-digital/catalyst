@@ -18,6 +18,10 @@ class NewFollowerNotification extends Notification implements ShouldQueue
 
     public function via($notifiable): array
     {
+        if ($notifiable->id === $this->follower->id) {
+            return [];
+        }
+
         return ['broadcast', 'database'];
     }
 

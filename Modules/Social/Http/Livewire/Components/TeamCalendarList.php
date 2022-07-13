@@ -27,7 +27,7 @@ class TeamCalendarList extends Component
     public function getRowsQueryProperty()
     {
         $query = Team::query()
-            ->withCount(['users', 'media']);
+            ->withCount(['users']);
 
         $query = $this->applyFilters($query)
             ->orderBy($this->orderBy, $this->sortOrder);

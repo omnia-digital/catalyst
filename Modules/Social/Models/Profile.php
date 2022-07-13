@@ -14,10 +14,11 @@
     use Spatie\MediaLibrary\InteractsWithMedia;
     use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
+    use Spatie\Tags\HasTags;
 
     class Profile extends Model implements HasMedia
     {
-        use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto, InteractsWithMedia;
+        use SoftDeletes, HasFactory, HasSlug, HasTags, HasProfilePhoto, InteractsWithMedia;
 
         public $incrementing = false;
 
@@ -96,7 +97,7 @@
         {
             return $this->is_private == true ? 'private' : 'public';
         }
-        
+
 
         public function url() {
             return route('social.profile.show', $this->handle);
