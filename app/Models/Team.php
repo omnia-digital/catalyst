@@ -5,9 +5,11 @@ namespace App\Models;
 use App\Traits\Location\HasLocation;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
@@ -21,6 +23,7 @@ use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Permission\Models\Role;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
@@ -172,31 +175,46 @@ class Team extends JetstreamTeam implements HasMedia
         return null;
     }
 
+    //** Memberships and Roles  **//
+
     public function owner()
     {
-        return $this->users()->where('role_id', $this->roles()->where('name', 'owner')->first()->id);
+        setPermissionsTeamId($this->id);
+        $teamOwnerRole = Role::findByName(config('platform.teams.default_owner_role'));
+
+        if ( empty($teamOwnerRole)) {
+            return;
+        }
+
+        return $this->users();
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class,Jetstream::membershipModel(),'team_id','model_id')->where('model_type','App\Models\User');
+        return $this->memberships()->with('user');
     }
 
-    public function roles()
+    public function memberships(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'model_has_roles',null,'team_id')->where('model_type','App\Models\User');
+    }
+
+    public function roles(): HasMany
     {
         return $this->hasMany(Membership::class, 'team_id');
     }
 
-    public function members()
+    public function members(): BelongsToMany
     {
         return $this->users()->wherePivotNotIn('role', ['owner']);
     }
 
-    public function allUsers() {
+    public function allUsers(): BelongsToMany|Collection
+    {
         return $this->users();
     }
 
-    public function profile()
+    public function profile(): string
     {
         return route('social.teams.show', $this);
     }
@@ -209,7 +227,8 @@ class Team extends JetstreamTeam implements HasMedia
     public function scopeWithuser(Builder $query, User $user): Builder
     {
         return $query
-            ->leftJoin('team_user', 'teams.id', '=', 'team_user.team_id')
-            ->where('team_user.user_id', $user->id);
+            ->leftJoin('model_has_roles', 'teams.id', '=', 'model_has_roles.team_id')
+            ->where('model_has_roles.model_id', $user->id)
+            ->where('model_has_roles.model_type', User::class);
     }
 }
