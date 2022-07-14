@@ -24,6 +24,8 @@ class TeamCalendarList extends Component
 
     public Team $team;
 
+    public ?string $classes = '';
+
     public function getRowsQueryProperty()
     {
         $query = Team::query()
@@ -85,8 +87,9 @@ class TeamCalendarList extends Component
         $this->emitUp('toggle_map_calendar', $tab, $this->places);
     }
 
-    public function mount()
+    public function mount($classes = '')
     {
+        $this->classes = $classes;
         $this->orderBy = 'name';
 
         if (!\App::environment('production')) {
