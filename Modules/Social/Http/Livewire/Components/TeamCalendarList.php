@@ -6,6 +6,7 @@ use App\Models\Location;
 use App\Models\Team;
 use App\Models\User;
 use App\Traits\Filter\WithSortAndFilters;
+use App\Traits\Team\WithTeamManagement;
 use Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,7 +14,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class TeamCalendarList extends Component
 {
-    use WithPagination, WithCachedRows, WithSortAndFilters;
+    use WithPagination, WithCachedRows, WithSortAndFilters, WithTeamManagement;
 
     public array $sortLabels = [
         'name' => 'Name',
@@ -21,7 +22,7 @@ class TeamCalendarList extends Component
         'start_date' => 'Launch Date'
     ];
 
-    public $selectedID;
+    public Team $team;
 
     public function getRowsQueryProperty()
     {
@@ -69,10 +70,14 @@ class TeamCalendarList extends Component
         return $places->all();
     }
 
-    public function selectEvent($eventID)
+    public function selectTeam($teamID)
     {
-        $this->selectedID = $eventID;
-        $this->emit('select_event', $eventID);
+        $this->team = Team::find($teamID);
+    }
+
+    public function moreInfo()
+    {
+        return redirect()->route('social.teams.show', $this->team);
     }
 
     public function toggleMapCalendar($tab)
