@@ -83,6 +83,8 @@ trait WithTeamManagement
             $this->user->id,
             'editor'
         );
+
+        $this->emit('applied_to_team');
     }
 
     /**
@@ -96,6 +98,7 @@ trait WithTeamManagement
             ->remove($this->team, $this->user->id);
 
         $this->team = $this->team->fresh();
+        $this->emit('application_removed');
     }
 
     /**
