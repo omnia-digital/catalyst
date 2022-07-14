@@ -1,4 +1,4 @@
-<div class="h-full z-20 absolute left-0 top-0 w-1/3 min-w-[295px] p-2">
+<div class="h-full min-w-[295px] p-2 {{ $classes }}">
     <div x-data="{
             showDetail: false,
             message: '',
@@ -77,7 +77,7 @@
             </div>
 
             <!-- Show All Teams -->
-            <div x-show="!showDetail" class="bg-primary space-y-2 pt-4 flex-1 overflow-y-scroll scrollbar-hide">
+            <div x-show="!showDetail" class="bg-primary space-y-2 pt-4 pb-2 flex-1 overflow-y-scroll scrollbar-hide">
                 @forelse ($teams as $item)
                     <div
                         class="space-y-2 mx-2 p-4 bg-primary rounded-lg border border-neutral cursor-pointer
@@ -114,7 +114,7 @@
             </div>
 
             <!-- Show Team Details -->
-            <div x-cloak x-show="showDetail" class="bg-primary space-y-2 pt-4 flex-1 overflow-y-scroll scrollbar-hide">
+            <div x-cloak x-show="showDetail" class="bg-primary space-y-2 pt-4 pb-24 flex-1 overflow-y-scroll scrollbar-hide">
                 <div class="px-4 space-y-2">
                     <div x-show="details.start_date_string" class="flex items-center space-x-2">
                         <x-heroicon-o-calendar class="w-4 h-4" />
