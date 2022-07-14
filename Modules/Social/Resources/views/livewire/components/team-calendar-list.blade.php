@@ -1,4 +1,4 @@
-<div class="h-full min-w-[295px] p-2 {{ $classes }}">
+<div class="h-full min-w-[295px] max-w-[395px] p-2 {{ $classes }}">
     <div x-data="{
             showDetail: false,
             message: '',
@@ -12,7 +12,7 @@
             },
             selectEvent(event) {
                 this.showDetail = true;
-                $dispatch('select_event', event.id);
+                $wire.emit('select_event', event.id);
                 $wire.selectTeam(event.id)
 
                 this.populateData(event);
