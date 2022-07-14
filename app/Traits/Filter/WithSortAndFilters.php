@@ -39,7 +39,7 @@ trait WithSortAndFilters {
 
     public function applyFilters($query)
     {
-        $table = $query->first()->getTable();
+        $table = $query->first()?->getTable();
 
         $query = $query->when($this->filters['created_at'], function($q) use ($table) {
             return $q->whereDate($table.'.created_at', $this->filters['created_at']);
