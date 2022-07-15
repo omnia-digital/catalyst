@@ -51,7 +51,9 @@ class Team extends JetstreamTeam implements HasMedia
     ];
 
     protected $appends = [
-        'profile_photo_url'
+        'profile_photo_url',
+        'location_short',
+        'start_date_string'
     ];
 
     /**
@@ -154,6 +156,11 @@ class Team extends JetstreamTeam implements HasMedia
     public function sampleImages()
     {
         return $this->getMedia('team_sample_images');
+    }
+
+    public function getStartDateStringAttribute() 
+    {
+        return $this->start_date?->toFormattedDateString();
     }
 
     public function getReviewScoreAttribute()
