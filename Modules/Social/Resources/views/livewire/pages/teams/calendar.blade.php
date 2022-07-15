@@ -1,11 +1,15 @@
 <div>
-    <div class="flex flex-wrap-reverse sm:flex-nowrap">
+    <div class="flex">
 
-        <div x-data="{openMobileTeams: false}" class="sm:h-full-minus-[56px] w-full sm:w-fit">
-            <livewire:social::components.team-calendar-list classes="shrink hidden mx-auto sm:block sm:mx-0 sm:static" />
-            <div class="absolute left-0 bottom-0 right-0 z-10 bg-primary p-4">
-                <button class="w-full flex justify-center items-center py-2 px-4 mx-2 text-sm rounded-md bg-transparent border-2 border-secondary text-secondary hover:bg-neutral-light active:bg-neutral-light focus:bg-neutral-light">
-                    <span class="ml-2">{{ \Trans::get('Teams') }}</span>
+        <div x-data="{openMobileTeams: false}" class="sm:h-full-minus-[56px] relative">
+            <div :class="openMobileTeams ? 'z-10 left-0 top-0 bg-neutral' : 'left-[-395px]'" class="h-full absolute sm:block sm:z-0 sm:static transition-all delay-75 duration-300">
+                <livewire:social::components.team-calendar-list classes="shrink" />
+            </div>
+            <div class="flex sm:hidden justify-center items-center fixed bottom-4 right-4 z-20 bg-transparent p-px w-12 h-12">
+                <button 
+                    x-on:click="openMobileTeams = !openMobileTeams"
+                    class="flex justify-center items-center p-3 text-sm rounded-full bg-primary border border-secondary text-secondary hover:bg-neutral-light active:bg-neutral-light focus:bg-neutral-light">
+                    <x-heroicon-o-collection class="w-4 h-4" />
                 </button>
             </div>
         </div>
