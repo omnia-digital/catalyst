@@ -1,4 +1,4 @@
-<div class="h-full min-w-[295px] max-w-[395px] p-2 {{ $classes }}">
+<div class="h-full sm:min-w-[295px] sm:max-w-[395px] p-2 {{ $classes }}">
     <div x-data="{
             showDetail: false,
             message: '',
