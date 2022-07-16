@@ -12,10 +12,6 @@ class Home extends Component
 
     public $tabs = [];
 
-    public $activities = [];
-
-    public $questions = [];
-
     public function mount()
     {
         $this->tabs = [
@@ -35,10 +31,6 @@ class Home extends Component
                 'current' => false
             ]
         ];
-
-        $this->activities = [];
-
-        $this->questions = [];
     }
 
     public function getPlacesProperty()

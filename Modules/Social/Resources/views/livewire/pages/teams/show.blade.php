@@ -153,6 +153,8 @@
                         </div>
                     </div> --}}
                     <!-- Team Location -->
+                    <livewire:social::partials.user-status-list :team="$team"/>
+
                     <div>
                         <div class="text-black font-semibold">
                             <p class="text-sm">{{ \Trans::get('Location') }}</p>
