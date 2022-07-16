@@ -103,11 +103,12 @@ class Team extends JetstreamTeam implements HasMedia
         return $this;
     }
 
-    /**
-     * Get all of the pending user applications for the team.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    // Relations //
+    public function postsWithinTeam()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public function teamApplications(): HasMany
     {
         return $this->hasMany(TeamApplication::class);
@@ -143,6 +144,7 @@ class Team extends JetstreamTeam implements HasMedia
         return optional($this->getMedia('team_profile_photos')->first());
     }
 
+    // Attributes //
     /**
      * Get the URL to the team's profile photo.
      *
@@ -158,7 +160,7 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->getMedia('team_sample_images');
     }
 
-    public function getStartDateStringAttribute() 
+    public function getStartDateStringAttribute()
     {
         return $this->start_date?->toFormattedDateString();
     }
@@ -191,6 +193,8 @@ class Team extends JetstreamTeam implements HasMedia
     {
         return route('social.teams.show', $this);
     }
+
+    // Scopes //
 
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
