@@ -9,12 +9,8 @@ use OmniaDigital\OmniaLibrary\Livewire\WithMap;
 class Home extends Component
 {
     use WithMap;
-    
+
     public $tabs = [];
-
-    public $activities = [];
-
-    public $questions = [];
 
     public function mount()
     {
@@ -35,10 +31,6 @@ class Home extends Component
                 'current' => false
             ]
         ];
-
-        $this->activities = [];
-
-        $this->questions = [];
     }
 
     public function getPlacesProperty()
@@ -66,7 +58,7 @@ class Home extends Component
 
     public function render()
     {
-        return view('social::livewire.home', [
+        return view('social::livewire.pages.home', [
             'places' => $this->places,
         ]);
     }

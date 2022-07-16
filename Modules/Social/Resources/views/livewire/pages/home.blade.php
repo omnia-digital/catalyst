@@ -29,15 +29,6 @@
                     </div>
                 </div>
             </div>
-            <div class="my-4">
-
-                <!-- Posts -->
-                <ul role="list" class="mt-6 space-y-4">
-                    @foreach ($activities as $activity)
-                        <livewire:social::partials.activity-list-item :activity="$activity"/>
-                    @endforeach
-                </ul>
-            </div>
     </div>
 
         <livewire:media-manager :handleUploadProcess="false"/>

@@ -83,6 +83,6 @@ class PostEditor extends Component
 
     public function render()
     {
-        return view('social::livewire.post-editor');
+        return view('social::livewire.components.post-editor');
     }
 }

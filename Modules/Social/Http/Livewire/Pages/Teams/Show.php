@@ -24,6 +24,26 @@ class Show extends Component
         'members'
     ];
 
+    public $activity = [
+        'user' => [
+            'avatar' => 'https://via.placeholder.com/150',
+        ],
+        'title' => 'Activity Title',
+        'created_at' => 'June 1, 2022',
+        'id' => 1,
+        'message' => 'Activity Message',
+        'team' => [
+            'link' => '#',
+        ],
+        'members' => [
+            [
+                'avatar' => 'https://via.placeholder.com/150',
+                'name' => 'Member Name',
+                'link' => '#',
+            ],
+        ],
+    ];
+
     public function getPlacesProperty()
     {
         $places = Location::select(['lat', 'lng', 'model_id'])
