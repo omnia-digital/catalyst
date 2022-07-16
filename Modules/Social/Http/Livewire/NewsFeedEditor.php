@@ -42,6 +42,6 @@ class NewsFeedEditor extends Component
 
     public function render()
     {
-        return view('social::livewire.news-feed-editor');
+        return view('social::livewire.components.news-feed-editor');
     }
 }

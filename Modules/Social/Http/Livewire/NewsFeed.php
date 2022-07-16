@@ -47,7 +47,7 @@ class NewsFeed extends Component
 
     public function render()
     {
-        return view('social::livewire.news-feed', [
+        return view('social::livewire.partials.news-feed', [
             'feed' => $this->rows
         ]);
     }

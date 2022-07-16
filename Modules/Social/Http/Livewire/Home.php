@@ -9,7 +9,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithMap;
 class Home extends Component
 {
     use WithMap;
-    
+
     public $tabs = [];
 
     public $activities = [];
@@ -66,7 +66,7 @@ class Home extends Component
 
     public function render()
     {
-        return view('social::livewire.home', [
+        return view('social::livewire.pages.home', [
             'places' => $this->places,
         ]);
     }
