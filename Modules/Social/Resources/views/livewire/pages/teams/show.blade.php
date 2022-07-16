@@ -83,7 +83,12 @@
         </div>
             <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
                 <div class="col-span-2 row-span-1 space-y-6 flex flex-col">
-                    @if ($team->content)
+                    <h3>Discussion</h3>
+                    <livewire:social::news-feed-editor :team="$team"/>
+
+                    <livewire:social::news-feed :team="$team"/>
+
+                @if ($team->content)
                         <div class="flex-1 flex flex-col">
                             <p class="text-black font-semibold">{{ \Trans::get('About this Team') }}</p>
                             <div
