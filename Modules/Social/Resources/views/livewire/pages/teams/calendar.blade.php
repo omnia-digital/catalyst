@@ -3,7 +3,7 @@
 
         <div x-data="{openMobileTeams: false}" class="sm:h-full-minus-[56px] relative">
             <div :class="openMobileTeams ? 'z-10 left-0 top-0 bg-neutral' : 'left-[-395px]'" class="h-full absolute sm:block sm:z-0 sm:static transition-all delay-75 duration-300">
-                <livewire:social::components.team-calendar-list classes="shrink" />
+                <livewire:social::components.team-calendar-list />
             </div>
             <div class="flex sm:hidden justify-center items-center fixed bottom-4 right-4 z-20 bg-transparent p-px w-12 h-12">
                 <button 
