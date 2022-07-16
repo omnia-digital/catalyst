@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="fixed w-full bg-primary z-50 shadow-sm">
-    <div class="flex justify-between items-center sm:block">
+    <div class="max-w-8xl mx-auto flex justify-between items-center sm:block">
         <!-- Desktop Navigation Menu -->
-        <div class="max-w-8xl inline-block sm:grid grid-cols-10 gap-2 h-14">
+        <div class="inline-block sm:grid grid-cols-10 gap-2 h-14">
             <!-- Left side header -->
             <div class="col-span-2">
                 <!-- Logo -->

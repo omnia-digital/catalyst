@@ -1,4 +1,4 @@
-<article wire:click.prevent.stop="showPost" class="bg-primary pt-4 shadow-sm rounded-lg z-10 hover:border-2 {{ $clickable ? 'hover:border-secondary  cursor-pointer' : '' }}">
+<article wire:click.prevent.stop="showPost" class="bg-primary pt-4 shadow-sm rounded-lg z-10 border-2 border-transparent {{ $clickable ? 'hover:border-secondary  cursor-pointer' : '' }}">
 
     <div class="flex justify-between px-5">
         <div class="flex space-x-3">
