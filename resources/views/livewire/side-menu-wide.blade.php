@@ -68,7 +68,7 @@
                     @foreach ($navigation as $item)
                         <a href="{{ route($item['name']) }}"
                            title="{{ $item['label'] }}"
-                           class="{{ request()->routeIs($item['name']) ? 'bg-neutral-light font-semibold text-black' : 'text-light-text-color hover:text-black hover:bg-neutral-light' }}
+                           class="{{ request()->routeIs($item['name']) ? 'font-semibold text-black' : 'text-light-text-color hover:text-black' }}
                            {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
                            aria-current="page">
                             <x-dynamic-component
@@ -82,6 +82,8 @@
                 </nav>
             </div>
             <livewire:partials.profile-badge/>
+
+{{--            <livewire:social::partials.applications/>--}}
         </div>
     </div>
 

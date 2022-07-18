@@ -4,7 +4,7 @@ namespace Modules\Social\Http\Livewire\Pages\Teams;
 
 use App\Models\Team;
 use App\Models\User;
-use App\Traits\WithSortAndFilters;
+use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -31,8 +31,9 @@ class MyTeams extends Component
 
     public function getRowsQueryProperty()
     {
-        $query = auth()->user()->ownedTeams()
-            ->withCount(['users', 'media']);
+        $query = Team::query()
+            ->withUser($this->user)
+            ->withCount(['users']);
 
         $query = $this->applyFilters($query)
             ->orderBy($this->orderBy, $this->sortOrder);

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="space-y-8">
-        <h1 class="py-2 text-3xl">{{ \Trans::get('Discover') }}</h1>
+        <h1 class="py-2 text-3xl">{{ \Trans::get('Discover New Teams') }}</h1>
 
         <div>
             <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured & Recommended') }}</x-library::heading.3>
@@ -10,8 +10,14 @@
             {{--      Use $featuredTeams      --}}
         </div>
 
+{{--        <div>--}}
+{{--            <livewire:social::components.find-projects/>--}}
+{{--        </div>--}}
+
         <div>
-            <livewire:social::components.find-projects/>
+            <x-library::heading.3 class="uppercase">{{ \Trans::get('Find Teams') }}</x-library::heading.3>
+
+            <livewire:social::pages.teams.map/>
         </div>
 
         <div>
@@ -57,8 +63,8 @@
 
                 <div class="px-4 sm:px-6 md:px-0">
                     <div class="py-4">
-                        <div class="col-span-2 grid grid-cols-5 gap-3">
-                            @foreach($curatedTeams as $team)
+                        <div class="col-span-2 grid grid-cols-4 gap-3">
+                            @foreach($curatedTeams->take(4) as $team)
                                 <livewire:social::components.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>
                             @endforeach
                         </div>

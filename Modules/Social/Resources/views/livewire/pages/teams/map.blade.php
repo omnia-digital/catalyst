@@ -1,14 +1,8 @@
-@extends('social::livewire.layouts.pages.team-map-calendar-layout')
-
-@section('content')
+<div>
     <div>
-        <div class="grid grid-cols-12 gap-6">
-            <div class="col-span-3 h-full-minus-[56px]">
-                <livewire:social::components.team-calendar-list/>
-            </div>
-            <div class="col-span-9 mr-10">
-                <x-library::map.mapbox id="project-map" class="h-full-minus-[56px]" :places="$places" mapStyle="mapbox://styles/mapbox/dark-v10"/>
-            </div>
+        <div class="relative">
+            <livewire:social::components.team-calendar-list classes="z-20 absolute left-0 top-0 w-1/3"/>
+            <x-library::map.mapbox id="project-map" class="h-full-minus-[88px] z-10" :places="$places" mapStyle="mapbox://styles/mapbox/dark-v10"/>
         </div>
     </div>
-@endsection
+</div>

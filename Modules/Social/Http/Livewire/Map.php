@@ -55,7 +55,7 @@ class Map extends Component
 
     public function render()
     {
-        return view('social::livewire.map', [
+        return view('social::livewire.components.map', [
             'countries'  => Country::orderBy('name')->get(),
         ]);
     }

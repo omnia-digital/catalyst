@@ -15,7 +15,7 @@
                 {{--                <x-library::input.trix wire:model.defer="body"/>--}}
                 <x-library::tiptap wire:model.defer="body"/>
                 <x-library::input.error for="body"/>
-                <x-library::input.help value="Maximum is 500 characters"/>
+                <x-library::input.help value="Maximum is 2500 characters"/>
             </div>
             <div class="mt-4">
                 <x-library::input.label value="Image"/>

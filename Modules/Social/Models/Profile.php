@@ -3,20 +3,22 @@
     namespace Modules\Social\Models;
 
     use App\Models\User;
-    use App\Util\Lexer\PrettyNumber;
+    use App\Support\Lexer\PrettyNumber;
     use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Storage;
     use Laravel\Jetstream\HasProfilePhoto;
     use Modules\Social\Database\Factories\ProfileFactory;
-use Modules\Social\Traits\Awardable;
-use Spatie\Sluggable\HasSlug;
+    use Spatie\MediaLibrary\HasMedia;
+    use Spatie\MediaLibrary\InteractsWithMedia;
+    use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
+    use Spatie\Tags\HasTags;
 
-    class Profile extends Model
+    class Profile extends Model implements HasMedia
     {
-        use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto;
+        use SoftDeletes, HasFactory, HasSlug, HasTags, HasProfilePhoto, InteractsWithMedia;
 
         public $incrementing = false;
 
@@ -32,13 +34,22 @@ use Spatie\Sluggable\HasSlug;
             'first_name',
             'last_name',
             'handle',
+            'bio',
+            'website',
             'user_id',
         ];
 
         protected $fillable = [
             'first_name',
             'last_name',
+            'bio',
+            'website',
             'user_id',
+        ];
+
+        protected $appends = [
+            'name',
+            'profile_photo_url'
         ];
 
         /**
@@ -87,8 +98,29 @@ use Spatie\Sluggable\HasSlug;
             return $this->is_private == true ? 'private' : 'public';
         }
 
+
         public function url() {
             return route('social.profile.show', $this->handle);
+        }
+
+        public function bannerImage()
+        {
+            return optional($this->getMedia('profile_banner_images')->first());
+        }
+
+        public function photo()
+        {
+            return optional($this->getMedia('profile_photos')->first());
+        }
+
+        /**
+         * Get the URL to the user's profile photo.
+         *
+         * @return string
+         */
+        public function getProfilePhotoUrlAttribute()
+        {
+            return $this->photo()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
         }
 
         public function getCountryAttribute()

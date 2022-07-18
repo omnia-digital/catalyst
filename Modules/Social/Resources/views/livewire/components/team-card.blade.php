@@ -1,8 +1,9 @@
 <div wire:click.prevent.stop="showTeam"
-    class="bg-primary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
-    @if ($team->getMedia('team_main_images')->count())
-        style="background-image: url({{ $team->getMedia('team_main_images')->first()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
-    @endif
+    class="w-full bg-primary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
+        style="background-image: url({{ ($team->getMedia('team_main_images')->count()) ? $team->getMedia('team_main_images')->first()->getFullUrl() : 'https://source.unsplash.com/random'
+      }}); background-size: cover;
+        background-repeat:
+         no-repeat;"
 >
     <div class="h-80 rounded"></div>
     <div class="space-y-2 p-4 bg-primary rounded absolute bottom-0 right-0 left-0">
@@ -10,7 +11,7 @@
             <p class="text-dark-text-color font-semibold text-base">{{ $team->name }}</p>
             <div class="flex items-center">
                 <x-heroicon-o-users class="h-4 w-4 mr-2" />
-                <p>{{ $team->allUsers()->count() }}</p>
+                <p>{{ $team->users_count ?? $team->users()->count() }}</p>
             </div>
         </div>
         <div class="flex items-center text-base-text-color">

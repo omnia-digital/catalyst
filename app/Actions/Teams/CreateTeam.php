@@ -17,25 +17,38 @@ class CreateTeam implements CreatesTeams
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'start_date' => ['required', 'date'],
-            'summary' => ['required', 'max:280'],
+//            'start_date' => ['required', 'date'],
+//            'summary' => ['required', 'max:280'],
         ])->validateWithBag('createTeam');
 
         AddingTeam::dispatch($user);
 
         $team = $user->ownedTeams()->create([
             'name' => $input['name'],
-            'start_date' => $input['start_date'],
-            'summary' => $input['summary'],
+//            'start_date' => $input['start_date'],
+//            'summary' => $input['summary'],
         ]);
+
+        if (!empty($input['teamTypes'])) {
+            $team->attachTags($input['teamTypes']);
+        }
 
         $user->teams()->updateExistingPivot($team->id, ['role' => 'owner']);
 
-        $team->addMedia($input['bannerImage'])->toMediaCollection('team_banner_images');
-        $team->addMedia($input['mainImage'])->toMediaCollection('team_main_images');
+        if ( ! empty($input['bannerImage'])) {
+            $team->addMedia($input['bannerImage'])->toMediaCollection('team_banner_images');
+        }
+        if ( ! empty($input['mainImage'])) {
+            $team->addMedia($input['mainImage'])->toMediaCollection('team_main_images');
+        }
+        if ( ! empty($input['profilePhoto'])) {
+            $team->addMedia($input['profilePhoto'])->toMediaCollection('team_profile_photos');
+        }
 
-        foreach ($input['sampleMedia'] as $media) {
-            $team->addMedia($media)->toMediaCollection('team_sample_images');
+        if ( ! empty($input['sampleMedia'])) {
+            foreach ($input['sampleMedia'] as $media) {
+                $team->addMedia($media)->toMediaCollection('team_sample_images');
+            }
         }
 
         $user->switchTeam($team);

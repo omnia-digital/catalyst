@@ -68,6 +68,6 @@ class RepliesModal extends Component
 
     public function render()
     {
-        return view('social::livewire.replies-modal');
+        return view('social::livewire.partials.replies-modal');
     }
 }

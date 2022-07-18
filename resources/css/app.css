@@ -19,6 +19,27 @@
 @import '../../vendor/filament/forms/dist/module.esm.css';
 
 
+@layer utilities {
+    @variants responsive {
+        .masonry-1 {
+            column-gap: 1em;
+            column-count: 1;
+        }
+        .masonry-2 {
+            column-gap: 1em;
+            column-count: 2;
+        }
+        .masonry-3 {
+            column-gap: 1em;
+            column-count: 3;
+        }
+        .break-inside {
+            break-inside: avoid;
+        }
+
+    }
+}
+
 p,a, body  {
     @apply text-base;
 }

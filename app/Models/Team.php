@@ -2,19 +2,16 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasLocation;
+use App\Traits\Location\HasLocation;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
@@ -54,7 +51,9 @@ class Team extends JetstreamTeam implements HasMedia
     ];
 
     protected $appends = [
-        'profile_photo_url'
+        'profile_photo_url',
+        'location_short',
+        'start_date_string'
     ];
 
     /**
@@ -104,11 +103,12 @@ class Team extends JetstreamTeam implements HasMedia
         return $this;
     }
 
-    /**
-     * Get all of the pending user applications for the team.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    // Relations //
+    public function postsWithinTeam()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public function teamApplications(): HasMany
     {
         return $this->hasMany(TeamApplication::class);
@@ -139,9 +139,30 @@ class Team extends JetstreamTeam implements HasMedia
         return optional($this->getMedia('team_main_images')->first());
     }
 
+    public function profilePhoto()
+    {
+        return optional($this->getMedia('team_profile_photos')->first());
+    }
+
+    // Attributes //
+    /**
+     * Get the URL to the team's profile photo.
+     *
+     * @return string
+     */
+    public function getProfilePhotoUrlAttribute()
+    {
+        return $this->profilePhoto()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
+    }
+
     public function sampleImages()
     {
         return $this->getMedia('team_sample_images');
+    }
+
+    public function getStartDateStringAttribute()
+    {
+        return $this->start_date?->toFormattedDateString();
     }
 
     public function getReviewScoreAttribute()
@@ -173,8 +194,17 @@ class Team extends JetstreamTeam implements HasMedia
         return route('social.teams.show', $this);
     }
 
+    // Scopes //
+
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         return $query->where('name', 'LIKE', "%$search%");
+    }
+
+    public function scopeWithuser(Builder $query, User $user): Builder
+    {
+        return $query
+            ->leftJoin('team_user', 'teams.id', '=', 'team_user.team_id')
+            ->where('team_user.user_id', $user->id);
     }
 }

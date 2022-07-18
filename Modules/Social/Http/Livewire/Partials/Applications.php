@@ -89,11 +89,11 @@ class Applications extends Component
         return $this->applications->count();
     }
 
-    public function testClick()
-    {
-        $this->emit('team_action', "Invitation declined");
-    }
-    
+//    public function testClick()
+//    {
+//        $this->emit('team_action', "Invitation declined");
+//    }
+
     public function getUserProperty()
     {
         return User::find(Auth::id());

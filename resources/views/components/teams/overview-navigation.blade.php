@@ -25,7 +25,7 @@
             </x-library::dropdown> --}}
         </div>
     </div>
-    <div class="flex pr-2">
+    <div class="flex pr-2 items-center">
         @can('update-team', $team)
             <a href="{{ route('social.teams.edit', $team) }}" class="py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Edit Team') }}</a>
         @endcan

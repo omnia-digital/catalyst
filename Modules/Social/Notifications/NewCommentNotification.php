@@ -23,6 +23,10 @@ class NewCommentNotification extends Notification implements ShouldQueue
 
     public function via($notifiable): array
     {
+        if ($notifiable->id === $this->post->user_id) {
+            return [];
+        }
+
         return ['broadcast', 'database'];
     }
 

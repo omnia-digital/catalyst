@@ -1,4 +1,4 @@
-@extends('resources::livewire.layouts.pages.default-page-layout')
+@extends('resources::livewire.layouts.pages.full-page-layout')
 
 @section('content')
             <div class="mb-2 flex justify-between items-center">
@@ -24,19 +24,21 @@
             @include('livewire.partials.filters')
 
             <div class="">
-                <ul role="list" class="space-y-4">
+                <div class="masonry sm:masonry-2">
                     @forelse($resources as $resource)
-                        <li>
+                        <div class="w-full break-inside mb-3">
+                            <div class="mx-1">
                             <livewire:resources::components.resource-card
                                 as="li"
                                 :post="$resource"
                                 :wire:key="'resource-card-' . $resource->id"
                             />
-                        </li>
+                            </div>
+                        </div>
                     @empty
                         <li class="p-4 bg-primary rounded-md text-base-text-color">No resources to show</li>
                     @endforelse
-                </ul>
+                </div>
 
                 <div class="pb-6">
                     {{ $resources->onEachSide(1)->links() }}
