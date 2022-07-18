@@ -4,7 +4,7 @@ namespace Modules\Social\Http\Livewire\Pages\Teams;
 
 use App\Models\Location;
 use App\Models\Team;
-use App\Traits\WithTeamManagement;
+use App\Traits\Team\WithTeamManagement;
 use Livewire\Component;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -22,6 +22,26 @@ class Show extends Component
         'likes',
         'comments',
         'members'
+    ];
+
+    public $activity = [
+        'user' => [
+            'avatar' => 'https://via.placeholder.com/150',
+        ],
+        'title' => 'Activity Title',
+        'created_at' => 'June 1, 2022',
+        'id' => 1,
+        'message' => 'Activity Message',
+        'team' => [
+            'link' => '#',
+        ],
+        'members' => [
+            [
+                'avatar' => 'https://via.placeholder.com/150',
+                'name' => 'Member Name',
+                'link' => '#',
+            ],
+        ],
     ];
 
     public function getPlacesProperty()

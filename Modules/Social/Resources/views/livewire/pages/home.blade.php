@@ -21,22 +21,13 @@
 
                     <!-- Featured Section -->
                     <div class="mt-4">
-                        <livewire:social::map/>
+                        <livewire:social::pages.teams.map/>
 
                     </div>
                     <div class="mt-4">
                         <livewire:social::news-feed/>
                     </div>
                 </div>
-            </div>
-            <div class="my-4">
-
-                <!-- Posts -->
-                <ul role="list" class="mt-6 space-y-4">
-                    @foreach ($activities as $activity)
-                        <livewire:social::partials.activity-list-item :activity="$activity"/>
-                    @endforeach
-                </ul>
             </div>
     </div>
 

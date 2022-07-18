@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.19.0.
+ * Generated for Laravel 9.20.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -7130,6 +7130,33 @@
         {
                         /** @var \Illuminate\Auth\Access\Gate $instance */
                         return $instance->setContainer($container);
+        }
+                    /**
+         * Deny with a HTTP status code.
+         *
+         * @param int $status
+         * @param \Illuminate\Auth\Access\?string $message
+         * @param \Illuminate\Auth\Access\?int $code
+         * @return \Illuminate\Auth\Access\Response 
+         * @static 
+         */ 
+        public static function denyWithStatus($status, $message = null, $code = null)
+        {
+                        /** @var \Illuminate\Auth\Access\Gate $instance */
+                        return $instance->denyWithStatus($status, $message, $code);
+        }
+                    /**
+         * Deny with a 404 HTTP status code.
+         *
+         * @param \Illuminate\Auth\Access\?string $message
+         * @param \Illuminate\Auth\Access\?int $code
+         * @return \Illuminate\Auth\Access\Response 
+         * @static 
+         */ 
+        public static function denyAsNotFound($message = null, $code = null)
+        {
+                        /** @var \Illuminate\Auth\Access\Gate $instance */
+                        return $instance->denyAsNotFound($message, $code);
         }
          
     }
@@ -16803,7 +16830,34 @@
      
 }
 
-    namespace App\Util\Platform\Facades { 
+    namespace App\Support\Platform\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class PlatformFacade {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isModuleEnabled($moduleName)
+        {
+                        /** @var \App\Support\Platform\Platform $instance */
+                        return $instance->isModuleEnabled($moduleName);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function translate($string)
+        {
+                        /** @var \App\Support\Platform\Platform $instance */
+                        return $instance->translate($string);
+        }
+         
+    }
             /**
      * 
      *
@@ -16816,7 +16870,7 @@
          */ 
         public static function get($string)
         {
-                        /** @var \App\Util\Platform\Translate $instance */
+                        /** @var \App\Support\Platform\Translate $instance */
                         return $instance->get($string);
         }
          
@@ -20048,35 +20102,6 @@
      
 }
 
-    namespace Nwidart\Modules { 
-            /**
-     * 
-     *
-     */ 
-        class Module {
-                    /**
-         * 
-         *
-         * @see \App\Providers\AppServiceProvider::register()
-         * @param mixed $moduleName
-         * @static 
-         */ 
-        public static function isModuleEnabled($moduleName)
-        {
-                        return \Nwidart\Modules\Module::isModuleEnabled($moduleName);
-        }
-         
-    }
-            /**
-     * 
-     *
-     */ 
-        class Collection {
-         
-    }
-     
-}
-
     namespace Illuminate\View { 
             /**
      * 
@@ -20163,12 +20188,12 @@
      
 }
 
-    namespace Nwidart\Modules\Laravel { 
+    namespace Nwidart\Modules { 
             /**
      * 
      *
      */ 
-        class Module {
+        class Collection {
          
     }
      
@@ -23951,7 +23976,8 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
-            class Trans extends \App\Util\Platform\Facades\TranslateFacade {}
+            class Platform extends \App\Support\Platform\Facades\PlatformFacade {}
+            class Trans extends \App\Support\Platform\Facades\TranslateFacade {}
             class Visits extends \Awssat\Visits\Visits {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Image extends \Intervention\Image\Facades\Image {}

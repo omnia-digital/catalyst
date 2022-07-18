@@ -2,7 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Bookmarks;
 
-use App\Traits\WithSortAndFilters;
+use App\Traits\Filter\WithSortAndFilters;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Models\Bookmark;
@@ -20,7 +20,7 @@ class Index extends Component
     ];
 
     public array $sortLabels = [
-        'created_at' => 'Date Created', 
+        'created_at' => 'Date Created',
     ];
 
     protected $queryString = [

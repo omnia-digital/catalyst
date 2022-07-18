@@ -33,8 +33,8 @@
         x-on:mouseenter.once="markAsRead"
         {{ $attributes->class(['py-4'])->merge() }}
 >
-    <div class="flex items-center space-x-4">
-        <div class="flex-shrink-0">
+    <div class="flex space-x-4">
+        <div class="flex justify-center items-center h-8 w-8">
             <x-dynamic-component :component="$icon" class="h-8 w-8 {{ $iconColor }}"/>
         </div>
         <div class="flex-1 min-w-0">
@@ -51,7 +51,7 @@
             </p>
 
             @if ($subtitle)
-                <p class="text-sm text-gray-500 truncate">
+                <p class="text-sm text-gray-500">
                     {{ $subtitle }}
                 </p>
             @endif
