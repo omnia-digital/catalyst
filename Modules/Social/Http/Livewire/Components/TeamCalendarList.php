@@ -22,6 +22,10 @@ class TeamCalendarList extends Component
         'start_date' => 'Launch Date'
     ];
 
+    protected $listeners = [
+        'teamSelected' => 'handleTeamSelected'
+    ];
+
     public Team $team;
 
     public ?string $classes = '';
@@ -75,6 +79,13 @@ class TeamCalendarList extends Component
     public function selectTeam($teamID)
     {
         $this->team = Team::find($teamID);
+    }
+
+    public function handleTeamSelected($teamId)
+    {
+        $this->selectTeam($teamId);
+
+        $this->dispatchBrowserEvent('select-event', ['team' => $this->team]);
     }
 
     public function moreInfo()

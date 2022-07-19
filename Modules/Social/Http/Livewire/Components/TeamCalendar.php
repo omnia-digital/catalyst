@@ -29,6 +29,11 @@ class TeamCalendar extends LivewireCalendar
         $this->calculateGridStartsEnds();
     }
 
+    public function onEventClick($eventId)
+    {
+        $this->emitTo('social::components.team-calendar-list', 'teamSelected', $eventId);
+    }
+
     public function getUserProperty()
     {
         return User::find(Auth::id());

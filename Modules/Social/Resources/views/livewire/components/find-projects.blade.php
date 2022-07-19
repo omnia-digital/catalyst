@@ -37,7 +37,7 @@
         </p>
     </div>
 
-    <div>
+    <div id="test">
         @if ($current === 'map')
             <livewire:social::components.team-map/>
         @else
@@ -49,4 +49,14 @@
             </div>
         @endif
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            Livewire.hook('message.sent', (message, component) => {
+                // if (message.updateQueue[0].method === 'selectOutboundInternalLink') {
+                document.getElementById('test').innerHTML = '';
+                // }
+            });
+        });
+    </script>
 </div>

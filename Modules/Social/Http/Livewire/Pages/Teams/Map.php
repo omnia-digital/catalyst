@@ -12,8 +12,10 @@ class Map extends Component
 {
     use WithMap, WithNotification;
 
+    public string|int|null $placeId = null;
+
     protected $listeners = [
-        'select_event' => 'handleEventSelected'
+        'select_event' => 'handleEventSelected',
     ];
 
     public function handleEventSelected($eventId)
@@ -29,6 +31,11 @@ class Map extends Component
         $this->flyTo('project-map', $location->lng, $location->lat);
     }
 
+    public function showPlaceDetail($placeId)
+    {
+        $this->emitTo('social::components.team-calendar-list', 'teamSelected', $placeId);
+    }
+
     public function getPlacesProperty()
     {
         $places = Location::query()
@@ -37,6 +44,7 @@ class Map extends Component
             ->get()
             ->map(function (Location $location) {
                 return [
+                    'id' => $location->id,
                     'name' => $location->model->name,
                     'lat' => $location->lat,
                     'lng' => $location->lng,
