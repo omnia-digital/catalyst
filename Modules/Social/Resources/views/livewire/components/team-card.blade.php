@@ -11,7 +11,7 @@
             <p class="text-dark-text-color font-semibold text-base">{{ $team->name }}</p>
             <div class="flex items-center">
                 <x-heroicon-o-users class="h-4 w-4 mr-2" />
-                <p>{{ $team->allUsers()->count() }}</p>
+                <p>{{ $team->users_count ?? $team->users()->count() }}</p>
             </div>
         </div>
         <div class="flex items-center text-base-text-color">

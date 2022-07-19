@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\Filter;
 
 trait WithSortAndFilters {
 
@@ -15,6 +15,8 @@ trait WithSortAndFilters {
         'has_attachment' => false,
     ];
 
+    public array $skipFilters = [];
+
     public $filterCount = 0;
 
     public function sortBy($key)
@@ -28,7 +30,7 @@ trait WithSortAndFilters {
     {
         $this->sortOrder = ($this->sortOrder === 'asc') ? 'desc' : 'asc';
     }
-    
+
     public function updatedFilters()
     {
         $this->filterCount = sizeof(array_filter($this->filters));
@@ -37,13 +39,15 @@ trait WithSortAndFilters {
 
     public function applyFilters($query)
     {
-        if ($this->filters['created_at'] != '') {
-            $query = $query->whereDate('created_at', $this->filters['created_at']);
-        }
+        $table = $query->first()?->getTable();
 
-        if ($this->filters['has_attachment']) {
-            $query = $query->having('media_count', '>=', 1);
-        }
+        $query = $query->when($this->filters['created_at'], function($q) use ($table) {
+            return $q->whereDate($table.'.created_at', $this->filters['created_at']);
+        });
+
+        $query = $query->when($this->filters['has_attachment'], function($q) {
+            return $q->having('media_count', '>=', 1);
+        });
 
         return $query;
     }

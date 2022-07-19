@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
-use App\Util\Platform\Translate;
+use App\Support\Platform\Platform;
+use App\Support\Platform\Translate;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
-class PlatformTranslateServiceProvider extends ServiceProvider
+class PlatformServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -14,6 +15,9 @@ class PlatformTranslateServiceProvider extends ServiceProvider
 
     public function register()
     {
+        App::bind('platform', function () {
+            return new Platform();
+        });
         App::bind('trans', function () {
             return new Translate();
         });

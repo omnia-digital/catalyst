@@ -16830,7 +16830,34 @@
      
 }
 
-    namespace App\Util\Platform\Facades { 
+    namespace App\Support\Platform\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class PlatformFacade {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isModuleEnabled($moduleName)
+        {
+                        /** @var \App\Support\Platform\Platform $instance */
+                        return $instance->isModuleEnabled($moduleName);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function translate($string)
+        {
+                        /** @var \App\Support\Platform\Platform $instance */
+                        return $instance->translate($string);
+        }
+         
+    }
             /**
      * 
      *
@@ -16843,7 +16870,7 @@
          */ 
         public static function get($string)
         {
-                        /** @var \App\Util\Platform\Translate $instance */
+                        /** @var \App\Support\Platform\Translate $instance */
                         return $instance->get($string);
         }
          
@@ -20075,35 +20102,6 @@
      
 }
 
-    namespace Nwidart\Modules { 
-            /**
-     * 
-     *
-     */ 
-        class Module {
-                    /**
-         * 
-         *
-         * @see \App\Providers\AppServiceProvider::register()
-         * @param mixed $moduleName
-         * @static 
-         */ 
-        public static function isModuleEnabled($moduleName)
-        {
-                        return \Nwidart\Modules\Module::isModuleEnabled($moduleName);
-        }
-         
-    }
-            /**
-     * 
-     *
-     */ 
-        class Collection {
-         
-    }
-     
-}
-
     namespace Illuminate\View { 
             /**
      * 
@@ -20190,12 +20188,12 @@
      
 }
 
-    namespace Nwidart\Modules\Laravel { 
+    namespace Nwidart\Modules { 
             /**
      * 
      *
      */ 
-        class Module {
+        class Collection {
          
     }
      
@@ -23978,7 +23976,8 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
-            class Trans extends \App\Util\Platform\Facades\TranslateFacade {}
+            class Platform extends \App\Support\Platform\Facades\PlatformFacade {}
+            class Trans extends \App\Support\Platform\Facades\TranslateFacade {}
             class Visits extends \Awssat\Visits\Visits {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Image extends \Intervention\Image\Facades\Image {}

@@ -17,7 +17,7 @@
             </div>
 
             <!-- Filters -->
-            @include('livewire.partials.filters')
+            @include('livewire.partials.filters', ['skipFilters' => ['has_attachment' => true]])
 
             <!-- Initiatives -->
             <div class="mt-6">

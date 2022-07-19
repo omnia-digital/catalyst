@@ -2,7 +2,7 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
-use App\Traits\WithSortAndFilters;
+use App\Traits\Filter\WithSortAndFilters;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Enums\PostType;

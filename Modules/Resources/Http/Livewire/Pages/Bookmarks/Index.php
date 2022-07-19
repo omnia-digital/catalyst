@@ -2,7 +2,7 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Bookmarks;
 
-use App\Traits\WithSortAndFilters;
+use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -56,7 +56,7 @@ class Index extends Component
         });
     }
 
-    
+
 
     public function render()
     {

@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('team_id')->nullable()->index();
             $table->string('title')->nullable();
             $table->string('url')->nullable();
-            $table->longText('body');
+            $table->text('body');
             $table->string('type')->nullable();
             $table->string('image')->nullable();
             $table->nullableMorphs('postable');

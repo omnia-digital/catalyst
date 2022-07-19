@@ -82,6 +82,8 @@
                 </nav>
             </div>
             <livewire:partials.profile-badge/>
+
+{{--            <livewire:social::partials.applications/>--}}
         </div>
     </div>
 

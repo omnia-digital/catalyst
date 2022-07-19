@@ -33,19 +33,23 @@
             {{-- <x-input.select wire:model="filters.speaker" :options="$speakers" placeholder="All Speakers" enableDefaultOption/> --}}
             Filters
         </div>
-        <div class="w-full relative md:w-1/3">
-            <x-library::input.date wire:model="filters.created_at" class="pl-8" placeholder="Date Created"/>
-            <div class="absolute top-0 flex items-center h-full ml-3">
-                <x-heroicon-o-calendar class="w-4 text-dark-text-color" />
+        @empty($skipFilters['created_at'])
+            <div class="w-full relative md:w-1/3">
+                <x-library::input.date wire:model="filters.created_at" class="pl-8" placeholder="Date Created"/>
+                <div class="absolute top-0 flex items-center h-full ml-3">
+                    <x-heroicon-o-calendar class="w-4 text-dark-text-color" />
+                </div>
+                <div class="absolute top-0 right-0 flex items-center h-full mr-3">
+                    <x-heroicon-o-chevron-down class="w-4 text-dark-text-color" />
+                </div>
             </div>
-            <div class="absolute top-0 right-0 flex items-center h-full mr-3">
-                <x-heroicon-o-chevron-down class="w-4 text-dark-text-color" />
+        @endempty
+        @empty($skipFilters['has_attachment'])
+            <div class="w-full py-2 md:w-1/2 flex items-center justify-end space-x-2">
+                <x-library::input.toggle wire:model="filters.has_attachment"/>
+                <div class="text-sm text-base-text-color">Has Media</div>
             </div>
-        </div>
-        <div class="w-full py-2 md:w-1/2 flex items-center justify-end space-x-2">
-            <x-library::input.toggle wire:model="filters.has_attachment"/>
-            <div class="text-sm text-base-text-color">Has Media</div>
-        </div>
+        @endempty
     </div>
     <div></div>
 </div>

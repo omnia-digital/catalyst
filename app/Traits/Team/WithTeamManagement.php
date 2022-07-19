@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\Team;
 
 use App\Actions\Teams\ApplyToTeam;
 use App\Actions\Teams\RemoveTeamApplication;
@@ -83,6 +83,8 @@ trait WithTeamManagement
             $this->user->id,
             'editor'
         );
+
+        $this->emit('applied_to_team');
     }
 
     /**
@@ -96,6 +98,7 @@ trait WithTeamManagement
             ->remove($this->team, $this->user->id);
 
         $this->team = $this->team->fresh();
+        $this->emit('application_removed');
     }
 
     /**
@@ -155,7 +158,7 @@ trait WithTeamManagement
         );
 
         $this->team->teamApplications()->where('user_id', $userID)->delete();
-        
+
         $this->team = $this->team->fresh();
 
         $this->emit('member_added');
