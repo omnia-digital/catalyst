@@ -73,9 +73,9 @@
                     </div>
                 </div>
                 @if ($team->tags()->count() > 0)
-                    <div class="flex justify-start space-x-2 mt-2">
+                    <div class="flex flex-wrap justify-start mt-1">
                         @foreach($team->tags as $tag)
-                            <x-library::tag class=" bg-gray-700 text-xxs text-white uppercase">{{ $tag->name }}</x-library::tag>
+                            <x-library::tag class="mt-1 mr-2 last:mr-0 bg-gray-700 text-xxs text-white uppercase">{{ $tag->name }}</x-library::tag>
                         @endforeach
                     </div>
                 @endif
@@ -160,7 +160,8 @@
                             <p class="text-sm">{{ \Trans::get('Location') }}</p>
                         </div>
                         <div class="mt-4 bg-white">
-                            <x-library::map.google class="h-96" :places="$this->places"/>
+                            {{-- <x-library::map.google class="h-96" :places="$this->places"/> --}}
+                            <x-library::map.mapbox id="project-map" class="h-96 z-10" :places="$this->places" mapStyle="mapbox://styles/mapbox/dark-v10"/>
                         </div>
                     </div>
                     <!-- Team Languages -->
