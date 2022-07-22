@@ -64,7 +64,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:omnia-digital/library.git"
+            "url": "https://github.com/omnia-digital/library"
         },
         {
             "type": "vcs",
