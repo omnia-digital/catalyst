@@ -64,11 +64,11 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/omnia-digital/library"
+            "url": "git@github.com:omnia-digital/library.git"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/Osimba/livewire-calendar"
+            "url": "git@github.com:Osimba/livewire-calendar.git"
         },
         {
             "type": "composer",
