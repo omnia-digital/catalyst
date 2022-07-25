@@ -1,9 +1,7 @@
 <div>
     <div class="h-60 relative overlay before:bg-black before:inset-0 before:opacity-60 bg-black"
-        @if ($team->bannerImage()->count())
-            style="background-image: url({{ $team->bannerImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
-        @endif
-        >
+        style="background-image: url({{ $team->bannerImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
+    >
         <div class="mb-1 mx-4 absolute bottom-0 left-0 right-0 flex justify-between items-end">
             <div class="flex items-end">
                 <div class="mr-3 z-10 -mb-12">

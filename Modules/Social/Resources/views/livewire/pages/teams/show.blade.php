@@ -10,7 +10,11 @@
                     @if ($team->sampleImages()->count())
                         style="background-image: url({{ $displayUrl }}); background-size: contain; background-position: center; background-repeat: no-repeat;"
                     @endif
-                ></div>
+                >
+                    @unless ($team->sampleImages()->count())
+                        <div class="h-full flex justify-center items-center text-primary">No Sample Images</div>
+                    @endunless
+                </div>
                 @if ($team->sampleImages()->count())
                 <div class="flex w-full mt-1 space-x-1 overflow-x-scroll h-40" style="scrollbar-width: thin;">
                     <div class="flex h-36 pl-2">
@@ -28,9 +32,7 @@
                 <div class="flex flex-col flex-1 bg-primary rounded">
                     <div
                         class="h-44 bg-secondary"
-                        @if ($team->mainImage()->count())
-                            style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
-                        @endif
+                        style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
                     ></div>
                     <div class="p-[15px] flex flex-col flex-1">
                         <p class="text-sm flex-1">{{ $team->summary }}</p>
