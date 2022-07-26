@@ -16,9 +16,9 @@ use Livewire\WithFileUploads;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Edit extends Component implements HasForms
+class Edit extends Component/*  implements HasForms */
 {
-    use WithPlace, AuthorizesRequests, WithFileUploads, InteractsWithForms;
+    use WithPlace, AuthorizesRequests, WithFileUploads/* , InteractsWithForms */;
 
     public Team $team;
 
@@ -53,7 +53,7 @@ class Edit extends Component implements HasForms
         ];
     }
 
-    protected function getFormSchema(): array
+/*     protected function getFormSchema(): array
     {
         return [
             TextInput::make('team.name')->required(),
@@ -61,7 +61,7 @@ class Edit extends Component implements HasForms
             Textarea::make('team.summary')->required(),
             MarkdownEditor::make('team.content')->required(),
         ];        
-    }
+    } */
 
     public function updatedBannerImage()
     {
