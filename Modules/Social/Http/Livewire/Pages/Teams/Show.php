@@ -55,6 +55,7 @@ class Show extends Component
             ->get()
             ->map(function (Location $location) {
                 return [
+                    'id' => $location->id,
                     'name' => $location->model->name,
                     'lat' => $location->lat,
                     'lng' => $location->lng,
@@ -82,8 +83,8 @@ class Show extends Component
     public function mount(Team $team)
     {
         $team->owner;
-        $this->displayUrl = optional($team->getMedia('team_sample_images')->first())->getFullUrl();
-        $this->displayID = optional($team->getMedia('team_sample_images')->first())->id;
+        $this->displayUrl = $team->sampleImages()->first()->getFullUrl();
+        $this->displayID = $team->sampleImages()->first()->id;
     }
 
     public function render()
