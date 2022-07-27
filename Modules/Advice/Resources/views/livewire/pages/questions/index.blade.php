@@ -15,7 +15,7 @@
             </div>
 
             <!-- Filters -->
-            @include('livewire.partials.filters')
+            @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
             <div class="">
                 <ul role="list" class="space-y-4">

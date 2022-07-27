@@ -2,20 +2,35 @@
 
 namespace App\Traits\Filter;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
+use Spatie\Tags\Tag;
+
 trait WithSortAndFilters {
 
-    public string $orderBy = 'created_at';
+    public ?string $search = null;
+    
+    public string $orderBy = 'name';
 
     public string $sortOrder = 'desc';
 
     public string $defaultSortOrder = 'desc';
 
     public array $filters = [
-        'created_at' => '',
         'has_attachment' => false,
+        'location' => null,
+        'rating' => [],
+        'search' => null,
     ];
 
-    public array $skipFilters = [];
+
+    // Below properties should be nested in $filters,
+    // but there is an error with Livewire cannot detect nested property.
+    // When the error is fixed, put them back to $filters.
+    // https://omniaapp.slack.com/archives/G01LA6L3H60/p1656660776169019
+    public array $members = [0, 0];
+    public array $tags = [];
+    public ?string $dateFilter = null;
 
     public $filterCount = 0;
 
@@ -31,24 +46,52 @@ trait WithSortAndFilters {
         $this->sortOrder = ($this->sortOrder === 'asc') ? 'desc' : 'asc';
     }
 
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedMembers()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedTags()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedDateFilter()
+    {
+        $this->resetPage();
+    }
+
     public function updatedFilters()
     {
         $this->filterCount = sizeof(array_filter($this->filters));
         $this->resetPage();
     }
 
-    public function applyFilters($query)
+    public function getAllTagsProperty()
+    {
+        return Tag::all()->mapWithKeys(fn(Tag $tag) => [$tag->name => $tag->name])->all();
+    }
+
+    public function applySorting(Builder $query): Builder
+    {
+        return $query->orderBy($this->orderBy, $this->sortOrder);
+    }
+
+    public function applyFilters(Builder $query): Builder
     {
         $table = $query->first()?->getTable();
-
-        $query = $query->when($this->filters['created_at'], function($q) use ($table) {
-            return $q->whereDate($table.'.created_at', $this->filters['created_at']);
-        });
-
-        $query = $query->when($this->filters['has_attachment'], function($q) {
-            return $q->having('media_count', '>=', 1);
-        });
-
-        return $query;
+        
+        return $query
+            ->when($this->filters['has_attachment'], fn(Builder $q) => $q->having('media_count', '>=', 1))
+            ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->whereHas('location', fn(Builder $query) => $query->search($location)))
+            ->when($this->dateFilter, fn(Builder $query, $date) => $query->whereDate($table.'.'.$this->dateColumn, $date))
+            ->when(max($this->members) > 0, fn(Builder $query) => $query->havingBetween('users_count', $this->members))
+            ->when(!empty($this->tags), fn(Builder $query) => $query->withAnyTags($this->tags));
+            //->when(Arr::get($this->filters, 'rating'), fn(Builder $query, $rating) => $query->whereIn('rating', $rating))
     }
 }

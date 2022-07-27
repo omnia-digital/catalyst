@@ -13,7 +13,7 @@
     </div>
 
     <!-- Filters -->
-    @include('livewire.partials.filters')
+    @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
     @if(empty($bookmarks))
         <h2>No Bookmarked Resources</h2>
