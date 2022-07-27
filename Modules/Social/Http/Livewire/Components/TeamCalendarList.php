@@ -22,6 +22,8 @@ class TeamCalendarList extends Component
         'start_date' => 'Launch Date'
     ];
 
+    public string $dateColumn = 'start_date';
+
     public Team $team;
 
     public ?string $classes = '';
@@ -31,8 +33,8 @@ class TeamCalendarList extends Component
         $query = Team::query()
             ->withCount(['users']);
 
-        $query = $this->applyFilters($query)
-            ->orderBy($this->orderBy, $this->sortOrder);
+        $query = $this->applyFilters($query);
+        $query = $this->applySorting($query);
 
         return $query;
     }

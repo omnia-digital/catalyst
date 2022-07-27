@@ -1,5 +1,5 @@
 @php
-    $skipFilters = isset($skipFilters) ? $skipFilters: [];
+    $skipFilters = isset($skipFilters) ? $skipFilters : [];
 @endphp
 <div class="space-y-2">
     <div class="bg-primary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
