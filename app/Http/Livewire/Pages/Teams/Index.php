@@ -6,6 +6,7 @@ use App\Actions\Teams\GetTeamCategoriesAction;
 use App\Lenses\Teams\NewReleaseTeamsLens;
 use App\Lenses\WithLenses;
 use App\Models\Team;
+use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Livewire\Component;
@@ -15,7 +16,15 @@ use Spatie\Tags\Tag;
 
 class Index extends Component
 {
-    use WithSorting, WithPagination, WithLenses;
+    use WithSortAndFilters, WithPagination, WithLenses;
+
+    public array $sortLabels = [
+        'name' => 'Name',
+        'users_count' => 'Users',
+        'start_date' => 'Launch Date'
+    ];
+
+    public string $dateColumn = 'start_date';
 
     public ?string $lens = null;
 
@@ -24,64 +33,22 @@ class Index extends Component
         'filters',
         'tags',
         'members',
-        'startDate'
+        'dateFilter',
     ];
-
-    public array $filters = [
-        'location' => null,
-        'rating' => [],
-        'search' => null,
-    ];
-
-    // Below properties should be nested in $filters,
-    // but there is an error with Livewire cannot detect nested property.
-    // When the error is fixed, put them back to $filters.
-    // https://omniaapp.slack.com/archives/G01LA6L3H60/p1656660776169019
-    public array $members = [0, 0];
-    public array $tags = [];
-    public ?string $startDate = null;
-
-    public function updatedMembers()
-    {
-        $this->resetPage();
-    }
-
-    public function updatedTags()
-    {
-        $this->resetPage();
-    }
-
-    public function updatedStartDate()
-    {
-        $this->resetPage();
-    }
-
-    public function updatedFilters()
-    {
-        $this->resetPage();
-    }
 
     public function mount()
     {
-        $this->defaultSorting('name', 'asc');
-    }
-
-    public function getAllTagsProperty()
-    {
-        return Tag::all()->mapWithKeys(fn(Tag $tag) => [$tag->name => $tag->name])->all();
+        $this->orderBy = 'name';
     }
 
     public function getRowsQueryProperty()
     {
-        return Team::query()
+        $query = Team::query()
             ->with('location')
-            ->withCount('users as members')
-            ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->whereHas('location', fn(Builder $query) => $query->search($location)))
-            ->when($this->startDate, fn(Builder $query, $date) => $query->whereDate('start_date', $date))
-            ->when(max($this->members) > 0, fn(Builder $query) => $query->havingBetween('members', $this->members))
-            ->when(!empty($this->tags), fn(Builder $query) => $query->withAnyTags($this->tags))
-            //->when(Arr::get($this->filters, 'rating'), fn(Builder $query, $rating) => $query->whereIn('rating', $rating))
-            ->when(Arr::get($this->filters, 'search'), fn(Builder $query, $search) => $query->search($search));
+            ->withCount('users');
+            
+        return $this->applyFilters($query)
+            ->when($this->search, fn(Builder $q) => $q->search($this->search));
     }
 
     public function getRowsProperty()

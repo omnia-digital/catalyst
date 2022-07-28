@@ -73,7 +73,7 @@
             
             <!-- Filters -->
             <div x-show="!showDetail">
-                @include('livewire.partials.filters-sm', ['skipFilters' => ['has_attachment' => true]])
+                @include('livewire.partials.filters-sm', ['skipFilters' => ['has_attachment']])
             </div>
 
             <!-- Show All Teams -->
