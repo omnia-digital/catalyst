@@ -1,9 +1,6 @@
 <div wire:click.prevent.stop="showTeam"
     class="w-full bg-primary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
-        style="background-image: url({{ ($team->getMedia('team_main_images')->count()) ? $team->getMedia('team_main_images')->first()->getFullUrl() : 'https://source.unsplash.com/random'
-      }}); background-size: cover;
-        background-repeat:
-         no-repeat;"
+    style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
 >
     <div class="h-80 rounded"></div>
     <div class="space-y-2 p-4 bg-primary rounded absolute bottom-0 right-0 left-0">

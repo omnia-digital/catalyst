@@ -36,10 +36,14 @@ class NewCommentNotification extends Notification implements ShouldQueue
             ? route('resources.show', $this->post)
             : route('social.posts.show', $this->post);
 
+        $subtitle = $this->post->type === PostType::RESOURCE->value
+            ? Str::of($this->post->body)->stripTags()->limit(155)
+            : Str::of($this->post->body)->stripTags();
+
         return NotificationCenter::make()
             ->icon('heroicon-o-chat-alt')
             ->success($this->actionable->name . ' left a comment in your post')
-            ->subtitle(Str::of($this->post->body)->stripTags()->limit(155))
+            ->subtitle($subtitle)
             ->image($this->actionable->profile_photo_url)
             ->actionLink($url)
             ->actionText('View')

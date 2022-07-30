@@ -21,7 +21,7 @@
             </div>
 
             <!-- Filters -->
-            @include('livewire.partials.filters')
+            @include('livewire.partials.filters', ['skipFilters' => ['members', 'location', 'tags']])
 
             <div class="">
                 <div class="masonry sm:masonry-2">

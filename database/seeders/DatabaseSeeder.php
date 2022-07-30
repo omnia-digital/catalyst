@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SocialDatabaseSeeder::class);
         $this->call(ResourcesDatabaseSeeder::class);
         $this->call(AdviceDatabaseSeeder::class);
+        $this->call(NotificationTableSeeder::class);
 
         if (DB::connection() instanceof \Illuminate\Database\MySqlConnection) {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');

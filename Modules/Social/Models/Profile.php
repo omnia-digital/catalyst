@@ -2,7 +2,8 @@
 
     namespace Modules\Social\Models;
 
-    use App\Models\User;
+use App\Models\NullMedia;
+use App\Models\User;
     use App\Support\Lexer\PrettyNumber;
     use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     use Illuminate\Support\Facades\Cache;
@@ -105,7 +106,7 @@
 
         public function bannerImage()
         {
-            return optional($this->getMedia('profile_banner_images')->first());
+            return $this->getMedia('profile_banner_images')->first() ?? (new NullMedia('profile'));
         }
 
         public function photo()

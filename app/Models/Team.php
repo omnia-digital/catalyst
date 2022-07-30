@@ -131,12 +131,12 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function bannerImage()
     {
-        return optional($this->getMedia('team_banner_images')->first());
+        return $this->getMedia('team_banner_images')->first() ?? (new NullMedia);
     }
 
     public function mainImage()
     {
-        return optional($this->getMedia('team_main_images')->first());
+        return $this->getMedia('team_main_images')->first() ?? (new NullMedia);
     }
 
     public function profilePhoto()
@@ -157,7 +157,7 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function sampleImages()
     {
-        return $this->getMedia('team_sample_images');
+        return $this->getMedia('team_sample_images')->count() ? $this->getMedia('team_sample_images') : (new NullMedia);
     }
 
     public function getStartDateStringAttribute()

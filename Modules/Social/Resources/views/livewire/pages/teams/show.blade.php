@@ -10,7 +10,11 @@
                     @if ($team->sampleImages()->count())
                         style="background-image: url({{ $displayUrl }}); background-size: contain; background-position: center; background-repeat: no-repeat;"
                     @endif
-                ></div>
+                >
+                    @unless ($team->sampleImages()->count())
+                        <div class="h-full flex justify-center items-center text-primary">No Sample Images</div>
+                    @endunless
+                </div>
                 @if ($team->sampleImages()->count())
                 <div class="flex w-full mt-1 space-x-1 overflow-x-scroll h-40" style="scrollbar-width: thin;">
                     <div class="flex h-36 pl-2">
@@ -28,9 +32,7 @@
                 <div class="flex flex-col flex-1 bg-primary rounded">
                     <div
                         class="h-44 bg-secondary"
-                        @if ($team->mainImage()->count())
-                            style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
-                        @endif
+                        style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
                     ></div>
                     <div class="p-[15px] flex flex-col flex-1">
                         <p class="text-sm flex-1">{{ $team->summary }}</p>
@@ -73,9 +75,9 @@
                     </div>
                 </div>
                 @if ($team->tags()->count() > 0)
-                    <div class="flex justify-start space-x-2 mt-2">
+                    <div class="flex flex-wrap justify-start mt-1">
                         @foreach($team->tags as $tag)
-                            <x-library::tag class=" bg-gray-700 text-xxs text-white uppercase">{{ $tag->name }}</x-library::tag>
+                            <x-library::tag class="mt-1 mr-2 last:mr-0 bg-gray-700 text-xxs text-white uppercase">{{ $tag->name }}</x-library::tag>
                         @endforeach
                     </div>
                 @endif
@@ -160,7 +162,8 @@
                             <p class="text-sm">{{ \Trans::get('Location') }}</p>
                         </div>
                         <div class="mt-4 bg-white">
-                            <x-library::map.google class="h-96" :places="$this->places"/>
+                            {{-- <x-library::map.google class="h-96" :places="$this->places"/> --}}
+                            <x-library::map.mapbox id="project-map" class="h-96 z-10" :places="$this->places" mapStyle="mapbox://styles/mapbox/dark-v10"/>
                         </div>
                     </div>
                     <!-- Team Languages -->

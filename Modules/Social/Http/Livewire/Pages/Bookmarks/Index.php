@@ -14,14 +14,11 @@ class Index extends Component
 
     public ?string $search = null;
 
-    public array $filters = [
-        'created_at' => '',
-        'has_attachment' => false,
-    ];
-
     public array $sortLabels = [
         'created_at' => 'Date Created',
     ];
+
+    public string $dateColumn = 'created_at';
 
     protected $queryString = [
         'search'
@@ -29,6 +26,7 @@ class Index extends Component
 
     public function mount()
     {
+        $this->orderBy = "created_at";
     }
 
     public function getRowsQueryProperty()
