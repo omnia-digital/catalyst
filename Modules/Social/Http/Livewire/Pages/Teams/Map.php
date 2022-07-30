@@ -12,8 +12,10 @@ class Map extends Component
 {
     use WithMap, WithNotification;
 
+    public string|int|null $placeId = null;
+
     protected $listeners = [
-        'select_event' => 'handleEventSelected'
+        'select_event' => 'handleEventSelected',
     ];
 
     public function handleEventSelected($eventId)
@@ -26,7 +28,12 @@ class Map extends Component
             return;
         }
 
-        $this->flyTo('project-map', $location->lng, $location->lat);
+        $this->flyTo('team-map', $location->lng, $location->lat);
+    }
+
+    public function showPlaceDetail($placeId)
+    {
+        $this->emitTo('social::components.team-calendar-list', 'teamSelected', $placeId);
     }
 
     public function getPlacesProperty()

@@ -28,6 +28,10 @@ class TeamCalendarList extends Component
 
     public ?string $classes = '';
 
+    protected $listeners = [
+        'teamSelected' => 'handleTeamSelected'
+    ];
+
     public function getRowsQueryProperty()
     {
         $query = Team::query()
@@ -78,6 +82,13 @@ class TeamCalendarList extends Component
     public function selectTeam($teamID)
     {
         $this->team = Team::find($teamID);
+    }
+
+    public function handleTeamSelected($teamId)
+    {
+        $this->selectTeam($teamId);
+
+        $this->dispatchBrowserEvent('select-event', ['team' => $this->team]);
     }
 
     public function moreInfo()

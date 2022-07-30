@@ -10,14 +10,8 @@
             {{--      Use $featuredTeams      --}}
         </div>
 
-{{--        <div>--}}
-{{--            <livewire:social::components.find-projects/>--}}
-{{--        </div>--}}
-
         <div>
-            <x-library::heading.3 class="uppercase">{{ \Trans::get('Find Teams') }}</x-library::heading.3>
-
-            <livewire:social::pages.teams.map/>
+            <livewire:social::components.find-teams/>
         </div>
 
         <div>

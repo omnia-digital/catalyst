@@ -24,7 +24,7 @@
                     this.details[key] = data[key];
                 };
             },
-        }" 
+        }"
         x-init="
             @this.on('select_event', (eventID) => {
                 showDetail = true;
@@ -38,7 +38,9 @@
                 setTimeout(() => { message = false; }, 3000);
             });
         "
-        class="flex flex-col sticky h-full top-20 inset-y-2">
+         x-on:select-event.window="selectEvent($event.detail.team);"
+        class="flex flex-col sticky h-full top-20 inset-y-2"
+    >
         <div class="h-full flex flex-col">
             <div class="bg-primary flex justify-between items-center text-xl min-h-[64px] pt-2 px-4">
                 <div class="font-medium">
@@ -60,7 +62,7 @@
                             <span class="sr-only" x-text="'Calendar'"></span>
                             <span><x-heroicon-o-calendar class="h-6 w-6" /></span>
                         </a>
-                        <a x-cloak x-show="showDetail" href="#" 
+                        <a x-cloak x-show="showDetail" href="#"
                             x-on:click.prevent="showDetail = false"
                             @class([
 		                    'text-light-text-color hover:text-secondary active:text-secondary focus:text-secondary'
@@ -70,7 +72,7 @@
                         </a>
                 </div>
             </div>
-            
+
             <!-- Filters -->
             <div x-show="!showDetail">
                 @include('livewire.partials.filters-sm', ['skipFilters' => ['has_attachment']])
