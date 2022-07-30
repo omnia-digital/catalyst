@@ -5,7 +5,7 @@ namespace Modules\Social\Support\Livewire;
 use App\Models\Team;
 use Illuminate\Support\Collection;
 
-trait InteractsWithCalendarProjects
+trait InteractsWithCalendarTeams
 {
     public function events(): Collection
     {

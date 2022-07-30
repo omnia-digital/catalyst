@@ -6,11 +6,11 @@ use App\Models\User;
 use Asantibanez\LivewireCalendar\LivewireCalendar;
 use Auth;
 use Carbon\Carbon;
-use Modules\Social\Support\Livewire\InteractsWithCalendarProjects;
+use Modules\Social\Support\Livewire\InteractsWithCalendarTeams;
 
 class CurrentWeekTeamCalendar extends LivewireCalendar
 {
-    use InteractsWithCalendarProjects;
+    use InteractsWithCalendarTeams;
 
     public $selectedID;
 

@@ -11,7 +11,7 @@
         </div>
 
         <div>
-            <livewire:social::components.find-projects/>
+            <livewire:social::components.find-teams/>
         </div>
 
         <div>

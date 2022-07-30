@@ -28,7 +28,7 @@ class Map extends Component
             return;
         }
 
-        $this->flyTo('project-map', $location->lng, $location->lat);
+        $this->flyTo('team-map', $location->lng, $location->lat);
     }
 
     public function showPlaceDetail($placeId)

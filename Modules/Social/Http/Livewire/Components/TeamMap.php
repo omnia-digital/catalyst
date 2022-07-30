@@ -24,7 +24,7 @@ class TeamMap extends Component
     {
         $this->startDate = $data['start_date'];
 
-        $this->addPlaces('project-map', $this->places);
+        $this->addPlaces('team-map', $this->places);
     }
 
     public function getPlacesProperty()

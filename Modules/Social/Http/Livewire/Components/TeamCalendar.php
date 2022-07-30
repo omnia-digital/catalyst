@@ -8,11 +8,11 @@ use Asantibanez\LivewireCalendar\LivewireCalendar;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Modules\Social\Support\Livewire\InteractsWithCalendarProjects;
+use Modules\Social\Support\Livewire\InteractsWithCalendarTeams;
 
 class TeamCalendar extends LivewireCalendar
 {
-    use InteractsWithCalendarProjects;
+    use InteractsWithCalendarTeams;
 
     public $selectedID;
 

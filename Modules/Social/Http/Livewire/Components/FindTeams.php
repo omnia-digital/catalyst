@@ -7,11 +7,9 @@ use Livewire\Component;
 /**
  * @property array $places
  */
-class FindProjects extends Component
+class FindTeams extends Component
 {
     public ?string $startDate = null;
-
-    public string $current = 'map';
 
     public function updatedStartDate()
     {
@@ -26,6 +24,6 @@ class FindProjects extends Component
 
     public function render()
     {
-        return view('social::livewire.components.find-projects');
+        return view('social::livewire.components.find-teams');
     }
 }
