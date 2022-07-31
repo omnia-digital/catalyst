@@ -3,6 +3,10 @@
 @section('content')
     <div class="">
         <div class="mt-0">
+            <!-- Recommended Teams -->
+            <div>
+
+            </div>
             <div class="mx-auto max-w-post-card-max-w">
                 <livewire:social::news-feed-editor/>
             </div>
@@ -19,8 +23,9 @@
 
 
             <!-- Featured Section -->
-            <div class="mt-4 justify-center">
-                <livewire:social::pages.teams.map/>
+            <div class="mt-4 justify-center mx-auto max-w-post-card-max-w">
+                <h3>{{ Trans::get('Team Map') }}</h3>
+                <livewire:social::pages.teams.map class=""/>
             </div>
             <div class="mt-4 mx-auto max-w-post-card-max-w">
                 <livewire:social::news-feed/>
