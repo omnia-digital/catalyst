@@ -20,7 +20,7 @@
         <div class="hidden sm:block">
             <div class="border-b border-gray-200">
                 <nav class="-mb-px flex text-lg font-bold text-neutral-dark" aria-label="Tabs">
-                    <a href="#" class="border-transparent hover:text-secondary text-secondary border-b-secondary hover:border-b-secondary whitespace-nowrap flex py-4 py-4 pl-1 pr-4
+                    <a href="#" class="border-transparent hover:text-secondary text-secondary border-b-secondary hover:border-b-secondary whitespace-nowrap flex pb-4 pl-1 pr-4
                             border-b-2">
                         Posts
                         @if(false)
@@ -28,7 +28,7 @@
                         @endif
                     </a>
 
-                    <a href="#" class="border-transparent hover:text-secondary hover:border-b-secondary whitespace-nowrap flex py-4 py-4 pl-1 pr-4 border-b-2">
+                    <a href="#" class="border-transparent hover:text-secondary hover:border-b-secondary whitespace-nowrap flex pb-4 pl-1 pr-4 border-b-2">
                         Likes
 
                         @if(false)
@@ -36,7 +36,7 @@
                         @endif
                     </a>
 
-                    <a href="#" class="border-transparent hover:text-secondary  hover:border-b-secondary whitespace-nowrap flex py-4 py-4 pl-1 pr-4 border-b-2">
+                    <a href="#" class="border-transparent hover:text-secondary  hover:border-b-secondary whitespace-nowrap flex pb-4 pl-1 pr-4 border-b-2">
                         Resources
 
                         @if(false)
