@@ -4,19 +4,20 @@
 @import 'tailwindcss/utilities';
 
 :root {
-    --base-text-color: #6b7280;
+    --base-text-color: #050505;
+    --white-text-color: #fff;
     --light-text-color: #9ca3af;
     --dark-text-color: #272d38;
-    --neutral: #F3F4F6;
+    --neutral: #F0F2F5;
     --neutral-light: #f6f7f8;
     --neutral-dark: #6b7280;
     --neutral-hover: #eff0f2;
     --primary: white;
-    --secondary: #171E2C;
+    --secondary: #141414;
     --tertiary: #384263;
 }
 
-@import '../../vendor/filament/forms/dist/module.esm.css';
+@use '../../vendor/filament/forms/dist/module.esm.css';
 
 
 @layer utilities {
@@ -38,6 +39,10 @@
         }
 
     }
+}
+
+p, a, body, h1, h2, h3, h4, h5, h6 {
+    @apply text-base-text-color;
 }
 
 p,a, body  {

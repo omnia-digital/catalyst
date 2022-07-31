@@ -3,13 +3,13 @@
 
 @section('content')
         <div class="mt-4">
-            <h2 class="text-black font-semibold text-2xl mx-6 ">{{ \Trans::get('Members') }}</h2>
+            <h2 class="text-base-text-color font-semibold text-2xl mx-6 ">{{ \Trans::get('Members') }}</h2>
 
             <div x-data="setup()">
                 <!-- Team Members Navigation -->
                 <div class="w-full mt-6">
                     <nav class="flex items-center justify-between text-xs">
-                        <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-10">
+                        <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-6">
                             <template x-for="(tab, index) in tabs" :key="tab.id">
                                 <li class="pb-px">
                                     <a href="#"
@@ -26,12 +26,12 @@
                 </div>
 
                 <!-- Member Overview -->
-                <div x-show="activeTab === 0" class="mt-6 space-y-6">
+                <div x-show="activeTab === 0" class="mt-6 px-6 space-y-6">
                     <div class="space-y-6">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
                                 <img class="w-8 h-8 rounded-full" src="{{ $team->owner->profile_photo_url }}" alt="{{ $team->owner->name }}">
-                                <div class="ml-4">{{ $team->owner->name }}</div>
+                                <div class="ml-4"><a href="{{ $team->owner->url() }}" class="hover:underline focus:underline">{{ $team->owner->name }}</a></div>
                             </div>
 
                             <div class="flex items-center">
@@ -44,7 +44,56 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img class="w-8 h-8 rounded-full" src="{{ $member->profile_photo_url }}" alt="{{ $member->name }}">
-                                    <div class="ml-4">{{ $member->name }}</div>
+                                    <div class="ml-4"><a href="{{ $member->url() }}" class="hover:underline focus:underline">{{ $member->name }}</a></div>
+                                    <div class="ml-2">
+                                        <x-library::dropdown dropdownClasses="z-20 max-h-[320px] overflow-scroll scrollbar-hide">
+                                            <x-slot name="trigger" x-on:click.stop="">
+                                                <button type="button" class="p-2 rounded-full flex items-center text-neutral-dark hover:text-secondary focus:text-secondary" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
+                                                    <span class="italic">({{ $member->awards()->count() . ' ' . Trans::get(Str::plural('Award', $member->awards()->count())) }})</span>
+                                                </button>
+                                            </x-slot>
+                                            @can('add-award-to-team-member', $team)
+                                            <x-library::dropdown.item x-on:click.prevent="$openModal('add-awards-modal-{{ $member->id }}')"  class="bg-white p-2 flex items-center">
+                                                <x-heroicon-o-plus class="h-4 w-4 mr-4" />
+                                                <p>{{ Trans::get('Add Award') }}</p>
+                                            </x-library::dropdown.item>
+                                            @endcan
+                                            @forelse ($member->awards as $award)
+                                                <div class="bg-white p-2 flex items-center space-x-2">
+                                                    <x-dynamic-component :component="$award->icon" class="h-4 w-4" />
+                                                    <p class="flex-1">{{ ucfirst($award->name) }}</p>
+                                                </div>
+                                            @empty
+                                                <div class="bg-white p-2 flex items-center">
+                                                    <p>{{ Trans::get('No awards') }}</p>
+                                                </div>
+                                            @endforelse
+                                        </x-library::dropdown>
+                                    </div>
+                                    <x-library::modal id="add-awards-modal-{{ $member->id }}" maxWidth="2xl">
+                                        <x-slot name="title">{{ Trans::get('Add Awards') }}</x-slot>
+                                        <x-slot name="content">
+                                            <div class="w-full flex flex-col">
+                                                @forelse (\App\Models\Award::whereNotIn('id', $member->awards()->pluck('awards.id')->toArray())->get() as $award)
+                                                    <div class="mr-4 mt-2 flex items-center">
+                                                        <input type="checkbox" wire:model.defer="awardsToAdd" value="{{ $award->id }}" class="mr-2" name="award-item-{{ $award->id }}" id="award-item-{{ $award->id }}">
+                                                        <label for="award-item-{{ $award->id }}" class="bg-primary p-2 flex flex-1 items-center">
+                                                            <x-dynamic-component :component="$award->icon" class="h-4 w-4 mr-4" />
+                                                            <p>{{ ucfirst($award->name) }}</p>
+                                                        </label>
+                                                    </div>
+                                                @empty
+                                                    <div class="w-full px-4 py-2 text-sm bg-white p-2 flex items-center">
+                                                        <p>{{ Trans::get('No other awards are available') }}</p>
+                                                    </div>
+                                                @endforelse
+
+                                            </div>
+                                        </x-slot>
+                                        <x-slot name="actions">
+                                            <x-library::button wire:click="addAward({{ $member->id }})">{{ Trans::get('Add') }}</x-library::button>
+                                        </x-slot>
+                                    </x-library::modal>
                                 </div>
 
                                 <div class="flex items-center">
@@ -61,13 +110,13 @@
 
                                     <!-- Leave Team -->
                                     @if ($this->user->id === $member->id)
-                                        <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="$toggle('confirmingLeavingTeam')">
+                                        <button class="cursor-pointer ml-6 text-sm text-red-500 hover:underline focus:underline" wire:click="$toggle('confirmingLeavingTeam')">
                                             {{ \Trans::get('Leave') }}
                                         </button>
 
                                         <!-- Remove Team Member -->
                                     @elseif (Gate::check('removeTeamMember', $team))
-                                        <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="confirmTeamMemberRemoval('{{ $member->id }}')">
+                                        <button class="cursor-pointer ml-6 text-sm text-red-500 hover:underline focus:underline" wire:click="confirmTeamMemberRemoval('{{ $member->id }}')">
                                             {{ \Trans::get('Remove') }}
                                         </button>
                                     @endif
@@ -75,15 +124,10 @@
                             </div>
                         @endforeach
                     </div>
-                    {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-                        @foreach ($team->members() as $member)
-                            <x-user-tile :user="$member" :team="$team" />
-                        @endforeach
-                    </div> --}}
                 </div>
 
                 <!-- Team Invitations -->
-                <div x-cloak x-show="activeTab === 1" class="mt-6 space-y-6">
+                <div x-cloak x-show="activeTab === 1" class="mt-6 px-6 space-y-6">
                     <div>
                         @if (Gate::check('addTeamMember', $team))
                             <x-jet-section-border/>
@@ -211,7 +255,7 @@
                 </div>
 
                 <!-- Team Applications -->
-                <div x-cloak x-show="activeTab === 2" class="mt-6 space-y-6">
+                <div x-cloak x-show="activeTab === 2" class="mt-6 px-6 space-y-6">
                     <x-jet-section-border/>
 
                     <!-- Team Member Applications -->
@@ -233,7 +277,7 @@
 
                                             <div class="flex items-center">
                                                 <button type="button"
-                                                        class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-black text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
+                                                        class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
                                                         wire:click.prevent="addTeamMemberUsingID({{ $application->user->id }})"
                                                 >Accept
                                                 </button>

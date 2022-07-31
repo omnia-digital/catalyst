@@ -1,14 +1,14 @@
-<nav x-data="{ open: false }" class="fixed w-full bg-primary z-50 shadow-sm">
-    <div class="max-w-8xl mx-auto flex justify-between items-center sm:block">
+<nav x-data="{ open: false }" class="fixed w-full bg-primary z-50 shadow-sm h-14">
+    <div class="flex justify-between items-center sm:block">
         <!-- Desktop Navigation Menu -->
-        <div class="inline-block sm:grid grid-cols-10 gap-2 h-14">
+        <div class="flex justify-between items-center w-full">
             <!-- Left side header -->
-            <div class="col-span-2">
+            <div class="md:w-64 pl-4">
                 <!-- Logo -->
                 <div class="flex items-center h-14 flex-shrink-0">
                     <a href="{{ route('social.home') }}"
-                    title="{{ env('APP_NAME') }}"
-                    class="text-black py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
+                       title="{{ env('APP_NAME') }}"
+                       class="text-base-text-color py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
                         <x-dynamic-component
                                 component="heroicon-s-globe-alt"
                                 class="flex-shrink-0 h-6 w-6"
@@ -19,24 +19,25 @@
                 </div>
             </div>
             <!-- Right side header -->
-            <div class="col-span-8">
-                <div class="flex space-x-6 items-center h-14">
+            <div class="flex flex-1 grid grid-cols-12 h-14 items-center">
                     <!-- Navigation Links -->
-                    <nav class="hidden flex-1 sm:block mx-auto max-w-2xl items-center space-x-4">
-                        @foreach ($navigation as $item)
-                            @if(\Platform::isModuleEnabled($item['module']))
-                                <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->route()->named($item['module'] . '*')">
-                                    <x-dynamic-component
-                                            :component="$item['icon']"
-                                            class="flex-shrink-0 h-6 w-6 mr-2"
-                                            aria-hidden="true"
-                                    />
-                                    {{ $item['label'] }}
-                                </x-main-nav-link>
-                            @endif
-                        @endforeach
-                    </nav>
-                    <div class="hidden ml-auto sm:flex max-w-sm justify-between md:items-center">
+                    <div class="hidden sm:flex col-span-9 items-center ">
+                        <nav class="space-x-4 flex justify-center">
+                            @foreach ($navigation as $item)
+                                @if(\Platform::isModuleEnabled($item['module']))
+                                    <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->route()->named($item['module'] . '*')">
+                                        <x-dynamic-component
+                                                :component="$item['icon']"
+                                                class="flex-shrink-0 h-6 w-6 mr-2"
+                                                aria-hidden="true"
+                                        />
+                                        {{ $item['label'] }}
+                                    </x-main-nav-link>
+                                @endif
+                            @endforeach
+                        </nav>
+                    </div>
+                    <div class="hidden sm:flex col-span-3 mr-4 justify-between md:items-center">
                         <!-- Search -->
                         <div class="hidden md:flex flex-1 items-center">
                             <div class="w-full">
@@ -46,76 +47,76 @@
                                         <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
                                     </div>
                                     <input id="search" name="search"
-                                        class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
-                                        placeholder="Search" type="search"/>
+                                           class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
+                                           placeholder="Search" type="search"/>
                                 </div>
                             </div>
                         </div>
                         <!-- Notifications -->
                         <div class="mx-3 flex items-center">
                             <a href="{{ route('notifications') }}"
-                            title="Notifications"
-                            class="{{ request()->routeIs('notifications') ? 'font-semibold text-secondary' : 'text-light-text-color hover:text-secondary' }}
+                               title="Notifications"
+                               class="{{ request()->routeIs('notifications') ? 'font-semibold text-secondary' : 'text-light-text-color hover:text-secondary' }}
                             {{ 'relative rounded-full w-full p-1 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
-                            aria-current="page">
+                               aria-current="page">
                                 <x-dynamic-component
                                         component="heroicon-o-bell"
                                         class="flex-shrink-0 h-6 w-6"
                                         aria-hidden="true"
                                 />
-                                    @if(Auth::user()
-                ->notifications()->whereNull('read_at')->count() > 0 )
-                                        <span class="ml-2 w-3 h-3 text-xxs absolute top-0 right-0 flex items-center justify-center text-white bg-danger-600 rounded-full">{{ Auth::user()
+                                @if(Auth::user()
+            ->notifications()->whereNull('read_at')->count() > 0 )
+                                    <span class="ml-2 w-3 h-3 text-2xs absolute top-0 right-0 flex items-center justify-center text-white-text-color bg-danger-600 rounded-full">{{ Auth::user()
                     ->notifications()->whereNull('read_at')->count() }}</span>
-                                    @endif
-                                    <span class="sr-only">View notifications</span>
+                                @endif
+                                <span class="sr-only">View notifications</span>
                             </a>
                         </div>
 
                         <!-- Teams Dropdown -->
-                    {{-- @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->isMemberOfATeam())
-                        <div class="md:relative">
-                            <x-jet-dropdown align="right" width="60">
-                                <x-slot name="trigger">
-                                    <button type="button"
-                                            class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                        <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->currentTeam->profile_photo_url }}" alt="{{ Auth::user()->currentTeam->name }}"/>
-                                    </button>
-                                </x-slot>
+                        {{-- @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->isMemberOfATeam())
+                            <div class="md:relative">
+                                <x-jet-dropdown align="right" width="60">
+                                    <x-slot name="trigger">
+                                        <button type="button"
+                                                class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                            <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->currentTeam->profile_photo_url }}" alt="{{ Auth::user()->currentTeam->name }}"/>
+                                        </button>
+                                    </x-slot>
 
-                                <x-slot name="content">
-                                    <div class="w-60">
-                                        <!-- Current Team -->
-                                        <div class="block px-4 py-2 text-xs text-light-text-color">
-                                            {{ \Trans::get('Current Team') }}
-                                        </div>
-                                        <x-jet-dropdown-link href="{{ route('social.teams.show', Auth::user()->currentTeam->handle) }}">
-                                            {{  Auth::user()->currentTeam->name }}
-                                        </x-jet-dropdown-link>
-
-                                                                                @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                                                                    <x-jet-dropdown-link href="{{ route('teams.create') }}">
-                                                                                        {{ \Trans::get('Create New Team') }}
-                                                                                    </x-jet-dropdown-link>
-                                                                                @endcan
-
-                                        @if(Auth::user()->hasMultipleTeams())
-                                            <div class="border-t border-gray-100"></div>
-
-                                            <!-- Team Switcher -->
+                                    <x-slot name="content">
+                                        <div class="w-60">
+                                            <!-- Current Team -->
                                             <div class="block px-4 py-2 text-xs text-light-text-color">
-                                                {{ \Trans::get('Switch Teams') }}
+                                                {{ \Trans::get('Current Team') }}
                                             </div>
+                                            <x-jet-dropdown-link href="{{ route('social.teams.show', Auth::user()->currentTeam->handle) }}">
+                                                {{  Auth::user()->currentTeam->name }}
+                                            </x-jet-dropdown-link>
 
-                                            @foreach (Auth::user()->teams as $team)
-                                                <x-jet-switchable-team :team="$team"/>
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                </x-slot>
-                            </x-jet-dropdown>
-                        </div>
-                    @endif --}}
+                                                                                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                                                                                        <x-jet-dropdown-link href="{{ route('teams.create') }}">
+                                                                                            {{ \Trans::get('Create New Team') }}
+                                                                                        </x-jet-dropdown-link>
+                                                                                    @endcan
+
+                                            @if(Auth::user()->hasMultipleTeams())
+                                                <div class="border-t border-gray-100"></div>
+
+                                                <!-- Team Switcher -->
+                                                <div class="block px-4 py-2 text-xs text-light-text-color">
+                                                    {{ \Trans::get('Switch Teams') }}
+                                                </div>
+
+                                                @foreach (Auth::user()->teams as $team)
+                                                    <x-jet-switchable-team :team="$team"/>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    </x-slot>
+                                </x-jet-dropdown>
+                            </div>
+                        @endif --}}
 
                         <!-- Settings Dropdown -->
                         <div class="relative flex">
@@ -132,13 +133,13 @@
                                                 {{ Auth::user()->name }}
                                                 <div>
                                                     <img class="inline-block h-8 w-8 rounded-full"
-                                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                        alt=""/>
+                                                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                         alt=""/>
                                                 </div>
                                                 <svg class="-mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                                     <path fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"/>
+                                                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                          clip-rule="evenodd"/>
                                                 </svg>
                                             </button>
                                         </span>
@@ -168,7 +169,7 @@
                                         @csrf
 
                                         <x-jet-dropdown-link href="{{ route('logout') }}"
-                                                            onclick="event.preventDefault();
+                                                             onclick="event.preventDefault();
                                                                         this.closest('form').submit();">
                                             {{ \Trans::get('Log Out') }}
                                         </x-jet-dropdown-link>

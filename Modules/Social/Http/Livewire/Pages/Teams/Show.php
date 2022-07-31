@@ -6,11 +6,12 @@ use App\Models\Location;
 use App\Models\Team;
 use App\Traits\Team\WithTeamManagement;
 use Livewire\Component;
+use OmniaDigital\OmniaLibrary\Livewire\WithMap;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Show extends Component
 {
-    use WithTeamManagement;
+    use WithTeamManagement, WithMap;
 
     public $team;
 
@@ -46,7 +47,7 @@ class Show extends Component
 
     public function getPlacesProperty()
     {
-        $places = Location::select(['lat', 'lng', 'model_id'])
+        $places = Location::select(['lat', 'lng', 'model_id', 'model_type'])
             ->where('model_id', $this->team->id)
             ->where('model_type', Team::class)
             ->hasCoordinates()
@@ -54,6 +55,7 @@ class Show extends Component
             ->get()
             ->map(function (Location $location) {
                 return [
+                    'id' => $location->id,
                     'name' => $location->model->name,
                     'lat' => $location->lat,
                     'lng' => $location->lng,
@@ -81,8 +83,8 @@ class Show extends Component
     public function mount(Team $team)
     {
         $team->owner;
-        $this->displayUrl = optional($team->getMedia('team_sample_images')->first())->getFullUrl();
-        $this->displayID = optional($team->getMedia('team_sample_images')->first())->id;
+        $this->displayUrl = $team->sampleImages()->first()->getFullUrl();
+        $this->displayID = $team->sampleImages()->first()->id;
     }
 
     public function render()

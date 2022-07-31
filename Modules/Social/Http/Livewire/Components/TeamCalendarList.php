@@ -22,17 +22,23 @@ class TeamCalendarList extends Component
         'start_date' => 'Launch Date'
     ];
 
+    public string $dateColumn = 'start_date';
+
     public Team $team;
 
     public ?string $classes = '';
+
+    protected $listeners = [
+        'teamSelected' => 'handleTeamSelected'
+    ];
 
     public function getRowsQueryProperty()
     {
         $query = Team::query()
             ->withCount(['users']);
 
-        $query = $this->applyFilters($query)
-            ->orderBy($this->orderBy, $this->sortOrder);
+        $query = $this->applyFilters($query);
+        $query = $this->applySorting($query);
 
         return $query;
     }
@@ -57,6 +63,7 @@ class TeamCalendarList extends Component
             ->get()
             ->map(function (Location $location) {
                 return [
+                    'id' => $location->id,
                     'name' => $location->model->name,
                     'lat' => $location->lat,
                     'lng' => $location->lng,
@@ -75,6 +82,13 @@ class TeamCalendarList extends Component
     public function selectTeam($teamID)
     {
         $this->team = Team::find($teamID);
+    }
+
+    public function handleTeamSelected($teamId)
+    {
+        $this->selectTeam($teamId);
+
+        $this->dispatchBrowserEvent('select-event', ['team' => $this->team]);
     }
 
     public function moreInfo()

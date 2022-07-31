@@ -10,7 +10,7 @@
         </div>
     </div>
             @if(count($categories))
-                    <div class="flex justify-between space-x-2 pt-4">
+                    <div class="flex justify-between space-x-2 pt-4 mb-4">
                         @foreach ($categories as $category)
                             <x-library::button.link :href="route('social.teams.home', ['lens' => str($category)->slug()->value()])" class="w-full h-16 {{ str($lens) == str($category)->slug()->value
                             () ? 'border-secondary text-base-text-color' : 'text-base-text-color' }}">
@@ -20,8 +20,11 @@
                     </div>
             @endif
 
+            <!-- Filters -->
+            @include('livewire.partials.filters', ['skipFilters' => ['has_attachment']])
+
             {{-- Sorting & Filters --}}
-            <div class="flex items-center space-x-4">
+            {{-- <div class="flex items-center space-x-4">
                 <div class="flex items-center space-x-2">
                     <p class="font-bold">Sort</p>
                     <x-library::dropdown>
@@ -37,7 +40,7 @@
 
                         <x-library::dropdown.item wire:click.prevent="sortBy('name')">{{ Trans::get('By name') }}</x-library::dropdown.item>
                         <x-library::dropdown.item wire:click.prevent="sortBy('members')">{{ Trans::get('By members') }}</x-library::dropdown.item>
-                        {{--                        <x-library::dropdown.item wire:click.prevent="sortBy('rating')">By rating</x-library::dropdown.item>--}}
+                        {{--                        <x-library::dropdown.item wire:click.prevent="sortBy('rating')">By rating</x-library::dropdown.item>}}
                     </x-library::dropdown>
                 </div>
                 <div class="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
@@ -53,42 +56,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="border border-gray-200 bg-white shadow-sm rounded-md flex items-center space-x-4 px-4 py-2">
-                <x-library::heading.3>{{ Trans::get('Filters') }}</x-library::heading.3>
-
-                <div>
-                    <x-library::input.text wire:model.debounce.450ms="filters.location" placeholder="{{ Trans::get('Location') }}"/>
-                </div>
-
-                <div>
-                    <x-library::input.date wire:model="startDate" placeholder="{{ Trans::get('Team Launch Date') }}"/>
-                </div>
-
-                <div class="w-96">
-                    <x-library::input.selects wire:model="tags" :options="$allTags"/>
-                </div>
-
-                <div class="flex items-center w-full z-50">
-                    <x-library::input.label value="Members" class="mr-8 font-bold"/>
-                    <x-library::input.range-slider
-                            wire:model.defer="members"
-                            :min="0" :max="100" :step="5" :decimals="0"/>
-                </div>
-
-                {{--                    <div>--}}
-                {{--                        <div class="mt-2 grid grid-cols-3 gap-3 sm:grid-cols-5">--}}
-                {{--                            @for($i = 1; $i <= 5; $i++)--}}
-                {{--                                <x-library::input.checkbox-card wire:model="filters.rating" wire:key="rating-{{ $i }}" :value="$i">--}}
-                {{--                                    <div class="flex items-center space-x-1">--}}
-                {{--                                        <span>{{ $i }}</span>--}}
-                {{--                                        <x-heroicon-o-star class="w-4 h-4"/>--}}
-                {{--                                    </div>--}}
-                {{--                                </x-library::input.checkbox-card>--}}
-                {{--                            @endfor--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-            </div>
+            </div> --}}
 
             @if($lens)
                 <h2 class="pt-3">{{ str($lens)->headline() }}</h2>
@@ -96,9 +64,11 @@
             <div class="px-4 sm:px-6 md:px-0">
                 <div class="py-4">
                     <div class="col-span-2 grid grid-cols-3 gap-3">
-                        @foreach($teams as $team)
+                        @forelse($teams as $team)
                             <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
-                        @endforeach
+                        @empty
+                            <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
+                        @endforelse
                     </div>
                 </div>
             </div>

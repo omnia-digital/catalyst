@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\Advice\Database\Seeders\AdviceDatabaseSeeder;
 use Modules\Resources\Database\Seeders\ResourcesDatabaseSeeder;
+use Modules\Reviews\Database\Seeders\ReviewsDatabaseSeeder;
+use Modules\Reviews\Database\Seeders\ReviewTableSeeder;
 use Modules\Social\Database\Seeders\PostsTableSeeder;
 use Modules\Social\Database\Seeders\SocialDatabaseSeeder;
 
@@ -32,6 +34,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ResourcesDatabaseSeeder::class);
         $this->call(AdviceDatabaseSeeder::class);
         $this->call(NotificationTableSeeder::class);
+        $this->call(LanguageTableSeeder::class);
+        $this->call(ReviewsDatabaseSeeder::class);
 
         if (DB::connection() instanceof \Illuminate\Database\MySqlConnection) {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');

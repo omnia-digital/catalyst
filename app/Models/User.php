@@ -80,6 +80,11 @@ class User extends Authenticatable
             return $this->profile->profile_photo_url;
         }
 
+        public function getOnlineStatusAttribute()
+        {
+            return true;
+        }
+
         //// Relations ////
 
         public function profile() {

@@ -13,7 +13,7 @@
     </div>
 
     <!-- Filters -->
-    @include('livewire.partials.filters')
+    @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
     @if(empty($bookmarks))
         <h2>No Bookmarked Resources</h2>
@@ -65,7 +65,7 @@
                         component: 'social.undiscovered'
                     },
                 ],
-                notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>',
+                notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-black rounded-full">3</span>',
             }
         }
     </script>

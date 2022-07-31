@@ -15,7 +15,7 @@
                             @click="open = false"
                     >
                         <span class="sr-only">Close sidebar</span>
-                        <x-heroicon-o-x class="h-6 w-6 text-white"/>
+                        <x-heroicon-o-x class="h-6 w-6 text-white-text-color"/>
                     </button>
                 </div>
                 <div class="flex-shrink-0 flex items-center px-4">
@@ -40,11 +40,11 @@
                         </a>
                         @foreach ($navigation as $item)
                             <a href="{{ route($item['name']) }}"
-                               class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-light-text-color hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center
+                               class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white-text-color' : 'text-light-text-color hover:bg-gray-700 hover:text-white-text-color' }} {{ 'group flex items-center
                                px-2 py-2 text-base-text-color font-medium' }}">
                                 <h2>
                                     <x-dynamic-component :component="$item['icon']"
-                                                         class="{{ $item['current'] ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
+                                                         class="{{ $item['current'] ? 'text-white-text-color' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
                                                          aria-hidden="true"/>
                                     <span>{{ $item['label'] }}</span>
                                 </h2>
@@ -62,13 +62,16 @@
     <!-- Static \sidebar for desktop -->
     <div class="hidden md:flex md:flex-col scrollbar-hide md:sticky top-20 md:inset-y-2">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
-        <div class="flex flex-col min-h-0 ">
+        <div class="flex flex-col min-h-0 space-y-4">
+            <livewire:partials.profile-badge/>
+
+            <hr class="mr-2 border-gray-300"/>
             <div class="flex mb-4">
                 <nav class="space-y-3">
                     @foreach ($navigation as $item)
                         <a href="{{ route($item['name']) }}"
                            title="{{ $item['label'] }}"
-                           class="{{ request()->routeIs($item['name']) ? 'font-semibold text-black' : 'text-light-text-color hover:text-black' }}
+                           class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
                            {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
                            aria-current="page">
                             <x-dynamic-component
@@ -81,7 +84,6 @@
                     @endforeach
                 </nav>
             </div>
-            <livewire:partials.profile-badge/>
 
 {{--            <livewire:social::partials.applications/>--}}
         </div>

@@ -13,17 +13,22 @@ class Show extends Component
     public $post;
     public $recentlyAddedComment;
 
-    public function postAdded(Post $post) {
+    public function postAdded(Post $post)
+    {
         $this->recentlyAddedComment = $post;
     }
 
-    public function mount(Post $post)
+    public function mount($post)
     {
-        if ($post->type === PostType::RESOURCE) {
-            return $this->redirectRoute('resources.show', $post->id);
+        $this->post = Post::withoutGlobalScope('parent')->findOrFail($post);
+
+        if ($this->post->type === PostType::RESOURCE) {
+            $this->redirectRoute('resources.show', $this->post->id);
+
+            return;
         }
 
-        $this->post = $post->load('comments');
+        $this->post = $this->post->load('comments');
     }
 
     public function render()

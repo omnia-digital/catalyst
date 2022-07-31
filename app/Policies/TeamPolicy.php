@@ -81,6 +81,18 @@ class TeamPolicy
     }
 
     /**
+     * Determine whether the user can give a team member an award.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Team  $team
+     * @return mixed
+     */
+    public function addAwardToTeamMember(User $user, Team $team)
+    {
+        return $user->hasTeamRole($team, 'admin') || $user->ownsTeam($team);
+    }
+
+    /**
      * Determine whether the user can remove team members.
      *
      * @param  \App\Models\User  $user

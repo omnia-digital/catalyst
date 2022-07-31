@@ -10,15 +10,21 @@ use OmniaDigital\OmniaLibrary\Livewire\WithMap;
 /**
  * @property array $places
  */
-class FindProjects extends Component
+class TeamMap extends Component
 {
     use WithMap;
 
     public ?string $startDate = null;
 
-    public function updatedStartDate()
+    protected $listeners = [
+        'startDateUpdated' => 'handleStartDateUpdated'
+    ];
+
+    public function handleStartDateUpdated($data)
     {
-        $this->addPlaces('project-map', $this->places);
+        $this->startDate = $data['start_date'];
+
+        $this->addPlaces('team-map', $this->places);
     }
 
     public function getPlacesProperty()
@@ -30,6 +36,7 @@ class FindProjects extends Component
             ->get()
             ->map(function (Location $location) {
                 return [
+                    'id' => $location->id,
                     'name' => $location->model->name,
                     'lat' => $location->lat,
                     'lng' => $location->lng,
@@ -47,7 +54,7 @@ class FindProjects extends Component
 
     public function render()
     {
-        return view('social::livewire.components.find-projects', [
+        return view('social::livewire.components.team-map', [
             'places' => $this->places,
         ]);
     }
