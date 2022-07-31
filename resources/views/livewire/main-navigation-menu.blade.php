@@ -1,9 +1,9 @@
 <nav x-data="{ open: false }" class="fixed w-full bg-primary z-50 shadow-sm">
-    <div class="max-w-8xl mx-auto flex justify-between items-center sm:block">
+    <div class="flex justify-between items-center sm:block">
         <!-- Desktop Navigation Menu -->
-        <div class="inline-block sm:grid grid-cols-10 gap-2 h-14">
+        <div class="flex justify-between items-center w-full h-14">
             <!-- Left side header -->
-            <div class="col-span-2">
+            <div class="md:w-64 pl-4">
                 <!-- Logo -->
                 <div class="flex items-center h-14 flex-shrink-0">
                     <a href="{{ route('social.home') }}"
@@ -19,10 +19,10 @@
                 </div>
             </div>
             <!-- Right side header -->
-            <div class="col-span-8">
+            <div class="flex-1 px-4">
                 <div class="flex space-x-6 items-center h-14">
                     <!-- Navigation Links -->
-                    <nav class="hidden flex-1 sm:block mx-auto max-w-2xl items-center space-x-4">
+                    <nav class="hidden flex-1 sm:block  items-center space-x-4">
                         @foreach ($navigation as $item)
                             @if(\Platform::isModuleEnabled($item['module']))
                                 <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->route()->named($item['module'] . '*')">
