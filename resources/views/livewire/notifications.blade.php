@@ -7,7 +7,7 @@
                 <div class="flex items-center">
                     <h1 class="py-2 text-3xl">Notifications</h1>
                     @if(Auth::user()->notifications()->whereNull('read_at')->count() > 0 )
-                        <span class="ml-2 w-6 h-6 text-md flex items-center justify-center text-white bg-danger-600 rounded-full">
+                        <span class="ml-2 w-6 h-6 text-md flex items-center justify-center text-white-text-color bg-danger-600 rounded-full">
                             {{ Auth::user()->notifications()->whereNull('read_at')->count() }}
                         </span>
                     @endif

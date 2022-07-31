@@ -27,7 +27,7 @@
                 </div>
             </div>
             {{-- No program to calculate reviewScore yet
-                <div class="flex items-center text-white text-3xl font-semibold">
+                <div class="flex items-center text-white-text-color text-3xl font-semibold">
                 <x-heroicon-s-star class="w-6 h-6" />
                 {{ $user->reviewScore ?? '3758' }}
             </div> --}}

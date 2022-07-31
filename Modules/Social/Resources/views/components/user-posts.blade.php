@@ -48,7 +48,7 @@
     </div>
     <!-- Posts -->
     <div>
-        {{--                <div class="flex justify-between items-center text-black font-semibold">--}}
+        {{--                <div class="flex justify-between items-center text-base-text-color font-semibold">--}}
         {{--                    <p class="text-sm flex">Posts <span class="bg-gray-400 rounded-full ml-2 w-5 h-5 flex justify-center items-center">{{ $this->user->posts()->count() }}</span></p>--}}
         {{--                    <a href="#" class="text-xs flex items-center">See all--}}
         {{--                        <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>--}}

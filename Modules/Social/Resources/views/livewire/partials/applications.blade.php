@@ -39,11 +39,11 @@
             <ul class="flex justify-center items-center my-4">
                 <template x-for="(tab, index) in tabs" :key="index">
                     <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-base-text-color border-b-2 justify-center"
-                        :class="activeTab===index ? 'text-black font-bold border-black' : ''" @click="activeTab = index"
+                        :class="activeTab===index ? 'text-base-text-color font-bold border-black' : ''" @click="activeTab = index"
                     >
                         <span x-text="tab.label"></span>
                         <template x-if="tab.count > 0">
-                            <span x-text="tab.count" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full"></span>
+                            <span x-text="tab.count" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-black rounded-full"></span>
                         </template>
                     </li>
                 </template>

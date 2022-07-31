@@ -18,7 +18,7 @@
 
             <!-- Profile Awards -->
             <div class="hidden sm:block">
-                <div class="flex justify-between items-center text-black font-semibold">
+                <div class="flex justify-between items-center text-base-text-color font-semibold">
                     <p class="text-sm">{{ \Trans::get('Awards') }}</p>
                     @if($this->user->awards()->count())
                         <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
@@ -39,7 +39,7 @@
 
             {{-- Skills --}}
             <div class="hidden sm:block">
-                <div class="flex justify-between items-center text-black font-semibold">
+                <div class="flex justify-between items-center text-base-text-color font-semibold">
                     <p class="text-sm">{{ \Trans::get('Skills') }}</p>
                     @if($this->user->awards()->count())
                         <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
@@ -60,7 +60,7 @@
 
             {{-- Teams --}}
             <div class="hidden sm:block xl:hidden">
-                <div class="flex justify-between items-center text-black font-semibold">
+                <div class="flex justify-between items-center text-base-text-color font-semibold">
                     <p class="text-sm">{{ \Trans::get('Teams') }}</p>
                     @if($this->user->teams()->count())
                         <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
@@ -85,7 +85,7 @@
 
             <!-- Profile Reviews -->
             {{-- <div class="hidden sm:block xl:hidden">
-                <div class="flex justify-between items-center text-black font-semibold">
+                <div class="flex justify-between items-center text-base-text-color font-semibold">
                     <p class="text-sm">Reviews</p>
                     <a href="#" class="text-xs flex items-center">See all
                         <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
@@ -117,7 +117,7 @@
         <div class="hidden xl:block col-span-4 space-y-4 xl:mr-4">
             {{-- Teams --}}
             <div>
-                <div class="flex justify-between items-center text-black font-semibold">
+                <div class="flex justify-between items-center text-base-text-color font-semibold">
                     <p class="text-sm">{{ \Trans::get('Teams') }}</p>
                     @if($this->user->teams()->count())
                         <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
@@ -142,7 +142,7 @@
 
             <!-- Profile Reviews -->
             {{-- <div>
-                <div class="flex justify-between items-center text-black font-semibold">
+                <div class="flex justify-between items-center text-base-text-color font-semibold">
                     <p class="text-sm">Reviews</p>
                     <a href="#" class="text-xs flex items-center">See all
                         <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>

@@ -37,7 +37,8 @@ module.exports = {
             },
             fontSize: {
                 'dot': '.15rem',
-                'xxs': '0.65rem',
+                '2xs': '0.65rem',
+                '3xs': '0.55rem',
                 'base': '0.9375rem',
             },
             height: {
@@ -53,6 +54,7 @@ module.exports = {
             },
             colors: {
                 'base-text-color': 'var(--base-text-color)',
+                'white-text-color': 'var(--white-text-color)',
                 'light-text-color': 'var(--light-text-color)',
                 'dark-text-color': 'var(--dark-text-color)',
                 neutral: 'var(--neutral)',
