@@ -1,37 +1,33 @@
 @extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
-    <div>
+    <div class="">
+        <div class="mt-0">
+            <livewire:social::news-feed-editor/>
 
-            <div class="mt-0">
-                <div class="mx-auto">
-                    <livewire:social::news-feed-editor/>
-
-                    {{--                        <div x-data="setup()">--}}
-                    {{--                            <ul class="flex justify-center items-center my-4">--}}
-                    {{--                                <template x-for="(tab, index) in tabs" :key="tab.id">--}}
-                    {{--                                    <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-gray-500 border-b-2 justify-center"--}}
-                    {{--                                        :class="activeTab===tab.id ? 'text-black font-bold border-black' : ''"--}}
-                    {{--                                        @click="activeTab = tab.id"--}}
-                    {{--                                        x-html="tab.title + notifications"></li>--}}
-                    {{--                                </template>--}}
-                    {{--                            </ul>--}}
-                    {{--                        </div>--}}
+            {{--                        <div x-data="setup()">--}}
+            {{--                            <ul class="flex justify-center items-center my-4">--}}
+            {{--                                <template x-for="(tab, index) in tabs" :key="tab.id">--}}
+            {{--                                    <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-gray-500 border-b-2 justify-center"--}}
+            {{--                                        :class="activeTab===tab.id ? 'text-black font-bold border-black' : ''"--}}
+            {{--                                        @click="activeTab = tab.id"--}}
+            {{--                                        x-html="tab.title + notifications"></li>--}}
+            {{--                                </template>--}}
+            {{--                            </ul>--}}
+            {{--                        </div>--}}
 
 
-                    <!-- Featured Section -->
-                    <div class="mt-4">
-                        <livewire:social::pages.teams.map/>
-
-                    </div>
-                    <div class="mt-4">
-                        <livewire:social::news-feed/>
-                    </div>
-                </div>
+            <!-- Featured Section -->
+            <div class="mt-4 justify-center">
+                <livewire:social::pages.teams.map/>
             </div>
+            <div class="mt-4 mx-auto max-w-post-card-max-w">
+                <livewire:social::news-feed/>
+            </div>
+        </div>
     </div>
 
-        <livewire:media-manager :handleUploadProcess="false"/>
+    <livewire:media-manager :handleUploadProcess="false"/>
 @endsection
 @push('scripts')
     <script>

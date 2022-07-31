@@ -48,7 +48,8 @@ module.exports = {
                 'sm': '22rem',
                 '2xl': '40rem',
                 '8xl': '82rem',
-                '9xl': '90rem'
+                '9xl': '90rem',
+                'post-card-max-w': '680px'
             },
             colors: {
                 'base-text-color': 'var(--base-text-color)',

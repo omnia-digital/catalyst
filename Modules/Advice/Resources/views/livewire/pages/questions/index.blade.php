@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <x-sidebar-column class="max-w-sm" post-type="resource"/>
+        <x-sidebar-column post-type="resource"/>
 
     </div>
 @endsection
