@@ -1,11 +1,10 @@
 <div>
     <div class="flex bg-neutral">
         <!-- SideMenu -->
-        <livewire:social::layouts.module-navigation class="md:fixed md:w-64 pl-4 pt-4"/>
+        <livewire:social::layouts.module-navigation class="md:fixed md:w-64 pl-6 pt-4"/>
 
         <!-- Main Content -->
-        <div class="md:pl-64 flex flex-col">
-
+        <div class="md:pl-64 w-full flex flex-col">
             <div class="">
                 {{--            @if (Route::currentRouteName() !== 'social.profile.show')--}}
                 {{--                <div class="bg-neutral">--}}
@@ -18,7 +17,7 @@
 
                 <div class="min-h-screen">
                     <!-- Page content -->
-                    <div class="mx-auto">
+                    <div class="flex-1">
                         @hasSection('full-width-header')
                             <div class="">
                                 @yield('full-width-header')

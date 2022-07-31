@@ -6,6 +6,9 @@
             <div class="">
                 <div class="mb-2 flex justify-between items-center">
                     <div class="flex-1 flex items-center">
+                        <x-dynamic-component component="heroicon-o-briefcase"
+                                             class="{{ 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-8 w-8"
+                                             aria-hidden="true"/>
                         <h1 class="py-2 text-3xl">{{ Trans::get('My Teams') }}</h1>
                         <span class="bg-gray-400 text-xs rounded-full ml-2 w-5 h-5 flex items-center justify-center">{{ $teamsCount }}</span>
                     </div>
