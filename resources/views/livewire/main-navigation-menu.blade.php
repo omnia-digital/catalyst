@@ -8,7 +8,7 @@
                 <div class="flex items-center h-14 flex-shrink-0">
                     <a href="{{ route('social.home') }}"
                        title="{{ env('APP_NAME') }}"
-                       class="text-black py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
+                       class="text-base-text-color py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
                         <x-dynamic-component
                                 component="heroicon-s-globe-alt"
                                 class="flex-shrink-0 h-6 w-6"
@@ -66,7 +66,7 @@
                                 />
                                 @if(Auth::user()
             ->notifications()->whereNull('read_at')->count() > 0 )
-                                    <span class="ml-2 w-3 h-3 text-xxs absolute top-0 right-0 flex items-center justify-center text-white bg-danger-600 rounded-full">{{ Auth::user()
+                                    <span class="ml-2 w-3 h-3 text-2xs absolute top-0 right-0 flex items-center justify-center text-white-text-color bg-danger-600 rounded-full">{{ Auth::user()
                     ->notifications()->whereNull('read_at')->count() }}</span>
                                 @endif
                                 <span class="sr-only">View notifications</span>

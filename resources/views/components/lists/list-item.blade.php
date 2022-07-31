@@ -16,7 +16,7 @@
             <div class="absolute top-0 left-0">
                 <div class="flex items-center w-16 h-8 bg-gray-800 py-3 rounded-md text-center opacity-80">
                     <div class="ml-2 w-3 h-3 bg-red-600 rounded-full"></div>
-                    <p class="text-sm ml-1 uppercase text-white font-medium">Live</p>
+                    <p class="text-sm ml-1 uppercase text-white-text-color font-medium">Live</p>
                 </div>
             </div>
         @endif

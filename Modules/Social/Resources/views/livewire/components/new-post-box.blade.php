@@ -1,6 +1,6 @@
 <div x-data="{ reactionMenuOpen: false, attachmentDrawer: false, postSent: @entangle('postSent') }" class="flex relative items-start w-full bg-primary px-4 py-6 shadow sm:p-6 sm:rounded-lg">
     <div wire:loading.flex wire:target="savePost" class="absolute z-10 inset-0 justify-center items-center bg-primary opacity-50">
-        <x-loading-icon class="h-12 w-12 text-black" />
+        <x-loading-icon class="h-12 w-12 text-base-text-color" />
     </div>
     <div
         x-init="@this.on('postAdded', post => { setTimeout(() => { postSent = false }, 1500) })"

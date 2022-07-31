@@ -108,7 +108,7 @@
                 <div class="mt-12" x-data="{ isTrailerModalVisible: false }">
                     <button
                             @click="isTrailerModalVisible = true"
-                            class="flex bg-blue-500 text-white font-semibold px-4 py-4 hover:bg-blue-600 rounded transition ease-in-out duration-150"
+                            class="flex bg-blue-500 text-white-text-color font-semibold px-4 py-4 hover:bg-blue-600 rounded transition ease-in-out duration-150"
                     >
                         <svg class="w-6 fill-current" viewBox="0 0 24 24">
                             <path d="M0 0h24v24H0z" fill="none"></path>

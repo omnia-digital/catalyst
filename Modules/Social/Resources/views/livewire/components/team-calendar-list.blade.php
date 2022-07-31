@@ -4,10 +4,10 @@
             message: '',
             title: null,
             details: {
-                name: null, 
-                start_date_string: null, 
-                users_count: null, 
-                summary: null, 
+                name: null,
+                start_date_string: null,
+                users_count: null,
+                summary: null,
                 location_short: null
             },
             selectEvent(event) {
@@ -150,7 +150,7 @@
                     >More Info</button>
                     @if (!is_null($team) && $team->teamApplications()->hasUser($this->user->id))
                         <button
-                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white hover:opacity-75 active:opacity-75 focus:opacity-75"
+                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white-text-color hover:opacity-75 active:opacity-75 focus:opacity-75"
                             wire:click="removeApplication"
                         >{{ \Trans::get('Remove Application') }}</button>
                     @elseif(!is_null($team) && !$team->hasUser($this->user))
@@ -158,7 +158,7 @@
                             <x-jet-input-error for="user_id" class="mt-2" />
                         </div>
                         <button
-                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white hover:opacity-75 active:opacity-75 focus:opacity-75"
+                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white-text-color hover:opacity-75 active:opacity-75 focus:opacity-75"
                             wire:click="applyToTeam"
                         >{{ \Trans::get('Apply') }}</button>
                     @endif

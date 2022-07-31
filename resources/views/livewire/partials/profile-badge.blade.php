@@ -16,7 +16,7 @@
                             <div class="grow-0 bg-primary text-xs rounded-md p-1">
                                 {{ $user->level ?? '48' }}
                             </div>
-                            <div class="grow-0 text-xs text-white px-1">
+                            <div class="grow-0 text-xs text-white-text-color px-1">
                                 {{ $user->score ?? '3758' }}
                             </div>
                         </div>
