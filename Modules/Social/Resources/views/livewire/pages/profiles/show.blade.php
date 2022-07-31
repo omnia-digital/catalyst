@@ -110,11 +110,11 @@
             </div> --}}
 
         </div>
-        <div class="hidden sm:block sm:col-span-3 xl:col-span-5 mr-4">
+        <div class="hidden sm:block sm:col-span-3 xl:col-span-5 mr-4 xl:mr-0">
             <!-- User Posts -->
             <x-social::user-posts :posts="$this->user->posts"/>
         </div>
-        <div class="hidden xl:block col-span-4 space-y-4">
+        <div class="hidden xl:block col-span-4 space-y-4 xl:mr-4">
             {{-- Teams --}}
             <div>
                 <div class="flex justify-between items-center text-black font-semibold">
