@@ -1,17 +1,27 @@
 @extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
-    <div class="space-y-8">
+    <div class="mt-6 space-y-8">
         <h1 class="py-2 text-3xl">{{ \Trans::get('Discover New Teams') }}</h1>
 
         <div>
             <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured & Recommended') }}</x-library::heading.3>
 
             {{--      Use $featuredTeams      --}}
+
+            <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
+                @forelse (\App\Models\Team::all()->take(4) as $team)
+                    <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                @empty
+                    <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
+                @endforelse
+            </div>
+
         </div>
 
         <div>
-            <livewire:social::components.find-teams/>
+            <x-library::heading.3 class="uppercase">{{ \Trans::get('Team Map') }}</x-library::heading.3>
+            <livewire:social::pages.teams.map class=""/>
         </div>
 
         <div>

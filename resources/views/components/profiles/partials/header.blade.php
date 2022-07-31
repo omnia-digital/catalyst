@@ -12,13 +12,13 @@
                         <h1 class="text-3xl text-primary">{{ $user->name  }}</h1>
                         <h2 class="font-normal text-primary">{{ '@' .  $user->handle }}</h2>
                     </div>
-                    <div class="flex space-x-2 items-baseline text-primary text-sm">
-                        <div class="flex items-center space-x-1">
+                    <div class="flex space-x-2 items-center text-primary text-sm">
+                        <div class="flex space-x-1">
                             <x-heroicon-o-location-marker class="w-4 h-4"/>
                             <span>{{ $user->profile->country }}</span>
                         </div>
                         <x-dot/>
-                        <p>Joined about {{ $user->profile->created_at->diffForHumans() }}</p>
+                        <p class="text-primary">Joined about {{ $user->profile->created_at->diffForHumans() }}</p>
                         <x-dot/>
                         @if($user->online_status)
                             <x-tag name="Online" class="py-0"/>
