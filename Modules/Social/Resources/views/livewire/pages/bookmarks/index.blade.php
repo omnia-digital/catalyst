@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.pages.sidebar-page-layout')
+@extends('social::livewire.layouts.pages.sidebar-page-max-w-layout')
 
 @section('content')
     <div class="mb-2 flex justify-between items-center">
