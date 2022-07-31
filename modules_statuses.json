@@ -4,5 +4,6 @@
     "Projects": true,
     "Resources": true,
     "Jobs": true,
-    "Games": false
+    "Games": false,
+    "Reviews": true
 }
