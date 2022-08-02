@@ -1,15 +1,10 @@
 <div>
-    @hasSection('full-width-header')
-        <div class="">
-            @yield('full-width-header')
-        </div>
-    @endif
-    <div class="max-w-8xl mx-auto grid grid-cols-10 gap-4 bg-neutral @hasSection('full-width-header') pt-6 @else  @endif">
+    <div class="flex bg-neutral">
         <!-- SideMenu -->
-        <livewire:social::layouts.module-navigation class="col-span-2 pt-6"/>
+        <livewire:social::layouts.module-navigation class="md:fixed md:w-64 pl-6 pt-4"/>
 
         <!-- Main Content -->
-        <div class="col-span-8">
+        <div class="md:pl-64 w-full flex flex-col">
             <div class="">
                 {{--            @if (Route::currentRouteName() !== 'social.profile.show')--}}
                 {{--                <div class="bg-neutral">--}}
@@ -22,7 +17,12 @@
 
                 <div class="min-h-screen">
                     <!-- Page content -->
-                    <div class="mx-auto">
+                    <div class="flex-1">
+                        @hasSection('full-width-header')
+                            <div class="">
+                                @yield('full-width-header')
+                            </div>
+                        @endif
                         @yield('page-layout')
                     </div>
                 </div>

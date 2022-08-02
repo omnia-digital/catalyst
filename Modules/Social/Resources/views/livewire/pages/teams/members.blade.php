@@ -3,7 +3,7 @@
 
 @section('content')
         <div class="mt-4">
-            <h2 class="text-black font-semibold text-2xl mx-6 ">{{ \Trans::get('Members') }}</h2>
+            <h2 class="text-base-text-color font-semibold text-2xl mx-6 ">{{ \Trans::get('Members') }}</h2>
 
             <div x-data="setup()">
                 <!-- Team Members Navigation -->
@@ -277,7 +277,7 @@
 
                                             <div class="flex items-center">
                                                 <button type="button"
-                                                        class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-black text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
+                                                        class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
                                                         wire:click.prevent="addTeamMemberUsingID({{ $application->user->id }})"
                                                 >Accept
                                                 </button>

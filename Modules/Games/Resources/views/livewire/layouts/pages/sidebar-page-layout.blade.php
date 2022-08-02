@@ -5,6 +5,6 @@
         <div class="mx-auto max-w-4xl w-full">
             @yield('content')
         </div>
-        <x-sidebar-column class="max-w-sm"/>
+        <x-sidebar-column class="lg:max-w-sm"/>
     </div>
 @endsection

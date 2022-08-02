@@ -16,7 +16,7 @@
                         @click="open = false"
                     >
                         <span class="sr-only">Close sidebar</span>
-                        <x-heroicon-o-x class="h-6 w-6 text-white"/>
+                        <x-heroicon-o-x class="h-6 w-6 text-white-text-color"/>
                     </button>
                 </div>
                 <div class="flex-shrink-0 flex items-center px-4">
@@ -30,8 +30,8 @@
                         @foreach ($navigation as $item)
                             <a
                                 href="{{ route($item['name']) }}"
-                                class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white' : 'text-light-text-color hover:bg-gray-700 hover:text-white' }} {{ 'group flex items-center px-2 py-2 text-base-text-color font-medium' }}">
-                                <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
+                                class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white-text-color' : 'text-light-text-color hover:bg-gray-700 hover:text-white-text-color' }} {{ 'group flex items-center px-2 py-2 text-base-text-color font-medium' }}">
+                                <x-dynamic-component :component="$item['icon']" class="{{ $item['current'] ? 'text-white-text-color' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3 flex-shrink-0 h-6 w-6"
                                                         aria-hidden="true"/>
                                 {{ $item['label'] }}
                             </a>
@@ -58,10 +58,10 @@
                                  alt=""/>
                         </div>
                         <div class="bg-black flex items-center rounded-md -m-2 p-1">
-                            <div class="bg-primary text-xxs rounded-md p-1">
+                            <div class="bg-primary text-2xs rounded-md p-1">
                                 {{ Auth::user()->level ?? '48' }}
                             </div>
-                            <div class="text-xxs text-white p-1">
+                            <div class="text-2xs text-white-text-color p-1">
                                 {{ Auth::user()->score ?? '3758' }}
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                         <a
                             href="{{ route($item['name']) }}"
                             title="{{ $item['label'] }}"
-                            class="{{ request()->routeIs($item['name']) ? 'bg-neutral-light font-semibold text-black' : 'text-light-text-color hover:text-black hover:bg-neutral-light' }}
+                            class="{{ request()->routeIs($item['name']) ? 'bg-neutral-light font-semibold text-base-text-color' : 'text-light-text-color hover:text-base-text-color hover:bg-neutral-light' }}
                             {{ 'w-full py-2 px-6 group flex flex-col justify-center items-center relative text-xs font-medium' }}"
                         >
                             <x-dynamic-component

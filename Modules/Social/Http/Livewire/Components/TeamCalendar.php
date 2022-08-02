@@ -8,30 +8,15 @@ use Asantibanez\LivewireCalendar\LivewireCalendar;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Modules\Social\Support\Livewire\InteractsWithCalendarTeams;
 
 class TeamCalendar extends LivewireCalendar
 {
+    use InteractsWithCalendarTeams;
+
     public $selectedID;
 
     protected $listeners = ['select_event' => 'goToMonth'];
-
-    public function events() : Collection
-    {
-        return Team::query()
-            ->whereDate('start_date', '>=', $this->gridStartsAt)
-            ->whereDate('start_date', '<=', $this->gridEndsAt)
-            ->get()
-            ->map(function (Team $team) {
-                return [
-                    'id' => $team->id,
-                    'title' => $team->name,
-                    'description' => $team->summary,
-                    'date' => $team->start_date,
-                    'count' => $team->allUsers()->count(),
-                    'location' => $team->location
-                ];
-            });
-    }
 
     public function goToMonth($eventID)
     {
@@ -42,6 +27,11 @@ class TeamCalendar extends LivewireCalendar
         $this->endsAt = $this->startsAt->clone()->endOfMonth()->startOfDay();
 
         $this->calculateGridStartsEnds();
+    }
+
+    public function onEventClick($eventId)
+    {
+        $this->emitTo('social::components.team-calendar-list', 'teamSelected', $eventId);
     }
 
     public function getUserProperty()

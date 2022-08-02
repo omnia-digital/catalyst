@@ -1,4 +1,4 @@
-<aside class="hidden xl:block sticky h-screen overflow-y-scroll scrollbar-hide top-20 pb-24 {{$class ?? ''}}">
+<aside class="sticky h-screen max-w-sm overflow-y-scroll scrollbar-hide top-20 pb-24 {{$class ?? ''}}">
     <div class="space-y-4">
         <livewire:social::partials.trending-section type="{{$type ?? ''}}"/>
         <livewire:social::partials.who-to-follow-section/>

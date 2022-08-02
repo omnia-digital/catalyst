@@ -4,10 +4,10 @@
             message: '',
             title: null,
             details: {
-                name: null, 
-                start_date_string: null, 
-                users_count: null, 
-                summary: null, 
+                name: null,
+                start_date_string: null,
+                users_count: null,
+                summary: null,
                 location_short: null
             },
             selectEvent(event) {
@@ -24,7 +24,7 @@
                     this.details[key] = data[key];
                 };
             },
-        }" 
+        }"
         x-init="
             @this.on('select_event', (eventID) => {
                 showDetail = true;
@@ -38,7 +38,9 @@
                 setTimeout(() => { message = false; }, 3000);
             });
         "
-        class="flex flex-col sticky h-full top-20 inset-y-2">
+         x-on:select-event.window="selectEvent($event.detail.team);"
+        class="flex flex-col sticky h-full top-20 inset-y-2"
+    >
         <div class="h-full flex flex-col">
             <div class="bg-primary flex justify-between items-center text-xl min-h-[64px] pt-2 px-4">
                 <div class="font-medium">
@@ -60,7 +62,7 @@
                             <span class="sr-only" x-text="'Calendar'"></span>
                             <span><x-heroicon-o-calendar class="h-6 w-6" /></span>
                         </a>
-                        <a x-cloak x-show="showDetail" href="#" 
+                        <a x-cloak x-show="showDetail" href="#"
                             x-on:click.prevent="showDetail = false"
                             @class([
 		                    'text-light-text-color hover:text-secondary active:text-secondary focus:text-secondary'
@@ -70,7 +72,7 @@
                         </a>
                 </div>
             </div>
-            
+
             <!-- Filters -->
             <div x-show="!showDetail">
                 @include('livewire.partials.filters-sm', ['skipFilters' => ['has_attachment']])
@@ -148,7 +150,7 @@
                     >More Info</button>
                     @if (!is_null($team) && $team->teamApplications()->hasUser($this->user->id))
                         <button
-                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white hover:opacity-75 active:opacity-75 focus:opacity-75"
+                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white-text-color hover:opacity-75 active:opacity-75 focus:opacity-75"
                             wire:click="removeApplication"
                         >{{ \Trans::get('Remove Application') }}</button>
                     @elseif(!is_null($team) && !$team->hasUser($this->user))
@@ -156,7 +158,7 @@
                             <x-jet-input-error for="user_id" class="mt-2" />
                         </div>
                         <button
-                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white hover:opacity-75 active:opacity-75 focus:opacity-75"
+                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white-text-color hover:opacity-75 active:opacity-75 focus:opacity-75"
                             wire:click="applyToTeam"
                         >{{ \Trans::get('Apply') }}</button>
                     @endif
