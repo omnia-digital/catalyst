@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "3x1io/filament-themes": "^1.0",
         "asantibanez/livewire-calendar": "dev-master",
         "awssat/laravel-visits": "^3.0",
         "bezhansalleh/filament-google-analytics": "^0.0.2",
@@ -24,7 +25,6 @@
         "jorenvanhocht/laravel-share": "^4.2",
         "laravel/framework": "^9.0",
         "laravel/jetstream": "^2.4",
-        "laravel/nova": "^3.9",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/vapor-cli": "^1.38",
@@ -43,6 +43,7 @@
         "spatie/laravel-activitylog": "^4.4",
         "spatie/laravel-analytics": "^4.1",
         "spatie/laravel-medialibrary": "^10.0.0",
+        "spatie/laravel-settings": "^2.4",
         "spatie/laravel-sluggable": "^3.1",
         "spatie/laravel-tags": "^4.3",
         "squirephp/countries-en": "^3.3",
@@ -71,10 +72,6 @@
         {
             "type": "vcs",
             "url": "git@github.com:Osimba/livewire-calendar.git"
-        },
-        {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
         }
     ],
     "autoload": {
@@ -82,7 +79,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Modules\\": "Modules/"
+            "Modules\\": "Modules/",
+            "Themes\\": "resources/views/themes/"
         }
     },
     "autoload-dev": {
