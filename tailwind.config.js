@@ -92,6 +92,7 @@ module.exports = {
         require('@tailwindcss/aspect-ratio'),
         require('tailwind-scrollbar-hide'),
         require('@tailwindcss/line-clamp'),
+        require('tailwindcss-theming'),
         plugin(function({ matchUtilities, theme }) {
             matchUtilities(
                 {
