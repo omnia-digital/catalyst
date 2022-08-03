@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TeamResource\Pages;
 use App\Filament\Resources\TeamResource\RelationManagers;
 use App\Models\Team;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -23,7 +24,13 @@ class TeamResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
+                Forms\Components\Select::make('user_id')
+                    ->label('Owner')
+                    ->options(User::all()
+                        ->mapWithKeys(function ($item, $key) { 
+                            return [$item['id'] => $item['id'] . ' - ' . $item['name']]; 
+                        }))
+                    ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
@@ -47,7 +54,8 @@ class TeamResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id'),
+                Tables\Columns\TextColumn::make('owner.name')
+                    ->label('Owner'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('start_date')
                     ->dateTime(),
@@ -65,8 +73,8 @@ class TeamResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make('view'),
+                Tables\Actions\EditAction::make('edit'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
