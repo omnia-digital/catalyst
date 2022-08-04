@@ -44,6 +44,14 @@ class TeamResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('user_id')
+                    ->label('Owner')
+                    ->options(User::all()
+                        ->mapWithKeys(function ($item, $key) {
+                            return [$item['id'] => $item['id'] . ' - ' . $item['name']];
+                        }))
+                    ->searchable()
+                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -66,6 +74,8 @@ class TeamResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('owner.name')
+                    ->label('Owner'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('start_date')
                     ->dateTime(),
@@ -83,8 +93,8 @@ class TeamResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make('view'),
+                Tables\Actions\EditAction::make('edit'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
