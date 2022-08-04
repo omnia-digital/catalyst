@@ -5,15 +5,15 @@
         <h2>No Resource found</h2>
     @else
 
-        <div class="mb-4 flex items-center">
-            <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full hover:text-primary">
-                <a href="{{ route('resources.home') }}">
-                    <x-heroicon-o-arrow-left class="h-6"/>
-                </a>
-            </div>
-            <h1 class="py-2 text-3xl">Resource</h1>
+        <div class="mb-4 rounded-b-lg pl-4 flex items-center bg-secondary">
+{{--            <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full hover:text-primary">--}}
+{{--                <a href="{{ route('resources.home') }}">--}}
+{{--                    <x-heroicon-o-arrow-left class="h-6"/>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+            <a href="{{route('resources.home')}}"><h1 class="py-4 text-3xl text-primary hover:cursor-pointer">Resources</h1></a>
         </div>
-        <div>
+        <div class="mx-4">
             @if($resource->image)
                 <div>
                     <img class="rounded-lg w-full object-cover max-h-96 bg-neutral-dark flex-shrink-0" src="{{$resource->image}}" alt="{{$resource->title}}">

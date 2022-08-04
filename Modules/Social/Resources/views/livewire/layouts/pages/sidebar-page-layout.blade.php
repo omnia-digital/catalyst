@@ -2,7 +2,7 @@
 
 
 @section('page-layout')
-    <div class="grid grid-cols-12 gap-4 pt-6 mr-4">
+    <div class="grid grid-cols-12 gap-4 mr-4">
         <div class="col-span-9">
             @yield('content')
         </div>

@@ -31,7 +31,6 @@
 
 
 @layer utilities {
-    @variants responsive {
         .masonry-1 {
             column-gap: 1em;
             column-count: 1;
@@ -47,8 +46,6 @@
         .break-inside {
             break-inside: avoid;
         }
-
-    }
 }
 
 p, a, body, h1, h2, h3, h4, h5, h6 {

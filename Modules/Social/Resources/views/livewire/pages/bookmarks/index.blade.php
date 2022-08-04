@@ -1,14 +1,9 @@
-@extends('social::livewire.layouts.pages.sidebar-page-max-w-layout')
+@extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
-    <div class="mb-2 flex justify-between items-center">
-        <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full">
-            <a href="{{ route('social.home') }}">
-                <x-heroicon-o-arrow-left class="h-6"/>
-            </a>
-        </div>
+    <div class="mb-4 rounded-b-lg pl-4 flex items-center bg-secondary items-center">
         <div class="flex-1 flex items-center">
-            <h1 class="py-2 text-3xl">Bookmarks</h1>
+            <h1 class="py-4 text-3xl text-primary hover:cursor-pointer">Bookmarks</h1>
         </div>
     </div>
 
