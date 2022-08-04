@@ -16,9 +16,29 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TeamResource extends Resource
 {
+    protected static ?string $label = 'Teams';
     protected static ?string $model = Team::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'My Teams';
+
+    public static function getEloquentQuery(): Builder
+    {
+        if (auth()->user()->is_admin) {
+            return parent::getEloquentQuery();
+        } else {
+            return parent::getEloquentQuery()->whereIn('id', auth()->user()->ownedTeams->pluck('id'));
+        }
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getEloquentQuery()->get()->count();
+    }
+
+    protected static function getNavigationBadgeColor(): ?string
+    {
+        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
+    }
 
     public static function form(Form $form): Form
     {
@@ -27,8 +47,8 @@ class TeamResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->label('Owner')
                     ->options(User::all()
-                        ->mapWithKeys(function ($item, $key) { 
-                            return [$item['id'] => $item['id'] . ' - ' . $item['name']]; 
+                        ->mapWithKeys(function ($item, $key) {
+                            return [$item['id'] => $item['id'] . ' - ' . $item['name']];
                         }))
                     ->searchable()
                     ->required(),
@@ -59,8 +79,8 @@ class TeamResource extends Resource
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('start_date')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('summary'),
-                Tables\Columns\TextColumn::make('content'),
+//                Tables\Columns\TextColumn::make('summary'),
+//                Tables\Columns\TextColumn::make('content'),
                 Tables\Columns\TextColumn::make('location'),
                 Tables\Columns\TextColumn::make('rating'),
                 Tables\Columns\TextColumn::make('languages'),

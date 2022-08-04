@@ -2,8 +2,8 @@
 
 
 @section('page-layout')
-    <div class="flex space-x-4 pt-6">
-        <div class="mx-auto max-w-4xl w-full">
+    <div class="flex space-x-4">
+        <div class=" w-full">
             @yield('content')
         </div>
         <x-sidebar-column class="max-w-sm" type="{{\Modules\Social\Enums\PostType::RESOURCE->value}}"/>

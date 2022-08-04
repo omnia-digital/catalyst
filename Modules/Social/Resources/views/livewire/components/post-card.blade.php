@@ -4,16 +4,16 @@ cursor-pointer' : ''
 
     <div class="flex justify-between px-5">
         <div class="flex space-x-3">
-            <div class="mr-3 flex-shrink-0">
+            <div class="flex-shrink-0">
                 <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}"/>
             </div>
             <div class="min-w-0 flex-1">
                 <div class="min-w-0">
-                    <div class="mr-2 font leading-5">
+                    <div class="font leading-5">
                         <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}"
                            class="hover:underline block font-bold text-dark-text-color">{{ $post->user->name }}</a>
                     </div>
-                    <div class="flex content-center space-x-1 text-base-text-color">
+                    <div class="flex content-center space-x-1 items-center text-base-text-color">
                         <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
                         <x-dot/>
                         <a href="{{ $post->getUrl() }}" class="hover:underline">

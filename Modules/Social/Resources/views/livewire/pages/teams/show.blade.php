@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="grid grid-cols-12 gap-4 mt-4">
+    <div class="grid grid-cols-12 gap-4 mt-4 mr-4">
         <div class="col-span-6 space-y-6">
 
             <h3>Discussion</h3>
@@ -158,7 +158,7 @@
                         </div>
                         <div class="mt-4 bg-white">
                             {{-- <x-library::map.google class="h-96" :places="$this->places"/> --}}
-                            <x-library::map.mapbox id="project-map" class="h-96 z-10" :places="$this->places" mapStyle="mapbox://styles/mapbox/dark-v10"/>
+                            <x-library::map.mapbox id="team-map" class="h-96 z-10" :places="$this->places" mapStyle="mapbox://styles/mapbox/dark-v10"/>
                         </div>
                     </div>
                     <!-- Team Languages -->

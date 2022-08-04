@@ -14,6 +14,8 @@ class Map extends Component
 
     public string|int|null $placeId = null;
 
+    public $height= '500px';
+
     protected $listeners = [
         'select_event' => 'handleEventSelected',
     ];

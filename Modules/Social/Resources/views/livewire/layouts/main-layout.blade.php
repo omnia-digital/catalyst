@@ -5,16 +5,7 @@
 
         <!-- Main Content -->
         <div class="md:pl-64 w-full flex flex-col">
-            <div class="">
-                {{--            @if (Route::currentRouteName() !== 'social.profile.show')--}}
-                {{--                <div class="bg-neutral">--}}
-                {{--                    <div class="flex-1 flex items-center">--}}
-                {{--                        <h1 class="py-4 ml-4 text-3xl">Community</h1>--}}
-                {{--                        <x-heroicon-o-cog class="mt-1 ml-3 w-6 h-6"/>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
-                {{--            @endif--}}
-
+            <div>
                 <div class="min-h-screen">
                     <!-- Page content -->
                     <div class="flex-1">

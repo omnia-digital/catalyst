@@ -39,44 +39,41 @@ class MainNavigationMenu extends Component
                 'module'  => 'games',
                 'current' => false
             ],
-//            [
-//                'label'   => 'Jobs',
-//                'name'    => 'jobs.home',
-//                'icon'    => 'heroicon-o-briefcase',
-//                'module'  => 'jobs',
-//                'current' => false
-//            ],
-//            [
-//                'label'   => 'Advice',
-//                'name'    => 'advice.home',
-//                'icon'    => 'heroicon-o-briefcase',
-//                'module'  => 'advice',
-//                'current' => false
-//            ],
-            //                [
-            //                    'label'   => 'Teams',
-            //                    'name'    => 'social.teams.home',
-            //                    'icon'    => 'heroicon-o-globe',
-            //                    'current' => false
-            //                ],
-            //            [
-            //                'label'   => 'Crm',
-            //                'name'    => 'crm',
-            //                'icon'    => 'heroicon-o-users',
-            //                'current' => false
-            //            ],
-            //            [
-            //                'label'   => 'Learn',
-            //                'name'    => 'learn',
-            //                'icon'    => 'heroicon-o-academic-cap',
-            //                'current' => false
-            //            ],
-            //            [
-            //                'label'   => 'Marketplace',
-            //                'name'    => 'marketplace',
-            //                'icon'    => 'heroicon-o-shopping-bag',
-            //                'current' => false
-            //            ],
+            [
+                'label'   => 'Jobs',
+                'name'    => 'jobs.home',
+                'icon'    => 'heroicon-o-briefcase',
+                'module'  => 'jobs',
+                'current' => false
+            ],
+            [
+                'label'   => 'Advice',
+                'name'    => 'advice.home',
+                'icon'    => 'heroicon-o-briefcase',
+                'module'  => 'advice',
+                'current' => false
+            ],
+            [
+                'label'   => 'Crm',
+                'name'    => 'social.crm',
+                'icon'    => 'heroicon-o-users',
+                'module'  => 'advice',
+                'current' => false
+            ],
+            [
+                'label'   => 'Learn',
+                'name'    => 'advice.home',
+                'icon'    => 'heroicon-o-academic-cap',
+                'module'  => 'advice',
+                'current' => false
+            ],
+            [
+                'label'   => 'Marketplace',
+                'name'    => 'advice.home',
+                'icon'    => 'heroicon-o-shopping-bag',
+                'module'  => 'jobs',
+                'current' => false
+            ],
         ];
 
 

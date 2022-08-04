@@ -65,7 +65,7 @@
         <div class="flex flex-col min-h-0 space-y-4">
             <livewire:partials.profile-badge/>
 
-            <hr class="mr-2 border-gray-300"/>
+            <hr class="mr-6 border-gray-300"/>
             <div class="flex mb-4">
                 <nav class="space-y-3">
                     @foreach ($navigation as $item)

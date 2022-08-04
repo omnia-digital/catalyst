@@ -1,6 +1,6 @@
 <section aria-labelledby="trending-heading" class="card">
         <div class="">
-            <h2 id="trending-heading" class="px-3 py-2 text-xl font-medium text-dark-text-color">
+            <h2 id="trending-heading" class="px-3 py-2 text-xl font-medium text-h1-color">
                 {{ $title }}
             </h2>
             <div class="flow-root">

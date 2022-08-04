@@ -65,7 +65,7 @@
     </div>
 
     <!-- Social Actions -->
-    <div class="z-20 w-full">
+    <div class="z-20 w-full px-5">
         <livewire:social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
     </div>
 </article>

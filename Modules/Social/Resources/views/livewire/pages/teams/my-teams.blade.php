@@ -22,7 +22,7 @@
             <!-- Filters -->
             @include('livewire.partials.filters', ['skipFilters' => ['has_attachment']])
 
-            <!-- Initiatives -->
+            <!-- Teams -->
             <div class="mt-6">
                 <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 mt-4">
                     @forelse ($teams as $team)
