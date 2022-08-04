@@ -55,7 +55,7 @@ class MainNavigationMenu extends Component
             ],
             [
                 'label'   => 'Crm',
-                'name'    => 'advice.home',
+                'name'    => 'social.crm',
                 'icon'    => 'heroicon-o-users',
                 'module'  => 'advice',
                 'current' => false

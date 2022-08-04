@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="grid grid-cols-12 gap-4 mt-4">
+    <div class="grid grid-cols-12 gap-4 mt-4 mr-4">
         <div class="col-span-6 space-y-6">
 
             <h3>Discussion</h3>

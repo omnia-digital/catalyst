@@ -18,6 +18,7 @@
         "doctrine/dbal": "^3.3",
         "filament/filament": "^2.0",
         "filament/forms": "^2.0",
+        "filament/spatie-laravel-settings-plugin": "^2.0",
         "filament/tables": "^2.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",

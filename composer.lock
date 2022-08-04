@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b19f77004e373aa47d1216f80cd82c01",
+    "content-hash": "cd94f6eca047163f5f2126de8fe9d915",
     "packages": [
         {
             "name": "3x1io/filament-themes",
@@ -313,16 +313,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.232.0",
+            "version": "3.232.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "140af6f27803d8cb6f1ba6405a1133f5f90eb9f1"
+                "reference": "7e79325815640d21f3bcab9889f7002a8268d674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/140af6f27803d8cb6f1ba6405a1133f5f90eb9f1",
-                "reference": "140af6f27803d8cb6f1ba6405a1133f5f90eb9f1",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7e79325815640d21f3bcab9889f7002a8268d674",
+                "reference": "7e79325815640d21f3bcab9889f7002a8268d674",
                 "shasum": ""
             },
             "require": {
@@ -399,9 +399,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.232.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.232.1"
             },
-            "time": "2022-08-02T18:16:04+00:00"
+            "time": "2022-08-03T18:16:18+00:00"
         },
         {
             "name": "awssat/laravel-visits",
@@ -2017,16 +2017,16 @@
         },
         {
             "name": "filament/filament",
-            "version": "v2.15.11",
+            "version": "v2.15.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/admin.git",
-                "reference": "aece8d47ff01d071003d582f060f9f0818e88937"
+                "reference": "71318ffb6059b10272e72b68b99eea2ef91fa79f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/admin/zipball/aece8d47ff01d071003d582f060f9f0818e88937",
-                "reference": "aece8d47ff01d071003d582f060f9f0818e88937",
+                "url": "https://api.github.com/repos/filamentphp/admin/zipball/71318ffb6059b10272e72b68b99eea2ef91fa79f",
+                "reference": "71318ffb6059b10272e72b68b99eea2ef91fa79f",
                 "shasum": ""
             },
             "require": {
@@ -2075,20 +2075,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-08-02T21:42:38+00:00"
+            "time": "2022-08-03T11:32:01+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v2.15.11",
+            "version": "v2.15.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "f39bb17ca477c5ece3cace8813608a93612531a4"
+                "reference": "bee1b050cd25ed71adca983f0ceca6043e3c2ffb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/f39bb17ca477c5ece3cace8813608a93612531a4",
-                "reference": "f39bb17ca477c5ece3cace8813608a93612531a4",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/bee1b050cd25ed71adca983f0ceca6043e3c2ffb",
+                "reference": "bee1b050cd25ed71adca983f0ceca6043e3c2ffb",
                 "shasum": ""
             },
             "require": {
@@ -2133,20 +2133,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-08-02T21:42:37+00:00"
+            "time": "2022-08-03T11:31:29+00:00"
         },
         {
             "name": "filament/notifications",
-            "version": "v2.15.11",
+            "version": "v2.15.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
-                "reference": "cb68422135943eb7cb1603bf7cd801cc47620a0f"
+                "reference": "d94d9d80b39c07bac86848f56632db1ddafcfc4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/cb68422135943eb7cb1603bf7cd801cc47620a0f",
-                "reference": "cb68422135943eb7cb1603bf7cd801cc47620a0f",
+                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/d94d9d80b39c07bac86848f56632db1ddafcfc4d",
+                "reference": "d94d9d80b39c07bac86848f56632db1ddafcfc4d",
                 "shasum": ""
             },
             "require": {
@@ -2182,11 +2182,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-08-01T21:24:53+00:00"
+            "time": "2022-08-03T11:31:27+00:00"
         },
         {
             "name": "filament/spatie-laravel-settings-plugin",
-            "version": "v2.15.11",
+            "version": "v2.15.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/spatie-laravel-settings-plugin.git",
@@ -2233,7 +2233,7 @@
         },
         {
             "name": "filament/support",
-            "version": "v2.15.11",
+            "version": "v2.15.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
@@ -2283,7 +2283,7 @@
         },
         {
             "name": "filament/tables",
-            "version": "v2.15.11",
+            "version": "v2.15.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",

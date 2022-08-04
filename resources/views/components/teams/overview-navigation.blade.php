@@ -6,8 +6,11 @@
                     href="{{ route('social.teams.' . $key, $team) }}"
                     class="py-4 mx-[10px] flex items-center border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
                     {{ $item }}
+                    @if ($key === 'members')
+                        <span class="ml-2 px-2 py-1 flex justify-center items-center rounded-full bg-neutral-dark text-white-text-color text-xs font-semibold">{{ $team->users()->count() }}</span>
+                    @endif
                     @if ($key === 'followers')
-                        <span class="ml-2 p-1 flex justify-center items-center rounded-full bg-neutral-dark text-white-text-color text-xs font-semibold">{{ $team->followers()->count() }}</span>
+                        <span class="ml-2 px-2 py-1 flex justify-center items-center rounded-full bg-neutral-dark text-white-text-color text-xs font-semibold">{{ $team->followers()->count() }}</span>
                     @endif
                 </a>
             @endforeach

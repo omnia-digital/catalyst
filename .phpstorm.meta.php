@@ -12,6 +12,7 @@ namespace PHPSTORM_META {
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
@@ -284,6 +285,7 @@ namespace PHPSTORM_META {
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
@@ -556,6 +558,7 @@ namespace PHPSTORM_META {
     override(\Illuminate\Contracts\Container\Container::get(0), map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
@@ -828,6 +831,7 @@ namespace PHPSTORM_META {
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
@@ -1100,6 +1104,7 @@ namespace PHPSTORM_META {
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
@@ -1372,6 +1377,7 @@ namespace PHPSTORM_META {
     override(\App::get(0), map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
@@ -1644,6 +1650,7 @@ namespace PHPSTORM_META {
     override(\App::make(0), map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
@@ -1916,6 +1923,7 @@ namespace PHPSTORM_META {
     override(\App::makeWith(0), map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
@@ -2188,6 +2196,7 @@ namespace PHPSTORM_META {
     override(\app(0), map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
@@ -2460,6 +2469,7 @@ namespace PHPSTORM_META {
     override(\resolve(0), map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
@@ -2732,6 +2742,7 @@ namespace PHPSTORM_META {
     override(\Psr\Container\ContainerInterface::get(0), map([
         '' => '@',
             'App\Contracts\InvitesTeamMembers' => \App\Actions\Teams\InviteTeamMember::class,
+            'App\Settings\GeneralSettings' => \App\Settings\GeneralSettings::class,
             'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
             'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
             'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
