@@ -11,7 +11,7 @@
                 </div>
                 <div class="relative px-4 py-16 sm:px-6 sm:py-16 lg:py-16 lg:px-8">
                     <h1 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-                        <span class="block text-white">RESOURCES</span>
+                        <span class="block text-white uppercase">{{ Trans::get('Resources') }}</span>
                     </h1>
                     <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit
                         sunt amet fugiat veniam occaecat fugiat aliqua.</p>
