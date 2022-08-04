@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('status')->nullable()->index();
+            $table->boolean('is_admin')->nullable();
             $table->boolean('2fa_enabled')->default(false);
             $table->string('2fa_secret')->nullable();
             $table->json('2fa_backup_codes')->nullable();

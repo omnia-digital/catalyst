@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TeamResource\Pages;
 use App\Filament\Resources\TeamResource\RelationManagers;
 use App\Models\Team;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -15,16 +16,34 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TeamResource extends Resource
 {
+    protected static ?string $label = 'Teams';
     protected static ?string $model = Team::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'My Teams';
+
+    public static function getEloquentQuery(): Builder
+    {
+        if (auth()->user()->is_admin) {
+            return parent::getEloquentQuery();
+        } else {
+            return parent::getEloquentQuery()->whereIn('id', auth()->user()->ownedTeams->pluck('id'));
+        }
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getEloquentQuery()->get()->count();
+    }
+
+    protected static function getNavigationBadgeColor(): ?string
+    {
+        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -47,12 +66,11 @@ class TeamResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('start_date')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('summary'),
-                Tables\Columns\TextColumn::make('content'),
+//                Tables\Columns\TextColumn::make('summary'),
+//                Tables\Columns\TextColumn::make('content'),
                 Tables\Columns\TextColumn::make('location'),
                 Tables\Columns\TextColumn::make('rating'),
                 Tables\Columns\TextColumn::make('languages'),

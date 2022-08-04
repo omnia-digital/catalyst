@@ -16,6 +16,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
@@ -25,9 +26,29 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
+    protected static ?string $label = 'Members';
     protected static ?string $model = User::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'My Teams';
+
+    public static function getEloquentQuery(): Builder
+    {
+        if (auth()->user()->is_admin) {
+            return User::query();
+        } else {
+            return parent::getEloquentQuery()->whereHas('teams', fn(Builder $query) => $query->whereIn('teams.id', auth()->user()->ownedTeams->pluck('id')));
+        }
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getEloquentQuery()->get()->count();
+    }
+
+    protected static function getNavigationBadgeColor(): ?string
+    {
+        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
+    }
 
     public static function form(Form $form): Form
     {
@@ -106,7 +127,7 @@ class UserResource extends Resource
 
             ])
             ->filters([
-                //
+
             ])
             ->actions([
                 ViewAction::make(),
