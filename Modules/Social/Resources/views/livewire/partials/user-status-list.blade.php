@@ -19,6 +19,7 @@
 {{--                                </p>--}}
                             </div>
                             <div class="flex-shrink-0">
+                                <livewire:award-stack :user="$user" :team="$team" />
 {{--                                <livewire:social::partials.follow-button :model="$user"/>--}}
                             </div>
                         </li>
