@@ -13,6 +13,7 @@ use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use Modules\Reviews\Traits\Reviewable;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Modules\Social\Traits\Awardable;
@@ -30,8 +31,18 @@ use Wimil\Followers\Traits\CanBeFollowed;
  */
 class Team extends JetstreamTeam implements HasMedia
 {
-    use HasFactory, Notifiable,
-        Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto, HasSlug, HasLocation, InteractsWithMedia;
+    use HasFactory, 
+        Notifiable,
+        Likable, 
+        Postable, 
+        HasTags, 
+        CanBeFollowed, 
+        Awardable, 
+        Reviewable,
+        HasProfilePhoto, 
+        HasSlug, 
+        HasLocation, 
+        InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.

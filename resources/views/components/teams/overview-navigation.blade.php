@@ -99,9 +99,11 @@
         </div> --}}
     </div>
     <!-- Review Modal -->
-    <x-library::modal id="review-modal-{{ $team->id }}" maxWidth="md">
+    <x-library::modal id="review-modal-{{ $team->id }}" maxWidth="3xl" hideCancelButton>
         <x-slot name="title">Review: {{ $team->name }}</x-slot>
 
-        <x-slot name="content">Stuff</x-slot>
+        <x-slot name="content">
+            <livewire:reviews::create-review :team="$team" />
+        </x-slot>
     </x-library::modal>
 </nav>
