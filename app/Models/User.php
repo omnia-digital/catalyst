@@ -3,6 +3,7 @@
     namespace App\Models;
 
 use App\Traits\Team\HasTeams;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,7 +20,7 @@ use Modules\Social\Traits\HasBookmarks;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Wimil\Followers\Traits\Followable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
     {
         use HasApiTokens,
             TwoFactorAuthenticatable,
@@ -35,6 +36,11 @@ class User extends Authenticatable
             HasTeams::ownsTeam insteadof JetstreamHasTeams;
             HasTeams::ownedTeams insteadof JetstreamHasTeams;
             HasTeams::currentTeam insteadof JetstreamHasTeams;
+        }
+
+        public function canAccessFilament(): bool
+        {
+            return str_ends_with($this->email, '@omniadigital.io') && $this->hasVerifiedEmail();
         }
 
         protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
