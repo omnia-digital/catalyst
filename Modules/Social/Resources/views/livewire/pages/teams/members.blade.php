@@ -45,55 +45,6 @@
                                 <div class="flex items-center">
                                     <img class="w-8 h-8 rounded-full" src="{{ $member->profile_photo_url }}" alt="{{ $member->name }}">
                                     <div class="ml-4"><a href="{{ $member->url() }}" class="hover:underline focus:underline">{{ $member->name }}</a></div>
-                                    <div class="ml-2">
-                                        <x-library::dropdown dropdownClasses="z-20 max-h-[320px] overflow-scroll scrollbar-hide">
-                                            <x-slot name="trigger" x-on:click.stop="">
-                                                <button type="button" class="p-2 rounded-full flex items-center text-neutral-dark hover:text-secondary focus:text-secondary" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
-                                                    <span class="italic">({{ $member->awards()->count() . ' ' . Trans::get(Str::plural('Award', $member->awards()->count())) }})</span>
-                                                </button>
-                                            </x-slot>
-                                            @can('add-award-to-team-member', $team)
-                                            <x-library::dropdown.item x-on:click.prevent="$openModal('add-awards-modal-{{ $member->id }}')"  class="bg-white p-2 flex items-center">
-                                                <x-heroicon-o-plus class="h-4 w-4 mr-4" />
-                                                <p>{{ Trans::get('Add Award') }}</p>
-                                            </x-library::dropdown.item>
-                                            @endcan
-                                            @forelse ($member->awards as $award)
-                                                <div class="bg-white p-2 flex items-center space-x-2">
-                                                    <x-dynamic-component :component="$award->icon" class="h-4 w-4" />
-                                                    <p class="flex-1">{{ ucfirst($award->name) }}</p>
-                                                </div>
-                                            @empty
-                                                <div class="bg-white p-2 flex items-center">
-                                                    <p>{{ Trans::get('No awards') }}</p>
-                                                </div>
-                                            @endforelse
-                                        </x-library::dropdown>
-                                    </div>
-                                    <x-library::modal id="add-awards-modal-{{ $member->id }}" maxWidth="2xl">
-                                        <x-slot name="title">{{ Trans::get('Add Awards') }}</x-slot>
-                                        <x-slot name="content">
-                                            <div class="w-full flex flex-col">
-                                                @forelse (\App\Models\Award::whereNotIn('id', $member->awards()->pluck('awards.id')->toArray())->get() as $award)
-                                                    <div class="mr-4 mt-2 flex items-center">
-                                                        <input type="checkbox" wire:model.defer="awardsToAdd" value="{{ $award->id }}" class="mr-2" name="award-item-{{ $award->id }}" id="award-item-{{ $award->id }}">
-                                                        <label for="award-item-{{ $award->id }}" class="bg-primary p-2 flex flex-1 items-center">
-                                                            <x-dynamic-component :component="$award->icon" class="h-4 w-4 mr-4" />
-                                                            <p>{{ ucfirst($award->name) }}</p>
-                                                        </label>
-                                                    </div>
-                                                @empty
-                                                    <div class="w-full px-4 py-2 text-sm bg-white p-2 flex items-center">
-                                                        <p>{{ Trans::get('No other awards are available') }}</p>
-                                                    </div>
-                                                @endforelse
-
-                                            </div>
-                                        </x-slot>
-                                        <x-slot name="actions">
-                                            <x-library::button wire:click="addAward({{ $member->id }})">{{ Trans::get('Add') }}</x-library::button>
-                                        </x-slot>
-                                    </x-library::modal>
                                 </div>
 
                                 <div class="flex items-center">
