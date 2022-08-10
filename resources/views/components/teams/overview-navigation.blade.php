@@ -14,9 +14,9 @@
                     @endif
                 </a>
             @endforeach
-            <x-library::dropdown>
+            <x-library::dropdown dropdownClasses="bg-primary divide-primary border-0">
                 <x-slot name="trigger">
-                    <button type="button" class="py-4 mx-4 flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
+                    <button type="button" class="md:hidden py-4 mx-4 flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
                         <span class="sr-only">Open options</span>
                         <x-heroicon-s-dots-vertical class="h-6 w-6"/>
                     </button>
@@ -24,7 +24,7 @@
                 @foreach ($nav as $key => $item)
                     <a
                         href="{{ route('social.teams.' . $key, $team) }}"
-                        class="md:hidden block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color {{ $pageView === $key ? 'bg-netural-light text-secondary' : '' }} hover:bg-netural-light hover:text-secondary">
+                        class="md:hidden block w-full px-4 py-2 text-left text-sm disabled:text-base-text-color border-transparent bg-primary {{ $pageView === $key ? 'bg-neutral text-secondary' : '' }} hover:bg-neutral">
                         {{ $item }}
                         @if ($key === 'members')
                             <span class="ml-2 px-2 py-1 rounded-full bg-neutral-dark text-white-text-color text-xs font-semibold">{{ $team->users()->count() }}</span>
@@ -35,11 +35,8 @@
                     </a>
                 @endforeach
                 @can('update-team', $team)
-                    <a href="{{ route('social.teams.edit', $team) }}" class="md:hidden py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Edit Team') }}</a>
+                    <a href="{{ route('social.teams.edit', $team) }}" class="md:hidden hover:bg-neutral block w-full px-4 py-2 text-left text-sm">{{ \Trans::get('Edit Team') }}</a>
                 @endcan
-                <x-library::dropdown.item x-on:click="$dispatch('review-modal-{{ $team->id }}', { type: 'open' })" class="hover:bg-netural-light hover:text-secondary">
-                    Review
-                </x-library::dropdown.item>
             </x-library::dropdown>
         </div>
     </div>
@@ -98,12 +95,4 @@
             <button class="p-2 mx-[15px] inline-flex items-center text-sm rounded-full bg-primary"><x-heroicon-s-plus class="h-4 w-4" /></button>
         </div> --}}
     </div>
-    <!-- Review Modal -->
-    <x-library::modal id="review-modal-{{ $team->id }}" maxWidth="3xl" hideCancelButton>
-        <x-slot name="title">Review: {{ $team->name }}</x-slot>
-
-        <x-slot name="content">
-            <livewire:reviews::create-review :team="$team" />
-        </x-slot>
-    </x-library::modal>
 </nav>

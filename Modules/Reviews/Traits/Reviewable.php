@@ -2,6 +2,7 @@
 
 namespace Modules\Reviews\Traits;
 
+use App\Models\User;
 use Modules\Reviews\Models\Review;
 
 trait Reviewable
@@ -13,6 +14,21 @@ trait Reviewable
     public function reviews()
     {
         return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function reviewedBy(User $user)
+    {
+        return $this->reviews()->where('user_id', $user->id)->exists();
+    }
+
+    public function getCurrentUserReview()
+    {
+        return $this->reviews()->where('user_id', auth()->id())->first() ?? null;
+    }
+
+    public function recommendedCount()
+    {
+        return $this->reviews()->where('recommend', 1)->count();
     }
 
 }
