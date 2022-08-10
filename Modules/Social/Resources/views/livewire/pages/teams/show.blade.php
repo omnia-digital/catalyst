@@ -47,6 +47,60 @@
                     </div>
                 </div>
             @endif
+
+            <div class="lg:grid lg:grid-cols-2 lg:gap-4">
+                {{--<div class="col-span-1">
+                    <div class="bg-white p-4">
+                        <p class="text-2xs">Overall Reviews:</p>
+                        <div class="flex items-center space-x-2 text-2xs">
+                            <div class="bg-black flex items-center rounded-md mr-1 p-1">
+                                <div class="flex items-center text-white-text-color">
+                                    <x-heroicon-s-star class="w-4 h-4" />
+                                    {{ $team->reviewScore ?? '3758' }}
+                                </div>
+                            </div>
+                            <span class="text-gray-400">{{ $team->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $team->reviews()->count */'296,418' }})</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-2xs">Most Helpful Reviews</p>
+                        <div class="flex justify-start items-start bg-primary border border-neutral-light p-4">
+                            <div class="mr-2">
+                                <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1" alt="Arlene McCoy" />
+                            </div>
+                            <div class="flex-1 space-y-2">
+                                <p class="text-dark-text-color font-semibold text-sm">Arlene McCoy</p>
+                                <p class="text-light-text-color text-xs">Courtney was very helpful in setting up and an amazing person to be around!</p>
+                            </div>
+                            <div class="flex text-light-text-color">
+                                <x-heroicon-s-star class="h-5 w-5" />
+                                <x-heroicon-s-star class="h-5 w-5" />
+                                <x-heroicon-s-star class="h-5 w-5" />
+                                <x-heroicon-s-star class="h-5 w-5" />
+                                <x-heroicon-s-star class="h-5 w-5" />
+                            </div>
+                        </div>
+                    </div>
+                </div>--}}
+                <div class="col-span-2">
+                    <div class="space-y-4">
+                        <div x-data class="flex justify-between">
+                            <p class="text-base-text-color font-semibold">{{ \Trans::get('Team Reviews') }} <span class="text-gray-400">({{ $team->reviews()->count() }})</span></p>
+                            @can('add-review', $team)
+                                <a href="#" 
+                                    x-on:click="$dispatch('review-modal-{{ $team->id }}', { type: 'open' })" 
+                                    class="text-dark-text-color hover:underline hover:text-secondary"
+                                >
+                                    {{ \Trans::get('Add Review') }}
+                                </a>
+                            @endcan
+                        </div>
+                        @foreach ($team->reviews as $review)
+                            <livewire:reviews::review-card :review="$review" />
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-span-6 space-y-4">
             <div class="lg:grid lg:grid-rows-1 lg:grid-cols-3 lg:gap-4">
@@ -195,75 +249,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <p class="text-base-text-color font-semibold">Team Reviews</p>
-            <div class="lg:grid lg:grid-cols-2 lg:gap-4">
-                <div class="col-span-1">
-                    <div class="bg-white p-4">
-                        <p class="text-2xs">Overall Reviews:</p>
-                        <div class="flex items-center space-x-2 text-2xs">
-                            <div class="bg-black flex items-center rounded-md mr-1 p-1">
-                                <div class="flex items-center text-white-text-color">
-                                    <x-heroicon-s-star class="w-4 h-4" />
-                                    {{ $team->reviewScore ?? '3758' }}
-                                </div>
-                            </div>
-                            <span class="text-gray-400">{{ $team->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $team->reviews()->count */'296,418' }})</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-2xs">Most Helpful Reviews</p>
-                        <div class="flex justify-start items-start bg-primary border border-neutral-light p-4">
-                            <div class="mr-2">
-                                <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1" alt="Arlene McCoy" />
-                            </div>
-                            <div class="flex-1 space-y-2">
-                                <p class="text-dark-text-color font-semibold text-sm">Arlene McCoy</p>
-                                <p class="text-light-text-color text-xs">Courtney was very helpful in setting up and an amazing person to be around!</p>
-                            </div>
-                            <div class="flex text-light-text-color">
-                                <x-heroicon-s-star class="h-5 w-5" />
-                                <x-heroicon-s-star class="h-5 w-5" />
-                                <x-heroicon-s-star class="h-5 w-5" />
-                                <x-heroicon-s-star class="h-5 w-5" />
-                                <x-heroicon-s-star class="h-5 w-5" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-span-1">
-                    <div class="bg-white p-4">
-                        <p class="text-2xs">Recent Reviews:</p>
-                        <div class="flex items-center space-x-2 text-2xs">
-                            <div class="bg-black flex items-center rounded-md mr-1 p-1">
-                                <div class="flex items-center text-white-text-color">
-                                    <x-heroicon-s-star class="w-4 h-4" />
-                                    {{ $team->reviewScore ?? '3758' }}
-                                </div>
-                            </div>
-                            <span class="text-gray-400">{{ $team->reviewStatus ?? 'Overwhelmingly Positive' }} ({{ /* $team->reviews()->count */'2,418' }})</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Recent Reviews</p>
-                        <div class="flex justify-start items-start bg-primary border border-neutral-light p-4">
-                            <div class="mr-2">
-                                <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1" alt="Arlene McCoy" />
-                            </div>
-                            <div class="flex-1 space-y-2">
-                                <p class="text-dark-text-color font-semibold text-sm">Arlene McCoy</p>
-                                <p class="text-light-text-color text-xs">Courtney was very helpful in setting up and an amazing person to be around!</p>
-                            </div>
-                            <div class="flex text-light-text-color">
-                                <x-heroicon-s-star class="h-5 w-5" />
-                                <x-heroicon-s-star class="h-5 w-5" />
-                                <x-heroicon-s-star class="h-5 w-5" />
-                                <x-heroicon-s-star class="h-5 w-5" />
-                                <x-heroicon-s-star class="h-5 w-5" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+            
         </div>
     </div>
 @endsection

@@ -11,6 +11,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
+use Modules\Reviews\Models\Review;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 use Trans;
 
@@ -19,6 +20,8 @@ class CreateReview extends Component implements HasForms
     use WithModal, InteractsWithForms;
 
     public Team $team;
+
+    public Review|null $review = null;
 
     public $body;
     public $visibility;
@@ -53,16 +56,47 @@ class CreateReview extends Component implements HasForms
         ];        
     }
 
-    public function mount(Team $team)
+    public function mount(Team $team, Review $review)
     {
         $this->team = $team;
+
+        if ($review) {
+            $this->review = $review;
+    
+            $this->form->fill([
+                'body' => $this->review->body,
+                'visibility' => $this->review->visibility,
+                'language_id' => $this->review->language_id,
+                'commentable' => $this->review->commentable,
+                'received_product_free' => $this->review->received_product_free,
+                'recommend' => $this->review->recommend,
+            ]);
+        }
     }
+
+    protected function getFormModel(): Review 
+    {
+        return $this->review;
+    } 
 
     public function createReview()
     {
-        $this->team->reviews()->create(
-            array_merge(['user_id' => auth()->id()], $this->form->getState())  
-        );
+        if ($this->team->reviewedBy(auth()->user())) {
+            
+            $this->review->update(
+                $this->form->getState()
+            );
+            
+            $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review updated'), 'type' => 'success']);
+
+        } else {
+            
+            $this->team->reviews()->create(
+                array_merge(['user_id' => auth()->id()], $this->form->getState())  
+            );
+    
+            $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review created'), 'type' => 'success']);
+        }
 
         $this->closeModal('review-modal-' . $this->team->id);
         $this->reset('body', 'visibility', 'language_id', 'commentable', 'received_product_free', 'recommend');
