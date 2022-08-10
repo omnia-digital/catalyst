@@ -83,22 +83,7 @@
                     </div>
                 </div>--}}
                 <div class="col-span-2">
-                    <div class="space-y-4">
-                        <div x-data class="flex justify-between">
-                            <p class="text-base-text-color font-semibold">{{ \Trans::get('Team Reviews') }} <span class="text-gray-400">({{ $team->reviews()->count() }})</span></p>
-                            @can('add-review', $team)
-                                <a href="#" 
-                                    x-on:click="$dispatch('review-modal-{{ $team->id }}', { type: 'open' })" 
-                                    class="text-dark-text-color hover:underline hover:text-secondary"
-                                >
-                                    {{ \Trans::get('Add Review') }}
-                                </a>
-                            @endcan
-                        </div>
-                        @foreach ($team->reviews as $review)
-                            <livewire:reviews::review-card :review="$review" />
-                        @endforeach
-                    </div>
+                    <livewire:reviews::review-list :model="$team" />
                 </div>
             </div>
         </div>

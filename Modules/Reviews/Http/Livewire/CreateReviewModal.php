@@ -3,7 +3,6 @@
 namespace Modules\Reviews\Http\Livewire;
 
 use App\Models\Language;
-use App\Models\Team;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
@@ -15,11 +14,11 @@ use Modules\Reviews\Models\Review;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 use Trans;
 
-class CreateReview extends Component implements HasForms
+class CreateReviewModal extends Component implements HasForms
 {
     use WithModal, InteractsWithForms;
 
-    public Team $team;
+    public $model;
 
     public Review|null $review = null;
 
@@ -29,6 +28,8 @@ class CreateReview extends Component implements HasForms
     public $commentable;
     public $received_product_free;
     public $recommend;
+
+    protected $listeners = ['openReviewModal'];
 
     protected function getFormSchema(): array
     {
@@ -56,12 +57,15 @@ class CreateReview extends Component implements HasForms
         ];        
     }
 
-    public function mount(Team $team, Review $review)
+    public function mount($model)
     {
-        $this->team = $team;
+        $this->model = $model;
+    }
 
-        if ($review) {
-            $this->review = $review;
+    public function openReviewModal()
+    {
+        if ($this->model->reviewedBy(auth()->user())) {
+            $this->review = $this->model->getCurrentUserReview();
     
             $this->form->fill([
                 'body' => $this->review->body,
@@ -72,38 +76,50 @@ class CreateReview extends Component implements HasForms
                 'recommend' => $this->review->recommend,
             ]);
         }
-    }
 
-    protected function getFormModel(): Review 
-    {
-        return $this->review;
-    } 
+        $this->dispatchBrowserEvent('review-modal-' . $this->model->id, ['type' => 'open']);
+    }
 
     public function createReview()
     {
-        if ($this->team->reviewedBy(auth()->user())) {
+        if ($this->model->reviewedBy(auth()->user())) {
             
             $this->review->update(
                 $this->form->getState()
             );
             
+            $this->emitTo('reviews::review-card', 'reviewUpdated');
             $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review updated'), 'type' => 'success']);
 
         } else {
             
-            $this->team->reviews()->create(
+            $this->review = $this->model->reviews()->create(
                 array_merge(['user_id' => auth()->id()], $this->form->getState())  
             );
     
             $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review created'), 'type' => 'success']);
         }
 
-        $this->closeModal('review-modal-' . $this->team->id);
+        $this->emit('updateReviews', $this->review);
+        $this->closeModal('review-modal-' . $this->model->id);
         $this->reset('body', 'visibility', 'language_id', 'commentable', 'received_product_free', 'recommend');
+    }
+
+    public function removeReview()
+    {
+        if ($this->model->reviewedBy(auth()->user())) {
+            $this->review->delete();
+
+            $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review removed'), 'type' => 'success']);
+
+            $this->emit('updateReviews');
+            $this->closeModal('review-modal-' . $this->model->id);
+            $this->reset('body', 'visibility', 'language_id', 'commentable', 'received_product_free', 'recommend');
+        }
     }
 
     public function render()
     {
-        return view('reviews::livewire.create-review');
+        return view('reviews::livewire.create-review-modal');
     }
 }

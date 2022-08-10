@@ -9,6 +9,8 @@ class ReviewCard extends Component
 {
     public $review;
 
+    protected $listeners = ['reviewUpdated' => '$refresh'];
+
     public function mount(Review $review)
     {
         $this->review = $review;

@@ -9,7 +9,7 @@
     @if (auth()->user()->is($review->user))
         <div>
             <button 
-                x-on:click.prevent="$dispatch('review-modal-{{ $review->reviewable->id }}', { type: 'open' })" 
+                wire:click.prevent="$emitTo('reviews::create-review-modal', 'openReviewModal')" 
                 class="text-light-text-color hover:text-base-text-color"
             >
                 <x-heroicon-o-pencil class="w-4 h-4" />

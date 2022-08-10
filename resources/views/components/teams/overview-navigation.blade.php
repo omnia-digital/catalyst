@@ -95,12 +95,4 @@
             <button class="p-2 mx-[15px] inline-flex items-center text-sm rounded-full bg-primary"><x-heroicon-s-plus class="h-4 w-4" /></button>
         </div> --}}
     </div>
-    <!-- Review Modal -->
-    <x-library::modal id="review-modal-{{ $team->id }}" maxWidth="3xl" hideCancelButton>
-        <x-slot name="title">Review: {{ $team->name }}</x-slot>
-
-        <x-slot name="content">
-            <livewire:reviews::create-review :team="$team" :review="$team->getCurrentUserReview()" />
-        </x-slot>
-    </x-library::modal>
 </nav>
