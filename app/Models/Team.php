@@ -188,7 +188,7 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function owner()
     {
-        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id');
+        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id')>where('role', 'owner');
     }
 
     public function members()
@@ -197,7 +197,7 @@ class Team extends JetstreamTeam implements HasMedia
     }
 
     public function allUsers() {
-        return $this->users();
+        return $this->users;
     }
 
     public function profile()
