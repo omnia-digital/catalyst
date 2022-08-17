@@ -35,14 +35,17 @@
                     </a>
                 @endforeach
                 @can('update-team', $team)
-                    <a href="{{ route('social.teams.edit', $team) }}" class="md:hidden hover:bg-neutral block w-full px-4 py-2 text-left text-sm">{{ \Trans::get('Edit Team') }}</a>
+                    <a href="{{ route('social.teams.edit', $team) }}" class="md:hidden hover:bg-neutral block w-full px-4 py-2 text-left text-sm">{{ \Trans::get('Admin Panel') }}</a>
                 @endcan
             </x-library::dropdown>
         </div>
     </div>
     <div class="flex pr-2 items-center">
         @can('update-team', $team)
-            <a href="{{ route('social.teams.edit', $team) }}" class="hidden md:block py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Admin Panel') }}</a>
+            <a href="{{ route('social.teams.edit', $team) }}" class="bg-neutral rounded-lg px-4 py-2 border border-secondary hidden md:block font-bold hover:underline mx-4
+            whitespace-nowrap">{{
+            \Trans::get('Admin Panel')
+            }}</a>
         @endcan
         @cannot('update-team', $team)
             <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>

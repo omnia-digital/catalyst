@@ -1,4 +1,4 @@
-<div class=" sticky top-0 z-40">
+<div class="sticky top-0 z-40">
     <div class="h-40 relative overlay before:bg-black before:inset-0 before:opacity-60 bg-black shadow-md"
         style="background-image: url({{ $team->bannerImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
     >

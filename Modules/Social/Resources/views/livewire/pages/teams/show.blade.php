@@ -22,7 +22,6 @@
         @endif
 
         <div class="col-span-7 space-y-6">
-
             <h3>Discussion</h3>
 
             <livewire:social::news-feed-editor :team="$team"/>
@@ -70,7 +69,6 @@
 
             </div>
         </div>
-
 
         <div class="h-screen sticky overflow-y-scroll scrollbar-hide top-[220px] col-span-5 space-y-6 mb-12">
             <div class="flex flex-col">
@@ -192,11 +190,6 @@
                 </div>
             </div>
 
-
-        </div>
-
-
-        <div class="col-span-3 space-y-6">
 
         </div>
     </div>
