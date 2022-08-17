@@ -1,4 +1,4 @@
-@extends('resources::livewire.layouts.pages.default-page-layout')
+@extends('resources::livewire.layouts.pages.full-page-layout')
 
 @section('content')
         <div class="w-full mb-4">

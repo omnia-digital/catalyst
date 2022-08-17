@@ -1,7 +1,6 @@
 <article wire:click.prevent.stop="showPost" class="max-w-post-card-max-w bg-primary pt-4 shadow rounded-lg z-10 border-2 border-transparent {{ $clickable ? '
 cursor-pointer' : ''
 }}">
-
     <div class="flex justify-between px-5">
         <div class="flex space-x-3">
             <div class="flex-shrink-0">
@@ -23,13 +22,19 @@ cursor-pointer' : ''
                 </div>
             </div>
         </div>
-        <div class=" flex align-top">
-            {{--                @if (!is_null($post->team_id))--}}
-            {{--                    <div class="text-base-text-color text-xs font-semibold mr-3">--}}
-            {{--                        <a href="{{ $post->team->profile() }}" class=" hover:no-underline">{{ $post->team->name }}</a>--}}
-            {{--                    </div>--}}
-            {{--                @endif--}}
-            <div class="relative z-1 inline-block text-left">
+        <div class="z-1 flex align-top space-x-4">
+            @if (!is_null($post->team_id))
+                <div class="flex items-center space-x-2 h-7">
+                    <div class="flex-shrink-0">
+                        <img class="h-7 w-7 rounded-full" src="{{ $post->team?->profile_photo_url }}" alt="{{ $post->team->name }}"/>
+                    </div>
+                    <div class="text-base-text-color text-xs font-semibold mr-3">
+                        <a wire:click.prevent.stop="showProfile('{{ $post->team->handle }}', true)"
+                           href="{{ route('social.teams.show', $post->team->handle) }}" class="hover:underline">{{ $post->team->name }}</a>
+                    </div>
+                </div>
+            @endif
+            <div class="relative z-1 inline-block text-left items-center">
                 <x-library::dropdown>
                     <x-slot name="trigger" x-on:click.stop="">
                         <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">

@@ -30,7 +30,10 @@ class PostCard extends Component
         }
     }
 
-    public function showProfile($handle = null) {
+    public function showProfile($handle = null, $team = false) {
+        if ($team) {
+            return $this->redirectRoute('social.teams.show',$handle);
+        }
         if($handle) {
             return $this->redirectRoute('social.profile.show', $handle);
         }
