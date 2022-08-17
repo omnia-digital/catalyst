@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Reviews\Models\Review;
 use Modules\Social\Models\Like;
 use Modules\Social\Models\Post;
 use Modules\Social\Models\Profile;
@@ -101,6 +102,11 @@ class User extends Authenticatable implements FilamentUser
         public function posts() {
             if (!class_exists(Post::class)) return;
             return $this->hasMany(Post::class);
+        }
+
+        public function reviews() {
+            if (!class_exists(Review::class)) return;
+            return $this->hasMany(Review::class);
         }
 
         public function likes() {

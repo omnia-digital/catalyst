@@ -9,14 +9,17 @@ use Modules\Social\Notifications\PostWasLikedNotification;
 
 class LikeButton extends Component
 {
-    public Post $model;
+    public $model;
 
     public $show;
+    
+    public $hideCount;
 
-    public function mount($model, $show = false)
+    public function mount($model, $show = false, $hideCount = false)
     {
         $this->model = $model;
         $this->show = $show;
+        $this->hideCount = $hideCount;
     }
 
     public function like()

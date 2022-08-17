@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 
 class Review extends Model
 {
-    use HasFactory, Postable;
+    use HasFactory, Postable, Likable;
 
     protected $guarded = [];
     

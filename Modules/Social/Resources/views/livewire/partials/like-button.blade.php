@@ -5,7 +5,9 @@
         @else
             <x-heroicon-o-thumb-up :class="$show ? 'h-6 w-6' : 'h-5 w-5'" aria-hidden="true" />
         @endif
-        <span class="font-medium text-dark-text-color">{{ $model->likesCount() > 0 ? $model->likesCount() : '' }}</span>
+        @unless ($hideCount)
+            <span class="font-medium text-dark-text-color">{{ $model->likesCount() > 0 ? $model->likesCount() : '' }}</span>
+        @endunless
         <span class="sr-only">likes</span>
     </button>
 </div>
