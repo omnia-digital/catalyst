@@ -42,9 +42,11 @@
     </div>
     <div class="flex pr-2 items-center">
         @can('update-team', $team)
-            <a href="{{ route('social.teams.edit', $team) }}" class="hidden md:block py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Edit Team') }}</a>
+            <a href="{{ route('social.teams.edit', $team) }}" class="hidden md:block py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Admin Panel') }}</a>
         @endcan
-        <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
+        @cannot('update-team', $team)
+            <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
+        @endcan
         <div class="inline-flex items-center text-md relative">
             <div class="absolute inset-auto -translate-y-12 p-2 rounded-md bg-black text-white-text-color"
                 x-data="{show: false}"

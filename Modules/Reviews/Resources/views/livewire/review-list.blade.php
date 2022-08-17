@@ -1,9 +1,9 @@
 <div class="space-y-4">
     <div class="flex justify-between">
-        <p class="text-base-text-color font-semibold">{{ \Trans::get('Reviews') }} <span class="text-gray-400">({{ $model->reviews()->count() }})</span></p>
+        <h3 class="text-base-text-color font-semibold">{{ \Trans::get('Reviews') }} <span class="text-gray-400">({{ $model->reviews()->count() }})</span></h3>
         @can('add-review', $model)
-            <a href="#" 
-            wire:click.prevent="$emitTo('reviews::create-review-modal', 'openReviewModal')" 
+            <a href="#"
+            wire:click.prevent="$emitTo('reviews::create-review-modal', 'openReviewModal')"
             class="text-dark-text-color hover:underline hover:text-secondary"
             >
                 {{ \Trans::get('Add Review') }}
