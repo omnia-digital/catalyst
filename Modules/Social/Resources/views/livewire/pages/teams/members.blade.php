@@ -51,11 +51,11 @@
                                     <!-- Manage Team Member Role -->
                                     @if (Gate::check('addTeamMember', $team) && Laravel\Jetstream\Jetstream::hasRoles())
                                         <button class="ml-2 text-sm text-light-text-color underline hover:no-underline active:no-underline" wire:click="manageRole('{{ $member->id }}')">
-                                            {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role) : 'No Role' }}
+                                            {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role)->name : 'No Role' }}
                                         </button>
                                     @elseif (Laravel\Jetstream\Jetstream::hasRoles())
                                         <div class="ml-2 text-sm text-light-text-color">
-                                            {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role) : '' }}
+                                            {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role)->name : '' }}
                                         </div>
                                     @endif
 
