@@ -100,7 +100,7 @@
                                 <div>
                                     <div class="flex items-center">
                                         <div class="mr-3 w-10 h-10 rounded-full">
-                                            <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $application->team->owner?->profile_photo_url }}" alt="{{ $application->team->owner->name }}" />
+                                            <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $application->team->owner?->profile_photo_url }}" alt="{{ $application->team->owner?->name }}" />
                                         </div>
                                         <div class="flex-1">
                                             <h3 class="mb-2 sm:mb-1 text-dark-text-color text-sm font-normal leading-5">You applied to join <span class="font-bold">{{ $application->team->name }}</span></h3>
