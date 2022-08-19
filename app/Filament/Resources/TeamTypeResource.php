@@ -4,10 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TeamTypeResource\Pages;
 use App\Filament\Resources\TeamTypeResource\RelationManagers;
-use App\Models\Team;
-use App\Models\User;
 use Ariaieboy\FilamentJalaliDatetime\JalaliDateTimeColumn;
-use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -49,12 +46,14 @@ class TeamTypeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\KeyValue::make('name')
+                    ->keyLabel('Language Code')
+                    ->valueLabel('Name')
+                    ->required(),
+                Forms\Components\KeyValue::make('slug')
+                     ->keyLabel('Language Code')
+                     ->valueLabel('Name')
+                    ->required(),
                 Forms\Components\TextInput::make('type')
                   ->required()
                   ->maxLength(255),
@@ -65,9 +64,9 @@ class TeamTypeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label('Owner')->sortable(),
-                Tables\Columns\TextColumn::make('slug')->label('Slug')->sortable(),
-                Tables\Columns\TextColumn::make('type')->label('Type')->sortable(),
+                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('slug')->sortable(),
+                Tables\Columns\TextColumn::make('type')->sortable(),
                 JalaliDateTimeColumn::make('created_at')
             ])
             ->filters([
