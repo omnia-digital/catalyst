@@ -12,63 +12,12 @@ class Map extends Component
 {
     use WithMap, WithNotification;
 
-    public string|int|null $placeId = null;
-
-    public $height= '500px';
-
-    protected $listeners = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{select_event: 'handleEventSelected'}
+     */
+    protected array $listeners = [
         'select_event' => 'handleEventSelected',
     ];
-
-    /**
-     * @return void
-     */
-    public function handleEventSelected($eventId)
-    {
-        $team = Team::find($eventId);
-
-        if (!$team || !($location = $team->location()->first()) || !($location->lng) || !($location->lat)) {
-            $this->error(\Trans::get('Cannot find the team or location. Please refresh the page and try again!'));
-
-            return;
-        }
-
-        $this->flyTo('team-map', $location->lng, $location->lat);
-    }
-
-    public function showPlaceDetail($placeId): void
-    {
-        $this->emitTo('social::components.team-calendar-list', 'teamSelected', $placeId);
-    }
-
-    public function getPlacesProperty()
-    {
-        $places = Location::query()
-            ->hasCoordinates()
-            ->with('model')
-            ->get()
-            ->map(function (Location $location) {
-                return [
-                    'id' => $location->id,
-                    'name' => $location->model->name,
-                    'lat' => $location->lat,
-                    'lng' => $location->lng,
-                    'address' => $location->address,
-                    'address_line_2' => $location->address_line_2,
-                    'city' => $location->city,
-                    'state' => $location->state,
-                    'postal_code' => $location->postal_code,
-                    'country' => $location->country,
-                ];
-            });
-
-        return $places->all();
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('social::livewire.pages.teams.map', [
-            'places' => $this->places,
-        ]);
-    }
 }

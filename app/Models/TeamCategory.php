@@ -9,5 +9,8 @@ class TeamCategory extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    /**
+     * @var array
+     */
+    protected array $guarded = [];
 }

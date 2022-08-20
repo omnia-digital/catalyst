@@ -82,14 +82,17 @@ trait WithSortAndFilters {
         return Tag::all()->mapWithKeys(fn(Tag $tag) => [$tag->name => $tag->name])->all();
     }
 
-    public function applySorting(Builder $query): Builder
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<\Illuminate\Database\Eloquent\Model>
+     */
+    public function applySorting(Builder $query): \Illuminate\Database\Eloquent\Builder
     {
         return $query->orderBy($this->orderBy, $this->sortOrder);
     }
 
     public function applyFilters(Builder $query): Builder
     {
-        $table = $query->first()?->getTable();
+        $query->first()?->getTable();
         
         return $query
             ->when($this->filters['has_attachment'], fn(Builder $q) => $q->having('media_count', '>=', 1))

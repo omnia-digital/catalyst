@@ -11,38 +11,11 @@ class UserStatusList extends Component
 {
     public Team|null $team = null;
 
-    /**
-     * @psalm-return \Illuminate\Database\Eloquent\Builder<User>
-     */
-    public function getUsersQueryProperty(): \Illuminate\Database\Eloquent\Builder
-    {
-        return User::query();
-    }
-
     public function forTeam($query, Team $team)
     {
         return $query
             ->whereHas('teams', function ($query) use ($team) {
                 $query->where('team_user.team_id', $team->id);
             });
-    }
-
-    public function getUserListProperty()
-    {
-        $query = $this
-            ->usersQuery
-            ->withCount(['followers'])
-            ->distinct();
-
-        if($this->team) {
-            $query = $this->forTeam($query, $this->team);
-        }
-
-        return $query->get();
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('social::livewire.partials.user-status-list');
     }
 }

@@ -10,18 +10,16 @@ class ResourcesController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @return Renderable
      */
-    public function index()
+    public function index(): \Illuminate\View\View
     {
         return view('resources::index');
     }
 
     /**
      * Show the form for creating a new resource.
-     * @return Renderable
      */
-    public function create()
+    public function create(): \Illuminate\View\View
     {
         return view('resources::create');
     }
@@ -38,20 +36,20 @@ class ResourcesController extends Controller
 
     /**
      * Show the specified resource.
+     *
      * @param int $id
-     * @return Renderable
      */
-    public function show($id)
+    public function show($id): \Illuminate\View\View
     {
         return view('resources::show');
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
      * @param int $id
-     * @return Renderable
      */
-    public function edit($id)
+    public function edit($id): \Illuminate\View\View
     {
         return view('resources::edit');
     }

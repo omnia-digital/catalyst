@@ -10,6 +10,11 @@ class EditAward extends EditRecord
 {
     protected static string $resource = AwardResource::class;
 
+    /**
+     * @return Actions\DeleteAction[]
+     *
+     * @psalm-return array{0: Actions\DeleteAction}
+     */
     protected function getActions(): array
     {
         return [

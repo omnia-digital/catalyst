@@ -9,13 +9,6 @@ class InvitingTeamMember
     use Dispatchable;
 
     /**
-     * The team instance.
-     *
-     * @var mixed
-     */
-    public $team;
-
-    /**
      * The email address of the invitee.
      *
      * @var mixed
@@ -28,13 +21,6 @@ class InvitingTeamMember
      * @var mixed
      */
     public $role;
-
-    /**
-     * The message from the inviter.
-     *
-     * @var mixed
-     */
-    public $message;
 
     /**
      * Create a new event instance.

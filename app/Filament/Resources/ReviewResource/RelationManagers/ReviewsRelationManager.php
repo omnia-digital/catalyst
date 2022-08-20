@@ -16,6 +16,9 @@ class ReviewsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'Name';
 
+    /**
+     * @return Form
+     */
     public static function form(Form $form): Form
     {
         return $form
@@ -26,6 +29,9 @@ class ReviewsRelationManager extends RelationManager
             ]);
     }
 
+    /**
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return $table

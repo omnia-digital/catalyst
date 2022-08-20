@@ -22,7 +22,9 @@ class UserFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return (\Illuminate\Support\Carbon|string)[]
+     *
+     * @psalm-return array{email: string, email_verified_at: \Illuminate\Support\Carbon, password: string, remember_token: string}
      */
     public function definition()
     {
@@ -32,20 +34,6 @@ class UserFactory extends Factory
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
     }
 
     /**
@@ -66,27 +54,6 @@ class UserFactory extends Factory
                 }), 
                 ['role' => 'owner'],
                 'teams'
-        );
-    }
-
-    /**
-     * Indicate that the user should have a profile.
-     *
-     * @return null|static
-     */
-    public function withProfile()
-    {
-        if (!class_exists(\Modules\Social\Models\Profile::class)) return;
-
-        return $this->has(
-            Profile::factory()
-                ->state(function (array $attributes, User $user) {
-                    return [
-                        'user_id' => $user->id,
-                        'first_name' => $attributes['first_name'],
-                        'last_name' => $attributes['last_name'],
-                    ];
-                })
         );
     }
 }

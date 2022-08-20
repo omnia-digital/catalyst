@@ -12,7 +12,9 @@ class AwardFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return string[]
+     *
+     * @psalm-return array{name: string, icon: 'heroicon-o-academic-cap'}
      */
     public function definition()
     {

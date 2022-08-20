@@ -12,7 +12,12 @@ class Bookmark extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'order', 1: 'user_id', 2: 'bookmarkable_id', 3: 'bookmarkable_type'}
+     */
+    protected array $fillable = [
         'order',
         'user_id',
         'bookmarkable_id',
@@ -22,15 +27,5 @@ class Bookmark extends Model
     protected static function newFactory(): BookmarkFactory
     {
         return BookmarkFactory::new();
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function bookmarkable(): \Illuminate\Database\Eloquent\Relations\MorphTo
-    {
-        return $this->morphTo();
     }
 }

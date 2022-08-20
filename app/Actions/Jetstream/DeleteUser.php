@@ -16,17 +16,6 @@ class DeleteUser implements DeletesUsers
     protected $deletesTeams;
 
     /**
-     * Create a new action instance.
-     *
-     * @param  \Laravel\Jetstream\Contracts\DeletesTeams  $deletesTeams
-     * @return void
-     */
-    public function __construct(DeletesTeams $deletesTeams)
-    {
-        $this->deletesTeams = $deletesTeams;
-    }
-
-    /**
      * Delete the given user.
      *
      * @param  mixed  $user

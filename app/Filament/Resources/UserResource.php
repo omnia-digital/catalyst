@@ -40,16 +40,27 @@ class UserResource extends Resource
         }
     }
 
+    /**
+     * @return numeric-string
+     */
     protected static function getNavigationBadge(): ?string
     {
         return (string)static::getEloquentQuery()->get()->count();
     }
 
+    /**
+     * @return string
+     *
+     * @psalm-return 'primary'|'warning'
+     */
     protected static function getNavigationBadgeColor(): ?string
     {
         return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 
+    /**
+     * @return Form
+     */
     public static function form(Form $form): Form
     {
         return $form
@@ -93,6 +104,9 @@ class UserResource extends Resource
             ]);
     }
 
+    /**
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -138,12 +152,22 @@ class UserResource extends Resource
             ]);
     }
 
+    /**
+     * @return array
+     *
+     * @psalm-return array<empty, empty>
+     */
     public static function getRelations(): array
     {
         return [
         ];
     }
 
+    /**
+     * @return array[]
+     *
+     * @psalm-return array{index: array, create: array, view: array, edit: array}
+     */
     public static function getPages(): array
     {
         return [
@@ -152,13 +176,5 @@ class UserResource extends Resource
             'view' => Pages\ViewUser::route('/{record}'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }
-
-    /**
-     * @psalm-return \Closure(Model):string
-     */
-    protected function getTableRecordUrlUsing(): \Closure
-    {
-        return fn (Model $record): string => route('users.edit', ['record' => $record]);
     }
 }

@@ -12,7 +12,7 @@ class TrendingSection extends Component
 {
     use WithPagination, WithCachedRows;
 
-    public $title = 'Trending';
+    public string $title = 'Trending';
 
     public $type;
 

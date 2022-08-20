@@ -7,22 +7,9 @@ use Modules\Social\Models\Profile;
 
 class Media extends Component
 {
+    /**
+     * @var Profile|null
+     */
     public $profile; 
-    public $media;
 
-    public function getUserProperty()
-    {
-        return $this->profile->user;
-    }
-
-    public function mount(Profile $profile): void
-    {
-        $this->profile = $profile->load('user');
-        $this->media = $this->user->postMedia;
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('social::livewire.pages.profiles.media');
-    }
 }

@@ -10,7 +10,12 @@ class ProjectSize extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'title', 1: 'description', 2: 'order'}
+     */
+    protected array $fillable = [
         'title',
         'description',
         'order',
@@ -22,13 +27,5 @@ class ProjectSize extends Model
     public function users(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
         return $this->hasManyThrough(User::class, Job::class, 'user_id', 'id');
-    }
-
-    /**
-     * @psalm-return \Illuminate\Database\Eloquent\Relations\HasMany<Job>
-     */
-    public function jobs(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Job::class);
     }
 }

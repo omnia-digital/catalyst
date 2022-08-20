@@ -18,44 +18,12 @@ class RepostButton extends Component
 
     public Post $model;
 
-    public ?string $content = null;
-
-    protected $listeners = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{'post-editor:submitted': 'createRepost'}
+     */
+    protected array $listeners = [
         'post-editor:submitted' => 'createRepost'
     ];
-
-    public function showRepostModal(): void
-    {
-        $this->openModal('repost-modal-' . $this->model->id);
-    }
-
-    public function createRepost($data): void
-    {
-        $this->content = strip_tags($data['content']);
-
-        $this->validatePostEditor();
-
-        /** @var Post $repost */
-        $repost = DB::transaction(function () use ($data) {
-            $repost = (new CreateNewPostAction)
-                ->asRepost($this->model)
-                ->execute($data['content']);
-
-            $repost->attachMedia($data['images'] ?? []);
-
-            return $repost;
-        });
-
-
-        $this->model->user->notify(new PostWasRepostedNotification($repost, Auth::user()));
-
-        $this->emitPostSaved($data['id']);
-        $this->closeModal('repost-modal-' . $this->model->id);
-        $this->redirectRoute('social.posts.show', $repost);
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('social::livewire.partials.repost-button');
-    }
 }

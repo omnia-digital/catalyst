@@ -10,6 +10,11 @@ class ListTeamTypes extends ListRecords
 {
     protected static string $resource = TeamTypeResource::class;
 
+    /**
+     * @return Actions\CreateAction[]
+     *
+     * @psalm-return array{0: Actions\CreateAction}
+     */
     protected function getActions(): array
     {
         return [

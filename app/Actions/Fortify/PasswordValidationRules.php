@@ -9,9 +9,11 @@ trait PasswordValidationRules
     /**
      * Get the validation rules used to validate passwords.
      *
-     * @return array
+     * @return (\Laravel\Fortify\Rules\Password|string)[]
+     *
+     * @psalm-return array{0: 'required', 1: 'string', 2: \Laravel\Fortify\Rules\Password, 3: 'confirmed'}
      */
-    protected function passwordRules()
+    protected function passwordRules(): array
     {
         return ['required', 'string', new Password, 'confirmed'];
     }

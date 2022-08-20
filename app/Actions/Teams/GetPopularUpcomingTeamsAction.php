@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class GetPopularUpcomingTeamsAction
 {
+    /**
+     * @psalm-return Collection<Team>
+     */
     public function execute(int $limit = 5): Collection
     {
         return Team::query()

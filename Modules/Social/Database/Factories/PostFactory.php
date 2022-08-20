@@ -23,7 +23,9 @@ class PostFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return (\Illuminate\Support\Carbon|mixed|string)[]
+     *
+     * @psalm-return array{user_id: mixed, body: string, created_at: \Illuminate\Support\Carbon, updated_at: \Illuminate\Support\Carbon}
      */
     public function definition()
     {
@@ -45,37 +47,6 @@ class PostFactory extends Factory
         return $this->state([
             'type' => $type
         ]);
-    }
-
-    public function asResource(): PostFactory
-    {
-        return $this->withType(PostType::RESOURCE)->state([
-            'title' => $this->faker->company()
-        ]);
-    }
-
-    public function asQuestion(): PostFactory
-    {
-        return $this->withType(PostType::QUESTION)->state([
-            'title' => $this->faker->sentence,
-            'body' => $this->faker->paragraph(6)
-        ]);
-    }
-
-    /**
-     * @return $this
-     */
-    public function withReplies($replies = 5)
-    {
-        return $this->has(
-            Post::factory($replies)
-                ->state(function (array $attributes, Post $post) {
-                    return [
-                        'postable_id'   => $post->id,
-                        'postable_type' => Post::class,
-                    ];
-                })
-        );
     }
 }
 

@@ -18,7 +18,9 @@ class JobAddonFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return (int|string)[]
+     *
+     * @psalm-return array{name: string, code: string, description: string, price: int}
      */
     public function definition()
     {

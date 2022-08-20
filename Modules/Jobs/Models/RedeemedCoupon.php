@@ -9,7 +9,12 @@ class RedeemedCoupon extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'coupon_id', 1: 'code', 2: 'type', 3: 'original_price', 4: 'discount_amount', 5: 'after_discount_price', 6: 'redeemed_at'}
+     */
+    protected array $fillable = [
         'coupon_id',
         'code',
         'type',
@@ -19,22 +24,17 @@ class RedeemedCoupon extends Model
         'redeemed_at'
     ];
 
-    protected $casts = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{redeemed_at: 'datetime'}
+     */
+    protected array $casts = [
         'redeemed_at' => 'datetime'
     ];
 
-    public $timestamps = false;
-
-    public function model(): \Illuminate\Database\Eloquent\Relations\MorphTo
-    {
-        return $this->morphTo();
-    }
-
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @var false
      */
-    public function coupon()
-    {
-        return $this->belongsTo(Coupon::class);
-    }
+    public bool $timestamps = false;
 }

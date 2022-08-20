@@ -21,15 +21,6 @@ class PostWasLikedNotification extends Notification implements ShouldQueue
     ) {
     }
 
-    public function via($notifiable): array
-    {
-        if ($notifiable->id === $this->post->user_id) {
-            return [];
-        }
-
-        return ['broadcast', 'database'];
-    }
-
     public function toArray($notifiable): array
     {
         $url = $this->post->type === PostType::RESOURCE->value

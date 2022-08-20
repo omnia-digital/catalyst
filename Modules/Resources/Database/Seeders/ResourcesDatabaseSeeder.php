@@ -9,15 +9,5 @@ use Modules\Social\Models\Post;
 
 class ResourcesDatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        Post::factory(15)->asResource()->create();
-        $this->call(BookmarksTableSeeder::class);
 
-    }
 }

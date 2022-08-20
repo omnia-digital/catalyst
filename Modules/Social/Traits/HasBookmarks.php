@@ -10,9 +10,9 @@
         /**
          * Get the bookmarks that User has created
          *
-         * @return MorphMany
+         * @psalm-return \Illuminate\Database\Eloquent\Relations\MorphMany<\Modules\Social\Models\Bookmark>
          */
-        public function bookmarks(): MorphMany
+        public function bookmarks(): \Illuminate\Database\Eloquent\Relations\MorphMany
         {
             return $this->morphMany(Bookmark::class, 'bookmarkable');
         }

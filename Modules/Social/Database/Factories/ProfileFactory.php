@@ -18,7 +18,9 @@ class ProfileFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return (Factory|string)[]
+     *
+     * @psalm-return array{first_name: string, last_name: string, user_id: Factory<User>, bio: string}
      */
     public function definition()
     {

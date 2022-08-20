@@ -13,6 +13,11 @@ class ManageGeneralSettings //extends SettingsPage
     protected static ?string $navigationIcon = 'heroicon-o-cog';
     protected static string $settings = GeneralSettings::class;
 
+    /**
+     * @return TextInput[]
+     *
+     * @psalm-return array{0: TextInput}
+     */
     protected function getFormSchema(): array
     {
         return [

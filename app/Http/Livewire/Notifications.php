@@ -26,39 +26,4 @@ class Notifications extends Component
     {
         Auth::user()->notifications()->where('id', $notificationId)->first()?->markAsRead();
     }
-
-    public function showAlert($notification): void
-    {
-        $this->info($notification['title']);
-    }
-
-    public function loadMore(): void
-    {
-        $this->perPage = $this->rowsQuery->count() + $this->perPage;
-    }
-
-    public function getRowsQueryProperty()
-    {
-        return Auth::user()
-            ->notifications()
-            ->orderByDesc('created_at');
-    }
-
-    public function getRowsProperty()
-    {
-        return $this->rowsQuery->paginate($this->perPage);
-    }
-
-    public function getAllNotificationCountProperty()
-    {
-        return Auth::user()->notifications()->count();
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('livewire.notifications', [
-            'notifications' => $this->rows,
-            'allNotificationCount' => $this->allNotificationCount
-        ]);
-    }
 }

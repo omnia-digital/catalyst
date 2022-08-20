@@ -19,7 +19,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
     ];
 
-    protected $observers = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{'Modules\\Social\\Models\\Post'::class: PostObserver::class}
+     */
+    protected array $observers = [
         Post::class => PostObserver::class,
     ];
 

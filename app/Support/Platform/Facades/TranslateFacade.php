@@ -10,6 +10,8 @@ class TranslateFacade extends Facade
      * Get the registered name of the component.
      *
      * @return string
+     *
+     * @psalm-return 'trans'
      */
     protected static function getFacadeAccessor()
     {

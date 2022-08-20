@@ -8,122 +8,39 @@ use Modules\Social\Models\Post;
 
     class NewPostBox extends Component
     {
-        public $postTypes = [];
-        public $moods = [];
-        public $selected;
-        public $body;
-        public $attachments = [];
-        public $parentPostID;
-        public $postSent = false;
 
-        protected $listeners = ['filesAdded'];
-
-        protected $rules = [
-            'body' => 'required|min:6',
-        ];
-
-        public function filesAdded($files): void
-        {
-            $this->attachments = $files;
-        }
-
-        public function mount($parentPostID = null): void {
-            $this->parentPostID = $parentPostID;
-            $this->postTypes = [
-                [
-                    'label' => 'General',
-                    'icon' => 'heroicon-o-heart',
-                    'selected' => true
-                ],
-                [
-                    'label' => 'Announcement',
-                    'icon' => 'heroicon-o-heart'
-                ],
-                [
-                    'label' => 'Resource',
-                    'icon' => 'heroicon-o-newspaper'
-                ],
-            ];
-            $this->moods = [
-                [
-                    'name' => 'Excited',
-                    'value' => 'excited',
-                    'icon' => 'heroicon-o-fire',
-                    'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-red-500' ,
-                ],
-                [
-                    'name' => 'Loved',
-                    'value' => 'loved',
-                    'icon' => 'heroicon-o-heart',
-                    'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-pink-400' ,
-                ],
-                [
-                    'name' => 'Happy',
-                    'value' => 'happy',
-                    'icon' => 'heroicon-o-emoji-happy',
-                    'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-green-400' ,
-                ],
-                [
-                    'name' => 'Sad',
-                    'value' => 'sad',
-                    'icon' => 'heroicon-o-emoji-sad',
-                    'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-yellow-400' ,
-                ],
-                [
-                    'name' => 'Thumbsy',
-                    'value' => 'thumbsy',
-                    'icon' => 'heroicon-o-thumb-up',
-                    'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-secondary' ,
-                ],
-                [
-                    'name' => 'I feel nothing',
-                    'value' => null,
-                    'icon' => 'heroicon-o-x',
-                    'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-transparent',
-                ],
-            ];
-
-            $this->selected = $this->moods[5];
-        }
-
-        public function updated($propertyName): void
-        {
-            $this->validateOnly($propertyName);
-        }
-
-        public function savePost(): void
-        {
-            $validatedData = $this->validate();
-
-            if (is_null($this->parentPostID)) {
-                $post = $this->user->posts()->create($validatedData);
-            } else {
-                $parentPost = Post::withoutGlobalScope('parent')->find($this->parentPostID);
-                $post = $parentPost->createComment($validatedData, auth()->id());
-            }
-
-            $this->postSent = true;
-            $this->emit('postAdded', $post);
-            $this->reset(['body']);
-        }
 
         /**
-         * @psalm-return \Illuminate\Database\Eloquent\Collection<User>
+         * @var (null|string)[][]
+         *
+         * @psalm-var array{0?: array{name: 'Excited', value: 'excited', icon: 'heroicon-o-fire', iconColor: 'text-light-text-color', bgColor: 'bg-red-500'}, 1?: array{name: 'Loved', value: 'loved', icon: 'heroicon-o-heart', iconColor: 'text-light-text-color', bgColor: 'bg-pink-400'}, 2?: array{name: 'Happy', value: 'happy', icon: 'heroicon-o-emoji-happy', iconColor: 'text-light-text-color', bgColor: 'bg-green-400'}, 3?: array{name: 'Sad', value: 'sad', icon: 'heroicon-o-emoji-sad', iconColor: 'text-light-text-color', bgColor: 'bg-yellow-400'}, 4?: array{name: 'Thumbsy', value: 'thumbsy', icon: 'heroicon-o-thumb-up', iconColor: 'text-light-text-color', bgColor: 'bg-secondary'}, 5?: array{name: 'I feel nothing', value: null, icon: 'heroicon-o-x', iconColor: 'text-light-text-color', bgColor: 'bg-transparent'}}
          */
-        public function getUserProperty(): \Illuminate\Database\Eloquent\Collection
-        {
-            return User::find(auth()->id());
-        }
+        public array $moods = [];
 
-        public function render(): \Illuminate\View\View
-        {
-            return view('social::livewire.components.new-post-box');
-        }
+        /**
+         * @var (null|string)[]|null
+         *
+         * @psalm-var array{name: 'I feel nothing', value: null, icon: 'heroicon-o-x', iconColor: 'text-light-text-color', bgColor: 'bg-transparent'}|null
+         */
+         public $body;
+
+        public $parentPostID;
+
+
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{0: 'filesAdded'}
+         */
+        protected array $listeners = ['filesAdded'];
+
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{body: 'required|min:6'}
+         */
+        protected array $rules = [
+            'body' => 'required|min:6',
+        ];
 
     }

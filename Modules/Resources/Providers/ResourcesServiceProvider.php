@@ -93,12 +93,19 @@ class ResourcesServiceProvider extends ServiceProvider
      * Get the services provided by the provider.
      *
      * @return array
+     *
+     * @psalm-return array<empty, empty>
      */
     public function provides()
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     *
+     * @psalm-return list<string>
+     */
     private function getPublishableViewPaths(): array
     {
         $paths = [];

@@ -6,34 +6,6 @@
 
     class ModuleNavigation extends Component
     {
-        public string $class;
-        public array $navigation = [];
 
-        public function mount(): void {
-            $this->navigation = [
-                [
-                    'label'   => 'Home',
-                    'name'    => 'games.home',
-                    'icon'    => 'heroicon-o-home',
-                    'current' => false
-                ],
-//                [
-//                    'label'   => 'Reviews',
-//                    'name'    => 'games.reviews',
-//                    'icon'    => 'heroicon-o-globe',
-//                    'current' => false
-//                ],
-//                [
-//                    'label'   => 'Coming Soon',
-//                    'name'    => 'games.coming-soon',
-//                    'icon'    => 'heroicon-o-bell',
-//                    'current' => false
-//                ],
-            ];
-        }
 
-        public function render(): \Illuminate\View\View
-        {
-            return view('games::livewire.layouts.module-navigation');
-        }
     }

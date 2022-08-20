@@ -10,8 +10,10 @@ trait HasCoupon
 {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     *
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\MorphOne<\Modules\Jobs\Models\RedeemedCoupon>
      */
-    public function redeemedCoupon()
+    public function redeemedCoupon(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(RedeemedCoupon::class, 'model');
     }

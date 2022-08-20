@@ -61,9 +61,11 @@ class AddTeamMember implements AddsTeamMembers
     /**
      * Get the validation rules for adding a team member.
      *
-     * @return array
+     * @return (Role|string)[][]
+     *
+     * @psalm-return array{email: array{0: 'required', 1: 'email', 2: 'exists:users'}, role?: array{0: 'required', 1: 'string', 2: Role}}
      */
-    protected function rules()
+    protected function rules(): array
     {
         return array_filter([
             'email' => ['required', 'email', 'exists:users'],
@@ -76,11 +78,14 @@ class AddTeamMember implements AddsTeamMembers
     /**
      * Ensure that the user is not already on the team.
      *
-     * @param  mixed  $team
-     * @param  string  $email
+     * @param mixed  $team
+     * @param string  $email
+     *
      * @return \Closure
+     *
+     * @psalm-return \Closure(mixed):void
      */
-    protected function ensureUserIsNotAlreadyOnTeam($team, string $email)
+    protected function ensureUserIsNotAlreadyOnTeam($team, string $email): \Closure
     {
         return function ($validator) use ($team, $email) {
             $validator->errors()->addIf(

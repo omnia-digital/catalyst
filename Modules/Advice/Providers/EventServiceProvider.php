@@ -6,5 +6,8 @@
 
     class EventServiceProvider extends ServiceProvider
     {
-        protected $listen = [];
+        /**
+         * @var array
+         */
+        protected array $listen = [];
     }

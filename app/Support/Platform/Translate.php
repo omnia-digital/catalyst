@@ -11,7 +11,6 @@ class Translate
         $newWordString = '';
         foreach($wordsInString as $originalWord) {
             $lowercase = strtolower($originalWord);
-            $capitalized = ucfirst($originalWord);
             $singular = \Str::singular($lowercase);
             $plural = \Str::plural($lowercase);
             $newWord = $lowercase;

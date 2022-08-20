@@ -10,6 +10,11 @@ class ListUsers extends ListRecords
 {
     protected static string $resource = UserResource::class;
 
+    /**
+     * @return Actions\CreateAction[]
+     *
+     * @psalm-return array{0: Actions\CreateAction}
+     */
     protected function getActions(): array
     {
         return [

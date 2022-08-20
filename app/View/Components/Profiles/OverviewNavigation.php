@@ -9,10 +9,15 @@ use Illuminate\View\Component;
 class OverviewNavigation extends Component
 {
 
-    public $user;
-    public $pageView;
+    public User $user;
+    public string $pageView;
     
-    public $nav = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{show: 'Overview', media: 'Media', followers: 'Followers'}
+     */
+    public array $nav = [
         'show' => 'Overview',
         'media' => 'Media',
         'followers' => 'Followers'
@@ -32,7 +37,7 @@ class OverviewNavigation extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return \Illuminate\View\View
      */
     public function render()
     {

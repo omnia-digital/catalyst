@@ -18,21 +18,6 @@ class Game extends IGDBGame
 {
     use HasFactory;
 
-    public function getCoverUrl(): string
-    {
-        $coverUrl = Cover::where('id', $this->cover)->first()?->url;
-        $coverUrl = $coverUrl ? Str::replaceFirst('thumb', 'cover_big', $coverUrl) : null;
-
-        return $coverUrl ?? 'https://via.placeholder.com/264x352';
-    }
-
-    public function getInvolvedCompaniesAttribute()
-    {
-        $companies = InvolvedCompany::where('game', $this->id)->get();
-
-        return $companies;
-    }
-
     /**
      * @psalm-return \Illuminate\Support\Collection<empty, empty>
      */
@@ -52,16 +37,6 @@ class Game extends IGDBGame
     public function getTrailer()
     {
         return $this->getVideos()->first() ?? null;
-    }
-
-    public function getWebsitesAttribute()
-    {
-        return Website::where('game', $this->id)->get();
-    }
-
-    public function getRating()
-    {
-        return AgeRating::where('id', $this->rating)->first() ?? null;
     }
 
     public function profile(): string

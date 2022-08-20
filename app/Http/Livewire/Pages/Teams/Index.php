@@ -28,7 +28,12 @@ class Index extends Component
 
     public ?string $lens = null;
 
-    protected $queryString = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'lens', 1: 'filters', 2: 'tags', 3: 'members', 4: 'dateFilter'}
+     */
+    protected array $queryString = [
         'lens',
         'filters',
         'tags',

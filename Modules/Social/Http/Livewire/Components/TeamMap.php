@@ -16,46 +16,12 @@ class TeamMap extends Component
 
     public ?string $startDate = null;
 
-    protected $listeners = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{startDateUpdated: 'handleStartDateUpdated'}
+     */
+    protected array $listeners = [
         'startDateUpdated' => 'handleStartDateUpdated'
     ];
-
-    public function handleStartDateUpdated($data): void
-    {
-        $this->startDate = $data['start_date'];
-
-        $this->addPlaces('team-map', $this->places);
-    }
-
-    public function getPlacesProperty()
-    {
-        $places = Location::query()
-            ->hasCoordinates()
-            ->with('model')
-            ->when($this->startDate, fn(Builder $query) => $query->whereHas('model', fn(Builder $query) => $query->whereDate('start_date', $this->startDate)))
-            ->get()
-            ->map(function (Location $location) {
-                return [
-                    'id' => $location->id,
-                    'name' => $location->model->name,
-                    'lat' => $location->lat,
-                    'lng' => $location->lng,
-                    'address' => $location->address,
-                    'address_line_2' => $location->address_line_2,
-                    'city' => $location->city,
-                    'state' => $location->state,
-                    'postal_code' => $location->postal_code,
-                    'country' => $location->country,
-                ];
-            });
-
-        return $places->all();
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('social::livewire.components.team-map', [
-            'places' => $this->places,
-        ]);
-    }
 }

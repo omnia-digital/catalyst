@@ -26,6 +26,11 @@ class UserTable extends Component implements HasTable
         return User::query()->where;
     }
 
+    /**
+     * @return TextColumn[]
+     *
+     * @psalm-return array{0: TextColumn, 1: TextColumn, 2: TextColumn, 3: TextColumn, 4: TextColumn, 5: TextColumn, 6: TextColumn, 7: TextColumn, 8: TextColumn, 9: TextColumn, 10: TextColumn, 11: TextColumn}
+     */
     protected function getTableColumns(): array
     {
         return [
@@ -49,12 +54,20 @@ class UserTable extends Component implements HasTable
         ];
     }
 
+    /**
+     * @psalm-return array<empty, empty>
+     */
     protected function getTableFilters(): array
     {
         return [
         ];
     }
 
+    /**
+     * @return (EditAction|ViewAction)[]
+     *
+     * @psalm-return array{0: ViewAction, 1: EditAction}
+     */
     protected function getTableActions(): array
     {
         return [
@@ -63,6 +76,11 @@ class UserTable extends Component implements HasTable
         ];
     }
 
+    /**
+     * @return DeleteBulkAction[]
+     *
+     * @psalm-return array{0: DeleteBulkAction}
+     */
     protected function getTableBulkActions(): array
     {
         return [
@@ -70,6 +88,9 @@ class UserTable extends Component implements HasTable
         ];
     }
 
+    /**
+     * @return true
+     */
     public function isTableSearchable(): bool
     {
         return true;

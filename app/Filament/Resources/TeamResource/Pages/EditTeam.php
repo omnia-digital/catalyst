@@ -10,6 +10,11 @@ class EditTeam extends EditRecord
 {
     protected static string $resource = TeamResource::class;
 
+    /**
+     * @return (Actions\DeleteAction|Actions\ViewAction)[]
+     *
+     * @psalm-return array{0: Actions\ViewAction, 1: Actions\DeleteAction}
+     */
     protected function getActions(): array
     {
         return [

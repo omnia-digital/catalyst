@@ -28,7 +28,12 @@ class TeamCalendarList extends Component
 
     public ?string $classes = '';
 
-    protected $listeners = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{teamSelected: 'handleTeamSelected'}
+     */
+    protected array $listeners = [
         'teamSelected' => 'handleTeamSelected'
     ];
 
@@ -53,7 +58,7 @@ class TeamCalendarList extends Component
         });
     }
 
-    public function getUserProperty(): User|null
+    public function getUserProperty(): User|null|null
     {
         return User::find(Auth::id());
     }

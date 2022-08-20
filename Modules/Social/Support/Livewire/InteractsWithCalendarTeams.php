@@ -7,6 +7,11 @@ use Illuminate\Support\Collection;
 
 trait InteractsWithCalendarTeams
 {
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
+     *
+     * @psalm-return \Illuminate\Database\Eloquent\Collection<array-key, array{id: mixed, title: mixed, description: mixed, date: mixed, count: int, location: mixed}>|\Illuminate\Support\Collection<array-key, array{id: mixed, title: mixed, description: mixed, date: mixed, count: int, location: mixed}>
+     */
     public function events(): Collection
     {
         return Team::query()

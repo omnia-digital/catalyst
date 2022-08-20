@@ -10,19 +10,17 @@ class Members extends Component
 {
     use WithTeamManagement;
 
+    /**
+     * @var Team|null
+     */
     public $team;
 
-    protected $listeners = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{member_added: '$refresh'}
+     */
+    protected array $listeners = [
         'member_added' => '$refresh',
     ];
-
-    public function mount(Team $team): void
-    {
-        $this->team = $team;
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('social::livewire.pages.teams.members');
-    }
 }

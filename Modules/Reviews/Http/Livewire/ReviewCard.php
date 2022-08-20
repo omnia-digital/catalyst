@@ -7,17 +7,12 @@ use Modules\Reviews\Models\Review;
 
 class ReviewCard extends Component
 {
-    public $review;
 
-    protected $listeners = ['reviewUpdated' => '$refresh'];
 
-    public function mount(Review $review): void
-    {
-        $this->review = $review;
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('reviews::livewire.review-card');
-    }
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{reviewUpdated: '$refresh'}
+     */
+    protected array $listeners = ['reviewUpdated' => '$refresh'];
 }

@@ -23,7 +23,7 @@ trait Postable
     /**
      * Handles creating the post for the current model
      */
-    public function createPost($data, $userId): Model|Post
+    public function createPost($data, $userId): TRelatedModel|Post
     {
         return $this->posts()->create([
             'user_id' => $userId,
@@ -34,8 +34,10 @@ trait Postable
     //** Aliases **//
     /**
      * Alias for posts()
+     *
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<TRelatedModel>
      */
-    public function comments(): MorphMany
+    public function comments(): \Illuminate\Database\Eloquent\Builder
     {
         return $this->posts();
     }

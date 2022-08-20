@@ -14,20 +14,12 @@ class TeamCalendar extends LivewireCalendar
 {
     use InteractsWithCalendarTeams;
 
-    public $selectedID;
-
-    protected $listeners = ['select_event' => 'goToMonth'];
-
-    public function goToMonth($eventID): void
-    {
-        $this->selectedID = $eventID;
-        $date = Team::find($eventID)->start_date;
-
-        $this->startsAt = $date->startOfMonth()->startOfDay();
-        $this->endsAt = $this->startsAt->clone()->endOfMonth()->startOfDay();
-
-        $this->calculateGridStartsEnds();
-    }
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{select_event: 'goToMonth'}
+     */
+    protected array $listeners = ['select_event' => 'goToMonth'];
 
     /**
      * @return void
@@ -35,10 +27,5 @@ class TeamCalendar extends LivewireCalendar
     public function onEventClick($eventId)
     {
         $this->emitTo('social::components.team-calendar-list', 'teamSelected', $eventId);
-    }
-
-    public function getUserProperty(): User|null
-    {
-        return User::find(Auth::id());
     }
 }

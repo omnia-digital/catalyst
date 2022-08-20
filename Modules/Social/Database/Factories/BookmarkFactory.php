@@ -19,7 +19,9 @@ class BookmarkFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return (\Illuminate\Support\Carbon|mixed|string)[]
+     *
+     * @psalm-return array{user_id: mixed, bookmarkable_id: mixed, bookmarkable_type: Post::class, created_at: \Illuminate\Support\Carbon, updated_at: \Illuminate\Support\Carbon}
      */
     public function definition()
     {

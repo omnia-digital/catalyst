@@ -27,40 +27,40 @@ class NotificationCenter
             ->createdAt(now());
     }
 
-    public static function make(...$arguments): self
+    public static function make(...$arguments): static
     {
         return new static(...$arguments);
     }
 
-    public function title(string $value): NotificationCenter
+    public function title(string $value): static
     {
         $this->notification['title'] = $value;
 
         return $this;
     }
 
-    public function subtitle(string $value): NotificationCenter
+    public function subtitle(string $value): static
     {
         $this->notification['subtitle'] = $value;
 
         return $this;
     }
 
-    public function actionLink(string $value): self
+    public function actionLink(string $value): static
     {
         $this->notification['action_link'] = $value;
 
         return $this;
     }
 
-    public function actionText(string $value): self
+    public function actionText(string $value): static
     {
         $this->notification['action_text'] = $value;
 
         return $this;
     }
 
-    public function level(string $value): self
+    public function level(string $value): static
     {
         if (!in_array($value, self::LEVELS)) {
             $value = 'info';
@@ -92,56 +92,42 @@ class NotificationCenter
             ->level('danger');
     }
 
-    public function warning(string $value): self
-    {
-        return $this
-            ->title($value)
-            ->level('warning');
-    }
-
-    public function image(string $value): self
+    public function image(string $value): static
     {
         $this->notification['image'] = $value;
 
         return $this;
     }
 
-    public function createdAt(Carbon $value): self
+    public function createdAt(Carbon $value): static
     {
         $this->notification['created_at'] = $value->toAtomString();
 
         return $this;
     }
 
-    public function icon(string $value): self
+    public function icon(string $value): static
     {
         $this->notification['icon'] = $value;
 
         return $this;
     }
 
-    public function showMarkAsRead(bool $value = true): self
+    public function showMarkAsRead(bool $value = true): static
     {
         $this->notification['show_mark_as_read'] = $value;
 
         return $this;
     }
 
-    public function showCancel(bool $value = true): self
+    public function showCancel(bool $value = true): static
     {
         $this->notification['show_cancel'] = $value;
 
         return $this;
     }
 
-    public function sound(string $value): self
-    {
-        $this->notification['sound'] = $value;
-
-        return $this;
-    }
-
-    public function playSound(bool $value = true): self
+    public function playSound(bool $value = true): static
     {
         $this->notification['play_sound'] = $value;
 

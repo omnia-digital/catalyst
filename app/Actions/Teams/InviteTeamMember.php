@@ -71,10 +71,13 @@ class InviteTeamMember implements InvitesTeamMembers
     /**
      * Get the validation rules for inviting a team member.
      *
-     * @param  mixed  $team
-     * @return array
+     * @param mixed  $team
+     *
+     * @return (Role|\Illuminate\Validation\Rules\Unique|string)[][]
+     *
+     * @psalm-return array{email: array{0: 'required', 1: 'email', 2: \Illuminate\Validation\Rules\Unique}, role?: array{0: 'required', 1: 'string', 2: Role}, message: array{0: 'max:255'}}
      */
-    protected function rules($team)
+    protected function rules($team): array
     {
         return array_filter([
             'email' => ['required', 'email', Rule::unique('team_invitations')->where(function ($query) use ($team) {
@@ -90,11 +93,14 @@ class InviteTeamMember implements InvitesTeamMembers
     /**
      * Ensure that the user is not already on the team.
      *
-     * @param  mixed  $team
-     * @param  string  $email
+     * @param mixed  $team
+     * @param string  $email
+     *
      * @return \Closure
+     *
+     * @psalm-return \Closure(mixed):void
      */
-    protected function ensureUserIsNotAlreadyOnTeam($team, string $email)
+    protected function ensureUserIsNotAlreadyOnTeam($team, string $email): \Closure
     {
         return function ($validator) use ($team, $email) {
             $validator->errors()->addIf(

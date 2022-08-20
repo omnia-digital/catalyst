@@ -57,11 +57,21 @@ class Team extends JetstreamTeam implements HasMedia
         'content',
     ];
 
-    protected $dates = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'start_date'}
+     */
+    protected array $dates = [
         'start_date'
     ];
 
-    protected $appends = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'profile_photo_url', 1: 'location_short', 2: 'start_date_string'}
+     */
+    protected array $appends = [
         'profile_photo_url',
         'location_short',
         'start_date_string'
@@ -89,6 +99,8 @@ class Team extends JetstreamTeam implements HasMedia
      * Get the route key for the model.
      *
      * @return string
+     *
+     * @psalm-return 'handle'
      */
     public function getRouteKeyName()
     {
@@ -104,7 +116,7 @@ class Team extends JetstreamTeam implements HasMedia
         return $value;
     }
 
-    public function attachMedia(array $mediaUrls): self
+    public function attachMedia(array $mediaUrls): static
     {
         /** @var string $mediaUrl */
         foreach ($mediaUrls as $mediaUrl) {
@@ -123,6 +135,9 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->hasMany(Post::class);
     }
 
+    /**
+     * @psalm-return HasMany<TeamApplication>
+     */
     public function teamApplications(): HasMany
     {
         return $this->hasMany(TeamApplication::class);

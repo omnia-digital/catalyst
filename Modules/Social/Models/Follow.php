@@ -6,23 +6,12 @@
 
     class Follow extends Model
     {
-        protected $fillable = ['profile_id', 'following_id', 'local_profile'];
-
         /**
-         * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<Profile>
+         * @var string[]
+         *
+         * @psalm-var array{0: 'profile_id', 1: 'following_id', 2: 'local_profile'}
          */
-        public function actor(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-        {
-            return $this->belongsTo(Profile::class, 'profile_id', 'id');
-        }
-
-        /**
-         * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<Profile>
-         */
-        public function target(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-        {
-            return $this->belongsTo(Profile::class, 'following_id', 'id');
-        }
+        protected array $fillable = ['profile_id', 'following_id', 'local_profile'];
 
         /**
          * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<Profile>
@@ -37,20 +26,5 @@
             $path = $this->actor->permalink("#accepts/follows/{$this->id}{$append}");
 
             return url($path);
-        }
-
-        public function toText(): string
-        {
-            $actorName = $this->actor->handle;
-
-            return "{$actorName} " . \Trans::get('notification.startedFollowingYou');
-        }
-
-        public function toHtml(): string
-        {
-            $actorName = $this->actor->handle;
-            $actorUrl  = $this->actor->url();
-
-            return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . \Trans::get('notification.startedFollowingYou');
         }
     }

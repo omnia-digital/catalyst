@@ -16,74 +16,25 @@ class CreateTeamModal extends Component
 
     public ?string $name = null;
 
-    public ?string $startDate = null;
-
-    public ?string $summary = null;
-
     public $bannerImage;
-    public $bannerImageName;
+
 
     public $mainImage;
-    public $mainImageName;
+
 
     public $profilePhoto;
-    public $profilePhotoName;
 
-    public $sampleMedia = [];
+
+    /**
+     * @var array
+     */
+    public array $sampleMedia = [];
     public $sampleMediaNames = [];
 
-    public $teamTypes = [];
-
-    public function updatedBannerImage(): void
-    {
-        $this->validate([
-            'bannerImage' => 'image',
-        ]);
-
-        $this->bannerImageName = $this->bannerImage->getClientOriginalName();
-    }
-
-    public function updatedMainImage(): void
-    {
-        $this->validate([
-            'mainImage' => 'image',
-        ]);
-
-        $this->mainImageName = $this->mainImage->getClientOriginalName();
-    }
-
-    public function updatedProfilePhoto(): void
-    {
-        $this->validate([
-            'profilePhoto' => 'image',
-        ]);
-
-        $this->profilePhotoName = $this->profilePhoto->getClientOriginalName();
-    }
-
-    public function updatedSampleMedia(): void
-    {
-        $this->validate([
-            'sampleMedia.*' => 'image',
-        ]);
-
-        foreach ($this->sampleMedia as $key => $media) {
-            $this->sampleMediaNames[$key] = $media->getClientOriginalName();
-        }
-    }
-
-    public function getTeamTagsProperty()
-    {
-        return Tag::withType('team_type')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
-    }
-
-    protected function rules(): array
-    {
-        return [
-            'name' => ['required', 'max:254'],
-            'teamTypes' => ['required', 'array'],
-        ];
-    }
+    /**
+     * @var array
+     */
+    public array $teamTypes = [];
 
     public function create(): void
     {
@@ -104,12 +55,5 @@ class CreateTeamModal extends Component
         $this->reset();
 
         $this->redirectRoute('social.teams.show', $team);
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('livewire.create-team-modal', [
-            'teamTags' => $this->teamTags
-        ]);
     }
 }

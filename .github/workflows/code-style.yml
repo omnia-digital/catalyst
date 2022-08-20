@@ -75,6 +75,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          tools: composer:v2
+          coverage: none
+      - name: Validate Composer
+        run: composer validate
+      - name: Install Composer dependencies
+        run: |
+          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
+          composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
+          composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
+          composer install --prefer-dist --no-interaction --no-suggest
+
       - name: Install NPM dependencies
         run: npm ci
 

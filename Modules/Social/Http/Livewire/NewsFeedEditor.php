@@ -13,35 +13,14 @@ class NewsFeedEditor extends Component
 {
     use WithPostEditor, WithNotification;
 
-    public ?string $content = null;
-
-    protected $listeners = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{'post-editor:submitted': 'createPost'}
+     */
+    protected array $listeners = [
         'post-editor:submitted' => 'createPost'
     ];
 
     public Team|null $team = null;
-
-    public function createPost($data): void
-    {
-        $this->content = strip_tags($data['content']);
-
-        $this->validatePostEditor();
-
-        DB::transaction(function () use ($data) {
-            $options = [];
-            if (!empty($this->team)) {
-                $options['team_id'] = $this->team->id;
-            }
-            $post = (new CreateNewPostAction)->execute($data['content'], $options);
-            $post->attachMedia($data['images'] ?? []);
-        });
-
-        $this->emitPostSaved($data['id']);
-        $this->success('Post is created successfully!');
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('social::livewire.components.news-feed-editor');
-    }
 }

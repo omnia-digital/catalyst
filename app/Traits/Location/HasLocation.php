@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 trait HasLocation
 {
-    public function location(): MorphOne
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\MorphOne<\App\Models\Location>
+     */
+    public function location(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(Location::class, 'model');
     }

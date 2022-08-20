@@ -13,7 +13,12 @@ class Coupon extends Model
     const PERCENT = 'percent';
     const FIXED = 'fixed';
 
-    protected $casts = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{expires_at: 'datetime'}
+     */
+    protected array $casts = [
         'expires_at' => 'datetime'
     ];
 
@@ -23,58 +28,17 @@ class Coupon extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function redeems()
-    {
-        return $this->hasMany(RedeemedCoupon::class);
-    }
-
-    /**
      * Find a coupon by its code.
      *
      * @param string $code
      *
-     * @return null|static&\Illuminate\Database\Eloquent\Builder
+     * @return null|static
      *
      * @psalm-return null|static&\Illuminate\Database\Eloquent\Builder<static>
      */
-    public static function findByCode(string $code): static|null
+    public static function findByCode(string $code): static|null|null
     {
         return self::where('code', $code)->first();
-    }
-
-    /**
-     * Check if a coupon is valid.
-     *
-     * @return bool
-     */
-    public function isValid()
-    {
-        if (!$this->expires_at) {
-            return true;
-        }
-
-        if ($this->expires_at->lt(now())) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Check if a coupon is used for a specific model.
-     *
-     * @param string|Model $model
-     * @param int|null $id
-     * @return bool
-     */
-    public function isRedeemedFor($model, ?int $id = null)
-    {
-        return RedeemedCoupon::query()
-                             ->where('model_type', $model instanceof Model ? get_class($model) : $model)
-                             ->where('model_id', $model instanceof Model ? $model->getKey() : $id)
-                             ->exists();
     }
 
     /**

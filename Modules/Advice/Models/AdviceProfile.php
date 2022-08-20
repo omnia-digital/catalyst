@@ -22,14 +22,4 @@
             'bio',
             'person_id',
         ];
-
-        public function getCredibilityRatingAttribute(): void
-        {
-
-        }
-
-        public function person(): void
-        {
-            $this->belongsTo(Person::class);
-        }
     }

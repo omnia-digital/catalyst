@@ -15,9 +15,17 @@ class Review extends Model
 {
     use HasFactory, Postable, Likable;
 
-    protected $guarded = [];
+    /**
+     * @var array
+     */
+    protected array $guarded = [];
 
-    protected $casts = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{received_product_free: 'boolean', recommend: 'boolean', commentable: 'boolean'}
+     */
+    protected array $casts = [
         'received_product_free' => 'boolean',
         'recommend' => 'boolean',
         'commentable' => 'boolean',
@@ -26,20 +34,5 @@ class Review extends Model
     protected static function newFactory(): \Modules\Reviews\Database\factories\ReviewFactory
     {
         return \Modules\Reviews\Database\factories\ReviewFactory::new();
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function language(): BelongsTo
-    {
-        return $this->belongsTo(Language::class);
-    }
-
-    public function reviewable(): MorphTo
-    {
-        return $this->morphTo();
     }
 }

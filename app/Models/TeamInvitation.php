@@ -22,26 +22,6 @@
         ];
 
         /**
-         * Get the user that was invited.
-         *
-         * @return BelongsTo
-         */
-        public function user(): BelongsTo
-        {
-            return $this->belongsTo(User::class);
-        }
-
-        /**
-         * Get the user who sent the invitation.
-         *
-         * @return BelongsTo
-         */
-        public function inviter(): BelongsTo
-        {
-            return $this->belongsTo(User::class, 'inviter_id');
-        }
-
-        /**
          * Get the team that the invitation belongs to.
          *
          * @return BelongsTo

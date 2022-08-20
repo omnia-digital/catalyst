@@ -10,6 +10,11 @@ class EditReview extends EditRecord
 {
     protected static string $resource = ReviewResource::class;
 
+    /**
+     * @return (Actions\DeleteAction|Actions\ViewAction)[]
+     *
+     * @psalm-return array{0: Actions\ViewAction, 1: Actions\DeleteAction}
+     */
     protected function getActions(): array
     {
         return [

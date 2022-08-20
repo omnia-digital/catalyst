@@ -24,7 +24,12 @@ class Post extends Model implements HasMedia
 {
     use HasFactory, Likable, Postable, Attachable, Bookmarkable, InteractsWithMedia, HasTags;
 
-    protected $fillable = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'user_id', 1: 'team_id', 2: 'title', 3: 'type', 4: 'body', 5: 'postable_id', 6: 'postable_type', 7: 'repost_original_id', 8: 'published_at', 9: 'image'}
+     */
+    protected array $fillable = [
         'user_id',
         'team_id',
         'title',
@@ -37,11 +42,21 @@ class Post extends Model implements HasMedia
         'image'
     ];
 
-    protected $dates = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'published_at'}
+     */
+    protected array $dates = [
         'published_at'
     ];
 
-    protected $appends = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'published_at'}
+     */
+    protected array $appends = [
         'published_at',
     ];
 
@@ -53,61 +68,12 @@ class Post extends Model implements HasMedia
         });
     }
 
-    public function type(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => PostType::tryFrom($value),
-            set: fn($value) => $value?->value
-        );
-    }
-
-    public function scopeOfType($query, $type)
-    {
-        return $query->where('type', $type);
-    }
-
     protected static function newFactory(): PostFactory
     {
         return PostFactory::new();
     }
 
-    public function getPublishedAtAttribute($value)
-    {
-        if (empty($value)) {
-            return $this->created_at;
-        } else {
-            return $value;
-        }
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function team(): BelongsTo
-    {
-        return $this->belongsTo(Team::class)->withDefault([
-            'name' => 'No Team',
-        ]);
-    }
-
-    public function postable(): MorphTo
-    {
-        return $this->morphTo();
-    }
-
-    public function repostOriginal(): BelongsTo
-    {
-        return $this->belongsTo(self::class);
-    }
-
-    public function isRepost(): bool
-    {
-        return !is_null($this->repost_original_id);
-    }
-
-    public function attachMedia(array $mediaUrls): self
+    public function attachMedia(array $mediaUrls): static
     {
         /** @var string $mediaUrl */
         foreach ($mediaUrls as $mediaUrl) {
@@ -124,10 +90,5 @@ class Post extends Model implements HasMedia
         }
 
         return route('social.posts.show', $this);
-    }
-
-    public function isParent(): bool
-    {
-        return is_null($this->postable_id) && is_null($this->postable_type);
     }
 }

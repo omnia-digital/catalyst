@@ -30,18 +30,4 @@ class GetPopularGamesAction
         });
     }
 
-
-    /**
-     * @psalm-return Collection<array-key, Collection>
-     */
-    private function formatForView($games): Collection
-    {
-        return collect($games)->map(function ($game) {
-            return collect($game)->merge([
-                'coverImageUrl' => $game->cover_url,
-                'rating'        => isset($game['rating']) ? round($game['rating']) : null,
-                'platforms'     => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
-            ]);
-        });
-    }
 }

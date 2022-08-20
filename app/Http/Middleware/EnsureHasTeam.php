@@ -7,14 +7,7 @@ use Illuminate\Http\Request;
 
 class EnsureHasTeam
 {
-    public function handle(Request $request, Closure $next)
-    {
-        if (!auth()->user()->isMemberOfATeam()) {
-            return redirect()->route('social.home');
-        }
-        $this->ensureUserHasCurrentTeamSet();
-        return $next($request);
-    }
+
 
     protected function ensureUserHasCurrentTeamSet(): void
     {

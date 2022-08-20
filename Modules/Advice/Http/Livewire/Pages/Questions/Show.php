@@ -8,17 +8,5 @@ use function view;
 
 class Show extends Component
 {
-    public Post $resource;
 
-    public function mount(Post $question)
-    {
-        if ($question->type != 'question') {
-            return $this->redirectRoute('advice.questions.show', $question);
-        }
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('advice::livewire.pages.questions.show');
-    }
 }

@@ -12,66 +12,21 @@ class Create extends Component
 {
     use WithMediaManager;
 
-    public ?string $title = null;
-
     public ?string $body = null;
 
     public ?string $url = null;
 
-    public ?string $image = null;
-
-    protected function rules(): array
-    {
-        return [
-            'title' => ['required', 'max:255'],
-            'url'   => ['url', 'max:255'],
-            'body'  => ['required', 'max:2500'],
-            'image' => ['nullable','string'],
-        ];
-    }
-
-    public function addResource(): void
-    {
-        $validated = $this->validate();
-
-        $hashtags = $this->pullTags($validated['body']);
-
-        $resource = (new CreateNewPostAction)
-            ->type(PostType::RESOURCE)
-            ->execute($validated['body'], [
-                'title' => $validated['title'],
-                'url'   => $validated['url'],
-                'image' => $validated['image']
-            ]);
-
-        $tags = $this->getTags($hashtags);
-        $tags = $this->addResourceTag($tags);
-        $resource->attachTags($tags);
-
-        $this->reset('title', 'url', 'body', 'image');
-        $this->redirectRoute('resources.home', $resource);
-    }
-
     // Add Resource tag to all resources
-    public function addResourceTag($tags) : array
+    /**
+     * @psalm-param list<mixed> $tags
+     */
+    public function addResourceTag(array $tags) : array
     {
         if (!array_key_exists('resource', $tags)) {
             $tags[] = 'resource';
         }
 
         return $tags;
-    }
-
-    public function setFeaturedImage(array $image): void
-    {
-        $this->image = $image['url'];
-    }
-
-    public function removeFeaturedImage(): void
-    {
-        $this->image = null;
-
-        $this->removeFileFromMediaManager();
     }
 
     /**
@@ -91,8 +46,11 @@ class Create extends Component
 
     /**
      * @psalm-return list<mixed>
+     * @param string[] $hashtags
+     *
+     * @psalm-param list<string> $hashtags
      */
-    public function getTags($hashtags): array
+    public function getTags(array $hashtags): array
     {
         $tags = array();
 
@@ -101,10 +59,5 @@ class Create extends Component
         }
 
         return $tags;
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('resources::livewire.pages.resources.create');
     }
 }

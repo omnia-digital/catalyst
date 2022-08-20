@@ -8,8 +8,10 @@ trait Attachable
 {
     /**
      * Get the model's attachments
+     *
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\MorphMany<Attachment>
      */
-    public function attachments(): MorphMany
+    public function attachments(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(Attachment::class, 'attachable');
     }

@@ -12,47 +12,12 @@ use Modules\Games\Models\Game;
 
 class GamesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
-    {
 
-        // For Multi Query
-        // $client = new \GuzzleHttp\Client(['base_uri' => 'https://api-v3.igdb.com/']);
-
-        // $response = $client->request('POST', 'multiquery', [
-        //     'headers' => [
-        //         'user-key' => env('IGDB_KEY'),
-        //     ],
-        //     'body' => '
-        //         query games "Playstation" {
-        //             fields name, popularity, platforms.name, first_release_date;
-        //             where platforms = {6,48,130,49};
-        //             sort popularity desc;
-        //             limit 2;
-        //         };
-
-        //         query games "Switch" {
-        //             fields name, popularity, platforms.name, first_release_date;
-        //             where platforms = {6,48,130,49};
-        //             sort popularity desc;
-        //             limit 6;
-        //         };
-        //         '
-        // ]);
-
-        // $body = $response->getBody();
-        // dd(json_decode($body));
-        return view('games::livewire.home');
-    }
 
     /**
      * Show the form for creating a new resource.
-     * @return Renderable
      */
-    public function create()
+    public function create(): \Illuminate\View\View
     {
         return view('games::create');
     }
@@ -69,10 +34,10 @@ class GamesController extends Controller
 
     /**
      * Show the specified resource.
+     *
      * @param int $id
-     * @return Renderable
      */
-    public function show($slug)
+    public function show($slug): \Illuminate\View\View
     {
         $game = Game::where('slug', $slug)->firstOrFail();
 
@@ -98,32 +63,12 @@ class GamesController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('games::edit');
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param Request $request
      * @param int $id
      */
     public function update(Request $request, $id): void
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     */
-    public function destroy($id): void
     {
         //
     }

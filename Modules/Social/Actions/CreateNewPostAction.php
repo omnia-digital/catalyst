@@ -23,30 +23,21 @@ class CreateNewPostAction
 
     protected ?PostType $type = null;
 
-    protected ?Team $team = null;
-
-    public function user(User|Authenticatable $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function asComment(Model $parent): self
+    public function asComment(Model $parent): static
     {
         $this->postable = $parent;
 
         return $this;
     }
 
-    public function asRepost(Model $repost): self
+    public function asRepost(Model $repost): static
     {
         $this->repost = $repost;
 
         return $this;
     }
 
-    public function type(?PostType $type): self
+    public function type(?PostType $type): static
     {
         $this->type = $type;
 

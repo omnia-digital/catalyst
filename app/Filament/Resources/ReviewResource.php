@@ -19,6 +19,9 @@ class ReviewResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    /**
+     * @return Form
+     */
     public static function form(Form $form): Form
     {
         return $form
@@ -38,6 +41,9 @@ class ReviewResource extends Resource
             ]);
     }
 
+    /**
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -63,6 +69,11 @@ class ReviewResource extends Resource
             ]);
     }
 
+    /**
+     * @return string[]
+     *
+     * @psalm-return array{0: ReviewResource\RelationManagers\ReviewsRelationManager::class}
+     */
     public static function getRelations(): array
     {
         return [
@@ -70,6 +81,11 @@ class ReviewResource extends Resource
         ];
     }
 
+    /**
+     * @return array[]
+     *
+     * @psalm-return array{index: array, create: array, view: array, edit: array}
+     */
     public static function getPages(): array
     {
         return [

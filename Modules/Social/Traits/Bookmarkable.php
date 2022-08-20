@@ -13,8 +13,10 @@ trait Bookmarkable
 {
     /**
      * Get the bookmarks that all Users have created for this model
+     *
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\MorphMany<\Modules\Social\Models\Bookmark>
      */
-    public function bookmarks(): MorphMany
+    public function bookmarks(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
@@ -26,7 +28,7 @@ trait Bookmarkable
         return $this->bookmarks->where('user_id', $user->id)->isNotEmpty();
     }
 
-    public function markAsBookmark(): self
+    public function markAsBookmark(): \Modules\Social\Models\Post
     {
         $this->bookmarks()->create([
             'user_id' => Auth::id(),
@@ -36,7 +38,7 @@ trait Bookmarkable
         return $this;
     }
 
-    public function removeBookmark(): self
+    public function removeBookmark(): \Modules\Social\Models\Post
     {
         $this->bookmarks()->where('user_id', Auth::id())->delete();
 

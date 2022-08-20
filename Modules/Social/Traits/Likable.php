@@ -10,8 +10,10 @@ trait Likable
 {
     /**
      * Get the model's likes
+     *
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\MorphMany<\Modules\Social\Models\Like>
      */
-    public function likes(): MorphMany
+    public function likes(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(Like::class, 'likable');
     }

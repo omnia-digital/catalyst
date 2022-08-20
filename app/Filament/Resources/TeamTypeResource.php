@@ -32,16 +32,27 @@ class TeamTypeResource extends Resource
         return parent::getEloquentQuery()->where('type', 'team_type');
     }
 
+    /**
+     * @return numeric-string
+     */
     protected static function getNavigationBadge(): ?string
     {
         return (string)static::getEloquentQuery()->get()->count();
     }
 
+    /**
+     * @return string
+     *
+     * @psalm-return 'primary'|'warning'
+     */
     protected static function getNavigationBadgeColor(): ?string
     {
         return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 
+    /**
+     * @return Form
+     */
     public static function form(Form $form): Form
     {
         return $form
@@ -60,6 +71,9 @@ class TeamTypeResource extends Resource
             ]);
     }
 
+    /**
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -81,6 +95,11 @@ class TeamTypeResource extends Resource
             ]);
     }
 
+    /**
+     * @return array
+     *
+     * @psalm-return array<empty, empty>
+     */
     public static function getRelations(): array
     {
         return [
@@ -88,6 +107,11 @@ class TeamTypeResource extends Resource
         ];
     }
 
+    /**
+     * @return array[]
+     *
+     * @psalm-return array{index: array, create: array, view: array, edit: array}
+     */
     public static function getPages(): array
     {
         return [

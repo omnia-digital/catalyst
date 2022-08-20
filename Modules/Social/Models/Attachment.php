@@ -9,7 +9,10 @@ class Attachment extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    /**
+     * @var array
+     */
+    protected array $guarded = [];
     
     /* protected static function newFactory()
     {

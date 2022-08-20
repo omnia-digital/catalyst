@@ -8,19 +8,10 @@ use Modules\Social\Models\Post;
 
 class Show extends Component
 {
+    /**
+     * @var Post&\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Collection|null
+     *
+     * @psalm-var Post&\Illuminate\Database\Eloquent\Builder<Post>|\Illuminate\Database\Eloquent\Collection<Post&\Illuminate\Database\Eloquent\Builder<Post>>|null
+     */
     public $resource;
-
-    public function mount($resource): void
-    {
-        $this->resource = Post::withoutGlobalScope('parent')->find($resource);
-
-        if (!empty($this->resource) && $this->resource->type !== PostType::RESOURCE) {
-            $this->redirectRoute('social.posts.show', $this->resource);
-        }
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('resources::livewire.pages.resources.show');
-    }
 }

@@ -6,8 +6,5 @@
 
     class UserProfileLayout extends Component
     {
-        public function render(): \Illuminate\View\View
-        {
-            return view('social::livewire.layouts.user-profile-layout');
-        }
+
     }

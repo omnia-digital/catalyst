@@ -22,6 +22,9 @@ class TeamResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationGroup = 'My Teams';
 
+    /**
+     * @return Builder
+     */
     public static function getEloquentQuery(): Builder
     {
         if (auth()->user()->is_admin) {
@@ -31,16 +34,27 @@ class TeamResource extends Resource
         }
     }
 
+    /**
+     * @return numeric-string
+     */
     protected static function getNavigationBadge(): ?string
     {
         return (string)static::getEloquentQuery()->get()->count();
     }
 
+    /**
+     * @return string
+     *
+     * @psalm-return 'primary'|'warning'
+     */
     protected static function getNavigationBadgeColor(): ?string
     {
         return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 
+    /**
+     * @return Form
+     */
     public static function form(Form $form): Form
     {
         return $form
@@ -72,6 +86,9 @@ class TeamResource extends Resource
             ]);
     }
 
+    /**
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -103,6 +120,11 @@ class TeamResource extends Resource
             ]);
     }
 
+    /**
+     * @return array
+     *
+     * @psalm-return array<empty, empty>
+     */
     public static function getRelations(): array
     {
         return [
@@ -110,6 +132,11 @@ class TeamResource extends Resource
         ];
     }
 
+    /**
+     * @return array[]
+     *
+     * @psalm-return array{index: array, create: array, view: array, edit: array}
+     */
     public static function getPages(): array
     {
         return [

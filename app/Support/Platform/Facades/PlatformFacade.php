@@ -10,6 +10,8 @@ class PlatformFacade extends Facade
      * Get the registered name of the component.
      *
      * @return string
+     *
+     * @psalm-return 'platform'
      */
     protected static function getFacadeAccessor()
     {

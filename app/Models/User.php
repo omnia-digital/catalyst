@@ -47,16 +47,31 @@ class User extends Authenticatable implements FilamentUser
             return str_ends_with($this->email, '@omniadigital.io') && $this->hasVerifiedEmail();
         }
 
-        protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{0: 'deleted_at', 1: 'email_verified_at', 2: '2fa_setup_at'}
+         */
+        protected array $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
 
-        protected $fillable = [
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{0: 'first_name', 1: 'last_name', 2: 'email', 3: 'password'}
+         */
+        protected array $fillable = [
             'first_name',
             'last_name',
             'email',
             'password',
         ];
 
-        protected $hidden = [
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{0: 'email', 1: 'password', 2: 'is_admin', 3: 'remember_token', 4: 'email_verified_at', 5: 'two_factor_recovery_codes', 6: 'two_factor_secret', 7: 'deleted_at', 8: 'updated_at'}
+         */
+        protected array $hidden = [
             'email',
             'password',
             'is_admin',
@@ -68,7 +83,12 @@ class User extends Authenticatable implements FilamentUser
             'updated_at'
         ];
 
-        protected $appends = [
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{0: 'profile_photo_url'}
+         */
+        protected array $appends = [
             'profile_photo_url'
         ];
 
@@ -153,10 +173,16 @@ class User extends Authenticatable implements FilamentUser
                 ->where('model_type', Post::class);
         }
 
+        /**
+         * @psalm-return HasMany<TeamInvitation>
+         */
         public function teamInvitations(): HasMany
         {
             return $this->hasMany(TeamInvitation::class);
         }
+        /**
+         * @psalm-return HasMany<TeamApplication>
+         */
         public function teamApplications(): HasMany
         {
             return $this->hasMany(TeamApplication::class);
@@ -168,7 +194,7 @@ class User extends Authenticatable implements FilamentUser
             return route('social.profile.show', $this->handle);
         }
 
-        public static function findByEmail(string $email): static|null
+        public static function findByEmail(string $email): static|null|null
         {
             return User::where('email', $email)->first();
         }

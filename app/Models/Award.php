@@ -9,7 +9,10 @@ class Award extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    /**
+     * @var array
+     */
+    protected array $guarded = [];
 
     /**
      * @psalm-return \Illuminate\Database\Eloquent\Relations\MorphToMany<Team>

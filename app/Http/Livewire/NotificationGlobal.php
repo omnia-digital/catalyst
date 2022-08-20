@@ -26,14 +26,4 @@ class NotificationGlobal extends Component
     {
         Auth::user()->notifications()->where('id', $notificationId)->first()?->markAsRead();
     }
-
-    public function showAlert($notification): void
-    {
-        $this->info($notification['title']);
-    }
-
-    public function render(): string
-    {
-        return '<div></div>';
-    }
 }

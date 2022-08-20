@@ -9,7 +9,7 @@ class LensesServiceProvider extends ServiceProvider implements DeferrableProvide
 {
     protected array $lensClasses = [];
 
-    public function registerLens(string $name, string $class): self
+    public function registerLens(string $name, string $class): static
     {
         $this->lensClasses[] = $class;
 

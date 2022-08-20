@@ -19,7 +19,12 @@ class Job extends Model
 {
     use HasFactory, HasTransaction, HasCoupon, HasSlug, HasTags;
 
-    protected $fillable = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'title', 1: 'slug', 2: 'description', 3: 'team_id', 4: 'user_id', 5: 'apply_type', 6: 'apply_value', 7: 'payment_type', 8: 'budget', 9: 'location', 10: 'hours_per_week_id', 11: 'is_remote', 12: 'project_size_id', 13: 'is_active'}
+     */
+    protected array $fillable = [
         'title',
         'slug',
         'description',
@@ -36,12 +41,17 @@ class Job extends Model
         'is_active'
     ];
 
-    protected $casts = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{is_remote: 'boolean', is_active: 'boolean'}
+     */
+    protected array $casts = [
         'is_remote' => 'boolean',
         'is_active' => 'boolean'
     ];
 
-    protected $table = 'job_positions';
+    protected string $table = 'job_positions';
 
     protected static function booted()
     {
@@ -62,63 +72,5 @@ class Job extends Model
         return SlugOptions::create()
                           ->generateSlugsFrom('title')
                           ->saveSlugsTo('slug');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function company()
-    {
-        return $this->belongsTo(Jetstream::$teamModel, 'team_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function client()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    /**
-     * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsToMany<JobAddon>
-     */
-    public function addons(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(JobAddon::class);
-    }
-
-    /**
-     * Get featured jobs
-     *
-     * @param $query
-     * @param null $inDays
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function scopeFeatured($query, $inDays = null)
-    {
-        return $query->whereHas('addons', fn($query) => $query->where('code', JobAddons::FEATURED_JOB))
-                     ->when($inDays, fn($query) => $query->whereDate('created_at', '>=', now()->subDays($inDays)));
-    }
-
-    /**
-     * @param string $code
-     * @return bool
-     */
-    public function hasAddon(string $code)
-    {
-        return $this->addons->contains('code', $code);
-    }
-
-    /**
-     * Get apply link base on apply type (email or link).
-     *
-     * @return string
-     */
-    public function getApplyLinkAttribute()
-    {
-        return $this->apply_type === 'email'
-            ? 'mailto::' . $this->apply_value . '?subject=Apply for ' . $this->title
-            : $this->apply_value;
     }
 }

@@ -7,28 +7,10 @@ use Modules\Social\Models\Profile;
 
 class Show extends Component
 {
+    /**
+     * @var Profile|null
+     */
     public $profile;
-
-    public $additionalInfo = [
-        'likes',
-        'views',
-        'comments',
-        'volunteers',
-        'members'
-    ];
   
-    public function getUserProperty()
-    {
-        return $this->profile->user;
-    }
 
-    public function mount(Profile $profile): void
-    {
-        $this->profile = $profile->load('user');
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('social::livewire.pages.profiles.show');
-    }
 }

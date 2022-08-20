@@ -13,28 +13,11 @@ class ShareButton extends Component
     public Post $model;
     public ?string $url;
     public array $links = [];
-    public ?string $content = null;
 
-    public function mount(Post $model, $url = ''): void
-    {
-        $this->model = $model;
-        $this->url = $model->getUrl() ?? $url;
-    }
-
-    public function showShareModal(): void
-    {
-        $this->getLinks();
-        $this->openModal('share-modal-' . $this->model->id);
-    }
 
     public function getLinks()
     {
         $this->links = \Share::page($this->url)->facebook()->twitter()->linkedin()->whatsapp()->telegram()->reddit()->getRawLinks();
         return $this->links;
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('social::livewire.partials.share-button');
     }
 }

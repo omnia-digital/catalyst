@@ -12,20 +12,16 @@ class CurrentWeekTeamCalendar extends LivewireCalendar
 {
     use InteractsWithCalendarTeams;
 
-    public $selectedID;
-
     public ?string $selectedStartDate = null;
 
-    protected $listeners = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{startDateUpdated: 'handleStartDateUpdated'}
+     */
+    protected array $listeners = [
         'startDateUpdated' => 'handleStartDateUpdated'
     ];
-
-    public function handleStartDateUpdated($data): void
-    {
-        $this->selectedStartDate = $data['start_date'];
-
-        $this->calculateGridStartsEnds();
-    }
 
     /**
      * @return void
@@ -36,10 +32,5 @@ class CurrentWeekTeamCalendar extends LivewireCalendar
 
         $this->gridStartsAt = $date->clone()->startOfWeek($this->weekStartsAt);
         $this->gridEndsAt = $date->clone()->endOfWeek($this->weekEndsAt);
-    }
-
-    public function getUserProperty(): User|null
-    {
-        return User::find(Auth::id());
     }
 }

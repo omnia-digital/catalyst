@@ -21,16 +21,34 @@ use App\Models\User;
     {
         use SoftDeletes, HasFactory, HasSlug, HasTags, HasProfilePhoto, InteractsWithMedia;
 
-        public $incrementing = false;
+        /**
+         * @var false
+         */
+        public bool $incrementing = false;
 
-        protected $dates = [
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{0: 'deleted_at', 1: 'last_fetched_at'}
+         */
+        protected array $dates = [
             'deleted_at',
             'last_fetched_at'
         ];
 
-        protected $hidden = ['private_key'];
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{0: 'private_key'}
+         */
+        protected array $hidden = ['private_key'];
 
-        protected $visible = [
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{0: 'id', 1: 'first_name', 2: 'last_name', 3: 'handle', 4: 'bio', 5: 'website', 6: 'user_id'}
+         */
+        protected array $visible = [
             'id',
             'first_name',
             'last_name',
@@ -40,7 +58,12 @@ use App\Models\User;
             'user_id',
         ];
 
-        protected $fillable = [
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{0: 'first_name', 1: 'last_name', 2: 'bio', 3: 'website', 4: 'user_id'}
+         */
+        protected array $fillable = [
             'first_name',
             'last_name',
             'bio',
@@ -48,7 +71,12 @@ use App\Models\User;
             'user_id',
         ];
 
-        protected $appends = [
+        /**
+         * @var string[]
+         *
+         * @psalm-var array{0: 'name', 1: 'profile_photo_url'}
+         */
+        protected array $appends = [
             'name',
             'profile_photo_url'
         ];
@@ -57,15 +85,12 @@ use App\Models\User;
          * Get the route key for the model.
          *
          * @return string
+         *
+         * @psalm-return 'handle'
          */
         public function getRouteKeyName()
         {
             return 'handle';
-        }
-
-        public function getNameAttribute(): string
-        {
-            return $this->first_name . " " . $this->last_name;
         }
 
         protected static function newFactory(): ProfileFactory
@@ -78,30 +103,6 @@ use App\Models\User;
             return SlugOptions::create()
                               ->generateSlugsFrom('name')
                               ->saveSlugsTo('handle');
-        }
-
-        /**
-         * @return (mixed|string)[][]
-         *
-         * @psalm-return array{0: array{0: 'Phone', 1: '(123) 123-1234'}, 1: array{0: 'Email', 1: mixed}, 2: array{0: 'Title', 1: 'Senior Front-End Developer'}, 3: array{0: 'Team', 1: 'Product Development'}, 4: array{0: 'Location', 1: 'San Francisco'}, 5: array{0: 'Sits', 1: 'Oasis, 4th floor'}, 6: array{0: 'Salary', 1: '$145,000'}, 7: array{0: 'Birthday', 1: 'June 8, 1990'}}
-         */
-        public function fields(): array
-        {
-            return [
-                ['Phone', '(123) 123-1234'], // $this->phone
-                ['Email', $this->user->email],
-                ['Title', 'Senior Front-End Developer'],
-                ['Team', 'Product Development'],
-                ['Location', 'San Francisco'],
-                ['Sits', 'Oasis, 4th floor'],
-                ['Salary', '$145,000'],
-                ['Birthday', 'June 8, 1990'],
-            ];
-        }
-
-        public function getDefaultScope(): string
-        {
-            return $this->is_private == true ? 'private' : 'public';
         }
 
 
@@ -130,155 +131,6 @@ use App\Models\User;
         }
 
         /**
-         * Get the URL to the user's profile photo.
-         *
-         * @return string
-         */
-        public function getProfilePhotoUrlAttribute()
-        {
-            return $this->photo()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
-        }
-
-        public function getCountryAttribute(): string
-        {
-            return 'USA';
-        }
-
-        public function getAwardsAttribute()
-        {
-            return $this->user->awards;
-        }
-
-        public function followingCount($short = false)
-        {
-            $count = Cache::remember('profile:following_count:' . $this->id, now()->addMonths(1), function () {
-                if ($this->user->settings->show_profile_following_count == false) {
-                    return 0;
-                }
-                $count = DB::table('followers')->where('profile_id', $this->id)->count();
-                if ($this->following_count != $count) {
-                    $this->following_count = $count;
-                    $this->save();
-                }
-
-                return $count;
-            });
-
-            return $short ? PrettyNumber::convert($count) : $count;
-        }
-
-        public function followerCount($short = false)
-        {
-            $count = Cache::remember('profile:follower_count:' . $this->id, now()->addMonths(1), function () {
-                if ($this->user->settings->show_profile_follower_count == false) {
-                    return 0;
-                }
-                $count = DB::table('followers')->where('following_id', $this->id)->count();
-                if ($this->followers_count != $count) {
-                    $this->followers_count = $count;
-                    $this->save();
-                }
-
-                return $count;
-            });
-
-            return $short ? PrettyNumber::convert($count) : $count;
-        }
-
-        public function follows($profile): bool
-        {
-            return Follow::whereProfileId($this->id)->whereFollowingId($profile->id)->exists();
-        }
-
-        public function followedBy($profile): bool
-        {
-            return Follow::whereProfileId($profile->id)->whereFollowingId($this->id)->exists();
-        }
-
-        /**
-         * @psalm-return \Illuminate\Database\Eloquent\Relations\HasOne<Avatar>
-         */
-        public function avatar(): \Illuminate\Database\Eloquent\Relations\HasOne
-        {
-            return $this->hasOne(Avatar::class)->withDefault([
-                'media_path'   => 'public/avatars/default.jpg',
-                'change_count' => 0
-            ]);
-        }
-
-        public function avatarUrl()
-        {
-            $url = Cache::remember('avatar:' . $this->id, now()->addYears(1), function () {
-                $avatar = $this->avatar;
-
-                if ($avatar->cdn_url) {
-                    return $avatar->cdn_url ?? url('/storage/avatars/default.jpg');
-                }
-
-                if ($avatar->is_remote) {
-                    return $avatar->cdn_url ?? url('/storage/avatars/default.jpg');
-                }
-
-                $path = $avatar->media_path;
-                $path = "{$path}?v={$avatar->change_count}";
-
-                return config('app.url') . Storage::url($path);
-            });
-
-            return $url;
-        }
-
-        /**
-         * @psalm-return \Illuminate\Support\Collection<empty, empty>
-         */
-        public function recommendFollowers(): \Illuminate\Support\Collection
-        {
-            return collect([]);
-        }
-
-        /**
-         * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsToMany<self>
-         */
-        public function following(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-        {
-            return $this->belongsToMany(self::class, 'followers', 'profile_id', 'following_id');
-        }
-
-        /**
-         * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsToMany<self>
-         */
-        public function followers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-        {
-            return $this->belongsToMany(self::class, 'followers', 'following_id', 'profile_id');
-        }
-
-        /**
-         * @psalm-return \Illuminate\Database\Eloquent\Relations\HasMany<Like>
-         */
-        public function likes(): \Illuminate\Database\Eloquent\Relations\HasMany
-        {
-            return $this->hasMany(Like::class);
-        }
-
-        /**
-         * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<User>
-         */
-        public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-        {
-            return $this->belongsTo(User::class);
-        }
-
-        /**
          * Advice
          */
-
-        /**
-         * Credibility Rating for Advice
-         *
-         * @return void
-         */
-        public function getCredibilityRatingAttribute()
-        {
-
-        }
     }

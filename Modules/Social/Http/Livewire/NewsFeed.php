@@ -13,7 +13,12 @@ class NewsFeed extends Component
 
     public $perPage = 6;
 
-    protected $listeners = ['postSaved'];
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'postSaved'}
+     */
+    protected array $listeners = ['postSaved'];
 
     public Team|null $team = null;
 
@@ -32,7 +37,10 @@ class NewsFeed extends Component
         return $this->perPage < $this->rowsQuery->count();
     }
 
-    public function getRowsQueryProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<TRelatedModel>|\Illuminate\Database\Eloquent\Builder<\Illuminate\Database\Eloquent\Model>
+     */
+    public function getRowsQueryProperty(): \Illuminate\Database\Eloquent\Builder
     {
         if ($this->team) {
             return $this->team->postsWithinTeam()->with(['user', 'user.profile', 'media'])->latest();

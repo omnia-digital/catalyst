@@ -29,8 +29,18 @@ class CreateReviewModal extends Component implements HasForms
     public $received_product_free;
     public $recommend;
 
-    protected $listeners = ['openReviewModal'];
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'openReviewModal'}
+     */
+    protected array $listeners = ['openReviewModal'];
 
+    /**
+     * @return (Checkbox|Radio|Select|Textarea)[]
+     *
+     * @psalm-return array{0: Textarea, 1: Select, 2: Select, 3: Checkbox, 4: Checkbox, 5: Radio}
+     */
     protected function getFormSchema(): array
     {
         return [

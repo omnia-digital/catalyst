@@ -10,6 +10,11 @@ class ViewTeamType extends ViewRecord
 {
     protected static string $resource = TeamTypeResource::class;
 
+    /**
+     * @return Actions\EditAction[]
+     *
+     * @psalm-return array{0: Actions\EditAction}
+     */
     protected function getActions(): array
     {
         return [

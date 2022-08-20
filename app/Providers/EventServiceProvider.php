@@ -13,12 +13,22 @@ use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
-    protected $observers = [
+    /**
+     * @var string[][]
+     *
+     * @psalm-var array{'App\\Models\\Team'::class: array{0: TeamObserver::class}, 'App\\Models\\User'::class: array{0: UserObserver::class}}
+     */
+    protected array $observers = [
         Team::class => [TeamObserver::class,],
         User::class => [UserObserver::class,],
     ];
 
-    protected $listen = [
+    /**
+     * @var string[][]
+     *
+     * @psalm-var array{'Illuminate\\Auth\\Events\\Registered'::class: array{0: SendEmailVerificationNotification::class}}
+     */
+    protected array $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],

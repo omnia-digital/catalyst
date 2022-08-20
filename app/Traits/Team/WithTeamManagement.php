@@ -304,8 +304,10 @@ trait WithTeamManagement
      * Get the available team member roles.
      *
      * @return array
+     *
+     * @psalm-return array<int, mixed>
      */
-    public function getRolesProperty()
+    public function getRolesProperty(): array
     {
         return collect(Jetstream::$roles)->transform(function ($role) {
             return with($role->jsonSerialize(), function ($data) {

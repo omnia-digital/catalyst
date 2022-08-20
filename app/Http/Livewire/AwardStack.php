@@ -8,40 +8,29 @@ use App\Models\User;
 
 class AwardStack extends Component
 {
-    public $awardsToAdd = [];
+    /**
+     * @var array
+     */
+    public array $awardsToAdd = [];
 
+    /**
+     * @var User|null
+     */
     public $user;
 
+    /**
+     * @var \Illuminate\Database\Eloquent\Collection|null
+     *
+     * @psalm-var \Illuminate\Database\Eloquent\Collection<\App\Models\Award>|null
+     */
     public $awards;
 
-    public Team|null $team = null;
-
-    protected $listeners = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{'modal-closed': 'resetAwardsSelection'}
+     */
+    protected array $listeners = [
         'modal-closed' => 'resetAwardsSelection'
     ];
-
-    public function mount(User $user, Team $team = null): void
-    {
-        $this->user = $user;
-        $this->awards = $user->awards;
-        $this->team = $team;
-    }
-
-    public function resetAwardsSelection(): void
-    {
-        $this->reset('awardsToAdd');
-    }
-
-    public function addAward(User $user): void
-    {
-        $user->awards()->attach($this->awardsToAdd);
-        
-        $this->dispatchBrowserEvent('notify', ['message' => 'Awards Added', 'type' => 'success']);
-        $this->dispatchBrowserEvent('add-awards-modal-' . $user->id,  ['type' => 'close']);
-    }
-
-    public function render(): \Illuminate\View\View
-    {
-        return view('livewire.award-stack');
-    }
 }

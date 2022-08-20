@@ -9,7 +9,12 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'gateway', 1: 'description', 2: 'transaction_id', 3: 'payer_id', 4: 'payer_name', 5: 'payer_email', 6: 'amount', 7: 'invoice_number', 8: 'user_id'}
+     */
+    protected array $fillable = [
         'gateway',
         'description',
         'transaction_id',
@@ -20,20 +25,4 @@ class Transaction extends Model
         'invoice_number',
         'user_id'
     ];
-
-    /**
-     * Get the model that the transaction belongs to.
-     */
-    public function transactionable(): \Illuminate\Database\Eloquent\Relations\MorphTo
-    {
-        return $this->morphTo();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

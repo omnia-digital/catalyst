@@ -10,9 +10,14 @@ class OverviewNavigation extends Component
 {
 
     public Team $team;
-    public $pageView;
+    public string $pageView;
 
-    public $nav = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{show: 'Discussion', members: 'People', resources: 'Resources', advice: 'Advice', jobs: 'Jobs', learn: 'Courses', awards: 'Awards', about: 'About'}
+     */
+    public array $nav = [
         'show' => 'Discussion',
         'members' => 'People',
         'resources' => 'Resources',
@@ -38,7 +43,7 @@ class OverviewNavigation extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return \Illuminate\View\View
      */
     public function render()
     {

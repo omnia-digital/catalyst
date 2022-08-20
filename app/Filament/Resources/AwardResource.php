@@ -19,6 +19,9 @@ class AwardResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    /**
+     * @return Form
+     */
     public static function form(Form $form): Form
     {
         return $form
@@ -31,6 +34,9 @@ class AwardResource extends Resource
             ]);
     }
 
+    /**
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -53,6 +59,11 @@ class AwardResource extends Resource
             ]);
     }
     
+    /**
+     * @return array
+     *
+     * @psalm-return array<empty, empty>
+     */
     public static function getRelations(): array
     {
         return [
@@ -60,6 +71,11 @@ class AwardResource extends Resource
         ];
     }
     
+    /**
+     * @return array[]
+     *
+     * @psalm-return array{index: array, create: array, edit: array}
+     */
     public static function getPages(): array
     {
         return [

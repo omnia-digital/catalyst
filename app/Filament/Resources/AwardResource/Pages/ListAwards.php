@@ -10,6 +10,11 @@ class ListAwards extends ListRecords
 {
     protected static string $resource = AwardResource::class;
 
+    /**
+     * @return Actions\CreateAction[]
+     *
+     * @psalm-return array{0: Actions\CreateAction}
+     */
     protected function getActions(): array
     {
         return [

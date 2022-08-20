@@ -20,7 +20,9 @@ class TeamFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return string[]
+     *
+     * @psalm-return array{name: string, content: string, summary: string, start_date: string}
      */
     public function definition()
     {

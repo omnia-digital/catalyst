@@ -11,7 +11,6 @@ class Profile extends Controller
     public function show()
     {
         $user = Auth::user();
-        $profile = $user->profile;
 
         return Inertia::render('Social/Profile', [
             'profile' => [

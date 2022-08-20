@@ -20,7 +20,12 @@ class Index extends Component
 
     public string $dateColumn = 'created_at';
 
-    protected $queryString = [
+    /**
+     * @var string[]
+     *
+     * @psalm-var array{0: 'search'}
+     */
+    protected array $queryString = [
         'search'
     ];
 

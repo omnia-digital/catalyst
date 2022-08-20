@@ -6,7 +6,7 @@ use URL;
 
 class NullMedia
 {
-    public $id = 0;
+    public int $id = 0;
 
     public $type;
 
