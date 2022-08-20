@@ -32,9 +32,9 @@ class TeamTypeResource extends Resource
         return parent::getEloquentQuery()->where('type', 'team_type');
     }
 
-    protected static function getNavigationBadge(): int
+    protected static function getNavigationBadge(): ?string
     {
-        return static::getEloquentQuery()->get()->count();
+        return (string)static::getEloquentQuery()->get()->count();
     }
 
     protected static function getNavigationBadgeColor(): ?string

@@ -40,9 +40,9 @@ class UserResource extends Resource
         }
     }
 
-    protected static function getNavigationBadge(): int
+    protected static function getNavigationBadge(): ?string
     {
-        return static::getEloquentQuery()->get()->count();
+        return (string)static::getEloquentQuery()->get()->count();
     }
 
     protected static function getNavigationBadgeColor(): ?string
