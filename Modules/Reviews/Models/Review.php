@@ -16,6 +16,12 @@ class Review extends Model
     use HasFactory, Postable, Likable;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'received_product_free' => 'boolean',
+        'recommend' => 'boolean',
+        'commentable' => 'boolean',
+    ];
     
     protected static function newFactory()
     {

@@ -11,15 +11,17 @@
     </div>
     <div class="col-span-2 space-y-2">
         <div class="flex items-start justify-between">
-            <div class="flex items-start">
-                <div class="mr-2 bg-blue-600 p-1 rounded-full flex items-center justify-center">
-                    <x-heroicon-s-thumb-up class="w-8 h-8 text-blue-400" />
+            @if ($review->recommended)
+                <div class="flex items-start">
+                    <div class="mr-2 bg-blue-600 p-1 rounded-full flex items-center justify-center">
+                        <x-heroicon-s-thumb-up class="w-8 h-8 text-blue-400" />
+                    </div>
+                    <div class="flex-1">
+                        <p class="uppercase text-lg font-bold">Recommended</p>
+                        <p class="text-neutral-dark text-2xs">Member for 6 days at review time</p>
+                    </div>
                 </div>
-                <div class="flex-1">
-                    <p class="uppercase text-lg font-bold">Recommended</p>
-                    <p class="text-neutral-dark text-2xs">Member for 6 days at review time</p>
-                </div>
-            </div>
+            @endif
             @if (auth()->user()->is($review->user))
                 <div>
                     <button 
@@ -36,13 +38,15 @@
             <p class="mt-2 text-light-text-color text-xs">{{ $review->body }}</p>
         </div>
         <div class="mt-4">
-            <p class="text-light-text-color text-xs">{{ \Trans::get('81 people found this review helpful') }}</p>
+            <p class="text-light-text-color text-xs">{{ \Trans::get($review->likesCount() . ' ' . Str::plural('person', $review->likesCount()) . ' found this review helpful') }}</p>
             <div class="flex space-x-1 mt-3">
                 <p class="text-light-text-color text-xs">Helpful</p>
-                <livewire:social::partials.like-button :model="$review" :hideCount="true" :show="true" />
-                <a href="">
-                    <x-heroicon-s-thumb-down class="w-4 h-4 text-neutral hover:text-neutral-dark" />
-                </a>
+                <livewire:social::partials.like-button 
+                    :model="$review" 
+                    :hideCount="true" 
+                    :withDislikes="true"
+                    :btnStyles="'h-4 w-4'" 
+                />
             </div>
         </div>
     </div>

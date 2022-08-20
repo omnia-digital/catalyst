@@ -19,7 +19,7 @@
 {{--                                </p>--}}
                             </div>
                             <div class="flex-shrink-0">
-                                <livewire:award-stack :user="$user" :team="$team" />
+                                <livewire:award-stack :user="$user" :team="$team" wire:key="award-stack-{{ $user->id }}" />
 {{--                                <livewire:social::partials.follow-button :model="$user"/>--}}
                             </div>
                         </li>

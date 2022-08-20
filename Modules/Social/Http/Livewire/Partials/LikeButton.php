@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Social\Models\Post;
@@ -9,26 +10,38 @@ use Modules\Social\Notifications\PostWasLikedNotification;
 
 class LikeButton extends Component
 {
-    public $model;
+    public Model $model;
 
     public $show;
     
     public $hideCount;
 
-    public function mount($model, $show = false, $hideCount = false)
+    public $withDislikes;
+
+    public $btnStyles;
+
+    public function mount($model, $show = false, $hideCount = false, $withDislikes = false, $btnStyles = '')
     {
         $this->model = $model;
         $this->show = $show;
         $this->hideCount = $hideCount;
+        $this->withDislikes = $withDislikes;
+        $this->btnStyles = $btnStyles;
     }
 
     public function like()
     {
         $this->model->like();
 
-        if ($this->model->refresh()->is_liked) {
+        if ((get_class($this->model) == Post::class) && $this->model->refresh()->is_liked) {
             $this->model->user->notify(new PostWasLikedNotification($this->model, Auth::user()));
         }
+    }
+
+    public function dislike()
+    {
+        $this->model->dislike();
+
     }
 
     public function render()
