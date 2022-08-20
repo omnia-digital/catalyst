@@ -90,28 +90,51 @@ class User extends Authenticatable implements FilamentUser
             return $this->profile->profile_photo_url;
         }
 
-        public function getOnlineStatusAttribute()
+        /**
+         * @return true
+         */
+        public function getOnlineStatusAttribute(): bool
         {
             return true;
         }
 
         //// Relations ////
 
+        /**
+         * @return \Illuminate\Database\Eloquent\Relations\HasOne|null
+         *
+         * @psalm-return \Illuminate\Database\Eloquent\Relations\HasOne<Profile>|null
+         */
         public function profile() {
             if (!class_exists(Profile::class)) return;
             return $this->hasOne(Profile::class);
         }
 
+        /**
+         * @return HasMany|null
+         *
+         * @psalm-return HasMany<Post>|null
+         */
         public function posts() {
             if (!class_exists(Post::class)) return;
             return $this->hasMany(Post::class);
         }
 
+        /**
+         * @return HasMany|null
+         *
+         * @psalm-return HasMany<Review>|null
+         */
         public function reviews() {
             if (!class_exists(Review::class)) return;
             return $this->hasMany(Review::class);
         }
 
+        /**
+         * @return HasMany|null
+         *
+         * @psalm-return HasMany<Like>|null
+         */
         public function likes() {
             if (!class_exists(Like::class)) return;
             return $this->hasMany(Like::class);
@@ -121,7 +144,10 @@ class User extends Authenticatable implements FilamentUser
             return $this->likes->map->post->flatten();
         }
 
-        public function postMedia()
+        /**
+         * @psalm-return \Illuminate\Database\Eloquent\Builder<TRelatedModel>
+         */
+        public function postMedia(): \Illuminate\Database\Eloquent\Builder
         {
             return $this->hasManyThrough(Media::class, Post::class, 'user_id', 'model_id')
                 ->where('model_type', Post::class);
@@ -138,11 +164,11 @@ class User extends Authenticatable implements FilamentUser
 
         //// Helper Methods ////
 
-        public function url() {
+        public function url(): string {
             return route('social.profile.show', $this->handle);
         }
 
-        public static function findByEmail($email)
+        public static function findByEmail(string $email): static|null
         {
             return User::where('email', $email)->first();
         }

@@ -7,7 +7,7 @@ use Modules\Social\Models\Profile;
 
 class ProfilesTableSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         Profile::truncate();
 

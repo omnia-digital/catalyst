@@ -74,20 +74,20 @@ class Show extends Component
         return $this->redirectRoute('social.posts.show', $post['id']);
     }
 
-    public function setImage(Media $media)
+    public function setImage(Media $media): void
     {
         $this->displayUrl = $media->getFullUrl();
         $this->displayID = $media->id;
     }
 
-    public function mount(Team $team)
+    public function mount(Team $team): void
     {
         $team->owner;
         $this->displayUrl = $team->sampleImages()->first()->getFullUrl();
         $this->displayID = $team->sampleImages()->first()->id;
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.teams.show');
     }

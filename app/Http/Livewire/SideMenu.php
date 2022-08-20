@@ -15,7 +15,7 @@ class SideMenu extends Component
 
     public $navigation = [];
 
-    public function mount()
+    public function mount(): void
     {
         if (empty($this->navigation)) {
             $this->navigation = [
@@ -29,17 +29,17 @@ class SideMenu extends Component
         }
     }
 
-    public function openMobileMenu()
+    public function openMobileMenu(): void
     {
         $this->isOpen = true;
     }
 
-    public function closeMobileMenu()
+    public function closeMobileMenu(): void
     {
         $this->isOpen = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.side-menu-wide');
     }

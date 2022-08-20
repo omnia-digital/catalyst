@@ -10,7 +10,7 @@ class Show extends Component
 {
     public $resource;
 
-    public function mount($resource)
+    public function mount($resource): void
     {
         $this->resource = Post::withoutGlobalScope('parent')->find($resource);
 
@@ -19,7 +19,7 @@ class Show extends Component
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('resources::livewire.pages.resources.show');
     }

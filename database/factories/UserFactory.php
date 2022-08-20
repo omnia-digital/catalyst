@@ -72,7 +72,7 @@ class UserFactory extends Factory
     /**
      * Indicate that the user should have a profile.
      *
-     * @return $this
+     * @return null|static
      */
     public function withProfile()
     {

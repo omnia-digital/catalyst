@@ -12,7 +12,7 @@ class Home extends Component
         return Game::all();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('games::livewire.home', [
             'games' => $this->allGames,

@@ -8,7 +8,10 @@ use Livewire\Component;
 
 class WhoToFollowSection extends Component
 {
-    public function getUsersQueryProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<User>
+     */
+    public function getUsersQueryProperty(): \Illuminate\Database\Eloquent\Builder
     {
         return User::query();
     }
@@ -24,7 +27,7 @@ class WhoToFollowSection extends Component
             ->limit(3)->get();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.who-to-follow-section');
     }

@@ -17,7 +17,7 @@ class Show extends Component
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('advice::livewire.pages.questions.show');
     }

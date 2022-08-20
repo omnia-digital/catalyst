@@ -21,7 +21,7 @@ class NewsFeedEditor extends Component
 
     public Team|null $team = null;
 
-    public function createPost($data)
+    public function createPost($data): void
     {
         $this->content = strip_tags($data['content']);
 
@@ -40,7 +40,7 @@ class NewsFeedEditor extends Component
         $this->success('Post is created successfully!');
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.components.news-feed-editor');
     }

@@ -20,19 +20,19 @@ class AwardStack extends Component
         'modal-closed' => 'resetAwardsSelection'
     ];
 
-    public function mount(User $user, Team $team = null)
+    public function mount(User $user, Team $team = null): void
     {
         $this->user = $user;
         $this->awards = $user->awards;
         $this->team = $team;
     }
 
-    public function resetAwardsSelection()
+    public function resetAwardsSelection(): void
     {
         $this->reset('awardsToAdd');
     }
 
-    public function addAward(User $user)
+    public function addAward(User $user): void
     {
         $user->awards()->attach($this->awardsToAdd);
         
@@ -40,7 +40,7 @@ class AwardStack extends Component
         $this->dispatchBrowserEvent('add-awards-modal-' . $user->id,  ['type' => 'close']);
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.award-stack');
     }

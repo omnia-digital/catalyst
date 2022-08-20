@@ -22,12 +22,12 @@ use Modules\Social\Models\Post;
             'body' => 'required|min:6',
         ];
 
-        public function filesAdded($files)
+        public function filesAdded($files): void
         {
             $this->attachments = $files;
         }
 
-        public function mount($parentPostID = null) {
+        public function mount($parentPostID = null): void {
             $this->parentPostID = $parentPostID;
             $this->postTypes = [
                 [
@@ -92,12 +92,12 @@ use Modules\Social\Models\Post;
             $this->selected = $this->moods[5];
         }
 
-        public function updated($propertyName)
+        public function updated($propertyName): void
         {
             $this->validateOnly($propertyName);
         }
 
-        public function savePost()
+        public function savePost(): void
         {
             $validatedData = $this->validate();
 
@@ -113,12 +113,15 @@ use Modules\Social\Models\Post;
             $this->reset(['body']);
         }
 
-        public function getUserProperty()
+        /**
+         * @psalm-return \Illuminate\Database\Eloquent\Collection<User>
+         */
+        public function getUserProperty(): \Illuminate\Database\Eloquent\Collection
         {
             return User::find(auth()->id());
         }
 
-        public function render()
+        public function render(): \Illuminate\View\View
         {
             return view('social::livewire.components.new-post-box');
         }

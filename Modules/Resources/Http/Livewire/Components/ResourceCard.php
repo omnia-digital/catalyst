@@ -13,6 +13,9 @@ class ResourceCard extends PostCard
         return $this->redirectRoute('resources.show', $this->post);
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return view('resources::livewire.components.resource-card');

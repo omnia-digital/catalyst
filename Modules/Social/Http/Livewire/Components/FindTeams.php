@@ -11,7 +11,7 @@ class FindTeams extends Component
 {
     public ?string $startDate = null;
 
-    public function updatedStartDate()
+    public function updatedStartDate(): void
     {
         $component = $this->current === 'map'
             ? 'social::components.team-map'
@@ -22,7 +22,7 @@ class FindTeams extends Component
         ]);
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.components.find-teams');
     }

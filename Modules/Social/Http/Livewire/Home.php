@@ -12,7 +12,7 @@ class Home extends Component
 
     public $tabs = [];
 
-    public function mount()
+    public function mount(): void
     {
         $this->tabs = [
             [
@@ -57,7 +57,7 @@ class Home extends Component
         return $places->all();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.home', [
             'places' => $this->places,

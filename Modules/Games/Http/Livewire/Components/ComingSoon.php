@@ -10,7 +10,7 @@ class ComingSoon extends Component
 {
     public $comingSoon = [];
 
-    public function loadComingSoon()
+    public function loadComingSoon(): void
     {
         $current = Carbon::now()->timestamp;
 
@@ -35,12 +35,12 @@ class ComingSoon extends Component
 //        $this->comingSoon = $this->formatForView($comingSoonUnformatted);
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('games::livewire.components.coming-soon');
     }
 
-    private function formatForView($games)
+    private function formatForView($games): array
     {
         return collect($games)->map(function ($game) {
             return collect($game)->merge([

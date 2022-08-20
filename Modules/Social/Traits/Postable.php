@@ -10,8 +10,10 @@ trait Postable
 {
     /**
      * Get the posts for the current model
+     *
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<TRelatedModel>
      */
-    public function posts(): MorphMany
+    public function posts(): \Illuminate\Database\Eloquent\Builder
     {
         // @NOTE - we have to remove the 'parent' globalscope in order to retrieve comments
         return $this->morphMany(Post::class, 'postable')

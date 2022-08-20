@@ -28,7 +28,7 @@ class Create extends Component
         ];
     }
 
-    public function addResource()
+    public function addResource(): void
     {
         $validated = $this->validate();
 
@@ -43,19 +43,19 @@ class Create extends Component
         $this->redirectRoute('resources.home', $resource);
     }
 
-    public function setFeaturedImage(array $image)
+    public function setFeaturedImage(array $image): void
     {
         $this->image = $image['url'];
     }
 
-    public function removeFeaturedImage()
+    public function removeFeaturedImage(): void
     {
         $this->image = null;
 
         $this->removeFileFromMediaManager();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('advice::livewire.pages.questions.create');
     }

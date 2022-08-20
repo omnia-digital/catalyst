@@ -14,7 +14,7 @@ class Index extends Component
 
     public $type;
     
-    public function mount($type = null)
+    public function mount($type = null): void
     {
         if (!App::environment('production')) {
             $this->useCache = false;
@@ -38,7 +38,7 @@ class Index extends Component
         });
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.discover.index', [
             'posts' => $this->rows

@@ -30,12 +30,12 @@ class RepliesModal extends Component
         'post-editor:submitted' => 'saveComment'
     ];
 
-    public function postAdded()
+    public function postAdded(): void
     {
         $this->replyCount = $this->post->comments()->count();
     }
 
-    public function mount($post, $show = false, $type = null)
+    public function mount($post, $show = false, $type = null): void
     {
         $this->post = $post;
         $this->replyCount = $post->comments()->count();
@@ -43,7 +43,7 @@ class RepliesModal extends Component
         $this->type = $type;
     }
 
-    public function saveComment($data)
+    public function saveComment($data): void
     {
         $this->content = strip_tags($data['content']);
 
@@ -66,7 +66,7 @@ class RepliesModal extends Component
         $this->redirectRoute('social.posts.show', $this->post);
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.replies-modal');
     }

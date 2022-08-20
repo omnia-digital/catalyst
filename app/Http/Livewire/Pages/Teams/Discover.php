@@ -13,37 +13,52 @@ use Livewire\Component;
 
 class Discover extends Component
 {
-    public function getCategoriesProperty()
+    public function getCategoriesProperty(): array
     {
         return (new GetTeamCategoriesAction)->execute();
     }
 
-    public function getCuratedTeamsProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Collection<\Illuminate\Database\Eloquent\Model>
+     */
+    public function getCuratedTeamsProperty(): \Illuminate\Database\Eloquent\Collection
     {
         return (new GetCuratedTeamsAction)->execute();
     }
 
-    public function getPopularIndiesTeamsProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Collection<\Illuminate\Database\Eloquent\Model>
+     */
+    public function getPopularIndiesTeamsProperty(): \Illuminate\Database\Eloquent\Collection
     {
         return (new GetPopularIndiesTeamsAction)->execute();
     }
 
-    public function getPopularUpcomingTeamsProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Collection<\Illuminate\Database\Eloquent\Model>
+     */
+    public function getPopularUpcomingTeamsProperty(): \Illuminate\Database\Eloquent\Collection
     {
         return (new GetPopularUpcomingTeamsAction)->execute();
     }
 
-    public function getFeaturedTeamsProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Collection<\Illuminate\Database\Eloquent\Model>
+     */
+    public function getFeaturedTeamsProperty(): \Illuminate\Database\Eloquent\Collection
     {
         return (new GetFeaturedTeamsAction)->execute();
     }
 
-    public function getTrendingTeamsProperty()
+    /**
+     * @return \Illuminate\Support\Collection|array
+     */
+    public function getTrendingTeamsProperty(): array|\Illuminate\Support\Collection
     {
         return (new GetTrendingTeamsAction)->execute();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.teams.discover', [
             'featuredTeams' => $this->featuredTeams,

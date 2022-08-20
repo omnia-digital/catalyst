@@ -60,12 +60,12 @@ class CreateReviewModal extends Component implements HasForms
         ];        
     }
 
-    public function mount($model)
+    public function mount($model): void
     {
         $this->model = $model;
     }
 
-    public function openReviewModal()
+    public function openReviewModal(): void
     {
         if ($this->model->reviewedBy(auth()->user())) {
             $this->review = $this->model->getCurrentUserReview();
@@ -83,7 +83,7 @@ class CreateReviewModal extends Component implements HasForms
         $this->dispatchBrowserEvent('review-modal-' . $this->model->id, ['type' => 'open']);
     }
 
-    public function createReview()
+    public function createReview(): void
     {
         if ($this->model->reviewedBy(auth()->user())) {
             
@@ -108,7 +108,7 @@ class CreateReviewModal extends Component implements HasForms
         $this->reset('body', 'visibility', 'language_id', 'commentable', 'received_product_free', 'recommend');
     }
 
-    public function removeReview()
+    public function removeReview(): void
     {
         if ($this->model->reviewedBy(auth()->user())) {
             $this->review->delete();
@@ -121,7 +121,7 @@ class CreateReviewModal extends Component implements HasForms
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('reviews::livewire.create-review-modal');
     }

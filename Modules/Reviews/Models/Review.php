@@ -23,7 +23,7 @@ class Review extends Model
         'commentable' => 'boolean',
     ];
     
-    protected static function newFactory()
+    protected static function newFactory(): \Modules\Reviews\Database\factories\ReviewFactory
     {
         return \Modules\Reviews\Database\factories\ReviewFactory::new();
     }

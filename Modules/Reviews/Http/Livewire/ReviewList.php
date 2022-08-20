@@ -13,12 +13,12 @@ class ReviewList extends Component
 
     protected $listeners = ['updateReviews' => '$refresh'];
 
-    public function mount($model)
+    public function mount($model): void
     {
         $this->model = $model;
     }
 
-    public function updateReviews(Review $review)
+    public function updateReviews(Review $review): void
     {
         $this->latestReview = $review;
     }
@@ -33,7 +33,7 @@ class ReviewList extends Component
         return $this->rowsQuery->get();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('reviews::livewire.review-list', [
             'reviews' => $this->rows

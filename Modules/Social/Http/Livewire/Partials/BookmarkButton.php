@@ -13,7 +13,7 @@ class BookmarkButton extends Component
 
     public bool $show = false;
 
-    public function toggleBookmark()
+    public function toggleBookmark(): void
     {
         if ($this->model->isBookmarkedBy()) {
             $this->model->removeBookmark();
@@ -27,7 +27,7 @@ class BookmarkButton extends Component
         $this->model->loadCount('bookmarks');
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.bookmark-button');
     }

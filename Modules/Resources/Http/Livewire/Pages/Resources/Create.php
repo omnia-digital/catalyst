@@ -30,7 +30,7 @@ class Create extends Component
         ];
     }
 
-    public function addResource()
+    public function addResource(): void
     {
         $validated = $this->validate();
 
@@ -62,19 +62,24 @@ class Create extends Component
         return $tags;
     }
 
-    public function setFeaturedImage(array $image)
+    public function setFeaturedImage(array $image): void
     {
         $this->image = $image['url'];
     }
 
-    public function removeFeaturedImage()
+    public function removeFeaturedImage(): void
     {
         $this->image = null;
 
         $this->removeFileFromMediaManager();
     }
 
-    public function pullTags($text)
+    /**
+     * @return string[]
+     *
+     * @psalm-return list<string>
+     */
+    public function pullTags($text): array
     {
         $regexForHashtags = "/\B#([a-z0-9_-]+)/i";
         $hashtags = array();
@@ -84,7 +89,10 @@ class Create extends Component
         return $hashtags[1];
     }
 
-    public function getTags($hashtags)
+    /**
+     * @psalm-return list<mixed>
+     */
+    public function getTags($hashtags): array
     {
         $tags = array();
 
@@ -95,7 +103,7 @@ class Create extends Component
         return $tags;
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('resources::livewire.pages.resources.create');
     }

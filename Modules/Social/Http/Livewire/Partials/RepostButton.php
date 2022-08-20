@@ -24,12 +24,12 @@ class RepostButton extends Component
         'post-editor:submitted' => 'createRepost'
     ];
 
-    public function showRepostModal()
+    public function showRepostModal(): void
     {
         $this->openModal('repost-modal-' . $this->model->id);
     }
 
-    public function createRepost($data)
+    public function createRepost($data): void
     {
         $this->content = strip_tags($data['content']);
 
@@ -54,7 +54,7 @@ class RepostButton extends Component
         $this->redirectRoute('social.posts.show', $repost);
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.repost-button');
     }

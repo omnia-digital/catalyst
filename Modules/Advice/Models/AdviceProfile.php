@@ -23,12 +23,12 @@
             'person_id',
         ];
 
-        public function getCredibilityRatingAttribute()
+        public function getCredibilityRatingAttribute(): void
         {
 
         }
 
-        public function person()
+        public function person(): void
         {
             $this->belongsTo(Person::class);
         }

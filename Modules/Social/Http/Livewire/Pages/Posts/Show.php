@@ -13,11 +13,14 @@ class Show extends Component
     public $post;
     public $recentlyAddedComment;
 
-    public function postAdded(Post $post)
+    public function postAdded(Post $post): void
     {
         $this->recentlyAddedComment = $post;
     }
 
+    /**
+     * @return void
+     */
     public function mount($post)
     {
         $this->post = Post::withoutGlobalScope('parent')->findOrFail($post);
@@ -31,7 +34,7 @@ class Show extends Component
         $this->post = $this->post->load('comments');
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.posts.show');
     }

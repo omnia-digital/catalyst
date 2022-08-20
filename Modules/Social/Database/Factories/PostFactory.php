@@ -37,8 +37,10 @@ class PostFactory extends Factory
 
     /**
      * @return $this
+     *
+     * @param Modules\Social\Enums\PostType::QUESTION|Modules\Social\Enums\PostType::RESOURCE $type
      */
-    public function withType($type): static
+    public function withType(Modules\Social\Enums\PostType $type): static
     {
         return $this->state([
             'type' => $type

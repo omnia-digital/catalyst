@@ -20,7 +20,7 @@ class TeamMap extends Component
         'startDateUpdated' => 'handleStartDateUpdated'
     ];
 
-    public function handleStartDateUpdated($data)
+    public function handleStartDateUpdated($data): void
     {
         $this->startDate = $data['start_date'];
 
@@ -52,7 +52,7 @@ class TeamMap extends Component
         return $places->all();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.components.team-map', [
             'places' => $this->places,

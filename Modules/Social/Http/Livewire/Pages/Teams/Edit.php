@@ -63,7 +63,7 @@ class Edit extends Component/*  implements HasForms */
         ];        
     } */
 
-    public function updatedBannerImage()
+    public function updatedBannerImage(): void
     {
         $this->validate([
             'bannerImage' => 'image',
@@ -72,7 +72,7 @@ class Edit extends Component/*  implements HasForms */
         $this->bannerImageName = $this->bannerImage->getClientOriginalName();
     }
 
-    public function updatedMainImage()
+    public function updatedMainImage(): void
     {
         $this->validate([
             'mainImage' => 'image',
@@ -81,7 +81,7 @@ class Edit extends Component/*  implements HasForms */
         $this->mainImageName = $this->mainImage->getClientOriginalName();
     }
 
-    public function updatedProfilePhoto()
+    public function updatedProfilePhoto(): void
     {
         $this->validate([
             'profilePhoto' => 'image',
@@ -90,7 +90,7 @@ class Edit extends Component/*  implements HasForms */
         $this->profilePhotoName = $this->profilePhoto->getClientOriginalName();
     }
 
-    public function updatedSampleMedia()
+    public function updatedSampleMedia(): void
     {
         $this->validate([
             'sampleMedia.*' => 'image',
@@ -101,12 +101,15 @@ class Edit extends Component/*  implements HasForms */
         }
     }
 
-    public function mount(Team $team)
+    public function mount(Team $team): void
     {
         $this->authorize('update-team', $team);
         $this->team = $team->load('owner');
     }
 
+    /**
+     * @return void
+     */
     public function setAddress()
     {
         if(is_null($this->placeId)) {
@@ -124,7 +127,7 @@ class Edit extends Component/*  implements HasForms */
 
     }
 
-    public function saveChanges()
+    public function saveChanges(): void
     {
         $this->validate();
 
@@ -170,12 +173,12 @@ class Edit extends Component/*  implements HasForms */
         $this->reset('newAddress', 'removeAddress', 'bannerImage', 'bannerImageName', 'profilePhoto', 'profilePhotoName', 'mainImage', 'mainImageName', 'sampleMedia', 'sampleMediaNames');
     }
 
-    public function confirmRemoval(Media $media)
+    public function confirmRemoval(Media $media): void
     {
         $this->confirmingRemoveMedia = true;
         $this->mediaToRemove = $media;
     }
-    public function removeMedia()
+    public function removeMedia(): void
     {
         $this->mediaToRemove->delete();
         $this->confirmingRemoveMedia = false;
@@ -183,13 +186,13 @@ class Edit extends Component/*  implements HasForms */
         $this->reset('mediaToRemove');
     }
 
-    public function removeNewMedia($key)
+    public function removeNewMedia($key): void
     {
         unset($this->sampleMedia[$key]);
         unset($this->sampleMediaNames[$key]);
     }
 
-    public function getSelectedAddressProperty()
+    public function getSelectedAddressProperty(): string
     {
         $address = '';
         $address .= $this->newAddress['address'];
@@ -213,7 +216,7 @@ class Edit extends Component/*  implements HasForms */
         return Auth::user();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.teams.edit');
     }

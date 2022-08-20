@@ -24,7 +24,7 @@ class Transaction extends Model
     /**
      * Get the model that the transaction belongs to.
      */
-    public function transactionable()
+    public function transactionable(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo();
     }

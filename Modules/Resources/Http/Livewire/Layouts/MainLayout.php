@@ -6,7 +6,7 @@
 
     class MainLayout extends Component
     {
-        public function render()
+        public function render(): \Illuminate\View\View
         {
             return view('resources::livewire.layouts.main-layout');
         }

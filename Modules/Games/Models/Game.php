@@ -18,7 +18,7 @@ class Game extends IGDBGame
 {
     use HasFactory;
 
-    public function getCoverUrl()
+    public function getCoverUrl(): string
     {
         $coverUrl = Cover::where('id', $this->cover)->first()?->url;
         $coverUrl = $coverUrl ? Str::replaceFirst('thumb', 'cover_big', $coverUrl) : null;
@@ -33,7 +33,10 @@ class Game extends IGDBGame
         return $companies;
     }
 
-    public function getVideos()
+    /**
+     * @psalm-return \Illuminate\Support\Collection<empty, empty>
+     */
+    public function getVideos(): \Illuminate\Support\Collection
     {
         $videos = collect();
         if (!$this->videos) {
@@ -61,7 +64,7 @@ class Game extends IGDBGame
         return AgeRating::where('id', $this->rating)->first() ?? null;
     }
 
-    public function profile()
+    public function profile(): string
     {
         return route('games.show', $this->slug);
     }

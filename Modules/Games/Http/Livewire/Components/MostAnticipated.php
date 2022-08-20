@@ -10,7 +10,7 @@ class MostAnticipated extends Component
 {
     public $mostAnticipated = [];
 
-    public function loadMostAnticipated()
+    public function loadMostAnticipated(): void
     {
         $current = Carbon::now()->timestamp;
         $afterFourMonths = Carbon::now()->addMonths(4)->timestamp;
@@ -36,12 +36,12 @@ class MostAnticipated extends Component
         $this->mostAnticipated = $mostAnticipatedUnformatted;
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('games::livewire.components.most-anticipated');
     }
 
-    private function formatForView($games)
+    private function formatForView($games): array
     {
         return collect($games)->map(function ($game) {
             return collect($game)->merge([

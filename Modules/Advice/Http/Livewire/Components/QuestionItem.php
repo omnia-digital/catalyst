@@ -10,7 +10,7 @@ class QuestionItem extends Component
     public Post $post;
     public $optionsMenuOpen = false;
 
-    public function mount(Post $post) {
+    public function mount(Post $post): void {
         $this->post = $post;
     }
 
@@ -18,7 +18,7 @@ class QuestionItem extends Component
         return $this->post->user;
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('advice::livewire.question-list-item');
     }

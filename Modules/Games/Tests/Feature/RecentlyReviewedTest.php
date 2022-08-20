@@ -10,8 +10,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RecentlyReviewedTest extends TestCase
 {
-    /** @test */
-    public function the_main_page_shows_recently_reviewed_games()
+    /**
+     * @test
+     */
+    public function the_main_page_shows_recently_reviewed_games(): void
     {
         Http::fake([
             'https://api-v3.igdb.com/games' => $this->fakeRecentlyReviewedGames(),
@@ -26,7 +28,7 @@ class RecentlyReviewedTest extends TestCase
             ->assertSee('Developed by id Software, DOOM Eternal');
     }
 
-    private function fakeRecentlyReviewedGames()
+    private function fakeRecentlyReviewedGames(): \GuzzleHttp\Promise\PromiseInterface
     {
         return Http::response([
           0 =>  [

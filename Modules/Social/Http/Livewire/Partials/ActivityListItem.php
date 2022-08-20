@@ -8,11 +8,11 @@ class ActivityListItem extends Component
 {
     public $activity;
 
-    public function mount($activity)
+    public function mount($activity): void
     {
         $this->activity = $activity;
     }
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.activity-list-item');
     }

@@ -9,12 +9,12 @@ class Followers extends Component
 {
     public $team;
         
-    public function mount(Team $team)
+    public function mount(Team $team): void
     {
         $this->team = $team->load('owner');
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.teams.followers');
     }

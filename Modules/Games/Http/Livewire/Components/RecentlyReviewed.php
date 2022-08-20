@@ -11,7 +11,7 @@ class RecentlyReviewed extends Component
 {
     public $recentlyReviewed = [];
 
-    public function loadRecentlyReviewed()
+    public function loadRecentlyReviewed(): void
     {
         $before = Carbon::now()->subMonths(2)->timestamp;
         $current = Carbon::now()->timestamp;
@@ -46,12 +46,12 @@ class RecentlyReviewed extends Component
         });
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('games::livewire.components.recently-reviewed');
     }
 
-    private function formatForView($games)
+    private function formatForView($games): array
     {
 
         return collect($games)->map(function ($game) {

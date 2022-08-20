@@ -20,12 +20,15 @@ class ReviewTable extends Component implements HasTable
 {
     use InteractsWithTable;
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.components.review-table');
     }
 
-    protected function getTableQuery()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<Review>
+     */
+    protected function getTableQuery(): \Illuminate\Database\Eloquent\Builder
     {
         return Review::query();
     }

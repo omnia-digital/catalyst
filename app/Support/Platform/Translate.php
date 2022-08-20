@@ -4,7 +4,7 @@ namespace App\Support\Platform;
 
 class Translate
 {
-    public function get($string): string
+    public function get($string): array|string|null
     {
         $wordsInString = explode(' ', $string);
 

@@ -34,9 +34,12 @@ class Coupon extends Model
      * Find a coupon by its code.
      *
      * @param string $code
-     * @return Coupon
+     *
+     * @return null|static&\Illuminate\Database\Eloquent\Builder
+     *
+     * @psalm-return null|static&\Illuminate\Database\Eloquent\Builder<static>
      */
-    public static function findByCode(string $code)
+    public static function findByCode(string $code): static|null
     {
         return self::where('code', $code)->first();
     }

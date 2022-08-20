@@ -15,7 +15,7 @@ class Map extends Component
         'country'
     ];
 
-    public function updatedFilters($value, $key)
+    public function updatedFilters($value, $key): void
     {
         //$this->dispatchBrowserEvent('refresh-map', $this->rows);
 
@@ -24,14 +24,19 @@ class Map extends Component
         }
     }
 
-    public function selectCategory($id)
+    public function selectCategory($id): void
     {
         $this->selectedCategoryId = $id;
 
         $this->dispatchBrowserEvent('refresh-map', $this->rows);
     }
 
-    public function getCategoriesProperty()
+    /**
+     * @return string[]
+     *
+     * @psalm-return array{0: 'Category 1', 1: 'Category 2', 2: 'Category 3'}
+     */
+    public function getCategoriesProperty(): array
     {
         return ['Category 1', 'Category 2', 'Category 3'];//ContactCategory::all();
     }
@@ -52,7 +57,7 @@ class Map extends Component
         return null;//$this->rowsQuery->get();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.components.map', [
             'countries'  => Country::orderBy('name')->get(),

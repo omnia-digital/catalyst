@@ -9,7 +9,7 @@
         public string $class;
         public array $navigation = [];
 
-        public function mount() {
+        public function mount(): void {
             $this->navigation = [
                 [
                     'label'   => 'Home',
@@ -32,7 +32,7 @@
             ];
         }
 
-        public function render()
+        public function render(): \Illuminate\View\View
         {
             return view('games::livewire.layouts.module-navigation');
         }

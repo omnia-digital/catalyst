@@ -17,17 +17,17 @@ class NewsFeed extends Component
 
     public Team|null $team = null;
 
-    public function postSaved()
+    public function postSaved(): void
     {
         $this->resetPage();
     }
 
-    public function loadMore()
+    public function loadMore(): void
     {
         $this->perPage += 6;
     }
 
-    public function hasMore()
+    public function hasMore(): bool
     {
         return $this->perPage < $this->rowsQuery->count();
     }
@@ -45,7 +45,7 @@ class NewsFeed extends Component
         return $this->rowsQuery->paginate($this->perPage);
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.news-feed', [
             'feed' => $this->rows

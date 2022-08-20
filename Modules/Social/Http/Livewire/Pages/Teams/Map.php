@@ -20,6 +20,9 @@ class Map extends Component
         'select_event' => 'handleEventSelected',
     ];
 
+    /**
+     * @return void
+     */
     public function handleEventSelected($eventId)
     {
         $team = Team::find($eventId);
@@ -33,7 +36,7 @@ class Map extends Component
         $this->flyTo('team-map', $location->lng, $location->lat);
     }
 
-    public function showPlaceDetail($placeId)
+    public function showPlaceDetail($placeId): void
     {
         $this->emitTo('social::components.team-calendar-list', 'teamSelected', $placeId);
     }
@@ -62,7 +65,7 @@ class Map extends Component
         return $places->all();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.teams.map', [
             'places' => $this->places,

@@ -39,7 +39,10 @@ class Location extends Model
         );
     }
 
-    public function scopeSearch(Builder $query, ?string $search): Builder
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<Model>
+     */
+    public function scopeSearch(Builder $query, ?string $search): \Illuminate\Database\Eloquent\Builder
     {
         return $query->where(function (Builder $query) use ($search) {
             $query->where('address', 'LIKE', "%$search%")
@@ -51,7 +54,10 @@ class Location extends Model
         });
     }
 
-    public function scopeHasCoordinates(Builder $query): Builder
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<Model>
+     */
+    public function scopeHasCoordinates(Builder $query): \Illuminate\Database\Eloquent\Builder
     {
         return $query->where(function (Builder $query) {
             $query->where(function (Builder $query) {

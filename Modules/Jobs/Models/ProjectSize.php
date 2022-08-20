@@ -16,12 +16,18 @@ class ProjectSize extends Model
         'order',
     ];
 
-    public function users()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\HasManyThrough<User>
+     */
+    public function users(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
         return $this->hasManyThrough(User::class, Job::class, 'user_id', 'id');
     }
 
-    public function jobs()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\HasMany<Job>
+     */
+    public function jobs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Job::class);
     }

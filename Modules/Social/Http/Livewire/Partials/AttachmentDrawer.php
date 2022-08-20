@@ -13,7 +13,7 @@ class AttachmentDrawer extends Component
     public $attached_files = [];
     public $attachments = [];
 
-    public function updatedAttachedFiles()
+    public function updatedAttachedFiles(): void
     {
         $validatedFiles = $this->validate([
             'attached_files' => 'array',
@@ -40,7 +40,7 @@ class AttachmentDrawer extends Component
         $this->emitUp('filesAdded', $this->attachments);
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.attachment-drawer');
     }

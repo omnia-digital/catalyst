@@ -21,7 +21,10 @@ trait HasTeams
         return $this->teams()->wherePivot('team_id', $team->id)->wherePivot('role', 'owner')->exists();
     }
 
-    public function currentTeam()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Illuminate\Database\Eloquent\Model>|false
+     */
+    public function currentTeam(): \Illuminate\Database\Eloquent\Relations\BelongsTo|false
     {
         if (!$this->teams()->exists()) { return false;}
 
@@ -35,7 +38,7 @@ trait HasTeams
         return $this->belongsTo(Jetstream::teamModel(), 'current_team_id');
     }
 
-    public function isCurrentTeam($team)
+    public function isCurrentTeam($team): bool
     {
         if (is_null($team)) {
             return false;

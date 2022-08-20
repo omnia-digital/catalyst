@@ -10,8 +10,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MostAnticipatedTest extends TestCase
 {
-    /** @test */
-    public function the_main_page_shows_most_anticipated_games()
+    /**
+     * @test
+     */
+    public function the_main_page_shows_most_anticipated_games(): void
     {
         Http::fake([
             'https://api-v3.igdb.com/games' => $this->fakeMostAnticipatedGames(),
@@ -24,7 +26,7 @@ class MostAnticipatedTest extends TestCase
             ->assertSee('Jun 19, 2020');
     }
 
-    private function fakeMostAnticipatedGames()
+    private function fakeMostAnticipatedGames(): \GuzzleHttp\Promise\PromiseInterface
     {
         return Http::response([
           0 => [

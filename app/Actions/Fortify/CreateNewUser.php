@@ -61,7 +61,7 @@ class CreateNewUser implements CreatesNewUsers
      * @param  \App\Models\User  $user
      * @return void
      */
-    protected function createProfile(User $user, $input)
+    protected function createProfile(User $user, array $input)
     {
         $user->profile()->create([
             'first_name' => $input['first_name'],

@@ -9,6 +9,11 @@ class Notifications extends Component
 {
     public int $perPage = 10;
 
+    /**
+     * @return string[]
+     *
+     * @psalm-return array<string, '$refresh'|'markAsRead'>
+     */
     public function getListeners()
     {
         return [
@@ -17,17 +22,17 @@ class Notifications extends Component
         ];
     }
 
-    public function markAsRead($notificationId)
+    public function markAsRead($notificationId): void
     {
         Auth::user()->notifications()->where('id', $notificationId)->first()?->markAsRead();
     }
 
-    public function showAlert($notification)
+    public function showAlert($notification): void
     {
         $this->info($notification['title']);
     }
 
-    public function loadMore()
+    public function loadMore(): void
     {
         $this->perPage = $this->rowsQuery->count() + $this->perPage;
     }
@@ -49,7 +54,7 @@ class Notifications extends Component
         return Auth::user()->notifications()->count();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.notifications', [
             'notifications' => $this->rows,

@@ -15,13 +15,13 @@ class Media extends Component
         return $this->profile->user;
     }
 
-    public function mount(Profile $profile)
+    public function mount(Profile $profile): void
     {
         $this->profile = $profile->load('user');
         $this->media = $this->user->postMedia;
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.profiles.media');
     }

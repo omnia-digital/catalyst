@@ -16,7 +16,7 @@ class Applications extends Component
     public $invitations;
     public $applications;
 
-    public function mount()
+    public function mount(): void
     {
         $this->invitations = $this->user->teamInvitations;
 
@@ -94,12 +94,12 @@ class Applications extends Component
 //        $this->emit('team_action', "Invitation declined");
 //    }
 
-    public function getUserProperty()
+    public function getUserProperty(): User|null
     {
         return User::find(Auth::id());
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.applications');
     }

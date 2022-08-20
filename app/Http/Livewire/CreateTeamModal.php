@@ -34,7 +34,7 @@ class CreateTeamModal extends Component
 
     public $teamTypes = [];
 
-    public function updatedBannerImage()
+    public function updatedBannerImage(): void
     {
         $this->validate([
             'bannerImage' => 'image',
@@ -43,7 +43,7 @@ class CreateTeamModal extends Component
         $this->bannerImageName = $this->bannerImage->getClientOriginalName();
     }
 
-    public function updatedMainImage()
+    public function updatedMainImage(): void
     {
         $this->validate([
             'mainImage' => 'image',
@@ -52,7 +52,7 @@ class CreateTeamModal extends Component
         $this->mainImageName = $this->mainImage->getClientOriginalName();
     }
 
-    public function updatedProfilePhoto()
+    public function updatedProfilePhoto(): void
     {
         $this->validate([
             'profilePhoto' => 'image',
@@ -61,7 +61,7 @@ class CreateTeamModal extends Component
         $this->profilePhotoName = $this->profilePhoto->getClientOriginalName();
     }
 
-    public function updatedSampleMedia()
+    public function updatedSampleMedia(): void
     {
         $this->validate([
             'sampleMedia.*' => 'image',
@@ -85,7 +85,7 @@ class CreateTeamModal extends Component
         ];
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 
@@ -106,7 +106,7 @@ class CreateTeamModal extends Component
         $this->redirectRoute('social.teams.show', $team);
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.create-team-modal', [
             'teamTags' => $this->teamTags

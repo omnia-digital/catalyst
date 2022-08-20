@@ -28,7 +28,7 @@ class CommentSection extends Component
         'post-editor:submitted' => 'saveComment'
     ];
 
-    public function mount(Post $post, $type = null)
+    public function mount(Post $post, $type = null): void
     {
         $this->post = $post;
         $this->type = $type;
@@ -36,7 +36,7 @@ class CommentSection extends Component
         $this->loadComments();
     }
 
-    public function saveComment($data)
+    public function saveComment($data): void
     {
         $this->content = strip_tags($data['content']);
 
@@ -66,7 +66,7 @@ class CommentSection extends Component
             ->get();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.comment-section');
     }

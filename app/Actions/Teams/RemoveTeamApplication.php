@@ -36,9 +36,10 @@ class RemoveTeamApplication
     /**
      * Validate the invite member operation.
      *
-     * @param  mixed  $team
-     * @param  int  $userID
-     * @param  string|null  $role
+     * @param mixed  $team
+     * @param string $userID
+     * @param string|null  $role
+     *
      * @return void
      */
     protected function validate($team, string $userID, ?string $role)

@@ -8,8 +8,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ViewGameTest extends TestCase
 {
-    /** @test */
-    public function the_game_page_shows_correct_game_info()
+    /**
+     * @test
+     */
+    public function the_game_page_shows_correct_game_info(): void
     {
         Http::fake([
             'https://api-v3.igdb.com/games' => $this->fakeSingleGame(),
@@ -30,7 +32,7 @@ class ViewGameTest extends TestCase
         $response->assertSee('The Last Journey');
     }
 
-    public function fakeSingleGame()
+    public function fakeSingleGame(): \GuzzleHttp\Promise\PromiseInterface
     {
         return Http::response([
             0 =>  [

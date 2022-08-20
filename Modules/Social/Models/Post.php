@@ -66,7 +66,7 @@ class Post extends Model implements HasMedia
         return $query->where('type', $type);
     }
 
-    protected static function newFactory()
+    protected static function newFactory(): PostFactory
     {
         return PostFactory::new();
     }

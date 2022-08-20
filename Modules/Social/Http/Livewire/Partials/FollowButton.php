@@ -14,12 +14,12 @@ class FollowButton extends Component
 {
     public Model $model;
 
-    public function mount($model)
+    public function mount($model): void
     {
         $this->model = $model;
     }
 
-    public function follow()
+    public function follow(): void
     {
         if ($this->authUser->isFollowing($this->model)) {
             $this->authUser->unfollow($this->model);
@@ -30,12 +30,15 @@ class FollowButton extends Component
         }
     }
 
-    public function getAuthUserProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Collection<User>
+     */
+    public function getAuthUserProperty(): \Illuminate\Database\Eloquent\Collection
     {
         return User::find(auth()->id());
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.follow-button');
     }

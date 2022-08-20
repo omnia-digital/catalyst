@@ -28,7 +28,7 @@ class Index extends Component
         'search'
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->orderBy = 'published_at';
 
@@ -37,7 +37,10 @@ class Index extends Component
         }
     }
 
-    public function getRowsQueryProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<\Illuminate\Database\Eloquent\Model>
+     */
+    public function getRowsQueryProperty(): \Illuminate\Database\Eloquent\Builder
     {
         $query = Post::where('type', '=', PostType::RESOURCE)
             ->withCount(['bookmarks', 'likes', 'media']);
@@ -61,7 +64,7 @@ class Index extends Component
         });
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('resources::livewire.pages.resources.index', [
             'resources' => $this->rows

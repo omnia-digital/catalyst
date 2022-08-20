@@ -15,6 +15,9 @@ class PostCard extends Component
     public $optionsMenuOpen = false;
     public $clickable;
 
+    /**
+     * @return void
+     */
     public function mount(Post $post, $clickable = true) {
         $this->post = $post;
         $this->clickable = $clickable;
@@ -40,6 +43,9 @@ class PostCard extends Component
         return $this->redirectRoute('social.profile.show', $this->author->handle);
     }
 
+    /**
+     * @return void
+     */
     public function toggleBookmark()
     {
         if ($this->post->isBookmarkedBy()) {
@@ -57,6 +63,9 @@ class PostCard extends Component
         $this->success('Bookmark the resource successfully!');
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return view('social::livewire.components.post-card');

@@ -24,7 +24,7 @@
             'certification_id',
         ];
 
-        public function certifications()
+        public function certifications(): void
         {
             $this->belongsTo(Certification::class,'certification_id');
         }

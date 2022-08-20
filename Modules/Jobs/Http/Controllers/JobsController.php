@@ -28,10 +28,10 @@ class JobsController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @param Request $request
-     * @return Renderable
      */
-    public function store(Request $request)
+    public function store(Request $request): void
     {
         //
     }
@@ -58,21 +58,21 @@ class JobsController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
      * @param Request $request
      * @param int $id
-     * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): void
     {
         //
     }
 
     /**
      * Remove the specified resource from storage.
+     *
      * @param int $id
-     * @return Renderable
      */
-    public function destroy($id)
+    public function destroy($id): void
     {
         //
     }

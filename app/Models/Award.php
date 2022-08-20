@@ -11,12 +11,18 @@ class Award extends Model
 
     protected $guarded = [];
 
-    public function teams()  
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\MorphToMany<Team>
+     */
+    public function teams(): \Illuminate\Database\Eloquent\Relations\MorphToMany  
     {
         return $this->morphedByMany(Team::class, 'awardable');
     }
 
-    public function users()  
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\MorphToMany<User>
+     */
+    public function users(): \Illuminate\Database\Eloquent\Relations\MorphToMany  
     {
         return $this->morphedByMany(User::class, 'awardable');
     }

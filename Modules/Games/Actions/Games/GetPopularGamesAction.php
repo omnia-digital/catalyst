@@ -31,7 +31,10 @@ class GetPopularGamesAction
     }
 
 
-    private function formatForView($games)
+    /**
+     * @psalm-return Collection<array-key, Collection>
+     */
+    private function formatForView($games): Collection
     {
         return collect($games)->map(function ($game) {
             return collect($game)->merge([

@@ -9,7 +9,7 @@ use Illuminate\Support\ServiceProvider;
 
 class PlatformServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
     }
 

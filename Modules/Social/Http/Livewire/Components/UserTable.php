@@ -16,7 +16,7 @@ class UserTable extends Component implements HasTable
 {
     use InteractsWithTable;
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.components.user-table');
     }

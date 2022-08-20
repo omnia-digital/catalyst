@@ -36,7 +36,7 @@ class Index extends Component
         'dateFilter',
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->orderBy = 'name';
     }
@@ -51,7 +51,7 @@ class Index extends Component
             ->when($this->search, fn(Builder $q) => $q->search($this->search));
     }
 
-    public function getRowsProperty()
+    public function getRowsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         $query = $this->applyLens($this->rowsQuery);
         $query = $this->applySorting($query);
@@ -59,12 +59,12 @@ class Index extends Component
         return $query->paginate(25);
     }
 
-    public function getCategoriesProperty()
+    public function getCategoriesProperty(): array
     {
         return (new GetTeamCategoriesAction)->execute();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.teams.index', [
             'teams' => $this->rows,

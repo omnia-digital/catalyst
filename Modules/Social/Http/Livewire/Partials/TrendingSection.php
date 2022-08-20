@@ -16,7 +16,7 @@ class TrendingSection extends Component
 
     public $type;
 
-    public function mount($type = null)
+    public function mount($type = null): void
     {
         if (!App::environment('production')) {
             $this->useCache = false;
@@ -44,7 +44,7 @@ class TrendingSection extends Component
         });
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.trending-section', [
             'posts' => $this->rows

@@ -25,7 +25,7 @@ class RedeemedCoupon extends Model
 
     public $timestamps = false;
 
-    public function model()
+    public function model(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo();
     }

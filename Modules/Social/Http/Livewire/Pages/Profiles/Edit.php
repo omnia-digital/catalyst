@@ -28,7 +28,7 @@ class Edit extends Component
         ];
     }
 
-    public function updatedBannerImage()
+    public function updatedBannerImage(): void
     {
         $this->validate([
             'bannerImage' => 'image',
@@ -37,7 +37,7 @@ class Edit extends Component
         $this->bannerImageName = $this->bannerImage->getClientOriginalName();
     }
 
-    public function updatedPhoto()
+    public function updatedPhoto(): void
     {
         $this->validate([
             'photo' => 'image',
@@ -51,13 +51,13 @@ class Edit extends Component
         return $this->profile->user;
     }
 
-    public function mount(Profile $profile)
+    public function mount(Profile $profile): void
     {
         $this->authorize('update-profile', $profile);
         $this->profile = $profile->load('user');
     }
     
-    public function saveChanges()
+    public function saveChanges(): void
     {
         $this->validate();
         
@@ -81,7 +81,7 @@ class Edit extends Component
         $this->reset('bannerImage', 'bannerImageName', 'photo', 'photoName');
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.profiles.edit');
     }

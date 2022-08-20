@@ -32,7 +32,10 @@ class TeamCalendarList extends Component
         'teamSelected' => 'handleTeamSelected'
     ];
 
-    public function getRowsQueryProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<\Illuminate\Database\Eloquent\Model>
+     */
+    public function getRowsQueryProperty(): \Illuminate\Database\Eloquent\Builder
     {
         $query = Team::query()
             ->withCount(['users']);
@@ -50,7 +53,7 @@ class TeamCalendarList extends Component
         });
     }
 
-    public function getUserProperty()
+    public function getUserProperty(): User|null
     {
         return User::find(Auth::id());
     }
@@ -79,29 +82,29 @@ class TeamCalendarList extends Component
         return $places->all();
     }
 
-    public function selectTeam($teamID)
+    public function selectTeam($teamID): void
     {
         $this->team = Team::find($teamID);
     }
 
-    public function handleTeamSelected($teamId)
+    public function handleTeamSelected($teamId): void
     {
         $this->selectTeam($teamId);
 
         $this->dispatchBrowserEvent('select-event', ['team' => $this->team]);
     }
 
-    public function moreInfo()
+    public function moreInfo(): \Illuminate\Http\RedirectResponse
     {
         return redirect()->route('social.teams.show', $this->team);
     }
 
-    public function toggleMapCalendar($tab)
+    public function toggleMapCalendar($tab): void
     {
         $this->emitUp('toggle_map_calendar', $tab, $this->places);
     }
 
-    public function mount($classes = '')
+    public function mount($classes = ''): void
     {
         $this->classes = $classes;
         $this->orderBy = 'name';
@@ -111,7 +114,7 @@ class TeamCalendarList extends Component
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.components.team-calendar-list', [
             'teams' => $this->rows,

@@ -23,7 +23,7 @@ class MyTeams extends Component
 
     public string $dateColumn = 'start_date';
 
-    public function mount()
+    public function mount(): void
     {
         $this->orderBy = 'name';
 
@@ -32,7 +32,10 @@ class MyTeams extends Component
         }
     }
 
-    public function getRowsQueryProperty()
+    /**
+     * @psalm-return Builder<\Illuminate\Database\Eloquent\Model>
+     */
+    public function getRowsQueryProperty(): Builder
     {
         $query = Team::query()
             ->withUser($this->user)
@@ -52,12 +55,12 @@ class MyTeams extends Component
         });
     }
 
-    public function getUserProperty()
+    public function getUserProperty(): User|null
     {
         return User::find(Auth::id());
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.teams.my-teams', [
             'teams' => $this->rows,

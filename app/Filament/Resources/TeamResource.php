@@ -31,7 +31,7 @@ class TeamResource extends Resource
         }
     }
 
-    protected static function getNavigationBadge(): ?string
+    protected static function getNavigationBadge(): int
     {
         return static::getEloquentQuery()->get()->count();
     }

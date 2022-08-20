@@ -10,8 +10,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PopularGamesTest extends TestCase
 {
-    /** @test */
-    public function the_main_page_shows_popular_games()
+    /**
+     * @test
+     */
+    public function the_main_page_shows_popular_games(): void
     {
         Http::fake([
             'https://api-v3.igdb.com/games' => $this->fakePopularGames(),
@@ -26,7 +28,7 @@ class PopularGamesTest extends TestCase
           ->assertSee('Animal Crossing: New Horizons');
     }
 
-    private function fakePopularGames()
+    private function fakePopularGames(): \GuzzleHttp\Promise\PromiseInterface
     {
         return Http::response([
           0 => [

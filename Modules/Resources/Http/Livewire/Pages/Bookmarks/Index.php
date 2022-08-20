@@ -26,7 +26,7 @@ class Index extends Component
         'search'
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->orderBy = 'published_at';
     }
@@ -38,7 +38,10 @@ class Index extends Component
         return $query;
     }
 
-    public function getRowsQueryWithoutFiltersProperty()
+    /**
+     * @psalm-return Builder<Bookmark&Builder<Bookmark&Builder<Bookmark&Builder<Bookmark>>>&Builder<Bookmark&Builder<Bookmark>>>|Builder<\Illuminate\Database\Eloquent\Model>
+     */
+    public function getRowsQueryWithoutFiltersProperty(): Builder
     {
         return Bookmark::where('user_id', '=', \Auth::user()->id)->whereHas('bookmarkable', function(Builder $query) {
             return $query->scopes(['ofType' => PostType::RESOURCE]);
@@ -55,7 +58,7 @@ class Index extends Component
 
 
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('resources::livewire.pages.bookmarks.index', [
             'bookmarks' => $this->rows

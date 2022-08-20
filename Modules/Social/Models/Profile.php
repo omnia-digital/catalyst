@@ -63,12 +63,12 @@ use App\Models\User;
             return 'handle';
         }
 
-        public function getNameAttribute()
+        public function getNameAttribute(): string
         {
             return $this->first_name . " " . $this->last_name;
         }
 
-        protected static function newFactory()
+        protected static function newFactory(): ProfileFactory
         {
             return ProfileFactory::new();
         }
@@ -80,7 +80,12 @@ use App\Models\User;
                               ->saveSlugsTo('handle');
         }
 
-        public function fields()
+        /**
+         * @return (mixed|string)[][]
+         *
+         * @psalm-return array{0: array{0: 'Phone', 1: '(123) 123-1234'}, 1: array{0: 'Email', 1: mixed}, 2: array{0: 'Title', 1: 'Senior Front-End Developer'}, 3: array{0: 'Team', 1: 'Product Development'}, 4: array{0: 'Location', 1: 'San Francisco'}, 5: array{0: 'Sits', 1: 'Oasis, 4th floor'}, 6: array{0: 'Salary', 1: '$145,000'}, 7: array{0: 'Birthday', 1: 'June 8, 1990'}}
+         */
+        public function fields(): array
         {
             return [
                 ['Phone', '(123) 123-1234'], // $this->phone
@@ -94,21 +99,31 @@ use App\Models\User;
             ];
         }
 
-        public function getDefaultScope()
+        public function getDefaultScope(): string
         {
             return $this->is_private == true ? 'private' : 'public';
         }
 
 
-        public function url() {
+        public function url(): string {
             return route('social.profile.show', $this->handle);
         }
 
+        /**
+         * @return (int|string)|NullMedia
+         *
+         * @psalm-return NullMedia|array-key
+         */
         public function bannerImage()
         {
             return $this->getMedia('profile_banner_images')->first() ?? (new NullMedia('profile'));
         }
 
+        /**
+         * @return (int|string)|null
+         *
+         * @psalm-return array-key|null
+         */
         public function photo()
         {
             return optional($this->getMedia('profile_photos')->first());
@@ -124,7 +139,7 @@ use App\Models\User;
             return $this->photo()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
         }
 
-        public function getCountryAttribute()
+        public function getCountryAttribute(): string
         {
             return 'USA';
         }
@@ -180,7 +195,10 @@ use App\Models\User;
             return Follow::whereProfileId($profile->id)->whereFollowingId($this->id)->exists();
         }
 
-        public function avatar()
+        /**
+         * @psalm-return \Illuminate\Database\Eloquent\Relations\HasOne<Avatar>
+         */
+        public function avatar(): \Illuminate\Database\Eloquent\Relations\HasOne
         {
             return $this->hasOne(Avatar::class)->withDefault([
                 'media_path'   => 'public/avatars/default.jpg',
@@ -210,27 +228,42 @@ use App\Models\User;
             return $url;
         }
 
-        public function recommendFollowers()
+        /**
+         * @psalm-return \Illuminate\Support\Collection<empty, empty>
+         */
+        public function recommendFollowers(): \Illuminate\Support\Collection
         {
             return collect([]);
         }
 
-        public function following()
+        /**
+         * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsToMany<self>
+         */
+        public function following(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
         {
             return $this->belongsToMany(self::class, 'followers', 'profile_id', 'following_id');
         }
 
-        public function followers()
+        /**
+         * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsToMany<self>
+         */
+        public function followers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
         {
             return $this->belongsToMany(self::class, 'followers', 'following_id', 'profile_id');
         }
 
-        public function likes()
+        /**
+         * @psalm-return \Illuminate\Database\Eloquent\Relations\HasMany<Like>
+         */
+        public function likes(): \Illuminate\Database\Eloquent\Relations\HasMany
         {
             return $this->hasMany(Like::class);
         }
 
-        public function user()
+        /**
+         * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<User>
+         */
+        public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
         {
             return $this->belongsTo(User::class);
         }

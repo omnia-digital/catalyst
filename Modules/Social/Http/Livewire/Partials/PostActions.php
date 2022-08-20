@@ -17,7 +17,7 @@ class PostActions extends Component
     public bool $showShareButton = true;
     public bool $showBookmarkButton = false;
 
-    public function mount(Post $post, $show = false, $showCommentButton = true, $showLikeButton = true, $showRepostButton = true, $showShareButton = true,$showBookmarkButton = false)
+    public function mount(Post $post, $show = false, $showCommentButton = true, $showLikeButton = true, $showRepostButton = true, $showShareButton = true,$showBookmarkButton = false): void
     {
         $this->post = $post;
         $this->show = $show;
@@ -25,7 +25,7 @@ class PostActions extends Component
         $this->showBookmarkButton = $showBookmarkButton;
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.post-actions');
     }

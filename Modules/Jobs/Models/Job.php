@@ -80,7 +80,10 @@ class Job extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function addons()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsToMany<JobAddon>
+     */
+    public function addons(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(JobAddon::class);
     }

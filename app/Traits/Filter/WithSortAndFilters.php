@@ -34,45 +34,50 @@ trait WithSortAndFilters {
 
     public $filterCount = 0;
 
-    public function sortBy($key)
+    public function sortBy($key): void
     {
         $this->sortOrder = $this->defaultSortOrder;
 
         $this->orderBy = $key;
     }
 
-    public function toggleSortOrder()
+    public function toggleSortOrder(): void
     {
         $this->sortOrder = ($this->sortOrder === 'asc') ? 'desc' : 'asc';
     }
 
-    public function updatedSearch()
+    public function updatedSearch(): void
     {
         $this->resetPage();
     }
 
-    public function updatedMembers()
+    public function updatedMembers(): void
     {
         $this->resetPage();
     }
 
-    public function updatedTags()
+    public function updatedTags(): void
     {
         $this->resetPage();
     }
 
-    public function updatedDateFilter()
+    public function updatedDateFilter(): void
     {
         $this->resetPage();
     }
 
-    public function updatedFilters()
+    public function updatedFilters(): void
     {
         $this->filterCount = sizeof(array_filter($this->filters));
         $this->resetPage();
     }
 
-    public function getAllTagsProperty()
+    /**
+     * @return ((int|string)|mixed)[]
+     *
+     * @psalm-return array<array-key|mixed>
+     */
+    public function getAllTagsProperty(): array
     {
         return Tag::all()->mapWithKeys(fn(Tag $tag) => [$tag->name => $tag->name])->all();
     }

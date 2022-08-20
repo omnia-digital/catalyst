@@ -10,8 +10,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SearchDropdownTest extends TestCase
 {
-    /** @test */
-    public function the_search_dropdown_searches_for_games()
+    /**
+     * @test
+     */
+    public function the_search_dropdown_searches_for_games(): void
     {
         Http::fake([
             'https://api-v3.igdb.com/games' => $this->fakeSearchGames(),
@@ -24,7 +26,7 @@ class SearchDropdownTest extends TestCase
             ->assertSee('Fake The Legend of Zelda: Ocarina of Time');
     }
 
-    private function fakeSearchGames()
+    private function fakeSearchGames(): \GuzzleHttp\Promise\PromiseInterface
     {
         return Http::response([
           0 => [

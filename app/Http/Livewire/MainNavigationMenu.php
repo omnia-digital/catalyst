@@ -15,7 +15,7 @@ class MainNavigationMenu extends Component
         'refresh-navigation-menu' => '$refresh',
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->navigation = [
             [

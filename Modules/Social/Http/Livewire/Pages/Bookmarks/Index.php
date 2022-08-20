@@ -24,7 +24,7 @@ class Index extends Component
         'search'
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->orderBy = "created_at";
     }
@@ -36,7 +36,10 @@ class Index extends Component
         return $query;
     }
 
-    public function getRowsQueryWithoutFiltersProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<Bookmark>
+     */
+    public function getRowsQueryWithoutFiltersProperty(): \Illuminate\Database\Eloquent\Builder
     {
         return Bookmark::where('user_id', '=', \Auth::user()->id);
     }
@@ -48,7 +51,7 @@ class Index extends Component
         });
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.bookmarks.index', [
             'bookmarks' => $this->rows

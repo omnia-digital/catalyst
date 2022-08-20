@@ -10,7 +10,7 @@ use Nwidart\Modules\Facades\Module;
 
 class Platform
 {
-    public function isModuleEnabled($moduleName)
+    public function isModuleEnabled($moduleName): bool
     {
         $modules = collect(Module::allEnabled());
 
@@ -25,7 +25,7 @@ class Platform
         return false;
     }
 
-    public function translate($string): string
+    public function translate($string): array|string|null
     {
         $wordsInString = explode(' ', $string);
 

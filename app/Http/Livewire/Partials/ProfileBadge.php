@@ -11,7 +11,7 @@ class ProfileBadge extends Component
     protected $listeners = [
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->user = auth()->user();
     }

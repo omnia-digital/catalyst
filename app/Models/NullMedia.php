@@ -14,17 +14,17 @@ class NullMedia
         $this->type = $type;
     }
 
-    public function count()
+    public function count(): int
     {
         return 0;
     }
 
-    public function first()
+    public function first(): static
     {
         return $this;
     }
 
-    public function getFullUrl()
+    public function getFullUrl(): string
     {
         switch ($this->type) {
             case 'profile':

@@ -10,8 +10,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ComingSoonTest extends TestCase
 {
-    /** @test */
-    public function the_main_page_shows_coming_soon_games()
+    /**
+     * @test
+     */
+    public function the_main_page_shows_coming_soon_games(): void
     {
         Http::fake([
             'https://api-v3.igdb.com/games' => $this->fakeComingSoonGames(),
@@ -26,7 +28,7 @@ class ComingSoonTest extends TestCase
             ->assertSee('Jun 16, 2020');
     }
 
-    private function fakeComingSoonGames()
+    private function fakeComingSoonGames(): \GuzzleHttp\Promise\PromiseInterface
     {
         return Http::response( [
               0 => [

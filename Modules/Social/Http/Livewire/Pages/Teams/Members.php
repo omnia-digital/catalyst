@@ -16,12 +16,12 @@ class Members extends Component
         'member_added' => '$refresh',
     ];
 
-    public function mount(Team $team)
+    public function mount(Team $team): void
     {
         $this->team = $team;
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.pages.teams.members');
     }

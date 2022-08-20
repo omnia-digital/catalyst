@@ -11,7 +11,10 @@ class UserStatusList extends Component
 {
     public Team|null $team = null;
 
-    public function getUsersQueryProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<User>
+     */
+    public function getUsersQueryProperty(): \Illuminate\Database\Eloquent\Builder
     {
         return User::query();
     }
@@ -38,7 +41,7 @@ class UserStatusList extends Component
         return $query->get();
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.user-status-list');
     }

@@ -22,7 +22,7 @@ trait WithPostEditor
         ]);
     }
 
-    public function emitPostValidated(Validator $validator)
+    public function emitPostValidated(Validator $validator): void
     {
         $this->emitTo(
             'social::post-editor',
@@ -31,7 +31,7 @@ trait WithPostEditor
         );
     }
 
-    public function emitPostSaved(string $editorId)
+    public function emitPostSaved(string $editorId): void
     {
         $this->emitTo('social::post-editor', 'postSaved:' . $editorId);
         $this->emitTo('social::news-feed', 'postSaved');

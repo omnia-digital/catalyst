@@ -25,14 +25,14 @@ class Index extends Component
         'search'
     ];
 
-    public function mount()
+    public function mount(): void
     {
         if (!\App::environment('production')) {
             $this->useCache = false;
         }
     }
 
-    public function updatedFilters()
+    public function updatedFilters(): void
     {
         $this->resetPage();
     }
@@ -44,7 +44,10 @@ class Index extends Component
         return $query;
     }
 
-    public function getRowsQueryWithoutFiltersProperty()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<Post&\Illuminate\Database\Eloquent\Builder<Post>>
+     */
+    public function getRowsQueryWithoutFiltersProperty(): \Illuminate\Database\Eloquent\Builder
     {
         return Post::where('type','=','question')->orderByDesc('updated_at');
     }
@@ -56,7 +59,7 @@ class Index extends Component
         });
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('advice::livewire.pages.questions.index', [
             'questions' => $this->rows

@@ -115,7 +115,10 @@ class Team extends JetstreamTeam implements HasMedia
     }
 
     // Relations //
-    public function postsWithinTeam()
+    /**
+     * @psalm-return HasMany<Post>
+     */
+    public function postsWithinTeam(): HasMany
     {
         return $this->hasMany(Post::class);
     }
@@ -130,7 +133,7 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->hasMany(Post::class)->ofType(PostType::RESOURCE);
     }
 
-    public function teamLink()
+    public function teamLink(): string
     {
         return route('social.teams.show', $this->id);
     }
@@ -140,16 +143,31 @@ class Team extends JetstreamTeam implements HasMedia
         return visits($this)->relation();
     }
 
+    /**
+     * @return (int|string)|NullMedia
+     *
+     * @psalm-return NullMedia|array-key
+     */
     public function bannerImage()
     {
         return $this->getMedia('team_banner_images')->first() ?? (new NullMedia);
     }
 
+    /**
+     * @return (int|string)|NullMedia
+     *
+     * @psalm-return NullMedia|array-key
+     */
     public function mainImage()
     {
         return $this->getMedia('team_main_images')->first() ?? (new NullMedia);
     }
 
+    /**
+     * @return (int|string)|null
+     *
+     * @psalm-return array-key|null
+     */
     public function profilePhoto()
     {
         return optional($this->getMedia('team_profile_photos')->first());
@@ -166,7 +184,12 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->profilePhoto()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
     }
 
-    public function sampleImages()
+    /**
+     * @return NullMedia|\Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection
+     *
+     * @psalm-return NullMedia|\Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<array-key, \Spatie\MediaLibrary\MediaCollections\Models\Media>
+     */
+    public function sampleImages(): \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|NullMedia
     {
         return $this->getMedia('team_sample_images')->count() ? $this->getMedia('team_sample_images') : (new NullMedia);
     }
@@ -186,12 +209,18 @@ class Team extends JetstreamTeam implements HasMedia
         return null;
     }
 
-    public function owner()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<TRelatedModel>
+     */
+    public function owner(): \Illuminate\Database\Eloquent\Builder
     {
         return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id')->where('role', 'owner');
     }
 
-    public function members()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\Illuminate\Database\Eloquent\Model>
+     */
+    public function members(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->users()->wherePivotNotIn('role', ['owner']);
     }
@@ -200,14 +229,17 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->users;
     }
 
-    public function profile()
+    public function profile(): string
     {
         return route('social.teams.show', $this);
     }
 
     // Scopes //
 
-    public function scopeSearch(Builder $query, ?string $search): Builder
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<\Illuminate\Database\Eloquent\Model>
+     */
+    public function scopeSearch(Builder $query, ?string $search): \Illuminate\Database\Eloquent\Builder
     {
         return $query->where('name', 'LIKE', "%$search%");
     }

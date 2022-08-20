@@ -40,7 +40,7 @@ class UserResource extends Resource
         }
     }
 
-    protected static function getNavigationBadge(): ?string
+    protected static function getNavigationBadge(): int
     {
         return static::getEloquentQuery()->get()->count();
     }
@@ -154,7 +154,10 @@ class UserResource extends Resource
         ];
     }
 
-    protected function getTableRecordUrlUsing(): Closure
+    /**
+     * @psalm-return \Closure(Model):string
+     */
+    protected function getTableRecordUrlUsing(): \Closure
     {
         return fn (Model $record): string => route('users.edit', ['record' => $record]);
     }

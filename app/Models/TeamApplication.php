@@ -14,9 +14,9 @@ class TeamApplication extends Model
     /**
      * Get the team that the application belongs to.
      *
-     * @return BelongsTo
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<Team>
      */
-    public function team()
+    public function team(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Team::class);
     }
@@ -24,9 +24,9 @@ class TeamApplication extends Model
     /**
      * Get the user that submitted the application.
      *
-     * @return BelongsTo
+     * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<User>
      */
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }

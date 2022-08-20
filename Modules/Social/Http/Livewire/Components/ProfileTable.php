@@ -17,12 +17,15 @@ class ProfileTable extends Component implements HasTable
 {
     use InteractsWithTable;
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.components.profile-table');
     }
 
-    protected function getTableQuery()
+    /**
+     * @psalm-return Builder<Profile>
+     */
+    protected function getTableQuery(): Builder
     {
 //        if (auth()->user()->is_admin) {
             return Profile::query();

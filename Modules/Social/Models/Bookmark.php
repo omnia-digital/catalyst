@@ -19,7 +19,7 @@ class Bookmark extends Model
         'bookmarkable_type'
     ];
 
-    protected static function newFactory()
+    protected static function newFactory(): BookmarkFactory
     {
         return BookmarkFactory::new();
     }
@@ -29,7 +29,7 @@ class Bookmark extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function bookmarkable()
+    public function bookmarkable(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo();
     }

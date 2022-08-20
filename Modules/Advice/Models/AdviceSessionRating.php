@@ -25,7 +25,7 @@ class AdviceSessionRating extends Model
         'advice_profile_id'
     ];
 
-    public function adviceProfile()
+    public function adviceProfile(): void
     {
         $this->belongsTo(AdviceProfile::class);
     }

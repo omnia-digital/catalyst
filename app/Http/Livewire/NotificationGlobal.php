@@ -10,6 +10,11 @@ class NotificationGlobal extends Component
 {
     use WithNotification;
 
+    /**
+     * @return string[]
+     *
+     * @psalm-return array<string, 'showAlert'>
+     */
     public function getListeners()
     {
         return [
@@ -17,17 +22,17 @@ class NotificationGlobal extends Component
         ];
     }
 
-    public function markAsRead($notificationId)
+    public function markAsRead($notificationId): void
     {
         Auth::user()->notifications()->where('id', $notificationId)->first()?->markAsRead();
     }
 
-    public function showAlert($notification)
+    public function showAlert($notification): void
     {
         $this->info($notification['title']);
     }
 
-    public function render()
+    public function render(): string
     {
         return '<div></div>';
     }

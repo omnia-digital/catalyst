@@ -20,7 +20,7 @@ class LikeButton extends Component
 
     public $btnStyles;
 
-    public function mount($model, $show = false, $hideCount = false, $withDislikes = false, $btnStyles = '')
+    public function mount($model, $show = false, $hideCount = false, $withDislikes = false, $btnStyles = ''): void
     {
         $this->model = $model;
         $this->show = $show;
@@ -29,7 +29,7 @@ class LikeButton extends Component
         $this->btnStyles = $btnStyles;
     }
 
-    public function like()
+    public function like(): void
     {
         $this->model->like();
 
@@ -38,13 +38,13 @@ class LikeButton extends Component
         }
     }
 
-    public function dislike()
+    public function dislike(): void
     {
         $this->model->dislike();
 
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('social::livewire.partials.like-button');
     }
