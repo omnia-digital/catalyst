@@ -6,6 +6,7 @@ use App\Filament\Resources\TeamResource\Pages;
 use App\Filament\Resources\TeamResource\RelationManagers;
 use App\Models\Team;
 use App\Models\User;
+use Ariaieboy\FilamentJalaliDatetime\JalaliDateTimeColumn;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -56,6 +57,7 @@ class TeamResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('start_date'),
+                Forms\Components\SpatieTagsInput::make('type')->type('team_type'),
                 Forms\Components\Textarea::make('summary')
                     ->maxLength(65535),
                 Forms\Components\Textarea::make('content')
@@ -78,7 +80,7 @@ class TeamResource extends Resource
                     ->label('Owner'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('start_date')
-                    ->dateTime(),
+                                         ->date(),
 //                Tables\Columns\TextColumn::make('summary'),
 //                Tables\Columns\TextColumn::make('content'),
                 Tables\Columns\TextColumn::make('location'),
