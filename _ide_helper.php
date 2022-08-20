@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.24.0.
+ * Generated for Laravel 9.25.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -20115,6 +20115,114 @@
                     /**
          * 
          *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionEnabled()
+         * @param string $name
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionEnabled($name)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionEnabled($name);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionDisabled()
+         * @param string $name
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionDisabled($name)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionDisabled($name);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionHasIcon()
+         * @param string $name
+         * @param string $icon
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionHasIcon($name, $icon, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionHasIcon($name, $icon, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionDoesNotHaveIcon()
+         * @param string $name
+         * @param string $icon
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionDoesNotHaveIcon($name, $icon, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionDoesNotHaveIcon($name, $icon, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionHasLabel()
+         * @param string $name
+         * @param string $label
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionHasLabel($name, $label, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionHasLabel($name, $label, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionDoesNotHaveLabel()
+         * @param string $name
+         * @param string $label
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionDoesNotHaveLabel($name, $label, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionDoesNotHaveLabel($name, $label, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionHasColor()
+         * @param string $name
+         * @param string $color
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionHasColor($name, $color, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionHasColor($name, $color, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionDoesNotHaveColor()
+         * @param string $name
+         * @param string $color
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionDoesNotHaveColor($name, $color, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionDoesNotHaveColor($name, $color, $record);
+        }
+                    /**
+         * 
+         *
          * @see \Filament\Testing\TestsPageActions::assertPageActionHeld()
          * @param string $name
          * @return static 
@@ -20313,6 +20421,116 @@
                     /**
          * 
          *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionEnabled()
+         * @param string $name
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionEnabled($name, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionEnabled($name, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDisabled()
+         * @param string $name
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionDisabled($name, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionDisabled($name, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionHasIcon()
+         * @param string $name
+         * @param string $icon
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionHasIcon($name, $icon, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionHasIcon($name, $icon, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDoesNotHaveIcon()
+         * @param string $name
+         * @param string $icon
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionDoesNotHaveIcon($name, $icon, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionDoesNotHaveIcon($name, $icon, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionHasLabel()
+         * @param string $name
+         * @param string $label
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionHasLabel($name, $label, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionHasLabel($name, $label, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDoesNotHaveLabel()
+         * @param string $name
+         * @param string $label
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionDoesNotHaveLabel($name, $label, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionDoesNotHaveLabel($name, $label, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionHasColor()
+         * @param string $name
+         * @param string $color
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionHasColor($name, $color, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionHasColor($name, $color, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDoesNotHaveColor()
+         * @param string $name
+         * @param string $color
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionDoesNotHaveColor($name, $color, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionDoesNotHaveColor($name, $color, $record);
+        }
+                    /**
+         * 
+         *
          * @see \Filament\Tables\Testing\TestsActions::assertTableActionHeld()
          * @param string $name
          * @return static 
@@ -20445,6 +20663,114 @@
         public static function assertTableBulkActionHidden($name)
         {
                         return \Livewire\Testing\TestableLivewire::assertTableBulkActionHidden($name);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionEnabled()
+         * @param string $name
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableBulkActionEnabled($name)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionEnabled($name);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDisabled()
+         * @param string $name
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableBulkActionDisabled($name)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDisabled($name);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionHasIcon()
+         * @param string $name
+         * @param string $icon
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableBulkActionHasIcon($name, $icon, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionHasIcon($name, $icon, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDoesNotHaveIcon()
+         * @param string $name
+         * @param string $icon
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableBulkActionDoesNotHaveIcon($name, $icon, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDoesNotHaveIcon($name, $icon, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionHasLabel()
+         * @param string $name
+         * @param string $label
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableBulkActionHasLabel($name, $label, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionHasLabel($name, $label, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDoesNotHaveLabel()
+         * @param string $name
+         * @param string $label
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableBulkActionDoesNotHaveLabel($name, $label, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDoesNotHaveLabel($name, $label, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionHasColor()
+         * @param string $name
+         * @param string $color
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableBulkActionHasColor($name, $color, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionHasColor($name, $color, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDoesNotHaveColor()
+         * @param string $name
+         * @param string $color
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableBulkActionDoesNotHaveColor($name, $color, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDoesNotHaveColor($name, $color, $record);
         }
                     /**
          * 
@@ -23154,7 +23480,7 @@ namespace  {
              *
              * @param string $column
              * @param string $operator
-             * @param \DateTimeInterface|string|null $value
+             * @param \DateTimeInterface|string|int|null $value
              * @param string $boolean
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -23170,7 +23496,7 @@ namespace  {
              *
              * @param string $column
              * @param string $operator
-             * @param \DateTimeInterface|string|null $value
+             * @param \DateTimeInterface|string|int|null $value
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -23185,7 +23511,7 @@ namespace  {
              *
              * @param string $column
              * @param string $operator
-             * @param \DateTimeInterface|string|null $value
+             * @param \DateTimeInterface|string|int|null $value
              * @param string $boolean
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -23201,7 +23527,7 @@ namespace  {
              *
              * @param string $column
              * @param string $operator
-             * @param \DateTimeInterface|string|null $value
+             * @param \DateTimeInterface|string|int|null $value
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
