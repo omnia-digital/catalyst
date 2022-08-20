@@ -1,3 +1,6 @@
+[![Tests](https://github.com/laravelio/laravel.io/workflows/Tests/badge.svg)](https://github.com/laravelio/laravel.io/actions?query=workflow%3ATests)
+[![Code Style](https://github.com/laravelio/laravel.io/workflows/Code%20Style/badge.svg)](https://github.com/laravelio/laravel.io/actions?query=workflow%3AFormatting)
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

@@ -59,6 +59,7 @@
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
+        "friendsofphp/php-cs-fixer": "^3.10",
         "laracademy/generators": "^3.4",
         "laravel-lang/lang": "^10.9",
         "laravel-lang/publisher": "^13.0",
@@ -93,6 +94,9 @@
         }
     },
     "scripts": {
+        "format": [
+            "vendor/bin/php-cs-fixer fix"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
