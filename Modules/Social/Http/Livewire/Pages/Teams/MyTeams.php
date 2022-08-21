@@ -55,7 +55,7 @@ class MyTeams extends Component
         });
     }
 
-    public function getUserProperty(): User|null|null
+    public function getUserProperty(): User|null
     {
         return User::find(Auth::id());
     }

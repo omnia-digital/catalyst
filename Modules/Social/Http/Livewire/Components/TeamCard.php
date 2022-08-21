@@ -7,10 +7,7 @@ use Livewire\Component;
 
 class TeamCard extends Component
 {
-    /**
-     * @var Team|null
-     */
-    public $team;
+
     
 
 }

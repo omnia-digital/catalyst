@@ -38,9 +38,4 @@ class Game extends IGDBGame
     {
         return $this->getVideos()->first() ?? null;
     }
-
-    public function profile(): string
-    {
-        return route('games.show', $this->slug);
-    }
 }

@@ -8,6 +8,6 @@ use Modules\Games\Models\Game;
 
 class SearchDropdown extends Component
 {
-    public string $search = '';
+
 
 }

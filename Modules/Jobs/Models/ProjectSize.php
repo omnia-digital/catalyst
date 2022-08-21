@@ -15,7 +15,7 @@ class ProjectSize extends Model
      *
      * @psalm-var array{0: 'title', 1: 'description', 2: 'order'}
      */
-    protected array $fillable = [
+    protected $fillable = [
         'title',
         'description',
         'order',

@@ -31,7 +31,7 @@ use App\Models\User;
          *
          * @psalm-var array{0: 'deleted_at', 1: 'last_fetched_at'}
          */
-        protected array $dates = [
+        protected $dates = [
             'deleted_at',
             'last_fetched_at'
         ];
@@ -41,14 +41,14 @@ use App\Models\User;
          *
          * @psalm-var array{0: 'private_key'}
          */
-        protected array $hidden = ['private_key'];
+        protected $hidden = ['private_key'];
 
         /**
          * @var string[]
          *
          * @psalm-var array{0: 'id', 1: 'first_name', 2: 'last_name', 3: 'handle', 4: 'bio', 5: 'website', 6: 'user_id'}
          */
-        protected array $visible = [
+        protected $visible = [
             'id',
             'first_name',
             'last_name',
@@ -63,7 +63,7 @@ use App\Models\User;
          *
          * @psalm-var array{0: 'first_name', 1: 'last_name', 2: 'bio', 3: 'website', 4: 'user_id'}
          */
-        protected array $fillable = [
+        protected $fillable = [
             'first_name',
             'last_name',
             'bio',
@@ -76,7 +76,7 @@ use App\Models\User;
          *
          * @psalm-var array{0: 'name', 1: 'profile_photo_url'}
          */
-        protected array $appends = [
+        protected $appends = [
             'name',
             'profile_photo_url'
         ];
@@ -105,30 +105,6 @@ use App\Models\User;
                               ->saveSlugsTo('handle');
         }
 
-
-        public function url(): string {
-            return route('social.profile.show', $this->handle);
-        }
-
-        /**
-         * @return (int|string)|NullMedia
-         *
-         * @psalm-return NullMedia|array-key
-         */
-        public function bannerImage()
-        {
-            return $this->getMedia('profile_banner_images')->first() ?? (new NullMedia('profile'));
-        }
-
-        /**
-         * @return (int|string)|null
-         *
-         * @psalm-return array-key|null
-         */
-        public function photo()
-        {
-            return optional($this->getMedia('profile_photos')->first());
-        }
 
         /**
          * Advice

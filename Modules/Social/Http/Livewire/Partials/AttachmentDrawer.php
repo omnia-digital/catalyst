@@ -9,5 +9,9 @@ use Modules\Social\Models\Attachment;
 class AttachmentDrawer extends Component
 {
     use WithFileUploads;
-    public $attachments = [];
+
+    /**
+     * @var array
+     */
+
 }

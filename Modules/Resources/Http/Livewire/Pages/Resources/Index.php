@@ -29,7 +29,7 @@ class Index extends Component
      *
      * @psalm-var array{0: 'search'}
      */
-    protected array $queryString = [
+    protected $queryString = [
         'search'
     ];
 

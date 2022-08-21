@@ -10,7 +10,7 @@ class Profile extends Controller
 {
     public function show()
     {
-        $user = Auth::user();
+        Auth::user();
 
         return Inertia::render('Social/Profile', [
             'profile' => [

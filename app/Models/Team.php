@@ -31,17 +31,17 @@ use Wimil\Followers\Traits\CanBeFollowed;
  */
 class Team extends JetstreamTeam implements HasMedia
 {
-    use HasFactory, 
+    use HasFactory,
         Notifiable,
-        Likable, 
-        Postable, 
-        HasTags, 
-        CanBeFollowed, 
-        Awardable, 
+        Likable,
+        Postable,
+        HasTags,
+        CanBeFollowed,
+        Awardable,
         Reviewable,
-        HasProfilePhoto, 
-        HasSlug, 
-        HasLocation, 
+        HasProfilePhoto,
+        HasSlug,
+        HasLocation,
         InteractsWithMedia;
 
     /**
@@ -62,7 +62,7 @@ class Team extends JetstreamTeam implements HasMedia
      *
      * @psalm-var array{0: 'start_date'}
      */
-    protected array $dates = [
+    protected $dates = [
         'start_date'
     ];
 
@@ -71,7 +71,7 @@ class Team extends JetstreamTeam implements HasMedia
      *
      * @psalm-var array{0: 'profile_photo_url', 1: 'location_short', 2: 'start_date_string'}
      */
-    protected array $appends = [
+    protected $appends = [
         'profile_photo_url',
         'location_short',
         'start_date_string'

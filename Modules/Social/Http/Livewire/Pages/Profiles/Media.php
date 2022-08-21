@@ -7,9 +7,6 @@ use Modules\Social\Models\Profile;
 
 class Media extends Component
 {
-    /**
-     * @var Profile|null
-     */
-    public $profile; 
+
 
 }

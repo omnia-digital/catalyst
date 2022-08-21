@@ -19,7 +19,7 @@ class CurrentWeekTeamCalendar extends LivewireCalendar
      *
      * @psalm-var array{startDateUpdated: 'handleStartDateUpdated'}
      */
-    protected array $listeners = [
+    protected $listeners = [
         'startDateUpdated' => 'handleStartDateUpdated'
     ];
 

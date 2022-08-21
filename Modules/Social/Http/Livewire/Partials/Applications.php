@@ -13,8 +13,8 @@ use Livewire\Component;
 
 class Applications extends Component
 {
-    public $invitations;
-    public $applications;
+
+
 
 //    public function testClick()
 //    {

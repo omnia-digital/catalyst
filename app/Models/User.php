@@ -52,14 +52,14 @@ class User extends Authenticatable implements FilamentUser
          *
          * @psalm-var array{0: 'deleted_at', 1: 'email_verified_at', 2: '2fa_setup_at'}
          */
-        protected array $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
+        protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
 
         /**
          * @var string[]
          *
          * @psalm-var array{0: 'first_name', 1: 'last_name', 2: 'email', 3: 'password'}
          */
-        protected array $fillable = [
+        protected $fillable = [
             'first_name',
             'last_name',
             'email',
@@ -71,7 +71,7 @@ class User extends Authenticatable implements FilamentUser
          *
          * @psalm-var array{0: 'email', 1: 'password', 2: 'is_admin', 3: 'remember_token', 4: 'email_verified_at', 5: 'two_factor_recovery_codes', 6: 'two_factor_secret', 7: 'deleted_at', 8: 'updated_at'}
          */
-        protected array $hidden = [
+        protected $hidden = [
             'email',
             'password',
             'is_admin',
@@ -88,7 +88,7 @@ class User extends Authenticatable implements FilamentUser
          *
          * @psalm-var array{0: 'profile_photo_url'}
          */
-        protected array $appends = [
+        protected $appends = [
             'profile_photo_url'
         ];
 
@@ -194,7 +194,7 @@ class User extends Authenticatable implements FilamentUser
             return route('social.profile.show', $this->handle);
         }
 
-        public static function findByEmail(string $email): static|null|null
+        public static function findByEmail(string $email): static|null
         {
             return User::where('email', $email)->first();
         }

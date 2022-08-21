@@ -14,5 +14,5 @@ class ReviewCard extends Component
      *
      * @psalm-var array{reviewUpdated: '$refresh'}
      */
-    protected array $listeners = ['reviewUpdated' => '$refresh'];
+    protected $listeners = ['reviewUpdated' => '$refresh'];
 }

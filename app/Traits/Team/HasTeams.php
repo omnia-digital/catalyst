@@ -48,12 +48,12 @@ trait HasTeams
 
     public function isMemberOfATeam(): bool
     {
-        return $this->teams()->count() > 0);
+        return $this->teams()->count() > 0;
     }
 
     public function hasMultipleTeams(): bool
     {
-        return $this->teams()->count() > 1);
+        return $this->teams()->count() > 1;
     }
 
     public function ownedTeams()

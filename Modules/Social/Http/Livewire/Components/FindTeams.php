@@ -9,5 +9,5 @@ use Livewire\Component;
  */
 class FindTeams extends Component
 {
-    public ?string $startDate = null;
+
 }

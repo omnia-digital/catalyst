@@ -24,7 +24,7 @@ class Job extends Model
      *
      * @psalm-var array{0: 'title', 1: 'slug', 2: 'description', 3: 'team_id', 4: 'user_id', 5: 'apply_type', 6: 'apply_value', 7: 'payment_type', 8: 'budget', 9: 'location', 10: 'hours_per_week_id', 11: 'is_remote', 12: 'project_size_id', 13: 'is_active'}
      */
-    protected array $fillable = [
+    protected $fillable = [
         'title',
         'slug',
         'description',
@@ -46,7 +46,7 @@ class Job extends Model
      *
      * @psalm-var array{is_remote: 'boolean', is_active: 'boolean'}
      */
-    protected array $casts = [
+    protected $casts = [
         'is_remote' => 'boolean',
         'is_active' => 'boolean'
     ];

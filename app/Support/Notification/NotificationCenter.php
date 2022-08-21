@@ -8,7 +8,7 @@ class NotificationCenter
 {
     const LEVELS = ['info', 'success', 'error'];
 
-    protected array $notification = [];
+    protected $notification = [];
 
     public function __construct($title = null, $subtitle = null)
     {
@@ -71,21 +71,21 @@ class NotificationCenter
         return $this;
     }
 
-    public function info(string $value): self
+    public function info(string $value): static
     {
         return $this
             ->title($value)
             ->level('info');
     }
 
-    public function success(string $value): self
+    public function success(string $value): static
     {
         return $this
             ->title($value)
             ->level('success');
     }
 
-    public function danger(string $value): self
+    public function danger(string $value): static
     {
         return $this
             ->title($value)

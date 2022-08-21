@@ -10,7 +10,7 @@ use Modules\Social\Notifications\PostWasLikedNotification;
 
 class LikeButton extends Component
 {
-    public Model $model;
+
     
 
 }

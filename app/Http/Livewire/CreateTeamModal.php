@@ -16,22 +16,13 @@ class CreateTeamModal extends Component
 
     public ?string $name = null;
 
-    public $bannerImage;
 
-
-    public $mainImage;
-
-
-    public $profilePhoto;
 
 
     /**
      * @var array
      */
-    public array $sampleMedia = [];
-    public $sampleMediaNames = [];
-
-    /**
+      /**
      * @var array
      */
     public array $teamTypes = [];

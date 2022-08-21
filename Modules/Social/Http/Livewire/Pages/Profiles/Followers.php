@@ -7,5 +7,5 @@ use Modules\Social\Models\Profile;
 
 class Followers extends Component
 {
-    public Profile $profile;
+
 }

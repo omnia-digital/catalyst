@@ -18,19 +18,19 @@ class Review extends Model
     /**
      * @var array
      */
-    protected array $guarded = [];
+    protected $guarded = [];
 
     /**
      * @var string[]
      *
      * @psalm-var array{received_product_free: 'boolean', recommend: 'boolean', commentable: 'boolean'}
      */
-    protected array $casts = [
+    protected $casts = [
         'received_product_free' => 'boolean',
         'recommend' => 'boolean',
         'commentable' => 'boolean',
     ];
-    
+
     protected static function newFactory(): \Modules\Reviews\Database\factories\ReviewFactory
     {
         return \Modules\Reviews\Database\factories\ReviewFactory::new();

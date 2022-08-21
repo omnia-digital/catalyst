@@ -18,7 +18,7 @@ class Coupon extends Model
      *
      * @psalm-var array{expires_at: 'datetime'}
      */
-    protected array $casts = [
+    protected $casts = [
         'expires_at' => 'datetime'
     ];
 
@@ -36,7 +36,7 @@ class Coupon extends Model
      *
      * @psalm-return null|static&\Illuminate\Database\Eloquent\Builder<static>
      */
-    public static function findByCode(string $code): static|null|null
+    public static function findByCode(string $code): static|null
     {
         return self::where('code', $code)->first();
     }

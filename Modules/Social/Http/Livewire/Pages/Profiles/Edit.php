@@ -11,12 +11,6 @@ class Edit extends Component
 {
     use AuthorizesRequests, WithFileUploads;
 
-    public Profile $profile;
-
-    public $bannerImage;
-
-
-    public $photo;
 
     
 

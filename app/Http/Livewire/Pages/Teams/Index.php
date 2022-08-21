@@ -33,7 +33,7 @@ class Index extends Component
      *
      * @psalm-var array{0: 'lens', 1: 'filters', 2: 'tags', 3: 'members', 4: 'dateFilter'}
      */
-    protected array $queryString = [
+    protected $queryString = [
         'lens',
         'filters',
         'tags',
@@ -64,6 +64,11 @@ class Index extends Component
         return $query->paginate(25);
     }
 
+    /**
+     * @return string[]
+     *
+     * @psalm-return array{0: 'New Releases', 1: 'Specials', 2: 'Indies', 3: 'By User Tags', 4: 'Upcoming', 5: 'Popular Locations'}
+     */
     public function getCategoriesProperty(): array
     {
         return (new GetTeamCategoriesAction)->execute();

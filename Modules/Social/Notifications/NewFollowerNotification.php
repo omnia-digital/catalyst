@@ -12,10 +12,6 @@ class NewFollowerNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(
-        private User $follower
-    ){}
-
     public function toArray($notifiable): array
     {
         return NotificationCenter::make()

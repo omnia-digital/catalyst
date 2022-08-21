@@ -18,14 +18,12 @@ class CommentSection extends Component
 
     public Post $post;
 
-    public ?PostType $type = null;
-
     /**
      * @var string[]
      *
      * @psalm-var array{'post-editor:submitted': 'saveComment'}
      */
-    protected array $listeners = [
+    protected $listeners = [
         'post-editor:submitted' => 'saveComment'
     ];
 

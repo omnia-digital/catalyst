@@ -11,7 +11,7 @@
          *
          * @psalm-var array{0: 'profile_id', 1: 'following_id', 2: 'local_profile'}
          */
-        protected array $fillable = ['profile_id', 'following_id', 'local_profile'];
+        protected $fillable = ['profile_id', 'following_id', 'local_profile'];
 
         /**
          * @psalm-return \Illuminate\Database\Eloquent\Relations\BelongsTo<Profile>

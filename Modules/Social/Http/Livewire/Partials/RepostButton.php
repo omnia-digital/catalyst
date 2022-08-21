@@ -16,14 +16,12 @@ class RepostButton extends Component
 {
     use WithModal, WithNotification, WithPostEditor;
 
-    public Post $model;
-
     /**
      * @var string[]
      *
      * @psalm-var array{'post-editor:submitted': 'createRepost'}
      */
-    protected array $listeners = [
+    protected $listeners = [
         'post-editor:submitted' => 'createRepost'
     ];
 }

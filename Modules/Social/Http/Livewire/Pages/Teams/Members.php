@@ -20,7 +20,7 @@ class Members extends Component
      *
      * @psalm-var array{member_added: '$refresh'}
      */
-    protected array $listeners = [
+    protected $listeners = [
         'member_added' => '$refresh',
     ];
 }

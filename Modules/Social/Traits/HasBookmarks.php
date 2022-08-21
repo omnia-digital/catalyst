@@ -17,7 +17,7 @@
             return $this->morphMany(Bookmark::class, 'bookmarkable');
         }
 
-        public function createBookmark($model, $modelId, $order = null, $userId = null, $teamId = null, ): \Illuminate\Database\Eloquent\Model
+        public function createBookmark($model, $modelId, $order = null, $userId = null, $teamId = null, ): \Modules\Social\Models\Bookmark
         {
             return $this->bookmarks()->create([
                 'user_id'   => $userId ?? $this->id,

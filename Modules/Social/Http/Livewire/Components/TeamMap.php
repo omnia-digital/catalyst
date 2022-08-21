@@ -14,14 +14,12 @@ class TeamMap extends Component
 {
     use WithMap;
 
-    public ?string $startDate = null;
-
     /**
      * @var string[]
      *
      * @psalm-var array{startDateUpdated: 'handleStartDateUpdated'}
      */
-    protected array $listeners = [
+    protected $listeners = [
         'startDateUpdated' => 'handleStartDateUpdated'
     ];
 }

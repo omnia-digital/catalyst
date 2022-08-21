@@ -9,7 +9,7 @@ use Modules\Games\Models\Game;
 
 class RecentlyReviewed extends Component
 {
-    public array $recentlyReviewed = [];
+
 
     private function formatForView($games): array
     {

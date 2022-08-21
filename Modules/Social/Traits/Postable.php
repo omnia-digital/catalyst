@@ -23,7 +23,7 @@ trait Postable
     /**
      * Handles creating the post for the current model
      */
-    public function createPost($data, $userId): TRelatedModel|Post
+    public function createPost($data, $userId): Post
     {
         return $this->posts()->create([
             'user_id' => $userId,
@@ -44,8 +44,10 @@ trait Postable
 
     /**
      * Alias for createPost()
+     *
+     * @return TRelatedModel|\Modules\Social\Models\Post
      */
-    public function createComment($data, $userId): Model|Post
+    public function createComment($data, $userId): Post
     {
         return $this->createPost($data, $userId);
     }

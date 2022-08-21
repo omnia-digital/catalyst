@@ -16978,26 +16978,6 @@
      *
      */ 
         class PlatformFacade {
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function isModuleEnabled($moduleName)
-        {
-                        /** @var \App\Support\Platform\Platform $instance */
-                        return $instance->isModuleEnabled($moduleName);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function translate($string)
-        {
-                        /** @var \App\Support\Platform\Platform $instance */
-                        return $instance->translate($string);
-        }
          
     }
             /**

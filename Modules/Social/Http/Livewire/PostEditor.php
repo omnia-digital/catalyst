@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class PostEditor extends Component
 {
-    public ?string $content = null;
+
 
     public ?string $editorId = null;
 

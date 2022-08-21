@@ -10,11 +10,4 @@ use Livewire\Component;
 class SideMenu extends Component
 {
 
-
-    /**
-     * @var (false|string)[][]
-     *
-     * @psalm-var array{0?: array{label: 'No Module Navigation Items', name: 'social.home', icon: 'heroicon-o-x', current: false}}
-     */
-    public array $navigation = [];
 }

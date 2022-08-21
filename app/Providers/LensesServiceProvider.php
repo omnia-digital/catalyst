@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class LensesServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    protected array $lensClasses = [];
+    protected $lensClasses = [];
 
     public function registerLens(string $name, string $class): static
     {

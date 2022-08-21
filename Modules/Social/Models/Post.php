@@ -29,7 +29,7 @@ class Post extends Model implements HasMedia
      *
      * @psalm-var array{0: 'user_id', 1: 'team_id', 2: 'title', 3: 'type', 4: 'body', 5: 'postable_id', 6: 'postable_type', 7: 'repost_original_id', 8: 'published_at', 9: 'image'}
      */
-    protected array $fillable = [
+    protected $fillable = [
         'user_id',
         'team_id',
         'title',
@@ -47,7 +47,7 @@ class Post extends Model implements HasMedia
      *
      * @psalm-var array{0: 'published_at'}
      */
-    protected array $dates = [
+    protected $dates = [
         'published_at'
     ];
 
@@ -56,7 +56,7 @@ class Post extends Model implements HasMedia
      *
      * @psalm-var array{0: 'published_at'}
      */
-    protected array $appends = [
+    protected $appends = [
         'published_at',
     ];
 
@@ -71,24 +71,5 @@ class Post extends Model implements HasMedia
     protected static function newFactory(): PostFactory
     {
         return PostFactory::new();
-    }
-
-    public function attachMedia(array $mediaUrls): static
-    {
-        /** @var string $mediaUrl */
-        foreach ($mediaUrls as $mediaUrl) {
-            $this->addMediaFromUrl($mediaUrl)->toMediaCollection();
-        }
-
-        return $this;
-    }
-
-    public function getUrl(): string
-    {
-        if ($this->type === PostType::RESOURCE) {
-            return route('resources.show', $this);
-        }
-
-        return route('social.posts.show', $this);
     }
 }

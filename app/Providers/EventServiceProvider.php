@@ -18,7 +18,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @psalm-var array{'App\\Models\\Team'::class: array{0: TeamObserver::class}, 'App\\Models\\User'::class: array{0: UserObserver::class}}
      */
-    protected array $observers = [
+    protected $observers = [
         Team::class => [TeamObserver::class,],
         User::class => [UserObserver::class,],
     ];
@@ -26,9 +26,8 @@ class EventServiceProvider extends ServiceProvider
     /**
      * @var string[][]
      *
-     * @psalm-var array{'Illuminate\\Auth\\Events\\Registered'::class: array{0: SendEmailVerificationNotification::class}}
      */
-    protected array $listen = [
+    protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],

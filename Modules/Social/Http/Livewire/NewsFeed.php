@@ -18,7 +18,7 @@ class NewsFeed extends Component
      *
      * @psalm-var array{0: 'postSaved'}
      */
-    protected array $listeners = ['postSaved'];
+    protected $listeners = ['postSaved'];
 
     public Team|null $team = null;
 

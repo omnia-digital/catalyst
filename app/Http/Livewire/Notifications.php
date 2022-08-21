@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Notifications extends Component
 {
-    public int $perPage = 10;
+
 
     /**
      * @return string[]

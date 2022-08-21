@@ -9,5 +9,5 @@
         /**
          * @var array
          */
-        protected array $listen = [];
+        protected $listen = [];
     }

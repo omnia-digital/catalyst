@@ -12,7 +12,7 @@ class Attachment extends Model
     /**
      * @var array
      */
-    protected array $guarded = [];
+    protected $guarded = [];
     
     /* protected static function newFactory()
     {

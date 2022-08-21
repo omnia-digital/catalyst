@@ -34,7 +34,7 @@ class CreateReviewModal extends Component implements HasForms
      *
      * @psalm-var array{0: 'openReviewModal'}
      */
-    protected array $listeners = ['openReviewModal'];
+    protected $listeners = ['openReviewModal'];
 
     /**
      * @return (Checkbox|Radio|Select|Textarea)[]
@@ -47,7 +47,7 @@ class CreateReviewModal extends Component implements HasForms
             Textarea::make('body')->required(),
             Select::make('visibility')
                 ->options([
-                    0 => 'Public', 
+                    0 => 'Public',
                     1 => 'Friends Only'
                 ])
                 ->default(0)
@@ -67,7 +67,7 @@ class CreateReviewModal extends Component implements HasForms
                 ->label(Trans::get('Do you recommend this Team?'))
                 ->boolean()
                 ->required()
-        ];        
+        ];
     }
 
     public function mount($model): void
@@ -79,7 +79,7 @@ class CreateReviewModal extends Component implements HasForms
     {
         if ($this->model->reviewedBy(auth()->user())) {
             $this->review = $this->model->getCurrentUserReview();
-    
+
             $this->form->fill([
                 'body' => $this->review->body,
                 'visibility' => $this->review->visibility,
@@ -96,20 +96,20 @@ class CreateReviewModal extends Component implements HasForms
     public function createReview(): void
     {
         if ($this->model->reviewedBy(auth()->user())) {
-            
+
             $this->review->update(
                 $this->form->getState()
             );
-            
+
             $this->emitTo('reviews::review-card', 'reviewUpdated');
             $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review updated'), 'type' => 'success']);
 
         } else {
-            
+
             $this->review = $this->model->reviews()->create(
-                array_merge(['user_id' => auth()->id()], $this->form->getState())  
+                array_merge(['user_id' => auth()->id()], $this->form->getState())
             );
-    
+
             $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review created'), 'type' => 'success']);
         }
 

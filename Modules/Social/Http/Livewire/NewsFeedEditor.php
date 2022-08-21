@@ -18,9 +18,7 @@ class NewsFeedEditor extends Component
      *
      * @psalm-var array{'post-editor:submitted': 'createPost'}
      */
-    protected array $listeners = [
+    protected $listeners = [
         'post-editor:submitted' => 'createPost'
     ];
-
-    public Team|null $team = null;
 }

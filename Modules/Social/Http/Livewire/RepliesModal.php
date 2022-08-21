@@ -15,16 +15,12 @@ class RepliesModal extends Component
 {
     use WithPostEditor;
 
-    public Post $post;
-
-    public ?PostType $type = null;
-
     /**
      * @var string[]
      *
      * @psalm-var array{0: 'postAdded', 'post-editor:submitted': 'saveComment'}
      */
-    protected array $listeners = [
+    protected $listeners = [
         'postAdded',
         'post-editor:submitted' => 'saveComment'
     ];

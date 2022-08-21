@@ -35,25 +35,4 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
         ];
     }
-
-    /**
-     * Indicate that the user should have a personal team.
-     *
-     * @return $this
-     */
-    public function withTeam()
-    {
-        if (! Features::hasTeamFeatures()) {
-            return $this->state([]);
-        }
-
-        return $this->hasAttached(
-            Team::factory()
-                ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->profile->name.'\'s ' . \Trans::get('Team')];
-                }), 
-                ['role' => 'owner'],
-                'teams'
-        );
-    }
 }

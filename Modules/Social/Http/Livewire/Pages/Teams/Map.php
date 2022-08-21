@@ -17,7 +17,7 @@ class Map extends Component
      *
      * @psalm-var array{select_event: 'handleEventSelected'}
      */
-    protected array $listeners = [
+    protected $listeners = [
         'select_event' => 'handleEventSelected',
     ];
 }

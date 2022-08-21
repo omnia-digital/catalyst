@@ -15,5 +15,5 @@ class Location extends Model
     /**
      * @var array
      */
-    protected array $guarded = [];
+    protected $guarded = [];
 }

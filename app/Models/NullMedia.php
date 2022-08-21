@@ -23,17 +23,4 @@ class NullMedia
     {
         return $this;
     }
-
-    public function getFullUrl(): string
-    {
-        switch ($this->type) {
-            case 'profile':
-                return URL::asset('storage/images/profile_default.jpg');
-                break;
-            
-            default:
-                return URL::asset('storage/images/team_default.jpg');
-                break;
-        }
-    }
 }

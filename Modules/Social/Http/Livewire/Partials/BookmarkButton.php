@@ -9,5 +9,5 @@ use Modules\Social\Notifications\PostWasBookmarkedNotification;
 
 class BookmarkButton extends Component
 {
-    public Post $model;
+
 }

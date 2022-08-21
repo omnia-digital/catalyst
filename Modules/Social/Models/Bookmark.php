@@ -17,7 +17,7 @@ class Bookmark extends Model
      *
      * @psalm-var array{0: 'order', 1: 'user_id', 2: 'bookmarkable_id', 3: 'bookmarkable_type'}
      */
-    protected array $fillable = [
+    protected $fillable = [
         'order',
         'user_id',
         'bookmarkable_id',

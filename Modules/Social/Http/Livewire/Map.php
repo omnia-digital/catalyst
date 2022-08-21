@@ -10,13 +10,4 @@ use Squire\Models\Country;
 class Map extends Component
 {
 
-
-    /**
-     * @var string[]
-     *
-     * @psalm-var array{0: 'country'}
-     */
-    public array $filters = [
-        'country'
-    ];
 }

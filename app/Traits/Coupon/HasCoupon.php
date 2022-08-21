@@ -23,9 +23,8 @@ trait HasCoupon
      *
      * @param $coupon
      * @param $originalPrice
-     * @return Model
      */
-    public function redeemCoupon($coupon, $originalPrice)
+    public function redeemCoupon($coupon, $originalPrice): \Modules\Jobs\Models\RedeemedCoupon
     {
         $coupon = $coupon instanceof Coupon ? $coupon : Coupon::findByCode($coupon);
 

@@ -17,7 +17,7 @@ class HoursPerWeek extends Model
      *
      * @psalm-var array{0: 'value'}
      */
-    protected array $fillable = [
+    protected $fillable = [
         'value',
     ];
 

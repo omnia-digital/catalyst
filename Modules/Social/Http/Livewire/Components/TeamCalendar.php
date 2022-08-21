@@ -19,7 +19,7 @@ class TeamCalendar extends LivewireCalendar
      *
      * @psalm-var array{select_event: 'goToMonth'}
      */
-    protected array $listeners = ['select_event' => 'goToMonth'];
+    protected $listeners = ['select_event' => 'goToMonth'];
 
     /**
      * @return void

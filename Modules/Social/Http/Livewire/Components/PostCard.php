@@ -12,9 +12,4 @@ class PostCard extends Component
     use WithNotification;
 
     public Post $post;
-
-    /**
-     * @var false
-     */
-     public $clickable;
 }

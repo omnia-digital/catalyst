@@ -15,12 +15,6 @@ class PostWasLikedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(
-        private Post $post,
-        private User $actionable
-    ) {
-    }
-
     public function toArray($notifiable): array
     {
         $url = $this->post->type === PostType::RESOURCE->value

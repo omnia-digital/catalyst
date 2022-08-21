@@ -33,7 +33,7 @@ class TeamCalendarList extends Component
      *
      * @psalm-var array{teamSelected: 'handleTeamSelected'}
      */
-    protected array $listeners = [
+    protected $listeners = [
         'teamSelected' => 'handleTeamSelected'
     ];
 
@@ -58,7 +58,7 @@ class TeamCalendarList extends Component
         });
     }
 
-    public function getUserProperty(): User|null|null
+    public function getUserProperty(): User|null
     {
         return User::find(Auth::id());
     }

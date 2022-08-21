@@ -12,7 +12,7 @@ class Award extends Model
     /**
      * @var array
      */
-    protected array $guarded = [];
+    protected $guarded = [];
 
     /**
      * @psalm-return \Illuminate\Database\Eloquent\Relations\MorphToMany<Team>

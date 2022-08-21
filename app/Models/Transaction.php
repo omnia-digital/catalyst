@@ -14,7 +14,7 @@ class Transaction extends Model
      *
      * @psalm-var array{0: 'gateway', 1: 'description', 2: 'transaction_id', 3: 'payer_id', 4: 'payer_name', 5: 'payer_email', 6: 'amount', 7: 'invoice_number', 8: 'user_id'}
      */
-    protected array $fillable = [
+    protected $fillable = [
         'gateway',
         'description',
         'transaction_id',

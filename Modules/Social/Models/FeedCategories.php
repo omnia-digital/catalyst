@@ -13,7 +13,7 @@ class FeedCategories extends Model
      *
      * @psalm-var array{0: array{id: 0, name: 'my-feed', label: 'My Feed'}, 1: array{id: 1, name: 'top-teams', label: 'Top Teams'}, 2: array{id: 2, name: 'newest', label: 'Newest'}, 3: array{id: 3, name: 'favorites', label: 'Favorites'}, 4: array{id: 4, name: 'undiscovered', label: 'Undiscovered'}}
      */
-    protected array $rows = [
+    protected $rows = [
         [
             'id' => 0,
             'name' => 'my-feed',

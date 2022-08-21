@@ -7,9 +7,5 @@ use Modules\Social\Models\Post;
 
 class QuestionItem extends Component
 {
-    public Post $post;
 
-    /**
-     * @var false
-     */
-    
+}

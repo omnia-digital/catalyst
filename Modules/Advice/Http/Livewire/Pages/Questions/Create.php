@@ -11,6 +11,4 @@ class Create extends Component
     use WithMediaManager;
 
     public ?string $body = null;
-
-    public ?string $url = null;
 }

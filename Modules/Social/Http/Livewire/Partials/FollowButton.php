@@ -12,5 +12,5 @@ use Modules\Social\Notifications\NewFollowerNotification;
  */
 class FollowButton extends Component
 {
-    public Model $model;
+
 }
