@@ -308,7 +308,7 @@
             </div>
             <!-- Pinned teams -->
             <div class="px-4 mt-6 sm:px-6 lg:px-8">
-                <h2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Pinned Teams</h2>
+                <x-library::heading.2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Pinned Teams</x-library::heading.2>
                 <ul role="list" class="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-3">
                     <li class="relative col-span-1 flex shadow-sm rounded-md">
                         <div class="flex-shrink-0 flex items-center justify-center w-16 bg-pink-600 text-white-text-color text-sm font-medium rounded-l-md">GA</div>
@@ -357,7 +357,7 @@
             <!-- Teams list (only on smallest breakpoint) -->
             <div class="mt-10 sm:hidden">
                 <div class="px-4 sm:px-6">
-                    <h2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Teams</h2>
+                    <x-library::heading.2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Teams</x-library::heading.2>
                 </div>
                 <ul role="list" class="mt-3 border-t border-neutral-light divide-y divide-gray-100">
                     <li>

@@ -3,7 +3,7 @@
 ])
 
 @php
-    $class = 'text-lg leading-6 text-dark-text-color ' . $boldClass;
+    $class = 'text-lg leading-6 text-heading-default-color ' . $boldClass;
 @endphp
 
 <h3 {{ $attributes->merge(['class' => $class]) }}>

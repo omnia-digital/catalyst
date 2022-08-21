@@ -54,9 +54,9 @@
                         </Menu>
                     </div>
                 </div>
-                <h2 :id="'question-title-' + post.id" class="mt-4 text-base font-medium text-gray-900">
+                <x-library::heading.2 :id="'question-title-' + post.id" class="mt-4 text-base font-medium text-gray-900">
                     {{ post.title }}
-                </h2>
+                </x-library::heading.2>
             </div>
             <div class="mt-2 text-sm text-gray-700 space-y-4" v-html="post.body"/>
             <div class="mt-6 flex justify-between space-x-8">

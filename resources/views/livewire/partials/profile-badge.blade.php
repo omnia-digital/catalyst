@@ -1,15 +1,14 @@
 <div class="flex-1 relative text-left">
     <div type="button" wire:click="goToProfile"
-         class="group w-full flex rounded-md  text-sm text-left font-medium text-gray-700
-                        hover:cursor-pointer"
+         class="group w-full flex rounded-md  text-sm text-left font-medium text-gray-700 hover:cursor-pointer"
          id="options-menu-button" aria-expanded="false" aria-haspopup="true">
         <div class="w-full justify-between items-center">
             <div class="w-full min-w-0 items-center justify-between space-y-2">
                 <img class="w-24 h-24 bg-gray-300 rounded-full flex-shrink-0" src="{{ $user->profile_photo_url }}" alt="">
                 <div class="space-y-2">
                     <div class="">
-                        <p class="text-gray-900 text-lg font-medium truncate">{{ $user->name }}</p>
-                        <p class="-mt-1 text-gray-500 text-md truncate">{{ '@'.$user?->handle }}</p>
+                        <p class="text-heading-default-color text-lg font-medium truncate">{{ $user->name }}</p>
+                        <p class="-mt-1 text-heading-default-color text-md truncate">{{ '@'.$user?->handle }}</p>
                     </div>
                     <div class="flex mt-1">
                         <div class="bg-black flex items-center rounded-lg p-1">

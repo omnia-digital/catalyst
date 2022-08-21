@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-color-dark leading-tight">
+        <x-library::heading.2 class="font-semibold text-xl text-color-dark leading-tight">
             {{ \Trans::get('Dashboard') }}
-        </h2>
+        </x-library::heading.2>
     </x-slot>
 
     <div class="py-12">

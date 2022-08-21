@@ -111,9 +111,9 @@
                         <div class="p-6">
                             <div class="flex items-start justify-between">
                                 <x-heroicon-s-arrow-narrow-left x-on:click="showDetail = false" x-show="showDetail" class="w-5 h-5 cursor-pointer"/>
-                                <h2 id="slide-over-heading" class="text-lg font-medium text-dark-text-color">
+                                <x-library::heading.2 id="slide-over-heading" class="text-lg font-medium text-dark-text-color">
                                     Contacts
-                                </h2>
+                                </x-library::heading.2>
                                 <div class="ml-3 h-7 flex items-center">
                                     <button @click="open = false; setTimeout(() => open = true, 1000);" class="bg-primary rounded-md text-light-text-color hover:text-base-text-color focus:ring-2 focus:ring-secondary">
                                         <span class="sr-only">Close panel</span>
