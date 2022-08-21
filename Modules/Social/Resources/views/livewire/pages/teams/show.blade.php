@@ -22,7 +22,7 @@
         @endif
 
         <div class="col-span-7 space-y-6">
-            <h3>Discussion</h3>
+            <x-library::heading.3>Discussion</x-library::heading.3>
 
             <livewire:social::news-feed-editor :team="$team"/>
 
@@ -128,7 +128,7 @@
 
             @if ($team->content)
                 <div class="flex-1 flex flex-col">
-                    <h3>{{ \Trans::get('About') }}</h3>
+                    <x-library::heading.3>{{ \Trans::get('About') }}</x-library::heading.3>
                     <div x-data="{readMore: false, longText: @js(strlen($team->content) > 410)}"
                          class="mt-4 bg-white p-4 relative">
                         <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden" :class="(longText && readMore) ? 'h-full max-h-96' : 'max-h-24'">{{ $team->content }}</p>
@@ -143,13 +143,13 @@
             @endif
 
             <div>
-                <h3>People</h3>
+                <x-library::heading.3>People</x-library::heading.3>
                 <livewire:social::partials.user-status-list :team="$team"/>
             </div>
 
             <div>
                 <div class="text-base-text-color font-semibold">
-                    <h3>{{ \Trans::get('Location') }}</h3>
+                    <x-library::heading.3>{{ \Trans::get('Location') }}</x-library::heading.3>
                 </div>
                 <div class="mt-4 bg-white">
                     {{-- <x-library::map.google class="h-96" :places="$this->places"/> --}}
@@ -161,7 +161,7 @@
             @if ($team->languages)
                 <div>
                     <div class="text-base-text-color font-semibold">
-                        <h3>{{ \Trans::get('Languages') }}</h3>
+                        <x-library::heading.3>{{ \Trans::get('Languages') }}</x-library::heading.3>
                     </div>
                     <div class="mt-4 bg-white p-4">
                         <p class="text-dark-text-color">{{ $team->languages }}</p>
@@ -172,7 +172,7 @@
             <!-- Team Awards -->
             <div>
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <h3>{{ \Trans::get('Awards') }}</h3>
+                    <x-library::heading.3>{{ \Trans::get('Awards') }}</x-library::heading.3>
                     @if($team->awards()->count())
                         <a href="{{ route('social.teams.awards', $team) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>

@@ -9,6 +9,7 @@
     --white-text-color: #fff;
     --light-text-color: #9ca3af;
     --dark-text-color: #272d38;
+    --base-heading-color: var(--base-text-color);
     --neutral: #F0F2F5;
     --neutral-light: #f6f7f8;
     --neutral-dark: #6b7280;

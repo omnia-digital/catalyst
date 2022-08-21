@@ -20,7 +20,7 @@
                 </div>
             @endif
             <div class="flex mt-6">
-                <h3 class="text-dark-text-color text-4xl hover:underline font-bold">{{ $resource->title }}</h3>
+                <x-library::heading.3 class="text-dark-text-color text-4xl hover:underline font-bold">{{ $resource->title }}</x-library::heading.3>
                 @empty(!$resource->is_verified)
                     <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
                 @endempty

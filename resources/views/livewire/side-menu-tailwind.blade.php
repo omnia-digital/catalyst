@@ -81,7 +81,7 @@
                         </a>
                     </div>
                     <div class="mt-8">
-                        <h3 class="px-3 text-xs font-semibold text-base-text-color uppercase tracking-wider" id="mobile-teams-headline">Teams</h3>
+                        <x-library::heading.3 class="px-3 text-xs font-semibold text-base-text-color uppercase tracking-wider" id="mobile-teams-headline">Teams</x-library::heading.3>
                         <div class="mt-1 space-y-1" role="group" aria-labelledby="mobile-teams-headline">
                             <a href="#" class="group flex items-center px-3 py-2 text-base-text-color leading-5 font-medium text-base-text-color rounded-md hover:text-dark-text-color hover:bg-gray-50">
                                 <span class="w-2.5 h-2.5 mr-4 bg-secondary rounded-full" aria-hidden="true"></span>
@@ -208,7 +208,7 @@
                 </div>
                 <div class="mt-8">
                     <!-- Secondary navigation -->
-                    <h3 class="px-3 text-xs font-semibold text-base-text-color uppercase tracking-wider" id="desktop-teams-headline">Teams</h3>
+                    <x-library::heading.3 class="px-3 text-xs font-semibold text-base-text-color uppercase tracking-wider" id="desktop-teams-headline">Teams</x-library::heading.3>
                     <div class="mt-1 space-y-1" role="group" aria-labelledby="desktop-teams-headline">
                         <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-dark-text-color rounded-md hover:text-dark-text-color hover:bg-gray-50">
                             <span class="w-2.5 h-2.5 mr-4 bg-secondary rounded-full" aria-hidden="true"></span>
