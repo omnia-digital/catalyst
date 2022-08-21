@@ -20,6 +20,8 @@ module.exports = {
         themeVariants: [
             'default',
             'dark',
+            'hatchet',
+            'cfanea',
             'newyear',
             'valentines',
             'patrick',
@@ -30,7 +32,8 @@ module.exports = {
             'fall',
             'halloween',
             'christmas',
-            'winter'],
+            'winter'
+        ],
         extend: {
             fontFamily: {
                 sans: ["SF Pro Display", "Helvetica", "Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
@@ -68,7 +71,14 @@ module.exports = {
                 danger: colors.rose,
                 success: colors.green,
                 warning: colors.yellow,
-                'post-title-color': 'var(--post-title-color)',
+                'post-card-bg-color': 'var(--post-card-bg-color)',
+                'post-card-border-color': 'var(--post-card-border-color)',
+                'post-card-border-hover-color': 'var(--post-card-border-hover-color)',
+                'post-card-title-color': 'var(--post-card-title-color)',
+                'post-card-meta-color': 'var(--post-card-meta-color)',
+                'post-card-body-color': 'var(--post-card-body-color)',
+                'post-card-shadows': 'var(--post-card-shadows)',
+                'heading-default-color': 'var(--heading-default-color)',
                 'h1-color': 'var(--h1-color)',
                 'h2-color': 'var(--h2-color)',
                 'h3-color': 'var(--h3-color)',

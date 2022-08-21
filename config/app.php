@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'abbr' => env('APP_ABBR', 'APP'),
+    'theme' => env('APP_THEME', 'default'),
 
     /*
     |--------------------------------------------------------------------------
