@@ -4,7 +4,7 @@
 /* Themes */
 @import url('./themes/dark.css');
 
-.default {
+:root {
     --base-text-color: #050505;
     --white-text-color: #fff;
     --light-text-color: #9ca3af;

@@ -2,7 +2,7 @@
 
 @section('content')
     @empty($resource)
-        <h2>No Resource found</h2>
+        <x-library::heading.2>No Resource found</x-library::heading.2>
     @else
 
         <div class="mb-4 rounded-b-lg pl-4 flex items-center bg-secondary">

@@ -1,8 +1,8 @@
 <section aria-labelledby="trending-heading" class="card">
         <div class="">
-            <h2 id="trending-heading" class="px-3 py-2 text-xl font-medium text-h1-color">
+            <x-library::heading.2 id="trending-heading" class="px-3 py-2 text-xl font-medium text-h1-color">
                 {{ $title }}
-            </h2>
+            </x-library::heading.2>
             <div class="flow-root">
                 <ul role="list" class="">
                     @foreach ($posts as $post)

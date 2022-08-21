@@ -1,9 +1,9 @@
 <div class="card">
     <div class="py-3 flex-1 space-y-1 overflow-y-auto">
         <div class="pl-4 flex justify-between items-center">
-            <h2 class="text-xl font-medium text-gray-900">
+            <x-library::heading.2 class="text-xl font-medium text-gray-900">
                 {{ Trans::get('Teams') }}
-            </h2>
+            </x-library::heading.2>
             <div x-data="{show: false, message: ''}"
                 x-cloak
                 x-show="show"
