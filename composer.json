@@ -66,10 +66,9 @@
         "laravel/sail": "^1.12",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
+        "nunomaduro/larastan": "^2.1",
         "phpunit/phpunit": "^9.5.10",
-        "psalm/plugin-laravel": "^2.0",
-        "spatie/laravel-ignition": "^1.0",
-        "vimeo/psalm": "^4.26"
+        "spatie/laravel-ignition": "^1.0"
     },
     "repositories": [
         {
@@ -99,6 +98,9 @@
         "format": [
             "vendor/bin/php-cs-fixer fix"
         ],
+        "phpstan": [
+            "./vendor/bin/phpstan analyse"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
@@ -120,6 +122,9 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
+    },
+    "scripts-descriptions": {
+        "phpstan": "Run PHPStan static analysis against your application."
     },
     "extra": {
         "laravel": {
