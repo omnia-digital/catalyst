@@ -52,7 +52,12 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
         Route::get('{team}', ShowTeam::class)->name('show');
         Route::get('{team}/edit', EditTeam::class)->name('edit');
         Route::get('{team}/members', TeamMembers::class)->name('members');
+        Route::get('{team}/about', TeamFollowers::class)->name('about');
         Route::get('{team}/followers', TeamFollowers::class)->name('followers');
+        Route::get('{team}/resources', TeamFollowers::class)->name('resources');
+        Route::get('{team}/advice', TeamFollowers::class)->name('advice');
+        Route::get('{team}/jobs', TeamFollowers::class)->name('jobs');
+        Route::get('{team}/learn', TeamFollowers::class)->name('learn');
         Route::get('{team}/awards', TeamAwards::class)->name('awards');
         Route::get('/', AllTeams::class)->name('home');
     });

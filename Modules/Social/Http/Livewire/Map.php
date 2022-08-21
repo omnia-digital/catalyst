@@ -2,7 +2,6 @@
 
 namespace Modules\Social\Http\Livewire;
 
-use App\Models\Contact;
 use App\Models\ContactCategory;
 use Illuminate\Support\Arr;
 use Livewire\Component;

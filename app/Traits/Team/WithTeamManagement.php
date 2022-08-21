@@ -81,7 +81,7 @@ trait WithTeamManagement
         app(ApplyToTeam::class)->apply(
             $this->team,
             $this->user->id,
-            'editor'
+            'member'
         );
 
         $this->emit('applied_to_team');
@@ -154,7 +154,7 @@ trait WithTeamManagement
             $this->user,
             $this->team,
             $user->email,
-            'editor'
+            'member'
         );
 
         $this->team->teamApplications()->where('user_id', $userID)->delete();

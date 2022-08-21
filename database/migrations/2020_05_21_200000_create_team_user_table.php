@@ -17,7 +17,7 @@ class CreateTeamUserTable extends Migration
             $table->id();
             $table->foreignId('team_id');
             $table->foreignId('user_id');
-            $table->string('role')->nullable();
+            $table->string('role')->default('member');
             $table->timestamps();
 
             $table->unique(['team_id', 'user_id']);

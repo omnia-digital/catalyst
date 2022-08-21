@@ -93,6 +93,18 @@ class TeamPolicy
     }
 
     /**
+     * Determine whether the user can leave a review for the team.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Team  $team
+     * @return mixed
+     */
+    public function addReview(User $user, Team $team)
+    {
+        return $user->belongsToTeam($team);
+    }
+
+    /**
      * Determine whether the user can remove team members.
      *
      * @param  \App\Models\User  $user

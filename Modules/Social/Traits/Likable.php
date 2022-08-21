@@ -49,6 +49,14 @@ trait Likable
     }
 
     /**
+     * Check if the current model was previously liked or diliked by the user that is logged in
+     */
+    public function getWasLikedOrDislikedAttribute(): bool
+    {
+        return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->whereNotNull('deleted_at')->count();
+    }
+
+    /**
      * Return the total number of likes the current model has
      */
     public function likesCount(): int
@@ -73,9 +81,10 @@ trait Likable
             // If the current model is liked by the user then remove the like
             $this->likes()->where('user_id', auth()->id())->where('liked', true)->delete();
 
-        } else if ($this->wasLiked) {
+        } else if ($this->wasLikedOrDisliked) {
             // Else if the current model was previously liked by the user then restore the like
-            $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked', true)->restore();
+            $this->likes()->withTrashed()->where('user_id', auth()->id())->restore();
+            $this->likes()->withTrashed()->where('user_id', auth()->id())->update(['liked' => true]);
 
         } else {
             // Else if the current model was never liked by the user, then create/update the like
@@ -95,9 +104,10 @@ trait Likable
             // If the current model is disliked by the user then remove the like
             $this->likes()->where('user_id', auth()->id())->where('liked', false)->delete();
 
-        } else if ($this->wasDisliked) {
+        } else if ($this->wasLikedOrDisliked) {
             // Else if the current model was previously disliked by the user then restore the like
-            $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked', false)->restore();
+            $this->likes()->withTrashed()->where('user_id', auth()->id())->restore();
+            $this->likes()->withTrashed()->where('user_id', auth()->id())->update(['liked' => false]);
 
         } else {
             // Else if the current model was never disliked by the user, then create/update the like

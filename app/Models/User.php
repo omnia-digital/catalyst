@@ -3,6 +3,7 @@
     namespace App\Models;
 
 use App\Traits\Team\HasTeams;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Reviews\Models\Review;
 use Modules\Social\Models\Like;
 use Modules\Social\Models\Post;
 use Modules\Social\Models\Profile;
@@ -19,7 +21,7 @@ use Modules\Social\Traits\HasBookmarks;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Wimil\Followers\Traits\Followable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
     {
         use HasApiTokens,
             TwoFactorAuthenticatable,
@@ -35,6 +37,14 @@ class User extends Authenticatable
             HasTeams::ownsTeam insteadof JetstreamHasTeams;
             HasTeams::ownedTeams insteadof JetstreamHasTeams;
             HasTeams::currentTeam insteadof JetstreamHasTeams;
+        }
+
+        public function canAccessFilament(): bool
+        {
+            if ($this->is_admin) {
+                return true;
+            }
+            return str_ends_with($this->email, '@omniadigital.io') && $this->hasVerifiedEmail();
         }
 
         protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
@@ -95,6 +105,11 @@ class User extends Authenticatable
         public function posts() {
             if (!class_exists(Post::class)) return;
             return $this->hasMany(Post::class);
+        }
+
+        public function reviews() {
+            if (!class_exists(Review::class)) return;
+            return $this->hasMany(Review::class);
         }
 
         public function likes() {

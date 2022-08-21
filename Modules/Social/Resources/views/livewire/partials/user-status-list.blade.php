@@ -1,8 +1,8 @@
-<section aria-labelledby="people-heading" class="card">
+<section aria-labelledby="people-heading" class="card py-6">
     <div class="px-6 py-3">
-            <h2 id="people-list" class="text-xl font-medium text-gray-900">
-                {{ Trans::get('People') }}
-            </h2>
+{{--            <h2 id="people-list" class="text-xl font-medium text-gray-900">--}}
+{{--                {{ Trans::get('People') }}--}}
+{{--            </h2>--}}
             <div class="mt-6 flow-root">
                 <ul role="list" class="-my-4">
                     @forelse ($this->userList as $user)
@@ -19,6 +19,7 @@
 {{--                                </p>--}}
                             </div>
                             <div class="flex-shrink-0">
+                                <livewire:award-stack :user="$user" :team="$team" wire:key="award-stack-{{ $user->id }}" />
 {{--                                <livewire:social::partials.follow-button :model="$user"/>--}}
                             </div>
                         </li>

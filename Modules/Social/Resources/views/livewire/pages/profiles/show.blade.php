@@ -26,8 +26,8 @@
                         </a>
                     @endif
                 </div>
-                <div class="mt-4 flex space-x-2">
-                    @forelse ($this->user->awards()->take(2)->get() as $award)
+                <div class="mt-4 space-y-3">
+                    @forelse ($this->user->awards()->take(4)->get() as $award)
                         <x-awards-banner class="flex-1" :award="$award"/>
                     @empty
                         <div class="bg-white p-4 flex-1">
@@ -47,8 +47,8 @@
                         </a>
                     @endif
                 </div>
-                <div class="mt-4 flex space-x-2">
-                    @forelse ($this->user->awards()->take(2)->get() as $award)
+                <div class="mt-4 space-y-4">
+                    @forelse ($this->user->awards()->take(4)->get() as $award)
                         <x-awards-banner class="flex-1" :award="$award"/>
                     @empty
                         <div class="bg-white p-4 flex-1">
