@@ -201,7 +201,7 @@
                         <!-- Show Contact Detail -->
                         <div x-show="showDetail">
                             <div class="px-4 py-5 sm:px-6">
-                                <h3 class="text-lg leading-6 font-medium text-dark-text-color" x-text="title"></h3>
+                                <x-library::heading.3 class="text-lg leading-6 font-medium text-dark-text-color" x-text="title"></x-library::heading.3>
                                 <p class="mt-1 max-w-2xl text-sm text-base-text-color" x-text="description"></p>
                             </div>
                             <div class="border-t border-neutral-light px-4 py-5 sm:p-0">

@@ -99,7 +99,7 @@
             <!-- Edit Team Location -->
             <div x-cloak x-show="activeTab === 1" class="mt-6 space-y-6">
                 <div>
-                    <h3 class="text-lg">Current Team Location</h3>
+                    <x-library::heading.3 class="text-lg">Current Team Location</x-library::heading.3>
                     @if ($team->location()->exists())
                         <div class="flex items-center space-x-4 py-4">
                             <p class="{{ $removeAddress ? 'line-through' : '' }}">{{ $team->location }}</p>
@@ -125,7 +125,7 @@
                     @endif
                 </div>
                 <div>
-                    <h3 class="text-lg">Update Location</h3>
+                    <x-library::heading.3 class="text-lg">Update Location</x-library::heading.3>
                     <x-library::input.label value="Where will this event take place?"/>
                     <div class="flex items-center space-x-2">
                         <div class="flex-1">
@@ -139,7 +139,7 @@
                 </div>
                 @if (!empty($newAddress))
                     <div>
-                        <h3 class="text-lg">New Team Location</h3>
+                        <x-library::heading.3 class="text-lg">New Team Location</x-library::heading.3>
                         <p>{{ $this->selectedAddress }}</p>
                         <p class="text-2xs text-red-600">Please save changes to use this address</p>
                     </div>
