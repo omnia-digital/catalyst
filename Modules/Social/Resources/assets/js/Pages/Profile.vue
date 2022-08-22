@@ -24,9 +24,9 @@
                         </div>
                     </div>
                     <div class="flex justify-start mt-2 min-w-0 flex-1">
-                        <h1 class="text-2xl font-bold text-gray-900 truncate">
+                        <x-library::heading.1 class="text-2xl font-bold text-gray-900 truncate">
                             {{ profile.name }}
-                        </h1>
+                        </x-library::heading.1>
                         <p class="text-sm text-gray-600">{{ profile.handle }}</p>
                     </div>
                     <div class="mt-2 text-sm">
@@ -81,7 +81,7 @@
                 </div>
                 <!-- My Feed -->
                 <div class="mt-4">
-                    <h1 class="sr-only">Recent questions</h1>
+                    <x-library::heading.1 class="sr-only">Recent questions</x-library::heading.1>
                     <ul role="list" class="space-y-4">
                         <li v-for="question in questions" :key="question.id" class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
                             <article :aria-labelledby="'question-title-' + question.id">

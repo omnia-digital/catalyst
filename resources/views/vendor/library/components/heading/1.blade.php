@@ -1,11 +1,11 @@
 @props([
     'textColor' => 'text-heading-default-color',
-    'textSize' => 'text-2xl',
+    'textSize' => 'text-3xl',
     'boldClass' => 'font-medium',
     'class'=>''
 ])
 
-<x-library::heading.heading heading="h2"
+<x-library::heading.heading heading="h1"
                             :text-color="$textColor"
                             :text-size="$textSize"
                             :bold-class="$boldClass"

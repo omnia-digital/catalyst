@@ -9,8 +9,14 @@
     --neutral-dark: #6b7280;
     --neutral-hover: #eff0f2;
     --primary: #303030;
-    --secondary: #141414;
-    --tertiary: #384263;
+    --secondary: rgb(220 38 38);
+    --tertiary: #794f3e;
+    --main-nav-active-hover-text-color: var(--base-text-color);
+    --main-nav-active-text-color: var(--base-text-color);
+    --main-nav-active-bg-color: var(--secondary);
+    --main-nav-text-color: var(--base-text-color);
+    --main-nav-hover-text-color: var(--base-text-color);
+    --main-nav-hover-bg-color: var(--secondary);
     --post-card-bg-color: var(--primary);
     --post-card-border-color: var(--neutral-light);
     --post-card-border-hover-color: var(--dark-text-color);

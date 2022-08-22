@@ -14,7 +14,7 @@
                 {{--            @if (Route::currentRouteName() !== 'social.profile.show')--}}
                 {{--                <div class="bg-neutral">--}}
                 {{--                    <div class="flex-1 flex items-center">--}}
-                {{--                        <h1 class="py-4 ml-4 text-3xl">Community</h1>--}}
+                {{--                        <x-library::heading.1 class="py-4 ml-4 text-3xl">Community</x-library::heading.1>--}}
                 {{--                        <x-heroicon-o-cog class="mt-1 ml-3 w-6 h-6"/>--}}
                 {{--                    </div>--}}
                 {{--                </div>--}}

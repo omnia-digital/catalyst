@@ -7,7 +7,7 @@
             <x-dynamic-component component="heroicon-o-collection"
                                  class="{{ 'text-primary' }} mr-3 flex-shrink-0 h-8 w-8"
                                  aria-hidden="true"/>
-            <h1 class="py-4 text-3xl text-primary hover:cursor-pointer">{{ Trans::get('Trending') }}</h1>
+            <x-library::heading.1 class="py-4 text-3xl text-primary hover:cursor-pointer">{{ Trans::get('Trending') }}</x-library::heading.1>
         </div>
     </div>
     <div>
