@@ -192,5 +192,6 @@
 
 
         </div>
+        <livewire:media-manager :handleUploadProcess="false"/>
     </div>
 @endsection
