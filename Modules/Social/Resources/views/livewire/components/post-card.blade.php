@@ -16,7 +16,7 @@ cursor-pointer' : ''
                         <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
                         <x-dot/>
                         <a href="{{ $post->getUrl() }}" class="hover:underline">
-                            <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans(short: true) }}</time>
+                            <time datetime="{{ $post->published_at }}">{{ $post->published_at->diffForHumans(short: true) }}</time>
                         </a>
                     </div>
                 </div>
@@ -88,7 +88,7 @@ cursor-pointer' : ''
                                        href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}" class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
                                 </div>
                                 <div class="text-base-text-color">
-                                    {{ $post->repostOriginal->created_at->diffForHumans() }}
+                                    {{ $post->repostOriginal->published_at->diffForHumans() }}
                                 </div>
                             </div>
                         </div>

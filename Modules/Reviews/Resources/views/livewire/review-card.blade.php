@@ -18,7 +18,7 @@
                     </div>
                     <div class="flex-1">
                         <p class="uppercase text-lg font-bold">Recommended</p>
-                        <p class="text-neutral-dark text-2xs">Member for 6 days at review time</p>
+                        <p class="text-neutral-dark text-2xs">Member for {{ $review->reviewable->users()->where('users.id', $review->user_id)->first()?->membership->created_at->longAbsoluteDiffForHumans($review->created_at) }} at review time</p>
                     </div>
                 @endif
             </div>
