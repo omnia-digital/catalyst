@@ -192,5 +192,6 @@
 
 
         </div>
+        <livewire:reviews::create-review-modal :model="$team" />
     </div>
 @endsection
