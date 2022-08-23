@@ -35,9 +35,9 @@ class NewsFeed extends Component
     public function getRowsQueryProperty()
     {
         if ($this->team) {
-            return $this->team->postsWithinTeam()->with(['user', 'user.profile', 'media'])->latest();
+            return $this->team->postsWithinTeam()->with(['user', 'user.profile', 'media'])->orderBy('published_at', 'desc');
         }
-        return Post::with(['user', 'user.profile', 'media'])->latest();
+        return Post::with(['user', 'user.profile', 'media'])->orderBy('published_at', 'desc');
     }
 
     public function getRowsProperty()
