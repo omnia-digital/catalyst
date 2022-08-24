@@ -4,6 +4,7 @@ namespace Modules\Social\Http\Livewire\Pages\Teams;
 
 use App\Models\Location;
 use App\Models\Team;
+use App\Models\User;
 use App\Traits\Team\WithTeamManagement;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
@@ -18,6 +19,8 @@ class Show extends Component
     public $displayUrl = null;
 
     public $displayID = null;
+
+    public ?User $userToAddAwardsTo;
 
     public $additionalInfo = [
         'likes',
@@ -44,6 +47,8 @@ class Show extends Component
             ],
         ],
     ];
+
+    protected $listeners = ['addUserAwards'];
 
     public function getPlacesProperty()
     {
@@ -78,6 +83,12 @@ class Show extends Component
     {
         $this->displayUrl = $media->getFullUrl();
         $this->displayID = $media->id;
+    }
+
+    public function addUserAwards($userID)
+    {
+        $this->dispatchBrowserEvent('add-awards-modal', ['type' => 'open']);
+        $this->userToAddAwardsTo = User::find($userID);
     }
 
     public function mount(Team $team)

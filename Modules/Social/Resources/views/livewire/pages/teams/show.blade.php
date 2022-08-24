@@ -193,5 +193,44 @@
 
         </div>
         <livewire:media-manager :handleUploadProcess="false"/>
+
+        {{-- Add Awards Modal --}}
+        <div>
+            <x-library::modal id="add-awards-modal" maxWidth="2xl">
+                <x-slot name="title">{{ \Trans::get('Add Awards') }}</x-slot>
+                <x-slot name="content">
+                        @if($userToAddAwardsTo)
+                            <div class="w-full flex flex-col">
+                                @forelse (\App\Models\Award::whereNotIn('id', $userToAddAwardsTo->awards()->pluck('awards.id')->toArray())->get() as $award)
+                                    <div class="mr-4 mt-2 flex items-center">
+                                        <input type="checkbox" wire:model.defer="awardsToAdd" value="{{ $award->id }}" class="mr-2" name="award-item-{{ $award->id }}" id="award-item-{{ $award->id }}">
+                                        <label for="award-item-{{ $award->id }}" class="bg-primary p-2 flex flex-1 items-center">
+                                            <x-dynamic-component :component="$award->icon" class="h-4 w-4 mr-4" />
+                                            <p>{{ ucfirst($award->name) }}</p>
+                                        </label>
+                                    </div>
+                                @empty
+                                    <div class="w-full px-4 py-2 text-sm bg-white p-2 flex items-center">
+                                        <p>{{ \Trans::get('No other awards are available') }}</p>
+                                    </div>
+                                @endforelse
+        
+                            </div>
+                        @else
+                            <div class="w-full flex flex-col space-y-2">
+                                <div class="w-full bg-white h-4"></div>
+                                <div class="w-full bg-white h-4"></div>
+                                <div class="w-full bg-white h-4"></div>
+                                <div class="w-full bg-white h-4"></div>
+                            </div>
+                        @endif
+                    </x-slot>
+                    <x-slot name="actions">
+                        @if($userToAddAwardsTo)
+                            <x-library::button wire:click="addAward({{ $userToAddAwardsTo->id }})">{{ Trans::get('Add') }}</x-library::button>
+                        @endif
+                    </x-slot>
+            </x-library::modal>
+        </div>
     </div>
 @endsection
