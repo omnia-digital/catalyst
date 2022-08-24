@@ -23,7 +23,7 @@ class AwardStack extends Component
     public function mount(User $user, Team $team = null)
     {
         $this->user = $user;
-        $this->awards = $user->awards;
+        $this->awards = $user->awards()->take(3)->get();
         $this->team = $team;
     }
 
