@@ -13,7 +13,8 @@ class UsersTableSeeder extends Seeder
 
         User::factory(1)->withProfile()->withTeam()->create([
             'email' => 'admin@omniadigital.io',
-            'password' => bcrypt('testing')
+            'password' => bcrypt('testing'),
+            'is_admin' => true
         ]);
 
         User::factory(1)->withProfile()->withTeam()->create([
