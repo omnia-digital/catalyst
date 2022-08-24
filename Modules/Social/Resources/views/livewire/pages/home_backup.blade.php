@@ -22,7 +22,7 @@
             <div class="mt-4">
                 <new-post-box class="my-6" :user="user"></new-post-box>
 
-                <h1 class="sr-only">Recent Posts</h1>
+                <x-library::heading.1 class="sr-only">Recent Posts</x-library::heading.1>
                 <ul role="list" class="space-y-4">
                     <li v-for="question in questions" :key="question.id">
                         <post-card :post="question"></post-card>

@@ -8,7 +8,7 @@
                     <img class="h-24 w-24 rounded-full" src="{{ $team->profile_photo_url }}" alt="{{ $team->name }}" />
                 </div>
                 <div>
-                    <h1 class="text-3xl text-primary">{{ $team->name  }}</h1>
+                    <x-library::heading.1 textColor="text-primary">{{ $team->name  }}</x-library::heading.1>
                     <p class="text-sm text-primary">{{ '@' .  $team->handle }}</p>
                 </div>
             </div>

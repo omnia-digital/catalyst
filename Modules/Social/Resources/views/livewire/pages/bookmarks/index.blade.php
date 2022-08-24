@@ -3,7 +3,7 @@
 @section('content')
     <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg pl-4 flex items-center bg-secondary items-center">
         <div class="flex-1 flex items-center">
-            <h1 class="py-4 text-3xl text-primary hover:cursor-pointer">Bookmarks</h1>
+            <x-library::heading.1 class="py-4 text-3xl text-primary hover:cursor-pointer">Bookmarks</x-library::heading.1>
         </div>
     </div>
 

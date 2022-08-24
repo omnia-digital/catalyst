@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="flex-1 flex items-center">
-            <h1 class="py-2 text-3xl">Bookmarks</h1>
+            <x-library::heading.1 class="py-2 text-3xl">Bookmarks</x-library::heading.1>
         </div>
     </div>
 

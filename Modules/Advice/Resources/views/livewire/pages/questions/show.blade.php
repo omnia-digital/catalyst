@@ -3,7 +3,7 @@
 @section('content')
     <div class="mb-4 flex items-center">
         <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full"><a href="{{ route('resources.home') }}" class=""><x-heroicon-o-arrow-left class="h-6"/></a></div>
-        <h1 class="py-2 text-3xl">Resource</h1>
+        <x-library::heading.1 class="py-2 text-3xl">Resource</x-library::heading.1>
     </div>
     <div class="xl:grid xl:grid-cols-9 xl:gap-9">
         <div class="xl:col-span-6">

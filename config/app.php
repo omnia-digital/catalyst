@@ -16,6 +16,9 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
     'abbr' => env('APP_ABBR', 'APP'),
     'theme' => env('APP_THEME', 'default'),
+    'theme_light_type' => env('APP_THEME_LIGHT_TYPE', 'light'),
+    'logo_path' => env('APP_LOGO'),
+    'logo_path_dark' => env('APP_LOGO_DARK'),
 
     /*
     |--------------------------------------------------------------------------

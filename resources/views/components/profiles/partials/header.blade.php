@@ -9,7 +9,7 @@
                 </div>
                 <div class="mb-2 ml-3 space-y-1">
                     <div class="flex space-x-3 items-end">
-                        <h1 class="text-3xl text-primary">{{ $user->name  }}</h1>
+                        <x-library::heading.1 class="text-3xl text-primary">{{ $user->name  }}</x-library::heading.1>
                         <x-library::heading.2 class="font-normal text-primary">{{ '@' .  $user->handle }}</x-library::heading.2>
                     </div>
                     <div class="flex space-x-2 items-center text-primary text-sm">

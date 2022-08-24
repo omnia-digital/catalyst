@@ -18,7 +18,7 @@
                 </ol>
             </nav>
             <div class="border-b-2 border-b-light-text-color pb-1">
-                <h1 class="text-3xl"><span class="text-dark-text-color"> {{ Trans::get('Team') }} {{ Trans::get('Admin Page') }}: </span><span class="text-light-text-color">{{ $team->name }}</span></h1>
+                <x-library::heading.1 class="text-3xl"><span class="text-dark-text-color"> {{ Trans::get('Team') }} {{ Trans::get('Admin Page') }}: </span><span class="text-light-text-color">{{ $team->name }}</span></x-library::heading.1>
             </div>
         </div>
 
