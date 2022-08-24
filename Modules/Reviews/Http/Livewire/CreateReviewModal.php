@@ -41,17 +41,19 @@ class CreateReviewModal extends Component implements HasForms
                     1 => 'Friends Only'
                 ])
                 ->default(0)
+                ->disablePlaceholderSelection()
                 ->required(),
             Select::make('language_id')
                 ->label('Language')
                 ->options(Language::pluck('name', 'id'))
                 ->default(1)
+                ->disablePlaceholderSelection()
                 ->required(),
             Checkbox::make('commentable')
-                ->default(false)
+                ->default(1)
                 ->label('Allow Comments'),
             Checkbox::make('received_product_free')
-                ->default(false)
+                ->default(0)
                 ->label('Check this box if you joined for free'),
             Radio::make('recommend')
                 ->label(Trans::get('Do you recommend this Team?'))
@@ -78,7 +80,10 @@ class CreateReviewModal extends Component implements HasForms
                 'received_product_free' => $this->review->received_product_free,
                 'recommend' => $this->review->recommend,
             ]);
+        } else {
+            $this->form->fill();
         }
+
 
         $this->dispatchBrowserEvent('review-modal-' . $this->model->id, ['type' => 'open']);
     }

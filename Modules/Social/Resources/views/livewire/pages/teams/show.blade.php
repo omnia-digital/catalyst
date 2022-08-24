@@ -192,6 +192,7 @@
 
 
         </div>
+        <livewire:reviews::create-review-modal :model="$team" />
         <livewire:media-manager :handleUploadProcess="false"/>
 
         {{-- Add Awards Modal --}}
