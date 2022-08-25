@@ -1,9 +1,7 @@
 <div 
     x-data="{
         openAwardsModal() {
-            console.log('open')
             this.$wire.emitUp('addUserAwards', {{ $user->id }})
-            {{-- this.$dispatch('add-awards-modal', {'type': 'open'}) --}}
         }
     }" 
     class="flex items-center -space-x-3">
