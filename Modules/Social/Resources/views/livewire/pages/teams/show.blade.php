@@ -202,7 +202,7 @@
                 <x-slot name="content">
                         @if($userToAddAwardsTo)
                             <div class="w-full flex flex-col">
-                                @forelse (\App\Models\Award::whereNotIn('id', $userToAddAwardsTo->awards()->pluck('awards.id')->toArray())->get() as $award)
+                                @forelse ($this->getRemainingAwards($userToAddAwardsTo) as $award)
                                     <div class="mr-4 mt-2 flex items-center">
                                         <input type="checkbox" wire:model.defer="awardsToAdd" value="{{ $award->id }}" class="mr-2" name="award-item-{{ $award->id }}" id="award-item-{{ $award->id }}">
                                         <label for="award-item-{{ $award->id }}" class="bg-primary p-2 flex flex-1 items-center">

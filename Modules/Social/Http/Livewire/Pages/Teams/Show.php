@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Teams;
 
+use App\Models\Award;
 use App\Models\Location;
 use App\Models\Team;
 use App\Models\User;
@@ -21,6 +22,8 @@ class Show extends Component
     public $displayID = null;
 
     public ?User $userToAddAwardsTo;
+
+    public $awardsToAdd = [];
 
     public $additionalInfo = [
         'likes',
@@ -48,7 +51,7 @@ class Show extends Component
         ],
     ];
 
-    protected $listeners = ['addUserAwards'];
+    protected $listeners = ['addUserAwards', 'modal-closed' => 'resetAwardsSelection'];
 
     public function getPlacesProperty()
     {
@@ -85,10 +88,29 @@ class Show extends Component
         $this->displayID = $media->id;
     }
 
+    
+    public function resetAwardsSelection()
+    {
+        $this->reset('awardsToAdd');
+    }
+
     public function addUserAwards($userID)
     {
         $this->dispatchBrowserEvent('add-awards-modal', ['type' => 'open']);
         $this->userToAddAwardsTo = User::find($userID);
+    }
+
+    public function addAward(User $user)
+    {
+        $user->awards()->attach($this->awardsToAdd);
+        
+        $this->dispatchBrowserEvent('notify', ['message' => 'Awards Added', 'type' => 'success']);
+        $this->dispatchBrowserEvent('add-awards-modal',  ['type' => 'close']);
+    }
+
+    public function getRemainingAwards(User $user)
+    {
+        return Award::whereNotIn('id', $user->awards()->pluck('awards.id')->toArray())->get();
     }
 
     public function mount(Team $team)
