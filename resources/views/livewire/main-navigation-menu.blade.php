@@ -3,14 +3,14 @@
         <!-- Desktop Navigation Menu -->
         <div class="flex justify-between items-center w-full">
             <!-- Left side header -->
-            <div class="md:w-64 pl-4">
+            <div class="flex md:w-64 pl-4">
                 <!-- Logo -->
                 <div class="flex items-center h-14 flex-shrink-0">
                     <a href="{{ route('social.home') }}"
                        title="{{ env('APP_NAME') }}"
                        class="text-base-text-color py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
                         @if(config('app.logo_path'))
-                            <div class="flex items-center h-12 flex-shrink-0">
+                            <div class="flex items-center h-14 flex-shrink-0">
                                 @if(config('app.theme_light_type') === 'light')
                                     <img src="{{ config('app.logo_path') }}" class="h-full"/>
                                 @else
@@ -21,8 +21,7 @@
                             <x-dynamic-component
                                     component="heroicon-s-globe-alt"
                                     class="flex-shrink-0 h-6 w-6"
-                                    aria-hidden="true"
-                            />
+                                    aria-hidden="true" />
                             <span class="whitespace-nowrap">{{ env('APP_NAME') }}</span>
                         @endif
                     </a>
@@ -31,7 +30,7 @@
             <!-- Right side header -->
             <div class="flex flex-1 grid grid-cols-12 h-14 items-center">
                 <!-- Navigation Links -->
-                <div class="hidden sm:flex col-span-9 items-center ">
+                <div class="hidden sm:flex col-span-9 justify-center items-center ">
                     <nav class="space-x-4 flex justify-center">
                         @foreach ($navigation as $item)
                             @if(\Platform::isModuleEnabled($item['module']))
