@@ -8,14 +8,14 @@
 
 @php
     $classString = '';
-        if ($class) {
-            $classString .= $class . ' ';
-        } else {
-            $classString = 'leading-6 hover:cursor-pointer ';
-            $classString .= $boldClass . ' ';
-            $classString .= $textColor . ' ';
-            $classString .= $textSize . ' ';
-        }
+    $classString = 'leading-6 hover:cursor-pointer ';
+    $classString .= $boldClass . ' ';
+    $classString .= $textColor . ' ';
+    $classString .= $textSize . ' ';
+    if ($class) {
+        $classString .= $class . ' ';
+    }
+
 @endphp
 
 @switch($heading)
