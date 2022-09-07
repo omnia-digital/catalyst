@@ -23,8 +23,8 @@ cursor-pointer' : ''
             </div>
         </div>
         <div class="z-1 flex align-top space-x-4">
-            @if (!is_null($post->team_id))
-                <div class="flex items-center space-x-2 h-7">
+            @if (!is_null($post->team_id) && (!route_is('social.teams.show')))
+                <div class="hidden xl:flex items-center space-x-2 h-7">
                     <div class="flex-shrink-0">
                         <img class="h-7 w-7 rounded-full" src="{{ $post->team?->profile_photo_url }}" alt="{{ $post->team->name }}"/>
                     </div>
