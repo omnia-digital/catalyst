@@ -1,8 +1,7 @@
 <section aria-labelledby="people-heading" class="card py-6">
     <div class="px-6 py-3">
-{{--            <x-library::heading.2 id="people-list" class="text-xl font-medium text-gray-900">--}}
-{{--                {{ Trans::get('People') }}--}}
-{{--            </x-library::heading.2>--}}
+        <x-library::heading.3>{{ Trans::get('People') }}</x-library::heading.3>
+
         <div class="mt-6 flow-root">
             <ul role="list" class="-my-4">
                 @forelse ($this->userList as $user)
@@ -18,7 +17,7 @@
 {{--                                    <a href="{{ $user->url() }}">{{ '@' . $user->handle }}</a>--}}
 {{--                                </p>--}}
                         </div>
-                        <div class="flex-shrink-0">
+                        <div class="lg:hidden xl:block flex-shrink-0">
                             <livewire:award-stack :user="$user" :team="$team" wire:key="award-stack-{{ $user->id }}" />
 {{--                                <livewire:social::partials.follow-button :model="$user"/>--}}
                         </div>
@@ -35,5 +34,5 @@
             </ul>
         </div>
     </div>
-    
+
 </section>

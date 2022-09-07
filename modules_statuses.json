@@ -4,7 +4,7 @@
     "Projects": true,
     "Resources": true,
     "Jobs": true,
-    "Games": false,
+    "Games": true,
     "Reviews": true,
     "Crm": true
 }

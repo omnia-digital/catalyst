@@ -19897,6 +19897,31 @@
      
 }
 
+    namespace Vedmant\FeedReader\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class FeedReader {
+                    /**
+         * Used to parse an RSS feed.
+         *
+         * @param $url
+         * @param string $configuration
+         * @param array $options
+         * @return \SimplePie 
+         * @static 
+         */ 
+        public static function read($url, $configuration = 'default', $options = [])
+        {
+                        /** @var \Vedmant\FeedReader\FeedReader $instance */
+                        return $instance->read($url, $configuration, $options);
+        }
+         
+    }
+     
+}
+
     namespace Illuminate\Http { 
             /**
      * 
@@ -24920,6 +24945,7 @@ namespace  {
             class Sentry extends \Sentry\Laravel\Facade {}
             class Analytics extends \Spatie\Analytics\AnalyticsFacade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
+            class FeedReader extends \Vedmant\FeedReader\Facades\FeedReader {}
      
 }
 
