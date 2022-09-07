@@ -3,12 +3,33 @@
 
 @section('content')
     <div class="flex-1 grid grid-cols-12 gap-6 mr-5 mt-4">
-        <div class="col-span-5">
+        <div class="col-span-12 lg:col-span-6 xl:col-span-6">
             {{--            <x-library::heading.3 class="pl-3 mb-4">Discussion</x-library::heading.3>--}}
-            <div class="space-y-6">
+            <div class="space-y-4">
                 <livewire:social::news-feed-editor :team="$team"/>
 
-            <livewire:social::news-feed :team="$team"/>
+                {{-- Featured --}}
+                @if ($team->sampleImages()->count())
+                    <div class="col-span-12 bg-neutral">
+                        {{--                    <x-library::heading.4 class="ml-4 mt-1 uppercase" text-size="text-xs">Featured</x-library::heading.4>--}}
+                        <x-library::heading.3 class="pl-2">Featured</x-library::heading.3>
+                        <div class="flex flex-col">
+                            <div class="space-x-4 h-50 pt-2" style="scrollbar-width: thin;">
+                                <div class="flex space-x-2 rounded">
+                                    @foreach ($team->sampleImages()->take(3) as $media)
+                                        <div class="rounded-lg flex justify-center items-center relative cursor-pointer {{ ($media->id === $displayID) ? 'ring-2
+                            ring-neutral-dark'
+                            : '' }}"
+                                             wire:click="setImage({{ $media->id }})">
+                                            {{ $media->img()->attributes(['class' => 'h-48 w-96 object-cover rounded-lg']) }}
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                <livewire:social::news-feed :team="$team"/>
 
                 <!-- Post Tile -->
                 @if ($this->recentPosts->count())
@@ -50,33 +71,11 @@
         </div>
 
         {{--        <div class="col-span-7 grid grid-cols-12 gap-6 lg:gap-4 mr-4">--}}
-        <div class="sticky top-[220px] h-screen col-span-7 mr-4">
-            {{-- Featured --}}
-            @if ($team->sampleImages()->count())
-                <div class="col-span-12 bg-neutral">
-                    {{--                    <x-library::heading.4 class="ml-4 mt-1 uppercase" text-size="text-xs">Featured</x-library::heading.4>--}}
-                    <x-library::heading.3 class="pl-2">Featured</x-library::heading.3>
-                    <div class="flex flex-col">
-                        <div class="space-x-4 h-50 pt-4 pb-4" style="scrollbar-width: thin;">
-                            <div class="flex space-x-2 rounded">
-                                @foreach ($team->sampleImages() as $media)
-                                    <div class="rounded-lg flex justify-center items-center relative cursor-pointer {{ ($media->id === $displayID) ? 'ring-2
-                            ring-neutral-dark'
-                            : '' }}"
-                                         wire:click="setImage({{ $media->id }})">
-                                        {{ $media->img()->attributes(['class' => 'h-48 w-96 object-cover rounded-lg']) }}
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            <div class="masonry sm:masonry-2 space-y-6">
+        <div class="sticky top-[220px] h-screen col-span-12 lg:col-span-6 xl:col-span-6 mr-4">
+            <div class="2xl:masonry 2xl:masonry-2 space-y-6">
 
                 {{-- Overview  --}}
-                <div class="col-span-12 lg:col-span-7">
+                <div class="col-span-12 2xl:col-span-7">
                     <div class="flex flex-col flex-1 bg-primary rounded">
                         <div class="h-44 bg-secondary"
                              style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
@@ -113,7 +112,7 @@
                 </div>
 
                 {{-- People --}}
-                <div class="col-span-12 lg:col-span-5 space-y-6 my-12">
+                <div class="col-span-12 2xl:col-span-5 space-y-6 my-12">
                     <livewire:social::partials.user-status-list :team="$team"/>
                 </div>
 
@@ -129,10 +128,6 @@
                         </div>
                     </div> --}}
 
-                </div>
-
-                <div>
-                    <livewire:reviews::review-list :model="$team"/>
                 </div>
 
                 @if ($team->content)
@@ -194,6 +189,10 @@
                 {{--                    @endforelse--}}
                 {{--                </div>--}}
                 {{--            </div>--}}
+
+                <div>
+                    <livewire:reviews::review-list :model="$team"/>
+                </div>
             </div>
         </div>
 
