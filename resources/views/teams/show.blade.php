@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-dark-text-color leading-tight">
+        <x-library::heading.2 class="font-semibold text-xl text-dark-text-color leading-tight">
             {{ \Trans::get('Team Settings') }}
-        </h2>
+        </x-library::heading.2>
     </x-slot>
 
     <div>

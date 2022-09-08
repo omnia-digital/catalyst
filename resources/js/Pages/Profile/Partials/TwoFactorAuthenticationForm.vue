@@ -9,13 +9,13 @@
         </template>
 
         <template #content>
-            <h3 class="text-lg font-medium text-gray-900" v-if="twoFactorEnabled">
+            <x-library::heading.3 class="text-lg font-medium text-gray-900" v-if="twoFactorEnabled">
                 You have enabled two factor authentication.
-            </h3>
+            </x-library::heading.3>
 
-            <h3 class="text-lg font-medium text-gray-900" v-else>
+            <x-library::heading.3 class="text-lg font-medium text-gray-900" v-else>
                 You have not enabled two factor authentication.
-            </h3>
+            </x-library::heading.3>
 
             <div class="mt-3 max-w-xl text-sm text-gray-600">
                 <p>

@@ -9,7 +9,7 @@
         <!-- Page Heading -->
         <div class="space-y-8">
             <div class="border-b-2 border-b-light-text-color pb-1">
-                <h1 class="text-3xl"><span class="text-dark-text-color">Edit Profile: </span><span class="text-light-text-color">{{ $profile->name }}</span></h1>
+                <x-library::heading.1 class="text-3xl"><span class="text-dark-text-color">Edit Profile: </span><span class="text-light-text-color">{{ $profile->name }}</span></x-library::heading.1>
             </div>
         </div>
 

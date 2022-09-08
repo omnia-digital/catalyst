@@ -1,7 +1,7 @@
 <template>
     <div>
             <div class="flex-1 flex px-4 sm justify-between bg-neutral items-center">
-                <h1 class="text-gray-600 ml-4 text-3xl">Community</h1>
+                <x-library::heading.1 class="text-gray-600 ml-4 text-3xl">Community</x-library::heading.1>
                 <!-- search -->
                 <!--                    <div class="flex-1 flex">-->
                 <!--                        <form class="w-full flex md:ml-0" action="#" method="GET">-->

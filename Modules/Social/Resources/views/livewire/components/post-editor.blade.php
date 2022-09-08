@@ -34,7 +34,7 @@
     }"
         x-on:media-manager:file-selected.window="setImage"
         x-on:post-editor:image-set.window="setImages"
-        class="bg-primary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4"
+        class="bg-primary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4 max-w-post-card-max-w"
 >
     <div class="mr-3 flex-shrink-0">
         <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>

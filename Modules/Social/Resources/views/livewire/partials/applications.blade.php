@@ -1,9 +1,9 @@
 <div class="card">
     <div class="py-3 flex-1 space-y-1 overflow-y-auto">
         <div class="pl-4 flex justify-between items-center">
-            <h2 class="text-xl font-medium text-gray-900">
+            <x-library::heading.2 class="text-xl font-medium text-gray-900">
                 {{ Trans::get('Teams') }}
-            </h2>
+            </x-library::heading.2>
             <div x-data="{show: false, message: ''}"
                 x-cloak
                 x-show="show"
@@ -60,7 +60,7 @@
                                             <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $invitation->user?->profile_photo_url }}" alt="{{ $invitation->user->name }}" />
                                         </div>
                                         <div class="flex-1">
-                                            <h3 class="mb-2 sm:mb-1 text-dark-text-color text-sm font-normal leading-5"><span class="font-bold">{{ $invitation->inviter->name }}</span> wants you to join <span class="font-bold">{{ $invitation->team->name }}</span></h3>
+                                            <x-library::heading.3 class="mb-2 sm:mb-1 text-dark-text-color text-sm font-normal leading-5"><span class="font-bold">{{ $invitation->inviter->name }}</span> wants you to join <span class="font-bold">{{ $invitation->team->name }}</span></x-library::heading.3>
                                         </div>
                                     </div>
                                     @if ($invitation->message)
@@ -100,10 +100,10 @@
                                 <div>
                                     <div class="flex items-center">
                                         <div class="mr-3 w-10 h-10 rounded-full">
-                                            <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $application->team->owner?->profile_photo_url }}" alt="{{ $application->team->owner->name }}" />
+                                            <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $application->team->owner?->profile_photo_url }}" alt="{{ $application->team->owner?->name }}" />
                                         </div>
                                         <div class="flex-1">
-                                            <h3 class="mb-2 sm:mb-1 text-dark-text-color text-sm font-normal leading-5">You applied to join <span class="font-bold">{{ $application->team->name }}</span></h3>
+                                            <x-library::heading.3 class="mb-2 sm:mb-1 text-dark-text-color text-sm font-normal leading-5">You applied to join <span class="font-bold">{{ $application->team->name }}</span></x-library::heading.3>
                                         </div>
                                     </div>
                                     <div>
