@@ -181,6 +181,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\TeamLensesServiceProvider::class,
+        App\Providers\StripeConnectServiceProvider::class,
     ],
 
     /*

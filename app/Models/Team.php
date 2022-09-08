@@ -44,10 +44,16 @@ class Team extends JetstreamTeam implements HasMedia
         'start_date',
         'summary',
         'content',
+        'stripe_connect_id',
+        'stripe_connect_onboarding_completed',
     ];
 
     protected $dates = [
         'start_date'
+    ];
+
+    protected $casts = [
+        'stripe_connect_onboarding_completed' => 'boolean'
     ];
 
     protected $appends = [
@@ -70,8 +76,8 @@ class Team extends JetstreamTeam implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-                            ->generateSlugsFrom('name')
-                            ->saveSlugsTo('handle');
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('handle');
     }
 
     /**
@@ -145,6 +151,7 @@ class Team extends JetstreamTeam implements HasMedia
     }
 
     // Attributes //
+
     /**
      * Get the URL to the team's profile photo.
      *
@@ -185,7 +192,8 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->users()->wherePivotNotIn('role', ['owner']);
     }
 
-    public function allUsers() {
+    public function allUsers()
+    {
         return $this->users();
     }
 
@@ -193,6 +201,12 @@ class Team extends JetstreamTeam implements HasMedia
     {
         return route('social.teams.show', $this);
     }
+
+    /** @note We are not using this currently. Save for future when we want teams to create custom plans */
+    //public function teamPlans(): HasMany
+    //{
+    //    return $this->hasMany(TeamPlan::class);
+    //}
 
     // Scopes //
 
@@ -206,5 +220,15 @@ class Team extends JetstreamTeam implements HasMedia
         return $query
             ->leftJoin('team_user', 'teams.id', '=', 'team_user.team_id')
             ->where('team_user.user_id', $user->id);
+    }
+
+    public function hasStripeConnectAccount(): bool
+    {
+        return !empty($this->stripe_connect_id);
+    }
+
+    public function stripeConnectOnboardingCompleted(): bool
+    {
+        return (bool)$this->stripe_connect_onboarding_completed;
     }
 }

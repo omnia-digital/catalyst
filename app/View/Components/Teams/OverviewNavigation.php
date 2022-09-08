@@ -15,7 +15,8 @@ class OverviewNavigation extends Component
     public $nav = [
         'show' => 'Overview',
         'members' => 'Members',
-        'followers' => 'Followers'
+        'followers' => 'Followers',
+        'subscriptions' => 'Subscriptions',
     ];
 
     /**
