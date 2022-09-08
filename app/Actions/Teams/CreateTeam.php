@@ -51,6 +51,8 @@ class CreateTeam implements CreatesTeams
             }
         }
 
+        (new CreateStripeConnectAccountForTeamAction)->execute($team);
+
         $user->switchTeam($team);
 
         return $team;

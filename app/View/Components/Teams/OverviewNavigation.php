@@ -14,7 +14,8 @@ class OverviewNavigation extends Component
 
     public $nav = [
         'show' => 'Home',
-//        'members' => 'People',
+        'subscriptions' => 'Subscriptions',
+        //        'members' => 'People',
 //        'resources' => 'Resources',
 //        'advice' => 'Advice',
 //        'jobs' => 'Jobs',
