@@ -13,7 +13,7 @@ use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
 use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
 use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
-use Modules\Social\Http\Livewire\Pages\Settings\Index as SettingsPage;
+use Modules\Social\Http\Livewire\Pages\Subscription\Index as SubscriptionPage;
 use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
 use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
@@ -49,6 +49,8 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
 
     Route::get('billing', Billing::class)->name('billing');
 
+    Route::get('/subscription', SubscriptionPage::class)->name('subscription');
+
     Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {
         Route::get('/discover', DiscoverTeams::class)->name('discover');
         Route::get('/calendar', TeamMapCalendar::class)->name('calendar');
@@ -69,8 +71,6 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     });
 
     Route::get('/posts/{post}', ShowPosts::class)->name('posts.show');
-
-    Route::get('/settings', SettingsPage::class)->name('settings');
 
     Route::name('contacts.')->prefix('contacts')->group(function () {
         Route::get('/', ContactsIndex::class)->name('index');

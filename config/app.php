@@ -172,6 +172,7 @@ return [
          * Package Service Providers...
          */
         \App\Providers\PlatformServiceProvider::class,
+        
 
         /*
          * Application Service Providers...
@@ -186,6 +187,7 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\TeamLensesServiceProvider::class,
         App\Providers\StripeConnectServiceProvider::class,
+        Omniphx\Forrest\Providers\Laravel\ForrestServiceProvider::class,
     ],
 
     /*
@@ -217,6 +219,7 @@ return [
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
+        'Forrest' => Omniphx\Forrest\Providers\Laravel\Facades\Forrest::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Http' => Illuminate\Support\Facades\Http::class,

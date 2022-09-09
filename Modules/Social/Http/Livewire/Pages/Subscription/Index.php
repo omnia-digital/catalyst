@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Settings;
+namespace Modules\Social\Http\Livewire\Pages\Subscription;
 
 use App\Models\User;
 use Livewire\Component;
@@ -45,6 +45,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.settings.index');
+        return view('social::livewire.pages.subscription.index');
     }
 }

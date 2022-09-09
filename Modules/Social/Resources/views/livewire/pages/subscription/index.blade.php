@@ -4,36 +4,12 @@
     <div x-data="setup()" class="">
         <div class="mt-0">
             <x-social::page-heading>
-                <x-slot name="title">{{ \Trans::get('Settings') }}</x-slot>
+                <x-slot name="title">{{ \Trans::get('Subscription') }}</x-slot>
                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
             </x-social::page-heading>
             
-            <!-- Settings Navigation -->
-            <div class="w-full mt-6"></div>
-            <nav class="flex items-center justify-between text-xs">
-                <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-10">
-                    <template x-for="(tab, index) in tabs" :key="tab.id">
-                        <li class="pb-[3px]">
-                            <a href="#"
-                               class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:border-dark-text-color focus:border-dark-text-color"
-                               :class="(activeTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
-                               x-on:click.prevent="activeTab = tab.id;"
-                               x-text="tab.title"
-                            ></a>
-                        </li>
-                    </template>
-                </ul>
-
-            </nav>
-
-            <!-- Edit General Settings -->
-            <div x-show="activeTab === 0" class="mt-6 grid grid-cols-2 gap-6">
-                <p>General Settings</p>
-            </div>
-
             <!-- Subscription Settings -->
-            <div x-cloak x-show="activeTab === 1" class="mt-6 space-y-6">
-                <h2 class="text-2xl">Subscription Information</h2>
+            <div class="mt-6 space-y-6">
                 <div class="grid grid-cols-4 items-center max-w-2xl">
                     <div class="col-span-2 px-2 py-4">
                         <p>Subscription Status</p>
@@ -95,23 +71,4 @@
     </x-slot>
 </x-library::modal>
 
-@endpush
-@push('scripts')
-    <script>
-        function setup() {
-            return {
-                activeTab: 0,
-                tabs: [
-                    {
-                        id: 0,
-                        title: 'General',
-                    },
-                    {
-                        id: 1,
-                        title: 'Subscription',
-                    }
-                ],
-            }
-        }
-    </script>
 @endpush
