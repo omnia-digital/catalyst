@@ -30,7 +30,10 @@
                     <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
                 @endforelse
             </div>
+        </div>
 
+        <div>
+{{--                <livewire:games::components.feed-section feed-url="https://www.youtube.com/c/gameedged" type="youtube"/>--}}
         </div>
 
         <div>
