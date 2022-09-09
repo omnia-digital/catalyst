@@ -17,6 +17,8 @@ class Feeds extends Component
     public function getAllFeedsProperty()
     {
         $feeds = collect();
+        $feeds->push($this->getFeed('https://twitchrss.appspot.com/vod/cohhcarnage'));
+        $feeds->push($this->getFeed('https://www.youtube.com/c/gameedged'));
         $feeds->push($this->getFeed('https://feeds.feedburner.com/ign/all'));
         $feeds->push($this->getFeed('https://www.gamespot.com/feeds/game-news'));
         $feeds->push($this->getFeed('https://kotaku.com/rss'));
