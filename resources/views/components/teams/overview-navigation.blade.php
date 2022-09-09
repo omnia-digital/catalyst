@@ -49,34 +49,46 @@
         @endcan
         @cannot('update-team', $team)
             <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
+            <div>
+                @if(!auth()->user()->subscribed("team_$team->id"))
+                    <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
+                        Subscribe
+                    </x-library::button>
+                @else
+                    <x-library::button x-data="" x-on:click.prevent="$openModal('update-team-plan')" wire:target="">
+                        Update Plan
+                    </x-library::button>
+                @endif
+            </div>
         @endcan
+
         <div class="inline-flex items-center text-md relative">
             <div class="absolute inset-auto -translate-y-12 p-2 rounded-md bg-black text-white-text-color"
-                x-data="{show: false}"
-                x-show="show"
-                x-transition:enter-start="opacity-0 translate-y-0"
-                x-transition:enter-end="opacity-100 -translate-y-12"
-                x-transition:leave.opacity.duration.1500ms
-                x-init="@this.on('applied', () => {
+                 x-data="{show: false}"
+                 x-show="show"
+                 x-transition:enter-start="opacity-0 translate-y-0"
+                 x-transition:enter-end="opacity-100 -translate-y-12"
+                 x-transition:leave.opacity.duration.1500ms
+                 x-init="@this.on('applied', () => {
                     show = true;
                     setTimeout(() => { show = false; }, 3000);
                 })"
-                style="display: none;"
+                 style="display: none;"
             >
                 <span>{{ \Trans::get('Application Submitted') }}</span>
             </div>
             <div class="absolute inset-auto -translate-y-12 rounded-md p-2 bg-black text-white-text-color"
-                x-data="{show: false}"
-                x-show="show"
-                x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 translate-y-0"
-                x-transition:enter-end="opacity-100 -translate-y-12"
-                x-transition:leave.opacity.duration.1500ms
-                x-init="@this.on('application_removed', () => {
+                 x-data="{show: false}"
+                 x-show="show"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-0"
+                 x-transition:enter-end="opacity-100 -translate-y-12"
+                 x-transition:leave.opacity.duration.1500ms
+                 x-init="@this.on('application_removed', () => {
                     show = true;
                     setTimeout(() => { show = false; }, 3000);
                 })"
-                style="display: none;"
+                 style="display: none;"
             >
                 <span>{{ \Trans::get('Application Removed') }}</span>
             </div>
@@ -87,7 +99,7 @@
                 >{{ \Trans::get('Remove Application') }}</button>
             @elseif(!$team->hasUser(auth()->user()))
                 <div class="absolute -top-9 right-0 w-96">
-                    <x-jet-input-error for="user_id" class="mt-2" />
+                    <x-jet-input-error for="user_id" class="mt-2"/>
                 </div>
                 <button
                     class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-secondary text-white-text-color hover:opacity-75"
@@ -100,4 +112,7 @@
             <button class="p-2 mx-[15px] inline-flex items-center text-sm rounded-full bg-primary"><x-heroicon-s-plus class="h-4 w-4" /></button>
         </div> --}}
     </div>
+
+    <livewire:teams.subscribe-team-modal :team="$team"/>
+    <livewire:teams.update-team-plan-modal :team="$team"/>
 </nav>

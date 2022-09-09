@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HandleStripeConnectRefreshUrlController;
 use App\Http\Livewire\Notifications;
 use Illuminate\Support\Facades\Route;
 
@@ -13,3 +14,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
     Route::get('/notifications', Notifications::class)->name('notifications');
 });
+
+// Stripe Connect
+Route::get('/teams/stripe-connect/refresh', HandleStripeConnectRefreshUrlController::class)->name('teams.stripe-connect.refresh');

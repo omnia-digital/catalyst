@@ -1,14 +1,16 @@
 <?php
 
-    namespace App\Models;
+namespace App\Models;
 
 use App\Traits\Team\HasTeams;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
 use Laravel\Sanctum\HasApiTokens;
@@ -40,15 +42,9 @@ class User extends Authenticatable implements FilamentUser
             HasTeams::currentTeam insteadof JetstreamHasTeams;
         }
 
-        public function canAccessFilament(): bool
-        {
-            if ($this->is_admin) {
-                return true;
-            }
-            return str_ends_with($this->email, '@omniadigital.io') && $this->hasVerifiedEmail();
-        }
+    use Billable;
 
-        protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
+    protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
 
         protected $fillable = [
             'first_name',
@@ -73,11 +69,20 @@ class User extends Authenticatable implements FilamentUser
             'profile_photo_url'
         ];
 
+    public function canAccessFilament(): bool
+    {
+        if ($this->is_admin) {
+            return true;
+        }
+        return str_ends_with($this->email, '@omniadigital.io') && $this->hasVerifiedEmail();
+    }
+
         //// Attributes ////
 
-        public function getHandleAttribute() {
-            return $this->profile?->handle;
-        }
+    public function getHandleAttribute()
+    {
+        return $this->profile?->handle;
+    }
 
         public function getNameAttribute()
         {
@@ -148,8 +153,28 @@ class User extends Authenticatable implements FilamentUser
             return route('social.profile.show', $this->handle);
         }
 
-        public static function findByEmail($email)
-        {
-            return User::where('email', $email)->first();
-        }
+    public static function findByEmail($email)
+    {
+        return User::where('email', $email)->first();
     }
+
+    /** @note We are not using this currently. Save for future when we want teams to create custom plans */
+    //public function stripeConnectCustomers(): HasMany
+    //{
+    //    return $this->hasMany(StripeConnectCustomer::class);
+    //}
+
+    /** @note We are not using this currently. Save for future when we want teams to create custom plans */
+    //public function isStripeConnectCustomerOf(Team $team): bool
+    //{
+    //    return $this->stripeConnectCustomers->where('team_id', $team->id)->isNotEmpty();
+    //}
+
+    /** @note We are not using this currently. Save for future when we want teams to create custom plans */
+    //public function stripeConnectCustomerOf(Team $team): ?StripeConnectCustomer
+    //{
+    //    return $this->stripeConnectCustomers()
+    //        ->where('team_id', $team->id)
+    //        ->first();
+    //}
+}
