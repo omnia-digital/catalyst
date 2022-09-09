@@ -18,6 +18,7 @@ use Modules\Social\Models\Post;
 use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
+use Modules\Subscriptions\Models\Subscription;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Wimil\Followers\Traits\Followable;
 
@@ -110,6 +111,11 @@ class User extends Authenticatable implements FilamentUser
         public function reviews() {
             if (!class_exists(Review::class)) return;
             return $this->hasMany(Review::class);
+        }
+
+        public function subscription() {
+            if (!class_exists(Subscription::class)) return;
+            return $this->hasOne(Subscription::class);
         }
 
         public function likes() {

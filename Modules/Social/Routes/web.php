@@ -13,6 +13,7 @@ use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
 use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
 use App\Http\Livewire\Pages\Teams\Index as AllTeams;
+use Modules\Social\Http\Livewire\Pages\Settings\Index as SettingsPage;
 use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Calendar as TeamMapCalendar;
@@ -63,6 +64,8 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     });
 
     Route::get('/posts/{post}', ShowPosts::class)->name('posts.show');
+
+    Route::get('/settings', SettingsPage::class)->name('settings');
 
     Route::name('contacts.')->prefix('contacts')->group(function () {
         Route::get('/', ContactsIndex::class)->name('index');

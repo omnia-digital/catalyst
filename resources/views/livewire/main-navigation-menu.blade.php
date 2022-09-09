@@ -164,6 +164,10 @@
                                 <x-jet-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
                                     {{ auth()->user()->name }}
                                 </x-jet-dropdown-link>
+                                
+                                <x-jet-dropdown-link href="{{ route('social.settings') }}">
+                                    {{ \Trans::get('Settings') }}
+                                </x-jet-dropdown-link>
 
                                 {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
                                 {{--                                    <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">--}}
