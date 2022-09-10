@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TagResource\Pages;
+use App\Filament\Resources\TagResource\RelationManagers\TaggableRelationManager;
+use App\Filament\Resources\TagResource\RelationManagers\TeamsRelationManager;
 use Ariaieboy\FilamentJalaliDatetime\JalaliDateTimeColumn;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -15,9 +17,14 @@ use Spatie\Tags\Tag;
 class TagResource extends Resource
 {
     protected static ?string $label = 'Tags';
-    protected static ?string $model = Tag::class;
+    protected static ?string $model = \App\Models\Tag::class;
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationGroup = 'Settings';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'slug'];
+    }
 
     public static function registerNavigationItems(): void
     {
@@ -40,6 +47,8 @@ class TagResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('type')
+                  ->maxLength(255),
                 Forms\Components\KeyValue::make('name')
                     ->keyLabel('Language Code')
                     ->valueLabel('Name')
@@ -48,8 +57,6 @@ class TagResource extends Resource
                      ->keyLabel('Language Code')
                      ->valueLabel('Name')
                     ->required(),
-                Forms\Components\TextInput::make('type')
-                  ->maxLength(255),
             ]);
     }
 
@@ -57,9 +64,9 @@ class TagResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('type')->sortable(),
                 Tables\Columns\TextColumn::make('name')->sortable(),
                 Tables\Columns\TextColumn::make('slug')->sortable(),
-                Tables\Columns\TextColumn::make('type')->sortable(),
                 JalaliDateTimeColumn::make('created_at')
             ])
             ->filters([
@@ -77,7 +84,7 @@ class TagResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+//            TaggableRelationManager::class,
         ];
     }
 

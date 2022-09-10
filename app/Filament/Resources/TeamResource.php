@@ -22,6 +22,11 @@ class TeamResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationGroup = 'My Teams';
 
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name'];
+    }
+
     public static function getEloquentQuery(): Builder
     {
         if (auth()->user()->is_admin) {
@@ -45,19 +50,19 @@ class TeamResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->label('Owner')
-                    ->options(User::all()
-                        ->mapWithKeys(function ($item, $key) {
-                            return [$item['id'] => $item['id'] . ' - ' . $item['name']];
-                        }))
-                    ->searchable()
-                    ->required(),
+//                Forms\Components\Select::make('user_id')
+//                    ->label('Owner')
+//                    ->options(User::all()
+//                        ->mapWithKeys(function ($item, $key) {
+//                            return [$item['id'] => $item['id'] . ' - ' . $item['name']];
+//                        }))
+//                    ->searchable()
+//                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('start_date'),
-                Forms\Components\SpatieTagsInput::make('type')->type('team_type'),
+
                 Forms\Components\Textarea::make('summary')
                     ->maxLength(65535),
                 Forms\Components\Textarea::make('content')
@@ -69,6 +74,9 @@ class TeamResource extends Resource
                 Forms\Components\TextInput::make('languages')
                     ->required()
                     ->maxLength(255),
+//                Forms\Components\MultiSelect::make('teamTags')
+//                    ->label('Team Tags')
+//                    ->relationship('teamTags', 'name')
             ]);
     }
 
@@ -83,13 +91,13 @@ class TeamResource extends Resource
                                          ->date(),
 //                Tables\Columns\TextColumn::make('summary'),
 //                Tables\Columns\TextColumn::make('content'),
-                Tables\Columns\TextColumn::make('location'),
+//                Tables\Columns\TextColumn::make('location'),
                 Tables\Columns\TextColumn::make('rating'),
-                Tables\Columns\TextColumn::make('languages'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+//                Tables\Columns\TextColumn::make('languages'),
+//                Tables\Columns\TextColumn::make('created_at')
+//                    ->dateTime(),
+//                Tables\Columns\TextColumn::make('updated_at')
+//                    ->dateTime(),
             ])
             ->filters([
                 //
@@ -106,7 +114,8 @@ class TeamResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\TeamTypesRelationManager::class,
+            RelationManagers\TeamTagsRelationManager::class,
         ];
     }
 

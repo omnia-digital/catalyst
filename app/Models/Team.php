@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Traits\Location\HasLocation;
+use App\Traits\Tag\HasTeamTags;
+use App\Traits\Tag\HasTeamTypeTags;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -35,14 +37,18 @@ class Team extends JetstreamTeam implements HasMedia
         Notifiable,
         Likable,
         Postable,
-        HasTags,
         CanBeFollowed,
         Awardable,
         Reviewable,
         HasProfilePhoto,
         HasSlug,
         HasLocation,
+        HasTeamTypeTags,
         InteractsWithMedia;
+
+    use HasTeamTags, HasTags {
+        HasTeamTags::tags insteadof HasTags;
+    }
 
     /**
      * The attributes that are mass assignable.
