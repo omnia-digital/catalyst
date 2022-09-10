@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\TeamTypeResource\Pages;
+namespace App\Filament\Resources\TagResource\Pages;
 
-use App\Filament\Resources\TeamTypeResource;
+use App\Filament\Resources\TagResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListTeamTypes extends ListRecords
+class ListTag extends ListRecords
 {
-    protected static string $resource = TeamTypeResource::class;
+    protected static string $resource = TagResource::class;
 
     protected function getActions(): array
     {

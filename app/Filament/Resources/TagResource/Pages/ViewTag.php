@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\TeamTypeResource\Pages;
+namespace App\Filament\Resources\TagResource\Pages;
 
-use App\Filament\Resources\TeamTypeResource;
+use App\Filament\Resources\TagResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewTeamType extends ViewRecord
+class ViewTag extends ViewRecord
 {
-    protected static string $resource = TeamTypeResource::class;
+    protected static string $resource = TagResource::class;
 
     protected function getActions(): array
     {

@@ -24,7 +24,7 @@
             {{--      Use $featuredTeams      --}}
 
             <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
-                @forelse (\App\Models\Team::all()->take(4) as $team)
+                @forelse ($featuredTeams->take(4) as $team)
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
                     <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>

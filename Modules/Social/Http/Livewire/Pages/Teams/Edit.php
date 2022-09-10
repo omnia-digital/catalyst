@@ -50,6 +50,8 @@ class Edit extends Component/*  implements HasForms */
             'team.start_date' => ['required', 'date'],
             'team.summary' => ['required', 'max:280'],
             'team.content' => ['required', 'max:65500'],
+            'team.youtube_channel_id' => ['max:65500'],
+            'team.twitch_channel_id' => ['max:65500'],
         ];
     }
 
@@ -60,7 +62,7 @@ class Edit extends Component/*  implements HasForms */
             DatePicker::make('team.start_date')->required(),
             Textarea::make('team.summary')->required(),
             MarkdownEditor::make('team.content')->required(),
-        ];        
+        ];
     } */
 
     public function updatedBannerImage()

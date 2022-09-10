@@ -2,8 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TeamTypeResource\Pages;
-use App\Filament\Resources\TeamTypeResource\RelationManagers;
+use App\Filament\Resources\TagResource\Pages;
 use Ariaieboy\FilamentJalaliDatetime\JalaliDateTimeColumn;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -13,9 +12,9 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\Tags\Tag;
 
-class TeamTypeResource extends Resource
+class TagResource extends Resource
 {
-    protected static ?string $label = 'Team Types';
+    protected static ?string $label = 'Tags';
     protected static ?string $model = Tag::class;
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationGroup = 'Settings';
@@ -25,11 +24,6 @@ class TeamTypeResource extends Resource
         if (auth()->user()->is_admin) {
             parent::registerNavigationItems();
         }
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->where('type', 'team_type');
     }
 
     protected static function getNavigationBadge(): ?string
@@ -55,7 +49,6 @@ class TeamTypeResource extends Resource
                      ->valueLabel('Name')
                     ->required(),
                 Forms\Components\TextInput::make('type')
-                  ->required()
                   ->maxLength(255),
             ]);
     }
@@ -91,10 +84,10 @@ class TeamTypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTeamTypes::route('/'),
-            'create' => Pages\CreateTeamType::route('/create'),
-            'view' => Pages\ViewTeamType::route('/{record}'),
-            'edit' => Pages\EditTeamType::route('/{record}/edit'),
+            'index' => Pages\ListTag::route('/'),
+            'create' => Pages\CreateTag::route('/create'),
+            'view' => Pages\ViewTag::route('/{record}'),
+            'edit' => Pages\EditTag::route('/{record}/edit'),
         ];
     }
 }
