@@ -3,7 +3,7 @@
         <div class="max-w-3xl mx-auto pt-8 space-y-8">
             <livewire:social::pages.billing.payment-method :billable="$this->getBillable()"/>
 
-{{--            @livewire('billing.invoices', ['billable' => $billable])--}}
+            <livewire:social::pages.billing.invoices :billable="$this->getBillable()"/>
         </div>
     </div>
 </div>
