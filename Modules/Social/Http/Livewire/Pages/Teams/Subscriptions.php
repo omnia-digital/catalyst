@@ -39,6 +39,10 @@ class Subscriptions extends Component
 
     public function updateOnboardingProcessCompleted()
     {
+        if (!$this->team->hasStripeConnectAccount()) {
+            return;
+        }
+
         // Complete, nothing to update
         if ($this->team->stripeConnectOnboardingCompleted()) {
             return;

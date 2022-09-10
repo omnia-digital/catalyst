@@ -58,7 +58,7 @@
                     </x-library::button>
                 @else
                     <x-library::button x-data="" x-on:click.prevent="$openModal('update-team-plan')" wire:target="">
-                        Update Plan
+                        Manage Subscription
                     </x-library::button>
                 @endif
             </div>
