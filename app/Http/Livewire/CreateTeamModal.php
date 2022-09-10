@@ -3,12 +3,12 @@
 namespace App\Http\Livewire;
 
 use App\Actions\Teams\CreateTeam;
+use App\Models\Tag;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
-use Spatie\Tags\Tag;
 
 class CreateTeamModal extends Component
 {

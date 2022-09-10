@@ -1,9 +1,9 @@
 @extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
-    <div class="mb-4 rounded-b-lg pl-4 flex items-center bg-secondary items-center">
+    <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg pl-4 flex items-center bg-secondary items-center">
         <div class="flex-1 flex items-center">
-            <h1 class="py-4 text-3xl text-primary hover:cursor-pointer">Bookmarks</h1>
+            <x-library::heading.1 class="py-4 text-3xl text-primary hover:cursor-pointer">Bookmarks</x-library::heading.1>
         </div>
     </div>
 
@@ -11,7 +11,7 @@
     @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
     @if(empty($bookmarks))
-        <h2>No Bookmarked Resources</h2>
+        <x-library::heading.2>No Bookmarked Resources</x-library::heading.2>
     @else
         <div class="">
             <ul role="list" class="grid grid-cols-1 gap-6">

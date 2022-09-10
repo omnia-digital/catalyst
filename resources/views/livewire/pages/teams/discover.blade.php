@@ -10,11 +10,10 @@
                 <div class="absolute inset-0 bg-indigo-700 mix-blend-multiply"></div>
             </div>
             <div class="relative px-4 py-16 sm:px-6 sm:py-16 lg:py-16 lg:px-8">
-                <h1 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+                <x-library::heading.1 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
                     <span class="block text-white">DISCOVER</span>
-                </h1>
-                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit
-                    sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+                </x-library::heading.1>
+                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">{{ Trans::get('Find Teams and other resources') }}</p>
             </div>
         </div>
     </div>
@@ -25,13 +24,16 @@
             {{--      Use $featuredTeams      --}}
 
             <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
-                @forelse (\App\Models\Team::all()->take(4) as $team)
+                @forelse ($featuredTeams->take(4) as $team)
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
                     <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
                 @endforelse
             </div>
+        </div>
 
+        <div>
+{{--                <livewire:games::components.feed-section feed-url="https://www.youtube.com/c/gameedged" type="youtube"/>--}}
         </div>
 
         <div>

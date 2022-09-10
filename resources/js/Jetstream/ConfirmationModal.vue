@@ -9,9 +9,9 @@
                 </div>
 
                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 class="text-lg">
+                    <x-library::heading.3 class="text-lg">
                         <slot name="title"></slot>
-                    </h3>
+                    </x-library::heading.3>
 
                     <div class="mt-2">
                         <slot name="content"></slot>

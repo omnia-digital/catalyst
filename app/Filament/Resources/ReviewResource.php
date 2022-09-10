@@ -23,7 +23,18 @@ class ReviewResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('user_id')
+                      ->relationship('user', 'name'),
+                Forms\Components\TextInput::make('reviewable_type')
+                    ->required(),
+                Forms\Components\TextInput::make('reviewable_id')
+                    ->required(),
+                Forms\Components\Textarea::make('body'),
+                Forms\Components\TextInput::make('language_id'),
+                Forms\Components\Checkbox::make('visibility'),
+                Forms\Components\Checkbox::make('received_product_free'),
+                Forms\Components\Checkbox::make('recommend'),
+                Forms\Components\Checkbox::make('commentable'),
             ]);
     }
 
@@ -31,7 +42,14 @@ class ReviewResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('reviewable_type'),
+                Tables\Columns\TextColumn::make('reviewable_id'),
+                Tables\Columns\TextColumn::make('body'),
+                Tables\Columns\TextColumn::make('language_id'),
+                Tables\Columns\BooleanColumn::make('visibility'),
+                Tables\Columns\BooleanColumn::make('received_product_free'),
+                Tables\Columns\BooleanColumn::make('recommend'),
+                Tables\Columns\BooleanColumn::make('commentable'),
             ])
             ->filters([
                 //

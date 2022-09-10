@@ -1,13 +1,15 @@
-
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+/* Themes */
+@import url('./themes/dark.css');
 
 :root {
     --base-text-color: #050505;
     --white-text-color: #fff;
     --light-text-color: #9ca3af;
     --dark-text-color: #272d38;
+    --base-heading-color: var(--base-text-color);
     --neutral: #F0F2F5;
     --neutral-light: #f6f7f8;
     --neutral-dark: #6b7280;
@@ -15,9 +17,18 @@
     --primary: white;
     --secondary: #141414;
     --tertiary: #384263;
-    --post-title-color: var(--dark-text-color);
-    --post-meta-color: var(--light-text-color);
-    --post-body-color: var(--base-text-color);
+    --main-nav-active-hover-text-color: var(--neutral);
+    --main-nav-active-text-color: var(--neutral);
+    --main-nav-active-bg-color: var(--secondary);
+    --main-nav-text-color: var(--base-text-color);
+    --main-nav-hover-text-color: var(--neutral);
+    --main-nav-hover-bg-color: var(--secondary);
+    --post-card-bg-color: var(--primary);
+    --post-card-border-color: var(--neutral-light);
+    --post-card-border-hover-color: var(--dark-text-color);
+    --post-card-title-color: var(--dark-text-color);
+    --post-card-meta-color: var(--light-text-color);
+    --post-card-body-color: var(--base-text-color);
     --post-card-shadows: '0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06)';
     --heading-default-color: var(--dark-text-color);
     --h1-color: var(--heading-default-color);

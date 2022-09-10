@@ -23,7 +23,7 @@
 
         <script src="https://kit.fontawesome.com/d81fb76c88.js" crossorigin="anonymous"></script>
     </head>
-    <body class="h-full bg-neutral font-sans antialiased">
+    <body class="{{ config('app.theme') }} h-full bg-neutral font-sans antialiased">
 
         <!-- App Navigation -->
         <livewire:main-navigation-menu/>

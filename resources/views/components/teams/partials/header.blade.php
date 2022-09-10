@@ -1,5 +1,5 @@
-<div>
-    <div class="h-60 relative overlay before:bg-black before:inset-0 before:opacity-60 bg-black"
+<div class="sticky top-0 z-40">
+    <div class="h-40 relative overlay before:bg-black before:inset-0 before:opacity-60 bg-black shadow-md"
         style="background-image: url({{ $team->bannerImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
     >
         <div class="mb-1 mx-4 absolute bottom-0 left-0 right-0 flex justify-between items-end">
@@ -8,7 +8,7 @@
                     <img class="h-24 w-24 rounded-full" src="{{ $team->profile_photo_url }}" alt="{{ $team->name }}" />
                 </div>
                 <div>
-                    <h1 class="text-3xl text-primary">{{ $team->name  }}</h1>
+                    <x-library::heading.1 textColor="text-primary">{{ $team->name  }}</x-library::heading.1>
                     <p class="text-sm text-primary">{{ '@' .  $team->handle }}</p>
                 </div>
             </div>
@@ -29,5 +29,5 @@
             </div>
         </div>
     </div>
-    <x-teams.overview-navigation class="bg-gray-300" :team="$team" />
+    <x-teams.overview-navigation class="bg-primary" :team="$team" />
 </div>

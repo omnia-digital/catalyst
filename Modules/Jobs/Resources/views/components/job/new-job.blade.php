@@ -1,6 +1,6 @@
 <div>
 
-    <h1 class="w-full text-3xl px-4">Post a Job</h1>
+    <x-library::heading.1 class="w-full text-3xl px-4">Post a Job</x-library::heading.1>
 
     <div class="flex justify-between my-6">
         <div class="w-full md:w-10/12 px-2 md:pr-6">
@@ -25,7 +25,7 @@
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                     <div class="bg-primary py-6 px-4 space-y-6 sm:p-6">
                         <div>
-                            <h2 class="text-lg leading-6 font-medium text-dark-text-color">New Job</h2>
+                            <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">New Job</x-library::heading.2>
                         </div>
 
                         <div class="grid grid-cols-3 gap-6">
@@ -123,7 +123,7 @@
                             <div class="col-span-3 space-y-1 sm:col-span-2">
                                 <fieldset>
                                     <div class="mb-2">
-                                        <h2 class="text-lg leading-6 font-medium text-dark-text-color">Job Addons</h2>
+                                        <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">Job Addons</x-library::heading.2>
                                         <p class="mt-1 text-sm leading-5 text-base-text-color">This information will be displayed publicly so be careful what you share.</p>
                                     </div>
 
@@ -266,7 +266,7 @@
                                 >
                                     <fieldset>
                                         <div>
-                                            <h2 class="text-lg leading-6 font-medium text-dark-text-color">Payment</h2>
+                                            <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">Payment</x-library::heading.2>
                                             <p class="mt-1 text-sm leading-5 text-base-text-color">This information will be displayed publicly so be careful what you share.</p>
                                         </div>
                                         <div class="mt-2 bg-primary rounded-md -space-y-px">
@@ -383,7 +383,7 @@
                         </div>
                         {{--  Preview Job  --}}
                         <div class="rounded border-2 mt-10">
-                            <h2 class="text-xl text-center font-medium text-dark-text-color py-2">Preview</h2>
+                            <x-library::heading.2 class="text-xl text-center font-medium text-dark-text-color py-2">Preview</x-library::heading.2>
                             <p class="text-center font-bold">Here's a preview of how your jobpost will look like</p>
                             <p class="text-center">Don't worry if it's not perfect the first time: your job is fully editable for free after posting it!</p>
 

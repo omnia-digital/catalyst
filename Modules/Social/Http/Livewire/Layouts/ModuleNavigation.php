@@ -35,12 +35,12 @@
                     'icon'    => 'heroicon-o-briefcase',
                     'current' => false
                 ],
-                [
-                    'label'   => 'Trending Posts',
-                    'name'    => 'social.discover',
-                    'icon'    => 'heroicon-o-collection',
-                    'current' => false
-                ],
+//                [
+//                    'label'   => 'Trending Posts',
+//                    'name'    => 'social.discover',
+//                    'icon'    => 'heroicon-o-collection',
+//                    'current' => false
+//                ],
                 [
                     'label'   => 'Resources',
                     'name'    => 'resources.home',
@@ -53,12 +53,12 @@
                     'icon'    => 'heroicon-o-bookmark',
                     'current' => false
                 ],
-                [
-                    'label'   => 'Contacts',
-                    'name'    => 'social.contacts.index',
-                    'icon'    => 'heroicon-o-users',
-                    'current' => false
-                ],
+//                [
+//                    'label'   => 'Contacts',
+//                    'name'    => 'social.contacts.index',
+//                    'icon'    => 'heroicon-o-users',
+//                    'current' => false
+//                ],
             ];
         }
 

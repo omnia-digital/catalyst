@@ -4,9 +4,9 @@
 
     <div class="md:flex md:items-center md:justify-between">
         <div class="flex-1 min-w-0">
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+            <x-library::heading.2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
                 {{ $lens ? Trans::get('Teams') : Trans::get('All Teams') }}
-            </h2>
+            </x-library::heading.2>
         </div>
     </div>
             @if(count($categories))
@@ -59,7 +59,7 @@
             </div> --}}
 
             @if($lens)
-                <h2 class="pt-3">{{ str($lens)->headline() }}</h2>
+                <x-library::heading.2 class="pt-3">{{ str($lens)->headline() }}</x-library::heading.2>
             @endif
             <div class="px-4 sm:px-6 md:px-0">
                 <div class="py-4">

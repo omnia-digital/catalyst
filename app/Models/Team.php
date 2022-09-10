@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Traits\Location\HasLocation;
+use App\Traits\Tag\HasTeamTags;
+use App\Traits\Tag\HasTeamTypeTags;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,6 +15,7 @@ use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use Modules\Reviews\Traits\Reviewable;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Modules\Social\Traits\Awardable;
@@ -30,8 +33,22 @@ use Wimil\Followers\Traits\CanBeFollowed;
  */
 class Team extends JetstreamTeam implements HasMedia
 {
-    use HasFactory, Notifiable,
-        Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto, HasSlug, HasLocation, InteractsWithMedia;
+    use HasFactory,
+        Notifiable,
+        Likable,
+        Postable,
+        CanBeFollowed,
+        Awardable,
+        Reviewable,
+        HasProfilePhoto,
+        HasSlug,
+        HasLocation,
+        HasTeamTypeTags,
+        InteractsWithMedia;
+
+    use HasTeamTags, HasTags {
+        HasTeamTags::tags insteadof HasTags;
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -184,7 +201,7 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function owner()
     {
-        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id');
+        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id')->where('role', 'owner');
     }
 
     public function members()

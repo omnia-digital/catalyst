@@ -22,7 +22,7 @@
             <div class="mt-4">
                 <new-post-box class="my-6" :user="user"></new-post-box>
 
-                <h1 class="sr-only">Recent Posts</h1>
+                <x-library::heading.1 class="sr-only">Recent Posts</x-library::heading.1>
                 <ul role="list" class="space-y-4">
                     <li v-for="question in questions" :key="question.id">
                         <post-card :post="question"></post-card>
@@ -35,9 +35,9 @@
                 <section aria-labelledby="who-to-follow-heading">
                     <div class="bg-primary rounded-lg shadow">
                         <div class="p-6">
-                            <h2 id="who-to-follow-heading" class="text-base-text-color font-medium text-dark-text-color">
+                            <x-library::heading.2 id="who-to-follow-heading" class="text-base-text-color font-medium text-dark-text-color">
                                 Who to follow
-                            </h2>
+                            </x-library::heading.2>
                             <div class="mt-6 flow-root">
                                 <ul role="list" class="-my-4 divide-y divide-neutral-light">
                                     <li v-for="user in whoToFollow" :key="user.profile.handle" class="flex items-center py-4 space-x-3">
@@ -74,9 +74,9 @@
                 <section aria-labelledby="trending-heading">
                     <div class="bg-primary rounded-lg shadow">
                         <div class="p-6">
-                            <h2 id="trending-heading" class="text-base-text-color font-medium text-dark-text-color">
+                            <x-library::heading.2 id="trending-heading" class="text-base-text-color font-medium text-dark-text-color">
                                 Trending
-                            </h2>
+                            </x-library::heading.2>
                             <div class="mt-6 flow-root">
                                 <ul role="list" class="-my-4 divide-y divide-neutral-light">
                                     <li v-for="post in trendingPosts" :key="post.id" class="flex py-4 space-x-3">
