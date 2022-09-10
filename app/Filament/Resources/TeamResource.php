@@ -19,22 +19,22 @@ class TeamResource extends Resource
 {
     protected static ?string $label = 'Teams';
     protected static ?string $model = Team::class;
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-    protected static ?string $navigationGroup = 'My Teams';
+    protected static ?string $navigationIcon = 'heroicon-o-globe';
+    protected static ?string $navigationGroup = 'Social';
 
     public static function getGloballySearchableAttributes(): array
     {
         return ['name'];
     }
 
-    public static function getEloquentQuery(): Builder
-    {
-        if (auth()->user()->is_admin) {
-            return parent::getEloquentQuery();
-        } else {
-            return parent::getEloquentQuery()->whereIn('id', auth()->user()->ownedTeams->pluck('id'));
-        }
-    }
+//    public static function getEloquentQuery(): Builder
+//    {
+//        if (auth()->user()->is_admin) {
+//            return parent::getEloquentQuery();
+//        } else {
+//            return parent::getEloquentQuery()->whereIn('id', auth()->user()->ownedTeams->pluck('id'));
+//        }
+//    }
 
     protected static function getNavigationBadge(): ?string
     {
@@ -92,7 +92,7 @@ class TeamResource extends Resource
 //                Tables\Columns\TextColumn::make('summary'),
 //                Tables\Columns\TextColumn::make('content'),
 //                Tables\Columns\TextColumn::make('location'),
-                Tables\Columns\TextColumn::make('rating'),
+//                Tables\Columns\TextColumn::make('rating'),
 //                Tables\Columns\TextColumn::make('languages'),
 //                Tables\Columns\TextColumn::make('created_at')
 //                    ->dateTime(),
