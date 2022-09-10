@@ -36,14 +36,16 @@
         <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
 
         <div>
-            @if(!auth()->user()->subscribed("team_$team->id"))
-                <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
-                    Subscribe
-                </x-library::button>
-            @else
-                <x-library::button x-data="" x-on:click.prevent="$openModal('update-team-plan')" wire:target="">
-                    Update Plan
-                </x-library::button>
+            @if ($team->hasStripeConnectAccount())
+                @if(!auth()->user()->subscribed("team_$team->id"))
+                    <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
+                        Subscribe
+                    </x-library::button>
+                @else
+                    <x-library::button x-data="" x-on:click.prevent="$openModal('update-team-plan')" wire:target="">
+                        Manage Subscription
+                    </x-library::button>
+                @endif
             @endif
         </div>
 
