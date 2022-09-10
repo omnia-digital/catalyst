@@ -73,6 +73,8 @@ return [
     */
 
     'timezone' => 'UTC',
+    'default_datetime_format' => "M j, 'y @ g a ",
+    'default_date_format' => "M j, y",
 
     /*
     |--------------------------------------------------------------------------

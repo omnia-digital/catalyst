@@ -67,7 +67,7 @@ class TagResource extends Resource
                 Tables\Columns\TextColumn::make('type')->sortable(),
                 Tables\Columns\TextColumn::make('name')->sortable(),
                 Tables\Columns\TextColumn::make('slug')->sortable(),
-                JalaliDateTimeColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_at')->dateTime(config('app.default_datetime_format'))->sortable(),
             ])
             ->filters([
                 //

@@ -46,7 +46,7 @@ class Create extends Component
 
         $tags = $this->getTags($hashtags);
         $tags = $this->addResourceTag($tags);
-        $resource->attachTags($tags);
+        $resource->attachTags($tags,'post');
 
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);

@@ -88,7 +88,7 @@ class TeamResource extends Resource
                     ->label('Owner'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('start_date')
-                                         ->date(),
+                                         ->date(config('app.default_date_format')),
 //                Tables\Columns\TextColumn::make('summary'),
 //                Tables\Columns\TextColumn::make('content'),
 //                Tables\Columns\TextColumn::make('location'),
