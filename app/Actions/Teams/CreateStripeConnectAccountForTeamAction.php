@@ -13,6 +13,8 @@ class CreateStripeConnectAccountForTeamAction
             throw new \Exception('This team already had a Stripe Connect account');
         }
 
+        $team->load('owner');
+
         $stripeConnectAccount = app(StripeConnect::class)->createAccount($team->owner->email);
 
         $team->update([
