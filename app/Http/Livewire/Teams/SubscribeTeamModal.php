@@ -34,6 +34,12 @@ class SubscribeTeamModal extends Component
 
     public function subscribeTeam()
     {
+        if (!$this->team->hasStripeConnectAccount()) {
+            $this->error('This team is not ready to receive subscriptions yet!');
+
+            return;
+        }
+
         $this->validate();
 
         $this->billable->createOrGetStripeCustomer();
@@ -52,7 +58,12 @@ class SubscribeTeamModal extends Component
 
         $this->billable
             ->newSubscription('team_' . $this->team->id, $this->plan)
-            ->create();
+            ->create(subscriptionOptions: [
+                'application_fee_percent' => config('team-user-subscription.application_fee_percent'),
+                'transfer_data' => [
+                    'destination' => $this->team->stripe_connect_id,
+                ],
+            ]);
 
         $this->success('Subscribed!');
         $this->closeModal('subscribe-team');

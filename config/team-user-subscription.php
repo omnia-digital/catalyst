@@ -2,6 +2,8 @@
 
 return [
 
+    'application_fee_percent' => 10,
+
     'plans' => [
         [
             'name' => 'Basic',
