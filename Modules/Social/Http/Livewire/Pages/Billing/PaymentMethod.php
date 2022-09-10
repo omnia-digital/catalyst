@@ -12,7 +12,9 @@ class PaymentMethod extends Component
 
     public function stripeBillable()
     {
-        return Auth::user();
+        $user = Auth::user();
+        $user->createOrGetStripeCustomer();
+        return $user;
     }
 
     public function render()
