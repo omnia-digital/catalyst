@@ -5,7 +5,7 @@ return [
     'plans' => [
         [
             'name' => 'Basic',
-            'stripe_id' => 'price_1I1E7KFEoHB9qGEvEh5v6YWR',
+            'stripe_id' => 'price_1LgbhLHrjW9mNEkbUXYaSUFV',
             'price' => 29.99,
             'description' => 'Just a basic plan',
             'features' => [
@@ -15,7 +15,7 @@ return [
         ],
         [
             'name' => 'Premium',
-            'stripe_id' => 'price_1I1E7oFEoHB9qGEvXsKyuvYw',
+            'stripe_id' => 'price_1LgbhLHrjW9mNEkbLKo7f1tr',
             'price' => 59.99,
             'description' => 'Just a premium plan',
             'features' => [
