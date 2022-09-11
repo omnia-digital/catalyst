@@ -4,14 +4,16 @@
     <div class="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
         <x-library::table>
             <x-slot:head>
-                <thead>
-                <x-library::table.row>
-                    <x-library::table.head class="text-left ">Amount</x-library::table.head>
-                    <x-library::table.head class="text-left ">Status</x-library::table.head>
-                    <x-library::table.head class="text-left ">Date</x-library::table.head>
-                    <x-library::table.head class="text-right "></x-library::table.head>
-                </x-library::table.row>
-                </thead>
+                @if ($invoices->isNotEmpty())
+                    <thead>
+                    <x-library::table.row>
+                        <x-library::table.head class="text-left ">Amount</x-library::table.head>
+                        <x-library::table.head class="text-left ">Status</x-library::table.head>
+                        <x-library::table.head class="text-left ">Date</x-library::table.head>
+                        <x-library::table.head class="text-right "></x-library::table.head>
+                    </x-library::table.row>
+                    </thead>
+                @endif
             </x-slot:head>
 
             <x-slot:body>
