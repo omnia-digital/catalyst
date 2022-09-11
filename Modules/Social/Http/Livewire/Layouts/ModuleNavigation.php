@@ -35,12 +35,12 @@
                     'icon'    => 'heroicon-o-briefcase',
                     'current' => false
                 ],
-                [
-                    'label'   => \Trans::get('News'),
-                    'name'    => 'games.feeds',
-                    'icon'    => 'heroicon-o-briefcase',
-                    'current' => false
-                ],
+//                [
+//                    'label'   => \Trans::get('News'),
+//                    'name'    => 'games.feeds',
+//                    'icon'    => 'heroicon-o-briefcase',
+//                    'current' => false
+//                ],
 //                [
 //                    'label'   => 'Trending Posts',
 //                    'name'    => 'social.discover',
