@@ -27,7 +27,7 @@
                     return;
                 }
 
-                this.$wire.emitSelf('notificationRead', '{{ $id }}')
+                this.$wire.emitParent('notificationRead', '{{ $id }}')
             }
         }"
         x-on:mouseenter.once="markAsRead"

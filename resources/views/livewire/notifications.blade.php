@@ -3,7 +3,10 @@
 @section('content')
     <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg pl-4 flex items-center bg-secondary items-center">
         <div class="flex-1 flex items-center">
-            <x-library::heading.1 class="py-4 text-white-text-color">{{ Trans::get('Notifications') }}</x-library::heading.1>
+            <x-dynamic-component component="heroicon-o-bell"
+                                 class="{{ 'text-primary' }} mr-3 flex-shrink-0 h-8 w-8"
+                                 aria-hidden="true"/>
+            <x-library::heading.1 class="py-4">{{ Trans::get('Notifications') }}</x-library::heading.1>
             @if(Auth::user()->notifications()->whereNull('read_at')->count() > 0 )
                 <span class="ml-2 w-6 h-6 text-md flex items-center justify-center text-white-text-color bg-danger-600 rounded-full">
                             {{ Auth::user()->notifications()->whereNull('read_at')->count() }}

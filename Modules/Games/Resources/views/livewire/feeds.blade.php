@@ -10,7 +10,7 @@
                 <div class="absolute inset-0 bg-indigo-700 mix-blend-multiply"></div>
             </div>
             <div class="relative px-4 py-16 sm:px-6 sm:py-16 lg:py-16 lg:px-8">
-                <x-library::heading.1 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+                <x-library::heading.1 class="text-center">
                     <span class="block text-white uppercase">{{ Trans::get('News') }}</span>
                 </x-library::heading.1>
                 <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">See what's happening right now in gaming news.</p>

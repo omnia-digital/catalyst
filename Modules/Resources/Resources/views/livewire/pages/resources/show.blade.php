@@ -11,7 +11,7 @@
 {{--                    <x-heroicon-o-arrow-left class="h-6"/>--}}
 {{--                </a>--}}
 {{--            </div>--}}
-            <a href="{{route('resources.home')}}"><x-library::heading.1 class="py-4 text-3xl text-primary hover:cursor-pointer">Resources</x-library::heading.1></a>
+            <a href="{{route('resources.home')}}"><x-library::heading.1 class="py-4 hover:cursor-pointer">Resources</x-library::heading.1></a>
         </div>
         <div class="mx-4">
             @if($resource->image)

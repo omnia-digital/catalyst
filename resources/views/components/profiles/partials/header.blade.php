@@ -9,8 +9,8 @@
                 </div>
                 <div class="mb-2 ml-3 space-y-1">
                     <div class="flex space-x-3 items-end">
-                        <x-library::heading.1 class="text-3xl text-white-text-color">{{ $user->name  }}</x-library::heading.1>
-                        <x-library::heading.2 class="font-normal text-white-text-color">{{ '@' .  $user->handle }}</x-library::heading.2>
+                        <x-library::heading.1 class="text-3xl" text-color="text-white-text-color">{{ $user->name  }}</x-library::heading.1>
+                        <x-library::heading.2 class="font-normal" text-color="text-white-text-color">{{ '@' .  $user->handle }}</x-library::heading.2>
                     </div>
                     <div class="flex space-x-2 items-center text-primary text-sm">
                         <div class="flex space-x-1">

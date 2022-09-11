@@ -1,6 +1,6 @@
 @props([
-    'textColor' => 'text-heading-default-color',
-    'textSize' => 'text-3xl',
+    'textColor' => 'text-white-text-color',
+    'textSize' => 'text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-3xl',
     'boldClass' => 'font-medium',
     'class'=>''
 ])

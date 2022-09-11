@@ -1,6 +1,6 @@
 <div>
 
-    <x-library::heading.1 class="w-full text-3xl px-4">Post a Job</x-library::heading.1>
+    <x-library::heading.1 class="w-full px-4">Post a Job</x-library::heading.1>
 
     <div class="flex justify-between my-6">
         <div class="w-full md:w-10/12 px-2 md:pr-6">

@@ -20,9 +20,6 @@
     <div class="mt-6 space-y-8">
         <div>
             <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured & Recommended') }}</x-library::heading.3>
-
-            {{--      Use $featuredTeams      --}}
-
             <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
                 @forelse ($featuredTeams->take(4) as $team)
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
@@ -33,7 +30,7 @@
         </div>
 
         <div>
-{{--                <livewire:games::components.feed-section feed-url="https://www.youtube.com/c/gameedged" type="youtube"/>--}}
+                <livewire:games::components.feed-section feed-url="https://www.youtube.com/c/gameedged" type="youtube"/>
         </div>
 
         <div>
