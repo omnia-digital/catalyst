@@ -136,7 +136,7 @@ class Post extends Model implements HasMedia
     {
         $trendingPosts = Post::withCount('likes')
                    ->with('user')
-                   ->when($type, fn($query) => $query->where('type', $this->type))
+                   ->when($type, fn($query) => $query->where('type', $type))
                    ->orderBy('likes_count', 'desc')
                    ->orderBy('created_at', 'desc');
         return $trendingPosts;

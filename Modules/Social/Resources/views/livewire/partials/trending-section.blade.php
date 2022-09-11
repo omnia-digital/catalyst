@@ -1,12 +1,12 @@
 <section aria-labelledby="trending-heading" class="card">
         <div class="">
-            <x-library::heading.2 id="trending-heading" class="px-3 py-2 text-xl font-medium text-h1-color">
-                {{ $title }}
+            <x-library::heading.2 id="trending-heading" class="px-4 py-3 text-xl font-medium text-h1-color">
+                {{ $title }} {{ ucwords(Str::plural($type)) }}
             </x-library::heading.2>
             <div class="flow-root">
                 <ul role="list" class="">
                     @foreach ($posts as $post)
-                        <li class="py-3 px-4 hover:bg-neutral-hover">
+                        <li class="py-2 px-4 hover:bg-neutral-hover">
                         <a href="{{ route('social.posts.show', ['post' => $post]) }}" class="flex justify-between">
                             <div class="flex-1">
                                 <div class="font-bold">

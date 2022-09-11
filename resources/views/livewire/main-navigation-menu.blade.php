@@ -30,7 +30,7 @@
             <!-- Right side header -->
             <div class="flex flex-1 grid grid-cols-12 h-14 items-center">
                 <!-- Navigation Links -->
-                <div class="hidden sm:flex col-span-9 justify-center items-center ">
+                <div class="hidden sm:flex col-span-8 2xl:col-span-9 justify-center items-center ">
                     <nav class="space-x-4 flex justify-center">
                         @foreach ($navigation as $item)
                             @if(\Platform::isModuleEnabled($item['module']))
@@ -46,7 +46,7 @@
                         @endforeach
                     </nav>
                 </div>
-                <div class="hidden sm:flex col-span-3 mr-4 justify-between md:items-center">
+                <div class="hidden sm:flex col-span-4 2xl:col-span-3 mr-4 justify-between md:items-center">
                     <!-- Search -->
                     <div class="hidden md:flex flex-1 items-center">
                         <div class="w-full">
