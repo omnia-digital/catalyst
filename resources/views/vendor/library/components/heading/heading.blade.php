@@ -8,7 +8,7 @@
 
 @php
     $classString = '';
-    $classString = 'leading-6 hover:cursor-pointer ';
+    $classString = 'py-2 leading-6 hover:cursor-pointer font-extrabold tracking-tight';
     $classString .= $boldClass . ' ';
     $classString .= $textColor . ' ';
     $classString .= $textSize . ' ';

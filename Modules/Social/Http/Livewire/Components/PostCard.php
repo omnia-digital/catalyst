@@ -14,10 +14,12 @@ class PostCard extends Component
     public Post $post;
     public $optionsMenuOpen = false;
     public $clickable;
+    public $showPostActions = true;
 
-    public function mount(Post $post, $clickable = true) {
+    public function mount(Post $post, $clickable = true, $showPostActions = true) {
         $this->post = $post;
         $this->clickable = $clickable;
+        $this->showPostActions = $showPostActions;
     }
 
     public function getAuthorProperty() {

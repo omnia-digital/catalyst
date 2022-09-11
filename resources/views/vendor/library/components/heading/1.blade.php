@@ -1,6 +1,6 @@
 @props([
     'textColor' => 'text-white-text-color',
-    'textSize' => 'text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-3xl',
+    'textSize' => 'text-3xl sm:text-4xl lg:text-3xl',
     'boldClass' => 'font-medium',
     'class'=>''
 ])

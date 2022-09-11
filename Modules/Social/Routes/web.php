@@ -7,7 +7,7 @@ use Modules\Social\Http\Livewire\Home;
 use Modules\Social\Http\Livewire\Pages\Billing\Billing;
 use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
 use Modules\Social\Http\Livewire\Pages\Contacts\Index as ContactsIndex;
-use Modules\Social\Http\Livewire\Pages\Discover\Index as DiscoverIndex;
+use Modules\Social\Http\Livewire\Pages\Posts\Trending as DiscoverIndex;
 use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
 use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
 use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
@@ -35,7 +35,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     Route::get('/home', Home::class)->name('home');
     Route::get('bookmarks', Index::class)->name('bookmarks');
 
-    Route::get('/discover', DiscoverIndex::class)->name('discover');
+    Route::get('/trending', DiscoverIndex::class)->name('discover');
 
     Route::name('profile.')->prefix('profiles')->group(function() {
         Route::get('{profile}', ShowProfile::class)->name('show');

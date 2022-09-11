@@ -5,27 +5,14 @@
 {{--@endsection--}}
 
 @section('content')
-    <div class="py-4">
-        <!-- Page Heading -->
-        <div class="flex justify-between pb-4 sticky">
-            <div>
-                <nav>
-                    <ol class="list-reset flex items-center">
-                        <li><a href="{{ route('social.teams.my-teams') }}" class="font-bold hover:underline">{{ Trans::get('My Teams') }}</a></li>
-                        <li>
-                            <x-heroicon-s-chevron-right class="h-4 w-4 mx-2"/>
-                        </li>
-                        <li><a href="{{ $team->profile() }}" class="font-bold hover:underline">{{ $team->name }}</a></li>
-                    </ol>
-                </nav>
-                <div class="pt-1 border-b-2 border-b-light-text-color pb-1">
-                    <span class="text-dark-text-color dark:text-white-text-color">{{ Trans::get('Admin Panel') }}: </span>
-                    <x-library::heading.1 class="text-3xl"><span class="text-light-text-color">{{
-                $team->name }}</span></x-library::heading.1>
-                </div>
-            </div>
+    <div class="">
+        <x-teams.partials.header :team="$team"/>
 
-            <div class="mt-6 flex justify-end items-center">
+        <!-- Page Heading -->
+        <div class="flex p-4 sticky items-center justify-between">
+            <x-library::heading.2>{{ Trans::get('Team Admin Panel') }}</x-library::heading.2>
+
+            <div class="flex justify-end items-center">
                 <div class="mr-auto"
                      x-data="{show: false}"
                      x-show="show"
@@ -53,14 +40,13 @@
             </div>
         </div>
 
-        <div x-data="setup()">
+        <div x-data="setup()" class="px-4">
             <div>
                 <!-- Team Edit Navigation -->
-                <div class="w-full mt-6"></div>
-                <nav class="flex items-center justify-between text-xs">
-                    <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-10">
+                <nav class="flex items-center text-xs">
+                    <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-4">
                         <template x-for="(tab, index) in tabs" :key="tab.id">
-                            <li class="pb-[3px]">
+                            <li class=" pb-[3px]">
                                 <a href="#"
                                    class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:border-dark-text-color focus:border-dark-text-color"
                                    :class="(activeTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
@@ -153,20 +139,103 @@
 
             <!-- Edit Team Media -->
             <div x-cloak x-show="activeTab === 2" class="mt-6 grid grid-cols-2 gap-6">
-                <!-- YouTube Channel -->
-                <div class="flex-col">
-                    <x-library::input.label value="YouTube Channel" class="inline"/>
-                    <x-library::input.text id="youtube_channel_id" wire:model.defer="team.youtube_channel_id"/>
-                    <x-library::input.error for="team.youtube_channel_id"/>
+                <x-library::heading.3>{{ Trans::get('Featured Content') }}</x-library::heading.3>
+                <!-- Featured Content / Sample Media -->
+                <div class="col-span-2">
+                    <div class="flex items-center">
+                        <x-library::input.label value="Uploaded Content"/>
+                        <span class="text-red-600 text-sm ml-1">*</span>
+                    </div>
+                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                        <p class="flex-1 py-2 px-3 text-[1rem] text-base-text-color">Upload images/videos to display in Featured section</p>
+                        <label>
+                            <input type="file" wire:model="sampleMedia" hidden multiple required/>
+                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                        </label>
+                    </div>
+                    <x-library::input.error for="sampleMedia"/>
+                    <div class="pb-8">
+                        <div class="mt-4">
+                            <p>Current Featured Content:</p>
+                            <div>
+                                @if ($team->sampleImages()->count())
+                                    <div class="flex flex-wrap w-full">
+                                        @foreach ($team->sampleImages() as $key => $media)
+                                            <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center bg-primary relative border-4 border-dashed border-neutral-dark">
+                                                <img src="{{ $media->getFullUrl() }}" title="{{ $media->name }}" alt="{{ $media->name }}" class="max-w-[152px] max-h-[120px]">
+                                                <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="confirmRemoval({{ $media->id }})">
+                                                    <x-heroicon-o-x class="w-6 h-6"/>
+                                                </button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @else
+                                    <p>No featured content has been set.</p>
+                                @endif
+                            </div>
+                        </div>
+                        @if (sizeof($sampleMedia))
+                            <div class="mt-4">
+                                <p>Added Featured Content:</p>
+                                <div>
+                                    <div class="flex flex-wrap w-full">
+                                        @foreach ($sampleMedia as $key => $media)
+                                            <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative bg-primary border-4 border-dashed border-neutral-dark">
+                                                <img src="{{ $media->temporaryUrl() }}" title="{{ $sampleMediaNames[$key] }}" alt="{{ $sampleMediaNames[$key] }}"
+                                                     class="max-w-[152px] max-h-[120px]">
+                                                <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key}})">
+                                                    <x-heroicon-o-x class="w-6 h-6"/>
+                                                </button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Delete Media Confirmation Modal -->
+                    <x-jet-confirmation-modal wire:model="confirmingRemoveMedia">
+                        <x-slot name="title">
+                            {{ __('Delete Media') }}
+                        </x-slot>
+
+                        <x-slot name="content">
+                            {{ __('Are you sure you want to delete this media?') }}
+                        </x-slot>
+
+                        <x-slot name="footer">
+                            <x-jet-secondary-button wire:click="$toggle('confirmingRemoveMedia')" wire:loading.attr="disabled">
+                                {{ __('Cancel') }}
+                            </x-jet-secondary-button>
+
+                            <x-jet-danger-button class="ml-2" wire:click="removeMedia()" wire:loading.attr="disabled">
+                                {{ __('Delete Media') }}
+                            </x-jet-danger-button>
+                        </x-slot>
+                    </x-jet-confirmation-modal>
                 </div>
 
-                <!-- Twitch Channel -->
-                <div class="flex-col">
-                    <x-library::input.label value="Twitch Channel" class="inline"/>
-                    <x-library::input.text id="twitch_channel_id" wire:model.defer="team.twitch_channel_id"/>
-                    <x-library::input.error for="team.twitch_channel_id"/>
-                </div>
+                @if(\Platform::isModuleEnabled('games'))
+                    <x-library::heading.4>{{ Trans::get('Feeds') }}</x-library::heading.4>
+                    <!-- YouTube Channel -->
+                    <div class="flex-col">
+                        <x-library::input.label value="YouTube Channel" class="inline"/>
+                        <x-library::input.text id="youtube_channel_id" wire:model.defer="team.youtube_channel_id"/>
+                        <x-library::input.error for="team.youtube_channel_id"/>
+                    </div>
 
+                    <!-- Twitch Channel -->
+                    <div class="flex-col">
+                        <x-library::input.label value="Twitch Channel" class="inline"/>
+                        <x-library::input.text id="twitch_channel_id" wire:model.defer="team.twitch_channel_id"/>
+                        <x-library::input.error for="team.twitch_channel_id"/>
+                    </div>
+                @endif
+
+                <div class="col-span-2">
+                <x-library::heading.3>{{ Trans::get('Team Home & Profile') }}</x-library::heading.3>
+                </div>
                 <!-- Banner Image -->
                 <div class="flex-col">
                     <div class="flex items-center">
@@ -261,81 +330,6 @@
                             </div>
                         @endif
                     </div>
-                </div>
-                <!-- Sample Media -->
-                <div class="flex-col">
-                    <div class="flex items-center">
-                        <x-library::input.label value="Sample Media"/>
-                        <span class="text-red-600 text-sm ml-1">*</span>
-                    </div>
-                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
-                        <p class="flex-1 py-2 px-3 text-[1rem] text-base-text-color">Upload multiple images about your project to be displayed</p>
-                        <label>
-                            <input type="file" wire:model="sampleMedia" hidden multiple required/>
-                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
-                        </label>
-                    </div>
-                    <x-library::input.error for="sampleMedia"/>
-                    <div class="pb-8">
-                        <div class="mt-4">
-                            <p>Current Sample Media:</p>
-                            <div>
-                                @if ($team->sampleImages()->count())
-                                    <div class="flex flex-wrap w-full">
-                                        @foreach ($team->sampleImages() as $key => $media)
-                                            <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center bg-primary relative border-4 border-dashed border-neutral-dark">
-                                                <img src="{{ $media->getFullUrl() }}" title="{{ $media->name }}" alt="{{ $media->name }}" class="max-w-[152px] max-h-[120px]">
-                                                <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="confirmRemoval({{ $media->id }})">
-                                                    <x-heroicon-o-x class="w-6 h-6"/>
-                                                </button>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <p>No sample images have been set.</p>
-                                @endif
-                            </div>
-                        </div>
-                        @if (sizeof($sampleMedia))
-                            <div class="mt-4">
-                                <p>Added Sample Media:</p>
-                                <div>
-                                    <div class="flex flex-wrap w-full">
-                                        @foreach ($sampleMedia as $key => $media)
-                                            <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative bg-primary border-4 border-dashed border-neutral-dark">
-                                                <img src="{{ $media->temporaryUrl() }}" title="{{ $sampleMediaNames[$key] }}" alt="{{ $sampleMediaNames[$key] }}"
-                                                     class="max-w-[152px] max-h-[120px]">
-                                                <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key}})">
-                                                    <x-heroicon-o-x class="w-6 h-6"/>
-                                                </button>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-
-                    <!-- Delete Media Confirmation Modal -->
-                    <x-jet-confirmation-modal wire:model="confirmingRemoveMedia">
-                        <x-slot name="title">
-                            {{ __('Delete Media') }}
-                        </x-slot>
-
-                        <x-slot name="content">
-                            {{ __('Are you sure you want to delete this media?') }}
-                        </x-slot>
-
-                        <x-slot name="footer">
-                            <x-jet-secondary-button wire:click="$toggle('confirmingRemoveMedia')" wire:loading.attr="disabled">
-                                {{ __('Cancel') }}
-                            </x-jet-secondary-button>
-
-                            <x-jet-danger-button class="ml-2" wire:click="removeMedia()" wire:loading.attr="disabled">
-                                {{ __('Delete Media') }}
-                            </x-jet-danger-button>
-                        </x-slot>
-                    </x-jet-confirmation-modal>
                 </div>
             </div>
         </div>

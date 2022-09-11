@@ -35,7 +35,7 @@
         <div class="font-bold">
             {{ Trans::get('Filters') }}
         </div>
-        
+
         @unless(in_array('location', $skipFilters))
             <div class="min-w-[110px] flex-1">
                 <x-library::input.text wire:model.debounce.450ms="filters.location" placeholder="{{ Trans::get('Location') }}"/>
@@ -53,7 +53,7 @@
 
         @unless(in_array('tags', $skipFilters))
         <div class="min-w-[135px] flex-1">
-            <x-library::input.selects wire:model="tags" :options="$this->allTags"/>
+            <x-library::input.selects wire:model="tags" :options="$this->allTags" placeholder="Search by Tags"/>
         </div>
         @endunless
 

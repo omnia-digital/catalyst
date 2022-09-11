@@ -72,10 +72,10 @@
 
         {{--        <div class="col-span-7 grid grid-cols-12 gap-6 lg:gap-4 mr-4">--}}
         <div class="sticky top-[220px] h-screen col-span-12 lg:col-span-6 xl:col-span-6 mr-4">
-            <div class="2xl:masonry 2xl:masonry-2 space-y-6">
+            <div class="grid grid-cols-12 gap-4">
 
                 {{-- Overview  --}}
-                <div class="col-span-12 2xl:col-span-7">
+                <div class="col-span-12 2xl:col-span-6">
                     <div class="flex flex-col flex-1 bg-primary rounded">
                         <div class="h-44 bg-secondary"
                              style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
@@ -112,29 +112,29 @@
                 </div>
 
                 {{-- People --}}
-                <div class="col-span-12 2xl:col-span-5 space-y-6 my-12">
+                <div class="col-span-12 2xl:col-span-6 space-y-6">
                     <livewire:social::partials.user-status-list :team="$team"/>
                 </div>
 
 
-                <div class="col-span-1 row-span-1 space-y-6">
-                    <!-- Team Relevence -->
-                    {{-- <div>
-                        <div class="text-base-text-color font-semibold">
-                            <p class="text-sm">Is this team relevant to you?</p>
-                        </div>
-                        <div class="mt-4 bg-white p-4">
-                            <p class="text-dark-text-color text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione consequuntur hic aperiam adipisci cupiditate repellat quibusdam molestias praesentium sunt velit! Totam illum vero deleniti, sint est illo atque sequi quo.</p>
-                        </div>
-                    </div> --}}
+                <!-- Team Relevence -->
+{{--                <div class="col-span-12">--}}
+{{--                    --}}{{-- <div>--}}
+{{--                        <div class="text-base-text-color font-semibold">--}}
+{{--                            <p class="text-sm">Is this team relevant to you?</p>--}}
+{{--                        </div>--}}
+{{--                        <div class="mt-4 bg-white p-4">--}}
+{{--                            <p class="text-dark-text-color text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione consequuntur hic aperiam adipisci cupiditate repellat quibusdam molestias praesentium sunt velit! Totam illum vero deleniti, sint est illo atque sequi quo.</p>--}}
+{{--                        </div>--}}
+{{--                    </div> --}}
 
-                </div>
+{{--                </div>--}}
 
                 @if ($team->content)
-                    <div class="flex-1 flex flex-col">
+                    <div class="card p-4 col-span-12">
                         <x-library::heading.3>{{ \Trans::get('About') }}</x-library::heading.3>
                         <div x-data="{readMore: false, longText: @js(strlen($team->content) > 410)}"
-                             class="mt-4 card p-4 relative">
+                             class="relative">
                             <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden" :class="(longText && readMore) ? 'h-full max-h-96' : 'max-h-24'">{{ $team->content }}</p>
                             <div x-show="longText && !readMore"
                                  class="bg-gradient-to-t from-white to-transparent absolute bottom-1 left-4 right-2 pt-8">
@@ -159,11 +159,9 @@
 
                 <!-- Team Languages -->
                 @if ($team->languages)
-                    <div class="card">
-                        <div class="text-base-text-color font-semibold">
-                            <x-library::heading.3>{{ \Trans::get('Languages') }}</x-library::heading.3>
-                        </div>
-                        <div class="mt-4 p-4">
+                    <div class="card col-span-6 p-4">
+                        <x-library::heading.3>{{ \Trans::get('Languages') }}</x-library::heading.3>
+                        <div class="mt-2">
                             <p class="text-dark-text-color">{{ $team->languages }}</p>
                         </div>
                     </div>
@@ -190,7 +188,7 @@
                 {{--                </div>--}}
                 {{--            </div>--}}
 
-                <div>
+                <div class="col-span-12">
                     <livewire:reviews::review-list :model="$team"/>
                 </div>
             </div>

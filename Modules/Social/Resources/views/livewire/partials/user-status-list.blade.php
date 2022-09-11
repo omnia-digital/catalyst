@@ -1,4 +1,4 @@
-<section aria-labelledby="people-heading" class="card py-6">
+<section aria-labelledby="people-heading" class="card pb-6">
     <div class="px-6 py-3">
         <x-library::heading.3>{{ Trans::get('People') }}</x-library::heading.3>
 

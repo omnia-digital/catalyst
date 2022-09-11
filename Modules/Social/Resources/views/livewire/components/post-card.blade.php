@@ -23,7 +23,7 @@ cursor-pointer' : ''
             </div>
         </div>
         <div class="z-1 flex align-top space-x-4">
-            @if (!is_null($post->team_id) && (!\Route::currentRouteName('social.teams.show')))
+            @if (!is_null($post->team_id))
                 <div class="hidden xl:flex items-center space-x-2 h-7">
                     <div class="flex-shrink-0">
                         <img class="h-7 w-7 rounded-full" src="{{ $post->team?->profile_photo_url }}" alt="{{ $post->team->name }}"/>
@@ -114,7 +114,9 @@ cursor-pointer' : ''
         @endif
     </div>
 
-    <div wire:click.prevent.stop="" class="z-20 px-5">
-        <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
-    </div>
+    @if($showPostActions)
+        <div wire:click.prevent.stop="" class="z-20 px-5">
+            <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
+        </div>
+    @endif
 </article>

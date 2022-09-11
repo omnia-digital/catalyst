@@ -45,14 +45,19 @@ class Edit extends Component/*  implements HasForms */
 
     protected function rules(): array
     {
-        return [
+        $rules = [
             'team.name' => ['required', 'max:254'],
             'team.start_date' => ['required', 'date'],
             'team.summary' => ['required', 'max:280'],
             'team.content' => ['required', 'max:65500'],
-            'team.youtube_channel_id' => ['max:65500'],
-            'team.twitch_channel_id' => ['max:65500'],
         ];
+
+        if (\Platform::isModuleEnabled('games')) {
+            $rules['team.youtube_channel_id'] = ['max:65500'];
+            $rules['team.twitch_channel_id'] = ['max:65500'];
+        }
+
+        return $rules;
     }
 
 /*     protected function getFormSchema(): array

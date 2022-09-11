@@ -15,11 +15,11 @@
     </div>
     <div>
         <!-- Filters -->
-        @include('livewire.partials.filters', ['skipFilters' => ['has_attachment']])
+        @include('livewire.partials.filters', ['skipFilters' => ['has_attachment', 'members']])
 
         <!-- Teams -->
-        <div class="mt-6">
-            <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 mt-4">
+        <div class="mt-2">
+            <div class="grid grid-cols-2 gap-0 lg:grid-cols-4">
                 @forelse ($teams as $team)
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty

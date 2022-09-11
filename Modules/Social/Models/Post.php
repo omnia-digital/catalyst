@@ -131,4 +131,14 @@ class Post extends Model implements HasMedia
     {
         return is_null($this->postable_id) && is_null($this->postable_type);
     }
+
+    public static function getTrending($type = 'post')
+    {
+        $trendingPosts = Post::withCount('likes')
+                   ->with('user')
+                   ->when($type, fn($query) => $query->where('type', $this->type))
+                   ->orderBy('likes_count', 'desc')
+                   ->orderBy('created_at', 'desc');
+        return $trendingPosts;
+    }
 }
