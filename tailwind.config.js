@@ -13,6 +13,8 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './Modules/*/Resources/views/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
+        './src/**/*.{html,js}',
+        './node_modules/tw-elements/dist/js/**/*.js'
     ],
 
     darkMode: 'class',
@@ -108,6 +110,7 @@ module.exports = {
         require('@tailwindcss/aspect-ratio'),
         require('tailwind-scrollbar-hide'),
         require('@tailwindcss/line-clamp'),
+        require('tw-elements/dist/plugin'),
         plugin(function({ matchUtilities, theme }) {
             matchUtilities(
                 {

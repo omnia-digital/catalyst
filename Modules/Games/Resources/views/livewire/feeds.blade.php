@@ -18,5 +18,10 @@
         </div>
     </div>
 
+    <div class="space-y-6">
+        @foreach($feeds as $feed)
+            <livewire:games::components.feed-section :type="$feed[0]" :feed-url="$feed[1]"/>
+        @endforeach
+    </div>
 
 @endsection

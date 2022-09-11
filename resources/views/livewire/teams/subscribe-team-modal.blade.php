@@ -1,7 +1,7 @@
 <div>
     <x-library::modal id="subscribe-team" maxWidth="4xl">
         <x-slot:title>
-            Subscribe Team: {{ $team->name }}
+            Subscribe to {{ $team->name }}
         </x-slot:title>
         <x-slot:content>
             <div class="mb-4">
@@ -20,7 +20,7 @@
                                     @foreach($teamPlan['features'] as $feature)
                                         <div class="flex items-center space-x-2">
                                             <x-heroicon-s-check-circle class="text-green-500 w-4 h-4"/>
-                                            <p>{{ $feature }}.</p>
+                                            <p>{{ $feature }}</p>
                                         </div>
                                     @endforeach
                                 </x-slot>
@@ -30,6 +30,11 @@
                 </fieldset>
                 <x-library::input.error for="plan" class="mt-1"/>
             </div>
+            <p class="py-1 text-sm text-neutral-dark">Your username ({{ Auth::user()->handle }}) and member status may be publicly visible and shared by the {{ Trans::get('Team') }} with 3rd parties (to
+                provide
+                perks).</p>
+            <p class="py-1 text-sm text-neutral-dark">Recurring payment. Cancel anytime. {{ Trans::get('Team Owner') }} may update perks.</p>
+
         </x-slot:content>
         <x-slot:actions>
             <x-library::button wire:click.prevent="subscribeTeam" wire:target="subscribeTeam">

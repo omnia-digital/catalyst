@@ -11,8 +11,10 @@ return [
             'price' => 29.99,
             'description' => 'Just a basic plan',
             'features' => [
-                'Feature 1',
-                'Feature 2',
+                'View About Us section to see all Member perks',
+                'Access to member-only content',
+                'Member badge next to your name',
+                'Custom emoji',
             ]
         ],
         [
@@ -21,8 +23,8 @@ return [
             'price' => 59.99,
             'description' => 'Just a premium plan',
             'features' => [
-                'Feature 1',
-                'Feature 2',
+                'All perks from previous plans',
+                'Free membership to gift to someone else',
             ]
         ],
     ]

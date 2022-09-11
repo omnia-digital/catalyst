@@ -3,7 +3,10 @@
 @section('content')
     <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg pl-4 flex items-center bg-secondary items-center">
         <div class="flex-1 flex items-center">
-            <x-library::heading.1 class="py-4 hover:cursor-pointer">Bookmarks</x-library::heading.1>
+            <x-dynamic-component component="heroicon-o-bookmark"
+                                 class="{{ 'text-primary' }} mr-3 flex-shrink-0 h-8 w-8"
+                                 aria-hidden="true"/>
+            <x-library::heading.1 class="py-4">Bookmarks</x-library::heading.1>
         </div>
     </div>
 
