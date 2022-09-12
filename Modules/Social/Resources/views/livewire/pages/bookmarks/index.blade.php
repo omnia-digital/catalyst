@@ -17,7 +17,7 @@
         <x-library::heading.2>No Bookmarked Resources</x-library::heading.2>
     @else
         <div class="">
-            <ul role="list" class="grid grid-cols-1 gap-6">
+            <ul role="list" class="masonry masonry-2 space-y-4">
                 @foreach($bookmarks as $bookmark)
                     <li>
                         <livewire:social::components.post-card :post="$bookmark->bookmarkable()->first()"/>

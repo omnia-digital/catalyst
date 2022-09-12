@@ -31,6 +31,7 @@ class Post extends Model implements HasMedia
         'title',
         'type',
         'body',
+        'url',
         'postable_id',
         'postable_type',
         'repost_original_id',

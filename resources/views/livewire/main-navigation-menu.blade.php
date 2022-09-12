@@ -164,10 +164,14 @@
                                 <x-jet-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
                                     {{ auth()->user()->name }}
                                 </x-jet-dropdown-link>
+                                
+                                <x-jet-dropdown-link href="{{ route('social.subscription') }}">
+                                    {{ \Trans::get('Subscription') }}
+                                </x-jet-dropdown-link>
 
-                                    <x-jet-dropdown-link href="{{ route('social.billing') }}">
-                                        Billing
-                                    </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('social.billing') }}">
+                                    Billing
+                                </x-jet-dropdown-link>
 
                                     {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
                                     {{--                                    <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">--}}
@@ -224,7 +228,7 @@
                 @endif
 
                 <div>
-                    <div class="font-medium text-base-text-color text-dark-text-color">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-dark-text-color">{{ Auth::user()->name }}</div>
                     <div class="font-medium text-sm text-base-text-color">{{ Auth::user()->email }}</div>
                 </div>
             </div>

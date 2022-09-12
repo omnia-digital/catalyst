@@ -58,10 +58,11 @@ class CreateNewPostAction
         $user = $this->user ?? Auth::user();
 
         return $user->posts()->create([
+            'type'               => $this->type,
             'body'               => $content,
             'team_id'            => $options['team_id'] ?? null,
             'title'              => $options['title'] ?? null,
-            'type'               => $this->type,
+            'url'                => $options['url'] ?? null,
             'postable_id'        => $this->postable?->id ?? $options['postable_id'] ?? null,
             'postable_type'      => $this->postable ? get_class($this->postable) : ($options['postable_type'] ?? null),
             'repost_original_id' => $this->repost?->id,

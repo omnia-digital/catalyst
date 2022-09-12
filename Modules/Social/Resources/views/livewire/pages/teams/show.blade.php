@@ -30,43 +30,6 @@
                     </div>
                 @endif
                 <livewire:social::news-feed :team="$team"/>
-
-                <!-- Post Tile -->
-                @if ($this->recentPosts->count())
-                    <div>
-                        <div class="flex justify-between items-center text-base-text-color font-semibold">
-                            <p class="text-sm">{{ \Trans::get('Posts') }}</p>
-                            <a href="#" class="text-xs flex items-center">{{ \Trans::get('Read More') }}
-                                <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
-                            </a>
-                        </div>
-                        <div class="space-y-2">
-                            @foreach (\Modules\Social\Models\Post::take(2)->get() as $post)
-                                <div wire:click.prevent.stop="showPost({{ $post }})"
-                                     class="bg-primary border border-neutral-light rounded p-4 flex space-x-4 hover:cursor-pointer hover:ring-1 hover:ring-black">
-                                    <div class="w-1/3 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat rounded-md">
-                                    </div>
-                                    <div class="w-2/3 space-y-2">
-                                        <p class="text-dark-text-color font-semibold text-xs">{{ $post->title }}</p>
-                                        <div class="flex items-center text-base-text-color">
-                                            <x-heroicon-o-calendar class="h-5 w-5 mr-2"/>
-                                            <span class="text-neutral-900 text-xs">{{ $post->created_at->toFormattedDateString() }}</span>
-                                        </div>
-                                        <p class="text-light-text-color text-xs line-clamp-2">{{ $post->body }}</p>
-                                        <div class="text-base-text-color text-xs flex items-center -space-x-1 pt-6">
-                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1">
-                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=2">
-                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=3">
-                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=4">
-                                            <img class="h-6 w-6 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=5">
-                                            <div class="h-6 w-6 rounded-full bg-neutral-light flex justify-center items-center text-2xs p-2">+5</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
             </div>
         </div>
 

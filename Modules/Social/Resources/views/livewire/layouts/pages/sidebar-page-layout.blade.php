@@ -6,6 +6,6 @@
         <div class="col-span-8 2xl:col-span-9">
             @yield('content')
         </div>
-        <x-sidebar-column class="hidden sm:block col-span-4 2xl:col-span-3"/>
+        <x-sidebar-column class="mt-4 hidden sm:block col-span-4 2xl:col-span-3"/>
     </div>
 @endsection

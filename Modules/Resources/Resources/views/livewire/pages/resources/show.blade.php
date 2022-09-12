@@ -14,7 +14,7 @@
                 <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Resources') }}</x-library::heading.1>
             </a>
         </div>
-        <div class="">
+        <div class="w-full">
             <div class="col-span-4 card">
                 @if($resource->image)
                     <div>
@@ -38,6 +38,7 @@
                             <a href="{{ route('social.profile.show', $resource->user->handle) }}" class="hover:underline block text-base-text-color">{{  $resource->user->name }}</a>
                         </div>
                     </div>
+
                     @empty(!$resource->tags)
                         <div class="flex justify-start space-x-2">
                             @foreach($resource->tags as $tag)
@@ -50,27 +51,27 @@
                         {!! $resource->body !!}
                     </div>
 
-                    <div>
-                        <livewire:social::partials.post-actions wire:key="resource-actions-{{ $resource->id }}" :post="$resource" :show-comment-button="false" :show-bookmark-button="true"/>
-                    </div>
-
                     @if($resource->url)
-                        <a href="{{ $resource->url }}" target="_blank" class="bg-primary hover:shadow-lg rounded-lg px-4 py-2 text-xl inline-flex items-center space-x-2">
-                            <p>Go to website</p>
+                        <a href="{{ $resource->url }}" target="_blank" class="bg-secondary hover:shadow-lg rounded-lg px-4 py-2 text-xl text-white-text-color inline-flex items-center space-x-2">
+                            <p class="text-white-text-color">Go to URL</p>
                             <x-heroicon-o-arrow-right class="h-6 w-6"/>
                         </a>
                     @endif
 
-                    <hr class="mt-4"/>
-
-                    @if ($resource->isParent())
-                        <div class="py-4">
-                            <x-library::heading.3>{{ Trans::get('Discussion') }}</x-library::heading.3>
-                            <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::RESOURCE"/>
-                        </div>
-                    @endif
+                    <div>
+                        <livewire:social::partials.post-actions wire:key="resource-actions-{{ $resource->id }}" :post="$resource" :show-comment-button="false" :show-bookmark-button="true"/>
+                    </div>
                 </div>
             </div>
+
+            @if ($resource->isParent())
+                <div class="py-4 justify-center w-full xl:w-3/4 2xl:1/2 m-auto max-w-post-card-max-w">
+                    <div class="max-w-post-card-max-w">
+                    <x-library::heading.3>{{ Trans::get('Discussion') }}</x-library::heading.3>
+                    <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::RESOURCE"/>
+                    </div>
+                </div>
+            @endif
         </div>
         <livewire:media-manager/>
     @endif

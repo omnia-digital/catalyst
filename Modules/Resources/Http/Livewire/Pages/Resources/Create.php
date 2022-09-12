@@ -24,8 +24,8 @@ class Create extends Component
     {
         return [
             'title' => ['required', 'max:255'],
-            'url'   => ['url', 'max:255'],
-            'body'  => ['required', 'max:2500'],
+            'url'   => ['nullable', 'url', 'max:255'],
+            'body'  => ['required', 'min:50'],
             'image' => ['nullable','string'],
         ];
     }
@@ -40,27 +40,18 @@ class Create extends Component
             ->type(PostType::RESOURCE)
             ->execute($validated['body'], [
                 'title' => $validated['title'],
+                'body' => $validated['body'],
                 'url'   => $validated['url'],
                 'image' => $validated['image']
             ]);
 
         $tags = $this->getTags($hashtags);
-        $tags = $this->addResourceTag($tags);
         $resource->attachTags($tags,'post');
 
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);
     }
 
-    // Add Resource tag to all resources
-    public function addResourceTag($tags) : array
-    {
-        if (!array_key_exists('resource', $tags)) {
-            $tags[] = 'resource';
-        }
-
-        return $tags;
-    }
 
     public function setFeaturedImage(array $image)
     {
