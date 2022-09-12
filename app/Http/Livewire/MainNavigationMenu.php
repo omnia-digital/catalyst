@@ -25,13 +25,13 @@ class MainNavigationMenu extends Component
                 'module'  => 'social',
                 'current' => false
             ],
-            [
-                'label'   => 'Resources',
-                'name'    => 'resources.home',
-                'icon'    => 'heroicon-o-newspaper',
-                'module'  => 'resources',
-                'current' => false
-            ],
+//            [
+//                'label'   => 'Resources',
+//                'name'    => 'resources.home',
+//                'icon'    => 'heroicon-o-newspaper',
+//                'module'  => 'resources',
+//                'current' => false
+//            ],
             [
                 'label'   => 'Games',
                 'name'    => 'games.home',
@@ -39,41 +39,41 @@ class MainNavigationMenu extends Component
                 'module'  => 'games',
                 'current' => false
             ],
-            [
-                'label'   => 'Jobs',
-                'name'    => 'jobs.home',
-                'icon'    => 'heroicon-o-briefcase',
-                'module'  => 'jobs',
-                'current' => false
-            ],
-            [
-                'label'   => 'Advice',
-                'name'    => 'advice.home',
-                'icon'    => 'heroicon-o-briefcase',
-                'module'  => 'advice',
-                'current' => false
-            ],
-            [
-                'label'   => 'Crm',
-                'name'    => 'social.crm',
-                'icon'    => 'heroicon-o-users',
-                'module'  => 'advice',
-                'current' => false
-            ],
-            [
-                'label'   => 'Learn',
-                'name'    => 'advice.home',
-                'icon'    => 'heroicon-o-academic-cap',
-                'module'  => 'advice',
-                'current' => false
-            ],
-            [
-                'label'   => 'Marketplace',
-                'name'    => 'advice.home',
-                'icon'    => 'heroicon-o-shopping-bag',
-                'module'  => 'jobs',
-                'current' => false
-            ],
+//            [
+//                'label'   => 'Jobs',
+//                'name'    => 'jobs.home',
+//                'icon'    => 'heroicon-o-briefcase',
+//                'module'  => 'jobs',
+//                'current' => false
+//            ],
+//            [
+//                'label'   => 'Advice',
+//                'name'    => 'advice.home',
+//                'icon'    => 'heroicon-o-briefcase',
+//                'module'  => 'advice',
+//                'current' => false
+//            ],
+//            [
+//                'label'   => 'Crm',
+//                'name'    => 'social.crm',
+//                'icon'    => 'heroicon-o-users',
+//                'module'  => 'advice',
+//                'current' => false
+//            ],
+//            [
+//                'label'   => 'Learn',
+//                'name'    => 'advice.home',
+//                'icon'    => 'heroicon-o-academic-cap',
+//                'module'  => 'advice',
+//                'current' => false
+//            ],
+//            [
+//                'label'   => 'Marketplace',
+//                'name'    => 'advice.home',
+//                'icon'    => 'heroicon-o-shopping-bag',
+//                'module'  => 'jobs',
+//                'current' => false
+//            ],
         ];
 
 

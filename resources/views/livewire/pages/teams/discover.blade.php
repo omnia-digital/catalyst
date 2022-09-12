@@ -18,6 +18,7 @@
         </div>
     </div>
     <div class="mt-6 space-y-8">
+        {{-- Featured Teams --}}
         <div>
             <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured Teams') }}</x-library::heading.3>
             <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
@@ -25,6 +26,18 @@
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
                     <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Featured Teams Found') }}</p>
+                @endforelse
+            </div>
+        </div>
+
+        {{-- New Teams --}}
+        <div>
+            <x-library::heading.3 class="uppercase">{{ \Trans::get('New Teams') }}</x-library::heading.3>
+            <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
+                @forelse ($newTeams->take(4) as $team)
+                    <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                @empty
+                    <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No New Teams Found') }}</p>
                 @endforelse
             </div>
         </div>

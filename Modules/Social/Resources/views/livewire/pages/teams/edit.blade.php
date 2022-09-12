@@ -60,85 +60,8 @@
                 </nav>
             </div>
 
-            <!-- Edit Basic Team Info -->
-            <div x-show="activeTab === 0" class="mt-6 grid grid-cols-2 gap-6">
-                {{-- {{ $this->form }} --}}
-                <div class="flex-col">
-                    <x-library::input.label value="Name" class="inline"/>
-                    <span class="text-red-600 text-sm">*</span>
-                    <x-library::input.text id="name" wire:model.defer="team.name" required/>
-                    <x-library::input.error for="team.name"/>
-                </div>
-                <div class="flex-col">
-                    <x-library::input.label value="Start Date"/>
-                    <x-library::input.date id="startDate" wire:model.defer="team.start_date" placeholder="Team Launch Date"/>
-                    <x-library::input.error for="startDate"/>
-                </div>
-                <div class="flex-col">
-                    <x-library::input.label value="{{ \Trans::get('Summary') }}"/>
-                    <x-library::input.textarea id="summary" wire:model.defer="team.summary"/>
-                    <x-library::input.error for="team.summary"/>
-                </div>
-                <div class="flex-col">
-                    <x-library::input.label value="{{ \Trans::get('About this Team') }}"/>
-                    <x-library::input.textarea id="content" wire:model.defer="team.content" :rows="8"/>
-                    <x-library::input.error for="team.content"/>
-                </div>
-                {{--                @livewire('teams.delete-team-form', ['team' => $team])--}}
-            </div>
-
-            <!-- Edit Team Location -->
-            <div x-cloak x-show="activeTab === 1" class="mt-6 space-y-6">
-                <div>
-                    <x-library::heading.3 class="text-lg">Current Team Location</x-library::heading.3>
-                    @if ($team->location()->exists())
-                        <div class="flex items-center space-x-4 py-4">
-                            <p class="{{ $removeAddress ? 'line-through' : '' }}">{{ $team->location }}</p>
-                            @if ($removeAddress)
-                                <div class="py-2">
-                                    <a href="#"
-                                       class="hover:underline"
-                                       wire:click.prevent="$set('removeAddress', false)"
-                                    >Undo</a>
-                                </div>
-                            @else
-                                <x-library::button.destruction
-                                        wire:click.prevent="$set('removeAddress', true)"
-                                        class="p-1"
-                                >Remove
-                                </x-library::button.destruction>
-                            @endif
-                        </div>
-                    @else
-                        <div>
-                            <p>No Location has been selected for this team.</p>
-                        </div>
-                    @endif
-                </div>
-                <div>
-                    <x-library::heading.3 class="text-lg">Update Location</x-library::heading.3>
-                    <x-library::input.label value="Where will this event take place?"/>
-                    <div class="flex items-center space-x-2">
-                        <div class="flex-1">
-                            <x-library::input.place/>
-                        </div>
-                        <x-library::button.secondary
-                                wire:click.prevent="setAddress"
-                        >Set Address
-                        </x-library::button.secondary>
-                    </div>
-                </div>
-                @if (!empty($newAddress))
-                    <div>
-                        <x-library::heading.3 class="text-lg">New Team Location</x-library::heading.3>
-                        <p>{{ $this->selectedAddress }}</p>
-                        <p class="text-2xs text-red-600">Please save changes to use this address</p>
-                    </div>
-                @endif
-            </div>
-
             <!-- Edit Team Media -->
-            <div x-cloak x-show="activeTab === 2" class="mt-6 grid grid-cols-2 gap-6">
+            <div x-cloak x-show="activeTab === 0" class="mt-6 grid grid-cols-2 gap-6">
                 <x-library::heading.3>{{ Trans::get('Featured Content') }}</x-library::heading.3>
                 <!-- Featured Content / Sample Media -->
                 <div class="col-span-2">
@@ -217,24 +140,24 @@
                 </div>
 
                 @if(\Platform::isModuleEnabled('games'))
-                    <x-library::heading.4>{{ Trans::get('Feeds') }}</x-library::heading.4>
+                    <x-library::heading.4 class="col-span-2">{{ Trans::get('Feeds') }}</x-library::heading.4>
                     <!-- YouTube Channel -->
                     <div class="flex-col">
-                        <x-library::input.label value="YouTube Channel" class="inline"/>
+                        <x-library::input.label value="YouTube Channel ID" class="inline"/>
                         <x-library::input.text id="youtube_channel_id" wire:model.defer="team.youtube_channel_id"/>
                         <x-library::input.error for="team.youtube_channel_id"/>
                     </div>
 
                     <!-- Twitch Channel -->
                     <div class="flex-col">
-                        <x-library::input.label value="Twitch Channel" class="inline"/>
+                        <x-library::input.label value="Twitch Channel ID" class="inline"/>
                         <x-library::input.text id="twitch_channel_id" wire:model.defer="team.twitch_channel_id"/>
                         <x-library::input.error for="team.twitch_channel_id"/>
                     </div>
                 @endif
 
                 <div class="col-span-2">
-                <x-library::heading.3>{{ Trans::get('Team Home & Profile') }}</x-library::heading.3>
+                    <x-library::heading.3>{{ Trans::get('Team Home & Profile') }}</x-library::heading.3>
                 </div>
                 <!-- Banner Image -->
                 <div class="flex-col">
@@ -332,6 +255,84 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Edit Basic Team Info -->
+            <div x-show="activeTab === 1" class="mt-6 grid grid-cols-2 gap-6">
+                {{-- {{ $this->form }} --}}
+                <div class="flex-col">
+                    <x-library::input.label value="Name" class="inline"/>
+                    <span class="text-red-600 text-sm">*</span>
+                    <x-library::input.text id="name" wire:model.defer="team.name" required/>
+                    <x-library::input.error for="team.name"/>
+                </div>
+                <div class="flex-col">
+                    <x-library::input.label value="Start Date"/>
+                    <x-library::input.date id="startDate" wire:model.defer="team.start_date" placeholder="Team Launch Date"/>
+                    <x-library::input.error for="startDate"/>
+                </div>
+                <div class="flex-col">
+                    <x-library::input.label value="{{ \Trans::get('Summary') }}"/>
+                    <x-library::input.textarea id="summary" wire:model.defer="team.summary"/>
+                    <x-library::input.error for="team.summary"/>
+                </div>
+                <div class="flex-col">
+                    <x-library::input.label value="{{ \Trans::get('About this Team') }}"/>
+                    <x-library::input.textarea id="content" wire:model.defer="team.content" :rows="8"/>
+                    <x-library::input.error for="team.content"/>
+                </div>
+                {{--                @livewire('teams.delete-team-form', ['team' => $team])--}}
+            </div>
+
+            <!-- Edit Team Location -->
+            <div x-cloak x-show="activeTab === 2" class="mt-6 space-y-6">
+                <div>
+                    <x-library::heading.3 class="text-lg">Current Team Location</x-library::heading.3>
+                    @if ($team->location()->exists())
+                        <div class="flex items-center space-x-4 py-4">
+                            <p class="{{ $removeAddress ? 'line-through' : '' }}">{{ $team->location }}</p>
+                            @if ($removeAddress)
+                                <div class="py-2">
+                                    <a href="#"
+                                       class="hover:underline"
+                                       wire:click.prevent="$set('removeAddress', false)"
+                                    >Undo</a>
+                                </div>
+                            @else
+                                <x-library::button.destruction
+                                        wire:click.prevent="$set('removeAddress', true)"
+                                        class="p-1"
+                                >Remove
+                                </x-library::button.destruction>
+                            @endif
+                        </div>
+                    @else
+                        <div>
+                            <p>No Location has been selected for this team.</p>
+                        </div>
+                    @endif
+                </div>
+                <div>
+                    <x-library::heading.3 class="text-lg">Update Location</x-library::heading.3>
+                    <x-library::input.label value="Where will this event take place?"/>
+                    <div class="flex items-center space-x-2">
+                        <div class="flex-1">
+                            <x-library::input.place/>
+                        </div>
+                        <x-library::button.secondary
+                                wire:click.prevent="setAddress"
+                        >Set Address
+                        </x-library::button.secondary>
+                    </div>
+                </div>
+                @if (!empty($newAddress))
+                    <div>
+                        <x-library::heading.3 class="text-lg">New Team Location</x-library::heading.3>
+                        <p>{{ $this->selectedAddress }}</p>
+                        <p class="text-2xs text-red-600">Please save changes to use this address</p>
+                    </div>
+                @endif
+            </div>
+
         </div>
     </div>
 @endsection
@@ -343,18 +344,18 @@
                 tabs: [
                     {
                         id: 0,
-                        title: 'Basic Info',
-                        /* component: 'social::pages.teams.partials.edit-team-basic' */
+                        title: 'Content',
                     },
                     {
                         id: 1,
-                        title: 'Locations',
-                        /* component: 'social::pages.teams.partials.edit-team-locations' */
+                        title: 'Profile',
+                        /* component: 'social::pages.teams.partials.edit-team-basic' */
                     },
                     {
                         id: 2,
-                        title: 'Media',
-                    }
+                        title: 'Locations',
+                        /* component: 'social::pages.teams.partials.edit-team-locations' */
+                    },
                 ]
             }
         }

@@ -9,6 +9,7 @@ use App\Actions\Teams\GetPopularUpcomingTeamsAction;
 use App\Actions\Teams\GetTeamCategoriesAction;
 use App\Actions\Teams\GetTrendingTeamsAction;
 use App\Lenses\Teams\NewReleaseTeamsLens;
+use App\Models\Team;
 use App\Support\Feed\FeedItem;
 use App\Support\Feed\PolygonFeedItem;
 use Livewire\Component;
@@ -81,6 +82,11 @@ class Discover extends Component
         return $feed;
     }
 
+    public function getNewTeamsProperty()
+    {
+        return Team::latest('published_at')->get();
+    }
+
     public function getCategoriesProperty()
     {
         return (new GetTeamCategoriesAction)->execute();
@@ -115,6 +121,7 @@ class Discover extends Component
     {
         return view('livewire.pages.teams.discover', [
             'featuredTeams' => $this->featuredTeams,
+            'newTeams' => $this->newTeams,
             'trendingTeams' => $this->trendingTeams,
             'categories' => $this->categories,
             'curatedTeams' => $this->curatedTeams,

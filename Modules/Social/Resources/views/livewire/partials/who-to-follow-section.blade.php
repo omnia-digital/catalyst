@@ -1,9 +1,9 @@
 <section aria-labelledby="who-to-follow-heading" class="card">
-    <div class="p-6">
+    <div class="px-4 pb-6 pt-1">
             <x-library::heading.2 id="who-to-follow-heading" class="text-xl font-medium text-gray-900">
                 Who to follow
             </x-library::heading.2>
-            <div class="mt-6 flow-root">
+            <div class="mt-4 flow-root">
                 <ul role="list" class="-my-4">
                     @forelse ($this->whoToFollow as $user)
                         <li class="flex items-center py-4 space-x-3">
