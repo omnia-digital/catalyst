@@ -6,5 +6,6 @@
     "Jobs": false,
     "Games": true,
     "Reviews": true,
-    "Crm": false
+    "Crm": false,
+    "Subscriptions": true
 }
