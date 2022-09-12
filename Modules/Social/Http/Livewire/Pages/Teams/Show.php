@@ -2,15 +2,18 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Teams;
 
+use App\Models\Award;
 use App\Models\Location;
 use App\Models\Team;
+use App\Models\User;
 use App\Traits\Team\WithTeamManagement;
 use Livewire\Component;
+use OmniaDigital\OmniaLibrary\Livewire\WithMap;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Show extends Component
 {
-    use WithTeamManagement;
+    use WithTeamManagement, WithMap;
 
     public $team;
 
@@ -18,15 +21,41 @@ class Show extends Component
 
     public $displayID = null;
 
+    public ?User $userToAddAwardsTo;
+
+    public $awardsToAdd = [];
+
     public $additionalInfo = [
         'likes',
         'comments',
         'members'
     ];
 
+    public $activity = [
+        'user' => [
+            'avatar' => 'https://via.placeholder.com/150',
+        ],
+        'title' => 'Activity Title',
+        'created_at' => 'June 1, 2022',
+        'id' => 1,
+        'message' => 'Activity Message',
+        'team' => [
+            'link' => '#',
+        ],
+        'members' => [
+            [
+                'avatar' => 'https://via.placeholder.com/150',
+                'name' => 'Member Name',
+                'link' => '#',
+            ],
+        ],
+    ];
+
+    protected $listeners = ['addUserAwards', 'modal-closed' => 'resetAwardsSelection'];
+
     public function getPlacesProperty()
     {
-        $places = Location::select(['lat', 'lng', 'model_id'])
+        $places = Location::select(['lat', 'lng', 'model_id', 'model_type'])
             ->where('model_id', $this->team->id)
             ->where('model_type', Team::class)
             ->hasCoordinates()
@@ -34,6 +63,7 @@ class Show extends Component
             ->get()
             ->map(function (Location $location) {
                 return [
+                    'id' => $location->id,
                     'name' => $location->model->name,
                     'lat' => $location->lat,
                     'lng' => $location->lng,
@@ -58,11 +88,36 @@ class Show extends Component
         $this->displayID = $media->id;
     }
 
+    
+    public function resetAwardsSelection()
+    {
+        $this->reset('awardsToAdd');
+    }
+
+    public function addUserAwards($userID)
+    {
+        $this->dispatchBrowserEvent('add-awards-modal', ['type' => 'open']);
+        $this->userToAddAwardsTo = User::find($userID);
+    }
+
+    public function addAward(User $user)
+    {
+        $user->awards()->attach($this->awardsToAdd);
+        
+        $this->dispatchBrowserEvent('notify', ['message' => 'Awards Added', 'type' => 'success']);
+        $this->dispatchBrowserEvent('add-awards-modal',  ['type' => 'close']);
+    }
+
+    public function getRemainingAwards(User $user)
+    {
+        return Award::whereNotIn('id', $user->awards()->pluck('awards.id')->toArray())->get();
+    }
+
     public function mount(Team $team)
     {
         $team->owner;
-        $this->displayUrl = optional($team->getMedia('team_sample_images')->first())->getFullUrl();
-        $this->displayID = optional($team->getMedia('team_sample_images')->first())->id;
+        $this->displayUrl = $team->sampleImages()->first()->getFullUrl();
+        $this->displayID = $team->sampleImages()->first()->id;
     }
 
     public function render()

@@ -1,8 +1,11 @@
 {
-    "Advice": true,
+    "Advice": false,
     "Social": true,
     "Projects": true,
     "Resources": true,
-    "Jobs": true,
-    "Games": false
+    "Jobs": false,
+    "Games": true,
+    "Reviews": true,
+    "Crm": false,
+    "Subscriptions": true
 }

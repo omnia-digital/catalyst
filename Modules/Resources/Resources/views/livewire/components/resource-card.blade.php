@@ -1,4 +1,6 @@
-<article wire:click.prevent.stop="showPost" class="pt-4 shadow-sm rounded-lg cursor-pointer border border-2 hover:border-secondary z-10 bg-primary">
+<article wire:click.prevent.stop="showPost" class="pt-4 shadow-sm rounded-lg cursor-pointer border border-2 z-10 bg-primary {{ $clickable ? '
+cursor-pointer' : ''
+}}">
     <!-- Content -->
     <div class="w-full">
         <div class="space-y-2">
@@ -65,7 +67,7 @@
     </div>
 
     <!-- Social Actions -->
-    <div class="z-20 w-full">
+    <div class="z-20 w-full px-5">
         <livewire:social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
     </div>
 </article>

@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Actions;
 
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +22,8 @@ class CreateNewPostAction
     protected ?Model $repost = null;
 
     protected ?PostType $type = null;
+
+    protected ?Team $team = null;
 
     public function user(User|Authenticatable $user): self
     {
@@ -55,10 +58,11 @@ class CreateNewPostAction
         $user = $this->user ?? Auth::user();
 
         return $user->posts()->create([
-            'body'               => $content,
-            'team_id'            => $options['team_id'] ?? $user->current_team_id,
-            'title'              => $options['title'] ?? null,
             'type'               => $this->type,
+            'body'               => $content,
+            'team_id'            => $options['team_id'] ?? null,
+            'title'              => $options['title'] ?? null,
+            'url'                => $options['url'] ?? null,
             'postable_id'        => $this->postable?->id ?? $options['postable_id'] ?? null,
             'postable_type'      => $this->postable ? get_class($this->postable) : ($options['postable_type'] ?? null),
             'repost_original_id' => $this->repost?->id,

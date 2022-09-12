@@ -120,7 +120,7 @@ use Modules\Social\Models\Post;
 
         public function render()
         {
-            return view('social::livewire.new-post-box');
+            return view('social::livewire.components.new-post-box');
         }
 
     }

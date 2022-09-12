@@ -1,36 +1,44 @@
-<article wire:click.prevent.stop="showPost" class="bg-primary pt-4 shadow-sm rounded-lg z-10 hover:border-2 {{ $clickable ? 'hover:border-secondary  cursor-pointer' : '' }}">
-
+<article wire:click.prevent.stop="showPost" class="max-w-post-card-max-w bg-post-card-bg-color pt-4 shadow rounded-lg z-10 border-2 border-transparent {{ $clickable ? '
+cursor-pointer' : ''
+}}">
     <div class="flex justify-between px-5">
         <div class="flex space-x-3">
-            <div class="mr-3 flex-shrink-0">
+            <div class="flex-shrink-0">
                 <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}"/>
             </div>
             <div class="min-w-0 flex-1">
                 <div class="min-w-0">
-                    <div class="mr-2 font leading-5">
+                    <div class="font leading-5">
                         <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}"
-                           class="hover:underline block font-bold text-dark-text-color">{{ $post->user->name }}</a>
+                           class="hover:underline block font-bold text-post-card-title-color">{{ $post->user->name }}</a>
                     </div>
-                    <div class="flex content-center space-x-1 text-base-text-color">
+                    <div class="flex content-center space-x-1 items-center text-post-card-body-color">
                         <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
                         <x-dot/>
                         <a href="{{ $post->getUrl() }}" class="hover:underline">
-                            <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans(short: true) }}</time>
+                            <time datetime="{{ $post->published_at }}">{{ $post->published_at->diffForHumans(short: true) }}</time>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class=" flex align-top">
-            {{--                @if (!is_null($post->team_id))--}}
-            {{--                    <div class="text-base-text-color text-xs font-semibold mr-3">--}}
-            {{--                        <a href="{{ $post->team->profile() }}" class=" hover:no-underline">{{ $post->team->name }}</a>--}}
-            {{--                    </div>--}}
-            {{--                @endif--}}
-            <div class="relative z-1 inline-block text-left">
+        <div class="z-1 flex align-top space-x-4">
+            @if (!is_null($post->team_id))
+                <div class="hidden xl:flex items-center space-x-2 h-7">
+                    <div class="flex-shrink-0">
+                        <img class="h-7 w-7 rounded-full" src="{{ $post->team?->profile_photo_url }}" alt="{{ $post->team->name }}"/>
+                    </div>
+                    <div class="text-post-card-body-color text-xs font-semibold mr-3">
+                        <a wire:click.prevent.stop="showProfile('{{ $post->team->handle }}', true)"
+                           href="{{ route('social.teams.show', $post->team->handle) }}" class="hover:underline">{{ $post->team->name }}</a>
+                    </div>
+                </div>
+            @endif
+            <div class="relative z-1 inline-block text-left items-center">
                 <x-library::dropdown>
                     <x-slot name="trigger" x-on:click.stop="">
-                        <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
+                        <button type="button" class="-m-2 p-2 rounded-full flex items-center text-post-card-title-color hover:text-light-text-color" id="menu-0-button" aria-expanded="false"
+                                aria-haspopup="true">
                             <span class="sr-only">Open options</span>
                             <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
                         </button>
@@ -67,7 +75,7 @@
 
     <div>
         @if ($post->isRepost())
-            <article class="mt-4 w-full flex bg-white p-4 shadow-sm border border-gray-200 rounded-md">
+            <article class="mt-4 w-full flex bg-post-card-bg-color p-4 shadow-sm border border-post-card-border-color rounded-md">
                 <div class="mr-3 flex-shrink-0">
                     <img class="h-10 w-10 rounded-full" src="{{ $post->repostOriginal->user?->profile_photo_url }}" alt="{{ $post->repostOriginal->user->name }}"/>
                 </div>
@@ -80,7 +88,7 @@
                                        href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}" class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
                                 </div>
                                 <div class="text-base-text-color">
-                                    {{ $post->repostOriginal->created_at->diffForHumans() }}
+                                    {{ $post->repostOriginal->published_at->diffForHumans() }}
                                 </div>
                             </div>
                         </div>
@@ -106,7 +114,9 @@
         @endif
     </div>
 
-    <div wire:click.prevent.stop="" class="z-20 px-5">
-        <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
-    </div>
+    @if($showPostActions)
+        <div wire:click.prevent.stop="" class="z-20 px-5">
+            <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
+        </div>
+    @endif
 </article>

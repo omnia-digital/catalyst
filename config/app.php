@@ -15,6 +15,10 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'abbr' => env('APP_ABBR', 'APP'),
+    'theme' => env('APP_THEME', 'default'),
+    'theme_light_type' => env('APP_THEME_LIGHT_TYPE', 'light'),
+    'logo_path' => env('APP_LOGO'),
+    'logo_path_dark' => env('APP_LOGO_DARK'),
 
     /*
     |--------------------------------------------------------------------------
@@ -69,6 +73,8 @@ return [
     */
 
     'timezone' => 'UTC',
+    'default_datetime_format' => "M j, 'y @ g a ",
+    'default_date_format' => "M j, y",
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +174,7 @@ return [
          * Package Service Providers...
          */
         \App\Providers\PlatformServiceProvider::class,
+        
 
         /*
          * Application Service Providers...
@@ -176,12 +183,13 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\NovaServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\VaporUiServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\TeamLensesServiceProvider::class,
+        App\Providers\StripeConnectServiceProvider::class,
+        Omniphx\Forrest\Providers\Laravel\ForrestServiceProvider::class,
     ],
 
     /*
@@ -213,6 +221,7 @@ return [
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
+        'Forrest' => Omniphx\Forrest\Providers\Laravel\Facades\Forrest::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Http' => Illuminate\Support\Facades\Http::class,

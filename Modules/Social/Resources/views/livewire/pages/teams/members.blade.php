@@ -3,13 +3,13 @@
 
 @section('content')
         <div class="mt-4">
-            <h2 class="text-black font-semibold text-2xl mx-6 ">{{ \Trans::get('Members') }}</h2>
+            <x-library::heading.2 class="text-base-text-color font-semibold text-2xl mx-6 ">{{ \Trans::get('Members') }}</x-library::heading.2>
 
             <div x-data="setup()">
                 <!-- Team Members Navigation -->
                 <div class="w-full mt-6">
                     <nav class="flex items-center justify-between text-xs">
-                        <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-10">
+                        <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-6">
                             <template x-for="(tab, index) in tabs" :key="tab.id">
                                 <li class="pb-px">
                                     <a href="#"
@@ -26,12 +26,12 @@
                 </div>
 
                 <!-- Member Overview -->
-                <div x-show="activeTab === 0" class="mt-6 space-y-6">
+                <div x-show="activeTab === 0" class="mt-6 px-6 space-y-6">
                     <div class="space-y-6">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
                                 <img class="w-8 h-8 rounded-full" src="{{ $team->owner->profile_photo_url }}" alt="{{ $team->owner->name }}">
-                                <div class="ml-4">{{ $team->owner->name }}</div>
+                                <div class="ml-4"><a href="{{ $team->owner->url() }}" class="hover:underline focus:underline">{{ $team->owner->name }}</a></div>
                             </div>
 
                             <div class="flex items-center">
@@ -44,30 +44,30 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img class="w-8 h-8 rounded-full" src="{{ $member->profile_photo_url }}" alt="{{ $member->name }}">
-                                    <div class="ml-4">{{ $member->name }}</div>
+                                    <div class="ml-4"><a href="{{ $member->url() }}" class="hover:underline focus:underline">{{ $member->name }}</a></div>
                                 </div>
 
                                 <div class="flex items-center">
                                     <!-- Manage Team Member Role -->
                                     @if (Gate::check('addTeamMember', $team) && Laravel\Jetstream\Jetstream::hasRoles())
                                         <button class="ml-2 text-sm text-light-text-color underline hover:no-underline active:no-underline" wire:click="manageRole('{{ $member->id }}')">
-                                            {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role) : 'No Role' }}
+                                            {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role)->name : 'No Role' }}
                                         </button>
                                     @elseif (Laravel\Jetstream\Jetstream::hasRoles())
                                         <div class="ml-2 text-sm text-light-text-color">
-                                            {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role) : '' }}
+                                            {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role)->name : '' }}
                                         </div>
                                     @endif
 
                                     <!-- Leave Team -->
                                     @if ($this->user->id === $member->id)
-                                        <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="$toggle('confirmingLeavingTeam')">
+                                        <button class="cursor-pointer ml-6 text-sm text-red-500 hover:underline focus:underline" wire:click="$toggle('confirmingLeavingTeam')">
                                             {{ \Trans::get('Leave') }}
                                         </button>
 
                                         <!-- Remove Team Member -->
                                     @elseif (Gate::check('removeTeamMember', $team))
-                                        <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="confirmTeamMemberRemoval('{{ $member->id }}')">
+                                        <button class="cursor-pointer ml-6 text-sm text-red-500 hover:underline focus:underline" wire:click="confirmTeamMemberRemoval('{{ $member->id }}')">
                                             {{ \Trans::get('Remove') }}
                                         </button>
                                     @endif
@@ -75,15 +75,10 @@
                             </div>
                         @endforeach
                     </div>
-                    {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-                        @foreach ($team->members() as $member)
-                            <x-user-tile :user="$member" :team="$team" />
-                        @endforeach
-                    </div> --}}
                 </div>
 
                 <!-- Team Invitations -->
-                <div x-cloak x-show="activeTab === 1" class="mt-6 space-y-6">
+                <div x-cloak x-show="activeTab === 1" class="mt-6 px-6 space-y-6">
                     <div>
                         @if (Gate::check('addTeamMember', $team))
                             <x-jet-section-border/>
@@ -211,7 +206,7 @@
                 </div>
 
                 <!-- Team Applications -->
-                <div x-cloak x-show="activeTab === 2" class="mt-6 space-y-6">
+                <div x-cloak x-show="activeTab === 2" class="mt-6 px-6 space-y-6">
                     <x-jet-section-border/>
 
                     <!-- Team Member Applications -->
@@ -233,7 +228,7 @@
 
                                             <div class="flex items-center">
                                                 <button type="button"
-                                                        class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-black text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
+                                                        class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
                                                         wire:click.prevent="addTeamMemberUsingID({{ $application->user->id }})"
                                                 >Accept
                                                 </button>

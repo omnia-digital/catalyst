@@ -7,7 +7,7 @@
                 <img src="{{ $game->cover_url }}" alt="cover">
             </div>
             <div class="lg:ml-12 xl:mr-64">
-                <h2 class="font-semibold text-4xl leading-tight mt-1">{{ $game->name }}</h2>
+                <x-library::heading.2 class="font-semibold text-4xl leading-tight mt-1">{{ $game->name }}</x-library::heading.2>
                 <div class="text-gray-400">
                     <span>
                         {{ $game->genres }}
@@ -108,7 +108,7 @@
                 <div class="mt-12" x-data="{ isTrailerModalVisible: false }">
                     <button
                             @click="isTrailerModalVisible = true"
-                            class="flex bg-blue-500 text-white font-semibold px-4 py-4 hover:bg-blue-600 rounded transition ease-in-out duration-150"
+                            class="flex bg-blue-500 text-white-text-color font-semibold px-4 py-4 hover:bg-blue-600 rounded transition ease-in-out duration-150"
                     >
                         <svg class="w-6 fill-current" viewBox="0 0 24 24">
                             <path d="M0 0h24v24H0z" fill="none"></path>
@@ -151,7 +151,7 @@
                 class="images-container border-b border-gray-800 pb-12 mt-8"
                 x-data="{ isImageModalVisible: false, image: '' }"
         >
-            <h2 class="text-blue-500 uppercase tracking-wide font-semibold">Images</h2>
+            <x-library::heading.2 class="text-blue-500 uppercase tracking-wide font-semibold">Images</x-library::heading.2>
             @if($game->screenshots)
                 <div class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8">
                     @foreach ($game->screenshots as $screenshot)
@@ -197,7 +197,7 @@
 
         @if($game->screenshots)
             <div class="similar-games-container mt-8">
-                <h2 class="text-blue-500 uppercase tracking-wide font-semibold">Similar Games</h2>
+                <x-library::heading.2 class="text-blue-500 uppercase tracking-wide font-semibold">Similar Games</x-library::heading.2>
                 <div class="similar-games text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-12">
                     @foreach ($game->similarGames as $game)
 {{--                        <livewire:games::components.game-card :game="$game"/>--}}

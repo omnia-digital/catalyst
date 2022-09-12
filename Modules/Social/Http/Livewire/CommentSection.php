@@ -68,6 +68,6 @@ class CommentSection extends Component
 
     public function render()
     {
-        return view('social::livewire.comment-section');
+        return view('social::livewire.partials.comment-section');
     }
 }

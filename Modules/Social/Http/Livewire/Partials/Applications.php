@@ -39,7 +39,7 @@ class Applications extends Component
             $invitation->team->owner,
             $invitation->team,
             $this->user->email,
-            'editor'
+            'member'
         );
 
         $invitation->delete();

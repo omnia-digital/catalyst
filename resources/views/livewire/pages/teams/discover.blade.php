@@ -1,23 +1,66 @@
 @extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
-    <div class="space-y-8">
-        <h1 class="py-2 text-3xl">{{ \Trans::get('Discover New Teams') }}</h1>
-
+    <div class="w-full mb-4">
+        <div class="relative shadow-xl sm:rounded-b-2xl sm:overflow-hidden">
+            <div class="absolute inset-0 grayscale">
+                <img class="h-full w-full object-cover"
+                     src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100"
+                     alt="People working on laptops">
+                <div class="absolute inset-0 bg-indigo-700 mix-blend-multiply"></div>
+            </div>
+            <div class="relative px-4 py-16 sm:px-6 sm:py-16 lg:py-16 lg:px-8">
+                <x-library::heading.1 class="text-center uppercase" text-size="text-5xl">
+                    {{ Trans::get('DISCOVER') }}
+                </x-library::heading.1>
+                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">{{ Trans::get('Find Teams and other resources') }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="mt-6 space-y-8">
+        {{-- Featured Teams --}}
         <div>
-            <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured & Recommended') }}</x-library::heading.3>
-
-            {{--      Use $featuredTeams      --}}
+            <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured Teams') }}</x-library::heading.3>
+            <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
+                @forelse ($featuredTeams->take(4) as $team)
+                    <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                @empty
+                    <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Featured Teams Found') }}</p>
+                @endforelse
+            </div>
         </div>
 
-{{--        <div>--}}
-{{--            <livewire:social::components.find-projects/>--}}
-{{--        </div>--}}
+        {{-- New Teams --}}
+        <div>
+            <x-library::heading.3 class="uppercase">{{ \Trans::get('New Teams') }}</x-library::heading.3>
+            <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
+                @forelse ($newTeams->take(4) as $team)
+                    <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                @empty
+                    <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No New Teams Found') }}</p>
+                @endforelse
+            </div>
+        </div>
+
+        @if(\Platform::isModuleEnabled('games'))
+            <h2>Recommended YouTube Channels</h2>
+            <div class="space-y-6">
+                @foreach($youtubeFeeds as $youtubeFeed)
+                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>
+                @endforeach
+            </div>
+
+            <h2>Recommended Twitch Channels</h2>
+            <div class="space-y-6">
+                @foreach($twitchFeeds as $youtubeFeed)
+                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>
+                @endforeach
+            </div>
+        @endif
 
         <div>
-            <x-library::heading.3 class="uppercase">{{ \Trans::get('Find Teams') }}</x-library::heading.3>
-
-            <livewire:social::pages.teams.map/>
+            <x-library::heading.3 class="uppercase">{{ \Trans::get('Team Map') }}</x-library::heading.3>
+            <livewire:social::pages.teams.map class=""/>
         </div>
 
         <div>
@@ -41,7 +84,7 @@
             @if(count($categories))
                 <div class="flex items-center space-x-2">
                     <x-library::heading.3 class="uppercase">{{ \Trans::get('Categories') }} ({{ count($categories) }})</x-library::heading.3>
-                    <a href="#" class="text-gray-500 text-xs"></a>
+                    <a href="{{ route('social.teams.home') }}" class="text-gray-500 text-xs">{{ Trans::get('View All Teams') }}</a>
                 </div>
 
                 <div class="flex justify-between space-x-2 py-4">

@@ -5,6 +5,7 @@ namespace Modules\Social\Http\Livewire\Pages\Teams;
 use App\Models\Team;
 use App\Models\User;
 use App\Traits\Filter\WithSortAndFilters;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -20,6 +21,8 @@ class MyTeams extends Component
         'start_date' => 'Launch Date'
     ];
 
+    public string $dateColumn = 'start_date';
+
     public function mount()
     {
         $this->orderBy = 'name';
@@ -34,9 +37,10 @@ class MyTeams extends Component
         $query = Team::query()
             ->withUser($this->user)
             ->withCount(['users']);
-
+            
         $query = $this->applyFilters($query)
-            ->orderBy($this->orderBy, $this->sortOrder);
+            ->when($this->search, fn(Builder $q) => $q->search($this->search));
+        $query = $this->applySorting($query);
 
         return $query;
     }

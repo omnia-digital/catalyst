@@ -9,7 +9,7 @@
         <!-- Page Heading -->
         <div class="space-y-8">
             <div class="border-b-2 border-b-light-text-color pb-1">
-                <h1 class="text-3xl"><span class="text-dark-text-color">Edit Profile: </span><span class="text-light-text-color">{{ $profile->name }}</span></h1>
+                <x-library::heading.1 class="text-3xl"><span class="text-dark-text-color">Edit Profile: </span><span class="text-light-text-color">{{ $profile->name }}</span></x-library::heading.1>
             </div>
         </div>
 
@@ -86,7 +86,7 @@
                         <input type="text" class="flex-1 border-none" wire:model="bannerImageName" placeholder="Upload file for banner" readonly>
                         <label>
                             <input type="file" wire:model="bannerImage" hidden required />
-                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
                         </label>
                     </div>
                     <x-library::input.error for="bannerImage" />
@@ -117,7 +117,7 @@
                         <input type="text" class="flex-1 border-none" wire:model="photoName" placeholder="Upload file for banner" readonly>
                         <label>
                             <input type="file" wire:model="photo" hidden required />
-                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
                         </label>
                     </div>
                     <x-library::input.error for="photo" />

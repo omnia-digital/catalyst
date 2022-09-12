@@ -1,25 +1,23 @@
-@extends('social::livewire.layouts.pages.sidebar-page-layout')
+@extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
-    <div class="mb-2 flex justify-between items-center">
-        <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full">
-            <a href="{{ route('social.home') }}">
-                <x-heroicon-o-arrow-left class="h-6"/>
-            </a>
-        </div>
+    <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg pl-4 flex items-center bg-secondary items-center">
         <div class="flex-1 flex items-center">
-            <h1 class="py-2 text-3xl">Bookmarks</h1>
+            <x-dynamic-component component="heroicon-o-bookmark"
+                                 class="{{ 'text-primary' }} mr-3 flex-shrink-0 h-8 w-8"
+                                 aria-hidden="true"/>
+            <x-library::heading.1 class="py-4">Bookmarks</x-library::heading.1>
         </div>
     </div>
 
     <!-- Filters -->
-    @include('livewire.partials.filters')
+    @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
     @if(empty($bookmarks))
-        <h2>No Bookmarked Resources</h2>
+        <x-library::heading.2>No Bookmarked Resources</x-library::heading.2>
     @else
         <div class="">
-            <ul role="list" class="grid grid-cols-1 gap-6">
+            <ul role="list" class="masonry masonry-2 space-y-4">
                 @foreach($bookmarks as $bookmark)
                     <li>
                         <livewire:social::components.post-card :post="$bookmark->bookmarkable()->first()"/>
@@ -65,7 +63,7 @@
                         component: 'social.undiscovered'
                     },
                 ],
-                notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>',
+                notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-black rounded-full">3</span>',
             }
         }
     </script>
