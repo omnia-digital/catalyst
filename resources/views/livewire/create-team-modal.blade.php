@@ -42,7 +42,7 @@
 {{--        </div>--}}
 {{--        <div class="mt-6">--}}
 {{--            <hr class="border-neutral-dark mt-6 mb-4"/>--}}
-{{--            <h3 class="text-xl mb-4">{{ \Trans::get('Media') }}</h3>--}}
+{{--            <x-library::heading.3 class="text-xl mb-4">{{ \Trans::get('Media') }}</x-library::heading.3>--}}
 {{--            <div class="flex items-center">--}}
 {{--                <x-library::input.label value="{{ \Trans::get('Banner Image') }}" /><span class="text-red-600 text-sm ml-1">*</span>--}}
 {{--            </div>--}}

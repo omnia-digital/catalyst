@@ -21,10 +21,12 @@ class ReviewFactory extends Factory
      */
     public function definition()
     {
+        $team = Team::all()->random();
+
         return [
-            'user_id'    => User::all()->random()->id,
-            'reviewable_id'    => Team::all()->random()->id,
-            'reviewable_type' => Team::class,
+            'user_id'    => $team->users->random()->id,
+            'reviewable_id'    => $team->id,
+            'reviewable_type' => $team::class,
             'body'       => $this->faker->paragraph(4),
             'created_at' => now(),
             'updated_at' => now(),

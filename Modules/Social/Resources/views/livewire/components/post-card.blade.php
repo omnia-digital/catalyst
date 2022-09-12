@@ -16,7 +16,7 @@ cursor-pointer' : ''
                         <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
                         <x-dot/>
                         <a href="{{ $post->getUrl() }}" class="hover:underline">
-                            <time datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans(short: true) }}</time>
+                            <time datetime="{{ $post->published_at }}">{{ $post->published_at->diffForHumans(short: true) }}</time>
                         </a>
                     </div>
                 </div>
@@ -24,7 +24,7 @@ cursor-pointer' : ''
         </div>
         <div class="z-1 flex align-top space-x-4">
             @if (!is_null($post->team_id))
-                <div class="flex items-center space-x-2 h-7">
+                <div class="hidden xl:flex items-center space-x-2 h-7">
                     <div class="flex-shrink-0">
                         <img class="h-7 w-7 rounded-full" src="{{ $post->team?->profile_photo_url }}" alt="{{ $post->team->name }}"/>
                     </div>
@@ -88,7 +88,7 @@ cursor-pointer' : ''
                                        href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}" class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
                                 </div>
                                 <div class="text-base-text-color">
-                                    {{ $post->repostOriginal->created_at->diffForHumans() }}
+                                    {{ $post->repostOriginal->published_at->diffForHumans() }}
                                 </div>
                             </div>
                         </div>
@@ -114,7 +114,9 @@ cursor-pointer' : ''
         @endif
     </div>
 
-    <div wire:click.prevent.stop="" class="z-20 px-5">
-        <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
-    </div>
+    @if($showPostActions)
+        <div wire:click.prevent.stop="" class="z-20 px-5">
+            <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
+        </div>
+    @endif
 </article>

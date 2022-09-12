@@ -26,19 +26,19 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
-    protected static ?string $label = 'Members';
+    protected static ?string $label = 'Users';
     protected static ?string $model = User::class;
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-    protected static ?string $navigationGroup = 'My Teams';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationGroup = 'Social';
 
-    public static function getEloquentQuery(): Builder
-    {
-        if (auth()->user()->is_admin) {
-            return User::query();
-        } else {
-            return parent::getEloquentQuery()->whereHas('teams', fn(Builder $query) => $query->whereIn('teams.id', auth()->user()->ownedTeams->pluck('id')));
-        }
-    }
+//    public static function getEloquentQuery(): Builder
+//    {
+//        if (auth()->user()->is_admin) {
+//            return User::query();
+//        } else {
+//            return parent::getEloquentQuery()->whereHas('teams', fn(Builder $query) => $query->whereIn('teams.id', auth()->user()->ownedTeams->pluck('id')));
+//        }
+//    }
 
     protected static function getNavigationBadge(): ?string
     {
@@ -97,33 +97,33 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('profile_id'),
-                TextColumn::make('first_name'),
-                TextColumn::make('last_name'),
+                TextColumn::make('profile.id'),
+                TextColumn::make('profile.first_name'),
+                TextColumn::make('profile.last_name'),
                 TextColumn::make('email'),
                 TextColumn::make('email_verified_at')
-                    ->dateTime(),
-                TextColumn::make('two_factor_secret'),
-                TextColumn::make('two_factor_recovery_codes'),
+                    ->dateTime(config('app.default_datetime_format')),
+//                TextColumn::make('two_factor_secret'),
+//                TextColumn::make('two_factor_recovery_codes'),
                 TextColumn::make('status'),
-                Tables\Columns\BooleanColumn::make('2fa_enabled'),
-                TextColumn::make('2fa_secret'),
-                TextColumn::make('2fa_backup_codes'),
-                TextColumn::make('2fa_setup_at')
-                    ->dateTime(),
-                TextColumn::make('language'),
-                TextColumn::make('current_team_id'),
-                TextColumn::make('profile_photo_path'),
+//                Tables\Columns\BooleanColumn::make('2fa_enabled'),
+//                TextColumn::make('2fa_secret'),
+//                TextColumn::make('2fa_backup_codes'),
+//                TextColumn::make('2fa_setup_at')
+//                    ->dateTime(),
+//                TextColumn::make('language'),
+                TextColumn::make('current_team.name'),
+//                TextColumn::make('profile_photo_path'),
                 TextColumn::make('last_active_at')
-                    ->dateTime(),
-                TextColumn::make('delete_after')
-                    ->dateTime(),
-                TextColumn::make('deleted_at')
-                    ->dateTime(),
+                    ->dateTime(config('app.default_datetime_format')),
+//                TextColumn::make('delete_after')
+//                    ->dateTime(),
+//                TextColumn::make('deleted_at')
+//                    ->dateTime(),
                 TextColumn::make('created_at')
-                    ->dateTime(),
-                TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime(config('app.default_datetime_format')),
+//                TextColumn::make('updated_at')
+//                    ->dateTime(),
 
             ])
             ->filters([

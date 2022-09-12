@@ -2,7 +2,7 @@
     <div>
         <div class="divide-y divide-neutral-light">
 {{--            <div class="pb-4">--}}
-{{--                <h2 id="activity-title" class="text-lg font-medium text-dark-text-color">Comments</h2>--}}
+{{--                <x-library::heading.2 id="activity-title" class="text-lg font-medium text-dark-text-color">Comments</x-library::heading.2>--}}
 {{--            </div>--}}
             <div>
 

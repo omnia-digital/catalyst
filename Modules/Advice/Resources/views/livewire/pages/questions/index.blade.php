@@ -5,7 +5,7 @@
         <div class="xl:col-span-6">
             <div class="mb-2 flex justify-between items-center">
                 <div class="flex-1 flex items-center">
-                    <h1 class="py-2 text-3xl">Questions</h1>
+                    <x-library::heading.1 class="py-2">Questions</x-library::heading.1>
                 </div>
 
                 <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent="$openModal('add-resource-modal')">

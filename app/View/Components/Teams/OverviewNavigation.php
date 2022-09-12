@@ -13,14 +13,15 @@ class OverviewNavigation extends Component
     public $pageView;
 
     public $nav = [
-        'show' => 'Discussion',
-        'members' => 'People',
-        'resources' => 'Resources',
-        'advice' => 'Advice',
-        'jobs' => 'Jobs',
-        'learn' => 'Courses',
-        'awards' => 'Awards',
-        'about' => 'About',
+        'show' => 'Home',
+        'subscriptions' => 'Subscriptions',
+        //        'members' => 'People',
+//        'resources' => 'Resources',
+//        'advice' => 'Advice',
+//        'jobs' => 'Jobs',
+//        'learn' => 'Courses',
+//        'awards' => 'Awards',
+//        'about' => 'About',
 //        'followers' => 'Followers'
     ];
 

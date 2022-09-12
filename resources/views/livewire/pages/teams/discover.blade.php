@@ -10,29 +10,40 @@
                 <div class="absolute inset-0 bg-indigo-700 mix-blend-multiply"></div>
             </div>
             <div class="relative px-4 py-16 sm:px-6 sm:py-16 lg:py-16 lg:px-8">
-                <h1 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-                    <span class="block text-white">DISCOVER</span>
-                </h1>
-                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit
-                    sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+                <x-library::heading.1 class="text-center uppercase" text-size="text-5xl">
+                    {{ Trans::get('DISCOVER') }}
+                </x-library::heading.1>
+                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">{{ Trans::get('Find Teams and other resources') }}</p>
             </div>
         </div>
     </div>
     <div class="mt-6 space-y-8">
         <div>
-            <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured & Recommended') }}</x-library::heading.3>
-
-            {{--      Use $featuredTeams      --}}
-
+            <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured Teams') }}</x-library::heading.3>
             <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
-                @forelse (\App\Models\Team::all()->take(4) as $team)
+                @forelse ($featuredTeams->take(4) as $team)
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
-                    <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
+                    <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Featured Teams Found') }}</p>
                 @endforelse
             </div>
-
         </div>
+
+        @if(\Platform::isModuleEnabled('games'))
+            <h2>Recommended YouTube Channels</h2>
+            <div class="space-y-6">
+                @foreach($youtubeFeeds as $youtubeFeed)
+                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>
+                @endforeach
+            </div>
+
+            <h2>Recommended Twitch Channels</h2>
+            <div class="space-y-6">
+                @foreach($twitchFeeds as $youtubeFeed)
+                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>
+                @endforeach
+            </div>
+        @endif
 
         <div>
             <x-library::heading.3 class="uppercase">{{ \Trans::get('Team Map') }}</x-library::heading.3>
@@ -60,7 +71,7 @@
             @if(count($categories))
                 <div class="flex items-center space-x-2">
                     <x-library::heading.3 class="uppercase">{{ \Trans::get('Categories') }} ({{ count($categories) }})</x-library::heading.3>
-                    <a href="#" class="text-gray-500 text-xs"></a>
+                    <a href="{{ route('social.teams.home') }}" class="text-gray-500 text-xs">{{ Trans::get('View All Teams') }}</a>
                 </div>
 
                 <div class="flex justify-between space-x-2 py-4">

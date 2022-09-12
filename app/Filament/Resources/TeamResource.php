@@ -19,17 +19,22 @@ class TeamResource extends Resource
 {
     protected static ?string $label = 'Teams';
     protected static ?string $model = Team::class;
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-    protected static ?string $navigationGroup = 'My Teams';
+    protected static ?string $navigationIcon = 'heroicon-o-globe';
+    protected static ?string $navigationGroup = 'Social';
 
-    public static function getEloquentQuery(): Builder
+    public static function getGloballySearchableAttributes(): array
     {
-        if (auth()->user()->is_admin) {
-            return parent::getEloquentQuery();
-        } else {
-            return parent::getEloquentQuery()->whereIn('id', auth()->user()->ownedTeams->pluck('id'));
-        }
+        return ['name'];
     }
+
+//    public static function getEloquentQuery(): Builder
+//    {
+//        if (auth()->user()->is_admin) {
+//            return parent::getEloquentQuery();
+//        } else {
+//            return parent::getEloquentQuery()->whereIn('id', auth()->user()->ownedTeams->pluck('id'));
+//        }
+//    }
 
     protected static function getNavigationBadge(): ?string
     {
@@ -45,19 +50,19 @@ class TeamResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->label('Owner')
-                    ->options(User::all()
-                        ->mapWithKeys(function ($item, $key) {
-                            return [$item['id'] => $item['id'] . ' - ' . $item['name']];
-                        }))
-                    ->searchable()
-                    ->required(),
+//                Forms\Components\Select::make('user_id')
+//                    ->label('Owner')
+//                    ->options(User::all()
+//                        ->mapWithKeys(function ($item, $key) {
+//                            return [$item['id'] => $item['id'] . ' - ' . $item['name']];
+//                        }))
+//                    ->searchable()
+//                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('start_date'),
-                Forms\Components\SpatieTagsInput::make('type')->type('team_type'),
+
                 Forms\Components\Textarea::make('summary')
                     ->maxLength(65535),
                 Forms\Components\Textarea::make('content')
@@ -69,6 +74,9 @@ class TeamResource extends Resource
                 Forms\Components\TextInput::make('languages')
                     ->required()
                     ->maxLength(255),
+//                Forms\Components\MultiSelect::make('teamTags')
+//                    ->label('Team Tags')
+//                    ->relationship('teamTags', 'name')
             ]);
     }
 
@@ -80,16 +88,16 @@ class TeamResource extends Resource
                     ->label('Owner'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('start_date')
-                                         ->date(),
+                                         ->date(config('app.default_date_format')),
 //                Tables\Columns\TextColumn::make('summary'),
 //                Tables\Columns\TextColumn::make('content'),
-                Tables\Columns\TextColumn::make('location'),
-                Tables\Columns\TextColumn::make('rating'),
-                Tables\Columns\TextColumn::make('languages'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+//                Tables\Columns\TextColumn::make('location'),
+//                Tables\Columns\TextColumn::make('rating'),
+//                Tables\Columns\TextColumn::make('languages'),
+//                Tables\Columns\TextColumn::make('created_at')
+//                    ->dateTime(),
+//                Tables\Columns\TextColumn::make('updated_at')
+//                    ->dateTime(),
             ])
             ->filters([
                 //
@@ -106,7 +114,8 @@ class TeamResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\TeamTypesRelationManager::class,
+            RelationManagers\TeamTagsRelationManager::class,
         ];
     }
 

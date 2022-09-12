@@ -3,7 +3,7 @@
 
 @section('content')
         <div class="mt-4">
-            <h2 class="text-base-text-color font-semibold text-2xl mx-6 ">{{ \Trans::get('Members') }}</h2>
+            <x-library::heading.2 class="text-base-text-color font-semibold text-2xl mx-6 ">{{ \Trans::get('Members') }}</x-library::heading.2>
 
             <div x-data="setup()">
                 <!-- Team Members Navigation -->

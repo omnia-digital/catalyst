@@ -11,17 +11,17 @@
     </div>
     <div class="col-span-2 space-y-2">
         <div class="flex items-start justify-between">
-            @if ($review->recommended)
-                <div class="flex items-start">
+            <div class="flex items-start">
+                @if ($review->recommend)
                     <div class="mr-2 bg-blue-600 p-1 rounded-full flex items-center justify-center">
                         <x-heroicon-s-thumb-up class="w-8 h-8 text-blue-400" />
                     </div>
                     <div class="flex-1">
                         <p class="uppercase text-lg font-bold">Recommended</p>
-                        <p class="text-neutral-dark text-2xs">Member for 6 days at review time</p>
+                        <p class="text-neutral-dark text-2xs">Member for {{ $review->reviewable->users()->where('users.id', $review->user_id)->first()?->membership->created_at->longAbsoluteDiffForHumans($review->created_at) }} at review time</p>
                     </div>
-                </div>
-            @endif
+                @endif
+            </div>
             @if (auth()->user()->is($review->user))
                 <div>
                     <button 

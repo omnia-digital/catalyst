@@ -1,26 +1,27 @@
 <?php
 
+use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
+use App\Http\Livewire\Pages\Teams\Index as AllTeams;
 use Illuminate\Support\Facades\Route;
-use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
 use Modules\Social\Http\Livewire\Home;
+use Modules\Social\Http\Livewire\Pages\Billing\Billing;
 use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
-use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
-use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
 use Modules\Social\Http\Livewire\Pages\Contacts\Index as ContactsIndex;
-use Modules\Social\Http\Livewire\Pages\Discover\Index as DiscoverIndex;
+use Modules\Social\Http\Livewire\Pages\Posts\Trending as DiscoverIndex;
+use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
+use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
 use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
 use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
-use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
-use App\Http\Livewire\Pages\Teams\Index as AllTeams;
-use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
+use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Calendar as TeamMapCalendar;
 use Modules\Social\Http\Livewire\Pages\Teams\Edit as EditTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Followers as TeamFollowers;
 use Modules\Social\Http\Livewire\Pages\Teams\Members as TeamMembers;
-use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\MyTeams;
+use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
+use Modules\Social\Http\Livewire\Pages\Teams\Subscriptions;
 
 
 Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->group(function () {
@@ -34,7 +35,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
     Route::get('/home', Home::class)->name('home');
     Route::get('bookmarks', Index::class)->name('bookmarks');
 
-    Route::get('/discover', DiscoverIndex::class)->name('discover');
+    Route::get('/trending', DiscoverIndex::class)->name('discover');
 
     Route::name('profile.')->prefix('profiles')->group(function() {
         Route::get('{profile}', ShowProfile::class)->name('show');
@@ -43,6 +44,8 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
         Route::get('{profile}/followers', ProfileFollowers::class)->name('followers');
         Route::get('{profile}/awards', ProfileAwards::class)->name('awards');
     });
+
+    Route::get('billing', Billing::class)->name('billing');
 
     Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {
         Route::get('/discover', DiscoverTeams::class)->name('discover');
@@ -58,6 +61,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
         Route::get('{team}/advice', TeamFollowers::class)->name('advice');
         Route::get('{team}/jobs', TeamFollowers::class)->name('jobs');
         Route::get('{team}/learn', TeamFollowers::class)->name('learn');
+        Route::get('{team}/subscriptions', Subscriptions::class)->name('subscriptions');
         Route::get('{team}/awards', TeamAwards::class)->name('awards');
         Route::get('/', AllTeams::class)->name('home');
     });

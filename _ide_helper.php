@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.25.1.
+ * Generated for Laravel 9.28.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1495,6 +1495,52 @@
         {            //Method inherited from \Illuminate\Container\Container         
                         /** @var \Illuminate\Foundation\Application $instance */
                         $instance->offsetUnset($key);
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Illuminate\Foundation\Application::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Illuminate\Foundation\Application::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Illuminate\Foundation\Application::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Foundation\Application::flushMacros();
         }
          
     }
@@ -4302,7 +4348,7 @@
                         return $instance->make($name, $value, $minutes, $path, $domain, $secure, $httpOnly, $raw, $sameSite);
         }
                     /**
-         * Create a cookie that lasts "forever" (five years).
+         * Create a cookie that lasts "forever" (400 days).
          *
          * @param string $name
          * @param string $value
@@ -7489,7 +7535,7 @@
                     /**
          * Register a stub callable that will intercept requests and be able to return stub responses.
          *
-         * @param callable|array $callback
+         * @param callable|array|null $callback
          * @return \Illuminate\Http\Client\Factory 
          * @static 
          */ 
@@ -9862,18 +9908,6 @@
                         return $instance->intended($default, $status, $headers, $secure);
         }
                     /**
-         * Set the intended url.
-         *
-         * @param string $url
-         * @return \Illuminate\Routing\Redirector 
-         * @static 
-         */ 
-        public static function setIntendedUrl($url)
-        {
-                        /** @var \Illuminate\Routing\Redirector $instance */
-                        return $instance->setIntendedUrl($url);
-        }
-                    /**
          * Create a new redirect response to the given path.
          *
          * @param string $path
@@ -10000,6 +10034,29 @@
         {
                         /** @var \Illuminate\Routing\Redirector $instance */
                         $instance->setSession($session);
+        }
+                    /**
+         * Get the "intended" URL from the session.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function getIntendedUrl()
+        {
+                        /** @var \Illuminate\Routing\Redirector $instance */
+                        return $instance->getIntendedUrl();
+        }
+                    /**
+         * Set the "intended" URL in the session.
+         *
+         * @param string $url
+         * @return \Illuminate\Routing\Redirector 
+         * @static 
+         */ 
+        public static function setIntendedUrl($url)
+        {
+                        /** @var \Illuminate\Routing\Redirector $instance */
+                        return $instance->setIntendedUrl($url);
         }
                     /**
          * Register a custom macro.
@@ -12068,13 +12125,13 @@
          * Dump the request items and end the script.
          *
          * @param mixed $keys
-         * @return void 
+         * @return \Illuminate\Http\never 
          * @static 
          */ 
         public static function dd(...$keys)
         {
                         /** @var \Illuminate\Http\Request $instance */
-                        $instance->dd(...$keys);
+                        return $instance->dd(...$keys);
         }
                     /**
          * Dump the items.
@@ -19897,6 +19954,31 @@
      
 }
 
+    namespace Vedmant\FeedReader\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class FeedReader {
+                    /**
+         * Used to parse an RSS feed.
+         *
+         * @param $url
+         * @param string $configuration
+         * @param array $options
+         * @return \SimplePie 
+         * @static 
+         */ 
+        public static function read($url, $configuration = 'default', $options = [])
+        {
+                        /** @var \Vedmant\FeedReader\FeedReader $instance */
+                        return $instance->read($url, $configuration, $options);
+        }
+         
+    }
+     
+}
+
     namespace Illuminate\Http { 
             /**
      * 
@@ -20087,6 +20169,18 @@
         public static function assertPageActionExists($name)
         {
                         return \Livewire\Testing\TestableLivewire::assertPageActionExists($name);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionDoesNotExist()
+         * @param string $name
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionDoesNotExist($name)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionDoesNotExist($name);
         }
                     /**
          * 
@@ -20307,6 +20401,83 @@
                     /**
          * 
          *
+         * @see \Filament\Forms\Testing\TestsForms::assertFormExists()
+         * @param string $name
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormExists($name = 'form')
+        {
+                        return \Livewire\Testing\TestableLivewire::assertFormExists($name);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsForms::assertFormFieldExists()
+         * @param string $fieldName
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormFieldExists($fieldName, $formName = 'form')
+        {
+                        return \Livewire\Testing\TestableLivewire::assertFormFieldExists($fieldName, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsForms::assertFormFieldIsDisabled()
+         * @param string $fieldName
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormFieldIsDisabled($fieldName, $formName = 'form')
+        {
+                        return \Livewire\Testing\TestableLivewire::assertFormFieldIsDisabled($fieldName, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsForms::assertFormFieldIsEnabled()
+         * @param string $fieldName
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormFieldIsEnabled($fieldName, $formName = 'form')
+        {
+                        return \Livewire\Testing\TestableLivewire::assertFormFieldIsEnabled($fieldName, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsForms::assertFormFieldIsHidden()
+         * @param string $fieldName
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormFieldIsHidden($fieldName, $formName = 'form')
+        {
+                        return \Livewire\Testing\TestableLivewire::assertFormFieldIsHidden($fieldName, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsForms::assertFormFieldIsVisible()
+         * @param string $fieldName
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormFieldIsVisible($fieldName, $formName = 'form')
+        {
+                        return \Livewire\Testing\TestableLivewire::assertFormFieldIsVisible($fieldName, $formName);
+        }
+                    /**
+         * 
+         *
          * @see \Filament\Notifications\Testing\TestsNotifications::assertNotified()
          * @param \Filament\Notifications\Notification|string|null $notification
          * @return static 
@@ -20391,6 +20562,18 @@
         public static function assertTableActionExists($name)
         {
                         return \Livewire\Testing\TestableLivewire::assertTableActionExists($name);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDoesNotExist()
+         * @param string $name
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionDoesNotExist($name)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionDoesNotExist($name);
         }
                     /**
          * 
@@ -20639,6 +20822,18 @@
         public static function assertTableBulkActionExists($name)
         {
                         return \Livewire\Testing\TestableLivewire::assertTableBulkActionExists($name);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsBulkActions::assertTableBulkActionDoesNotExist()
+         * @param string $name
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableBulkActionDoesNotExist($name)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableBulkActionDoesNotExist($name);
         }
                     /**
          * 
@@ -20904,6 +21099,30 @@
         public static function resetTableFilters()
         {
                         return \Livewire\Testing\TestableLivewire::resetTableFilters();
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsFilters::removeTableFilter()
+         * @param string $filter
+         * @param string|null $field
+         * @return static 
+         * @static 
+         */ 
+        public static function removeTableFilter($filter, $field = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::removeTableFilter($filter, $field);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsFilters::removeTableFilters()
+         * @return static 
+         * @static 
+         */ 
+        public static function removeTableFilters()
+        {
+                        return \Livewire\Testing\TestableLivewire::removeTableFilters();
         }
                     /**
          * 
@@ -24253,7 +24472,7 @@ namespace  {
                 /**
              * Add a union statement to the query.
              *
-             * @param \Illuminate\Database\Query\Builder|\Closure $query
+             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
              * @param bool $all
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -24267,7 +24486,7 @@ namespace  {
                 /**
              * Add a union all statement to the query.
              *
-             * @param \Illuminate\Database\Query\Builder|\Closure $query
+             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -24920,6 +25139,7 @@ namespace  {
             class Sentry extends \Sentry\Laravel\Facade {}
             class Analytics extends \Spatie\Analytics\AnalyticsFacade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
+            class FeedReader extends \Vedmant\FeedReader\Facades\FeedReader {}
      
 }
 

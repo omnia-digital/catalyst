@@ -13,6 +13,8 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './Modules/*/Resources/views/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
+        './src/**/*.{html,js}',
+        './node_modules/tw-elements/dist/js/**/*.js'
     ],
 
     darkMode: 'class',
@@ -71,6 +73,12 @@ module.exports = {
                 danger: colors.rose,
                 success: colors.green,
                 warning: colors.yellow,
+                'main-nav-active-hover-text-color': 'var(--main-nav-active-hover-text-color)',
+                'main-nav-active-text-color': 'var(--main-nav-active-text-color)',
+                'main-nav-active-bg-color': 'var(--main-nav-active-bg-color)',
+                'main-nav-text-color': 'var(--main-nav-text-color)',
+                'main-nav-hover-text-color': 'var(--main-nav-hover-text-color)',
+                'main-nav-hover-bg-color': 'var(--main-nav-hover-bg-color)',
                 'post-card-bg-color': 'var(--post-card-bg-color)',
                 'post-card-border-color': 'var(--post-card-border-color)',
                 'post-card-border-hover-color': 'var(--post-card-border-hover-color)',
@@ -102,6 +110,7 @@ module.exports = {
         require('@tailwindcss/aspect-ratio'),
         require('tailwind-scrollbar-hide'),
         require('@tailwindcss/line-clamp'),
+        require('tw-elements/dist/plugin'),
         plugin(function({ matchUtilities, theme }) {
             matchUtilities(
                 {

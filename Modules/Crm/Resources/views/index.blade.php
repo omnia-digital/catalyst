@@ -1,7 +1,7 @@
 @extends('crm::layouts.master')
 
 @section('content')
-    <h1>Hello World</h1>
+    <x-library::heading.1>Hello World</x-library::heading.1>
 
     <p>
         This view is loaded from module: {!! config('crm.name') !!}

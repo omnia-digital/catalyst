@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="flex-1 flex items-center">
-            <h1 class="py-2 text-3xl">Bookmarks</h1>
+            <x-library::heading.1 class="py-2">Bookmarks</x-library::heading.1>
         </div>
     </div>
 
@@ -16,7 +16,7 @@
     @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
     @if(empty($bookmarks))
-        <h2>No Bookmarked Resources</h2>
+        <x-library::heading.2>No Bookmarked Resources</x-library::heading.2>
     @else
         <div class="">
             <ul role="list" class="grid grid-cols-1 gap-6">

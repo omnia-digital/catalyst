@@ -16,6 +16,9 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
     'abbr' => env('APP_ABBR', 'APP'),
     'theme' => env('APP_THEME', 'default'),
+    'theme_light_type' => env('APP_THEME_LIGHT_TYPE', 'light'),
+    'logo_path' => env('APP_LOGO'),
+    'logo_path_dark' => env('APP_LOGO_DARK'),
 
     /*
     |--------------------------------------------------------------------------
@@ -70,6 +73,8 @@ return [
     */
 
     'timezone' => 'UTC',
+    'default_datetime_format' => "M j, 'y @ g a ",
+    'default_date_format' => "M j, y",
 
     /*
     |--------------------------------------------------------------------------
@@ -182,6 +187,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\TeamLensesServiceProvider::class,
+        App\Providers\StripeConnectServiceProvider::class,
     ],
 
     /*
