@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a13ec92f2aeb89e220b85a1b00912790",
+    "content-hash": "8c9517bd07d2c99d1d30cabcc52261cb",
     "packages": [
         {
             "name": "3x1io/filament-themes",
@@ -6836,6 +6836,82 @@
                 }
             ],
             "time": "2022-09-08T03:24:12+00:00"
+        },
+        {
+            "name": "omniphx/forrest",
+            "version": "v2.14.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/omniphx/forrest.git",
+                "reference": "214519ca5765fd38012b9c289011bc2ddf76679a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/omniphx/forrest/zipball/214519ca5765fd38012b9c289011bc2ddf76679a",
+                "reference": "214519ca5765fd38012b9c289011bc2ddf76679a",
+                "shasum": ""
+            },
+            "require": {
+                "firebase/php-jwt": "^5.2|~6.0",
+                "guzzlehttp/guzzle": "~6.0|~7.0",
+                "illuminate/cache": "~6.0|~7.0|~8.0|~9.0",
+                "illuminate/config": "~6.0|~7.0|~8.0|~9.0",
+                "illuminate/contracts": "~6.0|~7.0|~8.0|~9.0",
+                "illuminate/http": "~6.0|~7.0|~8.0|~9.0",
+                "illuminate/routing": "~6.0|~7.0|~8.0|~9.0",
+                "nesbot/carbon": "^2.0",
+                "php": "~7.2 || ~8.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Omniphx\\Forrest\\Providers\\Laravel\\ForrestServiceProvider"
+                    ],
+                    "aliases": {
+                        "Forrest": "Omniphx\\Forrest\\Providers\\Laravel\\Facades\\Forrest"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Omniphx\\Forrest\\": "src/Omniphx/Forrest/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Mitchener",
+                    "email": "mattjmitchener@gmail.com",
+                    "homepage": "http://mattmitchener.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel library for Salesforce",
+            "keywords": [
+                "force",
+                "force.com",
+                "laravel",
+                "rest",
+                "salesforce"
+            ],
+            "support": {
+                "issues": "https://github.com/omniphx/forrest/issues",
+                "source": "https://github.com/omniphx/forrest/tree/v2.14.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/omniphx",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-09-08T15:51:42+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",

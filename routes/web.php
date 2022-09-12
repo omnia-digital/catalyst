@@ -8,6 +8,10 @@ Route::get('/', function () {
     return redirect()->route('social.home');
 });
 
+Route::get('/code', function () {
+    return $_GET;
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');

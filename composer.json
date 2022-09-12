@@ -40,6 +40,7 @@
         "mhmiton/laravel-modules-livewire": "^1.3",
         "nwidart/laravel-modules": "^8.2",
         "omnia-digital/library": "dev-main",
+        "omniphx/forrest": "2.*",
         "pestphp/pest": "^1.16",
         "pestphp/pest-plugin-laravel": "^1.1",
         "phuclh/media-manager": "^0.0.2",
