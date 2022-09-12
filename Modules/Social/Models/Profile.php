@@ -2,8 +2,8 @@
 
     namespace Modules\Social\Models;
 
-use App\Models\NullMedia;
-use App\Models\User;
+    use App\Models\NullMedia;
+    use App\Models\User;
     use App\Support\Lexer\PrettyNumber;
     use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     use Illuminate\Support\Facades\Cache;
@@ -46,6 +46,7 @@ use App\Models\User;
             'bio',
             'website',
             'user_id',
+            'salesforce_contact_id'
         ];
 
         protected $appends = [

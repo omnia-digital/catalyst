@@ -23,6 +23,7 @@ class CreateChargentSubscriptionsTable extends Migration
             $table->string('card_type')->nullable();
             $table->string('last_4')->nullable();
             $table->timestamp('starts_at')->nullable();
+            $table->timestamp('last_transaction_at')->nullable();
             $table->timestamp('next_invoice_at')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->boolean('is_active')->default(0);

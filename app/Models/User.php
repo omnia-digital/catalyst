@@ -20,7 +20,7 @@ use Modules\Social\Models\Post;
 use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
-use Modules\Subscriptions\Models\Subscription;
+use Modules\Subscriptions\Models\ChargentSubscription;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Wimil\Followers\Traits\Followable;
 
@@ -84,74 +84,87 @@ class User extends Authenticatable implements FilamentUser
         return $this->profile?->handle;
     }
 
-        public function getNameAttribute()
-        {
-            if ($this->profile()->exists()) {
-                return $this->profile->name;
-            }
-        }
+    public function getNameAttribute()
+    {
+        return $this->profile?->name;
+    }
 
-        public function getProfilePhotoUrlAttribute()
-        {
-            return $this->profile->profile_photo_url;
-        }
+    public function getFirstNameAttribute()
+    {
+        return $this->profile?->first_name;
+    }
 
-        public function getOnlineStatusAttribute()
-        {
-            return true;
-        }
+    public function getLastNameAttribute()
+    {
+        return $this->profile?->last_name;
+    }
 
-        //// Relations ////
+    public function getContactIdAttribute()
+    {
+        return $this->profile?->salesforce_contact_id;
+    }
 
-        public function profile() {
-            if (!class_exists(Profile::class)) return;
-            return $this->hasOne(Profile::class);
-        }
+    public function getProfilePhotoUrlAttribute()
+    {
+        return $this->profile->profile_photo_url;
+    }
 
-        public function posts() {
-            if (!class_exists(Post::class)) return;
-            return $this->hasMany(Post::class);
-        }
+    public function getOnlineStatusAttribute()
+    {
+        return true;
+    }
 
-        public function reviews() {
-            if (!class_exists(Review::class)) return;
-            return $this->hasMany(Review::class);
-        }
+    //// Relations ////
 
-        public function subscription() {
-            if (!class_exists(Subscription::class)) return;
-            return $this->hasOne(Subscription::class);
-        }
+    public function profile() {
+        if (!class_exists(Profile::class)) return;
+        return $this->hasOne(Profile::class);
+    }
 
-        public function likes() {
-            if (!class_exists(Like::class)) return;
-            return $this->hasMany(Like::class);
-        }
+    public function posts() {
+        if (!class_exists(Post::class)) return;
+        return $this->hasMany(Post::class);
+    }
 
-        public function likedPosts() {
-            return $this->likes->map->post->flatten();
-        }
+    public function reviews() {
+        if (!class_exists(Review::class)) return;
+        return $this->hasMany(Review::class);
+    }
 
-        public function postMedia()
-        {
-            return $this->hasManyThrough(Media::class, Post::class, 'user_id', 'model_id')
-                ->where('model_type', Post::class);
-        }
+    public function chargentSubscription() {
+        if (!class_exists(ChargentSubscription::class)) return;
+        return $this->hasOne(ChargentSubscription::class);
+    }
 
-        public function teamInvitations(): HasMany
-        {
-            return $this->hasMany(TeamInvitation::class);
-        }
-        public function teamApplications(): HasMany
-        {
-            return $this->hasMany(TeamApplication::class);
-        }
+    public function likes() {
+        if (!class_exists(Like::class)) return;
+        return $this->hasMany(Like::class);
+    }
 
-        //// Helper Methods ////
+    public function likedPosts() {
+        return $this->likes->map->post->flatten();
+    }
 
-        public function url() {
-            return route('social.profile.show', $this->handle);
-        }
+    public function postMedia()
+    {
+        return $this->hasManyThrough(Media::class, Post::class, 'user_id', 'model_id')
+            ->where('model_type', Post::class);
+    }
+
+    public function teamInvitations(): HasMany
+    {
+        return $this->hasMany(TeamInvitation::class);
+    }
+    public function teamApplications(): HasMany
+    {
+        return $this->hasMany(TeamApplication::class);
+    }
+
+    //// Helper Methods ////
+
+    public function url() {
+        return route('social.profile.show', $this->handle);
+    }
 
     public static function findByEmail($email)
     {

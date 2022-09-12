@@ -1,7 +1,7 @@
 @extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
-    <div x-data="setup()" class="">
+    <div x-data="" class="">
         <div class="mt-0">
             <x-social::page-heading>
                 <x-slot name="title">{{ \Trans::get('Subscription') }}</x-slot>

@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('subscriptions', function (Request $request) {
     $user = User::findByEmail($request->email);
 
-    $user->subscription()->firstOrCreate([
+    $user->chargentSubscription()->firstOrCreate([
         'subscription_type_id' => SubscriptionType::where('slug', $request->subscription_type)->first()->id,
         'chargent_order_id' => $request->chargent_order_object_id,
         'card_type' => $request->card_type,
