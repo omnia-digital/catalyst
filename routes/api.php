@@ -29,6 +29,7 @@ Route::post('subscriptions', function (Request $request) {
         'card_type' => $request->card_type,
         'last_4' => $request->last_4,
         'starts_at' => now(),
-        'next_invoice_at' => now()->addMonth()
+        'next_invoice_at' => now()->addMonth(),
+        'is_active' => 1
     ]);
 });
