@@ -2,7 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 /* Themes */
-@import url('./themes/dark.css');
+/*@import url('./themes/dark.css');*/
 
 :root {
     --base-text-color: #050505;
