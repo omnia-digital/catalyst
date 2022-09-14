@@ -31,4 +31,9 @@ class ChargentSubscription extends Model
     {
         return $this->belongsTo(SubscriptionType::class, 'subscription_type_id');
     }
+
+    public function getIsActiveAttribute()
+    {
+        return $this->status === 'Recurring';
+    }
 }

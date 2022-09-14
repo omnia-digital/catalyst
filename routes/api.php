@@ -28,8 +28,5 @@ Route::post('subscriptions', function (Request $request) {
         'chargent_order_id' => $request->chargent_order_object_id,
         'card_type' => $request->card_type,
         'last_4' => $request->last_4,
-        'starts_at' => now(),
-        'next_invoice_at' => now()->addMonth(),
-        'is_active' => 1
     ]);
 });
