@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'abbr' => env('APP_ABBR', 'APP'),
+    'slogan' => env('APP_SLOGAN', ''),
     'theme' => env('APP_THEME', 'default'),
     'theme_light_type' => env('APP_THEME_LIGHT_TYPE', 'light'),
     'logo_path' => env('APP_LOGO'),
@@ -174,7 +175,7 @@ return [
          * Package Service Providers...
          */
         \App\Providers\PlatformServiceProvider::class,
-        
+
 
         /*
          * Application Service Providers...
