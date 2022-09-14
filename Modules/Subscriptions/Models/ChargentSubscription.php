@@ -14,7 +14,9 @@ class ChargentSubscription extends Model
 
     protected $dates = [
         'starts_at',
-        'next_invoice_at'
+        'next_invoice_at',
+        'ends_at',
+        'last_transaction_at'
     ];
     
     protected static function newFactory()
