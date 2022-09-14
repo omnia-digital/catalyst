@@ -67,7 +67,8 @@
     <x-slot name="title">{{ \Trans::get('New Subscription') }}</x-slot>
 
     <x-slot name="content">
-        {!! $this->subscriptionForm !!}
+        <iframe src="{{ $this->iFrameURL() }}" width="100%" height="100%" frameborder="0" ></iframe>
+        <script src="//tfaforms.com/js/iframe_resize_helper.js"></script>
     </x-slot>
 </x-library::modal>
 
