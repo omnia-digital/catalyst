@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="fixed w-full bg-secondary z-50 shadow-sm h-14">
+<nav x-data="{ open: false }" class="fixed w-full bg-primary z-50 shadow-sm h-14">
     <div class="flex justify-between items-center sm:block">
         <!-- Desktop Navigation Menu -->
         <div class="flex justify-between items-center w-full">
