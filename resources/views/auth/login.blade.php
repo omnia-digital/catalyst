@@ -4,6 +4,11 @@
             <img src="{{ config('app.logo_path') }}" class="h-24"/>
         </x-slot>
 
+        <x-slot name="slogan">
+            <x-library::heading.1 text-color="text-heading-default-color">{{Trans::get('Come for the games. Stay for the community.')}}</x-library::heading.1>
+            <x-library::heading.3 class="text-center">{{Trans::get('Login to Hatchet')}}</x-library::heading.3>
+        </x-slot>
+
         <x-jet-validation-errors class="mb-4" />
 
         @if (session('status'))
