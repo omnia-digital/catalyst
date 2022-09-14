@@ -12,9 +12,9 @@
                         @if(config('app.logo_path'))
                             <div class="flex items-center h-14 flex-shrink-0">
                                 @if(config('app.theme_light_type') === 'light')
-                                    <img src="{{ config('app.logo_path') }}" class="h-full"/>
+                                    <img src="{{ config('app.logo_path') }}" class="h-10"/>
                                 @else
-                                    <img src="{{ config('app.logo_path_dark') }}" class="h-full"/>
+                                    <img src="{{ config('app.logo_path_dark') }}" class="h-10"/>
                                 @endif
                             </div>
                         @else
@@ -164,7 +164,7 @@
                                 <x-jet-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
                                     {{ auth()->user()->name }}
                                 </x-jet-dropdown-link>
-                                
+
                                 <x-jet-dropdown-link href="{{ route('social.subscription') }}">
                                     {{ \Trans::get('Subscription') }}
                                 </x-jet-dropdown-link>

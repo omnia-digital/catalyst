@@ -10,9 +10,10 @@ use Filament\Pages\SettingsPage;
 
 class ManageGeneralSettings extends SettingsPage
 {
-    protected static ?string $title = 'Settings';
+    protected static ?string $title = 'General Settings';
     protected static ?string $navigationIcon = 'heroicon-o-cog';
     protected static string $settings = GeneralSettings::class;
+    protected static ?string $navigationGroup = 'Settings';
 
     public function mount(): void
     {
