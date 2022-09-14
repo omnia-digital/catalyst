@@ -11,9 +11,16 @@ class Index extends Component
 {
     public $form;
 
+    /**
+     * Indicates if the application is confirming to cancel a subscription.
+     *
+     * @var bool
+     */
+    public $confirmingSubscriptionCancellation = false;
+
     public function mount()
     {
-        $this->form = FormAssemblyForm::findByFormID(config('services.form_assembly.subscription_form_id'));
+        $this->form = FormAssemblyForm::findBySlug('user-subscriptions');
 
         if (!$this->user->contact_id) {
             (new CreateContactObjectAction)->execute($this->user);
