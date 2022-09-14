@@ -18,12 +18,9 @@
     --secondary: #DB1D2E;
     --tertiary: #384263;
     --main-nav-active-text-color: var(--base-heading-color);
-    --main-nav-active-bg-color: var(--neutral);
-    --main-nav-text-color: var(--neutral);
-    --main-nav-active-hover-text-color: var(--neutral);
-    /*--main-nav-active-text-color: var(--neutral);*/
-    /*--main-nav-active-bg-color: var(--secondary);*/
-    /*--main-nav-text-color: var(--base-text-color);*/
+    --main-nav-active-text-color: var(--neutral);
+    --main-nav-active-bg-color: var(--secondary);
+    --main-nav-text-color: var(--base-text-color);
     --main-nav-hover-text-color: var(--neutral);
     --main-nav-hover-bg-color: var(--secondary);
     --post-card-bg-color: var(--primary);
