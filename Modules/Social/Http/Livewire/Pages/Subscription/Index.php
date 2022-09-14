@@ -33,6 +33,24 @@ class Index extends Component
         }
     }
 
+    /**
+     * Confirm that the user wants to cancel their subscription.
+     *
+     * @return void
+     */
+    public function confirmSubscriptionCancellation()
+    {
+        $this->confirmingSubscriptionCancellation = true;
+    }
+
+    public function cancelSubscription()
+    {
+        // Remove Subscription Action
+        // Change Payment Status to Stopped
+        // Change End date to now
+
+    }
+
     public function getSubscriptionActiveProperty()
     {
         return $this->subscription?->is_active;
