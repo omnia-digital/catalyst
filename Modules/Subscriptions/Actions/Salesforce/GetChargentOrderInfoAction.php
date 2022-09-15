@@ -11,7 +11,7 @@ class GetChargentOrderInfoAction
      */
     public function execute(ChargentSubscription $subscription)
     {
-        if (!$subscription->chargent_order_id) {
+        if (!$subscription?->chargent_order_id) {
             return null;
         }
 

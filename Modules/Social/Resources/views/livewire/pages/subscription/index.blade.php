@@ -59,6 +59,26 @@
                 </div>
             </div>
         </div>
+        <!-- Cancel Subscription Confirmation Modal -->
+        <x-jet-confirmation-modal wire:model="confirmingSubscriptionCancellation">
+            <x-slot name="title">
+                {{ \Trans::get('Cancel Subscription') }}
+            </x-slot>
+
+            <x-slot name="content">
+                {{ \Trans::get('Are you sure you would like to cancel your subscription?') }}
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$toggle('confirmingSubscriptionCancellation')" wire:loading.attr="disabled">
+                    {{ \Trans::get('Cancel') }}
+                </x-jet-secondary-button>
+
+                <x-jet-danger-button class="ml-2" wire:click="cancelSubscription" wire:loading.attr="disabled">
+                    {{ \Trans::get('Confirm') }}
+                </x-jet-danger-button>
+            </x-slot>
+        </x-jet-confirmation-modal>
     </div>
 
 @endsection
@@ -71,24 +91,4 @@
         <script src="//tfaforms.com/js/iframe_resize_helper.js"></script>
     </x-slot>
 </x-library::modal>
-<!-- Cancel Subscription Confirmation Modal -->
-<x-jet-confirmation-modal wire:model="confirmingSubscriptionCancellation">
-    <x-slot name="title">
-        {{ \Trans::get('Cancel Subscription') }}
-    </x-slot>
-
-    <x-slot name="content">
-        {{ \Trans::get('Are you sure you would like to cancel your subscription?') }}
-    </x-slot>
-
-    <x-slot name="footer">
-        <x-jet-secondary-button wire:click="$toggle('confirmingSubscriptionCancellation')" wire:loading.attr="disabled">
-            {{ \Trans::get('Cancel') }}
-        </x-jet-secondary-button>
-
-        <x-jet-danger-button class="ml-2" wire:click="cancelSubscription" wire:loading.attr="disabled">
-            {{ \Trans::get('Confirm') }}
-        </x-jet-danger-button>
-    </x-slot>
-</x-jet-confirmation-modal>
 @endpush
