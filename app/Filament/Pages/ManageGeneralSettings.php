@@ -15,25 +15,11 @@ class ManageGeneralSettings extends SettingsPage
     protected static string $settings = GeneralSettings::class;
     protected static ?string $navigationGroup = 'Settings';
 
-    public function mount(): void
-    {
-        $this->form->fill([
-            'authorId' => $this->record->author->id,
-        ]);
-    }
-
     protected function getFormSchema(): array
     {
         return [
             TextInput::make('site_name')
                 ->required(),
-            Select::make('Payment Gateway')
-                ->options([
-                    'chargent' => 'Chargent',
-                    'stripe' => 'Stripe'
-                ])
-                ->default('stripe')
-                ->disablePlaceholderSelection()
         ];
     }
 }
