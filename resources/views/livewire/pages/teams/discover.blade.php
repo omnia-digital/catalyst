@@ -1,6 +1,6 @@
 @extends('social::livewire.layouts.pages.full-page-layout')
 
-@section('content')
+@section('full-width-header')
     <div class="w-full mb-4">
         <div class="relative shadow-xl sm:rounded-b-2xl sm:overflow-hidden">
             <div class="absolute inset-0 grayscale">
@@ -17,11 +17,14 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('content')
     <div class="mt-6 space-y-8">
         {{-- Featured Teams --}}
         <div>
             <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured Teams') }}</x-library::heading.3>
-            <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
+            <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
                 @forelse ($featuredTeams->take(4) as $team)
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
@@ -33,7 +36,7 @@
         {{-- New Teams --}}
         <div>
             <x-library::heading.3 class="uppercase">{{ \Trans::get('New Teams') }}</x-library::heading.3>
-            <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-4">
+            <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
                 @forelse ($newTeams->take(4) as $team)
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
