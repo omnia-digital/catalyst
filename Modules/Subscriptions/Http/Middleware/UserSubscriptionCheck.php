@@ -2,6 +2,7 @@
 
 namespace Modules\Subscriptions\Http\Middleware;
 
+use App\Settings\BillingSettings;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,10 @@ class UserSubscriptionCheck
      */
     public function handle(Request $request, Closure $next)
     {
+        if (!(new BillingSettings())->user_subscriptions) {
+            return $next($request);
+        }
+        
         if ($request->user()->chargentSubscription?->is_active) {
             return $next($request);
         }

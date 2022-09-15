@@ -165,9 +165,11 @@
                                     {{ auth()->user()->name }}
                                 </x-jet-dropdown-link>
 
-                                <x-jet-dropdown-link href="{{ route('social.subscription') }}">
-                                    {{ \Trans::get('Subscription') }}
-                                </x-jet-dropdown-link>
+                                @if ($this->isUsingUserSubscriptions)
+                                    <x-jet-dropdown-link href="{{ route('social.subscription') }}">
+                                        {{ \Trans::get('Subscription') }}
+                                    </x-jet-dropdown-link>
+                                @endif
 
                                 <x-jet-dropdown-link href="{{ route('social.billing') }}">
                                     Billing
