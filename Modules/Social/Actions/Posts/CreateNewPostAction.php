@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Actions;
+namespace Modules\Social\Actions\Posts;
 
 use App\Models\Team;
 use App\Models\User;

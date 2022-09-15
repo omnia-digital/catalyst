@@ -17,6 +17,7 @@ class Feeds extends Component
     public function getAllFeedsProperty()
     {
         $feeds = collect();
+        $feeds->push(['','https://superjoost.substack.com/feed']);
         $feeds->push(['','https://feeds.feedburner.com/ign/all']);
         $feeds->push(['','https://www.gamespot.com/feeds/game-news']);
         $feeds->push(['','https://kotaku.com/rss']);

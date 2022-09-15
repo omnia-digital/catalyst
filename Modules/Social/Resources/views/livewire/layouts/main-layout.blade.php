@@ -1,7 +1,7 @@
 <div>
     <div class="flex bg-neutral">
         <!-- SideMenu -->
-        <livewire:social::layouts.module-navigation class="md:fixed md:w-64 pl-6 pt-4"/>
+        <livewire:social::layouts.module-navigation class="md:w-64 sm:pl-6 sm:pt-4"/>
 
         <!-- Main Content -->
         <div class="md:pl-64 w-full flex flex-col">
@@ -14,7 +14,9 @@
                                 @yield('full-width-header')
                             </div>
                         @endif
-                        @yield('page-layout')
+                        <div class="mx-4 sm:mx-0">
+                            @yield('page-layout')
+                        </div>
                     </div>
                 </div>
             </div>

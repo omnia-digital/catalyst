@@ -30,7 +30,13 @@
                     'current' => false
                 ],
                 [
-                    'label'   => \Trans::get('My Teams'),
+                    'label'   => \Trans::get('Teams'),
+                    'name'    => 'social.teams.my-teams',
+                    'icon'    => 'heroicon-o-briefcase',
+                    'current' => false
+                ],
+                [
+                    'label'   => \Trans::get('Menu'),
                     'name'    => 'social.teams.my-teams',
                     'icon'    => 'heroicon-o-briefcase',
                     'current' => false
