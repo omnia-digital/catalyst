@@ -5,6 +5,7 @@ namespace Modules\Social\Http\Livewire\Pages\Subscription;
 use Livewire\Component;
 use Modules\Subscriptions\Actions\Salesforce\CreateContactObjectAction;
 use Modules\Subscriptions\Actions\Salesforce\GetChargentOrderInfoAction;
+use Modules\Subscriptions\Actions\Salesforce\StopRecurringPaymentsOnChargentOrderAction;
 use Modules\Subscriptions\Models\FormAssemblyForm;
 
 class Index extends Component
@@ -22,15 +23,29 @@ class Index extends Component
     {
         $this->form = FormAssemblyForm::findBySlug('user-subscriptions');
 
-        if (!$this->user->contact_id) {
-            (new CreateContactObjectAction)->execute($this->user);
-            $this->user->refresh();
-        }
+        (new CreateContactObjectAction)->execute($this->user);
+        $this->user->refresh();
 
-        if ($this->subscription) {
-            (new GetChargentOrderInfoAction)->execute($this->subscription);
-            $this->subscription->refresh();
-        }
+        (new GetChargentOrderInfoAction)->execute($this->subscription);
+        $this->subscription->refresh();
+    }
+
+    /**
+     * Confirm that the user wants to cancel their subscription.
+     *
+     * @return void
+     */
+    public function confirmSubscriptionCancellation()
+    {
+        $this->confirmingSubscriptionCancellation = true;
+    }
+
+    public function cancelSubscription()
+    {
+        (new StopRecurringPaymentsOnChargentOrderAction)->execute($this->subscription);
+        $this->subscription->refresh();
+
+        $this->confirmingSubscriptionCancellation = false;
     }
 
     public function getSubscriptionActiveProperty()
@@ -40,7 +55,7 @@ class Index extends Component
 
     public function getSubscriptionProperty()
     {
-        return $this->user->chargentSubscription;
+        return $this->user->chargentSubscription()->latest()->first();
     }
 
     public function getUserProperty()
@@ -55,6 +70,10 @@ class Index extends Component
         $tfaFields = $this->form->fields()->where('enabled', 1)->pluck('name', 'tfa_code');
 
         foreach ($tfaFields as $code => $attribute) {
+            if ($attribute === 'chargent_order_id') {
+                $attributes[$code] = $this->subscription->$attribute;
+                continue;
+            }
             $attributes[$code] = $this->user->$attribute;
         }
 
