@@ -9,7 +9,7 @@ class Home extends Component
 {
     public function getAllGamesProperty()
     {
-        return Game::all();
+        return Game::where('first_release_date', '>', now()->subDays(30))->orderBy('follows')->limit(4)->get();
     }
 
     public function render()

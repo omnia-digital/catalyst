@@ -27,7 +27,7 @@ class MainNavigationMenu extends Component
             [
                 'label'   => 'Community',
                 'name'    => 'social.home',
-                'icon'    => 'heroicon-o-globe',
+                'icon'    => 'heroicon-o-home',
                 'module'  => 'social',
                 'current' => false
             ],
