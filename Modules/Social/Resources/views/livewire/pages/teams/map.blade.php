@@ -11,7 +11,7 @@
                     <x-heroicon-o-collection class="w-4 h-4" />
                 </button>
             </div>
-            <x-library::map.mapbox id="team-map" class="min-h-[500px] min-w-[100px] w-full z-10 rounded-lg" :places="$places" mapStyle="mapbox://styles/mapbox/dark-v10"/>
+            <x-library::map.mapbox id="team-map" class="min-h-[300px] sm:min-h-[500px] min-w-[100px] w-full z-10 rounded-lg" :places="$places" mapStyle="mapbox://styles/mapbox/dark-v10"/>
         </div>
     </div>
 </div>
