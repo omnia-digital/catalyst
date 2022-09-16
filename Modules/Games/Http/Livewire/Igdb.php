@@ -5,16 +5,16 @@ namespace Modules\Games\Http\Livewire;
 use Livewire\Component;
 use Modules\Games\Models\Game;
 
-class Home extends Component
+class Igdb extends Component
 {
     public function getAllGamesProperty()
     {
-        return Game::where('first_release_date', '>', now()->subDays(30))->orderBy('follows')->limit(4)->get();
+        return Game::all();
     }
 
     public function render()
     {
-        return view('games::livewire.home', [
+        return view('games::livewire.igdb', [
             'games' => $this->allGames,
         ]);
     }
