@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" class="{{ $class }} hidden sm:block fixed">
+<div x-data="{ open: false }" class="{{ $class }} hidden lg:block fixed md:w-64 sm:pl-6 sm:pt-4">
     <!-- Static \sidebar for desktop -->
     <div class="hidden md:flex md:flex-col scrollbar-hide md:sticky top-20 md:inset-y-2">
         <!-- Sidebar component, swap this element with another sidebar if you like -->

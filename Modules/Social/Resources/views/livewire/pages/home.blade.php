@@ -1,6 +1,6 @@
 @extends('social::livewire.layouts.pages.default-page-layout')
 
-@section('full-width-header')
+@section('banner-with-sidebar')
     <div class="w-full mb-4">
         <div class="relative shadow-xl sm:rounded-b-2xl sm:overflow-hidden">
             <div class="absolute inset-0 grayscale">
@@ -22,8 +22,8 @@
 @endsection
 
 @section('content')
-    <div class="">
-        <div class="mt-0">
+    <div>
+        <div>
             <!-- Recommended Teams -->
             <div>
 {{--                {{ $recommendedTeams }}--}}
