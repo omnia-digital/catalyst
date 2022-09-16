@@ -8,6 +8,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use Modules\Social\Models\Post;
 use Modules\Social\Observers\PostObserver;
+use Modules\Subscriptions\Events\NewSubscriptionPayment;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        NewSubscriptionPayment::class => [
+        ],
     ];
 
     protected $observers = [

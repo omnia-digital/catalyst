@@ -14,7 +14,9 @@ class ChargentSubscription extends Model
 
     protected $dates = [
         'starts_at',
-        'next_invoice_at'
+        'next_invoice_at',
+        'ends_at',
+        'last_transaction_at'
     ];
     
     protected static function newFactory()
@@ -30,5 +32,10 @@ class ChargentSubscription extends Model
     public function type()
     {
         return $this->belongsTo(SubscriptionType::class, 'subscription_type_id');
+    }
+
+    public function getIsActiveAttribute()
+    {
+        return $this->status === 'Recurring';
     }
 }

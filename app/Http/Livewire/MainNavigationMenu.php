@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Settings\BillingSettings;
 use Livewire\Component;
 
 class MainNavigationMenu extends Component
@@ -15,13 +16,18 @@ class MainNavigationMenu extends Component
         'refresh-navigation-menu' => '$refresh',
     ];
 
+    public function getIsUsingUserSubscriptionsProperty()
+    {
+        return (new BillingSettings())->user_subscriptions;
+    }
+
     public function mount()
     {
         $this->navigation = [
             [
                 'label'   => 'Community',
                 'name'    => 'social.home',
-                'icon'    => 'heroicon-o-globe',
+                'icon'    => 'heroicon-o-home',
                 'module'  => 'social',
                 'current' => false
             ],

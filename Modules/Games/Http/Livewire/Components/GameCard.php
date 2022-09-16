@@ -16,7 +16,7 @@ class GameCard extends Component
 
     public function showGame()
     {
-        return redirect($this->game?->profile());
+        return redirect()->to($this->game->url);
     }
 
     public function render()
