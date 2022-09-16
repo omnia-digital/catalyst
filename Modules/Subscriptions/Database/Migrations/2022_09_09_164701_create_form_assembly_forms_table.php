@@ -15,7 +15,8 @@ class CreateFormAssemblyFormsTable extends Migration
     {
         Schema::create('form_assembly_forms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->string('fa_form_id');
             $table->timestamps();
         });

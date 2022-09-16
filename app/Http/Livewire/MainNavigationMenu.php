@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Settings\BillingSettings;
 use Livewire\Component;
 
 class MainNavigationMenu extends Component
@@ -14,6 +15,11 @@ class MainNavigationMenu extends Component
     protected $listeners = [
         'refresh-navigation-menu' => '$refresh',
     ];
+
+    public function getIsUsingUserSubscriptionsProperty()
+    {
+        return (new BillingSettings())->user_subscriptions;
+    }
 
     public function mount()
     {
