@@ -8,7 +8,7 @@
             <x-library::heading.2 text-color="text-heading-default-color" class="mt-6">{{Trans::get(config('app.slogan', ''))}}</x-library::heading.2>
         </x-slot>
 
-        <x-library::heading.2 class="text-center">{{Trans::get('Log In')}}</x-library::heading.2>
+        <x-library::heading.2 class="text-center">{{ Trans::get('Login to') . ' ' . config('app.name') }}</x-library::heading.2>
 
         <x-jet-validation-errors class="mb-4"/>
 
