@@ -45,8 +45,8 @@
                     </h2>
                     <div id="flush-collapse-{{ \Str::slug($feed->get_title()) }}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{{ \Str::slug($feed->get_title()) }}"
                          data-bs-parent="#accordion-{{ \Str::slug($feed->get_title()) }}">
-                        <div class="accordion-body py-4 px-5">
-                            <div class="grid grid-cols-4 gap-4">
+                        <div class="accordion-body md:py-4 md:px-5">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4">
                                 @foreach($feed->get_items(0,4) as $item)
                                     <a href="{{ $item->get_link() }}" target="_blank">
                                         @if($item->get_media() && !empty($item->get_media()['url']))

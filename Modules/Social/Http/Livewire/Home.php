@@ -4,11 +4,14 @@ namespace Modules\Social\Http\Livewire;
 
 use App\Models\Location;
 use Livewire\Component;
+use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
+use OmniaDigital\OmniaLibrary\Livewire\WithModal;
+use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class Home extends Component
 {
-    use WithMap;
+    use WithMap, WithNotification, WithModal;
 
     public $tabs = [];
 

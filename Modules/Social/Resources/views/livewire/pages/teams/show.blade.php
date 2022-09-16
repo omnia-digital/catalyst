@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="flex-1 grid grid-cols-12 gap-6 mr-5 mt-4">
+    <div class="flex-1 grid grid-cols-12 gap-1 md:gap-6 lg:mr-3 xl:mr-5 mt-4">
         <div class="col-span-12 lg:col-span-6 xl:col-span-6">
             {{--            <x-library::heading.3 class="pl-3 mb-4">Discussion</x-library::heading.3>--}}
             <div class="space-y-4">
@@ -34,9 +34,8 @@
         </div>
 
         {{--        <div class="col-span-7 grid grid-cols-12 gap-6 lg:gap-4 mr-4">--}}
-        <div class="sticky top-[220px] h-screen col-span-12 lg:col-span-6 xl:col-span-6 mr-4">
+        <div class="sticky top-[220px] h-screen col-span-12 lg:col-span-6 xl:col-span-6 lg:mr-3 xl:mr-4">
             <div class="grid grid-cols-12 gap-4">
-
                 {{-- Overview  --}}
                 <div class="col-span-12 2xl:col-span-6">
                     <div class="flex flex-col flex-1 bg-primary rounded">
