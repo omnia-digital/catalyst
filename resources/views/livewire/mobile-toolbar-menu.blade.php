@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" class="{{ $class }} block sm:hidden">
+<div x-data="{ open: false }" class="{{ $class }} block lg:hidden">
     <div class="fixed bottom-0 bg-white z-[999] w-full px-4">
         <div class="flex justify-around">
             @foreach (collect($navigation)->take(4) as $item)
