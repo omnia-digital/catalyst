@@ -48,7 +48,7 @@
                                           </span>
                                           <span v-if="!(selected.value === null)">
                                             <div :class="[selected.bgColor, 'w-8 h-8 rounded-full flex items-center justify-center']">
-                                              <component :is="selected.icon" class="flex-shrink-0 h-5 w-5 text-white" aria-hidden="true" />
+                                              <component :is="selected.icon" class="flex-shrink-0 h-5 w-5 text-white-text-color" aria-hidden="true" />
                                             </div>
                                             <span class="sr-only">{{ selected.name }}</span>
                                           </span>
@@ -79,7 +79,7 @@
                         <Link href="/social/home"
                               as="button"
                               type="submit"
-                              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-primary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                               preserve-scroll
                         >
                             Post
@@ -107,11 +107,11 @@ import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } f
 import Dropdown from '@/Components/Dropdown'
 
 const moods = [
-    { name: 'Excited', value: 'excited', icon: FireIcon, iconColor: 'text-white', bgColor: 'bg-red-500' },
-    { name: 'Loved', value: 'loved', icon: HeartIcon, iconColor: 'text-white', bgColor: 'bg-pink-400' },
-    { name: 'Happy', value: 'happy', icon: EmojiHappyIcon, iconColor: 'text-white', bgColor: 'bg-green-400' },
-    { name: 'Sad', value: 'sad', icon: EmojiSadIcon, iconColor: 'text-white', bgColor: 'bg-yellow-400' },
-    { name: 'Thumbsy', value: 'thumbsy', icon: ThumbUpIcon, iconColor: 'text-white', bgColor: 'bg-blue-500' },
+    { name: 'Excited', value: 'excited', icon: FireIcon, iconColor: 'text-white-text-color', bgColor: 'bg-red-500' },
+    { name: 'Loved', value: 'loved', icon: HeartIcon, iconColor: 'text-white-text-color', bgColor: 'bg-pink-400' },
+    { name: 'Happy', value: 'happy', icon: EmojiHappyIcon, iconColor: 'text-white-text-color', bgColor: 'bg-green-400' },
+    { name: 'Sad', value: 'sad', icon: EmojiSadIcon, iconColor: 'text-white-text-color', bgColor: 'bg-yellow-400' },
+    { name: 'Thumbsy', value: 'thumbsy', icon: ThumbUpIcon, iconColor: 'text-white-text-color', bgColor: 'bg-blue-500' },
     { name: 'I feel nothing', value: null, icon: XIcon, iconColor: 'text-gray-400', bgColor: 'bg-transparent' },
 ]
 

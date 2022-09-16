@@ -39,7 +39,7 @@ class Applications extends Component
             $invitation->team->owner,
             $invitation->team,
             $this->user->email,
-            'editor'
+            'member'
         );
 
         $invitation->delete();
@@ -89,11 +89,11 @@ class Applications extends Component
         return $this->applications->count();
     }
 
-    public function testClick()
-    {
-        $this->emit('team_action', "Invitation declined");
-    }
-    
+//    public function testClick()
+//    {
+//        $this->emit('team_action', "Invitation declined");
+//    }
+
     public function getUserProperty()
     {
         return User::find(Auth::id());

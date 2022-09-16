@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Actions\Teams\CreateTeam;
+use App\Models\Tag;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -30,6 +31,8 @@ class CreateTeamModal extends Component
 
     public $sampleMedia = [];
     public $sampleMediaNames = [];
+
+    public $teamTypes = [];
 
     public function updatedBannerImage()
     {
@@ -69,12 +72,16 @@ class CreateTeamModal extends Component
         }
     }
 
+    public function getTeamTagsProperty()
+    {
+        return Tag::withType('team_type')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
+    }
+
     protected function rules(): array
     {
         return [
             'name' => ['required', 'max:254'],
-            'startDate' => ['required', 'date'],
-            'summary' => ['required', 'max:280'],
+            'teamTypes' => ['required', 'array'],
         ];
     }
 
@@ -84,12 +91,13 @@ class CreateTeamModal extends Component
 
         $team = (new CreateTeam())->create(Auth::user(), [
             'name' => $this->name,
-            'start_date' => $this->startDate,
-            'summary' => $this->summary,
-            'bannerImage' => $this->bannerImage,
-            'mainImage' => $this->mainImage,
-            'profilePhoto' => $this->profilePhoto,
-            'sampleMedia' => $this->sampleMedia,
+            'teamTypes' => $this->teamTypes,
+//            'start_date' => $this->startDate,
+//            'summary' => $this->summary,
+//            'bannerImage' => $this->bannerImage,
+//            'mainImage' => $this->mainImage,
+//            'profilePhoto' => $this->profilePhoto,
+//            'sampleMedia' => $this->sampleMedia,
         ]);
 
         $this->closeModal('create-team');
@@ -100,6 +108,8 @@ class CreateTeamModal extends Component
 
     public function render()
     {
-        return view('livewire.create-team-modal');
+        return view('livewire.create-team-modal', [
+            'teamTags' => $this->teamTags
+        ]);
     }
 }

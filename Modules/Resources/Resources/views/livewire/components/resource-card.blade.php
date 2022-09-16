@@ -1,22 +1,32 @@
-<article wire:click.prevent.stop="showPost" class="pl-5 pr-5 pt-4 shadow-sm rounded-lg cursor-pointer border border-2 border-transparent hover:border-secondary z-10 bg-primary">
+<article wire:click.prevent.stop="showPost" class="pt-4 shadow-sm rounded-lg cursor-pointer border border-2 z-10 bg-primary {{ $clickable ? '
+cursor-pointer' : ''
+}}">
     <!-- Content -->
     <div class="w-full">
-        <div class="space-y-2">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3 align-middle">
-                    <h4 class="flex items-center">
-                        <a href="{{ route('resources.show', ['resource' => $post]) }}">{{ $post->title }}</a>
-                    </h4>
-
-                    @empty(!$post->is_verified)
-                        <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
-                    @endempty
-
-                    <h4 class="text-base-text-color text-md font-normal">{{ $post->created_at->diffInDays() < 2 ? $post->created_at->shortAbsoluteDiffForHumans() : $post->created_at->format('M d') }}</h4>
+        <div class="space-y-1 lg:space-y-2">
+            <div class="px-5 flex items-start justify-between">
+                {{-- Left --}}
+                <div class="min-w-0 flex-1">
+                    <div class="min-w-0">
+                        <h4 class="flex items-center">
+                            <a href="{{ route('resources.show', ['resource' => $post]) }}">{{ $post->title }}</a>
+                        </h4>
+                        <div class="flex content-center space-x-1 items-center text-post-card-body-color">
+                            <p>by</p>
+                            <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}"
+                               class="hover:underline block font-bold text-post-card-title-color">{{ $post->user->name }}</a>
+                            <x-dot/>
+                            <a href="{{ $post->getUrl() }}" class="hover:underline">
+                                <time datetime="{{ $post->published_at }}">{{ $post->published_at->diffForHumans(short: true) }}</time>
+                            </a>
+                            @empty(!$post->is_verified)
+                                <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
+                            @endempty
+                        </div>
+                    </div>
                 </div>
-
-
-                <div class="flex-shrink-0 self-center flex">
+                {{-- Right --}}
+                <div class="flex lg:flex-shrink-0">
                     @if ($post->tags)
                         <div class="flex justify-start space-x-2 mr-2">
                             @foreach($post->tags as $tag)
@@ -40,12 +50,12 @@
                 </div>
             </div>
 
-            <div class="w-full line-clamp-5">
+            <div class="px-5 w-full line-clamp-5">
                 {!! $post->body !!}
             </div>
 
             @if($post->image)
-                <div class="block w-full aspect-w-10 aspect-h-3 rounded-lg overflow-hidden">
+                <div class="block w-full aspect-w-10 aspect-h-3 overflow-hidden">
                     <img src="{{ $post->image }}" alt="{{ $post->title }}" class="object-cover">
                 </div>
             @endif
@@ -65,7 +75,7 @@
     </div>
 
     <!-- Social Actions -->
-    <div class="z-20 w-full">
+    <div class="z-20 w-full px-5">
         <livewire:social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
     </div>
 </article>

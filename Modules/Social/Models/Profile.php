@@ -2,8 +2,9 @@
 
     namespace Modules\Social\Models;
 
+    use App\Models\NullMedia;
     use App\Models\User;
-    use App\Util\Lexer\PrettyNumber;
+    use App\Support\Lexer\PrettyNumber;
     use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\DB;
@@ -14,10 +15,11 @@
     use Spatie\MediaLibrary\InteractsWithMedia;
     use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
+    use Spatie\Tags\HasTags;
 
     class Profile extends Model implements HasMedia
     {
-        use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto, InteractsWithMedia;
+        use SoftDeletes, HasFactory, HasSlug, HasTags, HasProfilePhoto, InteractsWithMedia;
 
         public $incrementing = false;
 
@@ -44,6 +46,7 @@
             'bio',
             'website',
             'user_id',
+            'salesforce_contact_id'
         ];
 
         protected $appends = [
@@ -96,7 +99,7 @@
         {
             return $this->is_private == true ? 'private' : 'public';
         }
-        
+
 
         public function url() {
             return route('social.profile.show', $this->handle);
@@ -104,7 +107,7 @@
 
         public function bannerImage()
         {
-            return optional($this->getMedia('profile_banner_images')->first());
+            return $this->getMedia('profile_banner_images')->first() ?? (new NullMedia('profile'));
         }
 
         public function photo()
@@ -132,7 +135,7 @@
             return $this->user->awards;
         }
 
-        public function followingCount($short = false)
+        public function updateFollowingCount($short = false)
         {
             $count = Cache::remember('profile:following_count:' . $this->id, now()->addMonths(1), function () {
                 if ($this->user->settings->show_profile_following_count == false) {
@@ -150,12 +153,13 @@
             return $short ? PrettyNumber::convert($count) : $count;
         }
 
-        public function followerCount($short = false)
+        public function updateFollowerCount($short = false)
         {
-            $count = Cache::remember('profile:follower_count:' . $this->id, now()->addMonths(1), function () {
+            $count = Cache::remember('profile:follower_count:' . $this->id, now()->addMinutes(60), function () {
                 if ($this->user->settings->show_profile_follower_count == false) {
                     return 0;
                 }
+//                $count = $this->withCount('followers')->orderBy('followers_count','desc')->get();
                 $count = DB::table('followers')->where('following_id', $this->id)->count();
                 if ($this->followers_count != $count) {
                     $this->followers_count = $count;
@@ -168,12 +172,27 @@
             return $short ? PrettyNumber::convert($count) : $count;
         }
 
-        public function follows($profile): bool
+        /**
+         * Get the Profiles with the most likes on posts
+         * @return void
+         */
+        public function getMostPostLikes()
+        {
+            if (!empty($this->user)) {
+                $type = 'post';
+                return Post::where('user_id', $this->user->id)
+                    ->withCount('post.likes')
+                    ->when($type, fn($query) => $query->where('type', $this->type))
+                    ->orderBy('likes_count', 'desc');
+            }
+        }
+
+        public function isFollowing($profile): bool
         {
             return Follow::whereProfileId($this->id)->whereFollowingId($profile->id)->exists();
         }
 
-        public function followedBy($profile): bool
+        public function isFollowedBy($profile): bool
         {
             return Follow::whereProfileId($profile->id)->whereFollowingId($this->id)->exists();
         }
@@ -231,6 +250,19 @@
         public function user()
         {
             return $this->belongsTo(User::class);
+        }
+
+        public static function getTrending()
+        {
+
+            return Profile::query()->orderByDesc('followers_count');
+
+            $trending = Profile::withCount('followers')
+                                ->with('user')
+                                ->orderBy('followers_count', 'desc')
+                                ->orderBy('created_at', 'desc');
+
+            return $trending;
         }
 
         /**

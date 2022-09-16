@@ -36,7 +36,7 @@
                     </a>
                     <!--REDDIT ICON-->
                     <a href="{{ $links['reddit'] }}" target="_blank">
-                        <div class="text-[#FF4500] hover:text-white border hover:bg-[#FF4500] w-12 h-12 fill-[#FF4500] hover:fill-white border-secondary-light rounded-full flex items-center
+                        <div class="text-[#FF4500] hover:text-white-text-color border hover:bg-[#FF4500] w-12 h-12 fill-[#FF4500] hover:fill-white border-secondary-light rounded-full flex items-center
                             justify-center
                             shadow-xl
                             hover:shadow-sky-500/50 cursor-pointer">
@@ -86,9 +86,9 @@
                         style="display: none;"
                         x-data="{show: false}"
                         x-show="show"
-                        x-transition:leave.opacity.duration.1500ms 
-                        @copied.window=" 
-                            show = true; 
+                        x-transition:leave.opacity.duration.1500ms
+                        @copied.window="
+                            show = true;
                             setTimeout(() => { show = false; }, 3000);
                         "
                         class="absolute bottom-8 left-0 right-0 mx-auto flex justify-center">Link Copied!</div>

@@ -24,23 +24,35 @@
                     'current' => false
                 ],
                 [
-                    'label'   => 'Notifications',
-                    'name'    => 'notifications',
-                    'icon'    => 'heroicon-o-bell',
-                    'current' => false
-                ],
-                [
                     'label'   => \Trans::get('My Teams'),
                     'name'    => 'social.teams.my-teams',
                     'icon'    => 'heroicon-o-briefcase',
                     'current' => false
                 ],
-                [
-                    'label'   => 'Trending Posts',
-                    'name'    => 'social.discover',
-                    'icon'    => 'heroicon-o-collection',
-                    'current' => false
-                ],
+//                [
+//                    'label'   => 'Notifications',
+//                    'name'    => 'notifications',
+//                    'icon'    => 'heroicon-o-bell',
+//                    'current' => false
+//                ],
+//                [
+//                    'label'   => \Trans::get('Menu'),
+//                    'name'    => 'social.teams.my-teams',
+//                    'icon'    => 'heroicon-o-briefcase',
+//                    'current' => false
+//                ],
+//                [
+//                    'label'   => \Trans::get('News'),
+//                    'name'    => 'games.feeds',
+//                    'icon'    => 'x-fas-cloud',
+//                    'current' => false
+//                ],
+//                [
+//                    'label'   => 'Trending Posts',
+//                    'name'    => 'social.discover',
+//                    'icon'    => 'heroicon-o-collection',
+//                    'current' => false
+//                ],
                 [
                     'label'   => 'Resources',
                     'name'    => 'resources.home',
@@ -53,12 +65,12 @@
                     'icon'    => 'heroicon-o-bookmark',
                     'current' => false
                 ],
-                [
-                    'label'   => 'Contacts',
-                    'name'    => 'social.contacts.index',
-                    'icon'    => 'heroicon-o-users',
-                    'current' => false
-                ],
+//                [
+//                    'label'   => 'Contacts',
+//                    'name'    => 'social.contacts.index',
+//                    'icon'    => 'heroicon-o-users',
+//                    'current' => false
+//                ],
             ];
         }
 

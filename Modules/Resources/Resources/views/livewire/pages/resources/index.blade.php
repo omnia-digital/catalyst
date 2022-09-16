@@ -1,49 +1,52 @@
-@extends('resources::livewire.layouts.pages.full-page-layout')
+@extends('resources::livewire.layouts.pages.sidebar-page-layout')
 
 @section('content')
-            <div class="mb-2 flex justify-between items-center">
-                <div class="flex-1 flex items-center">
-{{--                    <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full">--}}
-{{--                        <a href="{{ route('social.home') }}">--}}
-{{--                            <x-heroicon-o-arrow-left class="h-6"/>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-                    <h1 class="py-2 text-3xl">Resources</h1>
+        <div class="w-full mb-4">
+            <div class="relative shadow-xl sm:rounded-b-2xl sm:overflow-hidden">
+                <div class="absolute inset-0 grayscale">
+                    <img class="h-full w-full object-cover"
+                         src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100"
+                         alt="People working on laptops">
+                    <div class="absolute inset-0 bg-indigo-700 mix-blend-multiply"></div>
                 </div>
-
-                <h2>
-
-                <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent.stop="$openModal('add-resource-modal')">
-                    Add Resource
-                </x-library::button>
-                </h2>
-                <livewire:resources::pages.resources.create/>
+                <div class="relative px-4 py-16 sm:px-6 sm:py-16 lg:py-16 lg:px-8">
+                    <x-library::heading.1 class="text-center uppercase" text-size="text-5xl">{{ Trans::get('Resources') }}</x-library::heading.1>
+                    <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">Find and create resources, articles, guides, and more.</p>
+                    <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
+                        <div class="justify-center w-full flex w-1/3">
+                            <x-library::button x-data="" class="py-2 w-full h-10 bg-primary text-base-text-color" x-on:click.prevent.stop="$openModal('add-resource-modal')">
+                                + New Resource
+                            </x-library::button>
+                            <livewire:resources::pages.resources.create/>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    <!-- Filters -->
+    @include('livewire.partials.filters', ['skipFilters' => ['members', 'location', 'tags']])
 
-            <!-- Filters -->
-            @include('livewire.partials.filters')
-
-            <div class="">
-                <div class="masonry sm:masonry-2">
-                    @forelse($resources as $resource)
-                        <div class="w-full break-inside mb-3">
-                            <div class="mx-1">
-                            <livewire:resources::components.resource-card
+    <div class="">
+        <div class="masonry sm:masonry-2">
+            @forelse($resources as $resource)
+                <div class="w-full break-inside mb-3">
+                    <div class="">
+                        <livewire:resources::components.resource-card
                                 as="li"
                                 :post="$resource"
                                 :wire:key="'resource-card-' . $resource->id"
-                            />
-                            </div>
-                        </div>
-                    @empty
-                        <li class="p-4 bg-primary rounded-md text-base-text-color">No resources to show</li>
-                    @endforelse
+                        />
+                    </div>
                 </div>
+            @empty
+                <li class="p-4 bg-primary rounded-md text-base-text-color">No resources to show</li>
+            @endforelse
+        </div>
 
-                <div class="pb-6">
-                    {{ $resources->onEachSide(1)->links() }}
-                </div>
-            </div>
+        <div class="pb-6">
+            {{ $resources->onEachSide(1)->links() }}
+        </div>
+    </div>
     @push('scripts')
         <script>
             function setup() {
@@ -57,7 +60,7 @@
                         },
                         {
                             id: 1,
-                            title: 'Top ' . {{ \Trans::get('teams') }},
+                            title: 'Top '.{{ \Trans::get('teams') }},
                             component: 'social.top-teams'
                         },
                         {
@@ -76,7 +79,7 @@
                             component: 'social.undiscovered'
                         },
                     ],
-                    notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>',
+                    notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-black rounded-full">3</span>',
                 }
             }
         </script>

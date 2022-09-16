@@ -5,7 +5,7 @@ namespace Modules\Social\Http\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use Modules\Social\Actions\CreateNewPostAction;
+use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Modules\Social\Notifications\NewCommentNotification;
@@ -68,6 +68,6 @@ class RepliesModal extends Component
 
     public function render()
     {
-        return view('social::livewire.replies-modal');
+        return view('social::livewire.partials.replies-modal');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Modules\Social\Http\Livewire;
 
-use App\Models\Contact;
 use App\Models\ContactCategory;
 use Illuminate\Support\Arr;
 use Livewire\Component;
@@ -55,7 +54,7 @@ class Map extends Component
 
     public function render()
     {
-        return view('social::livewire.map', [
+        return view('social::livewire.components.map', [
             'countries'  => Country::orderBy('name')->get(),
         ]);
     }

@@ -4,6 +4,7 @@ namespace Modules\Social\Http\Livewire\Partials;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Modules\Social\Models\Like;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 use Illuminate\Support\Facades\App;
@@ -26,15 +27,14 @@ class TrendingSection extends Component
             $this->type = $type;
         }
     }
-    
+
     public function showProfile($url) {
         return $this->redirect($url);
     }
 
     public function getRowsQueryProperty()
     {
-        return Post::with('user')
-            ->when($this->type, fn($query) => $query->where('type', $this->type));
+        return Post::getTrending($this->type);
     }
 
     public function getRowsProperty()

@@ -3,7 +3,7 @@
 @section('content')
     <div class="mb-4 flex items-center">
         <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full"><a href="{{ route('resources.home') }}" class=""><x-heroicon-o-arrow-left class="h-6"/></a></div>
-        <h1 class="py-2 text-3xl">Resource</h1>
+        <x-library::heading.1 class="py-2">Resource</x-library::heading.1>
     </div>
     <div class="xl:grid xl:grid-cols-9 xl:gap-9">
         <div class="xl:col-span-6">
@@ -11,7 +11,7 @@
                 <img class="rounded-lg w-full object-cover max-h-96 bg-neutral-dark flex-shrink-0" src="{{$resource->main_image}}" alt="{{$resource->title}}">
             </div>
             <div class="flex mt-6">
-                <h3 class="text-color-dark text-4xl hover:underline font-bold">{{ $resource->title }}</h3>
+                <x-library::heading.3 class="text-color-dark text-4xl hover:underline font-bold">{{ $resource->title }}</x-library::heading.3>
                 @empty(!$resource->is_verified)
                     <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
                 @endempty
@@ -73,7 +73,7 @@
                         component: 'social.undiscovered'
                     },
                 ],
-                notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>',
+                notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-black rounded-full">3</span>',
             }
         }
     </script>

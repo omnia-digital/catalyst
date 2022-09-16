@@ -2,7 +2,7 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Bookmarks;
 
-use App\Traits\WithSortAndFilters;
+use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,14 +16,11 @@ class Index extends Component
 
     public ?string $search = null;
 
-    public array $filters = [
-        'created_at' => '',
-        'has_attachment' => false,
+    public array $sortLabels = [
+        'published_at' => 'Date Created',
     ];
 
-    public array $sortLabels = [
-        'created_at' => 'Date Created',
-    ];
+    public string $dateColumn = 'published_at';
 
     protected $queryString = [
         'search'
@@ -31,7 +28,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->orderBy = 'created_at';
+        $this->orderBy = 'published_at';
     }
 
     public function getRowsQueryProperty()
@@ -56,7 +53,7 @@ class Index extends Component
         });
     }
 
-    
+
 
     public function render()
     {

@@ -4,10 +4,10 @@
             @foreach ($nav as $key => $item)
                 <a
                     href="{{ route('social.profile.' . $key, $user->handle) }}"
-                    class="py-4 mx-2 flex border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
+                    class="py-4 pl-2 pr-6 flex border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-secondary' : '' }} hover:border-b-secondary">
                     {{ $item }}
                     @if ($key === 'followers')
-                        <span class="ml-2 px-1 w-[21px] h-[22px] flex justify-center items-center rounded-full bg-neutral-dark text-white text-xs font-semibold">{{ $user->followers()->count() }}</span>
+                        <span class="ml-2 px-1 w-[21px] h-[22px] flex justify-center items-center rounded-full bg-neutral-dark text-white-text-color text-xs font-semibold">{{ $user->followers()->count() }}</span>
                     @endif
                 </a>
             @endforeach
@@ -27,6 +27,7 @@
     <div class="flex pr-2 items-center">
         @can('update-profile', $user->profile)
             <a href="{{ route('social.profile.edit', $user->handle) }}" class="py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Edit Profile') }}</a>
+            <a href="{{ route('social.billing') }}" class="py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Billing') }}</a>
         @endcan
         <livewire:social::partials.follow-button :model="$user" class="py-4 mx-4"/>
         {{-- Lists functionality not currently setup

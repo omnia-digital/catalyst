@@ -2,15 +2,18 @@
 
 namespace Modules\Social\Http\Livewire;
 
+use App\Models\Location;
 use Livewire\Component;
+use Modules\Social\Models\Post;
+use OmniaDigital\OmniaLibrary\Livewire\WithMap;
+use OmniaDigital\OmniaLibrary\Livewire\WithModal;
+use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class Home extends Component
 {
+    use WithMap, WithNotification, WithModal;
+
     public $tabs = [];
-
-    public $activities = [];
-
-    public $questions = [];
 
     public function mount()
     {
@@ -31,14 +34,36 @@ class Home extends Component
                 'current' => false
             ]
         ];
+    }
 
-        $this->activities = [];
+    public function getPlacesProperty()
+    {
+        $places = Location::query()
+            ->hasCoordinates()
+            ->with('model')
+            ->get()
+            ->map(function (Location $location) {
+                return [
+                    'id' => $location->id,
+                    'name' => $location->model->name,
+                    'lat' => $location->lat,
+                    'lng' => $location->lng,
+                    'address' => $location->address,
+                    'address_line_2' => $location->address_line_2,
+                    'city' => $location->city,
+                    'state' => $location->state,
+                    'postal_code' => $location->postal_code,
+                    'country' => $location->country,
+                ];
+            });
 
-        $this->questions = [];
+        return $places->all();
     }
 
     public function render()
     {
-        return view('social::livewire.home');
+        return view('social::livewire.pages.home', [
+            'places' => $this->places,
+        ]);
     }
 }

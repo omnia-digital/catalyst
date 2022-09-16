@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire;
 
+use App\Models\Team;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Models\Post;
@@ -12,7 +13,12 @@ class NewsFeed extends Component
 
     public $perPage = 6;
 
-    protected $listeners = ['postSaved'];
+    protected $listeners = [
+        'postSaved',
+        'postDeleted'
+    ];
+
+    public Team|null $team = null;
 
     public function postSaved()
     {
@@ -31,7 +37,10 @@ class NewsFeed extends Component
 
     public function getRowsQueryProperty()
     {
-        return Post::with(['user', 'user.profile', 'media'])->latest();
+        if ($this->team) {
+            return $this->team->postsWithinTeam()->with(['user', 'user.profile', 'media'])->orderBy('published_at', 'desc');
+        }
+        return Post::with(['user', 'user.profile', 'media'])->orderBy('published_at', 'desc');
     }
 
     public function getRowsProperty()
@@ -41,7 +50,7 @@ class NewsFeed extends Component
 
     public function render()
     {
-        return view('social::livewire.news-feed', [
+        return view('social::livewire.partials.news-feed', [
             'feed' => $this->rows
         ]);
     }

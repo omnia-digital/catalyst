@@ -8,6 +8,9 @@ class CreateTagTables extends Migration
 {
     public function up()
     {
+        if (Schema::hasTable('tags')) {
+            return;
+        }
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
 

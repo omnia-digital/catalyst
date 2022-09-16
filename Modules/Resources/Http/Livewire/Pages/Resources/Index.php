@@ -2,7 +2,7 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
-use App\Traits\WithSortAndFilters;
+use App\Traits\Filter\WithSortAndFilters;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Enums\PostType;
@@ -14,8 +14,6 @@ class Index extends Component
 {
     use WithPagination, WithCachedRows, WithSortAndFilters;
 
-    public ?string $search = null;
-
     public array $sortLabels = [
         'title' => 'Title',
         'bookmarks_count' => 'Bookmarks',
@@ -23,6 +21,8 @@ class Index extends Component
         'user_id' => 'User',
         'published_at' => 'Published Date'
     ];
+
+    public string $dateColumn = 'published_at';
 
     protected $queryString = [
         'search'
@@ -39,22 +39,19 @@ class Index extends Component
 
     public function getRowsQueryProperty()
     {
-        $query = clone $this->rowsQueryWithoutFilters;
+        $query = Post::where('type', '=', PostType::RESOURCE)
+            ->withCount(['bookmarks', 'likes', 'media']);
 
         $query = $this->applyFilters($query);
 
-        return $query
-                ->where(function($q) {
-                    $q->where('title', 'like', "%{$this->search}%")
-                    ->orWhere('body', 'like', "%{$this->search}%");
-                })
-                ->orderBy($this->orderBy, $this->sortOrder);
-    }
+        $query->where(function($q) {
+            $q->where('title', 'like', "%{$this->search}%")
+            ->orWhere('body', 'like', "%{$this->search}%");
+        });
 
-    public function getRowsQueryWithoutFiltersProperty()
-    {
-        return Post::where('type', '=', PostType::RESOURCE)
-            ->withCount(['bookmarks', 'likes', 'media']);
+        $query = $this->applySorting($query);
+
+        return $query;
     }
 
     public function getRowsProperty()

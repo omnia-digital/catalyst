@@ -2,7 +2,7 @@
 
 
 @section('page-layout')
-    <div class="flex space-x-4 pt-6">
+    <div class="flex space-x-4 mr-4">
         <div class="w-full">
             @yield('content')
         </div>

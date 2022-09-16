@@ -2,10 +2,10 @@
 
 
 @section('page-layout')
-    <div class="flex space-x-4 pt-6">
-        <div class="mx-auto max-w-4xl w-full">
+    <div class="grid grid-cols-12 gap-4 mr-4">
+        <div class="col-span-8 2xl:col-span-9">
             @yield('content')
         </div>
-        <x-sidebar-column class="max-w-sm" type="{{\Modules\Social\Enums\PostType::RESOURCE->value}}"/>
+        <x-sidebar-column class="hidden sm:block col-span-4 2xl:col-span-3" type="{{\Modules\Social\Enums\PostType::RESOURCE->value}}"/>
     </div>
 @endsection

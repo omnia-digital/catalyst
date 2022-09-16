@@ -12,7 +12,7 @@ class GetFeaturedTeamsAction
         return Team::query()
             ->limit($limit)
             ->withCount('users as members')
-            ->withAnyTags(['featured', 'recommended'])
+            ->withAnyTags(['featured', 'recommended'], 'team')
             ->get();
     }
 }

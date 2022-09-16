@@ -1,4 +1,5 @@
 require('./bootstrap');
+import 'tw-elements';
 
 import Alpine from 'alpinejs';
 import focus from '@alpinejs/focus';

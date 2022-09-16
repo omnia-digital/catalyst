@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 use Nwidart\Modules\Module;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,15 +17,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //Model::preventLazyLoading(! $this->app->isProduction());
-
-        Module::macro('isModuleEnabled', function ($moduleName) {
-            if (Module::collections()->has($moduleName)) {
-                $module = Module::find($moduleName);
-                return $module->isStatus(1);
-            }
-
-            return false;
-        });
     }
 
     /**
@@ -34,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //Cashier::calculateTaxes();
     }
 }

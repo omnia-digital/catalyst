@@ -39,7 +39,7 @@
                 <button type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span class="sr-only">Close sidebar</span>
                     <!-- Heroicon name: outline/x -->
-                    <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <svg class="h-6 w-6 text-white-text-color" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
@@ -81,7 +81,7 @@
                         </a>
                     </div>
                     <div class="mt-8">
-                        <h3 class="px-3 text-xs font-semibold text-base-text-color uppercase tracking-wider" id="mobile-teams-headline">Teams</h3>
+                        <x-library::heading.3 class="px-3 text-xs font-semibold text-base-text-color uppercase tracking-wider" id="mobile-teams-headline">Teams</x-library::heading.3>
                         <div class="mt-1 space-y-1" role="group" aria-labelledby="mobile-teams-headline">
                             <a href="#" class="group flex items-center px-3 py-2 text-base-text-color leading-5 font-medium text-base-text-color rounded-md hover:text-dark-text-color hover:bg-gray-50">
                                 <span class="w-2.5 h-2.5 mr-4 bg-secondary rounded-full" aria-hidden="true"></span>
@@ -208,7 +208,7 @@
                 </div>
                 <div class="mt-8">
                     <!-- Secondary navigation -->
-                    <h3 class="px-3 text-xs font-semibold text-base-text-color uppercase tracking-wider" id="desktop-teams-headline">Teams</h3>
+                    <x-library::heading.3 class="px-3 text-xs font-semibold text-base-text-color uppercase tracking-wider" id="desktop-teams-headline">Teams</x-library::heading.3>
                     <div class="mt-1 space-y-1" role="group" aria-labelledby="desktop-teams-headline">
                         <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-dark-text-color rounded-md hover:text-dark-text-color hover:bg-gray-50">
                             <span class="w-2.5 h-2.5 mr-4 bg-secondary rounded-full" aria-hidden="true"></span>
@@ -299,19 +299,19 @@
             <!-- Page title & actions -->
             <div class="border-b border-neutral-light px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
                 <div class="flex-1 min-w-0">
-                    <h1 class="text-lg font-medium leading-6 text-dark-text-color sm:truncate">Home</h1>
+                    <x-library::heading.1 class="text-lg font-medium leading-6 text-dark-text-color sm:truncate">Home</x-library::heading.1>
                 </div>
                 <div class="mt-4 flex sm:mt-0 sm:ml-4">
                     <button type="button" class="order-1 ml-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-0 sm:ml-0">Share</button>
-                    <button type="button" class="order-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">Create</button>
+                    <button type="button" class="order-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white-text-color bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">Create</button>
                 </div>
             </div>
             <!-- Pinned teams -->
             <div class="px-4 mt-6 sm:px-6 lg:px-8">
-                <h2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Pinned Teams</h2>
+                <x-library::heading.2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Pinned Teams</x-library::heading.2>
                 <ul role="list" class="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-3">
                     <li class="relative col-span-1 flex shadow-sm rounded-md">
-                        <div class="flex-shrink-0 flex items-center justify-center w-16 bg-pink-600 text-white text-sm font-medium rounded-l-md">GA</div>
+                        <div class="flex-shrink-0 flex items-center justify-center w-16 bg-pink-600 text-white-text-color text-sm font-medium rounded-l-md">GA</div>
                         <div class="flex-1 flex items-center justify-between border-t border-r border-b border-neutral-light bg-primary rounded-r-md truncate">
                             <div class="flex-1 px-4 py-2 text-sm truncate">
                                 <a href="#" class="text-dark-text-color font-medium hover:text-base-text-color"> GraphQL API </a>
@@ -357,7 +357,7 @@
             <!-- Teams list (only on smallest breakpoint) -->
             <div class="mt-10 sm:hidden">
                 <div class="px-4 sm:px-6">
-                    <h2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Teams</h2>
+                    <x-library::heading.2 class="text-base-text-color text-xs font-medium uppercase tracking-wide">Teams</x-library::heading.2>
                 </div>
                 <ul role="list" class="mt-3 border-t border-neutral-light divide-y divide-gray-100">
                     <li>

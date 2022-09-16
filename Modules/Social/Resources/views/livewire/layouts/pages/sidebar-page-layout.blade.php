@@ -2,10 +2,13 @@
 
 
 @section('page-layout')
-    <div class="flex space-x-4 pt-6">
-        <div class="mx-auto max-w-4xl w-full">
-            @yield('content')
+    <div class="grid grid-cols-12 gap-4 sm:mr-4">
+        <div class="col-span-12 sm:col-span-8 2xl:col-span-9">
+            @yield('banner-with-sidebar')
+            <div class="mx-4 sm:ml-4 sm:mr-0">
+                @yield('content')
+            </div>
         </div>
-        <x-sidebar-column class="max-w-sm"/>
+        <x-sidebar-column class="mt-4 hidden sm:block col-span-4 2xl:col-span-3"/>
     </div>
 @endsection

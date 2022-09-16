@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasLocation;
+use App\Traits\Location\HasLocation;
+use App\Traits\Tag\HasTeamTags;
+use App\Traits\Tag\HasTeamTypeTags;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use Modules\Reviews\Traits\Reviewable;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Modules\Social\Traits\Awardable;
@@ -33,8 +33,22 @@ use Wimil\Followers\Traits\CanBeFollowed;
  */
 class Team extends JetstreamTeam implements HasMedia
 {
-    use HasFactory, Notifiable,
-        Likable, Postable, HasTags, CanBeFollowed, Awardable, HasProfilePhoto, HasSlug, HasLocation, InteractsWithMedia;
+    use HasFactory,
+        Notifiable,
+        Likable,
+        Postable,
+        CanBeFollowed,
+        Awardable,
+        Reviewable,
+        HasProfilePhoto,
+        HasSlug,
+        HasLocation,
+        HasTeamTypeTags,
+        InteractsWithMedia;
+
+    use HasTeamTags, HasTags {
+        HasTeamTags::tags insteadof HasTags;
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -47,14 +61,22 @@ class Team extends JetstreamTeam implements HasMedia
         'start_date',
         'summary',
         'content',
+        'stripe_connect_id',
+        'stripe_connect_onboarding_completed',
     ];
 
     protected $dates = [
         'start_date'
     ];
 
+    protected $casts = [
+        'stripe_connect_onboarding_completed' => 'boolean'
+    ];
+
     protected $appends = [
-        'profile_photo_url'
+        'profile_photo_url',
+        'location_short',
+        'start_date_string'
     ];
 
     /**
@@ -71,8 +93,8 @@ class Team extends JetstreamTeam implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-                            ->generateSlugsFrom('name')
-                            ->saveSlugsTo('handle');
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('handle');
     }
 
     /**
@@ -104,11 +126,12 @@ class Team extends JetstreamTeam implements HasMedia
         return $this;
     }
 
-    /**
-     * Get all of the pending user applications for the team.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    // Relations //
+    public function postsWithinTeam()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public function teamApplications(): HasMany
     {
         return $this->hasMany(TeamApplication::class);
@@ -131,18 +154,20 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function bannerImage()
     {
-        return optional($this->getMedia('team_banner_images')->first());
+        return $this->getMedia('team_banner_images')->first() ?? (new NullMedia);
     }
 
     public function mainImage()
     {
-        return optional($this->getMedia('team_main_images')->first());
+        return $this->getMedia('team_main_images')->first() ?? (new NullMedia);
     }
 
     public function profilePhoto()
     {
         return optional($this->getMedia('team_profile_photos')->first());
     }
+
+    // Attributes //
 
     /**
      * Get the URL to the team's profile photo.
@@ -156,7 +181,12 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function sampleImages()
     {
-        return $this->getMedia('team_sample_images');
+        return $this->getMedia('team_sample_images')->count() ? $this->getMedia('team_sample_images') : (new NullMedia);
+    }
+
+    public function getStartDateStringAttribute()
+    {
+        return $this->start_date?->toFormattedDateString();
     }
 
     public function getReviewScoreAttribute()
@@ -171,7 +201,7 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function owner()
     {
-        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id');
+        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id')->where('role', 'owner');
     }
 
     public function members()
@@ -179,7 +209,8 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->users()->wherePivotNotIn('role', ['owner']);
     }
 
-    public function allUsers() {
+    public function allUsers()
+    {
         return $this->users();
     }
 
@@ -188,8 +219,33 @@ class Team extends JetstreamTeam implements HasMedia
         return route('social.teams.show', $this);
     }
 
+    /** @note We are not using this currently. Save for future when we want teams to create custom plans */
+    //public function teamPlans(): HasMany
+    //{
+    //    return $this->hasMany(TeamPlan::class);
+    //}
+
+    // Scopes //
+
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         return $query->where('name', 'LIKE', "%$search%");
+    }
+
+    public function scopeWithuser(Builder $query, User $user): Builder
+    {
+        return $query
+            ->leftJoin('team_user', 'teams.id', '=', 'team_user.team_id')
+            ->where('team_user.user_id', $user->id);
+    }
+
+    public function hasStripeConnectAccount(): bool
+    {
+        return !empty($this->stripe_connect_id);
+    }
+
+    public function stripeConnectOnboardingCompleted(): bool
+    {
+        return (bool)$this->stripe_connect_onboarding_completed;
     }
 }
