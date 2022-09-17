@@ -21,7 +21,7 @@ class UserSubscriptionCheck
             return $next($request);
         }
         
-        if ($request->user()->chargentSubscription?->is_active) {
+        if ($request->user()->chargentSubscription()->latest()->first()->is_active) {
             return $next($request);
         }
 
