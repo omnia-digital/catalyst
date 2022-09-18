@@ -26,10 +26,14 @@ class DeletePostDropdownItem extends Component
         $this->show = $show;
     }
 
-    public function openDeleteModal()
+    /**
+     * Confirm delete post.
+     *
+     * @return void
+     */
+    public function confirmDeletePost()
     {
-        $this->emitUp('delete-post-modal');
-//        $this->emitTo('delete-post-modal','delete', $this->post);
+        $this->emitTo('social::delete-post-modal', 'openDeletePostModal', $this->post->id);
     }
 
     public function render()
