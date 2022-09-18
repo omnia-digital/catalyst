@@ -69,6 +69,10 @@ jobs:
           php-version: 8.1
           tools: composer:v2
           coverage: none
+      - name: Register Font-Awesome Key
+        run: |
+          npm config set "@fortawesome:registry" https://npm.fontawesome.com/
+          npm config set "//npm.fontawesome.com/:_authToken" ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
       - name: Validate Composer
         run: composer validate
       - name: Install Composer dependencies
