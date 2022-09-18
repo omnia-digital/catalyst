@@ -27,6 +27,12 @@ class ManageBillingSettings extends SettingsPage
             Toggle::make('user_subscriptions')
                 ->label('Use User Subscriptions?')
                 ->inline(false),
+            Toggle::make('team_subscriptions')
+                  ->label('Use Team Subscriptions?')
+                  ->inline(false),
+            Toggle::make('team_member_subscriptions')
+                  ->label('Use Team Member Subscriptions?')
+                  ->inline(false),
             Select::make('user_subscription_form')
                 ->label('User Subscription Form')
                 ->options(FormAssemblyForm::pluck('name', 'slug')->toArray())

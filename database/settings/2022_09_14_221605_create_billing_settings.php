@@ -8,6 +8,8 @@ class CreateBillingSettings extends SettingsMigration
     {
         $this->migrator->add('billing.payment_gateway', 'stripe');
         $this->migrator->add('billing.user_subscriptions', 0);
+        $this->migrator->add('billing.team_subscriptions', 0);
+        $this->migrator->add('billing.team_member_subscriptions', 0);
         $this->migrator->add('billing.user_subscription_form', 'user-subscriptions');
     }
 }

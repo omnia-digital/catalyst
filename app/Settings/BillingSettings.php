@@ -9,6 +9,8 @@ class BillingSettings extends Settings
     public string $payment_gateway;
 
     public bool $user_subscriptions;
+    public bool $team_subscriptions;
+    public bool $team_member_subscriptions;
 
     public string $user_subscription_form;
 
