@@ -49,7 +49,7 @@ cursor-pointer' : ''
                             <p>{{ $post->isBookmarkedBy() ? 'Un-bookmark' : 'Bookmark' }}</p>
                         </div>
                     </x-library::dropdown.item>
-                    <livewire:social::delete-post-dropdown-item :post="$post" wire:key="delete-post-dropdown-item{{ $post->id }}" :show="true"/>
+                    {{-- <livewire:social::delete-post-dropdown-item :post="$post" wire:key="delete-post-dropdown-item{{ $post->id }}" :show="true"/> --}}
                 </x-library::dropdown>
             </div>
         </div>
