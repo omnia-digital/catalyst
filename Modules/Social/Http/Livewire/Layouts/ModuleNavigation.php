@@ -24,21 +24,27 @@
                     'current' => false
                 ],
                 [
-                    'label'   => 'Notifications',
-                    'name'    => 'notifications',
-                    'icon'    => 'heroicon-o-bell',
-                    'current' => false
-                ],
-                [
                     'label'   => \Trans::get('My Teams'),
                     'name'    => 'social.teams.my-teams',
                     'icon'    => 'heroicon-o-briefcase',
                     'current' => false
                 ],
 //                [
+//                    'label'   => 'Notifications',
+//                    'name'    => 'notifications',
+//                    'icon'    => 'heroicon-o-bell',
+//                    'current' => false
+//                ],
+//                [
+//                    'label'   => \Trans::get('Menu'),
+//                    'name'    => 'social.teams.my-teams',
+//                    'icon'    => 'heroicon-o-briefcase',
+//                    'current' => false
+//                ],
+//                [
 //                    'label'   => \Trans::get('News'),
 //                    'name'    => 'games.feeds',
-//                    'icon'    => 'heroicon-o-briefcase',
+//                    'icon'    => 'x-fas-cloud',
 //                    'current' => false
 //                ],
 //                [

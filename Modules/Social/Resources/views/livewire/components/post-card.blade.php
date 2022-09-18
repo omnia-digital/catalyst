@@ -1,4 +1,4 @@
-<article wire:click.prevent.stop="showPost" class="max-w-post-card-max-w bg-post-card-bg-color pt-4 shadow rounded-lg z-10 border-2 border-transparent {{ $clickable ? '
+<article wire:click.prevent.stop="showPost" class="w-full sm:max-w-post-card-max-w bg-post-card-bg-color pt-4 shadow rounded-lg z-10 border-2 border-transparent {{ $clickable ? '
 cursor-pointer' : ''
 }}">
     <div class="flex justify-between px-5">
@@ -44,8 +44,12 @@ cursor-pointer' : ''
                         </button>
                     </x-slot>
                     <x-library::dropdown.item wire:click.prevent.stop="toggleBookmark">
-                        {{ $post->isBookmarkedBy() ? 'Un-bookmark' : 'Bookmark' }}
+                        <div class="flex items-center space-x-1">
+                            <x-heroicon-o-bookmark class="h-6 w-6" aria-hidden="true"/>
+                            <p>{{ $post->isBookmarkedBy() ? 'Un-bookmark' : 'Bookmark' }}</p>
+                        </div>
                     </x-library::dropdown.item>
+                    {{-- <livewire:social::delete-post-dropdown-item :post="$post" wire:key="delete-post-dropdown-item{{ $post->id }}" :show="true"/> --}}
                 </x-library::dropdown>
             </div>
         </div>

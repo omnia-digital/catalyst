@@ -26,7 +26,7 @@ use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Subscriptions;
 
 
-Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->group(function () {
+Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subscribed'])->group(function () {
     //        Route::get('/', 'SocialController@index');
 
     // the way twitter works is
@@ -49,7 +49,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified'])->grou
 
     Route::get('billing', Billing::class)->name('billing');
 
-    Route::get('/subscription', SubscriptionPage::class)->name('subscription');
+    Route::get('/subscription', SubscriptionPage::class)->withoutMiddleware('subscribed')->name('subscription');
 
     Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {
         Route::get('/discover', DiscoverTeams::class)->name('discover');

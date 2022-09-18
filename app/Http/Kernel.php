@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'team' => \App\Http\Middleware\EnsureHasTeam::class,
         'team.permission' => \App\Http\Middleware\TeamsPermission::class,
+        'subscribed' => \Modules\Subscriptions\Http\Middleware\UserSubscriptionCheck::class,
     ];
 }

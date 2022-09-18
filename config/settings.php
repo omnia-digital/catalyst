@@ -1,5 +1,7 @@
 <?php
 
+use App\Settings\BillingSettings;
+
 return [
 
     /*
@@ -7,7 +9,7 @@ return [
      * put them (manually) here.
      */
     'settings' => [
-
+        BillingSettings::class
     ],
 
     /*
@@ -32,7 +34,7 @@ return [
         'database' => [
             'type' => Spatie\LaravelSettings\SettingsRepositories\DatabaseSettingsRepository::class,
             'model' => null,
-            'table' => null,
+            'table' => 'settings',
             'connection' => null,
         ],
         'redis' => [

@@ -13,7 +13,10 @@ class NewsFeed extends Component
 
     public $perPage = 6;
 
-    protected $listeners = ['postSaved'];
+    protected $listeners = [
+        'postSaved',
+        'postDeleted' => '$refresh'
+    ];
 
     public Team|null $team = null;
 

@@ -12,6 +12,7 @@ use MarcReichel\IGDBLaravel\Models\Cover;
 use MarcReichel\IGDBLaravel\Models\Game as IGDBGame;
 use MarcReichel\IGDBLaravel\Models\GameVideo;
 use MarcReichel\IGDBLaravel\Models\InvolvedCompany;
+use MarcReichel\IGDBLaravel\Models\Keyword;
 use MarcReichel\IGDBLaravel\Models\Website;
 
 class Game extends IGDBGame
@@ -64,5 +65,11 @@ class Game extends IGDBGame
     public function profile()
     {
         return route('games.show', $this->slug);
+    }
+
+    public function getKeywordsAttribute()
+    {
+        $tags = $this->tags;
+        return Keyword::where('');
     }
 }

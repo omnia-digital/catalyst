@@ -11,6 +11,7 @@ use App\Actions\Teams\RemoveTeamMember;
 use App\Actions\Teams\UpdateTeamName;
 use App\Contracts\InvitesTeamMembers;
 use App\Models\Membership;
+use App\Settings\BillingSettings;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 
@@ -54,26 +55,92 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configurePermissions()
     {
-        Jetstream::defaultApiTokenPermissions(['read']);
+        Jetstream::defaultApiTokenPermissions([]);
 
-        Jetstream::role('admin', 'Administrator', [
-            'create',
-            'read',
-            'update',
-            'delete',
-        ])->description('Administrator users can perform any action.');
+        $usingTeamMemberSubs = (new BillingSettings())?->team_member_subscriptions;
 
-        Jetstream::role('owner', 'Owner', [
-            'create',
-            'read',
-            'update',
-            'delete',
-        ])->description('Owners can perform any action.');
+        $postPermissions = [
+            'post-create',
+            'post-read',
+            'post-update',
+            'post-delete',
+        ];
+        $feedPermissions = [
+            'feed-create',
+            'feed-read',
+            'feed-update',
+            'feed-delete',
+        ];
+        $awardPermissions = [
+            'award-create',
+            'award-read',
+            'award-update',
+            'award-delete',
+        ];
+        $reviewPermissions = [
+            'review-create',
+            'review-read',
+            'review-update',
+            'review-delete',
+        ];
+        $subscriptionPermissions = [
+            'sub-create',
+            'sub-read',
+            'sub-update',
+            'sub-delete',
+        ];
+        $eventPermissions = [
+            'event-create',
+            'event-read',
+            'event-update',
+            'event-delete',
+        ];
+
+        $allPermissions = [
+            ...$postPermissions,
+            ...$feedPermissions,
+            ...$awardPermissions,
+            ...$reviewPermissions,
+            ...$eventPermissions,
+        ];
+
+        array_push($allPermissions, ...$subscriptionPermissions);
+
+        $memberRoleDescription = "Members are a part of your Team and can see content inside the community";
+        if ($usingTeamMemberSubs) {
+            $memberRoleDescription .= " (excluding 'sub-only' content)";
+        }
 
         Jetstream::role('member', 'Member', [
-            'read',
+            'post-create',
+            'post-read',
+            'feed-read',
+            'award-read',
+            'review-create',
+            'review-read',
+        ])->description(\Trans::get($memberRoleDescription));
+
+        if ($usingTeamMemberSubs) {
+            Jetstream::role('subscriber', 'Subscriber', [
+                'feed-read',
+            ])->description(\Trans::get("Subscribers can view 'sub-only' content, including posts, chats, events and more. Assigning a new member this role is equivalent to giving a subscription for free."));
+        }
+
+        Jetstream::role('moderator', 'Moderator', [
+            'post-read',
+            'post-delete',
+            'post-edit',
             'create',
-            'update',
-        ])->description('Member users have the ability to read, create, and update.');
+        ])->description(\Trans::get("Moderators can also can edit and delete posts."));
+
+        Jetstream::role('admin', 'Administrator', [
+            ...$allPermissions
+        ])->description(\Trans::get("Admins have access to everything except billing & subscription details."));
+
+        Jetstream::role('owner', 'Owner', [
+            ...$allPermissions,
+            'billing'
+        ])->description(\Trans::get("There can only be 1 Owner. The owner is the user that has their financial & billing accounts linked to this Team."));
+
     }
 }

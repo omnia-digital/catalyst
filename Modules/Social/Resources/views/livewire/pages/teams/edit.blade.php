@@ -333,6 +333,13 @@
                 @endif
             </div>
 
+            <!-- Team Members -->
+            <div x-cloak x-show="activeTab === 3" class="mt-6 pb-12 space-y-6">
+                <div>
+                <livewire:social::pages.teams.members :team="$team"/>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection
@@ -355,6 +362,11 @@
                         id: 2,
                         title: 'Locations',
                         /* component: 'social::pages.teams.partials.edit-team-locations' */
+                    },
+                    {
+                        id: 3,
+                        title: 'Members',
+                        // component: 'social::pages.teams.members'
                     },
                 ]
             }

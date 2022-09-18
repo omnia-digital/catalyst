@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.28.0.
+ * Generated for Laravel 9.30.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -3183,6 +3183,18 @@
                         return $instance->map($map);
         }
                     /**
+         * Specify the jobs that should be dispatched instead of faked.
+         *
+         * @param array|string $jobsToDispatch
+         * @return void 
+         * @static 
+         */ 
+        public static function except($jobsToDispatch)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
+                        $instance->except($jobsToDispatch);
+        }
+                    /**
          * Assert if a job was dispatched based on a truth-test callback.
          *
          * @param string|\Closure $command
@@ -3358,6 +3370,17 @@
         {
                         /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
                         $instance->assertBatchCount($count);
+        }
+                    /**
+         * Assert that no batched jobs were dispatched.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function assertNothingBatched()
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
+                        $instance->assertNothingBatched();
         }
                     /**
          * Get all of the jobs matching a truth-test callback.
@@ -6198,6 +6221,18 @@
         public static function flushMacros()
         {
                         \Illuminate\Events\Dispatcher::flushMacros();
+        }
+                    /**
+         * Specify the events that should be dispatched instead of faked.
+         *
+         * @param array|string $eventsToDispatch
+         * @return \Illuminate\Support\Testing\Fakes\EventFake 
+         * @static 
+         */ 
+        public static function except($eventsToDispatch)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\EventFake $instance */
+                        return $instance->except($eventsToDispatch);
         }
                     /**
          * Assert if an event has a listener attached to it.
@@ -9351,6 +9386,18 @@
         {
                         /** @var \Illuminate\Queue\QueueManager $instance */
                         return $instance->setApplication($app);
+        }
+                    /**
+         * Specify the jobs that should be queued instead of faked.
+         *
+         * @param array|string $jobsToBeQueued
+         * @return \Illuminate\Support\Testing\Fakes\QueueFake 
+         * @static 
+         */ 
+        public static function except($jobsToBeQueued)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\QueueFake $instance */
+                        return $instance->except($jobsToBeQueued);
         }
                     /**
          * Assert if a job was pushed based on a truth-test callback.
@@ -14518,6 +14565,18 @@
                         return $instance->createS3Driver($config);
         }
                     /**
+         * Create a scoped driver.
+         *
+         * @param array $config
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @static 
+         */ 
+        public static function createScopedDriver($config)
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemManager $instance */
+                        return $instance->createScopedDriver($config);
+        }
+                    /**
          * Set the given disk instance.
          *
          * @param string $name
@@ -19403,6 +19462,169 @@
      
 }
 
+    namespace Spatie\Analytics { 
+            /**
+     * 
+     *
+     * @see \Spatie\Analytics\Analytics
+     */ 
+        class AnalyticsFacade {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setViewId($viewId)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->setViewId($viewId);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getViewId()
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->getViewId();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchVisitorsAndPageViews($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchVisitorsAndPageViews($period);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTotalVisitorsAndPageViews($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTotalVisitorsAndPageViews($period);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchMostVisitedPages($period, $maxResults = 20)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchMostVisitedPages($period, $maxResults);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTopReferrers($period, $maxResults = 20)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTopReferrers($period, $maxResults);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchUserTypes($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchUserTypes($period);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTopBrowsers($period, $maxResults = 10)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTopBrowsers($period, $maxResults);
+        }
+                    /**
+         * Call the query method on the authenticated client.
+         *
+         * @param \Spatie\Analytics\Period $period
+         * @param string $metrics
+         * @param array $others
+         * @return \Google_Service_Analytics_GaData|array|null 
+         * @static 
+         */ 
+        public static function performQuery($period, $metrics, $others = [])
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->performQuery($period, $metrics, $others);
+        }
+                    /**
+         * Get the underlying Google_Service_Analytics object. You can use this
+         * to basically call anything on the Google Analytics API.
+         *
+         * @static 
+         */ 
+        public static function getAnalyticsService()
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->getAnalyticsService();
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Spatie\Analytics\Analytics::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Spatie\Analytics\Analytics::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Spatie\Analytics\Analytics::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Spatie\Analytics\Analytics::flushMacros();
+        }
+         
+    }
+     
+}
+
     namespace Spatie\LaravelIgnition\Facades { 
             /**
      * 
@@ -20154,6 +20376,60 @@
                     /**
          * 
          *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionHasUrl()
+         * @param string $name
+         * @param string $url
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionHasUrl($name, $url, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionHasUrl($name, $url, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionDoesNotHaveUrl()
+         * @param string $name
+         * @param string $url
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionDoesNotHaveUrl($name, $url, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionDoesNotHaveUrl($name, $url, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionShouldOpenUrlInNewTab()
+         * @param string $name
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionShouldOpenUrlInNewTab($name, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionShouldOpenUrlInNewTab($name, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Testing\TestsPageActions::assertPageActionShouldNotOpenUrlInNewTab()
+         * @param string $name
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertPageActionShouldNotOpenUrlInNewTab($name, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertPageActionShouldNotOpenUrlInNewTab($name, $record);
+        }
+                    /**
+         * 
+         *
          * @see \Filament\Testing\TestsPageActions::assertPageActionHeld()
          * @param string $name
          * @return static 
@@ -20551,6 +20827,60 @@
                     /**
          * 
          *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionHasUrl()
+         * @param string $name
+         * @param string $url
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionHasUrl($name, $url, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionHasUrl($name, $url, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionDoesNotHaveUrl()
+         * @param string $name
+         * @param string $url
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionDoesNotHaveUrl($name, $url, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionDoesNotHaveUrl($name, $url, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionShouldOpenUrlInNewTab()
+         * @param string $name
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionShouldOpenUrlInNewTab($name, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionShouldOpenUrlInNewTab($name, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsActions::assertTableActionShouldNotOpenUrlInNewTab()
+         * @param string $name
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableActionShouldNotOpenUrlInNewTab($name, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableActionShouldNotOpenUrlInNewTab($name, $record);
+        }
+                    /**
+         * 
+         *
          * @see \Filament\Tables\Testing\TestsActions::assertTableActionHeld()
          * @param string $name
          * @return static 
@@ -20891,6 +21221,47 @@
                     /**
          * 
          *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnStateSet()
+         * @param string $name
+         * @param mixed $value
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableColumnStateSet($name, $value, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnStateSet($name, $value, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnStateNotSet()
+         * @param string $name
+         * @param mixed $value
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableColumnStateNotSet($name, $value, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnStateNotSet($name, $value, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::callTableColumnAction()
+         * @param string $name
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function callTableColumnAction($name, $record = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::callTableColumnAction($name, $record);
+        }
+                    /**
+         * 
+         *
          * @see \Filament\Tables\Testing\TestsColumns::sortTable()
          * @param string|null $name
          * @param string|null $direction
@@ -20972,18 +21343,6 @@
         public static function assertTableFilterExists($name)
         {
                         return \Livewire\Testing\TestableLivewire::assertTableFilterExists($name);
-        }
-                    /**
-         * 
-         *
-         * @see \Filament\Tables\Testing\TestsFilters::parseFilterName()
-         * @param string $name
-         * @return string 
-         * @static 
-         */ 
-        public static function parseFilterName($name)
-        {
-                        return \Livewire\Testing\TestableLivewire::parseFilterName($name);
         }
                     /**
          * 
@@ -24974,6 +25333,7 @@ namespace  {
             class Livewire extends \Livewire\Livewire {}
             class Module extends \Nwidart\Modules\Facades\Module {}
             class Sentry extends \Sentry\Laravel\Facade {}
+            class Analytics extends \Spatie\Analytics\AnalyticsFacade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class FeedReader extends \Vedmant\FeedReader\Facades\FeedReader {}
      

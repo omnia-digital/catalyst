@@ -58,6 +58,16 @@ class PostCard extends Component
 
         $this->success('Bookmark the resource successfully!');
     }
+    
+    /**
+     * Confirm delete post.
+     *
+     * @return void
+     */
+    public function confirmDeletePost()
+    {
+        $this->emitTo('social::delete-post-modal', 'openDeletePostModal', $this->post->id);
+    }
 
     public function render()
     {
