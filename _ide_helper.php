@@ -18914,28 +18914,6 @@
                         return $instance->find($name);
         }
                     /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function findByAlias($alias)
-        {            //Method inherited from \Nwidart\Modules\FileRepository         
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->findByAlias($alias);
-        }
-                    /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function findRequirements($name)
-        {            //Method inherited from \Nwidart\Modules\FileRepository         
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->findRequirements($name);
-        }
-                    /**
          * Find a specific module, if there return that, otherwise throw exception.
          *
          * @param $name
