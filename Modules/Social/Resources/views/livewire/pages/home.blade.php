@@ -54,8 +54,8 @@
         </div>
     </div>
 
-    <livewire:social::delete-post-modal/>
-    <livewire:media-manager :handleUploadProcess="false"/>
+    <livewire:social::delete-post-modal />
+    <livewire:media-manager :handleUploadProcess="false" />
 @endsection
 @push('scripts')
     <script>

@@ -15,17 +15,28 @@ class DeletePostModal extends Component
 
     public ?string $content = null;
 
+    public $confirmingDeletePost = false;
+
     protected $listeners = [
-        'delete-post-modal:delete' => 'showDeletePostModal',
+        'openDeletePostModal',
     ];
 
-    public function showDeletePostModal()
+    public function openDeletePostModal(Post $post)
     {
-        $this->success('Post deleted successfully');
-//        $this->post->delete();
-//        $this->emitPostDeleted($data['id']);
+        $this->post = $post;
+        $this->confirmingDeletePost = true;
+    }
 
-        $this->openModal('delete-post-modal');
+    public function deletePost()
+    {
+        if ($this->post) {
+            $this->post->delete();
+            $this->success('Post deleted successfully');
+
+            $this->emit('postDeleted');
+        }
+
+        $this->confirmingDeletePost = false;
     }
 
     public function render()

@@ -21,6 +21,7 @@ use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
 use Modules\Subscriptions\Models\ChargentSubscription;
+use Modules\Subscriptions\Traits\WithChargentSubscriptions;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Wimil\Followers\Traits\Followable;
 
@@ -42,7 +43,7 @@ class User extends Authenticatable implements FilamentUser
             HasTeams::currentTeam insteadof JetstreamHasTeams;
         }
 
-    use Billable;
+    use Billable, WithChargentSubscriptions;
 
     protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
 
@@ -129,11 +130,6 @@ class User extends Authenticatable implements FilamentUser
     public function reviews() {
         if (!class_exists(Review::class)) return;
         return $this->hasMany(Review::class);
-    }
-
-    public function chargentSubscription() {
-        if (!class_exists(ChargentSubscription::class)) return;
-        return $this->hasOne(ChargentSubscription::class);
     }
 
     public function likes() {

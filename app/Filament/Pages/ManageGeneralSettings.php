@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Settings\FooterSettings;
 use App\Settings\GeneralSettings;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\SettingsPage;
 
@@ -18,7 +19,7 @@ class ManageGeneralSettings extends SettingsPage
     {
         return [
             TextInput::make('site_name')
-                     ->required(),
+                ->required(),
         ];
     }
 }

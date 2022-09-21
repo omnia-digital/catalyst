@@ -84,7 +84,7 @@ class Discover extends Component
 
     public function getNewTeamsProperty()
     {
-        return Team::latest('published_at')->get();
+        return Team::latest('created_at')->get();
     }
 
     public function getCategoriesProperty()

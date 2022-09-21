@@ -48,8 +48,6 @@
             }}</a>
         @endcan
 
-        <livewire:social::partials.follow-button :model="$team" class="py-4 mx-4"/>
-
         @if ($team->hasStripeConnectAccount())
             <div>
                 @if(!auth()->user()->subscribed("team_$team->id"))

@@ -15,7 +15,7 @@ class NewsFeed extends Component
 
     protected $listeners = [
         'postSaved',
-        'postDeleted'
+        'postDeleted' => '$refresh'
     ];
 
     public Team|null $team = null;

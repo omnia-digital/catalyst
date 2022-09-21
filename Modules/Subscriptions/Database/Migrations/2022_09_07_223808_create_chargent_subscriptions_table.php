@@ -26,7 +26,7 @@ class CreateChargentSubscriptionsTable extends Migration
             $table->timestamp('last_transaction_at')->nullable();
             $table->timestamp('next_invoice_at')->nullable();
             $table->timestamp('ends_at')->nullable();
-            $table->boolean('is_active')->default(0);
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
