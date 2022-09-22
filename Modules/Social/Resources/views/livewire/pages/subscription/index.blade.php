@@ -54,10 +54,9 @@
                         <p>Payment Method</p>
                     </div>
                     <div class="col-span-1 px-2 py-4 border-t flex items-center">
-                        <x-dynamic-component :component="$this->subscription?->cardIcon()"
-                            class="mr-2 h-8 w-8"
-                            aria-hidden="true"/>
-                        {{ $this->subscription?->last_4 ?? 'N/A' }}
+                        <x-fas-credit-card class="mr-2 h-8 w-8" aria-hidden="true" />
+                        <span class="mr-2">{{ $this->subscription?->card_type }}</span>
+                        <span class="mr-2">{{ $this->subscription?->last_4 ?? 'N/A' }}</span>
                     </div>
                     <div class="col-span-1 px-2 py-4">
                         <a role="button" 
