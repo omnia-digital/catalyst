@@ -38,4 +38,18 @@ class ChargentSubscription extends Model
     {
         return $this->status === 'Recurring';
     }
+
+    public function paymentMethod()
+    {
+        return ($this->card_type ?? 'Card') . " " . ($this->last_4 ?? 'XXXX');
+    }
+
+    public function cardIcon()
+    {
+        if ($this->card_type) {
+            return 'fab-cc-' . strtolower($this->card_type);
+        }
+
+        return 'fas-credit-card';
+    }
 }
