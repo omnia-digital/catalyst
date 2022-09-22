@@ -9,15 +9,19 @@ use App\Models\TeamApplication;
 use App\Models\TeamInvitation;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Role;
+use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
+use Trans;
 
 trait WithTeamManagement
 {
+    use WithNotification;
     /**
      * Indicates if a user's role is currently being managed.
      *
@@ -78,12 +82,15 @@ trait WithTeamManagement
      */
     public function applyToTeam()
     {
+        Gate::authorize('apply', $this->team);
+
         app(ApplyToTeam::class)->apply(
             $this->team,
             $this->user->id,
             'member'
         );
 
+        $this->success(Trans::get('Application Submitted to Team'));
         $this->emit('applied_to_team');
     }
 
@@ -98,6 +105,8 @@ trait WithTeamManagement
             ->remove($this->team, $this->user->id);
 
         $this->team = $this->team->fresh();
+
+        $this->success(Trans::get('Application Removed'));
         $this->emit('application_removed');
     }
 
@@ -135,6 +144,7 @@ trait WithTeamManagement
 
         $this->team = $this->team->fresh();
 
+        $this->success(Trans::get('Team info saved!'));
         $this->emit('saved');
     }
 
@@ -161,6 +171,8 @@ trait WithTeamManagement
 
         $this->team = $this->team->fresh();
 
+        //ToDo: Add Notification to user
+        $this->success(Trans::get('Team member added!'));
         $this->emit('member_added');
     }
 
@@ -176,6 +188,7 @@ trait WithTeamManagement
             TeamApplication::find($applicationId)->delete();
         }
 
+        //ToDo: Add Notification to user
         $this->team = $this->team->fresh();
     }
 
@@ -191,6 +204,7 @@ trait WithTeamManagement
             TeamInvitation::find($invitationId)->delete();
         }
 
+        $this->success(Trans::get('Invitation removed.'));
         $this->team = $this->team->fresh();
     }
 
@@ -211,6 +225,7 @@ trait WithTeamManagement
         $this->confirmingLeavingTeam = false;
 
         $this->team = $this->team->fresh();
+        $this->success(Trans::get('You left the team.'));
     }
 
     /**
@@ -244,6 +259,7 @@ trait WithTeamManagement
 
         $this->teamMemberIdBeingRemoved = null;
 
+        $this->success(Trans::get('Team member removed.'));
         $this->team = $this->team->fresh();
     }
 
