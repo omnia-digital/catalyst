@@ -10,7 +10,8 @@ use Modules\Subscriptions\Models\FormAssemblyForm;
 
 class Index extends Component
 {
-    public $form;
+    public $subscriptionForm;
+    public $paymentMethodForm;
 
     /**
      * Indicates if the application is confirming to cancel a subscription.
@@ -21,7 +22,8 @@ class Index extends Component
 
     public function mount()
     {
-        $this->form = FormAssemblyForm::findBySlug('user-subscriptions');
+        $this->subscriptionForm = FormAssemblyForm::findBySlug('user-subscriptions');
+        $this->paymentMethodForm = FormAssemblyForm::findBySlug('change-payment-method');
 
         (new CreateContactObjectAction)->execute($this->user);
         $this->user->refresh();
@@ -63,11 +65,16 @@ class Index extends Component
         return auth()->user();
     }
 
-    public function iFrameURL()
+    public function FunctionName(Type $var = null)
+    {
+        # code...
+    }
+
+    public function iFrameURL(FormAssemblyForm $form)
     {
         $qs = '?';
         $attributes = [];
-        $tfaFields = $this->form->fields()->where('enabled', 1)->pluck('name', 'tfa_code');
+        $tfaFields = $form->fields()->where('enabled', 1)->pluck('name', 'tfa_code');
 
         foreach ($tfaFields as $code => $attribute) {
             if ($attribute === 'chargent_order_id') {
@@ -79,7 +86,7 @@ class Index extends Component
 
         $qs .= http_build_query($attributes);
 
-        return 'https://tfaforms.com/' . $this->form->fa_form_id . $qs;
+        return 'https://tfaforms.com/' . $form->fa_form_id . $qs;
     }
 
     public function render()
