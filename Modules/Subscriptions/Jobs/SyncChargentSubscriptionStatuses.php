@@ -2,6 +2,7 @@
 
 namespace Modules\Subscriptions\Jobs;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -30,10 +31,11 @@ class SyncChargentSubscriptionStatuses implements ShouldQueue
      */
     public function handle()
     {
-        $subscriptions = ChargentSubscription::all();
-
-        foreach ($subscriptions as $subscription) {
-            (new GetChargentOrderInfoAction)->execute($subscription);
+        foreach (User::all() as $user) {
+            if ($user->chargentSubscription) {
+                (new GetChargentOrderInfoAction)->execute($user->chargentSubscription()->latest()->first());
+            }
         }
+
     }
 }

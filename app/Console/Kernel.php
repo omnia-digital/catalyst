@@ -27,8 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->job(new SyncChargentSubscriptionStatuses())
-            ->everyMinute()
-            ->appendOutputTo(storage_path('logs/chargent_sub_sync.log'));
+            ->dailyAt("22:00");
     }
 
     /**
