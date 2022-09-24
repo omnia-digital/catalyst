@@ -340,6 +340,12 @@
                 </div>
             </div>
 
+            <!-- Forms -->
+            <div x-cloak x-show="activeTab === 4" class="mt-6 pb-12 space-y-6">
+                <div>
+                    <livewire:social::pages.teams.forms :team="$team"/>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -367,6 +373,10 @@
                         id: 3,
                         title: 'Members',
                         // component: 'social::pages.teams.members'
+                    },
+                    {
+                        id: 4,
+                        title: 'Forms',
                     },
                 ]
             }

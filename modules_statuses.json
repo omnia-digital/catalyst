@@ -7,5 +7,6 @@
     "Games": false,
     "Reviews": true,
     "Crm": false,
-    "Subscriptions": true
+    "Subscriptions": true,
+    "Forms": true
 }

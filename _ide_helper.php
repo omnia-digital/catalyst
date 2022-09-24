@@ -17662,6 +17662,74 @@
      
 }
 
+    namespace BezhanSalleh\FilamentExceptions\Facades { 
+            /**
+     * 
+     *
+     * @see \BezhanSalleh\FilamentExceptions\FilamentExceptions
+     */ 
+        class FilamentExceptions {
+                    /**
+         * 
+         *
+         * @param \Throwable $exception
+         * @return void 
+         * @static 
+         */ 
+        public static function report($exception)
+        {
+                        \BezhanSalleh\FilamentExceptions\FilamentExceptions::report($exception);
+        }
+                    /**
+         * 
+         *
+         * @param \Throwable $exception
+         * @return void 
+         * @static 
+         */ 
+        public static function reportException($exception)
+        {
+                        /** @var \BezhanSalleh\FilamentExceptions\FilamentExceptions $instance */
+                        $instance->reportException($exception);
+        }
+                    /**
+         * Convert all items to string.
+         *
+         * @param $data
+         * @return array 
+         * @static 
+         */ 
+        public static function stringify($data)
+        {
+                        /** @var \BezhanSalleh\FilamentExceptions\FilamentExceptions $instance */
+                        return $instance->stringify($data);
+        }
+                    /**
+         * Store exception info to db.
+         *
+         * @param array $data
+         * @return bool 
+         * @static 
+         */ 
+        public static function store($data)
+        {
+                        /** @var \BezhanSalleh\FilamentExceptions\FilamentExceptions $instance */
+                        return $instance->store($data);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function formatFileName($fileName)
+        {
+                        return \BezhanSalleh\FilamentExceptions\FilamentExceptions::formatFileName($fileName);
+        }
+         
+    }
+     
+}
+
     namespace BezhanSalleh\FilamentGoogleAnalytics\Facades { 
             /**
      * 
@@ -25305,6 +25373,7 @@ namespace  {
             class Trans extends \App\Support\Platform\Facades\TranslateFacade {}
             class Visits extends \Awssat\Visits\Visits {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
+            class FilamentExceptions extends \BezhanSalleh\FilamentExceptions\Facades\FilamentExceptions {}
             class FilamentGoogleAnalytics extends \BezhanSalleh\FilamentGoogleAnalytics\Facades\FilamentGoogleAnalytics {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}
