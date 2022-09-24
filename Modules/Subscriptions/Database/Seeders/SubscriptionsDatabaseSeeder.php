@@ -18,13 +18,33 @@ class SubscriptionsDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        SubscriptionType::query()->delete();
+
         SubscriptionType::create([
-            'name' => 'Monthly',
-            'slug' => 'monthly',
+            'name' => 'CfaN EA Member',
+            'slug' => 'cfan-ea-member',
+            'amount' => 2500,
+        ]);
+        
+        SubscriptionType::create([
+            'name' => 'Associate Evangelist',
+            'slug' => 'associate-evangelist',
+            'amount' => 2500,
+        ]);
+        
+        SubscriptionType::create([
+            'name' => 'Co-Evangelist',
+            'slug' => 'co-evangelist',
+            'amount' => 2500,
+        ]);
+        
+        SubscriptionType::create([
+            'name' => 'Partner Evangelist',
+            'slug' => 'partner-evangelist',
             'amount' => 2500,
         ]);
 
-        FormAssemblyForm::create([
+        FormAssemblyForm::firstOrCreate([
             'name' => 'User Subscriptions',
             'fa_form_id' => '5011856'
         ]);
