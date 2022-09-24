@@ -31,6 +31,15 @@ jobs:
           npm config set "//npm.fontawesome.com/:_authToken" ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
       - name: Validate Composer
         run: composer validate
+      - name: Create SQLite database
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+      - name: Run migrations
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+        run: php artisan migrate
       - name: Install Composer dependencies
         run: |
           composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
