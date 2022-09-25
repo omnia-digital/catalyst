@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="col-span-2 px-2 py-4 border-t">
-                        <p>Subscription Type</p>
+                        <p>Plan</p>
                     </div>
                     <div class="col-span-2 px-2 py-4 border-t">
                         <p>{{ $this->subscription?->type?->name ?? 'N/A' }}</p>
@@ -48,6 +48,21 @@
                     </div>
                     <div class="col-span-2 px-2 py-4 border-t">
                         <p>{{ $this->subscription?->type?->printAmount() ?? 'N/A' }}</p>
+                    </div>
+
+                    <div class="col-span-2 px-2 py-4 border-t">
+                        <p>Payment Method</p>
+                    </div>
+                    <div class="col-span-1 px-2 py-4 border-t flex items-center">
+                        <x-fas-credit-card class="mr-2 h-8 w-8" aria-hidden="true" />
+                        <span class="mr-2">{{ $this->subscription?->card_type }}</span>
+                        <span class="mr-2">{{ $this->subscription?->last_4 ?? 'N/A' }}</span>
+                    </div>
+                    <div class="col-span-1 px-2 py-4">
+                        <a role="button" 
+                            x-on:click.prevent="$openModal('payment-method-form')" 
+                            class="font-semibold text-secondary hover:underline whitespace-nowrap"
+                        >Change Payment Method</a>
                     </div>
 
                     <div class="col-span-2 px-2 py-4 border-t">
@@ -87,7 +102,15 @@
     <x-slot name="title">{{ \Trans::get('New Subscription') }}</x-slot>
 
     <x-slot name="content">
-        <iframe src="{{ $this->iFrameURL() }}" width="100%" height="100%" frameborder="0" ></iframe>
+        <iframe src="{{ $this->iFrameURL($subscriptionForm) }}" width="100%" height="100%" frameborder="0" ></iframe>
+        <script src="//tfaforms.com/js/iframe_resize_helper.js"></script>
+    </x-slot>
+</x-library::modal>
+<x-library::modal id="payment-method-form" maxWidth="4xl" hideCancelButton>
+    <x-slot name="title">{{ \Trans::get('Change Payment Method') }}</x-slot>
+
+    <x-slot name="content">
+        <iframe src="{{ $this->iFrameURL($paymentMethodForm) }}" width="100%" height="100%" frameborder="0" ></iframe>
         <script src="//tfaforms.com/js/iframe_resize_helper.js"></script>
     </x-slot>
 </x-library::modal>

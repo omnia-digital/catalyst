@@ -5,6 +5,9 @@ namespace App\Policies;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
+use Modules\Subscriptions\Models\SubscriptionType;
+use Trans;
 
 class TeamPolicy
 {
@@ -34,6 +37,18 @@ class TeamPolicy
     }
 
     /**
+     * Determine whether the user can apply to a team.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Team $team
+     * @return mixed
+     */
+    public function apply(User $user, Team $team)
+    {
+        return in_array($user->chargentSubscription->type->slug, SubscriptionType::pluck('slug')->toArray());
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param \App\Models\User $user
@@ -41,7 +56,11 @@ class TeamPolicy
      */
     public function create(User $user)
     {
-        return true;
+        $subscriptions = SubscriptionType::whereNot('slug', 'cfan-ea-member')->pluck('slug')->toArray();
+
+        return in_array($user->chargentSubscription->type->slug, $subscriptions) 
+            ? Response::allow() 
+            : Response::deny(Trans::get('You must at least be an Associate Evangelist to create a Team'));
     }
 
     /**

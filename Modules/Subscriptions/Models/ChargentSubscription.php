@@ -38,4 +38,5 @@ class ChargentSubscription extends Model
     {
         return $this->status === 'Recurring';
     }
+
 }
