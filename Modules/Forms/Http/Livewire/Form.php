@@ -2,6 +2,7 @@
 
 namespace Modules\Forms\Http\Livewire;
 
+use App\Models\Team;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
@@ -21,11 +22,12 @@ class Form extends Component implements HasForms
     public \Modules\Forms\Models\Form $formModel;
 
     public $data = [];
+    public ?int $team_id = null; // tells us which team the form submission is for in case this is a global form
 
-    public function mount(\Modules\Forms\Models\Form $form)
+    public function mount(\Modules\Forms\Models\Form $form, int $team_id = null)
     {
         $this->formModel = $form;
-
+        $this->team_id = $team_id;
         $this->form->fill();
     }
 
@@ -63,10 +65,29 @@ class Form extends Component implements HasForms
 
     public function submit(): void
     {
-//        dd($this->form->getState());
+        $formData = $this->form->getState();
+        $formModelFields = collect($this->formModel->content);
+        $team_id = $this->team_id;
+
+        foreach($formData as $formDataKey => $value) {
+            // Search Form Model fields for the field that matches the form data
+            $formFieldKeyFound = $formModelFields->search(function($formModelField, $formModelFieldKey) use ($formDataKey) {
+                if ($formModelField['data']['name'] === $formDataKey) {
+                    return true;
+                }
+            });
+            $formFieldType = $formModelFields[$formFieldKeyFound]['type'];
+            $formData[$formDataKey] = [
+                'field_type' => $formFieldType,
+                'data' => $value
+            ];
+        }
+
         FormSubmission::create([
             'form_id' => $this->formModel->id,
-            'data' => $this->form->getState(),
+            'user_id' => auth()->id(),
+            'team_id' => $team_id ?? null,
+            'data' => $formData,
         ]);
     }
 

@@ -2,10 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FormResource\Pages\CreateForm;
-use App\Filament\Resources\FormResource\Pages\EditForm;
-use App\Filament\Resources\FormResource\Pages\ListForms;
-use App\Filament\Resources\FormResource\Pages\ViewForm;
+use App\Filament\Resources\FormSubmissionResource\Pages\CreateFormSubmission;
+use App\Filament\Resources\FormSubmissionResource\Pages\EditFormSubmission;
+use App\Filament\Resources\FormSubmissionResource\Pages\ListFormSubmissions;
+use App\Filament\Resources\FormSubmissionResource\Pages\ViewFormSubmission;
+use Filament\Forms\Components\BelongsToSelect;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Actions\ActionGroup;
@@ -17,13 +24,12 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 
-class FormResource extends Resource
+class FormSubmissionResource extends Resource
 {
-    protected static ?string $label = 'Forms';
-    protected static ?string $model = \Modules\Forms\Models\Form::class;
+    protected static ?string $label = 'Form Submissions';
+    protected static ?string $model = \Modules\Forms\Models\FormSubmission::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Settings';
-    public $data = [];
 
     protected static function getNavigationBadge(): ?string
     {
@@ -39,7 +45,12 @@ class FormResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+//                TextColumn::make('data'),
+                TextColumn::make('user.profile.first_name'),
+                TextColumn::make('user.profile.last_name'),
+                TextColumn::make('user.email'),
+                TextColumn::make('form.name'),
+                TextColumn::make('team.name'),
             ])
             ->filters([
                 Filter::make('name')
@@ -66,15 +77,15 @@ class FormResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListForms::route('/'),
-            'create' => CreateForm::route('/create'),
-            'view' => ViewForm::route('/{record}'),
-            'edit' => EditForm::route('/{record}/edit'),
+            'index' => ListFormSubmissions::route('/'),
+//            'create' => CreateFormSubmission::route('/create'),
+            'view' => ViewFormSubmission::route('/{record}'),
+            'edit' => EditFormSubmission::route('/{record}/edit'),
         ];
     }
 
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn (Model $record): string => route('forms.edit', ['record' => $record]);
+        return fn (Model $record): string => route('form_submissions.edit', ['record' => $record]);
     }
 }

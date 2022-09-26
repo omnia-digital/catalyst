@@ -3,6 +3,7 @@
 namespace Modules\Forms\Models;
 
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +14,7 @@ class FormSubmission extends Model
     protected $fillable = [
         'form_id',
         'team_id',
+        'user_id',
         'data'
     ];
 
@@ -28,5 +30,10 @@ class FormSubmission extends Model
     public function team()
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
