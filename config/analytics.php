@@ -6,6 +6,7 @@ return [
      * The view id of which you want to display data.
      */
     'view_id' => env('GOOGLE_ANALYTICS_VIEW_ID'),
+    'ga_tag_id' => env('GOOGLE_ANALYTICS_TAG_ID'),
 
     /*
      * Path to the client secret json file. Take a look at the README of this package

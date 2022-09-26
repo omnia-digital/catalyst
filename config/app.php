@@ -21,6 +21,11 @@ return [
     'logo_path' => env('APP_LOGO'),
     'logo_path_dark' => env('APP_LOGO_DARK'),
 
+    'modules' => [
+        'social' => [
+            'map' => env('SOCIAL_SHOW_MAP', true),
+        ]
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Environment
