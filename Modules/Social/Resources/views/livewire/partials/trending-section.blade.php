@@ -16,8 +16,9 @@
                                     {!! $post->body !!}
                                 </div>
                             </div>
-                            <div class="w-1/6">
-                                <img class="rounded-lg flex-shrink-0 h-full object-cover" src="{{ $post->image ? $post->image : $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}"/>
+                            <div class="w-16 h-16">
+                                <img class="rounded-lg flex-shrink-0 h-full object-cover" src="{{ $post->image ? $post->image : $post->user?->profile_photo_url }}" alt="{{
+                                $post->user->name }}"/>
                             </div>
                         </a>
                         </li>
