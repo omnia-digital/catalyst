@@ -34,11 +34,6 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            if ($this->shouldReport($e)) {
-                \FilamentExceptions::report($e);
-            }
-        });
     }
 
     public function report(Throwable $exception)
