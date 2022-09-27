@@ -45,4 +45,9 @@ class Form extends Model
         return $this->hasMany(FormSubmission::class);
     }
 
+    public function formType()
+    {
+        return $this->belongsTo(FormType::class);
+    }
+
 }

@@ -16,8 +16,16 @@ return new class extends Migration
         Schema::create('form_templates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->string('type')->nullable();
             $table->json('content');
+            $table->timestamps();
+        });
+
+        Schema::create('form_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
 
@@ -27,6 +35,7 @@ return new class extends Migration
             $table->string('slug');
             $table->json('content');
             $table->foreignIdFor(\Modules\Forms\Models\FormTemplate::class, 'form_template_id')->index()->nullable();
+            $table->foreignIdFor(\Modules\Forms\Models\FormType::class, 'form_type_id')->index()->nullable();
             $table->foreignIdFor(\App\Models\Team::class, 'team_id')->index()->nullable();
             $table->boolean('is_used_on_all_teams')->default(false);
             $table->timestamp('published_at')->nullable();

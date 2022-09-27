@@ -9,6 +9,7 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -29,6 +30,12 @@ class CreateForm extends CreateRecord implements HasForms
                 ->label('Name')
                 ->reactive()
                 ->required(),
+            Select::make('form_type_id')
+                ->relationship('formType', 'name')
+                ->schema([
+                    TextInput::make('name')->required(),
+                    Textarea::make('slug'),
+                ]),
             Builder::make('content')->blocks([
                     Block::make('text')->label('Text input')->icon('heroicon-o-annotation')->schema([
                             $this->getFieldNameInput(),

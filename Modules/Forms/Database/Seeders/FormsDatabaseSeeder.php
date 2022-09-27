@@ -4,6 +4,7 @@ namespace Modules\Forms\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Forms\Models\FormType;
 
 class FormsDatabaseSeeder extends Seeder
 {
@@ -16,6 +17,22 @@ class FormsDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        // Default Form Types
+        $registrationFormType = FormType::create([
+            'name' => \Trans::get('Registration'),
+            'slug' => 'registration',
+        ]);
+        $teamResourceRequestForm = FormType::create([
+            'name' => \Trans::get('Team Resource Request'),
+            'slug' => 'team-resource-request',
+        ]);
+        $teamMemberApplicationForm = FormType::create([
+            'name' => \Trans::get('Team Member Application Form'),
+            'slug' => 'team-member-application-form',
+        ]);
+        $teamMemberForm = FormType::create([
+            'name' => \Trans::get('Team Member Form'),
+            'slug' => 'team-member-form',
+        ]);
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class FormTemplate extends Model
+class FormType extends Model
 {
     use HasFactory, HasSlug;
 
@@ -15,12 +15,6 @@ class FormTemplate extends Model
         'name',
         'slug'
     ];
-
-    protected $casts = [
-        'content' => 'array',
-    ];
-
-    protected $guarded = [];
 
     public function getSlugOptions(): SlugOptions
     {
