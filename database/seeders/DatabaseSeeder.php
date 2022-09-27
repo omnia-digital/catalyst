@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\Advice\Database\Seeders\AdviceDatabaseSeeder;
+use Modules\Forms\Database\Seeders\FormsDatabaseSeeder;
 use Modules\Resources\Database\Seeders\ResourcesDatabaseSeeder;
 use Modules\Reviews\Database\Seeders\ReviewsDatabaseSeeder;
 use Modules\Reviews\Database\Seeders\ReviewTableSeeder;
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguageTableSeeder::class);
         $this->call(ReviewsDatabaseSeeder::class);
         $this->call(SubscriptionsDatabaseSeeder::class);
+        $this->call(FormsDatabaseSeeder::class);
 
         if (DB::connection() instanceof \Illuminate\Database\MySqlConnection) {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
