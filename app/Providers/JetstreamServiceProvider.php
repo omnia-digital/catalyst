@@ -54,9 +54,9 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         Jetstream::defaultApiTokenPermissions([]);
 
-        if (class_exists(BillingSettings::class) && \Schema::hasTable('settings')) {
-            $usingTeamMemberSubs = (new BillingSettings())?->team_member_subscriptions;
-        }
+//        if (class_exists(BillingSettings::class) && \Schema::hasTable('settings')) {
+//            $usingTeamMemberSubs = (new BillingSettings())?->team_member_subscriptions;
+//        }
 
         $postPermissions         = [
             'post-create',
