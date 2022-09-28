@@ -20,12 +20,12 @@ class UserSubscriptionCheck
         if (!(new BillingSettings())->user_subscriptions) {
             return $next($request);
         }
-        
-        if ($request->user()->chargentSubscription()->latest()->first()->is_active) {
+
+        if ($request->user()->chargentSubscription()?->latest()?->first()?->is_active) {
             return $next($request);
         }
 
         return redirect()->route('social.subscription');
-        
+
     }
 }

@@ -21,6 +21,16 @@ class MainNavigationMenu extends Component
         return (new BillingSettings())->user_subscriptions;
     }
 
+    public function getIsUsingStripeProperty()
+    {
+        return (new BillingSettings())->payment_gateway == 'stripe';
+    }
+
+    public function getIsUsingChargentProperty()
+    {
+        return (new BillingSettings())->payment_gateway == 'chargent';
+    }
+
     public function mount()
     {
         $this->navigation = [

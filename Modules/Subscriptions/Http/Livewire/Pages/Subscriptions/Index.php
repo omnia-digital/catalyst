@@ -1,8 +1,10 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Subscription;
+namespace Modules\Subscriptions\Http\Livewire\Pages\Subscriptions;
 
+use App\Settings\BillingSettings;
 use Livewire\Component;
+use Modules\Social\Http\Livewire\Pages\Subscription\Type;
 use Modules\Subscriptions\Actions\Salesforce\CreateContactObjectAction;
 use Modules\Subscriptions\Actions\Salesforce\GetChargentOrderInfoAction;
 use Modules\Subscriptions\Actions\Salesforce\StopRecurringPaymentsOnChargentOrderAction;
@@ -22,7 +24,15 @@ class Index extends Component
 
     public function mount()
     {
-        $this->subscriptionForm = FormAssemblyForm::findBySlug('user-subscriptions');
+        $platformIsUsingChargentPaymentGateway = (new BillingSettings())->payment_gateway == 'chargent';
+        if ( ! $platformIsUsingChargentPaymentGateway || ! config('forrest.credentials.consumerKey')) {
+//            $this->redirect(route('social.home'));
+        }
+        if (!$this->subscription) {
+            return;
+        }
+
+        $this->subscriptionForm  = FormAssemblyForm::findBySlug('user-subscriptions');
         $this->paymentMethodForm = FormAssemblyForm::findBySlug('change-payment-method');
 
         (new CreateContactObjectAction)->execute($this->user);
@@ -57,7 +67,9 @@ class Index extends Component
 
     public function getSubscriptionProperty()
     {
-        return $this->user->chargentSubscription()->latest()->first();
+        return $this->user->chargentSubscription()
+                          ->latest()
+                          ->first();
     }
 
     public function getUserProperty()
@@ -72,9 +84,11 @@ class Index extends Component
 
     public function iFrameURL(FormAssemblyForm $form)
     {
-        $qs = '?';
+        $qs         = '?';
         $attributes = [];
-        $tfaFields = $form->fields()->where('enabled', 1)->pluck('name', 'tfa_code');
+        $tfaFields  = $form->fields()
+                           ->where('enabled', 1)
+                           ->pluck('name', 'tfa_code');
 
         foreach ($tfaFields as $code => $attribute) {
             if ($attribute === 'chargent_order_id') {
@@ -91,6 +105,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.subscription.index');
+        return view('subscriptions::livewire.pages.subscription.index');
     }
 }

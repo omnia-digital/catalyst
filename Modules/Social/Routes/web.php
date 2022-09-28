@@ -1,20 +1,18 @@
 <?php
 
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
 use App\Http\Livewire\Pages\Teams\Index as AllTeams;
+use Illuminate\Support\Facades\Route;
 use Modules\Social\Http\Livewire\Home;
-use Modules\Social\Http\Livewire\Pages\Billing\Billing;
 use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
 use Modules\Social\Http\Livewire\Pages\Contacts\Index as ContactsIndex;
-use Modules\Social\Http\Livewire\Pages\Posts\Trending as DiscoverIndex;
 use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
+use Modules\Social\Http\Livewire\Pages\Posts\Trending as DiscoverIndex;
+use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
 use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
 use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
-use Modules\Social\Http\Livewire\Pages\Subscription\Index as SubscriptionPage;
-use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
 use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Calendar as TeamMapCalendar;
@@ -24,6 +22,8 @@ use Modules\Social\Http\Livewire\Pages\Teams\Members as TeamMembers;
 use Modules\Social\Http\Livewire\Pages\Teams\MyTeams;
 use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Subscriptions;
+use Modules\Subscriptions\Http\Livewire\Pages\Billing\Billing;
+use Modules\Subscriptions\Http\Livewire\Pages\Subscriptions\Index as SubscriptionPage;
 
 
 Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subscribed'])->group(function () {
@@ -47,9 +47,9 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subsc
         Route::get('{profile}/awards', ProfileAwards::class)->name('awards');
     });
 
-    Route::get('billing', Billing::class)->name('billing');
 
-    Route::get('/subscription', SubscriptionPage::class)->withoutMiddleware('subscribed')->name('subscription');
+    Route::get('billing', Billing::class)->name('billing'); // stripe billing page
+    Route::get('/subscription', SubscriptionPage::class)->withoutMiddleware('subscribed')->name('subscription'); // chargent billing
 
     Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {
         Route::get('/discover', DiscoverTeams::class)->name('discover');

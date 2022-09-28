@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.pages.team-profile-layout')
+@extends('social::Social.Resources.views.livewire.layouts.pages.team-profile-layout')
 
 @section('content')
     <div class="mt-4">

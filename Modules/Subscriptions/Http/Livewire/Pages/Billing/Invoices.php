@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Billing;
+namespace Modules\Subscriptions\Http\Livewire\Pages\Billing;
 
 use Livewire\Component;
 

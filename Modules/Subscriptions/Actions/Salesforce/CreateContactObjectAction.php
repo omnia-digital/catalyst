@@ -11,12 +11,12 @@ class CreateContactObjectAction
      */
     public function execute(User $user)
     {
-        if($user->contact_id) {
+        if($user->contact_id || !config('forrest.credentials.consumerKey')) {
             return;
         }
-        
+
         Forrest::authenticate();
-        
+
         $contact = Forrest::query(
             "SELECT Id FROM Contact 
             WHERE (FirstName LIKE '%" . addslashes($user->first_name) . "%' AND Email = '" . addslashes($user->email) . "') 
@@ -28,7 +28,7 @@ class CreateContactObjectAction
             or (FirstName LIKE '%" . addslashes($user->first_name) . "%' AND npe01__HomeEmail__c = '" . addslashes($user->email) . "')
             LIMIT 1"
         );
-        
+
 
         if ($contact['totalSize'] == 0) {
             $createdContact = Forrest::sobjects('Contact', [

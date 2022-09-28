@@ -180,15 +180,17 @@
                                                 {{ auth()->user()->name }}
                                             </x-jet-dropdown-link>
 
-                                            @if ($this->isUsingUserSubscriptions)
-                                                <x-jet-dropdown-link href="{{ route('social.subscription') }}">
-                                                    {{ \Trans::get('Subscription') }}
-                                                </x-jet-dropdown-link>
-                                            @endif
-
+                                            @if ($this->isUsingStripe)
                                             <x-jet-dropdown-link href="{{ route('social.billing') }}">
                                                 Billing
                                             </x-jet-dropdown-link>
+                                            @elseif ($this->isUsingChargent)
+                                                @if ($this->isUsingUserSubscriptions)
+                                                    <x-jet-dropdown-link href="{{ route('social.subscription') }}">
+                                                        {{ \Trans::get('Subscriptions') }}
+                                                    </x-jet-dropdown-link>
+                                                @endif
+                                            @endif
 
                                             {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
                                             {{--                                    <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">--}}

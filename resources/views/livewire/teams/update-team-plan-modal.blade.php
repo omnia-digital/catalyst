@@ -50,7 +50,7 @@
         </x-library::modal>
 
         <x-library::confirm id="cancel-subscription" submit="cancelSubscription">
-            <x-slot:title>Cancel Subscription</x-slot:title>
+            <x-slot:title>Cancel Subscriptions</x-slot:title>
             <x-slot:content>
                 Are you sure to cancel your subscription?
             </x-slot:content>
