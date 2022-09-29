@@ -14,17 +14,25 @@ class Map extends Component
 
     public string|int|null $placeId = null;
 
+    public $modelName = null;
+
     public $height= '500px';
 
     protected $listeners = [
         'select_event' => 'handleEventSelected',
     ];
 
+    public function mount($modelName)
+    {
+        $this->modelName = $modelName;
+    }
+
     public function handleEventSelected($eventId)
     {
-        $team = Team::find($eventId);
+        //$team = Team::find($eventId);
+        $event = $this->modelName::find($eventId);
 
-        if (!$team || !($location = $team->location()->first()) || !($location->lng) || !($location->lat)) {
+        if (!$event || !($location = $event->location()->first()) || !($location->lng) || !($location->lat)) {
             $this->error(\Trans::get('Cannot find the team or location. Please refresh the page and try again!'));
 
             return;
