@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\EventMapCalendar\WithEventManagement;
 use App\Traits\Location\HasLocation;
 use App\Traits\Tag\HasTeamTags;
 use App\Traits\Tag\HasTeamTypeTags;
@@ -44,7 +45,8 @@ class Team extends JetstreamTeam implements HasMedia
         HasSlug,
         HasLocation,
         HasTeamTypeTags,
-        InteractsWithMedia;
+        InteractsWithMedia,
+        WithEventManagement;
 
     use HasTeamTags, HasTags {
         HasTeamTags::tags insteadof HasTags;
@@ -105,6 +107,19 @@ class Team extends JetstreamTeam implements HasMedia
     public function getRouteKeyName()
     {
         return 'handle';
+    }
+
+    public function detailsPage()
+    {
+        return route('social.teams.show', $this);
+    }
+
+    public function getDateColumn()
+    {
+        return [
+            'column' => 'start_date',
+            'label' => 'Launch Date'
+        ];
     }
 
     public function getThumbnailAttribute($value)

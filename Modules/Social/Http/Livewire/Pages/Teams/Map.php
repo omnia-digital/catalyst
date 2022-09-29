@@ -14,7 +14,8 @@ class Map extends Component
 
     public string|int|null $placeId = null;
 
-    public $modelName = null;
+    public $events = null;
+    public $eventClassName;
 
     public $height= '500px';
 
@@ -22,18 +23,18 @@ class Map extends Component
         'select_event' => 'handleEventSelected',
     ];
 
-    public function mount($modelName)
+    public function mount($events)
     {
-        $this->modelName = $modelName;
+        $this->events = $events;
+        $this->eventClassName = get_class($events?->first());
     }
 
     public function handleEventSelected($eventId)
     {
-        //$team = Team::find($eventId);
-        $event = $this->modelName::find($eventId);
+        $event = $this->eventClassName::find($eventId);
 
         if (!$event || !($location = $event->location()->first()) || !($location->lng) || !($location->lat)) {
-            $this->error(\Trans::get('Cannot find the team or location. Please refresh the page and try again!'));
+            $this->error(\Trans::get('The selected event doesn\'t have a set location'));
 
             return;
         }
@@ -50,6 +51,8 @@ class Map extends Component
     {
         $places = Location::query()
             ->hasCoordinates()
+            ->where('model_type', $this->eventClassName)
+            ->whereIn('model_id', $this->events->pluck('id'))
             ->with('model')
             ->get()
             ->map(function (Location $location) {

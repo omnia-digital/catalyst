@@ -2,7 +2,7 @@
     <div>
         <div x-data="{openMobileTeams: true}" class="relative overflow-hidden">
             <div :class="openMobileTeams ? 'z-20 left-0 top-0' : 'left-[-395px]'" class="h-full absolute w-1/3 transition-all delay-75 duration-300">
-                <livewire:social::components.team-calendar-list />
+                <livewire:social::components.team-calendar-list :events="$events" />
             </div>
             <div class="flex justify-center items-center absolute bottom-4 right-4 z-20 bg-transparent p-px w-12 h-12">
                 <button

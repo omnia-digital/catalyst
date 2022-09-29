@@ -13,7 +13,7 @@
             selectEvent(event) {
                 this.showDetail = true;
                 $wire.emit('select_event', event.id);
-                $wire.selectTeam(event.id)
+                $wire.selectEventByID(event.id)
 
                 this.populateData(event);
             },
@@ -80,10 +80,10 @@
 
             <!-- Show All Teams -->
             <div x-show="!showDetail" class="bg-primary space-y-2 pt-4 pb-2 flex-1 overflow-y-scroll scrollbar-hide">
-                @forelse ($teams as $item)
+                @forelse ($eventList as $item)
                     <div
                         class="space-y-2 mx-2 p-4 bg-primary rounded-lg border border-neutral cursor-pointer
-                            {{ (!is_null($team) && ($team->handle === $item->handle)) ? 'shadow-md ring-1 ring-neutral-dark' : '' }}
+                            {{ (!is_null($event) && ($event->handle === $item->handle)) ? 'shadow-md ring-1 ring-neutral-dark' : '' }}
                             hover:shadow-lg  hover:ring-2 hover:ring-neutral-dark active:shadow-lg active:ring-2 active:ring-neutral-dark focus:shadow-lg focus:ring-2 focus:ring-neutral-dark"
                         {{-- wire:click="selectEvent({{ $item->id }})" --}}
                         x-on:click="selectEvent({{ $item }})"
@@ -106,7 +106,7 @@
                             </div>
                             <div class="flex items-center">
                                 <x-heroicon-o-calendar class="h-4 w-4 mr-2" />
-                                <p>{{ $item->start_date?->toFormattedDateString() }}</p>
+                                <p>{{ $item->getEventDate()->toFormattedDateString() }}</p>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                     <div class="text-sm pt-2" x-text="details.summary"></div>
                 </div>
                 <div class="absolute bottom-0 left-0 right-0 p-6 flex items-center justify-center bg-primary">
-                    <div wire:loading wire:target="selectTeam" class="absolute inset-0 bg-white/75"></div>
+                    <div wire:loading wire:target="selectEventByID" class="absolute inset-0 bg-white/75"></div>
                     <div class="absolute inset-auto -translate-y-12 rounded-md p-2 text-success-700"
                         x-show="message"
                         x-transition:enter="transition ease-out duration-300"
@@ -148,12 +148,12 @@
                         wire:click.prevent="moreInfo"
                         class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-transparent border-2 border-secondary text-secondary hover:bg-neutral-light active:bg-neutral-light focus:bg-neutral-light"
                     >More Info</button>
-                    @if (!is_null($team) && $team->teamApplications()->hasUser($this->user->id))
+                    @if (!is_null($event) && $event->teamApplications()->hasUser($this->user->id))
                         <button
                             class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white-text-color hover:opacity-75 active:opacity-75 focus:opacity-75"
                             wire:click="removeApplication"
                         >{{ \Trans::get('Remove Application') }}</button>
-                    @elseif(!is_null($team) && !$team->hasUser($this->user))
+                    @elseif(!is_null($event) && !$event->hasUser($this->user))
                         <div class="absolute -top-9 right-0 w-96">
                             <x-jet-input-error for="user_id" class="mt-2" />
                         </div>

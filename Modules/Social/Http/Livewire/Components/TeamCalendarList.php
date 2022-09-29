@@ -18,23 +18,22 @@ class TeamCalendarList extends Component
 
     public array $sortLabels = [
         'name' => 'Name',
-        'users_count' => 'Users',
-        'start_date' => 'Launch Date'
+        'users_count' => 'Users'
     ];
 
-    public string $dateColumn = 'start_date';
-
-    public Team $team;
+    public $event;
+    public $events = null;
+    public $eventClassName;
 
     public ?string $classes = '';
 
     protected $listeners = [
-        'teamSelected' => 'handleTeamSelected'
+        'teamSelected' => 'handleEventSelected'
     ];
 
     public function getRowsQueryProperty()
     {
-        $query = Team::query()
+        $query = $this->eventClassName::query()
             ->withCount(['users']);
 
         $query = $this->applyFilters($query);
@@ -79,21 +78,21 @@ class TeamCalendarList extends Component
         return $places->all();
     }
 
-    public function selectTeam($teamID)
+    public function selectEventByID($eventID)
     {
-        $this->team = Team::find($teamID);
+        $this->event = $this->eventClassName::find($eventID);
     }
 
-    public function handleTeamSelected($teamId)
+    public function handleEventSelected($eventID)
     {
-        $this->selectTeam($teamId);
+        $this->selectEventByID($eventID);
 
-        $this->dispatchBrowserEvent('select-event', ['team' => $this->team]);
+        $this->dispatchBrowserEvent('select-event', ['team' => $this->event]);
     }
 
     public function moreInfo()
     {
-        return redirect()->route('social.teams.show', $this->team);
+        return redirect($this->event->detailsPage());
     }
 
     public function toggleMapCalendar($tab)
@@ -101,10 +100,15 @@ class TeamCalendarList extends Component
         $this->emitUp('toggle_map_calendar', $tab, $this->places);
     }
 
-    public function mount($classes = '')
+    public function mount($events, $classes = '')
     {
+        $this->eventClassName = get_class($events?->first());
+
+        $dateColumn = $events?->first()->getDateColumn();
+        $this->sortLabels[$dateColumn['column']] = $dateColumn['label'];
+
         $this->classes = $classes;
-        $this->orderBy = 'name';
+        //$this->orderBy = 'name';
 
         if (!\App::environment('production')) {
             $this->useCache = false;
@@ -114,7 +118,7 @@ class TeamCalendarList extends Component
     public function render()
     {
         return view('social::livewire.components.team-calendar-list', [
-            'teams' => $this->rows,
+            'eventList' => $this->rows,
             'teamsCount' => $this->rowsQuery->count()
         ]);
     }
