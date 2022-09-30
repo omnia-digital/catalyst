@@ -13,12 +13,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Trans;
 
 class Edit extends Component/*  implements HasForms */
 {
-    use WithPlace, AuthorizesRequests, WithFileUploads/* , InteractsWithForms */;
+    use WithPlace, AuthorizesRequests, WithFileUploads, WithNotification/* , InteractsWithForms */;
 
     public Team $team;
 
@@ -170,6 +172,7 @@ class Edit extends Component/*  implements HasForms */
             }
         }
 
+        $this->success(Trans::get('Team Information Saved'));
         $this->emit('changes_saved');
 
         $this->team->refresh();

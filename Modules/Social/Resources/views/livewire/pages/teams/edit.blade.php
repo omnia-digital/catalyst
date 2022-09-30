@@ -13,18 +13,6 @@
             <x-library::heading.2>{{ Trans::get('Team Admin Panel') }}</x-library::heading.2>
 
             <div class="flex justify-end items-center">
-                <div class="mr-auto"
-                     x-data="{show: false}"
-                     x-show="show"
-                     x-transition:leave.opacity.duration.1500ms
-                     x-init="@this.on('changes_saved', () => {
-                show = true;
-                setTimeout(() => { show = false; }, 3000);
-            })"
-                     style="display: none;"
-                >
-                    <p class="text-sm opa text-green-600">{{ \Trans::get('Team info saved!') }}</p>
-                </div>
                 @if ($errors->any())
                     <div class="mr-auto">
                         <p class="text-sm text-red-600">{{ \Trans::get('This form has errors') }}:</p>
