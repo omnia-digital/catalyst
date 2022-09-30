@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class Notifications extends Component
+class UserNotifications extends Component
 {
     public int $perPage = 10;
 
@@ -51,7 +51,7 @@ class Notifications extends Component
 
     public function render()
     {
-        return view('livewire.notifications', [
+        return view('livewire.user-notifications', [
             'notifications' => $this->rows,
             'allNotificationCount' => $this->allNotificationCount
         ]);
