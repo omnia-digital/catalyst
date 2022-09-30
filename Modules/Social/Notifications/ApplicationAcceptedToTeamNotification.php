@@ -49,7 +49,7 @@ class ApplicationAcceptedToTeamNotification extends Notification implements Shou
 
         return NotificationCenter::make()
             ->icon('heroicon-o-check')
-            ->success(Trans::get('Your application to, ' . $this->team->name . ' has been accepted'))
+            ->success(Trans::get('Your application to ' . $this->team->name . ' has been accepted'))
             ->image($this->team->profile_photo_url)
             ->actionLink($url)
             ->actionText('View')
