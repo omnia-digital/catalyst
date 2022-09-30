@@ -14,14 +14,14 @@ use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
 use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
 use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
+use Modules\Social\Http\Livewire\Pages\Teams\Admin\TeamAdmin as EditTeam;
+use Modules\Social\Http\Livewire\Pages\Teams\Admin\ManageTeamMembers as TeamMembers;
+use Modules\Social\Http\Livewire\Pages\Teams\Admin\Subscriptions;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Calendar as TeamMapCalendar;
-use Modules\Social\Http\Livewire\Pages\Teams\Edit as EditTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Followers as TeamFollowers;
-use Modules\Social\Http\Livewire\Pages\Teams\Members as TeamMembers;
 use Modules\Social\Http\Livewire\Pages\Teams\MyTeams;
 use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
-use Modules\Social\Http\Livewire\Pages\Teams\Subscriptions;
 use Modules\Subscriptions\Http\Livewire\Pages\Billing\Billing;
 use Modules\Subscriptions\Http\Livewire\Pages\Subscriptions\Index as SubscriptionPage;
 
@@ -59,6 +59,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subsc
         Route::get('{team}', ShowTeam::class)->name('show');
         Route::get('{team}/edit', EditTeam::class)->name('edit');
         Route::get('{team}/members', TeamMembers::class)->name('members');
+        Route::get('{team}/members', TeamFollowers::class)->name('members');
         Route::get('{team}/about', TeamFollowers::class)->name('about');
         Route::get('{team}/followers', TeamFollowers::class)->name('followers');
         Route::get('{team}/resources', TeamFollowers::class)->name('resources');

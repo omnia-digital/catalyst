@@ -19,7 +19,9 @@ class ManageGeneralSettings extends SettingsPage
     {
         return [
             TextInput::make('site_name')
-                ->required(),
+                     ->required(),
+            TextInput::make('teams_apply_button_text')
+                     ->required(),
         ];
     }
 }

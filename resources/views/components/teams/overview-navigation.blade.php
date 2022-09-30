@@ -48,7 +48,6 @@
             }}</a>
         @endcan
 
-        @if ($team->hasStripeConnectAccount())
             <div>
                 @if(!auth()->user()->subscribed("team_$team->id"))
                     <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
@@ -60,7 +59,6 @@
                     </x-library::button>
                 @endif
             </div>
-        @endif
 
         <div class="inline-flex items-center text-md relative">
             @if ($team->teamApplications()->hasUser(auth()->id()))
@@ -76,7 +74,7 @@
                     <button
                             class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-secondary text-white-text-color hover:opacity-75"
                             wire:click="applyToTeam"
-                    >{{ \Trans::get('Apply') }}</button>
+                    >{{ \Trans::get($this->applyButtonText) }}</button>
                 @endcan
             @endif
         </div>

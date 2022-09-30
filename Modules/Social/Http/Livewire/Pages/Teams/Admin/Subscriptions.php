@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Teams;
+namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 
 use App\Actions\Teams\CreateStripeConnectAccountForTeamAction;
 use App\Models\Team;

@@ -256,7 +256,7 @@
                 </div>
             </div>
 
-            <!-- Edit Basic Team Info -->
+            <!-- TeamAdmin Basic Team Info -->
             <div x-show="activeTab === 1" class="mt-6 grid grid-cols-2 gap-6">
                 {{-- {{ $this->form }} --}}
                 <div class="flex-col">
@@ -283,7 +283,7 @@
                 {{--                @livewire('teams.delete-team-form', ['team' => $team])--}}
             </div>
 
-            <!-- Edit Team Location -->
+            <!-- TeamAdmin Team Location -->
             <div x-cloak x-show="activeTab === 2" class="mt-6 space-y-6">
                 <div>
                     <x-library::heading.3 class="text-lg">Current Team Location</x-library::heading.3>
@@ -333,14 +333,14 @@
                 @endif
             </div>
 
-            <!-- Team Members -->
+            <!-- Team ManageTeamMembers -->
             <div x-cloak x-show="activeTab === 3" class="mt-6 pb-12 space-y-6">
                 <div>
                 <livewire:social::pages.teams.members :team="$team"/>
                 </div>
             </div>
 
-            <!-- Forms -->
+            <!-- ManageTeamForms -->
             <div x-cloak x-show="activeTab === 4" class="mt-6 pb-12 space-y-6">
                 <div>
                     <livewire:social::pages.teams.forms :team="$team"/>
@@ -371,12 +371,12 @@
                     },
                     {
                         id: 3,
-                        title: 'Members',
+                        title: 'ManageTeamMembers',
                         // component: 'social::pages.teams.members'
                     },
                     {
                         id: 4,
-                        title: 'Forms',
+                        title: 'ManageTeamForms',
                     },
                 ]
             }

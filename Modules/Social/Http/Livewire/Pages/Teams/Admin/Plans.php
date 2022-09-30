@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Teams;
+namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 
 use App\Actions\Teams\CreateTeamPlanAction;
 use App\Enums\Teams\TeamBillingPeriod;
@@ -63,7 +63,7 @@ class Plans extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.teams.plans', [
+        return view('social::livewire.pages.teams.admin.plans', [
             'plans' => $this->rows
         ]);
     }
