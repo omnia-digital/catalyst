@@ -62,7 +62,7 @@ class TeamCalendarList extends Component
             ->get()
             ->map(function (Location $location) {
                 return [
-                    'id' => $location->id,
+                    'id' => $location->model->id,
                     'name' => $location->model->name,
                     'lat' => $location->lat,
                     'lng' => $location->lng,
@@ -100,12 +100,14 @@ class TeamCalendarList extends Component
         $this->emitUp('toggle_map_calendar', $tab, $this->places);
     }
 
-    public function mount($events = null, $classes = '')
+    public function mount($eventClassName = null, $classes = '')
     {
-        $this->eventClassName = get_class($events?->first());
+        $this->eventClassName = $eventClassName;
 
-        $dateColumn = $events?->first()->getDateColumn();
-        $this->sortLabels[$dateColumn['column']] = $dateColumn['label'];
+        if (!is_null($eventClassName)) {
+            $dateColumn = $eventClassName::first()->getDateColumn();
+            $this->sortLabels[$dateColumn['column']] = $dateColumn['label'];
+        }
 
         $this->classes = $classes;
         //$this->orderBy = 'name';

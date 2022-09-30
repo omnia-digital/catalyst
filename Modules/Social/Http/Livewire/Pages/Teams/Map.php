@@ -18,7 +18,6 @@ class Map extends Component
 
     public string|int|null $placeId = null;
 
-    public $events = null;
     public $eventClassName;
 
     public $height= '500px';
@@ -27,12 +26,11 @@ class Map extends Component
         'select_event' => 'handleEventSelected',
     ];
 
-    public function mount($places, $events = null, $showList = true)
+    public function mount($places, $eventClassName = null, $showList = true)
     {
-        $this->showList = is_null($events) ? false : $showList;
+        $this->showList = is_null($eventClassName) ? false : $showList;
         $this->places = $places;
-        $this->events = $events;
-        $this->eventClassName = is_null($events) ? null : get_class($events->first());
+        $this->eventClassName = $eventClassName;
     }
 
     public function handleEventSelected($eventId)
