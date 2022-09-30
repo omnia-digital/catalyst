@@ -47,7 +47,7 @@
             @if(config('app.modules.social.map'))
                 <div class="mt-4 justify-center mx-auto max-w-post-card-max-w">
                     <x-library::heading.3>{{ Trans::get('Team Map') }}</x-library::heading.3>
-                    <livewire:social::pages.teams.map :events="\App\Models\Team::all()" class=""/>
+                    <livewire:social::pages.teams.map :places="$places" :events="\App\Models\Team::all()" :showList="false" class=""/>
                 </div>
             @endif
             <div class="mt-4 mx-auto max-w-post-card-max-w">

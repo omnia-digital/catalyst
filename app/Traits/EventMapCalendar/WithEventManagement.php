@@ -25,8 +25,8 @@ trait WithEventManagement
         return $this->$dateColumn;
     }
 
-    public function getNameAttribute()
+    public function getNameAttribute($value)
     {
-        return $this->name ?? $this->title;
+        return $value ?? $this->title;
     }
 }

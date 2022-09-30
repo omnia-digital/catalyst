@@ -81,35 +81,7 @@
             <!-- Show All Teams -->
             <div x-show="!showDetail" class="bg-primary space-y-2 pt-4 pb-2 flex-1 overflow-y-scroll scrollbar-hide">
                 @forelse ($eventList as $item)
-                    <div
-                        class="space-y-2 mx-2 p-4 bg-primary rounded-lg border border-neutral cursor-pointer
-                            {{ (!is_null($event) && ($event->handle === $item->handle)) ? 'shadow-md ring-1 ring-neutral-dark' : '' }}
-                            hover:shadow-lg  hover:ring-2 hover:ring-neutral-dark active:shadow-lg active:ring-2 active:ring-neutral-dark focus:shadow-lg focus:ring-2 focus:ring-neutral-dark"
-                        {{-- wire:click="selectEvent({{ $item->id }})" --}}
-                        x-on:click="selectEvent({{ $item }})"
-                    >
-                        <div class="flex justify-between">
-                            <p class="text-dark-text-color font-semibold text-base">{{ $item->name }}</p>
-
-                        </div>
-                        <div class="flex items-center text-base-text-color">
-                            @isset($item->location)
-                                <x-heroicon-o-location-marker class="h-4 w-4 mr-2" />
-                                <span class="text-dark-text-color text-xs">{{ $item->location }}</span>
-                            @endisset
-                        </div>
-                        <p class="text-light-text-color text-xs line-clamp-3">{{ $item->summary }}</p>
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center">
-                                <x-heroicon-o-users class="h-4 w-4 mr-2" />
-                                <p>{{ $item->users_count }}</p>
-                            </div>
-                            <div class="flex items-center">
-                                <x-heroicon-o-calendar class="h-4 w-4 mr-2" />
-                                <p>{{ $item->getEventDate()->toFormattedDateString() }}</p>
-                            </div>
-                        </div>
-                    </div>
+                    <x-map.list-item x-on:click="selectEvent({{ $item }})" :item="$item" :selectedItem="$event?->handle === $item->handle" />
                 @empty
                     <div>No {{ \Trans::get('teams') }} to show</div>
                 @endforelse

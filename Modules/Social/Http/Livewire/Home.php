@@ -44,8 +44,10 @@ class Home extends Component
             ->get()
             ->map(function (Location $location) {
                 return [
-                    'id' => $location->id,
+                    'id' => $location->model->id,
                     'name' => $location->model->name,
+                    'description' => $this->getTeamDescriptionHTML($location),
+                    'users_count' => $location->model->users_count,
                     'lat' => $location->lat,
                     'lng' => $location->lng,
                     'address' => $location->address,
@@ -58,6 +60,15 @@ class Home extends Component
             });
 
         return $places->all();
+    }
+
+    public function getTeamDescriptionHTML(Location $location)
+    {
+        $content = "";
+        $content .= "<h3 class='h3 block'>{$location->model->name}</h2>";
+        $content .= "<p>{$location->model->start_date->toFormattedDateString()}</p>";
+
+        return $content;
     }
 
     public function render()

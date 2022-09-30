@@ -100,7 +100,7 @@ class TeamCalendarList extends Component
         $this->emitUp('toggle_map_calendar', $tab, $this->places);
     }
 
-    public function mount($events, $classes = '')
+    public function mount($events = null, $classes = '')
     {
         $this->eventClassName = get_class($events?->first());
 

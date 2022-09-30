@@ -12,6 +12,10 @@ class Map extends Component
 {
     use WithMap, WithNotification;
 
+    public bool $showList;
+
+    public array $places;
+
     public string|int|null $placeId = null;
 
     public $events = null;
@@ -23,10 +27,12 @@ class Map extends Component
         'select_event' => 'handleEventSelected',
     ];
 
-    public function mount($events)
+    public function mount($places, $events = null, $showList = true)
     {
+        $this->showList = is_null($events) ? false : $showList;
+        $this->places = $places;
         $this->events = $events;
-        $this->eventClassName = get_class($events?->first());
+        $this->eventClassName = is_null($events) ? null : get_class($events->first());
     }
 
     public function handleEventSelected($eventId)
@@ -47,7 +53,7 @@ class Map extends Component
         $this->emitTo('social::components.team-calendar-list', 'teamSelected', $placeId);
     }
 
-    public function getPlacesProperty()
+    /* public function getPlacesProperty()
     {
         $places = Location::query()
             ->hasCoordinates()
@@ -72,7 +78,7 @@ class Map extends Component
             });
 
         return $places->all();
-    }
+    } */
 
     public function getTeamDescriptionHTML(Location $location)
     {
@@ -85,8 +91,6 @@ class Map extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.teams.map', [
-            'places' => $this->places,
-        ]);
+        return view('social::livewire.pages.teams.map');
     }
 }
