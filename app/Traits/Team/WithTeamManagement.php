@@ -18,6 +18,7 @@ use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Role;
 use Modules\Social\Notifications\ApplicationAcceptedToTeamNotification;
 use Modules\Social\Notifications\NewApplicationToTeamNotification;
+use Modules\Social\Notifications\NewMemberOfMyTeamNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use Trans;
 
@@ -175,6 +176,11 @@ trait WithTeamManagement
         $this->team = $this->team->fresh();
 
         $user->notify(new ApplicationAcceptedToTeamNotification($this->team, $user));
+
+        foreach ($this->team->users as $member) {
+            $member->notify(new NewMemberOfMyTeamNotification($this->team, $user));
+        }
+        
         $this->success(Trans::get('Team member added!'));
         $this->emit('member_added');
     }
