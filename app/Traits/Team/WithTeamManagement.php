@@ -16,6 +16,7 @@ use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Role;
+use Modules\Social\Notifications\NewApplicationToTeamNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use Trans;
 
@@ -90,6 +91,7 @@ trait WithTeamManagement
             'member'
         );
 
+        $this->team->owner->notify(new NewApplicationToTeamNotification($this->team, $this->user));
         $this->success(Trans::get('Application Submitted to Team'));
         $this->emit('applied_to_team');
     }
