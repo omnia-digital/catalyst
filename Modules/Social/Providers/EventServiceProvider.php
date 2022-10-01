@@ -8,7 +8,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use Modules\Social\Models\Post;
 use Modules\Social\Observers\PostObserver;
-use Modules\Payments\Events\NewSubscriptionPayment;
+use Modules\Billing\Events\NewSubscriptionPayment;
 
 class EventServiceProvider extends ServiceProvider
 {

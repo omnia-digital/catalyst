@@ -6,7 +6,7 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
-use Modules\Payments\Models\SubscriptionType;
+use Modules\Billing\Models\SubscriptionType;
 use Trans;
 
 class TeamPolicy
