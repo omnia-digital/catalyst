@@ -28,7 +28,7 @@ class Show extends Component
     public $additionalInfo = [
         'likes',
         'comments',
-        'members'
+        'members',
     ];
 
     public $activity = [

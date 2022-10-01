@@ -58,6 +58,7 @@ class SubscribeTeamModal extends Component
 
         $this->billable
             ->newSubscription('team_' . $this->team->id, $this->plan)
+            ->teamId($this->team->id)
             ->create(subscriptionOptions: [
                 'application_fee_percent' => config('team-user-subscription.application_fee_percent'),
                 'transfer_data' => [

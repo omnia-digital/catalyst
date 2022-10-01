@@ -334,6 +334,13 @@
                     <livewire:social::pages.teams.forms :team="$team"/>
                 </div>
             </div>
+
+            <!-- Subscriptions -->
+            <div x-cloak x-show="activeTab === 5" class="mt-6 pb-12 space-y-6">
+                <div>
+                    <livewire:subscriptions::pages.admin-subscriptions :team="$team"/>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -341,7 +348,7 @@
     <script>
         function setup() {
             return {
-                activeTab: 0,
+                activeTab: 5,
                 tabs: [
                     {
                         id: 0,
@@ -365,6 +372,10 @@
                     {
                         id: 4,
                         title: 'Forms',
+                    },
+                    {
+                        id: 5,
+                        title: 'Subscriptions',
                     },
                 ]
             }

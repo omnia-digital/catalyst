@@ -65,7 +65,6 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subsc
         Route::get('{team}/advice', TeamFollowers::class)->name('advice');
         Route::get('{team}/jobs', TeamFollowers::class)->name('jobs');
         Route::get('{team}/learn', TeamFollowers::class)->name('learn');
-        Route::get('{team}/subscriptions', Subscriptions::class)->name('subscriptions');
         Route::get('{team}/awards', TeamAwards::class)->name('awards');
         Route::get('/', AllTeams::class)->name('home');
     });
