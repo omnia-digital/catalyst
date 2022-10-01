@@ -64,15 +64,15 @@
                     {{-- Right Side Nav --}}
                     <div class="col-span-12 lg:col-span-4 2xl:col-span-3 flex justify-end items-center">
                         <!-- Mobile Hamburger -->
-{{--                        <div class="inline-block sm:hidden sm:ml-auto  mr-2">--}}
-{{--                            <button @click="open = ! open"--}}
-{{--                                    class="inline-flex items-center justify-center p-2 rounded-md text-light-text-color hover:text-base-text-color hover:bg-neutral focus:outline-none focus:bg-neutral focus:text-base-text-color transition">--}}
-{{--                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">--}}
-{{--                                    <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>--}}
-{{--                                    <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>--}}
-{{--                                </svg>--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="inline-block sm:hidden sm:ml-auto  mr-2">--}}
+                        {{--                            <button @click="open = ! open"--}}
+                        {{--                                    class="inline-flex items-center justify-center p-2 rounded-md text-light-text-color hover:text-base-text-color hover:bg-neutral focus:outline-none focus:bg-neutral focus:text-base-text-color transition">--}}
+                        {{--                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">--}}
+                        {{--                                    <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>--}}
+                        {{--                                    <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>--}}
+                        {{--                                </svg>--}}
+                        {{--                            </button>--}}
+                        {{--                        </div>--}}
                         {{-- Profile & Notifications --}}
                         <div class="flex justify-end">
                             <div class="flex col-span-4 2xl:col-span-3 mr-4 justify-between md:items-center">
@@ -181,15 +181,13 @@
                                             </x-jet-dropdown-link>
 
                                             @if ($this->isUsingStripe)
-                                            <x-jet-dropdown-link href="{{ route('payments.billing') }}">
-                                                Billing
-                                            </x-jet-dropdown-link>
-                                            @elseif ($this->isUsingChargent)
-                                                @if ($this->isUsingUserSubscriptions)
-                                                    <x-jet-dropdown-link href="{{ route('social.subscription') }}">
-                                                        {{ \Trans::get('Subscriptions') }}
-                                                    </x-jet-dropdown-link>
-                                                @endif
+                                                <x-jet-dropdown-link href="{{ route('billing.billing') }}">
+                                                    {{ \Trans::get('Billing') }}
+                                                </x-jet-dropdown-link>
+                                            @elseif ($this->isUsingChargent && $this->isUsingUserSubscriptions)
+                                                <x-jet-dropdown-link href="{{ route('billing.subscription') }}">
+                                                    {{ \Trans::get('Billing') }}
+                                                </x-jet-dropdown-link>
                                             @endif
 
                                             {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
