@@ -1,14 +1,15 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
+namespace Modules\Subscriptions\Http\Livewire\Pages;
 
 use App\Actions\Teams\CreateStripeConnectAccountForTeamAction;
 use App\Models\Team;
 use App\Support\StripeConnect\StripeConnect;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Laravel\Cashier\Subscription;
 use Livewire\Component;
 
-class Subscriptions extends Component
+class AdminSubscriptions extends Component
 {
     use AuthorizesRequests;
 
@@ -31,7 +32,7 @@ class Subscriptions extends Component
 
         $accountLink = app(StripeConnect::class)->createAccountLink(
             accountStripeId: $this->team->stripe_connect_id,
-            returnUrl: route('social.teams.subscriptions', $this->team)
+            returnUrl: route('social.teams.edit', $this->team)
         );
 
         $this->redirect($accountLink->url);
@@ -53,8 +54,23 @@ class Subscriptions extends Component
         $this->team->update(['stripe_connect_onboarding_completed' => $account->details_submitted]);
     }
 
+    public function getRowsQueryProperty()
+    {
+        return Subscription::query()
+            ->with('owner')
+            ->where('team_id', $this->team->id);
+    }
+
+    public function getRowsProperty()
+    {
+        return $this->rowsQuery->paginate(25);
+    }
+
     public function render()
     {
-        return view('billing::livewire.pages.teams.subscriptions');
+        return view('subscriptions::livewire.pages.admin-subscriptions', [
+            'subscriptions' => $this->rows,
+            'plans' => collect(config('team-user-subscription.plans'))
+        ]);
     }
 }

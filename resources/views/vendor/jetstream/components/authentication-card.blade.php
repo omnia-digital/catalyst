@@ -3,11 +3,11 @@
     <div class="flex flex-col md:items-end items-center md:min-h-screen md:pr-6 lg:pr-24 justify-center">
         <div class="flex flex-col">
             <div class="flex justify-center md:justify-start">
-                {{ $logo }}
+                {{ $logo ?? config('app.name') }}
             </div>
 
             <div class="text-center md:text-left md:items-start">
-                {{ $slogan ?? config('app.slogan', '') }}
+                {{ $slogan ?? config('app.slogan') }}
             </div>
         </div>
     </div>
