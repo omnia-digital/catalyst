@@ -19,9 +19,9 @@ Route::name('billing.')
      ->prefix('billing')
      ->group(function () {
          Route::get('billing', Billing::class)
-              ->name('billing'); // stripe billing page
+              ->name('stripe-billing'); // stripe billing page
          Route::get('/subscription', SubscriptionPage::class)
               ->withoutMiddleware('subscribed')
-              ->name('subscription'); // chargent billing
+              ->name('chargent-billing'); // chargent billing
 
      });

@@ -338,7 +338,7 @@
             <!-- Subscriptions -->
             <div x-cloak x-show="activeTab === 5" class="mt-6 pb-12 space-y-6">
                 <div>
-                    <livewire:subscriptions::pages.admin-subscriptions :team="$team"/>
+                    <livewire:billing::pages.admin-subscriptions :team="$team"/>
                 </div>
             </div>
         </div>

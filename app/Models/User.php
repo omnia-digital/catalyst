@@ -20,7 +20,7 @@ use Modules\Social\Models\Post;
 use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
-use Modules\Subscriptions\Models\Builders\CashierSubscriptionBuilder;
+use Modules\Billing\Models\Builders\CashierSubscriptionBuilder;
 use Modules\Billing\Models\ChargentSubscription;
 use Modules\Billing\Traits\WithChargentSubscriptions;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;

@@ -14,6 +14,6 @@ class Billing extends Component
 
     public function render()
     {
-        return view('billing::livewire.pages.billing.billing');
+        return view('billing::livewire.pages.billing.stripe-billing');
     }
 }

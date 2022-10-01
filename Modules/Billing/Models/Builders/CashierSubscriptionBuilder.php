@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Subscriptions\Models\Builders;
+namespace Modules\Billing\Models\Builders;
 
 use Laravel\Cashier\SubscriptionBuilder;
 use Stripe\Subscription as StripeSubscription;

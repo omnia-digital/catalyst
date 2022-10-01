@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Subscriptions\Http\Livewire\Pages;
+namespace Modules\Billing\Http\Livewire\Pages;
 
 use App\Actions\Teams\CreateStripeConnectAccountForTeamAction;
 use App\Models\Team;
@@ -68,7 +68,7 @@ class AdminSubscriptions extends Component
 
     public function render()
     {
-        return view('subscriptions::livewire.pages.admin-subscriptions', [
+        return view('billing::livewire.pages.admin-subscriptions', [
             'subscriptions' => $this->rows,
             'plans' => collect(config('team-user-subscription.plans'))
         ]);

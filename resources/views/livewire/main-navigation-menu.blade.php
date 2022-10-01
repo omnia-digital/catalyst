@@ -91,7 +91,7 @@
                                         @if(Auth::user()
                     ->notifications()->whereNull('read_at')->count() > 0 )
                                             <span class="ml-2 w-3 h-3 text-2xs absolute top-0 right-0 flex items-center justify-center text-white-text-color bg-danger-600 rounded-full">{{ Auth::user()
-                    ->notifications()->whereNull('read_at')->count() }}</span>
+{{--                    ->notifications()->whereNull('read_at')->count() }}</span>--}}
                                         @endif
                                         <span class="sr-only">View notifications</span>
                                     </a>
@@ -181,11 +181,11 @@
                                             </x-jet-dropdown-link>
 
                                             @if ($this->isUsingStripe)
-                                                <x-jet-dropdown-link href="{{ route('billing.billing') }}">
-                                                    {{ \Trans::get('Billing') }}
-                                                </x-jet-dropdown-link>
+{{--                                                <x-jet-dropdown-link href="{{ route('billing.stripe-billing') }}">--}}
+{{--                                                    {{ \Trans::get('Billing') }}--}}
+{{--                                                </x-jet-dropdown-link>--}}
                                             @elseif ($this->isUsingChargent && $this->isUsingUserSubscriptions)
-                                                <x-jet-dropdown-link href="{{ route('billing.subscription') }}">
+                                                <x-jet-dropdown-link href="{{ route('billing.chargent-billing') }}">
                                                     {{ \Trans::get('Billing') }}
                                                 </x-jet-dropdown-link>
                                             @endif
