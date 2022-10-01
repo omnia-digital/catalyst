@@ -181,7 +181,7 @@
                                             </x-jet-dropdown-link>
 
                                             @if ($this->isUsingStripe)
-                                            <x-jet-dropdown-link href="{{ route('social.billing') }}">
+                                            <x-jet-dropdown-link href="{{ route('payments.billing') }}">
                                                 Billing
                                             </x-jet-dropdown-link>
                                             @elseif ($this->isUsingChargent)

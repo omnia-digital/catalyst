@@ -7,8 +7,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
 use Illuminate\Support\Arr;
-use Modules\Subscriptions\Enums\PaymentGateway;
-use Modules\Subscriptions\Models\FormAssemblyForm;
+use Modules\Payments\Enums\PaymentGateway;
+use Modules\Payments\Models\FormAssemblyForm;
 
 class ManageBillingSettings extends SettingsPage
 {

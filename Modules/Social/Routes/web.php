@@ -22,8 +22,6 @@ use Modules\Social\Http\Livewire\Pages\Teams\Calendar as TeamMapCalendar;
 use Modules\Social\Http\Livewire\Pages\Teams\Followers as TeamFollowers;
 use Modules\Social\Http\Livewire\Pages\Teams\MyTeams;
 use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
-use Modules\Subscriptions\Http\Livewire\Pages\Billing\Billing;
-use Modules\Subscriptions\Http\Livewire\Pages\Subscriptions\Index as SubscriptionPage;
 
 
 Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subscribed'])->group(function () {
@@ -47,10 +45,6 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subsc
         Route::get('{profile}/awards', ProfileAwards::class)->name('awards');
     });
 
-
-    Route::get('billing', Billing::class)->name('billing'); // stripe billing page
-    Route::get('/subscription', SubscriptionPage::class)->withoutMiddleware('subscribed')->name('subscription'); // chargent billing
-
     Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {
         Route::get('/discover', DiscoverTeams::class)->name('discover');
         Route::get('/calendar', TeamMapCalendar::class)->name('calendar');
@@ -66,7 +60,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subsc
         Route::get('{team}/advice', TeamFollowers::class)->name('advice');
         Route::get('{team}/jobs', TeamFollowers::class)->name('jobs');
         Route::get('{team}/learn', TeamFollowers::class)->name('learn');
-        Route::get('{team}/subscriptions', Subscriptions::class)->name('subscriptions');
+        Route::get('{team}/subscriptions', payments::class)->name('subscriptions');
         Route::get('{team}/awards', TeamAwards::class)->name('awards');
         Route::get('/', AllTeams::class)->name('home');
     });

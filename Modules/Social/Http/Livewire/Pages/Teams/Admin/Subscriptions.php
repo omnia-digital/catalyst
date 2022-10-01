@@ -55,6 +55,6 @@ class Subscriptions extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.teams.subscriptions');
+        return view('payments::livewire.pages.teams.subscriptions');
     }
 }

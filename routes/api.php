@@ -3,7 +3,7 @@
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Modules\Subscriptions\Models\SubscriptionType;
+use Modules\Payments\Models\SubscriptionType;
 
 /*
 |--------------------------------------------------------------------------

@@ -6,7 +6,7 @@
         <x-slot:content>
             <div class="mb-4">
                 @if (!$this->billable->hasDefaultPaymentMethod())
-                    <x-library::alert.warning>You don't have a default payment method. Please add one <a href="{{ route('social.billing') }}" class="font-medium hover:underline">here</a>.
+                    <x-library::alert.warning>You don't have a default payment method. Please add one <a href="{{ route('payments.billing') }}" class="font-medium hover:underline">here</a>.
                     </x-library::alert.warning>
                 @endif
             </div>

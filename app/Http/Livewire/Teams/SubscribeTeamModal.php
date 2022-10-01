@@ -29,7 +29,7 @@ class SubscribeTeamModal extends Component
 
     public function getTeamPlansProperty()
     {
-        return config('subscriptions.team_member_subscriptionsplans');
+        return config('payments.team_member_subscriptionsplans');
     }
 
     public function subscribeTeam()
@@ -59,7 +59,7 @@ class SubscribeTeamModal extends Component
         $this->billable
             ->newSubscription('team_' . $this->team->id, $this->plan)
             ->create(subscriptionOptions: [
-                'application_fee_percent' => config('subscriptions.team_member_subscriptionsapplication_fee_percent'),
+                'application_fee_percent' => config('payments.team_member_subscriptionsapplication_fee_percent'),
                 'transfer_data' => [
                     'destination' => $this->team->stripe_connect_id,
                 ],

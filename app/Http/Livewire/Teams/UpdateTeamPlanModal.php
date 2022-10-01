@@ -36,7 +36,7 @@ class UpdateTeamPlanModal extends Component
 
     public function getTeamPlansProperty()
     {
-        return config('subscriptions.team_member_subscriptionsplans');
+        return config('payments.team_member_subscriptionsplans');
     }
 
     public function updatePlan()
