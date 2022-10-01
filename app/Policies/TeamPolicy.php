@@ -6,7 +6,7 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
-use Modules\Subscriptions\Models\SubscriptionType;
+use Modules\Billing\Models\SubscriptionType;
 use Trans;
 
 class TeamPolicy
@@ -45,7 +45,7 @@ class TeamPolicy
      */
     public function apply(User $user, Team $team)
     {
-        return in_array($user->chargentSubscription?->type?->slug, SubscriptionType::pluck('slug')->toArray());
+        return in_array($user?->chargentSubscription?->type?->slug, SubscriptionType::pluck('slug')->toArray());
     }
 
     /**
@@ -58,8 +58,8 @@ class TeamPolicy
     {
         $subscriptions = SubscriptionType::whereNot('slug', 'cfan-ea-member')->pluck('slug')->toArray();
 
-        return in_array($user->chargentSubscription?->type?->slug, $subscriptions) 
-            ? Response::allow() 
+        return in_array($user->chargentSubscription?->type?->slug, $subscriptions)
+            ? Response::allow()
             : Response::deny(Trans::get('You must at least be an Associate Evangelist to create a Team'));
     }
 

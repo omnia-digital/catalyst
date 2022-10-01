@@ -8,7 +8,7 @@
                 @if(!$this->currentPlan->onGracePeriod())
                     <div class="mb-4">
                         @if (!$this->billable->hasDefaultPaymentMethod())
-                            <x-library::alert.warning>You don't have a default payment method. Please add one <a href="{{ route('social.billing') }}" class="font-medium hover:underline">here</a>.</x-library::alert.warning>
+                            <x-library::alert.warning>You don't have a default payment method. Please add one <a href="{{ route('billing.billing') }}" class="font-medium hover:underline">here</a>.</x-library::alert.warning>
                         @endif
                     </div>
                     <div>
@@ -50,7 +50,7 @@
         </x-library::modal>
 
         <x-library::confirm id="cancel-subscription" submit="cancelSubscription">
-            <x-slot:title>Cancel Subscription</x-slot:title>
+            <x-slot:title>Cancel Subscriptions</x-slot:title>
             <x-slot:content>
                 Are you sure to cancel your subscription?
             </x-slot:content>

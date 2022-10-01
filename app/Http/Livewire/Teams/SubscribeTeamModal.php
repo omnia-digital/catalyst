@@ -29,12 +29,12 @@ class SubscribeTeamModal extends Component
 
     public function getTeamPlansProperty()
     {
-        return config('team-user-subscription.plans');
+        return config('billing.team_member_subscriptionsplans');
     }
 
     public function subscribeTeam()
     {
-        if (!$this->team->hasStripeConnectAccount()) {
+        if (!$this->team?->hasStripeConnectAccount()) {
             $this->error('This team is not ready to receive subscriptions yet!');
 
             return;
@@ -60,7 +60,7 @@ class SubscribeTeamModal extends Component
             ->newSubscription('team_' . $this->team->id, $this->plan)
             ->teamId($this->team->id)
             ->create(subscriptionOptions: [
-                'application_fee_percent' => config('team-user-subscription.application_fee_percent'),
+                'application_fee_percent' => config('billing.team_member_subscriptionsapplication_fee_percent'),
                 'transfer_data' => [
                     'destination' => $this->team->stripe_connect_id,
                 ],

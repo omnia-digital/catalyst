@@ -38,25 +38,25 @@
             </div>
 
             {{-- Skills --}}
-            <div class="hidden sm:block">
-                <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <p class="text-sm">{{ \Trans::get('Skills') }}</p>
-                    @if($this->user->awards()->count())
-                        <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
-                            <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
-                        </a>
-                    @endif
-                </div>
-                <div class="mt-4 space-y-4">
-                    @forelse ($this->user->awards()->take(4)->get() as $award)
-                        <x-awards-banner class="flex-1" :award="$award"/>
-                    @empty
-                        <div class="bg-white p-4 flex-1">
-                            <p class="text-dark-text-color">{{ \Trans::get('No awards to show.') }}</p>
-                        </div>
-                    @endforelse
-                </div>
-            </div>
+{{--            <div class="hidden sm:block">--}}
+{{--                <div class="flex justify-between items-center text-base-text-color font-semibold">--}}
+{{--                    <p class="text-sm">{{ \Trans::get('Skills') }}</p>--}}
+{{--                    @if($this->user->awards()->count())--}}
+{{--                        <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}--}}
+{{--                            <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>--}}
+{{--                        </a>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--                <div class="mt-4 space-y-4">--}}
+{{--                    @forelse ($this->user->awards()->take(4)->get() as $award)--}}
+{{--                        <x-awards-banner class="flex-1" :award="$award"/>--}}
+{{--                    @empty--}}
+{{--                        <div class="bg-white p-4 flex-1">--}}
+{{--                            <p class="text-dark-text-color">{{ \Trans::get('No awards to show.') }}</p>--}}
+{{--                        </div>--}}
+{{--                    @endforelse--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             {{-- Teams --}}
             <div class="hidden sm:block xl:hidden">

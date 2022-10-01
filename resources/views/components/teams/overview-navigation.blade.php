@@ -35,20 +35,19 @@
                     </a>
                 @endforeach
                 @can('update-team', $team)
-                    <a href="{{ route('social.teams.edit', $team) }}" class="md:hidden hover:bg-neutral block w-full px-4 py-2 text-left text-sm">{{ \Trans::get('Admin Panel') }}</a>
+                    <a href="{{ route('social.teams.admin', $team) }}" class="md:hidden hover:bg-neutral block w-full px-4 py-2 text-left text-sm">{{ \Trans::get('Admin Panel') }}</a>
                 @endcan
             </x-library::dropdown>
         </div>
     </div>
     <div class="flex pr-2 items-center">
         @can('update-team', $team)
-            <a href="{{ route('social.teams.edit', $team) }}" class="bg-neutral rounded-lg px-4 py-2 border border-secondary hidden md:block font-bold hover:underline mx-4
+            <a href="{{ route('social.teams.admin', $team) }}" class="bg-neutral rounded-lg px-4 py-2 border border-secondary hidden md:block font-bold hover:underline mx-4
             whitespace-nowrap">{{
             \Trans::get('Admin Panel')
             }}</a>
         @endcan
 
-        @if ($team->hasStripeConnectAccount())
             <div>
                 @if(!auth()->user()->subscribed("team_$team->id"))
                     <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
@@ -56,11 +55,10 @@
                     </x-library::button>
                 @else
                     <x-library::button x-data="" x-on:click.prevent="$openModal('update-team-plan')" wire:target="">
-                        Manage Subscription
+                        Manage Subscriptions
                     </x-library::button>
                 @endif
             </div>
-        @endif
 
         <div class="inline-flex items-center text-md relative">
             @if ($team->teamApplications()->hasUser(auth()->id()))
@@ -76,7 +74,7 @@
                     <button
                             class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-secondary text-white-text-color hover:opacity-75"
                             wire:click="applyToTeam"
-                    >{{ \Trans::get('Apply') }}</button>
+                    >{{ \Trans::get($this->applyButtonText) }}</button>
                 @endcan
             @endif
         </div>
