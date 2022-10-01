@@ -1,8 +1,8 @@
 <?php
 
 
-use Modules\Billing\Http\Livewire\Pages\Billing\Billing;
-use Modules\Billing\Http\Livewire\Pages\Subscriptions\Index as SubscriptionPage;
+use Modules\Billing\Http\Livewire\Pages\Billing\Chargent\User\Subscription as SubscriptionPage;
+use Modules\Billing\Http\Livewire\Pages\Billing\Stripe\User\Billing;
 
 /*
 |--------------------------------------------------------------------------

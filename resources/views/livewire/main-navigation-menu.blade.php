@@ -181,9 +181,9 @@
                                             </x-jet-dropdown-link>
 
                                             @if ($this->isUsingStripe)
-{{--                                                <x-jet-dropdown-link href="{{ route('billing.stripe-billing') }}">--}}
-{{--                                                    {{ \Trans::get('Billing') }}--}}
-{{--                                                </x-jet-dropdown-link>--}}
+                                                <x-jet-dropdown-link href="{{ route('billing.stripe-billing') }}">
+                                                    {{ \Trans::get('Billing') }}
+                                                </x-jet-dropdown-link>
                                             @elseif ($this->isUsingChargent && $this->isUsingUserSubscriptions)
                                                 <x-jet-dropdown-link href="{{ route('billing.chargent-billing') }}">
                                                     {{ \Trans::get('Billing') }}

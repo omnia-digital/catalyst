@@ -1,16 +1,16 @@
 <?php
 
-namespace Modules\Billing\Http\Livewire\Pages\Subscriptions;
+namespace Modules\Billing\Http\Livewire\Pages\Billing\Chargent\User;
 
 use App\Settings\BillingSettings;
 use Livewire\Component;
-use Modules\Social\Http\Livewire\Pages\Subscription\Type;
 use Modules\Billing\Actions\Salesforce\CreateContactObjectAction;
 use Modules\Billing\Actions\Salesforce\GetChargentOrderInfoAction;
 use Modules\Billing\Actions\Salesforce\StopRecurringBillingOnChargentOrderAction;
 use Modules\Billing\Models\FormAssemblyForm;
+use Modules\Social\Http\Livewire\Pages\Subscription\Type;
 
-class Index extends Component
+class Subscription extends Component
 {
     public $subscriptionForm;
     public $paymentMethodForm;
@@ -102,6 +102,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('billing::livewire.pages.subscription.index');
+        return view('billing::livewire.pages.billing.chargent.user.subscription');
     }
 }
