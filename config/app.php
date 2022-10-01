@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Platform Framework'),
     'abbr' => env('APP_ABBR', 'APP'),
-    'slogan' => env('APP_SLOGAN', ''),
+    'slogan' => env('APP_SLOGAN', 'Welcome to the community'),
     'theme' => env('APP_THEME', 'default'),
     'theme_light_type' => env('APP_THEME_LIGHT_TYPE', 'light'),
     'logo_path' => env('APP_LOGO'),
