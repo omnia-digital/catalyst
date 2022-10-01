@@ -377,6 +377,13 @@
                     <livewire:social::pages.teams.admin.manage-team-forms :team="$team"/>
                 </div>
             </div>
+
+            <!-- Subscriptions -->
+            <div x-cloak x-show="activeTab === 4" class="mt-6 pb-12 space-y-6">
+                <div>
+                    <livewire:billing::pages.billing.stripe.team.admin-subscriptions :team="$team"/>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -403,6 +410,10 @@
                     {
                         id: 3,
                         title: 'Forms',
+                    },
+                    {
+                        id: 4,
+                        title: 'Subscriptions',
                     },
                 ]
             }

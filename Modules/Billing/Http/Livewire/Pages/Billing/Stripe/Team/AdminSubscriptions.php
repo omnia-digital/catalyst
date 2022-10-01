@@ -32,7 +32,7 @@ class AdminSubscriptions extends Component
 
         $accountLink = app(StripeConnect::class)->createAccountLink(
             accountStripeId: $this->team->stripe_connect_id,
-            returnUrl: route('social.teams.edit', $this->team)
+            returnUrl: route('social.teams.admin', $this->team)
         );
 
         $this->redirect($accountLink->url);
@@ -68,7 +68,7 @@ class AdminSubscriptions extends Component
 
     public function render()
     {
-        return view('billing::livewire.pages.stripe.teams.admin-subscriptions', [
+        return view('billing::livewire.pages.billing.stripe.team.admin-subscriptions', [
             'subscriptions' => $this->rows,
             'plans' => collect(config('team-user-subscription.plans'))
         ]);
