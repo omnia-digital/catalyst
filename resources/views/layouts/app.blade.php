@@ -37,7 +37,7 @@
         <!-- App Navigation -->
         <livewire:main-navigation-menu/>
 
-        <main class="pt-14">
+        <main class="pb-20 lg:pb-4 pt-14">
             {{ $slot }}
         </main>
 

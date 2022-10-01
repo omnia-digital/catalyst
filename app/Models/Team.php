@@ -214,6 +214,13 @@ class Team extends JetstreamTeam implements HasMedia
         return $this->users();
     }
 
+    public function hasUserWithEmail(string $email)
+    {
+        return $this->allUsers->contains(function ($user) use ($email) {
+            return $user->email === $email;
+        });
+    }
+
     public function profile()
     {
         return route('social.teams.show', $this);
