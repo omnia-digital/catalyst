@@ -23,6 +23,6 @@ class ManageTeamMembers extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.teams.admin.members');
+        return view('social::livewire.pages.teams.admin.manage-team-members');
     }
 }

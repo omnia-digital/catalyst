@@ -57,7 +57,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subsc
         Route::get('/map', Modules\Social\Http\Livewire\Pages\Teams\Map::class)->name('map');
         Route::get('/my-' . \Trans::get('teams'), MyTeams::class)->name('my-teams');
         Route::get('{team}', ShowTeam::class)->name('show');
-        Route::get('{team}/edit', EditTeam::class)->name('edit');
+        Route::get('{team}/admin', EditTeam::class)->name('admin');
         Route::get('{team}/members', TeamMembers::class)->name('members');
         Route::get('{team}/members', TeamFollowers::class)->name('members');
         Route::get('{team}/about', TeamFollowers::class)->name('about');
