@@ -58,7 +58,7 @@ class TeamPolicy
     {
         $subscriptions = SubscriptionType::whereNot('slug', 'cfan-ea-member')->pluck('slug')->toArray();
 
-        return in_array($user->chargentSubscription->type->slug, $subscriptions)
+        return in_array($user->chargentSubscription?->type?->slug, $subscriptions)
             ? Response::allow()
             : Response::deny(Trans::get('You must at least be an Associate Evangelist to create a Team'));
     }

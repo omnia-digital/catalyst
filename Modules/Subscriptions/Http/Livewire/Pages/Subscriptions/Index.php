@@ -38,8 +38,10 @@ class Index extends Component
         (new CreateContactObjectAction)->execute($this->user);
         $this->user->refresh();
 
-        (new GetChargentOrderInfoAction)->execute($this->subscription);
-        $this->subscription->refresh();
+        if ($this->subscription) {
+            (new GetChargentOrderInfoAction)->execute($this->subscription);
+            $this->subscription->refresh();
+        }
     }
 
     /**
@@ -77,11 +79,6 @@ class Index extends Component
         return auth()->user();
     }
 
-    public function FunctionName(Type $var = null)
-    {
-        # code...
-    }
-
     public function iFrameURL(FormAssemblyForm $form)
     {
         $qs         = '?';
@@ -91,8 +88,8 @@ class Index extends Component
                            ->pluck('name', 'tfa_code');
 
         foreach ($tfaFields as $code => $attribute) {
-            if ($attribute === 'chargent_order_id') {
-                $attributes[$code] = $this->subscription->$attribute;
+            if ($attribute === 'chargent_order_id' && !is_null($this->subscription)) {
+                $attributes[$code] = $this->subscription?->$attribute;
                 continue;
             }
             $attributes[$code] = $this->user->$attribute;

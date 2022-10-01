@@ -17,7 +17,7 @@
         },
     }"
     x-on:notify.window="add($event)"
-    class="fixed bottom-0 right-0 z-10 pr-4 pb-4 max-w-xs w-full flex flex-col space-y-4 sm:justify-start"
+    class="fixed bottom-0 right-0 z-[999] pr-4 pb-4 max-w-xs w-full flex flex-col space-y-4 sm:justify-start"
     role="status"
     aria-live="polite"
 >
