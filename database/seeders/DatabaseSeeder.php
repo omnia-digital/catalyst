@@ -12,7 +12,7 @@ use Modules\Reviews\Database\Seeders\ReviewsDatabaseSeeder;
 use Modules\Reviews\Database\Seeders\ReviewTableSeeder;
 use Modules\Social\Database\Seeders\PostsTableSeeder;
 use Modules\Social\Database\Seeders\SocialDatabaseSeeder;
-use Modules\Subscriptions\Database\Seeders\SubscriptionsDatabaseSeeder;
+use Modules\Payments\Database\Seeders\SubscriptionsDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {

@@ -3,6 +3,7 @@
 namespace App\View\Components\Teams;
 
 use App\Models\Team;
+use App\Settings\GeneralSettings;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
@@ -14,8 +15,8 @@ class OverviewNavigation extends Component
 
     public $nav = [
         'show' => 'Home',
-        'subscriptions' => 'Subscriptions',
-        //        'members' => 'People',
+//        'subscriptions' => 'Subscriptions',
+//        'members' => 'People',
 //        'resources' => 'Resources',
 //        'advice' => 'Advice',
 //        'jobs' => 'Jobs',
@@ -34,6 +35,11 @@ class OverviewNavigation extends Component
     {
         $this->team = $team;
         $this->pageView = array_slice(explode('.', Route::currentRouteName()), -1)[0];
+    }
+
+    public function getApplyButtonTextProperty()
+    {
+        return ((new GeneralSettings())?->teams_apply_button_text) ?? 'Apply';
     }
 
     /**

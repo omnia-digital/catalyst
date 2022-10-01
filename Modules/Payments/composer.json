@@ -1,0 +1,23 @@
+{
+    "name": "omnia-digital/payments",
+    "description": "",
+    "authors": [
+        {
+            "name": "Joshua Torres",
+            "email": "josht@omniadigital.io"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Subscriptions\\": ""
+        }
+    }
+}

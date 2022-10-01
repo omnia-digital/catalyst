@@ -20,8 +20,8 @@ use Modules\Social\Models\Post;
 use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
-use Modules\Subscriptions\Models\ChargentSubscription;
-use Modules\Subscriptions\Traits\WithChargentSubscriptions;
+use Modules\Payments\Models\ChargentSubscription;
+use Modules\Payments\Traits\WithChargentSubscriptions;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Wimil\Followers\Traits\Followable;
 
