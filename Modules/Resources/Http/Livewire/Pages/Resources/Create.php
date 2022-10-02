@@ -2,11 +2,12 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
+use App\Models\Tag;
 use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
 use Phuclh\MediaManager\WithMediaManager;
-use Spatie\Tags\Tag;
+use Spatie\Tags\Tag as SpatieTag;
 
 class Create extends Component
 {
@@ -67,10 +68,9 @@ class Create extends Component
 
     public function pullTags($text)
     {
-        $regexForHashtags = "/\B#([a-z0-9_-]+)/i";
         $hashtags = array();
 
-        preg_match_all($regexForHashtags, $text, $hashtags);
+        preg_match_all(Tag::TAG_REGEX, $text, $hashtags);
 
         return $hashtags[1];
     }
@@ -80,7 +80,7 @@ class Create extends Component
         $tags = array();
 
         foreach ($hashtags as $hashtag) {
-            $tags[] = Tag::findOrCreateFromString($hashtag);
+            $tags[] = SpatieTag::findOrCreateFromString($hashtag);
         }
 
         return $tags;

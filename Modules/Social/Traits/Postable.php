@@ -2,14 +2,8 @@
 
 namespace Modules\Social\Traits;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use League\CommonMark\CommonMarkConverter;
-use League\CommonMark\Environment\Environment;
-use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
-use League\CommonMark\Extension\Mention\MentionExtension;
-use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
 
 trait Postable
@@ -29,45 +23,10 @@ trait Postable
      */
     public function createPost($data, $userId): Model|Post
     {
-        $mentions = $this->getMentions($data['body']);
-
-        foreach ($mentions as $mention) {
-            $profileUrl = config('app.url') . '/social/profiles/' . $mention;
-            $htmlTag = "<a href='{$profileUrl}'>@{$mention}</a>";
-
-            $body = str_replace("@{$mention}", $htmlTag, $data['body']);
-        }
-
-        /* $config = [
-            'mentions' => [
-                'user_handle' => [
-                    'symbol' => '@',
-                    'regex' => '/^[A-Za-z0-9_]{1,15}(?!\w)/',
-                    'generator' => config('app.url') . '/social/profiles/%s',
-                ],
-            ]
-        ];
-        $commonMark = new CommonMarkConverter($config); */
-
         return $this->posts()->create([
             'user_id' => $userId,
-            'body' => $body,
+            'body' => $data['body'],
         ]);
-    }
-
-    public function createMention($mention, $userId)
-    {
-        //MentionMention
-    }
-
-    public function getMentions($content)
-    {
-        $regexForMentions = "/\B@([a-z0-9_-]+)/i";
-        $mentions = array();
-
-        preg_match_all($regexForMentions, $content, $mentions);
-
-        return $mentions[1];
     }
 
     //** Aliases **//

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Traits\Conditionable;
 use Modules\Social\Enums\PostType;
+use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
 
 class CreateNewPostAction
@@ -57,9 +58,9 @@ class CreateNewPostAction
     {
         $user = $this->user ?? Auth::user();
 
-        return $user->posts()->create([
+        $post = $user->posts()->create([
             'type'               => $this->type,
-            'body'               => $content,
+            'body'               => $this->replaceMentionsWithLinks($content),
             'team_id'            => $options['team_id'] ?? null,
             'title'              => $options['title'] ?? null,
             'url'                => $options['url'] ?? null,
@@ -68,5 +69,31 @@ class CreateNewPostAction
             'repost_original_id' => $this->repost?->id,
             'image'              => $options['image'] ?? null,
         ]);
+
+        $userMentions = $this->getUserMentions($content);
+
+        Mention::createManyFromHandle($userMentions, $post);
+
+        return $post;
+    }
+
+    private function getUserMentions($content)
+    {
+        $mentions = array();
+
+        preg_match_all(Mention::USER_HANDLE_REGEX, $content, $mentions);
+
+        return $mentions[1];
+    }
+
+    public function replaceMentionsWithLinks($content)
+    {
+        return preg_replace_callback(
+            Mention::USER_HANDLE_REGEX, 
+            function ($matches) {
+                return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.profile.show', $matches[1]) . "'>" . $matches[0] . "</a>";
+            },
+            $content
+        );
     }
 }

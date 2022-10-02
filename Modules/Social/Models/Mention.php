@@ -12,10 +12,29 @@ class Mention extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public CONST USER_HANDLE_REGEX = '/(?<![\S])@([a-z0-9_-]+)/';
+
+    public CONST TEAM_HANDLE_REGEX = '/(?<![\S])@{2}([a-z0-9_-]+)/';
     
     protected static function newFactory()
     {
         return \Modules\Social\Database\factories\MentionFactory::new();
+    }
+
+    public static function createManyFromHandle($handles, $post)
+    {
+        foreach ($handles as $handle) {
+            Mention::create([
+                'mentionable_type' => User::class,
+                'mentionable_id' => User::with('profile')
+                    ->whereHas('profile', function ($q) use ($handle) { 
+                        $q->where('handle', $handle); 
+                    })->first()->id,
+                'postable_type' => $post::class,
+                'postable_id' => $post->id
+            ]);
+        }
     }
 
     public function mentionable(): MorphTo

@@ -67,7 +67,6 @@ class User extends Authenticatable implements FilamentUser
         ];
 
         protected $appends = [
-            'profile_photo_url'
         ];
 
     public function canAccessFilament(): bool
