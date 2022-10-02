@@ -13,18 +13,6 @@
             <x-library::heading.2>{{ Trans::get('Team Admin Panel') }}</x-library::heading.2>
 
             <div class="flex justify-end items-center">
-                <div class="mr-auto"
-                     x-data="{show: false}"
-                     x-show="show"
-                     x-transition:leave.opacity.duration.1500ms
-                     x-init="@this.on('changes_saved', () => {
-                show = true;
-                setTimeout(() => { show = false; }, 3000);
-            })"
-                     style="display: none;"
-                >
-                    <p class="text-sm opa text-green-600">{{ \Trans::get('Team info saved!') }}</p>
-                </div>
                 @if ($errors->any())
                     <div class="mr-auto">
                         <p class="text-sm text-red-600">{{ \Trans::get('This form has errors') }}:</p>
@@ -340,6 +328,19 @@
                 </div>
             </div>
 
+            <!-- Forms -->
+            <div x-cloak x-show="activeTab === 4" class="mt-6 pb-12 space-y-6">
+                <div>
+                    <livewire:social::pages.teams.forms :team="$team"/>
+                </div>
+            </div>
+
+            <!-- Subscriptions -->
+            <div x-cloak x-show="activeTab === 5" class="mt-6 pb-12 space-y-6">
+                <div>
+                    <livewire:billing::pages.admin-subscriptions :team="$team"/>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -347,7 +348,7 @@
     <script>
         function setup() {
             return {
-                activeTab: 0,
+                activeTab: 5,
                 tabs: [
                     {
                         id: 0,
@@ -367,6 +368,14 @@
                         id: 3,
                         title: 'Members',
                         // component: 'social::pages.teams.members'
+                    },
+                    {
+                        id: 4,
+                        title: 'Forms',
+                    },
+                    {
+                        id: 5,
+                        title: 'Subscriptions',
                     },
                 ]
             }

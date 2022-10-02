@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.30.1.
+ * Generated for Laravel 9.33.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1577,6 +1577,30 @@
                         $instance->terminate($input, $status);
         }
                     /**
+         * Register a callback to be invoked when the command lifecyle duration exceeds a given amount of time.
+         *
+         * @param \DateTimeInterface|\Carbon\CarbonInterval|float|int $threshold
+         * @param callable $handler
+         * @return void 
+         * @static 
+         */ 
+        public static function whenCommandLifecycleIsLongerThan($threshold, $handler)
+        {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
+                        /** @var \App\Console\Kernel $instance */
+                        $instance->whenCommandLifecycleIsLongerThan($threshold, $handler);
+        }
+                    /**
+         * When the command being handled started.
+         *
+         * @return \Illuminate\Support\Carbon|null 
+         * @static 
+         */ 
+        public static function commandStartedAt()
+        {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
+                        /** @var \App\Console\Kernel $instance */
+                        return $instance->commandStartedAt();
+        }
+                    /**
          * Register a Closure based command with the application.
          *
          * @param string $signature
@@ -2230,6 +2254,17 @@
                         return $instance->setRequest($request);
         }
                     /**
+         * Get the timebox instance used by the guard.
+         *
+         * @return \Illuminate\Support\Timebox 
+         * @static 
+         */ 
+        public static function getTimebox()
+        {
+                        /** @var \Illuminate\Auth\SessionGuard $instance */
+                        return $instance->getTimebox();
+        }
+                    /**
          * Determine if the current user is authenticated. If not, throw an exception.
          *
          * @return \App\Models\User 
@@ -2814,9 +2849,9 @@
             /**
      * 
      *
-     * @method static \Illuminate\Broadcasting\Broadcasters\Broadcaster channel(string $channel, callable|string  $callback, array $options = [])
+     * @method static \Illuminate\Broadcasting\Broadcasters\Broadcaster channel(string $channel, callable|string $callback, array $options = [])
      * @method static mixed auth(\Illuminate\Http\Request $request)
-     * @method static void resolveAuthenticatedUserUsing(Closure $callback)
+     * @method static void resolveAuthenticatedUserUsing(\Closure $callback)
      * @see \Illuminate\Contracts\Broadcasting\Factory
      */ 
         class Broadcast {
@@ -3468,6 +3503,18 @@
         {
                         /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
                         return $instance->hasDispatchedAfterResponse($command);
+        }
+                    /**
+         * Dispatch an empty job batch for testing.
+         *
+         * @param string $name
+         * @return \Illuminate\Bus\Batch 
+         * @static 
+         */ 
+        public static function dispatchFakeBatch($name = '')
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
+                        return $instance->dispatchFakeBatch($name);
         }
                     /**
          * Record the fake pending batch dispatch.
@@ -8401,7 +8448,6 @@
      * @method static void alwaysReplyTo(string $address, string|null $name = null)
      * @method static void alwaysReturnPath(string $address)
      * @method static void alwaysTo(string $address, string|null $name = null)
-     * @method static \Illuminate\Mail\PendingMail cc($users)
      * @method static \Illuminate\Mail\SentMessage|null plain(string $view, array $data, $callback)
      * @method static \Illuminate\Mail\SentMessage|null html(string $html, $callback)
      * @method static mixed laterOn(string $queue, \DateTimeInterface|\DateInterval|int $delay, \Illuminate\Contracts\Mail\Mailable|string|array $view)
@@ -8688,6 +8734,18 @@
         {
                         /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
                         return $instance->to($users);
+        }
+                    /**
+         * Begin the process of mailing a mailable class instance.
+         *
+         * @param mixed $users
+         * @return \Illuminate\Mail\PendingMail 
+         * @static 
+         */ 
+        public static function cc($users)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
+                        return $instance->cc($users);
         }
                     /**
          * Begin the process of mailing a mailable class instance.
@@ -11608,6 +11666,40 @@
                         return $instance->isFromTrustedProxy();
         }
                     /**
+         * Filter the given array of rules into an array of rules that are included in precognitive headers.
+         *
+         * @param array $rules
+         * @return array 
+         * @static 
+         */ 
+        public static function filterPrecognitiveRules($rules)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->filterPrecognitiveRules($rules);
+        }
+                    /**
+         * Determine if the request is attempting to be precognitive.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isAttemptingPrecognition()
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->isAttemptingPrecognition();
+        }
+                    /**
+         * Determine if the request is precognitive.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isPrecognitive()
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->isPrecognitive();
+        }
+                    /**
          * Determine if the request is sending JSON.
          *
          * @return bool 
@@ -12019,12 +12111,39 @@
                         return $instance->boolean($key, $default);
         }
                     /**
+         * Retrieve input as an integer value.
+         *
+         * @param string $key
+         * @param int $default
+         * @return int 
+         * @static 
+         */ 
+        public static function integer($key, $default = 0)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->integer($key, $default);
+        }
+                    /**
+         * Retrieve input as a float value.
+         *
+         * @param string $key
+         * @param float $default
+         * @return float 
+         * @static 
+         */ 
+        public static function float($key, $default = 0.0)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->float($key, $default);
+        }
+                    /**
          * Retrieve input from the request as a Carbon instance.
          *
          * @param string $key
          * @param string|null $format
          * @param string|null $tz
          * @return \Illuminate\Support\Carbon|null 
+         * @throws \Carbon\Exceptions\InvalidFormatException
          * @static 
          */ 
         public static function date($key, $format = null, $tz = null)
@@ -12035,9 +12154,10 @@
                     /**
          * Retrieve input from the request as an enum.
          *
+         * @template TEnum
          * @param string $key
-         * @param string $enumClass
-         * @return mixed|null 
+         * @param \Illuminate\Http\class-string<TEnum> $enumClass
+         * @return \Illuminate\Http\TEnum|null 
          * @static 
          */ 
         public static function enum($key, $enumClass)
@@ -13590,6 +13710,16 @@
         public static function morphUsingUuids()
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
                         \Illuminate\Database\Schema\MySqlBuilder::morphUsingUuids();
+        }
+                    /**
+         * Set the default morph key type for migrations to ULIDs.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function morphUsingUlids()
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        \Illuminate\Database\Schema\MySqlBuilder::morphUsingUlids();
         }
                     /**
          * Determine if the given table has a given column.
@@ -15723,6 +15853,18 @@
                         return $instance->setKeyResolver($keyResolver);
         }
                     /**
+         * Clone a new instance of the URL generator with a different encryption key resolver.
+         *
+         * @param callable $keyResolver
+         * @return \Illuminate\Routing\UrlGenerator 
+         * @static 
+         */ 
+        public static function withKeyResolver($keyResolver)
+        {
+                        /** @var \Illuminate\Routing\UrlGenerator $instance */
+                        return $instance->withKeyResolver($keyResolver);
+        }
+                    /**
          * Get the root controller namespace.
          *
          * @return string 
@@ -16935,7 +17077,444 @@
      
 }
 
-        namespace Jorenvh\Share { 
+        namespace Omniphx\Forrest\Providers\Laravel\Facades { 
+            /**
+     * 
+     *
+     * @method static string|array chatter(string $resource, array $options = [])
+     * @method static string|array tabs(string $resource, array $options = [])
+     * @method static string|array appMenu(string $resource, array $options = [])
+     * @method static string|array quickActions(string $resource, array $options = [])
+     * @method static string|array commerce(string $resource, array $options = [])
+     * @method static string|array wave(string $resource, array $options = [])
+     * @method static string|array exchange-connect(string $resource, array $options = [])
+     * @method static string|array analytics(string $resource, array $options = [])
+     * @method static string|array composite(string $resource, array $options = [])
+     * @method static string|array theme(string $resource, array $options = [])
+     * @method static string|array nouns(string $resource, array $options = [])
+     * @method static string|array recent(string $resource, array $options = [])
+     * @method static string|array licensing(string $resource, array $options = [])
+     * @method static string|array async-queries(string $resource, array $options = [])
+     * @method static string|array emailConnect(string $resource, array $options = [])
+     * @method static string|array compactLayouts(string $resource, array $options = [])
+     * @method static string|array flexiPage(string $resource, array $options = [])
+     * @method static string|array knowledgeManagement(string $resource, array $options = [])
+     * @method static string|array sobjects(string $resource, array $options = [])
+     * @method static string|array actions(string $resource, array $options = [])
+     * @method static string|array support(string $resource, array $options = [])
+     */ 
+        class Forrest {
+                    /**
+         * Call this method to redirect user to login page and initiate
+         * the Web Server OAuth Authentication Flow.
+         *
+         * @param null $loginURL
+         * @return \Illuminate\Http\RedirectResponse 
+         * @static 
+         */ 
+        public static function authenticate($url = null, $stateOptions = [])
+        {
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->authenticate($url, $stateOptions);
+        }
+                    /**
+         * When settings up your callback route, you will need to call this method to
+         * acquire an authorization token. This token will be used for the API requests.
+         *
+         * @return \Omniphx\Forrest\Interfaces\RedirectInterface 
+         * @static 
+         */ 
+        public static function callback()
+        {
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->callback();
+        }
+                    /**
+         * Refresh authentication token.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function refresh()
+        {
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        $instance->refresh();
+        }
+                    /**
+         * Revokes access token from Salesforce. Will not flush token from storage.
+         *
+         * @return \Psr\Http\Message\ResponseInterface 
+         * @static 
+         */ 
+        public static function revoke()
+        {
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->revoke();
+        }
+                    /**
+         * Try requesting token, if token expired try refreshing token.
+         *
+         * @param string $url
+         * @param array $options
+         * @return string|array 
+         * @static 
+         */ 
+        public static function request($url, $options)
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->request($url, $options);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setCredentials($credentials)
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->setCredentials($credentials);
+        }
+                    /**
+         * GET method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function get($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->get($path, $requestBody, $options);
+        }
+                    /**
+         * POST method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function post($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->post($path, $requestBody, $options);
+        }
+                    /**
+         * PUT method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function put($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->put($path, $requestBody, $options);
+        }
+                    /**
+         * DELETE method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function delete($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->delete($path, $requestBody, $options);
+        }
+                    /**
+         * HEAD method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function head($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->head($path, $requestBody, $options);
+        }
+                    /**
+         * PATCH method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function patch($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->patch($path, $requestBody, $options);
+        }
+                    /**
+         * Request that returns all currently supported versions.
+         * 
+         * Includes the verison, label and link to each version's root.
+         * Formats: json, xml
+         * Methods: get.
+         *
+         * @param array $options
+         * @return array $versions
+         * @static 
+         */ 
+        public static function versions($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->versions($options);
+        }
+                    /**
+         * Lists availabe resources for specified API version.
+         * 
+         * Includes resource name and URI.
+         * Formats: json, xml
+         * Methods: get.
+         *
+         * @param array $options
+         * @return array $resources
+         * @static 
+         */ 
+        public static function resources($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->resources($options);
+        }
+                    /**
+         * Returns information about the logged-in user.
+         *
+         * @param array
+         * @return array $identity
+         * @static 
+         */ 
+        public static function identity($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->identity($options);
+        }
+                    /**
+         * Lists information about organizational limits.
+         * 
+         * Available for API version 29.0 and later.
+         * Returns limits for daily API calls, Data storage, etc.
+         *
+         * @param array $options
+         * @return array $limits
+         * @static 
+         */ 
+        public static function limits($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->limits($options);
+        }
+                    /**
+         * Describes all global objects available in the organization.
+         *
+         * @param string $object_name
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function describe($object_name = null, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->describe($object_name, $options);
+        }
+                    /**
+         * Executes a specified SOQL query.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array $queryResults
+         * @static 
+         */ 
+        public static function query($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->query($query, $options);
+        }
+                    /**
+         * Calls next query.
+         *
+         * @param $nextUrl
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function next($nextUrl, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->next($nextUrl, $options);
+        }
+                    /**
+         * Details how Salesforce will process your query.
+         * 
+         * Available for API verison 30.0 or later.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array $queryExplain
+         * @static 
+         */ 
+        public static function queryExplain($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->queryExplain($query, $options);
+        }
+                    /**
+         * Executes a SOQL query, but will also returned records that have
+         * been deleted.
+         * 
+         * Available for API version 29.0 or later.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array $queryResults
+         * @static 
+         */ 
+        public static function queryAll($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->queryAll($query, $options);
+        }
+                    /**
+         * Executes the specified SOSL query.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function search($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->search($query, $options);
+        }
+                    /**
+         * Returns an ordered list of objects in the default global search
+         * scope of a logged-in user. Global search keeps track of which
+         * objects the user interacts with and how often and arranges the
+         * search results accordingly. Objects used most frequently appear
+         * at the top of the list.
+         *
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function scopeOrder($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->scopeOrder($options);
+        }
+                    /**
+         * Returns search result layout information for the objects in the query string.
+         *
+         * @param array $objectList
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function searchLayouts($objectList, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->searchLayouts($objectList, $options);
+        }
+                    /**
+         * Returns a list of Salesforce Knowledge articles whose titles match the user’s
+         * search query. Provides a shortcut to navigate directly to likely
+         * relevant articles, before the user performs a search.
+         * 
+         * Available for API version 30.0 or later.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function suggestedArticles($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->suggestedArticles($query, $options);
+        }
+                    /**
+         * Returns a list of suggested searches based on the user’s query string text
+         * matching searches that other users have performed in Salesforce Knowledge.
+         * 
+         * Available for API version 30.0 or later.
+         * 
+         * Tested this and can't get it to work. I think the request is set up correctly.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function suggestedQueries($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->suggestedQueries($query, $options);
+        }
+                    /**
+         * Request to a custom Apex REST endpoint.
+         *
+         * @param string $customURI
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function custom($customURI, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->custom($customURI, $options);
+        }
+                    /**
+         * Public accessor to the Guzzle Client Object.
+         *
+         * @return \Omniphx\Forrest\HttpClientInterface 
+         * @static 
+         */ 
+        public static function getClient()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->getClient();
+        }
+                    /**
+         * Accessor to get instance URL
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getInstanceURL()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->getInstanceURL();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getBaseUrl()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->getBaseUrl();
+        }
+         
+    }
+     
+}
+
+    namespace Jorenvh\Share { 
             /**
      * 
      *
@@ -17656,6 +18235,74 @@
         {            //Method inherited from \DebugBar\DebugBar         
                         /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
                         return $instance->offsetUnset($key);
+        }
+         
+    }
+     
+}
+
+    namespace BezhanSalleh\FilamentExceptions\Facades { 
+            /**
+     * 
+     *
+     * @see \BezhanSalleh\FilamentExceptions\FilamentExceptions
+     */ 
+        class FilamentExceptions {
+                    /**
+         * 
+         *
+         * @param \Throwable $exception
+         * @return void 
+         * @static 
+         */ 
+        public static function report($exception)
+        {
+                        \BezhanSalleh\FilamentExceptions\FilamentExceptions::report($exception);
+        }
+                    /**
+         * 
+         *
+         * @param \Throwable $exception
+         * @return void 
+         * @static 
+         */ 
+        public static function reportException($exception)
+        {
+                        /** @var \BezhanSalleh\FilamentExceptions\FilamentExceptions $instance */
+                        $instance->reportException($exception);
+        }
+                    /**
+         * Convert all items to string.
+         *
+         * @param $data
+         * @return array 
+         * @static 
+         */ 
+        public static function stringify($data)
+        {
+                        /** @var \BezhanSalleh\FilamentExceptions\FilamentExceptions $instance */
+                        return $instance->stringify($data);
+        }
+                    /**
+         * Store exception info to db.
+         *
+         * @param array $data
+         * @return bool 
+         * @static 
+         */ 
+        public static function store($data)
+        {
+                        /** @var \BezhanSalleh\FilamentExceptions\FilamentExceptions $instance */
+                        return $instance->store($data);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function formatFileName($fileName)
+        {
+                        return \BezhanSalleh\FilamentExceptions\FilamentExceptions::formatFileName($fileName);
         }
          
     }
@@ -18912,28 +19559,6 @@
         {            //Method inherited from \Nwidart\Modules\FileRepository         
                         /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
                         return $instance->find($name);
-        }
-                    /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function findByAlias($alias)
-        {            //Method inherited from \Nwidart\Modules\FileRepository         
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->findByAlias($alias);
-        }
-                    /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function findRequirements($name)
-        {            //Method inherited from \Nwidart\Modules\FileRepository         
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->findRequirements($name);
         }
                     /**
          * Find a specific module, if there return that, otherwise throw exception.
@@ -21181,6 +21806,18 @@
         public static function assertCanRenderTableColumn($name)
         {
                         return \Livewire\Testing\TestableLivewire::assertCanRenderTableColumn($name);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertCanNotRenderTableColumn()
+         * @param string $name
+         * @return static 
+         * @static 
+         */ 
+        public static function assertCanNotRenderTableColumn($name)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertCanNotRenderTableColumn($name);
         }
                     /**
          * 
@@ -25301,6 +25938,7 @@ namespace  {
                     }
             class Event extends \Illuminate\Support\Facades\Event {}
             class File extends \Illuminate\Support\Facades\File {}
+            class Forrest extends \Omniphx\Forrest\Providers\Laravel\Facades\Forrest {}
             class Gate extends \Illuminate\Support\Facades\Gate {}
             class Hash extends \Illuminate\Support\Facades\Hash {}
             class Http extends \Illuminate\Support\Facades\Http {}
@@ -25327,6 +25965,7 @@ namespace  {
             class Trans extends \App\Support\Platform\Facades\TranslateFacade {}
             class Visits extends \Awssat\Visits\Visits {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
+            class FilamentExceptions extends \BezhanSalleh\FilamentExceptions\Facades\FilamentExceptions {}
             class FilamentGoogleAnalytics extends \BezhanSalleh\FilamentGoogleAnalytics\Facades\FilamentGoogleAnalytics {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}

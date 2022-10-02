@@ -2,7 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 /* Themes */
-@import url('./themes/dark.css');
+/*@import url('./themes/dark.css');*/
 
 :root {
     --base-text-color: #050505;
@@ -15,7 +15,7 @@
     --neutral-dark: #6b7280;
     --neutral-hover: #eff0f2;
     --primary: white;
-    --secondary: #141414;
+    --secondary: #DB1D2E;
     --tertiary: #384263;
     --main-nav-active-text-color: var(--base-heading-color);
     --main-nav-active-text-color: var(--neutral);

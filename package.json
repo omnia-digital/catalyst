@@ -33,7 +33,6 @@
     "dependencies": {
         "@alpinejs/collapse": "^3.9.0",
         "@alpinejs/focus": "^3.10.2",
-        "@fortawesome/fontawesome-pro": "^6.2.0",
         "@headlessui/vue": "^1.4.1",
         "@heroicons/vue": "^1.0.5",
         "@ryangjchandler/alpine-clipboard": "^2.2.0",

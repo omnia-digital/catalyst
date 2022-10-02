@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HandleStripeConnectRefreshUrlController;
-use App\Http\Livewire\Notifications;
+use App\Http\Livewire\UserNotifications;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,7 +12,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/notifications', Notifications::class)->name('notifications');
+    Route::get('/notifications', UserNotifications::class)->name('notifications');
 });
 
 // Stripe Connect

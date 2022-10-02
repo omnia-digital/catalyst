@@ -44,10 +44,12 @@
             {{--                        </div>--}}
 
             <!-- Featured Section -->
-            <div class="mt-4 justify-center mx-auto max-w-post-card-max-w">
-                <x-library::heading.3>{{ Trans::get('Team Map') }}</x-library::heading.3>
-                <livewire:social::pages.teams.map class=""/>
-            </div>
+            @if(config('app.modules.social.map'))
+                <div class="mt-4 justify-center mx-auto max-w-post-card-max-w">
+                    <x-library::heading.3>{{ Trans::get('Team Map') }}</x-library::heading.3>
+                    <livewire:social::pages.teams.map class=""/>
+                </div>
+            @endif
             <div class="mt-4 mx-auto max-w-post-card-max-w">
                 <livewire:social::news-feed/>
             </div>

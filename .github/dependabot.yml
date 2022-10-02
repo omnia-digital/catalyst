@@ -1,0 +1,50 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+registries:
+  github-actions:
+    type: composer-repository
+    url: "github.com/omnia-digital/library"
+    password: ${{ secrets.GH_ACTIONS_TOKEN }}
+updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "Github Actions Dependency Update"
+      include: "scope"
+    labels:
+      - "github-actions"
+      - "dependencies"
+
+  # Maintain dependencies for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "Npm Dependency Update"
+      include: "scope"
+    labels:
+      - "npm"
+      - "dependencies"
+
+  # Maintain dependencies for Composer
+  - package-ecosystem: "composer"
+    directory: "/"
+    registries:
+      - omnia
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "Composer Dependency Update"
+      include: "scope"
+    labels:
+      - "composer"
+      - "php"
+      - "dependencies"
