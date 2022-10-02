@@ -105,7 +105,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
         array_push($allPermissions, ...$subscriptionPermissions);
 
-        $memberRoleDescription = "Members are a part of your Team and can see content inside the community";
+        $memberRoleDescription = "Members are a part of your Team and can see content inside the Team";
         //        if ($usingTeamMemberSubs) {
         //            $memberRoleDescription .= " (excluding 'sub-only' content)";
         //        }
@@ -144,7 +144,7 @@ class JetstreamServiceProvider extends ServiceProvider
             ...$allPermissions,
             'billing'
         ])
-                 ->description(\Trans::get("There can only be 1 Owner. The owner is the user that has their financial & billing accounts linked to this Team."));
+                 ->description(\Trans::get("There can only be 1 Owner. The owner is the user that has their financial & billing accounts linked to this Team"));
 
     }
 }
