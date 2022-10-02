@@ -25,12 +25,13 @@ class Mention extends Model
     public static function createManyFromHandle($handles, $type, $post)
     {
         foreach ($handles as $handle) {
-            Mention::create([
-                'mentionable_type' => $type,
-                'mentionable_id' => $type::findByHandle($handle)->id,
-                'postable_type' => $post::class,
-                'postable_id' => $post->id
-            ]);
+            !is_null($type::findByHandle($handle)) && 
+                Mention::create([
+                    'mentionable_type' => $type,
+                    'mentionable_id' => $type::findByHandle($handle)->id,
+                    'postable_type' => $post::class,
+                    'postable_id' => $post->id
+                ]);
         }
     }
 

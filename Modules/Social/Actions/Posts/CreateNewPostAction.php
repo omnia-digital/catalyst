@@ -90,22 +90,39 @@ class CreateNewPostAction
 
     private function replaceMentionsWithLinks($content)
     {
-        $content = preg_replace_callback(
+
+        $content = $this->replaceUserMentions($content);
+
+        $content = $this->replaceTeamMentions($content);
+
+        return $content;
+    }
+
+    private function replaceUserMentions($content)
+    {
+        return preg_replace_callback(
             Mention::USER_HANDLE_REGEX, 
             function ($matches) {
+                if (is_null(User::findByHandle($matches[1]))) return $matches[0];
+
                 return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.profile.show', $matches[1]) . "'>" . $matches[0] . "</a>";
             },
             $content
         );
+    }
 
-        $content = preg_replace_callback(
+    private function replaceTeamMentions($content)
+    {
+        return preg_replace_callback(
             Mention::TEAM_HANDLE_REGEX, 
             function ($matches) {
+                if (is_null(Team::findByHandle($matches[1]))) {
+                    return $matches[0];
+                }
+
                 return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.teams.show', $matches[1]) . "'>" . $matches[0] . "</a>";
             },
             $content
         );
-
-        return $content;
     }
 }
