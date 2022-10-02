@@ -20,8 +20,9 @@ use Modules\Social\Models\Post;
 use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
-use Modules\Subscriptions\Models\ChargentSubscription;
-use Modules\Subscriptions\Traits\WithChargentSubscriptions;
+use Modules\Billing\Models\Builders\CashierSubscriptionBuilder;
+use Modules\Billing\Models\ChargentSubscription;
+use Modules\Billing\Traits\WithChargentSubscriptions;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Wimil\Followers\Traits\Followable;
 
@@ -164,6 +165,18 @@ class User extends Authenticatable implements FilamentUser
     public static function findByEmail($email)
     {
         return User::where('email', $email)->first();
+    }
+
+    /**
+     * Begin creating a new subscription.
+     *
+     * @param  string  $name
+     * @param  string|string[]  $prices
+     * @return \Laravel\Cashier\SubscriptionBuilder
+     */
+    public function newSubscription($name, $prices = [])
+    {
+        return new CashierSubscriptionBuilder($this, $name, $prices);
     }
 
     /** @note We are not using this currently. Save for future when we want teams to create custom plans */

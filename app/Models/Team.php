@@ -7,9 +7,11 @@ use App\Traits\Tag\HasTeamTags;
 use App\Traits\Tag\HasTeamTypeTags;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Subscription;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
@@ -254,5 +256,15 @@ class Team extends JetstreamTeam implements HasMedia
     public function stripeConnectOnboardingCompleted(): bool
     {
         return (bool)$this->stripe_connect_onboarding_completed;
+    }
+
+    public function subscription(): BelongsTo
+    {
+        return $this->belongsTo(Subscription::class);
+    }
+
+    public function subscribersCount(): int
+    {
+        return Subscription::where('team_id', $this->id)->count();
     }
 }

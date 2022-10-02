@@ -68,6 +68,11 @@
                                         <p class="text-dark-text-color font-semibold text-lg">{{ $team->$item()->count() }}</p>
                                     </div>
                                 @endforeach
+
+                                <div>
+                                    <p class="text-light-text-color text-2xs">subscribers</p>
+                                    <p class="text-dark-text-color font-semibold text-lg">{{ number_format($team->subscribersCount()) }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -80,17 +85,17 @@
 
 
                 <!-- Team Relevence -->
-{{--                <div class="col-span-12">--}}
-{{--                    --}}{{-- <div>--}}
-{{--                        <div class="text-base-text-color font-semibold">--}}
-{{--                            <p class="text-sm">Is this team relevant to you?</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="mt-4 bg-white p-4">--}}
-{{--                            <p class="text-dark-text-color text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione consequuntur hic aperiam adipisci cupiditate repellat quibusdam molestias praesentium sunt velit! Totam illum vero deleniti, sint est illo atque sequi quo.</p>--}}
-{{--                        </div>--}}
-{{--                    </div> --}}
+                {{--                <div class="col-span-12">--}}
+                {{--                    --}}{{-- <div>--}}
+                {{--                        <div class="text-base-text-color font-semibold">--}}
+                {{--                            <p class="text-sm">Is this team relevant to you?</p>--}}
+                {{--                        </div>--}}
+                {{--                        <div class="mt-4 bg-white p-4">--}}
+                {{--                            <p class="text-dark-text-color text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione consequuntur hic aperiam adipisci cupiditate repellat quibusdam molestias praesentium sunt velit! Totam illum vero deleniti, sint est illo atque sequi quo.</p>--}}
+                {{--                        </div>--}}
+                {{--                    </div> --}}
 
-{{--                </div>--}}
+                {{--                </div>--}}
 
                 @if ($team->content)
                     <div class="card p-4 col-span-12">
