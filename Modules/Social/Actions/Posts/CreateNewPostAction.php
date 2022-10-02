@@ -70,30 +70,42 @@ class CreateNewPostAction
             'image'              => $options['image'] ?? null,
         ]);
 
-        $userMentions = $this->getUserMentions($content);
+        [$userMentions, $teamMentions] = $this->getAllMentions($content);
 
-        Mention::createManyFromHandle($userMentions, $post);
+        Mention::createManyFromHandle($userMentions, User::class, $post);
+        Mention::createManyFromHandle($teamMentions, Team::class, $post);
 
         return $post;
     }
 
-    private function getUserMentions($content)
+    private function getAllMentions($content)
     {
-        $mentions = array();
+        $userMentions = $teamMentions = array();
 
-        preg_match_all(Mention::USER_HANDLE_REGEX, $content, $mentions);
+        preg_match_all(Mention::USER_HANDLE_REGEX, $content, $userMentions);
+        preg_match_all(Mention::TEAM_HANDLE_REGEX, $content, $teamMentions);
 
-        return $mentions[1];
+        return [$userMentions[1], $teamMentions[1]];
     }
 
-    public function replaceMentionsWithLinks($content)
+    private function replaceMentionsWithLinks($content)
     {
-        return preg_replace_callback(
+        $content = preg_replace_callback(
             Mention::USER_HANDLE_REGEX, 
             function ($matches) {
                 return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.profile.show', $matches[1]) . "'>" . $matches[0] . "</a>";
             },
             $content
         );
+
+        $content = preg_replace_callback(
+            Mention::TEAM_HANDLE_REGEX, 
+            function ($matches) {
+                return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.teams.show', $matches[1]) . "'>" . $matches[0] . "</a>";
+            },
+            $content
+        );
+
+        return $content;
     }
 }

@@ -23,6 +23,7 @@ use Modules\Social\Traits\HasBookmarks;
 use Modules\Billing\Models\Builders\CashierSubscriptionBuilder;
 use Modules\Billing\Models\ChargentSubscription;
 use Modules\Billing\Traits\WithChargentSubscriptions;
+use Modules\Social\Traits\HasHandle;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Wimil\Followers\Traits\Followable;
 
@@ -35,7 +36,8 @@ class User extends Authenticatable implements FilamentUser
             HasFactory,
             HasBookmarks,
             Followable,
-            Awardable;
+            Awardable,
+            HasHandle;
         use HasTeams, JetstreamHasTeams {
             HasTeams::hasTeamRole insteadof JetstreamHasTeams;
             HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
@@ -165,6 +167,14 @@ class User extends Authenticatable implements FilamentUser
     public static function findByEmail($email)
     {
         return User::where('email', $email)->first();
+    }
+
+    public static function findByHandle($handle)
+    {
+        return User::with('profile')
+            ->whereHas('profile', function ($q) use ($handle) { 
+                $q->where('handle', $handle); 
+            })->first();
     }
 
     /**

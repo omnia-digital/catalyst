@@ -22,15 +22,12 @@ class Mention extends Model
         return \Modules\Social\Database\factories\MentionFactory::new();
     }
 
-    public static function createManyFromHandle($handles, $post)
+    public static function createManyFromHandle($handles, $type, $post)
     {
         foreach ($handles as $handle) {
             Mention::create([
-                'mentionable_type' => User::class,
-                'mentionable_id' => User::with('profile')
-                    ->whereHas('profile', function ($q) use ($handle) { 
-                        $q->where('handle', $handle); 
-                    })->first()->id,
+                'mentionable_type' => $type,
+                'mentionable_id' => $type::findByHandle($handle)->id,
                 'postable_type' => $post::class,
                 'postable_id' => $post->id
             ]);
