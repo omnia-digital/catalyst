@@ -274,4 +274,9 @@ class Team extends JetstreamTeam implements HasMedia
     {
         return Subscription::where('team_id', $this->id)->count();
     }
+
+    public function notify($value)
+    {
+        return $this->owner->notify($value);
+    }
 }

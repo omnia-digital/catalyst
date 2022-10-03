@@ -2,14 +2,14 @@
 
 namespace Modules\Social\Notifications;
 
-use App\Models\User;
+use App\Models\Team;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Modules\Social\Enums\PostType;
-use Modules\Social\Models\Post;
+use Modules\Social\Models\Mention;
 use Str;
 use Trans;
 
@@ -23,7 +23,7 @@ class SomeoneMentionedYouNotification extends Notification implements ShouldQueu
      * @return void
      */
     public function __construct(
-        private Post $post
+        private Mention $mention
     ) {
     }
 
@@ -35,7 +35,7 @@ class SomeoneMentionedYouNotification extends Notification implements ShouldQueu
      */
     public function via($notifiable)
     {
-        if ($notifiable->id === $this->post->user_id) {
+        if ($notifiable->id === $this->mention->postable->user_id) {
             return [];
         }
 
@@ -50,15 +50,20 @@ class SomeoneMentionedYouNotification extends Notification implements ShouldQueu
      */
     public function toArray($notifiable)
     {
-        $url = route('social.posts.show', $this->post);
-        $subtitle = $this->post->type === PostType::RESOURCE->value
-            ? Str::of($this->post->body)->stripTags()->limit(155)
-            : Str::of($this->post->body)->stripTags();
+        $url = route('social.posts.show', $this->mention->postable);
+
+        $message = $this->mention->mentionable::class === Team::class
+            ? Trans::get($this->mention->postable->user->name . ' mentioned your team, ' . $this->mention->mentionable->name . ' in their post')
+            : Trans::get($this->mention->postable->user->name . ' mentioned you in their post');
+
+        $subtitle = $this->mention->postable->type === PostType::RESOURCE->value
+            ? Str::of($this->mention->postable->body)->stripTags()->limit(155)
+            : Str::of($this->mention->postable->body)->stripTags();
 
         return NotificationCenter::make()
             ->icon('heroicon-o-user-group')
-            ->success(Trans::get($this->post->user->name . ' mentioned you in their post'))
-            ->image($this->post->user->profile_photo_url)
+            ->success($message)
+            ->image($this->mention->postable->user->profile_photo_url)
             ->subtitle($subtitle)
             ->actionLink($url)
             ->actionText('View')

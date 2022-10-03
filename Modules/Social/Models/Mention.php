@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Models;
 
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,7 +32,7 @@ class Mention extends Model
     protected static function booted()
     {
         static::created(function ($mention) {
-            $mention->mentionable->notify(new SomeoneMentionedYouNotification($mention->postable));
+            $mention->mentionable->notify(new SomeoneMentionedYouNotification($mention));
         });
     }
 
