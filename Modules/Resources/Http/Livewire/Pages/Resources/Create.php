@@ -7,7 +7,6 @@ use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
 use Phuclh\MediaManager\WithMediaManager;
-use Spatie\Tags\Tag as SpatieTag;
 
 class Create extends Component
 {
@@ -80,7 +79,7 @@ class Create extends Component
         $tags = array();
 
         foreach ($hashtags as $hashtag) {
-            $tags[] = SpatieTag::findOrCreateFromString($hashtag);
+            $tags[] = Tag::findOrCreateFromString($hashtag);
         }
 
         return $tags;

@@ -60,7 +60,7 @@ class CreateNewPostAction
 
         $post = $user->posts()->create([
             'type'               => $this->type,
-            'body'               => $this->replaceMentionsWithLinks($content),
+            'body'               => $this->processPostBody($content),
             'team_id'            => $options['team_id'] ?? null,
             'title'              => $options['title'] ?? null,
             'url'                => $options['url'] ?? null,
@@ -72,8 +72,8 @@ class CreateNewPostAction
 
         [$userMentions, $teamMentions] = $this->getAllMentions($content);
 
-        Mention::createManyFromHandle($userMentions, User::class, $post);
-        Mention::createManyFromHandle($teamMentions, Team::class, $post);
+        Mention::createManyFromHandles($userMentions, User::class, $post);
+        Mention::createManyFromHandles($teamMentions, Team::class, $post);
 
         return $post;
     }
@@ -88,7 +88,7 @@ class CreateNewPostAction
         return [$userMentions[1], $teamMentions[1]];
     }
 
-    private function replaceMentionsWithLinks($content)
+    private function processPostBody($content)
     {
 
         $content = $this->replaceUserMentions($content);

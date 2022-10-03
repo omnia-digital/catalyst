@@ -22,7 +22,7 @@ class Mention extends Model
         return \Modules\Social\Database\factories\MentionFactory::new();
     }
 
-    public static function createManyFromHandle($handles, $type, $post)
+    public static function createManyFromHandles($handles, $type, $post)
     {
         foreach ($handles as $handle) {
             !is_null($type::findByHandle($handle)) && 
