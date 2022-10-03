@@ -21,6 +21,7 @@ use Modules\Reviews\Traits\Reviewable;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Modules\Social\Traits\Awardable;
+use Modules\Social\Traits\HasHandle;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\MediaLibrary\HasMedia;
@@ -44,6 +45,7 @@ class Team extends JetstreamTeam implements HasMedia
         Reviewable,
         HasProfilePhoto,
         HasSlug,
+        HasHandle,
         HasLocation,
         HasTeamTypeTags,
         InteractsWithMedia;
@@ -107,6 +109,11 @@ class Team extends JetstreamTeam implements HasMedia
     public function getRouteKeyName()
     {
         return 'handle';
+    }
+
+    public static function findByHandle($handle)
+    {
+        return Team::where('handle', $handle)->first();
     }
 
     public function getThumbnailAttribute($value)

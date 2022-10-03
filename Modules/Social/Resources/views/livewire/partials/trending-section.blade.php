@@ -7,20 +7,20 @@
                 <ul role="list" class="">
                     @foreach ($posts as $post)
                         <li class="py-2 px-4 hover:bg-neutral-hover">
-                        <a href="{{ route('social.posts.show', ['post' => $post]) }}" class="flex justify-between">
-                            <div class="flex-1">
-                                <div class="font-bold">
-                                    <span wire:click.prevent.stop="showProfile('{{ $post->user->url() }}')" class="hover:underline">{{ $post->title ?? $post->user->name }}</span>
+                            <div wire:click.prevent.stop="showPost('{{ $post->id }}')" class="flex justify-between cursor-pointer">
+                                <div class="flex-1">
+                                    <div class="font-bold">
+                                        <span wire:click.prevent.stop="showProfile('{{ $post->user->url() }}')" class="hover:underline">{{ $post->title ?? $post->user->name }}</span>
+                                    </div>
+                                    <div class="line-clamp-2">
+                                        {!! $post->body !!}
+                                    </div>
                                 </div>
-                                <div class="line-clamp-2">
-                                    {!! $post->body !!}
+                                <div class="w-16 h-16">
+                                    <img class="rounded-lg flex-shrink-0 h-full object-cover" src="{{ $post->image ? $post->image : $post->user?->profile_photo_url }}" alt="{{
+                                    $post->user->name }}"/>
                                 </div>
                             </div>
-                            <div class="w-16 h-16">
-                                <img class="rounded-lg flex-shrink-0 h-full object-cover" src="{{ $post->image ? $post->image : $post->user?->profile_photo_url }}" alt="{{
-                                $post->user->name }}"/>
-                            </div>
-                        </a>
                         </li>
                     @endforeach
                 </ul>

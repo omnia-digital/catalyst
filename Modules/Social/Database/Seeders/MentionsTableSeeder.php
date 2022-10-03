@@ -4,8 +4,9 @@ namespace Modules\Social\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Social\Models\Mention;
 
-class SocialDatabaseSeeder extends Seeder
+class MentionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +17,8 @@ class SocialDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(PostsTableSeeder::class);
-        $this->call(BookmarksTableSeeder::class);
-        $this->call(MentionsTableSeeder::class);
+        Mention::truncate();
+
+        Mention::factory(15)->create();
     }
 }

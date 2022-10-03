@@ -28,6 +28,11 @@ class TrendingSection extends Component
         }
     }
 
+    public function showPost($postID)
+    {
+        return $this->redirectRoute('social.posts.show', $postID);
+    }
+
     public function showProfile($url) {
         return $this->redirect($url);
     }
