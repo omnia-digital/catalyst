@@ -231,7 +231,9 @@ class Team extends JetstreamTeam implements HasMedia
             return;
         }
 
-        return $this->users();
+        $owner = $this->users()->where('role_id', $teamOwnerRole->id)->first();
+
+        return $owner;
     }
 
     public function users()

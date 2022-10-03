@@ -61,6 +61,7 @@ class CreatePermissionTables extends Migration
                 ->references('id') // permission id
                 ->on($tableNames['permissions'])
                 ->onDelete('cascade');
+            $table->timestamps();
             if ($teams) {
                 $table->unsignedBigInteger($columnNames['team_foreign_key']);
                 $table->index($columnNames['team_foreign_key'], 'model_has_permissions_team_foreign_key_index');
@@ -85,6 +86,7 @@ class CreatePermissionTables extends Migration
                 ->references('id') // role id
                 ->on($tableNames['roles'])
                 ->onDelete('cascade');
+            $table->timestamps();
             if ($teams) {
                 $table->unsignedBigInteger($columnNames['team_foreign_key']);
                 $table->index($columnNames['team_foreign_key'], 'model_has_roles_team_foreign_key_index');
