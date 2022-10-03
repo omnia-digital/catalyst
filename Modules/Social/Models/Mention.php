@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Modules\Social\Notifications\SomeoneMentionedYouNotification;
 
 class Mention extends Model
 {
@@ -20,6 +21,18 @@ class Mention extends Model
     protected static function newFactory()
     {
         return \Modules\Social\Database\factories\MentionFactory::new();
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::created(function ($mention) {
+            $mention->mentionable->notify(new SomeoneMentionedYouNotification($mention->postable));
+        });
     }
 
     public static function createManyFromHandles($handles, $type, $post)
