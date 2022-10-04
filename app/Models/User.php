@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Team\HasTeams;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Filament\Models\Contracts\FilamentUser;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,7 +28,7 @@ use Modules\Social\Traits\HasHandle;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Wimil\Followers\Traits\Followable;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     {
         use HasApiTokens,
             TwoFactorAuthenticatable,

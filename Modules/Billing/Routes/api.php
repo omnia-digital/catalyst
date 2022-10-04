@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Modules\Billing\Models\SubscriptionType;
 
 /*
 |--------------------------------------------------------------------------
