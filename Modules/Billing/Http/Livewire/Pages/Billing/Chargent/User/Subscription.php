@@ -7,6 +7,7 @@ use Livewire\Component;
 use Modules\Billing\Actions\Salesforce\CreateContactObjectAction;
 use Modules\Billing\Actions\Salesforce\GetChargentOrderInfoAction;
 use Modules\Billing\Actions\Salesforce\StopRecurringBillingOnChargentOrderAction;
+use Modules\Billing\Actions\Salesforce\StopRecurringPaymentsOnChargentOrderAction;
 use Modules\Billing\Models\FormAssemblyForm;
 use Modules\Social\Http\Livewire\Pages\Subscription\Type;
 
@@ -28,9 +29,9 @@ class Subscription extends Component
         if ( ! $platformIsUsingChargentPaymentGateway || ! config('forrest.credentials.consumerKey')) {
 //            $this->redirect(route('social.home'));
         }
-        if (!$this->subscription) {
+        /* if (!$this->subscription) {
             return;
-        }
+        } */
 
         $this->subscriptionForm  = FormAssemblyForm::findBySlug('user-subscriptions');
         $this->paymentMethodForm = FormAssemblyForm::findBySlug('change-payment-method');

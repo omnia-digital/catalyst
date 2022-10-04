@@ -4,7 +4,7 @@ use Carbon\Carbon;
 use Modules\Billing\Models\ChargentSubscription;
 use Omniphx\Forrest\Providers\Laravel\Facades\Forrest;
 
-class StopRecurringPaymentsOnChargentOrderAction
+class StopRecurringBillingOnChargentOrderAction
 {
     /**
      * @param ChargentSubscription $subscription
