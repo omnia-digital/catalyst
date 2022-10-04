@@ -46,19 +46,19 @@
         </div>
 
         @if(\Platform::isModuleEnabled('games'))
-            <h2>Recommended YouTube Channels</h2>
-            <div class="space-y-6">
-                @foreach($youtubeFeeds as $youtubeFeed)
-                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>
-                @endforeach
-            </div>
+{{--            <h2>Recommended YouTube Channels</h2>--}}
+{{--            <div class="space-y-6">--}}
+{{--                @foreach($youtubeFeeds as $youtubeFeed)--}}
+{{--                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
 
-            <h2>Recommended Twitch Channels</h2>
-            <div class="space-y-6">
-                @foreach($twitchFeeds as $youtubeFeed)
-                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>
-                @endforeach
-            </div>
+{{--            <h2>Recommended Twitch Channels</h2>--}}
+{{--            <div class="space-y-6">--}}
+{{--                @foreach($twitchFeeds as $youtubeFeed)--}}
+{{--                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
         @endif
 
         <div>
