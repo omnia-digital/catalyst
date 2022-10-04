@@ -36,7 +36,7 @@ class OverviewNavigation extends Component
         $this->pageView = array_slice(explode('.', Route::currentRouteName()), -1)[0];
     }
 
-    public function getApplyButtonTextProperty()
+    public function applyButtonText()
     {
         return ((new GeneralSettings())?->teams_apply_button_text) ?? 'Apply';
     }
