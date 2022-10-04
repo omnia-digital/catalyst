@@ -41,13 +41,13 @@ class MainNavigationMenu extends Component
                 'module'  => 'social',
                 'current' => false
             ],
-//            [
-//                'label'   => 'Resources',
-//                'name'    => 'resources.home',
-//                'icon'    => 'heroicon-o-newspaper',
-//                'module'  => 'resources',
-//                'current' => false
-//            ],
+            [
+                'label'   => 'Resources',
+                'name'    => 'resources.home',
+                'icon'    => 'heroicon-o-newspaper',
+                'module'  => 'resources',
+                'current' => false
+            ],
             [
                 'label'   => 'Games',
                 'name'    => 'games.home',
