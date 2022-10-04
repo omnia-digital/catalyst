@@ -74,7 +74,7 @@
                     <button
                             class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-secondary text-white-text-color hover:opacity-75"
                             wire:click="applyToTeam"
-                    >{{ \Trans::get($this->applyButtonText) }}</button>
+                    >{{ \Trans::get($applyButtonText) }}</button>
                 @endcan
             @endif
         </div>
