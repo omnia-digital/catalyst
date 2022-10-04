@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Settings\BillingSettings;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 use Modules\Billing\Models\SubscriptionType;
@@ -45,6 +46,8 @@ class TeamPolicy
      */
     public function apply(User $user, Team $team)
     {
+        if(!(new BillingSettings())->user_subscriptions) return true;
+
         return in_array($user?->chargentSubscription?->type?->slug, SubscriptionType::pluck('slug')->toArray());
     }
 
@@ -56,6 +59,8 @@ class TeamPolicy
      */
     public function create(User $user)
     {
+        if(!(new BillingSettings())->user_subscriptions) return true;
+
         $subscriptions = SubscriptionType::whereNot('slug', 'cfan-ea-member')->pluck('slug')->toArray();
 
         return in_array($user->chargentSubscription?->type?->slug, $subscriptions)
