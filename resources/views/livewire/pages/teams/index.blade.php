@@ -15,9 +15,9 @@
     @if(count($categories))
         <div class="flex justify-between space-x-2 pt-4 mb-4">
             @foreach ($categories as $category)
-                <x-library::button.link :href="route('social.teams.home', ['lens' => str($category)->slug()->value()])" class="w-full h-16 {{ str($lens) == str($category)->slug()->value
-                            () ? 'border-secondary text-base-text-color' : 'text-base-text-color' }}">
-                    {{ $category }}
+                <x-library::button.link :href="route('social.teams.home', ['lens' => str($category['slug'])->slug()->value()])" class="w-full h-16 {{ str($lens) == str($category['slug'])->slug()
+                ->value() ? 'border-secondary text-base-text-color' : 'text-base-text-color' }}">
+                    {{ $category['name'] }}
                 </x-library::button.link>
             @endforeach
         </div>

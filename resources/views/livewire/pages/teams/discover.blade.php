@@ -92,8 +92,8 @@
 
                 <div class="flex justify-between space-x-2 py-4">
                     @foreach ($categories as $category)
-                        <x-library::button.link :href="route('social.teams.home', ['lens' => str($category)->slug()->value()])" class="w-full h-16 text-base-text-color">
-                            {{ $category }}
+                        <x-library::button.link :href="route('social.teams.home', ['lens' => $category['slug']])" class="w-full h-16 text-base-text-color">
+                            {{ $category['name'] }}
                         </x-library::button.link>
                     @endforeach
                 </div>
@@ -102,14 +102,14 @@
             @foreach($categories as $category)
                 <div>
                     <div class="flex items-center space-x-2">
-                        <x-library::heading.3 class="uppercase">{{ \Trans::get($category) }}</x-library::heading.3>
-                        <a href="{{ route('social.teams.home', ['tags[0]' => $category]) }}" class="text-gray-500 text-xs">View All</a>
+                        <x-library::heading.3 class="uppercase">{{ \Trans::get($category['name']) }}</x-library::heading.3>
+                        <a href="{{ route('social.teams.home', ['tags[0]' => $category['slug']]) }}" class="text-gray-500 text-xs">View All</a>
                     </div>
 
                     <div class="px-4 sm:px-6 md:px-0">
                         <div class="py-4">
                             <div class="col-span-2 grid grid-cols-4 gap-3">
-                                @foreach($curatedTeams->take(4) as $team)
+                                @foreach($this->getTeams($category['slug'])->take(4) as $team)
                                     <livewire:social::components.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>
                                 @endforeach
                             </div>
@@ -118,24 +118,24 @@
                 </div>
             @endforeach
         @endif
-        <div>
-            @if($curatedTeams->count())
-                <div class="flex items-center space-x-2">
-                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Curated') }}</x-library::heading.3>
-                    <a href="{{ route('social.teams.home', ['tags[0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>
-                </div>
+{{--        <div>--}}
+{{--            @if($curatedTeams->count())--}}
+{{--                <div class="flex items-center space-x-2">--}}
+{{--                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Curated') }}</x-library::heading.3>--}}
+{{--                    <a href="{{ route('social.teams.home', ['tags[0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>--}}
+{{--                </div>--}}
 
-                <div class="px-4 sm:px-6 md:px-0">
-                    <div class="py-4">
-                        <div class="col-span-2 grid grid-cols-4 gap-3">
-                            @foreach($curatedTeams->take(4) as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
+{{--                <div class="px-4 sm:px-6 md:px-0">--}}
+{{--                    <div class="py-4">--}}
+{{--                        <div class="col-span-2 grid grid-cols-4 gap-3">--}}
+{{--                            @foreach($curatedTeams->take(4) as $team)--}}
+{{--                                <livewire:social::components.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endif--}}
+{{--        </div>--}}
 
         {{--        <div>--}}
         {{--            <div class="flex items-center space-x-2">--}}
@@ -154,23 +154,23 @@
         {{--            </div>--}}
         {{--        </div>--}}
 
-        <div>
-            @if($popularIndiesTeams->count())
-                <div class="flex items-center space-x-2">
-                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Popular Upcoming') }}</x-library::heading.3>
-                    <a href="{{ route('social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">{{ \Trans::get('View All') }}</a>
-                </div>
+{{--        <div>--}}
+{{--            @if($popularIndiesTeams->count())--}}
+{{--                <div class="flex items-center space-x-2">--}}
+{{--                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Popular Upcoming') }}</x-library::heading.3>--}}
+{{--                    <a href="{{ route('social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">{{ \Trans::get('View All') }}</a>--}}
+{{--                </div>--}}
 
-                <div class="px-4 sm:px-6 md:px-0">
-                    <div class="py-4">
-                        <div class="col-span-2 grid grid-cols-5 gap-3">
-                            @foreach($popularIndiesTeams as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="popular-indies-team-{{ $team->id }}"/>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
+{{--                <div class="px-4 sm:px-6 md:px-0">--}}
+{{--                    <div class="py-4">--}}
+{{--                        <div class="col-span-2 grid grid-cols-5 gap-3">--}}
+{{--                            @foreach($popularIndiesTeams as $team)--}}
+{{--                                <livewire:social::components.team-card :team="$team" wire:key="popular-indies-team-{{ $team->id }}"/>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endif--}}
+{{--        </div>--}}
     </div>
 @endsection

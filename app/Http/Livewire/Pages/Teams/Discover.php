@@ -117,6 +117,22 @@ class Discover extends Component
         return (new GetTrendingTeamsAction)->execute();
     }
 
+    public function getTeams($category = null, $limit = 5)
+    {
+        $query = Team::query()
+            ->limit($limit)
+            ->withCount(['likes', 'users as members']);
+
+        if (!empty($category)) {
+            $query->withAnyTags([$category]);
+        }
+
+        $query->orderBy('likes_count', 'DESC')
+              ->get();
+
+        return $query;
+    }
+
     public function render()
     {
         return view('livewire.pages.teams.discover', [
