@@ -6,8 +6,9 @@
         <div class="col-span-12 lg:col-span-6 xl:col-span-6">
             {{--            <x-library::heading.3 class="pl-3 mb-4">Discussion</x-library::heading.3>--}}
             <div class="space-y-4">
-                <livewire:social::news-feed-editor :team="$team"/>
-
+                @if ($this->canViewTeamContent)
+                    <livewire:social::news-feed-editor :team="$team"/>
+                @endif
                 {{-- Featured --}}
                 @if ($team->sampleImages()->count())
                     <div class="col-span-12 bg-neutral">
@@ -29,7 +30,17 @@
                         </div>
                     </div>
                 @endif
-                <livewire:social::news-feed :team="$team"/>
+
+                @if ($this->canViewTeamContent)
+                    <livewire:social::news-feed :team="$team"/>
+                @else
+                    <div class="card p-1 col-span-12">
+                        <div class="py-28 px-12 flex flex-col justify-center items-center text-center">
+                            <x-heroicon-o-lock-closed class="w-20 h-20" />
+                            <p>{{ \Trans::get('You must join this team to view and participate in discussions.') }}</p>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -161,47 +172,50 @@
             </div>
         </div>
 
-
-        <livewire:reviews::create-review-modal :model="$team"/>
-        <livewire:media-manager :handleUploadProcess="false"/>
+        @if ($this->canViewTeamContent)
+            <livewire:reviews::create-review-modal :model="$team"/>
+            <livewire:media-manager :handleUploadProcess="false"/>
+        @endif
 
         {{-- Add Awards Modal --}}
-        <div>
-            <x-library::modal id="add-awards-modal" maxWidth="2xl">
-                <x-slot name="title">{{ \Trans::get('Add Awards') }}</x-slot>
-                <x-slot name="content">
-                    @if($userToAddAwardsTo)
-                        <div class="w-full flex flex-col">
-                            @forelse ($this->getRemainingAwards($userToAddAwardsTo) as $award)
-                                <div class="mr-4 mt-2 flex items-center">
-                                    <input type="checkbox" wire:model.defer="awardsToAdd" value="{{ $award->id }}" class="mr-2" name="award-item-{{ $award->id }}" id="award-item-{{ $award->id }}">
-                                    <label for="award-item-{{ $award->id }}" class="bg-primary p-2 flex flex-1 items-center">
-                                        <x-dynamic-component :component="$award->icon" class="h-4 w-4 mr-4"/>
-                                        <p>{{ ucfirst($award->name) }}</p>
-                                    </label>
-                                </div>
-                            @empty
-                                <div class="w-full px-4 py-2 text-sm bg-white p-2 flex items-center">
-                                    <p>{{ \Trans::get('No other awards are available') }}</p>
-                                </div>
-                            @endforelse
+        @if ($this->canViewTeamContent)
+            <div>
+                <x-library::modal id="add-awards-modal" maxWidth="2xl">
+                    <x-slot name="title">{{ \Trans::get('Add Awards') }}</x-slot>
+                    <x-slot name="content">
+                        @if($userToAddAwardsTo)
+                            <div class="w-full flex flex-col">
+                                @forelse ($this->getRemainingAwards($userToAddAwardsTo) as $award)
+                                    <div class="mr-4 mt-2 flex items-center">
+                                        <input type="checkbox" wire:model.defer="awardsToAdd" value="{{ $award->id }}" class="mr-2" name="award-item-{{ $award->id }}" id="award-item-{{ $award->id }}">
+                                        <label for="award-item-{{ $award->id }}" class="bg-primary p-2 flex flex-1 items-center">
+                                            <x-dynamic-component :component="$award->icon" class="h-4 w-4 mr-4"/>
+                                            <p>{{ ucfirst($award->name) }}</p>
+                                        </label>
+                                    </div>
+                                @empty
+                                    <div class="w-full px-4 py-2 text-sm bg-white p-2 flex items-center">
+                                        <p>{{ \Trans::get('No other awards are available') }}</p>
+                                    </div>
+                                @endforelse
 
-                        </div>
-                    @else
-                        <div class="w-full flex flex-col space-y-2">
-                            <div class="w-full bg-white h-4"></div>
-                            <div class="w-full bg-white h-4"></div>
-                            <div class="w-full bg-white h-4"></div>
-                            <div class="w-full bg-white h-4"></div>
-                        </div>
-                    @endif
-                </x-slot>
-                <x-slot name="actions">
-                    @if($userToAddAwardsTo)
-                        <x-library::button wire:click="addAward({{ $userToAddAwardsTo->id }})">{{ Trans::get('Add') }}</x-library::button>
-                    @endif
-                </x-slot>
-            </x-library::modal>
-        </div>
+                            </div>
+                        @else
+                            <div class="w-full flex flex-col space-y-2">
+                                <div class="w-full bg-white h-4"></div>
+                                <div class="w-full bg-white h-4"></div>
+                                <div class="w-full bg-white h-4"></div>
+                                <div class="w-full bg-white h-4"></div>
+                            </div>
+                        @endif
+                    </x-slot>
+                    <x-slot name="actions">
+                        @if($userToAddAwardsTo)
+                            <x-library::button wire:click="addAward({{ $userToAddAwardsTo->id }})">{{ Trans::get('Add') }}</x-library::button>
+                        @endif
+                    </x-slot>
+                </x-library::modal>
+            </div>
+        @endif
     </div>
 @endsection
