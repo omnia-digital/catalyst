@@ -15,7 +15,7 @@
                                class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
                                     {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
                                aria-current="page">
-                                <x-library::icons.icon name="{{ $item['icon'] }}" size="w-8 h-8 mr-1"/>
+                                <x-library::icons.icon name="{{ $item['icon'] }}" size="w-6 h-6 mr-1"/>
                                 <span>{{ $item['label'] }}</span>
                             </a>
                         @endif

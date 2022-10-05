@@ -113,7 +113,7 @@
                         <x-library::heading.3>{{ \Trans::get('About') }}</x-library::heading.3>
                         <div x-data="{readMore: false, longText: @js(strlen($team->content) > 410)}"
                              class="relative">
-                            <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden" :class="(longText && readMore) ? 'h-full max-h-96' : 'max-h-24'">{{ $team->content }}</p>
+                            <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden" :class="(longText && readMore) ? 'h-full max-h-96' : 'max-h-24'">{!! $team->content !!}</p>
                             <div x-show="longText && !readMore"
                                  class="bg-gradient-to-t from-white to-transparent absolute bottom-1 left-4 right-2 pt-8">
                                 <a class="block w-full text-right"

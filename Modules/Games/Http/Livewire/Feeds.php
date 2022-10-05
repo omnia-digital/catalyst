@@ -25,7 +25,7 @@ class Feeds extends Component
         $feeds->push(['','https://www.engadget.com/gaming']);
         $feeds->push(['','https://www.giantbomb.com/feeds/reviews/']);
         $feeds->push(['','http://nintendoeverything.com/feed']);
-        $feeds->push(['','http://rss.indiedb.com/headlines/feed/rss.xml']);
+        $feeds->push(['','http://rss.indiedb.com/news/feed/rss.xml']);
         $feeds->push(['','https://www.indieretronews.com/feeds/posts/default?alt=rss']);
         $feeds->push(['','https://indiecator.org/feed/']);
         $feeds->push(['','https://warpdoor.com/rss/']);

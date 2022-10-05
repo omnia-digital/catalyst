@@ -14,8 +14,8 @@
                 [
                     'label'   => 'Home',
                     'name'    => 'social.home',
-                    'icon'    => 'fa-duotone fa-house',
-//                    'icon'    => 'fa-duotone fa-house-chimney',
+                    'icon'    => 'fa-regular fa-house',
+//                    'icon'    => 'fa-regular fa-house-chimney',
 //                    'icon'    => 'heroicon-o-home',
                     'module'  => 'social',
                     'current' => false
@@ -23,17 +23,25 @@
                 [
                     'label'   => 'Discover',
                     'name'    => 'social.teams.discover',
-                    'icon'    => 'fa-duotone fa-telescope',
-//                    'icon'    => 'fa-duotone fa-earth-americas',
+                    'icon'    => 'fa-regular fa-telescope',
+//                    'icon'    => 'fa-regular fa-earth-americas',
 //                    'icon'    => 'heroicon-o-globe',
+                    'module'  => 'social',
+                    'current' => false
+                ],
+                [
+                    'label'   => \Trans::get('Teams'),
+                    'name'    => 'social.teams.home',
+                    'icon'    => 'fa-regular fa-users',
+//                    'icon'    => 'heroicon-o-briefcase',
                     'module'  => 'social',
                     'current' => false
                 ],
                 [
                     'label'   => \Trans::get('My Teams'),
                     'name'    => 'social.teams.my-teams',
-                    'icon'    => 'fa-duotone fa-users',
-//                    'icon'    => 'heroicon-o-briefcase',
+                    'icon'    => 'fa-regular fa-users',
+                    //                    'icon'    => 'heroicon-o-briefcase',
                     'module'  => 'social',
                     'current' => false
                 ],
@@ -50,9 +58,9 @@
 //                    'current' => false
 //                ],
                 [
-                    'label'   => \Trans::get('News Feeds'),
+                    'label'   => \Trans::get('News'),
                     'name'    => 'games.feeds',
-                    'icon'    => 'fa-duotone fa-rss',
+                    'icon'    => 'fa-regular fa-rss',
                     'module'  => 'games',
                     'current' => false
                 ],
@@ -65,7 +73,7 @@
                 [
                     'label'   => 'Resources',
                     'name'    => 'resources.home',
-                    'icon'    => 'fa-duotone fa-newspaper',
+                    'icon'    => 'fa-regular fa-newspaper',
 //                    'icon'    => 'fa-regular fa-newspaper',
 //                    'icon'    => 'heroicon-o-book-open',
                     'module'  => 'social',
@@ -74,7 +82,7 @@
                 [
                     'label'   => 'Bookmarks',
                     'name'    => 'social.bookmarks',
-                    'icon'    => 'fa-duotone fa-bookmark',
+                    'icon'    => 'fa-regular fa-bookmark',
 //                    'icon'    => 'heroicon-o-bookmark',
                     'module'  => 'social',
                     'current' => false
