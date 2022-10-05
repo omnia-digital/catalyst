@@ -25,7 +25,7 @@ class UserSubscriptionCheck
             return $next($request);
         }
 
-        return redirect()->route('social.subscription');
+        return redirect()->route('billing.chargent-billing');
 
     }
 }
