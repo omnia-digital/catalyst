@@ -177,8 +177,10 @@ trait WithTeamManagement
 
         $user->notify(new ApplicationAcceptedToTeamNotification($this->team, $user));
 
-        foreach ($this->team->users as $member) {
-            $member->notify(new NewMemberOfMyTeamNotification($this->team, $user));
+        $ownerAndAdmins = $this->team->admins->merge([$this->team->owner]);
+
+        foreach ($ownerAndAdmins as $admin) {
+            $admin->notify(new NewMemberOfMyTeamNotification($this->team, $user));
         }
         
         $this->success(Trans::get('Team member added!'));

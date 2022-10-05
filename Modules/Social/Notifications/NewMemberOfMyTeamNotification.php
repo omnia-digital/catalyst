@@ -34,8 +34,7 @@ class NewMemberOfMyTeamNotification extends Notification
      */
     public function via($notifiable)
     {
-        if (($notifiable->id === $this->team->owner->id) 
-            || ($notifiable->id === $this->newMember->id)) {
+        if ($notifiable->id === $this->newMember->id) {
             return [];
         }
 
@@ -54,7 +53,7 @@ class NewMemberOfMyTeamNotification extends Notification
 
         return NotificationCenter::make()
             ->icon('heroicon-o-user')
-            ->success(Trans::get($this->newMember->name . ' has been added to your team, ' . $this->team->name))
+            ->success(Trans::get($this->newMember->name . ' has been added to the team, ' . $this->team->name))
             ->image($this->newMember->profile_photo_url)
             ->actionLink($url)
             ->actionText('View')
