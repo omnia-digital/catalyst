@@ -12,6 +12,9 @@ class ManageTeamMembers extends Component
 
     public $team;
 
+    public $applicationsCount = 0;
+    public $invitationsCount = 0;
+
     protected $listeners = [
         'member_added' => '$refresh',
     ];
@@ -19,6 +22,8 @@ class ManageTeamMembers extends Component
     public function mount(Team $team)
     {
         $this->team = $team;
+        $this->applicationsCount = $this->team->teamApplications->count();
+        $this->invationsCount = $this->team->teamInvitations->count();
     }
 
     public function render()

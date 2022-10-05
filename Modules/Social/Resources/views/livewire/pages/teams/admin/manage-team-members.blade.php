@@ -7,13 +7,19 @@
             <nav class="flex items-center justify-between text-xs">
                 <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-6">
                     <template x-for="(tab, index) in membersTabs" :key="tab.id">
-                        <li class="pb-px">
+                        <li class="pb-px flex">
                             <a href="#"
                                class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-3 hover:border-dark-text-color focus:border-dark-text-color"
                                :class="(activeMembersTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
                                x-on:click.prevent="activeMembersTab = tab.id;"
                                x-text="tab.title"
                             ></a>
+                            <div x-show="tab.id == 1 && $wire.invitationsCount > 0">
+                                <span x-text="$wire.invitationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-secondary rounded-full"></span>
+                            </div>
+                            <div x-show="tab.id == 2 && $wire.applicationsCount > 0">
+                                <span x-text="$wire.applicationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-secondary rounded-full"></span>
+                            </div>
                         </li>
                     </template>
                 </ul>

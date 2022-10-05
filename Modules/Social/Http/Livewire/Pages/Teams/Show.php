@@ -23,6 +23,7 @@ class Show extends Component
     public $displayID = null;
 
     public ?User $userToAddAwardsTo;
+    public $applicationsCount = 0;
 
     public $awardsToAdd = [];
 
@@ -53,6 +54,14 @@ class Show extends Component
     ];
 
     protected $listeners = ['addUserAwards', 'modal-closed' => 'resetAwardsSelection'];
+
+    public function mount(Team $team)
+    {
+        $team->owner;
+        $this->displayUrl = $team->sampleImages()->first()->getFullUrl();
+        $this->displayID = $team->sampleImages()->first()->id;
+        $this->applicationsCount = $this->team->teamApplications->count();
+    }
 
     public function getPlacesProperty()
     {
@@ -131,13 +140,6 @@ class Show extends Component
     public function getCanViewTeamContentProperty()
     {
         return $this->isPublic || $this->isMember;
-    }
-
-    public function mount(Team $team)
-    {
-        $team->owner;
-        $this->displayUrl = $team->sampleImages()->first()->getFullUrl();
-        $this->displayID = $team->sampleImages()->first()->id;
     }
 
     public function render()

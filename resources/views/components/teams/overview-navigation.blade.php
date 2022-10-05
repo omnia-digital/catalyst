@@ -42,6 +42,12 @@
     </div>
     <div class="flex-1 flex pr-2 items-center justify-end">
         @can('update-team', $team)
+
+            <a x-show="$wire.applicationsCount > 0" class="flex items-center hover:underline" :href="route('social:team.admin')">
+                <p>{{ Trans::get('Pending Applications: ') }}</p>
+                <span x-text="$wire.applicationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-secondary rounded-full hover:no-underline"></span>
+            </a>
+
             <a href="{{ route('social.teams.admin', $team) }}" class="bg-neutral rounded-lg px-4 py-2 border border-secondary hidden md:block font-bold hover:underline mx-4
             whitespace-nowrap">{{
             \Trans::get('Admin Panel')
@@ -62,7 +68,7 @@
             </div>
         @endif
 
-            <x-teams.apply-button :team="$team"/>
+        <x-teams.apply-button :team="$team"/>
         {{-- Lists functionality not currently setup
         <div class="inline-flex items-center text-md">
             <button class="p-2 mx-[15px] inline-flex items-center text-sm rounded-full bg-primary"><x-heroicon-s-plus class="h-4 w-4" /></button>
