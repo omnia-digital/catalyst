@@ -1,5 +1,5 @@
 <nav {{ $attributes->merge(['class' => 'flex relative rounded-b']) }} x-data>
-    <div class="flex justify-between items-center w-full ml-32 relative z-10">
+    <div class="flex-1 justify-between items-center w-full ml-32 relative z-10">
         <div class="flex ml-auto md:ml-0">
             @foreach ($nav as $key => $item)
                 <a
@@ -40,7 +40,7 @@
             </x-library::dropdown>
         </div>
     </div>
-    <div class="flex pr-2 items-center">
+    <div class="flex-1 flex pr-2 items-center justify-end">
         @can('update-team', $team)
             <a href="{{ route('social.teams.admin', $team) }}" class="bg-neutral rounded-lg px-4 py-2 border border-secondary hidden md:block font-bold hover:underline mx-4
             whitespace-nowrap">{{
@@ -62,9 +62,7 @@
             </div>
         @endif
 
-        <div class="inline-flex items-center text-md relative">
             <x-teams.apply-button :team="$team"/>
-        </div>
         {{-- Lists functionality not currently setup
         <div class="inline-flex items-center text-md">
             <button class="p-2 mx-[15px] inline-flex items-center text-sm rounded-full bg-primary"><x-heroicon-s-plus class="h-4 w-4" /></button>
