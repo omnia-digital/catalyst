@@ -6,6 +6,7 @@ use App\Models\Award;
 use App\Models\Location;
 use App\Models\Team;
 use App\Models\User;
+use App\Settings\BillingSettings;
 use App\Traits\Team\WithTeamManagement;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
@@ -88,7 +89,7 @@ class Show extends Component
         $this->displayID = $media->id;
     }
 
-    
+
     public function resetAwardsSelection()
     {
         $this->reset('awardsToAdd');
@@ -103,7 +104,7 @@ class Show extends Component
     public function addAward(User $user)
     {
         $user->awards()->attach($this->awardsToAdd);
-        
+
         $this->dispatchBrowserEvent('notify', ['message' => 'Awards Added', 'type' => 'success']);
         $this->dispatchBrowserEvent('add-awards-modal',  ['type' => 'close']);
     }

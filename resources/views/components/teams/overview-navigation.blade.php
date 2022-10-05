@@ -48,6 +48,7 @@
             }}</a>
         @endcan
 
+        @if(\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
             <div>
                 @if(!auth()->user()->subscribed("team_$team->id"))
                     <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
@@ -59,6 +60,7 @@
                     </x-library::button>
                 @endif
             </div>
+        @endif
 
         <div class="inline-flex items-center text-md relative">
             @if ($team->teamApplications()->hasUser(auth()->id()))

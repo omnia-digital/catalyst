@@ -180,11 +180,11 @@
                                                 {{ auth()->user()->name }}
                                             </x-jet-dropdown-link>
 
-                                            @if ($this->isUsingStripe)
+                                            @if (\App\Support\Platform\Platform::isUsingStripe())
                                                 <x-jet-dropdown-link href="{{ route('billing.stripe-billing') }}">
                                                     {{ \Trans::get('Billing') }}
                                                 </x-jet-dropdown-link>
-                                            @elseif ($this->isUsingChargent && $this->isUsingUserSubscriptions)
+                                            @elseif (\App\Support\Platform\Platform::isUsingChargent() && \App\Support\Platform\Platform::isUsingUserSubscriptions())
                                                 <x-jet-dropdown-link href="{{ route('billing.chargent-billing') }}">
                                                     {{ \Trans::get('Billing') }}
                                                 </x-jet-dropdown-link>
