@@ -8,38 +8,35 @@
             <div class="space-y-4">
                 @if ($this->canViewTeamContent)
                     <livewire:social::news-feed-editor :team="$team"/>
-                @endif
-                {{-- Featured --}}
-                @if ($team->sampleImages()->count())
-                    <div class="col-span-12 bg-neutral">
-                        {{--                    <x-library::heading.4 class="ml-4 mt-1 uppercase" text-size="text-xs">Featured</x-library::heading.4>--}}
-                        <x-library::heading.3 class="pl-2">Featured</x-library::heading.3>
-                        <div class="flex flex-col">
-                            <div class="space-x-4 h-50 pt-2" style="scrollbar-width: thin;">
-                                <div class="flex space-x-2 rounded">
-                                    @foreach ($team->sampleImages()->take(3) as $media)
-                                        <div class="rounded-lg flex justify-center items-center relative cursor-pointer {{ ($media->id === $displayID) ? 'ring-2
+                    {{-- Featured --}}
+                    @if ($team->sampleImages()->count())
+                        <div class="col-span-12 bg-neutral">
+                            {{--                    <x-library::heading.4 class="ml-4 mt-1 uppercase" text-size="text-xs">Featured</x-library::heading.4>--}}
+                            <x-library::heading.3 class="pl-2">Featured</x-library::heading.3>
+                            <div class="flex flex-col">
+                                <div class="space-x-4 h-50 pt-2" style="scrollbar-width: thin;">
+                                    <div class="flex space-x-2 rounded">
+                                        @foreach ($team->sampleImages()->take(3) as $media)
+                                            <div class="rounded-lg flex justify-center items-center relative cursor-pointer {{ ($media->id === $displayID) ? 'ring-2
                             ring-neutral-dark'
                             : '' }}"
-                                             wire:click="setImage({{ $media->id }})">
-                                            {{ $media->img()->attributes(['class' => 'h-48 w-96 object-cover rounded-lg']) }}
-                                        </div>
-                                    @endforeach
+                                                 wire:click="setImage({{ $media->id }})">
+                                                {{ $media->img()->attributes(['class' => 'h-48 w-96 object-cover rounded-lg']) }}
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endif
-
-                @if ($this->canViewTeamContent)
+                    @endif
                     <livewire:social::news-feed :team="$team"/>
                 @else
                     <div class="card p-1 col-span-12">
                         <div class="py-28 px-12 flex flex-col justify-center items-center text-center">
-                            <x-heroicon-o-lock-closed class="w-20 h-20" />
+                            <x-heroicon-o-lock-closed class="w-20 h-20"/>
                             <p class="text-lg">{{ \Trans::get('You must be a member of this Team to view content and participate in discussions.') }}</p>
                             <div class="my-2">
-                            <x-teams.apply-button :team="$team"/>
+                                <x-teams.apply-button :team="$team"/>
                             </div>
                         </div>
                     </div>
