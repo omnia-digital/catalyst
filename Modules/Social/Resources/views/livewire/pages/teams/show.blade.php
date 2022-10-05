@@ -37,7 +37,8 @@
                     <div class="card p-1 col-span-12">
                         <div class="py-28 px-12 flex flex-col justify-center items-center text-center">
                             <x-heroicon-o-lock-closed class="w-20 h-20" />
-                            <p class="text-lg">{{ \Trans::get('You must join this team to view and participate in discussions.') }}</p>
+                            <p class="text-lg">{{ \Trans::get('You must be a member of this Team to view content and participate in discussions.') }}</p>
+                            <x-teams.apply-button :team="$team"/>
                         </div>
                     </div>
                 @endif

@@ -68,6 +68,16 @@ class Platform
         return (new GeneralSettings())->{$setting} === true;
     }
 
+    public static function getGeneralSetting($setting)
+    {
+        return (new GeneralSettings())->{$setting};
+    }
+
+    public static function applyButtonText()
+    {
+        return \Trans::get(self::getGeneralSetting('teams_apply_button_text') ?? 'Apply');
+    }
+
     //Billing Settings //
 
     public static function hasBillingSettingEnabled($setting)
