@@ -113,6 +113,25 @@ class Show extends Component
         return Award::whereNotIn('id', $user->awards()->pluck('awards.id')->toArray())->get();
     }
 
+    /**
+     * If we decide to allow the team owners to decide if their team is public
+     * or private then we can edit this method to account for that.
+     */
+    public function getIsPublicProperty()
+    {
+        return false;
+    }
+
+    public function getIsMemberProperty()
+    {
+        return $this->team->hasUser(auth()->user());
+    }
+
+    public function getCanViewTeamContentProperty()
+    {
+        return $this->isPublic || $this->isMember;
+    }
+
     public function mount(Team $team)
     {
         $team->owner;
