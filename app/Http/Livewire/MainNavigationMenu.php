@@ -22,21 +22,23 @@ class MainNavigationMenu extends Component
             [
                 'label'   => 'Community',
                 'name'    => 'social.home',
-                'icon'    => 'heroicon-o-home',
+                'icon'    => 'fa-duotone fa-house',
+//                'icon'    => 'heroicon-o-home',
                 'module'  => 'social',
                 'current' => false
             ],
             [
                 'label'   => 'Resources',
                 'name'    => 'resources.home',
-                'icon'    => 'heroicon-o-newspaper',
+                'icon'    => 'fa-duotone fa-newspaper',
+//                'icon'    => 'heroicon-o-newspaper',
                 'module'  => 'resources',
                 'current' => false
             ],
             [
                 'label'   => 'Games',
                 'name'    => 'games.home',
-                'icon'    => 'heroicon-o-newspaper',
+                'icon'    => 'fa-regular fa-gamepad-modern',
                 'module'  => 'games',
                 'current' => false
             ],

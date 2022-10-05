@@ -46,19 +46,19 @@
         </div>
 
         @if(\Platform::isModuleEnabled('games'))
-{{--            <h2>Recommended YouTube Channels</h2>--}}
-{{--            <div class="space-y-6">--}}
-{{--                @foreach($youtubeFeeds as $youtubeFeed)--}}
-{{--                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
+            {{--            <h2>Recommended YouTube Channels</h2>--}}
+            {{--            <div class="space-y-6">--}}
+            {{--                @foreach($youtubeFeeds as $youtubeFeed)--}}
+            {{--                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>--}}
+            {{--                @endforeach--}}
+            {{--            </div>--}}
 
-{{--            <h2>Recommended Twitch Channels</h2>--}}
-{{--            <div class="space-y-6">--}}
-{{--                @foreach($twitchFeeds as $youtubeFeed)--}}
-{{--                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
+            {{--            <h2>Recommended Twitch Channels</h2>--}}
+            {{--            <div class="space-y-6">--}}
+            {{--                @foreach($twitchFeeds as $youtubeFeed)--}}
+            {{--                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>--}}
+            {{--                @endforeach--}}
+            {{--            </div>--}}
         @endif
 
         <div>
@@ -83,8 +83,8 @@
             @endif
         </div>
 
-        <div>
-            @if(count($categories))
+        @if(count($categories))
+            <div>
                 <div class="flex items-center space-x-2">
                     <x-library::heading.3 class="uppercase">{{ \Trans::get('Categories') }} ({{ count($categories) }})</x-library::heading.3>
                     <a href="{{ route('social.teams.home') }}" class="text-gray-500 text-xs">{{ Trans::get('View All Teams') }}</a>
@@ -97,9 +97,27 @@
                         </x-library::button.link>
                     @endforeach
                 </div>
-            @endif
-        </div>
+            </div>
 
+            @foreach($categories as $category)
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <x-library::heading.3 class="uppercase">{{ \Trans::get($category) }}</x-library::heading.3>
+                        <a href="{{ route('social.teams.home', ['tags[0]' => $category]) }}" class="text-gray-500 text-xs">View All</a>
+                    </div>
+
+                    <div class="px-4 sm:px-6 md:px-0">
+                        <div class="py-4">
+                            <div class="col-span-2 grid grid-cols-4 gap-3">
+                                @foreach($curatedTeams->take(4) as $team)
+                                    <livewire:social::components.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @endif
         <div>
             @if($curatedTeams->count())
                 <div class="flex items-center space-x-2">

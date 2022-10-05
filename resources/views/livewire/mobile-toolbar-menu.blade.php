@@ -2,19 +2,20 @@
     <div class="fixed bottom-0 bg-white z-[70] w-full px-4">
         <div class="flex justify-around">
             @foreach (collect($navigation)->take(4) as $item)
-                <a href="{{ route($item['name']) }}"
-                   class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color hover:text-white-text-color' }} {{
+                @if(\Platform::isModuleEnabled($item['module']))
+                    <a href="{{ route($item['name']) }}"
+                       class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color hover:text-white-text-color' }} {{
                                'group text-center
                                text-base-text-color py-3' }}">
-                    <div class="text-xs font-medium text-center py-0 leading-2">
-                        <x-dynamic-component :component="$item['icon']"
-                                             class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color group-hover:text-light-text-color' }} flex-shrink-0 h-8 w-8
-                                             inline text-center" aria-hidden="true"/>
-                        <br/>
-                        <span class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color group-hover:text-light-text-color' }} text-center inline"
-                        >{{ $item['label'] }}</span>
-                    </div>
-                </a>
+                        <div class="text-xs font-medium text-center py-0 leading-2">
+                            <x-library::icons.icon name="{{ $item['icon'] }}" size="w-8 h-8" class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color
+                        group-hover:text-light-text-color' }} inline text-center"/>
+                            <br/>
+                            <span class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color group-hover:text-light-text-color' }} text-center inline"
+                            >{{ $item['label'] }}</span>
+                        </div>
+                    </a>
+                @endif
             @endforeach
         </div>
     </div>

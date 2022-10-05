@@ -18,10 +18,7 @@
                                 @endif
                             </div>
                         @else
-                            <x-dynamic-component
-                                    component="heroicon-s-globe-alt"
-                                    class="flex-shrink-0 h-6 w-6"
-                                    aria-hidden="true"/>
+                            <x-library::icons.icon name="fa-duotone fa-earth-americas" size="w-6 h-6"/>
                             <span class="whitespace-nowrap">{{ env('APP_NAME') }}</span>
                         @endif
                     </a>
@@ -50,11 +47,7 @@
                             @foreach ($navigation as $item)
                                 @if(\Platform::isModuleEnabled($item['module']))
                                     <x-main-nav-link href="{{ route($item['name']) }}" :active="request()->route()->named($item['module'] . '*')">
-                                        <x-dynamic-component
-                                                :component="$item['icon']"
-                                                class="flex-shrink-0 h-6 w-6 mr-2"
-                                                aria-hidden="true"
-                                        />
+                                        <x-library::icons.icon :name="$item['icon']" class="w-6 h-6 mr-2"/>
                                         {{ $item['label'] }}
                                     </x-main-nav-link>
                                 @endif

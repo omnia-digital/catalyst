@@ -14,19 +14,27 @@
                 [
                     'label'   => 'Home',
                     'name'    => 'social.home',
-                    'icon'    => 'heroicon-o-home',
+                    'icon'    => 'fa-duotone fa-house',
+//                    'icon'    => 'fa-duotone fa-house-chimney',
+//                    'icon'    => 'heroicon-o-home',
+                    'module'  => 'social',
                     'current' => false
                 ],
                 [
                     'label'   => 'Discover',
                     'name'    => 'social.teams.discover',
-                    'icon'    => 'heroicon-o-globe',
+                    'icon'    => 'fa-duotone fa-telescope',
+//                    'icon'    => 'fa-duotone fa-earth-americas',
+//                    'icon'    => 'heroicon-o-globe',
+                    'module'  => 'social',
                     'current' => false
                 ],
                 [
                     'label'   => \Trans::get('My Teams'),
                     'name'    => 'social.teams.my-teams',
-                    'icon'    => 'heroicon-o-briefcase',
+                    'icon'    => 'fa-duotone fa-users',
+//                    'icon'    => 'heroicon-o-briefcase',
+                    'module'  => 'social',
                     'current' => false
                 ],
 //                [
@@ -41,12 +49,13 @@
 //                    'icon'    => 'heroicon-o-briefcase',
 //                    'current' => false
 //                ],
-//                [
-//                    'label'   => \Trans::get('News'),
-//                    'name'    => 'games.feeds',
-//                    'icon'    => 'x-fas-cloud',
-//                    'current' => false
-//                ],
+                [
+                    'label'   => \Trans::get('News Feeds'),
+                    'name'    => 'games.feeds',
+                    'icon'    => 'fa-duotone fa-rss',
+                    'module'  => 'games',
+                    'current' => false
+                ],
 //                [
 //                    'label'   => 'Trending Posts',
 //                    'name'    => 'social.discover',
@@ -56,13 +65,18 @@
                 [
                     'label'   => 'Resources',
                     'name'    => 'resources.home',
-                    'icon'    => 'heroicon-o-book-open',
+                    'icon'    => 'fa-duotone fa-newspaper',
+//                    'icon'    => 'fa-regular fa-newspaper',
+//                    'icon'    => 'heroicon-o-book-open',
+                    'module'  => 'social',
                     'current' => false
                 ],
                 [
                     'label'   => 'Bookmarks',
                     'name'    => 'social.bookmarks',
-                    'icon'    => 'heroicon-o-bookmark',
+                    'icon'    => 'fa-duotone fa-bookmark',
+//                    'icon'    => 'heroicon-o-bookmark',
+                    'module'  => 'social',
                     'current' => false
                 ],
 //                [
