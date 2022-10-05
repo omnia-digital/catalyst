@@ -3,6 +3,7 @@
 namespace Modules\Billing\Http\Livewire\Pages\Billing\Chargent\User;
 
 use App\Settings\BillingSettings;
+use App\Support\Platform\Platform;
 use Livewire\Component;
 use Modules\Billing\Actions\Salesforce\CreateContactObjectAction;
 use Modules\Billing\Actions\Salesforce\GetChargentOrderInfoAction;
@@ -25,7 +26,7 @@ class Subscription extends Component
 
     public function mount()
     {
-        $platformIsUsingChargentPaymentGateway = (new BillingSettings())->payment_gateway == 'chargent';
+        $platformIsUsingChargentPaymentGateway = Platform::isUsingPaymentGateway('chargent');
         if ( ! $platformIsUsingChargentPaymentGateway || ! config('forrest.credentials.consumerKey')) {
 //            $this->redirect(route('social.home'));
         }

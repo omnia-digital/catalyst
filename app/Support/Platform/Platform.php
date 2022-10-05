@@ -6,6 +6,8 @@ namespace App\Support\Platform;
 
 
 
+use App\Settings\BillingSettings;
+use App\Settings\GeneralSettings;
 use Nwidart\Modules\Facades\Module;
 
 class Platform
@@ -57,5 +59,49 @@ class Platform
         $newWordString = rtrim($newWordString);
 
         return __($newWordString);
+    }
+
+    // General Settings //
+
+    public static function hasGeneralSettingEnabled($setting)
+    {
+        return (new GeneralSettings())->{$setting} === true;
+    }
+
+    //Billing Settings //
+
+    public static function hasBillingSettingEnabled($setting)
+    {
+        return (new BillingSettings())->{$setting} === true;
+    }
+
+    public static function isUsingUserSubscriptions()
+    {
+        return self::hasBillingSettingEnabled('user_subscriptions');
+    }
+
+    public static function isUsingTeamSubscriptions()
+    {
+        return self::hasBillingSettingEnabled('team_subscriptions');
+    }
+
+    public static function isUsingTeamMemberSubscriptions()
+    {
+        return self::hasBillingSettingEnabled('team_member_subscriptions');
+    }
+
+    public static function isUsingPaymentGateway($gateway) : bool
+    {
+        return (new BillingSettings())->payment_gateway == $gateway;
+    }
+
+    public static function isUsingStripe() : bool
+    {
+        return self::isUsingPaymentGateway('stripe');
+    }
+
+    public static function isUsingChargent() : bool
+    {
+        return self::isUsingPaymentGateway('chargent');
     }
 }

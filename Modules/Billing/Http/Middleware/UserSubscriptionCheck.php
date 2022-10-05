@@ -3,6 +3,7 @@
 namespace Modules\Billing\Http\Middleware;
 
 use App\Settings\BillingSettings;
+use App\Support\Platform\Platform;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class UserSubscriptionCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!(new BillingSettings())->user_subscriptions) {
+        if (!Platform::isUsingUserSubscriptions()) {
             return $next($request);
         }
 

@@ -3,6 +3,7 @@
 namespace App\View\Components\Teams;
 
 use App\Models\Team;
+use App\Settings\BillingSettings;
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
