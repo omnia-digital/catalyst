@@ -8,7 +8,7 @@ return [
         'plans' => [
             [
                 'name' => 'Basic',
-                'stripe_id' => 'price_1LgbhLHrjW9mNEkbUXYaSUFV',
+                'stripe_id' => env('STRIPE_BASIC_PLAN_ID'),
                 'price' => 29.99,
                 'description' => 'Just a basic plan',
                 'features' => [
@@ -20,7 +20,7 @@ return [
             ],
             [
                 'name' => 'Premium',
-                'stripe_id' => 'price_1LgbhLHrjW9mNEkbLKo7f1tr',
+                'stripe_id' => env('STRIPE_PREMIUM_PLAN_ID'),
                 'price' => 59.99,
                 'description' => 'Just a premium plan',
                 'features' => [
