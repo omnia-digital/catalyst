@@ -225,7 +225,7 @@
                         </div>
                         <div class="flex-col">
                             <x-library::input.label value="Start Date"/>
-                            <x-library::input.date id="startDate" wire:model.defer="team.start_date" placeholder="Team Launch Date"/>
+                            <x-library::input.date id="startDate" wire:model.defer="team.start_date" placeholder="{{ Trans::get('Team Launch Date') }}"/>
                             <x-library::input.error for="startDate"/>
                         </div>
                         <div class="flex-col">
