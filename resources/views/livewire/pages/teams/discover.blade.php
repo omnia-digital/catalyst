@@ -21,17 +21,19 @@
 
 @section('content')
     <div class="mt-6 space-y-8">
-        {{-- Featured Teams --}}
-        <div>
-            <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured Teams') }}</x-library::heading.3>
-            <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
-                @forelse ($featuredTeams->take(4) as $team)
-                    <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
-                @empty
-                    <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Featured Teams Found') }}</p>
-                @endforelse
+        @if(!empty($featuredTeams) && $featuredTeams->count() > 0)
+            {{-- Featured Teams --}}
+            <div>
+                <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured Teams') }}</x-library::heading.3>
+                <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
+                    @forelse ($featuredTeams->take(4) as $team)
+                        <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                    @empty
+                        <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Featured Teams Found') }}</p>
+                    @endforelse
+                </div>
             </div>
-        </div>
+        @endif
 
         {{-- New Teams --}}
         <div>
@@ -118,24 +120,24 @@
                 </div>
             @endforeach
         @endif
-{{--        <div>--}}
-{{--            @if($curatedTeams->count())--}}
-{{--                <div class="flex items-center space-x-2">--}}
-{{--                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Curated') }}</x-library::heading.3>--}}
-{{--                    <a href="{{ route('social.teams.home', ['tags[0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>--}}
-{{--                </div>--}}
+        {{--        <div>--}}
+        {{--            @if($curatedTeams->count())--}}
+        {{--                <div class="flex items-center space-x-2">--}}
+        {{--                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Curated') }}</x-library::heading.3>--}}
+        {{--                    <a href="{{ route('social.teams.home', ['tags[0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>--}}
+        {{--                </div>--}}
 
-{{--                <div class="px-4 sm:px-6 md:px-0">--}}
-{{--                    <div class="py-4">--}}
-{{--                        <div class="col-span-2 grid grid-cols-4 gap-3">--}}
-{{--                            @foreach($curatedTeams->take(4) as $team)--}}
-{{--                                <livewire:social::components.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>--}}
-{{--                            @endforeach--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            @endif--}}
-{{--        </div>--}}
+        {{--                <div class="px-4 sm:px-6 md:px-0">--}}
+        {{--                    <div class="py-4">--}}
+        {{--                        <div class="col-span-2 grid grid-cols-4 gap-3">--}}
+        {{--                            @foreach($curatedTeams->take(4) as $team)--}}
+        {{--                                <livewire:social::components.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>--}}
+        {{--                            @endforeach--}}
+        {{--                        </div>--}}
+        {{--                    </div>--}}
+        {{--                </div>--}}
+        {{--            @endif--}}
+        {{--        </div>--}}
 
         {{--        <div>--}}
         {{--            <div class="flex items-center space-x-2">--}}
@@ -154,23 +156,23 @@
         {{--            </div>--}}
         {{--        </div>--}}
 
-{{--        <div>--}}
-{{--            @if($popularIndiesTeams->count())--}}
-{{--                <div class="flex items-center space-x-2">--}}
-{{--                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Popular Upcoming') }}</x-library::heading.3>--}}
-{{--                    <a href="{{ route('social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">{{ \Trans::get('View All') }}</a>--}}
-{{--                </div>--}}
+        {{--        <div>--}}
+        {{--            @if($popularIndiesTeams->count())--}}
+        {{--                <div class="flex items-center space-x-2">--}}
+        {{--                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Popular Upcoming') }}</x-library::heading.3>--}}
+        {{--                    <a href="{{ route('social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">{{ \Trans::get('View All') }}</a>--}}
+        {{--                </div>--}}
 
-{{--                <div class="px-4 sm:px-6 md:px-0">--}}
-{{--                    <div class="py-4">--}}
-{{--                        <div class="col-span-2 grid grid-cols-5 gap-3">--}}
-{{--                            @foreach($popularIndiesTeams as $team)--}}
-{{--                                <livewire:social::components.team-card :team="$team" wire:key="popular-indies-team-{{ $team->id }}"/>--}}
-{{--                            @endforeach--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            @endif--}}
-{{--        </div>--}}
+        {{--                <div class="px-4 sm:px-6 md:px-0">--}}
+        {{--                    <div class="py-4">--}}
+        {{--                        <div class="col-span-2 grid grid-cols-5 gap-3">--}}
+        {{--                            @foreach($popularIndiesTeams as $team)--}}
+        {{--                                <livewire:social::components.team-card :team="$team" wire:key="popular-indies-team-{{ $team->id }}"/>--}}
+        {{--                            @endforeach--}}
+        {{--                        </div>--}}
+        {{--                    </div>--}}
+        {{--                </div>--}}
+        {{--            @endif--}}
+        {{--        </div>--}}
     </div>
 @endsection
