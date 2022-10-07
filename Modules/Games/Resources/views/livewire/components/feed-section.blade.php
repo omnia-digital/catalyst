@@ -3,8 +3,9 @@
         <div class="space-y-2">
             <div>
                 <div class="">
+                    @if($showTitle)
                     <h2 class="mb-0">
-                        <div class="px-5 py-1">
+                        <div class="py-1">
                             <div>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-6">
@@ -18,12 +19,14 @@
                                             @endif
                                         @endif
 
-                                        <div>
-                                        <a href="{{ $feed->get_link() }}" target="_blank" class="flex items-center text-neutral-dark space-x-2 hover:underline">
-                                            <x-library::heading.2 class="text-heading-default-color uppercase tracking-wide font-semibold">{{ $feed->get_title() }}</x-library::heading.2>
-                                        </a>
-                                            <p>{{ $feed->get_description() }}</p>
-                                        </div>
+                                        @if($showDescription)
+                                            <div>
+                                            <a href="{{ $feed->get_link() }}" target="_blank" class="flex items-center text-neutral-dark space-x-2 hover:underline">
+                                                <x-library::heading.2 class="text-heading-default-color uppercase tracking-wide font-semibold">{{ $feed->get_title() }}</x-library::heading.2>
+                                            </a>
+                                                <p>{{ $feed->get_description() }}</p>
+                                            </div>
+                                        @endif
 
 
                                     </div>
@@ -32,11 +35,20 @@
                                     {{--                                        <span>Follow</span>--}}
                                     {{--                                    </button>--}}
                                     {{--                                </div>--}}
+
+                                    @if($showLinkToNewsPage)
+                                        <div>
+                                            <a href="{{ route('games.feeds') }}" target="_self" class="flex items-center text-neutral-dark space-x-2 hover:underline">
+                                                <p class="text-heading-default-color uppercase tracking-wide font-semibold">{{ Trans::get('See more News') }}</p>
+                                            </a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </h2>
-                    <div class="md:py-1 md:px-5">
+                    @endif
+                    <div class="md:py-1">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4">
                             @foreach($feed->get_items(0,4) as $item)
                                 {{-- @if(!empty($item->get_thumbnail()) || !empty($item->get_media())) --}}

@@ -19,6 +19,9 @@ class FeedSection extends Component
     public bool $loaded = false;
     public string $feedUrl;
     public string $type;
+    public bool $showTitle = true;
+    public bool $showDescription = true;
+    public bool $showLinkToNewsPage = false;
 
     public function ready()
     {

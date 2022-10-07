@@ -29,6 +29,13 @@
 {{--                {{ $recommendedTeams }}--}}
             </div>
 
+            <div class="my-4">
+                <x-library::heading.3>{{ Trans::get('Latest Gaming News') }}</x-library::heading.3>
+                @foreach($newsRssFeeds->take(1) as $newsFeed)
+                    <livewire:games::components.feed-section :type="$newsFeed[0]" :feed-url="$newsFeed[1]" :show-description="false" :show-link-to-news-page="true"/>
+                @endforeach
+            </div>
+
             <div class="mx-auto max-w-post-card-max-w">
                 <livewire:social::news-feed-editor/>
             </div>
