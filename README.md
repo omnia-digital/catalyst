@@ -19,7 +19,7 @@ The Platform Framework is a web application framework designed to make it easy t
 
 ## Platform Framework Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Platform Framework development. If you are interested in becoming a sponsor, please contact us at Omnia Digital [Omnia Digital Website](https://omniadigital.io).
+We would like to extend our thanks to the following sponsors for funding Platform Framework development. If you are interested in becoming a sponsor, please contact us at [Omnia Digital](https://omniadigital.io).
 
 ### Premium Partners
 
