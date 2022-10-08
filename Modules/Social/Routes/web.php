@@ -10,6 +10,7 @@ use Modules\Social\Http\Livewire\Pages\Contacts\Index as ContactsIndex;
 use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
 use Modules\Social\Http\Livewire\Pages\Posts\Trending as DiscoverIndex;
 use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
+use Modules\Social\Http\Livewire\Pages\Profiles\Teams as ProfileTeams;
 use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
 use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
@@ -43,6 +44,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subsc
         Route::get('{profile}/media', ProfileMedia::class)->name('media');
         Route::get('{profile}/followers', ProfileFollowers::class)->name('followers');
         Route::get('{profile}/awards', ProfileAwards::class)->name('awards');
+        Route::get('{profile}/teams', ProfileTeams::class)->name('teams');
     });
 
     Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {
