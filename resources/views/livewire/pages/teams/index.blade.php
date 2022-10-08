@@ -3,10 +3,8 @@
 @section('content')
     <div class="sticky top-[55px] z-40 rounded-b-lg pl-4 flex items-center bg-secondary items-center">
         <a href="{{ route('social.teams.home', []) }}">
-            <div class="flex-1 flex items-center">
-                <x-dynamic-component component="heroicon-o-briefcase"
-                                     class="{{ 'text-primary' }} mr-3 flex-shrink-0 h-8 w-8"
-                                     aria-hidden="true"/>
+            <div class="flex-1 flex items-center space-x-2 -ml-1">
+                <x-library::icons.icon name="fa-regular fa-users" size="w-8 h-8" color="text-white-text-color"/>
                 <x-library::heading.1 class="py-4" text-color="text-white-text-color">{{ $lens ? Trans::get('Teams') : Trans::get('All Teams') }}
                 </x-library::heading.1>
             </div>

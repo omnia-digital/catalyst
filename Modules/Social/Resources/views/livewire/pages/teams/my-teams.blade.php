@@ -18,7 +18,7 @@
             </x-library::button.index>
         @endcan
     </div>
-    <div>
+    <div class="px-4 sm:px-2 lg:px-0">
         <!-- Filters -->
         @include('livewire.partials.filters', ['skipFilters' => ['has_attachment', 'members']])
 
@@ -34,6 +34,7 @@
         </div>
         <livewire:create-team-modal/>
     </div>
+
     {{-- Create Team button --}}
     @can('create', \App\Models\Team::class)
         <div class="sm:hidden fixed bottom-16 right-4 h-16 mb-2 w-16 z-[999]">
