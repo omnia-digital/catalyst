@@ -48,8 +48,8 @@
                         </div>
                     </h2>
                     @endif
-                    <div class="px-4 sm:px-2 lg:px-0 md:py-1">
-                        <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
+                    <div class="">
+                        <div class="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mt-4">
                             @foreach($feed->get_items(0,4) as $item)
                                 {{-- @if(!empty($item->get_thumbnail()) || !empty($item->get_media())) --}}
                                 <a href="{{ $item->get_link() }}" target="_blank">

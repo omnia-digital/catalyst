@@ -1,8 +1,41 @@
+@props([
+    'name' => 'name',
+    'size' => 'w-6 h-6',
+    'bgColor' => 'secondary',
+    'bgColorHover' => 'secondary-dark',
+    'textColor' => 'text-white-text-color',
+    'textSize' => 'text-sm',
+    'boldClass' => 'font-medium',
+    'rounded' => 'rounded-md',
+    'border' => 'border border-transparent',
+    'px' => 'px-4',
+    'py' => 'py-2',
+    'shadow' => 'shadow-sm',
+    'class' => '',
+])
+
+@php
+    $classString = 'inline-flex items-center justify-center focus:outline-none ';
+    if ($class) {
+        $classString .= $class . ' ';
+    }
+    $classString .= 'bg-'.$bgColor . ' ';
+    $classString .= 'hover:bg-'.$bgColorHover . ' ';
+    $classString .= $textColor . ' ';
+    $classString .= $textSize . ' ';
+    $classString .= $boldClass . ' ';
+    $classString .= $rounded . ' ';
+    $classString .= $border . ' ';
+    $classString .= $px . ' ';
+    $classString .= $py . ' ';
+    $classString .= $shadow . ' ';
+    $classString .= $size . ' ';
+
+@endphp
+
 <button wire:loading.attr="disabled"
-        wire:loading.class.remove="bg-secondary hover:bg-secondary-dark focus:ring-secondary"
-        wire:loading.class="bg-gray-500 cursor-not-allowed"
-        {{ $attributes->merge(['type' => 'button', 'class' => 'inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white
-        bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary']) }}
+        wire:loading.class="cursor-not-allowed"
+        {{ $attributes->merge(['class' => $classString, 'type' => 'button']) }}
 >
     <div>
         <span wire:loading {{ $attributes->only('wire:target') }}>Loading...</span>
