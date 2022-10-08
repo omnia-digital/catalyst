@@ -24,7 +24,7 @@
 
         <!-- Teams -->
         <div class="mt-2">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-0 lg:grid-cols-4">
+            <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
                 @forelse ($teams as $team)
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
