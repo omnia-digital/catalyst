@@ -1,4 +1,4 @@
-@extends('resources::livewire.layouts.pages.default-page-layout')
+@extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
     @empty($resource)
@@ -23,7 +23,7 @@
                 @endif
                 <div class="px-6">
                     <div class="flex mt-6 px-4e">
-                        <x-library::heading.3 class="text-dark-text-color text-4xl hover:underline font-bold">{{ $resource->title }}</x-library::heading.3>
+                        <x-library::heading.3 class="text-2xl text-dark-text-color sm:text-4xl hover:underline font-bold">{{ $resource->title }}</x-library::heading.3>
                         @empty(!$resource->is_verified)
                             <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
                         @endempty
