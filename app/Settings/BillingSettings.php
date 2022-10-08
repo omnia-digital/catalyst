@@ -14,6 +14,8 @@ class BillingSettings extends Settings
 
     public ?string $user_subscription_form;
 
+    public ?float $application_fee_percent;
+
     public static function group(): string
     {
         return 'billing';
