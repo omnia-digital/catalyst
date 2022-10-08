@@ -5,7 +5,8 @@
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\Billing\\Providers\\BillingServiceProvider"
+        "Modules\\Billing\\Providers\\BillingServiceProvider",
+        "Modules\\Billing\\Providers\\EventServiceProvider"
     ],
     "aliases": {},
     "files": [],

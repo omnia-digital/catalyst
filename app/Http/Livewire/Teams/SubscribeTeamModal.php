@@ -4,8 +4,10 @@ namespace App\Http\Livewire\Teams;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Settings\BillingSettings;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Modules\Billing\Events\TeamMemberSubscriptionCreatedEvent;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
@@ -29,7 +31,7 @@ class SubscribeTeamModal extends Component
 
     public function getTeamPlansProperty()
     {
-        return config('billing.team_member_subscriptionsplans');
+        return config('billing.team_member_subscriptions.plans');
     }
 
     public function subscribeTeam()
@@ -56,15 +58,17 @@ class SubscribeTeamModal extends Component
             return;
         }
 
-        $this->billable
+        $subscription = $this->billable
             ->newSubscription('team_' . $this->team->id, $this->plan)
             ->teamId($this->team->id)
             ->create(subscriptionOptions: [
-                'application_fee_percent' => config('billing.team_member_subscriptionsapplication_fee_percent'),
+                'application_fee_percent' => (new BillingSettings)->application_fee_percent,
                 'transfer_data' => [
                     'destination' => $this->team->stripe_connect_id,
                 ],
             ]);
+
+        event(new TeamMemberSubscriptionCreatedEvent($subscription, $this->billable, $this->team));
 
         $this->success('Subscribed!');
         $this->closeModal('subscribe-team');
