@@ -13,7 +13,7 @@
                     <x-library::heading.1 class="text-center uppercase" text-size="text-5xl">{{ Trans::get('Resources') }}</x-library::heading.1>
                     <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">Find and create resources, articles, guides, and more.</p>
                     <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
-                        <div class="justify-center w-full flex w-1/3">
+                        <div class="justify-center w-full flex md:w-1/2 lg:w-1/3">
                             <x-library::button x-data="" class="py-2 w-full h-10 bg-primary text-base-text-color" x-on:click.prevent.stop="$openModal('add-resource-modal')">
                                 + New Resource
                             </x-library::button>
@@ -27,7 +27,7 @@
     @include('livewire.partials.filters', ['skipFilters' => ['members', 'location', 'tags']])
 
     <div class="">
-        <div class="masonry sm:masonry-2">
+        <div class="masonry sm:masonry-1 md:masonry-2">
             @forelse($resources as $resource)
                 <div class="w-full break-inside mb-3">
                     <div class="">

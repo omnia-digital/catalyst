@@ -9,15 +9,15 @@
                 <x-slot:trigger class=" hover:cursor-pointer text-base-text-color hover:text-secondary">
                     {{ $sortLabels[$orderBy] }}
                     <i class="fa-solid fa-caret-down ml-1"></i>
-                </x-slot>
-                @foreach ($sortLabels as $key => $item)
-                    <x-library::dropdown.item class="bg-primary border-none" wire:click.prevent="sortBy('{{ $key }}')">{{ $item }}</x-library::dropdown.item>
+                    </x-slot>
+                    @foreach ($sortLabels as $key => $item)
+                        <x-library::dropdown.item class="bg-primary border-none" wire:click.prevent="sortBy('{{ $key }}')">{{ $item }}</x-library::dropdown.item>
                 @endforeach
             </x-library::dropdown.index>
             @if ($sortOrder === 'asc')
-                <x-heroicon-o-arrow-narrow-up class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-secondary" wire:click.prevent="toggleSortOrder()" />
+                <x-heroicon-o-arrow-narrow-up class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-secondary" wire:click.prevent="toggleSortOrder()"/>
             @else
-                <x-heroicon-o-arrow-narrow-down class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-secondary" wire:click.prevent="toggleSortOrder()" />
+                <x-heroicon-o-arrow-narrow-down class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-secondary" wire:click.prevent="toggleSortOrder()"/>
             @endif
         </div>
         <div class="flex-1 min-w-0 bg-primary p-2 rounded-lg">
@@ -26,35 +26,38 @@
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
                     </div>
-                    <x-library::input.text type="search" wire:model.debounce.500ms="search" placeholder="Search..." class="px-4 block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"/>
+                    <x-library::input.text type="search" wire:model.debounce.500ms="search" placeholder="Search..."
+                                           class="px-4 block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"/>
                 </div>
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-1 gap-4 bg-primary px-6 py-2 rounded-lg mb-6 border-t border-b border-gray-100 md:flex md:flex-wrap md:items-center">
-        <div class="font-bold">
-            {{ Trans::get('Filters') }}
-        </div>
-
-        @unless(in_array('location', $skipFilters))
-            <div class="min-w-[110px] flex-1">
-                <x-library::input.text wire:model.debounce.450ms="filters.location" placeholder="{{ Trans::get('Location') }}"/>
+    <div class="flex justify-between gap-3 flex-wrap bg-primary px-6 py-2 rounded-lg mb-6 border-t border-b border-gray-100 items-center">
+        <div class="flex justify-start items-center space-x-3">
+            <div class="font-bold">
+                {{ Trans::get('Filters') }}
             </div>
-        @endunless
-
-        @unless(in_array('date', $skipFilters))
-            <div class="min-w-[110px] flex-1 relative">
-                <x-library::input.date class="pl-8" wire:model="dateFilter" placeholder="{{ ($this->dateColumn === 'created_at' || $this->dateColumn === 'published_at') ? Trans::get('Date Created') : Trans::get('Launch Date') }}"/>
-                <div class="absolute top-0 flex items-center h-full ml-3">
-                    <x-heroicon-o-calendar class="w-4 text-dark-text-color" />
+            @unless(in_array('location', $skipFilters))
+                <div class="sm:min-w-[110px]">
+                    <x-library::input.text wire:model.debounce.450ms="filters.location" placeholder="{{ Trans::get('Location') }}"/>
                 </div>
-            </div>
-        @endunless
+            @endunless
+
+            @unless(in_array('date', $skipFilters))
+                <div class="sm:min-w-[110px]  relative">
+                    <x-library::input.date class="pl-8" wire:model="dateFilter"
+                                           placeholder="{{ ($this->dateColumn === 'created_at' || $this->dateColumn === 'published_at') ? Trans::get('Date Created') : Trans::get('Launch Date') }}"/>
+                    <div class="absolute top-0 flex items-center h-full ml-3">
+                        <x-heroicon-o-calendar class="w-4 text-dark-text-color"/>
+                    </div>
+                </div>
+            @endunless
+        </div>
 
         @unless(in_array('tags', $skipFilters))
-        <div class="min-w-[135px] flex-1">
-            <x-library::input.selects wire:model="tags" :options="$this->allTags" placeholder="Search by Tags"/>
-        </div>
+            <div class="min-w-[135px]">
+                <x-library::input.selects wire:model="tags" :options="$this->allTags" placeholder="Search by Tags"/>
+            </div>
         @endunless
 
         @unless(in_array('members', $skipFilters))
