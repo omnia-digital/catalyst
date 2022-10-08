@@ -82,7 +82,17 @@ class Platform
 
     public static function hasBillingSettingEnabled($setting)
     {
-        return (new BillingSettings())->{$setting} === true;
+        return (new BillingSettings())?->{$setting} === true;
+    }
+
+    public static function getBillingSetting($setting)
+    {
+        return (new BillingSettings())?->{$setting};
+    }
+
+    public function getAppFee()
+    {
+        return self::getBillingSetting('application_fee_percent') ?? config('billing.team_member_subscriptions.application_fee_percent');
     }
 
     public static function isUsingUserSubscriptions()

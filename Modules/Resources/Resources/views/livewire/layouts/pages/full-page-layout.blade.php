@@ -1,4 +1,4 @@
-@extends('resources::livewire.layouts.main-layout')
+@extends('social::livewire.layouts.main-layout')
 
 
 @section('page-layout')

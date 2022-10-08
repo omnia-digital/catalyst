@@ -4,7 +4,7 @@ return [
     'name' => 'Billing',
 
     'team_member_subscriptions' => [
-        'application_fee_percent' => 10,
+        'application_fee_percent' => env('APPLICATION_FEE_PERCENT',10),
         'plans'                   => [
             [
                 'name'        => 'Tier 1 Subscriber',

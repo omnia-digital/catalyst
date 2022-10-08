@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Teams;
 use App\Models\Team;
 use App\Models\User;
 use App\Settings\BillingSettings;
+use App\Support\Platform\Platform;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Modules\Billing\Events\TeamMemberSubscriptionCreatedEvent;
@@ -62,7 +63,7 @@ class SubscribeTeamModal extends Component
             ->newSubscription('team_' . $this->team->id, $this->plan)
             ->teamId($this->team->id)
             ->create(subscriptionOptions: [
-                'application_fee_percent' => (new BillingSettings)->application_fee_percent,
+                'application_fee_percent' => Platform::getAppFee(),
                 'transfer_data' => [
                     'destination' => $this->team->stripe_connect_id,
                 ],
