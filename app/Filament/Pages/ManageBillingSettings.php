@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Settings\BillingSettings;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
 use Illuminate\Support\Arr;
@@ -28,15 +29,20 @@ class ManageBillingSettings extends SettingsPage
                 ->label('Use User Subscriptions?')
                 ->inline(false),
             Toggle::make('team_subscriptions')
-                  ->label('Use Team Subscriptions?')
-                  ->inline(false),
+                ->label('Use Team Subscriptions?')
+                ->inline(false),
             Toggle::make('team_member_subscriptions')
-                  ->label('Use Team Member Subscriptions?')
-                  ->inline(false),
+                ->label('Use Team Member Subscriptions?')
+                ->inline(false),
             Select::make('user_subscription_form')
                 ->label('User Subscription Form')
                 ->options(FormAssemblyForm::pluck('name', 'slug')->toArray())
                 ->disablePlaceholderSelection(),
+            TextInput::make('application_fee_percent')
+                ->label('Application Fee Percent')
+                ->numeric()
+                ->minValue(1)
+                ->maxValue(100),
         ];
     }
 }
