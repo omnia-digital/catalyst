@@ -139,7 +139,7 @@
             </div>
 
             <div class="flex justify-end items-center">
-                <x-library::button wire:click="submit" wire:target="submit" class="py-1 px-3 text-base">
+                <x-library::button wire:click="submit" wire:target="submit">
                     {{ $submitButtonText }}
                 </x-library::button>
             </div>

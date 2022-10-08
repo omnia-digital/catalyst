@@ -1,6 +1,6 @@
 @props([
     'name' => 'name',
-    'size' => 'w-6 h-6',
+    'size' => '',
     'bgColor' => 'secondary',
     'bgColorHover' => 'secondary-dark',
     'textColor' => 'text-white-text-color',
@@ -34,7 +34,8 @@
 @endphp
 
 <button wire:loading.attr="disabled"
-        wire:loading.class="cursor-not-allowed"
+        wire:loading.class="bg-neutral-dark cursor-not-allowed"
+        wire:loading.class.remove="bg-{{$bgColor}} hover:bg-{{ $bgColorHover }} focus:ring-{{$bgColor}} text"
         {{ $attributes->merge(['class' => $classString, 'type' => 'button']) }}
 >
     <div>
