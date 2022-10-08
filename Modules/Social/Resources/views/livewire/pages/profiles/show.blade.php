@@ -2,8 +2,8 @@
 
 @section('content')
     <x-profiles.partials.header :user="$this->user"/>
-    <div class="mt-6 grid grid-cols-6 xl:grid-cols-12 gap-6">
-        <div class="col-span-6 sm:col-span-3 xl:col-span-3 space-y-4">
+    <div class="mt-6 grid grid-cols-6 xl:grid-cols-12 gap-6 px-6">
+        <div class="col-span-6 md:col-span-3 xl:col-span-3 space-y-4">
             <div class="p-4 rounded bg-primary text-base-text-color">
                 <div class="flex justify-start text-sm space-x-4">
                     @isset ($profile->website)
@@ -17,7 +17,7 @@
             </div>
 
             <!-- Profile Awards -->
-            <div class="hidden sm:block">
+            <div class="block">
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
                     <p class="text-sm">{{ \Trans::get('Awards') }}</p>
                     @if($this->user->awards()->count())
@@ -59,11 +59,11 @@
 {{--            </div>--}}
 
             {{-- Teams --}}
-            <div class="hidden sm:block xl:hidden">
+            <div class="block xl:hidden">
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
                     <p class="text-sm">{{ \Trans::get('Teams') }}</p>
                     @if($this->user->teams()->count())
-                        <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
+                        <a href="{{ route('social.profile.teams', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                         </a>
                     @endif
@@ -110,7 +110,7 @@
             </div> --}}
 
         </div>
-        <div class="hidden sm:block sm:col-span-3 xl:col-span-5 mr-4 xl:mr-0">
+        <div class="block col-span-6 md:col-span-3 xl:col-span-5 mr-4 xl:mr-0">
             <!-- User Posts -->
             <x-social::user-posts :posts="$this->user->posts"/>
         </div>
@@ -120,7 +120,7 @@
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
                     <p class="text-sm">{{ \Trans::get('Teams') }}</p>
                     @if($this->user->teams()->count())
-                        <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
+                        <a href="{{ route('social.profile.teams', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                         </a>
                     @endif

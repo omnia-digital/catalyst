@@ -1,7 +1,12 @@
-<div>
+<div
+    x-data="{
+        activeTab: 0,
+        tabs: ['Posts'{{-- , 'Likes', 'Resources' --}}]   
+    }" 
+>
     <!-- Posts Nav -->
     <div>
-        <div class="sm:hidden">
+        {{-- <div class="sm:hidden">
             <label for="tabs" class="sr-only">Select a tab</label>
             <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
             <select id="tabs" name="tabs" class="block w-full pl-3 pr-10 pb-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
@@ -16,38 +21,28 @@
 
                 <option>Disqualified</option>
             </select>
-        </div>
+        </div> --}}
         <div class="hidden sm:block">
             <div class="border-b border-gray-200">
-                <nav class="-mb-px flex text-lg font-bold text-neutral-dark" aria-label="Tabs">
-                    <a href="#" class="border-transparent hover:text-secondary text-secondary border-b-secondary hover:border-b-secondary whitespace-nowrap flex pb-4 pl-1 pr-4
-                            border-b-2">
-                        Posts
-                        @if(false)
-                            <span class="bg-gray-100 text-gray-900 hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">6</span>
-                        @endif
-                    </a>
-
-                    <a href="#" class="border-transparent hover:text-secondary hover:border-b-secondary whitespace-nowrap flex pb-4 pl-1 pr-4 border-b-2">
-                        Likes
-
-                        @if(false)
-                            <span class="bg-gray-100 text-gray-900 hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">6</span>
-                        @endif
-                    </a>
-
-                    <a href="#" class="border-transparent hover:text-secondary  hover:border-b-secondary whitespace-nowrap flex pb-4 pl-1 pr-4 border-b-2">
-                        Resources
-
-                        @if(false)
-                            <span class="bg-gray-100 text-gray-900 hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">6</span>
-                        @endif                            </a>
+                <nav class="flex items-center text-xs">
+                    <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3">
+                        <template x-for="(tab, index) in tabs" :key="index" class="space-x-4">
+                            <li class="mr-4 last:mr-0 pb-[3px]">
+                                <a type="button"
+                                   class="text-base-text-color cursor-pointer transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:text-secondary focus:text-secondary hover:border-secondary focus:border-secondary"
+                                   :class="(activeTab === index) && 'border-secondary text-secondary'"
+                                   x-on:click.prevent="activeTab = index;"
+                                   x-text="tab"
+                                ></a>
+                            </li>
+                        </template>
+                    </ul>
                 </nav>
             </div>
         </div>
     </div>
     <!-- Posts -->
-    <div>
+    <div x-show="activeTab === 0">
         {{--                <div class="flex justify-between items-center text-base-text-color font-semibold">--}}
         {{--                    <p class="text-sm flex">Posts <span class="bg-gray-400 rounded-full ml-2 w-5 h-5 flex justify-center items-center">{{ $this->user->posts()->count() }}</span></p>--}}
         {{--                    <a href="#" class="text-xs flex items-center">See all--}}

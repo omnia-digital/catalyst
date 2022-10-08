@@ -17,6 +17,9 @@
                     </a>
                 @endforeach
             </div>
+            <div class="sm:hidden flex items-center">
+              <livewire:social::partials.follow-button :model="$user" />
+            </div>
         </div>
         <div class="hidden sm:ml-6 sm:flex sm:items-center">
             @can('update-profile', $user->profile)
@@ -37,7 +40,12 @@
     </div>
   
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div x-cloak x-show="open" class="sm:hidden" id="mobile-menu">
+    <div 
+      class="sm:hidden" id="mobile-menu"
+      x-cloak 
+      x-show="open" 
+      x-collapse
+    >
       <div class="space-y-1 pt-2 pb-3">
         @foreach ($nav as $key => $item)
             <a
@@ -50,14 +58,13 @@
             </a>
         @endforeach
       </div>
-      <div class="border-t border-gray-200 pt-4 pb-3">
-        <div class="mt-3 space-y-1">
-            @can('update-profile', $user->profile)
-                <a href="{{ route('social.profile.edit', $user->handle) }}" class="block px-4 py-2 text-base font-medium text-light-text-color hover:bg-neutral-hover hover:text-dark-text-color whitespace-nowrap">{{ \Trans::get('Edit Profile') }}</a>
-                <a href="{{ route('billing.stripe-billing') }}" class="block px-4 py-2 text-base font-medium text-light-text-color hover:bg-neutral-hover hover:text-dark-text-color whitespace-nowrap">{{ \Trans::get('Billing') }}</a>
-            @endcan
-            <livewire:social::partials.follow-button :model="$user" class="py-4 mx-4"/>
-        </div>
-      </div>
+      @can('update-profile', $user->profile)
+          <div class="border-t border-gray-200 pt-4 pb-3">
+              <div class="space-y-1">
+                  <a href="{{ route('social.profile.edit', $user->handle) }}" class="block px-4 py-2 text-base font-medium text-light-text-color hover:bg-neutral-hover hover:text-dark-text-color whitespace-nowrap">{{ \Trans::get('Edit Profile') }}</a>
+                  <a href="{{ route('billing.stripe-billing') }}" class="block px-4 py-2 text-base font-medium text-light-text-color hover:bg-neutral-hover hover:text-dark-text-color whitespace-nowrap">{{ \Trans::get('Billing') }}</a>
+              </div>
+          </div>
+      @endcan
     </div>
   </nav>
