@@ -16,6 +16,7 @@
     use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
     use Spatie\Tags\HasTags;
+    use Squire\Models\Country;
 
     class Profile extends Model implements HasMedia
     {
@@ -44,6 +45,7 @@
             'first_name',
             'last_name',
             'bio',
+            'country',
             'website',
             'user_id',
             'salesforce_contact_id'
@@ -125,9 +127,14 @@
             return $this->photo()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
         }
 
-        public function getCountryAttribute()
+        public function countryFlag()
         {
-            return 'USA';
+            return Country::select('flag')->where('code_3', $this->country)->pluck('flag')->first();
+        }
+
+        public function displayCountry()
+        {
+            return $this->countryFlag() . ' ' . strtoupper($this->country);
         }
 
         public function getAwardsAttribute()

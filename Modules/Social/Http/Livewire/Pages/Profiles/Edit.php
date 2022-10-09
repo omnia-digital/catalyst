@@ -3,15 +3,19 @@
 namespace Modules\Social\Http\Livewire\Pages\Profiles;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Social\Models\Profile;
+use Squire\Models\Country;
 
 class Edit extends Component
 {
     use AuthorizesRequests, WithFileUploads;
 
     public Profile $profile;
+
+    public ?string $country = null;
 
     public $bannerImage;
     public $bannerImageName;
@@ -25,6 +29,7 @@ class Edit extends Component
             'profile.first_name' => ['required', 'max:254'],
             'profile.last_name' => ['required', 'max:254'],
             'profile.bio' => ['required', 'max:280'],
+            'country' => ['required', Rule::in(Country::select('code_3')->pluck('code_3')->toArray())],
         ];
     }
 
@@ -55,12 +60,14 @@ class Edit extends Component
     {
         $this->authorize('update-profile', $profile);
         $this->profile = $profile->load('user');
+        $this->country = $profile->country;
     }
     
     public function saveChanges()
     {
         $this->validate();
         
+        $this->profile->country = $this->country;
         $this->profile->save();
 
         if(!is_null($this->bannerImage) && $this->profile->bannerImage()->count()) {
@@ -83,6 +90,8 @@ class Edit extends Component
 
     public function render()
     {
-        return view('social::livewire.pages.profiles.edit');
+        return view('social::livewire.pages.profiles.edit', [
+            'countries'  => Country::orderBy('name')->pluck('name', 'code_3')->toArray(),
+        ]);
     }
 }

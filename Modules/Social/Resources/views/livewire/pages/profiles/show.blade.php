@@ -2,7 +2,7 @@
 
 @section('content')
     <x-profiles.partials.header :user="$this->user"/>
-    <div class="mt-6 grid grid-cols-6 xl:grid-cols-12 gap-6 px-6">
+    <div class="mt-6 grid grid-cols-6 xl:grid-cols-12 gap-6 px-4 lg:px-0">
         <div class="col-span-6 md:col-span-3 xl:col-span-3 space-y-4">
             <div class="p-4 rounded bg-primary text-base-text-color">
                 <div class="flex justify-start text-sm space-x-4">
@@ -110,9 +110,13 @@
             </div> --}}
 
         </div>
-        <div class="block col-span-6 md:col-span-3 xl:col-span-5 mr-4 xl:mr-0">
+        <div class="block col-span-6 md:col-span-3 xl:col-span-5 lg:mr-4 xl:mr-0">
             <!-- User Posts -->
-            <x-social::user-posts :posts="$this->user->posts"/>
+            <x-social::user-posts 
+                :posts="$this->user->posts()->onlyPosts()->get()"
+                :likes="$this->user->likes"
+                :resources="$this->user->posts()->onlyResources()->get()"
+            />
         </div>
         <div class="hidden xl:block col-span-4 space-y-4 xl:mr-4">
             {{-- Teams --}}

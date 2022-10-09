@@ -1,11 +1,11 @@
 @extends('social::livewire.layouts.pages.user-profile-layout')
 
 @section('full-width-header')
-    <div class="col-span-2 h-36 bg-[url('https://source.unsplash.com/random')] -mx-4 bg-cover bg-no-repeat"></div>
+    <div class="col-span-2 h-36 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
 @endsection
 
 @section('content')
-    <div>
+    <div class="px-4 lg:px-0 lg:pr-4">
         <!-- Page Heading -->
         <div class="space-y-8">
             <div class="border-b-2 border-b-light-text-color pb-1">
@@ -71,6 +71,17 @@
                 <x-library::input.label value="Bio"/>
                 <x-library::input.textarea id="bio" wire:model.defer="profile.bio" />
                 <x-library::input.error for="profile.bio"/>
+            </div>
+            <div>
+                <x-library::input.label value="Country"/>
+                <x-library::input.select 
+                    :options="$countries" 
+                    placeholder="Select a Country"
+                    class="!bg-white"
+                    id="country" 
+                    wire:model="country" 
+                />
+                <x-library::input.error for="country"/>
             </div>
         </div>
 

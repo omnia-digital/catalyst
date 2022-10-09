@@ -13,10 +13,7 @@
                         <x-library::heading.2 class="font-normal" textSize="text-lg sm:text-xl sm:text-2xl" text-color="text-white-text-color">{{ '@' .  $user->handle }}</x-library::heading.2>
                     </div>
                     <div class="flex flex-wrap space-x-2 items-center text-primary text-sm">
-                        <div class="flex space-x-1">
-                            <x-heroicon-o-location-marker class="w-4 h-4"/>
-                            <span>{{ $user->profile->country }}</span>
-                        </div>
+                        <span>{{ $user->profile->displayCountry() }}</span>
                         <x-dot class="hidden sm:block" />
                         <p class="text-primary whitespace-nowrap">Joined about {{ $user->profile->created_at->diffForHumans() }}</p>
                         <x-dot class="hidden sm:block" />
