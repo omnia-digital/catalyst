@@ -128,6 +128,16 @@ class Post extends Model implements HasMedia
         return route('social.posts.show', $this);
     }
 
+    public function scopeOnlyResources($query)
+    {
+        return $query->where('type', PostType::RESOURCE);
+    }
+
+    public function scopeOnlyPosts($query)
+    {
+        return $query->whereNull('type');
+    }
+
     public function isParent(): bool
     {
         return is_null($this->postable_id) && is_null($this->postable_type);

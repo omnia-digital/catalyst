@@ -24,7 +24,6 @@
         <div class="hidden sm:ml-6 sm:flex sm:items-center">
             @can('update-profile', $user->profile)
                 <a href="{{ route('social.profile.edit', $user->handle) }}" class="py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Edit Profile') }}</a>
-                <a href="{{ route('billing.stripe-billing') }}" class="py-4 mx-4 whitespace-nowrap">{{ \Trans::get('Billing') }}</a>
             @endcan
             <livewire:social::partials.follow-button :model="$user" class="py-4 mx-4"/>
         </div>
@@ -62,7 +61,6 @@
           <div class="border-t border-gray-200 pt-4 pb-3">
               <div class="space-y-1">
                   <a href="{{ route('social.profile.edit', $user->handle) }}" class="block px-4 py-2 text-base font-medium text-light-text-color hover:bg-neutral-hover hover:text-dark-text-color whitespace-nowrap">{{ \Trans::get('Edit Profile') }}</a>
-                  <a href="{{ route('billing.stripe-billing') }}" class="block px-4 py-2 text-base font-medium text-light-text-color hover:bg-neutral-hover hover:text-dark-text-color whitespace-nowrap">{{ \Trans::get('Billing') }}</a>
               </div>
           </div>
       @endcan

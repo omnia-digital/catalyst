@@ -1,3 +1,8 @@
+@props([
+    'posts' => [],
+    'likes' => [],
+    'resources' => [],
+])
 <div
     x-data="{
         activeTab: 'posts',
@@ -45,9 +50,45 @@
         {{--                    </a>--}}
         {{--                </div>--}}
         <div class="mt-4 space-y-4">
-            @foreach ($posts as $post)
-                <livewire:social::components.post-card-dynamic :post="$post"/>
-            @endforeach
+            @forelse ($posts as $post)
+                <livewire:social::components.post-card-dynamic :post="$post" />
+            @empty
+                <div class="bg-white p-4">
+                    <p class="text-dark-text-color">{{ \Trans::get('No posts to show.') }}</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+
+    <div x-cloak x-show="activeTab === 'likes'">
+        <div class="mt-4 space-y-4">
+            @forelse ($likes as $like)
+                <div class="bg-white p-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="flex-shrink-0">
+                            <img class="h-10 w-10 rounded-full" src="{{ $like->likable?->user?->profile_photo_url }}" alt="{{ $like->likable?->user?->name }}"/>
+                        </div>
+                        <p class="text-dark-text-color">
+                            <strong>{{ $this->user?->name }}</strong> liked <strong>{{ $like->likable?->user?->name }}</strong>'s {{ \Trans::get(strtolower(class_basename($like->likable::class))) }}</p>
+                    </div>
+                </div>
+            @empty
+                <div class="bg-white p-4">
+                    <p class="text-dark-text-color">{{ \Trans::get('No likes to show. Check back later!') }}</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+
+    <div x-cloak x-show="activeTab === 'resources'">
+        <div class="mt-4 space-y-4">
+            @forelse ($resources as $resource)
+                <livewire:social::components.post-card-dynamic :post="$resource" />
+            @empty
+                <div class="bg-white p-4">
+                    <p class="text-dark-text-color">{{ \Trans::get('No resources to show. Check back later!') }}</p>
+                </div>
+            @endforelse
         </div>
     </div>
 </div>
