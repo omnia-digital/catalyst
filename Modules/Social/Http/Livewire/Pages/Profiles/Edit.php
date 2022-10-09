@@ -3,6 +3,7 @@
 namespace Modules\Social\Http\Livewire\Pages\Profiles;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Social\Models\Profile;
@@ -28,7 +29,7 @@ class Edit extends Component
             'profile.first_name' => ['required', 'max:254'],
             'profile.last_name' => ['required', 'max:254'],
             'profile.bio' => ['required', 'max:280'],
-            'country' => ['required'],
+            'country' => ['required', Rule::in(Country::select('code_3')->pluck('code_3')->toArray())],
         ];
     }
 
