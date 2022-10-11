@@ -26,15 +26,17 @@
         <div>
             <!-- Recommended Teams -->
             <div>
-{{--                {{ $recommendedTeams }}--}}
+                {{--                {{ $recommendedTeams }}--}}
             </div>
 
-            <div class="my-4">
-                <x-library::heading.3>{{ Trans::get('Latest Gaming News') }}</x-library::heading.3>
-                @foreach($newsRssFeeds->take(1) as $newsFeed)
-                    <livewire:games::components.feed-section :type="$newsFeed[0]" :feed-url="$newsFeed[1]" :show-description="false" :show-link-to-news-page="true"/>
-                @endforeach
-            </div>
+            @if(Platform::isModuleEnabled('games'))
+                <div class="my-4">
+                    <x-library::heading.3>{{ Trans::get('Latest Gaming News') }}</x-library::heading.3>
+                    @foreach($newsRssFeeds->take(1) as $newsFeed)
+                        <livewire:games::components.feed-section :type="$newsFeed[0]" :feed-url="$newsFeed[1]" :show-description="false" :show-link-to-news-page="true"/>
+                    @endforeach
+                </div>
+            @endif
 
             <div class="mx-auto max-w-post-card-max-w">
                 <livewire:social::news-feed-editor/>
@@ -63,8 +65,8 @@
         </div>
     </div>
 
-    <livewire:social::delete-post-modal />
-    <livewire:media-manager :handleUploadProcess="false" />
+    <livewire:social::delete-post-modal/>
+    <livewire:media-manager :handleUploadProcess="false"/>
 @endsection
 @push('scripts')
     <script>
