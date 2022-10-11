@@ -52,7 +52,15 @@
                     </div>
                 </div>
             @endunless
+
+            @unless(in_array('my_teams', $skipFilters))
+                <div class="flex items-center space-x-2">
+                    <x-library::input.label for="my_teams" color="text-base-text-color">{{ Trans::get('My Teams Only') }}</x-library::input.label>
+                    <x-library::input.checkbox wire:model="filters.my_teams" name="my_teams"/>
+                </div>
+            @endunless
         </div>
+
 
         @unless(in_array('tags', $skipFilters))
             <div class="min-w-[135px]">

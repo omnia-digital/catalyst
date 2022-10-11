@@ -63,10 +63,12 @@
             {{--            </div>--}}
         @endif
 
-        <div>
-            <x-library::heading.3 class="uppercase">{{ \Trans::get('Team Map') }}</x-library::heading.3>
-            <livewire:social::pages.teams.map class=""/>
-        </div>
+        @if(config('app.modules.social.map'))
+            <div>
+                <x-library::heading.3 class="uppercase">{{ \Trans::get('Team Map') }}</x-library::heading.3>
+                <livewire:social::pages.teams.map class=""/>
+            </div>
+        @endif
 
         <div>
             @if($trendingTeams->count())

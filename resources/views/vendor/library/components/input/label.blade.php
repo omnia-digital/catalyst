@@ -1,12 +1,18 @@
 @props([
 'value',
 'for' => false,
-'required' => false
+'required' => false,
+'color' => 'text-neutral-dark',
+'class' => '',
 ])
+
+@php
+    $class = 'text-sm font-medium ' . $class;
+@endphp
 
 <label
     for="{{ $for ?: \Illuminate\Support\Str::kebab($value ?? '') }}"
-    {{ $attributes->merge(['class' => 'block mb-1 font-medium text-sm']) }}
+    {{ $attributes->merge(['class' => $class]) }}
 >
     {{ $value ?? $slot ?? null }}
 
