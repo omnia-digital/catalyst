@@ -1,14 +1,24 @@
 @extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
-    <div class="sticky top-[55px] z-40 rounded-b-lg pl-4 flex items-center bg-secondary items-center">
+    <div class="sticky top-[55px] z-40 rounded-b-lg px-4 flex items-center bg-secondary items-center justify-between">
         <a href="{{ route('social.teams.home', []) }}">
             <div class="flex-1 flex items-center space-x-2 -ml-1">
                 <x-library::icons.icon name="fa-regular fa-users" size="w-8 h-8" color="text-white-text-color"/>
-                <x-library::heading.1 class="py-4" text-color="text-white-text-color">{{ $lens ? Trans::get('Teams') : Trans::get('All Teams') }}
+                <x-library::heading.1 class="py-4" text-color="text-white-text-color">{{ $lens ? Trans::get('Teams') : Trans::get('Teams') }}
                 </x-library::heading.1>
             </div>
         </a>
+        @can('create', \App\Models\Team::class)
+            <x-library::button.index x-data=""
+                                     x-on:click.prevent="$openModal('create-team')"
+                                     bg-color="primary"
+                                     text-color="text-secondary"
+                                     size="w-60 h-10" py="py-2 "
+                                     class="hidden sm:block">
+                {{ Trans::get('Create Team') }}
+            </x-library::button.index>
+        @endcan
     </div>
 
     <div class="px-4 sm:px-2 lg:px-0">
@@ -72,5 +82,6 @@
                 <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
             @endforelse
         </div>
+            <livewire:create-team-modal/>
     </div>
 @endsection

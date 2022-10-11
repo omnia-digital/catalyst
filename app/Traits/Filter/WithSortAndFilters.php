@@ -9,7 +9,7 @@ use Spatie\Tags\Tag;
 trait WithSortAndFilters {
 
     public ?string $search = null;
-    
+
     public string $orderBy = 'name';
 
     public string $sortOrder = 'desc';
@@ -21,6 +21,7 @@ trait WithSortAndFilters {
         'location' => null,
         'rating' => [],
         'search' => null,
+        'my_teams' => false,
     ];
 
 
@@ -85,13 +86,19 @@ trait WithSortAndFilters {
     public function applyFilters(Builder $query): Builder
     {
         $table = $query->first()?->getTable();
-        
+
         return $query
             ->when($this->filters['has_attachment'], fn(Builder $q) => $q->having('media_count', '>=', 1))
+            // location filter
             ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->whereHas('location', fn(Builder $query) => $query->search($location)))
+            // date filter
             ->when($this->dateFilter, fn(Builder $query, $date) => $query->whereDate($table.'.'.$this->dateColumn, $date))
+            // members filter
             ->when(max($this->members) > 0, fn(Builder $query) => $query->havingBetween('users_count', $this->members))
-            ->when(!empty($this->tags), fn(Builder $query) => $query->withAnyTags($this->tags));
+            // tags
+            ->when(!empty($this->tags), fn(Builder $query) => $query->withAnyTags($this->tags))
+            // my_teams
+            ->when(Arr::get($this->filters, 'my_teams'), fn(Builder $query) => $query->withUser(auth()->user()));
             //->when(Arr::get($this->filters, 'rating'), fn(Builder $query, $rating) => $query->whereIn('rating', $rating))
     }
 }
