@@ -52,6 +52,7 @@ class TeamAdmin extends Component/*  implements HasForms */
         $rules = [
             'team.name' => ['required', 'max:254'],
             'team.start_date' => ['required', 'date'],
+            'team.end_date' => ['required', 'date', 'after_or_equal:team.start_date'],
             'team.summary' => ['required', 'max:280'],
             'team.content' => ['required', 'max:65500'],
         ];

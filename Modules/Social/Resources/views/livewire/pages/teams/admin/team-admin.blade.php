@@ -229,6 +229,11 @@
                             <x-library::input.error for="startDate"/>
                         </div>
                         <div class="flex-col">
+                            <x-library::input.label value="End Date"/>
+                            <x-library::input.date id="endDate" wire:model.defer="team.end_date" placeholder="{{ Trans::get('Team End Date') }}"/>
+                            <x-library::input.error for="endDate"/>
+                        </div>
+                        <div class="flex-col">
                             <x-library::input.label value="{{ \Trans::get('Summary') }}"/>
                             <x-library::input.textarea id="summary" wire:model.defer="team.summary"/>
                             <x-library::input.error for="team.summary"/>
@@ -378,12 +383,14 @@
                 </div>
             </div>
 
-            <!-- Subscriptions -->
-            <div x-cloak x-show="activeTab === 4" class="mt-6 pb-12 space-y-6">
-                <div>
-                    <livewire:billing::pages.billing.stripe.team.admin-subscriptions :team="$team"/>
+            @if(\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
+                <!-- Subscriptions -->
+                <div x-cloak x-show="activeTab === 4" class="mt-6 pb-12 space-y-6">
+                    <div>
+                        <livewire:billing::pages.billing.stripe.team.admin-subscriptions :team="$team"/>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection
