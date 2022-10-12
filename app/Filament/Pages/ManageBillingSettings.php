@@ -45,7 +45,7 @@ class ManageBillingSettings extends SettingsPage
             TextInput::make('application_fee_percent')
                 ->label('Application Fee Percent')
                 ->numeric()
-                ->minValue(1)
+                ->minValue(0)
                 ->maxValue(100),
         ];
     }
