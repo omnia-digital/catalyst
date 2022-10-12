@@ -2,7 +2,7 @@
     {{ $attributes->merge(['class' => 'bg-white shadow']) }}
     x-data="{ open: false }"
 >
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="mx-auto px-4 sm:px-6">
       <div class="md:ml-28 relative flex h-16 justify-between">
         <div class="flex">
             <div class="hidden sm:flex sm:space-x-8">
