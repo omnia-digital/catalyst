@@ -4,8 +4,8 @@
         <div x-data="" class="">
             <div class="mt-0">
                 <x-social::page-heading>
-                    <x-slot name="title">{{ \Trans::get('Subscriptions') }}</x-slot>
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+                    <x-slot name="title">{{ \Trans::get('Membership') }}</x-slot>
+                    Manage your membership plan and billing information.
                 </x-social::page-heading>
 
                 <!-- Subscriptions Settings -->
