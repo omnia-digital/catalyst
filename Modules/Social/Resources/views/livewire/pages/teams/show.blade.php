@@ -56,11 +56,20 @@
                         <div class="p-4 flex flex-col flex-1">
                             <p class="text-sm flex-1">{{ $team->summary }}</p>
                             <div class="text-xs grid grid-cols-4 grid-rows-4 gap-1 items-center">
+                                @if($team->start_date)
                                 <span class="col-span-1 text-gray-400 text-2xs uppercase">Launch Date</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-o-calendar class="w-4 h-4"/>
                                     <span>{{ \Carbon\Carbon::parse($team->start_date)->toFormattedDateString() }}</span>
                                 </div>
+                                @endif
+                                @if($team->end_date)
+                                <span class="col-span-1 text-gray-400 text-2xs uppercase">End Date</span>
+                                <div class="col-span-3 flex items-center space-x-2">
+                                    <x-heroicon-o-calendar class="w-4 h-4"/>
+                                    <span>{{ \Carbon\Carbon::parse($team->end_date)->toFormattedDateString() }}</span>
+                                </div>
+                                @endif
                                 <span class="col-span-1 text-gray-400 text-2xs uppercase">Location:</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-o-location-marker class="w-4 h-4"/>
