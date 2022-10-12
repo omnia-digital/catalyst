@@ -99,22 +99,20 @@
         </div>
 @endsection
 @push('modals')
-    @if($this->subscription)
-        <x-library::modal id="subscription-form" maxWidth="4xl" hideCancelButton>
-            <x-slot name="title">{{ \Trans::get('New Subscriptions') }}</x-slot>
+    <x-library::modal id="subscription-form" maxWidth="4xl" hideCancelButton>
+        <x-slot name="title">{{ \Trans::get('New Subscriptions') }}</x-slot>
 
-            <x-slot name="content">
-                <iframe src="{{ $this->iFrameURL($subscriptionForm) }}" width="100%" height="100%" frameborder="0"></iframe>
-                <script src="//tfaforms.com/js/iframe_resize_helper.js"></script>
-            </x-slot>
-        </x-library::modal>
-        <x-library::modal id="payment-method-form" maxWidth="4xl" hideCancelButton>
-            <x-slot name="title">{{ \Trans::get('Change Payment Method') }}</x-slot>
+        <x-slot name="content">
+            <iframe src="{{ $this->iFrameURL($subscriptionForm) }}" width="100%" height="100%" frameborder="0"></iframe>
+            <script src="//tfaforms.com/js/iframe_resize_helper.js"></script>
+        </x-slot>
+    </x-library::modal>
+    <x-library::modal id="payment-method-form" maxWidth="4xl" hideCancelButton>
+        <x-slot name="title">{{ \Trans::get('Change Payment Method') }}</x-slot>
 
-            <x-slot name="content">
-                <iframe src="{{ $this->iFrameURL($paymentMethodForm) }}" width="100%" height="100%" frameborder="0"></iframe>
-                <script src="//tfaforms.com/js/iframe_resize_helper.js"></script>
-            </x-slot>
-        </x-library::modal>
-    @endif
+        <x-slot name="content">
+            <iframe src="{{ $this->iFrameURL($paymentMethodForm) }}" width="100%" height="100%" frameborder="0"></iframe>
+            <script src="//tfaforms.com/js/iframe_resize_helper.js"></script>
+        </x-slot>
+    </x-library::modal>
 @endpush

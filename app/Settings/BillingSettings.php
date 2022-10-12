@@ -13,6 +13,7 @@ class BillingSettings extends Settings
     public ?bool $team_member_subscriptions;
 
     public ?string $user_subscription_form;
+    public ?string $change_payment_method_form;
 
     public ?float $application_fee_percent;
 
