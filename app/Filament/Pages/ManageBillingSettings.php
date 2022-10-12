@@ -38,6 +38,10 @@ class ManageBillingSettings extends SettingsPage
                 ->label('User Subscription Form')
                 ->options(FormAssemblyForm::pluck('name', 'slug')->toArray())
                 ->disablePlaceholderSelection(),
+            Select::make('change_payment_method_form')
+                ->label('Form To Change Payment Method For User Subscriptions')
+                ->options(FormAssemblyForm::pluck('name', 'slug')->toArray())
+                ->disablePlaceholderSelection(),
             TextInput::make('application_fee_percent')
                 ->label('Application Fee Percent')
                 ->numeric()

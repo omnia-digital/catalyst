@@ -24,18 +24,20 @@ class Subscription extends Component
      */
     public $confirmingSubscriptionCancellation = false;
 
+    protected $listeners = ['modal-closed' => '$refresh'];
+
     public function mount()
     {
         $platformIsUsingChargentPaymentGateway = Platform::isUsingPaymentGateway('chargent');
         if ( ! $platformIsUsingChargentPaymentGateway || ! config('forrest.credentials.consumerKey')) {
 //            $this->redirect(route('social.home'));
         }
-        /* if (!$this->subscription) {
-            return;
-        } */
 
-        $this->subscriptionForm  = FormAssemblyForm::findBySlug('user-subscriptions');
-        $this->paymentMethodForm = FormAssemblyForm::findBySlug('change-payment-method');
+        $subscriptionFormSlug = Platform::getBillingSetting('user_subscription_form');
+        $changePaymentFormSlug = Platform::getBillingSetting('change_payment_method_form');
+
+        $this->subscriptionForm  = FormAssemblyForm::findBySlug($subscriptionFormSlug);
+        $this->paymentMethodForm = FormAssemblyForm::findBySlug($changePaymentFormSlug);
 
         (new CreateContactObjectAction)->execute($this->user);
         $this->user->refresh();
