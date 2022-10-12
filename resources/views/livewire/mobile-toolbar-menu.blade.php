@@ -18,19 +18,19 @@
                 @endif
             @endforeach
             <!-- mobile menu button -->
-                <a @click="open = true"
-                   class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color hover:text-white-text-color' }} {{
+            <a @click="open = true"
+               class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color hover:text-white-text-color' }} {{
                                'group text-center
                                text-base-text-color py-3' }}">
-                    <div class="text-xs font-medium text-center py-0 leading-2">
-                        <x-library::icons.icon name="heroicon-o-menu" size="w-8 h-8" class="text-light-text-color
+                <div class="text-xs font-medium text-center py-0 leading-2">
+                    <x-library::icons.icon name="heroicon-o-menu" size="w-8 h-8" class="text-light-text-color
                         group-hover:text-light-text-color inline text-center"/>
-                        <br/>
-                        <span class="text-light-text-color group-hover:text-light-text-color text-center inline"
-                        >{{ Trans::get('Menu') }}</span>
-                        <span class="sr-only">Open sidebar</span>
-                    </div>
-                </a>
+                    <br/>
+                    <span class="text-light-text-color group-hover:text-light-text-color text-center inline"
+                    >{{ Trans::get('Menu') }}</span>
+                    <span class="sr-only">Open sidebar</span>
+                </div>
+            </a>
         </div>
     </div>
 
