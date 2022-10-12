@@ -53,22 +53,22 @@
                         <x-heroicon-o-x class="h-6 w-6 text-white-text-color"/>
                     </button>
                 </div>
-                @if(\Platform::isModuleEnabled('games'))
-                    <div class="flex-1 h-0 overflow-y-auto">
-                        <!-- mobile nav -->
-                        <nav class="px-2 space-y-1">
-                            @foreach ($navigation as $item)
+                <div class="flex-1 h-0 overflow-y-auto">
+                    <!-- mobile nav -->
+                    <nav class="px-2 space-y-1">
+                        @foreach ($navigation as $item)
+                            @if(Module::isEnabled($item['module']))
                                 <a href="{{ route($item['name']) }}"
-                                   class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
-                                    {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
-                                   aria-current="page">
+                                class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
+                                        {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
+                                aria-current="page">
                                     <x-library::icons.icon name="{{ $item['icon'] }}" size="w-6 h-6 mr-1"/>
                                     <span>{{ $item['label'] }}</span>
                                 </a>
-                            @endforeach
-                        </nav>
-                    </div>
-                @endif
+                            @endif
+                        @endforeach
+                    </nav>
+                </div>
             </div>
             <div class="flex-shrink-0 w-14" aria-hidden="true">
                 <!-- Dummy element to force sidebar to shrink to fit close icon -->
