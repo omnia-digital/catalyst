@@ -18,19 +18,19 @@
                 @endif
             @endforeach
             <!-- mobile menu button -->
-                <a @click="open = true"
-                   class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color hover:text-white-text-color' }} {{
+            <a @click="open = true"
+               class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color hover:text-white-text-color' }} {{
                                'group text-center
                                text-base-text-color py-3' }}">
-                    <div class="text-xs font-medium text-center py-0 leading-2">
-                        <x-library::icons.icon name="heroicon-o-menu" size="w-8 h-8" class="text-light-text-color
+                <div class="text-xs font-medium text-center py-0 leading-2">
+                    <x-library::icons.icon name="heroicon-o-menu" size="w-8 h-8" class="text-light-text-color
                         group-hover:text-light-text-color inline text-center"/>
-                        <br/>
-                        <span class="text-light-text-color group-hover:text-light-text-color text-center inline"
-                        >{{ Trans::get('Menu') }}</span>
-                        <span class="sr-only">Open sidebar</span>
-                    </div>
-                </a>
+                    <br/>
+                    <span class="text-light-text-color group-hover:text-light-text-color text-center inline"
+                    >{{ Trans::get('Menu') }}</span>
+                    <span class="sr-only">Open sidebar</span>
+                </div>
+            </a>
         </div>
     </div>
 
@@ -53,20 +53,22 @@
                         <x-heroicon-o-x class="h-6 w-6 text-white-text-color"/>
                     </button>
                 </div>
-                <div class="flex-1 h-0 overflow-y-auto">
-                    <!-- mobile nav -->
-                    <nav class="px-2 space-y-1">
-                        @foreach ($navigation as $item)
-                            <a href="{{ route($item['name']) }}"
-                               class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
+                @if(\Platform::isModuleEnabled('games'))
+                    <div class="flex-1 h-0 overflow-y-auto">
+                        <!-- mobile nav -->
+                        <nav class="px-2 space-y-1">
+                            @foreach ($navigation as $item)
+                                <a href="{{ route($item['name']) }}"
+                                   class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
                                     {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
-                               aria-current="page">
-                                <x-library::icons.icon name="{{ $item['icon'] }}" size="w-6 h-6 mr-1"/>
-                                <span>{{ $item['label'] }}</span>
-                            </a>
-                        @endforeach
-                    </nav>
-                </div>
+                                   aria-current="page">
+                                    <x-library::icons.icon name="{{ $item['icon'] }}" size="w-6 h-6 mr-1"/>
+                                    <span>{{ $item['label'] }}</span>
+                                </a>
+                            @endforeach
+                        </nav>
+                    </div>
+                @endif
             </div>
             <div class="flex-shrink-0 w-14" aria-hidden="true">
                 <!-- Dummy element to force sidebar to shrink to fit close icon -->
