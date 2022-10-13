@@ -29,7 +29,7 @@
                     @foreach ($searchResults as $game)
                         <li class="border-b border-gray-700">
                             <a
-                                href="{{ route('games.show', $game['slug']) }}"
+                                href="{{ route('games.games.show', $game['slug']) }}"
                                 class="block hover:bg-gray-700 flex items-center transition ease-in-out duration-150 px-3 py-3"
                                 @if ($loop->last) @keydown.tab="isVisible=false" @endif
                             >

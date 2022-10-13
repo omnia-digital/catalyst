@@ -5,12 +5,15 @@ namespace Modules\Games\Http\Livewire\Components;
 use Carbon\Carbon;
 use Livewire\Component;
 use MarcReichel\IGDBLaravel\Models\Cover;
+use Modules\Games\Actions\Games\GetPopularGamesAction;
 use Modules\Games\Models\Game;
 
 class RecentlyReviewed extends Component
 {
-    public $recentlyReviewed = [];
-
+    public function getRecentlyReviewedProperty()
+    {
+        return (new GetPopularGamesAction())->execute();
+    }
     public function loadRecentlyReviewed()
     {
         $before = Carbon::now()->subMonths(2)->timestamp;
@@ -48,7 +51,9 @@ class RecentlyReviewed extends Component
 
     public function render()
     {
-        return view('games::livewire.components.recently-reviewed');
+        return view('games::livewire.components.recently-reviewed', [
+            'recentlyReviewed' => $this->recentlyReviewed,
+        ]);
     }
 
     private function formatForView($games)
@@ -56,7 +61,7 @@ class RecentlyReviewed extends Component
 
         return collect($games)->map(function ($game) {
             return collect($game)->merge([
-                $coverUrl = $game->cover_url,
+                'coverUrl' => $game->cover_url,
                 'coverImageUrl' => $game->cover_url,
                 'rating' => isset($game['rating']) ? round($game['rating']) : null,
                 'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
