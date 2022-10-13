@@ -41,14 +41,14 @@
                                 <p>Plan</p>
                             </div>
                             <div class="col-span-2 px-2 py-4 border-t">
-                                <p>{{ $this->subscription?->type?->name ?? 'N/A' }}</p>
+                                <p>{{ $subscription?->type?->name ?? 'N/A' }}</p>
                             </div>
 
                             <div class="col-span-2 px-2 py-4 border-t">
                                 <p>Amount</p>
                             </div>
                             <div class="col-span-2 px-2 py-4 border-t">
-                                <p>{{ $this->subscription?->type?->printAmount() ?? 'N/A' }}</p>
+                                <p>{{ $subscription?->type?->printAmount() ?? 'N/A' }}</p>
                             </div>
 
                             <div class="col-span-2 px-2 py-4 border-t">
@@ -56,8 +56,8 @@
                             </div>
                             <div class="col-span-1 px-2 py-4 border-t flex items-center">
                                 <x-fas-credit-card class="mr-2 h-8 w-8" aria-hidden="true"/>
-                                <span class="mr-2">{{ $this->subscription?->card_type }}</span>
-                                <span class="mr-2">{{ $this->subscription?->last_4 ?? 'N/A' }}</span>
+                                <span class="mr-2">{{ $subscription?->card_type }}</span>
+                                <span class="mr-2">{{ $subscription?->last_4 ?? 'N/A' }}</span>
                             </div>
                             <div class="col-span-1 px-2 py-4">
                                 <a role="button"
@@ -70,7 +70,7 @@
                                 <p>Next Invoice</p>
                             </div>
                             <div class="col-span-2 px-2 py-4 border-t">
-                                <p>{{ $this->subscription?->next_invoice_at?->toFormattedDateString() ?? 'N/A' }}</p>
+                                <p>{{ $subscription?->next_invoice_at?->toFormattedDateString() ?? 'N/A' }}</p>
                             </div>
                         @endif
                     </div>
