@@ -14,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 use Modules\Reviews\Models\Review;
 use Modules\Social\Models\Like;
 use Modules\Social\Models\Post;
@@ -173,8 +173,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public static function findByHandle($handle)
     {
         return User::with('profile')
-            ->whereHas('profile', function ($q) use ($handle) { 
-                $q->where('handle', $handle); 
+            ->whereHas('profile', function ($q) use ($handle) {
+                $q->where('handle', $handle);
             })->first();
     }
 
