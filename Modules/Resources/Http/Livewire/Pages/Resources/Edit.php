@@ -2,7 +2,9 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
+use App\Models\Tag;
 use Livewire\Component;
+use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
 use Phuclh\MediaManager\WithMediaManager;
 
@@ -18,7 +20,7 @@ class Edit extends Component
 
     public ?string $image = null;
 
-    public ?Post $resource;
+    public Post|null $resource;
 
     protected $listeners = ['openEditResourceModal'];
 
@@ -32,9 +34,18 @@ class Edit extends Component
         ];
     }
 
-    public function openEditResourceModal(Post $resource)
+    public function mount(Post $resource = null)
     {
-        $this->resource = $resource;
+        if (!is_null($resource)) {
+            $this->resource = $resource;
+        }
+    }
+
+    public function openEditResourceModal($resourceID = null)
+    {
+        if (!is_null($resourceID)) {
+            $this->resource = Post::find($resourceID);
+        }
 
         $this->title = $this->resource->title;
 
@@ -49,24 +60,46 @@ class Edit extends Component
     {
         $validated = $this->validate();
 
-        $hashtags = $this->pullTags($validated['body']);
+        $hashtags = Tag::pullTags($validated['body']);
 
         $this->resource->update([
-            'title' => $this->title,
-            'body' => $this->body,
-            'url' => $this->url,
+            'title' => $validated['title'],
+            'body' => Mention::processMentionContent(strip_tags($validated['body'])),
+            'url' => $validated['url'],
+            'image' => $validated['image']
         ]);
 
-        $tags = $this->getTags($hashtags);
-        $this->resource->attachTags($tags, 'post');
+        $updatedResource = $this->resource;
 
-        $this->reset('title', 'url', 'body', 'image', 'resource');
-        $this->redirectRoute('resources.home', $this->resource);
+        [$userMentions, $teamMentions] = Mention::getAllMentions($validated['body']);
+
+        Mention::createManyFromHandles($userMentions, User::class, $updatedResource);
+        Mention::createManyFromHandles($teamMentions, Team::class, $updatedResource);
+
+        $tags = Tag::getTags($hashtags);
+        $updatedResource->attachTags($tags, 'post');
+
+        $this->reset('title', 'url', 'body', 'image');
+        $this->redirectRoute('resources.show', $updatedResource);
     }
 
-    public function confirmRemoval($media = null)
+    public function setFeaturedImage(array $image)
     {
-        return;
+        $this->image = $image['url'];
+    }
+
+    public function removeFeaturedImage()
+    {
+        $this->image = null;
+
+        $this->removeFileFromMediaManager();
+    }
+
+    public function removeImage()
+    {
+        if (is_null($this->resource)) return;
+
+        $this->resource->image = null;
     }
 
     public function render()

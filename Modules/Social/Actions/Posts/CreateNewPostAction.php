@@ -61,7 +61,7 @@ class CreateNewPostAction
 
         $post = $user->posts()->create([
             'type'               => $this->type,
-            'body'               => TextProcessor::processMentionContent($content),
+            'body'               => Mention::processMentionContent($content),
             'team_id'            => $options['team_id'] ?? null,
             'title'              => $options['title'] ?? null,
             'url'                => $options['url'] ?? null,
@@ -71,7 +71,7 @@ class CreateNewPostAction
             'image'              => $options['image'] ?? null,
         ]);
 
-        [$userMentions, $teamMentions] = TextProcessor::getAllMentions($content);
+        [$userMentions, $teamMentions] = Mention::getAllMentions($content);
 
         Mention::createManyFromHandles($userMentions, User::class, $post);
         Mention::createManyFromHandles($teamMentions, Team::class, $post);

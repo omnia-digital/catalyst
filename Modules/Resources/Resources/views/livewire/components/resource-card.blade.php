@@ -45,9 +45,11 @@ cursor-pointer' : ''
                             <x-library::dropdown.item wire:click.prevent.stop="toggleBookmark">
                                 {{ $post->isBookmarkedBy() ? 'Un-bookmark' : 'Bookmark' }}
                             </x-library::dropdown.item>
-                            <x-library::dropdown.item wire:click.prevent.stop="$emitTo('resources::pages.resources.edit', 'openEditResourceModal', {{ $post->id }})">
-                                Edit
-                            </x-library::dropdown.item>
+                            @can('update', $post)
+                                <x-library::dropdown.item wire:click.prevent.stop="$emitTo('resources::pages.resources.edit', 'openEditResourceModal', {{ $post->id }})">
+                                    Edit
+                                </x-library::dropdown.item>
+                            @endcan
                         </x-library::dropdown>
                     </div>
                 </div>

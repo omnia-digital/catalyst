@@ -21,8 +21,12 @@
                 <div class="mt-2">
                     @if ($resource?->image)
                         <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center bg-primary relative border-4 border-dashed border-neutral-dark">
+                            <div wire:loading wire:target="removeImage" class="absolute w-full h-full flex justify-center items-center bg-gray-500/75">
+                                <x-heroicon-o-refresh class="animate-spin w-8 h-8" role="status" />
+                                <span class="sr-only">Loading...</span>
+                            </div>
                             <img src="{{ $resource?->image }}" title="{{ $resource?->title }}" alt="{{ $resource?->title }}" class="max-w-[152px] max-h-[120px]">
-                            <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="confirmRemoval">
+                            <button type="button" wire:loading.attr="disabled" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeImage">
                                 <x-heroicon-o-x class="w-6 h-6"/>
                             </button>
                         </div>
@@ -45,8 +49,6 @@
         </x-slot>
         <x-slot name="actions">
             <x-library::button wire:click="updateResource">Update Resource</x-library::button>
-
-            {{--            <livewire:social::post-editor :title :wire:key="uniqid()" submit-text="Add Resource"/>--}}
         </x-slot>
     </x-library::modal>
 
