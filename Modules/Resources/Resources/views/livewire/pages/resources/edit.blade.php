@@ -1,56 +1,61 @@
-<div>
-    <x-library::modal id="edit-resource-modal" maxWidth="5xl">
-        <x-slot name="title">Edit Resource</x-slot>
-        <x-slot name="content">
-            <div class="mt-4">
-                <x-library::input.text label="Title" wire:model.defer="title"/>
-                <x-library::input.error for="title"/>
-            </div>
-            <div class="mt-6">
-                <x-library::input.text label="URL" wire:model.defer="url"/>
-                <x-library::input.error for="url"/>
-            </div>
-            <div class="mt-4">
-                <x-library::input.label value="Body"/>
-                <x-library::tiptap wire:model.defer="body"/>
-                <x-library::input.error for="body"/>
-                <x-library::input.help value="Maximum is 2500 characters"/>
-            </div>
-            <div class="mt-4">
-                <x-library::input.label value="Resource Image" />
-                <div class="mt-2">
-                    @if ($resource?->image)
-                        <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center bg-primary relative border-4 border-dashed border-neutral-dark">
-                            <div wire:loading wire:target="removeImage" class="absolute w-full h-full flex justify-center items-center bg-gray-500/75">
-                                <x-heroicon-o-refresh class="animate-spin w-8 h-8" role="status" />
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <img src="{{ $resource?->image }}" title="{{ $resource?->title }}" alt="{{ $resource?->title }}" class="max-w-[152px] max-h-[120px]">
-                            <button type="button" wire:loading.attr="disabled" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeImage">
-                                <x-heroicon-o-x class="w-6 h-6"/>
-                            </button>
+@extends('social::livewire.layouts.pages.full-page-layout')
+
+@section('content')
+    <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-secondary">
+        <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-primary hover:text-primary">
+            <a href="{{ route('resources.show', $resource->id) }}">
+                Cancel
+            </a>
+        </div>
+        <a href="{{route('resources.home')}}">
+            <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Edit Resource') }}</x-library::heading.1>
+        </a>
+    </div>
+    <div class="w-full">
+        <div class="col-span-4 card">
+            <div class="p-6">
+                <div class="mt-4">
+                    <x-library::input.label value="Title" />
+                    <x-library::input.text class="!bg-white border-gray-600" wire:model.defer="resource.title"/>
+                    <x-library::input.error for="resource.title"/>
+                </div>
+                <div class="mt-6">
+                    <x-library::input.label value="URL" />
+                    <x-library::input.text class="!bg-white border-gray-600" wire:model.defer="resource.url"/>
+                    <x-library::input.error for="resource.url"/>
+                </div>
+                <div class="mt-4">
+                    <x-library::input.label value="Body"/>
+                    <x-library::tiptap wire:model.defer="resource.body"/>
+                    <x-library::input.error for="resource.body"/>
+                    <x-library::input.help value="Maximum is 2500 characters"/>
+                </div>
+                <div class="mt-4">
+                    <x-library::input.label value="Image"/>
+                    <div class="w-56 relative">
+                        <div 
+                            wire:loading 
+                            wire:target="removeFeaturedImage, setFeaturedImage" 
+                            class="absolute z-10 rounded-lg w-full h-full flex justify-center items-center bg-gray-500/75"
+                        >
+                            <x-heroicon-o-refresh class="animate-spin w-8 h-8 absolute top-1/2 right-1/2 -mr-4 -mt-4" role="status" />
+                            <span class="sr-only">Loading...</span>
                         </div>
-                    @else
-                        <p>No image set.</p>
-                    @endif
+                        <x-library::input.media-manager
+                            id="resource-featured-image"
+                            setImageAction="setFeaturedImage"
+                            removeImageAction="removeFeaturedImage"
+                            :file="$this->resource->image ?? null"
+                            label="Add Image (Upload, Unsplash, URL)"
+                        />
+                    </div>
+                    <x-library::input.error for="image"/>
+                </div>
+                <div class="flex justify-end mt-8">
+                    <x-library::button wire:click="updateResource">Update Resource</x-library::button>
                 </div>
             </div>
-            <div class="mt-4">
-                <x-library::input.label value="Image"/>
-                <x-library::input.media-manager
-                        id="resource-featured-image"
-                        setImageAction="setFeaturedImage"
-                        removeImageAction="removeFeaturedImage"
-                        :file="$image ?? null"
-                        label="Add Image (Upload, Unsplash, URL)"
-                />
-                <x-library::input.error for="image"/>
-            </div>
-        </x-slot>
-        <x-slot name="actions">
-            <x-library::button wire:click="updateResource">Update Resource</x-library::button>
-        </x-slot>
-    </x-library::modal>
-
+        </div>        
+    </div>
     <livewire:media-manager/>
-</div>
+@endsection

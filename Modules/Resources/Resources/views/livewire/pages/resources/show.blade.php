@@ -39,9 +39,9 @@
                         </div>
                         @can('update', $resource)
                             <div class="ml-auto flex justify-end items-center">
-                                <x-library::button wire:click.prevent.stop="$emitTo('resources::pages.resources.edit', 'openEditResourceModal')">
+                                <x-library::button.link href="{{ route('resources.edit', $resource->id) }}" size="" class="text-secondary border-none rounded-none shadow-none hover:underline">
                                     Edit
-                                </x-library::button>
+                                </x-library::button.link>
                             </div>
                         @endcan
                     </div>
@@ -80,7 +80,6 @@
                 </div>
             @endif
         </div>
-        <livewire:resources::pages.resources.edit :resource="$resource" />
         <livewire:media-manager/>
     @endif
 

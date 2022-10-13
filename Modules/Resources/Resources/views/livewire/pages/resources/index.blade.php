@@ -46,7 +46,6 @@
         <div class="pb-6">
             {{ $resources->onEachSide(1)->links() }}
         </div>
-        <livewire:resources::pages.resources.edit />
     </div>
     @push('scripts')
         <script>

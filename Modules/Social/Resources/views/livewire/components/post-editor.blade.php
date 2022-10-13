@@ -4,14 +4,6 @@
         showImages: true,
         images: [],
         users: {},
-        showDropdown: false,
-        getAllUsers() {
-            axios.get('https://jsonplaceholder.typicode.com/users')
-                .then((response) => {
-                    this.users = response.data
-                    showDropdown = true;
-                });
-        },
         showMediaManager(file, metadata) {
             this.$wire.emitTo(
                 'media-manager',
@@ -63,7 +55,6 @@
                 characterLimit="500"
                 :placeholder="$placeholder"
                 class="bg-primary text-lg"
-                @keyup.slash="getAllUsers"
         >
             <x-slot name="footer">
                 <div class="bg-primary">
@@ -104,27 +95,6 @@
                 </div>
             </x-slot>
         </x-library::tiptap>
-        {{-- User Dropdown --}}
-        <div>
-            <div x-show="showDropdown" class="mt-6 flow-root absolute">
-                <ul role="list" class="-my-5 divide-y divide-gray-200">
-                    <template x-for="user in users" :key="user.username">
-                        <li class="py-4 hover:bg-neutral-light">
-                            <div class="flex items-center space-x-4">
-                                <div class="flex-shrink-0">
-                                    <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=B+H&color=7F9CF5&background=EBF4FF" alt="" />
-                                </div>
-                                <div class="min-w-0 flex-1">
-                                    <p class="truncate text-sm font-medium text-gray-900" x-text="user.name"></p>
-                                    <p class="truncate text-sm text-gray-500" x-text="user.username"></p>
-                                </div>
-                            </div>
-                        </li>
-                    </template>
-                </ul>
-            </div>
-        </div>
-        {{-- End User Dropdown --}}
         <hr class="text-neutral-light"/>
         <div class="flex justify-between items-center pt-3 pb-2">
             @if($openState == false)
