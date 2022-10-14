@@ -12,7 +12,7 @@
             </div>
             <div class="mt-4">
                 <x-library::input.label value="Body"/>
-                {{--                <x-library::input.trix wire:model.defer="body"/>--}}
+                <p class="my-4 italic text-secondary">You can even use Markdown to style and format your Resource! Not sure how to use it? Here's the official guide: <a href="https://www.markdownguide.org/basic-syntax/" class="underline hover:no-underline">https://www.markdownguide.org/basic-syntax/</a></p>
                 <x-library::tiptap wire:model.defer="body"/>
                 <x-library::input.error for="body"/>
                 <x-library::input.help value="Maximum is 2500 characters"/>
