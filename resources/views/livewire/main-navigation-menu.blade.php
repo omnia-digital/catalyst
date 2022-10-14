@@ -53,7 +53,7 @@
                                 @endif
                             @endforeach
                             @if(config('feedback.roadmap.url'))
-                                <x-main-nav-link href="{{ config('feedback.roadmap.url') }}">
+                                <x-main-nav-link href="{{ config('feedback.roadmap.url') }}" target="_blank">
                                     <x-library::icons.icon name="fa-solid fa-road" class="w-6 h-6 mr-2"/>
                                     {{ Trans::get('Roadmap') }}
                                 </x-main-nav-link>
