@@ -27,7 +27,9 @@ class AwardResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('icon')
                     ->default('heroicon-o-academic-cap')
-                    ->required()
+                    ->required(),
+                Forms\Components\TextInput::make('bg_color')->nullable(),
+                Forms\Components\TextInput::make('text_color')->nullable()
             ]);
     }
 
@@ -37,6 +39,8 @@ class AwardResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('icon'),
+                Tables\Columns\TextColumn::make('bg_color'),
+                Tables\Columns\TextColumn::make('text_color'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
