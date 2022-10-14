@@ -3,6 +3,8 @@
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
 use App\Models\Tag;
+use App\Models\Team;
+use App\Models\User;
 use Livewire\Component;
 use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
@@ -12,11 +14,7 @@ class Edit extends Component
 {
     use WithMediaManager;
 
-    public ?string $image = null;
-
     public Post $resource;
-
-    protected $listeners = ['openEditResourceModal'];
 
     protected function rules(): array
     {
@@ -41,7 +39,7 @@ class Edit extends Component
 
         $this->resource->update([
             'title' => $validated['title'],
-            'body' => Mention::processMentionContent(strip_tags($validated['body'])),
+            'body' => Mention::processMentionContent($validated['body']),
             'url' => $validated['url'],
             'image' => $validated['image']
         ]);
