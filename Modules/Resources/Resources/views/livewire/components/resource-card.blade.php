@@ -1,6 +1,7 @@
-<article wire:click.prevent.stop="showPost" class="pt-4 shadow-sm rounded-lg cursor-pointer border-2 z-10 bg-primary {{ $clickable ? '
-cursor-pointer' : ''
-}}">
+<article 
+    wire:click.prevent.stop="showPost" 
+    class="pt-4 shadow-sm rounded-lg cursor-pointer border-2 z-10 bg-primary {{ $clickable ? 'cursor-pointer' : '' }}"
+>
     <!-- Content -->
     <div class="w-full">
         <div class="space-y-1 lg:space-y-2">
@@ -60,7 +61,7 @@ cursor-pointer' : ''
             </div>
 
             <div class="px-5 w-full line-clamp-5">
-                {!! $post->body !!}
+                {!! strip_tags($post->body) !!}
             </div>
 
             @if($post->image)
