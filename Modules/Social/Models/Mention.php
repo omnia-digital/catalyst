@@ -36,19 +36,6 @@ class Mention extends Model
         });
     }
 
-    public static function createManyFromHandles($handles, $type, $post)
-    {
-        foreach ($handles as $handle) {
-            !is_null($type::findByHandle($handle)) && 
-                Mention::create([
-                    'mentionable_type' => $type,
-                    'mentionable_id' => $type::findByHandle($handle)->id,
-                    'postable_type' => $post::class,
-                    'postable_id' => $post->id
-                ]);
-        }
-    }
-
     public function mentionable(): MorphTo
     {
         return $this->morphTo();
@@ -62,5 +49,101 @@ class Mention extends Model
     public function poster()
     {
         return $this->hasOneThrough(User::class, Post::class);
+    }
+
+    public static function createManyFromHandles($handles, $type, $post)
+    {
+        foreach ($handles as $handle) {
+            if (is_null($type::findByHandle($handle))) continue;
+            
+            $mentionAlreadyExists = Mention::where([
+                'mentionable_type' => $type, 
+                'mentionable_id' => $type::findByHandle($handle)->id, 
+                'postable_id' => $post->id
+            ])->exists();
+            
+            !$mentionAlreadyExists &&
+                Mention::create([
+                    'mentionable_type' => $type,
+                    'mentionable_id' => $type::findByHandle($handle)->id,
+                    'postable_type' => $post::class,
+                    'postable_id' => $post->id
+                ]);
+        }
+    }
+    /**
+     * Replace user mentions in body with links to the user profile
+     * 
+     * @param string $content
+     * @return string
+     */
+    public static function replaceUserMentions($content)
+    {
+        return preg_replace_callback(
+            Mention::USER_HANDLE_REGEX, 
+            function ($matches) {
+                if (is_null(User::findByHandle($matches[1]))) return $matches[0];
+
+                return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.profile.show', $matches[1]) . "'>" . $matches[0] . "</a>";
+            },
+            $content
+        );
+    }
+
+    /**
+     * Replace team mentions in body with links to the user profile
+     * 
+     * @param string $content
+     * @return string
+     */
+    public static function replaceTeamMentions($content)
+    {
+        return preg_replace_callback(
+            Mention::TEAM_HANDLE_REGEX, 
+            function ($matches) {
+                if (is_null(Team::findByHandle($matches[1]))) {
+                    return $matches[0];
+                }
+
+                return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.teams.show', $matches[1]) . "'>" . $matches[0] . "</a>";
+            },
+            $content
+        );
+    }
+    
+    public static function processMentionContent($content)
+    {
+
+        $content = self::replaceUserMentions($content);
+
+        $content = self::replaceTeamMentions($content);
+
+        return $content;
+    }
+    
+    public static function getAllMentions($content)
+    {
+        return [
+            self::getUserMentions($content), 
+            self::getTeamMentions($content)
+        ];
+    }
+
+    public static function getUserMentions($content)
+    {
+        $userMentions = array();
+
+        preg_match_all(Mention::USER_HANDLE_REGEX, $content, $userMentions);
+
+        return $userMentions[1];
+    }
+
+    public static function getTeamMentions($content)
+    {
+        $teamMentions = array();
+
+        preg_match_all(Mention::TEAM_HANDLE_REGEX, $content, $teamMentions);
+
+        return $teamMentions[1];
     }
 }

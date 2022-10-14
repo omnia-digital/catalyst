@@ -28,15 +28,22 @@
                             <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
                         @endempty
                     </div>
-                    <div class="flex justify-start my-2 space-x-3">
+                    <div class="flex justify-start items-center my-2">
                         <div class="flex">
                             <x-heroicon-o-calendar class="w-5 h-5"/>
                             <p class="ml-2 text-base-text-color text-md">{{ $resource->created_at->format('M d, Y') }}</p>
                         </div>
-                        <div class="flex space-x-2">
+                        <div class="flex ml-3 space-x-2">
                             <p>by</p>
                             <a href="{{ route('social.profile.show', $resource->user->handle) }}" class="hover:underline block text-base-text-color">{{  $resource->user->name }}</a>
                         </div>
+                        @can('update', $resource)
+                            <div class="ml-auto flex justify-end items-center">
+                                <x-library::button.link href="{{ route('resources.edit', $resource->id) }}" size="" class="text-secondary border-none rounded-none shadow-none hover:underline">
+                                    Edit
+                                </x-library::button.link>
+                            </div>
+                        @endcan
                     </div>
 
                     @empty(!$resource->tags)
