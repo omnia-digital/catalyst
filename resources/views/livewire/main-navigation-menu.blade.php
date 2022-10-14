@@ -66,7 +66,7 @@
                                        class="{{ request()->routeIs('notifications') ? 'font-semibold text-secondary' : 'text-light-text-color hover:text-secondary' }}
                             {{ 'relative rounded-full w-full p-1 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
                                        aria-current="page">
-                                        <x-library::icons.icon name="fa-solid fa-bell"/>
+                                        <x-library::icons.icon name="heroicon-o-bell"/>
                                         @if(Auth::user()
                     ->notifications()->whereNull('read_at')->count() > 0 )
                                             <span class="ml-2 w-3 h-3 text-2xs absolute top-0 right-0 flex items-center justify-center text-white-text-color bg-danger-600 rounded-full">{{ Auth::user()
