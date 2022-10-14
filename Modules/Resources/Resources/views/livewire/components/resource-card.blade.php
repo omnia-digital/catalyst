@@ -61,7 +61,7 @@
             </div>
 
             <div class="px-5 w-full line-clamp-5">
-                {!! $post->body !!}
+                {!! strip_tags($post->body) !!}
             </div>
 
             @if($post->image)

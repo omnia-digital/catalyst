@@ -13,7 +13,7 @@
                                         <span wire:click.prevent.stop="showProfile('{{ $post->user->url() }}')" class="hover:underline">{{ $post->title ?? $post->user->name }}</span>
                                     </div>
                                     <div class="line-clamp-2">
-                                        {!! $post->body !!}
+                                        {!! strip_tags($post->body) !!}
                                     </div>
                                 </div>
                                 <div class="w-16 h-16">
