@@ -70,11 +70,14 @@
                                     <span>{{ \Carbon\Carbon::parse($team->end_date)->toFormattedDateString() }}</span>
                                 </div>
                                 @endif
-                                <span class="col-span-1 text-gray-400 text-2xs uppercase">Location:</span>
+                                    @if($team->location_short)
+
+                                    <span class="col-span-1 text-gray-400 text-2xs uppercase">Location:</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-o-location-marker class="w-4 h-4"/>
                                     <span>{{ $team->location_short ?? "Not Set"}}</span>
                                 </div>
+                                    @endif
                                 <span class="col-span-1 text-gray-400 text-2xs uppercase ">Organizer:</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-s-user-circle class="w-4 h-4"/>
@@ -198,7 +201,7 @@
                                     <div class="mr-4 mt-2 flex items-center">
                                         <input type="checkbox" wire:model.defer="awardsToAdd" value="{{ $award->id }}" class="mr-2" name="award-item-{{ $award->id }}" id="award-item-{{ $award->id }}">
                                         <label for="award-item-{{ $award->id }}" class="bg-primary p-2 flex flex-1 items-center">
-                                            <x-dynamic-component :component="$award->icon" class="h-4 w-4 mr-4"/>
+                                            <x-library::icons.icon :name="$award->icon" class="h-4 w-4 mr-4"/>
                                             <p>{{ ucfirst($award->name) }}</p>
                                         </label>
                                     </div>

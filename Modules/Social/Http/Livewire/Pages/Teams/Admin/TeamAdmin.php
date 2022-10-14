@@ -3,6 +3,7 @@
 namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 
 use App\Models\Team;
+use App\Support\Platform\Platform;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -51,11 +52,17 @@ class TeamAdmin extends Component/*  implements HasForms */
     {
         $rules = [
             'team.name' => ['required', 'max:254'],
-            'team.start_date' => ['required', 'date'],
-            'team.end_date' => ['required', 'date', 'after_or_equal:team.start_date'],
-            'team.summary' => ['required', 'max:280'],
-            'team.content' => ['required', 'max:65500'],
+            'team.start_date' => ['date'],
+            'team.end_date' => ['date', 'after_or_equal:team.start_date'],
+            'team.summary' => ['max:280'],
+            'team.content' => ['max:65500'],
         ];
+
+//        if (Platform::hasGeneralSettingEnabled('team_require_start_date')) {
+//            $rules['team.start_date'] = ['required', 'date'];
+//        } else {
+//            $rules['team.start_date'] = ['date'];
+//        }
 
         if (\Platform::isModuleEnabled('games')) {
 //            $rules['team.youtube_channel_id'] = ['max:65500'];
