@@ -48,7 +48,7 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('{profile}/teams', ProfileTeams::class)->name('teams');
     });
 
-    Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {
+    Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(GuestAccessMiddleware::class)->group(function () {
         Route::get('/discover', DiscoverTeams::class)->name('discover');
         Route::get('/calendar', TeamMapCalendar::class)->name('calendar');
         Route::get('/map', Modules\Social\Http\Livewire\Pages\Teams\Map::class)->name('map');
