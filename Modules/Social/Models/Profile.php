@@ -80,7 +80,8 @@
         {
             return SlugOptions::create()
                               ->generateSlugsFrom('name')
-                              ->saveSlugsTo('handle');
+                              ->saveSlugsTo('handle')
+                              ->doNotGenerateSlugsOnUpdate();
         }
 
         public function fields()
