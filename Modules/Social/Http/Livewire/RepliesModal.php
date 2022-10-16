@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire;
 
+use App\Support\Platform\WithLoginModal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -13,7 +14,7 @@ use Modules\Social\Support\Livewire\WithPostEditor;
 
 class RepliesModal extends Component
 {
-    use WithPostEditor;
+    use WithPostEditor, WithLoginModal;
 
     public int $replyCount = 0;
 

@@ -4,6 +4,8 @@ namespace Modules\Social\Providers;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Settings\GeneralSettings;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Facades\Gate;
@@ -41,6 +43,10 @@ class SocialServiceProvider extends ServiceProvider
             return $user->belongsToTeam($team) && 
                 ($user->hasTeamRole($team, 'admin') ||
                 $user->ownsTeam($team));
+        });
+
+        Blade::if('guestAccess', function () {
+            return (new GeneralSettings)->allow_guest_access;
         });
     }
 
