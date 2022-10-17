@@ -68,6 +68,11 @@
                 <x-library::input.error for="profile.last_name"/>
             </div>
             <div>
+                <x-library::input.label value="Website"/>
+                <x-library::input.text id="website" wire:model.defer="profile.website" />
+                <x-library::input.error for="profile.website"/>
+            </div>
+            <div>
                 <x-library::input.label value="Bio"/>
                 <x-library::input.textarea id="bio" wire:model.defer="profile.bio" />
                 <x-library::input.error for="profile.bio"/>

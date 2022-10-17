@@ -10,6 +10,9 @@
             <x-slot:description>{{ $description }}</x-slot>
         @endisset
         {{ $slot }}
+        @isset ($footer)
+            <x-slot:footer>{{ $footer }}</x-slot>
+        @endisset
     </x-vertical-tabs.panel-section>
     @isset ($additional)
         {{ $additional }}

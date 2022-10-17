@@ -2,15 +2,95 @@
 
 namespace App\Http\Livewire\Pages\Account;
 
+use Auth;
+use Laravel\Fortify\Contracts\UpdatesUserPasswords;
+use Laravel\Jetstream\ConfirmsPasswords;
 use Livewire\Component;
+use Modules\Social\Models\Profile;
 
 class Index extends Component
 {
-    public function getNavigationProperty()
+    use ConfirmsPasswords;
+
+    public $email;
+
+    public $handle;
+
+    /**
+     * The component's state.
+     *
+     * @var array
+     */
+    public $state = [
+        'current_password' => '',
+        'password' => '',
+        'password_confirmation' => '',
+    ];
+
+    /**
+     * Update the user's basic account info.
+     * 
+     * @return void
+     */
+    public function updateAccount()
     {
-        return [
-            []
+        $this->resetErrorBag();
+
+        $this->user->email = $this->email;
+        $this->user->save();
+        
+        $this->profile->handle = $this->handle;
+        $this->profile->save();
+
+        $this->emit('account_saved');
+    }
+
+    /**
+     * Update the user's password.
+     *
+     * @param  \Laravel\Fortify\Contracts\UpdatesUserPasswords  $updater
+     * @return void
+     */
+    public function updatePassword(UpdatesUserPasswords $updater)
+    {
+        $this->resetErrorBag();
+
+        $updater->update(Auth::user(), $this->state);
+
+        if (request()->hasSession()) {
+            request()->session()->put([
+                'password_hash_'.Auth::getDefaultDriver() => Auth::user()->getAuthPassword(),
+            ]);
+        }
+
+        $this->state = [
+            'current_password' => '',
+            'password' => '',
+            'password_confirmation' => '',
         ];
+
+        $this->emit('password_saved');
+    }
+
+    public function mount()
+    {
+        $this->email = $this->user->email;
+        $this->handle = $this->profile->handle;
+    }
+
+    /**
+     * Get the current user of the application.
+     *
+     * @return mixed
+     */
+    public function getUserProperty()
+    {
+        return Auth::user();
+    }
+
+    public function getProfileProperty()
+    {
+        return $this->user->profile;
     }
 
     public function render()
