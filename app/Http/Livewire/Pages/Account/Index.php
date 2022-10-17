@@ -16,6 +16,26 @@ class Index extends Component
 
     public $handle;
 
+    protected function getAccountRules() {
+        return [
+            'email' => [
+                'required', 
+                'string', 
+                'email', 
+                'max:255', 
+                'unique:users,email,'.$this->user->id
+            ],
+            'handle' => [
+                'required', 
+                'string', 
+                'alpha_dash', 
+                'max:40', 
+                'unique:profiles,handle,'.$this->user->id,
+                'unique:teams',
+            ]
+        ];
+    } 
+
     /**
      * The component's state.
      *
@@ -36,10 +56,15 @@ class Index extends Component
     {
         $this->resetErrorBag();
 
-        $this->user->email = $this->email;
+        $validated = $this->validate($this->getAccountRules(), [
+            'email.unique' => 'This email has already been taken',
+            'handle.unique' => 'This username has already been taken',
+        ]);
+
+        $this->user->email = $validated['email'];
         $this->user->save();
-        
-        $this->profile->handle = $this->handle;
+
+        $this->profile->handle = $validated['handle'];
         $this->profile->save();
 
         $this->emit('account_saved');

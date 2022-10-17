@@ -1,9 +1,13 @@
 @extends('social::livewire.layouts.pages.account-page-layout')
 
 @section('content')
+    <x-social::page-heading>
+        <x-slot name="title">{{ \Trans::get('Account Settings') }}</x-slot>
+        Manage all your account settings in one place.
+    </x-social::page-heading>
     <x-vertical-tabs>
         <x-slot:items>
-            <x-vertical-tabs.item icon="cog">Account</x-vertical-tabs.item>
+            <x-vertical-tabs.item icon="cog" class="text-lg font-medium">Account</x-vertical-tabs.item>
         </x-slot>
 
         <x-slot:panels>

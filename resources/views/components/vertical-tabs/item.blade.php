@@ -10,7 +10,7 @@
         type="button"
         :tabindex="isSelected($el.id) ? 0 : -1"
         :class="isSelected($el.id) ? 'bg-gray-50 text-secondary' : 'text-light-text-color'"
-        {{ $attributes->merge(['class' => 'hover:bg-white group hover:text-neutral-dark rounded-md px-3 py-2 flex items-center text-sm font-medium']) }} 
+        {{ $attributes->merge(['class' => 'hover:bg-white group hover:text-neutral-dark rounded-md px-3 py-2 flex items-center']) }} 
         role="tab"
     >
         <x-dynamic-component 
