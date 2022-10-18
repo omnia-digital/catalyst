@@ -124,4 +124,9 @@ class Platform
     {
         return self::isUsingPaymentGateway('chargent');
     }
+
+    public static function isAllowingGuestAccess() : bool
+    {
+        return (new GeneralSettings)->allow_guest_access;
+    }
 }

@@ -23,7 +23,7 @@ trait Bookmarkable
     {
         is_null($user) && $user = Auth::user();
 
-        return $this->bookmarks->where('user_id', $user->id)->isNotEmpty();
+        return $this->bookmarks->where('user_id', $user?->id)->isNotEmpty();
     }
 
     public function markAsBookmark(): self

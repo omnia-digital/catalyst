@@ -7,6 +7,8 @@ use App\Models\Location;
 use App\Models\Team;
 use App\Models\User;
 use App\Settings\BillingSettings;
+use App\Support\Platform\Platform;
+use App\Support\Platform\WithLoginModal;
 use App\Traits\Team\WithTeamManagement;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
@@ -14,7 +16,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Show extends Component
 {
-    use WithTeamManagement, WithMap;
+    use WithTeamManagement, WithMap, WithLoginModal;
 
     public $team;
 
@@ -139,6 +141,10 @@ class Show extends Component
 
     public function getCanViewTeamContentProperty()
     {
+        if (Platform::isAllowingGuestAccess()) {
+            return true;
+        }
+
         return $this->isPublic || $this->isMember;
     }
 
