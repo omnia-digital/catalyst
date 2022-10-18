@@ -37,6 +37,7 @@
         "laravel/vapor-cli": "^1.38",
         "laravel/vapor-core": "^2.21",
         "laravel/vapor-ui": "^1.5",
+        "lcobucci/jwt": "^4.2",
         "league/commonmark": "^2.3",
         "livewire/livewire": "^2.5",
         "marcreichel/igdb-laravel": "^3.6",

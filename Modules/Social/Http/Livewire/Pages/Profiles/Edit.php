@@ -29,6 +29,8 @@ class Edit extends Component
             'profile.first_name' => ['required', 'max:254'],
             'profile.last_name' => ['required', 'max:254'],
             'profile.bio' => ['required', 'max:280'],
+            'profile.website' => ['required', 'max:280'],
+            'profile.birth_date' => ['required', 'date_format:Y-m-d'],
             'country' => ['required', Rule::in(Country::select('code_3')->pluck('code_3')->toArray())],
         ];
     }

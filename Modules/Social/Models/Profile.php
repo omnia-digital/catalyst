@@ -25,6 +25,7 @@
         public $incrementing = false;
 
         protected $dates = [
+            'birth_date',
             'deleted_at',
             'last_fetched_at'
         ];
@@ -37,7 +38,9 @@
             'last_name',
             'handle',
             'bio',
+            'country',
             'website',
+            'birth_date',
             'user_id',
         ];
 
@@ -47,6 +50,7 @@
             'bio',
             'country',
             'website',
+            'birth_date',
             'user_id',
             'salesforce_contact_id'
         ];

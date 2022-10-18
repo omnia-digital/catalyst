@@ -73,6 +73,11 @@
                 <x-library::input.error for="profile.website"/>
             </div>
             <div>
+                <x-library::input.label value="Date of Birth"/>
+                <x-library::input.date id="birth_date" wire:model.defer="profile.birth_date" />
+                <x-library::input.error for="profile.birth_date"/>
+            </div>
+            <div>
                 <x-library::input.label value="Bio"/>
                 <x-library::input.textarea id="bio" wire:model.defer="profile.bio" />
                 <x-library::input.error for="profile.bio"/>
