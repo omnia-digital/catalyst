@@ -11,16 +11,15 @@
                             <p class="text-heading-default-color text-lg font-medium truncate">{{ $user->name }}</p>
                             <p class="-mt-1 text-heading-default-color text-md truncate">{{ '@'.$user?->handle }}</p>
                         </div>
-                        {{--                    <div class="flex mt-1">--}}
-                        {{--                        <div class="bg-black flex items-center rounded-lg p-1">--}}
-                        {{--                            <div class="grow-0 bg-primary text-xs rounded-md p-1">--}}
-                        {{--                                {{ $user->level ?? '48' }}--}}
-                        {{--                            </div>--}}
-                        {{--                            <div class="grow-0 text-xs text-white-text-color px-1">--}}
-                        {{--                                {{ $user->score ?? '3758' }}--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
-                        {{--                    </div>--}}
+                        @if (\Platform::isUsingUserSubscriptions() && \Platform::isSubscriptionShownInNavigation())
+                            <div class="flex mt-1">
+                                <div class="bg-black flex items-center rounded-lg p-1">
+                                    <div class="grow-0 text-white text-xs rounded-md p-1">
+                                        {{ ($user->chargentSubscription()->latest()->first()?->isActive) ? $user->chargentSubscription()->latest()->first()->type->name : 'Not Active' }}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <!-- Heroicon name: solid/selector -->
