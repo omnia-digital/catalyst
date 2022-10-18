@@ -129,4 +129,14 @@ class Platform
     {
         return (new GeneralSettings)->allow_guest_access;
     }
+
+    public static function isSubscriptionShownInNavigation()
+    {
+        return self::getBillingSetting('show_user_subscription_plan_in_navigation');
+    }
+
+    public static function isSubscriptionShownInProfileHeader()
+    {
+        return self::getBillingSetting('show_user_subscription_plan_in_profile_header');
+    }
 }
