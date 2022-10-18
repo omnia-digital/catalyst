@@ -13,12 +13,20 @@
                         <x-library::heading.2 class="font-normal" textSize="text-lg sm:text-xl sm:text-2xl" text-color="text-white-text-color">{{ '@' .  $user->handle }}</x-library::heading.2>
                     </div>
                     <div class="flex flex-wrap space-x-2 items-center text-primary text-sm">
-                        <span>{{ $user->profile->displayCountry() }}</span>
-                        <x-dot class="hidden sm:block" />
+                        @if (\Platform::isUsingUserSubscriptions() && \Platform::isSubscriptionShownInProfileHeader())
+                            <span>{{ ($user->chargentSubscription()->latest()->first()?->isActive) ? $user->chargentSubscription()->latest()->first()->type->name : 'Not Active' }}</span>
+                            <x-dot class="hidden sm:block" />
+                        @endif
+                        @if ($user->profile->country)
+                            <span>{{ $user->profile->displayCountry() }}</span>
+                            <x-dot class="hidden sm:block" />
+                        @endif
                         <p class="text-primary whitespace-nowrap">Joined about {{ $user->profile->created_at->diffForHumans() }}</p>
                         <x-dot class="hidden sm:block" />
                         @if($user->online_status)
                             <x-tag name="Online" class="py-0"/>
+                        @else
+                            <x-tag name="Offline" class="py-0"/>
                         @endif
                     </div>
                 </div>
