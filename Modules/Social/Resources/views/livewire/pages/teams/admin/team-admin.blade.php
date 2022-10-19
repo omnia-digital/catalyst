@@ -44,8 +44,8 @@
                 <!-- Team Edit Navigation -->
                 <nav class="flex items-center text-xs">
                     <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-4">
-                        <template x-for="(tab, index) in tabs" :key="tab.id">
-                            <li class=" pb-[3px]">
+                        <template x-for="(tab, index) in tabs" :key="tab.id" hidden>
+                            <li class="pb-[3px]">
                                 <a href="#"
                                    class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:border-dark-text-color focus:border-dark-text-color"
                                    :class="(activeTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
@@ -180,42 +180,8 @@
             <div x-show="activeTab === 1" class="mt-6 grid sm:grid-cols-1 md:grid-cols-2 gap-6">
                 {{-- Home & Profile Media --}}
                 <div class="space-y-6">
-                    {{-- Banner Image --}}
-                    <div class="flex-col space-y-4">
-                        <x-library::heading.2>{{ Trans::get('Banner') }}</x-library::heading.2>
-                        <div class="flex mt-4 space-x-2">
-                            <div>
-                                {{--                            <p>Current Banner:</p>--}}
-                                @if ($team->bannerImage()->count())
-                                    <img src="{{ $team->bannerImage()->getFullUrl() }}" alt="{{ $team->bannerImage()->name }}" title="{{ $team->bannerImage()->name }}" class="w-full h-100">
-                                @else
-                                    <p>No image set for banner</p>
-                                @endif
-                            </div>
-                            @if ($bannerImage)
-                                <div>
-                                    {{--                                <p>New Banner:</p>--}}
-                                    <img class="w-full h-32" src="{{ $bannerImage->temporaryUrl() }}" alt="{{ $bannerImageName }} Preview">
-                                </div>
-                            @endif
-                        </div>
-                        {{--                        <div class="flex items-center">--}}
-                        {{--                            <x-library::input.label value="Banner Image"/>--}}
-                        {{--                            <span class="text-red-600 text-sm ml-1">*</span>--}}
-                        {{--                        </div>--}}
-                        <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
-                            <input type="text" class="flex-1 border-none" wire:model="bannerImageName" placeholder="Upload file for Banner" readonly>
-                            <label>
-                                <input type="file" wire:model="bannerImage" hidden required/>
-                                <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary
-                                hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Change</span>
-                            </label>
-                        </div>
-                        <x-library::input.error for="bannerImage"/>
-                    </div>
-                    {{-- Form --}}
+                    <!-- Details -->
                     <div class="space-y-4">
-                        {{-- {{ $this->form }} --}}
                         <x-library::heading.2>{{ Trans::get('Details') }}</x-library::heading.2>
                         <div class="flex-col">
                             <x-library::input.label value="{{Trans::get('Name')}}" class="inline"/>
@@ -238,9 +204,32 @@
                             <x-library::input.textarea id="summary" wire:model.defer="team.summary"/>
                             <x-library::input.error for="team.summary"/>
                         </div>
+                        <div>
+                            <div class="flex items-center">
+                                <x-library::input.label value="{{ \Trans::get('What is your Team associated with?') }}" class="inline" />
+                                <span class="text-neutral-dark ml-1">{{ \Trans::get('(you can choose more than one)') }}</span>
+                                <span class="text-red-600 text-sm">*</span>
+                            </div>
+                            <x-library::input.selects wire:model="teamTypes" :options="$teamTags" hidden />
+                            <div>
+                                <p>Current Tags:</p>
+                                <div class="flex items-center space-x-3 mt-1">
+                                    @foreach ($team->teamTypes as $tag)
+                                        <div class="relative">
+                                            <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4" :name="$tag->name" />
+                                            <button 
+                                                wire:click="removeTag('{{ $tag->name }}')"
+                                                class="absolute -top-2 -right-2 p-1 rounded-full bg-white"
+                                            >
+                                                <x-library::icons.icon name="heroicon-o-x" color="text-danger-600" class="h-3 w-3"/>
+                                            </button>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                         <div class="flex-col">
                             <x-library::input.label value="{{ \Trans::get('About this Team') }}"/>
-                            {{--                        <x-library::input.textarea id="content" wire:model.defer="team.content" :rows="16"/>--}}
                             <x-library::input.error for="team.content"/>
                             <x-library::tiptap id="content" wire:model.defer="team.content"
                                                word-count-type="character"
@@ -250,7 +239,34 @@
                         {{--                @livewire('teams.delete-team-form', ['team' => $team])--}}
                     </div>
                 </div>
-                <div class="space-y-4">
+                <div class="space-y-6">
+                    <!-- Banner Image -->
+                    <div class="flex-col space-y-4">
+                        <x-library::heading.2>{{ Trans::get('Banner') }}</x-library::heading.2>
+                        <div class="flex mt-4 space-x-2">
+                            <div>
+                                @if ($team->bannerImage()->count())
+                                    <img src="{{ $team->bannerImage()->getFullUrl() }}" alt="{{ $team->bannerImage()->name }}" title="{{ $team->bannerImage()->name }}" class="w-full h-100">
+                                @else
+                                    <p>No image set for banner</p>
+                                @endif
+                            </div>
+                            @if ($bannerImage)
+                                <div>
+                                    <img class="w-full h-32" src="{{ $bannerImage->temporaryUrl() }}" alt="{{ $bannerImageName }} Preview">
+                                </div>
+                            @endif
+                        </div>
+                        <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                            <input type="text" class="flex-1 border-none" wire:model="bannerImageName" placeholder="Upload file for Banner" readonly>
+                            <label>
+                                <input type="file" wire:model="bannerImage" hidden required/>
+                                <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary
+                                hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Change</span>
+                            </label>
+                        </div>
+                        <x-library::input.error for="bannerImage"/>
+                    </div>
                     <!-- Main Image -->
                     <div class="flex-col">
                         <x-library::heading.2>{{ Trans::get('Main Image') }}</x-library::heading.2>
