@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.36.1.
+ * Generated for Laravel 9.36.2.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -17765,6 +17765,33 @@
         public static function isUsingChargent()
         {
                         return \App\Support\Platform\Platform::isUsingChargent();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isAllowingGuestAccess()
+        {
+                        return \App\Support\Platform\Platform::isAllowingGuestAccess();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isSubscriptionShownInNavigation()
+        {
+                        return \App\Support\Platform\Platform::isSubscriptionShownInNavigation();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isSubscriptionShownInProfileHeader()
+        {
+                        return \App\Support\Platform\Platform::isSubscriptionShownInProfileHeader();
         }
          
     }

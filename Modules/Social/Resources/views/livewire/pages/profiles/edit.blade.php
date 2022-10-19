@@ -73,7 +73,7 @@
                 <x-library::input.error for="profile.website"/>
             </div>
             <div>
-                <x-library::input.label value="Date of Birth"/>
+                <x-library::input.label value="Date of Birth (This will not be visible to the public)"/>
                 <x-library::input.date id="birth_date" wire:model.defer="profile.birth_date" />
                 <x-library::input.error for="profile.birth_date"/>
             </div>
