@@ -75,6 +75,12 @@
         </div> --}}
     </div>
 
-    <livewire:teams.subscribe-team-modal :team="$team"/>
-    <livewire:teams.update-team-plan-modal :team="$team"/>
+    <div>
+        @auth
+            <livewire:teams.subscribe-team-modal :team="$team"/>
+            <livewire:teams.update-team-plan-modal :team="$team"/>
+        @endauth
+    </div>
+
+    <livewire:login-modal/>
 </nav>
