@@ -54,36 +54,34 @@
         </div>
 
         <!-- Edit Basic User Info -->
-        <div x-show="activeTab === 0" class="mt-6 space-y-6">
-            <div>
+        <div x-show="activeTab === 0" class="mt-6 grid grid-cols-4 gap-6">
+            <div class="col-span-4 md:col-span-2">
                 <x-library::input.label value="First Name" class="inline"/>
                 <span class="text-red-600 text-sm">*</span>
                 <x-library::input.text id="first_name" wire:model.defer="profile.first_name" required/>
                 <x-library::input.error for="profile.first_name"/>
             </div>
-            <div>
+            <div class="col-span-4 md:col-span-2">
                 <x-library::input.label value="Last Name" class="inline"/>
                 <span class="text-red-600 text-sm">*</span>
                 <x-library::input.text id="last_name" wire:model.defer="profile.last_name" required/>
                 <x-library::input.error for="profile.last_name"/>
             </div>
-            <div>
+            <div class="col-span-4 md:col-span-2">
                 <x-library::input.label value="Website"/>
                 <x-library::input.text id="website" wire:model.defer="profile.website" />
                 <x-library::input.error for="profile.website"/>
             </div>
-            <div>
-                <x-library::input.label value="Date of Birth (This will not be visible to the public)"/>
-                <x-library::input.date id="birth_date" wire:model.defer="profile.birth_date" />
+            <div class="col-span-4 md:col-span-2">
+                <x-library::input.label value="Date of Birth" class="inline"/>
+                <span class="text-neutral-dark ml-1">{{ \Trans::get('(This will not be visible to the public)') }}</span>
+                <span class="text-red-600 text-sm">*</span>
+                <x-library::input.date format="Y-m-d" id="birth_date" wire:model.defer="profile.birth_date" />
                 <x-library::input.error for="profile.birth_date"/>
             </div>
-            <div>
-                <x-library::input.label value="Bio"/>
-                <x-library::input.textarea id="bio" wire:model.defer="profile.bio" />
-                <x-library::input.error for="profile.bio"/>
-            </div>
-            <div>
-                <x-library::input.label value="Country"/>
+            <div class="col-span-4 md:col-span-2">
+                <x-library::input.label value="Country" class="inline"/>
+                <span class="text-red-600 text-sm">*</span>
                 <x-library::input.select 
                     :options="$countries" 
                     placeholder="Select a Country"
@@ -93,6 +91,35 @@
                 />
                 <x-library::input.error for="country"/>
             </div>
+            <div class="col-span-4">
+                <div class="flex items-center">
+                    <x-library::input.label value="{{ \Trans::get('What are you associated with?') }}" class="inline" />
+                    <span class="text-neutral-dark ml-1">{{ \Trans::get('(you can choose more than one)') }}</span>
+                    <span class="text-red-600 text-sm">*</span>
+                </div>
+                <x-library::input.selects wire:model="profileTypes" :options="$profileTags"/>
+                <p>Current Tags:</p>
+                <div class="flex items-center space-x-3">
+                    @foreach ($profile->tags as $tag)
+                        <div class="relative">
+                            <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4" :name="$tag->name" />
+                            <button 
+                                wire:click="removeTag('{{ $tag->name }}')"
+                                class="absolute -top-2 -right-2 p-1 rounded-full bg-white"
+                            >
+                                <x-library::icons.icon name="heroicon-o-x" color="text-danger-600" class="h-3 w-3"/>
+                            </button>
+                        </div>
+                    @endforeach
+                </div>
+                
+            </div>
+            <div class="col-span-4">
+                <x-library::input.label value="Bio"/>
+                <x-library::input.textarea id="bio" wire:model.defer="profile.bio" />
+                <x-library::input.error for="profile.bio"/>
+            </div>
+            
         </div>
 
         <!-- Edit Team Media -->

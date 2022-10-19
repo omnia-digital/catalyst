@@ -5,7 +5,8 @@
     use App\Models\NullMedia;
     use App\Models\User;
     use App\Support\Lexer\PrettyNumber;
-    use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
+use App\Traits\Tag\HasProfileTags;
+use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Storage;
@@ -20,14 +21,20 @@
 
     class Profile extends Model implements HasMedia
     {
-        use SoftDeletes, HasFactory, HasSlug, HasTags, HasProfilePhoto, InteractsWithMedia;
+        use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto, InteractsWithMedia;
+        use HasProfileTags, HasTags {
+            HasProfileTags::tags insteadof HasTags;
+        }
 
         public $incrementing = false;
 
         protected $dates = [
-            'birth_date',
             'deleted_at',
             'last_fetched_at'
+        ];
+
+        protected $casts = [
+            'birth_date' => 'datetime:Y-m-d',
         ];
 
         protected $hidden = ['private_key'];
