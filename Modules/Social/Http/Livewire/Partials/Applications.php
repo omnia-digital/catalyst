@@ -2,8 +2,6 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
-use App\Actions\Teams\RemoveTeamApplication;
-use App\Models\Team;
 use App\Models\TeamApplication;
 use App\Models\TeamInvitation;
 use App\Models\User;

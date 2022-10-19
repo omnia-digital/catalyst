@@ -23,9 +23,10 @@ use Modules\Social\Http\Livewire\Pages\Teams\Calendar as TeamMapCalendar;
 use Modules\Social\Http\Livewire\Pages\Teams\Followers as TeamFollowers;
 use Modules\Social\Http\Livewire\Pages\Teams\MyTeams;
 use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
+use Modules\Social\Http\Middleware\GuestAccessMiddleware;
 
 
-Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subscribed'])->group(function () {
+Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::class])->group(function () {
     //        Route::get('/', 'SocialController@index');
 
     // the way twitter works is
@@ -47,7 +48,7 @@ Route::name('social.')->prefix('social')->middleware(['auth', 'verified', 'subsc
         Route::get('{profile}/teams', ProfileTeams::class)->name('teams');
     });
 
-    Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(['auth', 'verified'])->group(function () {
+    Route::name('teams.')->prefix(\Trans::get('teams'))->middleware(GuestAccessMiddleware::class)->group(function () {
         Route::get('/discover', DiscoverTeams::class)->name('discover');
         Route::get('/calendar', TeamMapCalendar::class)->name('calendar');
         Route::get('/map', Modules\Social\Http\Livewire\Pages\Teams\Map::class)->name('map');
