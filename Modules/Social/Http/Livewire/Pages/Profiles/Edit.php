@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Profiles;
 
+use App\Models\Tag;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -23,13 +24,18 @@ class Edit extends Component
     public $photo;
     public $photoName;
 
+    public $profileTypes = [];
+
     protected function rules(): array
     {
         return [
             'profile.first_name' => ['required', 'max:254'],
             'profile.last_name' => ['required', 'max:254'],
-            'profile.bio' => ['required', 'max:280'],
+            'profile.bio' => ['max:280'],
+            'profile.website' => ['max:280'],
+            'profile.birth_date' => ['required', 'date'],
             'country' => ['required', Rule::in(Country::select('code_3')->pluck('code_3')->toArray())],
+            'profileTypes' => ['required', 'array']
         ];
     }
 
@@ -56,6 +62,11 @@ class Edit extends Component
         return $this->profile->user;
     }
 
+    public function getProfileTagsProperty()
+    {
+        return Tag::withType('profile_type')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
+    }
+
     public function mount(Profile $profile)
     {
         $this->authorize('update-profile', $profile);
@@ -69,6 +80,10 @@ class Edit extends Component
         
         $this->profile->country = $this->country;
         $this->profile->save();
+
+        if (!empty($this->profileTypes)) {
+            $this->profile->attachTags($this->profileTypes, 'profile_type');
+        }
 
         if(!is_null($this->bannerImage) && $this->profile->bannerImage()->count()) {
             $this->profile->bannerImage()->delete();
@@ -88,10 +103,17 @@ class Edit extends Component
         $this->reset('bannerImage', 'bannerImageName', 'photo', 'photoName');
     }
 
+    public function removeTag(string $tagName)
+    {
+        $this->profile->detachTag(Tag::findFromString($tagName, 'profile_type'));
+        $this->profile->refresh();
+    }
+
     public function render()
     {
         return view('social::livewire.pages.profiles.edit', [
             'countries'  => Country::orderBy('name')->pluck('name', 'code_3')->toArray(),
+            'profileTags' => $this->profileTags,
         ]);
     }
 }

@@ -162,19 +162,28 @@
                                                     {{ \Trans::get('Manage Account') }}
                                                 </div>
 
+                                            <x-jet-dropdown-link href="{{ route('account') }}">
+                                                {{ \Trans::get('Account') }}
+                                            </x-jet-dropdown-link>
+
+                                           
                                                 <x-jet-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
                                                     {{ auth()->user()->name }}
                                                 </x-jet-dropdown-link>
 
-                                                @if (\App\Support\Platform\Platform::isUsingStripe())
-                                                    <x-jet-dropdown-link href="{{ route('billing.stripe-billing') }}">
-                                                        {{ \Trans::get('Billing') }}
-                                                    </x-jet-dropdown-link>
-                                                @elseif (\App\Support\Platform\Platform::isUsingChargent() && \App\Support\Platform\Platform::isUsingUserSubscriptions())
-                                                    <x-jet-dropdown-link href="{{ route('billing.chargent-billing') }}">
-                                                        {{ \Trans::get('Billing') }}
-                                                    </x-jet-dropdown-link>
-                                                @endif
+                                            <x-jet-dropdown-link href="{{ route('account') }}">
+                                                {{ \Trans::get('Account') }}
+                                            </x-jet-dropdown-link>
+
+                                            @if (\App\Support\Platform\Platform::isUsingStripe())
+                                                <x-jet-dropdown-link href="{{ route('billing.stripe-billing') }}">
+                                                    {{ \Trans::get('Billing') }}
+                                                </x-jet-dropdown-link>
+                                            @elseif (\App\Support\Platform\Platform::isUsingChargent() && \App\Support\Platform\Platform::isUsingUserSubscriptions())
+                                                <x-jet-dropdown-link href="{{ route('billing.chargent-billing') }}">
+                                                    {{ \Trans::get('Billing') }}
+                                                </x-jet-dropdown-link>
+                                            @endif
 
                                                 {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
                                                 {{--                                    <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">--}}
