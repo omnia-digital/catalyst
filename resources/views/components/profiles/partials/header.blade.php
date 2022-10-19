@@ -14,7 +14,7 @@
                     </div>
                     <div class="flex flex-wrap space-x-2 items-center text-primary text-sm">
                         @if (\Platform::isUsingUserSubscriptions() && \Platform::isSubscriptionShownInProfileHeader())
-                            <span>{{ ($user->chargentSubscription()->latest()->first()?->isActive) ? $user->chargentSubscription()->latest()->first()->type->name : 'Not Active' }}</span>
+                            <x-tag name="{{ ($user->chargentSubscription()->latest()->first()?->isActive) ? $user->chargentSubscription()->latest()->first()->type->name : 'Not Active' }}" />
                             <x-dot class="hidden sm:block" />
                         @endif
                         @if ($user->profile->country)

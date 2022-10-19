@@ -13,7 +13,7 @@
                         </div>
                         @if (\Platform::isUsingUserSubscriptions() && \Platform::isSubscriptionShownInNavigation())
                             <div class="flex mt-1">
-                                <div class="bg-black flex items-center rounded-lg p-1">
+                                <div class="bg-neutral-dark flex items-center rounded-lg p-1">
                                     <div class="grow-0 text-white text-xs rounded-md p-1">
                                         {{ ($user->chargentSubscription()->latest()->first()?->isActive) ? $user->chargentSubscription()->latest()->first()->type->name : 'Not Active' }}
                                     </div>
