@@ -1,15 +1,15 @@
-<div class="mt-4">
-    <x-library::heading.2 class="text-base-text-color font-semibold text-2xl mx-6 ">{{ \Trans::get('Members') }}</x-library::heading.2>
+<div class="mt-4 mx-6">
+    <x-library::heading.2 class="text-base-text-color font-semibold text-2xl">{{ \Trans::get('Members') }}</x-library::heading.2>
 
     <div x-data="setupMembers()">
         <!-- Team Members Navigation -->
         <div class="w-full mt-6">
             <nav class="flex items-center justify-between text-xs">
                 <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-6">
-                    <template x-for="(tab, index) in membersTabs" :key="tab.id">
-                        <li class="pb-px flex">
+                    <template x-for="(tab, index) in membersTabs" :key="tab.id" hidden>
+                        <li class="pb-[3px]">
                             <a href="#"
-                               class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-3 hover:border-dark-text-color focus:border-dark-text-color"
+                               class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:border-dark-text-color focus:border-dark-text-color"
                                :class="(activeMembersTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
                                x-on:click.prevent="activeMembersTab = tab.id;"
                                x-text="tab.title"
