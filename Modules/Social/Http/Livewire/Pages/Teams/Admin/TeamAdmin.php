@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 
+use App\Models\Tag;
 use App\Models\Team;
 use App\Support\Platform\Platform;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -20,6 +21,8 @@ class TeamAdmin extends Component/*  implements HasForms */
     public Team $team;
 
     public $selected;
+
+    public $teamTypes = [];
 
     public array $newAddress = [];
 
@@ -58,29 +61,19 @@ class TeamAdmin extends Component/*  implements HasForms */
             'team.content' => ['max:65500'],
         ];
 
-//        if (Platform::hasGeneralSettingEnabled('team_require_start_date')) {
-//            $rules['team.start_date'] = ['required', 'date'];
-//        } else {
-//            $rules['team.start_date'] = ['date'];
-//        }
+        // if (Platform::hasGeneralSettingEnabled('team_require_start_date')) {
+        //     $rules['team.start_date'] = ['required', 'date'];
+        // } else {
+        //     $rules['team.start_date'] = ['date'];
+        // }
 
         if (\Platform::isModuleEnabled('games')) {
-//            $rules['team.youtube_channel_id'] = ['max:65500'];
-//            $rules['team.twitch_channel_id'] = ['max:65500'];
+            // $rules['team.youtube_channel_id'] = ['max:65500'];
+            // $rules['team.twitch_channel_id'] = ['max:65500'];
         }
 
         return $rules;
     }
-
-/*     protected function getFormSchema(): array
-    {
-        return [
-            TextInput::make('team.name')->required(),
-            DatePicker::make('team.start_date')->required(),
-            Textarea::make('team.summary')->required(),
-            MarkdownEditor::make('team.content')->required(),
-        ];
-    } */
 
     public function updatedBannerImage()
     {
@@ -137,11 +130,20 @@ class TeamAdmin extends Component/*  implements HasForms */
 
     }
 
+    public function getTeamTagsProperty()
+    {
+        return Tag::withType('team_type')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
+    }
+
     public function saveChanges()
     {
         $this->validate();
 
         $this->team->save();
+
+        if (!empty($this->teamTypes)) {
+            $this->team->attachTags($this->teamTypes, 'team_type');
+        }
 
         $this->removeAddress && $this->team->location()->delete();
 
@@ -182,6 +184,12 @@ class TeamAdmin extends Component/*  implements HasForms */
         $this->team->refresh();
 
         $this->reset('newAddress', 'removeAddress', 'bannerImage', 'bannerImageName', 'profilePhoto', 'profilePhotoName', 'mainImage', 'mainImageName', 'sampleMedia', 'sampleMediaNames');
+    }
+
+    public function removeTag(string $tagName)
+    {
+        $this->team->detachTag(Tag::findFromString($tagName, 'team_type'));
+        $this->team->refresh();
     }
 
     public function confirmRemoval(Media $media)
@@ -229,6 +237,8 @@ class TeamAdmin extends Component/*  implements HasForms */
 
     public function render()
     {
-        return view('social::livewire.pages.teams.admin.team-admin');
+        return view('social::livewire.pages.teams.admin.team-admin', [
+            'teamTags' => $this->teamTags
+        ]);
     }
 }
