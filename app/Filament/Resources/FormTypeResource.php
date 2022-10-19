@@ -22,7 +22,7 @@ class FormTypeResource extends Resource
     protected static ?string $label = 'Form Types';
     protected static ?string $model = \Modules\Forms\Models\FormType::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Forms';
     public $data = [];
 
     protected static function getNavigationBadge(): ?string

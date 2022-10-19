@@ -29,7 +29,7 @@ class FormSubmissionResource extends Resource
     protected static ?string $label = 'Form Submissions';
     protected static ?string $model = \Modules\Forms\Models\FormSubmission::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Forms';
 
     protected static function getNavigationBadge(): ?string
     {

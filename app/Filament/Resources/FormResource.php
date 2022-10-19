@@ -25,7 +25,7 @@ class FormResource extends Resource
     protected static ?string $label = 'Forms';
     protected static ?string $model = \Modules\Forms\Models\Form::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Forms';
     public $data = [];
 
     protected static function getNavigationBadge(): ?string
