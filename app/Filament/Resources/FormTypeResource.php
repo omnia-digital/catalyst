@@ -2,13 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FormResource\Pages\CreateForm;
-use App\Filament\Resources\FormResource\Pages\EditForm;
-use App\Filament\Resources\FormResource\Pages\EditFormType;
-use App\Filament\Resources\FormResource\Pages\ListForms;
-use App\Filament\Resources\FormResource\Pages\ListFormsType;
-use App\Filament\Resources\FormResource\Pages\ViewForm;
-use App\Filament\Resources\FormResource\Pages\ViewFormType;
+use App\Filament\Resources\FormTypeResource\Pages\CreateFormType;
+use App\Filament\Resources\FormTypeResource\Pages\EditFormType;
+use App\Filament\Resources\FormTypeResource\Pages\ListFormsType;
+use App\Filament\Resources\FormTypeResource\Pages\ViewFormType;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Actions\ActionGroup;
@@ -20,10 +17,10 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 
-class FormResource extends Resource
+class FormTypeResource extends Resource
 {
-    protected static ?string $label = 'Forms';
-    protected static ?string $model = \Modules\Forms\Models\Form::class;
+    protected static ?string $label = 'Form Types';
+    protected static ?string $model = \Modules\Forms\Models\FormType::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Settings';
     public $data = [];
@@ -69,15 +66,15 @@ class FormResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListForms::route('/'),
-            'create' => CreateForm::route('/create'),
-            'view' => ViewForm::route('/{record}'),
-            'edit' => EditForm::route('/{record}/edit'),
+            'index' => ListFormsType::route('/'),
+            'create' => CreateFormType::route('/create'),
+            'view' => ViewFormType::route('/{record}'),
+            'edit' => EditFormType::route('/{record}/edit'),
         ];
     }
 
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn (Model $record): string => route('forms.edit', ['record' => $record]);
+        return fn (Model $record): string => route('form_types.edit', ['record' => $record]);
     }
 }

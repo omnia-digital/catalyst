@@ -10,6 +10,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -24,13 +25,21 @@ class EditForm extends EditRecord implements HasForms
 
     protected function getFormSchema(): array
     {
-        $staticFields  = [
+        $staticFields = [
             TextInput::make('name')
                      ->label('Name')
                      ->required(true),
             TextInput::make('slug')
                      ->label('Slug')
-                     ->required(true)->hint('Do not change this if this form has been sent to users because it is used in the form link, so any previous links sent will be broken.'),
+                     ->required(true)
+                     ->hint('Do not change this if this form has been sent to users because it is used in the form link, so any previous links sent will be broken.'),
+            Select::make('form_type_id')
+                  ->relationship('formType', 'name')
+                  ->schema([
+                      TextInput::make('name')
+                               ->required(),
+                      Textarea::make('slug'),
+                  ]),
         ];
 
         $builderButton = [

@@ -1,28 +1,24 @@
 <?php
 
-namespace App\Filament\Resources\FormResource\Pages;
+namespace App\Filament\Resources\FormTypeResource\Pages;
 
-use App\Filament\Resources\FormResource;
+use App\Filament\Resources\FormTypeResource;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\KeyValue;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Str;
-use Modules\Forms\Models\Form;
 
-class CreateForm extends CreateRecord implements HasForms
+class CreateFormType extends CreateRecord implements HasForms
 {
     use InteractsWithForms;
 
-    protected static string $resource = FormResource::class;
+    protected static string $resource = FormTypeResource::class;
 
     protected function getFormSchema(): array
     {
