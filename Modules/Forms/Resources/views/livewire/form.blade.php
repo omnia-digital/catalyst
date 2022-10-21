@@ -10,9 +10,9 @@
                 <span class="text-base-text-color" wire:loading wire:target="submit">Processing...</span>
             </x-forms::button>
         @else
-        <div class="p-8 bg-white shadow">
-            <p>Your form was submitted successfully.</p>
-        </div>
+            <div class="p-8 bg-white shadow">
+                <p>{{ \Trans::get('Your form was submitted successfully.') }}</p>
+            </div>
         @endunless
     </form>
 </div>
