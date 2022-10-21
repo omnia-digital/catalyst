@@ -14,15 +14,17 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
 use Modules\Forms\Models\FormSubmission;
+use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class Form extends Component implements HasForms
 {
-    use InteractsWithForms;
+    use InteractsWithForms, WithNotification;
 
     public \Modules\Forms\Models\Form $formModel;
 
     public $data = [];
     public ?int $team_id = null; // tells us which team the form submission is for in case this is a global form
+    public bool $formSubmitted = false;
 
     public function mount(\Modules\Forms\Models\Form $form, int $team_id = null)
     {
@@ -83,12 +85,17 @@ class Form extends Component implements HasForms
             ];
         }
 
-        FormSubmission::create([
+        $submission = FormSubmission::create([
             'form_id' => $this->formModel->id,
             'user_id' => auth()->id(),
             'team_id' => $team_id ?? null,
             'data' => $formData,
         ]);
+
+        if ($submission) {
+            $this->success('Form submitted successfully');
+            $this->formSubmitted = true;
+        }
     }
 
     public function render()

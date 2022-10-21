@@ -11,16 +11,6 @@ class Form extends Model
 {
     use HasFactory, HasSlug;
 
-    protected $fillable = [
-        'name',
-        'slug',
-        'content',
-        'form_template_id',
-        'team_id',
-        'is_used_on_all_teams',
-        'published_at'
-    ];
-
     protected $casts = [
         'content' => 'array',
     ];
