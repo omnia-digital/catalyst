@@ -9,4 +9,6 @@
             <livewire:media-manager/>
         @endauth
     </div>
+
+    <livewire:authentication-modal/>
 @endsection

@@ -79,7 +79,7 @@
 
     <livewire:social::delete-post-modal/>
     <livewire:media-manager :handleUploadProcess="false"/>
-    <livewire:login-modal/>
+    <livewire:authentication-modal/>
 @endsection
 @push('scripts')
     <script>

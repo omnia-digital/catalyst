@@ -19,5 +19,5 @@
         </div>
     </section>
 
-    <livewire:login-modal/>
+    <livewire:authentication-modal/>
 </div>
