@@ -3,7 +3,7 @@
 namespace Modules\Social\Http\Livewire\Partials;
 
 use App\Support\Platform\Platform;
-use App\Support\Platform\WithLoginModal;
+use App\Support\Platform\WithGuestAccess;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Social\Models\Post;
@@ -11,7 +11,7 @@ use Modules\Social\Notifications\PostWasBookmarkedNotification;
 
 class BookmarkButton extends Component
 {
-    use WithLoginModal;
+    use WithGuestAccess;
 
     public Post $model;
 
@@ -20,7 +20,7 @@ class BookmarkButton extends Component
     public function toggleBookmark()
     {
         if (Platform::isAllowingGuestAccess() && !Auth::check()) {
-            $this->showLoginModal(route('social.posts.show', $this->model));
+            $this->showAuthenticationModal(route('social.posts.show', $this->model));
 
             return;
         }

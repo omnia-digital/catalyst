@@ -19,7 +19,7 @@ class LoginModal extends Component
     public bool $remember = false;
 
     protected $listeners = [
-        'showLoginModal' => 'handleShowLoginModal'
+        'showAuthenticationModal' => 'handleShowAuthenticationModal'
     ];
 
     protected function rules(): array
@@ -30,7 +30,7 @@ class LoginModal extends Component
         ];
     }
 
-    public function handleShowLoginModal($data)
+    public function handleShowAuthenticationModal($data)
     {
         $this->redirectAfterLogin = $data['redirect'] ?? route('social.home');
 

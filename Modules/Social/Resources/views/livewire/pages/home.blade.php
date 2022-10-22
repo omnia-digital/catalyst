@@ -23,7 +23,7 @@
                         {{ Trans::get('Create a new Team') }}
                     </x-library::button>
                 @else
-                    <x-library::button wire:click.prevent="showLoginModal" class="mx-auto mt-4 px-16 py-2">
+                    <x-library::button wire:click.prevent="showAuthenticationModal" class="mx-auto mt-4 px-16 py-2">
                         {{ Trans::get('Create a new Team') }}
                     </x-library::button>
                 @endauth
