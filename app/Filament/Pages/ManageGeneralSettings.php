@@ -26,6 +26,9 @@ class ManageGeneralSettings extends SettingsPage
             Toggle::make('allow_guest_access')
                   ->label('Allow Guest Access to Platform?')
                   ->inline(false),
+            Toggle::make('should_show_login_on_guest_access')
+                ->label('Show Login Modal/Page on Guest Access?')
+                ->inline(false),
         ];
     }
 }
