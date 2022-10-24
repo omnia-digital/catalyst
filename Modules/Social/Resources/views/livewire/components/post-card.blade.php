@@ -49,6 +49,18 @@ cursor-pointer' : ''
                             <p>{{ $post->isBookmarkedBy() ? 'Un-bookmark' : 'Bookmark' }}</p>
                         </div>
                     </x-library::dropdown.item>
+                    @can('update', $post)
+                        <a 
+                            x-data x-on:click.stop="" 
+                            class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color" 
+                            href="{{ route('social.posts.edit', $post->id) }}"
+                        >
+                            <div class="flex items-center space-x-1">
+                                <x-heroicon-o-pencil-alt class="h-6 w-6" aria-hidden="true"/>
+                                <span>Edit</span>
+                            </div>
+                        </a>
+                    @endcan
                     @can('delete', $post)
                         <livewire:social::delete-post-dropdown-item :post="$post" wire:key="delete-post-dropdown-item{{ $post->id }}" :show="true"/>
                     @endcan

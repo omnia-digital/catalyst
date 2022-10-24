@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Social\Http\Livewire\Home;
 use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
 use Modules\Social\Http\Livewire\Pages\Contacts\Index as ContactsIndex;
+use Modules\Social\Http\Livewire\Pages\Posts\Edit as EditPosts;
 use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
 use Modules\Social\Http\Livewire\Pages\Posts\Trending as DiscoverIndex;
 use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
@@ -68,6 +69,7 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
     });
 
     Route::get('/posts/{post}', ShowPosts::class)->name('posts.show');
+    Route::get('/posts/{post}/edit', EditPosts::class)->name('posts.edit');
 
     Route::name('contacts.')->prefix('contacts')->group(function () {
         Route::get('/', ContactsIndex::class)->name('index');
