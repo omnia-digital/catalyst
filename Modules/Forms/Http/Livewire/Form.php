@@ -12,6 +12,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Modules\Forms\Models\FormSubmission;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
@@ -41,7 +42,8 @@ class Form extends Component implements HasForms
             return match ($field['type']) {
                 'text' => TextInput::make($config['name'])
                     ->label($config['label'])
-                    ->required($config['is_required']),
+                    ->required($config['is_required'])
+                    ->type($config['type']),
                 'select' => Select::make($config['name'])
                     ->label($config['label'])
                     ->options($config['options'])
@@ -92,9 +94,32 @@ class Form extends Component implements HasForms
             'data' => $formData,
         ]);
 
+        $this->processFormSubmission($submission);
+
         if ($submission) {
             $this->success('Form submitted successfully');
             $this->formSubmitted = true;
+        }
+
+        if ($this->team_id) {
+            $this->redirectRoute('social.teams.show', $this->team_id);
+        }
+
+        $this->redirectRoute('social.home');
+    }
+
+    public function processFormSubmission($submission)
+    {
+        switch ($submission->form->formType->slug) {
+            case 'registration':
+                Http::withOptions([
+                    'verify' => false
+                ])->post(route('register'), $submission->data);
+                break;
+            
+            default:
+                # code...
+                break;
         }
     }
 
