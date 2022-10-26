@@ -2,7 +2,9 @@
 
 namespace Modules\Forms\Http\Livewire;
 
+use App\Actions\Fortify\CreateNewUser;
 use App\Models\Team;
+use Auth;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
@@ -12,6 +14,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Modules\Forms\Models\FormSubmission;
@@ -87,19 +90,21 @@ class Form extends Component implements HasForms
             ];
         }
 
-        $submission = FormSubmission::create([
-            'form_id' => $this->formModel->id,
-            'user_id' => auth()->id(),
-            'team_id' => $team_id ?? null,
-            'data' => $formData,
-        ]);
-
-        $this->processFormSubmission($submission);
-
-        if ($submission) {
-            $this->success('Form submitted successfully');
-            $this->formSubmitted = true;
+        if ($this->formModel->formType->slug !== 'registration') {
+            FormSubmission::create([
+                'form_id' => $this->formModel->id,
+                'user_id' => auth()->id(),
+                'team_id' => $team_id ?? null,
+                'data' => $formData,
+            ]);
         }
+
+        $submissionData = array_map(fn ($item): string => $item['data'], $formData );
+
+        $this->processFormSubmission($submissionData, $this->formModel->formType->slug);
+
+        $this->success('Form submitted successfully');
+        $this->formSubmitted = true;
 
         if ($this->team_id) {
             $this->redirectRoute('social.teams.show', $this->team_id);
@@ -108,13 +113,12 @@ class Form extends Component implements HasForms
         $this->redirectRoute('social.home');
     }
 
-    public function processFormSubmission($submission)
+    public function processFormSubmission($submissionData, $type)
     {
-        switch ($submission->form->formType->slug) {
+        switch ($type) {
             case 'registration':
-                Http::withOptions([
-                    'verify' => false
-                ])->post(route('register'), $submission->data);
+                event(new Registered($user = (new CreateNewUser)->create($submissionData)));
+                Auth::login($user);
                 break;
             
             default:
