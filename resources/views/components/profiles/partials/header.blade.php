@@ -13,8 +13,8 @@
                         <x-library::heading.2 class="font-normal" textSize="text-lg sm:text-xl sm:text-2xl" text-color="text-white-text-color">{{ '@' .  $user->handle }}</x-library::heading.2>
                     </div>
                     <div class="flex flex-wrap space-x-2 items-center text-primary text-sm">
-                        @if (\Platform::isUsingUserSubscriptions() 
-                            && \Platform::isSubscriptionShownInProfileHeader() 
+                        @if (\Platform::isUsingUserSubscriptions()
+                            && \Platform::isSubscriptionShownInProfileHeader()
                             && $user->chargentSubscription()->latest()->first()?->isActive)
                                 <x-tag name="{{ $user->chargentSubscription()->latest()->first()->type->name }}" />
                                 <x-dot class="hidden sm:block" />
@@ -25,7 +25,7 @@
                         @endif
 
                         <p class="text-primary whitespace-nowrap">Joined about {{ $user->profile->created_at->diffForHumans() }}</p>
-                        
+
                         {{-- @if($user->online_status)
                             <x-dot class="hidden sm:block" />
                             <x-tag name="Online" class="py-0"/>
@@ -33,13 +33,13 @@
                             <x-dot class="hidden sm:block" />
                             <x-tag name="Offline" class="py-0"/>
                         @endif --}}
-                        
+
                         <div class="!ml-auto flex items-center justify-end space-x-2">
                             @foreach ($user->profile->tags as $tag)
                                 {{-- @if ($loop->first)
                                     <x-dot class="hidden sm:block" />
                                 @endif --}}
-                                <x-tag class="bg-white/50" :name="$tag->name" />
+                                <x-tag class="bg-neutral-dark" text-color="text-white-text-color" :name="$tag->name" />
                             @endforeach
                         </div>
                     </div>
