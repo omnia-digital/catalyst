@@ -56,15 +56,17 @@
 
         @if(\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
             <div>
-                @if(!auth()->user()->subscribed("team_$team->id"))
-                    <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
-                        Subscribe
-                    </x-library::button>
-                @else
-                    <x-library::button x-data="" x-on:click.prevent="$openModal('update-team-plan')" wire:target="">
-                        Manage Subscriptions
-                    </x-library::button>
-                @endif
+                @auth()
+                    @if(!auth()->user()->subscribed("team_$team->id"))
+                        <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
+                            Subscribe
+                        </x-library::button>
+                    @else
+                        <x-library::button x-data="" x-on:click.prevent="$openModal('update-team-plan')" wire:target="">
+                            Manage Subscriptions
+                        </x-library::button>
+                    @endif
+                @endauth
             </div>
         @endif
 
