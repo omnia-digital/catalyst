@@ -13,9 +13,11 @@
                         <x-library::heading.2 class="font-normal" textSize="text-lg sm:text-xl sm:text-2xl" text-color="text-white-text-color">{{ '@' .  $user->handle }}</x-library::heading.2>
                     </div>
                     <div class="flex flex-wrap space-x-2 items-center text-primary text-sm">
-                        @if (\Platform::isUsingUserSubscriptions() && \Platform::isSubscriptionShownInProfileHeader())
-                            <x-tag name="{{ ($user->chargentSubscription()->latest()->first()?->isActive) ? $user->chargentSubscription()->latest()->first()->type->name : 'Not Active' }}" />
-                            <x-dot class="hidden sm:block" />
+                        @if (\Platform::isUsingUserSubscriptions() 
+                            && \Platform::isSubscriptionShownInProfileHeader() 
+                            && $user->chargentSubscription()->latest()->first()?->isActive)
+                                <x-tag name="{{ $user->chargentSubscription()->latest()->first()->type->name }}" />
+                                <x-dot class="hidden sm:block" />
                         @endif
                         @if ($user->profile->country)
                             <span>{{ $user->profile->displayCountry() }}</span>
