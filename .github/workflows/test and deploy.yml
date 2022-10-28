@@ -25,31 +25,37 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql
       - name: Copy environment config file
         run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
-      - name: Run yarn
+      - name: Register Font-Awesome Key
         run: |
-          yarn --version
-          yarn && yarn dev
+          npm config set "@fortawesome:registry" https://npm.fontawesome.com/
+          npm config set "//npm.fontawesome.com/:_authToken" ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
       - name: Validate Composer
         run: composer validate
-      - name: Install Composer dependencies
-        run: |
-          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
-          composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
-          composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
-          composer install --prefer-dist --no-interaction --no-suggest
+#      - name: Create SQLite database
+#        run: |
+#          mkdir -p database
+#          touch database/database.sqlite
+#      - name: Run migrations
+#        env:
+#          DB_CONNECTION: sqlite
+#          DB_DATABASE: database/database.sqlite
+#        run: php artisan migrate
+#      - name: Install Composer dependencies
+#        run: |
+#          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
+#          composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
+#          composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
+#          composer install --prefer-dist --no-interaction
+#      - name: Run yarn
+#        run: |
+#          yarn --version
+#          yarn && yarn dev
       #      - name: Run Tests
       #        run: |
       #          ./vendor/bin/pest --version
       #          ./vendor/bin/pest --verbose
       #        env:
       #          APP_ENV: testing
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: Logs
-          path: ./storage/logs
-
   deploy:
     name: Deploy to Vapor
     runs-on: ubuntu-latest
@@ -65,11 +71,15 @@ jobs:
           php-version: 8.1
           tools: composer:v2
           coverage: none
+      - name: Register Font-Awesome Key
+        run: |
+          npm config set "@fortawesome:registry" https://npm.fontawesome.com/
+          npm config set "//npm.fontawesome.com/:_authToken" ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
       - name: Validate Composer
         run: composer validate
       - name: Install Composer dependencies
         run: |
-          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
           composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
           composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
           composer install --prefer-dist --no-interaction --no-suggest

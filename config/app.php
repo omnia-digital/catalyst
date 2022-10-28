@@ -13,9 +13,19 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Platform Framework'),
     'abbr' => env('APP_ABBR', 'APP'),
+    'slogan' => env('APP_SLOGAN', 'Welcome to the community'),
+    'theme' => env('APP_THEME', 'default'),
+    'theme_light_type' => env('APP_THEME_LIGHT_TYPE', 'light'),
+    'logo_path' => env('APP_LOGO'),
+    'logo_path_dark' => env('APP_LOGO_DARK'),
 
+    'modules' => [
+        'social' => [
+            'map' => env('SOCIAL_SHOW_MAP', true),
+        ]
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -40,7 +50,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -69,6 +79,8 @@ return [
     */
 
     'timezone' => 'UTC',
+    'default_datetime_format' => "M j, 'y @ g a ",
+    'default_date_format' => "M j, 'y",
 
     /*
     |--------------------------------------------------------------------------
@@ -167,19 +179,23 @@ return [
         /*
          * Package Service Providers...
          */
+        \App\Providers\PlatformServiceProvider::class,
+
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\VaporUiServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-
+        App\Providers\TeamLensesServiceProvider::class,
+        App\Providers\StripeConnectServiceProvider::class,
+        Omniphx\Forrest\Providers\Laravel\ForrestServiceProvider::class,
     ],
 
     /*
@@ -211,6 +227,7 @@ return [
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
+        'Forrest' => Omniphx\Forrest\Providers\Laravel\Facades\Forrest::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Http' => Illuminate\Support\Facades\Http::class,
@@ -234,6 +251,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Platform' => \App\Support\Platform\Facades\PlatformFacade::class,
+        'Trans' => \App\Support\Platform\Facades\TranslateFacade::class,
     ],
 
 ];

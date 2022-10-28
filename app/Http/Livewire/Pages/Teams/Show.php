@@ -7,11 +7,13 @@ use Livewire\Component;
 
 class Show extends Component
 {
-    public $project;
+    public $team;
 
     public function mount(Team $team)
     {
-        $this->project = $team;
+        $this->team = $team;
+
+        visits($team)->increment();
     }
 
     public function render()

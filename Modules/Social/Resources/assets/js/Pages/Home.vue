@@ -22,7 +22,7 @@
                 <div class="mt-4">
                     <new-post-box class="my-6" :user="user"></new-post-box>
 
-                    <h1 class="sr-only">Recent Posts</h1>
+                    <x-library::heading.1 class="sr-only">Recent Posts</x-library::heading.1>
                     <ul role="list" class="space-y-4">
                         <li v-for="question in questions" :key="question.id">
                             <post-list-item :post="question"></post-list-item>
@@ -35,9 +35,9 @@
                     <section aria-labelledby="who-to-follow-heading">
                         <div class="bg-white rounded-lg shadow">
                             <div class="p-6">
-                                <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
+                                <x-library::heading.2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
                                     Who to follow
-                                </h2>
+                                </x-library::heading.2>
                                 <div class="mt-6 flow-root">
                                     <ul role="list" class="-my-4 divide-y divide-gray-200">
                                         <li v-for="user in whoToFollow" :key="user.profile.handle" class="flex items-center py-4 space-x-3">
@@ -74,9 +74,9 @@
                     <section aria-labelledby="trending-heading">
                         <div class="bg-white rounded-lg shadow">
                             <div class="p-6">
-                                <h2 id="trending-heading" class="text-base font-medium text-gray-900">
+                                <x-library::heading.2 id="trending-heading" class="text-base font-medium text-gray-900">
                                     Trending
-                                </h2>
+                                </x-library::heading.2>
                                 <div class="mt-6 flow-root">
                                     <ul role="list" class="-my-4 divide-y divide-gray-200">
                                         <li v-for="post in trendingPosts" :key="post.id" class="flex py-4 space-x-3">
@@ -130,7 +130,7 @@ import PostListItem from "../Components/PostListItem";
 const navigation = [
     {label: 'Home', name: 'home', icon: HomeIcon, current: true},
     {label: 'Explore', name: 'explore', icon: TrendingUpIcon, current: false},
-    {label: 'Projects', name: 'projects', icon: FireIcon, current: false},
+    {label: 'Teams', name: 'teams', icon: FireIcon, current: false},
     {label: 'My Profile', name: 'profile', icon: UserGroupIcon, current: false},
 ]
 const userNavigation = [

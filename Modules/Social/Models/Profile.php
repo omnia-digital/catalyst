@@ -2,19 +2,29 @@
 
     namespace Modules\Social\Models;
 
+    use App\Models\NullMedia;
     use App\Models\User;
-    use App\Util\Lexer\PrettyNumber;
-    use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
+    use App\Support\Lexer\PrettyNumber;
+use App\Traits\Tag\HasProfileTags;
+use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Storage;
+    use Laravel\Jetstream\HasProfilePhoto;
     use Modules\Social\Database\Factories\ProfileFactory;
+    use Spatie\MediaLibrary\HasMedia;
+    use Spatie\MediaLibrary\InteractsWithMedia;
     use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
+    use Spatie\Tags\HasTags;
+    use Squire\Models\Country;
 
-    class Profile extends Model
+    class Profile extends Model implements HasMedia
     {
-        use SoftDeletes, HasFactory, HasSlug;
+        use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto, InteractsWithMedia;
+        use HasProfileTags, HasTags {
+            HasProfileTags::tags insteadof HasTags;
+        }
 
         public $incrementing = false;
 
@@ -23,19 +33,54 @@
             'last_fetched_at'
         ];
 
+        protected $casts = [
+            'birth_date' => 'datetime:Y-m-d',
+        ];
+
         protected $hidden = ['private_key'];
 
         protected $visible = [
             'id',
-            'name',
+            'first_name',
+            'last_name',
             'handle',
+            'bio',
+            'country',
+            'website',
+            'birth_date',
             'user_id',
         ];
 
         protected $fillable = [
-            'name',
+            'first_name',
+            'last_name',
+            'bio',
+            'country',
+            'website',
+            'birth_date',
             'user_id',
+            'salesforce_contact_id'
         ];
+
+        protected $appends = [
+            'name',
+            'profile_photo_url'
+        ];
+
+        /**
+         * Get the route key for the model.
+         *
+         * @return string
+         */
+        public function getRouteKeyName()
+        {
+            return 'handle';
+        }
+
+        public function getNameAttribute()
+        {
+            return $this->first_name . " " . $this->last_name;
+        }
 
         protected static function newFactory()
         {
@@ -46,7 +91,8 @@
         {
             return SlugOptions::create()
                               ->generateSlugsFrom('name')
-                              ->saveSlugsTo('handle');
+                              ->saveSlugsTo('handle')
+                              ->doNotGenerateSlugsOnUpdate();
         }
 
         public function fields()
@@ -68,7 +114,47 @@
             return $this->is_private == true ? 'private' : 'public';
         }
 
-        public function followingCount($short = false)
+
+        public function url() {
+            return route('social.profile.show', $this->handle);
+        }
+
+        public function bannerImage()
+        {
+            return $this->getMedia('profile_banner_images')->first() ?? (new NullMedia('profile'));
+        }
+
+        public function photo()
+        {
+            return optional($this->getMedia('profile_photos')->first());
+        }
+
+        /**
+         * Get the URL to the user's profile photo.
+         *
+         * @return string
+         */
+        public function getProfilePhotoUrlAttribute()
+        {
+            return $this->photo()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
+        }
+
+        public function countryFlag()
+        {
+            return Country::select('flag')->where('code_3', $this->country)->pluck('flag')->first();
+        }
+
+        public function displayCountry()
+        {
+            return $this->countryFlag() . ' ' . strtoupper($this->country);
+        }
+
+        public function getAwardsAttribute()
+        {
+            return $this->user->awards;
+        }
+
+        public function updateFollowingCount($short = false)
         {
             $count = Cache::remember('profile:following_count:' . $this->id, now()->addMonths(1), function () {
                 if ($this->user->settings->show_profile_following_count == false) {
@@ -86,12 +172,13 @@
             return $short ? PrettyNumber::convert($count) : $count;
         }
 
-        public function followerCount($short = false)
+        public function updateFollowerCount($short = false)
         {
-            $count = Cache::remember('profile:follower_count:' . $this->id, now()->addMonths(1), function () {
+            $count = Cache::remember('profile:follower_count:' . $this->id, now()->addMinutes(60), function () {
                 if ($this->user->settings->show_profile_follower_count == false) {
                     return 0;
                 }
+//                $count = $this->withCount('followers')->orderBy('followers_count','desc')->get();
                 $count = DB::table('followers')->where('following_id', $this->id)->count();
                 if ($this->followers_count != $count) {
                     $this->followers_count = $count;
@@ -104,12 +191,27 @@
             return $short ? PrettyNumber::convert($count) : $count;
         }
 
-        public function follows($profile): bool
+        /**
+         * Get the Profiles with the most likes on posts
+         * @return void
+         */
+        public function getMostPostLikes()
+        {
+            if (!empty($this->user)) {
+                $type = 'post';
+                return Post::where('user_id', $this->user->id)
+                    ->withCount('post.likes')
+                    ->when($type, fn($query) => $query->where('type', $this->type))
+                    ->orderBy('likes_count', 'desc');
+            }
+        }
+
+        public function isFollowing($profile): bool
         {
             return Follow::whereProfileId($this->id)->whereFollowingId($profile->id)->exists();
         }
 
-        public function followedBy($profile): bool
+        public function isFollowedBy($profile): bool
         {
             return Follow::whereProfileId($profile->id)->whereFollowingId($this->id)->exists();
         }
@@ -167,6 +269,19 @@
         public function user()
         {
             return $this->belongsTo(User::class);
+        }
+
+        public static function getTrending()
+        {
+
+            return Profile::query()->orderByDesc('followers_count');
+
+            $trending = Profile::withCount('followers')
+                                ->with('user')
+                                ->orderBy('followers_count', 'desc')
+                                ->orderBy('created_at', 'desc');
+
+            return $trending;
         }
 
         /**

@@ -1,1 +1,1 @@
-<i class="pt-2.5 text-dot fa-solid fa-circle"></i>
+<i {{ $attributes->merge(['class' => 'text-dot fa-solid fa-circle' ]) }}></i>

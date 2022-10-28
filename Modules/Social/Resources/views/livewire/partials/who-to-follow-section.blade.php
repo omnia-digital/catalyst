@@ -1,9 +1,9 @@
 <section aria-labelledby="who-to-follow-heading" class="card">
-    <div class="p-6">
-            <h2 id="who-to-follow-heading" class="text-xl font-medium text-gray-900">
+    <div class="px-4 pb-6 pt-1">
+            <x-library::heading.2 id="who-to-follow-heading" class="text-xl font-medium text-gray-900">
                 Who to follow
-            </h2>
-            <div class="mt-6 flow-root">
+            </x-library::heading.2>
+            <div class="mt-4 flow-root">
                 <ul role="list" class="-my-4">
                     @forelse ($this->whoToFollow as $user)
                         <li class="flex items-center py-4 space-x-3">
@@ -32,13 +32,6 @@
                         </li>
                     @endforelse
                 </ul>
-            </div>
-            <div class="mt-6">
-                @if ($this->whoToFollow->count())
-                    <a href="#" class="w-full block text-center px-4 py-2  shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                        View all
-                    </a>
-                @endif
             </div>
         </div>
 </section>

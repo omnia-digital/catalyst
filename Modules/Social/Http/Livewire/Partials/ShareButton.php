@@ -2,13 +2,14 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
+use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 
 class ShareButton extends Component
 {
-    use withModal;
+    use withModal, WithGuestAccess;
 
     public Post $model;
     public ?string $url;

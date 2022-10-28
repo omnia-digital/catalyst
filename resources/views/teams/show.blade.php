@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-dark-text-color leading-tight">
-            {{ __('Team Settings') }}
-        </h2>
+        <x-library::heading.2 class="font-semibold text-xl text-dark-text-color leading-tight">
+            {{ \Trans::get('Team Settings') }}
+        </x-library::heading.2>
     </x-slot>
 
     <div>
@@ -11,7 +11,7 @@
 
             @livewire('teams.team-member-manager', ['team' => $team])
 
-            @if (Gate::check('delete', $team) && ! $team->personal_team)
+            @if (Gate::check('delete', $team))
                 <x-jet-section-border />
 
                 <div class="mt-10 sm:mt-0">

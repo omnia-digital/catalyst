@@ -1,3 +1,4 @@
+const plugin = require('tailwindcss/plugin');
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors')
 
@@ -11,6 +12,9 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './Modules/*/Resources/views/**/*.blade.php',
+        './vendor/filament/**/*.blade.php',
+        './src/**/*.{html,js}',
+        './node_modules/tw-elements/dist/js/**/*.js'
     ],
 
     darkMode: 'class',
@@ -18,6 +22,8 @@ module.exports = {
         themeVariants: [
             'default',
             'dark',
+            'hatchet',
+            'cfanea',
             'newyear',
             'valentines',
             'patrick',
@@ -28,35 +34,65 @@ module.exports = {
             'fall',
             'halloween',
             'christmas',
-            'winter'],
+            'winter'
+        ],
         extend: {
             fontFamily: {
                 sans: ["SF Pro Display", "Helvetica", "Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Arial", "sans-serif", ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
                 'dot': '.15rem',
-                'xxs': '0.65rem',
+                '2xs': '0.65rem',
+                '3xs': '0.55rem',
                 'base': '0.9375rem',
             },
             height: {
-                '13': '3.2rem'
+                '13': '3.2rem',
+                'full-with-nav': 'calc(100vh - 56px)'
             },
             maxWidth: {
                 'sm': '22rem',
                 '2xl': '40rem',
-                '8xl': '82rem'
+                '8xl': '82rem',
+                '9xl': '90rem',
+                'post-card-max-w': '680px'
             },
             colors: {
                 'base-text-color': 'var(--base-text-color)',
+                'white-text-color': 'var(--white-text-color)',
                 'light-text-color': 'var(--light-text-color)',
                 'dark-text-color': 'var(--dark-text-color)',
                 neutral: 'var(--neutral)',
                 'neutral-light': 'var(--neutral-light)',
                 'neutral-dark': 'var(--neutral-dark)',
+                'neutral-dark\/75': 'var(--neutral-dark-75)',
                 'neutral-hover': 'var(--neutral-hover)',
                 primary: 'var(--primary)',
                 secondary: 'var(--secondary)',
                 tertiary: 'var(--tertiary)',
+                danger: colors.rose,
+                success: colors.green,
+                warning: colors.yellow,
+                'main-nav-active-hover-text-color': 'var(--main-nav-active-hover-text-color)',
+                'main-nav-active-text-color': 'var(--main-nav-active-text-color)',
+                'main-nav-active-bg-color': 'var(--main-nav-active-bg-color)',
+                'main-nav-text-color': 'var(--main-nav-text-color)',
+                'main-nav-hover-text-color': 'var(--main-nav-hover-text-color)',
+                'main-nav-hover-bg-color': 'var(--main-nav-hover-bg-color)',
+                'post-card-bg-color': 'var(--post-card-bg-color)',
+                'post-card-border-color': 'var(--post-card-border-color)',
+                'post-card-border-hover-color': 'var(--post-card-border-hover-color)',
+                'post-card-title-color': 'var(--post-card-title-color)',
+                'post-card-meta-color': 'var(--post-card-meta-color)',
+                'post-card-body-color': 'var(--post-card-body-color)',
+                'post-card-shadows': 'var(--post-card-shadows)',
+                'heading-default-color': 'var(--heading-default-color)',
+                'h1-color': 'var(--h1-color)',
+                'h2-color': 'var(--h2-color)',
+                'h3-color': 'var(--h3-color)',
+                'h4-color': 'var(--h4-color)',
+                'h5-color': 'var(--h5-color)',
+                'h6-color': 'var(--h6-color)',
             },
         },
     },
@@ -74,5 +110,22 @@ module.exports = {
         require('@tailwindcss/aspect-ratio'),
         require('tailwind-scrollbar-hide'),
         require('@tailwindcss/line-clamp'),
+        require('tw-elements/dist/plugin'),
+        plugin(function({ matchUtilities, theme }) {
+            matchUtilities(
+                {
+                    'h-full-minus': (value) => {
+                        return {
+                            height: 'calc(100vh - ' + value + ')',
+                        }
+                    },
+                    'max-h-full-minus': (value) => {
+                        return {
+                            maxHeight: 'calc(100vh - ' + value + ')',
+                        }
+                    },
+                },
+            )
+        }),
     ]
 };

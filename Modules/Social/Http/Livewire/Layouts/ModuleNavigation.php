@@ -14,51 +14,85 @@
                 [
                     'label'   => 'Home',
                     'name'    => 'social.home',
-                    'icon'    => 'heroicon-o-home',
+                    'icon'    => 'fa-regular fa-house',
+//                    'icon'    => 'fa-regular fa-house-chimney',
+//                    'icon'    => 'heroicon-o-home',
+                    'module'  => 'social',
                     'current' => false
                 ],
                 [
-                    'label'   => 'My Projects',
-                    'name'    => 'social.my-projects',
-                    'icon'    => 'heroicon-o-briefcase',
+                    'label'   => 'Discover',
+                    'name'    => 'social.teams.discover',
+                    'icon'    => 'fa-regular fa-telescope',
+//                    'icon'    => 'fa-regular fa-earth-americas',
+//                    'icon'    => 'heroicon-o-globe',
+                    'module'  => 'social',
+                    'current' => false
+                ],
+                [
+                    'label'   => \Trans::get('Teams'),
+                    'name'    => 'social.teams.home',
+                    'icon'    => 'fa-regular fa-users',
+//                    'icon'    => 'heroicon-o-briefcase',
+                    'module'  => 'social',
+                    'current' => false
+                ],
+                [
+                    'label'   => \Trans::get('My Teams'),
+                    'name'    => 'social.teams.my-teams',
+                    'icon'    => 'fa-regular fa-users',
+                    //                    'icon'    => 'heroicon-o-briefcase',
+                    'module'  => 'social',
                     'current' => false
                 ],
 //                [
-//                    'label'   => 'Explore',
-//                    'name'    => 'social.bookmarks',
-//                    'icon'    => 'heroicon-o-hashtag',
-//                    'current' => false
-//                ],
-//                [
 //                    'label'   => 'Notifications',
-//                    'name'    => 'social.bookmarks',
+//                    'name'    => 'notifications',
 //                    'icon'    => 'heroicon-o-bell',
 //                    'current' => false
 //                ],
 //                [
-//                    'label'   => 'Messages',
-//                    'name'    => 'social.bookmarks',
-//                    'icon'    => 'heroicon-o-chat',
-//                    'current' => false
-//                ],
-//                [
-//                    'label'   => 'Groups',
-//                    'name'    => 'social.bookmarks',
-//                    'icon'    => 'heroicon-o-user-group',
+//                    'label'   => \Trans::get('Menu'),
+//                    'name'    => 'social.teams.my-teams',
+//                    'icon'    => 'heroicon-o-briefcase',
 //                    'current' => false
 //                ],
                 [
-                    'label'   => 'Contacts',
-                    'name'    => 'social.contacts.show',
-                    'icon'    => 'heroicon-o-users',
+                    'label'   => \Trans::get('News'),
+                    'name'    => 'games.feeds',
+                    'icon'    => 'fa-regular fa-rss',
+                    'module'  => 'games',
+                    'current' => false
+                ],
+//                [
+//                    'label'   => 'Trending Posts',
+//                    'name'    => 'social.discover',
+//                    'icon'    => 'heroicon-o-collection',
+//                    'current' => false
+//                ],
+                [
+                    'label'   => 'Resources',
+                    'name'    => 'resources.home',
+                    'icon'    => 'fa-regular fa-newspaper',
+//                    'icon'    => 'fa-regular fa-newspaper',
+//                    'icon'    => 'heroicon-o-book-open',
+                    'module'  => 'social',
                     'current' => false
                 ],
                 [
                     'label'   => 'Bookmarks',
                     'name'    => 'social.bookmarks',
-                    'icon'    => 'heroicon-o-bookmark',
+                    'icon'    => 'fa-regular fa-bookmark',
+//                    'icon'    => 'heroicon-o-bookmark',
+                    'module'  => 'social',
                     'current' => false
                 ],
+//                [
+//                    'label'   => 'Contacts',
+//                    'name'    => 'social.contacts.index',
+//                    'icon'    => 'heroicon-o-users',
+//                    'current' => false
+//                ],
             ];
         }
 

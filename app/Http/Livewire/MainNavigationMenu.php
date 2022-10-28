@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Settings\BillingSettings;
 use Livewire\Component;
 
 class MainNavigationMenu extends Component
@@ -21,15 +22,24 @@ class MainNavigationMenu extends Component
             [
                 'label'   => 'Community',
                 'name'    => 'social.home',
-                'icon'    => 'heroicon-o-globe',
+                'icon'    => 'fa-duotone fa-house',
+//                'icon'    => 'heroicon-o-home',
                 'module'  => 'social',
                 'current' => false
             ],
             [
                 'label'   => 'Resources',
                 'name'    => 'resources.home',
-                'icon'    => 'heroicon-o-newspaper',
+                'icon'    => 'fa-duotone fa-newspaper',
+//                'icon'    => 'heroicon-o-newspaper',
                 'module'  => 'resources',
+                'current' => false
+            ],
+            [
+                'label'   => 'Games',
+                'name'    => 'games.home',
+                'icon'    => 'fa-regular fa-gamepad-modern',
+                'module'  => 'games',
                 'current' => false
             ],
 //            [
@@ -46,30 +56,27 @@ class MainNavigationMenu extends Component
 //                'module'  => 'advice',
 //                'current' => false
 //            ],
-            //                [
-            //                    'label'   => 'Projects',
-            //                    'name'    => 'projects.home',
-            //                    'icon'    => 'heroicon-o-globe',
-            //                    'current' => false
-            //                ],
-            //            [
-            //                'label'   => 'CRM',
-            //                'name'    => 'crm',
-            //                'icon'    => 'heroicon-o-users',
-            //                'current' => false
-            //            ],
-            //            [
-            //                'label'   => 'Learn',
-            //                'name'    => 'learn',
-            //                'icon'    => 'heroicon-o-academic-cap',
-            //                'current' => false
-            //            ],
-            //            [
-            //                'label'   => 'Marketplace',
-            //                'name'    => 'marketplace',
-            //                'icon'    => 'heroicon-o-shopping-bag',
-            //                'current' => false
-            //            ],
+//            [
+//                'label'   => 'Crm',
+//                'name'    => 'social.crm',
+//                'icon'    => 'heroicon-o-users',
+//                'module'  => 'advice',
+//                'current' => false
+//            ],
+//            [
+//                'label'   => 'Learn',
+//                'name'    => 'advice.home',
+//                'icon'    => 'heroicon-o-academic-cap',
+//                'module'  => 'advice',
+//                'current' => false
+//            ],
+//            [
+//                'label'   => 'Marketplace',
+//                'name'    => 'advice.home',
+//                'icon'    => 'heroicon-o-shopping-bag',
+//                'module'  => 'jobs',
+//                'current' => false
+//            ],
         ];
 
 

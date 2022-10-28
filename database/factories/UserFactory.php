@@ -27,11 +27,9 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => $this->faker->unique()->firstName(),
-            'last_name' => $this->faker->unique()->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
         ];
     }
@@ -52,21 +50,41 @@ class UserFactory extends Factory
 
     /**
      * Indicate that the user should have a personal team.
-     *
+     * 
      * @return $this
      */
-    public function withPersonalTeam()
+    public function withTeam()
     {
         if (! Features::hasTeamFeatures()) {
             return $this->state([]);
         }
 
-        return $this->has(
+        return $this->hasAttached(
             Team::factory()
                 ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->name.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
-                }),
-            'ownedTeams'
+                    return ['name' => $user->profile->name.'\'s ' . \Trans::get('Team')];
+                }), 
+                ['role' => 'owner'],
+                'teams'
+        );
+    }
+
+    /**
+     * Indicate that the user should have a personal team.
+     * 
+     * @param $position
+     * @return $this
+     */
+    public function withExistingTeam($position = 'member')
+    {
+        if (! Features::hasTeamFeatures()) {
+            return $this->state([]);
+        }
+
+        return $this->hasAttached(
+            Team::get()->shuffle()->first(), 
+            ['role' => $position],
+            'teams'
         );
     }
 
@@ -83,7 +101,9 @@ class UserFactory extends Factory
             Profile::factory()
                 ->state(function (array $attributes, User $user) {
                     return [
-                        'user_id' => $user->id
+                        'user_id' => $user->id,
+                        'first_name' => $attributes['first_name'],
+                        'last_name' => $attributes['last_name'],
                     ];
                 })
         );

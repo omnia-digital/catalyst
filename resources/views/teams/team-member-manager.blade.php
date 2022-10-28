@@ -6,23 +6,23 @@
         <div class="mt-10 sm:mt-0">
             <x-jet-form-section submit="addTeamMember">
                 <x-slot name="title">
-                    {{ __('Add Team Member') }}
+                    {{ \Trans::get('Add Team Member') }}
                 </x-slot>
 
                 <x-slot name="description">
-                    {{ __('Add a new team member to your team, allowing them to collaborate with you.') }}
+                    {{ \Trans::get('Add a new team member to your team, allowing them to collaborate with you.') }}
                 </x-slot>
 
                 <x-slot name="form">
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-base-text-color">
-                            {{ __('Please provide the email address of the person you would like to add to this team.') }}
+                            {{ \Trans::get('Please provide the email address of the person you would like to add to this team.') }}
                         </div>
                     </div>
 
                     <!-- Member Email -->
                     <div class="col-span-6 sm:col-span-4">
-                        <x-jet-label for="email" value="{{ __('Email') }}" />
+                        <x-jet-label for="email" value="{{ \Trans::get('Email') }}" />
                         <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="addTeamMemberForm.email" />
                         <x-jet-input-error for="email" class="mt-2" />
                     </div>
@@ -30,7 +30,7 @@
                     <!-- Role -->
                     @if (count($this->roles) > 0)
                         <div class="col-span-6 lg:col-span-4">
-                            <x-jet-label for="role" value="{{ __('Role') }}" />
+                            <x-jet-label for="role" value="{{ \Trans::get('Role') }}" />
                             <x-jet-input-error for="role" class="mt-2" />
 
                             <div class="relative z-0 mt-1 border border-neutral-light rounded-lg cursor-pointer">
@@ -59,15 +59,22 @@
                             </div>
                         </div>
                     @endif
+
+                    <!-- Invitation Message -->
+                    {{-- <div class="col-span-6 sm:col-span-4">
+                        <x-jet-label for="message" value="{{ \Trans::get('Message') }}" />
+                        <x-jet-input id="message" type="text" class="mt-1 block w-full" wire:model.defer="addTeamMemberForm.message" />
+                        <x-jet-input-error for="message" class="mt-2" />
+                    </div> --}}
                 </x-slot>
 
                 <x-slot name="actions">
                     <x-jet-action-message class="mr-3" on="saved">
-                        {{ __('Added.') }}
+                        {{ \Trans::get('Added.') }}
                     </x-jet-action-message>
 
                     <x-jet-button>
-                        {{ __('Add') }}
+                        {{ \Trans::get('Add') }}
                     </x-jet-button>
                 </x-slot>
             </x-jet-form-section>
@@ -81,11 +88,11 @@
         <div class="mt-10 sm:mt-0">
             <x-jet-action-section>
                 <x-slot name="title">
-                    {{ __('Pending Team Invitations') }}
+                    {{ \Trans::get('Pending Team Invitations') }}
                 </x-slot>
 
                 <x-slot name="description">
-                    {{ __('These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.') }}
+                    {{ \Trans::get('These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.') }}
                 </x-slot>
 
                 <x-slot name="content">
@@ -99,7 +106,7 @@
                                         <!-- Cancel Team Invitation -->
                                         <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
                                                             wire:click="cancelTeamInvitation({{ $invitation->id }})">
-                                            {{ __('Cancel') }}
+                                            {{ \Trans::get('Cancel') }}
                                         </button>
                                     @endif
                                 </div>
@@ -118,11 +125,11 @@
         <div class="mt-10 sm:mt-0">
             <x-jet-action-section>
                 <x-slot name="title">
-                    {{ __('Team Members') }}
+                    {{ \Trans::get('Team Members') }}
                 </x-slot>
 
                 <x-slot name="description">
-                    {{ __('All of the people that are part of this team.') }}
+                    {{ \Trans::get('All of the people that are part of this team.') }}
                 </x-slot>
 
                 <!-- Team Member List -->
@@ -139,24 +146,24 @@
                                     <!-- Manage Team Member Role -->
                                     @if (Gate::check('addTeamMember', $team) && Laravel\Jetstream\Jetstream::hasRoles())
                                         <button class="ml-2 text-sm text-light-text-color underline" wire:click="manageRole('{{ $user->id }}')">
-                                            {{ Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name }}
+                                            {{ $user->membership->role ? Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name : '' }}
                                         </button>
                                     @elseif (Laravel\Jetstream\Jetstream::hasRoles())
                                         <div class="ml-2 text-sm text-light-text-color">
-                                            {{ Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name }}
+                                            {{ $user->membership->role ? Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name : '' }}
                                         </div>
                                     @endif
 
                                     <!-- Leave Team -->
                                     @if ($this->user->id === $user->id)
                                         <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="$toggle('confirmingLeavingTeam')">
-                                            {{ __('Leave') }}
+                                            {{ \Trans::get('Leave') }}
                                         </button>
 
                                     <!-- Remove Team Member -->
                                     @elseif (Gate::check('removeTeamMember', $team))
                                         <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="confirmTeamMemberRemoval('{{ $user->id }}')">
-                                            {{ __('Remove') }}
+                                            {{ \Trans::get('Remove') }}
                                         </button>
                                     @endif
                                 </div>
@@ -171,7 +178,7 @@
     <!-- Role Management Modal -->
     <x-jet-dialog-modal wire:model="currentlyManagingRole">
         <x-slot name="title">
-            {{ __('Manage Role') }}
+            {{ \Trans::get('Manage Role') }}
         </x-slot>
 
         <x-slot name="content">
@@ -203,11 +210,11 @@
 
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="stopManagingRole" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
+                {{ \Trans::get('Cancel') }}
             </x-jet-secondary-button>
 
             <x-jet-button class="ml-2" wire:click="updateRole" wire:loading.attr="disabled">
-                {{ __('Save') }}
+                {{ \Trans::get('Save') }}
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>
@@ -215,20 +222,20 @@
     <!-- Leave Team Confirmation Modal -->
     <x-jet-confirmation-modal wire:model="confirmingLeavingTeam">
         <x-slot name="title">
-            {{ __('Leave Team') }}
+            {{ \Trans::get('Leave Team') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ __('Are you sure you would like to leave this team?') }}
+            {{ \Trans::get('Are you sure you would like to leave this team?') }}
         </x-slot>
 
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('confirmingLeavingTeam')" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
+                {{ \Trans::get('Cancel') }}
             </x-jet-secondary-button>
 
             <x-jet-danger-button class="ml-2" wire:click="leaveTeam" wire:loading.attr="disabled">
-                {{ __('Leave') }}
+                {{ \Trans::get('Leave') }}
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
@@ -236,20 +243,20 @@
     <!-- Remove Team Member Confirmation Modal -->
     <x-jet-confirmation-modal wire:model="confirmingTeamMemberRemoval">
         <x-slot name="title">
-            {{ __('Remove Team Member') }}
+            {{ \Trans::get('Remove Team Member') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ __('Are you sure you would like to remove this person from the team?') }}
+            {{ \Trans::get('Are you sure you would like to remove this person from the team?') }}
         </x-slot>
 
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('confirmingTeamMemberRemoval')" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
+                {{ \Trans::get('Cancel') }}
             </x-jet-secondary-button>
 
             <x-jet-danger-button class="ml-2" wire:click="removeTeamMember" wire:loading.attr="disabled">
-                {{ __('Remove') }}
+                {{ \Trans::get('Remove') }}
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>

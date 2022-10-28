@@ -34,7 +34,7 @@
         {
             $actorName = $this->actor->handle;
 
-            return "{$actorName} " . __('notification.startedFollowingYou');
+            return "{$actorName} " . \Trans::get('notification.startedFollowingYou');
         }
 
         public function toHtml()
@@ -42,6 +42,6 @@
             $actorName = $this->actor->handle;
             $actorUrl  = $this->actor->url();
 
-            return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . __('notification.startedFollowingYou');
+            return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . \Trans::get('notification.startedFollowingYou');
         }
     }

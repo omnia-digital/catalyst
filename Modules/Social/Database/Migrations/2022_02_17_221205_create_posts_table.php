@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('type')->nullable();
             $table->string('image')->nullable();
             $table->nullableMorphs('postable');
+            $table->unsignedBigInteger('repost_original_id')->index()->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
@@ -37,4 +38,4 @@ class CreatePostsTable extends Migration
     {
         Schema::dropIfExists('posts');
     }
-}
+};

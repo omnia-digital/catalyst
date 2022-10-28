@@ -2,6 +2,7 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
+use App\Traits\Filter\WithSortAndFilters;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Enums\PostType;
@@ -11,14 +12,7 @@ use function view;
 
 class Index extends Component
 {
-    use WithPagination, WithCachedRows;
-
-    public ?string $search = null;
-
-    public array $filters = [
-        'published_at' => '',
-        'has_attachment' => false,
-    ];
+    use WithPagination, WithCachedRows, WithSortAndFilters;
 
     public array $sortLabels = [
         'title' => 'Title',
@@ -28,8 +22,7 @@ class Index extends Component
         'published_at' => 'Published Date'
     ];
 
-    public string $orderBy = 'published_at';
-    public bool $sortDesc = true;
+    public string $dateColumn = 'published_at';
 
     protected $queryString = [
         'search'
@@ -37,42 +30,28 @@ class Index extends Component
 
     public function mount()
     {
+        $this->orderBy = 'published_at';
+
         if (!\App::environment('production')) {
             $this->useCache = false;
         }
     }
 
-    public function updatedFilters()
-    {
-        $this->resetPage();
-    }
-
-    public function sortBy($key)
-    {
-        if($this->orderBy === $key) {
-            $this->sortDesc = !$this->sortDesc;
-        } else {
-            $this->orderBy = $key;
-            $this->sertDesc = true;
-        }
-    }
-
     public function getRowsQueryProperty()
     {
-        $query = clone $this->rowsQueryWithoutFilters;
+        $query = Post::where('type', '=', PostType::RESOURCE)
+            ->withCount(['bookmarks', 'likes', 'media']);
 
-        return $query->where(function($q) {
+        $query = $this->applyFilters($query);
+
+        $query->where(function($q) {
             $q->where('title', 'like', "%{$this->search}%")
             ->orWhere('body', 'like', "%{$this->search}%");
         });
-    }
 
-    public function getRowsQueryWithoutFiltersProperty()
-    {
-        return Post::where('type','=',PostType::RESOURCE)
-            ->withCount('bookmarks')
-            ->withCount('likes')
-            ->orderBy($this->orderBy, $this->sortDesc ? 'desc' : 'asc');
+        $query = $this->applySorting($query);
+
+        return $query;
     }
 
     public function getRowsProperty()

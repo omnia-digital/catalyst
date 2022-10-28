@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Modules\Billing\Models\SubscriptionType;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    $user = $request->user()->makeVisible(['email','name','profile_photo_url'])->append(['name']);
+
+    return [
+        'id' => $user->id,
+        'email' => $user->email,
+        'name' => $user->name,
+        'avatar' => $user->profile_photo_url,
+        'profile_photo' => $user->profile_photo_url,
+    ];
 });

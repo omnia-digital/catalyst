@@ -15,12 +15,17 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index();
             $table->string('name');
+            $table->string('handle')->nullable()->index();
+            $table->string('profile_photo_path', 2048)->nullable();
             $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->text('summary')->nullable();
             $table->text('content')->nullable();
-            $table->boolean('personal_team');
+            $table->string('location')->nullable();
+            $table->integer('rating')->nullable();
+            $table->string('languages')->default('English');
             $table->timestamps();
         });
     }

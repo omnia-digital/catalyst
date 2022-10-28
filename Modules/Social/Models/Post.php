@@ -4,6 +4,7 @@ namespace Modules\Social\Models;
 
 use App\Models\Team;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +31,7 @@ class Post extends Model implements HasMedia
         'title',
         'type',
         'body',
+        'url',
         'postable_id',
         'postable_type',
         'repost_original_id',
@@ -76,7 +78,7 @@ class Post extends Model implements HasMedia
         if (empty($value)) {
             return $this->created_at;
         } else {
-            return $value;
+            return new Carbon($value);
         }
     }
 
@@ -88,7 +90,7 @@ class Post extends Model implements HasMedia
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class)->withDefault([
-            'name' => 'No Project',
+            'name' => 'No Team',
         ]);
     }
 
@@ -126,8 +128,28 @@ class Post extends Model implements HasMedia
         return route('social.posts.show', $this);
     }
 
+    public function scopeOnlyResources($query)
+    {
+        return $query->where('type', PostType::RESOURCE);
+    }
+
+    public function scopeOnlyPosts($query)
+    {
+        return $query->whereNull('type');
+    }
+
     public function isParent(): bool
     {
         return is_null($this->postable_id) && is_null($this->postable_type);
+    }
+
+    public static function getTrending($type = 'post')
+    {
+        $trendingPosts = Post::withCount('likes')
+                   ->with('user')
+                   ->when($type, fn($query) => $query->where('type', $type))
+                   ->orderBy('likes_count', 'desc')
+                   ->orderBy('created_at', 'desc');
+        return $trendingPosts;
     }
 }

@@ -24,9 +24,9 @@
                         </div>
                     </div>
                     <div class="flex justify-start mt-2 min-w-0 flex-1">
-                        <h1 class="text-2xl font-bold text-gray-900 truncate">
+                        <x-library::heading.1 class="text-2xl font-bold text-gray-900 truncate">
                             {{ profile.name }}
-                        </h1>
+                        </x-library::heading.1>
                         <p class="text-sm text-gray-600">{{ profile.handle }}</p>
                     </div>
                     <div class="mt-2 text-sm">
@@ -81,7 +81,7 @@
                 </div>
                 <!-- My Feed -->
                 <div class="mt-4">
-                    <h1 class="sr-only">Recent questions</h1>
+                    <x-library::heading.1 class="sr-only">Recent questions</x-library::heading.1>
                     <ul role="list" class="space-y-4">
                         <li v-for="question in questions" :key="question.id" class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
                             <article :aria-labelledby="'question-title-' + question.id">
@@ -138,9 +138,9 @@
                                             </Menu>
                                         </div>
                                     </div>
-                                    <h2 :id="'question-title-' + question.id" class="mt-4 text-base font-medium text-gray-900">
+                                    <x-library::heading.2 :id="'question-title-' + question.id" class="mt-4 text-base font-medium text-gray-900">
                                         {{ question.title }}
-                                    </h2>
+                                    </x-library::heading.2>
                                 </div>
                                 <div class="mt-2 text-sm text-gray-700 space-y-4" v-html="question.body"/>
                                 <div class="mt-6 flex justify-between space-x-8">
@@ -186,9 +186,9 @@
                     <section aria-labelledby="who-to-follow-heading">
                         <div class="bg-white rounded-lg shadow">
                             <div class="p-6">
-                                <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
+                                <x-library::heading.2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
                                     Who to follow
-                                </h2>
+                                </x-library::heading.2>
                                 <div class="mt-6 flow-root">
                                     <ul role="list" class="-my-4 divide-y divide-gray-200">
                                         <li v-for="user in whoToFollow" :key="profile.handle" class="flex items-center py-4 space-x-3">
@@ -225,9 +225,9 @@
                     <section aria-labelledby="trending-heading">
                         <div class="bg-white rounded-lg shadow">
                             <div class="p-6">
-                                <h2 id="trending-heading" class="text-base font-medium text-gray-900">
+                                <x-library::heading.2 id="trending-heading" class="text-base font-medium text-gray-900">
                                     Trending
-                                </h2>
+                                </x-library::heading.2>
                                 <div class="mt-6 flow-root">
                                     <ul role="list" class="-my-4 divide-y divide-gray-200">
                                         <li v-for="post in trendingPosts" :key="post.id" class="flex py-4 space-x-3">
@@ -297,7 +297,7 @@ const user = {
 const navigation = [
     {label: 'Home', name: 'home', icon: HomeIcon, current: true},
     {label: 'Explore', name: 'explore', icon: TrendingUpIcon, current: false},
-    {label: 'Projects', name: 'projects', icon: FireIcon, current: false},
+    {label: 'Teams', name: 'teams', icon: FireIcon, current: false},
     {label: 'My Profile', name: 'profile', icon: UserGroupIcon, current: false},
 ]
 const userNavigation = [

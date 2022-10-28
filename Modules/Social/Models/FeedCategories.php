@@ -16,8 +16,8 @@ class FeedCategories extends Model
         ],
         [
             'id' => 1,
-            'name' => 'top-projects',
-            'label' => 'Top Projects',
+            'name' => 'top-teams',
+            'label' => 'Top Teams',
         ],
         [
             'id' => 2,

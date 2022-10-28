@@ -29,16 +29,6 @@ class SideMenu extends Component
         }
     }
 
-    public function openMobileMenu()
-    {
-        $this->isOpen = true;
-    }
-
-    public function closeMobileMenu()
-    {
-        $this->isOpen = false;
-    }
-
     public function render()
     {
         return view('livewire.side-menu-wide');

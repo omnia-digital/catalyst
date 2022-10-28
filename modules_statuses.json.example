@@ -1,0 +1,12 @@
+{
+  "Advice": false,
+  "Social": true,
+  "Projects": true,
+  "Resources": true,
+  "Jobs": false,
+  "Games": true,
+  "Reviews": true,
+  "Crm": false,
+  "Billing": true,
+  "Forms": true
+}

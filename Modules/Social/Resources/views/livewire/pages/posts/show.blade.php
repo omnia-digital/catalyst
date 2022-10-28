@@ -1,16 +1,14 @@
-@extends('social::livewire.layouts.main-layout')
+@extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
-    <div class="flex space-x-6">
+    <div class="mt-6 max-w-post-card-max-w mx-auto divide-y">
+        <livewire:social::components.post-card wire:key="post-{{ $post->id }}" :post="$post" :clickable="false"/>
 
-<div class="divide-y">
-    <livewire:social::components.post-card wire:key="post-{{ $post->id }}" :post="$post"/>
-
-    <livewire:social::comment-section :post="$post"/>
-
-</div>
-    <x-sidebar-column class="max-w-sm" post-type="resource"/>
+        @auth
+            <livewire:social::comment-section :post="$post"/>
+            <livewire:media-manager/>
+        @endauth
     </div>
 
-    <livewire:media-manager/>
+    <livewire:authentication-modal/>
 @endsection

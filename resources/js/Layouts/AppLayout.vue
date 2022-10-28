@@ -16,7 +16,7 @@
                                 <button type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                                         @click="sidebarOpen = false">
                                     <span class="sr-only">Close sidebar</span>
-                                    <XIcon class="h-6 w-6 text-white" aria-hidden="true"/>
+                                    <XIcon class="h-6 w-6 text-white-text-color" aria-hidden="true"/>
                                 </button>
                             </div>
                         </TransitionChild>
@@ -29,7 +29,7 @@
                             <!-- mobile nav -->
                             <nav class="px-2 space-y-1">
                                 <a v-for="item in navigation" :key="item.name" :href="item.href"
-                                   :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
+                                   :class="[item.current ? 'bg-gray-900 text-white-text-color' : 'text-gray-300 hover:bg-gray-700 hover:text-white-text-color', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
                                     <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
                                     {{ item.name }}
                                 </a>
@@ -61,10 +61,10 @@
                                      alt=""/>
                             </div>
                             <div class="ml-3">
-                                <p class="text-lg font-medium text-white">
+                                <p class="text-lg font-medium text-white-text-color">
                                     Joshua Torres
                                 </p>
-                                <p class="text-base font-medium text-primary group-hover:text-white">
+                                <p class="text-base font-medium text-primary group-hover:text-white-text-color">
                                     Lvl 5 <span class="text-gold">5348</span>
                                 </p>
                             </div>
@@ -74,10 +74,10 @@
                 <div class="flex-1 flex pl-6 flex-col overflow-y-auto">
                     <nav class="flex-1 py-4 space-y-1">
                         <Link v-for="item in navigation" :key="item.name" :href="route(item.name)"
-                              :class="[$page.component === '' ? 'bg-tertiary text-white' :
-                        'text-gray-300 hover:bg-tertiary hover:text-white',
+                              :class="[$page.component === '' ? 'bg-tertiary text-white-text-color' :
+                        'text-gray-300 hover:bg-tertiary hover:text-white-text-color',
                         'group flex items-center px-2 py-2 text-lg font-medium rounded-md']">
-                            <component :is="item.icon" :class="[item.current ? 'text-white' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
+                            <component :is="item.icon" :class="[item.current ? 'text-white-text-color' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true"/>
                             {{ item.label }}
                         </Link>
                     </nav>
@@ -120,7 +120,7 @@ const navigation = [
     {label: 'Community', name: 'home', icon: UsersIcon, current: true},
     {label: 'Notifications', name: 'notifications', icon: BellIcon, current: false},
     {label: 'Messages', name: 'messages', icon: MailIcon, current: false},
-    {label: 'Projects', name: 'projects', icon: CollectionIcon, current: false},
+    {label: 'Teams', name: 'teams', icon: CollectionIcon, current: false},
     {label: 'Groups', name: 'groups', icon: InformationCircleIcon, current: false},
     {label: 'Learn', name: 'learn', icon: AcademicCapIcon, current: false},
     {label: 'Marketplace', name: 'marketplace', icon: OfficeBuildingIcon, current: false},

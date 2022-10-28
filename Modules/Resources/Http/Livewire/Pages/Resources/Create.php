@@ -2,11 +2,11 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
+use App\Models\Tag;
 use Livewire\Component;
-use Modules\Social\Actions\CreateNewPostAction;
+use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
 use Phuclh\MediaManager\WithMediaManager;
-use Spatie\Tags\Tag;
 
 class Create extends Component
 {
@@ -24,8 +24,8 @@ class Create extends Component
     {
         return [
             'title' => ['required', 'max:255'],
-            'url'   => ['url', 'max:255'],
-            'body'  => ['required', 'max:500'],
+            'url'   => ['nullable', 'url', 'max:255'],
+            'body'  => ['required', 'min:50'],
             'image' => ['nullable','string'],
         ];
     }
@@ -34,33 +34,24 @@ class Create extends Component
     {
         $validated = $this->validate();
 
-        $hashtags = $this->pullTags($validated['body']);
+        $hashtags = Tag::pullTags($validated['body']);
 
         $resource = (new CreateNewPostAction)
             ->type(PostType::RESOURCE)
             ->execute($validated['body'], [
                 'title' => $validated['title'],
+                'body' => $validated['body'],
                 'url'   => $validated['url'],
                 'image' => $validated['image']
             ]);
 
-        $tags = $this->getTags($hashtags);
-        $tags = $this->addResourceTag($tags);
-        $resource->attachTags($tags);
+        $tags = Tag::getTags($hashtags);
+        $resource->attachTags($tags,'post');
 
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);
     }
 
-    // Add Resource tag to all resources
-    public function addResourceTag($tags) : array
-    {
-        if (!array_key_exists('resource', $tags)) {
-            $tags[] = 'resource';
-        }
-
-        return $tags;
-    }
 
     public function setFeaturedImage(array $image)
     {
@@ -72,27 +63,6 @@ class Create extends Component
         $this->image = null;
 
         $this->removeFileFromMediaManager();
-    }
-
-    public function pullTags($text)
-    {
-        $regexForHashtags = "/\B#([a-z0-9_-]+)/i";
-        $hashtags = array();
-
-        preg_match_all($regexForHashtags, $text, $hashtags);
-
-        return $hashtags[1];
-    }
-
-    public function getTags($hashtags)
-    {
-        $tags = array();
-
-        foreach ($hashtags as $hashtag) {
-            $tags[] = Tag::findOrCreateFromString($hashtag);
-        }
-
-        return $tags;
     }
 
     public function render()
