@@ -45,7 +45,7 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('{profile}/media', ProfileMedia::class)->name('media');
         Route::get('{profile}/followers', ProfileFollowers::class)->name('followers');
         Route::get('{profile}/awards', ProfileAwards::class)->name('awards');
-        Route::get('{profile}/teams', ProfileTeams::class)->name('teams');
+        Route::get('{profile}/' . \Trans::get('teams'), ProfileTeams::class)->name('teams');
     });
 
     Route::name('teams.')->prefix(\Trans::get('teams'))->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
