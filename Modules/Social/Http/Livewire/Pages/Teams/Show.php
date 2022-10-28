@@ -8,7 +8,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Settings\BillingSettings;
 use App\Support\Platform\Platform;
-use App\Support\Platform\WithLoginModal;
+use App\Support\Platform\WithGuestAccess;
 use App\Traits\Team\WithTeamManagement;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
@@ -16,7 +16,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Show extends Component
 {
-    use WithTeamManagement, WithMap, WithLoginModal;
+    use WithTeamManagement, WithMap, WithGuestAccess;
 
     public $team;
 

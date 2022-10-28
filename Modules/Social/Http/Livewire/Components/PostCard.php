@@ -2,6 +2,9 @@
 
 namespace Modules\Social\Http\Livewire\Components;
 
+use App\Support\Platform\Platform;
+use App\Support\Platform\WithGuestAccess;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
@@ -9,7 +12,7 @@ use function view;
 
 class PostCard extends Component
 {
-    use WithNotification;
+    use WithNotification, WithGuestAccess;
 
     public Post $post;
     public $optionsMenuOpen = false;
@@ -44,6 +47,12 @@ class PostCard extends Component
 
     public function toggleBookmark()
     {
+        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+            $this->showAuthenticationModal(route('social.posts.show', $this->post));
+
+            return;
+        }
+
         if ($this->post->isBookmarkedBy()) {
             $this->post->removeBookmark();
             $this->post->refresh();

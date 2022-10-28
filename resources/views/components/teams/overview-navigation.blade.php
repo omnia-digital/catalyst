@@ -82,5 +82,5 @@
         @endauth
     </div>
 
-    <livewire:login-modal/>
+    <livewire:authentication-modal/>
 </nav>

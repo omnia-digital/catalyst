@@ -3,7 +3,7 @@
 namespace Modules\Social\Http\Livewire;
 
 use App\Support\Platform\Platform;
-use App\Support\Platform\WithLoginModal;
+use App\Support\Platform\WithGuestAccess;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +16,7 @@ use Modules\Social\Support\Livewire\WithPostEditor;
 
 class CommentSection extends Component
 {
-    use WithPostEditor, WithLoginModal;
+    use WithPostEditor, WithGuestAccess;
 
     public Post $post;
 
@@ -41,7 +41,7 @@ class CommentSection extends Component
     public function saveComment($data)
     {
         if (Platform::isAllowingGuestAccess() && !Auth::check()) {
-            $this->showLoginModal(route('social.posts.show', $this->post));
+            $this->showAuthenticationModal(route('social.posts.show', $this->post));
 
             return;
         }

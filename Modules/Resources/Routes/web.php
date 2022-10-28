@@ -6,7 +6,7 @@ use Modules\Resources\Http\Livewire\Pages\Resources\Index;
 use Modules\Resources\Http\Livewire\Pages\Resources\Show;
 use Modules\Social\Http\Middleware\GuestAccessMiddleware;
 
-Route::name('resources.')->prefix('resources')->middleware([GuestAccessMiddleware::class])->group(function () {
+Route::name('resources.')->prefix('resources')->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
     Route::get('/', Index::class)->name('home');
     Route::get('bookmarks', BookmarkIndex::class)->name('bookmarks');
     Route::get('{resource}', Show::class)->name('show');

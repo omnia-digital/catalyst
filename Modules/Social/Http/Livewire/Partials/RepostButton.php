@@ -2,7 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
-use App\Support\Platform\WithLoginModal;
+use App\Support\Platform\WithGuestAccess;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -15,7 +15,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class RepostButton extends Component
 {
-    use WithModal, WithNotification, WithPostEditor, WithLoginModal;
+    use WithModal, WithNotification, WithPostEditor, WithGuestAccess;
 
     public Post $model;
 
