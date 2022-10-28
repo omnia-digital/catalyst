@@ -8,26 +8,32 @@
         </div>
     </div>
 
-    <!-- Filters -->
-    @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
+    <div wire:init="showGuestAccessModal">
+        @auth
+            <!-- Filters -->
+            @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
-    @if(empty($bookmarks))
-        <x-library::heading.2>No Bookmarked Resources</x-library::heading.2>
-    @else
-        <div class="">
-            <ul role="list" class="masonry masonry-2 space-y-4">
-                @foreach($bookmarks as $bookmark)
-                    <li>
-                        <livewire:social::components.post-card :post="$bookmark->bookmarkable()->first()"/>
-                    </li>
-                @endforeach
-            </ul>
+            @if(empty($bookmarks))
+                <x-library::heading.2>No Bookmarked Resources</x-library::heading.2>
+            @else
+                <div class="">
+                    <ul role="list" class="masonry masonry-2 space-y-4">
+                        @foreach($bookmarks as $bookmark)
+                            <li>
+                                <livewire:social::components.post-card :post="$bookmark->bookmarkable()->first()"/>
+                            </li>
+                        @endforeach
+                    </ul>
 
-            <div class="pb-6">
-                {{ $bookmarks->onEachSide(1)->links() }}
-            </div>
-        </div>
-    @endif
+                    <div class="pb-6">
+                        {{ $bookmarks->onEachSide(1)->links() }}
+                    </div>
+                </div>
+            @endif
+        @endauth
+    </div>
+
+    <livewire:authentication-modal/>
 @endsection
 @push('scripts')
     <script>
@@ -42,7 +48,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top ' . {{ \Trans::get('teams') }},
+                        title: 'Top '.{{ \Trans::get('teams') }},
                         component: 'social.top-teams'
                     },
                     {
