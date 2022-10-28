@@ -23,21 +23,22 @@
                         @endif
 
                         <p class="text-primary whitespace-nowrap">Joined about {{ $user->profile->created_at->diffForHumans() }}</p>
-                        <x-dot class="hidden sm:block" />
-
-                        @if($user->online_status)
+                        
+                        {{-- @if($user->online_status)
+                            <x-dot class="hidden sm:block" />
                             <x-tag name="Online" class="py-0"/>
                         @else
+                            <x-dot class="hidden sm:block" />
                             <x-tag name="Offline" class="py-0"/>
-                        @endif
-                        @foreach ($user->profile->tags as $tag)
-                            @if ($loop->first)
-                                <x-dot class="hidden sm:block" />
-                            @endif
-                            <x-tag :name="$tag->name" />
-                        @endforeach
-
+                        @endif --}}
+                        
                         <div class="!ml-auto flex items-center justify-end space-x-2">
+                            @foreach ($user->profile->tags as $tag)
+                                {{-- @if ($loop->first)
+                                    <x-dot class="hidden sm:block" />
+                                @endif --}}
+                                <x-tag class="bg-white/50" :name="$tag->name" />
+                            @endforeach
                         </div>
                     </div>
                 </div>
