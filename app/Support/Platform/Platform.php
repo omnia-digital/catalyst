@@ -130,6 +130,11 @@ class Platform
         return (new GeneralSettings)->allow_guest_access;
     }
 
+    public static function shouldShowLoginOnGuestAccess() : bool
+    {
+        return (new GeneralSettings)->should_show_login_on_guest_access;
+    }
+
     public static function isSubscriptionShownInNavigation()
     {
         return self::getBillingSetting('show_user_subscription_plan_in_navigation');

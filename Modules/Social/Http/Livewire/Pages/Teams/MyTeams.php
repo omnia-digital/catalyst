@@ -4,6 +4,8 @@ namespace Modules\Social\Http\Livewire\Pages\Teams;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Support\Platform\Platform;
+use App\Support\Platform\WithGuestAccess;
 use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +15,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class MyTeams extends Component
 {
-    use WithPagination, WithCachedRows, WithSortAndFilters;
+    use WithPagination, WithCachedRows, WithSortAndFilters, WithGuestAccess;
 
     public array $sortLabels = [
         'name' => 'Name',
@@ -25,6 +27,12 @@ class MyTeams extends Component
 
     public function mount()
     {
+        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+            $this->redirectToAuthenticationPage();
+
+            return;
+        }
+
         $this->orderBy = 'name';
 
         if (!\App::environment('production')) {

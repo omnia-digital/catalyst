@@ -22,7 +22,7 @@
     @else
         <button
                 class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-secondary text-white-text-color hover:opacity-75"
-                wire:click.prevent="showLoginModal('{{ route('social.teams.show', $team) }}')"
+                wire:click.prevent="showAuthenticationModal('{{ route('social.teams.show', $team) }}')"
         >{{ \App\Support\Platform\Platform::applyButtonText() }}</button>
     @endauth
 </div>
