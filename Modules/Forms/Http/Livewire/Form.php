@@ -69,7 +69,6 @@ class Form extends Component implements HasForms
     {
         $formData = $this->form->getState();
         $formModelFields = collect($this->formModel->content);
-        $team_id = $this->team_id;
 
         foreach($formData as $formDataKey => $value) {
             // Search Form Model fields for the field that matches the form data
@@ -85,20 +84,10 @@ class Form extends Component implements HasForms
             ];
         }
 
-        if ($this->formModel->formType->slug !== 'registration') {
-            FormSubmission::create([
-                'form_id' => $this->formModel->id,
-                'user_id' => auth()->id(),
-                'team_id' => $team_id ?? null,
-                'data' => $formData,
-            ]);
-        }
-
-        $submissionData = array_map(fn ($item): string => $item['data'], $formData );
-
-        $this->processFormSubmission($submissionData, $this->formModel->formType->slug);
+        $this->processFormSubmission($formData, $this->formModel->formType->slug);
 
         $this->success('Form submitted successfully');
+
         $this->formSubmitted = true;
 
         if ($this->team_id) {
@@ -108,18 +97,31 @@ class Form extends Component implements HasForms
         $this->redirectRoute('social.home');
     }
 
-    public function processFormSubmission($submissionData, $type)
+    public function processFormSubmission($formData, $type)
     {
         switch ($type) {
             case 'registration':
-                event(new Registered($user = (new CreateNewUser)->create($submissionData)));
+                $registrationData = array_map(fn ($item): string => $item['data'], $formData );
+
+                event(new Registered($user = (new CreateNewUser)->create($registrationData)));
                 Auth::login($user);
                 break;
             
             default:
-                # code...
+                $user = auth()->user();
                 break;
         }
+
+        unset($formData['password']);
+        unset($formData['password_confirmation']);
+
+        FormSubmission::create([
+            'form_id' => $this->formModel->id,
+            'user_id' => $user->id,
+            'team_id' => $team_id ?? null,
+            'data' => $formData,
+        ]);
+
     }
 
     public function render()
