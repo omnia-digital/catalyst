@@ -38,20 +38,20 @@
                 }
             },
 
-            removeImage(index) {
-                this.$wire.call('removeImage', index);
+            removeTemporaryImage(index) {
+                this.$wire.call('removeTemporaryImage', index);
             },
 
         }"
         x-on:media-manager:file-selected.window="setImage"
-        x-on:upadate-post:image-set.window="setImages"
+        x-on:update-post:image-set.window="setImages"
         class="w-full"
     >
         <div class="col-span-4 card">
             <div class="p-6 space-y-4">
                 <div>
                     <x-library::tiptap 
-                        wire:model.defer="content"
+                        wire:model.defer="post.body"
                         heightClass="m-1 text-lg"
                         wordCountType="character"
                         characterLimit="500"
@@ -63,11 +63,10 @@
                                     x-show="showImages"
                                     x-transition
                                     role="list"
-                                    class="px-4 grid gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
-                                    x-bind:class="{'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6': images.length > 2, 'grid-cols-1': images.length === 1, 'grid-cols-2': images.length === 2}"
+                                    class="px-4 grid grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
                                 >
                                     <template x-for="(image, index) in images" :key="index">
-                                        <li class="relative cursor-pointer">
+                                        <li class="col-span-1 relative cursor-pointer">
                                             <button
                                                 x-on:click.prevent.stop="removeTemporaryImage(index)"
                                                 type="button"
@@ -105,12 +104,12 @@
                     </div>
                 </div>
                 <div>
-                    @if ($post->getMedia()->count())
+                    @if ($postMedia?->count())
                         <div>
                             Post images:
                         </div>
                         <div class="flex flex-wrap w-full space-x-4">
-                            @foreach ($post->getMedia() as $key => $media)
+                            @foreach ($postMedia as $key => $media)
                                 <div class="w-56 relative">
                                     <div 
                                         wire:loading 
@@ -120,16 +119,9 @@
                                         <x-heroicon-o-refresh class="animate-spin w-8 h-8 absolute top-1/2 right-1/2 -mr-4 -mt-4" role="status" />
                                         <span class="sr-only">Loading...</span>
                                     </div>
-                                    {{-- <x-library::input.media-manager
-                                        id="post-image-{{ $key }}"
-                                        setImageAction="setFeaturedImage"
-                                        removeImageAction="removeImage({{ $media->id }})"
-                                        :file="$media->getFullUrl() ?? null"
-                                        label="Add Image (Upload, Unsplash, URL)"
-                                    /> --}}
                                     <div class="relative">
                                         <button
-                                            wire:click.prevent="removeImage({{ $media->id }})"
+                                            wire:click.prevent="confirmMediaRemoval({{ $media->id }})"
                                             type="button"
                                             class="absolute -top-2 -right-2 z-10 bg-red-100 rounded-full p-1 inline-flex items-center justify-center hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500"
                                         >
@@ -154,4 +146,24 @@
         </div>        
     </div>
     <livewire:media-manager/>
+    <!-- Remove Media Confirmation Modal -->
+    <x-jet-confirmation-modal wire:model="confirmingMediaRemoval">
+        <x-slot name="title">
+            {{ \Trans::get('Remove Media') }}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ \Trans::get('Are you sure you would like to remove this image? This cannot be undone.') }}
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('confirmingMediaRemoval')" wire:loading.attr="disabled">
+                {{ \Trans::get('Cancel') }}
+            </x-jet-secondary-button>
+
+            <x-jet-danger-button class="ml-2" wire:click="removeImage" wire:loading.attr="disabled">
+                {{ \Trans::get('Remove') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-confirmation-modal>
 @endsection
