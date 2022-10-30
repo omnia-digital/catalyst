@@ -2,16 +2,15 @@
 
 namespace Modules\Forms\Http\Livewire;
 
-use App\Models\Team;
-use Filament\Forms\Components\Builder\Block;
+use App\Actions\Fortify\CreateNewUser;
+use Auth;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Auth\Events\Registered;
 use Livewire\Component;
 use Modules\Forms\Models\FormSubmission;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
@@ -41,7 +40,8 @@ class Form extends Component implements HasForms
             return match ($field['type']) {
                 'text' => TextInput::make($config['name'])
                     ->label($config['label'])
-                    ->required($config['is_required']),
+                    ->required($config['is_required'])
+                    ->type($config['type']),
                 'select' => Select::make($config['name'])
                     ->label($config['label'])
                     ->options($config['options'])
@@ -69,7 +69,6 @@ class Form extends Component implements HasForms
     {
         $formData = $this->form->getState();
         $formModelFields = collect($this->formModel->content);
-        $team_id = $this->team_id;
 
         foreach($formData as $formDataKey => $value) {
             // Search Form Model fields for the field that matches the form data
@@ -85,17 +84,44 @@ class Form extends Component implements HasForms
             ];
         }
 
-        $submission = FormSubmission::create([
+        $this->processFormSubmission($formData, $this->formModel->formType->slug);
+
+        $this->success('Form submitted successfully');
+
+        $this->formSubmitted = true;
+
+        if ($this->team_id) {
+            $this->redirectRoute('social.teams.show', $this->team_id);
+        }
+
+        $this->redirectRoute('social.home');
+    }
+
+    public function processFormSubmission($formData, $type)
+    {
+        switch ($type) {
+            case 'registration':
+                $registrationData = array_map(fn ($item): string => $item['data'], $formData );
+
+                event(new Registered($user = (new CreateNewUser)->create($registrationData)));
+                Auth::login($user);
+                break;
+            
+            default:
+                $user = auth()->user();
+                break;
+        }
+
+        unset($formData['password']);
+        unset($formData['password_confirmation']);
+
+        FormSubmission::create([
             'form_id' => $this->formModel->id,
-            'user_id' => auth()->id(),
+            'user_id' => $user->id,
             'team_id' => $team_id ?? null,
             'data' => $formData,
         ]);
 
-        if ($submission) {
-            $this->success('Form submitted successfully');
-            $this->formSubmitted = true;
-        }
     }
 
     public function render()

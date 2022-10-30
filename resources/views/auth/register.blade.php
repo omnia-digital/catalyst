@@ -12,7 +12,11 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <x-forms.register-default-form/>
+        @if (\Modules\Forms\Models\Form::getRegistrationForm())
+            <livewire:forms::form :form="\Modules\Forms\Models\Form::getRegistrationForm()"/>
+        @else
+            <x-forms.register-default-form/>
+        @endif
 
         <x-slot name="additionalCard">
             <div class="flex items-center justify-center">

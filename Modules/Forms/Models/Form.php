@@ -40,4 +40,9 @@ class Form extends Model
         return $this->belongsTo(FormType::class);
     }
 
+    public static function getRegistrationForm()
+    {
+        return self::where('form_type_id', FormType::where('slug', 'registration')->first()->id)->first();
+    }
+
 }
