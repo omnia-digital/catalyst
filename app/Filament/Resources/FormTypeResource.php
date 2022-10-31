@@ -6,6 +6,9 @@ use App\Filament\Resources\FormTypeResource\Pages\CreateFormType;
 use App\Filament\Resources\FormTypeResource\Pages\EditFormType;
 use App\Filament\Resources\FormTypeResource\Pages\ListFormsType;
 use App\Filament\Resources\FormTypeResource\Pages\ViewFormType;
+use Closure;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Actions\ActionGroup;
@@ -16,6 +19,8 @@ use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class FormTypeResource extends Resource
 {
@@ -35,11 +40,28 @@ class FormTypeResource extends Resource
         return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                TextInput::make('name')
+                        ->label('Name')
+                        ->lazy()
+                        ->afterStateUpdated(function (Closure $set, $state) {
+                            $set('slug', Str::slug($state));
+                        })
+                        ->required(),
+                TextInput::make('slug')
+                    ->label('Slug')
+                    ->required()
+            ]);
+    }
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('name'),
+                TextColumn::make('slug'),
             ])
             ->filters([
                 Filter::make('name')
