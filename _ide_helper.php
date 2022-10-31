@@ -17780,6 +17780,15 @@
          *
          * @static 
          */ 
+        public static function shouldShowLoginOnGuestAccess()
+        {
+                        return \App\Support\Platform\Platform::shouldShowLoginOnGuestAccess();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
         public static function isSubscriptionShownInNavigation()
         {
                         return \App\Support\Platform\Platform::isSubscriptionShownInNavigation();
