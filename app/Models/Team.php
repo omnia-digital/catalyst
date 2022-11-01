@@ -20,6 +20,7 @@ use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Reviews\Traits\Reviewable;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
+use Modules\Social\Models\TeamNotification;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasHandle;
 use Modules\Social\Traits\Likable;
@@ -136,6 +137,11 @@ class Team extends JetstreamTeam implements HasMedia
     }
 
     // Relations //
+    public function teamNotifications(): HasMany
+    {
+        return $this->hasMany(TeamNotification::class);
+    }
+    
     public function postsWithinTeam()
     {
         return $this->hasMany(Post::class);

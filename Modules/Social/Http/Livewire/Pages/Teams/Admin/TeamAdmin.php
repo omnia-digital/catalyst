@@ -9,14 +9,19 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\Social\Support\Livewire\ManagesTeamNotifications;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Trans;
 
-class TeamAdmin extends Component/*  implements HasForms */
+class TeamAdmin extends Component
 {
-    use WithPlace, AuthorizesRequests, WithFileUploads, WithNotification/* , InteractsWithForms */;
+    use WithPlace, 
+        AuthorizesRequests, 
+        WithFileUploads, 
+        WithNotification,
+        ManagesTeamNotifications;
 
     public Team $team;
 
