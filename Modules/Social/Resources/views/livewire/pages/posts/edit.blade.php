@@ -99,7 +99,7 @@
                             </div>
                         @endif
                         <div>
-                            <x-library::input.error for="content" class="mt-2"/>
+                            <x-library::input.error for="post.body" class="mt-2"/>
                         </div>
                     </div>
                 </div>
