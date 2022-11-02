@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Social\Database\factories;
+namespace Modules\Social\Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;

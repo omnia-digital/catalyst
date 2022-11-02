@@ -43,7 +43,7 @@
     <div class="flex-1 flex pr-2 items-center justify-end">
         @can('update-team', $team)
 
-            <a x-show="$wire.applicationsCount > 0" class="flex items-center hover:underline" :href="route('social:team.admin')">
+            <a x-show="$wire.applicationsCount > 0" class="flex items-center hover:underline" href="{{ route('social.teams.admin', $team) }}">
                 <p>{{ Trans::get('Pending Applications: ') }}</p>
                 <span x-text="$wire.applicationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-secondary rounded-full hover:no-underline"></span>
             </a>
