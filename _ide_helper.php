@@ -19162,6 +19162,156 @@
      
 }
 
+    namespace Laravel\Octane\Facades { 
+            /**
+     * 
+     *
+     * @see \Laravel\Octane\Octane
+     */ 
+        class Octane {
+                    /**
+         * Get a Swoole table instance.
+         *
+         * @param string $table
+         * @return \Swoole\Table 
+         * @static 
+         */ 
+        public static function table($table)
+        {
+                        /** @var \Laravel\Octane\Octane $instance */
+                        return $instance->table($table);
+        }
+                    /**
+         * Format an exception to a string that should be returned to the client.
+         *
+         * @param \Throwable $e
+         * @param bool $debug
+         * @return string 
+         * @static 
+         */ 
+        public static function formatExceptionForClient($e, $debug = false)
+        {
+                        return \Laravel\Octane\Octane::formatExceptionForClient($e, $debug);
+        }
+                    /**
+         * Concurrently resolve the given callbacks via background tasks, returning the results.
+         * 
+         * Results will be keyed by their given keys - if a task did not finish, the tasks value will be "false".
+         *
+         * @param array $tasks
+         * @param int $waitMilliseconds
+         * @return array 
+         * @throws \Laravel\Octane\Exceptions\TaskException
+         * @throws \Laravel\Octane\Exceptions\TaskTimeoutException
+         * @static 
+         */ 
+        public static function concurrently($tasks, $waitMilliseconds = 3000)
+        {
+                        /** @var \Laravel\Octane\Octane $instance */
+                        return $instance->concurrently($tasks, $waitMilliseconds);
+        }
+                    /**
+         * Get the task dispatcher.
+         *
+         * @return \Laravel\Octane\Contracts\DispatchesTasks 
+         * @static 
+         */ 
+        public static function tasks()
+        {
+                        /** @var \Laravel\Octane\Octane $instance */
+                        return $instance->tasks();
+        }
+                    /**
+         * Get the listeners that will prepare the Laravel application for a new request.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function prepareApplicationForNextRequest()
+        {
+                        return \Laravel\Octane\Octane::prepareApplicationForNextRequest();
+        }
+                    /**
+         * Get the listeners that will prepare the Laravel application for a new operation.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function prepareApplicationForNextOperation()
+        {
+                        return \Laravel\Octane\Octane::prepareApplicationForNextOperation();
+        }
+                    /**
+         * Get the container bindings / services that should be pre-resolved by default.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function defaultServicesToWarm()
+        {
+                        return \Laravel\Octane\Octane::defaultServicesToWarm();
+        }
+                    /**
+         * Register a Octane route.
+         *
+         * @param string $method
+         * @param string $uri
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */ 
+        public static function route($method, $uri, $callback)
+        {
+                        /** @var \Laravel\Octane\Octane $instance */
+                        $instance->route($method, $uri, $callback);
+        }
+                    /**
+         * Determine if a route exists for the given method and URI.
+         *
+         * @param string $method
+         * @param string $uri
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasRouteFor($method, $uri)
+        {
+                        /** @var \Laravel\Octane\Octane $instance */
+                        return $instance->hasRouteFor($method, $uri);
+        }
+                    /**
+         * Invoke the route for the given method and URI.
+         *
+         * @param \Illuminate\Http\Request $request
+         * @param string $method
+         * @param string $uri
+         * @return \Symfony\Component\HttpFoundation\Response 
+         * @static 
+         */ 
+        public static function invokeRoute($request, $method, $uri)
+        {
+                        /** @var \Laravel\Octane\Octane $instance */
+                        return $instance->invokeRoute($request, $method, $uri);
+        }
+                    /**
+         * Register a callback to be called every N seconds.
+         *
+         * @param string $key
+         * @param callable $callback
+         * @param int $seconds
+         * @param bool $immediate
+         * @return \Laravel\Octane\Swoole\InvokeTickCallable 
+         * @static 
+         */ 
+        public static function tick($key, $callback, $seconds = 1, $immediate = true)
+        {
+                        /** @var \Laravel\Octane\Octane $instance */
+                        return $instance->tick($key, $callback, $seconds, $immediate);
+        }
+         
+    }
+     
+}
+
     namespace Livewire { 
             /**
      * 
@@ -20212,6 +20362,169 @@
         {
                         /** @var \Sentry\State\Hub $instance */
                         return $instance->getSpan();
+        }
+         
+    }
+     
+}
+
+    namespace Spatie\Analytics { 
+            /**
+     * 
+     *
+     * @see \Spatie\Analytics\Analytics
+     */ 
+        class AnalyticsFacade {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setViewId($viewId)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->setViewId($viewId);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getViewId()
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->getViewId();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchVisitorsAndPageViews($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchVisitorsAndPageViews($period);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTotalVisitorsAndPageViews($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTotalVisitorsAndPageViews($period);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchMostVisitedPages($period, $maxResults = 20)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchMostVisitedPages($period, $maxResults);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTopReferrers($period, $maxResults = 20)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTopReferrers($period, $maxResults);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchUserTypes($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchUserTypes($period);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTopBrowsers($period, $maxResults = 10)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTopBrowsers($period, $maxResults);
+        }
+                    /**
+         * Call the query method on the authenticated client.
+         *
+         * @param \Spatie\Analytics\Period $period
+         * @param string $metrics
+         * @param array $others
+         * @return \Google_Service_Analytics_GaData|array|null 
+         * @static 
+         */ 
+        public static function performQuery($period, $metrics, $others = [])
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->performQuery($period, $metrics, $others);
+        }
+                    /**
+         * Get the underlying Google_Service_Analytics object. You can use this
+         * to basically call anything on the Google Analytics API.
+         *
+         * @static 
+         */ 
+        public static function getAnalyticsService()
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->getAnalyticsService();
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Spatie\Analytics\Analytics::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Spatie\Analytics\Analytics::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Spatie\Analytics\Analytics::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Spatie\Analytics\Analytics::flushMacros();
         }
          
     }
@@ -25973,9 +26286,11 @@ namespace  {
             class FilamentGoogleAnalytics extends \BezhanSalleh\FilamentGoogleAnalytics\Facades\FilamentGoogleAnalytics {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}
+            class Octane extends \Laravel\Octane\Facades\Octane {}
             class Livewire extends \Livewire\Livewire {}
             class Module extends \Nwidart\Modules\Facades\Module {}
             class Sentry extends \Sentry\Laravel\Facade {}
+            class Analytics extends \Spatie\Analytics\AnalyticsFacade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class FeedReader extends \Vedmant\FeedReader\Facades\FeedReader {}
      

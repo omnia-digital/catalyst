@@ -23,3 +23,5 @@ yarn-error.log
 /.vscode
 /.vapor
 modules_statuses.json
+rr
+.rr.yaml
