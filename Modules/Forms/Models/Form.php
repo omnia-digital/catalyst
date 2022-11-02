@@ -42,7 +42,13 @@ class Form extends Model
 
     public static function getRegistrationForm()
     {
-        return self::where('form_type_id', FormType::where('slug', 'registration')->first()?->id)?->first();
+        $formType = FormType::where('slug', 'registration')->first();
+
+        if($formType) {
+            return self::where('form_type_id', $formType?->id)->first();
+        }
+
+        return false;
     }
 
 }
