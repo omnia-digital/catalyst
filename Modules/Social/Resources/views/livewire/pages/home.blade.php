@@ -11,10 +11,7 @@
             </div>
             <div class="relative px-4 py-12 sm:px-6 sm:py-12 lg:py-12 lg:px-8 text-center">
                 <x-library::heading.1 class="text-center uppercase" text-size="text-5xl">{{ Trans::get('Community') }}</x-library::heading.1>
-                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">Welcome to the new home of the gaming community. Make new friends, connect, and find your
-                    favorite news,
-                    games, and
-                    communities.</p>
+                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">{{ Trans::get('Welcome to the community.') }}</p>
                 </p>
                 @auth
                     <x-library::button x-data=""
