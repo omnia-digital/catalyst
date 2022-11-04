@@ -5,8 +5,8 @@
                 {{ $this->form }}
             </div>
 
-            <x-forms::button type="submit" class="hover:bg-neutral-hover focus:ring-1" wire:loading.attr="disabled" wire:target="submit">
-                <span class="text-base-text-color" wire:loading.remove wire:target="submit">Submit</span>
+            <x-forms::button type="submit" class="hover:bg-neutral-hover w-full focus:ring-1" wire:loading.attr="disabled" wire:target="submit">
+                <span class="text-base-text-color" wire:loading.remove wire:target="submit">{{ $submitText }}</span>
                 <span class="text-base-text-color" wire:loading wire:target="submit">Processing...</span>
             </x-forms::button>
         @else
