@@ -3,6 +3,7 @@
 namespace Modules\Forms\Http\Livewire;
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Forms\Components\Paragraph;
 use Auth;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
@@ -24,11 +25,14 @@ class Form extends Component implements HasForms
     public $data = [];
     public ?int $team_id = null; // tells us which team the form submission is for in case this is a global form
     public bool $formSubmitted = false;
+    public bool $needBootcamp = false;
+    public string $submitText;
 
-    public function mount(\Modules\Forms\Models\Form $form, int $team_id = null)
+    public function mount(\Modules\Forms\Models\Form $form, int $team_id = null, $submitText = "Submit")
     {
         $this->formModel = $form;
         $this->team_id = $team_id;
+        $this->submitText = $submitText;
         $this->form->fill();
     }
 
@@ -41,18 +45,26 @@ class Form extends Component implements HasForms
                 'text' => TextInput::make($config['name'])
                     ->label($config['label'])
                     ->required($config['is_required'])
+                    ->helperText($config['helper_text'] ?? null)
+                    ->hint($config['hint'] ?? null)
                     ->type($config['type']),
                 'select' => Select::make($config['name'])
                     ->label($config['label'])
                     ->options($config['options'])
-                    ->required($config['is_required']),
+                    ->required($config['is_required'])
+                    ->helperText($config['helper_text'] ?? null)
+                    ->hint($config['hint'] ?? null),
                 'checkbox' => Checkbox::make($config['name'])
                     ->label($config['label'])
-                    ->required($config['is_required']),
+                    ->required($config['is_required'])
+                    ->helperText($config['helper_text'] ?? null)
+                    ->hint($config['hint'] ?? null),
                 'file' => FileUpload::make($config['name'])
                     ->label($config['label'])
                     ->multiple($config['is_multiple'])
-                    ->required($config['is_required']),
+                    ->required($config['is_required'])
+                    ->helperText($config['helper_text'] ?? null)
+                    ->hint($config['hint'] ?? null),
             };
         }, $this->formModel->content);
     }

@@ -27,6 +27,7 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Illuminate\Database\Eloquent\Model;
@@ -82,7 +83,9 @@ class FormResource extends Resource
                                     ])
                                     ->default('text')
                                     ->disablePlaceholderSelection()
-                                    ->required()
+                                    ->required(),
+                                TextInput::make('helper_text'),
+                                TextInput::make('hint'),
                             ]),
                         Block::make('select')
                             ->icon('heroicon-o-selector')
@@ -93,12 +96,16 @@ class FormResource extends Resource
                                         ->keyLabel('Value')
                                         ->valueLabel('Label'),
                                 Checkbox::make('is_required'),
+                                TextInput::make('helper_text'),
+                                TextInput::make('hint'),
                             ]),
                         Block::make('checkbox')
                             ->icon('heroicon-o-check-circle')
                             ->schema([
                                 self::getFieldNameInput(),
                                 Checkbox::make('is_required'),
+                                TextInput::make('helper_text'),
+                                TextInput::make('hint'),
                             ]),
                         Block::make('file')
                             ->icon('heroicon-o-photograph')
@@ -108,10 +115,12 @@ class FormResource extends Resource
                                     ->schema([
                                         Checkbox::make('is_multiple'),
                                         Checkbox::make('is_required'),
+                                        TextInput::make('helper_text'),
+                                        TextInput::make('hint'),
                                     ]),
                             ]),
                     ])
-                    ->createItemButtonLabel('Add form input')
+                    ->createItemButtonLabel('Add Form Element')
                     ->disableLabel()
             ]);
     }
