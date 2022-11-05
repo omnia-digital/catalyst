@@ -61,11 +61,11 @@
                         </nav>
                     </div>
                     {{-- Right Side Nav --}}
-                    @auth
-                        <div class="col-span-12 lg:col-span-4 2xl:col-span-3 flex justify-end items-center">
+                    <div class="col-span-12 lg:col-span-4 2xl:col-span-3 flex justify-end items-center mr-4">
+                        @auth
                             {{-- Profile & Notifications --}}
                             <div class="flex justify-end">
-                                <div class="flex col-span-4 2xl:col-span-3 mr-4 justify-between md:items-center">
+                                <div class="flex col-span-4 2xl:col-span-3 justify-between md:items-center">
                                     <!-- Notifications -->
                                     <div class="mx-3 flex items-center">
                                         <a href="{{ route('notifications') }}"
@@ -170,15 +170,15 @@
                                                     {{ \Trans::get('Account') }}
                                                 </x-jet-dropdown-link>
 
-                                            @if (\App\Support\Platform\Platform::isUsingStripe())
-                                                <x-jet-dropdown-link href="{{ route('billing.stripe-billing') }}">
-                                                    {{ \Trans::get('Billing') }}
-                                                </x-jet-dropdown-link>
-                                            @elseif (\App\Support\Platform\Platform::isUsingChargent() && \App\Support\Platform\Platform::isUsingUserSubscriptions())
-                                                <x-jet-dropdown-link href="{{ route('billing.chargent-billing') }}">
-                                                    {{ \Trans::get('Billing') }}
-                                                </x-jet-dropdown-link>
-                                            @endif
+                                                @if (\App\Support\Platform\Platform::isUsingStripe())
+                                                    <x-jet-dropdown-link href="{{ route('billing.stripe-billing') }}">
+                                                        {{ \Trans::get('Billing') }}
+                                                    </x-jet-dropdown-link>
+                                                @elseif (\App\Support\Platform\Platform::isUsingChargent() && \App\Support\Platform\Platform::isUsingUserSubscriptions())
+                                                    <x-jet-dropdown-link href="{{ route('billing.chargent-billing') }}">
+                                                        {{ \Trans::get('Billing') }}
+                                                    </x-jet-dropdown-link>
+                                                @endif
 
                                                 {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
                                                 {{--                                    <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">--}}
@@ -214,13 +214,12 @@
                                 {{--                                </button>--}}
                                 {{--                            </div>--}}
                             </div>
-                        </div>
-                    @else
-                        <div class="relative flex">
+                        @else
                             <x-jet-dropdown align="right" width="48">
                                 <x-slot name="trigger">
                                     <span class="inline-flex rounded-md">
-                                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-base-text-color bg-primary hover:text-dark-text-color focus:outline-none transition">
+                                                <button type="button"
+                                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-base-text-color bg-primary hover:text-dark-text-color focus:outline-none transition">
                                                     <div>
                                                         <x-heroicon-o-user class="inline-block h-5 w-5 rounded-full"/>
                                                     </div>
@@ -242,8 +241,8 @@
                                     </x-jet-dropdown-link>
                                 </x-slot>
                             </x-jet-dropdown>
-                        </div>
-                    @endauth
+                        @endauth
+                    </div>
                 </div>
             </div>
         </div>
