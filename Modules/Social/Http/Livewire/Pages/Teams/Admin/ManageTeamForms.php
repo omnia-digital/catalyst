@@ -11,8 +11,8 @@ class ManageTeamForms extends Component
 {
     public ?Team $team;
 
-    public $platformForms;
-    public $teamForms;
+    public $platformForms = [];
+    public $teamForms = [];
 
     public function onLoad()
     {
