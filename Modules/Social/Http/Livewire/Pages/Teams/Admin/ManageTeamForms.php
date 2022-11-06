@@ -14,6 +14,11 @@ class ManageTeamForms extends Component
     public $platformForms = [];
     public $teamForms = [];
 
+    public $confirmingFormRemoval = false;
+    public $formIdBeingRemoved = null;
+
+    protected $listeners = ['formRemoved' => '$refresh'];
+
     public function onLoad()
     {
         $this->loadForms();
@@ -32,6 +37,24 @@ class ManageTeamForms extends Component
 
         $this->platformForms = $platformForms;
         $this->teamForms = $teamForms;
+    }
+
+    public function confirmFormRemoval($formId)
+    {
+        $this->confirmingFormRemoval = true;
+
+        $this->formIdBeingRemoved = $formId;
+    }
+
+    public function removeForm()
+    {
+        Form::find($this->formIdBeingRemoved)->delete();
+
+        $this->confirmingFormRemoval = false;
+
+        $this->formIdBeingRemoved = null;
+
+        $this->emit('formRemoved');
     }
 
     public function render()

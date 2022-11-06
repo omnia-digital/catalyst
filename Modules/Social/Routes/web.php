@@ -23,7 +23,7 @@ use Modules\Social\Http\Livewire\Pages\Teams\Admin\Subscriptions;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Calendar as TeamMapCalendar;
 use Modules\Social\Http\Livewire\Pages\Teams\Followers as TeamFollowers;
-use Modules\Social\Http\Livewire\Pages\Teams\Forms\Create as CreateTeamForms;
+use Modules\Social\Http\Livewire\Pages\Teams\Forms\CreateEdit as CreateEditTeamForms;
 use Modules\Social\Http\Livewire\Pages\Teams\MyTeams;
 use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
 use Modules\Social\Http\Middleware\GuestAccessMiddleware;
@@ -67,7 +67,8 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('{team}/jobs', TeamFollowers::class)->name('jobs');
         Route::get('{team}/learn', TeamFollowers::class)->name('learn');
         Route::get('{team}/awards', TeamAwards::class)->name('awards');
-        Route::get('{team}/forms/create', CreateTeamForms::class)->name('forms.create');
+        Route::get('{team}/forms/create', CreateEditTeamForms::class)->name('forms.create');
+        Route::get('{team}/forms/{form}/edit', CreateEditTeamForms::class)->name('forms.edit');
         Route::get('/', AllTeams::class)->name('home');
     });
 

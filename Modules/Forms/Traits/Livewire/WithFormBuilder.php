@@ -119,13 +119,19 @@ trait WithFormBuilder
     {
         $form = $this->form->getState();
 
-        Form::create([
+        $formData = [
             'name' => $form['name'], 
             'slug' => $form['slug'], 
             'form_type_id' => $form['form_type_id'], 
             'team_id' => $teamId,
             'content' => $form['content']
-        ]);
+        ];
+
+        if ($this->formModel) {
+            $this->formModel->update($formData);
+        } else {
+            Form::create($formData);
+        }
 
         $this->success(Trans::get('Form created successfully'));
 

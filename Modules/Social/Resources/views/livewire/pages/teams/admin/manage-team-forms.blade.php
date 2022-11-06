@@ -8,7 +8,7 @@
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                 <a 
                     href="{{ route('social.teams.forms.create', $team) }}"
-                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 sm:w-auto" 
+                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-text-color focus:ring-offset-2 sm:w-auto" 
                 >Create a form</a>
             </div>
         </div>
@@ -16,9 +16,9 @@
             <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
-                        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">Submissions</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Active</th>
+                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-black sm:pl-6">Name</th>
+                        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-black lg:table-cell">Type</th>
+                        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-black lg:table-cell">Submissions</th>
                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                             <span class="sr-only">Actions</span>
                         </th>
@@ -26,23 +26,29 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     <tr class="border-t border-gray-200">
-                        <th colspan="4" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-gray-900 sm:px-6">{{ \Trans::get('Team Forms') }}</th>
+                        <th colspan="4" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ \Trans::get('Team Forms') }}</th>
                     </tr>
                     @forelse($teamForms as $form)
                         <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $form->name }}</td>
-                            <td class="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell">45</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                                <x-library::input.toggle />
+                            <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-black sm:w-auto sm:max-w-none sm:pl-6">
+                                {{ $form->name }}
+                                <dl class="font-normal lg:hidden">
+                                    <dt class="sr-only">Type</dt>
+                                    <dd class="mt-1 truncate text-dark-text-color">{{ $form->formType?->name ?? '' }}</dd>
+                                    <dt class="sr-only sm:hidden">Submissions</dt>
+                                    <dd class="mt-1 truncate text-light-text-color">{{ $form->submissions()->count() }} submissions</dd>
+                                </dl>
                             </td>
-                            <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="#" class="text-gray-600 hover:text-gray-900">Edit<span class="sr-only">, {{ $form->name }}</span></a>
-                                <a href="#" class="text-danger-600 hover:text-danger-900">Delete<span class="sr-only">, {{ $form->name }}</span></a>
+                            <td class="hidden px-3 py-4 text-sm text-dark-text-color lg:table-cell">{{ $form->formType?->name ?? '' }}</td>
+                            <td class="hidden px-3 py-4 text-sm text-light-text-color lg:table-cell">{{ $form->submissions()->count() }}</td>
+                            <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 space-x-2">
+                                <a href="{{ route('social.teams.forms.edit', ['team' => $team, 'form' => $form->id]) }}" class="text-black hover:text-light-text-color">Edit<span class="sr-only">, {{ $form->name }}</span></a>
+                                <a wire:click.prevent="confirmFormRemoval('{{ $form->id }}')" href="#" type="button" class="text-danger-600 hover:text-danger-900">Delete<span class="sr-only">, {{ $form->name }}</span></a>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                            <td colspan="4" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                                 <span wire:loading.remove>{{ \Trans::get('No Team Forms') }}</span>
                                 <span wire:loading>{{ \Trans::get('Loading Forms...') }}</span>
                             </td>
@@ -50,19 +56,22 @@
                         @endforelse
                     
                     <tr class="border-t border-gray-200">
-                        <th colspan="4" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-gray-900 sm:px-6">{{ \Trans::get('Platfrom Forms') }}</th>
+                        <th colspan="4" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ \Trans::get('Platfrom Forms') }}</th>
                     </tr>
                     @forelse($platformForms as $form)
                         <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $form->name }}</td>
-                            <td class="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell">45</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                                <x-library::input.toggle />
+                            <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-black sm:w-auto sm:max-w-none sm:pl-6">
+                                {{ $form->name }}
+                                <dl class="font-normal lg:hidden">
+                                    <dt class="sr-only">Type</dt>
+                                    <dd class="mt-1 truncate text-dark-text-color">{{ $form->formType?->name ?? '' }}</dd>
+                                    <dt class="sm:hidden">Submissions</dt>
+                                    <dd class="mt-1 truncate text-light-text-color sm:hidden">{{ $form->submissions()->count() }}</dd>
+                                </dl>
                             </td>
-                            <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, {{ $form->name }}</span></a>
-                                <a href="#" class="text-danger-600 hover:text-danger-900">Delete<span class="sr-only">, {{ $form->name }}</span></a>
-                            </td>
+                            <td class="hidden px-3 py-4 text-sm text-dark-text-color lg:table-cell">{{ $form->formType?->name ?? '' }}</td>
+                            <td class="hidden px-3 py-4 text-sm text-light-text-color lg:table-cell">{{ $form->submissions()->count() }}</td>
+                            <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"></td>
                         </tr>
                     @empty
                         <tr>
@@ -77,4 +86,24 @@
             </table>
         </div>
     </div>
+    <!-- Remove Form Confirmation Modal -->
+    <x-jet-confirmation-modal wire:model="confirmingFormRemoval">
+        <x-slot name="title">
+            {{ \Trans::get('Delete Form') }}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ \Trans::get('Are you sure you would like to delete this form?') }}
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('confirmingFormRemoval')" wire:loading.attr="disabled">
+                {{ \Trans::get('Cancel') }}
+            </x-jet-secondary-button>
+
+            <x-jet-danger-button class="ml-2" wire:click="removeForm" wire:loading.attr="disabled">
+                {{ \Trans::get('Delete') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-confirmation-modal>
 </div>
