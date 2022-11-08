@@ -38,7 +38,7 @@ class Form extends Component implements HasForms
         return array_map(function (array $field) {
             $config = $field['data'];
 
-            $helperText = !is_null($config['helper_text']) ? "<p class='hint-text'>{$config['helper_text']}</p" : null;
+            $helperText = isset($config['helper_text']) ? "<p class='hint-text'>{$config['helper_text']}</p" : null;
 
             return match ($field['type']) {
                 'text' => TextInput::make($config['name'])
