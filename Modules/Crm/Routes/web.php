@@ -12,5 +12,5 @@
 */
 
 Route::name('crm.')->prefix('crm')->group(function() {
-    Route::get('/', 'CrmController@index');
+    //Route::get('/', 'CrmController@index');
 });

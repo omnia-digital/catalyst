@@ -66,6 +66,12 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             'email_verified_at',
             'two_factor_recovery_codes',
             'two_factor_secret',
+            '2fa_secret',
+            '2fa_backup_codes',
+            '2fa_setup_at',
+            'stripe_id',
+            'pm_type',
+            'pm_last_four',
             'deleted_at',
             'updated_at'
         ];
