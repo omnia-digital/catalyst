@@ -6,9 +6,9 @@
                 <p class="mt-2 text-sm text-gray-700">{{ Trans::get('These are forms that will be sent to members of your Team. You can choose which date these forms are sent out.') }}</p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                <a 
+                <a
                     href="{{ route('social.teams.forms.create', $team) }}"
-                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-text-color focus:ring-offset-2 sm:w-auto" 
+                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-text-color focus:ring-offset-2 sm:w-auto"
                 >Create a form</a>
             </div>
         </div>
@@ -44,10 +44,10 @@
                             <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 space-x-2">
                                 <x-library::dropdown dropdownClasses="z-10">
                                     <x-slot name="trigger">
-                                        <button 
-                                            type="button" 
-                                            id="menu-{{ $form->id }}-button" 
-                                            class="pl-2 py-2 flex items-center text-gray-400 hover:text-gray-600" 
+                                        <button
+                                            type="button"
+                                            id="menu-{{ $form->id }}-button"
+                                            class="pl-2 py-2 flex items-center text-gray-400 hover:text-gray-600"
                                         >
                                             <span class="sr-only">Open actions, {{ $form->name }}</span>
                                             <x-heroicon-s-dots-vertical class="h-5 w-5"/>
@@ -59,14 +59,14 @@
                                     >{{ $form->isActive ? 'Make Draft' : 'Publish' }}</x-library::dropdown.item>
 
                                     <!-- Edit Form -->
-                                    <a 
-                                        href="{{ route('social.teams.forms.edit', ['team' => $team, 'form' => $form->id]) }}" 
+                                    <a
+                                        href="{{ route('social.teams.forms.edit', ['team' => $team, 'form' => $form->id]) }}"
                                         class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color"
                                     >Edit<span class="sr-only">, {{ $form->name }}</span></a>
-                                    
+
                                     <!-- Delete Form -->
-                                    <x-library::dropdown.item  
-                                        wire:click.prevent="confirmFormRemoval('{{ $form->id }}')" 
+                                    <x-library::dropdown.item
+                                        wire:click.prevent="confirmFormRemoval('{{ $form->id }}')"
                                         class="text-danger-600 hover:text-danger-900"
                                     >Delete<span class="sr-only">, {{ $form->name }}</span></x-library::dropdown.item>
                                 </x-library::dropdown>
@@ -80,9 +80,9 @@
                             </td>
                         </tr>
                         @endforelse
-                    
+
                     <tr class="border-t border-gray-200">
-                        <th colspan="4" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ \Trans::get('Platfrom Forms') }}</th>
+                        <th colspan="4" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ \Trans::get('Platform Forms') }}</th>
                     </tr>
                     @forelse($platformForms as $form)
                         <tr>
@@ -107,7 +107,7 @@
                             </td>
                         </tr>
                     @endforelse
-        
+
                 </tbody>
             </table>
         </div>
