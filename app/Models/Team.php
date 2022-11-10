@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Traits\Location\HasLocation;
 use App\Traits\Tag\HasTeamTags;
 use App\Traits\Tag\HasTeamTypeTags;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -163,12 +163,12 @@ class Team extends JetstreamTeam implements HasMedia
 
     public function bannerImage()
     {
-        return $this->getMedia('team_banner_images')->first() ?? (new NullMedia);
+        return optional($this->getMedia('team_banner_images')->first());
     }
 
     public function mainImage()
     {
-        return $this->getMedia('team_main_images')->first() ?? (new NullMedia);
+        return optional($this->getMedia('team_main_images')->first());
     }
 
     public function profilePhoto()
