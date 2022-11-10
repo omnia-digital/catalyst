@@ -22,8 +22,8 @@ use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
 use Modules\Billing\Models\Builders\CashierSubscriptionBuilder;
-use Modules\Billing\Models\ChargentSubscription;
 use Modules\Billing\Traits\WithChargentSubscriptions;
+use Modules\Forms\Models\FormSubmission;
 use Modules\Social\Traits\HasHandle;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Wimil\Followers\Traits\Followable;
@@ -154,9 +154,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     {
         return $this->hasMany(TeamInvitation::class);
     }
+
     public function teamApplications(): HasMany
     {
         return $this->hasMany(TeamApplication::class);
+    }
+
+    public function formSubmissions(): HasMany
+    {
+        return $this->hasMany(FormSubmission::class);
     }
 
     //// Helper Methods ////

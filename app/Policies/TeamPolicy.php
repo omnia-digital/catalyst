@@ -47,6 +47,8 @@ class TeamPolicy
      */
     public function apply(User $user, Team $team)
     {
+        if($team->teamApplications()->where('user_id', $user->id)->exists()) return false;
+        
         if(!Platform::isUsingUserSubscriptions()) return true;
 
         return in_array($user?->chargentSubscription?->type?->slug, SubscriptionType::pluck('slug')->toArray());
