@@ -28,6 +28,8 @@ use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
@@ -36,7 +38,7 @@ use Wimil\Followers\Traits\CanBeFollowed;
 /**
  * Teams are just Teams
  */
-class Team extends JetstreamTeam implements HasMedia
+class Team extends JetstreamTeam implements HasMedia, Searchable
 {
     use HasFactory,
         Notifiable,
@@ -299,5 +301,12 @@ class Team extends JetstreamTeam implements HasMedia
     public function notify($value)
     {
         return $this->owner->notify($value);
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('teams.show', $this);
+
+        return new SearchResult($this, $this->name, $url);
     }
 }
