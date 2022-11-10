@@ -48,6 +48,14 @@
                 </div>
             @endif
         </div>
+
+        <div class="mt-2">
+            @if (!$showLoginModal)
+                <a href="#" wire:click.prevent="showLoginModal">Has an account?</a>
+            @else
+                <a href="#" wire:click.prevent="showRegisterModal">Sign up</a>
+            @endif
+        </div>
     </x-slot:content>
     <x-slot:actions>
         <x-library::button wire:click.prevent="{{ $showLoginModal ? 'login' : 'register' }}">
