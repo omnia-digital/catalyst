@@ -64,6 +64,20 @@ class AuthenticationModal extends Component
         $this->openModal('authentication-modal');
     }
 
+    public function showLoginModal()
+    {
+        $this->showLoginModal = true;
+
+        $this->openModal('authentication-modal');
+    }
+
+    public function showRegisterModal()
+    {
+        $this->showLoginModal = false;
+
+        $this->openModal('authentication-modal');
+    }
+
     public function login()
     {
         $this->validate();
