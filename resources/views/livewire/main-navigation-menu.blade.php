@@ -24,19 +24,7 @@
                     </a>
                 </div>
                 <!-- Search -->
-                <div class="hidden sm:flex w-full items-center">
-                    <div class="w-full">
-                        <label for="search" class="sr-only">{{ Trans::get('Search ' . config('app.name')) }}</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
-                            </div>
-                            <input id="search" name="search"
-                                   class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
-                                   placeholder="{{ Trans::get('Search ' . config('app.name')) }}" type="search"/>
-                        </div>
-                    </div>
-                </div>
+                <livewire:global-search/>
             </div>
             <!-- Main nav header -->
             <div class="flex w-full justify-between h-full items-center pl-4">
