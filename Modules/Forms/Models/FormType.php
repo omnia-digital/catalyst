@@ -24,6 +24,28 @@ class FormType extends Model
                           ->doNotGenerateSlugsOnUpdate();
     }
 
+    public static function teamApplicationForm()
+    {
+        return self::where('slug', 'team-member-application-form')->first();
+    }
+
+    public static function teamApplicationFormId()
+    {
+        return self::teamApplicationForm()?->id;
+    }
+
+    public static function userRegistrationForm()
+    {
+        return self::where('slug', 'registration')->first();
+    }
+
+    public static function userRegistrationFormId()
+    {
+        return self::userRegistrationForm()?->id;
+    }
+
+    // Relationships
+
     public function forms()
     {
         return $this->hasMany(Form::class);

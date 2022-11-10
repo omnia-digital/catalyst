@@ -25,6 +25,23 @@ class Form extends Model
                           ->doNotGenerateSlugsOnUpdate();
     }
 
+    public static function getRegistrationForm()
+    {
+        return self::query()
+            ->where('form_type_id', FormType::userRegistrationFormId())
+            ->whereNotNull('form_type_id')
+            ->first();
+    }
+
+    // Attributes
+
+    public function getIsActiveAttribute()
+    {
+        return !is_null($this->published_at);
+    }
+
+    // Relationships
+
     public function formTemplate()
     {
         return $this->belongsTo(FormTemplate::class);
@@ -38,17 +55,6 @@ class Form extends Model
     public function formType()
     {
         return $this->belongsTo(FormType::class);
-    }
-
-    public static function getRegistrationForm()
-    {
-        $formType = FormType::where('slug', 'registration')->first();
-
-        if($formType) {
-            return self::where('form_type_id', $formType?->id)->first();
-        }
-
-        return false;
     }
 
 }
