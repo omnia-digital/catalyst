@@ -136,7 +136,7 @@
                                                 <div
                                                     class="rounded-lg border border-gray-300 bg-primary px-6 py-4 hover:border-gray-400 group-focus:border-secondary sm:flex sm:justify-between sm:space-x-4">
                                                     <div class="flex items-center space-x-0">
-                                                        <div class="flex-shrink-0 flex items-center hidden">
+                                                        <div class="flex-shrink-0 flex items-center">
                                                             <span class="form-radio text-secondary group-focus:bg-red-500"></span>
                                                         </div>
                                                         <div class="text-sm leading-5">

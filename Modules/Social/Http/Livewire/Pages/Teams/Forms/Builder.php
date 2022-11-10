@@ -8,7 +8,7 @@ use Livewire\Component;
 use Modules\Forms\Models\Form;
 use Modules\Forms\Traits\Livewire\WithFormBuilder;
 
-class CreateEdit extends Component implements HasForms
+class Builder extends Component implements HasForms
 {
     use WithFormBuilder;
 
@@ -16,18 +16,18 @@ class CreateEdit extends Component implements HasForms
 
     public ?Form $formModel;
 
-    public function mount(Team $team, Form $form = null)
+    public function mount(Team $team, $form = null)
     {
         $this->team = $team;
 
         if ($form) {
-            $this->formModel = $form;
-            $this->form->fill($form->toArray());
+            $this->formModel = Form::find($form);
+            $this->form->fill($this->formModel->toArray());
         }
     }
     
     public function render()
     {
-        return view('social::livewire.pages.teams.forms.create-edit');
+        return view('social::livewire.pages.teams.forms.builder');
     }
 }
