@@ -17,6 +17,8 @@ use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use Modules\Forms\Models\Form;
+use Modules\Forms\Models\FormType;
 use Modules\Reviews\Traits\Reviewable;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
@@ -206,6 +208,20 @@ class Team extends JetstreamTeam implements HasMedia
     public function getReviewStatusAttribute()
     {
         return null;
+    }
+
+    public function forms(): HasMany
+    {
+        return $this->hasMany(Form::class);
+    }
+
+    public function applicationForm()
+    {
+        return $this->forms()
+            ->where('form_type_id', FormType::teamApplicationFormId())
+            ->whereNotNull('form_type_id')
+            ->whereNotNull('published_at')
+            ->first();
     }
 
     public function owner()
