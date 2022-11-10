@@ -18,6 +18,7 @@ use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
 use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
 use Modules\Social\Http\Livewire\Pages\Teams\Admin\TeamAdmin as EditTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Admin\ManageTeamMembers as TeamMembers;
+use Modules\Social\Http\Livewire\Pages\Teams\Apply as ApplyToTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Calendar as TeamMapCalendar;
 use Modules\Social\Http\Livewire\Pages\Teams\Followers as TeamFollowers;
@@ -67,6 +68,7 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('{team}/awards', TeamAwards::class)->name('awards');
         Route::get('{team}/forms/create', TeamFormBuilder::class)->name('forms.create');
         Route::get('{team}/forms/{form}/edit', TeamFormBuilder::class)->name('forms.edit');
+        Route::get('{team}/apply', ApplyToTeam::class)->name('application');
         Route::get('/', AllTeams::class)->name('home');
     });
 
