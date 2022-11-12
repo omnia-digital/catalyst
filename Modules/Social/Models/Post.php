@@ -19,9 +19,11 @@ use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Spatie\Tags\HasTags;
 
-class Post extends Model implements HasMedia
+class Post extends Model implements HasMedia, Searchable
 {
     use HasFactory, Likable, Postable, Attachable, Bookmarkable, InteractsWithMedia, HasTags;
 
@@ -151,5 +153,12 @@ class Post extends Model implements HasMedia
                    ->orderBy('likes_count', 'desc')
                    ->orderBy('created_at', 'desc');
         return $trendingPosts;
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('social.posts.show', $this);
+
+        return (new SearchResult($this, $this->title, $url))->setType($this->type?->value ?? $this->getTable());
     }
 }

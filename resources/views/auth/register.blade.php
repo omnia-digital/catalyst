@@ -13,7 +13,10 @@
         <x-jet-validation-errors class="mb-4" />
 
         @if (\Modules\Forms\Models\Form::getRegistrationForm())
-            <livewire:forms::form :submitText="'Sign Up'" :form="\Modules\Forms\Models\Form::getRegistrationForm()"/>
+            <livewire:forms::user-registration-form 
+                :form="\Modules\Forms\Models\Form::getRegistrationForm()"
+                submitText="Sign Up" 
+            />
         @else
             <x-forms.register-default-form/>
         @endif

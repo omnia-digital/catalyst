@@ -6,18 +6,22 @@ use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Forms\Models\Form;
+use Modules\Forms\Traits\Livewire\WithFormManagement;
 
 class ManageTeamForms extends Component
 {
+    use WithFormManagement;
+
     public ?Team $team;
 
     public $platformForms = [];
     public $teamForms = [];
 
-    public $confirmingFormRemoval = false;
-    public $formIdBeingRemoved = null;
-
-    protected $listeners = ['formRemoved' => '$refresh'];
+    protected $listeners = [
+        'formRemoved' => '$refresh',
+        'formPublished' => '$refresh',
+        'formSavedAsDraft' => '$refresh',
+    ];
 
     public function onLoad()
     {
@@ -37,24 +41,6 @@ class ManageTeamForms extends Component
 
         $this->platformForms = $platformForms;
         $this->teamForms = $teamForms;
-    }
-
-    public function confirmFormRemoval($formId)
-    {
-        $this->confirmingFormRemoval = true;
-
-        $this->formIdBeingRemoved = $formId;
-    }
-
-    public function removeForm()
-    {
-        Form::find($this->formIdBeingRemoved)->delete();
-
-        $this->confirmingFormRemoval = false;
-
-        $this->formIdBeingRemoved = null;
-
-        $this->emit('formRemoved');
     }
 
     public function render()

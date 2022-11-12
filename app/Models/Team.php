@@ -17,6 +17,8 @@ use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use Modules\Forms\Models\Form;
+use Modules\Forms\Models\FormType;
 use Modules\Reviews\Traits\Reviewable;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
@@ -26,6 +28,8 @@ use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
@@ -34,7 +38,7 @@ use Wimil\Followers\Traits\CanBeFollowed;
 /**
  * Teams are just Teams
  */
-class Team extends JetstreamTeam implements HasMedia
+class Team extends JetstreamTeam implements HasMedia, Searchable
 {
     use HasFactory,
         Notifiable,
@@ -208,6 +212,20 @@ class Team extends JetstreamTeam implements HasMedia
         return null;
     }
 
+    public function forms(): HasMany
+    {
+        return $this->hasMany(Form::class);
+    }
+
+    public function applicationForm()
+    {
+        return $this->forms()
+            ->where('form_type_id', FormType::teamApplicationFormId())
+            ->whereNotNull('form_type_id')
+            ->whereNotNull('published_at')
+            ->first();
+    }
+
     public function owner()
     {
         return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id')->where('role', 'owner');
@@ -283,5 +301,12 @@ class Team extends JetstreamTeam implements HasMedia
     public function notify($value)
     {
         return $this->owner->notify($value);
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('teams.show', $this);
+
+        return new SearchResult($this, $this->name, $url);
     }
 }
