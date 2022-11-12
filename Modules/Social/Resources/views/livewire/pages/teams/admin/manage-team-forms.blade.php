@@ -60,7 +60,7 @@
 
                                     <!-- Edit Form -->
                                     <a
-                                        href="{{ route('social.teams.forms.admin.edit', ['team' => $team, 'form' => $form->id]) }}"
+                                        href="{{ route('social.teams.admin.forms.edit', ['team' => $team, 'form' => $form->id]) }}"
                                         class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color"
                                     >Edit<span class="sr-only">, {{ $form->name }}</span></a>
 
