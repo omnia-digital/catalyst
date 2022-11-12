@@ -7,7 +7,7 @@
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                 <a 
-                    href="{{ route('social.teams.forms.create', $team) }}"
+                    href="{{ route('social.teams.admin.forms.create', $team) }}"
                     class="inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-text-color focus:ring-offset-2 sm:w-auto" 
                 >Create a form</a>
             </div>
@@ -42,7 +42,7 @@
                             <td class="hidden px-3 py-4 text-sm text-dark-text-color lg:table-cell">{{ $form->formType?->name ?? '' }}</td>
                             <td class="hidden px-3 py-4 text-sm text-light-text-color lg:table-cell">{{ $form->submissions()->count() }}</td>
                             <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 space-x-2">
-                                <a href="{{ route('social.teams.forms.edit', ['team' => $team, 'form' => $form->id]) }}" class="text-black hover:text-light-text-color">Edit<span class="sr-only">, {{ $form->name }}</span></a>
+                                <a href="{{ route('social.teams.forms.admin.edit', ['team' => $team, 'form' => $form->id]) }}" class="text-black hover:text-light-text-color">Edit<span class="sr-only">, {{ $form->name }}</span></a>
                                 <a wire:click.prevent="confirmFormRemoval('{{ $form->id }}')" href="#" type="button" class="text-danger-600 hover:text-danger-900">Delete<span class="sr-only">, {{ $form->name }}</span></a>
                             </td>
                         </tr>
@@ -56,7 +56,7 @@
                         @endforelse
                     
                     <tr class="border-t border-gray-200">
-                        <th colspan="4" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ \Trans::get('Platfrom Forms') }}</th>
+                        <th colspan="4" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ \Trans::get('Platform Forms') }}</th>
                     </tr>
                     @forelse($platformForms as $form)
                         <tr>

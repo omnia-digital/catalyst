@@ -12,6 +12,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Modules\Forms\Models\FormSubmission;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
@@ -92,7 +93,8 @@ class Form extends Component implements HasForms
             $formFieldType = $formModelFields[$formFieldKeyFound]['type'];
             $formData[$formDataKey] = [
                 'field_type' => $formFieldType,
-                'data' => $value
+                'data' => $value,
+                'label' => Str::of($formDataKey)->replace(['-', '_'], ' ')->ucfirst()
             ];
         }
 

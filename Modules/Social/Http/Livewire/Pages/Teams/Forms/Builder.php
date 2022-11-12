@@ -14,7 +14,7 @@ class Builder extends Component implements HasForms
 
     public Team $team;
 
-    public ?Form $formModel;
+    public $formModel;
 
     public function mount(Team $team, $form = null)
     {
@@ -24,6 +24,11 @@ class Builder extends Component implements HasForms
             $this->formModel = Form::find($form);
             $this->form->fill($this->formModel->toArray());
         }
+    }
+
+    public function getApplicationsCountProperty()
+    {
+        return $this->team->teamApplications->count();
     }
     
     public function render()

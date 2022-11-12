@@ -56,6 +56,8 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('/my-' . \Trans::get('teams'), MyTeams::class)->name('my-teams');
         Route::get('{team}', ShowTeam::class)->name('show');
         Route::get('{team}/admin', EditTeam::class)->name('admin');
+        Route::get('{team}/admin/forms/create', TeamFormBuilder::class)->name('admin.forms.create');
+        Route::get('{team}/admin/forms/{form}/edit', TeamFormBuilder::class)->name('admin.forms.edit');
         Route::get('{team}/members', TeamMembers::class)->name('members');
         Route::get('{team}/members', TeamFollowers::class)->name('members');
         Route::get('{team}/about', TeamFollowers::class)->name('about');
@@ -65,8 +67,6 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('{team}/jobs', TeamFollowers::class)->name('jobs');
         Route::get('{team}/learn', TeamFollowers::class)->name('learn');
         Route::get('{team}/awards', TeamAwards::class)->name('awards');
-        Route::get('{team}/forms/create', TeamFormBuilder::class)->name('forms.create');
-        Route::get('{team}/forms/{form}/edit', TeamFormBuilder::class)->name('forms.edit');
         Route::get('/', AllTeams::class)->name('home');
     });
 

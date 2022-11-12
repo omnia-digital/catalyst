@@ -1,9 +1,14 @@
 @extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
-<div class="min-h-screen">
-    <form wire:submit.prevent="save({{ $this->team->id }})" class="p-8 space-y-8 max-w-4xl mx-auto">
-        <div class="p-8">
+<div>
+    <x-teams.partials.header :team="$team"/>
+    <div class="p-8">
+        <x-library::heading.2>{{ Trans::get('Team Admin Panel: Form Builder') }}</x-library::heading.2>
+    </div>
+
+    <form wire:submit.prevent="save({{ $this->team->id }})" class="p-8 space-y-8 ">
+        <div>
             {{ $this->form }}
         </div>
 

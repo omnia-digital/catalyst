@@ -24,6 +24,11 @@ class FormType extends Model
                           ->doNotGenerateSlugsOnUpdate();
     }
 
+    public static function forTeams()
+    {
+        return self::where('for', 'teams')->get();
+    }
+
     public function forms()
     {
         return $this->hasMany(Form::class);
