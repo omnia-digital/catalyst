@@ -106,7 +106,7 @@ trait WithFormBuilder
                     ->afterStateUpdated(function (\Closure $set, $state) {
                         $name = Str::of($state)
                                     ->snake()
-                                    ->lower();
+                                    ->lower() . uniqid("_");
                         $set('name', $name);
                     })
                     ->required(),

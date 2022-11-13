@@ -49,11 +49,6 @@ class TeamAdmin extends Component/*  implements HasForms */
         $this->team = $team->load('owner');
     }
 
-    public function getApplicationsCountProperty()
-    {
-        return $this->team->teamApplications->count();
-    }
-
     protected function rules(): array
     {
         $rules = [

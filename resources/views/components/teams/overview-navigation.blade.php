@@ -42,13 +42,13 @@
     </div>
     <div class="flex-1 flex pr-2 items-center justify-end">
         @can('update-team', $team)
-            @if ($this->applicationsCount > 0)
+            @if ($team->applicationsCount() > 0)
                 <a 
                     class="flex items-center hover:underline" href="{{ route('social.teams.admin', $team) }}">
                     <p>{{ Trans::get('Pending Applications: ') }}</p>
                     <span 
                         class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-secondary rounded-full hover:no-underline"
-                    >{{ $this->applicationsCount }}</span>
+                    >{{ $team->applicationsCount() }}</span>
                 </a>
             @endif
 

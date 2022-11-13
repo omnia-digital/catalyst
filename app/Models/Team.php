@@ -246,6 +246,11 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         return $this->users();
     }
 
+    public function applicationsCount()
+    {
+        return $this->teamApplications()->count();
+    }
+
     public function hasUserWithEmail(string $email)
     {
         return $this->allUsers->contains(function ($user) use ($email) {

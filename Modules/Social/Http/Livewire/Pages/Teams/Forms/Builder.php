@@ -25,11 +25,6 @@ class Builder extends Component implements HasForms
             $this->form->fill($this->formModel->toArray());
         }
     }
-
-    public function getApplicationsCountProperty()
-    {
-        return $this->team->teamApplications->count();
-    }
     
     public function render()
     {
