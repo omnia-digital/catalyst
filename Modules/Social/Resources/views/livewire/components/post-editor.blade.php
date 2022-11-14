@@ -4,14 +4,6 @@
         showImages: true,
         images: [],
         users: {},
-        showDropdown: false,
-        getAllUsers() {
-            axios.get('https://jsonplaceholder.typicode.com/users')
-                .then((response) => {
-                    this.users = response.data
-                    showDropdown = true;
-                });
-        },
         showMediaManager(file, metadata) {
             this.$wire.emitTo(
                 'media-manager',
@@ -46,7 +38,9 @@
         class="bg-primary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4 max-w-post-card-max-w relative"
 >
     <div class="mr-3 flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>
+        @auth
+            <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>
+        @endauth
     </div>
     <div class="flex-1">
         @if($includeTitle)
@@ -63,7 +57,6 @@
                 characterLimit="500"
                 :placeholder="$placeholder"
                 class="bg-primary text-lg"
-                @keyup.slash="getAllUsers"
         >
             <x-slot name="footer">
                 <div class="bg-primary">
@@ -89,42 +82,10 @@
                                 </div>
                             </li>
                         </template>
-
-                        {{--                    <li class="relative">--}}
-                        {{--                        <button--}}
-                        {{--                                x-on:click.prevent.stop="showMediaManager(null, {})"--}}
-                        {{--                                type="button"--}}
-                        {{--                                class="relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-2 text-center hover:border-gray-400 focus:outline-none focus:ring-2--}}
-                        {{--                                focus:ring-offset-2 focus:ring-gray-500"--}}
-                        {{--                        >--}}
-                        {{--                            <x-coolicon-plus class="mx-auto h-8 w-8 text-gray-400"/>--}}
-                        {{--                        </button>--}}
-                        {{--                    </li>--}}
                     </ul>
                 </div>
             </x-slot>
         </x-library::tiptap>
-        {{-- User Dropdown --}}
-        <div>
-            <div x-show="showDropdown" class="mt-6 flow-root absolute">
-                <ul role="list" class="-my-5 divide-y divide-gray-200">
-                    <template x-for="user in users" :key="user.username">
-                        <li class="py-4 hover:bg-neutral-light">
-                            <div class="flex items-center space-x-4">
-                                <div class="flex-shrink-0">
-                                    <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=B+H&color=7F9CF5&background=EBF4FF" alt="" />
-                                </div>
-                                <div class="min-w-0 flex-1">
-                                    <p class="truncate text-sm font-medium text-gray-900" x-text="user.name"></p>
-                                    <p class="truncate text-sm text-gray-500" x-text="user.username"></p>
-                                </div>
-                            </div>
-                        </li>
-                    </template>
-                </ul>
-            </div>
-        </div>
-        {{-- End User Dropdown --}}
         <hr class="text-neutral-light"/>
         <div class="flex justify-between items-center pt-3 pb-2">
             @if($openState == false)

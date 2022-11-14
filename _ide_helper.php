@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.35.1.
+ * Generated for Laravel 9.36.2.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -12690,6 +12690,7 @@
      * @method static \Illuminate\Routing\RouteRegistrar scopeBindings()
      * @method static \Illuminate\Routing\RouteRegistrar where(array $where)
      * @method static \Illuminate\Routing\RouteRegistrar withoutMiddleware(array|string $middleware)
+     * @method static \Illuminate\Routing\RouteRegistrar withoutScopedBindings()
      * @see \Illuminate\Routing\Router
      */ 
         class Route {
@@ -17105,39 +17106,24 @@
      */ 
         class Forrest {
                     /**
-         * Call this method to redirect user to login page and initiate
-         * the Web Server OAuth Authentication Flow.
+         * 
          *
-         * @param null $loginURL
-         * @return \Illuminate\Http\RedirectResponse 
          * @static 
          */ 
-        public static function authenticate($url = null, $stateOptions = [])
+        public static function authenticate($url = null)
         {
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
-                        return $instance->authenticate($url, $stateOptions);
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->authenticate($url);
         }
                     /**
-         * When settings up your callback route, you will need to call this method to
-         * acquire an authorization token. This token will be used for the API requests.
-         *
-         * @return \Omniphx\Forrest\Interfaces\RedirectInterface 
-         * @static 
-         */ 
-        public static function callback()
-        {
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
-                        return $instance->callback();
-        }
-                    /**
-         * Refresh authentication token.
+         * Refresh authentication token by re-authenticating.
          *
          * @return void 
          * @static 
          */ 
         public static function refresh()
         {
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         $instance->refresh();
         }
                     /**
@@ -17148,7 +17134,7 @@
          */ 
         public static function revoke()
         {
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->revoke();
         }
                     /**
@@ -17161,7 +17147,7 @@
          */ 
         public static function request($url, $options)
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->request($url, $options);
         }
                     /**
@@ -17171,7 +17157,7 @@
          */ 
         public static function setCredentials($credentials)
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->setCredentials($credentials);
         }
                     /**
@@ -17185,7 +17171,7 @@
          */ 
         public static function get($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->get($path, $requestBody, $options);
         }
                     /**
@@ -17199,7 +17185,7 @@
          */ 
         public static function post($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->post($path, $requestBody, $options);
         }
                     /**
@@ -17213,7 +17199,7 @@
          */ 
         public static function put($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->put($path, $requestBody, $options);
         }
                     /**
@@ -17227,7 +17213,7 @@
          */ 
         public static function delete($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->delete($path, $requestBody, $options);
         }
                     /**
@@ -17241,7 +17227,7 @@
          */ 
         public static function head($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->head($path, $requestBody, $options);
         }
                     /**
@@ -17255,7 +17241,7 @@
          */ 
         public static function patch($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->patch($path, $requestBody, $options);
         }
                     /**
@@ -17271,7 +17257,7 @@
          */ 
         public static function versions($options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->versions($options);
         }
                     /**
@@ -17287,7 +17273,7 @@
          */ 
         public static function resources($options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->resources($options);
         }
                     /**
@@ -17299,7 +17285,7 @@
          */ 
         public static function identity($options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->identity($options);
         }
                     /**
@@ -17314,7 +17300,7 @@
          */ 
         public static function limits($options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->limits($options);
         }
                     /**
@@ -17327,7 +17313,7 @@
          */ 
         public static function describe($object_name = null, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->describe($object_name, $options);
         }
                     /**
@@ -17340,7 +17326,7 @@
          */ 
         public static function query($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->query($query, $options);
         }
                     /**
@@ -17353,7 +17339,7 @@
          */ 
         public static function next($nextUrl, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->next($nextUrl, $options);
         }
                     /**
@@ -17368,7 +17354,7 @@
          */ 
         public static function queryExplain($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->queryExplain($query, $options);
         }
                     /**
@@ -17384,7 +17370,7 @@
          */ 
         public static function queryAll($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->queryAll($query, $options);
         }
                     /**
@@ -17397,7 +17383,7 @@
          */ 
         public static function search($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->search($query, $options);
         }
                     /**
@@ -17413,7 +17399,7 @@
          */ 
         public static function scopeOrder($options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->scopeOrder($options);
         }
                     /**
@@ -17426,7 +17412,7 @@
          */ 
         public static function searchLayouts($objectList, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->searchLayouts($objectList, $options);
         }
                     /**
@@ -17443,7 +17429,7 @@
          */ 
         public static function suggestedArticles($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->suggestedArticles($query, $options);
         }
                     /**
@@ -17461,7 +17447,7 @@
          */ 
         public static function suggestedQueries($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->suggestedQueries($query, $options);
         }
                     /**
@@ -17474,7 +17460,7 @@
          */ 
         public static function custom($customURI, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->custom($customURI, $options);
         }
                     /**
@@ -17485,7 +17471,7 @@
          */ 
         public static function getClient()
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->getClient();
         }
                     /**
@@ -17496,7 +17482,7 @@
          */ 
         public static function getInstanceURL()
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->getInstanceURL();
         }
                     /**
@@ -17506,7 +17492,7 @@
          */ 
         public static function getBaseUrl()
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
                         return $instance->getBaseUrl();
         }
          
@@ -17779,6 +17765,42 @@
         public static function isUsingChargent()
         {
                         return \App\Support\Platform\Platform::isUsingChargent();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isAllowingGuestAccess()
+        {
+                        return \App\Support\Platform\Platform::isAllowingGuestAccess();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function shouldShowLoginOnGuestAccess()
+        {
+                        return \App\Support\Platform\Platform::shouldShowLoginOnGuestAccess();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isSubscriptionShownInNavigation()
+        {
+                        return \App\Support\Platform\Platform::isSubscriptionShownInNavigation();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isSubscriptionShownInProfileHeader()
+        {
+                        return \App\Support\Platform\Platform::isSubscriptionShownInProfileHeader();
         }
          
     }
@@ -20190,169 +20212,6 @@
         {
                         /** @var \Sentry\State\Hub $instance */
                         return $instance->getSpan();
-        }
-         
-    }
-     
-}
-
-    namespace Spatie\Analytics { 
-            /**
-     * 
-     *
-     * @see \Spatie\Analytics\Analytics
-     */ 
-        class AnalyticsFacade {
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setViewId($viewId)
-        {
-                        /** @var \Spatie\Analytics\Analytics $instance */
-                        return $instance->setViewId($viewId);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getViewId()
-        {
-                        /** @var \Spatie\Analytics\Analytics $instance */
-                        return $instance->getViewId();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function fetchVisitorsAndPageViews($period)
-        {
-                        /** @var \Spatie\Analytics\Analytics $instance */
-                        return $instance->fetchVisitorsAndPageViews($period);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function fetchTotalVisitorsAndPageViews($period)
-        {
-                        /** @var \Spatie\Analytics\Analytics $instance */
-                        return $instance->fetchTotalVisitorsAndPageViews($period);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function fetchMostVisitedPages($period, $maxResults = 20)
-        {
-                        /** @var \Spatie\Analytics\Analytics $instance */
-                        return $instance->fetchMostVisitedPages($period, $maxResults);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function fetchTopReferrers($period, $maxResults = 20)
-        {
-                        /** @var \Spatie\Analytics\Analytics $instance */
-                        return $instance->fetchTopReferrers($period, $maxResults);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function fetchUserTypes($period)
-        {
-                        /** @var \Spatie\Analytics\Analytics $instance */
-                        return $instance->fetchUserTypes($period);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function fetchTopBrowsers($period, $maxResults = 10)
-        {
-                        /** @var \Spatie\Analytics\Analytics $instance */
-                        return $instance->fetchTopBrowsers($period, $maxResults);
-        }
-                    /**
-         * Call the query method on the authenticated client.
-         *
-         * @param \Spatie\Analytics\Period $period
-         * @param string $metrics
-         * @param array $others
-         * @return \Google_Service_Analytics_GaData|array|null 
-         * @static 
-         */ 
-        public static function performQuery($period, $metrics, $others = [])
-        {
-                        /** @var \Spatie\Analytics\Analytics $instance */
-                        return $instance->performQuery($period, $metrics, $others);
-        }
-                    /**
-         * Get the underlying Google_Service_Analytics object. You can use this
-         * to basically call anything on the Google Analytics API.
-         *
-         * @static 
-         */ 
-        public static function getAnalyticsService()
-        {
-                        /** @var \Spatie\Analytics\Analytics $instance */
-                        return $instance->getAnalyticsService();
-        }
-                    /**
-         * Register a custom macro.
-         *
-         * @param string $name
-         * @param object|callable $macro
-         * @return void 
-         * @static 
-         */ 
-        public static function macro($name, $macro)
-        {
-                        \Spatie\Analytics\Analytics::macro($name, $macro);
-        }
-                    /**
-         * Mix another object into the class.
-         *
-         * @param object $mixin
-         * @param bool $replace
-         * @return void 
-         * @throws \ReflectionException
-         * @static 
-         */ 
-        public static function mixin($mixin, $replace = true)
-        {
-                        \Spatie\Analytics\Analytics::mixin($mixin, $replace);
-        }
-                    /**
-         * Checks if macro is registered.
-         *
-         * @param string $name
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasMacro($name)
-        {
-                        return \Spatie\Analytics\Analytics::hasMacro($name);
-        }
-                    /**
-         * Flush the existing macros.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function flushMacros()
-        {
-                        \Spatie\Analytics\Analytics::flushMacros();
         }
          
     }
@@ -26117,7 +25976,6 @@ namespace  {
             class Livewire extends \Livewire\Livewire {}
             class Module extends \Nwidart\Modules\Facades\Module {}
             class Sentry extends \Sentry\Laravel\Facade {}
-            class Analytics extends \Spatie\Analytics\AnalyticsFacade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class FeedReader extends \Vedmant\FeedReader\Facades\FeedReader {}
      

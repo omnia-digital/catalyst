@@ -2,6 +2,8 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
+use App\Support\Platform\Platform;
+use App\Support\Platform\WithGuestAccess;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -10,10 +12,12 @@ use Modules\Social\Notifications\PostWasLikedNotification;
 
 class LikeButton extends Component
 {
+    use WithGuestAccess;
+
     public Model $model;
 
     public $show;
-    
+
     public $hideCount;
 
     public $withDislikes;
@@ -31,6 +35,12 @@ class LikeButton extends Component
 
     public function like()
     {
+        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+            $this->showAuthenticationModal(route('social.posts.show', $this->model));
+
+            return;
+        }
+
         $this->model->like();
 
         if ((get_class($this->model) == Post::class) && $this->model->refresh()->is_liked) {

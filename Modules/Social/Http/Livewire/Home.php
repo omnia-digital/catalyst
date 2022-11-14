@@ -3,6 +3,7 @@
 namespace Modules\Social\Http\Livewire;
 
 use App\Models\Location;
+use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
@@ -11,7 +12,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class Home extends Component
 {
-    use WithMap, WithNotification, WithModal;
+    use WithMap, WithNotification, WithModal, WithGuestAccess;
 
     public $tabs = [];
 

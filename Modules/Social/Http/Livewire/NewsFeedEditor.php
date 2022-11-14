@@ -3,6 +3,9 @@
 namespace Modules\Social\Http\Livewire;
 
 use App\Models\Team;
+use App\Support\Platform\Platform;
+use App\Support\Platform\WithGuestAccess;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
@@ -11,7 +14,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class NewsFeedEditor extends Component
 {
-    use WithPostEditor, WithNotification;
+    use WithPostEditor, WithNotification, WithGuestAccess;
 
     public ?string $content = null;
 
@@ -23,6 +26,12 @@ class NewsFeedEditor extends Component
 
     public function createPost($data)
     {
+        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+            $this->showAuthenticationModal();
+
+            return;
+        }
+
         $this->content = strip_tags($data['content']);
 
         $this->validatePostEditor();

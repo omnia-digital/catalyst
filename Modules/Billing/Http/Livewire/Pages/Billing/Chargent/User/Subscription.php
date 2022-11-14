@@ -106,6 +106,8 @@ class Subscription extends Component
 
     public function render()
     {
-        return view('billing::livewire.pages.billing.chargent.user.subscription');
+        return view('billing::livewire.pages.billing.chargent.user.subscription', [
+            'subscription' => $this->subscription
+        ]);
     }
 }

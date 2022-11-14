@@ -39,12 +39,6 @@ class BillingDatabaseSeeder extends Seeder
             'amount' => 3500,
         ]);
 
-        SubscriptionType::firstOrCreate([
-            'name' => 'Partner Evangelist',
-            'slug' => 'partner-evangelist',
-            'amount' => 4000,
-        ]);
-
         $subscriptionForm = FormAssemblyForm::firstOrCreate([
             'name' => 'User Subscriptions',
             'fa_form_id' => '5011856'

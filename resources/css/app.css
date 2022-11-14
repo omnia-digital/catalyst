@@ -119,3 +119,8 @@ h5 {
 .overlay::before {
     @apply content-[''] absolute w-full inset-0 opacity-75;
 }
+
+.hint-text {
+    font-size: 0.65rem;
+    max-width: 375px;
+}

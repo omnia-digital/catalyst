@@ -42,6 +42,12 @@ class ManageBillingSettings extends SettingsPage
                 ->label('Form To Change Payment Method For User Subscriptions')
                 ->options(FormAssemblyForm::pluck('name', 'slug')->toArray())
                 ->disablePlaceholderSelection(),
+            Toggle::make('show_user_subscription_plan_in_navigation')
+                ->label('Show User Subscription Plan in Left Navigation?')
+                ->inline(false),
+            Toggle::make('show_user_subscription_plan_in_profile_header')
+                ->label('Show User Subscription Plan in Profile Header?')
+                ->inline(false),
             TextInput::make('application_fee_percent')
                 ->label('Application Fee Percent')
                 ->numeric()

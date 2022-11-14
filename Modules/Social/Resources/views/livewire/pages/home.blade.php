@@ -9,14 +9,23 @@
                      alt="People working on laptops">
                 <div class="absolute inset-0 bg-indigo-700 mix-blend-multiply"></div>
             </div>
-            <div class="relative px-4 py-16 sm:px-6 sm:py-16 lg:py-16 lg:px-8">
+            <div class="relative px-4 py-12 sm:px-6 sm:py-12 lg:py-12 lg:px-8 text-center">
                 <x-library::heading.1 class="text-center uppercase" text-size="text-5xl">{{ Trans::get('Community') }}</x-library::heading.1>
-                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">Welcome to the new home of the gaming community. Make new friends, connect, and find your
-                    favorite news,
-                    games, and
-                    communities.</p>
+                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">{{ Trans::get('Welcome to the community.') }}</p>
                 </p>
+                @auth
+                    <x-library::button x-data=""
+                                       x-on:click.prevent="$openModal('create-team')"
+                                       class="mx-auto mt-4 px-16 py-2">
+                        {{ Trans::get('Create a new Team') }}
+                    </x-library::button>
+                @else
+                    <x-library::button wire:click.prevent="showAuthenticationModal" class="mx-auto mt-4 px-16 py-2">
+                        {{ Trans::get('Create a new Team') }}
+                    </x-library::button>
+                @endauth
             </div>
+            <livewire:create-team-modal/>
         </div>
     </div>
 @endsection
@@ -67,6 +76,7 @@
 
     <livewire:social::delete-post-modal/>
     <livewire:media-manager :handleUploadProcess="false"/>
+    <livewire:authentication-modal/>
 @endsection
 @push('scripts')
     <script>

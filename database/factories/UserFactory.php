@@ -50,7 +50,7 @@ class UserFactory extends Factory
 
     /**
      * Indicate that the user should have a personal team.
-     *
+     * 
      * @return $this
      */
     public function withTeam()
@@ -66,6 +66,25 @@ class UserFactory extends Factory
                 }), 
                 ['role' => 'owner'],
                 'teams'
+        );
+    }
+
+    /**
+     * Indicate that the user should have a personal team.
+     * 
+     * @param $position
+     * @return $this
+     */
+    public function withExistingTeam($position = 'member')
+    {
+        if (! Features::hasTeamFeatures()) {
+            return $this->state([]);
+        }
+
+        return $this->hasAttached(
+            Team::get()->shuffle()->first(), 
+            ['role' => $position],
+            'teams'
         );
     }
 

@@ -90,7 +90,7 @@ class Platform
         return (new BillingSettings())?->{$setting};
     }
 
-    public function getAppFee()
+    public static function getAppFee()
     {
         return self::getBillingSetting('application_fee_percent') ?? config('billing.team_member_subscriptions.application_fee_percent');
     }
@@ -123,5 +123,25 @@ class Platform
     public static function isUsingChargent() : bool
     {
         return self::isUsingPaymentGateway('chargent');
+    }
+
+    public static function isAllowingGuestAccess() : bool
+    {
+        return (new GeneralSettings)->allow_guest_access;
+    }
+
+    public static function shouldShowLoginOnGuestAccess() : bool
+    {
+        return (new GeneralSettings)->should_show_login_on_guest_access;
+    }
+
+    public static function isSubscriptionShownInNavigation()
+    {
+        return self::getBillingSetting('show_user_subscription_plan_in_navigation');
+    }
+
+    public static function isSubscriptionShownInProfileHeader()
+    {
+        return self::getBillingSetting('show_user_subscription_plan_in_profile_header');
     }
 }

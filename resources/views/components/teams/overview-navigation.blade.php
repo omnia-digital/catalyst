@@ -43,7 +43,7 @@
     <div class="flex-1 flex pr-2 items-center justify-end">
         @can('update-team', $team)
 
-            <a x-show="$wire.applicationsCount > 0" class="flex items-center hover:underline" :href="route('social:team.admin')">
+            <a x-show="$wire.applicationsCount > 0" class="flex items-center hover:underline" href="{{ route('social.teams.admin', $team) }}">
                 <p>{{ Trans::get('Pending Applications: ') }}</p>
                 <span x-text="$wire.applicationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-secondary rounded-full hover:no-underline"></span>
             </a>
@@ -56,15 +56,17 @@
 
         @if(\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
             <div>
-                @if(!auth()->user()->subscribed("team_$team->id"))
-                    <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
-                        Subscribe
-                    </x-library::button>
-                @else
-                    <x-library::button x-data="" x-on:click.prevent="$openModal('update-team-plan')" wire:target="">
-                        Manage Subscriptions
-                    </x-library::button>
-                @endif
+                @auth()
+                    @if(!auth()->user()->subscribed("team_$team->id"))
+                        <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
+                            Subscribe
+                        </x-library::button>
+                    @else
+                        <x-library::button x-data="" x-on:click.prevent="$openModal('update-team-plan')" wire:target="">
+                            Manage Subscriptions
+                        </x-library::button>
+                    @endif
+                @endauth
             </div>
         @endif
 
@@ -75,6 +77,12 @@
         </div> --}}
     </div>
 
-    <livewire:teams.subscribe-team-modal :team="$team"/>
-    <livewire:teams.update-team-plan-modal :team="$team"/>
+    <div>
+        @auth
+            <livewire:teams.subscribe-team-modal :team="$team"/>
+            <livewire:teams.update-team-plan-modal :team="$team"/>
+        @endauth
+    </div>
+
+    <livewire:authentication-modal/>
 </nav>

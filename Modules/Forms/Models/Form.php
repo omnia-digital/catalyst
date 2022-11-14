@@ -11,16 +11,6 @@ class Form extends Model
 {
     use HasFactory, HasSlug;
 
-    protected $fillable = [
-        'name',
-        'slug',
-        'content',
-        'form_template_id',
-        'team_id',
-        'is_used_on_all_teams',
-        'published_at'
-    ];
-
     protected $casts = [
         'content' => 'array',
     ];
@@ -34,6 +24,23 @@ class Form extends Model
                           ->saveSlugsTo('slug')
                           ->doNotGenerateSlugsOnUpdate();
     }
+
+    public static function getRegistrationForm()
+    {
+        return self::query()
+            ->where('form_type_id', FormType::userRegistrationFormId())
+            ->whereNotNull('form_type_id')
+            ->first();
+    }
+
+    // Attributes
+
+    public function getIsActiveAttribute()
+    {
+        return !is_null($this->published_at);
+    }
+
+    // Relationships
 
     public function formTemplate()
     {

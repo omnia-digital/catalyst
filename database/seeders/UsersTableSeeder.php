@@ -17,12 +17,43 @@ class UsersTableSeeder extends Seeder
             'is_admin' => true
         ]);
 
-        User::factory(1)->withProfile()->withTeam()->create([
+        User::factory(1)->withProfile()->withExistingTeam()->create([
             'email' => 'teammember@test.com',
             'password' => bcrypt('testing')
         ]);
 
-        User::factory(15)->withProfile()->withTeam()->create();
+        User::factory(1)->withProfile()->withExistingTeam()->create([
+            'email' => 'jondoe@test.com',
+            'password' => bcrypt('testing')
+        ]);
+
+        User::factory(1)->withProfile()->withExistingTeam()->create([
+            'email' => 'janedoe@test.com',
+            'password' => bcrypt('testing')
+        ]);
+
+        User::factory(1)->withProfile()->withTeam()->create([
+            'email' => 'teamowner@test.com',
+            'password' => bcrypt('testing')
+        ]);
+
+        User::factory(1)->withProfile()->withExistingTeam()->create([
+            'email' => 'teammember2@test.com',
+            'password' => bcrypt('testing')
+        ]);
+
+        User::factory(1)->withProfile()->withExistingTeam()->create([
+            'email' => 'teammember3@test.com',
+            'password' => bcrypt('testing')
+        ]);
+
+        User::factory(1)->withProfile()->withExistingTeam()->create([
+            'email' => 'teammember4@test.com',
+            'password' => bcrypt('testing')
+        ]);
+
+
+        User::factory(10)->withProfile()->withTeam()->create();
 
     }
 }

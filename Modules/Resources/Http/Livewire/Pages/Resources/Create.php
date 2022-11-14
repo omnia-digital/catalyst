@@ -34,7 +34,7 @@ class Create extends Component
     {
         $validated = $this->validate();
 
-        $hashtags = $this->pullTags($validated['body']);
+        $hashtags = Tag::pullTags($validated['body']);
 
         $resource = (new CreateNewPostAction)
             ->type(PostType::RESOURCE)
@@ -45,7 +45,7 @@ class Create extends Component
                 'image' => $validated['image']
             ]);
 
-        $tags = $this->getTags($hashtags);
+        $tags = Tag::getTags($hashtags);
         $resource->attachTags($tags,'post');
 
         $this->reset('title', 'url', 'body', 'image');
@@ -63,26 +63,6 @@ class Create extends Component
         $this->image = null;
 
         $this->removeFileFromMediaManager();
-    }
-
-    public function pullTags($text)
-    {
-        $hashtags = array();
-
-        preg_match_all(Tag::TAG_REGEX, $text, $hashtags);
-
-        return $hashtags[1];
-    }
-
-    public function getTags($hashtags)
-    {
-        $tags = array();
-
-        foreach ($hashtags as $hashtag) {
-            $tags[] = Tag::findOrCreateFromString($hashtag);
-        }
-
-        return $tags;
     }
 
     public function render()

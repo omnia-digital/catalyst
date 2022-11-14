@@ -2,7 +2,10 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Bookmarks;
 
+use App\Support\Platform\Platform;
+use App\Support\Platform\WithGuestAccess;
 use App\Traits\Filter\WithSortAndFilters;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Models\Bookmark;
@@ -10,7 +13,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class Index extends Component
 {
-    use WithPagination, WithCachedRows, WithSortAndFilters;
+    use WithPagination, WithCachedRows, WithSortAndFilters, WithGuestAccess;
 
     public ?string $search = null;
 
@@ -38,7 +41,7 @@ class Index extends Component
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-        return Bookmark::where('user_id', '=', \Auth::user()->id);
+        return Bookmark::where('user_id', '=', \Auth::user()?->id);
     }
 
     public function getRowsProperty()
@@ -46,6 +49,12 @@ class Index extends Component
         return $this->cache(function () {
             return $this->rowsQuery->paginate(24);
         });
+    }
+
+    public function showGuestAccessModal() {
+        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+            $this->showAuthenticationModal(route('social.bookmarks'));
+        }
     }
 
     public function render()

@@ -1,6 +1,7 @@
-<article wire:click.prevent.stop="showPost" class="pt-4 shadow-sm rounded-lg cursor-pointer border border-2 z-10 bg-primary {{ $clickable ? '
-cursor-pointer' : ''
-}}">
+<article 
+    wire:click.prevent.stop="showPost" 
+    class="pt-4 shadow-sm rounded-lg cursor-pointer border-2 z-10 bg-primary {{ $clickable ? 'cursor-pointer' : '' }}"
+>
     <!-- Content -->
     <div class="w-full">
         <div class="space-y-1 lg:space-y-2">
@@ -45,13 +46,22 @@ cursor-pointer' : ''
                             <x-library::dropdown.item wire:click.prevent.stop="toggleBookmark">
                                 {{ $post->isBookmarkedBy() ? 'Un-bookmark' : 'Bookmark' }}
                             </x-library::dropdown.item>
+                            @can('update', $post)
+                                <a 
+                                    x-data x-on:click.stop="" 
+                                    class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color" 
+                                    href="{{ route('resources.edit', $post->id) }}"
+                                >
+                                    Edit
+                                </a>
+                            @endcan
                         </x-library::dropdown>
                     </div>
                 </div>
             </div>
 
             <div class="px-5 w-full line-clamp-5">
-                {!! $post->body !!}
+                {!! strip_tags($post->body) !!}
             </div>
 
             @if($post->image)
