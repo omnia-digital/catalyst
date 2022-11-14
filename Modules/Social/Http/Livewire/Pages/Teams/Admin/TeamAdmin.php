@@ -42,13 +42,11 @@ class TeamAdmin extends Component/*  implements HasForms */
 
     public $confirmingRemoveMedia = false;
     public $mediaToRemove;
-    public $applicationsCount = 0;
 
     public function mount(Team $team)
     {
         $this->authorize('update-team', $team);
         $this->team = $team->load('owner');
-        $this->applicationsCount = $this->team->teamApplications->count();
     }
 
     protected function rules(): array

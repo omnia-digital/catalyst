@@ -7,6 +7,7 @@ use App\Filament\Resources\FormTypeResource\Pages\EditFormType;
 use App\Filament\Resources\FormTypeResource\Pages\ListFormsType;
 use App\Filament\Resources\FormTypeResource\Pages\ViewFormType;
 use Closure;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -53,7 +54,14 @@ class FormTypeResource extends Resource
                         ->required(),
                 TextInput::make('slug')
                     ->label('Slug')
+                    ->required(),
+                Select::make('for')
+                    ->label('Choose who can use this form type')
                     ->required()
+                    ->options([
+                        'teams' => 'Teams',
+                        'admin' => 'Admin'
+                    ])
             ]);
     }
     public static function table(Table $table): Table

@@ -24,6 +24,11 @@ class FormType extends Model
                           ->doNotGenerateSlugsOnUpdate();
     }
 
+    public static function forTeams()
+    {
+        return self::where('for', 'teams')->get();
+    }
+
     public static function teamApplicationForm()
     {
         return self::where('slug', 'team-member-application-form')->first();

@@ -21,18 +21,22 @@ class FormsDatabaseSeeder extends Seeder
         $registrationFormType = FormType::create([
             'name' => \Trans::get('Registration'),
             'slug' => 'registration',
+            'for' => 'admin',
         ]);
         $teamResourceRequestForm = FormType::create([
             'name' => \Trans::get('Team Resource Request'),
             'slug' => 'team-resource-request',
+            'for' => 'teams',
         ]);
         $teamMemberApplicationForm = FormType::create([
             'name' => \Trans::get('Team Member Application Form'),
             'slug' => 'team-member-application-form',
+            'for' => 'teams',
         ]);
         $teamMemberForm = FormType::create([
             'name' => \Trans::get('Team Member Form'),
             'slug' => 'team-member-form',
+            'for' => 'teams',
         ]);
     }
 }

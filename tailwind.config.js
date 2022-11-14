@@ -68,7 +68,19 @@ module.exports = {
                     'dark': 'var(--neutral-dark)',
                     'hover': 'var(--neutral-hover)',
                 },
-                primary: 'var(--primary)',
+                primary: {
+                    DEFAULT: 'var(--primary)',
+                    "50": "#FFFFFF",
+                    "100": "#FFFFFF",
+                    "200": "#FFFFFF",
+                    "300": "#FFFFFF",
+                    "400": "#FFFFFF",
+                    "500": "#FFFFFF",
+                    "600": "#CCCCCC",
+                    "700": "#999999",
+                    "800": "#666666",
+                    "900": "#333333"
+                },
                 secondary: {
                     DEFAULT: 'var(--secondary)',
                     "50": "#ff4f60",
@@ -82,7 +94,19 @@ module.exports = {
                     "800": "#bd0010",
                     "900": "#b30006"
                 },
-                tertiary: 'var(--tertiary)',
+                tertiary: {
+                    DEFAULT: 'var(--tertiary)',
+                    "50": "#E8EBF2",
+                    "100": "#D1D6E5",
+                    "200": "#A4ADCB",
+                    "300": "#7684B2",
+                    "400": "#51608F",
+                    "500": "#384263",
+                    "600": "#2C344E",
+                    "700": "#21273B",
+                    "800": "#161A27",
+                    "900": "#0B0D14"
+                  },
                 danger: colors.rose,
                 success: colors.green,
                 warning: colors.yellow,

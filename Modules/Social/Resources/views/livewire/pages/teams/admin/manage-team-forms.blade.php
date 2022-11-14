@@ -6,9 +6,9 @@
                 <p class="mt-2 text-sm text-gray-700">{{ Trans::get('These are forms that will be sent to members of your Team. You can choose which date these forms are sent out.') }}</p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                <a
-                    href="{{ route('social.teams.forms.create', $team) }}"
-                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-text-color focus:ring-offset-2 sm:w-auto"
+                <a 
+                    href="{{ route('social.teams.admin.forms.create', $team) }}"
+                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-text-color focus:ring-offset-2 sm:w-auto" 
                 >Create a form</a>
             </div>
         </div>
@@ -60,7 +60,7 @@
 
                                     <!-- Edit Form -->
                                     <a
-                                        href="{{ route('social.teams.forms.edit', ['team' => $team, 'form' => $form->id]) }}"
+                                        href="{{ route('social.teams.admin.forms.edit', ['team' => $team, 'form' => $form->id]) }}"
                                         class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color"
                                     >Edit<span class="sr-only">, {{ $form->name }}</span></a>
 
