@@ -30,7 +30,7 @@ use Modules\Social\Http\Middleware\GuestAccessMiddleware;
 
 
 Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
-   
+
     // the way twitter works is
     // /{handle} for profile
     // /{handle}/status/{post_id} for any type of post, whether it's a post or reply
@@ -80,6 +80,7 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
     });
 
     Route::get('/crm', \Modules\Social\Http\Livewire\Pages\Crm\Index::class)->name('crm');
+    Route::get('/art', \Modules\Social\Http\Livewire\Pages\Art\Index::class)->name('art');
 
     Route::get('/learn', function () {
         return "Learn";
