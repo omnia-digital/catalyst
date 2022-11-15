@@ -13,7 +13,8 @@ class FormType extends Model
 
     protected $fillable = [
         'name',
-        'slug'
+        'slug',
+        'for'
     ];
 
     public function getSlugOptions(): SlugOptions
