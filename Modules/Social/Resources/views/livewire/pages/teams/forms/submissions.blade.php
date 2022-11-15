@@ -37,7 +37,7 @@
         <x-slot name="title">Submission: <span wire:loading.remove wire:target="updateCurrentSelected">{{ $selectedSubmission->user->name }}</span></x-slot>
 
         <x-slot name="content">
-            <div wire:loading.remove wire:target="updateCurrentSelected">
+            <div>
                 <table class="w-full divide-y divide-gray-300">
                     <thead>
                         <tr>
@@ -45,9 +45,9 @@
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 table-cell">Value</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200">
+                    <tbody wire:loading.class="animate-pulse" wire:target="updateCurrentSelected" class="divide-y divide-gray-200">
                         @foreach ($selectedSubmission->data as $field => $value)
-                            <tr>
+                            <tr wire:loading.remove wire:target="updateCurrentSelected">
                                 <td class="w-full max-w-0 py-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none">
                                     {{ $field }}
                                 </td>
@@ -56,6 +56,10 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div wire:loading wire:target="updateCurrentSelected" class="flex justify-center items-center gap-2">
+                    <div class="h-2 w-full bg-neutral-dark rounded"></div>
+                    <div class="h-2 w-full bg-neutral-dark rounded"></div>
+                </div>
                 @if ($selectedSubmission->teamApplication)
                     <div class="flex items-center mt-8 justify-end">
                         <button type="button"
@@ -71,9 +75,6 @@
                         @endif
                     </div>
                 @endif
-            </div>
-            <div wire:loading wire:target="updateCurrentSelected" class="flex justify-center items-center">
-                <x-heroicon-o-refresh class="w-8 h-8 animate-spin" />
             </div>
         </x-slot>
     </x-library::modal>
