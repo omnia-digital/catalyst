@@ -1,9 +1,5 @@
 @extends('social::livewire.layouts.pages.full-page-layout')
 
-{{--@section('full-width-header')--}}
-{{--    <div class="col-span-2 h-36 bg-[url('https://source.unsplash.com/random')] -mx-4 bg-cover bg-no-repeat"></div>--}}
-{{--@endsection--}}
-
 @section('content')
     <div class="">
         <x-teams.partials.header :team="$team"/>

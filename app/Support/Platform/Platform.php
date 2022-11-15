@@ -90,7 +90,7 @@ class Platform
         return (new BillingSettings())?->{$setting};
     }
 
-    public function getAppFee()
+    public static function getAppFee()
     {
         return self::getBillingSetting('application_fee_percent') ?? config('billing.team_member_subscriptions.application_fee_percent');
     }

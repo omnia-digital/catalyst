@@ -13,7 +13,8 @@ class FormType extends Model
 
     protected $fillable = [
         'name',
-        'slug'
+        'slug',
+        'for'
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -22,6 +23,11 @@ class FormType extends Model
                           ->generateSlugsFrom('name')
                           ->saveSlugsTo('slug')
                           ->doNotGenerateSlugsOnUpdate();
+    }
+
+    public static function forTeams()
+    {
+        return self::where('for', 'teams')->get();
     }
 
     public static function teamApplicationForm()
