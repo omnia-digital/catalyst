@@ -29,7 +29,6 @@ class FormTypeResource extends Resource
     protected static ?string $model = \Modules\Forms\Models\FormType::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Forms';
-    public $data = [];
 
     protected static function getNavigationBadge(): ?string
     {
@@ -70,6 +69,7 @@ class FormTypeResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('slug'),
+                TextColumn::make('for'),
             ])
             ->filters([
                 Filter::make('name')
