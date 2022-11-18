@@ -4,7 +4,7 @@
         @can('add-review', $model)
             <a href="#"
             wire:click.prevent="$emitTo('reviews::create-review-modal', 'openReviewModal')"
-            class="text-dark-text-color hover:underline hover:text-secondary"
+            class="text-dark-text-color hover:underline hover:text-primary"
             >
                 {{ \Trans::get('Add Review') }}
             </a>

@@ -4,7 +4,7 @@
     <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-neutral-dark">
         <a 
             href="{{ route('social.posts.show', $post->id) }}" 
-            class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-primary hover:text-primary"
+            class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary"
         >Cancel</a>
         <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Edit Post') }}</x-library::heading.1>
     </div>
@@ -55,10 +55,10 @@
                         heightClass="m-1 text-lg"
                         wordCountType="character"
                         characterLimit="500"
-                        class="bg-primary text-lg"
+                        class="bg-secondary text-lg"
                     >
                         <x-slot name="footer">
-                            <div class="bg-primary">
+                            <div class="bg-secondary">
                                 <ul
                                     x-show="showImages"
                                     x-transition

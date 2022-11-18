@@ -20,14 +20,14 @@
             </div>
             @can('apply', $team)
                 <a
-                    class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-secondary text-white-text-color hover:opacity-75"
+                    class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-primary text-white-text-color hover:opacity-75"
                     href="{{ route('social.teams.application', $team) }}"
                 >{{ \App\Support\Platform\Platform::applyButtonText() }}</a>
             @endcan
         @endif
     @else
         <button
-            class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-secondary text-white-text-color hover:opacity-75"
+            class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-primary text-white-text-color hover:opacity-75"
             wire:click.prevent="showAuthenticationModal('{{ route('social.teams.show', $team) }}')"
         >{{ \App\Support\Platform\Platform::applyButtonText() }}</button>
     @endauth

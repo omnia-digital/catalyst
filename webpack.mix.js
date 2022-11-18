@@ -16,7 +16,6 @@ mix.js('resources/js/app.js', 'public/js')
         require('postcss-import'),
         require('tailwindcss'),
     ])
-    .sass('resources/sass/filament.scss', 'public/css')
     .copyDirectory('resources/images', 'public/storage/images');
 
 

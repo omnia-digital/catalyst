@@ -3,7 +3,7 @@
 ])
 
 @php
-    $class = 'relative block w-full border-2 border-gray-300 border-dashed rounded-lg text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary';
+    $class = 'relative block w-full border-2 border-gray-300 border-dashed rounded-lg text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary';
     $class .= ' ' . $padding;
 @endphp
 

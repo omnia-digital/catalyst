@@ -12,7 +12,7 @@
                 <div class="hidden sm:block">
                     <nav class="relative z-0 rounded-lg shadow flex divide-x divide-neutral-light" aria-label="Tabs">
                         <a v-for="(tab, tabIdx) in tabs" :key="tab.name" :href="tab.href" :aria-current="tab.current ? 'page' : undefined"
-                           :class="[tab.current ? 'text-dark-text-color' : 'text-base-text-color hover:text-dark-text-color', tabIdx === 0 ? 'rounded-l-lg' : '', tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '', 'group relative min-w-0 flex-1 overflow-hidden bg-primary py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10']">
+                           :class="[tab.current ? 'text-dark-text-color' : 'text-base-text-color hover:text-dark-text-color', tabIdx === 0 ? 'rounded-l-lg' : '', tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '', 'group relative min-w-0 flex-1 overflow-hidden bg-secondary py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10']">
 {{--                            <span>{{ tab.name }}</span>--}}
                             <span aria-hidden="true" :class="[tab.current ? 'bg-rose-500' : 'bg-transparent', 'absolute inset-x-0 bottom-0 h-0.5']"/>
                         </a>
@@ -33,7 +33,7 @@
         <aside class="hidden xl:block xl:col-span-3">
             <div class="sticky top-4 space-y-4">
                 <section aria-labelledby="who-to-follow-heading">
-                    <div class="bg-primary rounded-lg shadow">
+                    <div class="bg-secondary rounded-lg shadow">
                         <div class="p-6">
                             <x-library::heading.2 id="who-to-follow-heading" class="text-base-text-color font-medium text-dark-text-color">
                                 Who to follow
@@ -64,7 +64,7 @@
                                 </ul>
                             </div>
                             <div class="mt-6">
-                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-gray-50">
+                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-secondary hover:bg-gray-50">
                                     View all
                                 </a>
                             </div>
@@ -72,7 +72,7 @@
                     </div>
                 </section>
                 <section aria-labelledby="trending-heading">
-                    <div class="bg-primary rounded-lg shadow">
+                    <div class="bg-secondary rounded-lg shadow">
                         <div class="p-6">
                             <x-library::heading.2 id="trending-heading" class="text-base-text-color font-medium text-dark-text-color">
                                 Trending
@@ -98,7 +98,7 @@
                                 </ul>
                             </div>
                             <div class="mt-6">
-                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-gray-50">
+                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-secondary hover:bg-gray-50">
                                     View all
                                 </a>
                             </div>

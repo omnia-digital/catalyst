@@ -14,7 +14,7 @@
                     <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">Find and create resources, articles, guides, and more.</p>
                     <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
                         <div class="justify-center w-full flex md:w-1/2 lg:w-1/3">
-                            <x-library::button x-data="" class="py-2 w-full h-10 bg-primary text-base-text-color" x-on:click.prevent.stop="$openModal('add-resource-modal')">
+                            <x-library::button x-data="" class="py-2 w-full h-10 bg-secondary text-base-text-color" x-on:click.prevent.stop="$openModal('add-resource-modal')">
                                 + New Resource
                             </x-library::button>
                             <livewire:resources::pages.resources.create/>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             @empty
-                <li class="p-4 bg-primary rounded-md text-base-text-color">No resources to show</li>
+                <li class="p-4 bg-secondary rounded-md text-base-text-color">No resources to show</li>
             @endforelse
         </div>
 

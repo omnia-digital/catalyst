@@ -49,8 +49,8 @@
             <div class="grid grid-cols-12 gap-4">
                 {{-- Overview  --}}
                 <div class="col-span-12 2xl:col-span-6">
-                    <div class="flex flex-col flex-1 bg-primary rounded">
-                        <div class="h-44 bg-secondary"
+                    <div class="flex flex-col flex-1 bg-secondary rounded">
+                        <div class="h-44 bg-primary"
                              style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
                         ></div>
                         <div class="p-4 flex flex-col flex-1">
@@ -200,7 +200,7 @@
                                 @forelse ($this->getRemainingAwards($userToAddAwardsTo) as $award)
                                     <div class="mr-4 mt-2 flex items-center">
                                         <input type="checkbox" wire:model.defer="awardsToAdd" value="{{ $award->id }}" class="mr-2" name="award-item-{{ $award->id }}" id="award-item-{{ $award->id }}">
-                                        <label for="award-item-{{ $award->id }}" class="bg-primary p-2 flex flex-1 items-center">
+                                        <label for="award-item-{{ $award->id }}" class="bg-secondary p-2 flex flex-1 items-center">
                                             <x-library::icons.icon :name="$award->icon" class="h-4 w-4 mr-4"/>
                                             <p>{{ ucfirst($award->name) }}</p>
                                         </label>

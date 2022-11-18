@@ -12,8 +12,8 @@
 <button
     x-data
     x-tooltip="{{ $title }}"
-    x-bind:class="{ 'bg-secondary text-white': isActive({{ $isActive ?? "'false'" }}, {{ $opts ?? '{}' }}, updatedAt) }"
-    {{ $attributes->merge(['class' => 'hover:bg-secondary-dark hover:text-white p-1 rounded-lg']) }}
+    x-bind:class="{ 'bg-primary text-white': isActive({{ $isActive ?? "'false'" }}, {{ $opts ?? '{}' }}, updatedAt) }"
+    {{ $attributes->merge(['class' => 'hover:bg-primary-dark hover:text-white p-1 rounded-lg']) }}
 >
     {{ $slot }}
 </button>
