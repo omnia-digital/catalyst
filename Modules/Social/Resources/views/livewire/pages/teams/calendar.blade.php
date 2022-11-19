@@ -8,7 +8,7 @@
             <div class="flex sm:hidden justify-center items-center fixed bottom-4 right-4 z-20 bg-transparent p-px w-12 h-12">
                 <button 
                     x-on:click="openMobileTeams = !openMobileTeams"
-                    class="flex justify-center items-center p-3 text-sm rounded-full bg-primary border border-secondary text-secondary hover:bg-neutral-light active:bg-neutral-light focus:bg-neutral-light">
+                    class="flex justify-center items-center p-3 text-sm rounded-full bg-secondary border border-primary text-primary hover:bg-neutral-light active:bg-neutral-light focus:bg-neutral-light">
                     <x-heroicon-o-collection class="w-4 h-4" />
                 </button>
             </div>

@@ -6,11 +6,11 @@
     <div class="group block aspect-w-10 aspect-h-7 w-full relative overflow-hidden rounded-lg  cursor-pointer">
         <img class="object-cover w-full h-48" src="{{ $item->thumbnail }}" alt="{{ $item->title }}"/>
 
-        <div class="px-4 py-4 transition-transform ease-in-out bg-neutral-dark hover:translate-y-1 hover:scale-y-150 hover:bg-secondary duration-75">
+        <div class="px-4 py-4 transition-transform ease-in-out bg-neutral-dark hover:translate-y-1 hover:scale-y-150 hover:bg-primary duration-75">
             <h4 class="mb-3 text-xl font-semibold tracking-tight text-white-text-color">{{ $item->title }}</h4>
         </div>
     </div>
-{{--    <div class="{{ 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-secondary' }} group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-neutral overflow-hidden cursor-pointer relative">--}}
+{{--    <div class="{{ 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-primary' }} group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-neutral overflow-hidden cursor-pointer relative">--}}
 {{--        <img--}}
 {{--            src="{{ $item->thumbnail }}"--}}
 {{--            alt="{{ $item->title }}"--}}

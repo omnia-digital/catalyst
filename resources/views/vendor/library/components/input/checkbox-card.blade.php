@@ -33,7 +33,7 @@
             $watch('selectedItems', () => setActive());
         }"
         x-on:click.prevent.stop="setSelectedItems"
-        x-bind:class="{'border-transparent ring-2 ring-secondary': isActive, 'border-gray-300': !isActive}"
+        x-bind:class="{'border-transparent ring-2 ring-primary': isActive, 'border-gray-300': !isActive}"
         x-id="['checkbox-card']"
         {{ $attributes->class(['border rounded-md py-2 px-2 flex items-center justify-center text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none']) }}
         {{ $attributes->wire('key') }}

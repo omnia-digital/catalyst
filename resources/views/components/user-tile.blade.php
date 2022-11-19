@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class'=> 'bg-primary border border-neutral-light rounded w-full max-w-sm']) }}>
+<div {{ $attributes->merge(['class'=> 'bg-secondary border border-neutral-light rounded w-full max-w-sm']) }}>
     <div class="relative">
         <div class="h-24 bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat"></div>
         <div class="absolute -bottom-12 left-5">

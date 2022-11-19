@@ -10,7 +10,7 @@
     wire:click.prevent.stop="sortBy('{{ $key }}')"
     href="#"
     aria-current="page"
-    class="{{ $selected ? 'text-secondary' : 'text-base-text-color hover:text-dark-text-color' }} whitespace-nowrap my-2 px-1 font-medium text-sm"
+    class="{{ $selected ? 'text-primary' : 'text-base-text-color hover:text-dark-text-color' }} whitespace-nowrap my-2 px-1 font-medium text-sm"
 >
     <span class="flex">
         {{ $slot }}

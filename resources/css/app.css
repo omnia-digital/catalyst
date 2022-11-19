@@ -14,16 +14,46 @@
     --neutral-light: #f6f7f8;
     --neutral-dark: #6b7280;
     --neutral-hover: #eff0f2;
-    --primary: white;
-    --secondary: #DB1D2E;
+    --primary: #DB1D2E;
+    --primary-50: #ff4f60;
+    --primary-100: #ff4556;
+    --primary-200: #f93b4c;
+    --primary-300: #ef3142;
+    --primary-400: #e52738;
+    --primary-500: #db1d2e;
+    --primary-600: #d11324;
+    --primary-700: #c7091a;
+    --primary-800: #bd0010;
+    --primary-900: #b30006;
+    --secondary: white;
+    --secondary-50: white;
+    --secondary-100: white;
+    --secondary-200: white;
+    --secondary-300: white;
+    --secondary-400: #8C8C8C;
+    --secondary-500: #707070;
+    --secondary-600: #595959;
+    --secondary-700: #424242;
+    --secondary-800: #2E2E2E;
+    --secondary-900: #171717;
     --tertiary: #384263;
+    --tertiary-50: #E8EBF2;
+    --tertiary-100: #D1D6E5;
+    --tertiary-200: #A4ADCB;
+    --tertiary-300: #7684B2;
+    --tertiary-400: #51608F;
+    --tertiary-500: #384263;
+    --tertiary-600: #2C344E;
+    --tertiary-700: #21273B;
+    --tertiary-800: #161A27;
+    --tertiary-900: #0B0D14;
     --main-nav-active-text-color: var(--base-heading-color);
     --main-nav-active-text-color: var(--neutral);
-    --main-nav-active-bg-color: var(--secondary);
+    --main-nav-active-bg-color: var(--primary);
     --main-nav-text-color: var(--base-text-color);
     --main-nav-hover-text-color: var(--neutral);
-    --main-nav-hover-bg-color: var(--secondary);
-    --post-card-bg-color: var(--primary);
+    --main-nav-hover-bg-color: var(--primary);
+    --post-card-bg-color: var(--secondary);
     --post-card-border-color: var(--neutral-light);
     --post-card-border-hover-color: var(--dark-text-color);
     --post-card-title-color: var(--dark-text-color);
@@ -99,12 +129,9 @@ h5 {
 }
 
 [x-cloak] { display: none !important; }
-/*a {*/
-/*    @apply text-primary*/
-/*}*/
 
 .card {
-    @apply pt-1 bg-primary shadow rounded-lg;
+    @apply pt-1 bg-secondary shadow rounded-lg;
 }
 
 .fill-row-span > * {

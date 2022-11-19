@@ -2,25 +2,25 @@
     $skipFilters = isset($skipFilters) ? $skipFilters : [];
 @endphp
 <div class="space-y-2">
-    <div class="bg-primary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
+    <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
         <div class="flex items-center pr-3">
             <span class="mr-3 font-bold">Sort By</span>
-            <x-library::dropdown.index :position="'left'" class="z-10 p-2 rounded-md bg-neutral" :dropdownClasses="'bg-primary border-none shadow-md'">
-                <x-slot:trigger class=" hover:cursor-pointer text-base-text-color hover:text-secondary">
+            <x-library::dropdown.index :position="'left'" class="z-10 p-2 rounded-md bg-neutral" :dropdownClasses="'bg-secondary border-none shadow-md'">
+                <x-slot:trigger class=" hover:cursor-pointer text-base-text-color hover:text-primary">
                     {{ $sortLabels[$orderBy] }}
                     <i class="fa-solid fa-caret-down ml-1"></i>
                     </x-slot>
                     @foreach ($sortLabels as $key => $item)
-                        <x-library::dropdown.item class="bg-primary border-none" wire:click.prevent="sortBy('{{ $key }}')">{{ $item }}</x-library::dropdown.item>
+                        <x-library::dropdown.item class="bg-secondary border-none" wire:click.prevent="sortBy('{{ $key }}')">{{ $item }}</x-library::dropdown.item>
                 @endforeach
             </x-library::dropdown.index>
             @if ($sortOrder === 'asc')
-                <x-heroicon-o-arrow-narrow-up class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-secondary" wire:click.prevent="toggleSortOrder()"/>
+                <x-heroicon-o-arrow-narrow-up class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-primary" wire:click.prevent="toggleSortOrder()"/>
             @else
-                <x-heroicon-o-arrow-narrow-down class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-secondary" wire:click.prevent="toggleSortOrder()"/>
+                <x-heroicon-o-arrow-narrow-down class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-primary" wire:click.prevent="toggleSortOrder()"/>
             @endif
         </div>
-        <div class="flex-1 min-w-0 bg-primary p-2 rounded-lg">
+        <div class="flex-1 min-w-0 bg-secondary p-2 rounded-lg">
             <div class="filters flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
                 <div class="w-full relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="flex justify-between gap-3 flex-wrap bg-primary px-6 py-2 rounded-lg mb-6 border-t border-b border-gray-100 items-center">
+    <div class="flex justify-between gap-3 flex-wrap bg-secondary px-6 py-2 rounded-lg mb-6 border-t border-b border-gray-100 items-center">
         <div class="flex justify-start items-center space-x-3">
             <div class="font-bold">
                 {{ Trans::get('Filters') }}
