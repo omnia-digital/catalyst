@@ -1,9 +1,9 @@
 <a href="{{ $this->game->url }}">
-<div class="w-full bg-primary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black" style="background-image: url({{ $game->getCoverUrl() }});
+<div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black" style="background-image: url({{ $game->getCoverUrl() }});
      background-size:
      cover; background-repeat: no-repeat;">
     <div class="h-80 rounded"></div>
-    <div class="space-y-2 p-4 bg-primary rounded absolute bottom-0 right-0 left-0">
+    <div class="space-y-2 p-4 bg-secondary rounded absolute bottom-0 right-0 left-0">
         <div class="flex justify-between">
             <p class="text-dark-text-color font-semibold text-lg">{{ $game->name }}</p>
             <div class="flex items-center">

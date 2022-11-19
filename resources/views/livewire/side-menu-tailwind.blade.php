@@ -24,7 +24,7 @@
             From: "translate-x-0"
             To: "-translate-x-full"
         -->
-        <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-primary">
+        <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-secondary">
             <!--
               Close button, show/hide based on off-canvas menu state.
 
@@ -84,7 +84,7 @@
                         <x-library::heading.3 class="px-3 text-xs font-semibold text-base-text-color uppercase tracking-wider" id="mobile-teams-headline">Teams</x-library::heading.3>
                         <div class="mt-1 space-y-1" role="group" aria-labelledby="mobile-teams-headline">
                             <a href="#" class="group flex items-center px-3 py-2 text-base-text-color leading-5 font-medium text-base-text-color rounded-md hover:text-dark-text-color hover:bg-gray-50">
-                                <span class="w-2.5 h-2.5 mr-4 bg-secondary rounded-full" aria-hidden="true"></span>
+                                <span class="w-2.5 h-2.5 mr-4 bg-primary rounded-full" aria-hidden="true"></span>
                                 <span class="truncate"> Engineering </span>
                             </a>
 
@@ -145,7 +145,7 @@
                     From: "transform opacity-100 scale-100"
                     To: "transform opacity-0 scale-95"
                 -->
-                <div class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-button" tabindex="-1">
+                <div class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-secondary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-button" tabindex="-1">
                     <div class="py-1" role="none">
                         <!-- Active: "bg-neutral text-dark-text-color", Not Active: "text-dark-text-color" -->
                         <a href="#" class="text-dark-text-color block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-item-0">View profile</a>
@@ -171,7 +171,7 @@
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input type="text" name="search" id="search" class="focus:ring-secondary focus:border-secondary block w-full pl-9 sm:text-sm border-gray-300 rounded-md" placeholder="Search">
+                    <input type="text" name="search" id="search" class="focus:ring-primary focus:border-primary block w-full pl-9 sm:text-sm border-gray-300 rounded-md" placeholder="Search">
                 </div>
             </div>
             <!-- Navigation -->
@@ -211,7 +211,7 @@
                     <x-library::heading.3 class="px-3 text-xs font-semibold text-base-text-color uppercase tracking-wider" id="desktop-teams-headline">Teams</x-library::heading.3>
                     <div class="mt-1 space-y-1" role="group" aria-labelledby="desktop-teams-headline">
                         <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-dark-text-color rounded-md hover:text-dark-text-color hover:bg-gray-50">
-                            <span class="w-2.5 h-2.5 mr-4 bg-secondary rounded-full" aria-hidden="true"></span>
+                            <span class="w-2.5 h-2.5 mr-4 bg-primary rounded-full" aria-hidden="true"></span>
                             <span class="truncate"> Engineering </span>
                         </a>
 
@@ -232,7 +232,7 @@
     <!-- Main column -->
     <div class="lg:pl-64 flex flex-col">
         <!-- Search header -->
-        <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-primary border-b border-neutral-light lg:hidden">
+        <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-secondary border-b border-neutral-light lg:hidden">
             <!-- Sidebar toggle, controls the 'sidebarOpen' sidebar state. -->
             <button type="button" class="px-4 border-r border-neutral-light text-base-text-color focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden">
                 <span class="sr-only">Open sidebar</span>
@@ -260,7 +260,7 @@
                     <!-- Profile dropdown -->
                     <div class="ml-3 relative">
                         <div>
-                            <button type="button" class="max-w-xs bg-primary flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                            <button type="button" class="max-w-xs bg-secondary flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                 <span class="sr-only">Open user menu</span>
                                 <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                             </button>
@@ -276,7 +276,7 @@
                             From: "transform opacity-100 scale-100"
                             To: "transform opacity-0 scale-95"
                         -->
-                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-secondary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <div class="py-1" role="none">
                                 <!-- Active: "bg-neutral text-dark-text-color", Not Active: "text-dark-text-color" -->
                                 <a href="#" class="text-dark-text-color block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-0">View profile</a>
@@ -302,7 +302,7 @@
                     <x-library::heading.1 class="text-lg font-medium leading-6 text-dark-text-color sm:truncate">Home</x-library::heading.1>
                 </div>
                 <div class="mt-4 flex sm:mt-0 sm:ml-4">
-                    <button type="button" class="order-1 ml-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-primary hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-0 sm:ml-0">Share</button>
+                    <button type="button" class="order-1 ml-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-secondary hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-0 sm:ml-0">Share</button>
                     <button type="button" class="order-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white-text-color bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">Create</button>
                 </div>
             </div>
@@ -312,13 +312,13 @@
                 <ul role="list" class="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-3">
                     <li class="relative col-span-1 flex shadow-sm rounded-md">
                         <div class="flex-shrink-0 flex items-center justify-center w-16 bg-pink-600 text-white-text-color text-sm font-medium rounded-l-md">GA</div>
-                        <div class="flex-1 flex items-center justify-between border-t border-r border-b border-neutral-light bg-primary rounded-r-md truncate">
+                        <div class="flex-1 flex items-center justify-between border-t border-r border-b border-neutral-light bg-secondary rounded-r-md truncate">
                             <div class="flex-1 px-4 py-2 text-sm truncate">
                                 <a href="#" class="text-dark-text-color font-medium hover:text-base-text-color"> GraphQL API </a>
                                 <p class="text-base-text-color">12 Members</p>
                             </div>
                             <div class="flex-shrink-0 pr-2">
-                                <button type="button" class="w-8 h-8 bg-primary inline-flex items-center justify-center text-light-text-color rounded-full hover:text-base-text-color focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" id="pinned-team-options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                                <button type="button" class="w-8 h-8 bg-secondary inline-flex items-center justify-center text-light-text-color rounded-full hover:text-base-text-color focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" id="pinned-team-options-menu-0-button" aria-expanded="false" aria-haspopup="true">
                                     <span class="sr-only">Open options</span>
                                     <!-- Heroicon name: solid/dots-vertical -->
                                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -336,7 +336,7 @@
                                     From: "transform opacity-100 scale-100"
                                     To: "transform opacity-0 scale-95"
                                 -->
-                                <div class="z-10 mx-3 origin-top-right absolute right-10 top-3 w-48 mt-1 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="pinned-team-options-menu-0-button" tabindex="-1">
+                                <div class="z-10 mx-3 origin-top-right absolute right-10 top-3 w-48 mt-1 rounded-md shadow-lg bg-secondary ring-1 ring-black ring-opacity-5 divide-y divide-neutral-light focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="pinned-team-options-menu-0-button" tabindex="-1">
                                     <div class="py-1" role="none">
                                         <!-- Active: "bg-neutral text-dark-text-color", Not Active: "text-dark-text-color" -->
                                         <a href="#" class="text-dark-text-color block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="pinned-team-options-menu-0-item-0">View</a>
@@ -394,7 +394,7 @@
                             <th class="pr-6 py-3 border-b border-neutral-light bg-gray-50 text-right text-xs font-medium text-base-text-color uppercase tracking-wider"></th>
                         </tr>
                         </thead>
-                        <tbody class="bg-primary divide-y divide-gray-100">
+                        <tbody class="bg-secondary divide-y divide-gray-100">
                         <tr>
                             <td class="px-6 py-3 max-w-0 w-full whitespace-nowrap text-sm font-medium text-dark-text-color">
                                 <div class="flex items-center space-x-3 lg:pl-2">
@@ -424,7 +424,7 @@
                             </td>
                             <td class="hidden md:table-cell px-6 py-3 whitespace-nowrap text-sm text-base-text-color text-right">March 17, 2020</td>
                             <td class="px-6 py-3 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class="text-secondary hover:text-secondary-dark">Edit</a>
+                                <a href="#" class="text-primary hover:text-primary-dark">Edit</a>
                             </td>
                         </tr>
 

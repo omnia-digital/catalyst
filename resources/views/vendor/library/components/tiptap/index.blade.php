@@ -7,7 +7,7 @@
     'class' => '',
 ])
 
-<div class="editor bg-primary shadow-sm {{ $class }}">
+<div class="editor bg-secondary shadow-sm {{ $class }}">
     <div
             wire:ignore
             x-data="{

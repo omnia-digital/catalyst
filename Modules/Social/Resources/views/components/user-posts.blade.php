@@ -19,7 +19,7 @@
             <div class="sm:hidden">
                 <label for="tabs" class="sr-only">Select a tab</label>
                 <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
-                <select x-model="activeTab" class="block w-full rounded-md border-neutral-light py-2 pl-3 pr-10 text-base focus:border-secondary focus:outline-none focus:ring-secondary sm:text-sm">
+                <select x-model="activeTab" class="block w-full rounded-md border-neutral-light py-2 pl-3 pr-10 text-base focus:border-primary focus:outline-none focus:ring-primary sm:text-sm">
                     <template x-for="(tab, index) in tabs" :key="index" class="space-x-4">
                         <option :value="index" x-text="tab"></option>
                     </template>
@@ -30,8 +30,8 @@
                   <nav class="-mb-px flex" aria-label="Tabs">
                     <template x-for="(tab, index) in tabs" :key="index">
                         <a type="button"
-                            class="mr-4 last:mr-0 cursor-pointer hover:text-secondary hover:border-secondary focus:text-secondary focus:border-secondary whitespace-nowrap py-4 px-1 border-b-2 font-semibold"
-                            :class="(activeTab === index) ? 'border-secondary text-secondary' : 'border-transparent text-light-text-color'"
+                            class="mr-4 last:mr-0 cursor-pointer hover:text-primary hover:border-primary focus:text-primary focus:border-primary whitespace-nowrap py-4 px-1 border-b-2 font-semibold"
+                            :class="(activeTab === index) ? 'border-primary text-primary' : 'border-transparent text-light-text-color'"
                             x-on:click.prevent="activeTab = index;"
                             x-text="tab"
                         ></a>

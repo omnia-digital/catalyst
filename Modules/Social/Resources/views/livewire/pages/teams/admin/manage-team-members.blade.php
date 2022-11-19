@@ -15,10 +15,10 @@
                                x-text="tab.title"
                             ></a>
                             <div x-show="tab.id == 1 && $wire.invitationsCount > 0">
-                                <span x-text="$wire.invitationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-secondary rounded-full"></span>
+                                <span x-text="$wire.invitationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-primary rounded-full"></span>
                             </div>
                             <div x-show="tab.id == 2 && $wire.applicationsCount > 0">
-                                <span x-text="$wire.applicationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-secondary rounded-full"></span>
+                                <span x-text="$wire.applicationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-primary rounded-full"></span>
                             </div>
                         </li>
                     </template>
@@ -119,7 +119,7 @@
                                         <div class="relative z-0 mt-1 border border-neutral-light rounded-lg cursor-pointer">
                                             @foreach ($this->roles as $index => $role)
                                                 <button type="button"
-                                                        class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-secondary focus:ring focus:ring-secondary-light {{ $index > 0 ? 'border-t border-neutral-light rounded-t-none' : '' }} {{ ! $loop->last ? 'rounded-b-none' : '' }}"
+                                                        class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-primary focus:ring focus:ring-primary-light {{ $index > 0 ? 'border-t border-neutral-light rounded-t-none' : '' }} {{ ! $loop->last ? 'rounded-b-none' : '' }}"
                                                         wire:click="$set('addTeamMemberForm.role', '{{ $role->key }}')">
                                                     <div class="{{ isset($addTeamMemberForm['role']) && $addTeamMemberForm['role'] !== $role->key ? 'opacity-50' : '' }}">
                                                         <!-- Role Name -->
@@ -230,7 +230,7 @@
 
                                     <div class="flex items-center">
                                         <button type="button"
-                                                class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
+                                                class="inline-flex items-center px-4 py-2 rounded-full bg-secondary text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
                                                 wire:click.prevent="addTeamMemberUsingID({{ $application->user->id }})"
                                         >Accept
                                         </button>
@@ -266,7 +266,7 @@
                 <div class="relative z-0 mt-1 border border-neutral-light rounded-lg cursor-pointer">
                     @foreach ($this->roles as $index => $role)
                         <button type="button"
-                                class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-secondary focus:ring focus:ring-secondary-light {{ $index > 0 ? 'border-t border-neutral-light rounded-t-none' : '' }} {{ ! $loop->last ? 'rounded-b-none' : '' }}"
+                                class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-primary focus:ring focus:ring-primary-light {{ $index > 0 ? 'border-t border-neutral-light rounded-t-none' : '' }} {{ ! $loop->last ? 'rounded-b-none' : '' }}"
                                 wire:click="$set('currentRole', '{{ $role->key }}')">
                             <div class="{{ $currentRole !== $role->key ? 'opacity-50' : '' }}">
                                 <!-- Role Name -->

@@ -4,8 +4,8 @@
     @empty($resource)
         <x-library::heading.2>No Resource found</x-library::heading.2>
     @else
-        <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-secondary">
-            <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-primary hover:text-primary">
+        <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
+            <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary">
                 <a href="{{ route('resources.home') }}">
                     <x-heroicon-o-arrow-left class="h-6"/>
                 </a>
@@ -39,7 +39,7 @@
                         </div>
                         @can('update', $resource)
                             <div class="ml-auto flex justify-end items-center">
-                                <x-library::button.link href="{{ route('resources.edit', $resource->id) }}" size="" class="text-secondary border-none rounded-none shadow-none hover:underline">
+                                <x-library::button.link href="{{ route('resources.edit', $resource->id) }}" size="" class="text-primary border-none rounded-none shadow-none hover:underline">
                                     Edit
                                 </x-library::button.link>
                             </div>
@@ -59,7 +59,7 @@
                     </div>
 
                     @if($resource->url)
-                        <a href="{{ $resource->url }}" target="_blank" class="bg-secondary hover:shadow-lg rounded-lg px-4 py-2 text-xl text-white-text-color inline-flex items-center space-x-2">
+                        <a href="{{ $resource->url }}" target="_blank" class="bg-primary hover:shadow-lg rounded-lg px-4 py-2 text-xl text-white-text-color inline-flex items-center space-x-2">
                             <p class="text-white-text-color">Go to URL</p>
                             <x-heroicon-o-arrow-right class="h-6 w-6"/>
                         </a>

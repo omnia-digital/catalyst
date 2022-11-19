@@ -12,7 +12,7 @@
                         <x-library::heading.1 class="text-2xl sm:text-3xl" text-color="text-white-text-color">{{ $user->name  }}</x-library::heading.1>
                         <x-library::heading.2 class="font-normal" textSize="text-lg sm:text-xl sm:text-2xl" text-color="text-white-text-color">{{ '@' .  $user->handle }}</x-library::heading.2>
                     </div>
-                    <div class="flex flex-wrap space-x-2 items-center text-primary text-sm">
+                    <div class="flex flex-wrap space-x-2 items-center text-secondary text-sm">
                         @if (\Platform::isUsingUserSubscriptions()
                             && \Platform::isSubscriptionShownInProfileHeader()
                             && $user->chargentSubscription()->latest()->first()?->isActive)
@@ -24,7 +24,7 @@
                             <x-dot class="hidden sm:block" />
                         @endif
 
-                        <p class="text-primary whitespace-nowrap">Joined about {{ $user->profile->created_at->diffForHumans() }}</p>
+                        <p class="text-secondary whitespace-nowrap">Joined about {{ $user->profile->created_at->diffForHumans() }}</p>
 
                         {{-- @if($user->online_status)
                             <x-dot class="hidden sm:block" />
@@ -52,5 +52,5 @@
             </div> --}}
         </div>
     </div>
-    <x-profiles.overview-navigation class="bg-primary shadow" :user="$user"/>
+    <x-profiles.overview-navigation class="bg-secondary shadow" :user="$user"/>
 </div>

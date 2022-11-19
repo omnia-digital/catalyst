@@ -29,7 +29,7 @@
                     @forelse ($featuredTeams->take(4) as $team)
                         <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                     @empty
-                        <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Featured Teams Found') }}</p>
+                        <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No Featured Teams Found') }}</p>
                     @endforelse
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 @forelse ($newTeams->take(4) as $team)
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
-                    <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No New Teams Found') }}</p>
+                    <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No New Teams Found') }}</p>
                 @endforelse
             </div>
         </div>

@@ -1,8 +1,8 @@
 @extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
-    <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-secondary">
-        <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-primary hover:text-primary">
+    <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
+        <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary">
             <a href="{{ route('resources.show', $resource->id) }}">
                 Cancel
             </a>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="mt-4">
                     <x-library::input.label value="Body"/>
-                    <p class="my-4 italic text-secondary">You can even use Markdown to style and format your Resource! Not sure how to use it? Here's the official guide: <a href="https://www.markdownguide.org/basic-syntax/" class="underline hover:no-underline">https://www.markdownguide.org/basic-syntax/</a></p>
+                    <p class="my-4 italic text-primary">You can even use Markdown to style and format your Resource! Not sure how to use it? Here's the official guide: <a href="https://www.markdownguide.org/basic-syntax/" class="underline hover:no-underline">https://www.markdownguide.org/basic-syntax/</a></p>
                     <x-library::tiptap wire:model.defer="resource.body"/>
                     <x-library::input.error for="resource.body"/>
                     <x-library::input.help value="Maximum is 2500 characters"/>

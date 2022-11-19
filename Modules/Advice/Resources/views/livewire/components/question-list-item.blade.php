@@ -1,5 +1,5 @@
 <div
-        class="bg-primary pt-4 shadow sm:px-3 sm:rounded-lg"
+        class="bg-secondary pt-4 shadow sm:px-3 sm:rounded-lg"
         x-data="{ openOptions: false }"
 >
         <article aria-labelledby="{{ 'post-' . $post->id }}" class="flex justify-start">
@@ -41,7 +41,7 @@
                             </div>
                             <div
                                     aria-labelledby="post-card-{{ $post->id }}-options-menu-items"
-                                    class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                    class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-secondary ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     x-show="openOptions" @click.away="openOptions = false"
                                     x-transition:enter.duration.100ms
                                     x-transition:enter.opacity.0
