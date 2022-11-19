@@ -22,7 +22,7 @@
 
                 <div class="flex items-center">
                     <button type="button"
-                            class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
+                            class="inline-flex items-center px-4 py-2 rounded-full bg-white text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
                             x-on:click.prevent="viewSubmission({{ $submission->id }})"
                     >View Submission</button>
                 </div>
@@ -49,7 +49,7 @@
                         @foreach ($selectedSubmission->data as $field => $value)
                             <tr wire:loading.remove wire:target="updateCurrentSelected">
                                 <td class="w-full max-w-0 py-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none">
-                                    {{ $field }}
+                                    {{ $value['label'] ?? $field }}
                                 </td>
                                 <td class="px-3 py-4 text-sm text-gray-500 table-cell">{{ $value['data'] }}</td>
                             </tr>
@@ -63,7 +63,7 @@
                 @if ($selectedSubmission->teamApplication)
                     <div class="flex items-center mt-8 justify-end">
                         <button type="button"
-                            class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
+                            class="inline-flex items-center px-4 py-2 rounded-full bg-white text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
                             wire:click.prevent="addTeamMemberUsingID({{ $selectedSubmission->user->id }})"
                         >{{ \Trans::get('Accept') }}</button>
                         @if (Gate::check('removeTeamMember', $team))
