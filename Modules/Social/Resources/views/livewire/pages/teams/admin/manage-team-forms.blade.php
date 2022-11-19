@@ -37,19 +37,27 @@
                                     <dd class="mt-1 truncate text-dark-text-color">{{ $form->formType?->name ?? '' }}</dd>
                                     <dt class="sr-only sm:hidden">Submissions</dt>
                                     <dd class="mt-1 truncate text-light-text-color">
-                                        <a 
-                                            href="{{ route('social.teams.forms.submissions', ['team' => $team, 'form' => $form]) }}"
-                                            class="underline hover:no-underline focus:ring-1"
-                                        >{{ $form->submissions()->count() }} {{ Str::plural('submission', $form->submissions()->count()) }}</a>
+                                        @if ($form->submissions()->count())
+                                            <a 
+                                                href="{{ route('social.teams.forms.submissions', ['team' => $team, 'form' => $form]) }}"
+                                                class="underline hover:no-underline focus:ring-1"
+                                            >{{ $form->submissions()->count() }} {{ Str::plural('submission', $form->submissions()->count()) }}</a>
+                                        @else
+                                            <span>{{ $form->submissions()->count() }} {{ Str::plural('submission', $form->submissions()->count()) }}</span>
+                                        @endif
                                     </dd>
                                 </dl>
                             </td>
                             <td class="hidden px-3 py-4 text-sm text-dark-text-color lg:table-cell">{{ $form->formType?->name ?? '' }}</td>
                             <td class="hidden px-3 py-4 text-sm text-light-text-color lg:table-cell">
-                                <a 
-                                    href="{{ route('social.teams.forms.submissions', ['team' => $team, 'form' => $form]) }}"
-                                    class="underline hover:no-underline focus:ring-1"
-                                >{{ $form->submissions()->count() }}</a>
+                                @if ($form->submissions()->count())
+                                    <a 
+                                        href="{{ route('social.teams.forms.submissions', ['team' => $team, 'form' => $form]) }}"
+                                        class="underline hover:no-underline focus:ring-1"
+                                    >{{ $form->submissions()->count() }}</a>
+                                @else
+                                    <span>{{ $form->submissions()->count() }}</span>
+                                @endif
                             </td>
                             <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 space-x-2">
                                 <x-library::dropdown dropdownClasses="z-10">
