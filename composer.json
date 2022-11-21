@@ -71,7 +71,7 @@
         "laracademy/generators": "^3.4",
         "laravel-lang/lang": "^10.9",
         "laravel-lang/publisher": "^13.0",
-        "laravel/sail": "^1.12",
+        "laravel/sail": "^1.16",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
