@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a7670c551fcf27a1b636eab1d421ed2c",
+    "content-hash": "93f384f5baaea1ee9e016e951eb40445",
     "packages": [
         {
             "name": "3x1io/filament-themes",
@@ -18415,5 +18415,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }
