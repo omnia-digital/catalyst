@@ -227,7 +227,7 @@ return [
         /*
          * This disk will be used to store files regarding importing subscribers.
          */
-        'import_subscribers_disk' => 'local',
+        'import_subscribers_disk' => 'public',
     ],
 
     'transactional' => [
@@ -279,33 +279,10 @@ return [
     ],
 
     /*
-     * This disk will be used to store files regarding importing.
-     */
-    'import_disk' => 'local',
-
-    /*
-     * This disk will be used to store files regarding exporting.
-     */
-    'export_disk' => 'local',
-
-    /*
-     * This disk will be used to store files temporarily for
-     * unzipping & reading. Make sure this is on a local
-     * filesystem.
-     */
-    'tmp_disk' => 'local',
-
-    /*
      * The mailer used by Mailcoach for password resets and summary emails.
      * Mailcoach will use the default Laravel mailer if this is not set.
      */
     'mailer' => null,
-
-    /*
-     * The timezone to use with Mailcoach, by default the timezone in
-     * config/app.php will be used.
-     */
-    'timezone' => null,
 
     /*
      * The date format used on all screens of the UI

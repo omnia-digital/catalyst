@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.39.0.
+ * Generated for Laravel 9.41.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -9224,7 +9224,7 @@
      *
      * @method static mixed reset(array $credentials, \Closure $callback)
      * @method static string sendResetLink(array $credentials, \Closure $callback = null)
-     * @method static \Illuminate\Contracts\Auth\CanResetPassword getUser(array $credentials)
+     * @method static \Illuminate\Contracts\Auth\CanResetPassword|null getUser(array $credentials)
      * @method static string createToken(\Illuminate\Contracts\Auth\CanResetPassword $user)
      * @method static void deleteToken(\Illuminate\Contracts\Auth\CanResetPassword $user)
      * @method static bool tokenExists(\Illuminate\Contracts\Auth\CanResetPassword $user, string $token)
@@ -12045,6 +12045,20 @@
                         return $instance->missing($key);
         }
                     /**
+         * Apply the callback if the request is missing the given input item key.
+         *
+         * @param string $key
+         * @param callable $callback
+         * @param callable|null $default
+         * @return $this|mixed 
+         * @static 
+         */ 
+        public static function whenMissing($key, $callback, $default = null)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->whenMissing($key, $callback, $default);
+        }
+                    /**
          * Get the keys for all of the input and files.
          *
          * @return array 
@@ -13602,6 +13616,149 @@
         {
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->macroCall($method, $parameters);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\Feed\FeedServiceProvider::registerRouteMacro()
+         * @param mixed $baseUrl
+         * @static 
+         */ 
+        public static function feeds($baseUrl = '')
+        {
+                        return \Illuminate\Routing\Router::feeds($baseUrl);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachMailgunFeedback\MailcoachMailgunFeedbackServiceProvider::register()
+         * @param string $url
+         * @static 
+         */ 
+        public static function mailgunFeedback($url)
+        {
+                        return \Illuminate\Routing\Router::mailgunFeedback($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachPostmarkFeedback\MailcoachPostmarkFeedbackServiceProvider::register()
+         * @param string $url
+         * @static 
+         */ 
+        public static function postmarkFeedback($url)
+        {
+                        return \Illuminate\Routing\Router::postmarkFeedback($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachSendgridFeedback\MailcoachSendgridFeedbackServiceProvider::register()
+         * @param string $url
+         * @static 
+         */ 
+        public static function sendgridFeedback($url)
+        {
+                        return \Illuminate\Routing\Router::sendgridFeedback($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachSendinblueFeedback\MailcoachSendinblueFeedbackServiceProvider::register()
+         * @param string $url
+         * @static 
+         */ 
+        public static function sendinblueFeedback($url)
+        {
+                        return \Illuminate\Routing\Router::sendinblueFeedback($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachSesFeedback\MailcoachSesFeedbackServiceProvider::register()
+         * @param string $url
+         * @static 
+         */ 
+        public static function sesFeedback($url)
+        {
+                        return \Illuminate\Routing\Router::sesFeedback($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::auth()
+         * @param mixed $options
+         * @static 
+         */ 
+        public static function auth($options = [])
+        {
+                        return \Illuminate\Routing\Router::auth($options);
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::resetPassword()
+         * @static 
+         */ 
+        public static function resetPassword()
+        {
+                        return \Illuminate\Routing\Router::resetPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::confirmPassword()
+         * @static 
+         */ 
+        public static function confirmPassword()
+        {
+                        return \Illuminate\Routing\Router::confirmPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::emailVerification()
+         * @static 
+         */ 
+        public static function emailVerification()
+        {
+                        return \Illuminate\Routing\Router::emailVerification();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\Mailcoach\MailcoachServiceProvider::bootRoutes()
+         * @param string $url
+         * @param bool $registerFeedback
+         * @param bool $registerAuth
+         * @static 
+         */ 
+        public static function mailcoach($url = '', $registerFeedback = true, $registerAuth = true)
+        {
+                        return \Illuminate\Routing\Router::mailcoach($url, $registerFeedback, $registerAuth);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachEditor\MailcoachEditorServiceProvider::bootingPackage()
+         * @param string $url
+         * @static 
+         */ 
+        public static function mailcoachEditor($url = '')
+        {
+                        return \Illuminate\Routing\Router::mailcoachEditor($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\WebhookClient\WebhookClientServiceProvider::packageBooted()
+         * @param string $url
+         * @param string $name
+         * @static 
+         */ 
+        public static function webhooks($url, $name = 'default')
+        {
+                        return \Illuminate\Routing\Router::webhooks($url, $name);
         }
          
     }
@@ -17141,6 +17298,18 @@
         {
                         return \Illuminate\Support\Str::sanitizeHtml($html);
         }
+                    /**
+         * 
+         *
+         * @see \Spatie\Mailcoach\MailcoachServiceProvider::bootSupportMacros()
+         * @param int $number
+         * @param int $decimals
+         * @static 
+         */ 
+        public static function shortNumber($number, $decimals = 1)
+        {
+                        return \Illuminate\Support\Str::shortNumber($number, $decimals);
+        }
          
     }
             /**
@@ -17161,6 +17330,636 @@
         public static function debug()
         {
                         return \Illuminate\Support\Collection::debug();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\After::__invoke()
+         * @param mixed $currentItem
+         * @param mixed $fallback
+         * @static 
+         */ 
+        public static function after($currentItem, $fallback = null)
+        {
+                        return \Illuminate\Support\Collection::after($currentItem, $fallback);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\At::__invoke()
+         * @param mixed $index
+         * @static 
+         */ 
+        public static function at($index)
+        {
+                        return \Illuminate\Support\Collection::at($index);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Before::__invoke()
+         * @param mixed $currentItem
+         * @param mixed $fallback
+         * @static 
+         */ 
+        public static function before($currentItem, $fallback = null)
+        {
+                        return \Illuminate\Support\Collection::before($currentItem, $fallback);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\ChunkBy::__invoke()
+         * @param \Closure $callback
+         * @param bool $preserveKeys
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function chunkBy($callback, $preserveKeys = false)
+        {
+                        return \Illuminate\Support\Collection::chunkBy($callback, $preserveKeys);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\CollectBy::__invoke()
+         * @param mixed $key
+         * @param mixed $default
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function collectBy($key, $default = null)
+        {
+                        return \Illuminate\Support\Collection::collectBy($key, $default);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\ContainsAll::__invoke()
+         * @param mixed $values
+         * @return bool 
+         * @static 
+         */ 
+        public static function containsAll($values = [])
+        {
+                        return \Illuminate\Support\Collection::containsAll($values);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\ContainsAny::__invoke()
+         * @param mixed $values
+         * @return bool 
+         * @static 
+         */ 
+        public static function containsAny($values = [])
+        {
+                        return \Illuminate\Support\Collection::containsAny($values);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\EachCons::__invoke()
+         * @param int $chunkSize
+         * @param bool $preserveKeys
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function eachCons($chunkSize, $preserveKeys = false)
+        {
+                        return \Illuminate\Support\Collection::eachCons($chunkSize, $preserveKeys);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Eighth::__invoke()
+         * @static 
+         */ 
+        public static function eighth()
+        {
+                        return \Illuminate\Support\Collection::eighth();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Extract::__invoke()
+         * @param mixed $keys
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function extract($keys)
+        {
+                        return \Illuminate\Support\Collection::extract($keys);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Fifth::__invoke()
+         * @static 
+         */ 
+        public static function fifth()
+        {
+                        return \Illuminate\Support\Collection::fifth();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\FilterMap::__invoke()
+         * @param callable $callback
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function filterMap($callback)
+        {
+                        return \Illuminate\Support\Collection::filterMap($callback);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\FirstOrPush::__invoke()
+         * @param mixed $callback
+         * @param mixed $value
+         * @param mixed $instance
+         * @static 
+         */ 
+        public static function firstOrPush($callback, $value, $instance = null)
+        {
+                        return \Illuminate\Support\Collection::firstOrPush($callback, $value, $instance);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Fourth::__invoke()
+         * @static 
+         */ 
+        public static function fourth()
+        {
+                        return \Illuminate\Support\Collection::fourth();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\FromPairs::__invoke()
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function fromPairs()
+        {
+                        return \Illuminate\Support\Collection::fromPairs();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\GetNth::__invoke()
+         * @param int $nth
+         * @static 
+         */ 
+        public static function getNth($nth)
+        {
+                        return \Illuminate\Support\Collection::getNth($nth);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Glob::__invoke()
+         * @param string $pattern
+         * @param int $flags
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function glob($pattern, $flags = 0)
+        {
+                        return \Illuminate\Support\Collection::glob($pattern, $flags);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\GroupByModel::__invoke()
+         * @param mixed $callback
+         * @param bool $preserveKeys
+         * @param mixed $modelKey
+         * @param mixed $itemsKey
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function groupByModel($callback, $preserveKeys = false, $modelKey = 0, $itemsKey = 1)
+        {
+                        return \Illuminate\Support\Collection::groupByModel($callback, $preserveKeys, $modelKey, $itemsKey);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Head::__invoke()
+         * @static 
+         */ 
+        public static function head()
+        {
+                        return \Illuminate\Support\Collection::head();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\IfMacro::__invoke()
+         * @param mixed|null $if
+         * @param mixed|null $then
+         * @param mixed|null $else
+         * @return mixed|null 
+         * @static 
+         */ 
+        public static function if($if, $then = null, $else = null)
+        {
+                        return \Illuminate\Support\Collection::if($if, $then, $else);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\IfAny::__invoke()
+         * @param callable $callback
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function ifAny($callback)
+        {
+                        return \Illuminate\Support\Collection::ifAny($callback);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\IfEmpty::__invoke()
+         * @param callable $callback
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function ifEmpty($callback)
+        {
+                        return \Illuminate\Support\Collection::ifEmpty($callback);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\InsertAfter::__invoke()
+         * @param mixed $after
+         * @param mixed $item
+         * @param mixed $key
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function insertAfter($after, $item, $key = null)
+        {
+                        return \Illuminate\Support\Collection::insertAfter($after, $item, $key);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\InsertAfterKey::__invoke()
+         * @param mixed $afterKey
+         * @param mixed $item
+         * @param mixed $key
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function insertAfterKey($afterKey, $item, $key = null)
+        {
+                        return \Illuminate\Support\Collection::insertAfterKey($afterKey, $item, $key);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\InsertAt::__invoke()
+         * @param int $index
+         * @param mixed $item
+         * @param mixed $key
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function insertAt($index, $item, $key = null)
+        {
+                        return \Illuminate\Support\Collection::insertAt($index, $item, $key);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\InsertBefore::__invoke()
+         * @param mixed $before
+         * @param mixed $item
+         * @param mixed $key
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function insertBefore($before, $item, $key = null)
+        {
+                        return \Illuminate\Support\Collection::insertBefore($before, $item, $key);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\InsertBeforeKey::__invoke()
+         * @param mixed $beforeKey
+         * @param mixed $item
+         * @param mixed $key
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function insertBeforeKey($beforeKey, $item, $key = null)
+        {
+                        return \Illuminate\Support\Collection::insertBeforeKey($beforeKey, $item, $key);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Ninth::__invoke()
+         * @static 
+         */ 
+        public static function ninth()
+        {
+                        return \Illuminate\Support\Collection::ninth();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\None::__invoke()
+         * @param mixed $key
+         * @param mixed $value
+         * @return bool 
+         * @static 
+         */ 
+        public static function none($key, $value = null)
+        {
+                        return \Illuminate\Support\Collection::none($key, $value);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Paginate::__invoke()
+         * @param int $perPage
+         * @param string $pageName
+         * @param int|null $page
+         * @param int|null $total
+         * @param array $options
+         * @return \Illuminate\Pagination\LengthAwarePaginator 
+         * @static 
+         */ 
+        public static function paginate($perPage = 15, $pageName = 'page', $page = null, $total = null, $options = [])
+        {
+                        return \Illuminate\Support\Collection::paginate($perPage, $pageName, $page, $total, $options);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\ParallelMap::__invoke()
+         * @param callable $callback
+         * @param mixed $workers
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function parallelMap($callback, $workers = null)
+        {
+                        return \Illuminate\Support\Collection::parallelMap($callback, $workers);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Path::__invoke()
+         * @param mixed $key
+         * @param mixed $default
+         * @static 
+         */ 
+        public static function path($key, $default = null)
+        {
+                        return \Illuminate\Support\Collection::path($key, $default);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\PluckMany::__invoke()
+         * @param mixed $keys
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function pluckMany($keys)
+        {
+                        return \Illuminate\Support\Collection::pluckMany($keys);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\PluckToArray::__invoke()
+         * @param mixed $value
+         * @param mixed $key
+         * @return array 
+         * @static 
+         */ 
+        public static function pluckToArray($value, $key = null)
+        {
+                        return \Illuminate\Support\Collection::pluckToArray($value, $key);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Prioritize::__invoke()
+         * @param callable $callable
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function prioritize($callable)
+        {
+                        return \Illuminate\Support\Collection::prioritize($callable);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Recursive::__invoke()
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function recursive()
+        {
+                        return \Illuminate\Support\Collection::recursive();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Rotate::__invoke()
+         * @param int $offset
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function rotate($offset)
+        {
+                        return \Illuminate\Support\Collection::rotate($offset);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Second::__invoke()
+         * @static 
+         */ 
+        public static function second()
+        {
+                        return \Illuminate\Support\Collection::second();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\SectionBy::__invoke()
+         * @param mixed $key
+         * @param bool $preserveKeys
+         * @param mixed $sectionKey
+         * @param mixed $itemsKey
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function sectionBy($key, $preserveKeys = false, $sectionKey = 0, $itemsKey = 1)
+        {
+                        return \Illuminate\Support\Collection::sectionBy($key, $preserveKeys, $sectionKey, $itemsKey);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Seventh::__invoke()
+         * @static 
+         */ 
+        public static function seventh()
+        {
+                        return \Illuminate\Support\Collection::seventh();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\SimplePaginate::__invoke()
+         * @param int $perPage
+         * @param string $pageName
+         * @param int|null $page
+         * @param array $options
+         * @return \Illuminate\Pagination\Paginator 
+         * @static 
+         */ 
+        public static function simplePaginate($perPage = 15, $pageName = 'page', $page = null, $options = [])
+        {
+                        return \Illuminate\Support\Collection::simplePaginate($perPage, $pageName, $page, $options);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Sixth::__invoke()
+         * @static 
+         */ 
+        public static function sixth()
+        {
+                        return \Illuminate\Support\Collection::sixth();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\SliceBefore::__invoke()
+         * @param mixed $callback
+         * @param bool $preserveKeys
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function sliceBefore($callback, $preserveKeys = false)
+        {
+                        return \Illuminate\Support\Collection::sliceBefore($callback, $preserveKeys);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Tail::__invoke()
+         * @param bool $preserveKeys
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function tail($preserveKeys = false)
+        {
+                        return \Illuminate\Support\Collection::tail($preserveKeys);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Tenth::__invoke()
+         * @static 
+         */ 
+        public static function tenth()
+        {
+                        return \Illuminate\Support\Collection::tenth();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Third::__invoke()
+         * @static 
+         */ 
+        public static function third()
+        {
+                        return \Illuminate\Support\Collection::third();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\ToPairs::__invoke()
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function toPairs()
+        {
+                        return \Illuminate\Support\Collection::toPairs();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Transpose::__invoke()
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function transpose()
+        {
+                        return \Illuminate\Support\Collection::transpose();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\TryCatch::__invoke()
+         * @static 
+         */ 
+        public static function try()
+        {
+                        return \Illuminate\Support\Collection::try();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\Validate::__invoke()
+         * @param mixed $callback
+         * @return bool 
+         * @static 
+         */ 
+        public static function validate($callback)
+        {
+                        return \Illuminate\Support\Collection::validate($callback);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\WeightedRandom::__invoke()
+         * @param callable|string $weightAttribute
+         * @param mixed $default
+         * @static 
+         */ 
+        public static function weightedRandom($weightAttribute, $default = null)
+        {
+                        return \Illuminate\Support\Collection::weightedRandom($weightAttribute, $default);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\CollectionMacros\Macros\WithSize::__invoke()
+         * @param int $size
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function withSize($size)
+        {
+                        return \Illuminate\Support\Collection::withSize($size);
         }
          
     }
@@ -19268,6 +20067,17 @@
      
 }
 
+    namespace Laravel\Horizon { 
+            /**
+     * 
+     *
+     */ 
+        class Horizon {
+         
+    }
+     
+}
+
     namespace Livewire { 
             /**
      * 
@@ -20324,6 +21134,169 @@
      
 }
 
+    namespace Spatie\Analytics { 
+            /**
+     * 
+     *
+     * @see \Spatie\Analytics\Analytics
+     */ 
+        class AnalyticsFacade {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setViewId($viewId)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->setViewId($viewId);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getViewId()
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->getViewId();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchVisitorsAndPageViews($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchVisitorsAndPageViews($period);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTotalVisitorsAndPageViews($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTotalVisitorsAndPageViews($period);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchMostVisitedPages($period, $maxResults = 20)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchMostVisitedPages($period, $maxResults);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTopReferrers($period, $maxResults = 20)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTopReferrers($period, $maxResults);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchUserTypes($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchUserTypes($period);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTopBrowsers($period, $maxResults = 10)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTopBrowsers($period, $maxResults);
+        }
+                    /**
+         * Call the query method on the authenticated client.
+         *
+         * @param \Spatie\Analytics\Period $period
+         * @param string $metrics
+         * @param array $others
+         * @return \Google_Service_Analytics_GaData|array|null 
+         * @static 
+         */ 
+        public static function performQuery($period, $metrics, $others = [])
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->performQuery($period, $metrics, $others);
+        }
+                    /**
+         * Get the underlying Google_Service_Analytics object. You can use this
+         * to basically call anything on the Google Analytics API.
+         *
+         * @static 
+         */ 
+        public static function getAnalyticsService()
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->getAnalyticsService();
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Spatie\Analytics\Analytics::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Spatie\Analytics\Analytics::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Spatie\Analytics\Analytics::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Spatie\Analytics\Analytics::flushMacros();
+        }
+         
+    }
+     
+}
+
     namespace Spatie\LaravelIgnition\Facades { 
             /**
      * 
@@ -20706,6 +21679,128 @@
         {
                         /** @var \Spatie\FlareClient\Flare $instance */
                         return $instance->group($groupName, $properties);
+        }
+         
+    }
+     
+}
+
+    namespace Spatie\Navigation\Facades { 
+            /**
+     * 
+     *
+     * @see \Spatie\Navigation\Navigation
+     */ 
+        class Navigation {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function make()
+        {
+                        return \Spatie\Navigation\Navigation::make();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function add($title = '', $url = '', $configure = null)
+        {
+                        /** @var \Spatie\Navigation\Navigation $instance */
+                        return $instance->add($title, $url, $configure);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function addIf($condition, $title = '', $url = '', $configure = null)
+        {
+                        /** @var \Spatie\Navigation\Navigation $instance */
+                        return $instance->addIf($condition, $title, $url, $configure);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isActive($section)
+        {
+                        /** @var \Spatie\Navigation\Navigation $instance */
+                        return $instance->isActive($section);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function activeSection()
+        {
+                        /** @var \Spatie\Navigation\Navigation $instance */
+                        return $instance->activeSection();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function filter($callback)
+        {
+                        /** @var \Spatie\Navigation\Navigation $instance */
+                        return $instance->filter($callback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function tree()
+        {
+                        /** @var \Spatie\Navigation\Navigation $instance */
+                        return $instance->tree();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function breadcrumbs()
+        {
+                        /** @var \Spatie\Navigation\Navigation $instance */
+                        return $instance->breadcrumbs();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function current()
+        {
+                        /** @var \Spatie\Navigation\Navigation $instance */
+                        return $instance->current();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getParent()
+        {
+                        /** @var \Spatie\Navigation\Navigation $instance */
+                        return $instance->getParent();
+        }
+                    /**
+         * 
+         *
+         * @return \Spatie\Navigation\Node[] 
+         * @static 
+         */ 
+        public static function getParents()
+        {
+                        /** @var \Spatie\Navigation\Navigation $instance */
+                        return $instance->getParents();
         }
          
     }
@@ -22000,6 +23095,114 @@
                     /**
          * 
          *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnFormattedStateSet()
+         * @param string $name
+         * @param mixed $value
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableColumnFormattedStateSet($name, $value, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnFormattedStateSet($name, $value, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnFormattedStateNotSet()
+         * @param string $name
+         * @param mixed $value
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableColumnFormattedStateNotSet($name, $value, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnFormattedStateNotSet($name, $value, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnHasExtraAttributes()
+         * @param string $name
+         * @param array $attributes
+         * @param mixed $record
+         * @static 
+         */ 
+        public static function assertTableColumnHasExtraAttributes($name, $attributes, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnHasExtraAttributes($name, $attributes, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnDoesNotHaveExtraAttributes()
+         * @param string $name
+         * @param array $attributes
+         * @param mixed $record
+         * @static 
+         */ 
+        public static function assertTableColumnDoesNotHaveExtraAttributes($name, $attributes, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnDoesNotHaveExtraAttributes($name, $attributes, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnHasDescription()
+         * @param string $name
+         * @param mixed $description
+         * @param mixed $record
+         * @param string $position
+         * @static 
+         */ 
+        public static function assertTableColumnHasDescription($name, $description, $record, $position = 'below')
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnHasDescription($name, $description, $record, $position);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnDoesNotHaveDescription()
+         * @param string $name
+         * @param mixed $description
+         * @param mixed $record
+         * @param string $position
+         * @static 
+         */ 
+        public static function assertTableColumnDoesNotHaveDescription($name, $description, $record, $position = 'below')
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnDoesNotHaveDescription($name, $description, $record, $position);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertSelectColumnHasOptions()
+         * @param string $name
+         * @param array $options
+         * @param mixed $record
+         * @static 
+         */ 
+        public static function assertSelectColumnHasOptions($name, $options, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertSelectColumnHasOptions($name, $options, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertSelectColumnDoesNotHaveOptions()
+         * @param string $name
+         * @param array $options
+         * @param mixed $record
+         * @static 
+         */ 
+        public static function assertSelectColumnDoesNotHaveOptions($name, $options, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertSelectColumnDoesNotHaveOptions($name, $options, $record);
+        }
+                    /**
+         * 
+         *
          * @see \Filament\Tables\Testing\TestsColumns::callTableColumnAction()
          * @param string $name
          * @param mixed $record
@@ -22132,6 +23335,182 @@
         {
                         return \Livewire\Testing\TestableLivewire::assertCountTableRecords($count);
         }
+                    /**
+         * 
+         *
+         * @see \Spatie\LivewireWizard\WizardServiceProvider::registerLivewireTestMacros()
+         * @static 
+         */ 
+        public static function emitEvents()
+        {
+                        return \Livewire\Testing\TestableLivewire::emitEvents();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\LivewireWizard\WizardServiceProvider::registerLivewireTestMacros()
+         * @param string|null $step
+         * @static 
+         */ 
+        public static function getStepState($step = null)
+        {
+                        return \Livewire\Testing\TestableLivewire::getStepState($step);
+        }
+         
+    }
+     
+}
+
+    namespace Illuminate\Routing { 
+            /**
+     * 
+     *
+     * @mixin \Illuminate\Routing\RouteRegistrar
+     */ 
+        class Router {
+                    /**
+         * 
+         *
+         * @see \Spatie\Feed\FeedServiceProvider::registerRouteMacro()
+         * @param mixed $baseUrl
+         * @static 
+         */ 
+        public static function feeds($baseUrl = '')
+        {
+                        return \Illuminate\Routing\Router::feeds($baseUrl);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachMailgunFeedback\MailcoachMailgunFeedbackServiceProvider::register()
+         * @param string $url
+         * @static 
+         */ 
+        public static function mailgunFeedback($url)
+        {
+                        return \Illuminate\Routing\Router::mailgunFeedback($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachPostmarkFeedback\MailcoachPostmarkFeedbackServiceProvider::register()
+         * @param string $url
+         * @static 
+         */ 
+        public static function postmarkFeedback($url)
+        {
+                        return \Illuminate\Routing\Router::postmarkFeedback($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachSendgridFeedback\MailcoachSendgridFeedbackServiceProvider::register()
+         * @param string $url
+         * @static 
+         */ 
+        public static function sendgridFeedback($url)
+        {
+                        return \Illuminate\Routing\Router::sendgridFeedback($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachSendinblueFeedback\MailcoachSendinblueFeedbackServiceProvider::register()
+         * @param string $url
+         * @static 
+         */ 
+        public static function sendinblueFeedback($url)
+        {
+                        return \Illuminate\Routing\Router::sendinblueFeedback($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachSesFeedback\MailcoachSesFeedbackServiceProvider::register()
+         * @param string $url
+         * @static 
+         */ 
+        public static function sesFeedback($url)
+        {
+                        return \Illuminate\Routing\Router::sesFeedback($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::auth()
+         * @param mixed $options
+         * @static 
+         */ 
+        public static function auth($options = [])
+        {
+                        return \Illuminate\Routing\Router::auth($options);
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::resetPassword()
+         * @static 
+         */ 
+        public static function resetPassword()
+        {
+                        return \Illuminate\Routing\Router::resetPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::confirmPassword()
+         * @static 
+         */ 
+        public static function confirmPassword()
+        {
+                        return \Illuminate\Routing\Router::confirmPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::emailVerification()
+         * @static 
+         */ 
+        public static function emailVerification()
+        {
+                        return \Illuminate\Routing\Router::emailVerification();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\Mailcoach\MailcoachServiceProvider::bootRoutes()
+         * @param string $url
+         * @param bool $registerFeedback
+         * @param bool $registerAuth
+         * @static 
+         */ 
+        public static function mailcoach($url = '', $registerFeedback = true, $registerAuth = true)
+        {
+                        return \Illuminate\Routing\Router::mailcoach($url, $registerFeedback, $registerAuth);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailcoachEditor\MailcoachEditorServiceProvider::bootingPackage()
+         * @param string $url
+         * @static 
+         */ 
+        public static function mailcoachEditor($url = '')
+        {
+                        return \Illuminate\Routing\Router::mailcoachEditor($url);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\WebhookClient\WebhookClientServiceProvider::packageBooted()
+         * @param string $url
+         * @param string $name
+         * @static 
+         */ 
+        public static function webhooks($url, $name = 'default')
+        {
+                        return \Illuminate\Routing\Router::webhooks($url, $name);
+        }
          
     }
      
@@ -22194,6 +23573,28 @@
         public static function assertDontSeeLivewire($component)
         {
                         return \Illuminate\Testing\TestView::assertDontSeeLivewire($component);
+        }
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Schema { 
+            /**
+     * 
+     *
+     */ 
+        class Blueprint {
+                    /**
+         * 
+         *
+         * @see \Spatie\SchemalessAttributes\SchemalessAttributesServiceProvider::registeringPackage()
+         * @param string $columnName
+         * @static 
+         */ 
+        public static function schemalessAttributes($columnName = 'schemaless_attributes')
+        {
+                        return \Illuminate\Database\Schema\Blueprint::schemalessAttributes($columnName);
         }
          
     }
@@ -22328,6 +23729,51 @@
      *
      */ 
         class Collection {
+         
+    }
+     
+}
+
+    namespace Spatie\Flash { 
+            /**
+     * 
+     *
+     * @mixin \Spatie\Flash\Message
+     */ 
+        class Flash {
+                    /**
+         * 
+         *
+         * @see \Spatie\Flash\Flash::levels()
+         * @param string $message
+         * @static 
+         */ 
+        public static function success($message)
+        {
+                        return \Spatie\Flash\Flash::success($message);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\Flash\Flash::levels()
+         * @param string $message
+         * @static 
+         */ 
+        public static function warning($message)
+        {
+                        return \Spatie\Flash\Flash::warning($message);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\Flash\Flash::levels()
+         * @param string $message
+         * @static 
+         */ 
+        public static function error($message)
+        {
+                        return \Spatie\Flash\Flash::error($message);
+        }
          
     }
      
@@ -26119,10 +27565,13 @@ namespace  {
             class FilamentGoogleAnalytics extends \BezhanSalleh\FilamentGoogleAnalytics\Facades\FilamentGoogleAnalytics {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}
+            class Horizon extends \Laravel\Horizon\Horizon {}
             class Livewire extends \Livewire\Livewire {}
             class Module extends \Nwidart\Modules\Facades\Module {}
             class Sentry extends \Sentry\Laravel\Facade {}
+            class Analytics extends \Spatie\Analytics\AnalyticsFacade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
+            class Navigation extends \Spatie\Navigation\Facades\Navigation {}
             class FeedReader extends \Vedmant\FeedReader\Facades\FeedReader {}
      
 }
