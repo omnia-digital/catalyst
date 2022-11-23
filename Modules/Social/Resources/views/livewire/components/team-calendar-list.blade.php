@@ -42,22 +42,22 @@
         class="flex flex-col sticky h-full top-20 inset-y-2"
     >
         <div class="h-full flex flex-col">
-            <div class="bg-primary flex justify-between items-center text-xl min-h-[64px] pt-2 px-4">
+            <div class="bg-secondary flex justify-between items-center text-xl min-h-[64px] pt-2 px-4">
                 <div class="font-medium">
                     <div class="text-xl" x-show="!showDetail">{{ \Trans::get('Teams') }}</div>
                     <div x-show="showDetail" class="text-lg font-bold" x-text="title"></div>
                 </div>
                 <div class="flex items-center space-x-4">
                         <a x-show="!showDetail" href="{{ route('social.teams.map') }}" @class([
-		                    'text-light-text-color hover:text-secondary active:text-secondary focus:text-secondary',
-		                    'text-secondary' => request()->routeIs('social.teams.map')
+		                    'text-light-text-color hover:text-primary active:text-primary focus:text-primary',
+		                    'text-primary' => request()->routeIs('social.teams.map')
                             ])>
                             <span class="sr-only" x-text="'Map'"></span>
                             <span><x-heroicon-o-map class="h-6 w-6" /></span>
                         </a>
                         <a x-show="!showDetail" href="{{ route('social.teams.calendar') }}" @class([
-		                    'text-light-text-color hover:text-secondary active:text-secondary focus:text-secondary',
-		                    'text-secondary' => request()->routeIs('social.teams.calendar')
+		                    'text-light-text-color hover:text-primary active:text-primary focus:text-primary',
+		                    'text-primary' => request()->routeIs('social.teams.calendar')
                             ])>
                             <span class="sr-only" x-text="'Calendar'"></span>
                             <span><x-heroicon-o-calendar class="h-6 w-6" /></span>
@@ -65,7 +65,7 @@
                         <a x-cloak x-show="showDetail" href="#"
                             x-on:click.prevent="showDetail = false"
                             @class([
-		                    'text-light-text-color hover:text-secondary active:text-secondary focus:text-secondary'
+		                    'text-light-text-color hover:text-primary active:text-primary focus:text-primary'
                             ])>
                             <span class="sr-only" x-text="'Close Details'"></span>
                             <span><x-heroicon-o-x class="h-6 w-6" /></span>
@@ -79,10 +79,10 @@
             </div>
 
             <!-- Show All Teams -->
-            <div x-show="!showDetail" class="bg-primary space-y-2 pt-4 pb-2 flex-1 overflow-y-scroll scrollbar-hide">
+            <div x-show="!showDetail" class="bg-secondary space-y-2 pt-4 pb-2 flex-1 overflow-y-scroll scrollbar-hide">
                 @forelse ($teams as $item)
                     <div
-                        class="space-y-2 mx-2 p-4 bg-primary rounded-lg border border-neutral cursor-pointer
+                        class="space-y-2 mx-2 p-4 bg-secondary rounded-lg border border-neutral cursor-pointer
                             {{ (!is_null($team) && ($team->handle === $item->handle)) ? 'shadow-md ring-1 ring-neutral-dark' : '' }}
                             hover:shadow-lg  hover:ring-2 hover:ring-neutral-dark active:shadow-lg active:ring-2 active:ring-neutral-dark focus:shadow-lg focus:ring-2 focus:ring-neutral-dark"
                         {{-- wire:click="selectEvent({{ $item->id }})" --}}
@@ -116,7 +116,7 @@
             </div>
 
             <!-- Show Team Details -->
-            <div x-cloak x-show="showDetail" class="bg-primary space-y-2 pt-4 pb-24 flex-1 overflow-y-scroll scrollbar-hide">
+            <div x-cloak x-show="showDetail" class="bg-secondary space-y-2 pt-4 pb-24 flex-1 overflow-y-scroll scrollbar-hide">
                 <div class="px-4 space-y-2">
                     <div x-show="details.start_date_string" class="flex items-center space-x-2">
                         <x-heroicon-o-calendar class="w-4 h-4" />
@@ -132,7 +132,7 @@
                     </div>
                     <div class="text-sm pt-2" x-text="details.summary"></div>
                 </div>
-                <div class="absolute bottom-0 left-0 right-0 p-6 flex items-center justify-center bg-primary">
+                <div class="absolute bottom-0 left-0 right-0 p-6 flex items-center justify-center bg-secondary">
                     <div wire:loading wire:target="selectTeam" class="absolute inset-0 bg-white/75"></div>
                     <div class="absolute inset-auto -translate-y-12 rounded-md p-2 text-success-700"
                         x-show="message"
@@ -144,24 +144,13 @@
                     >
                         <span x-text="message"></span>
                     </div>
-                    <button
-                        wire:click.prevent="moreInfo"
-                        class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-transparent border-2 border-secondary text-secondary hover:bg-neutral-light active:bg-neutral-light focus:bg-neutral-light"
-                    >More Info</button>
-                    @if (!is_null($team) && $team->teamApplications()->hasUser($this->user->id))
+                    <div>
                         <button
-                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white-text-color hover:opacity-75 active:opacity-75 focus:opacity-75"
-                            wire:click="removeApplication"
-                        >{{ \Trans::get('Remove Application') }}</button>
-                    @elseif(!is_null($team) && !$team->hasUser($this->user) && $this->user->can('apply', $team))
-                        <div class="absolute -top-9 right-0 w-96">
-                            <x-jet-input-error for="user_id" class="mt-2" />
-                        </div>
-                        <button
-                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-md bg-secondary border-2 border-secondary text-white-text-color hover:opacity-75 active:opacity-75 focus:opacity-75"
-                            wire:click="applyToTeam"
-                        >{{ \Trans::get('Apply') }}</button>
-                    @endif
+                            wire:click.prevent="moreInfo"
+                            class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-full bg-transparent border-2 border-primary text-primary hover:bg-neutral-light active:bg-neutral-light focus:bg-neutral-light"
+                        >More Info</button>
+                    </div>
+                    <x-teams.apply-button :team="$team" />
                 </div>
             </div>
         </div>

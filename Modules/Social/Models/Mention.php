@@ -21,7 +21,7 @@ class Mention extends Model
     
     protected static function newFactory()
     {
-        return \Modules\Social\Database\factories\MentionFactory::new();
+        return \Modules\Social\Database\Factories\MentionFactory::new();
     }
 
     /**

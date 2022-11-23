@@ -6,13 +6,22 @@ use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Forms\Models\Form;
+use Modules\Forms\Traits\Livewire\WithFormManagement;
 
 class ManageTeamForms extends Component
 {
+    use WithFormManagement;
+
     public ?Team $team;
 
-    public $platformForms;
-    public $teamForms;
+    public $platformForms = [];
+    public $teamForms = [];
+
+    protected $listeners = [
+        'formRemoved' => '$refresh',
+        'formPublished' => '$refresh',
+        'formSavedAsDraft' => '$refresh',
+    ];
 
     public function onLoad()
     {

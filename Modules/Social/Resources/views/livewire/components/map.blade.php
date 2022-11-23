@@ -76,7 +76,7 @@
         x-on:focus-to-country.window="focusToCountry($event.detail)"
         @keydown.window.escape="open = !open;" class="overflow-hidden relative bg-neutral"
     >
-        <div class="h-12 text-sm bg-primary flex items-center justify-between">
+        <div class="h-12 text-sm bg-secondary flex items-center justify-between">
             <div class="px-4 flex items-center space-x-4">
                 <button role="button" class="flex items-center"><span class="font-semibold mr-2">Sort:</span> By Date <x-heroicon-o-arrow-sm-down class="w-4 h-4" /></button>
                 <button role="button" class="flex items-center"><x-heroicon-o-filter class="w-4 h-4" /><span class="ml-2 font-semibold">Filter (2)</span></button>
@@ -107,7 +107,7 @@
                     id="side-menu"
                     class="w-screen max-w-md"
                 >
-                    <div class="h-full flex flex-col bg-primary shadow-xl overflow-y-scroll">
+                    <div class="h-full flex flex-col bg-secondary shadow-xl overflow-y-scroll">
                         <div class="p-6">
                             <div class="flex items-start justify-between">
                                 <x-heroicon-s-arrow-narrow-left x-on:click="showDetail = false" x-show="showDetail" class="w-5 h-5 cursor-pointer"/>
@@ -115,7 +115,7 @@
                                     Contacts
                                 </x-library::heading.2>
                                 <div class="ml-3 h-7 flex items-center">
-                                    <button @click="open = false; setTimeout(() => open = true, 1000);" class="bg-primary rounded-md text-light-text-color hover:text-base-text-color focus:ring-2 focus:ring-secondary">
+                                    <button @click="open = false; setTimeout(() => open = true, 1000);" class="bg-secondary rounded-md text-light-text-color hover:text-base-text-color focus:ring-2 focus:ring-primary">
                                         <span class="sr-only">Close panel</span>
                                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -130,7 +130,7 @@
                             <div class="w-full max-w-xs mx-auto mb-5">
                                 <div>
                                     <label for="country" class="block text-sm font-medium text-dark-text-color">Country</label>
-                                    <select wire:model="filters.country" id="country" name="country" class="mt-1 block w-full pl-3 pr-10 py-2 text-base-text-color border-gray-300 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm rounded-md">
+                                    <select wire:model="filters.country" id="country" name="country" class="mt-1 block w-full pl-3 pr-10 py-2 text-base-text-color border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md">
                                         <option selected>All</option>
 
                                         @foreach ($countries as $country)
@@ -144,14 +144,14 @@
                                 <div class="px-6">
                                     <nav class="-mb-px flex flex-wrap justify-center -mx-4">
                                         <a wire:click="selectCategory('All')" href="#"
-                                           class="{{'All' === $selectedCategoryId ? 'border-secondary text-secondary whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' : 'border-transparent text-base-text-color hover:text-dark-text-color hover:border-gray-300 whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' }}" aria-current="page">
+                                           class="{{'All' === $selectedCategoryId ? 'border-primary text-primary whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' : 'border-transparent text-base-text-color hover:text-dark-text-color hover:border-gray-300 whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' }}" aria-current="page">
                                             All
                                         </a>
 
                                         @foreach($categories as $category)
                                             @if ($category->id == $selectedCategoryId)
                                                 <a wire:click="selectCategory('{{ $category->id }}')" href="#"
-                                                   class="border-secondary text-secondary whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm" aria-current="page">
+                                                   class="border-primary text-primary whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm" aria-current="page">
                                                     {{ $category->name }}
                                                 </a>
                                             @else

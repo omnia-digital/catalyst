@@ -9,6 +9,7 @@ use App\Filament\Resources\FormResource\Pages\ListForms;
 use App\Filament\Resources\FormResource\Pages\ListFormsType;
 use App\Filament\Resources\FormResource\Pages\ViewForm;
 use App\Filament\Resources\FormResource\Pages\ViewFormType;
+use Closure;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Actions\ActionGroup;
@@ -26,8 +27,10 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Modules\Forms\Models\FormType;
 
@@ -67,40 +70,57 @@ class FormResource extends Resource
                     ->columnSpan(2)
                     ->blocks([
                         Block::make('text')
-                             ->label('Text input')
-                             ->icon('heroicon-o-annotation')
-                             ->schema([
-                                 self::getFieldNameInput(),
-                                 Checkbox::make('is_required'),
-                             ]),
+                            ->label('Text input')
+                            ->icon('heroicon-o-annotation')
+                            ->schema([
+                                self::getFieldNameInput(),
+                                Checkbox::make('is_required'),
+                                Select::make('type')
+                                    ->options([
+                                        'email' => 'Email',
+                                        'password' => 'Password',
+                                        'text' => 'Text',
+                                    ])
+                                    ->default('text')
+                                    ->disablePlaceholderSelection()
+                                    ->required(),
+                                TextInput::make('helper_text'),
+                                TextInput::make('hint'),
+                            ]),
                         Block::make('select')
-                             ->icon('heroicon-o-selector')
-                             ->schema([
-                                 self::getFieldNameInput(),
-                                 KeyValue::make('options')
-                                         ->addButtonLabel('Add option')
-                                         ->keyLabel('Value')
-                                         ->valueLabel('Label'),
-                                 Checkbox::make('is_required'),
-                             ]),
+                            ->icon('heroicon-o-selector')
+                            ->schema([
+                                self::getFieldNameInput(),
+                                KeyValue::make('options')
+                                        ->addButtonLabel('Add option')
+                                        ->keyLabel('Value')
+                                        ->valueLabel('Label'),
+                                Checkbox::make('is_required'),
+                                TextInput::make('helper_text'),
+                                TextInput::make('hint'),
+                            ]),
                         Block::make('checkbox')
-                             ->icon('heroicon-o-check-circle')
-                             ->schema([
-                                 self::getFieldNameInput(),
-                                 Checkbox::make('is_required'),
-                             ]),
+                            ->icon('heroicon-o-check-circle')
+                            ->schema([
+                                self::getFieldNameInput(),
+                                Checkbox::make('is_required'),
+                                TextInput::make('helper_text'),
+                                TextInput::make('hint'),
+                            ]),
                         Block::make('file')
-                             ->icon('heroicon-o-photograph')
-                             ->schema([
-                                 self::getFieldNameInput(),
-                                 Grid::make()
-                                     ->schema([
-                                         Checkbox::make('is_multiple'),
-                                         Checkbox::make('is_required'),
-                                     ]),
-                             ]),
+                            ->icon('heroicon-o-photograph')
+                            ->schema([
+                                self::getFieldNameInput(),
+                                Grid::make()
+                                    ->schema([
+                                        Checkbox::make('is_multiple'),
+                                        Checkbox::make('is_required'),
+                                        TextInput::make('helper_text'),
+                                        TextInput::make('hint'),
+                                    ]),
+                            ]),
                     ])
-                    ->createItemButtonLabel('Add form input')
+                    ->createItemButtonLabel('Add Form Element')
                     ->disableLabel()
             ]);
     }

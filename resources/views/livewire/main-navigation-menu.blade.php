@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="fixed w-full bg-primary z-50 shadow-sm h-14">
+<nav x-data="{ open: false }" class="fixed w-full bg-secondary z-50 shadow-sm h-14">
     <div class="flex justify-between items-center">
         <!-- Desktop Navigation Menu -->
         <div class="flex items-center justify-between w-full">
@@ -24,19 +24,7 @@
                     </a>
                 </div>
                 <!-- Search -->
-                <div class="hidden sm:flex w-full items-center">
-                    <div class="w-full">
-                        <label for="search" class="sr-only">{{ Trans::get('Search ' . config('app.name')) }}</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
-                            </div>
-                            <input id="search" name="search"
-                                   class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
-                                   placeholder="{{ Trans::get('Search ' . config('app.name')) }}" type="search"/>
-                        </div>
-                    </div>
-                </div>
+                <livewire:global-search/>
             </div>
             <!-- Main nav header -->
             <div class="flex w-full justify-between h-full items-center pl-4">
@@ -61,16 +49,16 @@
                         </nav>
                     </div>
                     {{-- Right Side Nav --}}
-                    @auth
-                        <div class="col-span-12 lg:col-span-4 2xl:col-span-3 flex justify-end items-center">
+                    <div class="col-span-12 lg:col-span-4 2xl:col-span-3 flex justify-end items-center mr-4">
+                        @auth
                             {{-- Profile & Notifications --}}
                             <div class="flex justify-end">
-                                <div class="flex col-span-4 2xl:col-span-3 mr-4 justify-between md:items-center">
+                                <div class="flex col-span-4 2xl:col-span-3 justify-between md:items-center">
                                     <!-- Notifications -->
                                     <div class="mx-3 flex items-center">
                                         <a href="{{ route('notifications') }}"
                                            title="Notifications"
-                                           class="{{ request()->routeIs('notifications') ? 'font-semibold text-secondary' : 'text-light-text-color hover:text-secondary' }}
+                                           class="{{ request()->routeIs('notifications') ? 'font-semibold text-primary' : 'text-light-text-color hover:text-primary' }}
                                 {{ 'relative rounded-full w-full p-1 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
                                            aria-current="page">
                                             <x-library::icons.icon name="heroicon-o-bell"/>
@@ -139,7 +127,7 @@
                                                 @else
                                                     <span class="inline-flex rounded-md">
                                                 <button type="button"
-                                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-base-text-color bg-primary hover:text-dark-text-color focus:outline-none transition">
+                                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-base-text-color bg-secondary hover:text-dark-text-color focus:outline-none transition">
                                                     {{ Auth::user()->name }}
                                                     <div>
                                                         <img class="inline-block h-8 w-8 rounded-full"
@@ -162,28 +150,23 @@
                                                     {{ \Trans::get('Manage Account') }}
                                                 </div>
 
-                                            <x-jet-dropdown-link href="{{ route('account') }}">
-                                                {{ \Trans::get('Account') }}
-                                            </x-jet-dropdown-link>
-
-
                                                 <x-jet-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
                                                     {{ auth()->user()->name }}
                                                 </x-jet-dropdown-link>
 
-                                            <x-jet-dropdown-link href="{{ route('account') }}">
-                                                {{ \Trans::get('Account') }}
-                                            </x-jet-dropdown-link>
+                                                <x-jet-dropdown-link href="{{ route('account') }}">
+                                                    {{ \Trans::get('Account') }}
+                                                </x-jet-dropdown-link>
 
-                                            @if (\App\Support\Platform\Platform::isUsingStripe())
-                                                <x-jet-dropdown-link href="{{ route('billing.stripe-billing') }}">
-                                                    {{ \Trans::get('Billing') }}
-                                                </x-jet-dropdown-link>
-                                            @elseif (\App\Support\Platform\Platform::isUsingChargent() && \App\Support\Platform\Platform::isUsingUserSubscriptions())
-                                                <x-jet-dropdown-link href="{{ route('billing.chargent-billing') }}">
-                                                    {{ \Trans::get('Billing') }}
-                                                </x-jet-dropdown-link>
-                                            @endif
+                                                @if (\App\Support\Platform\Platform::isUsingStripe())
+                                                    <x-jet-dropdown-link href="{{ route('billing.stripe-billing') }}">
+                                                        {{ \Trans::get('Billing') }}
+                                                    </x-jet-dropdown-link>
+                                                @elseif (\App\Support\Platform\Platform::isUsingChargent() && \App\Support\Platform\Platform::isUsingUserSubscriptions())
+                                                    <x-jet-dropdown-link href="{{ route('billing.chargent-billing') }}">
+                                                        {{ \Trans::get('Billing') }}
+                                                    </x-jet-dropdown-link>
+                                                @endif
 
                                                 {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
                                                 {{--                                    <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">--}}
@@ -219,13 +202,12 @@
                                 {{--                                </button>--}}
                                 {{--                            </div>--}}
                             </div>
-                        </div>
-                    @else
-                        <div class="relative flex">
+                        @else
                             <x-jet-dropdown align="right" width="48">
                                 <x-slot name="trigger">
                                     <span class="inline-flex rounded-md">
-                                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-base-text-color bg-primary hover:text-dark-text-color focus:outline-none transition">
+                                                <button type="button"
+                                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-base-text-color bg-secondary hover:text-dark-text-color focus:outline-none transition">
                                                     <div>
                                                         <x-heroicon-o-user class="inline-block h-5 w-5 rounded-full"/>
                                                     </div>
@@ -247,14 +229,14 @@
                                     </x-jet-dropdown-link>
                                 </x-slot>
                             </x-jet-dropdown>
-                        </div>
-                    @endauth
+                        @endauth
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Mobile Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-primary max-h-full-minus-[56px] overflow-y-scroll scrollbar-hide">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-secondary max-h-full-minus-[56px] overflow-y-scroll scrollbar-hide">
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ \Trans::get('Dashboard') }}

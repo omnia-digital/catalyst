@@ -98,6 +98,11 @@ trait WithTeamManagement
         $this->emit('applied_to_team');
     }
 
+    public function teamHasApplicationForm()
+    {
+        return !is_null($this->team->applicationForm());
+    }
+
     /**
      * Remove application to a team.
      *

@@ -22,13 +22,15 @@ use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
 use Modules\Billing\Models\Builders\CashierSubscriptionBuilder;
-use Modules\Billing\Models\ChargentSubscription;
 use Modules\Billing\Traits\WithChargentSubscriptions;
+use Modules\Forms\Models\FormSubmission;
 use Modules\Social\Traits\HasHandle;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Wimil\Followers\Traits\Followable;
 
-class User extends Authenticatable implements FilamentUser, MustVerifyEmail
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Searchable
     {
         use HasApiTokens,
             TwoFactorAuthenticatable,
@@ -66,6 +68,12 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             'email_verified_at',
             'two_factor_recovery_codes',
             'two_factor_secret',
+            '2fa_secret',
+            '2fa_backup_codes',
+            '2fa_setup_at',
+            'stripe_id',
+            'pm_type',
+            'pm_last_four',
             'deleted_at',
             'updated_at'
         ];
@@ -154,9 +162,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     {
         return $this->hasMany(TeamInvitation::class);
     }
+
     public function teamApplications(): HasMany
     {
         return $this->hasMany(TeamApplication::class);
+    }
+
+    public function formSubmissions(): HasMany
+    {
+        return $this->hasMany(FormSubmission::class);
     }
 
     //// Helper Methods ////
@@ -209,4 +223,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     //        ->where('team_id', $team->id)
     //        ->first();
     //}
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('profile.show', $this);
+
+        return new SearchResult($this, $this->name, $url);
+    }
 }

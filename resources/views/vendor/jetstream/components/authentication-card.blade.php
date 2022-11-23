@@ -13,12 +13,12 @@
     </div>
     {{-- Right --}}
     <div class="md:flex md:flex-col md:items-start md:min-h-screen md:pl-6 lg:pl-24 mx-4 md:mx-0 justify-center">
-        <div class="w-full md:max-w-md mt-6 px-6 py-4 bg-primary shadow-md md:overflow-hidden md:rounded-lg">
+        <div class="w-full md:max-w-md mt-6 px-6 py-4 bg-secondary shadow-md md:overflow-hidden md:rounded-lg">
             {{ $slot }}
         </div>
 
         @isset($additionalCard)
-            <div class="w-full md:max-w-md mt-6 px-6 py-4 bg-primary shadow-md overflow-hidden md:rounded-lg">
+            <div class="w-full md:max-w-md mt-6 px-6 py-4 bg-secondary shadow-md overflow-hidden md:rounded-lg">
                 {{ $additionalCard }}
             </div>
         @endisset

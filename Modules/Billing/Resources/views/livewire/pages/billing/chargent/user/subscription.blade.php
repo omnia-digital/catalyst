@@ -23,9 +23,9 @@
                         </div>
                         <div class="col-span-1 px-2 py-4">
                             @if ($this->subscriptionActive)
-                                <a role="button" wire:click="confirmSubscriptionCancellation" class="font-semibold text-secondary hover:underline whitespace-nowrap">Cancel Subscriptions</a>
+                                <a role="button" wire:click="confirmSubscriptionCancellation" class="font-semibold text-primary hover:underline whitespace-nowrap">Cancel Subscriptions</a>
                             @else
-                                <a role="button" x-on:click.prevent="$openModal('subscription-form')" class="font-semibold text-secondary hover:underline whitespace-nowrap">New Subscriptions</a>
+                                <a role="button" x-on:click.prevent="$openModal('subscription-form')" class="font-semibold text-primary hover:underline whitespace-nowrap">New Subscriptions</a>
                             @endif
                         </div>
 
@@ -62,7 +62,7 @@
                             <div class="col-span-1 px-2 py-4">
                                 <a role="button"
                                 x-on:click.prevent="$openModal('payment-method-form')"
-                                class="font-semibold text-secondary hover:underline whitespace-nowrap"
+                                class="font-semibold text-primary hover:underline whitespace-nowrap"
                                 >Change Payment Method</a>
                             </div>
 

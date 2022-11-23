@@ -35,7 +35,7 @@
     }"
         x-on:media-manager:file-selected.window="setImage"
         x-on:post-editor:image-set.window="setImages"
-        class="bg-primary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4 max-w-post-card-max-w relative"
+        class="bg-secondary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4 max-w-post-card-max-w relative"
 >
     <div class="mr-3 flex-shrink-0">
         @auth
@@ -56,10 +56,10 @@
                 wordCountType="character"
                 characterLimit="500"
                 :placeholder="$placeholder"
-                class="bg-primary text-lg"
+                class="bg-secondary text-lg"
         >
             <x-slot name="footer">
-                <div class="bg-primary">
+                <div class="bg-secondary">
                     <ul
                             x-show="showImages"
                             x-transition
@@ -82,17 +82,6 @@
                                 </div>
                             </li>
                         </template>
-
-                        {{--                    <li class="relative">--}}
-                        {{--                        <button--}}
-                        {{--                                x-on:click.prevent.stop="showMediaManager(null, {})"--}}
-                        {{--                                type="button"--}}
-                        {{--                                class="relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-2 text-center hover:border-gray-400 focus:outline-none focus:ring-2--}}
-                        {{--                                focus:ring-offset-2 focus:ring-gray-500"--}}
-                        {{--                        >--}}
-                        {{--                            <x-coolicon-plus class="mx-auto h-8 w-8 text-gray-400"/>--}}
-                        {{--                        </button>--}}
-                        {{--                    </li>--}}
                     </ul>
                 </div>
             </x-slot>

@@ -13,7 +13,8 @@ class FormType extends Model
 
     protected $fillable = [
         'name',
-        'slug'
+        'slug',
+        'for'
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -23,6 +24,33 @@ class FormType extends Model
                           ->saveSlugsTo('slug')
                           ->doNotGenerateSlugsOnUpdate();
     }
+
+    public static function forTeams()
+    {
+        return self::where('for', 'teams')->get();
+    }
+
+    public static function teamApplicationForm()
+    {
+        return self::where('slug', 'team-member-application-form')->first();
+    }
+
+    public static function teamApplicationFormId()
+    {
+        return self::teamApplicationForm()?->id;
+    }
+
+    public static function userRegistrationForm()
+    {
+        return self::where('slug', 'registration')->first();
+    }
+
+    public static function userRegistrationFormId()
+    {
+        return self::userRegistrationForm()?->id;
+    }
+
+    // Relationships
 
     public function forms()
     {

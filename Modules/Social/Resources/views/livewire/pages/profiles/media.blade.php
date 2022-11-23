@@ -8,7 +8,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
                 @foreach ($media as $mediaItem)
                     <div x-on:click="open = true; imageSrc = '{{ $mediaItem->getFullUrl() }}';"
-                         class="border border-neutral-light rounded-md group relative bg-secondary hover:cursor-pointer hover:ring-1 hover:ring-secondary"
+                         class="border border-neutral-light rounded-md group relative bg-primary hover:cursor-pointer hover:ring-1 hover:ring-primary"
                          style="background-image: url({{ $mediaItem->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
                     >
                         <div class="h-40 rounded-md"></div>
