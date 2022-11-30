@@ -49,11 +49,11 @@
             @endif
         </div>
 
-        <div class="mt-2">
+        <div class="mt-4">
             @if (!$showLoginModal)
-                <a href="#" wire:click.prevent="showLoginModal">Has an account?</a>
+                <a href="#" class="hover:text-primary hover:underline" wire:click.prevent="showLoginModal">Have an account?</a>
             @else
-                <a href="#" wire:click.prevent="showRegisterModal">Sign up</a>
+                <a href="#" class="hover:text-primary hover:underline" wire:click.prevent="showRegisterModal">Sign up</a>
             @endif
         </div>
     </x-slot:content>

@@ -150,7 +150,9 @@
                             class="py-2 px-4 mx-2 flex-1 flex justify-center items-center text-sm rounded-full bg-transparent border-2 border-primary text-primary hover:bg-neutral-light active:bg-neutral-light focus:bg-neutral-light"
                         >More Info</button>
                     </div>
-                    <x-teams.apply-button :team="$team" />
+                    @if ($team)
+                        <x-teams.apply-button :team="$team" />
+                    @endif
                 </div>
             </div>
         </div>
