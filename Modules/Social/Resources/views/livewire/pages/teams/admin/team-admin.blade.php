@@ -400,7 +400,7 @@
                     </div>
                 </div>
             @endif
-
+{{-- 
             <div x-cloak x-show="activeTab === 5" class="mt-6 pb-12 space-y-6">
                 <div class="px-4 sm:px-6 lg:px-8">
                     <div class="sm:flex sm:items-center">
@@ -470,7 +470,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
