@@ -215,29 +215,31 @@
                 <div class="space-y-6">
                     <input type="hidden" wire:model.defer="editingNotification.form_id">
                     <div>
-                        <x-library::input.label value="Send to members with the following role" />
+                        <x-library::input.label value="Who do you want to send this to?" />
                         <x-library::input.select class="!bg-white" id="role_id" wire:model="editingNotification.role_id" :options="$this->getRoleIds()" />
                         <x-library::input.error for="editingNotification.role_id"/>
                     </div>
+                    <div class="flex-items-center gap-4">
+                        <div>
+                            <x-library::input.label value="Timezone" />
+                            <x-library::input.select class="!bg-white" wire:model="editingNotification.timezone" :options="\Platform::TimezoneList()" />
+                            <x-library::input.error for="editingNotification.timezone"/>
+                        </div>
+                        <div>
+                            <x-library::input.label value="When do you want to send it?" />
+                            <x-library::input.date wire:model="editingNotification.send_date_edit" />
+                            <x-library::input.error for="editingNotification.send_date_edit"/>
+                        </div>
+                    </div>
                     <div>
-                        <x-library::input.label value="Title" />
-                        <x-library::input.text id="title" wire:model.defer="editingNotification.title" />
-                        <x-library::input.error for="editingNotification.title"/>
+                        <x-library::input.label value="Name" />
+                        <x-library::input.text id="name" wire:model.defer="editingNotification.name" />
+                        <x-library::input.error for="editingNotification.name"/>
                     </div>
                     <div>
                         <x-library::input.label value="Message" /><span class="italic text-gray-400 text-xs">(optional)</span>
                         <x-library::input.textarea id="message" wire:model.defer="editingNotification.message" />
                         <x-library::input.error for="editingNotification.message"/>
-                    </div>
-                    <div>
-                        <x-library::input.label value="Timezone" />
-                        <x-library::input.select class="!bg-white" wire:model="editingNotification.timezone" :options="\Platform::TimezoneList()" />
-                        <x-library::input.error for="editingNotification.timezone"/>
-                    </div>
-                    <div>
-                        <x-library::input.label value="Send Date" />
-                        <x-library::input.date wire:model="editingNotification.send_date_edit" />
-                        <x-library::input.error for="editingNotification.send_date_edit"/>
                     </div>
                 </div>
                 <x-slot:actions>

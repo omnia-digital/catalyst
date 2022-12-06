@@ -5,6 +5,7 @@ namespace Modules\Forms\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Models\Role;
 
 class FormNotification extends Model
 {
@@ -38,5 +39,10 @@ class FormNotification extends Model
     public function form()
     {
         return $this->belongsTo(Form::class);
+    }
+
+    public function role()
+    {
+        return $this->belogsTo(Role::class);
     }
 }

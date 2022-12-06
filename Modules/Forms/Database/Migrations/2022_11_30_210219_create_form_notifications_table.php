@@ -20,7 +20,7 @@ class CreateFormNotificationsTable extends Migration
             $table->foreignIdFor(Form::class, 'form_id');
             $table->foreignIdFor(Role::class, 'role_id');
             $table->string('target_role')->nullable();
-            $table->string('title');
+            $table->string('name');
             $table->text('message')->nullable();
             $table->string('timezone')->default('UTC');
             $table->timestamp('send_date');

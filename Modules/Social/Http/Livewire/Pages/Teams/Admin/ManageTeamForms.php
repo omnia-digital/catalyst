@@ -10,6 +10,7 @@ use Laravel\Jetstream\Jetstream;
 use Livewire\Component;
 use Modules\Forms\Models\Form;
 use Modules\Forms\Models\FormNotification;
+use Modules\Forms\Notifications\FormReminderNotification;
 use Modules\Forms\Traits\Livewire\WithFormManagement;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
@@ -28,7 +29,7 @@ class ManageTeamForms extends Component
     public $editingNotification = [
         'form_id' => '',
         'role_id' => '',
-        'title' => '', 
+        'name' => '', 
         'send_date_edit' => '',
         'timezone' => ''
     ];
@@ -55,12 +56,20 @@ class ManageTeamForms extends Component
         return Auth::user();
     }
 
+    public function sendReminderNow(FormNotification $formNotification)
+    {
+        $users = $this->team->members()->where('role', $formNotification->role->name);
+        foreach ($users as $user) {
+            $user->notify(new FormReminderNotification($this->team, $formNotification));
+        }
+    }
+
     public function makeBlankNotification($formId = null)
     {
         return [
             'form_id' => $formId,
             'role_id' => Role::first()?->id,
-            'title' => 'New Form Notification', 
+            'name' => 'New Form Notification', 
             'send_date_edit' => now(),
             'timezone' => 'UTC'
         ];
@@ -94,7 +103,7 @@ class ManageTeamForms extends Component
                 Rule::exists(config('permission.table_names.roles'), 'id')
                     ->where(fn ($q) => $q->where('team_id', $this->team->id)),
             ],
-            'editingNotification.title' => ['required', 'string'],
+            'editingNotification.name' => ['required', 'string'],
             'editingNotification.message' => ['nullable', 'string'],
             'editingNotification.send_date_edit' => ['required', 'date'],
             'editingNotification.timezone' => ['required', 'timezone']

@@ -400,77 +400,6 @@
                     </div>
                 </div>
             @endif
-{{-- 
-            <div x-cloak x-show="activeTab === 5" class="mt-6 pb-12 space-y-6">
-                <div class="px-4 sm:px-6 lg:px-8">
-                    <div class="sm:flex sm:items-center">
-                        <div class="sm:flex-auto">
-                            <h1 class="text-xl font-semibold text-dark-text-color">Team Notifications</h1>
-                            <p class="mt-2 text-sm text-gray-700">A list of all the notifications you can send to your team.</p>
-                        </div>
-                        <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                            <x-library::button.secondary 
-                                type="button" 
-                                wire:click="addTeamNotification"
-                                class="">Add Notification</x-library::button.secondary>
-                        </div>
-                    </div>
-                    <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-300">
-                            <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-dark-text-color sm:pl-6">Name</th>
-                                <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-dark-text-color lg:table-cell">For</th>
-                                <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-dark-text-color sm:table-cell">Message</th>
-                                <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-dark-text-color sm:table-cell">Frequency</th>
-                                <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-dark-text-color sm:table-cell">Last Sent</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-dark-text-color">Active</th>
-                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                    <span class="sr-only">Actions</span>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200 bg-white">
-                            <tr>
-                                <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-dark-text-color sm:w-auto sm:max-w-none sm:pl-6">
-                                    Daily Reminder for Response Data
-                                <dl class="font-normal lg:hidden">
-                                    <dt class="sr-only">For</dt>
-                                    <dd class="mt-1 truncate text-gray-700">Leaders</dd>
-                                    <dt class="sr-only sm:hidden">Frequency</dt>
-                                    <dd class="mt-1 truncate text-gray-500 sm:hidden">Daily</dd>
-                                    <dt class="sr-only sm:hidden">Last Sent</dt>
-                                    <dd class="mt-1 truncate text-gray-500 sm:hidden">{{ now()->diffForHumans() }}</dd>
-                                    <dt class="sr-only sm:hidden">Message</dt>
-                                    <dd class="mt-1 truncate text-gray-500 sm:hidden">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur, accusamus alias suscipit provident omnis expedita cum culpa, et quo, voluptatem enim magni voluptas. Enim iusto, pariatur odit nihil veniam sint.</dd>
-                                </dl>
-                                </td>
-                                <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">Leaders</td>
-                                <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell line-clamp-1">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores illum commodi libero. Modi nisi incidunt non veritatis aspernatur eum repudiandae aliquam, aliquid perferendis, excepturi, sint a totam expedita doloribus possimus.</td>
-                                <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">Daily</td>
-                                <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ now()->diffForHumans() }}</td>
-                                <td class="px-3 py-4 text-sm text-gray-500">
-                                    <x-library::input.toggle />
-                                </td>
-                                <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-library::dropdown>
-                                        <x-slot name="trigger" x-on:click.stop="">
-                                            <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
-                                                <span class="sr-only">Open options, Daily Reminder for Response Data</span>
-                                                <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
-                                            </button>
-                                        </x-slot>
-                                        <a href="#" class="text-secondary hover:underline">Edit<span class="sr-only">, Daily Reminder for Response Data</span></a>
-                                    </x-library::dropdown>
-                                </td>
-                            </tr>
-                    
-                            <!-- More people... -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
 @endsection
@@ -487,12 +416,10 @@
                     {
                         id: 1,
                         title: 'Profile',
-                        /* component: 'social::pages.teams.partials.edit-team-basic' */
                     },
                     {
                         id: 2,
                         title: 'Team Members',
-                        // component: 'social::pages.teams.members'
                     },
                     {
                         id: 3,
@@ -501,10 +428,6 @@
                     {
                         id: 4,
                         title: 'Subscriptions',
-                    },
-                    {
-                        id: 5,
-                        title: 'Notifications',
                     },
                 ]
             }
