@@ -6,6 +6,7 @@ use App\Models\Team;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 use Spatie\Tags\Tag;
 
 class TeamTableSeeder extends Seeder
@@ -17,10 +18,10 @@ class TeamTableSeeder extends Seeder
      */
     public function run()
     {
+
         $teams = Team::factory(10)
                      ->has(Location::factory(1))
-                     ->hasAttached(User::factory(1)->withProfile(), ['role'=> 'owner'])
-                     ->hasAttached(User::factory(3)->withProfile(), ['role'=> 'member'])
+                     ->withUsers(2)
                      ->create();
 
         foreach ($teams as $team) {

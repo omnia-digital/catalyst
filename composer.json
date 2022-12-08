@@ -54,6 +54,7 @@
         "spatie/laravel-analytics": "^4.1",
         "spatie/laravel-medialibrary": "^10.0.0",
         "spatie/laravel-searchable": "^1.11",
+        "spatie/laravel-permission": "^5.5",
         "spatie/laravel-settings": "^2.4",
         "spatie/laravel-sluggable": "^3.1",
         "spatie/laravel-tags": "^4.3",
@@ -84,7 +85,11 @@
         },
         {
             "type": "vcs",
-            "url": "git@github.com:Osimba/livewire-calendar.git"
+            "url": "https://github.com/Osimba/livewire-calendar.git"
+        },
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
         }
     ],
     "autoload": {

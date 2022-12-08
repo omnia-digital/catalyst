@@ -8,23 +8,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 use Modules\Social\Models\Profile;
-use Nwidart\Modules\Module;
 use Spatie\Permission\Models\Role;
 
-class UserFactory extends Factory
+class RoleFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = User::class;
+    protected $model = Role::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     public function definition()
     {
         return [
@@ -36,22 +25,8 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
-    }
-
-    /**
      * Indicate that the user should have a personal team.
-     * 
+     *
      * @return $this
      */
     public function withTeam()
@@ -72,25 +47,6 @@ class UserFactory extends Factory
                 }),
                 ['role_id' => $teamOwnerRole->id],
                 'teams'
-        );
-    }
-
-    /**
-     * Indicate that the user should have a personal team.
-     * 
-     * @param $position
-     * @return $this
-     */
-    public function withExistingTeam($position = 'member')
-    {
-        if (! Features::hasTeamFeatures()) {
-            return $this->state([]);
-        }
-
-        return $this->hasAttached(
-            Team::get()->shuffle()->first(), 
-            ['role' => $position],
-            'teams'
         );
     }
 
