@@ -9,14 +9,19 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\Social\Support\Livewire\ManagesTeamNotifications;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Trans;
 
-class TeamAdmin extends Component/*  implements HasForms */
+class TeamAdmin extends Component
 {
-    use WithPlace, AuthorizesRequests, WithFileUploads, WithNotification/* , InteractsWithForms */;
+    use WithPlace, 
+        AuthorizesRequests, 
+        WithFileUploads, 
+        WithNotification,
+        ManagesTeamNotifications;
 
     public Team $team;
 
@@ -42,13 +47,11 @@ class TeamAdmin extends Component/*  implements HasForms */
 
     public $confirmingRemoveMedia = false;
     public $mediaToRemove;
-    public $applicationsCount = 0;
 
     public function mount(Team $team)
     {
         $this->authorize('update-team', $team);
         $this->team = $team->load('owner');
-        $this->applicationsCount = $this->team->teamApplications->count();
     }
 
     protected function rules(): array

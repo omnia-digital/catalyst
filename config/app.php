@@ -180,6 +180,7 @@ return [
          * Package Service Providers...
          */
         \App\Providers\PlatformServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
 
         /*

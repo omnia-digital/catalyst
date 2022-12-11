@@ -3,6 +3,7 @@
 namespace Modules\Forms\Models;
 
 use App\Models\Team;
+use App\Models\TeamApplication;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,5 +36,10 @@ class FormSubmission extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function teamApplication()
+    {
+        return $this->hasOne(TeamApplication::class);
     }
 }

@@ -1,4 +1,4 @@
-<div x-data="{}" class="grid grid-cols-3 justify-start items-start bg-primary shadow rounded-lg border border-neutral-light p-4">
+<div x-data="{}" class="grid grid-cols-3 justify-start items-start bg-secondary shadow rounded-lg border border-neutral-light p-4">
     <div class="col-span-1 flex">
         <div class="mr-2">
             <img class="h-8 w-8 rounded-full" src="{{ $review->user->profile_photo_url }}" alt="{{ $review->user->name }}"/>

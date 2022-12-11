@@ -37,7 +37,7 @@ trait WithFormBuilder
                     ->required(true),
             Select::make('form_type_id')
                 ->label('Form Type')
-                ->options(FormType::pluck('name', 'id')->toArray()),
+                ->options(FormType::forTeams()->pluck('name', 'id')->toArray()),
             TextInput::make('slug')
                 ->label('Slug')
                 ->required(true)
@@ -51,7 +51,6 @@ trait WithFormBuilder
                         ->icon('heroicon-o-annotation')
                         ->schema([
                             $this->getFieldNameInput(),
-                            Checkbox::make('is_required'),
                             Select::make('type')
                                 ->options([
                                     'email' => 'Email',
@@ -60,7 +59,8 @@ trait WithFormBuilder
                                 ])
                                 ->default('text')
                                 ->disablePlaceholderSelection()
-                                ->required()
+                                ->required(),
+                            Checkbox::make('is_required'),
                         ]),
                     Block::make('select')
                         ->icon('heroicon-o-selector')
@@ -100,18 +100,20 @@ trait WithFormBuilder
         // between our builder blocks.
         return Grid::make()
             ->schema([
-                TextInput::make('name')
+                TextInput::make('label')
+                    ->columnSpan(2)
                     ->lazy()
                     ->afterStateUpdated(function (\Closure $set, $state) {
-                        $label = Str::of($state)
-                                    ->kebab()
-                                    ->replace(['-', '_'], ' ')
-                                    ->ucfirst();
-                        $set('label', $label);
+                        $name = Str::of($state)
+                                    ->snake()
+                                    ->lower() . uniqid("_");
+                        $set('name', $name);
                     })
                     ->required(),
-                TextInput::make('label')
+                TextInput::make('name')
+                    ->hidden()
                     ->required(),
+                
             ]);
     }
     

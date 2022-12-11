@@ -4,7 +4,7 @@
     <x-profiles.partials.header :user="$this->user"/>
     <div class="mt-6 grid grid-cols-6 xl:grid-cols-12 gap-6 px-4 lg:px-0">
         <div class="col-span-6 md:col-span-3 xl:col-span-3 space-y-4">
-            <div class="p-4 rounded bg-primary text-base-text-color">
+            <div class="p-4 rounded bg-secondary text-base-text-color">
                 <div class="flex justify-start text-sm space-x-4">
                     @isset ($profile->website)
                         <div class="flex items-center space-x-2">
@@ -91,7 +91,7 @@
                         <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                     </a>
                 </div>
-                <div class="flex justify-start items-start mt-2 bg-primary border border-neutral-light p-4">
+                <div class="flex justify-start items-start mt-2 bg-secondary border border-neutral-light p-4">
                     <div class="mr-4">
                         <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1" alt="Arlene McCoy"/>
                     </div>
@@ -152,7 +152,7 @@
                         <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                     </a>
                 </div>
-                <div class="flex justify-start items-start mt-2 bg-primary border border-neutral-light p-4">
+                <div class="flex justify-start items-start mt-2 bg-secondary border border-neutral-light p-4">
                     <div class="mr-4">
                         <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1" alt="Arlene McCoy"/>
                     </div>

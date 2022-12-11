@@ -31,7 +31,7 @@
 
                                     </div>
                                     {{--                                <div class="inline-flex items-center text-md">--}}
-                                    {{--                                    <button type="button" class="inline-flex items-center px-4 py-2 rounded-full bg-secondary text-white-text-color text-sm tracking-wide font-medium hover:opacity-75">--}}
+                                    {{--                                    <button type="button" class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-white-text-color text-sm tracking-wide font-medium hover:opacity-75">--}}
                                     {{--                                        <span>Follow</span>--}}
                                     {{--                                    </button>--}}
                                     {{--                                </div>--}}
@@ -54,20 +54,20 @@
                                 {{-- @if(!empty($item->get_thumbnail()) || !empty($item->get_media())) --}}
                                 <a href="{{ $item->get_link() }}" target="_blank">
                                     @if($item->get_media() && !empty($item->get_media()['url']))
-                                        <div class="w-full bg-primary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
+                                        <div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
                                              style="background-image: url({{ ($item->get_media() && $item->get_media()['url'])? $item->get_media()['url'] : 'https://source.unsplash.com/random?gaming'
                                   }}); background-size: cover;
                                  background-repeat: no-repeat;"
                                         >
                                             @else
-                                                <div class="w-full bg-primary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
+                                                <div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
                                                      style="background-image: url({{ ($item->get_thumbnail() && $item->get_thumbnail()['url'])? $item->get_thumbnail()['url'] : 'https://source.unsplash.com/random?gaming'
                           }}); background-size: cover;
                          background-repeat: no-repeat;"
                                                 >
                                                     @endif
                                                     <div class="h-80 rounded"></div>
-                                                    <div class="space-y-2 p-4 bg-primary rounded absolute bottom-0 right-0 left-0">
+                                                    <div class="space-y-2 p-4 bg-secondary rounded absolute bottom-0 right-0 left-0">
                                                         <div class="flex justify-between">
                                                             <p class="text-heading-default-color font-semibold text-base">{{$item->get_title()}}</p>
                                                             {{--                                        <div class="flex items-center">--}}

@@ -49,7 +49,7 @@
                 </template>
             </ul>
 
-            <div class="bg-primary mx-auto">
+            <div class="bg-secondary mx-auto">
                 <div x-show="activeTab===0">
                     <div class="flex justify-between">
                         <div class="px-6 flex flex-col divide-y space-y-3">

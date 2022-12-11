@@ -9,6 +9,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Modules\Forms\Models\FormSubmission;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
@@ -97,9 +98,11 @@ class Form extends Component implements HasForms
                 }
             });
             $formFieldType = $formModelFields[$formFieldKeyFound]['type'];
+            $formFieldLabel = $formModelFields[$formFieldKeyFound]['data']['label'];
             $formData[$formDataKey] = [
                 'field_type' => $formFieldType,
-                'data' => $value
+                'data' => $value,
+                'label' => $formFieldLabel
             ];
         }
 
