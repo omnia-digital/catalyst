@@ -98,10 +98,11 @@ class Form extends Component implements HasForms
                 }
             });
             $formFieldType = $formModelFields[$formFieldKeyFound]['type'];
+            $formFieldLabel = $formModelFields[$formFieldKeyFound]['data']['label'];
             $formData[$formDataKey] = [
                 'field_type' => $formFieldType,
                 'data' => $value,
-                'label' => Str::of($formDataKey)->replace(['-', '_'], ' ')->ucfirst()
+                'label' => $formFieldLabel
             ];
         }
 
