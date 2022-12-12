@@ -3086,16 +3086,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.277.0",
+            "version": "v0.278.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "72e0eacbd51131c954da05edf110d9774f0f5af0"
+                "reference": "3da85d2066b5a8042663e96e7cba3a3f83655961"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/72e0eacbd51131c954da05edf110d9774f0f5af0",
-                "reference": "72e0eacbd51131c954da05edf110d9774f0f5af0",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/3da85d2066b5a8042663e96e7cba3a3f83655961",
+                "reference": "3da85d2066b5a8042663e96e7cba3a3f83655961",
                 "shasum": ""
             },
             "require": {
@@ -3124,9 +3124,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.277.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.278.0"
             },
-            "time": "2022-12-05T01:04:16+00:00"
+            "time": "2022-12-12T01:28:13+00:00"
         },
         {
             "name": "google/auth",
@@ -5205,16 +5205,16 @@
         },
         {
             "name": "league/config",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/config.git",
-                "reference": "a9d39eeeb6cc49d10a6e6c36f22c4c1f4a767f3e"
+                "reference": "754b3604fb2984c71f4af4a9cbe7b57f346ec1f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/config/zipball/a9d39eeeb6cc49d10a6e6c36f22c4c1f4a767f3e",
-                "reference": "a9d39eeeb6cc49d10a6e6c36f22c4c1f4a767f3e",
+                "url": "https://api.github.com/repos/thephpleague/config/zipball/754b3604fb2984c71f4af4a9cbe7b57f346ec1f3",
+                "reference": "754b3604fb2984c71f4af4a9cbe7b57f346ec1f3",
                 "shasum": ""
             },
             "require": {
@@ -5223,7 +5223,7 @@
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "phpstan/phpstan": "^0.12.90",
+                "phpstan/phpstan": "^1.8.2",
                 "phpunit/phpunit": "^9.5.5",
                 "scrutinizer/ocular": "^1.8.1",
                 "unleashedtech/php-coding-standard": "^3.1",
@@ -5283,7 +5283,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-14T12:15:32+00:00"
+            "time": "2022-12-11T20:36:23+00:00"
         },
         {
             "name": "league/event",
@@ -7513,12 +7513,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:omnia-digital/library.git",
-                "reference": "21e36a17b8fff7f101c598f566d0aeea38fd6dac"
+                "reference": "84b8da8cb776dfb991db2c274c3269e9d3f0aec0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/21e36a17b8fff7f101c598f566d0aeea38fd6dac",
-                "reference": "21e36a17b8fff7f101c598f566d0aeea38fd6dac",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/84b8da8cb776dfb991db2c274c3269e9d3f0aec0",
+                "reference": "84b8da8cb776dfb991db2c274c3269e9d3f0aec0",
                 "shasum": ""
             },
             "require": {
@@ -7602,7 +7602,7 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2022-12-11T03:43:29+00:00"
+            "time": "2022-12-12T17:31:35+00:00"
         },
         {
             "name": "omniphx/forrest",
