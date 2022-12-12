@@ -60,10 +60,7 @@
                 <!-- Featured Content / Sample Media -->
                 <div>
                     <x-library::heading.4>{{ Trans::get('Featured Content') }}</x-library::heading.4>
-                    <p>{{ Trans::get('The content on this page will show up in the Featured Content section of your Team home page. You can use this feature as a perk of getting exclusive content
-                by being a member of your
-                Team.')
-                }}</p>
+                    <p>{{ Trans::get('The content on this page will show up in the Featured Content section of your Team home page. You can use this feature as a perk of getting exclusive content by being a member of your Team.') }}</p>
                 </div>
                 <div class="space-y-6">
                     <div>
@@ -77,7 +74,7 @@
                                         @if ($team->sampleImages()->count())
                                             <div class="flex flex-wrap w-full">
                                                 @foreach ($team->sampleImages() as $key => $media)
-                                                    <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center bg-primary relative border-4 border-dashed border-neutral-dark">
+                                                    <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center bg-secondary relative border-4 border-dashed border-neutral-dark">
                                                         <img src="{{ $media->getFullUrl() }}" title="{{ $media->name }}" alt="{{ $media->name }}" class="max-w-[152px] max-h-[120px]">
                                                         <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="confirmRemoval({{ $media->id }})">
                                                             <x-heroicon-o-x class="w-6 h-6"/>
@@ -96,7 +93,7 @@
                                         <div>
                                             <div class="flex flex-wrap w-full">
                                                 @foreach ($sampleMedia as $key => $media)
-                                                    <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative bg-primary border-4 border-dashed border-neutral-dark">
+                                                    <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative bg-secondary border-4 border-dashed border-neutral-dark">
                                                         <img src="{{ $media->temporaryUrl() }}" title="{{ $sampleMediaNames[$key] }}" alt="{{ $sampleMediaNames[$key] }}"
                                                              class="max-w-[152px] max-h-[120px]">
                                                         <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key}})">
@@ -109,11 +106,11 @@
                                     </div>
                                 @endif
                             </div>
-                            <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                            <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">
                                 <p class="flex-1 py-2 px-3 text-[1rem] text-base-text-color">Upload images/videos to display in Featured section</p>
                                 <label>
                                     <input type="file" wire:model="sampleMedia" hidden multiple required/>
-                                    <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                                    <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">Browse</span>
                                 </label>
                             </div>
                             <x-library::input.error for="sampleMedia"/>
@@ -173,7 +170,7 @@
             </div>
 
             <!-- Profile Info -->
-            <div x-show="activeTab === 1" class="mt-6 grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+            <div x-cloak x-show="activeTab === 1" class="mt-6 grid sm:grid-cols-1 md:grid-cols-2 gap-6">
                 {{-- Home & Profile Media --}}
                 <div class="space-y-6">
                     <!-- Details -->
@@ -253,12 +250,12 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                        <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">
                             <input type="text" class="flex-1 border-none" wire:model="bannerImageName" placeholder="Upload file for Banner" readonly>
                             <label>
                                 <input type="file" wire:model="bannerImage" hidden required/>
-                                <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary
-                                hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Change</span>
+                                <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-primary
+                                hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">Change</span>
                             </label>
                         </div>
                         <x-library::input.error for="bannerImage"/>
@@ -287,11 +284,11 @@
                         {{--                            <x-library::input.label value="Main Image"/>--}}
                         {{--                            <span class="text-red-600 text-sm">*</span>--}}
                         {{--                        </div>--}}
-                        <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                        <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">
                             <input type="text" class="flex-1 border-none" wire:model="mainImageName" placeholder="Upload file for Main Image" readonly>
                             <label>
                                 <input type="file" wire:model="mainImage" hidden required/>
-                                <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                                <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">Browse</span>
                             </label>
                         </div>
                         <x-library::input.error for="mainImage"/>
@@ -320,11 +317,11 @@
                         {{--                            <x-library::input.label value="{{ Trans::get('Team') }} Profile Photo"/>--}}
                         {{--                            <span class="text-red-600 text-sm ml-1">*</span>--}}
                         {{--                        </div>--}}
-                        <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                        <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">
                             <input type="text" class="flex-1 border-none" wire:model="profilePhotoName" placeholder="Upload new Profile Photo" readonly>
                             <label>
                                 <input type="file" wire:model="profilePhoto" hidden required/>
-                                <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                                <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">Browse</span>
                             </label>
                         </div>
                         <x-library::input.error for="profilePhoto"/>
@@ -419,12 +416,10 @@
                     {
                         id: 1,
                         title: 'Profile',
-                        /* component: 'social::pages.teams.partials.edit-team-basic' */
                     },
                     {
                         id: 2,
                         title: 'Team Members',
-                        // component: 'social::pages.teams.members'
                     },
                     {
                         id: 3,

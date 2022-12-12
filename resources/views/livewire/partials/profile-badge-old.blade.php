@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="flex mt-1">
                                     <div class="bg-black flex items-center rounded-lg p-1">
-                                        <div class="grow-0 bg-primary text-xs rounded-md p-1">
+                                        <div class="grow-0 bg-secondary text-xs rounded-md p-1">
                                             {{ Auth::user()->level ?? '48' }}
                                         </div>
                                         <div class="grow-0 text-xs text-white-text-color px-1">

@@ -15,7 +15,7 @@
     role="region"
     {{ $attributes->merge(['class' => 'border border-black rounded-md shadow']) }}
 >
-    <x-library::heading.2>
+    <h2>
         <button
                 x-on:click="expanded = !expanded"
                 :aria-expanded="expanded"
@@ -25,7 +25,7 @@
             <span x-show="expanded" aria-hidden="true" class="ml-4">&minus;</span>
             <span x-show="!expanded" aria-hidden="true" class="ml-4">&plus;</span>
         </button>
-    </x-library::heading.2>
+    </h2>
 
     <div x-show="expanded" x-collapse>
         <div class="pb-4 px-6">

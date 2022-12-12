@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.39.0.
+ * Generated for Laravel 9.43.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -2016,7 +2016,7 @@
          * Attempt to authenticate a user with credentials and additional callbacks.
          *
          * @param array $credentials
-         * @param array|callable $callbacks
+         * @param array|callable|null $callbacks
          * @param bool $remember
          * @return bool 
          * @static 
@@ -9224,7 +9224,7 @@
      *
      * @method static mixed reset(array $credentials, \Closure $callback)
      * @method static string sendResetLink(array $credentials, \Closure $callback = null)
-     * @method static \Illuminate\Contracts\Auth\CanResetPassword getUser(array $credentials)
+     * @method static \Illuminate\Contracts\Auth\CanResetPassword|null getUser(array $credentials)
      * @method static string createToken(\Illuminate\Contracts\Auth\CanResetPassword $user)
      * @method static void deleteToken(\Illuminate\Contracts\Auth\CanResetPassword $user)
      * @method static bool tokenExists(\Illuminate\Contracts\Auth\CanResetPassword $user, string $token)
@@ -10932,6 +10932,7 @@
                     /**
          * Gets the list of trusted proxies.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getTrustedProxies()
@@ -10963,6 +10964,7 @@
                     /**
          * Gets the list of trusted host patterns.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getTrustedHosts()
@@ -11377,6 +11379,7 @@
                     /**
          * Gets the mime types associated with the format.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getMimeTypes($format)
@@ -11396,7 +11399,7 @@
                     /**
          * Associates a format with mime types.
          *
-         * @param string|array $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
+         * @param string|string[] $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
          * @static 
          */ 
         public static function setFormat($format, $mimeTypes)
@@ -11432,14 +11435,26 @@
                         return $instance->setRequestFormat($format);
         }
                     /**
-         * Gets the format associated with the request.
+         * Gets the usual name of the format associated with the request's media type (provided in the Content-Type header).
          *
+         * @deprecated since Symfony 6.2, use getContentTypeFormat() instead
          * @static 
          */ 
         public static function getContentType()
         {            //Method inherited from \Symfony\Component\HttpFoundation\Request         
                         /** @var \Illuminate\Http\Request $instance */
                         return $instance->getContentType();
+        }
+                    /**
+         * Gets the usual name of the format associated with the request's media type (provided in the Content-Type header).
+         *
+         * @see Request::$formats
+         * @static 
+         */ 
+        public static function getContentTypeFormat()
+        {            //Method inherited from \Symfony\Component\HttpFoundation\Request         
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->getContentTypeFormat();
         }
                     /**
          * Sets the default locale.
@@ -11545,6 +11560,7 @@
          *
          * @param bool $asResource If true, a resource will be returned
          * @return string|resource 
+         * @psalm-return ($asResource is true ? resource : string)
          * @static 
          */ 
         public static function getContent($asResource = false)
@@ -11601,6 +11617,7 @@
                     /**
          * Gets a list of languages acceptable by the client browser ordered in the user browser preferences.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getLanguages()
@@ -11611,6 +11628,7 @@
                     /**
          * Gets a list of charsets acceptable by the client browser in preferable order.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getCharsets()
@@ -11621,6 +11639,7 @@
                     /**
          * Gets a list of encodings acceptable by the client browser in preferable order.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getEncodings()
@@ -11631,6 +11650,7 @@
                     /**
          * Gets a list of content types acceptable by the client browser in preferable order.
          *
+         * @return string[] 
          * @static 
          */ 
         public static function getAcceptableContentTypes()
@@ -12043,6 +12063,20 @@
         {
                         /** @var \Illuminate\Http\Request $instance */
                         return $instance->missing($key);
+        }
+                    /**
+         * Apply the callback if the request is missing the given input item key.
+         *
+         * @param string $key
+         * @param callable $callback
+         * @param callable|null $default
+         * @return $this|mixed 
+         * @static 
+         */ 
+        public static function whenMissing($key, $callback, $default = null)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->whenMissing($key, $callback, $default);
         }
                     /**
          * Get the keys for all of the input and files.
@@ -12918,6 +12952,60 @@
         {
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->apiResource($name, $controller, $options);
+        }
+                    /**
+         * Register an array of singleton resource controllers.
+         *
+         * @param array $singletons
+         * @param array $options
+         * @return void 
+         * @static 
+         */ 
+        public static function singletons($singletons, $options = [])
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        $instance->singletons($singletons, $options);
+        }
+                    /**
+         * Route a singleton resource to a controller.
+         *
+         * @param string $name
+         * @param string $controller
+         * @param array $options
+         * @return \Illuminate\Routing\PendingSingletonResourceRegistration 
+         * @static 
+         */ 
+        public static function singleton($name, $controller, $options = [])
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        return $instance->singleton($name, $controller, $options);
+        }
+                    /**
+         * Register an array of API singleton resource controllers.
+         *
+         * @param array $singletons
+         * @param array $options
+         * @return void 
+         * @static 
+         */ 
+        public static function apiSingletons($singletons, $options = [])
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        $instance->apiSingletons($singletons, $options);
+        }
+                    /**
+         * Route an API singleton resource to a controller.
+         *
+         * @param string $name
+         * @param string $controller
+         * @param array $options
+         * @return \Illuminate\Routing\PendingSingletonResourceRegistration 
+         * @static 
+         */ 
+        public static function apiSingleton($name, $controller, $options = [])
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        return $instance->apiSingleton($name, $controller, $options);
         }
                     /**
          * Create a route group with shared attributes.
@@ -17213,24 +17301,39 @@
      */ 
         class Forrest {
                     /**
-         * 
+         * Call this method to redirect user to login page and initiate
+         * the Web Server OAuth Authentication Flow.
          *
+         * @param null $loginURL
+         * @return \Illuminate\Http\RedirectResponse 
          * @static 
          */ 
-        public static function authenticate($url = null)
+        public static function authenticate($url = null, $stateOptions = [])
         {
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->authenticate($url);
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->authenticate($url, $stateOptions);
         }
                     /**
-         * Refresh authentication token by re-authenticating.
+         * When settings up your callback route, you will need to call this method to
+         * acquire an authorization token. This token will be used for the API requests.
+         *
+         * @return \Omniphx\Forrest\Interfaces\RedirectInterface 
+         * @static 
+         */ 
+        public static function callback()
+        {
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
+                        return $instance->callback();
+        }
+                    /**
+         * Refresh authentication token.
          *
          * @return void 
          * @static 
          */ 
         public static function refresh()
         {
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         $instance->refresh();
         }
                     /**
@@ -17241,7 +17344,7 @@
          */ 
         public static function revoke()
         {
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->revoke();
         }
                     /**
@@ -17254,7 +17357,7 @@
          */ 
         public static function request($url, $options)
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->request($url, $options);
         }
                     /**
@@ -17264,7 +17367,7 @@
          */ 
         public static function setCredentials($credentials)
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->setCredentials($credentials);
         }
                     /**
@@ -17278,7 +17381,7 @@
          */ 
         public static function get($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->get($path, $requestBody, $options);
         }
                     /**
@@ -17292,7 +17395,7 @@
          */ 
         public static function post($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->post($path, $requestBody, $options);
         }
                     /**
@@ -17306,7 +17409,7 @@
          */ 
         public static function put($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->put($path, $requestBody, $options);
         }
                     /**
@@ -17320,7 +17423,7 @@
          */ 
         public static function delete($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->delete($path, $requestBody, $options);
         }
                     /**
@@ -17334,7 +17437,7 @@
          */ 
         public static function head($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->head($path, $requestBody, $options);
         }
                     /**
@@ -17348,7 +17451,7 @@
          */ 
         public static function patch($path, $requestBody = [], $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->patch($path, $requestBody, $options);
         }
                     /**
@@ -17364,7 +17467,7 @@
          */ 
         public static function versions($options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->versions($options);
         }
                     /**
@@ -17380,7 +17483,7 @@
          */ 
         public static function resources($options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->resources($options);
         }
                     /**
@@ -17392,7 +17495,7 @@
          */ 
         public static function identity($options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->identity($options);
         }
                     /**
@@ -17407,7 +17510,7 @@
          */ 
         public static function limits($options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->limits($options);
         }
                     /**
@@ -17420,7 +17523,7 @@
          */ 
         public static function describe($object_name = null, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->describe($object_name, $options);
         }
                     /**
@@ -17433,7 +17536,7 @@
          */ 
         public static function query($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->query($query, $options);
         }
                     /**
@@ -17446,7 +17549,7 @@
          */ 
         public static function next($nextUrl, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->next($nextUrl, $options);
         }
                     /**
@@ -17461,7 +17564,7 @@
          */ 
         public static function queryExplain($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->queryExplain($query, $options);
         }
                     /**
@@ -17477,7 +17580,7 @@
          */ 
         public static function queryAll($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->queryAll($query, $options);
         }
                     /**
@@ -17490,7 +17593,7 @@
          */ 
         public static function search($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->search($query, $options);
         }
                     /**
@@ -17506,7 +17609,7 @@
          */ 
         public static function scopeOrder($options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->scopeOrder($options);
         }
                     /**
@@ -17519,7 +17622,7 @@
          */ 
         public static function searchLayouts($objectList, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->searchLayouts($objectList, $options);
         }
                     /**
@@ -17536,7 +17639,7 @@
          */ 
         public static function suggestedArticles($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->suggestedArticles($query, $options);
         }
                     /**
@@ -17554,7 +17657,7 @@
          */ 
         public static function suggestedQueries($query, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->suggestedQueries($query, $options);
         }
                     /**
@@ -17567,7 +17670,7 @@
          */ 
         public static function custom($customURI, $options = [])
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->custom($customURI, $options);
         }
                     /**
@@ -17578,7 +17681,7 @@
          */ 
         public static function getClient()
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->getClient();
         }
                     /**
@@ -17589,7 +17692,7 @@
          */ 
         public static function getInstanceURL()
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->getInstanceURL();
         }
                     /**
@@ -17599,7 +17702,7 @@
          */ 
         public static function getBaseUrl()
         {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        /** @var \Omniphx\Forrest\Authentications\WebServer $instance */
                         return $instance->getBaseUrl();
         }
          
@@ -17907,6 +18010,15 @@
         public static function isSubscriptionShownInProfileHeader()
         {
                         return \App\Support\Platform\Platform::isSubscriptionShownInProfileHeader();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function TimezoneList()
+        {
+                        return \App\Support\Platform\Platform::TimezoneList();
         }
          
     }
@@ -22000,6 +22112,114 @@
                     /**
          * 
          *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnFormattedStateSet()
+         * @param string $name
+         * @param mixed $value
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableColumnFormattedStateSet($name, $value, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnFormattedStateSet($name, $value, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnFormattedStateNotSet()
+         * @param string $name
+         * @param mixed $value
+         * @param mixed $record
+         * @return static 
+         * @static 
+         */ 
+        public static function assertTableColumnFormattedStateNotSet($name, $value, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnFormattedStateNotSet($name, $value, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnHasExtraAttributes()
+         * @param string $name
+         * @param array $attributes
+         * @param mixed $record
+         * @static 
+         */ 
+        public static function assertTableColumnHasExtraAttributes($name, $attributes, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnHasExtraAttributes($name, $attributes, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnDoesNotHaveExtraAttributes()
+         * @param string $name
+         * @param array $attributes
+         * @param mixed $record
+         * @static 
+         */ 
+        public static function assertTableColumnDoesNotHaveExtraAttributes($name, $attributes, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnDoesNotHaveExtraAttributes($name, $attributes, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnHasDescription()
+         * @param string $name
+         * @param mixed $description
+         * @param mixed $record
+         * @param string $position
+         * @static 
+         */ 
+        public static function assertTableColumnHasDescription($name, $description, $record, $position = 'below')
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnHasDescription($name, $description, $record, $position);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnDoesNotHaveDescription()
+         * @param string $name
+         * @param mixed $description
+         * @param mixed $record
+         * @param string $position
+         * @static 
+         */ 
+        public static function assertTableColumnDoesNotHaveDescription($name, $description, $record, $position = 'below')
+        {
+                        return \Livewire\Testing\TestableLivewire::assertTableColumnDoesNotHaveDescription($name, $description, $record, $position);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertSelectColumnHasOptions()
+         * @param string $name
+         * @param array $options
+         * @param mixed $record
+         * @static 
+         */ 
+        public static function assertSelectColumnHasOptions($name, $options, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertSelectColumnHasOptions($name, $options, $record);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Tables\Testing\TestsColumns::assertSelectColumnDoesNotHaveOptions()
+         * @param string $name
+         * @param array $options
+         * @param mixed $record
+         * @static 
+         */ 
+        public static function assertSelectColumnDoesNotHaveOptions($name, $options, $record)
+        {
+                        return \Livewire\Testing\TestableLivewire::assertSelectColumnDoesNotHaveOptions($name, $options, $record);
+        }
+                    /**
+         * 
+         *
          * @see \Filament\Tables\Testing\TestsColumns::callTableColumnAction()
          * @param string $name
          * @param mixed $record
@@ -22231,6 +22451,39 @@
      *
      */ 
         class SearchResultCollection {
+         
+    }
+     
+}
+
+    namespace Illuminate\Routing { 
+            /**
+     * 
+     *
+     */ 
+        class Route {
+                    /**
+         * 
+         *
+         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
+         * @param mixed $roles
+         * @static 
+         */ 
+        public static function role($roles = [])
+        {
+                        return \Illuminate\Routing\Route::role($roles);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
+         * @param mixed $permissions
+         * @static 
+         */ 
+        public static function permission($permissions = [])
+        {
+                        return \Illuminate\Routing\Route::permission($permissions);
+        }
          
     }
      

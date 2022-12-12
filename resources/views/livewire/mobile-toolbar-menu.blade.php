@@ -4,14 +4,14 @@
             @foreach (collect($navigation)->take(4) as $item)
                 @if(\Platform::isModuleEnabled($item['module']))
                     <a href="{{ route($item['name']) }}"
-                       class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color hover:text-white-text-color' }} {{
+                       class="{{ request()->routeIs($item['name']) ? 'text-primary' : 'text-light-text-color hover:text-white-text-color' }} {{
                                'group text-center
                                text-base-text-color py-3' }}">
                         <div class="text-xs font-medium text-center py-0 leading-2">
-                            <x-library::icons.icon name="{{ $item['icon'] }}" size="w-8 h-8" class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color
+                            <x-library::icons.icon name="{{ $item['icon'] }}" size="w-8 h-8" class="{{ request()->routeIs($item['name']) ? 'text-primary' : 'text-light-text-color
                         group-hover:text-light-text-color' }} inline text-center"/>
                             <br/>
-                            <span class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color group-hover:text-light-text-color' }} text-center inline"
+                            <span class="{{ request()->routeIs($item['name']) ? 'text-primary' : 'text-light-text-color group-hover:text-light-text-color' }} text-center inline"
                             >{{ $item['label'] }}</span>
                         </div>
                     </a>
@@ -19,7 +19,7 @@
             @endforeach
             <!-- mobile menu button -->
             <a @click="open = true"
-               class="{{ request()->routeIs($item['name']) ? 'text-secondary' : 'text-light-text-color hover:text-white-text-color' }} {{
+               class="{{ request()->routeIs($item['name']) ? 'text-primary' : 'text-light-text-color hover:text-white-text-color' }} {{
                                'group text-center
                                text-base-text-color py-3' }}">
                 <div class="text-xs font-medium text-center py-0 leading-2">
@@ -41,8 +41,8 @@
             x-transition:leave.duration.75ms
     >
         <div class="relative inset-0 z-[900] md:hidden">
-            <div aria-hidden="true" class="sticky inset-0 bg-primary bg-opacity-75"></div>
-            <div class="fixed flex flex-col max-w-lg w-full py-2 bg-primary">
+            <div aria-hidden="true" class="sticky inset-0 bg-secondary bg-opacity-75"></div>
+            <div class="fixed flex flex-col max-w-lg w-full py-2 bg-secondary">
                 <div class="absolute top-0 right-0 -mr-12 pt-2">
                     <button type="button"
                             class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"

@@ -2,17 +2,21 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
+use App\Support\Platform\WithGuestAccess;
 use App\Traits\Filter\WithSortAndFilters;
+use Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
+use Platform;
+
 use function view;
 
 class Index extends Component
 {
-    use WithPagination, WithCachedRows, WithSortAndFilters;
+    use WithPagination, WithCachedRows, WithSortAndFilters, WithGuestAccess;
 
     public array $sortLabels = [
         'title' => 'Title',
@@ -34,6 +38,15 @@ class Index extends Component
 
         if (!\App::environment('production')) {
             $this->useCache = false;
+        }
+    }
+
+    public function loginCheck()
+    {
+        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+            $this->showAuthenticationModal(route('resources.home'));
+
+            return;
         }
     }
 

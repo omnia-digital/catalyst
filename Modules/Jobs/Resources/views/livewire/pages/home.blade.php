@@ -7,7 +7,7 @@
         <div class="col-span-9 mt-10">
             <x-library::heading.2 class="text-xl font-medium text-dark-text-color py-2">Latest Jobs</x-library::heading.2>
 
-            <div class="bg-primary shadow overflow-hidden sm:rounded-md">
+            <div class="bg-secondary shadow overflow-hidden sm:rounded-md">
                 <ul>
                     @forelse($jobs as $job)
                         <x-job.item

@@ -8,7 +8,7 @@
             @forelse ($teams as $team)
                 <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
             @empty
-                <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No teams to show') }}</p>
+                <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No teams to show') }}</p>
             @endforelse
         </div>
     </div>

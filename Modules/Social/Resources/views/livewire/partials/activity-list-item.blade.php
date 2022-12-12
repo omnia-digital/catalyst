@@ -1,4 +1,4 @@
-<div class="bg-primary px-4 py-6 shadow sm:p-6 ">
+<div class="bg-secondary px-4 py-6 shadow sm:p-6 ">
     <article aria-labelledby="{{ 'activity-item-' . $activity['id'] }}">
         <div class="flex justify-beetween items-center">
             <div>

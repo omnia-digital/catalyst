@@ -1,7 +1,7 @@
 @props([
     'align' => 'right',
     'width' => '48',
-    'contentClasses' => 'py-1 bg-primary',
+    'contentClasses' => 'py-1 bg-secondary',
     'dropdownClasses' => '',
     'closeOnClick' => true,
 ])

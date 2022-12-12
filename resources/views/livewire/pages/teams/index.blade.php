@@ -1,7 +1,7 @@
 @extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
-    <div class="sticky top-[55px] z-40 rounded-b-lg px-4 flex items-center bg-secondary items-center justify-between">
+    <div class="sticky top-[55px] z-40 rounded-b-lg px-4 flex items-center bg-primary items-center justify-between">
         <a href="{{ route('social.teams.home', []) }}">
             <div class="flex-1 flex items-center space-x-2 -ml-1">
                 <x-library::icons.icon name="fa-regular fa-users" size="w-8 h-8" color="text-white-text-color"/>
@@ -13,7 +13,7 @@
             <x-library::button.index x-data=""
                                      x-on:click.prevent="$openModal('create-team')"
                                      bg-color="primary"
-                                     text-color="text-secondary"
+                                     text-color="text-primary"
                                      size="w-60 h-10" py="py-2 "
                                      class="hidden sm:block">
                 {{ Trans::get('Create Team') }}
@@ -26,7 +26,7 @@
             <div class="flex justify-between space-x-2 pt-4 mb-4">
                 @foreach ($categories as $category)
                     <x-library::button.link :href="route('social.teams.home', ['lens' => str($category['slug'])->slug()->value()])" class="w-full h-16 {{ str($lens) == str($category['slug'])->slug()
-                ->value() ? 'border-secondary text-base-text-color' : 'text-base-text-color' }}">
+                ->value() ? 'border-primary text-base-text-color' : 'text-base-text-color' }}">
                         {{ $category['name'] }}
                     </x-library::button.link>
                 @endforeach
@@ -79,7 +79,7 @@
             @forelse($teams as $team)
                 <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
             @empty
-                <p class="p-4 bg-primary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
+                <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
             @endforelse
         </div>
             <livewire:create-team-modal/>

@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
         Filament::serving(function () {
             
             Filament::registerTheme(
-                asset('css/filament.css'),
+                asset('css/app.css'),
             );
         });
     }
