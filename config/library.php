@@ -58,6 +58,12 @@ return [
         'mapbox' => [
             'api_key' => env('MAPBOX_API_KEY')
         ]
+    ],
+
+    'canva' => [
+        'button' => [
+            'api_key' => env('CANVA_BUTTON_API_KEY')
+        ]
     ]
 
 ];
