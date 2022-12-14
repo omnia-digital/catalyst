@@ -26,34 +26,34 @@ class PermissionSeeder extends Seeder
             'delete post',
         ];
         $feedPermissions         = [
-            'feed create',
-            'feed read',
-            'feed update',
-            'feed delete',
+            'create feed',
+            'read feed',
+            'update feed',
+            'delete feed',
         ];
         $awardPermissions        = [
-            'award create',
-            'award read',
-            'award update',
-            'award delete',
+            'create award',
+            'read award',
+            'update award',
+            'delete award',
         ];
         $reviewPermissions       = [
-            'review create',
-            'review read',
-            'review update',
-            'review delete',
+            'create review',
+            'read review',
+            'update review',
+            'delete review',
         ];
         $subscriptionPermissions = [
-            'sub create',
-            'sub read',
-            'sub update',
-            'sub delete',
+            'create sub',
+            'read sub',
+            'update sub',
+            'delete sub',
         ];
         $eventPermissions        = [
-            'event create',
-            'event read',
-            'event update',
-            'event delete',
+            'create event',
+            'read event',
+            'update event',
+            'delete event',
         ];
 
         $allPermissions = [
