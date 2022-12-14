@@ -3,10 +3,11 @@
     namespace App\Models;
 
     use Laravel\Jetstream\Membership as JetstreamMembership;
+use Spatie\Permission\Models\Role;
 
     class Membership extends JetstreamMembership
     {
-        public $incrementing = true;
+        //public $incrementing = true;
 
         protected $table = 'model_has_roles';
 
@@ -14,7 +15,12 @@
 
         public function user()
         {
-            return $this->belongsTo(User::class,'user_id')->where('model_type',User::class);
+            return $this->morphTo(User::class, 'model');
+        }
+
+        public function role()
+        {
+            return $this->belongsTo(Role::class);
         }
 
         public function team()

@@ -249,41 +249,60 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function owner()
     {
-        setPermissionsTeamId($this->id);
-        $teamOwnerRole = Role::findByName(config('platform.teams.default_owner_role'));
+        $teamOwnerRole = Role::where('name', config('platform.teams.default_owner_role'))
+            ->where('team_id', $this->id)
+            ->first();
 
         if ( empty($teamOwnerRole)) {
             return;
         }
 
-        $owner = $this->users()->where('role_id', $teamOwnerRole->id)->first();
+        return $this->morphedByMany(User::class, 'model', 'model_has_roles')
+            ->where('role_id', $teamOwnerRole->id)
+            ->withPivot('role_id')
+            ->withTimestamps()
+            ->as('membership')
+            ->first();
+    }
 
-        return $owner;
+    public function getOwnerAttribute()
+    {
+        return $this->owner();
     }
 
     public function users()
     {
-        return $this->memberships()->with('user');
+        return $this->morphedByMany(User::class, 'model', 'model_has_roles')
+            ->withPivot('role_id')
+            ->withTimestamps()
+            ->as('membership');
     }
 
-    public function memberships(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'model_has_roles',null,'team_id')->where('model_type','App\Models\User');
-    }
+    // public function memberships(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(User::class, 'model_has_roles',null,'team_id')->where('model_type','App\Models\User');
+    // }
 
     public function roles(): HasMany
     {
-        return $this->hasMany(Membership::class, 'team_id');
+        return $this->hasMany(Role::class);
     }
 
     public function members(): BelongsToMany
     {
-        return $this->users()->wherePivotNotIn('role', ['owner']);
+        $roleId = $this->getRoleByName(config('platform.teams.default_owner_role'))->id;
+        return $this->users()->wherePivotNotIn('role_id', [$roleId]);
     }
 
     public function admins()
     {
-        return $this->users()->wherePivotIn('role', ['admin']);
+        $roleId = $this->getRoleByName(config('platform.teams.default_admin_role'))->id;
+        return $this->users()->wherePivotIn('role_id', [$roleId]);
+    }
+
+    public function getRoleByName($roleName)
+    {
+        return $this->roles()->where('name', $roleName)->first();
     }
 
     public function allUsers()

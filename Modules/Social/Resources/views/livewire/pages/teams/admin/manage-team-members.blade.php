@@ -1,30 +1,48 @@
 <div class="mt-4 mx-6">
     <x-library::heading.2 class="text-base-text-color font-semibold text-2xl">{{ \Trans::get('Members') }}</x-library::heading.2>
 
-    <div x-data="setupMembers()">
+    <div x-data="{
+        activeMembersTab: 1,
+        membersTabs: [
+            {
+                id: 0,
+                title: 'All Members',
+                /* component: 'social::pages.teams.partials.edit-team-basic' */
+            },
+            {
+                id: 1,
+                title: 'Invitations',
+                count: $wire.invitationsCount
+                /* component: 'teams.team-member-manager' */
+            },
+            {
+                id: 2,
+                title: 'Applications',
+                count: $wire.applicationsCount
+                /* component: */
+            }
+        ]
+    }">
         <!-- Team Members Navigation -->
-        <div class="w-full mt-6">
-            <nav class="flex items-center justify-between text-xs">
-                <ul class="flex font-semibold border-b-2 border-gray-300 w-full pb-3 space-x-6">
+        <div class="mt-6">
+            <div class="border-b border-gray-400">
+                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
                     <template x-for="(tab, index) in membersTabs" :key="tab.id" hidden>
-                        <li class="pb-[3px]">
-                            <a href="#"
-                               class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:border-dark-text-color focus:border-dark-text-color"
-                               :class="(activeMembersTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
-                               x-on:click.prevent="activeMembersTab = tab.id;"
-                               x-text="tab.title"
-                            ></a>
-                            <div x-show="tab.id == 1 && $wire.invitationsCount > 0">
-                                <span x-text="$wire.invitationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-primary rounded-full"></span>
-                            </div>
-                            <div x-show="tab.id == 2 && $wire.applicationsCount > 0">
-                                <span x-text="$wire.applicationsCount" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-primary rounded-full"></span>
-                            </div>
-                        </li>
+                        <a href="#"
+                            class="text-gray-400 transition duration-150 ease-in border-transparent hover:text-gray-700 hover:border-gray-200 whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm hover:border-dark-text-color focus:border-dark-text-color"
+                            :class="(activeMembersTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
+                            x-on:click.prevent="activeMembersTab = tab.id;"
+                        >
+                            <span x-text="tab.title"></span>
+                            <span
+                                x-show="tab.count" 
+                                x-text="tab.count" 
+                                class=" ml-3 py-0.5 px-2.5 rounded-full text-xs font-bold text-white md:inline-block bg-primary"
+                            ></span>
+                        </a>
                     </template>
-                </ul>
-
-            </nav>
+                </nav>
+            </div>
         </div>
 
         <!-- Member Overview -->
@@ -53,11 +71,11 @@
                             <!-- Manage Team Member Role -->
                             @if (Gate::check('addTeamMember', $team) && Laravel\Jetstream\Jetstream::hasRoles())
                                 <button class="ml-2 text-sm text-light-text-color underline hover:no-underline active:no-underline" wire:click="manageRole('{{ $member->id }}')">
-                                    {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role)->name : 'No Role' }}
+                                    {{ \Spatie\Permission\Models\Role::find($member->membership->role_id)->name ?? 'No Role' }}
                                 </button>
                             @elseif (Laravel\Jetstream\Jetstream::hasRoles())
                                 <div class="ml-2 text-sm text-light-text-color">
-                                    {{ $member->membership->role ? Laravel\Jetstream\Jetstream::findRole($member->membership->role)->name : '' }}
+                                    {{ \Spatie\Permission\Models\Role::find($member->membership->role_id)->name ?? '' }}
                                 </div>
                             @endif
 
@@ -69,9 +87,10 @@
 
                                 <!-- Remove Team Member -->
                             @elseif (Gate::check('removeTeamMember', $team))
-                                <button class="cursor-pointer ml-6 text-sm text-red-500 hover:underline focus:underline" wire:click="confirmTeamMemberRemoval('{{ $member->id }}')">
-                                    {{ \Trans::get('Remove') }}
-                                </button>
+                                <button 
+                                    wire:click="confirmTeamMemberRemoval('{{ $member->id }}')"
+                                    class="cursor-pointer ml-6 text-sm text-red-500 hover:underline focus:underline" 
+                                >{{ \Trans::get('Remove') }}</button>
                             @endif
                         </div>
                     </div>
@@ -120,15 +139,15 @@
                                             @foreach ($this->roles as $index => $role)
                                                 <button type="button"
                                                         class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-primary focus:ring focus:ring-primary-light {{ $index > 0 ? 'border-t border-neutral-light rounded-t-none' : '' }} {{ ! $loop->last ? 'rounded-b-none' : '' }}"
-                                                        wire:click="$set('addTeamMemberForm.role', '{{ $role->key }}')">
-                                                    <div class="{{ isset($addTeamMemberForm['role']) && $addTeamMemberForm['role'] !== $role->key ? 'opacity-50' : '' }}">
+                                                        wire:click="$set('addTeamMemberForm.role', '{{ $role->name }}')">
+                                                    <div class="{{ isset($addTeamMemberForm['role']) && $addTeamMemberForm['role'] !== $role->name ? 'opacity-50' : '' }}">
                                                         <!-- Role Name -->
                                                         <div class="flex items-center">
-                                                            <div class="text-sm text-base-text-color {{ $addTeamMemberForm['role'] == $role->key ? 'font-semibold' : '' }}">
+                                                            <div class="text-sm text-base-text-color {{ $addTeamMemberForm['role'] == $role->name ? 'font-semibold' : '' }}">
                                                                 {{ $role->name }}
                                                             </div>
 
-                                                            @if ($addTeamMemberForm['role'] == $role->key)
+                                                            @if ($addTeamMemberForm['role'] == $role->name)
                                                                 <svg class="ml-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                                      stroke="currentColor" viewBox="0 0 24 24">
                                                                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -229,11 +248,12 @@
                                     <div class="text-base-text-color">{{ $application->user->name }} ({{ $application->user->email }})</div>
 
                                     <div class="flex items-center">
+                                        @if (Gate::check('addTeamMember', $team))
                                         <button type="button"
                                                 class="inline-flex items-center px-4 py-2 rounded-full bg-secondary text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
                                                 wire:click.prevent="addTeamMemberUsingID({{ $application->user->id }})"
-                                        >Accept
-                                        </button>
+                                        >Accept</button>
+                                        @endif
                                         @if (Gate::check('removeTeamMember', $team))
                                             <!-- Deny Team Application -->
                                             <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
@@ -267,15 +287,15 @@
                     @foreach ($this->roles as $index => $role)
                         <button type="button"
                                 class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-primary focus:ring focus:ring-primary-light {{ $index > 0 ? 'border-t border-neutral-light rounded-t-none' : '' }} {{ ! $loop->last ? 'rounded-b-none' : '' }}"
-                                wire:click="$set('currentRole', '{{ $role->key }}')">
-                            <div class="{{ $currentRole !== $role->key ? 'opacity-50' : '' }}">
+                                wire:click="$set('currentRole', '{{ $role->id }}')">
+                            <div class="{{ $currentRole != $role->id ? 'opacity-50' : '' }}">
                                 <!-- Role Name -->
                                 <div class="flex items-center">
-                                    <div class="text-sm text-base-text-color {{ $currentRole == $role->key ? 'font-semibold' : '' }}">
+                                    <div class="text-sm text-base-text-color {{ $currentRole == $role->id ? 'font-semibold' : '' }}">
                                         {{ $role->name }}
                                     </div>
 
-                                    @if ($currentRole == $role->key)
+                                    @if ($currentRole == $role->id)
                                         <svg class="ml-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor"
                                              viewBox="0 0 24 24">
                                             <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -362,11 +382,13 @@
                     {
                         id: 1,
                         title: 'Invitations',
+                        count: Livewire.invitationsCount
                         /* component: 'teams.team-member-manager' */
                     },
                     {
                         id: 2,
                         title: 'Applications',
+                        count: Livewire.applicationsCount
                         /* component: */
                     }
                 ]

@@ -12,8 +12,9 @@ trait HasTeams
 {
     public function teams()
     {
-        return $this->roles()->whereNotNull('model_has_roles.team_id')
-                             ->withTimestamps();
+        return $this->morphToMany(Team::class, 'model', 'model_has_roles')
+            ->withTimestamps()
+            ->as('membership');
     }
 
     public function ownsTeam($team)
@@ -21,12 +22,14 @@ trait HasTeams
         if (is_null($team)) {
             return false;
         }
+        return $this->is($team->owner);
+        /* TODO: Do i need this?
         $currentTeamId = getPermissionsTeamId();
         setPermissionsTeamId($team->id);
         $response = $this->hasRole(config('platform.teams.default_owner_role'));
         setPermissionsTeamId($currentTeamId);
 
-        return $response;
+        return $response; */
     }
 
     public function currentTeam()
@@ -66,7 +69,10 @@ trait HasTeams
 
     public function ownedTeams()
     {
-        return $this->belongsToMany(Jetstream::teamModel(), Jetstream::membershipModel())->where(['role' => 'owner'])->withPivot('role')->withTimestamps()->as('membership');
+        $ownerArray = $this->roles()->whereIn('name', [config('platform.teams.default_owner_role')])->get()->toArray();
+        return $this->morphToMany(Team::class, 'model', 'model_has_roles')
+            ->whereIn('role_id', $ownerArray)
+            ->withPivot('role_id')->withTimestamps()->as('membership');
     }
 
     public function hasTeamRole($team, string $role)
@@ -84,4 +90,21 @@ trait HasTeams
         return $this->belongsToTeam($team) && optional(Jetstream::findRole($userOnTeam->membership->role))->key === $role;
     }
 
+    /**
+     * Get the role that the user has on the team.
+     *
+     * @param  mixed  $team
+     * @return \Spatie\Permission\Models\Role|null
+     */
+    public function teamRole($team)
+    {
+        if (! $this->belongsToTeam($team)) {
+            return;
+        }
+
+        $roleId = $team->users->where('id', $this->id)->first()->membership->role_id;
+        $role = \Spatie\Permission\Models\Role::find($roleId);
+
+        return $role ?? null;
+    }
 }

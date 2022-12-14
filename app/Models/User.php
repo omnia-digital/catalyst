@@ -32,25 +32,26 @@ use Spatie\Permission\Traits\HasRoles;
 use Wimil\Followers\Traits\Followable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Searchable
-    {
-        use HasApiTokens,
-            TwoFactorAuthenticatable,
-            Notifiable,
-            SoftDeletes,
-            HasFactory,
-            HasBookmarks,
-            Followable,
-            Awardable,
-            HasHandle,
-            HasRoles;
-        use HasTeams, JetstreamHasTeams {
-            HasTeams::teams insteadof JetstreamHasTeams;
-            HasTeams::hasTeamRole insteadof JetstreamHasTeams;
-            HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
-            HasTeams::ownsTeam insteadof JetstreamHasTeams;
-            HasTeams::ownedTeams insteadof JetstreamHasTeams;
-            HasTeams::currentTeam insteadof JetstreamHasTeams;
-        }
+{
+    use HasApiTokens,
+        TwoFactorAuthenticatable,
+        Notifiable,
+        SoftDeletes,
+        HasFactory,
+        HasBookmarks,
+        Followable,
+        Awardable,
+        HasHandle,
+        HasRoles;
+    use HasTeams, JetstreamHasTeams {
+        HasTeams::teams insteadof JetstreamHasTeams;
+        HasTeams::hasTeamRole insteadof JetstreamHasTeams;
+        HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
+        HasTeams::ownsTeam insteadof JetstreamHasTeams;
+        HasTeams::ownedTeams insteadof JetstreamHasTeams;
+        HasTeams::currentTeam insteadof JetstreamHasTeams;
+        HasTeams::teamRole insteadof JetstreamHasTeams;
+    }
 
     use Billable, WithChargentSubscriptions;
 

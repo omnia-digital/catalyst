@@ -23,7 +23,7 @@ class ManageTeamMembers extends Component
     {
         $this->team = $team;
         $this->applicationsCount = $this->team->teamApplications->count();
-        $this->invationsCount = $this->team->teamInvitations->count();
+        $this->invitationsCount = $this->team->teamInvitations->count();
     }
 
     public function render()

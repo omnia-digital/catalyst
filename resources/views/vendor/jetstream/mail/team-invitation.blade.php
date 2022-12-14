@@ -1,11 +1,11 @@
 @component('mail::message')
 
-<strong>{{ $invitation->inviter->name }}</strong> has invited you to join the <strong>{{ $invitation->team->name }}</strong> team as a(n) <strong>{{ Laravel\Jetstream\Jetstream::findRole($invitation->role)->name }}</strong>!
+<strong>{{ $invitation->inviter->name }}</strong> has invited you to join the <strong>{{ $invitation->team->name }}</strong> team as a(n) <strong>{{ \Spatie\Permission\Models\Role::findByName($invitation->role)->name }}</strong>!
 
 <hr><br>
 
 {{ $invitation->inviter->name }} says:<br>
-"{{ \Trans::get(':message', ['message' => $invitation->message]) }}"
+"{{ \Trans::get($invitation->message) }}"
 
 <br><hr><br>
 

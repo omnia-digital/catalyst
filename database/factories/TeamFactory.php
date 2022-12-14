@@ -4,10 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Team;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Laravel\Jetstream\Features;
-use Modules\Social\Models\Profile;
 use Spatie\Permission\Models\Role;
 
 class TeamFactory extends Factory
@@ -34,13 +31,12 @@ class TeamFactory extends Factory
         ];
     }
 
-    public function withUsers($amount = 1)
+    public function withUsers($amount = 1, $role = 'Member')
     {
-        return $this->hasAttached(User::factory($amount)->withProfile(), function(Team $team) {
+        return $this->hasAttached(User::factory($amount)->withProfile(), function(Team $team) use ($role) {
             setPermissionsTeamId($team->id);
             return [
-                'role_id' => Role::findOrCreate(config('platform.teams.default_owner_role'))->id,
-                'model_type' => User::class,
+                'role_id' => Role::findOrCreate($role)->id,
             ];
         });
 

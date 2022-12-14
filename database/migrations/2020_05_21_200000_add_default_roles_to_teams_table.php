@@ -28,11 +28,11 @@ return new class extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('teams')) {
-            Schema::table('teams', function (Blueprint $table) {
-                $table->dropForeign(['default_role_id']);
-                $table->dropColumn('default_role_id');
-            });
-        }
+        // if (Schema::hasTable('teams')) {
+        //     Schema::table('teams', function (Blueprint $table) {
+        //         $table->dropForeign(['default_role_id']);
+        //         $table->dropColumn('default_role_id');
+        //     });
+        // }
     }
 };

@@ -21,7 +21,8 @@ class TeamTableSeeder extends Seeder
 
         $teams = Team::factory(10)
                      ->has(Location::factory(1))
-                     ->withUsers(2)
+                     ->withUsers(1, config('platform.teams.default_owner_role'))
+                     ->withUsers(2, config('platform.teams.default_member_role'))
                      ->create();
 
         foreach ($teams as $team) {
