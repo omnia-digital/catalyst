@@ -274,6 +274,23 @@
             </div>
         </div>
 
+        <!-- Team Roles -->
+        <div x-cloak x-show="activeMembersTab === 3" class="mt-6 px-6 space-y-6">
+            <div class="flex items-center space-x-4">
+                <div>
+                    <x-library::input.text label="Role Name" id="roleName" wire:model.defer="roleName" />
+                    <x-library::input.error for="roleName"/>
+                </div>
+                <x-library::button wire:click="createRole">Add Role</x-library::button>
+            </div>
+            <div>
+                @foreach ($this->teamRoles as $role)
+                    <div class="flex items-center">
+                        <div>{{ $role->name }}</div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
     @once
         <!-- Role Management Modal -->
@@ -376,8 +393,7 @@
                 membersTabs: [
                     {
                         id: 0,
-                        title: 'All Members',
-                        /* component: 'social::pages.teams.partials.edit-team-basic' */
+                        title: 'All Members'
                     },
                     {
                         id: 1,
@@ -390,6 +406,10 @@
                         title: 'Applications',
                         count: Livewire.applicationsCount
                         /* component: */
+                    },
+                    {
+                        id: 3,
+                        title: 'Roles'
                     }
                 ]
             }

@@ -68,7 +68,6 @@ class CreateNewPostAction
             'postable_id'        => $this->postable?->id ?? $options['postable_id'] ?? null,
             'postable_type'      => $this->postable ? get_class($this->postable) : ($options['postable_type'] ?? null),
             'repost_original_id' => $this->repost?->id,
-            'image'              => $options['image'] ?? null,
         ]);
 
         [$userMentions, $teamMentions] = Mention::getAllMentions($content);

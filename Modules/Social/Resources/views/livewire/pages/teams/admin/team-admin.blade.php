@@ -60,10 +60,7 @@
                 <!-- Featured Content / Sample Media -->
                 <div>
                     <x-library::heading.4>{{ Trans::get('Featured Content') }}</x-library::heading.4>
-                    <p>{{ Trans::get('The content on this page will show up in the Featured Content section of your Team home page. You can use this feature as a perk of getting exclusive content
-                by being a member of your
-                Team.')
-                }}</p>
+                    <p>{{ Trans::get('The content on this page will show up in the Featured Content section of your Team home page. You can use this feature as a perk of getting exclusive content by being a member of your Team.') }}</p>
                 </div>
                 <div class="space-y-6">
                     <div>
@@ -173,7 +170,7 @@
             </div>
 
             <!-- Profile Info -->
-            <div x-show="activeTab === 1" class="mt-6 grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+            <div x-cloak x-show="activeTab === 1" class="mt-6 grid sm:grid-cols-1 md:grid-cols-2 gap-6">
                 {{-- Home & Profile Media --}}
                 <div class="space-y-6">
                     <!-- Details -->
@@ -419,12 +416,10 @@
                     {
                         id: 1,
                         title: 'Profile',
-                        /* component: 'social::pages.teams.partials.edit-team-basic' */
                     },
                     {
                         id: 2,
                         title: 'Team Members',
-                        // component: 'social::pages.teams.members'
                     },
                     {
                         id: 3,
