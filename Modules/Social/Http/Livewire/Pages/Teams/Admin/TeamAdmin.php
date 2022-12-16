@@ -50,8 +50,8 @@ class TeamAdmin extends Component
 
     public function mount(Team $team)
     {
-        $this->authorize('update-team', $team);
-        $this->team = $team->load('owner');
+        $this->authorize('update', $team);
+        //$this->team = $team->load('owner');
     }
 
     protected function rules(): array

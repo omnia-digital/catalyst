@@ -59,8 +59,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('form_templates');
-        Schema::dropIfExists('forms');
         Schema::dropIfExists('form_submissions');
+        Schema::dropIfExists('forms');
+        Schema::dropIfExists('form_types');
+        Schema::dropIfExists('form_templates');
     }
 };

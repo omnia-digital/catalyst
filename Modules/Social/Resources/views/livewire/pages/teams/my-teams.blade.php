@@ -10,7 +10,7 @@
         @can('create', \App\Models\Team::class)
             <x-library::button.index x-data=""
                                      x-on:click.prevent="$openModal('create-team')"
-                                     bg-color="primary"
+                                     bg-color="secondary"
                                      text-color="text-primary"
                                      size="w-60 h-10" py="py-2 "
                                      class="hidden sm:block">

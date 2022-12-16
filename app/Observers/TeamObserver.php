@@ -3,13 +3,20 @@
 namespace App\Observers;
 
 use App\Models\Team;
+use Spatie\Permission\Models\Role;
 use function activity;
 
 class TeamObserver
 {
     public function created(Team $team)
     {
-        activity()->by($team->owner)->on($team)->log(\Trans::get("Team $team->name created"));
+//        $ownerRole = Role::create([
+//            'name' => config('platform.teams.default_owner_role'),
+//            'team_id' => $team->id,
+//        ]);
+//        dd($team->owner);
+//
+//        activity()->by($team->owner)->on($team)->log(\Trans::get("Team $team->name created"));
     }
 
     public function updated(Team $team)

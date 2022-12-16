@@ -28,26 +28,30 @@ use Modules\Social\Traits\HasHandle;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
+use Spatie\Permission\Traits\HasRoles;
 use Wimil\Followers\Traits\Followable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Searchable
-    {
-        use HasApiTokens,
-            TwoFactorAuthenticatable,
-            Notifiable,
-            SoftDeletes,
-            HasFactory,
-            HasBookmarks,
-            Followable,
-            Awardable,
-            HasHandle;
-        use HasTeams, JetstreamHasTeams {
-            HasTeams::hasTeamRole insteadof JetstreamHasTeams;
-            HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
-            HasTeams::ownsTeam insteadof JetstreamHasTeams;
-            HasTeams::ownedTeams insteadof JetstreamHasTeams;
-            HasTeams::currentTeam insteadof JetstreamHasTeams;
-        }
+{
+    use HasApiTokens,
+        TwoFactorAuthenticatable,
+        Notifiable,
+        SoftDeletes,
+        HasFactory,
+        HasBookmarks,
+        Followable,
+        Awardable,
+        HasHandle,
+        HasRoles;
+    use HasTeams, JetstreamHasTeams {
+        HasTeams::teams insteadof JetstreamHasTeams;
+        HasTeams::hasTeamRole insteadof JetstreamHasTeams;
+        HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
+        HasTeams::ownsTeam insteadof JetstreamHasTeams;
+        HasTeams::ownedTeams insteadof JetstreamHasTeams;
+        HasTeams::currentTeam insteadof JetstreamHasTeams;
+        HasTeams::teamRole insteadof JetstreamHasTeams;
+    }
 
     use Billable, WithChargentSubscriptions;
 

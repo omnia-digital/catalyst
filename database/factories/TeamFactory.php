@@ -4,9 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Team;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Laravel\Jetstream\Features;
+use Spatie\Permission\Models\Role;
 
 class TeamFactory extends Factory
 {
@@ -25,10 +24,21 @@ class TeamFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->company(),
-            'content' => implode(' ', $this->faker->paragraphs(7)),
-            'summary' => $this->faker->paragraph(),
-            'start_date' => $this->faker->date()
+            'name'       => $this->faker->unique()->company(),
+            'content'    => implode(' ', $this->faker->paragraphs(7)),
+            'summary'    => $this->faker->paragraph(),
+            'start_date' => $this->faker->date(),
         ];
+    }
+
+    public function withUsers($amount = 1, $role = 'Member')
+    {
+        return $this->hasAttached(User::factory($amount)->withProfile(), function(Team $team) use ($role) {
+            setPermissionsTeamId($team->id);
+            return [
+                'role_id' => Role::findOrCreate($role)->id,
+            ];
+        });
+
     }
 }

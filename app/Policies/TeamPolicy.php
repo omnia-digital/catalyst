@@ -80,7 +80,15 @@ class TeamPolicy
      */
     public function update(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        if ($user->ownsTeam($team)) {
+            return true;
+        }
+
+        if ($user->belongsToTeam($team)) {
+            if ($user->teamRole($team)->hasPermissionTo('update team')) {
+                return true;
+            }
+        }
     }
 
     /**
@@ -92,7 +100,15 @@ class TeamPolicy
      */
     public function addTeamMember(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        if ($user->ownsTeam($team)) {
+            return true;
+        }
+
+        if ($user->belongsToTeam($team)) {
+            if ($user->teamRole($team)->hasPermissionTo('update team')) {
+                return true;
+            }
+        }
     }
 
     /**
@@ -116,7 +132,15 @@ class TeamPolicy
      */
     public function addAwardToTeamMember(User $user, Team $team)
     {
-        return $user->hasTeamRole($team, 'admin') || $user->ownsTeam($team);
+        if ($user->ownsTeam($team)) {
+            return true;
+        }
+
+        if ($user->belongsToTeam($team)) {
+            if ($user->teamRole($team)->hasPermissionTo('give team award')) {
+                return true;
+            }
+        }
     }
 
     /**
@@ -140,7 +164,15 @@ class TeamPolicy
      */
     public function removeTeamMember(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        if ($user->ownsTeam($team)) {
+            return true;
+        }
+
+        if ($user->belongsToTeam($team)) {
+            if ($user->teamRole($team)->hasPermissionTo('update team')) {
+                return true;
+            }
+        }
     }
 
     /**

@@ -7,15 +7,18 @@ use App\Traits\Tag\HasTeamTags;
 use App\Traits\Tag\HasTeamTypeTags;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Cashier\Subscription;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Forms\Models\Form;
 use Modules\Forms\Models\FormType;
@@ -31,6 +34,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
+use Spatie\Permission\Models\Role;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
@@ -140,6 +144,11 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         return $this;
     }
 
+    public function getDefaultRoleAttribute($value)
+    {
+        return config('platform.teams.default_member_role');
+    }
+
     // Relations //
     public function teamNotifications(): HasMany
     {
@@ -151,6 +160,11 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         return $this->hasMany(Post::class);
     }
 
+    /**
+     * Get all of the pending user applications for the team.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function teamApplications(): HasMany
     {
         return $this->hasMany(TeamApplication::class);
@@ -218,6 +232,13 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         return null;
     }
 
+    //** Memberships and Roles  **//
+
+//    public function owner()
+//    {
+//        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id')->where('role', 'owner');
+//    }
+
     public function forms(): HasMany
     {
         return $this->hasMany(Form::class);
@@ -234,17 +255,60 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function owner()
     {
-        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id')->where('role', 'owner');
+        $teamOwnerRole = Role::where('name', config('platform.teams.default_owner_role'))
+            ->where('team_id', $this->id)
+            ->first();
+
+        if ( empty($teamOwnerRole)) {
+            return;
+        }
+
+        return $this->morphedByMany(User::class, 'model', 'model_has_roles')
+            ->where('role_id', $teamOwnerRole->id)
+            ->withPivot('role_id')
+            ->withTimestamps()
+            ->as('membership')
+            ->first();
     }
 
-    public function members()
+    public function getOwnerAttribute()
     {
-        return $this->users()->wherePivotNotIn('role', ['owner']);
+        return $this->owner();
+    }
+
+    public function users()
+    {
+        return $this->morphedByMany(User::class, 'model', 'model_has_roles')
+            ->withPivot('role_id')
+            ->withTimestamps()
+            ->as('membership');
+    }
+
+    // public function memberships(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(User::class, 'model_has_roles',null,'team_id')->where('model_type','App\Models\User');
+    // }
+
+    public function roles(): HasMany
+    {
+        return $this->hasMany(Role::class);
+    }
+
+    public function members(): BelongsToMany
+    {
+        $roleId = $this->getRoleByName(config('platform.teams.default_owner_role'))->id;
+        return $this->users()->wherePivotNotIn('role_id', [$roleId]);
     }
 
     public function admins()
     {
-        return $this->users()->wherePivotIn('role', ['admin']);
+        $roleId = $this->getRoleByName(config('platform.teams.default_admin_role'))->id;
+        return $this->users()->wherePivotIn('role_id', [$roleId]);
+    }
+
+    public function getRoleByName($roleName)
+    {
+        return $this->roles()->where('name', $roleName)->first();
     }
 
     public function allUsers()
@@ -264,7 +328,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         });
     }
 
-    public function profile()
+    public function profile(): string
     {
         return route('social.teams.show', $this);
     }
@@ -285,8 +349,9 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     public function scopeWithuser(Builder $query, User $user): Builder
     {
         return $query
-            ->leftJoin('team_user', 'teams.id', '=', 'team_user.team_id')
-            ->where('team_user.user_id', $user->id);
+            ->leftJoin('model_has_roles', 'teams.id', '=', 'model_has_roles.team_id')
+            ->where('model_has_roles.model_id', $user->id)
+            ->where('model_has_roles.model_type', User::class);
     }
 
     public function hasStripeConnectAccount(): bool

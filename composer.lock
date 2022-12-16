@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ef86c712f3fd15330e721972763b54e",
+    "content-hash": "564f456a959ca5095c82caa0a875ec53",
     "packages": [
         {
             "name": "3x1io/filament-themes",
@@ -472,6 +472,7 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
+
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.252.6"
             },
             "time": "2022-12-09T19:21:09+00:00"

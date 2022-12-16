@@ -29,6 +29,12 @@ class CreateTeam implements CreatesTeams
 //            'summary' => $input['summary'],
         ]);
 
+        // Roles
+        // assign the creator the owner role
+        setPermissionsTeamId($team->id);
+        $user->assignRole(config('platform.teams.default_owner_role'));
+
+        // Team types
         if (!empty($input['teamTypes'])) {
             $team->attachTags($input['teamTypes']);
         }

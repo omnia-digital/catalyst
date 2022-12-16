@@ -34,14 +34,14 @@
                         @endif
                     </a>
                 @endforeach
-                @can('update-team', $team)
+                @can('update', $team)
                     <a href="{{ route('social.teams.admin', $team) }}" class="md:hidden hover:bg-neutral block w-full px-4 py-2 text-left text-sm">{{ \Trans::get('Admin Panel') }}</a>
                 @endcan
             </x-library::dropdown>
         </div>
     </div>
     <div class="flex-1 flex pr-2 items-center justify-end">
-        @can('update-team', $team)
+        @can('update', $team)
             @if ($team->applicationsCount() > 0)
                 <a 
                     class="flex items-center hover:underline" href="{{ route('social.teams.admin', $team) }}">

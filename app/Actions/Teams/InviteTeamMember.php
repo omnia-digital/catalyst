@@ -29,6 +29,8 @@ class InviteTeamMember implements InvitesTeamMembers
     {
         Gate::forUser($inviter)->authorize('addTeamMember', $team);
 
+        setPermissionsTeamId($team->id);
+
         $user = User::findByEmail($email);
 
         $this->validate($team, $email, $role, $message);
@@ -80,9 +82,7 @@ class InviteTeamMember implements InvitesTeamMembers
             'email' => ['required', 'email', Rule::unique('team_invitations')->where(function ($query) use ($team) {
                 $query->where('team_id', $team->id);
             })],
-            'role' => Jetstream::hasRoles()
-                            ? ['required', 'string', new Role]
-                            : null,
+            'role' => ['required', 'string'],
             'message' => ['max:255'],
         ]);
     }

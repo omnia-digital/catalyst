@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 use Modules\Social\Models\Profile;
 use Nwidart\Modules\Module;
+use Spatie\Permission\Models\Role;
 
 class UserFactory extends Factory
 {
@@ -59,13 +60,17 @@ class UserFactory extends Factory
             return $this->state([]);
         }
 
+        $team = Team::factory()->create();
+
+        $role = Role::create([
+            'name' => config('platform.teams.default_owner_role'),
+            'team_id' => $team->id
+        ]);
+
         return $this->hasAttached(
-            Team::factory()
-                ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->profile->name.'\'s ' . \Trans::get('Team')];
-                }), 
-                ['role' => 'owner'],
-                'teams'
+            $team,
+            ['role_id' => $role->id, 'team_id' => $team->id],
+            'teams'
         );
     }
 
@@ -75,15 +80,20 @@ class UserFactory extends Factory
      * @param $position
      * @return $this
      */
-    public function withExistingTeam($position = 'member')
+    public function withExistingTeam()
     {
         if (! Features::hasTeamFeatures()) {
             return $this->state([]);
         }
+        $team = Team::get()->shuffle()->first();
+
+        $member = config('platform.teams.default_member_role');
+
+        setPermissionsTeamId($team->id);
 
         return $this->hasAttached(
-            Team::get()->shuffle()->first(), 
-            ['role' => $position],
+            $team, 
+            ['role_id' => Role::findOrCreate($member)->id, 'team_id' => $team->id],
             'teams'
         );
     }
