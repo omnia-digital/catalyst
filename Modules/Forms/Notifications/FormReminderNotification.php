@@ -35,8 +35,8 @@ class FormReminderNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'database', 'mail'];
         if ($notifiable->hasTeamRole($this->team, $this->formNotification->role->name)) {
+            return ['broadcast', 'database', 'mail'];
         }
     }
 

@@ -120,27 +120,14 @@ class ManageTeamForms extends Component
 
     public function scheduleNotification(FormNotification $formNotification)
     {
-        $scheduledNotification = $formNotification->scheduledNotification;
-
         $sendDate = $formNotification->send_date->hour(6);
 
         foreach ($this->team->users()->where('role_id', $formNotification->role_id)->get() as $user) {
-            if (is_null($scheduledNotification)) {
-                $scheduledNotification = ScheduledNotification::create(
-                    $user,
-                    new FormReminderNotification($this->team, $formNotification),
-                    $sendDate
-                );
-                $formNotification->scheduled_notification_id = $scheduledNotification->id;
-                $formNotification->save();
-            } 
-
-            if ($scheduledNotification->isSent()) {
-                $scheduledNotification->scheduleAgainAt($sendDate);
-
-            } elseif ($scheduledNotification->getSendAt()->notEqualTo($sendDate)) {
-                $scheduledNotification->reschedule($sendDate);
-            }
+            ScheduledNotification::create(
+                $user,
+                new FormReminderNotification($this->team, $formNotification),
+                now()->addMinute()//$sendDate
+            );
         }
     }
 

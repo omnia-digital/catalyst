@@ -25,7 +25,6 @@ class CreateFormNotificationsTable extends Migration
             $table->text('message')->nullable();
             $table->string('timezone')->default('UTC');
             $table->timestamp('send_date');
-            $table->foreignIdFor(ScheduledNotification::class, 'scheduled_notification_id')->nullable();
             $table->timestamps();
         });
     }
