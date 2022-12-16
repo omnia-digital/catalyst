@@ -146,7 +146,7 @@ class Platform
         return self::getBillingSetting('show_user_subscription_plan_in_profile_header');
     }
 
-    public static function TimezoneList()
+    public static function timezoneList()
     {
         foreach (timezone_identifiers_list() as $timezone) {
             $timezones[$timezone] = $timezone . " " . CarbonTimeZone::create($timezone)->toOffsetName();
