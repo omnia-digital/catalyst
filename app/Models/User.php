@@ -29,6 +29,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use Spatie\Permission\Traits\HasRoles;
+use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable;
 use Wimil\Followers\Traits\Followable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Searchable
@@ -42,7 +43,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Sea
         Followable,
         Awardable,
         HasHandle,
-        HasRoles;
+        HasRoles,
+        SnoozeNotifiable;
     use HasTeams, JetstreamHasTeams {
         HasTeams::teams insteadof JetstreamHasTeams;
         HasTeams::hasTeamRole insteadof JetstreamHasTeams;

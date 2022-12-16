@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "564f456a959ca5095c82caa0a875ec53",
+    "content-hash": "ab7b989be67bbcd7742b51e5c3ca4c2e",
     "packages": [
         {
             "name": "3x1io/filament-themes",
@@ -472,7 +472,6 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.252.6"
             },
             "time": "2022-12-09T19:21:09+00:00"
@@ -16424,6 +16423,65 @@
             "time": "2021-07-28T10:34:58+00:00"
         },
         {
+            "name": "thomasjohnkane/snooze",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thomasjohnkane/snooze.git",
+                "reference": "3e1e1ecd4c4d26f9847f9258a58f0d57b8f2b3fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thomasjohnkane/snooze/zipball/3e1e1ecd4c4d26f9847f9258a58f0d57b8f2b3fa",
+                "reference": "3e1e1ecd4c4d26f9847f9258a58f0d57b8f2b3fa",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~6.0 || ~7.0 || ~8.0 || ^9.0",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~4.0|| ~5.0 || ~6.0 || ^7.0",
+                "phpunit/phpunit": "^9.0",
+                "timacdonald/log-fake": "^1.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Thomasjohnkane\\Snooze\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Thomasjohnkane\\Snooze\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Kane",
+                    "email": "thomasjohnkane@gmail.com"
+                }
+            ],
+            "description": "Schedule future notifications and reminders in Laravel",
+            "keywords": [
+                "delayed notifications",
+                "notifications",
+                "scheduled",
+                "snooze"
+            ],
+            "support": {
+                "issues": "https://github.com/thomasjohnkane/snooze/issues",
+                "source": "https://github.com/thomasjohnkane/snooze/tree/2.2.0"
+            },
+            "time": "2022-02-14T23:48:06+00:00"
+        },
+        {
             "name": "tightenco/ziggy",
             "version": "v1.5.0",
             "source": {
@@ -18573,5 +18631,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

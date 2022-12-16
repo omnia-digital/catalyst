@@ -15,6 +15,7 @@ use Modules\Forms\Traits\Livewire\WithFormManagement;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use Spatie\Permission\Models\Role;
+use Thomasjohnkane\Snooze\ScheduledNotification;
 
 class ManageTeamForms extends Component
 {
@@ -39,6 +40,7 @@ class ManageTeamForms extends Component
         'formPublished' => '$refresh',
         'formSavedAsDraft' => '$refresh',
         'notificationSaved' => '$refresh',
+        'formNotificationRemoved' => '$refresh',
     ];
 
     public function mount()
@@ -83,17 +85,6 @@ class ManageTeamForms extends Component
         $this->openModal('form-notification-modal');
     }
 
-    public function editFormNotification(FormNotification $formNotification)
-    {
-        if (!isset($this->editingNotification['id'])) 
-            $this->editingNotification = $formNotification->toArray();
-
-        if (isset($this->editingNotification['id']) && ($this->editingNotification['id'] !== $formNotification->id))
-            $this->editingNotification = $formNotification->toArray();
-
-        $this->openModal('form-notification-modal');
-    }
-
     public function saveFormNotification()
     {
         $attributes = $this->validate([
@@ -110,10 +101,12 @@ class ManageTeamForms extends Component
         ]);
 
         if (isset($this->editingNotification['id'])) {
-            FormNotification::find($this->editingNotification['id'])->update($attributes['editingNotification']);
+            $formNotification = FormNotification::find($this->editingNotification['id'])->update($attributes['editingNotification']);
         } else {
-            FormNotification::create($attributes['editingNotification']);
+            $formNotification = FormNotification::create($attributes['editingNotification']);
         }
+
+        $this->scheduleNotification($formNotification);
         
         $this->success('Notification created successfully');
 
@@ -123,6 +116,19 @@ class ManageTeamForms extends Component
         $this->closeModal('form-notification-modal');
 
         $this->emit('notificationSaved');
+    }
+
+    public function scheduleNotification(FormNotification $formNotification)
+    {
+        $sendDate = $formNotification->send_date->hour(6);
+
+        foreach ($this->team->users()->where('role_id', $formNotification->role_id)->get() as $user) {
+            ScheduledNotification::create(
+                $user,
+                new FormReminderNotification($this->team, $formNotification),
+                $sendDate
+            );
+        }
     }
 
     public function getRoleIds()

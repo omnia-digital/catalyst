@@ -61,6 +61,7 @@
         "spatie/laravel-tags": "^4.3",
         "squirephp/countries-en": "^3.3",
         "stripe/stripe-php": "^9.0",
+        "thomasjohnkane/snooze": "^2.2",
         "tightenco/ziggy": "^1.4",
         "vedmant/laravel-feed-reader": "^1.5",
         "wimil/followers": "^1.0"

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Permission\Models\Role;
+use Thomasjohnkane\Snooze\Models\ScheduledNotification;
 
 class FormNotification extends Model
 {
@@ -43,6 +44,11 @@ class FormNotification extends Model
 
     public function role()
     {
-        return $this->belogsTo(Role::class);
+        return $this->belongsTo(Role::class);
+    }
+
+    public function scheduledNotification()
+    {
+        return $this->belongsTo(ScheduledNotification::class);
     }
 }

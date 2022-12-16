@@ -72,10 +72,10 @@
                                         <div class="relative">
                                             <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4 py-0 rounded-full" :name="$notification->print_send_date" />
                                             <button 
-                                                wire:click="editFormNotification('{{ $notification->id }}')"
+                                                wire:click="confirmFormNotificationRemoval('{{ $notification->id }}')"
                                                 class="absolute -top-2 -right-2 p-1 rounded-full bg-white group hover:bg-primary-500"
                                             >
-                                                <x-library::icons.icon name="heroicon-s-pencil-alt" color="text-primary-600 group-hover:text-white" class="h-3 w-3"/>
+                                                <x-library::icons.icon name="heroicon-o-x" color="text-primary-600 group-hover:text-white" class="h-3 w-3"/>
                                             </button>
                                         </div>
                                     @endforeach
@@ -207,10 +207,31 @@
         </x-slot>
     </x-jet-confirmation-modal>
     
+    <!-- Delete Form Notification Confirmation Modal -->
+    <x-jet-confirmation-modal wire:model="confirmingFormNotificationRemoval">
+        <x-slot name="title">
+            {{ \Trans::get('Delete Form Notification') }}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ \Trans::get('Are you sure you would like to delete this form notification?') }}
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('confirmingFormNotificationRemoval')" wire:loading.attr="disabled">
+                {{ \Trans::get('Cancel') }}
+            </x-jet-secondary-button>
+
+            <x-jet-danger-button class="ml-2" wire:click="removeFormNotification" wire:loading.attr="disabled">
+                {{ \Trans::get('Delete') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-confirmation-modal>
+    
     <!-- Form Notification Modal -->
     <form wire:submit.prevent="saveFormNotification">
         <x-library::modal id="form-notification-modal">
-            <x-slot:title>Edit Form Notification</x-slot:title>
+            <x-slot:title>Create Form Notification</x-slot:title>
             <x-slot:content>
                 <div class="space-y-6">
                     <input type="hidden" wire:model.defer="editingNotification.form_id">
