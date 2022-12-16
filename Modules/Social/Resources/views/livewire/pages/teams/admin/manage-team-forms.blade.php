@@ -70,7 +70,7 @@
                                 <div class="flex flex-wrap items-center gap-2">
                                     @foreach ($form->notifications as $notification)
                                         <div class="relative">
-                                            <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4 py-0 rounded-full" :name="$notification->print_send_date" />
+                                            <x-tag wire:click.stop="sendNotif('{{ $notification->id }}')" bgColor="neutral-dark" textColor="white" class="text-lg px-4 py-0 rounded-full" :name="$notification->print_send_date" />
                                             <button 
                                                 wire:click="editFormNotification('{{ $notification->id }}')"
                                                 class="absolute -top-2 -right-2 p-1 rounded-full bg-white group hover:bg-primary-500"

@@ -15,6 +15,7 @@ use Modules\Forms\Traits\Livewire\WithFormManagement;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use Spatie\Permission\Models\Role;
+use Thomasjohnkane\Snooze\Models\ScheduledNotification;
 
 class ManageTeamForms extends Component
 {
@@ -123,6 +124,15 @@ class ManageTeamForms extends Component
         $this->closeModal('form-notification-modal');
 
         $this->emit('notificationSaved');
+    }
+
+    public function sendNotif(FormNotification $notif)
+    {
+        ScheduledNotification::create(
+            auth()->user(),
+            new FormReminderNotification($this->team, $notif),
+            now()->addSeconds(10)
+        );
     }
 
     public function getRoleIds()
