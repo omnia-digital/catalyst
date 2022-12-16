@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Modules\Forms\Models\Form;
 use Spatie\Permission\Models\Role;
+use Thomasjohnkane\Snooze\Models\ScheduledNotification;
 
 class CreateFormNotificationsTable extends Migration
 {
@@ -24,6 +25,7 @@ class CreateFormNotificationsTable extends Migration
             $table->text('message')->nullable();
             $table->string('timezone')->default('UTC');
             $table->timestamp('send_date');
+            $table->foreignIdFor(ScheduledNotification::class, 'scheduled_notification_id')->nullable();
             $table->timestamps();
         });
     }
