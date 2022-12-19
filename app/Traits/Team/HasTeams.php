@@ -69,10 +69,15 @@ trait HasTeams
 
     public function ownedTeams()
     {
-        $ownerArray = $this->roles()->whereIn('name', [config('platform.teams.default_owner_role')])->get()->toArray();
+        $ownerArray = $this->roles()
+            ->whereIn('name', [config('platform.teams.default_owner_role')])
+            ->get()
+            ->pluck('id')
+            ->toArray();
         return $this->morphToMany(Team::class, 'model', 'model_has_roles')
-            ->whereIn('role_id', $ownerArray)
-            ->withPivot('role_id')->withTimestamps()->as('membership');
+            ->as('membership')
+            ->wherePivotIn('role_id', $ownerArray)
+            ->withTimestamps();
     }
 
     public function hasTeamRole($team, string $role)

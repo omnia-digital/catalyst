@@ -231,14 +231,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     {
         return null;
     }
-
-    //** Memberships and Roles  **//
-
-//    public function owner()
-//    {
-//        return $this->hasOneThrough(User::class, Membership::class, 'team_id', 'id', 'id', 'user_id')->where('role', 'owner');
-//    }
-
+    
     public function forms(): HasMany
     {
         return $this->hasMany(Form::class);
@@ -252,6 +245,8 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
             ->whereNotNull('published_at')
             ->first();
     }
+
+    //** Memberships and Roles  **//
 
     public function owner()
     {
@@ -283,11 +278,6 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
             ->withTimestamps()
             ->as('membership');
     }
-
-    // public function memberships(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(User::class, 'model_has_roles',null,'team_id')->where('model_type','App\Models\User');
-    // }
 
     public function roles(): HasMany
     {
