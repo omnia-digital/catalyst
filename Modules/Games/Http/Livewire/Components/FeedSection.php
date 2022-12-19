@@ -45,6 +45,15 @@ class FeedSection extends Component
         return $feed;
     }
 
+    public function sanitize($content)
+    {
+        $content = strip_tags($content);
+        $content = html_entity_decode($content);
+//        $content = preg_replace("/&#?[a-z0-9]{2,8};/i","",$content);
+        //        $content = preg_replace('/[^A-Za-z0-9 ]+/', '', $content);
+        return trim($content, ' ');
+    }
+
     public function render()
     {
         return view('games::livewire.components.feed-section', [

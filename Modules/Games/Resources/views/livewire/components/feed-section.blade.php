@@ -4,29 +4,30 @@
             <div>
                 <div class="">
                     @if($showTitle)
-                    <h2 class="mb-0">
-                        <div class="py-1">
-                            <div>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-6">
-                                        @if($feed->get_image_url())
-                                            @if($feed->get_image_link())
-                                                <a href="{{ $feed->get_image_link() }}" target="_blank">
-                                                    @endif
+                        <h2 class="mb-0">
+                            <div class="py-1">
+                                <div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-6">
+                                            @if($feed->get_image_url())
+                                                @if($feed->get_image_link())
+                                                    <a href="{{ $feed->get_image_link() }}" target="_blank">
+                                                @endif
                                                     <img src="{{ $feed->get_image_url() }}" class="h-12 rounded-full object-cover"/>
-                                                    @if($feed->get_image_link())
-                                                </a>
+                                                @if($feed->get_image_link())
+                                                    </a>
+                                                @endif
                                             @endif
-                                        @endif
 
-                                        @if($showDescription)
-                                            <div>
-                                            <a href="{{ $feed->get_link() }}" target="_blank" class="flex items-center text-neutral-dark space-x-2 hover:underline">
-                                                <x-library::heading.2 class="text-heading-default-color uppercase tracking-wide font-semibold">{{ $feed->get_title() }}</x-library::heading.2>
-                                            </a>
-                                                <p>{{ $feed->get_description() }}</p>
-                                            </div>
-                                        @endif
+                                            @if($showDescription)
+                                                <div>
+                                                    <a href="{{ $feed->get_link() }}" target="_blank" class="flex items-center text-neutral-dark space-x-2 hover:underline">
+                                                        <x-library::heading.2 class="text-heading-default-color uppercase tracking-wide font-semibold">{!! $this->sanitize($feed->get_title())
+                                                         !!}</x-library::heading.2>
+                                                    </a>
+                                                    <p>{{ $feed->get_description() }}</p>
+                                                </div>
+                                            @endif
 
 
                                     </div>
@@ -69,7 +70,7 @@
                                                     <div class="h-80 rounded"></div>
                                                     <div class="space-y-2 p-4 bg-secondary rounded absolute bottom-0 right-0 left-0">
                                                         <div class="flex justify-between">
-                                                            <p class="text-heading-default-color font-semibold text-base">{{$item->get_title()}}</p>
+                                                            <p class="text-heading-default-color font-semibold text-base">{!! $this->sanitize($item->get_title())  !!}</p>
                                                             {{--                                        <div class="flex items-center">--}}
                                                             {{--                                            <x-heroicon-o-users class="h-4 w-4 mr-2" />--}}
                                                             {{--                                            <p>{{ $team->users_count ?? $team->users()->count() }}</p>--}}
