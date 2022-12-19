@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Events\AddingTeam;
 use Laravel\Jetstream\Jetstream;
+use Spatie\Permission\Models\Role;
 
 class CreateTeam implements CreatesTeams
 {
@@ -17,29 +18,34 @@ class CreateTeam implements CreatesTeams
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-//            'start_date' => ['required', 'date'],
-//            'summary' => ['required', 'max:280'],
         ])->validateWithBag('createTeam');
 
         AddingTeam::dispatch($user);
 
-        $team = $user->ownedTeams()->create([
+        $team = Team::create([
             'name' => $input['name'],
-//            'start_date' => $input['start_date'],
-//            'summary' => $input['summary'],
         ]);
 
         // Roles
-        // assign the creator the owner role
-        setPermissionsTeamId($team->id);
-        $user->assignRole(config('platform.teams.default_owner_role'));
+        // Create an owner and member role for the new team
+        // Assign the Owner role to the user who just created the team
+        $roleOwner = Role::create([
+            'name' => config('platform.teams.default_owner_role'),
+            'team_id' => $team->id
+        ]);
+        $roleMember = Role::create([
+            'name' => config('platform.teams.default_member_role'),
+            'team_id' => $team->id
+        ]);
+
+        $team->users()->attach(
+            $user, ['role_id' => $roleOwner->id]
+        );
 
         // Team types
         if (!empty($input['teamTypes'])) {
             $team->attachTags($input['teamTypes']);
         }
-
-        $user->teams()->updateExistingPivot($team->id, ['role' => 'owner']);
 
         if ( ! empty($input['bannerImage'])) {
             $team->addMedia($input['bannerImage'])->toMediaCollection('team_banner_images');
