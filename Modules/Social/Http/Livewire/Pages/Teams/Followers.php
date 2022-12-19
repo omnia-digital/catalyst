@@ -11,7 +11,7 @@ class Followers extends Component
         
     public function mount(Team $team)
     {
-        $this->team = $team->load('owner');
+        $this->team = $team;
     }
 
     public function render()

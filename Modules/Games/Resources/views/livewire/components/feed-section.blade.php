@@ -84,7 +84,8 @@
                                                                 @endforeach
                                                             @endif
                                                         </div>
-                                                        <p class="text-light-text-color text-xs line-clamp-3 h-0 transition-all delay-75 duration-300 group-hover:h-13">{{ $item->get_description() }}</p>
+                                                        <p class="text-light-text-color text-xs line-clamp-3 h-0 transition-all delay-75 duration-300 group-hover:h-13">{{ $this->sanitize
+                                                        ($item->get_description()) }}</p>
                                                     </div>
                                                 </div>
                                 </a>
