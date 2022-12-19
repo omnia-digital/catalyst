@@ -126,7 +126,7 @@ class ManageTeamForms extends Component
             ScheduledNotification::create(
                 $user,
                 new FormReminderNotification($this->team, $formNotification),
-                now()->addMinute()//$sendDate
+                $sendDate
             );
         }
     }
