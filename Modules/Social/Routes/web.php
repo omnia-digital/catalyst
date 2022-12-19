@@ -29,6 +29,9 @@ use Modules\Social\Http\Livewire\Pages\Teams\MyTeams;
 use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
 use Modules\Social\Http\Middleware\GuestAccessMiddleware;
 
+// Shorten URLs
+Route::get('/u/{profile}', ShowProfile::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.profile.show');
+Route::get('/t/{team}', ShowTeam::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.teams.show');
 
 Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
    
@@ -43,7 +46,7 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
     Route::get('/trending', DiscoverIndex::class)->name('discover');
 
     Route::name('profile.')->prefix('profiles')->group(function() {
-        Route::get('{profile}', ShowProfile::class)->name('show');
+        Route::get('{profile}', ShowProfile::class)->name('show.full-url');
         Route::get('{profile}/edit', EditProfile::class)->name('edit');
         Route::get('{profile}/media', ProfileMedia::class)->name('media');
         Route::get('{profile}/followers', ProfileFollowers::class)->name('followers');
@@ -56,7 +59,7 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('/calendar', TeamMapCalendar::class)->name('calendar');
         Route::get('/map', TeamMap::class)->name('map');
         Route::get('/my-' . \Trans::get('teams'), MyTeams::class)->name('my-teams');
-        Route::get('{team}', ShowTeam::class)->name('show');
+        Route::get('{team}', ShowTeam::class)->name('show.full-url');
         Route::get('{team}/admin', EditTeam::class)->name('admin');
         Route::get('{team}/admin/forms/create', TeamFormBuilder::class)->name('admin.forms.create');
         Route::get('{team}/admin/forms/{form}/edit', TeamFormBuilder::class)->name('admin.forms.edit');
@@ -99,4 +102,3 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
     //        Route::get('/bookmarks', function () {
     //        })->name('bookmarks');
 });
-
