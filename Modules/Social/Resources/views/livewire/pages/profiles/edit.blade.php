@@ -91,29 +91,32 @@
                 />
                 <x-library::input.error for="country"/>
             </div>
-            <div class="col-span-4">
-                <div class="flex items-center">
-                    <x-library::input.label value="{{ \Trans::get('What are you associated with?') }}" class="inline" />
-                    <span class="text-neutral-dark ml-1">{{ \Trans::get('(you can choose more than one)') }}</span>
-                    <span class="text-red-600 text-sm">*</span>
+            @if (sizeof($this->profileTags))
+                <div class="col-span-4">
+                    <div class="flex items-center">
+                        <x-library::input.label value="{{ \Trans::get('What are you associated with?') }}" class="inline" />
+                        <span class="text-neutral-dark ml-1">{{ \Trans::get('(you can choose more than one)') }}</span>
+                        <span class="text-red-600 text-sm">*</span>
+                    </div>
+                    <x-library::input.selects wire:model="profileTypes" :options="$this->profileTags"/>
+                    <x-library::input.error for="profileTypes"/>
+                    <p>Current Tags:</p>
+                    <div class="flex items-center space-x-3">
+                        @foreach ($profile->tags as $tag)
+                            <div class="relative">
+                                <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4" :name="$tag->name" />
+                                <button 
+                                    wire:click="removeTag('{{ $tag->name }}')"
+                                    class="absolute -top-2 -right-2 p-1 rounded-full bg-white"
+                                >
+                                    <x-library::icons.icon name="heroicon-o-x" color="text-danger-600" class="h-3 w-3"/>
+                                </button>
+                            </div>
+                        @endforeach
+                    </div>
+                    
                 </div>
-                <x-library::input.selects wire:model="profileTypes" :options="$profileTags"/>
-                <p>Current Tags:</p>
-                <div class="flex items-center space-x-3">
-                    @foreach ($profile->tags as $tag)
-                        <div class="relative">
-                            <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4" :name="$tag->name" />
-                            <button 
-                                wire:click="removeTag('{{ $tag->name }}')"
-                                class="absolute -top-2 -right-2 p-1 rounded-full bg-white"
-                            >
-                                <x-library::icons.icon name="heroicon-o-x" color="text-danger-600" class="h-3 w-3"/>
-                            </button>
-                        </div>
-                    @endforeach
-                </div>
-                
-            </div>
+            @endif
             <div class="col-span-4">
                 <x-library::input.label value="Bio"/>
                 <x-library::input.textarea id="bio" wire:model.defer="profile.bio" />

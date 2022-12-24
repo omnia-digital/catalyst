@@ -35,7 +35,7 @@ class Edit extends Component
             'profile.website' => ['max:280'],
             'profile.birth_date' => ['required', 'date'],
             'country' => ['required', Rule::in(Country::select('code_3')->pluck('code_3')->toArray())],
-            'profileTypes' => ['required', 'array']
+            'profileTypes' => ['array']
         ];
     }
 
@@ -71,7 +71,7 @@ class Edit extends Component
     {
         $this->authorize('update-profile', $profile);
         $this->profile = $profile->load('user');
-        $this->country = $profile->country;
+        $this->country = $profile->country ?? 'afg'; //default country
     }
     
     public function saveChanges()
