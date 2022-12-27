@@ -7,6 +7,7 @@ use App\Models\Team;
 use App\Support\Platform\Platform;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Social\Support\Livewire\ManagesTeamNotifications;
@@ -17,9 +18,9 @@ use Trans;
 
 class TeamAdmin extends Component
 {
-    use WithPlace, 
-        AuthorizesRequests, 
-        WithFileUploads, 
+    use WithPlace,
+        AuthorizesRequests,
+        WithFileUploads,
         WithNotification,
         ManagesTeamNotifications;
 
@@ -58,10 +59,10 @@ class TeamAdmin extends Component
     {
         $rules = [
             'team.name' => ['required', 'max:254'],
-            'team.start_date' => ['date'],
-            'team.end_date' => ['date', 'after_or_equal:team.start_date'],
-            'team.summary' => ['max:280'],
-            'team.content' => ['max:65500'],
+            'team.start_date' => ['nullable','date'],
+            'team.end_date' => ['nullable','date', 'after_or_equal:team.start_date' ],
+            'team.summary' => ['nullable','max:280'],
+            'team.content' => ['nullable','max:65500'],
         ];
 
         // if (Platform::hasGeneralSettingEnabled('team_require_start_date')) {
