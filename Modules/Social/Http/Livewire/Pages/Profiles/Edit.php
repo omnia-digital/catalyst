@@ -71,7 +71,7 @@ class Edit extends Component
     {
         $this->authorize('update-profile', $profile);
         $this->profile = $profile->load('user');
-        $this->country = $profile->country ?? 'afg'; //default country
+        $this->country = $profile->country ?? array_keys($this->countriesArray())[0];
     }
     
     public function saveChanges()
@@ -109,10 +109,15 @@ class Edit extends Component
         $this->profile->refresh();
     }
 
+    public function countriesArray()
+    {
+        return Country::orderBy('name')->pluck('name', 'code_3')->toArray();
+    }
+
     public function render()
     {
         return view('social::livewire.pages.profiles.edit', [
-            'countries'  => Country::orderBy('name')->pluck('name', 'code_3')->toArray(),
+            'countries'  => $this->countriesArray(),
             'profileTags' => $this->profileTags,
         ]);
     }
