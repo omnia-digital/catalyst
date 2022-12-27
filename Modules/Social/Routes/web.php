@@ -3,6 +3,7 @@
 
 use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
 use App\Http\Livewire\Pages\Teams\Index as AllTeams;
+use App\Http\Livewire\Pages\Companies\Index as AllCompanies;
 use Illuminate\Support\Facades\Route;
 use Modules\Social\Http\Livewire\Home;
 use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
@@ -34,7 +35,7 @@ Route::get('/u/{profile}', ShowProfile::class)->middleware([GuestAccessMiddlewar
 Route::get('/t/{team}', ShowTeam::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.teams.show');
 
 Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
-   
+
     // the way twitter works is
     // /{handle} for profile
     // /{handle}/status/{post_id} for any type of post, whether it's a post or reply
@@ -75,6 +76,10 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('{team}/forms/{form}/submissions', TeamFormSubmissions::class)->name('forms.submissions');
         Route::get('{team}/apply', ApplyToTeam::class)->name('application');
         Route::get('/', AllTeams::class)->name('home');
+    });
+
+    Route::name('companies.')->prefix(\Trans::get('companies'))->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
+        Route::get('/', AllCompanies::class)->name('home');
     });
 
     Route::get('/posts/{post}', ShowPosts::class)->name('posts.show');

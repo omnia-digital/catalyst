@@ -87,6 +87,14 @@
                     'module'  => 'social',
                     'current' => false
                 ],
+                [
+                    'label'   => \Trans::get('Companies'),
+                    'name'    => 'social.companies.home',
+                    'icon'    => 'fa-light fa-building',
+                    //                    'icon'    => 'heroicon-o-bookmark',
+                    'module'  => 'social',
+                    'current' => false
+                ],
 //                [
 //                    'label'   => 'Contacts',
 //                    'name'    => 'social.contacts.index',

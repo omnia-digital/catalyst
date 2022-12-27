@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Companies;
 
-use App\Actions\Teams\CreateTeam;
+use App\Actions\Companies\CreateCompany;
 use App\Models\Tag;
-use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 
-class CreateTeamModal extends Component
+class CreateCompanyModal extends Component
 {
     use WithModal, WithFileUploads;
 
@@ -32,7 +31,7 @@ class CreateTeamModal extends Component
     public $sampleMedia = [];
     public $sampleMediaNames = [];
 
-    public $teamTypes = [];
+    public $companyTypes = [];
 
     public function updatedBannerImage()
     {
@@ -72,16 +71,16 @@ class CreateTeamModal extends Component
         }
     }
 
-    public function getTeamTagsProperty()
+    public function getCompanyTagsProperty()
     {
-        return Tag::withType('team_type')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
+        return Tag::withType('company_type')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
     }
 
     protected function rules(): array
     {
         return [
             'name' => ['required', 'max:254'],
-            'teamTypes' => ['required', 'array'],
+            'companyTypes' => ['required', 'array'],
         ];
     }
 
@@ -89,9 +88,9 @@ class CreateTeamModal extends Component
     {
         $this->validate();
 
-        $team = (new CreateTeam())->create(Auth::user(), [
+        $company = (new CreateCompany())->create(Auth::user(), [
             'name' => $this->name,
-            'teamTypes' => $this->teamTypes,
+            'companyTypes' => $this->companyTypes,
 //            'start_date' => $this->startDate,
 //            'summary' => $this->summary,
 //            'bannerImage' => $this->bannerImage,
@@ -100,16 +99,16 @@ class CreateTeamModal extends Component
 //            'sampleMedia' => $this->sampleMedia,
         ]);
 
-        $this->closeModal('create-team');
+        $this->closeModal('create-company');
         $this->reset();
 
-        $this->redirectRoute('social.teams.show', $team);
+        $this->redirectRoute('social.companies.show', $company);
     }
 
     public function render()
     {
-        return view('livewire.create-team-modal', [
-            'teamTags' => $this->teamTags
+        return view('livewire.create-company-modal', [
+            'companyTags' => $this->companyTags
         ]);
     }
 }
