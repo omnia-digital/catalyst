@@ -64,7 +64,7 @@ class Game extends IGDBGame
 
     public function profile()
     {
-        return route('games.show', $this->slug);
+        return route('games.games.show', $this->slug);
     }
 
     public function getKeywordsAttribute()

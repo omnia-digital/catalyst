@@ -24,6 +24,7 @@ class GetPopularGamesAction
             return $game['rating'];
         })->each(function ($game) {
             $this->emit('gameWithRatingAdded', [
+                'coverImageUrl' => $game['coverImageUrl'],
                 'slug'   => $game['slug'],
                 'rating' => $game['rating'] / 100
             ]);

@@ -1,5 +1,5 @@
 <a href="{{ $this->game->url }}">
-<div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black" style="background-image: url({{ $game->getCoverUrl() }});
+    <div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black" style="background-image: url({{ $game->getCoverUrl() }});
      background-size:
      cover; background-repeat: no-repeat;">
     <div class="h-80 rounded"></div>
@@ -15,11 +15,15 @@
             <div class="flex justify-between items-center">
                 {{ $game->first_release_date->format(config('app.default_date_format')) }}
                 <div class="flex justify-end space-x-4">
-                    @foreach($game->platforms as $platform)
-                        <img src="{{ \MarcReichel\IGDBLaravel\Models\PlatformLogo::find(\MarcReichel\IGDBLaravel\Models\Platform::find
-                        ($platform)->platform_logo)->url }}" alt=""
-                             class="w-6 h-6"/>
-                    @endforeach
+                    @if($game->platforms)
+                        @foreach($game?->platforms as $platform)
+                            @if(\MarcReichel\IGDBLaravel\Models\Platform::find($platform)->platform_logo)
+                                <img src="{{ \MarcReichel\IGDBLaravel\Models\PlatformLogo::find(\MarcReichel\IGDBLaravel\Models\Platform::find
+                        ($platform)?->platform_logo)?->url }}" alt=""
+                                     class="w-6 h-6"/>
+                            @endif
+                        @endforeach
+                    @endif
                 </div>
             </div>
             <br/>
