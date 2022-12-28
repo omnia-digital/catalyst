@@ -23,13 +23,23 @@
         @include('livewire.partials.filters', ['skipFilters' => ['has_attachment', 'members']])
 
         <!-- Teams -->
-        <div class="mt-2">
+        <div x-data="{}" class="mt-2">
             <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
                 @forelse ($teams as $team)
                     <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
                     <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
                 @endforelse
+            </div>
+            <div>
+                @if ($this->hasMore())
+                    <div
+                        x-intersect:enter="$wire.loadMore"
+                        wire:loading.attr="disabled" 
+                        class="mb-6 w-full relative inline-flex items-center px-4 py-2">
+                        <span wire:loading wire.target="loadMore">Loading...</span>
+                    </div>
+                @endif
             </div>
         </div>
         <livewire:create-team-modal/>

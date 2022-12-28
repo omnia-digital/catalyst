@@ -17,6 +17,9 @@ class MyTeams extends Component
 {
     use WithPagination, WithCachedRows, WithSortAndFilters, WithGuestAccess;
 
+    public $perPage = 25;
+    public $loadMoreCount = 25;
+
     public array $sortLabels = [
         'name' => 'Name',
         'users_count' => 'Users',
@@ -56,13 +59,23 @@ class MyTeams extends Component
     public function getRowsProperty()
     {
         return $this->cache(function () {
-            return $this->rowsQuery->paginate(100);
+            return $this->rowsQuery->paginate($this->perPage);
         });
     }
 
     public function getUserProperty()
     {
         return User::find(Auth::id());
+    }
+    
+    public function loadMore()
+    {
+        $this->perPage += $this->loadMoreCount;
+    }
+
+    public function hasMore()
+    {
+        return $this->perPage < $this->rowsQuery->count();
     }
 
     public function render()
