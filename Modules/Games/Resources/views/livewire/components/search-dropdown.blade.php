@@ -15,16 +15,16 @@
         @keydown.escape.window = "isVisible = false"
         @keydown="isVisible = true"
         @keydown.shift.tab="isVisible = false"
-    />
+    >
     <div class="absolute top-0 flex items-center h-full ml-6">
         <svg class="fill-current text-gray-400 w-6" viewBox="0 0 24 24"><path class="heroicon-ui" d="M16.32 14.9l5.39 5.4a1 1 0 01-1.42 1.4l-5.38-5.38a8 8 0 111.41-1.41zM10 16a6 6 0 100-12 6 6 0
         000 12z"/></svg>
     </div>
 
+    <div wire:loading class="top-0 right-0 text-lg items-center absolute mr-4 mt-4"><i class="fa-duotone fa-loader animate-spin"></i> Loading...</div>
 
     @if (strlen($search) >= 2)
-        <div class="absolute z-30 bg-white text-md text- rounded-lg shadow  mt-2" x-show.transition.opacity.duration.200="isVisible">
-            <div wire:loading class="fa-spinner top-0 right-0 mr-4 mt-3"><x-library::loading-indicator wire:loading /> Loading...</div>
+        <div class="absolute z-30 bg-white text-md text- rounded-lg shadow mt-2" x-show.transition.opacity.duration.200="isVisible">
 
             @if (count($searchResults) > 0)
                 <ul>

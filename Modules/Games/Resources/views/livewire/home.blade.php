@@ -1,7 +1,7 @@
 @extends('games::livewire.layouts.pages.default-page-layout')
 
 @section('content')
-    <div wire:init="load" class="mr-4">
+    <div wire:init="load" class="md:mr-4">
         <div class="sticky top-[55px] z-50 mb-4 rounded-b-lg pl-4 flex items-center bg-primary items-center">
             <div class="flex-1 flex items-center">
                 <x-library::icons.icon name="fa-regular fa-gamepad-modern" color="text-secondary" class="h-8 w-8 mr-3"/>
