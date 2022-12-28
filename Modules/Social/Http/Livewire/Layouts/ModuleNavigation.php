@@ -38,25 +38,12 @@
                     'current' => false
                 ],
                 [
-                    'label'   => \Trans::get('My Teams'),
-                    'name'    => 'social.teams.my-teams',
-                    'icon'    => 'fa-regular fa-users',
-                    //                    'icon'    => 'heroicon-o-briefcase',
-                    'module'  => 'social',
+                    'label'   => \Trans::get('Games'),
+                    'name'    => 'games.home',
+                    'icon'    => 'fa-regular fa-gamepad-modern',
+                    'module'  => 'games',
                     'current' => false
                 ],
-//                [
-//                    'label'   => 'Notifications',
-//                    'name'    => 'notifications',
-//                    'icon'    => 'heroicon-o-bell',
-//                    'current' => false
-//                ],
-//                [
-//                    'label'   => \Trans::get('Menu'),
-//                    'name'    => 'social.teams.my-teams',
-//                    'icon'    => 'heroicon-o-briefcase',
-//                    'current' => false
-//                ],
                 [
                     'label'   => \Trans::get('News'),
                     'name'    => 'games.feeds',

@@ -10,6 +10,7 @@ use Modules\Games\Models\Game;
 class ComingSoon extends Component
 {
     public $readyToLoad = false;
+    public $small = false;
 
     public function load()
     {
@@ -18,7 +19,7 @@ class ComingSoon extends Component
 
     public function getComingSoonProperty()
     {
-        return $this->formatForView((new GamesAction())->comingSoon());
+        return (new GamesAction())->comingSoon();
     }
 
     public function render()

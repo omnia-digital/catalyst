@@ -17,9 +17,21 @@ class GamesAction
 
     public function search($search = '')
     {
-        $igdbGames = IGDBGame::where('name', 'like', '%' . $search . '%')
-                                 ->limit(15)
-                                 ->get();
+        $igdbGames = IGDBGame::search($search)->limit(15)->get();
+//        $igdbGames = IGDBGame::where('name', 'like', '%' . $search . '%')
+//                                 ->limit(15)
+//                                 ->get();
+        $igdbGames = IGDBGame::fuzzySearch(
+        // fields to search in
+            [
+                'name',
+//                'involved_companies.company.name', // you can search for nested values as well
+            ],
+            // the query to search for
+            $search,
+            // enable/disable case sensitivity (disabled by default)
+            false,
+        )->get();
         $games     = $this->syncIgdbGames($igdbGames);
 
         return $games;
@@ -36,11 +48,12 @@ class GamesAction
 
     public function comingSoon()
     {
-        return $this->popular();
+//        return $this->popular();
         $current = Carbon::now()->timestamp;
 
-        $comingSoonUnformatted = Game::where('first_release_date', '>', $current)
+        $comingSoonUnformatted = IGDBGame::where('first_release_date', '>', $current)
                                      ->where('first_release_date', '<', $current + (60 * 60 * 24 * 7))
+            ->limit(30)
                                      ->get();
 
         //        $comingSoonUnformatted = Http::withHeaders(config('services.igdb'))

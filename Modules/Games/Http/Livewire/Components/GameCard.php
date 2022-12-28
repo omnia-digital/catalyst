@@ -21,7 +21,7 @@ class GameCard extends Component
 
     public function render()
     {
-        return view('games::livewire.components.game-card', [
+        return view('games::livewire.components.game-card-steam', [
             'game' => $this->game
         ]);
     }

@@ -28,9 +28,8 @@
                     <!-- mobile nav -->
                     <nav class="px-2 space-y-1">
                         @foreach ($navigation as $item)
-                            <a
-                                href="{{ route($item['name']) }}"
-                                class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white-text-color' : 'text-light-text-color hover:bg-gray-700 hover:text-white-text-color' }} {{ 'group flex items-center px-2 py-2 text-base-text-color font-medium' }}">
+                            <a href="{{ Route::has($item['name']) ? route($item['name']) : $item['name'] }}"
+                               class="{{ request()->routeIs($item['name']) ? 'bg-gray-900 text-white-text-color' : 'text-light-text-color hover:bg-gray-700 hover:text-white-text-color' }} {{ 'group flex items-center px-2 py-2 text-base-text-color font-medium' }}">
                                 <x-library::icons.icon name="$item['icon']" class="{{ $item['current'] ? 'text-white-text-color' : 'text-light-text-color group-hover:text-light-text-color' }} mr-3
                                 flex-shrink-0 h-6 w-6"/>
                                 {{ $item['label'] }}

@@ -1,5 +1,5 @@
 <a href="{{ $game->details->url }}" target="_blank">
-    <div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black" style="background-image: url({{
+    <div class="w-full bg-secondary  group relative hover:cursor-pointer hover:ring-1 hover:ring-primary" style="background-image: url({{
     $game->details?->getCoverUrl() }});
      background-size:
      cover; background-repeat: no-repeat;">
