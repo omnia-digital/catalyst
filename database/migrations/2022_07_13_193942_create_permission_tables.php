@@ -37,6 +37,8 @@ class CreatePermissionTables extends Migration
             $table->unique(['name', 'guard_name']);
         });
 
+        Schema::hasTable($tableNames['roles']) ? Schema::rename($tableNames['roles'], $tableNames['roles'].'_old') : null;
+
         Schema::create($tableNames['roles'], function (Blueprint $table) use ($teams, $columnNames) {
             $table->bigIncrements('id'); // role id
             if ($teams || config('permission.testing')) { // permission.testing is a fix for sqlite testing
@@ -53,6 +55,8 @@ class CreatePermissionTables extends Migration
                 $table->unique(['name', 'guard_name']);
             }
         });
+
+        Schema::hasTable($tableNames['model_has_permissions']) ? Schema::rename($tableNames['model_has_permissions'], $tableNames['model_has_permissions'].'_old') : null;
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames, $teams) {
             $table->unsignedBigInteger(PermissionRegistrar::$pivotPermission);
@@ -76,8 +80,9 @@ class CreatePermissionTables extends Migration
                 $table->primary([PermissionRegistrar::$pivotPermission, $columnNames['model_morph_key'], 'model_type'],
                     'model_has_permissions_permission_model_type_primary');
             }
-
         });
+
+        Schema::hasTable($tableNames['model_has_roles']) ? Schema::rename($tableNames['model_has_roles'], $tableNames['model_has_roles'].'_old') : null;
 
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames, $teams) {
             $table->unsignedBigInteger(PermissionRegistrar::$pivotRole);
@@ -102,6 +107,8 @@ class CreatePermissionTables extends Migration
                     'model_has_roles_role_model_type_primary');
             }
         });
+
+        Schema::hasTable($tableNames['role_has_permissions']) ? Schema::rename($tableNames['role_has_permissions'], $tableNames['role_has_permissions'].'_old') : null;
 
         Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames) {
             $table->unsignedBigInteger(PermissionRegistrar::$pivotPermission);
