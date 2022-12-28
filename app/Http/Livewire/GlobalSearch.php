@@ -3,10 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\Team;
+use App\Models\User;
 use App\Support\Platform\GlobalSearch\GlobalSearch as Search;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Modules\Social\Models\Post;
+use Modules\Social\Models\Profile;
+use Spatie\Searchable\ModelSearchAspect;
 use Spatie\Searchable\SearchResultCollection;
 
 class GlobalSearch extends Component
@@ -25,8 +28,8 @@ class GlobalSearch extends Component
 
         $this->searchResults = (new Search)
             ->registerModel(Post::class, 'title')
-            ->registerModel(Team::class, 'name')
-            //->registerModel(User::class, 'name')
+            ->registerModel(Team::class, 'name', 'handle')
+            ->registerModel(Profile::class, 'first_name', 'last_name', 'handle')
             ->search($value);
     }
 

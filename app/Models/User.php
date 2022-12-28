@@ -28,13 +28,11 @@ use Modules\Forms\Models\FormSubmission;
 use Modules\Social\Traits\HasHandle;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\PermissionRegistrar;
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
 use Spatie\Permission\Traits\HasRoles;
 use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable;
 use Wimil\Followers\Traits\Followable;
 
-class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Searchable
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     use HasApiTokens,
         TwoFactorAuthenticatable,
@@ -242,11 +240,4 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Sea
     //        ->where('team_id', $team->id)
     //        ->first();
     //}
-
-    public function getSearchResult(): SearchResult
-    {
-        $url = route('profile.show', $this);
-
-        return new SearchResult($this, $this->name, $url);
-    }
 }
