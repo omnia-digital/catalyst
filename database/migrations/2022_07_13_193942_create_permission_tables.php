@@ -14,6 +14,7 @@ class CreatePermissionTables extends Migration
      */
     public function up()
     {
+
         $tableNames = config('permission.table_names');
         $columnNames = config('permission.column_names');
         $teams = config('permission.teams');
@@ -24,6 +25,8 @@ class CreatePermissionTables extends Migration
         if ($teams && empty($columnNames['team_foreign_key'] ?? null)) {
             throw new \Exception('Error: team_foreign_key on config/permission.php not loaded. Run [php artisan config:clear] and try again.');
         }
+
+        Schema::hasTable($tableNames['permissions']) ? Schema::rename($tableNames['permissions'], $tableNames['permissions'].'_old') : null;
 
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->bigIncrements('id'); // permission id
