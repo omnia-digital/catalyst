@@ -22,11 +22,16 @@ use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     class Association extends Model
     {
         protected $fillable = [
-            'target_type',
-            'target_id',
+            'targetable_type',
+            'targetable_id',
             'associatable_type',
             'associatable_id',
         ];
+
+        public function targetable()
+        {
+            return $this->morphTo();
+        }
 
         public function associatable()
         {

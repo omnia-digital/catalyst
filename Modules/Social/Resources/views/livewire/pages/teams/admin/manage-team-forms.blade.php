@@ -3,12 +3,12 @@
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
                 <h1 class="text-xl font-semibold text-gray-900">{{ Trans::get('Forms') }}</h1>
-                <p class="mt-2 text-sm text-gray-700">{{ Trans::get('These are forms that will be sent to members of your Team. You can choose which date these forms are sent out.') }}</p>
+                <p class="mt-2 text-sm text-gray-700">{{ Trans::get('These are forms that will be sent to members of your Team . You can choose which date these forms are sent out.') }}</p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                <a 
+                <a
                     href="{{ route('social.teams.admin.forms.create', $team) }}"
-                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-text-color focus:ring-offset-2 sm:w-auto" 
+                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-text-color focus:ring-offset-2 sm:w-auto"
                 >Create a form</a>
             </div>
         </div>
@@ -42,7 +42,7 @@
                                             @foreach ($form->notifications as $notification)
                                                 <div class="relative">
                                                     <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4 py-0 rounded-full" :name="$notification->print_send_date" />
-                                                    <button 
+                                                    <button
                                                         wire:click="editFormNotification('{{ $notification->id }}')"
                                                         class="absolute -top-2 -right-2 p-1 rounded-full bg-white group hover:bg-primary-500"
                                                     >
@@ -55,7 +55,7 @@
                                     <dt class="sr-only sm:hidden">Submissions</dt>
                                     <dd class="mt-1 truncate text-light-text-color">
                                         @if ($form->submissions()->count())
-                                            <a 
+                                            <a
                                                 href="{{ route('social.teams.forms.submissions', ['team' => $team, 'form' => $form]) }}"
                                                 class="underline hover:no-underline focus:ring-1"
                                             >{{ $form->submissions()->count() }} {{ Str::plural('submission', $form->submissions()->count()) }}</a>
@@ -71,7 +71,7 @@
                                     @foreach ($form->notifications as $notification)
                                         <div class="relative">
                                             <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4 py-0 rounded-full" :name="$notification->print_send_date" />
-                                            <button 
+                                            <button
                                                 wire:click="confirmFormNotificationRemoval('{{ $notification->id }}')"
                                                 class="absolute -top-2 -right-2 p-1 rounded-full bg-white group hover:bg-primary-500"
                                             >
@@ -83,7 +83,7 @@
                             </td>
                             <td class="hidden px-3 py-4 text-sm text-light-text-color lg:table-cell">
                                 @if ($form->submissions()->count())
-                                    <a 
+                                    <a
                                         href="{{ route('social.teams.forms.submissions', ['team' => $team, 'form' => $form]) }}"
                                         class="underline hover:no-underline focus:ring-1"
                                     >{{ $form->submissions()->count() }}</a>
@@ -113,8 +113,8 @@
                                     >Create Reminder</x-library::dropdown.item>
 
                                     <!-- Edit Form -->
-                                    <a 
-                                        href="{{ route('social.teams.admin.forms.edit', ['team' => $team, 'form' => $form]) }}" 
+                                    <a
+                                        href="{{ route('social.teams.admin.forms.edit', ['team' => $team, 'form' => $form]) }}"
                                         class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color"
                                     >Edit<span class="sr-only">, {{ $form->name }}</span></a>
 
@@ -206,7 +206,7 @@
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
-    
+
     <!-- Delete Form Notification Confirmation Modal -->
     <x-jet-confirmation-modal wire:model="confirmingFormNotificationRemoval">
         <x-slot name="title">
@@ -227,7 +227,7 @@
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
-    
+
     <!-- Form Notification Modal -->
     <form wire:submit.prevent="saveFormNotification">
         <x-library::modal id="form-notification-modal">

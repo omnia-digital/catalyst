@@ -29,16 +29,16 @@
                     @foreach ($searchResults as $game)
                         <li class="border-b border-gray-700">
                             <a
-                                href="{{ route('games.games.show', $game['slug']) }}"
+                                href="{{ route('games.games.show', $game->details['slug']) }}"
                                 class="block hover:bg-gray-700 flex items-center transition ease-in-out duration-150 px-3 py-3"
                                 @if ($loop->last) @keydown.tab="isVisible=false" @endif
                             >
-                                @if (isset($game->cover_url))
-                                    <img src="{{ $game->cover_url }}" alt="cover" class="w-10">
+                                @if (isset($game->details->cover_url))
+                                    <img src="{{ $game->details->cover_url }}" alt="cover" class="w-10">
                                 @else
                                     <img src="https://via.placeholder.com/264x352" alt="game cover" class="w-10">
                                 @endif
-                                <span class="ml-4">{{ $game['name'] }}</span>
+                                <span class="ml-4">{{ $game->details['name'] }}</span>
                             </a>
                         </li>
                     @endforeach

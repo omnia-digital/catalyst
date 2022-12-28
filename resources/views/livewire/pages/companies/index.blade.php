@@ -82,6 +82,6 @@
                 <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No Companies Found') }}</p>
             @endforelse
         </div>
-            <livewire:create-company-modal/>
+            <livewire:companies.create-company-modal/>
     </div>
 @endsection

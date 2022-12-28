@@ -32,7 +32,7 @@
                 @endforelse
             </div>
         </div>
-        <livewire:create-team-modal/>
+        <livewire:teams.create-team-modal/>
     </div>
 
     {{-- Create Team button --}}

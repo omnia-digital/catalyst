@@ -11,7 +11,7 @@ Route::name('games.')->prefix('games')->middleware([GuestAccessMiddleware::class
     Route::get('/', Home::class)->name('home');
     Route::get('/igdb', \Modules\Games\Http\Livewire\Igdb::class)->name('igdb');
     Route::get('/feeds', Feeds::class)->name('feeds');
-    Route::name('games.')->prefix('/games')->group(function() {
+    Route::name('games.')->prefix('/g')->group(function() {
         Route::get('/{slug}', \Modules\Games\Http\Livewire\Show::class)->name('show');
     });
 });

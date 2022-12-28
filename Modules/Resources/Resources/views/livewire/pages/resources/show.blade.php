@@ -97,7 +97,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top '.{{ \Trans::get('teams') }},
+                        title: 'Top '.{{ \Platform::getTeamsWord() }},
                         component: 'social.top-teams'
                     },
                     {

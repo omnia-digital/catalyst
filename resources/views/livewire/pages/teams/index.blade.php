@@ -82,6 +82,6 @@
                 <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
             @endforelse
         </div>
-            <livewire:create-team-modal/>
+            <livewire:teams.create-team-modal/>
     </div>
 @endsection

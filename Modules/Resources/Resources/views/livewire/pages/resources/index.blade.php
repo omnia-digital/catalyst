@@ -15,15 +15,15 @@
                     <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
                         <div class="justify-center w-full flex md:w-1/2 lg:w-1/3">
                             @auth
-                                <x-library::button 
-                                    x-data="" 
-                                    class="py-2 w-full h-10" 
+                                <x-library::button
+                                    x-data=""
+                                    class="py-2 w-full h-10"
                                     x-on:click.prevent.stop="$openModal('add-resource-modal')"
                                 >+ New Resource</x-library::button>
                                 <livewire:resources::pages.resources.create/>
                             @else
-                                <x-library::button 
-                                    class="py-2 w-full h-10" 
+                                <x-library::button
+                                    class="py-2 w-full h-10"
                                     wire:click="loginCheck"
                                 >+ New Resource</x-library::button>
                                 <livewire:authentication-modal/>
@@ -70,7 +70,7 @@
                         },
                         {
                             id: 1,
-                            title: 'Top '.{{ \Trans::get('teams') }},
+                            title: 'Top '.{{ \Platform::getTeamsWord() }},
                             component: 'social.top-teams'
                         },
                         {
