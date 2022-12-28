@@ -97,7 +97,12 @@
                     <span class="text-neutral-dark ml-1">{{ \Trans::get('(you can choose more than one)') }}</span>
                     <span class="text-red-600 text-sm">*</span>
                 </div>
-                <x-library::input.selects wire:model="profileTypes" :options="$profileTags"/>
+                <x-library::input.selects 
+                    wire:model="profileTypes" 
+                    :options="$this->profileTags"
+                    :placeholder="sizeof($this->profileTags) ? 'Type to search' : 'There are currently no available tags.'"
+                />
+                <x-library::input.error for="profileTypes"/>
                 <p>Current Tags:</p>
                 <div class="flex items-center space-x-3">
                     @foreach ($profile->tags as $tag)
