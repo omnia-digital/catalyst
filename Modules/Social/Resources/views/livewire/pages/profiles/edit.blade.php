@@ -26,7 +26,7 @@
             >
                 <p class="text-sm opa text-green-600">Profile saved.</p>
             </div>
-            <div class="mr-4"><a href="{{ $profile->url() }}" class="hover:underline">Cancel</a></div>
+            <div class="mr-4"><a href="{{ $profile->urlLink() }}" class="hover:underline">Cancel</a></div>
             <x-library::button.index
                     wire:click.prevent="saveChanges"
             >Save Changes

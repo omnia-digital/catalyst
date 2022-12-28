@@ -14,12 +14,14 @@ use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     use Modules\Social\Database\Factories\ProfileFactory;
     use Spatie\MediaLibrary\HasMedia;
     use Spatie\MediaLibrary\InteractsWithMedia;
-    use Spatie\Sluggable\HasSlug;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
     use Spatie\Tags\HasTags;
     use Squire\Models\Country;
 
-    class Profile extends Model implements HasMedia
+    class Profile extends Model implements HasMedia, Searchable
     {
         use SoftDeletes, HasFactory, HasSlug, HasProfilePhoto, InteractsWithMedia;
         use HasProfileTags, HasTags {
@@ -115,7 +117,7 @@ use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
         }
 
 
-        public function url() {
+        public function urlLink() {
             return route('social.profile.show', $this->handle);
         }
 
@@ -296,5 +298,12 @@ use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
         public function getCredibilityRatingAttribute()
         {
 
+        }
+
+        public function getSearchResult(): SearchResult
+        {
+            $url = $this->urlLink();
+
+            return new SearchResult($this, $this->name, $url);
         }
     }
