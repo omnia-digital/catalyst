@@ -1,49 +1,47 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Components;
+namespace Modules\Crm\Http\Livewire\Components;
 
 use App\Models\User;
-use Filament\Forms\Components\Textarea;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Livewire\Component;
-use Modules\Reviews\Models\Review;
-use Ariaieboy\FilamentJalaliDatetime\JalaliDateTimeColumn;
 
-
-class ReviewTable extends Component implements HasTable
+class UserTable extends Component implements HasTable
 {
     use InteractsWithTable;
 
     public function render()
     {
-        return view('social::livewire.components.review-table');
+        return view('crm::livewire.components.user-table');
     }
 
     protected function getTableQuery()
     {
-        return Review::query();
+        return User::query()->where;
     }
 
     protected function getTableColumns(): array
     {
         return [
-            TextColumn::make('id'),
-            TextColumn::make('user_id'),
-            TextColumn::make('reviewable_type'),
-            TextColumn::make('reviewable_id'),
-            TextColumn::make('body'),
-            TextColumn::make('visibility'),
-            TextColumn::make('language_id'),
-            BooleanColumn::make('received_product_free'),
-            BooleanColumn::make('recommend'),
-            BooleanColumn::make('commentable'),
-            JalaliDateTimeColumn::make('created_at')
+            TextColumn::make('profile.first_name'),
+            TextColumn::make('profile.last_name'),
+            TextColumn::make('email'),
+            TextColumn::make('status'),
+            TextColumn::make('language'),
+            TextColumn::make('current_team_id'),
+            TextColumn::make('profile_photo_path'),
+            TextColumn::make('last_active_at')
+                      ->dateTime(),
+            TextColumn::make('delete_after')
+                      ->dateTime(),
+            TextColumn::make('deleted_at')
+                      ->dateTime(),
+            TextColumn::make('created_at')
                       ->dateTime(),
             TextColumn::make('updated_at')
                       ->dateTime(),

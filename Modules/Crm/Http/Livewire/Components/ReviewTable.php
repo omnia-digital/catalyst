@@ -1,51 +1,47 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Components;
+namespace Modules\Crm\Http\Livewire\Components;
 
+use Ariaieboy\FilamentJalaliDatetime\JalaliDateTimeColumn;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
-use Modules\Crm\Models\Contact;
-use Modules\Social\Models\Profile;
+use Modules\Reviews\Models\Review;
 
-class ProfileTable extends Component implements HasTable
+
+class ReviewTable extends Component implements HasTable
 {
     use InteractsWithTable;
 
     public function render()
     {
-        return view('social::livewire.components.profile-table');
+        return view('crm::livewire.components.review-table');
     }
 
     protected function getTableQuery()
     {
-//        if (auth()->user()->is_admin) {
-            return Profile::query();
-//        }
-//        else {
-//            return Contact::query()->whereHas('user', fn(Builder $query) => $query->whereIn('teams.id', auth()->user()->ownedTeams->pluck('id')));
-//        }
-
+        return Review::query();
     }
 
     protected function getTableColumns(): array
     {
         return [
-            TextColumn::make('first_name'),
-            TextColumn::make('last_name'),
-            TextColumn::make('user.email'),
-            TextColumn::make('user.status'),
-            TextColumn::make('language'),
-            TextColumn::make('user.current_team_id'),
-            TextColumn::make('user.profile_photo_path'),
-            TextColumn::make('user.last_active_at')
-                      ->dateTime(),
-            TextColumn::make('created_at')
+            TextColumn::make('id'),
+            TextColumn::make('user_id'),
+            TextColumn::make('reviewable_type'),
+            TextColumn::make('reviewable_id'),
+            TextColumn::make('body'),
+            TextColumn::make('visibility'),
+            TextColumn::make('language_id'),
+            BooleanColumn::make('received_product_free'),
+            BooleanColumn::make('recommend'),
+            BooleanColumn::make('commentable'),
+            JalaliDateTimeColumn::make('created_at')
                       ->dateTime(),
             TextColumn::make('updated_at')
                       ->dateTime(),

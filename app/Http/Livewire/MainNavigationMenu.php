@@ -56,13 +56,13 @@ class MainNavigationMenu extends Component
 //                'module'  => 'advice',
 //                'current' => false
 //            ],
-//            [
-//                'label'   => 'Crm',
-//                'name'    => 'social.crm',
-//                'icon'    => 'heroicon-o-users',
-//                'module'  => 'advice',
-//                'current' => false
-//            ],
+            [
+                'label'   => 'Crm',
+                'name'    => 'crm.home',
+                'icon'    => 'heroicon-o-users',
+                'module'  => 'crm',
+                'current' => false
+            ],
 //            [
 //                'label'   => 'Learn',
 //                'name'    => 'advice.home',

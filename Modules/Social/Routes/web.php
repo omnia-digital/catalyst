@@ -89,8 +89,6 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('/', ContactsIndex::class)->name('index');
     });
 
-    Route::get('/crm', \Modules\Social\Http\Livewire\Pages\Crm\Index::class)->name('crm');
-
     Route::get('/learn', function () {
         return "Learn";
     })->name('learn');
