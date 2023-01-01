@@ -23,6 +23,7 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use STS\FilamentImpersonate\Impersonate;
 
 class UserResource extends Resource
 {
@@ -130,6 +131,7 @@ class UserResource extends Resource
 
             ])
             ->actions([
+                Impersonate::make('impersonate'),
                 ViewAction::make(),
                 EditAction::make(),
             ])
