@@ -23,8 +23,6 @@
                         @endif
                     </a>
                 </div>
-                <!-- Search -->
-                <livewire:global-search/>
             </div>
             <!-- Main nav header -->
             <div class="flex w-full justify-between h-full items-center pl-4">
@@ -50,6 +48,8 @@
                     </div>
                     {{-- Right Side Nav --}}
                     <div class="col-span-12 lg:col-span-4 2xl:col-span-3 flex justify-end items-center mr-4">
+                        <!-- Search -->
+                        <livewire:global-search/>
                         @auth
                             {{-- Profile & Notifications --}}
                             <div class="flex justify-end">

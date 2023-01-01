@@ -22,13 +22,15 @@ class ProfileTable extends Component implements HasTable
 
     protected function getTableQuery()
     {
-//        if (auth()->user()->is_admin) {
-            return Profile::query();
-//        }
-//        else {
-//            return Contact::query()->whereHas('user', fn(Builder $query) => $query->whereIn('teams.id', auth()->user()->ownedTeams->pluck('id')));
-//        }
-
+        // get all teams that I am an owner of, then get the profiles of the users on those teams
+        $teams = auth()->user()->ownedTeams()->pluck('id');
+        // get profiles of users that have any role on any of the teams I own
+        $profiles = Profile::whereHas('user', function ($query) use ($teams) {
+            $query->whereHas('teams', function ($query) use ($teams) {
+                $query->whereIn('team_id', $teams);
+            });
+        });
+        return $profiles;
     }
 
     protected function getTableColumns(): array
