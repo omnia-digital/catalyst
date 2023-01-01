@@ -60,6 +60,7 @@
         "spatie/laravel-sluggable": "^3.1",
         "spatie/laravel-tags": "^4.3",
         "squirephp/countries-en": "^3.3",
+        "stechstudio/filament-impersonate": "^2.10",
         "stripe/stripe-php": "^9.0",
         "thomasjohnkane/snooze": "^2.2",
         "tightenco/ziggy": "^1.4",

@@ -12,7 +12,6 @@ class Translate
         foreach($wordsInString as $originalWord) {
             $checkForPeriod = explode('.', $originalWord);
             if (!empty($checkForPeriod[1])) {
-                dd($checkForPeriod[0]);
                 $originalWord = $checkForPeriod[0];
                 $period = $checkForPeriod[1];
             }
