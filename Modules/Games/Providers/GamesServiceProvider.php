@@ -4,6 +4,8 @@ namespace Modules\Games\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Games\Events\IGDBGameWasRetrieved;
+use Modules\Games\Listeners\SyncIGDBGameWithDb;
 
 class GamesServiceProvider extends ServiceProvider
 {
@@ -28,16 +30,6 @@ class GamesServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->app->register(RouteServiceProvider::class);
     }
 
     /**

@@ -72,8 +72,8 @@ class TeamAdmin extends Component
         // }
 
         if (\Platform::isModuleEnabled('games')) {
-            // $rules['team.youtube_channel_id'] = ['max:65500'];
-            // $rules['team.twitch_channel_id'] = ['max:65500'];
+             $rules['team.youtube_channel_id'] = ['max:65500'];
+             $rules['team.twitch_channel_id'] = ['max:65500'];
         }
 
         return $rules;

@@ -50,12 +50,13 @@
             @if ($this->hasMore())
                 <div
                     x-intersect:enter="$wire.loadMore"
-                    wire:loading.attr="disabled" 
+                    wire:loading.attr="disabled"
                     class="mb-6 w-full relative inline-flex items-center px-4 py-2">
                     <span wire:loading wire.target="loadMore">Loading...</span>
                 </div>
             @endif
         </div>
         <livewire:create-team-modal/>
+            <livewire:teams.create-team-modal/>
     </div>
 @endsection

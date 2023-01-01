@@ -210,7 +210,7 @@
                                     @foreach ($team->teamTypes as $tag)
                                         <div class="relative">
                                             <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4" :name="$tag->name" />
-                                            <button 
+                                            <button
                                                 wire:click="removeTag('{{ $tag->name }}')"
                                                 class="absolute -top-2 -right-2 p-1 rounded-full bg-white"
                                             >
@@ -419,7 +419,7 @@
                     },
                     {
                         id: 2,
-                        title: 'Team Members',
+                        title: 'Members',
                     },
                     {
                         id: 3,

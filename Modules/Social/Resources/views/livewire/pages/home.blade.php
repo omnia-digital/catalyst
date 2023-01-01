@@ -25,7 +25,7 @@
                     </x-library::button>
                 @endauth
             </div>
-            <livewire:create-team-modal/>
+            <livewire:teams.create-team-modal/>
         </div>
     </div>
 @endsection

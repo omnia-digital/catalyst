@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Teams;
 
 use App\Actions\Teams\CreateTeam;
 use App\Models\Tag;
-use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -108,7 +107,7 @@ class CreateTeamModal extends Component
 
     public function render()
     {
-        return view('livewire.create-team-modal', [
+        return view('livewire.teams.create-team-modal', [
             'teamTags' => $this->teamTags
         ]);
     }

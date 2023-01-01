@@ -6,9 +6,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
-use MarcReichel\IGDBLaravel\Models\Platform;
-use MarcReichel\IGDBLaravel\Models\Website;
 use Modules\Games\Models\Game;
+use Modules\Games\Models\IGDB\Game;
 
 class GamesController extends Controller
 {
