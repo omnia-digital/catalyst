@@ -52,6 +52,11 @@ class ProfileTable extends Component implements HasTable
         ];
     }
 
+    protected function getTableRecordUrlUsing()
+    {
+        return fn (Profile $record): string => route('social.profile.edit', ['profile' => $record]);
+    }
+
     protected function getTableFilters(): array
     {
         return [
