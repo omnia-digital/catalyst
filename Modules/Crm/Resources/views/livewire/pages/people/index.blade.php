@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="pr-4">
-        <x-library::heading.2>Profiles in My {{ \Trans::get('Teams') }}</x-library::heading.2>
+{{--        <x-library::heading.2>Profiles</x-library::heading.2>--}}
         <livewire:crm::components.profile-table/>
     </div>
 @endsection

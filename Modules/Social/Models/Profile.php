@@ -7,6 +7,9 @@
     use App\Support\Lexer\PrettyNumber;
 use App\Traits\Tag\HasProfileTags;
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
+    use Filament\Tables\Columns\IconColumn;
+    use Filament\Tables\Columns\ImageColumn;
+    use Filament\Tables\Columns\TextColumn;
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Storage;
@@ -305,5 +308,29 @@ use Spatie\Sluggable\HasSlug;
             $url = $this->urlLink();
 
             return new SearchResult($this, $this->name, $url);
+        }
+
+        public static function getTableColumns(): array
+        {
+            return [
+                ImageColumn::make('profile_photo_url')
+                           ->label('Photo'),
+                TextColumn::make('first_name'),
+                TextColumn::make('last_name'),
+                IconColumn::make('user.is_admin')
+                          ->label('Admin')
+                          ->boolean(),
+                TextColumn::make('user.status')
+                          ->label('Status'),
+                TextColumn::make('user.id'),
+                TextColumn::make('user.email')
+                          ->label('Email'),
+                TextColumn::make('user.stripe_id')
+                          ->label('Stripe'),
+                TextColumn::make('created_at')
+                          ->dateTime(),
+                TextColumn::make('updated_at')
+                          ->dateTime(),
+            ];
         }
     }
