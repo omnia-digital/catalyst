@@ -13,7 +13,7 @@ class AdminUserStatsOverview extends BaseWidget
 
     public static function canView(): bool
     {
-        return auth()->user()->is_admin;
+        return auth()?->user()?->is_admin ?? false;
     }
     protected function getCards(): array
     {

@@ -5,7 +5,7 @@ return [
     /**
      * Dashboard Page
      */
-    'dedicated_dashboard' => true,
+    'dedicated_dashboard' => false,
     'dashboard_icon' => 'heroicon-o-chart-bar',
 
     /**

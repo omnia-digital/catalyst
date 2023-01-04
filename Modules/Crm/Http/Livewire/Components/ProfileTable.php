@@ -29,9 +29,14 @@ class ProfileTable extends Component implements HasTable
 {
     use InteractsWithTable;
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('crm::livewire.components.profile-table');
+    }
+
+    public function create()
+    {
+        return redirect('/admin/profiles/create');
     }
 
     protected function getFormSchema(): array
@@ -96,8 +101,9 @@ class ProfileTable extends Component implements HasTable
             ViewAction::make()
                       ->url(fn(Profile $record): string => route('social.profile.show', ['profile' => $record]))
                       ->openUrlInNewTab(),
-            EditAction::make(),
-
+            EditAction::make()
+                      ->url(fn(Profile $record): string => route('social.profile.edit', ['profile' => $record]))
+                      ->openUrlInNewTab(),
         ];
     }
 
