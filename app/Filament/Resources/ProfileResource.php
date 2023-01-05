@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProfileResource\Pages;
 use App\Filament\Resources\ProfileResource\RelationManagers;
+use BladeUI\Icons\Components\Icon;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -22,22 +23,32 @@ class ProfileResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Social';
 
+    public function mount()
+    {
+        
+    }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('first_name'),
                 Forms\Components\TextInput::make('last_name'),
-                Forms\Components\TextInput::make('user.email'),
-                Forms\Components\TextInput::make('user.status'),
+                Forms\Components\Fieldset::make('User')
+                        ->relationship('user')
+                        ->schema([
+                            Forms\Components\TextInput::make('id'),
+                            Forms\Components\Toggle::make('is_admin')->disabled(auth()->user()->is_admin),
+                            Forms\Components\TextInput::make('email'),
+                            Forms\Components\TextInput::make('current_team_id'),
+                            Forms\Components\TextInput::make('last_active_at'),
+                        ]),
+                Forms\Components\TextInput::make('photos'),
                 Forms\Components\TextInput::make('language'),
-                Forms\Components\TextInput::make('user.current_team_id'),
-                Forms\Components\TextInput::make('user.profile_photo_path'),
-                Forms\Components\TextInput::make('user.last_active_at'),
                 Forms\Components\TextInput::make('created_at'),
                 Forms\Components\TextInput::make('updated_at'),
             ]);
     }
+
 
     public static function table(Table $table): Table
     {
@@ -56,6 +67,13 @@ class ProfileResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            'user' => RelationManagers\UserRelationManager::class,
+        ];
     }
 
     public static function getPages(): array
