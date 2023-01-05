@@ -12,6 +12,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View;
 use Laravel\Cashier\Cashier;
 use Nwidart\Modules\Module;
+use Spatie\Health\Checks\Checks\DatabaseCheck;
+use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
+use Spatie\Health\Health;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +37,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //Cashier::calculateTaxes();
+
+//        Health::checks([
+//            UsedDiskSpaceCheck::new(),
+//            DatabaseCheck::new()
+//        ]);
 
         Filament::serving(function () {
             Filament::registerTheme(asset('css/app.css'),);

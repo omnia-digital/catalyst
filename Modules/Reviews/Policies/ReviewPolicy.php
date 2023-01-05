@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Forms\Policies;
+namespace Modules\Reviews\Policies;
 
 use App\Models\User;
-use Modules\Forms\Models\FormType;
+use Modules\Reviews\Models\Review;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FormTypePolicy
+class ReviewPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class FormTypePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view_any_form::type');
+        return $user->can('view_any_review');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormType  $formType
+     * @param  \Modules\Reviews\Models\Review  $review
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, FormType $formType)
+    public function view(User $user, Review $review)
     {
-        return $user->can('view_form::type');
+        return $user->can('view_review');
     }
 
     /**
@@ -41,31 +41,31 @@ class FormTypePolicy
      */
     public function create(User $user)
     {
-        return $user->can('create_form::type');
+        return $user->can('create_review');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormType  $formType
+     * @param  \Modules\Reviews\Models\Review  $review
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, FormType $formType)
+    public function update(User $user, Review $review)
     {
-        return $user->can('update_form::type');
+        return $user->can('update_review');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormType  $formType
+     * @param  \Modules\Reviews\Models\Review  $review
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, FormType $formType)
+    public function delete(User $user, Review $review)
     {
-        return $user->can('delete_form::type');
+        return $user->can('delete_review');
     }
 
     /**
@@ -76,19 +76,19 @@ class FormTypePolicy
      */
     public function deleteAny(User $user)
     {
-        return $user->can('delete_any_form::type');
+        return $user->can('delete_any_review');
     }
 
     /**
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormType  $formType
+     * @param  \Modules\Reviews\Models\Review  $review
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, FormType $formType)
+    public function forceDelete(User $user, Review $review)
     {
-        return $user->can('force_delete_form::type');
+        return $user->can('force_delete_review');
     }
 
     /**
@@ -99,19 +99,19 @@ class FormTypePolicy
      */
     public function forceDeleteAny(User $user)
     {
-        return $user->can('force_delete_any_form::type');
+        return $user->can('force_delete_any_review');
     }
 
     /**
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormType  $formType
+     * @param  \Modules\Reviews\Models\Review  $review
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, FormType $formType)
+    public function restore(User $user, Review $review)
     {
-        return $user->can('restore_form::type');
+        return $user->can('restore_review');
     }
 
     /**
@@ -122,19 +122,19 @@ class FormTypePolicy
      */
     public function restoreAny(User $user)
     {
-        return $user->can('restore_any_form::type');
+        return $user->can('restore_any_review');
     }
 
     /**
      * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormType  $formType
+     * @param  \Modules\Reviews\Models\Review  $review
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user, FormType $formType)
+    public function replicate(User $user, Review $review)
     {
-        return $user->can('replicate_form::type');
+        return $user->can('replicate_review');
     }
 
     /**
@@ -145,7 +145,7 @@ class FormTypePolicy
      */
     public function reorder(User $user)
     {
-        return $user->can('reorder_form::type');
+        return $user->can('reorder_review');
     }
 
 }

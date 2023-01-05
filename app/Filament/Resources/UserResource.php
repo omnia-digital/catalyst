@@ -91,6 +91,7 @@ class UserResource extends Resource
                 DateTimePicker::make('last_active_at'),
                 DateTimePicker::make('delete_after'),
                 MultiSelect::make('teams')->relationship('teams', 'name'),
+                Forms\Components\BelongsToManyMultiSelect::make('roles')->relationship('roles', 'name')
             ]);
     }
 
