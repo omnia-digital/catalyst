@@ -5,6 +5,10 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Team;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Billing\Models\SubscriptionType;
+use Platform;
+use Response;
+use Trans;
 
 class TeamPolicy
 {
