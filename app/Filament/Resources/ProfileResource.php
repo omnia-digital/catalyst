@@ -23,10 +23,6 @@ class ProfileResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Social';
 
-    public function mount()
-    {
-        
-    }
     public static function form(Form $form): Form
     {
         return $form
@@ -69,12 +65,6 @@ class ProfileResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            'user' => RelationManagers\UserRelationManager::class,
-        ];
-    }
 
     public static function getPages(): array
     {
