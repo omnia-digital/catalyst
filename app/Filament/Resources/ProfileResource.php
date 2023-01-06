@@ -23,7 +23,7 @@ class ProfileResource extends Resource
 {
     protected static ?string $model = Profile::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationGroup = 'Social';
+    protected static ?string $navigationGroup = 'People';
     protected $queryString = [
         'tableColumnSearchQueries'
     ];
