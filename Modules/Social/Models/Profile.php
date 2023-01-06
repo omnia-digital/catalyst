@@ -315,22 +315,20 @@ use Spatie\Sluggable\HasSlug;
             return [
                 ImageColumn::make('profile_photo_url')
                            ->label('Photo'),
-                TextColumn::make('first_name'),
-                TextColumn::make('last_name'),
+                TextColumn::make('first_name')->sortable()->searchable(),
+                TextColumn::make('last_name')->sortable()->searchable(),
                 IconColumn::make('user.is_admin')
                           ->label('Admin')
-                          ->boolean(),
-                TextColumn::make('user.status')
-                          ->label('Status'),
-                TextColumn::make('user.id'),
+                          ->boolean()->sortable(),
+                TextColumn::make('user.id')->label('User ID')->sortable()->searchable(),
                 TextColumn::make('user.email')
-                          ->label('Email'),
+                          ->label('Email')->sortable()->searchable(),
                 TextColumn::make('user.stripe_id')
-                          ->label('Stripe'),
+                          ->label('Stripe')->sortable()->searchable(),
                 TextColumn::make('created_at')
-                          ->dateTime(),
+                          ->dateTime()->sortable()->searchable(),
                 TextColumn::make('updated_at')
-                          ->dateTime(),
+                          ->dateTime()->sortable()->searchable(),
             ];
         }
     }

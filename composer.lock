@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fb2d378e0ef41bb0e7ff6fcada61b60",
+    "content-hash": "629842e8208572d96af9d87ef877221d",
     "packages": [
         {
             "name": "3x1io/filament-themes",
@@ -9762,6 +9762,72 @@
             "time": "2022-08-11T20:54:07+00:00"
         },
         {
+            "name": "phpsa/filament-password-reveal",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpsa/filament-password-reveal.git",
+                "reference": "1b5880f3d15e16c47835fcfaf8f3a4923566a235"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpsa/filament-password-reveal/zipball/1b5880f3d15e16c47835fcfaf8f3a4923566a235",
+                "reference": "1b5880f3d15e16c47835fcfaf8f3a4923566a235",
+                "shasum": ""
+            },
+            "require": {
+                "filament/forms": "^2.9",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Phpsa\\FilamentPasswordReveal\\FilamentPasswordRevealProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phpsa\\FilamentPasswordReveal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Craig G Smith",
+                    "email": "vxdhost@gmail.com"
+                }
+            ],
+            "description": "Password Input with option to show",
+            "homepage": "https://cgs4k.nz",
+            "keywords": [
+                "cli",
+                "filament",
+                "fun",
+                "laravel",
+                "resource",
+                "ui",
+                "user",
+                "widget"
+            ],
+            "support": {
+                "issues": "https://github.com/phpsa/filament-password-reveal/issues",
+                "source": "https://github.com/phpsa/filament-password-reveal/tree/v1.1.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/phpsa",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-10-10T19:52:28+00:00"
+        },
+        {
             "name": "phpseclib/phpseclib",
             "version": "3.0.18",
             "source": {
@@ -11061,6 +11127,79 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
+        },
+        {
+            "name": "ralphjsmit/laravel-filament-components",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralphjsmit/laravel-filament-components.git",
+                "reference": "9189cc18cda81a69cb8106fb9e0e4ba869b844ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralphjsmit/laravel-filament-components/zipball/9189cc18cda81a69cb8106fb9e0e4ba869b844ab",
+                "reference": "9189cc18cda81a69cb8106fb9e0e4ba869b844ab",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.10",
+                "filament/forms": "^2.10",
+                "illuminate/contracts": "^8.73|^9.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^5.10|^6.0",
+                "orchestra/testbench": "^6.22|^7.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpunit/phpunit": "^9.5",
+                "spatie/laravel-ray": "^1.26",
+                "spatie/pest-plugin-test-time": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RalphJSmit\\Filament\\Components\\FilamentComponentsServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentComponents": "RalphJSmit\\Filament\\Components\\Facades\\FilamentComponents"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Support/helpers.php"
+                ],
+                "psr-4": {
+                    "RalphJSmit\\Filament\\Components\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph J. Smit",
+                    "email": "rjs@ralphjsmit.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A collection of reusable components for Filament.",
+            "homepage": "https://github.com/ralphjsmit/laravel-filament-components",
+            "keywords": [
+                "laravel",
+                "laravel-filament-components",
+                "ralphjsmit"
+            ],
+            "support": {
+                "issues": "https://github.com/ralphjsmit/laravel-filament-components/issues",
+                "source": "https://github.com/ralphjsmit/laravel-filament-components/tree/1.1.1"
+            },
+            "time": "2022-10-06T18:32:50+00:00"
         },
         {
             "name": "ramsey/collection",
