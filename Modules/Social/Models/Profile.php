@@ -324,7 +324,12 @@ use Spatie\Sluggable\HasSlug;
                 TextColumn::make('user.email')
                           ->label('Email')->sortable()->searchable(),
                 TextColumn::make('user.stripe_id')
-                          ->label('Stripe')->sortable()->searchable(),
+                          ->label('Stripe')
+                          ->sortable()
+                          ->searchable()
+                          ->url(function (Profile $record):string {
+                              return "https://dashboard.stripe.com/customers/{$record->user->stripe_id}";
+                          }, true),
                 TextColumn::make('created_at')
                           ->dateTime()->sortable()->searchable(),
                 TextColumn::make('updated_at')
