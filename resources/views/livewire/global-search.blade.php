@@ -1,4 +1,4 @@
-<div class="hidden sm:flex w-full items-center">
+<div class="hidden sm:flex items-center">
     <div
             x-data="{
                 show: false,
@@ -14,7 +14,7 @@
             class="w-full"
     >
         <label for="search" class="sr-only">{{ Trans::get('Search ' . config('app.name')) }}</label>
-        <div class="relative w-72">
+        <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
             </div>

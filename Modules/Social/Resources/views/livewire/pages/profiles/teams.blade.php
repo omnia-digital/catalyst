@@ -3,7 +3,7 @@
 @section('content')
     <x-profiles.partials.header :user="$this->user"/>
     <div class="mt-4">
-        <x-library::heading.2 class="text-base-text-color font-semibold text-2xl">{{ \Trans::get('Teams') }}</x-library::heading.2>
+        <x-library::heading.2 class="text-base-text-color font-semibold text-2xl">{{ \Platform::getTeamsWord() }}</x-library::heading.2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
             @forelse ($teams as $team)
                 <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>

@@ -67,11 +67,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         ];
 
         protected $hidden = [
-            'email',
+//            'email',
             'password',
-            'is_admin',
+//            'is_admin',
             'remember_token',
-            'email_verified_at',
+//            'email_verified_at',
             'two_factor_recovery_codes',
             'two_factor_secret',
             '2fa_secret',
@@ -80,8 +80,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             'stripe_id',
             'pm_type',
             'pm_last_four',
-            'deleted_at',
-            'updated_at'
+//            'deleted_at',
+//            'updated_at'
         ];
 
         protected $appends = [
@@ -89,6 +89,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function canAccessFilament(): bool
     {
+            return true;
         if ($this->is_admin) {
             return true;
         }

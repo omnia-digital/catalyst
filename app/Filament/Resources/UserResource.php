@@ -30,7 +30,7 @@ class UserResource extends Resource
     protected static ?string $label = 'Users';
     protected static ?string $model = User::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationGroup = 'Social';
+    protected static ?string $navigationGroup = 'People';
 
 //    public static function getEloquentQuery(): Builder
 //    {
@@ -91,6 +91,7 @@ class UserResource extends Resource
                 DateTimePicker::make('last_active_at'),
                 DateTimePicker::make('delete_after'),
                 MultiSelect::make('teams')->relationship('teams', 'name'),
+                Forms\Components\BelongsToManyMultiSelect::make('roles')->relationship('roles', 'name')
             ]);
     }
 

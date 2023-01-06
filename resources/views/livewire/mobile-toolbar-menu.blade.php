@@ -58,7 +58,7 @@
                     <nav class="px-2 space-y-1">
                         @foreach ($navigation as $item)
                             @if(Module::isEnabled($item['module']))
-                                <a href="{{ route($item['name']) }}"
+                                <a href="{{ Route::has($item['name']) ? route($item['name']) : $item['name'] }}"
                                 class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
                                         {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
                                 aria-current="page">

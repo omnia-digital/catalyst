@@ -17,10 +17,14 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TeamResource extends Resource
 {
-    protected static ?string $label = 'Teams';
     protected static ?string $model = Team::class;
     protected static ?string $navigationIcon = 'heroicon-o-globe';
     protected static ?string $navigationGroup = 'Social';
+
+    protected static function getNavigationLabel(): string
+    {
+        return \Trans::get('Teams');
+    }
 
     public static function getGloballySearchableAttributes(): array
     {

@@ -7,6 +7,9 @@
     use App\Support\Lexer\PrettyNumber;
 use App\Traits\Tag\HasProfileTags;
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
+    use Filament\Tables\Columns\IconColumn;
+    use Filament\Tables\Columns\ImageColumn;
+    use Filament\Tables\Columns\TextColumn;
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Storage;
@@ -305,5 +308,32 @@ use Spatie\Sluggable\HasSlug;
             $url = $this->urlLink();
 
             return new SearchResult($this, $this->name, $url);
+        }
+
+        public static function getTableColumns(): array
+        {
+            return [
+                ImageColumn::make('profile_photo_url')
+                           ->label('Photo'),
+                TextColumn::make('first_name')->sortable()->searchable(),
+                TextColumn::make('last_name')->sortable()->searchable(),
+                IconColumn::make('user.is_admin')
+                          ->label('Admin')
+                          ->boolean()->sortable(),
+                TextColumn::make('user.id')->label('User ID')->sortable()->searchable(),
+                TextColumn::make('user.email')
+                          ->label('Email')->sortable()->searchable(),
+                TextColumn::make('user.stripe_id')
+                          ->label('Stripe')
+                          ->sortable()
+                          ->searchable()
+                          ->url(function (Profile $record):string {
+                              return "https://dashboard.stripe.com/customers/{$record->user->stripe_id}";
+                          }, true),
+                TextColumn::make('created_at')
+                          ->dateTime()->sortable()->searchable(),
+                TextColumn::make('updated_at')
+                          ->dateTime()->sortable()->searchable(),
+            ];
         }
     }

@@ -37,24 +37,11 @@
                     'module'  => 'social',
                     'current' => false
                 ],
-                [
-                    'label'   => \Trans::get('My Teams'),
-                    'name'    => 'social.teams.my-teams',
-                    'icon'    => 'fa-regular fa-users',
-                    //                    'icon'    => 'heroicon-o-briefcase',
-                    'module'  => 'social',
-                    'current' => false
-                ],
 //                [
-//                    'label'   => 'Notifications',
-//                    'name'    => 'notifications',
-//                    'icon'    => 'heroicon-o-bell',
-//                    'current' => false
-//                ],
-//                [
-//                    'label'   => \Trans::get('Menu'),
-//                    'name'    => 'social.teams.my-teams',
-//                    'icon'    => 'heroicon-o-briefcase',
+//                    'label'   => \Trans::get('Games'),
+//                    'name'    => 'games.home',
+//                    'icon'    => 'fa-regular fa-gamepad-modern',
+//                    'module'  => 'games',
 //                    'current' => false
 //                ],
                 [
@@ -87,6 +74,14 @@
                     'module'  => 'social',
                     'current' => false
                 ],
+//                [
+//                    'label'   => \Trans::get('Companies'),
+//                    'name'    => 'social.companies.home',
+//                    'icon'    => 'fa-light fa-building',
+//                    //                    'icon'    => 'heroicon-o-bookmark',
+//                    'module'  => 'social',
+//                    'current' => false
+//                ],
 //                [
 //                    'label'   => 'Contacts',
 //                    'name'    => 'social.contacts.index',

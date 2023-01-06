@@ -1,6 +1,7 @@
 @extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
+    <div class="md:mr-4">
     <div class="sticky top-[55px] z-40 rounded-b-lg px-4 flex items-center bg-primary items-center justify-between">
         <a href="{{ route('social.teams.home', []) }}">
             <div class="flex-1 flex items-center space-x-2 -ml-1">
@@ -50,12 +51,14 @@
             @if ($this->hasMore())
                 <div
                     x-intersect:enter="$wire.loadMore"
-                    wire:loading.attr="disabled" 
+                    wire:loading.attr="disabled"
                     class="mb-6 w-full relative inline-flex items-center px-4 py-2">
                     <span wire:loading wire.target="loadMore">Loading...</span>
                 </div>
             @endif
         </div>
-        <livewire:create-team-modal/>
+        <livewire:teams.create-team-modal/>
+            <livewire:teams.create-team-modal/>
+    </div>
     </div>
 @endsection

@@ -79,6 +79,26 @@ class Platform
         return \Trans::get(self::getGeneralSetting('teams_apply_button_text') ?? 'Apply');
     }
 
+    public static function getTeamsWord()
+    {
+        return \Trans::get('teams');
+    }
+
+    public static function getTeamsLetter()
+    {
+        return lcfirst(substr(self::getTeamsWord(),0,1));
+    }
+
+    public static function getUsersWord()
+    {
+        return \Trans::get('users');
+    }
+
+    public static function getUsersLetter()
+    {
+        return lcfirst(substr(self::getUsersWord(),0,1));
+    }
+
     //Billing Settings //
 
     public static function hasBillingSettingEnabled($setting)

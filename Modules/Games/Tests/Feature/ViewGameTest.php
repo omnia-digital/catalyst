@@ -15,7 +15,7 @@ class ViewGameTest extends TestCase
             'https://api-v3.igdb.com/games' => $this->fakeSingleGame(),
         ]);
 
-        $response = $this->get(route('games.show', 'fake-animal-crossing-new-horizons'));
+        $response = $this->get(route('games.games.show', 'fake-animal-crossing-new-horizons'));
 
         $response->assertSuccessful();
         $response->assertSee('Fake Animal Crossing: New Horizons');

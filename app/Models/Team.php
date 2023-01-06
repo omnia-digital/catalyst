@@ -154,7 +154,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     {
         return $this->hasMany(TeamNotification::class);
     }
-    
+
     public function postsWithinTeam()
     {
         return $this->hasMany(Post::class);
@@ -231,7 +231,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     {
         return null;
     }
-    
+
     public function forms(): HasMany
     {
         return $this->hasMany(Form::class);
@@ -371,7 +371,8 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function getSearchResult(): SearchResult
     {
-        $url = route('teams.show', $this);
-        return (new SearchResult($this, $this->name, $url))->setType(\Trans::get('Teams'));
+        $url = route('social.teams.show', $this);
+//        $url = route('social.'.\Trans::get('teams').'.show', $this);
+        return (new SearchResult($this, $this->name, $url))->setType('Teams');
     }
 }
