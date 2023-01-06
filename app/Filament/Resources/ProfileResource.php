@@ -2,25 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProfileResource\Pages;
+use App\Filament\Resources\ProfileResource\Pages\CreateProfile;
+use App\Filament\Resources\ProfileResource\Pages\EditProfile;
+use App\Filament\Resources\ProfileResource\Pages\ManageProfiles;
 use App\Filament\Resources\ProfileResource\RelationManagers;
-use BladeUI\Icons\Components\Icon;
 use Filament\Forms;
-use Filament\Pages\Actions\ViewAction;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Modules\Social\Models\Profile;
-use Phpsa\FilamentPasswordReveal\Password;
 use RalphJSmit\Filament\Components\Forms\CreatedAt;
 use RalphJSmit\Filament\Components\Forms\DeletedAt;
 use RalphJSmit\Filament\Components\Forms\Timestamp;
-use RalphJSmit\Filament\Components\Forms\Timestamps;
 use RalphJSmit\Filament\Components\Forms\UpdatedAt;
 
 class ProfileResource extends Resource
@@ -94,9 +90,9 @@ class ProfileResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageProfiles::route('/'),
-            'create' => Pages\CreateProfile::route('/create'),
-            'edit' => Pages\EditProfile::route('/edit/{record}'),
+            'index' => ManageProfiles::route('/'),
+            'create' => CreateProfile::route('/create'),
+            'edit' => EditProfile::route('/edit/{record}'),
         ];
     }
 }
