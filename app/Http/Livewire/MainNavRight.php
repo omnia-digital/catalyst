@@ -5,9 +5,8 @@ namespace App\Http\Livewire;
 use App\Settings\BillingSettings;
 use Livewire\Component;
 
-class MainNavItems extends Component
+class MainNavRight extends Component
 {
-    public $navigation;
 
     /**
      * Render the component.
@@ -16,6 +15,6 @@ class MainNavItems extends Component
      */
     public function render(): \Illuminate\View\View
     {
-        return view('livewire.main-nav-items');
+        return view('livewire.main-nav-right');
     }
 }
