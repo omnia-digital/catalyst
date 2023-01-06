@@ -41,12 +41,19 @@ class MainNavigationMenu extends Component
                 'current' => false
             ],
             [
-                'label'   => 'Games',
-                'name'    => 'games.home',
-                'icon'    => 'fa-regular fa-gamepad-modern',
+                'label'   => \Trans::get('News'),
+                'name'    => 'games.feeds',
+                'icon'    => 'fa-regular fa-rss',
                 'module'  => 'games',
                 'current' => false
             ],
+//            [
+//                'label'   => 'Games',
+//                'name'    => 'games.feeds',
+//                'icon'    => 'fa-regular fa-gamepad-modern',
+//                'module'  => 'games',
+//                'current' => false
+//            ],
             //            [
             //                'label'   => 'Jobs',
             //                'name'    => 'jobs.home',
