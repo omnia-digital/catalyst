@@ -53,8 +53,13 @@
                                x-on:click.prevent="activeTab = tab.id;"
                             >
                                 <span x-text="tab.title"></span>
-                                @if ($errors->all())
+                                @if ($errors->has('profile.*') || $errors->has('country') || $errors->has('profileTypes'))
                                     <template x-if="(tab.id === 0)">
+                                        <span class="text-3xs text-danger-600 absolute -right-1 -top-1">{{ $errors->count() }}</span>
+                                    </template>
+                                @endif
+                                @if ($errors->has('bannerImage') || $errors->has('image'))
+                                    <template x-if="(tab.id === 1)">
                                         <span class="text-3xs text-danger-600 absolute -right-1 -top-1">{{ $errors->count() }}</span>
                                     </template>
                                 @endif
