@@ -298,7 +298,7 @@ trait WithTeamManagement
      *
      * @return void
      */
-    public function updateRole()
+    public function updateUserRole()
     {
         $this->managingRoleFor->roles()->detach($this->managingRoleFor->teamRole($this->team)->id);
         $this->managingRoleFor->roles()->attach($this->currentRole, ['team_id' => $this->team->id]);
