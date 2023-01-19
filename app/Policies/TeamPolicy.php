@@ -262,4 +262,40 @@ class TeamPolicy
         return $user->can('reorder_team');
     }
 
+    /**
+     * Determine whether the user can create roles for the team.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Team  $team
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function createTeamRole(User $user, Team $team)
+    {
+        return $user->ownsTeam($team);
+    }
+
+    /**
+     * Determine whether the user can update existing roles for the team.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Team  $team
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function updateTeamRole(User $user, Team $team)
+    {
+        return $user->ownsTeam($team);
+    }
+
+    /**
+     * Determine whether the user can delete existing roles for the team.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Team  $team
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function deleteTeamRole(User $user, Team $team)
+    {
+        return $user->ownsTeam($team);
+    }
+
 }
