@@ -4,11 +4,14 @@ namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 
 use App\Enums\Teams\TeamRoleTypes;
 use App\Models\Team;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 
 class ManageTeamRoles extends Component
 {
+    use AuthorizesRequests;
+
     public $team;
     public $confirmingDeleteTeamRole = false;
     public $currentlyEditingRole = false;
@@ -52,6 +55,8 @@ class ManageTeamRoles extends Component
 
     public function createNewRole()
     {
+        $this->authorize('createTeamRole', $this->team);
+
         if ($this->editingRole->getKey()) $this->editingRole = $this->makeBlankRole();
 
         $this->currentlyEditingRole = true;
@@ -59,6 +64,8 @@ class ManageTeamRoles extends Component
 
     public function confirmDeleteTeamRole($roleId)
     {
+        $this->authorize('deleteTeamRole', $this->team);
+
         $this->roleIdBeingRemoved = $roleId;
 
         $this->confirmingDeleteTeamRole = true;
@@ -66,6 +73,8 @@ class ManageTeamRoles extends Component
 
     public function deleteTeamRole()
     {
+        $this->authorize('deleteTeamRole', $this->team);
+        
         $role = Role::find($this->roleIdBeingRemoved);
         $role->permissions()->detach();
         $role->delete();
@@ -75,6 +84,8 @@ class ManageTeamRoles extends Component
 
     public function editTeamRole(Role $role)
     {
+        $this->authorize('updateTeamRole', $this->team);
+
         if ($this->editingRole->isNot($role)) $this->editingRole = $role;
 
         $this->currentlyEditingRole = true;

@@ -30,30 +30,34 @@
                                             </div>
                                         </div>
 
-                                        <!-- Actions -->
-                                        <div class="mt-4 flex justify-end space-x-2">
-                                            <button 
-                                                wire:click="editTeamRole('{{ $role->id }}')"
-                                                type="button" 
-                                                class="border border-gray-300 p-1.5 rounded-lg hover:bg-gray-200">
-                                                <x-heroicon-o-pencil class="w-3.5 h-3.5" />
-                                                <span class="sr-only">Edit Role</span>
-                                            </button>
-                                            <button 
-                                                wire:click="confirmDeleteTeamRole('{{ $role->id }}')"
-                                                type="button" 
-                                                class="border border-gray-300 p-1 rounded-lg hover:bg-gray-200">
-                                                <x-heroicon-o-trash class="w-3.5 h-3.5" />
-                                                <span class="sr-only">Delete Role</span>
-                                            </button>
-                                        </div>
+                                        @can('createTeamRole', $team)
+                                            <!-- Actions -->
+                                            <div class="mt-4 flex justify-end space-x-2">
+                                                <button 
+                                                    wire:click="editTeamRole('{{ $role->id }}')"
+                                                    type="button" 
+                                                    class="border border-gray-300 p-1.5 rounded-lg hover:bg-gray-200">
+                                                    <x-heroicon-o-pencil class="w-3.5 h-3.5" />
+                                                    <span class="sr-only">Edit Role</span>
+                                                </button>
+                                                <button 
+                                                    wire:click="confirmDeleteTeamRole('{{ $role->id }}')"
+                                                    type="button" 
+                                                    class="border border-gray-300 p-1 rounded-lg hover:bg-gray-200">
+                                                    <x-heroicon-o-trash class="w-3.5 h-3.5" />
+                                                    <span class="sr-only">Delete Role</span>
+                                                </button>
+                                            </div>
+                                        @endcan
                                     </div>
                                 @endforeach
                             </div>
                         </div>
-                        <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                            <x-library::button wire:click="createNewRole">Create New Role</x-library::button>
-                        </div>
+                        @can('createTeamRole', $team)
+                            <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                                <x-library::button wire:click="createNewRole">Create New Role</x-library::button>
+                            </div>
+                        @endcan
                     </div>
                 </form>
             </div>
