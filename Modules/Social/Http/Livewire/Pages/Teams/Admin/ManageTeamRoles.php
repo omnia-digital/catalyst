@@ -6,6 +6,7 @@ use App\Enums\Teams\TeamRoleTypes;
 use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class ManageTeamRoles extends Component
@@ -17,6 +18,7 @@ class ManageTeamRoles extends Component
     public $currentlyEditingRole = false;
     public $roleIdBeingRemoved = null;
     public Role $editingRole;
+    public $selectedPermissions = [];
 
     public function rules()
     {
@@ -32,6 +34,7 @@ class ManageTeamRoles extends Component
     {
         $this->team = $team;
         $this->editingRole = $this->makeBlankRole();
+        $this->resetSelectedPermissions();
     }
 
     public function makeBlankRole()
@@ -51,6 +54,8 @@ class ManageTeamRoles extends Component
         $this->editingRole->save();
 
         $this->currentlyEditingRole = false;
+
+        $this->selectedPermissions[$this->editingRole->id] = [];
     }
 
     public function createNewRole()
@@ -80,6 +85,8 @@ class ManageTeamRoles extends Component
         $role->delete();
 
         $this->confirmingDeleteTeamRole = false;
+
+        unset($this->selectedPermissions[$this->roleIdBeingRemoved]);
     }
 
     public function editTeamRole(Role $role)
@@ -91,6 +98,20 @@ class ManageTeamRoles extends Component
         $this->currentlyEditingRole = true;
     }
 
+    public function detachPermissions($roleId)
+    {
+        Role::find($roleId)->permissions()->detach($this->selectedPermissions[$roleId]);
+
+        $this->selectedPermissions[$roleId] = [];
+    }
+
+    public function resetSelectedPermissions()
+    {
+        foreach ($this->roles as $role) {
+            $this->selectedPermissions[$role->id] = [];
+        }
+    }
+
     public function roleTypeOptions()
     {
         return TeamRoleTypes::options();
@@ -99,6 +120,11 @@ class ManageTeamRoles extends Component
     public function getRolesProperty()
     {
         return Role::where('team_id', $this->team->id)->get();
+    }
+
+    public function getPermissionsProperty()
+    {
+        return Permission::get();
     }
 
     public function render()
