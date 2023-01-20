@@ -20,7 +20,11 @@
                 title: 'Applications',
                 count: $wire.applicationsCount
                 /* component: */
-            }
+            },
+            {
+                id: 3,
+                title: 'Roles & Permissions',
+            },
         ]
     }">
         <!-- Team Members Navigation -->
@@ -276,19 +280,8 @@
 
         <!-- Team Roles -->
         <div x-cloak x-show="activeMembersTab === 3" class="mt-6 px-6 space-y-6">
-            <div class="flex items-center space-x-4">
-                <div>
-                    <x-library::input.text label="Role Name" id="roleName" wire:model.defer="roleName" />
-                    <x-library::input.error for="roleName"/>
-                </div>
-                <x-library::button wire:click="createRole">Add Role</x-library::button>
-            </div>
             <div>
-                @foreach ($this->teamRoles as $role)
-                    <div class="flex items-center">
-                        <div>{{ $role->name }}</div>
-                    </div>
-                @endforeach
+                <livewire:social::pages.teams.admin.manage-team-roles :team="$team"/>
             </div>
         </div>
     </div>
@@ -296,7 +289,7 @@
         <!-- Role Management Modal -->
         <x-jet-dialog-modal wire:model="currentlyManagingRole">
             <x-slot name="title">
-                {{ \Trans::get('Manage Role') }}
+                {{ \Trans::get('Manage User Role') }}
             </x-slot>
 
             <x-slot name="content">
@@ -335,7 +328,7 @@
                     {{ \Trans::get('Cancel') }}
                 </x-jet-secondary-button>
 
-                <x-jet-button class="ml-2" wire:click="updateRole" wire:loading.attr="disabled">
+                <x-jet-button class="ml-2" wire:click="updateUserRole" wire:loading.attr="disabled">
                     {{ \Trans::get('Save') }}
                 </x-jet-button>
             </x-slot>
@@ -384,35 +377,3 @@
         </x-jet-confirmation-modal>
     @endonce
 </div>
-
-@push('scripts')
-    <script>
-        function setupMembers() {
-            return {
-                activeMembersTab: 1,
-                membersTabs: [
-                    {
-                        id: 0,
-                        title: 'All Members'
-                    },
-                    {
-                        id: 1,
-                        title: 'Invitations',
-                        count: Livewire.invitationsCount
-                        /* component: 'teams.team-member-manager' */
-                    },
-                    {
-                        id: 2,
-                        title: 'Applications',
-                        count: Livewire.applicationsCount
-                        /* component: */
-                    },
-                    {
-                        id: 3,
-                        title: 'Roles'
-                    }
-                ]
-            }
-        }
-    </script>
-@endpush
