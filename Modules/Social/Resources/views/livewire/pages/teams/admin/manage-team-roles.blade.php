@@ -15,7 +15,7 @@
                         <div class="relative divide-y-2 border-gray-500">
                             @foreach ($this->roles as $index => $role)
                                 <div class="relative w-full py-4">
-                                    <div class="">
+                                    <div>
                                         <!-- Role Name -->
                                         <div class="flex items-center">
                                             <div class="text-sm text-base-text-color">
@@ -27,21 +27,25 @@
                                         <div class="mt-2 text-xs text-base-text-color text-left">
                                             {{ $role->description }}
                                         </div>
-                                        <div x-id="['role-permissions']" x-data="{ expanded: false }" class="mt-4 space-y-2 text-base-text-color">
-                                            <button type="button" class="text-sm flex items-center space-x-1" @click="expanded = !expanded">
-                                                <span>Permissions</span>
-                                                <x-heroicon-o-chevron-down class="w-3 h-3" x-show="!expanded" />
-                                                <x-heroicon-o-chevron-up class="w-3 h-3" x-show="expanded" />
-                                            </button>
-                                            <ul class="space-y-2 pl-2 columns-[100px]" x-show="expanded" x-collapse>
-                                                @foreach ($role->permissions as $permission)
-                                                    <li class="text-xs group flex items-center space-x-1" wire:key="permission-{{ $permission->id }}">
-                                                        <input type="checkbox" wire:model="selectedPermissions.{{ $role->id }}" value="{{ $permission->id }}">
-                                                        <span class="text-ellipsis cursor-default overflow-hidden whitespace-nowrap" x-tooltip="{{ $permission->name }}">{{ $permission->name }}</span>
-                                                    </li> 
-                                                @endforeach
-                                            </ul>
-                                        </div>
+                                        @if ($role->permissions->count())
+                                            <div x-id="['role-permissions']" x-data="{ expanded: false }" class="mt-4 space-y-2 text-base-text-color">
+                                                <button type="button" class="text-sm flex items-center space-x-1" @click="expanded = !expanded">
+                                                    <span>Permissions</span>
+                                                    <x-heroicon-o-chevron-down class="w-3 h-3" x-show="!expanded" />
+                                                    <x-heroicon-o-chevron-up class="w-3 h-3" x-show="expanded" />
+                                                </button>
+                                                <ul class="space-y-2 pl-2 columns-[100px]" x-show="expanded" x-collapse>
+                                                    @foreach ($role->permissions as $permission)
+                                                        <li class="text-xs group flex items-center space-x-1" wire:key="permission-{{ $permission->id }}">
+                                                            <input type="checkbox" wire:model="selectedPermissions.{{ $role->id }}" value="{{ $permission->id }}">
+                                                            <span class="text-ellipsis cursor-default overflow-hidden whitespace-nowrap" x-tooltip="{{ $permission->name }}">{{ $permission->name }}</span>
+                                                        </li> 
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @else
+                                            <p class="mt-4 pl-2 text-sm">No permissions...</p>
+                                        @endif
                                     </div>
 
                                     <!-- Actions -->
@@ -103,7 +107,7 @@
                     <!-- Permissions -->
                     <div class="bg-white p-4 sm:p-6 col-span-6 lg:col-span-4">
 
-                        <ul class="space-y-2 pl-2 columns-[100px]">
+                        <ul class="space-y-2 columns-[100px]">
                             @foreach ($this->permissions as $permission)
                                 <li class="text-xs group flex items-center space-x-1" wire:key="permission-{{ $permission->id }}">
                                     <span class="text-ellipsis cursor-default overflow-hidden whitespace-nowrap" x-tooltip="{{ $permission->name }}">{{ $permission->name }}</span>
