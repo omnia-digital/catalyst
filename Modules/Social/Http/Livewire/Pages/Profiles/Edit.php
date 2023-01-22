@@ -95,7 +95,7 @@ class Edit extends Component
             $this->profile->photo()->delete();
         }
         $this->photo &&
-            $this->profile->addMedia($this->photoName)->toMediaCollection('profile_photos');
+            $this->profile->addMedia($this->photo)->toMediaCollection('profile_photos');
 
         $this->emit('changes_saved');
 

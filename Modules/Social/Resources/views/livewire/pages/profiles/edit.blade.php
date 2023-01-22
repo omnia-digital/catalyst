@@ -13,18 +13,25 @@
             </div>
         </div>
 
-        <div class="mt-6 flex justify-end items-center">
-            <div class="mr-auto"
-                 x-data="{show: false}"
-                 x-show="show"
-                 x-transition:leave.opacity.duration.1500ms
-                 x-init="@this.on('changes_saved', () => {
+        <div 
+            x-data="{show: false}" 
+            x-init="@this.on('changes_saved', () => {
                 show = true;
                 setTimeout(() => { show = false; }, 3000);
             })"
-                 style="display: none;"
+            class="mt-6 flex justify-end items-center"
+        >
+            @if ($errors->all())
+                <div class="mr-auto">
+                    <p class="text-sm text-danger-600">There are errors in your form.</p>
+                </div>
+            @endif
+            <div class="mr-auto"
+                x-show="show"
+                x-transition:leave.opacity.duration.1500ms
+                style="display: none;"
             >
-                <p class="text-sm opa text-green-600">Profile saved.</p>
+                <p class="text-sm text-green-600">Profile saved.</p>
             </div>
             <div class="mr-4"><a href="{{ $profile->urlLink() }}" class="hover:underline">Cancel</a></div>
             <x-library::button.index
@@ -41,11 +48,22 @@
                     <template x-for="(tab, index) in tabs" :key="tab.id">
                         <li class="pb-px">
                             <a href="#"
-                               class="text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:border-dark-text-color focus:border-dark-text-color"
+                               class="relative text-gray-400 transition duration-150 ease-in border-b-2 border-transparent pb-4 hover:border-dark-text-color focus:border-dark-text-color"
                                :class="(activeTab === tab.id) && 'border-dark-text-color text-dark-text-color'"
                                x-on:click.prevent="activeTab = tab.id;"
-                               x-text="tab.title"
-                            ></a>
+                            >
+                                <span x-text="tab.title"></span>
+                                @if ($errors->has('profile.*') || $errors->has('country') || $errors->has('profileTypes'))
+                                    <template x-if="(tab.id === 0)">
+                                        <span class="text-3xs text-danger-600 absolute -right-1 -top-1">{{ $errors->count() }}</span>
+                                    </template>
+                                @endif
+                                @if ($errors->has('bannerImage') || $errors->has('image'))
+                                    <template x-if="(tab.id === 1)">
+                                        <span class="text-3xs text-danger-600 absolute -right-1 -top-1">{{ $errors->count() }}</span>
+                                    </template>
+                                @endif
+                            </a>
                         </li>
                     </template>
                 </ul>

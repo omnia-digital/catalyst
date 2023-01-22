@@ -372,7 +372,6 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     public function getSearchResult(): SearchResult
     {
         $url = route('social.teams.show', $this);
-//        $url = route('social.'.\Trans::get('teams').'.show', $this);
-        return (new SearchResult($this, $this->name, $url))->setType('Teams');
+        return (new SearchResult($this, $this->name, $url))->setType(\Trans::get('Teams'));
     }
 }
