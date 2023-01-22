@@ -7,6 +7,7 @@ use App\Filament\Resources\TeamResource\RelationManagers;
 use App\Models\Team;
 use App\Models\User;
 use Ariaieboy\FilamentJalaliDatetime\JalaliDateTimeColumn;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -54,19 +55,8 @@ class TeamResource extends Resource
     {
         return $form
             ->schema([
-//                Forms\Components\Select::make('user_id')
-//                    ->label('Owner')
-//                    ->options(User::all()
-//                        ->mapWithKeys(function ($item, $key) {
-//                            return [$item['id'] => $item['id'] . ' - ' . $item['name']];
-//                        }))
-//                    ->searchable()
-//                    ->required(),
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('owner')->relationship('owner','id'),
                 Forms\Components\DateTimePicker::make('start_date'),
-
                 Forms\Components\Textarea::make('summary')
                     ->maxLength(65535),
                 Forms\Components\Textarea::make('content')
@@ -88,8 +78,8 @@ class TeamResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('owner.name')
-                    ->label('Owner'),
+//                Tables\Columns\TextColumn::make('owner.name')
+//                    ->label('Owner'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('start_date')
                                          ->date(config('app.default_date_format')),

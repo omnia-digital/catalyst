@@ -250,25 +250,16 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function owner()
     {
-        $teamOwnerRole = Role::where('name', config('platform.teams.default_owner_role'))
-            ->where('team_id', $this->id)
-            ->first();
-
-        if ( empty($teamOwnerRole)) {
-            return;
-        }
-
-        return $this->morphedByMany(User::class, 'model', 'model_has_roles')
-            ->where('role_id', $teamOwnerRole->id)
-            ->withPivot('role_id')
-            ->withTimestamps()
-            ->as('membership')
-            ->first();
+        return $this->users()
+                    ->whereHas('roles', function ($query) {
+                        $query->where('name', config('platform.teams.default_owner_role'))
+                              ->where('roles.team_id', $this->id);
+                    });
     }
 
     public function getOwnerAttribute()
     {
-        return $this->owner();
+        return $this->owner()->first();
     }
 
     public function users()
