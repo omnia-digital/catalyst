@@ -5,6 +5,10 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Team;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Billing\Models\SubscriptionType;
+use Platform;
+use Response;
+use Trans;
 
 class TeamPolicy
 {
@@ -36,12 +40,20 @@ class TeamPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param \App\Models\User $user
+     * @return mixed
      */
     public function create(User $user)
     {
-        return $user->can('create_team');
+//        return $user->can('create_team');
+
+        if(!Platform::isUsingUserSubscriptions()) return true;
+
+        $subscriptions = SubscriptionType::whereNot('slug', 'cfan-ea-member')->pluck('slug')->toArray();
+
+        return in_array($user->chargentSubscription?->type?->slug, $subscriptions)
+            ? Response::allow()
+            : Response::deny(Trans::get('You must at least be an Associate Evangelist to create a Team'));
     }
 
     /**
@@ -53,19 +65,121 @@ class TeamPolicy
      */
     public function update(User $user, Team $team)
     {
-        return $user->can('update_team');
+//        return $user->can('update_team');
+
+        if ($user->ownsTeam($team)) {
+            return true;
+        }
+
+        if ($user->belongsToTeam($team)) {
+            if ($user->teamRole($team)->hasPermissionTo('update team')) {
+                return true;
+            }
+        }
+    }
+
+
+    /**
+     * Determine whether the user can add team members.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Team $team
+     * @return mixed
+     */
+    public function addTeamMember(User $user, Team $team)
+    {
+        if ($user->ownsTeam($team)) {
+            return true;
+        }
+
+        if ($user->belongsToTeam($team)) {
+            if ($user->teamRole($team)->hasPermissionTo('update team')) {
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Determine whether the user can update team member permissions.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Team $team
+     * @return mixed
+     */
+    public function updateTeamMember(User $user, Team $team)
+    {
+        return $user->ownsTeam($team);
+    }
+
+    /**
+     * Determine whether the user can give a team member an award.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Team $team
+     * @return mixed
+     */
+    public function addAwardToTeamMember(User $user, Team $team)
+    {
+        if ($user->ownsTeam($team)) {
+            return true;
+        }
+
+        if ($user->belongsToTeam($team)) {
+            if ($user->teamRole($team)->hasPermissionTo('give team award')) {
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Determine whether the user can leave a review for the team.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Team  $team
+     * @return mixed
+     */
+    public function addReview(User $user, Team $team)
+    {
+        return $user->belongsToTeam($team);
+    }
+
+    /**
+     * Determine whether the user can remove team members.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Team $team
+     * @return mixed
+     */
+    public function removeTeamMember(User $user, Team $team)
+    {
+        if ($user->ownsTeam($team)) {
+            return true;
+        }
+
+        if ($user->belongsToTeam($team)) {
+            if ($user->teamRole($team)->hasPermissionTo('update team')) {
+                return true;
+            }
+        }
+    }
+
+    public function manageMembership(User $user, Team $team)
+    {
+        return $user->ownsTeam($team);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Team  $team
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param \App\Models\User $user
+     * @param \App\Models\Team $team
+     * @return mixed
      */
     public function delete(User $user, Team $team)
     {
-        return $user->can('delete_team');
+        return $user->ownsTeam($team);
+//        return $user->can('delete_team');
+
     }
 
     /**
