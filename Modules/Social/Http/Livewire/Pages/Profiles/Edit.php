@@ -39,7 +39,7 @@ class Edit extends Component
         ];
     }
 
-    public function updatingBannerImage()
+    public function updatedBannerImage()
     {
         $this->validate([
             'bannerImage' => 'image',
@@ -48,7 +48,7 @@ class Edit extends Component
         $this->bannerImageName = $this->bannerImage->getClientOriginalName();
     }
 
-    public function updatingPhoto()
+    public function updatedPhoto()
     {
         $this->validate([
             'photo' => 'image',
