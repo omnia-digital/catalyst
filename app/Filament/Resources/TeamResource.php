@@ -79,20 +79,28 @@ class TeamResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
-            //                Tables\Columns\TextColumn::make('owner.name')
-            //                    ->label('Owner'),
-            Tables\Columns\TextColumn::make('name'),
+
+            Tables\Columns\TextColumn::make('id')
+                                     ->sortable()
+                                     ->searchable(),
+            Tables\Columns\TextColumn::make('name')
+                                     ->sortable()
+                                     ->searchable(),
+            Tables\Columns\TextColumn::make('handle')
+                                     ->sortable()
+                                     ->searchable(),
+            Tables\Columns\TextColumn::make('members_count')
+                                     ->label('Members')
+                                     ->counts('members')
+                                     ->sortable()
+                                     ->searchable(),
+            Tables\Columns\TextColumn::make('name')
+                                     ->sortable()
+                                     ->searchable(),
             Tables\Columns\TextColumn::make('start_date')
                                      ->date(config('app.default_date_format')),
-            //                Tables\Columns\TextColumn::make('summary'),
-            //                Tables\Columns\TextColumn::make('content'),
-            //                Tables\Columns\TextColumn::make('location'),
-            //                Tables\Columns\TextColumn::make('rating'),
-            //                Tables\Columns\TextColumn::make('languages'),
-            //                Tables\Columns\TextColumn::make('created_at')
-            //                    ->dateTime(),
-            //                Tables\Columns\TextColumn::make('updated_at')
-            //                    ->dateTime(),
+            Tables\Columns\TextColumn::make('created_at')
+                                     ->date(config('app.default_date_format')),
         ])
                      ->filters([//
                      ])

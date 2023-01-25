@@ -33,7 +33,7 @@ class TeamsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('handle')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('role.name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('roles.name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('members_count')->label('Members')->counts('members')->sortable()->searchable(),
             ])
             ->filters([
