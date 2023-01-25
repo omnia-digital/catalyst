@@ -93,7 +93,7 @@
                     <button x-on:click.prevent.stop="showMediaManager(null, {})" type="button">
                         <i class="fa-solid fa-image w-5 h-5 text-gray-500"></i>
                     </button>
-                    <x-library::canva-button size="tiny"/>
+{{--                    <x-library::canva-button size="tiny"/>--}}
                 </div>
             @endif
             <div>
