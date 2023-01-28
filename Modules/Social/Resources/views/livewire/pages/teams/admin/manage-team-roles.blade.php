@@ -30,11 +30,25 @@
                                         </div>
                                         @if ($role->permissions->count())
                                             <div x-id="['role-permissions']" x-data="{ expanded: false }" class="mt-4 space-y-2 text-base-text-color">
-                                                <button type="button" class="text-sm flex items-center space-x-1" @click="expanded = !expanded">
-                                                    <span>Permissions</span>
-                                                    <x-heroicon-o-chevron-down class="w-3 h-3" x-show="!expanded" />
-                                                    <x-heroicon-o-chevron-up class="w-3 h-3" x-show="expanded" />
-                                                </button>
+                                                <div class="flex justify-between items-center">
+                                                    <button 
+                                                        type="button" 
+                                                        class="text-sm flex items-center space-x-1" 
+                                                        x-on:click="expanded = !expanded"
+                                                    >
+                                                        <span>Permissions</span>
+                                                        <x-heroicon-o-chevron-down class="w-3 h-3" x-show="!expanded" />
+                                                        <x-heroicon-o-chevron-up class="w-3 h-3" x-show="expanded" />
+                                                    </button>
+                                                    <button 
+                                                        type="button" 
+                                                        class="text-sm flex items-center p-1" 
+                                                        x-tooltip="Attach new permission"
+                                                        wire:click="attachPermission('{{ $role->id }}')"
+                                                    >
+                                                        <x-heroicon-o-plus class="w-4 h-4" />
+                                                    </button>
+                                                </div>
                                                 <ul class="space-y-2 pl-2 columns-[100px]" x-show="expanded" x-collapse>
                                                     @foreach ($role->permissions as $permission)
                                                         <li class="text-xs group flex items-center space-x-1" wire:key="permission-{{ $permission->id }}">
@@ -142,6 +156,35 @@
 
             <x-slot name="footer">
                 <x-jet-secondary-button wire:click="$set('currentlyEditingRole', false)" wire:loading.attr="disabled">
+                    {{ \Trans::get('Cancel') }}
+                </x-jet-secondary-button>
+
+                <x-jet-button class="ml-2" wire:click="saveRole" wire:loading.attr="disabled">
+                    {{ \Trans::get('Save') }}
+                </x-jet-button>
+            </x-slot>
+        </x-jet-dialog-modal>
+
+        <!-- Add Permission Modal -->
+        <x-jet-dialog-modal wire:model="currentlyAddingPermission">
+            <x-slot name="title">
+                {{ \Trans::get('Attach Permissions to "' . ucfirst($roleToAttachPermission?->name) . '"') }}
+            </x-slot>
+
+            <x-slot name="content">
+                <div class="space-y-4">
+                    <div class="flex-col">
+                        <x-library::input.selects 
+                            wire:model="permissionsToAttach" 
+                            :options="$this->availablePermissions"
+                            placeholder="Select Permissions" 
+                        />
+                    </div>
+                </div>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$set('currentlyAddingPermission', false)" wire:loading.attr="disabled">
                     {{ \Trans::get('Cancel') }}
                 </x-jet-secondary-button>
 

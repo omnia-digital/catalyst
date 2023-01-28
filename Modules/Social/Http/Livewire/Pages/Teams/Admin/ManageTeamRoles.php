@@ -14,9 +14,12 @@ class ManageTeamRoles extends Component
     public $team;
     public $confirmingDeleteTeamRole = false;
     public $currentlyEditingRole = false;
+    public $currentlyAddingPermission = false;
+    public $roleToAttachPermission = null;
     public $roleIdBeingRemoved = null;
     public Role $editingRole;
     public $selectedPermissions = [];
+    public $permissionsToAttach = [];
 
     public function rules()
     {
@@ -103,10 +106,19 @@ class ManageTeamRoles extends Component
         $this->currentlyEditingRole = true;
     }
 
+    public function attachPermission($roleId)
+    {
+        $this->authorize('updateTeamRole', $this->team);
+
+        $this->roleToAttachPermission = Role::find($roleId);
+
+        $this->currentlyAddingPermission = true;
+    }
+
     public function detachPermissions($roleId)
     {
         $this->authorize('updateTeamRole', $this->team);
-        
+
         Role::find($roleId)->permissions()->detach($this->selectedPermissions[$roleId]);
 
         $this->selectedPermissions[$roleId] = [];
@@ -122,6 +134,11 @@ class ManageTeamRoles extends Component
     public function getRolesProperty()
     {
         return Role::where('team_id', $this->team->id)->get();
+    }
+
+    public function getAvailablePermissionsProperty()
+    {
+        return $this->roleToAttachPermission?->permissions()->pluck('name', 'id');
     }
 
     public function render()
