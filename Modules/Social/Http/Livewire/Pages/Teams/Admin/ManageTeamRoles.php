@@ -16,6 +16,7 @@ class ManageTeamRoles extends Component
     public $currentlyEditingRole = false;
     public $roleIdBeingRemoved = null;
     public Role $editingRole;
+    public $selectedPermissions = [];
 
     public function rules()
     {
@@ -38,6 +39,7 @@ class ManageTeamRoles extends Component
     {
         $this->team = $team;
         $this->editingRole = $this->makeBlankRole();
+        $this->resetSelectedPermissions();
     }
 
     public function makeBlankRole()
@@ -57,6 +59,8 @@ class ManageTeamRoles extends Component
         $this->editingRole->save();
 
         $this->currentlyEditingRole = false;
+
+        $this->selectedPermissions[$this->editingRole->id] = [];
     }
 
     public function createNewRole()
@@ -86,6 +90,8 @@ class ManageTeamRoles extends Component
         $role->delete();
 
         $this->confirmingDeleteTeamRole = false;
+
+        unset($this->selectedPermissions[$this->roleIdBeingRemoved]);
     }
 
     public function editTeamRole(Role $role)
@@ -95,6 +101,22 @@ class ManageTeamRoles extends Component
         if ($this->editingRole->isNot($role)) $this->editingRole = $role;
 
         $this->currentlyEditingRole = true;
+    }
+
+    public function detachPermissions($roleId)
+    {
+        $this->authorize('updateTeamRole', $this->team);
+        
+        Role::find($roleId)->permissions()->detach($this->selectedPermissions[$roleId]);
+
+        $this->selectedPermissions[$roleId] = [];
+    }
+
+    public function resetSelectedPermissions()
+    {
+        foreach ($this->roles as $role) {
+            $this->selectedPermissions[$role->id] = [];
+        }
     }
     
     public function getRolesProperty()
