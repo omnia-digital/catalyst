@@ -31,23 +31,25 @@
                                         </div>
 
                                         @can('createTeamRole', $team)
-                                            <!-- Actions -->
-                                            <div class="mt-4 flex justify-end space-x-2">
-                                                <button 
-                                                    wire:click="editTeamRole('{{ $role->id }}')"
-                                                    type="button" 
-                                                    class="border border-gray-300 p-1.5 rounded-lg hover:bg-gray-200">
-                                                    <x-heroicon-o-pencil class="w-3.5 h-3.5" />
-                                                    <span class="sr-only">Edit Role</span>
-                                                </button>
-                                                <button 
-                                                    wire:click="confirmDeleteTeamRole('{{ $role->id }}')"
-                                                    type="button" 
-                                                    class="border border-gray-300 p-1 rounded-lg hover:bg-gray-200">
-                                                    <x-heroicon-o-trash class="w-3.5 h-3.5" />
-                                                    <span class="sr-only">Delete Role</span>
-                                                </button>
-                                            </div>
+                                            @if (strtolower($role->name) !== strtolower(config('platform.teams.default_owner_role')))
+                                                <!-- Actions -->
+                                                <div class="mt-4 flex justify-end space-x-2">
+                                                    <button 
+                                                        wire:click="editTeamRole('{{ $role->id }}')"
+                                                        type="button" 
+                                                        class="border border-gray-300 p-1.5 rounded-lg hover:bg-gray-200">
+                                                        <x-heroicon-o-pencil class="w-3.5 h-3.5" />
+                                                        <span class="sr-only">Edit Role</span>
+                                                    </button>
+                                                    <button 
+                                                        wire:click="confirmDeleteTeamRole('{{ $role->id }}')"
+                                                        type="button" 
+                                                        class="border border-gray-300 p-1 rounded-lg hover:bg-gray-200">
+                                                        <x-heroicon-o-trash class="w-3.5 h-3.5" />
+                                                        <span class="sr-only">Delete Role</span>
+                                                    </button>
+                                                </div>
+                                            @endif
                                         @endcan
                                     </div>
                                 @endforeach
@@ -98,11 +100,6 @@
                         <span class="text-red-600 text-sm">*</span>
                         <x-library::input.text id="role-name" wire:model.defer="editingRole.name" required/>
                         <x-library::input.error for="editingRole.name"/>
-                    </div>
-                    <div class="flex-col">
-                        <x-library::input.label value="Role type"/>
-                        <x-library::input.select id="role-type" wire:model.defer="editingRole.type" :options="$this->roleTypeOptions()" placeholder="Select Role type" />
-                        <x-library::input.error for="editingRole.type"/>
                     </div>
                     <div class="flex-col">
                         <x-library::input.label value="Role description"/>
