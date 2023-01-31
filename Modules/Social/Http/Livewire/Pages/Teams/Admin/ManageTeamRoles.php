@@ -2,7 +2,6 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 
-use App\Enums\Teams\TeamRoleTypes;
 use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
@@ -22,8 +21,15 @@ class ManageTeamRoles extends Component
     {
         return [
             'editingRole.team_id' => 'required|integer',
-            'editingRole.name' => 'required|alpha_num',
-            'editingRole.type' => 'required|in:' . implode(',', TeamRoleTypes::keys()),
+            'editingRole.name' => [
+                'required', 
+                'alpha_num', 
+                function ($attribute, $value, $fail) {
+                    if (strtolower($value) === strtolower(config('platform.teams.default_owner_role'))) {
+                        $fail('You cannot create another role called ' . config('platform.teams.default_owner_role') . '.');
+                    }
+                }
+            ],
             'editingRole.description' => 'required|min:4|max:255'
         ];
     }
@@ -90,12 +96,7 @@ class ManageTeamRoles extends Component
 
         $this->currentlyEditingRole = true;
     }
-
-    public function roleTypeOptions()
-    {
-        return TeamRoleTypes::options();
-    }
-
+    
     public function getRolesProperty()
     {
         return Role::where('team_id', $this->team->id)->get();
