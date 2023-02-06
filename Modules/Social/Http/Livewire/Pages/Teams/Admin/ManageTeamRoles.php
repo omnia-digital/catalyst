@@ -5,6 +5,7 @@ namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class ManageTeamRoles extends Component
@@ -34,7 +35,8 @@ class ManageTeamRoles extends Component
                     }
                 }
             ],
-            'editingRole.description' => 'required|min:4|max:255'
+            'editingRole.description' => 'required|min:4|max:255',
+            'permissionsToAttach' => ['nullable', 'array']
         ];
     }
 
@@ -106,13 +108,34 @@ class ManageTeamRoles extends Component
         $this->currentlyEditingRole = true;
     }
 
-    public function attachPermission($roleId)
+    public function addPermissions($roleId)
     {
         $this->authorize('updateTeamRole', $this->team);
 
         $this->roleToAttachPermission = Role::find($roleId);
 
+        $this->permissionsToAttach = [];
+
         $this->currentlyAddingPermission = true;
+    }
+
+    
+    public function attachPermissions()
+    {
+        $this->authorize('updateTeamRole', $this->team);
+        
+        $this->roleToAttachPermission->permissions()->attach($this->permissionsToAttach);
+
+        $this->closePermissionsModal();
+    }
+
+    public function closePermissionsModal()
+    {
+        $this->currentlyAddingPermission = false;
+
+        $this->permissionsToAttach = [];
+
+        $this->roleToAttachPermission = null;
     }
 
     public function detachPermissions($roleId)
@@ -138,7 +161,9 @@ class ManageTeamRoles extends Component
 
     public function getAvailablePermissionsProperty()
     {
-        return $this->roleToAttachPermission?->permissions()->pluck('name', 'id');
+        $rolePermissionIds = $this->roleToAttachPermission?->permissions()->pluck('id')->toArray() ?? [];
+
+        return Permission::whereNotIn('id', $rolePermissionIds)->pluck('name', 'id');
     }
 
     public function render()

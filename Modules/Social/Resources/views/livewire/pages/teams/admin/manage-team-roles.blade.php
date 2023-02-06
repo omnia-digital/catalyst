@@ -44,7 +44,7 @@
                                                         type="button" 
                                                         class="text-sm flex items-center p-1" 
                                                         x-tooltip="Attach new permission"
-                                                        wire:click="attachPermission('{{ $role->id }}')"
+                                                        wire:click="addPermissions('{{ $role->id }}')"
                                                     >
                                                         <x-heroicon-o-plus class="w-4 h-4" />
                                                     </button>
@@ -173,8 +173,8 @@
 
             <x-slot name="content">
                 <div class="space-y-4">
-                    <div class="flex-col">
-                        <x-library::input.selects 
+                    <div wire:key="permissions-{{ now() }}" class="flex-col min-h-[300px]">
+                        <x-library::input.selects
                             wire:model="permissionsToAttach" 
                             :options="$this->availablePermissions"
                             placeholder="Select Permissions" 
@@ -184,11 +184,11 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-jet-secondary-button wire:click="$set('currentlyAddingPermission', false)" wire:loading.attr="disabled">
+                <x-jet-secondary-button wire:click="closePermissionsModal" wire:loading.attr="disabled">
                     {{ \Trans::get('Cancel') }}
                 </x-jet-secondary-button>
 
-                <x-jet-button class="ml-2" wire:click="saveRole" wire:loading.attr="disabled">
+                <x-jet-button class="ml-2" wire:click="attachPermissions" wire:loading.attr="disabled">
                     {{ \Trans::get('Save') }}
                 </x-jet-button>
             </x-slot>
