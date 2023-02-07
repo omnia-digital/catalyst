@@ -5,6 +5,7 @@ namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class ManageTeamRoles extends Component
@@ -14,8 +15,12 @@ class ManageTeamRoles extends Component
     public $team;
     public $confirmingDeleteTeamRole = false;
     public $currentlyEditingRole = false;
+    public $currentlyAddingPermission = false;
+    public $roleToAttachPermission = null;
     public $roleIdBeingRemoved = null;
     public Role $editingRole;
+    public $selectedPermissions = [];
+    public $permissionsToAttach = [];
 
     public function rules()
     {
@@ -30,7 +35,8 @@ class ManageTeamRoles extends Component
                     }
                 }
             ],
-            'editingRole.description' => 'required|min:4|max:255'
+            'editingRole.description' => 'required|min:4|max:255',
+            'permissionsToAttach' => ['nullable', 'array']
         ];
     }
 
@@ -38,6 +44,7 @@ class ManageTeamRoles extends Component
     {
         $this->team = $team;
         $this->editingRole = $this->makeBlankRole();
+        $this->resetSelectedPermissions();
     }
 
     public function makeBlankRole()
@@ -57,6 +64,8 @@ class ManageTeamRoles extends Component
         $this->editingRole->save();
 
         $this->currentlyEditingRole = false;
+
+        $this->selectedPermissions[$this->editingRole->id] = [];
     }
 
     public function createNewRole()
@@ -86,6 +95,8 @@ class ManageTeamRoles extends Component
         $role->delete();
 
         $this->confirmingDeleteTeamRole = false;
+
+        unset($this->selectedPermissions[$this->roleIdBeingRemoved]);
     }
 
     public function editTeamRole(Role $role)
@@ -96,10 +107,63 @@ class ManageTeamRoles extends Component
 
         $this->currentlyEditingRole = true;
     }
+
+    public function addPermissions($roleId)
+    {
+        $this->authorize('updateTeamRole', $this->team);
+
+        $this->roleToAttachPermission = Role::find($roleId);
+
+        $this->permissionsToAttach = [];
+
+        $this->currentlyAddingPermission = true;
+    }
+
+    
+    public function attachPermissions()
+    {
+        $this->authorize('updateTeamRole', $this->team);
+        
+        $this->roleToAttachPermission->permissions()->attach($this->permissionsToAttach);
+
+        $this->closePermissionsModal();
+    }
+
+    public function closePermissionsModal()
+    {
+        $this->currentlyAddingPermission = false;
+
+        $this->permissionsToAttach = [];
+
+        $this->roleToAttachPermission = null;
+    }
+
+    public function detachPermissions($roleId)
+    {
+        $this->authorize('updateTeamRole', $this->team);
+
+        Role::find($roleId)->permissions()->detach($this->selectedPermissions[$roleId]);
+
+        $this->selectedPermissions[$roleId] = [];
+    }
+
+    public function resetSelectedPermissions()
+    {
+        foreach ($this->roles as $role) {
+            $this->selectedPermissions[$role->id] = [];
+        }
+    }
     
     public function getRolesProperty()
     {
         return Role::where('team_id', $this->team->id)->get();
+    }
+
+    public function getAvailablePermissionsProperty()
+    {
+        $rolePermissionIds = $this->roleToAttachPermission?->permissions()->pluck('id')->toArray() ?? [];
+
+        return Permission::whereNotIn('id', $rolePermissionIds)->pluck('name', 'id');
     }
 
     public function render()
