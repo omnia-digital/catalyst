@@ -15,11 +15,10 @@
                     <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
                         <div class="justify-center w-full flex md:w-1/2 lg:w-1/3">
                             @auth
-                                <x-library::button
-                                    x-data=""
+                                <x-library::button.link
+                                    href="{{ route('resources.create') }}"
                                     class="py-2 w-full h-10"
-                                    x-on:click.prevent.stop="$openModal('add-resource-modal')"
-                                >+ New Resource</x-library::button>
+                                >+ New Resource</x-library::button.link>
                                 <livewire:resources::pages.resources.create/>
                             @else
                                 <x-library::button
