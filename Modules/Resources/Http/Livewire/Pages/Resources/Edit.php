@@ -45,13 +45,18 @@ class Edit extends Component
 
         $this->saveResource($validated);
 
+        if (!is_null($this->resource->published_at)) {
+            $this->resource->published_at = null;
+            $this->resource->save();
+        }
+
         $this->addMentions($validated['body']);
 
         $this->addTags($validated['body']);
 
-        // if (isset($validated['image'])) {
-        //     $this->resource->attachMedia([$validated['image']]);
-        // }
+        if (isset($validated['image'])) {
+            $this->resource->attachMedia([$validated['image']]);
+        }
 
         $this->redirectRoute('resources.show', $this->resource);
     }
@@ -71,9 +76,9 @@ class Edit extends Component
 
         $this->addTags($validated['body']);
         
-        // if (isset($validated['image'])) {
-        //     $this->resource->attachMedia([$validated['image']]);
-        // }
+        if (isset($validated['image'])) {
+            $this->resource->attachMedia([$validated['image']]);
+        }
 
         $this->redirectRoute('resources.show', $this->resource);
     }
