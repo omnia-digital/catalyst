@@ -71,6 +71,6 @@ trait HasLogo
      */
     protected function logoDisk()
     {
-        return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : 'public';
+        return 's3';
     }
 }

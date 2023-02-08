@@ -15,25 +15,69 @@
 
                             <div class="relative divide-y-2 border-gray-500">
                                 @foreach ($this->roles as $index => $role)
-                                    <div class="relative w-full py-4">
-                                        <div class="">
-                                            <!-- Role Name -->
-                                            <div class="flex items-center">
-                                                <div class="text-sm text-base-text-color">
-                                                    {{ $role->name }}
-                                                </div>
-                                            </div>
-
-                                            <!-- Role Description -->
-                                            <div class="mt-2 text-xs text-base-text-color text-left">
-                                                {{ $role->description }}
+                                <div class="relative w-full py-4">
+                                    <div>
+                                        <!-- Role Name -->
+                                        <div class="flex items-center">
+                                            <div class="text-sm text-base-text-color">
+                                                {{ $role->name }}
                                             </div>
                                         </div>
 
+                                        <!-- Role Description -->
+                                        <div class="mt-2 text-xs text-base-text-color text-left">
+                                            {{ $role->description }}
+                                        </div>
+                                        @if ($role->permissions->count())
+                                            <div x-id="['role-permissions']" x-data="{ expanded: false }" class="mt-4 space-y-2 text-base-text-color">
+                                                <div class="flex justify-between items-center">
+                                                    <button 
+                                                        type="button" 
+                                                        class="text-sm flex items-center space-x-1" 
+                                                        x-on:click="expanded = !expanded"
+                                                    >
+                                                        <span>Permissions</span>
+                                                        <x-heroicon-o-chevron-down class="w-3 h-3" x-show="!expanded" />
+                                                        <x-heroicon-o-chevron-up class="w-3 h-3" x-show="expanded" />
+                                                    </button>
+                                                    <button 
+                                                        type="button" 
+                                                        class="text-sm flex items-center p-1" 
+                                                        x-tooltip="Attach new permission"
+                                                        wire:click="addPermissions('{{ $role->id }}')"
+                                                    >
+                                                        <x-heroicon-o-plus class="w-4 h-4" />
+                                                    </button>
+                                                </div>
+                                                <ul class="space-y-2 pl-2 columns-[100px]" x-show="expanded" x-collapse>
+                                                    @foreach ($role->permissions as $permission)
+                                                        <li class="text-xs group flex items-center space-x-1" wire:key="permission-{{ $permission->id }}">
+                                                            <input type="checkbox" wire:model="selectedPermissions.{{ $role->id }}" value="{{ $permission->id }}">
+                                                            <span class="text-ellipsis cursor-default overflow-hidden whitespace-nowrap" x-tooltip="{{ $permission->name }}">{{ $permission->name }}</span>
+                                                        </li> 
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @else
+                                            <p class="mt-4 pl-2 text-sm">No permissions...</p>
+                                        @endif
+                                    </div>
+
+                                    <!-- Actions -->
+                                    <div class="mt-4 flex justify-end space-x-2">
+                                        @if (!empty($selectedPermissions[$role->id]))
+                                            @can('createTeamRole', $team)
+                                                <x-library::button 
+                                                    x-on:click="if(confirm('Are you sure you want to remove the selected permissions?')) $wire.detachPermissions('{{ $role->id }}')"
+                                                    class="text-xs !p-1.5 hover:bg-primary-300">
+                                                    <span>Remove Permissions</span>
+                                                </x-library::button>
+                                            @endcan
+                                        @endif
                                         @can('createTeamRole', $team)
                                             @if (strtolower($role->name) !== strtolower(config('platform.teams.default_owner_role')))
                                                 <!-- Actions -->
-                                                <div class="mt-4 flex justify-end space-x-2">
+                                                <div class="flex justify-end space-x-2">
                                                     <button 
                                                         wire:click="editTeamRole('{{ $role->id }}')"
                                                         type="button" 
@@ -52,6 +96,7 @@
                                             @endif
                                         @endcan
                                     </div>
+                                </div>
                                 @endforeach
                             </div>
                         </div>
@@ -115,6 +160,35 @@
                 </x-jet-secondary-button>
 
                 <x-jet-button class="ml-2" wire:click="saveRole" wire:loading.attr="disabled">
+                    {{ \Trans::get('Save') }}
+                </x-jet-button>
+            </x-slot>
+        </x-jet-dialog-modal>
+
+        <!-- Add Permission Modal -->
+        <x-jet-dialog-modal wire:model="currentlyAddingPermission">
+            <x-slot name="title">
+                {{ \Trans::get('Attach Permissions to "' . ucfirst($roleToAttachPermission?->name) . '"') }}
+            </x-slot>
+
+            <x-slot name="content">
+                <div class="space-y-4">
+                    <div wire:key="permissions-{{ now() }}" class="flex-col min-h-[300px]">
+                        <x-library::input.selects
+                            wire:model="permissionsToAttach" 
+                            :options="$this->availablePermissions"
+                            placeholder="Select Permissions" 
+                        />
+                    </div>
+                </div>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="closePermissionsModal" wire:loading.attr="disabled">
+                    {{ \Trans::get('Cancel') }}
+                </x-jet-secondary-button>
+
+                <x-jet-button class="ml-2" wire:click="attachPermissions" wire:loading.attr="disabled">
                     {{ \Trans::get('Save') }}
                 </x-jet-button>
             </x-slot>
