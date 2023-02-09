@@ -18,7 +18,7 @@
                                class="hover:underline block font-bold text-post-card-title-color">{{ $post->user->name }}</a>
                             <x-dot/>
                             <a href="{{ $post->getUrl() }}" class="hover:underline">
-                                <time datetime="{{ $post->published_at }}">{{ $post->published_at->diffForHumans(short: true) }}</time>
+                                <time datetime="{{ $post->published_at }}">{{ $post->published_at?->diffForHumans(short: true) }}</time>
                             </a>
                             @empty(!$post->is_verified)
                                 <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
@@ -71,7 +71,7 @@
             @endif
 
             @if ($post->media ?? null)
-                <div class="mt-3 rounded-lg overflow-hidden">
+                <div class="mt-3 overflow-hidden">
                     <div class="grid grid-cols-{{ sizeof($post->media) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($post->media) > 2 ? '2 h-80' : '1' }} gap-px">
                         @foreach ($post->media as $media)
                             <div class="w-full overflow-hidden @if($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">

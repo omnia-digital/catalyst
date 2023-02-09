@@ -52,8 +52,9 @@
                     </div>
                     <x-library::input.error for="image"/>
                 </div>
-                <div class="flex justify-end mt-8">
-                    <x-library::button wire:click="updateResource">Update Resource</x-library::button>
+                <div class="flex justify-end mt-8 space-x-2">
+                    <x-library::button.secondary wire:click="saveAsDraft">Save as Draft</x-library::button.secondary>
+                    <x-library::button wire:click="publishResource">Publish</x-library::button>
                 </div>
             </div>
         </div>        
