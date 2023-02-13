@@ -41,14 +41,14 @@ class NavigationPagesTest extends TestCase
 
     public function test_load_discover_page()
     {
-        $response = $this->get('/social/teams/discover');
+        $response = $this->get('/social/'. \Platform::getTeamsWord() . '/discover');
 
         $response->assertStatus(200);
     }
 
     public function test_load_teams_page()
     {
-        $response = $this->get('/social/teams');
+        $response = $this->get('/social/' . \Platform::getTeamsWord());
 
         $response->assertStatus(200);
     }

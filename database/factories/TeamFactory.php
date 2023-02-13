@@ -41,7 +41,6 @@ class TeamFactory extends Factory
             if (is_null($role)) {
                 $role = Role::create([
                     'name' => $roleName, 
-                    'type' => strtolower($roleName),
                     'team_id' => $team->id
                 ]);
             }
