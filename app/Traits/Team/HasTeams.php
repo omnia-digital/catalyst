@@ -4,6 +4,7 @@ namespace App\Traits\Team;
 
 use App\Models\Team;
 use Laravel\Jetstream\Jetstream;
+use Spatie\Permission\Models\Role;
 
 trait HasTeams
 {
@@ -85,11 +86,11 @@ trait HasTeams
 
         $userOnTeam = $team->users->where('id', $this->id)->first();
 
-        if (empty($userOnTeam?->membership?->role)) {
+        if (empty($userOnTeam?->membership?->role_id)) {
             return false;
         }
 
-        return $this->belongsToTeam($team) && optional(Jetstream::findRole($userOnTeam->membership->role))->key === $role;
+        return $this->belongsToTeam($team) && optional(Role::find($userOnTeam->membership->role_id))->name === $role;
     }
 
     /**

@@ -10,12 +10,10 @@ use App\Models\TeamInvitation;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
-//use Laravel\Jetstream\Role;
 use Modules\Social\Notifications\ApplicationAcceptedToTeamNotification;
 use Modules\Social\Notifications\NewApplicationToTeamNotification;
 use Modules\Social\Notifications\NewMemberOfMyTeamNotification;
@@ -300,6 +298,8 @@ trait WithTeamManagement
      */
     public function updateUserRole()
     {
+        Gate::authorize('updateTeamRole', $this->team);
+
         $this->managingRoleFor->roles()->detach($this->managingRoleFor->teamRole($this->team)->id);
         $this->managingRoleFor->roles()->attach($this->currentRole, ['team_id' => $this->team->id]);
 
