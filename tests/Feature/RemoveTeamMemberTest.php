@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Jetstream\Http\Livewire\TeamMemberManager;
 use Livewire\Livewire;
 use Modules\Social\Http\Livewire\Pages\Teams\Admin\ManageTeamMembers;
 use Modules\Social\Models\Profile;
