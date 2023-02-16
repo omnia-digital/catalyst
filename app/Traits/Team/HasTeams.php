@@ -2,11 +2,8 @@
 
 namespace App\Traits\Team;
 
-use App\Models\Membership;
 use App\Models\Team;
-use App\Models\User;
 use Laravel\Jetstream\Jetstream;
-use Spatie\Permission\Models\Role;
 
 trait HasTeams
 {
@@ -107,7 +104,7 @@ trait HasTeams
             return;
         }
 
-        $roleId = $team->users->where('id', $this->id)->first()->membership->role_id;
+        $roleId = $team->users->where('id', $this->id)->first()?->membership->role_id;
         $role = \Spatie\Permission\Models\Role::find($roleId);
 
         return $role ?? null;
