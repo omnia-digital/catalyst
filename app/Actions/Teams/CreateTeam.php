@@ -3,6 +3,7 @@
 namespace App\Actions\Teams;
 
 use App\Models\Team;
+use App\Support\Platform\Platform;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\CreatesTeams;
@@ -63,7 +64,9 @@ class CreateTeam implements CreatesTeams
             }
         }
 
-        (new CreateStripeConnectAccountForTeamAction)->execute($team);
+        if (Platform::isUsingTeamMemberSubscriptions()) {
+            (new CreateStripeConnectAccountForTeamAction)->execute($team);
+        }
 
         $user->switchTeam($team);
 

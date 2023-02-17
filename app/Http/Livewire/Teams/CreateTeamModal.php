@@ -88,7 +88,7 @@ class CreateTeamModal extends Component
     {
         $this->validate();
 
-        $team = (new CreateTeam())->create(Auth::user(), [
+        $team = app(CreateTeam::class)->create(Auth::user(), [
             'name' => $this->name,
             'teamTypes' => $this->teamTypes,
 //            'start_date' => $this->startDate,
