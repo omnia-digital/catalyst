@@ -7,8 +7,6 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
-use Modules\Social\Actions\Posts\CreateNewPostAction;
-use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
 use Phuclh\MediaManager\WithMediaManager;
