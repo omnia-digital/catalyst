@@ -29,14 +29,14 @@ class ApiTokenPermissionsTest extends TestCase
         $token = $user->tokens()->create([
             'name' => 'Test Token',
             'token' => Str::random(40),
-            'abilities' => ['create', 'read'],
+            'scope' => collect(['create team', 'read team'])->implode(','),
         ]);
 
         Livewire::test(ApiTokenManager::class)
                     ->set(['managingPermissionsFor' => $token])
                     ->set(['updateApiTokenForm' => [
                         'permissions' => [
-                            'delete',
+                            'delete team',
                             'missing-permission',
                         ],
                     ]])

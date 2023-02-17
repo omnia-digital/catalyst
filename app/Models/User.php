@@ -133,6 +133,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return true;
     }
 
+    public function deleteProfilePhoto()
+    {
+        $this->profile->deleteProfilePhoto();
+    }
+
     //// Relations ////
 
     public function roles(): BelongsToMany
