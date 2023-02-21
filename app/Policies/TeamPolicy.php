@@ -93,7 +93,7 @@ class TeamPolicy
         }
 
         if ($user->belongsToTeam($team)) {
-            if ($user->teamRole($team)->hasPermissionTo('update team')) {
+            if ($user->teamRole($team)?->hasPermissionTo('update team')) {
                 return true;
             }
         }
