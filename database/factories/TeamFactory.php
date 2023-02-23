@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Enums\Teams\TeamRoleTypes;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -41,7 +40,6 @@ class TeamFactory extends Factory
             if (is_null($role)) {
                 $role = Role::create([
                     'name' => $roleName, 
-                    'type' => strtolower($roleName),
                     'team_id' => $team->id
                 ]);
             }
