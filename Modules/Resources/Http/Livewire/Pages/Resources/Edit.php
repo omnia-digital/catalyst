@@ -19,6 +19,8 @@ class Edit extends Component
 
     public Post $resource;
 
+    public array $tags = [];
+
     protected function rules(): array
     {
         return [
@@ -60,7 +62,7 @@ class Edit extends Component
 
         $this->redirectRoute('resources.show', $this->resource);
     }
-    
+
     public function publishResource()
     {
         $validated = $this->validate()['resource'];
@@ -75,7 +77,7 @@ class Edit extends Component
         $this->addMentions($validated['body']);
 
         $this->addTags($validated['body']);
-        
+
         if (isset($validated['image'])) {
             $this->resource->attachMedia([$validated['image']]);
         }
@@ -98,6 +100,17 @@ class Edit extends Component
         $tags = Tag::getTags($hashtags);
 
         $this->resource->attachTags($tags, 'post');
+    }
+
+    public function getResourceTagsProperty()
+    {
+        // get tags that aren't the resource tag since we don't want the user to edit that one
+        $tagsToRemove = [
+            'Resource'
+        ];
+        return $this->resource->tags->mapWithKeys(function (Tag $tag) {
+            return [$tag->name => ucwords($tag->name)];
+        })->pluck($tagsToRemove)->all();
     }
 
     public function saveResource($attributes)
@@ -126,6 +139,8 @@ class Edit extends Component
 
     public function render()
     {
-        return view('resources::livewire.pages.resources.edit');
+        return view('resources::livewire.pages.resources.edit', [
+            'resourceTags' => $this->resourceTags
+        ]);
     }
 }
