@@ -1,6 +1,6 @@
-<?php namespace App\Console\Commands;
+<?php namespace Modules\Livestream\Console\Commands;
 
-use App\Models\Episode;
+use Modules\Livestream\Models\Episode;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;

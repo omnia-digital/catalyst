@@ -1,9 +1,9 @@
-<?php namespace App\Listeners;
+<?php namespace Modules\Livestream\Listeners;
 
-use App\Events\StreamActive;
-use App\Models\Stream;
-use App\Models\User;
-use App\Notifications\LivestreamNotification;
+use Modules\Livestream\Events\StreamActive;
+use Modules\Livestream\Models\Stream;
+use Modules\Livestream\Models\User;
+use Modules\Livestream\Notifications\LivestreamNotification;
 
 class NotifyStreamStarted
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Listeners;
+namespace Modules\Livestream\Listeners;
 
-use App\Models\LivestreamAccount;
+use Modules\Livestream\Models\LivestreamAccount;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Spark\Events\SubscriptionCreated;

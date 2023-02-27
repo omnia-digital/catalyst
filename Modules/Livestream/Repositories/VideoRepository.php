@@ -1,11 +1,11 @@
 <?php
 
-    namespace App\Repositories;
+    namespace Modules\Livestream\Repositories;
 
-    use App\Module;
-    use App\Role;
-    use App\SocialAccount;
-    use App\User;
+    use Modules\Livestream\Module;
+    use Modules\Livestream\Role;
+    use Modules\Livestream\SocialAccount;
+    use Modules\Livestream\User;
     use Carbon\Carbon;
     use Exception;
     use Facebook\Exceptions\FacebookResponseException;
@@ -17,13 +17,13 @@
     use Illuminate\Support\Facades\Log;
     use Illuminate\Support\Facades\Storage;
     use Laravel\Spark\Spark;
-    use App\Episode;
-    use App\PlaybackId;
-    use App\Services\MuxService;
-    use App\Services\SocialAccountService;
-    use App\Services\StreamIntegrationService;
-    use App\Video;
-    use App\VideoSourceType;
+    use Modules\Livestream\Episode;
+    use Modules\Livestream\PlaybackId;
+    use Modules\Livestream\Services\MuxService;
+    use Modules\Livestream\Services\SocialAccountService;
+    use Modules\Livestream\Services\StreamIntegrationService;
+    use Modules\Livestream\Video;
+    use Modules\Livestream\VideoSourceType;
 
     class VideoRepository
     {

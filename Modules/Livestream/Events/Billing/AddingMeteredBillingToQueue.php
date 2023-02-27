@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Events\Billing;
+namespace Modules\Livestream\Events\Billing;
 
-use App\Events\Event;
+use Modules\Livestream\Events\Event;
 
 class AddingMeteredBillingToQueue extends Event
 {

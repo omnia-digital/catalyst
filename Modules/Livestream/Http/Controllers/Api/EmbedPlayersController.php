@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers\Api;
+<?php namespace Modules\Livestream\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\Player;
+use Modules\Livestream\Http\Controllers\Controller;
+use Modules\Livestream\Models\Player;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class EmbedPlayersController extends Controller

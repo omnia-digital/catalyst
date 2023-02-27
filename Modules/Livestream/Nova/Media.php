@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Nova;
+namespace Modules\Livestream\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsToMany;
@@ -55,7 +55,7 @@ class Media extends Resource
             MorphTo::make('Model')->types([
                 Episode::class
             ]),
-            
+
             HasMany::make('Downloads')
         ];
     }

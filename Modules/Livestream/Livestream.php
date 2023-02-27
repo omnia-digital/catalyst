@@ -1,6 +1,6 @@
 <?php namespace Modules\Livestream;
 
-use App\Traits\UsesShortcodes;
+use Modules\Livestream\Traits\UsesShortcodes;
 use Illuminate\Support\Str;
 
 class Livestream

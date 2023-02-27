@@ -1,11 +1,11 @@
 <?php
-namespace App\Services;
+namespace Modules\Livestream\Services;
 
-use App\Services\Service;
+use Modules\Livestream\Services\Service;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
-use App\LivestreamAccount;
+use Modules\Livestream\LivestreamAccount;
 use Livestream\Livestream;
 
 class LivestreamService extends Service

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
-use App\Models\Media;
+use Modules\Livestream\Models\Media;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;

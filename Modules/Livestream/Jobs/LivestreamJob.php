@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Jobs;
+namespace Modules\Livestream\Jobs;
 
-use App\Jobs\Job;
+use Modules\Livestream\Jobs\Job;
 
 abstract class LivestreamJob extends Job
 {

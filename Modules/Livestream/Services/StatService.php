@@ -1,11 +1,11 @@
 <?php
-namespace App\Services;
+namespace Modules\Livestream\Services;
 
-use App\Stat;
+use Modules\Livestream\Stat;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use KeenIO\Client\KeenIOClient;
-use App\Services\LivestreamService;
+use Modules\Livestream\Services\LivestreamService;
 use Wensleydale\KeenLaravel\KeenFacade;
 
 class StatService extends LivestreamService

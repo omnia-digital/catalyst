@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\Person;
+namespace Modules\Livestream\Http\Livewire\Person;
 
-use App\Models\Person;
-use App\Support\Livewire\WithNotification;
-use App\Support\Livewire\WithSlideOver;
+use Modules\Livestream\Models\Person;
+use Modules\Livestream\Support\Livewire\WithNotification;
+use Modules\Livestream\Support\Livewire\WithSlideOver;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 

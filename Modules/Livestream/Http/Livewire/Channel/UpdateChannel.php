@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Channel;
+namespace Modules\Livestream\Http\Livewire\Channel;
 
-use App\Models\Channel;
-use App\Models\LivestreamAccount;
-use App\Support\Livestream\WithLivestreamAccount;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Models\Channel;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;

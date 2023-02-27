@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Team;
+namespace Modules\Livestream\Http\Livewire\Team;
 
-use App\Models\Team;
+use Modules\Livestream\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
 use Livewire\Component;

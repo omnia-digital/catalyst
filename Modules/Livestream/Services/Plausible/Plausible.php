@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Plausible;
+namespace Modules\Livestream\Services\Plausible;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;

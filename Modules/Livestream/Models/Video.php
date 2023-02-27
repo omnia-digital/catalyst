@@ -1,7 +1,7 @@
-<?php namespace App\Models;
+<?php namespace Modules\Livestream\Models;
 
-use App\Registries\VideoSource\Concerns\HasSourceVideo;
-use App\Support\Livestream\Concerns\HasPlayback;
+use Modules\Livestream\Registries\VideoSource\Concerns\HasSourceVideo;
+use Modules\Livestream\Support\Livestream\Concerns\HasPlayback;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

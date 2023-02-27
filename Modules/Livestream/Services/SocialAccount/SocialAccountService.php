@@ -1,6 +1,6 @@
-<?php namespace App\Services\SocialAccount;
+<?php namespace Modules\Livestream\Services\SocialAccount;
 
-use App\Models\SocialAccount;
+use Modules\Livestream\Models\SocialAccount;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 

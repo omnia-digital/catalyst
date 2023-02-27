@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Jobs\Episode;
+namespace Modules\Livestream\Jobs\Episode;
 
-use App\Actions\Episodes\CreateNewEpisode;
-use App\Models\Category;
-use App\Models\Episode;
-use App\Models\LivestreamAccount;
-use App\Services\Mux\MuxAsset;
+use Modules\Livestream\Actions\Episodes\CreateNewEpisode;
+use Modules\Livestream\Models\Category;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Services\Mux\MuxAsset;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

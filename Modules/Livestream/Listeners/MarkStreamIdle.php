@@ -1,7 +1,7 @@
-<?php namespace App\Listeners;
+<?php namespace Modules\Livestream\Listeners;
 
-use App\Events\StreamIdle;
-use App\Models\Stream;
+use Modules\Livestream\Events\StreamIdle;
+use Modules\Livestream\Models\Stream;
 
 class MarkStreamIdle
 {

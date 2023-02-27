@@ -1,4 +1,4 @@
-<?php namespace App\Metrics\MetricTypes;
+<?php namespace Modules\Livestream\Metrics\MetricTypes;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners\Video;
+namespace Modules\Livestream\Listeners\Video;
 
-use App\Events\Episode\EpisodeFinishedRecording;
-use App\Events\Video\FinishedMovingLiveTmpVideosToVod;
-use App\Events\Video\KickOffLiveVideoProcess;
-use App\Events\Video\LiveVideosFinishedProcessing;
-use App\Events\Video\LiveVideosProcessingAddedToQueue;
+use Modules\Livestream\Events\Episode\EpisodeFinishedRecording;
+use Modules\Livestream\Events\Video\FinishedMovingLiveTmpVideosToVod;
+use Modules\Livestream\Events\Video\KickOffLiveVideoProcess;
+use Modules\Livestream\Events\Video\LiveVideosFinishedProcessing;
+use Modules\Livestream\Events\Video\LiveVideosProcessingAddedToQueue;
 
 class ProcessFinishedLiveVideos
 {

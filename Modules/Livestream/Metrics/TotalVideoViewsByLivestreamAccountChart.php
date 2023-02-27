@@ -1,7 +1,7 @@
-<?php namespace App\Metrics;
+<?php namespace Modules\Livestream\Metrics;
 
-use App\Metrics\MetricTypes\Chart;
-use App\Services\Mux\MuxVideoView;
+use Modules\Livestream\Metrics\MetricTypes\Chart;
+use Modules\Livestream\Services\Mux\MuxVideoView;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;

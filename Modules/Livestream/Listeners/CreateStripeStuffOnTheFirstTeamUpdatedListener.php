@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Listeners;
+namespace Modules\Livestream\Listeners;
 
-use App\Jobs\CreateStripeCustomerJob;
-use App\Jobs\CreateStripeMeteredSubscriptionJob;
+use Modules\Livestream\Jobs\CreateStripeCustomerJob;
+use Modules\Livestream\Jobs\CreateStripeMeteredSubscriptionJob;
 use Illuminate\Support\Facades\Bus;
 use Laravel\Jetstream\Events\TeamUpdated;
 

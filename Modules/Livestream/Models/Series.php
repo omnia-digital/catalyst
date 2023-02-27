@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Livestream\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;

@@ -1,4 +1,4 @@
-<?php namespace App\Shortcodes;
+<?php namespace Modules\Livestream\Shortcodes;
 
 class TimezoneShortcode implements Shortcode
 {

@@ -1,7 +1,7 @@
-<?php namespace App\Observers;
+<?php namespace Modules\Livestream\Observers;
 
-use App\Jobs\Billing\CreateExtraInvoiceItemJob;
-use App\Models\Episode;
+use Modules\Livestream\Jobs\Billing\CreateExtraInvoiceItemJob;
+use Modules\Livestream\Models\Episode;
 use Illuminate\Support\Facades\Auth;
 
 class EpisodeObserver

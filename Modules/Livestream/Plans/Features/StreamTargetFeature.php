@@ -1,4 +1,4 @@
-<?php namespace App\Plans\Features;
+<?php namespace Modules\Livestream\Plans\Features;
 
 class StreamTargetFeature extends Feature
 {

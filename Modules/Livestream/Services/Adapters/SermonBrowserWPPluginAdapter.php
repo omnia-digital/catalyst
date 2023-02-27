@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Adapters;
+namespace Modules\Livestream\Services\Adapters;
 
 use Illuminate\Support\Facades\Log;
-use App\Events\Episode\ImportRssEpisodeAddedToQueue;
-use App\Jobs\Videos\importRemoteMP4FilesToVodAndCreateEpisodes;
+use Modules\Livestream\Events\Episode\ImportRssEpisodeAddedToQueue;
+use Modules\Livestream\Jobs\Videos\importRemoteMP4FilesToVodAndCreateEpisodes;
 use willvincent\Feeds\Facades\FeedsFacade;
 
 /**

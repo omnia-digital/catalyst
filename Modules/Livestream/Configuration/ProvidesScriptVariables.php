@@ -1,6 +1,6 @@
-<?php namespace App\Configuration;
+<?php namespace Modules\Livestream\Configuration;
 
-use App\Omnia;
+use Modules\Livestream\Omnia;
 use Laravel\Cashier\Cashier;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Spark\Contracts\InitialFrontendState;

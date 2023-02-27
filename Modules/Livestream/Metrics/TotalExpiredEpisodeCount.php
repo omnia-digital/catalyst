@@ -1,7 +1,7 @@
-<?php namespace App\Metrics;
+<?php namespace Modules\Livestream\Metrics;
 
-use App\Actions\Episodes\GetTotalNumberOfEpisodesAction;
-use App\Metrics\MetricTypes\Value;
+use Modules\Livestream\Actions\Episodes\GetTotalNumberOfEpisodesAction;
+use Modules\Livestream\Metrics\MetricTypes\Value;
 use Carbon\Carbon;
 
 class TotalExpiredEpisodeCount extends Value

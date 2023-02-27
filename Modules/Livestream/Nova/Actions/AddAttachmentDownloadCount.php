@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Nova\Actions;
+namespace Modules\Livestream\Nova\Actions;
 
-use App\Models\OldAnalytics;
+use Modules\Livestream\Models\OldAnalytics;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

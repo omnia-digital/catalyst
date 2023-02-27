@@ -1,6 +1,6 @@
 <?php namespace Database\Seeders;
 
-use App\Models\Episode;
+use Modules\Livestream\Models\Episode;
 use Illuminate\Database\Seeder;
 
 class EpisodeSeeder extends Seeder

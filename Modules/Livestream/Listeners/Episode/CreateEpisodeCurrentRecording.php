@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Listeners\Episode;
+namespace Modules\Livestream\Listeners\Episode;
 
-use App\Events\Stream\EpisodeStartedRecording;
+use Modules\Livestream\Events\Stream\EpisodeStartedRecording;
 
 /**
  * Class CreateEpisodeCurrentRecording

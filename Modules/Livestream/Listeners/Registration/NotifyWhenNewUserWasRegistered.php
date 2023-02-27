@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Listeners\Registration;
+namespace Modules\Livestream\Listeners\Registration;
 
-use App\Notifications\NewUserWasRegisteredNotification;
-use App\Omnia;
+use Modules\Livestream\Notifications\NewUserWasRegisteredNotification;
+use Modules\Livestream\Omnia;
 use Laravel\Spark\Events\Auth\UserRegistered;
-use App\User;
+use Modules\Livestream\User;
 
 class NotifyWhenNewUserWasRegistered
 {

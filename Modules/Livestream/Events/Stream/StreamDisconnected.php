@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Events\Stream;
+namespace Modules\Livestream\Events\Stream;
 
-use App\Events\Event;
+use Modules\Livestream\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use App\Events\Video\MuxEvent;
-use App\Services\EpisodeService;
+use Modules\Livestream\Events\Video\MuxEvent;
+use Modules\Livestream\Services\EpisodeService;
 
 class StreamDisconnected extends MuxEvent
 {

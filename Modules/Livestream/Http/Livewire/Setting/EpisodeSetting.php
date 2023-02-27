@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Setting;
+namespace Modules\Livestream\Http\Livewire\Setting;
 
-use App\Jobs\Episode\DeleteEpisodeJob;
-use App\Models\Episode;
-use App\Models\Team;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Jobs\Episode\DeleteEpisodeJob;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\Team;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 

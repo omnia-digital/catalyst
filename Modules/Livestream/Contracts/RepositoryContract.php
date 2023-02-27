@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Contracts;
+    namespace Modules\Livestream\Contracts;
 
     interface RepositoryContract
     {

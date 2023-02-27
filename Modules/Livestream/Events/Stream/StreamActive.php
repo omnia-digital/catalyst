@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Events\Stream;
+namespace Modules\Livestream\Events\Stream;
 
-use App\Events\Video\MuxEvent;
+use Modules\Livestream\Events\Video\MuxEvent;
 
 class StreamActive extends MuxEvent
 {

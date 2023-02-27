@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Providers;
+namespace Modules\Livestream\Providers;
 
-use App\Models\Team;
+use Modules\Livestream\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\ValidationException;

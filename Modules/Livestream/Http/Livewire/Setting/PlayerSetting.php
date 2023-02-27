@@ -1,7 +1,7 @@
-<?php namespace App\Http\Livewire\Setting;
+<?php namespace Modules\Livestream\Http\Livewire\Setting;
 
-use App\Models\LivestreamAccount;
-use App\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 

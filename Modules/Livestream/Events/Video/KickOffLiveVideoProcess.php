@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Events\Video;
+namespace Modules\Livestream\Events\Video;
 
-use App\Events\Event;
+use Modules\Livestream\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use App\Services\EpisodeService;
+use Modules\Livestream\Services\EpisodeService;
 
 /**
  * Class KickOffLiveVideoProcess

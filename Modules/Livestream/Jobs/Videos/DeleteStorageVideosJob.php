@@ -1,8 +1,8 @@
-<?php namespace App\Jobs\Videos;
+<?php namespace Modules\Livestream\Jobs\Videos;
 
-use App\Services\SocialAccount\SocialAccountService;
-use App\Models\SocialAccount;
-use App\Services\SocialAccount\StreamIntegrationService;
+use Modules\Livestream\Services\SocialAccount\SocialAccountService;
+use Modules\Livestream\Models\SocialAccount;
+use Modules\Livestream\Services\SocialAccount\StreamIntegrationService;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Illuminate\Bus\Queueable;
@@ -13,7 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Video;
+use Modules\Livestream\Models\Video;
 
 class DeleteStorageVideosJob implements ShouldQueue
 {

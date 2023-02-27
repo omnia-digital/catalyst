@@ -1,4 +1,4 @@
-<?php namespace App\Services\Mux;
+<?php namespace Modules\Livestream\Services\Mux;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;

@@ -1,12 +1,12 @@
-<?php namespace App\Models;
+<?php namespace Modules\Livestream\Models;
 
-use App\Enums\VideoStorageOption;
-use App\Events\EpisodeCreatedEvent;
-use App\Omnia;
-use App\Services\Mux\MuxAsset;
-use App\Support\Media\InteractsWithStaticMediaUrl;
-use App\Traits\Downloadable;
-use App\Traits\InteractsWithTopic;
+use Modules\Livestream\Enums\VideoStorageOption;
+use Modules\Livestream\Events\EpisodeCreatedEvent;
+use Modules\Livestream\Omnia;
+use Modules\Livestream\Services\Mux\MuxAsset;
+use Modules\Livestream\Support\Media\InteractsWithStaticMediaUrl;
+use Modules\Livestream\Traits\Downloadable;
+use Modules\Livestream\Traits\InteractsWithTopic;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -273,7 +273,7 @@ class Episode extends Model implements HasMedia
 
     public function scopeWhereTotalAttachmentDownloadsInDateRange($query, $from, $to)
     {
-        return $query->withSum(['attachmentDownloads' => function ($query) use ($from, $to) { 
+        return $query->withSum(['attachmentDownloads' => function ($query) use ($from, $to) {
             return $query->whereBetween('downloads.created_at', [$from, $to]);
         }], 'count');
     }
@@ -310,7 +310,7 @@ class Episode extends Model implements HasMedia
         if (!empty($episodeData['title'])) {
             Omnia::replaceShortcodesInString($episodeData['title']);
         }
-        
+
         if (!empty($episodeData['description'])) {
             Omnia::replaceShortcodesInString($episodeData['description']);
         }

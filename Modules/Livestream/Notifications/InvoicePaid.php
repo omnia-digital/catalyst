@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Notifications;
+namespace Modules\Livestream\Notifications;
 
-use App\User;
+use Modules\Livestream\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;

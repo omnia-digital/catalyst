@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\EmbedPlayersController;
-use App\Http\Controllers\Api\EmbedPlaylistController;
-use App\Http\Controllers\Api\VideoViewsController;
+use Modules\Livestream\Http\Controllers\Api\EmbedPlayersController;
+use Modules\Livestream\Http\Controllers\Api\EmbedPlaylistController;
+use Modules\Livestream\Http\Controllers\Api\VideoViewsController;
 use Illuminate\Support\Facades\Route;
 
 /*

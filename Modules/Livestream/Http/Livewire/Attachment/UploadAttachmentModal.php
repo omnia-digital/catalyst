@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Attachment;
+namespace Modules\Livestream\Http\Livewire\Attachment;
 
-use App\Models\Episode;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use GuzzleHttp\Psr7\Uri;
 use Livewire\Component;
 use Livewire\TemporaryUploadedFile;

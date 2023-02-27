@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Jobs\Videos;
+namespace Modules\Livestream\Jobs\Videos;
 
 use Illuminate\Support\Facades\Log;
-use App\Events\Video\FinishedMovingLiveVideosToTmp;
-use App\Events\Video\LiveVideosProcessing;
-use App\Events\Video\LiveVideosStartedProcessing;
-use App\Jobs\LivestreamJob;
-use App\Services\EpisodeService;
+use Modules\Livestream\Events\Video\FinishedMovingLiveVideosToTmp;
+use Modules\Livestream\Events\Video\LiveVideosProcessing;
+use Modules\Livestream\Events\Video\LiveVideosStartedProcessing;
+use Modules\Livestream\Jobs\LivestreamJob;
+use Modules\Livestream\Services\EpisodeService;
 
 class MoveLiveVideoFilesToTmp extends LivestreamJob
 {

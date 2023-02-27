@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace Modules\Livestream\Repositories;
 
-use App\Omnia;
+use Modules\Livestream\Omnia;
 use Carbon\Carbon;
 use Livestream\Livestream;
 

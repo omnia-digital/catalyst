@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Listeners\Video;
+namespace Modules\Livestream\Listeners\Video;
 
 use Illuminate\Support\Facades\Log;
-use App\Events\Stream\StreamEnded;
+use Modules\Livestream\Events\Stream\StreamEnded;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Events\Video\FinishedMovingLiveVideosToTmp;
-use App\Events\Video\LiveVideosStartedProcessing;
-use App\Jobs\Videos\MoveLiveVideoFilesToTmp as MoveLiveVideoFilesToTmp_Job;
+use Modules\Livestream\Events\Video\FinishedMovingLiveVideosToTmp;
+use Modules\Livestream\Events\Video\LiveVideosStartedProcessing;
+use Modules\Livestream\Jobs\Videos\MoveLiveVideoFilesToTmp as MoveLiveVideoFilesToTmp_Job;
 
 /**
  * Class MoveLiveVideoFilesToTmp

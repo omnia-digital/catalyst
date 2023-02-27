@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Services;
+namespace Modules\Livestream\Services;
 
-use App\Omnia;
-use App\Services\Service;
+use Modules\Livestream\Omnia;
+use Modules\Livestream\Services\Service;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Jenssegers\Agent\Agent;
-use App\Episode;
-use App\Exceptions\UnsupportedBroswerException;
-use App\LivestreamAccount;
+use Modules\Livestream\Episode;
+use Modules\Livestream\Exceptions\UnsupportedBroswerException;
+use Modules\Livestream\LivestreamAccount;
 use Auth;
-use App\Video;
+use Modules\Livestream\Video;
 
 class PlayerService extends Service
 {

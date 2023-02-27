@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Listeners\Episode;
+namespace Modules\Livestream\Listeners\Episode;
 
-use App\Events\Stream\StreamStarted;
-use App\Events\Stream\StreamEnded;
+use Modules\Livestream\Events\Stream\StreamStarted;
+use Modules\Livestream\Events\Stream\StreamEnded;
 
 class UpdateEpisodeLiveStatus
 {

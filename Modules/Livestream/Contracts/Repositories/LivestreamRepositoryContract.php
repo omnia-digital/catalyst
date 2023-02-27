@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Contracts\Repositories;
+namespace Modules\Livestream\Contracts\Repositories;
 
-use App\Contracts\RepositoryContract;
+use Modules\Livestream\Contracts\RepositoryContract;
 
 interface LivestreamRepositoryContract extends RepositoryContract
 {

@@ -1,6 +1,6 @@
-<?php namespace App\Jobs\Episode;
+<?php namespace Modules\Livestream\Jobs\Episode;
 
-use App\Models\Episode;
+use Modules\Livestream\Models\Episode;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;

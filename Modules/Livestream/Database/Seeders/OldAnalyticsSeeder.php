@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\OldAnalytics;
+use Modules\Livestream\Models\OldAnalytics;
 use Illuminate\Database\Seeder;
 
 class OldAnalyticsSeeder extends Seeder

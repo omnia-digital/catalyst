@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Events\EpisodeDownload;
+namespace Modules\Livestream\Events\EpisodeDownload;
 
-use App\EpisodeDownload;
-use App\Events\Event;
+use Modules\Livestream\EpisodeDownload;
+use Modules\Livestream\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 

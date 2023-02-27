@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Episode;
+use Modules\Livestream\Models\Episode;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Migrations\Migration;
 

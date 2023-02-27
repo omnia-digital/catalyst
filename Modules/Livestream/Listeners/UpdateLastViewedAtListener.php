@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Listeners;
+namespace Modules\Livestream\Listeners;
 
-use App\Events\EpisodeViewedEvent;
+use Modules\Livestream\Events\EpisodeViewedEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 

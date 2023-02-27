@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace Modules\Livestream\Exceptions;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

@@ -1,6 +1,6 @@
-<?php namespace App\Metrics\MetricTypes;
+<?php namespace Modules\Livestream\Metrics\MetricTypes;
 
-use App\Metrics\TimeFilters\TimeFilterRegistry;
+use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
 use Carbon\Carbon;
 use DateInterval;
 use Illuminate\Database\Eloquent\Collection;

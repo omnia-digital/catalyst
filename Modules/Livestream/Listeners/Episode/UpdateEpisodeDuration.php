@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners\Episode;
+namespace Modules\Livestream\Listeners\Episode;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
-use App\Episode;
-use App\Events\Video\VideoAssetCreated;
+use Modules\Livestream\Episode;
+use Modules\Livestream\Events\Video\VideoAssetCreated;
 
 class UpdateEpisodeDuration implements ShouldQueue
 {

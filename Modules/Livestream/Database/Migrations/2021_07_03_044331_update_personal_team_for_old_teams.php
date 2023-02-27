@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Team;
+use Modules\Livestream\Models\Team;
 use Illuminate\Database\Migrations\Migration;
 
 class UpdatePersonalTeamForOldTeams extends Migration

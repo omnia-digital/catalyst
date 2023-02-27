@@ -1,6 +1,6 @@
-<?php namespace App\Services\Mux;
+<?php namespace Modules\Livestream\Services\Mux;
 
-use App\Models\LivestreamAccount;
+use Modules\Livestream\Models\LivestreamAccount;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Collection;

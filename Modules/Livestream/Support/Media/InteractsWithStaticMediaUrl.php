@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Support\Media;
+namespace Modules\Livestream\Support\Media;
 
-use App\Models\Media;
+use Modules\Livestream\Models\Media;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 

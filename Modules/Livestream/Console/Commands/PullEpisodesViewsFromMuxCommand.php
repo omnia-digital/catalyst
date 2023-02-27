@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Modules\Livestream\Console\Commands;
 
-use App\Jobs\PullEpisodeViewsFromMuxJob;
-use App\Models\Episode;
+use Modules\Livestream\Jobs\PullEpisodeViewsFromMuxJob;
+use Modules\Livestream\Models\Episode;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 

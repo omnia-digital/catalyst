@@ -1,7 +1,7 @@
-<?php namespace App\Actions\Episodes;
+<?php namespace Modules\Livestream\Actions\Episodes;
 
-use App\Models\Episode;
-use App\Models\LivestreamAccount;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
 use Illuminate\Support\Facades\Auth;
 
 class CreateNewEpisode

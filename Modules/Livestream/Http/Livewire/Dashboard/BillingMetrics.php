@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard;
+namespace Modules\Livestream\Http\Livewire\Dashboard;
 
-use App\Metrics\CurrentStorageCost;
-use App\Metrics\BillableStorageDuration;
-use App\Metrics\TotalExpiredEpisodeCount;
-use App\Metrics\TotalStorageDuration;
+use Modules\Livestream\Metrics\CurrentStorageCost;
+use Modules\Livestream\Metrics\BillableStorageDuration;
+use Modules\Livestream\Metrics\TotalExpiredEpisodeCount;
+use Modules\Livestream\Metrics\TotalStorageDuration;
 use Livewire\Component;
 
 class BillingMetrics extends Component

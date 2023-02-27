@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Providers;
+namespace Modules\Livestream\Providers;
 
-use App\Omnia;
+use Modules\Livestream\Omnia;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 

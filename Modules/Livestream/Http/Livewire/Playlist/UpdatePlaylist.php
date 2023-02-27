@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Playlist;
+namespace Modules\Livestream\Http\Livewire\Playlist;
 
-use App\Models\Playlist;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Models\Playlist;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 

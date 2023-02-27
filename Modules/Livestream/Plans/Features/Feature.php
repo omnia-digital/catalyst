@@ -1,7 +1,7 @@
-<?php namespace App\Plans\Features;
+<?php namespace Modules\Livestream\Plans\Features;
 
-use App\Models\LivestreamAccount;
-use App\Models\Team;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Models\Team;
 use Illuminate\Support\Facades\Auth;
 
 abstract class Feature

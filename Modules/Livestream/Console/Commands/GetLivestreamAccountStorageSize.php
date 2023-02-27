@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Modules\Livestream\Console\Commands;
 
-use App\Jobs\Stats\PostStatsToService;
+use Modules\Livestream\Jobs\Stats\PostStatsToService;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Services\StreamStatService;
+use Modules\Livestream\Services\StreamStatService;
 
 class GetLivestreamAccountStorageSize extends Command
 {

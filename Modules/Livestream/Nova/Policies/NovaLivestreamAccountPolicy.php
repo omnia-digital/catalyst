@@ -1,8 +1,8 @@
 <?php
 
-    namespace App\Nova\Policies;
+    namespace Modules\Livestream\Nova\Policies;
 
-    use App\Policies\Traits\HasDefaultPolicy;
+    use Modules\Livestream\Policies\Traits\HasDefaultPolicy;
 
     class NovaLivestreamAccountPolicy
     {

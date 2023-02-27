@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace Modules\Livestream\Services;
 
-use App\Image;
-use App\Jobs\Images\ConvertImageToDefaultType;
+use Modules\Livestream\Image;
+use Modules\Livestream\Jobs\Images\ConvertImageToDefaultType;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\File;

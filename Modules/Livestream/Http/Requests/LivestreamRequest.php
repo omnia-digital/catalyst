@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Modules\Livestream\Http\Requests;
 
-use App\Http\Requests\Request as Omnia_Request;
+use Modules\Livestream\Http\Requests\Request as Omnia_Request;
 
 class LivestreamRequest extends Omnia_Request
 {}

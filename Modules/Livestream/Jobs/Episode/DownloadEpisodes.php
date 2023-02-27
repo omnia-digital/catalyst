@@ -1,16 +1,16 @@
-<?php namespace App\Jobs\Episode;
+<?php namespace Modules\Livestream\Jobs\Episode;
 
-use App\Enums\EpisodeDownloadStatus;
-use App\Notifications\EpisodeDownloadWasFailedNotification;
+use Modules\Livestream\Enums\EpisodeDownloadStatus;
+use Modules\Livestream\Notifications\EpisodeDownloadWasFailedNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Storage;
-use App\Episode;
-use App\EpisodeDownload;
-use App\Events\EpisodeDownload\EpisodeDownloadIsReady;
+use Modules\Livestream\Episode;
+use Modules\Livestream\EpisodeDownload;
+use Modules\Livestream\Events\EpisodeDownload\EpisodeDownloadIsReady;
 use Throwable;
 use ZipArchive;
 

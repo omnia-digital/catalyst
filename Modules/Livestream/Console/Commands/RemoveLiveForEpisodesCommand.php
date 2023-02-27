@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Modules\Livestream\Console\Commands;
 
-use App\Models\Episode;
+use Modules\Livestream\Models\Episode;
 use Illuminate\Console\Command;
 
 class RemoveLiveForEpisodesCommand extends Command

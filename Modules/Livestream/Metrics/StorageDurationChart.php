@@ -1,8 +1,8 @@
-<?php namespace App\Metrics;
+<?php namespace Modules\Livestream\Metrics;
 
-use App\Metrics\MetricTypes\Chart;
-use App\Models\ExtraInvoiceItem;
-use App\Models\Episode;
+use Modules\Livestream\Metrics\MetricTypes\Chart;
+use Modules\Livestream\Models\ExtraInvoiceItem;
+use Modules\Livestream\Models\Episode;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;

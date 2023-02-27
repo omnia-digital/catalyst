@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Actions\Fortify\CreateNewUser;
-use App\Models\User;
+use Modules\Livestream\Actions\Fortify\CreateNewUser;
+use Modules\Livestream\Models\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder

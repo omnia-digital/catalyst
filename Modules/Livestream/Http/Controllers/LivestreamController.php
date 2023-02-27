@@ -3,7 +3,7 @@
 namespace Modules\Livestream\Http\Controllers;
 
 
-use App\Http\Controllers\Controller as OmniaController;
+use Modules\Livestream\Http\Controllers\Controller as OmniaController;
 use Livestream\Livestream;
 
 class LivestreamController extends OmniaController

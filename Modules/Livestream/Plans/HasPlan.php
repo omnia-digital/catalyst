@@ -1,6 +1,6 @@
-<?php namespace App\Plans;
+<?php namespace Modules\Livestream\Plans;
 
-use App\Plans\Features\Feature;
+use Modules\Livestream\Plans\Features\Feature;
 
 trait HasPlan
 {

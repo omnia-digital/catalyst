@@ -1,8 +1,8 @@
-<?php namespace App\Models;
+<?php namespace Modules\Livestream\Models;
 
-use App\Actions\Fortify\CreateNewUser;
-use App\Notifications\LivestreamNotification;
-use App\Omnia;
+use Modules\Livestream\Actions\Fortify\CreateNewUser;
+use Modules\Livestream\Notifications\LivestreamNotification;
+use Modules\Livestream\Omnia;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

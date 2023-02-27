@@ -1,6 +1,6 @@
-<?php namespace App\Jobs\Streams;
+<?php namespace Modules\Livestream\Jobs\Streams;
 
-use App\Models\Stream;
+use Modules\Livestream\Models\Stream;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;

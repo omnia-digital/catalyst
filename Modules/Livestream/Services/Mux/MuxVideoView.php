@@ -1,8 +1,8 @@
-<?php namespace App\Services\Mux;
+<?php namespace Modules\Livestream\Services\Mux;
 
-use App\Models\Episode;
-use App\Models\LivestreamAccount;
-use App\Models\VideoView;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Models\VideoView;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Collection;

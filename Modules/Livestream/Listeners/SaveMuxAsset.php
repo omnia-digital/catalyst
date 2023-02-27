@@ -1,10 +1,10 @@
-<?php namespace App\Listeners;
+<?php namespace Modules\Livestream\Listeners;
 
-use App\Enums\StreamStatus;
-use App\Events\VideoAssetReady;
-use App\Models\Episode;
-use App\Models\Stream;
-use App\Services\Mux\Concerns\HasThumbnail;
+use Modules\Livestream\Enums\StreamStatus;
+use Modules\Livestream\Events\VideoAssetReady;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\Stream;
+use Modules\Livestream\Services\Mux\Concerns\HasThumbnail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Arr;

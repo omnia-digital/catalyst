@@ -1,9 +1,9 @@
 <?php
 
-    namespace App\Console\Commands;
+    namespace Modules\Livestream\Console\Commands;
 
-    use App\Models\Episode;
-    use App\Models\LivestreamAccount;
+    use Modules\Livestream\Models\Episode;
+    use Modules\Livestream\Models\LivestreamAccount;
     use Illuminate\Console\Command;
 
     class ActivateMP4DownloadForAllEpisodes extends Command

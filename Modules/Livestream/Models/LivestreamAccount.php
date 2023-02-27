@@ -1,6 +1,6 @@
-<?php namespace App\Models;
+<?php namespace Modules\Livestream\Models;
 
-use App\Enums\VideoStorageOption;
+use Modules\Livestream\Enums\VideoStorageOption;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

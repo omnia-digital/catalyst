@@ -1,11 +1,11 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Modules\Livestream\Http\Controllers;
 
-use App\Events\StreamActive;
-use App\Events\StreamCompleted;
-use App\Events\StreamDeleted;
-use App\Events\StreamIdle;
-use App\Events\StreamUpdated;
-use App\Events\VideoAssetReady;
+use Modules\Livestream\Events\StreamActive;
+use Modules\Livestream\Events\StreamCompleted;
+use Modules\Livestream\Events\StreamDeleted;
+use Modules\Livestream\Events\StreamIdle;
+use Modules\Livestream\Events\StreamUpdated;
+use Modules\Livestream\Events\VideoAssetReady;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;

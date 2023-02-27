@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Episode;
+namespace Modules\Livestream\Http\Livewire\Episode;
 
-use App\Models\Category;
-use App\Models\Episode;
-use App\Models\LivestreamAccount;
-use App\Support\Livestream\WithLivestreamAccount;
-use App\Support\Livewire\WithModal;
-use App\Support\Livewire\WithNotification;
-use App\Support\Livewire\WithSlideOver;
-use App\Support\Series\WithSeries;
+use Modules\Livestream\Models\Category;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Support\Livewire\WithModal;
+use Modules\Livestream\Support\Livewire\WithNotification;
+use Modules\Livestream\Support\Livewire\WithSlideOver;
+use Modules\Livestream\Support\Series\WithSeries;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;

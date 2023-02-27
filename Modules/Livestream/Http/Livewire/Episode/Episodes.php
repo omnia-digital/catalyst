@@ -1,10 +1,10 @@
-<?php namespace App\Http\Livewire\Episode;
+<?php namespace Modules\Livestream\Http\Livewire\Episode;
 
-use App\Models\Episode;
-use App\Models\Person;
-use App\Support\Livewire\WithCachedRows;
-use App\Support\Livewire\WithLayoutSwitcher;
-use App\Support\Livewire\WithSlideUp;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\Person;
+use Modules\Livestream\Support\Livewire\WithCachedRows;
+use Modules\Livestream\Support\Livewire\WithLayoutSwitcher;
+use Modules\Livestream\Support\Livewire\WithSlideUp;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
@@ -58,9 +58,9 @@ class Episodes extends Component
 
     public function selectEpisode($episode)
     {
-        if ($this->multiSelectMode) { 
-            $this->multiSelect($episode); 
-            return; 
+        if ($this->multiSelectMode) {
+            $this->multiSelect($episode);
+            return;
         }
 
         $this->useCachedRows();
@@ -80,7 +80,7 @@ class Episodes extends Component
         $this->turnOffMultiSelect();
         $this->massAttachmentUpload = true;
     }
-    
+
     public function toggleMultiSelect()
     {
         if ($this->multiSelectMode) {
@@ -112,7 +112,7 @@ class Episodes extends Component
 
         $this->emitTo('episode.multi-select-panel', 'updateSelectedEpisodes', $this->selectedIDs);
     }
-    
+
     public function multiDeselect($id)
     {
         if (($key = array_search($id, $this->selectedIDs)) !== false) {

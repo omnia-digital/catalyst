@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Team;
+namespace Modules\Livestream\Http\Livewire\Team;
 
-use App\Models\Team;
-use App\Omnia;
+use Modules\Livestream\Models\Team;
+use Modules\Livestream\Omnia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Component;

@@ -1,9 +1,9 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Modules\Livestream\Http\Controllers;
 
-use App\Models\SocialAccount;
-use App\Models\User;
-use App\Omnia;
-use App\Providers\RouteServiceProvider;
+use Modules\Livestream\Models\SocialAccount;
+use Modules\Livestream\Models\User;
+use Modules\Livestream\Omnia;
+use Modules\Livestream\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 

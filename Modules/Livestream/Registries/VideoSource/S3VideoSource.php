@@ -1,9 +1,9 @@
-<?php namespace App\Registries\VideoSource;
+<?php namespace Modules\Livestream\Registries\VideoSource;
 
-use App\Models\Video;
-use App\Registries\VideoSource\Concerns\BaseVideoSource;
-use App\Services\Mux\Concerns\Downloadable;
-use App\Services\Mux\MuxAsset;
+use Modules\Livestream\Models\Video;
+use Modules\Livestream\Registries\VideoSource\Concerns\BaseVideoSource;
+use Modules\Livestream\Services\Mux\Concerns\Downloadable;
+use Modules\Livestream\Services\Mux\MuxAsset;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 

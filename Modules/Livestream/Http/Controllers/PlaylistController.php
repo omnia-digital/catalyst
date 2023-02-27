@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
-use App\Http\Requests\PlaylistRequest;
-use App\LivestreamAccount;
-use App\Playlist;
+use Modules\Livestream\Http\Requests\PlaylistRequest;
+use Modules\Livestream\LivestreamAccount;
+use Modules\Livestream\Playlist;
 use Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\LivestreamController;
-use App\Services\PlayerService;
-use App\WowzaMediaServer;
-use App\WowzaVhost;
-use App\WowzaPublisher;
-use App\WowzaVhostHostPort;
+use Modules\Livestream\Http\Requests;
+use Modules\Livestream\Http\Controllers\LivestreamController;
+use Modules\Livestream\Services\PlayerService;
+use Modules\Livestream\WowzaMediaServer;
+use Modules\Livestream\WowzaVhost;
+use Modules\Livestream\WowzaPublisher;
+use Modules\Livestream\WowzaVhostHostPort;
 
 
 class PlaylistController extends LivestreamController

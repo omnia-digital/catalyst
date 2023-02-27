@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Stream;
+namespace Modules\Livestream\Http\Livewire\Stream;
 
-use App\Models\LivestreamAccount;
-use App\Models\Stream;
-use App\Services\Mux\MuxLivestream;
-use App\Support\Livestream\WithLivestreamAccount;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Models\Stream;
+use Modules\Livestream\Services\Mux\MuxLivestream;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 

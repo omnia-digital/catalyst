@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\Episode;
+namespace Modules\Livestream\Http\Livewire\Episode;
 
-use App\Actions\Episodes\CreateNewEpisode;
-use App\Actions\Episodes\DetectFileTypeFromUrl;
-use App\Services\Mux\MuxUploader;
+use Modules\Livestream\Actions\Episodes\CreateNewEpisode;
+use Modules\Livestream\Actions\Episodes\DetectFileTypeFromUrl;
+use Modules\Livestream\Services\Mux\MuxUploader;
 use JetBrains\PhpStorm\ArrayShape;
 use Livewire\Component;
 

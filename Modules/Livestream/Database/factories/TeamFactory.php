@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Team;
-use App\Models\User;
+use Modules\Livestream\Models\Team;
+use Modules\Livestream\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TeamFactory extends Factory

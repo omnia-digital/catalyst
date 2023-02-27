@@ -1,11 +1,11 @@
 <?php
 
-    namespace App\Nova;
+    namespace Modules\Livestream\Nova;
 
-    use App\Models\Video;
-    use App\Nova\Actions\AddAttachmentDownloadCount;
-    use App\Nova\Actions\ReplaceEpisodeShortcodesAction;
-    use App\Nova\Filters\EpisodeTeam;
+    use Modules\Livestream\Models\Video;
+    use Modules\Livestream\Nova\Actions\AddAttachmentDownloadCount;
+    use Modules\Livestream\Nova\Actions\ReplaceEpisodeShortcodesAction;
+    use Modules\Livestream\Nova\Filters\EpisodeTeam;
     use Illuminate\Http\Request;
     use KABBOUCHI\NovaImpersonate\Impersonate;
     use Laravel\Nova\Fields\BelongsTo;

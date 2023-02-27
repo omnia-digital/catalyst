@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Validation;
+namespace Modules\Livestream\Validation;
 
 use Illuminate\Validation\Validator as Laravel_Validator;
 

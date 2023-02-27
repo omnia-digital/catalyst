@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Listeners;
+namespace Modules\Livestream\Listeners;
 
-use App\Services\Plausible\Plausible;
+use Modules\Livestream\Services\Plausible\Plausible;
 use Spark\Events\SubscriptionCancelled;
 
 class TrackSubscriptionCancelledGoalListener

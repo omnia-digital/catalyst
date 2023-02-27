@@ -1,10 +1,10 @@
-<?php namespace App\Actions\Livestream;
+<?php namespace Modules\Livestream\Actions\Livestream;
 
-use App\Models\LivestreamAccount;
-use App\Models\Stream;
-use App\Models\Team;
-use App\Services\Mux\MuxLivestream;
-use App\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Models\Stream;
+use Modules\Livestream\Models\Team;
+use Modules\Livestream\Services\Mux\MuxLivestream;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 
 class CreateMuxStreamAction
 {

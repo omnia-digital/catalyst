@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
-use App\Exceptions\ChannelNotFoundException;
-use App\Team;
+use Modules\Livestream\Exceptions\ChannelNotFoundException;
+use Modules\Livestream\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use App\LivestreamAccount;
-use App\Repositories\EpisodeRepository;
-use App\Services\PlayerService;
-use App\Services\StreamService;
+use Modules\Livestream\LivestreamAccount;
+use Modules\Livestream\Repositories\EpisodeRepository;
+use Modules\Livestream\Services\PlayerService;
+use Modules\Livestream\Services\StreamService;
 use Omnia;
 
 class ChannelController extends LivestreamController

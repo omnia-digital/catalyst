@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Traits;
+namespace Modules\Livestream\Traits;
 
-use App\Models\Download;
+use Modules\Livestream\Models\Download;
 
 trait Downloadable
 {
-    
+
     /**
      * Get the model's reviews
      */

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Notifications;
+namespace Modules\Livestream\Http\Requests\Notifications;
 
-use App\Http\Requests\Notifications\WowzaNotificationRequest;
+use Modules\Livestream\Http\Requests\Notifications\WowzaNotificationRequest;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

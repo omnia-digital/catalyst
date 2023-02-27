@@ -1,10 +1,10 @@
-<?php namespace App\Http\Livewire\Episode;
+<?php namespace Modules\Livestream\Http\Livewire\Episode;
 
-use App\Models\EpisodeTemplate;
-use App\Models\LivestreamAccount;
-use App\Support\Livestream\WithLivestreamAccount;
-use App\Support\Livewire\WithNotification;
-use App\Support\Series\WithSeries;
+use Modules\Livestream\Models\EpisodeTemplate;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Support\Livewire\WithNotification;
+use Modules\Livestream\Support\Series\WithSeries;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;

@@ -1,6 +1,6 @@
-<?php namespace App\Support\Livestream\Concerns;
+<?php namespace Modules\Livestream\Support\Livestream\Concerns;
 
-use App\Models\PlaybackId;
+use Modules\Livestream\Models\PlaybackId;
 
 trait HasPlayback
 {

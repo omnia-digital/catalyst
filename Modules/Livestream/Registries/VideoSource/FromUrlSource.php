@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Registries\VideoSource;
+namespace Modules\Livestream\Registries\VideoSource;
 
-use App\Models\Video;
-use App\Registries\VideoSource\Concerns\BaseVideoSource;
+use Modules\Livestream\Models\Video;
+use Modules\Livestream\Registries\VideoSource\Concerns\BaseVideoSource;
 
 class FromUrlSource implements BaseVideoSource
 {

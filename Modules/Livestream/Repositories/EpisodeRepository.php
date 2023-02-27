@@ -1,11 +1,11 @@
 <?php
 
-    namespace App\Repositories;
+    namespace Modules\Livestream\Repositories;
 
-    use App\Omnia;
+    use Modules\Livestream\Omnia;
     use Carbon\Carbon;
     use Illuminate\Support\Facades\Auth;
-    use App\Episode;
+    use Modules\Livestream\Episode;
     use Livestream\Livestream;
 
     class EpisodeRepository

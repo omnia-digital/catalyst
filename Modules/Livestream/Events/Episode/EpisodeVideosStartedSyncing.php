@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Events\Episode;
+namespace Modules\Livestream\Events\Episode;
 
-use App\Episode;
-use App\Events\Event;
+use Modules\Livestream\Episode;
+use Modules\Livestream\Events\Event;
 
 class EpisodeVideosStartedSyncing extends Event
 {

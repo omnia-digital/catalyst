@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Listeners;
+namespace Modules\Livestream\Listeners;
 
-use App\Events\EpisodeCreatedEvent;
-use App\Services\Plausible\Plausible;
+use Modules\Livestream\Events\EpisodeCreatedEvent;
+use Modules\Livestream\Services\Plausible\Plausible;
 
 class TrackEpisodeCreatedGoalListener
 {

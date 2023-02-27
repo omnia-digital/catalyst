@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Stream;
+namespace Modules\Livestream\Http\Livewire\Stream;
 
-use App\Actions\Livestream\CreateStreamTargetAction;
-use App\Models\LivestreamAccount;
-use App\Plans\Features\StreamTargetFeature;
-use App\Support\Livestream\WithLivestreamAccount;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Actions\Livestream\CreateStreamTargetAction;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Plans\Features\StreamTargetFeature;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 

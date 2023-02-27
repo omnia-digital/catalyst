@@ -1,7 +1,7 @@
-<?php namespace App\Http\Livewire\Channel;
+<?php namespace Modules\Livestream\Http\Livewire\Channel;
 
-use App\Models\Channel;
-use App\Support\Livewire\WithCachedRows;
+use Modules\Livestream\Models\Channel;
+use Modules\Livestream\Support\Livewire\WithCachedRows;
 use Livewire\Component;
 
 class FindChannel extends Component

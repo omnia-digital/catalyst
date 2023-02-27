@@ -1,5 +1,5 @@
 <?php
-    namespace App\Services;
+    namespace Modules\Livestream\Services;
 
 
     class DefaultApiCorsProfile

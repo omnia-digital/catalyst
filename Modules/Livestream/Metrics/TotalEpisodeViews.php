@@ -1,8 +1,8 @@
-<?php namespace App\Metrics;
+<?php namespace Modules\Livestream\Metrics;
 
-use App\Actions\Episodes\GetTotalEpisodeViewsAction;
-use App\Metrics\MetricTypes\Value;
-use App\Services\Mux\MuxVideoView;
+use Modules\Livestream\Actions\Episodes\GetTotalEpisodeViewsAction;
+use Modules\Livestream\Metrics\MetricTypes\Value;
+use Modules\Livestream\Services\Mux\MuxVideoView;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 

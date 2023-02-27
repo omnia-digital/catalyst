@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace Modules\Livestream\Services;
 
 use Illuminate\Support\Collection;
-use App\Http\Requests\EpisodeImportRequest;
+use Modules\Livestream\Http\Requests\EpisodeImportRequest;
 
 /**
  * Handles Importing Episodes from another provider

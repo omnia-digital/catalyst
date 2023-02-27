@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DateIntervals;
+namespace Modules\Livestream\DateIntervals;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;

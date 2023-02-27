@@ -1,8 +1,8 @@
 <?php
 
-    namespace App\Console\Commands;
+    namespace Modules\Livestream\Console\Commands;
 
-    use App\Actions\Episodes\ImportEpisodesFromRssAction;
+    use Modules\Livestream\Actions\Episodes\ImportEpisodesFromRssAction;
     use Illuminate\Console\Command;
 
     class ImportEpisodesFromRssCommand extends Command

@@ -1,4 +1,4 @@
-<?php namespace App\Services\Mux\Concerns;
+<?php namespace Modules\Livestream\Services\Mux\Concerns;
 
 trait HasThumbnail
 {

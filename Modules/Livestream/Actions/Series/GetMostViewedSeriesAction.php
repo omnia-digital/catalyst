@@ -1,6 +1,6 @@
-<?php namespace App\Actions\Series;
+<?php namespace Modules\Livestream\Actions\Series;
 
-use App\Models\Team;
+use Modules\Livestream\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Providers;
+namespace Modules\Livestream\Providers;
 
-use App\Actions\Jetstream\AddTeamMember;
-use App\Actions\Jetstream\CreateTeam;
-use App\Actions\Jetstream\DeleteTeam;
-use App\Actions\Jetstream\DeleteUser;
-use App\Actions\Jetstream\InviteTeamMember;
-use App\Actions\Jetstream\RemoveTeamMember;
-use App\Actions\Jetstream\UpdateTeamInformation;
-use App\Http\Livewire\Profile\UpdateProfileInformationForm;
+use Modules\Livestream\Actions\Jetstream\AddTeamMember;
+use Modules\Livestream\Actions\Jetstream\CreateTeam;
+use Modules\Livestream\Actions\Jetstream\DeleteTeam;
+use Modules\Livestream\Actions\Jetstream\DeleteUser;
+use Modules\Livestream\Actions\Jetstream\InviteTeamMember;
+use Modules\Livestream\Actions\Jetstream\RemoveTeamMember;
+use Modules\Livestream\Actions\Jetstream\UpdateTeamInformation;
+use Modules\Livestream\Http\Livewire\Profile\UpdateProfileInformationForm;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 use Livewire\Livewire;

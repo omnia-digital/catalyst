@@ -1,12 +1,12 @@
 <?php
 
-    namespace App\Http\Controllers;
+    namespace Modules\Livestream\Http\Controllers;
 
     use Exception;
     use GuzzleHttp\Psr7\Stream;
     use Illuminate\Support\Facades\Auth;
-    use App\Http\Requests\StreamIntegrationRequest;
-    use App\StreamIntegration;
+    use Modules\Livestream\Http\Requests\StreamIntegrationRequest;
+    use Modules\Livestream\StreamIntegration;
 
     /**
      * Class StreamIntegrationController

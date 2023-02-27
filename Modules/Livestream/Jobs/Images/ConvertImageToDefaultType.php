@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Jobs\Images;
+namespace Modules\Livestream\Jobs\Images;
 
-use App\Image;
-use App\Services\ImageService;
+use Modules\Livestream\Image;
+use Modules\Livestream\Services\ImageService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;

@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
-use App\Http\Requests\EventRequest;
-use App\Event;
-use App\LivestreamAccount;
+use Modules\Livestream\Http\Requests\EventRequest;
+use Modules\Livestream\Event;
+use Modules\Livestream\LivestreamAccount;
 use Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\LivestreamController;
-use App\WowzaMediaServer;
-use App\WowzaVhost;
-use App\WowzaPublisher;
-use App\WowzaVhostHostPort;
+use Modules\Livestream\Http\Requests;
+use Modules\Livestream\Http\Controllers\LivestreamController;
+use Modules\Livestream\WowzaMediaServer;
+use Modules\Livestream\WowzaVhost;
+use Modules\Livestream\WowzaPublisher;
+use Modules\Livestream\WowzaVhostHostPort;
 
 class EventController extends LivestreamController
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Listeners\EpisodeDownload;
+namespace Modules\Livestream\Listeners\EpisodeDownload;
 
-use App\Notifications\EpisodeDownloadWasCompletedNotification;
-use App\Events\EpisodeDownload\EpisodeDownloadIsReady;
+use Modules\Livestream\Notifications\EpisodeDownloadWasCompletedNotification;
+use Modules\Livestream\Events\EpisodeDownload\EpisodeDownloadIsReady;
 
 class NotifyWhenEpisodeDownloadReady
 {

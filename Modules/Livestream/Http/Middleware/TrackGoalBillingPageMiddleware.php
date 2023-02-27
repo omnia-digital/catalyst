@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Modules\Livestream\Http\Middleware;
 
-use App\Services\Plausible\Plausible;
+use Modules\Livestream\Services\Plausible\Plausible;
 use Closure;
 use Illuminate\Http\Request;
 

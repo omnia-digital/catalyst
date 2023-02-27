@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Setting;
+namespace Modules\Livestream\Http\Livewire\Setting;
 
-use App\Enums\VideoStorageOption;
-use App\Models\Episode;
-use App\Models\LivestreamAccount;
-use App\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Enums\VideoStorageOption;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;

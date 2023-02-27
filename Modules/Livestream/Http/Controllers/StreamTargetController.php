@@ -1,14 +1,14 @@
 <?php
 
-    namespace App\Http\Controllers;
+    namespace Modules\Livestream\Http\Controllers;
 
-    use App\Omnia;
+    use Modules\Livestream\Omnia;
     use Exception;
     use Illuminate\Support\Facades\Auth;
-    use App\Http\Requests\StreamTargetRequest;
-    use App\Repositories\StreamTargetRepository;
-    use App\Stream;
-    use App\StreamTarget;
+    use Modules\Livestream\Http\Requests\StreamTargetRequest;
+    use Modules\Livestream\Repositories\StreamTargetRepository;
+    use Modules\Livestream\Stream;
+    use Modules\Livestream\StreamTarget;
 
     /**
      * Class StreamTargetController

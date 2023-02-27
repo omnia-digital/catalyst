@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace Modules\Livestream\Services;
 
-use App\Omnia;
-use App\Services\StatService;
+use Modules\Livestream\Omnia;
+use Modules\Livestream\Services\StatService;
 use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Client;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\UnauthorizedException;
 use KeenIO\Client\KeenIOClient;
-use App\Exceptions\LivestreamAccountIdNotFoundException;
+use Modules\Livestream\Exceptions\LivestreamAccountIdNotFoundException;
 
 /**
  * Class StreamStatService

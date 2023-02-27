@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Nova;
+namespace Modules\Livestream\Nova;
 
 use Illuminate\Http\Request;
 use KABBOUCHI\NovaImpersonate\Impersonate;

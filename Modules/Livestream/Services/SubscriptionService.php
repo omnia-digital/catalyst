@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace Modules\Livestream\Services;
 
-use App\Omnia;
-use App\Team;
-use App\User;
+use Modules\Livestream\Omnia;
+use Modules\Livestream\Team;
+use Modules\Livestream\User;
 use Illuminate\Support\Collection;
 use Laravel\Cashier\Billable;
 use Laravel\Spark\Contracts\Interactions\Subscribe;

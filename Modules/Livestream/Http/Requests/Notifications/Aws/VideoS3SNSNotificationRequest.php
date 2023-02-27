@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Notifications\Aws;
+namespace Modules\Livestream\Http\Requests\Notifications\Aws;
 
-use App\Http\Requests\Notifications\Aws\S3SNSNotificationRequest;
+use Modules\Livestream\Http\Requests\Notifications\Aws\S3SNSNotificationRequest;
 use Auth;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;

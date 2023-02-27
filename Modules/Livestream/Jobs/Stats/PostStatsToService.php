@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Jobs\Stats;
+namespace Modules\Livestream\Jobs\Stats;
 
-use App\Jobs\Job;
-use App\Services\StatService;
+use Modules\Livestream\Jobs\Job;
+use Modules\Livestream\Services\StatService;
 use Illuminate\Support\Facades\Log;
 
 class PostStatsToService extends Job

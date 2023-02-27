@@ -1,7 +1,7 @@
-<?php namespace App\Http\Livewire\Profile;
+<?php namespace Modules\Livestream\Http\Livewire\Profile;
 
-use App\Models\User;
-use App\Support\Livewire\WithTimezone;
+use Modules\Livestream\Models\User;
+use Modules\Livestream\Support\Livewire\WithTimezone;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;

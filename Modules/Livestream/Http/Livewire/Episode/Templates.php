@@ -1,9 +1,9 @@
-<?php namespace App\Http\Livewire\Episode;
+<?php namespace Modules\Livestream\Http\Livewire\Episode;
 
-use App\Models\LivestreamAccount;
-use App\Support\Livestream\WithLivestreamAccount;
-use App\Support\Livewire\WithNotification;
-use App\Support\Series\WithSeries;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Support\Livewire\WithNotification;
+use Modules\Livestream\Support\Series\WithSeries;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Spatie\ValidationRules\Rules\Delimited;

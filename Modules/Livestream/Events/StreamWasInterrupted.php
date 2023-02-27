@@ -1,4 +1,4 @@
-<?php namespace App\Events;
+<?php namespace Modules\Livestream\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;

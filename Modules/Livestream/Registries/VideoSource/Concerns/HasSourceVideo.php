@@ -1,7 +1,7 @@
-<?php namespace App\Registries\VideoSource\Concerns;
+<?php namespace Modules\Livestream\Registries\VideoSource\Concerns;
 
-use App\Models\Video;
-use App\Registries\VideoSource\VideoSourceRegistry;
+use Modules\Livestream\Models\Video;
+use Modules\Livestream\Registries\VideoSource\VideoSourceRegistry;
 
 trait HasSourceVideo
 {

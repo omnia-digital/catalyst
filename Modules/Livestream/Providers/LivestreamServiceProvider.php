@@ -2,7 +2,7 @@
 
 namespace Modules\Livestream\Providers;
 
-use App\Providers\MetricTimeFilterServiceProvider;
+use Modules\Livestream\Providers\MetricTimeFilterServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;

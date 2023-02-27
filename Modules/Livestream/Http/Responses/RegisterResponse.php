@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Responses;
+namespace Modules\Livestream\Http\Responses;
 
-use App\Models\Team;
+use Modules\Livestream\Models\Team;
 use Illuminate\Http\JsonResponse;
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 

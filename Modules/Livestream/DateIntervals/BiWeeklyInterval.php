@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DateIntervals;
+namespace Modules\Livestream\DateIntervals;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -18,5 +18,5 @@ class BiWeeklyInterval extends Model
         // if the amount of weeks is divisible by 2 then it is correct?
     }
 
-    
+
 }

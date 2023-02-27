@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners\Stream;
+namespace Modules\Livestream\Listeners\Stream;
 
-use App\Omnia;
-use App\User;
+use Modules\Livestream\Omnia;
+use Modules\Livestream\User;
 use Illuminate\Support\Facades\Log;
-use App\Notifications\StreamEnded;
-use App\Stream;
+use Modules\Livestream\Notifications\StreamEnded;
+use Modules\Livestream\Stream;
 
 /**
  * Class NotifyStreamStarted

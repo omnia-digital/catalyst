@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace Modules\Livestream\Providers;
 
-use App\Models\Team;
-use App\Policies\TeamPolicy;
+use Modules\Livestream\Models\Team;
+use Modules\Livestream\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

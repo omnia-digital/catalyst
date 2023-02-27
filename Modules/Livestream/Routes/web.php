@@ -1,31 +1,31 @@
 <?php
 
-use App\Http\Controllers\AttachmentController;
-use App\Http\Controllers\AuthSocialController;
-use App\Http\Controllers\MuxWebhooksController;
-use App\Http\Controllers\StripeWebhooksController;
-use App\Http\Livewire\Channel\ChannelDetail;
-use App\Http\Livewire\Channel\Channels;
-use App\Http\Livewire\Channel\FindChannel;
-use App\Http\Livewire\Channel\UpdateChannel;
-use App\Http\Livewire\Episode\CreateEpisode;
-use App\Http\Livewire\Episode\Episodes;
-use App\Http\Livewire\Episode\Templates;
-use App\Http\Livewire\Episode\UpdateTemplate;
-use App\Http\Livewire\Person\People;
-use App\Http\Livewire\Player\PlayerDetail;
-use App\Http\Livewire\Player\Players;
-use App\Http\Livewire\Playlist\Playlists;
-use App\Http\Livewire\Playlist\UpdatePlaylist;
-use App\Http\Livewire\Series\Series;
-use App\Http\Livewire\Series\UpdateSeries;
-use App\Http\Livewire\Setting\EpisodeSetting;
-use App\Http\Livewire\Setting\PlayerSetting;
-use App\Http\Livewire\Setting\StreamingSetting;
-use App\Http\Livewire\Setting\VideoSetting;
-use App\Http\Livewire\Stream\Streams;
-use App\Http\Livewire\Stream\StreamTargets;
-use App\Http\Livewire\Stream\UpdateStreamTarget;
+use Modules\Livestream\Http\Controllers\AttachmentController;
+use Modules\Livestream\Http\Controllers\AuthSocialController;
+use Modules\Livestream\Http\Controllers\MuxWebhooksController;
+use Modules\Livestream\Http\Controllers\StripeWebhooksController;
+use Modules\Livestream\Http\Livewire\Channel\ChannelDetail;
+use Modules\Livestream\Http\Livewire\Channel\Channels;
+use Modules\Livestream\Http\Livewire\Channel\FindChannel;
+use Modules\Livestream\Http\Livewire\Channel\UpdateChannel;
+use Modules\Livestream\Http\Livewire\Episode\CreateEpisode;
+use Modules\Livestream\Http\Livewire\Episode\Episodes;
+use Modules\Livestream\Http\Livewire\Episode\Templates;
+use Modules\Livestream\Http\Livewire\Episode\UpdateTemplate;
+use Modules\Livestream\Http\Livewire\Person\People;
+use Modules\Livestream\Http\Livewire\Player\PlayerDetail;
+use Modules\Livestream\Http\Livewire\Player\Players;
+use Modules\Livestream\Http\Livewire\Playlist\Playlists;
+use Modules\Livestream\Http\Livewire\Playlist\UpdatePlaylist;
+use Modules\Livestream\Http\Livewire\Series\Series;
+use Modules\Livestream\Http\Livewire\Series\UpdateSeries;
+use Modules\Livestream\Http\Livewire\Setting\EpisodeSetting;
+use Modules\Livestream\Http\Livewire\Setting\PlayerSetting;
+use Modules\Livestream\Http\Livewire\Setting\StreamingSetting;
+use Modules\Livestream\Http\Livewire\Setting\VideoSetting;
+use Modules\Livestream\Http\Livewire\Stream\Streams;
+use Modules\Livestream\Http\Livewire\Stream\StreamTargets;
+use Modules\Livestream\Http\Livewire\Stream\UpdateStreamTarget;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

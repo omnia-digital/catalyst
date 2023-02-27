@@ -1,7 +1,7 @@
-<?php namespace App\Models;
+<?php namespace Modules\Livestream\Models;
 
-use App\Enums\StreamStatus;
-use App\Services\Mux\MuxLivestream;
+use Modules\Livestream\Enums\StreamStatus;
+use Modules\Livestream\Services\Mux\MuxLivestream;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

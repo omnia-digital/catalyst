@@ -1,8 +1,8 @@
-<?php namespace App\Policies;
+<?php namespace Modules\Livestream\Policies;
 
-use App\Models\EpisodeTemplate;
-use App\Models\User;
-use App\Policies\Traits\HasDefaultPolicy;
+use Modules\Livestream\Models\EpisodeTemplate;
+use Modules\Livestream\Models\User;
+use Modules\Livestream\Policies\Traits\HasDefaultPolicy;
 
 class EpisodeTemplatePolicy
 {

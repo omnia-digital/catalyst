@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Events;
+namespace Modules\Livestream\Events;
 
-use App\Models\Episode;
+use Modules\Livestream\Models\Episode;
 use Illuminate\Foundation\Events\Dispatchable;
 
 class EpisodeCreatedEvent

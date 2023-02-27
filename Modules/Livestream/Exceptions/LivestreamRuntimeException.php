@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Exceptions;
+namespace Modules\Livestream\Exceptions;
 
-use App\Exceptions\OmniaRuntimeException;
+use Modules\Livestream\Exceptions\OmniaRuntimeException;
 use Illuminate\Support\Collection;
 
 class LivestreamRuntimeException extends OmniaRuntimeException

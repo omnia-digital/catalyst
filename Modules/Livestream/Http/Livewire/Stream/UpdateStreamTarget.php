@@ -1,8 +1,8 @@
-<?php namespace App\Http\Livewire\Stream;
+<?php namespace Modules\Livestream\Http\Livewire\Stream;
 
-use App\Models\StreamTarget;
-use App\Services\Mux\MuxLivestream;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Models\StreamTarget;
+use Modules\Livestream\Services\Mux\MuxLivestream;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 

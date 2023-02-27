@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Listeners\Video;
+namespace Modules\Livestream\Listeners\Video;
 
 use Illuminate\Support\Facades\Log;
-use App\Jobs\Videos\CleanUpTmpVideoFiles as CleanUpTmpVideoFiles_Job;
+use Modules\Livestream\Jobs\Videos\CleanUpTmpVideoFiles as CleanUpTmpVideoFiles_Job;
 
 class CleanUpTmpVideoFiles
 {

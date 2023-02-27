@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Modules\Livestream\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use App\Episode;
-use App\Services\MuxService;
+use Modules\Livestream\Episode;
+use Modules\Livestream\Services\MuxService;
 
 class UpdateEpisodeDurationCommand extends Command
 {

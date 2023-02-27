@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Episode;
+namespace Modules\Livestream\Http\Livewire\Episode;
 
-use App\Models\Episode;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Livewire\Component;
 use Livewire\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
@@ -37,7 +37,7 @@ class MassAttachmentUploadPanel extends Component
             $fileName = '%' . implode('%', explode(' ', $title)) . '%';
 
             $episode = Episode::where('title', 'like', $fileName)->first();
-            
+
             if (is_null($episode)) continue;
 
             // Check if the episode has a file with the same extension
@@ -57,7 +57,7 @@ class MassAttachmentUploadPanel extends Component
                     'epTitle' => $episode->title,
                     'mediaItem' => "<strong>{$ext}:</strong> {$mediaItem->name}",
                 ];
-            } 
+            }
         }
 
         $this->reset('massAttachments');

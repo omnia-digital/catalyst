@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Person;
+namespace Modules\Livestream\Http\Livewire\Person;
 
-use App\Models\person;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Models\person;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 

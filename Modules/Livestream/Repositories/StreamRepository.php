@@ -1,17 +1,17 @@
 <?php
 
-    namespace App\Repositories;
+    namespace Modules\Livestream\Repositories;
 
-    use App\Module;
-    use App\Role;
+    use Modules\Livestream\Module;
+    use Modules\Livestream\Role;
     use Illuminate\Support\Facades\Config;
-    use App\Contracts\Repositories\LivestreamRepositoryContract;
-    use App\EpisodeTemplate;
-    use App\LivestreamAccount;
-    use App\PlaybackId;
-    use App\Services\MuxService;
-    use App\Stream;
-    use App\Player;
+    use Modules\Livestream\Contracts\Repositories\LivestreamRepositoryContract;
+    use Modules\Livestream\EpisodeTemplate;
+    use Modules\Livestream\LivestreamAccount;
+    use Modules\Livestream\PlaybackId;
+    use Modules\Livestream\Services\MuxService;
+    use Modules\Livestream\Stream;
+    use Modules\Livestream\Player;
 
     class StreamRepository
     {

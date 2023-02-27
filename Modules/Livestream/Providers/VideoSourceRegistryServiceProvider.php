@@ -1,9 +1,9 @@
-<?php namespace App\Providers;
+<?php namespace Modules\Livestream\Providers;
 
-use App\Registries\VideoSource\FromUrlSource;
-use App\Registries\VideoSource\MuxVideoSource;
-use App\Registries\VideoSource\S3VideoSource;
-use App\Registries\VideoSource\VideoSourceRegistry;
+use Modules\Livestream\Registries\VideoSource\FromUrlSource;
+use Modules\Livestream\Registries\VideoSource\MuxVideoSource;
+use Modules\Livestream\Registries\VideoSource\S3VideoSource;
+use Modules\Livestream\Registries\VideoSource\VideoSourceRegistry;
 use Illuminate\Support\ServiceProvider;
 
 class VideoSourceRegistryServiceProvider extends ServiceProvider

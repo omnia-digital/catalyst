@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Listeners\Billing;
+namespace Modules\Livestream\Listeners\Billing;
 
 
 use Illuminate\Support\Facades\Bus;
-use App\Jobs\Billing\AddLivestreamMeteredBillingInvoiceItems;
+use Modules\Livestream\Jobs\Billing\AddLivestreamMeteredBillingInvoiceItems;
 
 class InvoiceMeteredBillingItemsForAllModules
 {

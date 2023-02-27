@@ -1,9 +1,9 @@
-<?php namespace App\Http\Livewire\Player;
+<?php namespace Modules\Livestream\Http\Livewire\Player;
 
-use App\Models\Player;
-use App\Support\Episode\WithEpisodeList;
-use App\Support\Livewire\WithNotification;
-use App\Support\Livewire\WithSlideOver;
+use Modules\Livestream\Models\Player;
+use Modules\Livestream\Support\Episode\WithEpisodeList;
+use Modules\Livestream\Support\Livewire\WithNotification;
+use Modules\Livestream\Support\Livewire\WithSlideOver;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithFileUploads;

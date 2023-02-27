@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Series;
+namespace Modules\Livestream\Support\Series;
 
 /**
  * This need to be used with WithLivestreamAccount trait.

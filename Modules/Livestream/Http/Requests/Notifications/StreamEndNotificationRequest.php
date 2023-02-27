@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Notifications;
+namespace Modules\Livestream\Http\Requests\Notifications;
 
 use Auth;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use App\Exceptions\TransVideoException;
-use App\Http\Requests\Notifications\Aws\VideoS3SNSNotificationRequest;
+use Modules\Livestream\Exceptions\TransVideoException;
+use Modules\Livestream\Http\Requests\Notifications\Aws\VideoS3SNSNotificationRequest;
 
 class StreamEndNotificationRequest extends VideoS3SNSNotificationRequest
 {

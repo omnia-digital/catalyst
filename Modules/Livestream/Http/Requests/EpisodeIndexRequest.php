@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Modules\Livestream\Http\Requests;
 
 use Auth;
 

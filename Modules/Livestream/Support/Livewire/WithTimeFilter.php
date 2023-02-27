@@ -1,6 +1,6 @@
-<?php namespace App\Support\Livewire;
+<?php namespace Modules\Livestream\Support\Livewire;
 
-use App\Metrics\TimeFilters\TimeFilterRegistry;
+use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
 use Carbon\CarbonPeriod;
 
 trait WithTimeFilter

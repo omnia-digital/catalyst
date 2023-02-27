@@ -1,8 +1,8 @@
-<?php namespace App\Jobs\Billing;
+<?php namespace Modules\Livestream\Jobs\Billing;
 
-use App\Models\ExtraInvoiceItem;
-use App\Models\Team;
-use App\Services\Mux\MuxDeliveryUsage;
+use Modules\Livestream\Models\ExtraInvoiceItem;
+use Modules\Livestream\Models\Team;
+use Modules\Livestream\Services\Mux\MuxDeliveryUsage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Queue\SerializesModels;

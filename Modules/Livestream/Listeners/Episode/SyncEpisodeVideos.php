@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Listeners\Episode;
+namespace Modules\Livestream\Listeners\Episode;
 
 use Illuminate\Support\Facades\Log;
-use App\Jobs\Episode\SyncEpisodeVideos as SyncEpisodeVideos_Job;
+use Modules\Livestream\Jobs\Episode\SyncEpisodeVideos as SyncEpisodeVideos_Job;
 
 class SyncEpisodeVideos
 {

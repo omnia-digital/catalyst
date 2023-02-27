@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Modules\Livestream\Http\Requests;
 
-use App\Http\Requests\Request;
+use Modules\Livestream\Http\Requests\Request;
 use Auth;
 
 class StreamIntegrationRequest extends LivestreamRequest

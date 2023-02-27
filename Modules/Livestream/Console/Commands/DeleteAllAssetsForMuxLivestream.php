@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Modules\Livestream\Console\Commands;
 
-use App\Omnia;
+use Modules\Livestream\Omnia;
 use Illuminate\Console\Command;
-use App\LivestreamAccount;
-use App\Repositories\StreamRepository;
-use App\Services\MuxService;
+use Modules\Livestream\LivestreamAccount;
+use Modules\Livestream\Repositories\StreamRepository;
+use Modules\Livestream\Services\MuxService;
 
 class DeleteAllAssetsForMuxLivestream extends Command
 {

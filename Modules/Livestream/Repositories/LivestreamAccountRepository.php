@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Repositories;
+namespace Modules\Livestream\Repositories;
 
-use App\Module;
-use App\Omnia;
-use App\Role;
-use App\User;
+use Modules\Livestream\Module;
+use Modules\Livestream\Omnia;
+use Modules\Livestream\Role;
+use Modules\Livestream\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Laravel\Spark\Spark;
 use Laravel\Spark\Events\PaymentMethod\VatIdUpdated;
 use Laravel\Spark\Events\PaymentMethod\BillingAddressUpdated;
-use App\Contracts\Repositories\LivestreamRepositoryContract;
-use App\EpisodeTemplate;
-use App\LivestreamAccount;
-use App\Player;
-use App\Stream;
+use Modules\Livestream\Contracts\Repositories\LivestreamRepositoryContract;
+use Modules\Livestream\EpisodeTemplate;
+use Modules\Livestream\LivestreamAccount;
+use Modules\Livestream\Player;
+use Modules\Livestream\Stream;
 
 class LivestreamAccountRepository implements LivestreamRepositoryContract
 {

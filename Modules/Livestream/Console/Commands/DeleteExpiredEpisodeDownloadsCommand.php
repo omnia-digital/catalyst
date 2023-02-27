@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Modules\Livestream\Console\Commands;
 
-use App\Enums\EpisodeDownloadStatus;
+use Modules\Livestream\Enums\EpisodeDownloadStatus;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
-use App\EpisodeDownload;
+use Modules\Livestream\EpisodeDownload;
 
 class DeleteExpiredEpisodeDownloadsCommand extends Command
 {

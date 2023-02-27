@@ -1,9 +1,9 @@
-<?php namespace App\Support\Episode;
+<?php namespace Modules\Livestream\Support\Episode;
 
-use App\Models\Episode;
-use App\Models\LivestreamAccount;
-use App\Models\Player;
-use App\Support\Livewire\WithCachedRows;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Models\Player;
+use Modules\Livestream\Support\Livewire\WithCachedRows;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
 

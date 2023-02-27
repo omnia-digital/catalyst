@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners;
+namespace Modules\Livestream\Listeners;
 
-use App\Actions\Livestream\CreateMuxStreamAction;
-use App\Enums\VideoStorageOption;
-use App\Models\LivestreamAccount;
-use App\Models\Player;
-use App\Models\Team;
+use Modules\Livestream\Actions\Livestream\CreateMuxStreamAction;
+use Modules\Livestream\Enums\VideoStorageOption;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Models\Player;
+use Modules\Livestream\Models\Team;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Laravel\Jetstream\Events\TeamCreated;

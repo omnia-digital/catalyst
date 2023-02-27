@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Jobs\Videos;
+namespace Modules\Livestream\Jobs\Videos;
 
 use Illuminate\Support\Facades\Log;
-use App\Episode;
-use App\Events\Video\FinishedMovingLiveTmpVideosToVod;
-use App\Events\Video\LiveVideosProcessing;
-use App\Jobs\LivestreamJob;
-use App\Services\EpisodeService;
+use Modules\Livestream\Episode;
+use Modules\Livestream\Events\Video\FinishedMovingLiveTmpVideosToVod;
+use Modules\Livestream\Events\Video\LiveVideosProcessing;
+use Modules\Livestream\Jobs\LivestreamJob;
+use Modules\Livestream\Services\EpisodeService;
 use Livestream\Livestream;
 
 /**

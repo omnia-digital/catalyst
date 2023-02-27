@@ -1,8 +1,8 @@
-<?php namespace App\Console\Commands;
+<?php namespace Modules\Livestream\Console\Commands;
 
-use App\Jobs\Streams\DisableStreamJob;
-use App\Models\Stream;
-use App\Models\Team;
+use Modules\Livestream\Jobs\Streams\DisableStreamJob;
+use Modules\Livestream\Models\Stream;
+use Modules\Livestream\Models\Team;
 use Illuminate\Console\Command;
 
 class DisableUnsubscribedStreamsCommand extends Command

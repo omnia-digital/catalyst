@@ -1,8 +1,8 @@
-<?php namespace App\Listeners;
+<?php namespace Modules\Livestream\Listeners;
 
-use App\Events\StreamCompleted;
-use App\Models\Video;
-use App\Services\Mux\Concerns\HasThumbnail;
+use Modules\Livestream\Events\StreamCompleted;
+use Modules\Livestream\Models\Video;
+use Modules\Livestream\Services\Mux\Concerns\HasThumbnail;
 use Illuminate\Support\Arr;
 
 class UpdateEpisodeInfo

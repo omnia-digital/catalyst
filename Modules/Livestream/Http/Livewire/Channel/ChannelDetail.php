@@ -1,8 +1,8 @@
-<?php namespace App\Http\Livewire\Channel;
+<?php namespace Modules\Livestream\Http\Livewire\Channel;
 
-use App\Models\Channel;
-use App\Models\Player;
-use App\Support\Episode\WithEpisodeList;
+use Modules\Livestream\Models\Channel;
+use Modules\Livestream\Models\Player;
+use Modules\Livestream\Support\Episode\WithEpisodeList;
 use Livewire\Component;
 
 class ChannelDetail extends Component

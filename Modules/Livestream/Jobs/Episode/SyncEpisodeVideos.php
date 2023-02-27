@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Jobs\Episode;
+namespace Modules\Livestream\Jobs\Episode;
 
 use Illuminate\Support\Facades\Log;
-use App\Episode;
-use App\Events\Episode\EpisodeVideosFinishedSyncing;
-use App\Events\Episode\EpisodeVideosStartedSyncing;
-use App\Events\Video\FinishedMovingLiveVideosToTmp;
-use App\Events\Video\LiveVideosProcessing;
-use App\Events\Video\LiveVideosStartedProcessing;
-use App\Jobs\LivestreamJob;
-use App\Services\EpisodeService;
+use Modules\Livestream\Episode;
+use Modules\Livestream\Events\Episode\EpisodeVideosFinishedSyncing;
+use Modules\Livestream\Events\Episode\EpisodeVideosStartedSyncing;
+use Modules\Livestream\Events\Video\FinishedMovingLiveVideosToTmp;
+use Modules\Livestream\Events\Video\LiveVideosProcessing;
+use Modules\Livestream\Events\Video\LiveVideosStartedProcessing;
+use Modules\Livestream\Jobs\LivestreamJob;
+use Modules\Livestream\Services\EpisodeService;
 
 /**
  * Class SyncEpisodeVideos

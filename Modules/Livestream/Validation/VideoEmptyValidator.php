@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Validation;
+namespace Modules\Livestream\Validation;
 
-use App\Validation\Validator as App_Validator;
+use Modules\Livestream\Validation\Validator as App_Validator;
 
 class VideoEmptyValidator extends App_Validator
 {

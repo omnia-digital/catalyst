@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Collection;
-use App\Event;
-use App\Http\Requests\DashboardRequest;
-use App\Dashboard;
+use Modules\Livestream\Event;
+use Modules\Livestream\Http\Requests\DashboardRequest;
+use Modules\Livestream\Dashboard;
 use Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\LivestreamController;
-use App\LivestreamApplication;
-use App\Player;
-use App\Services\PlayerService;
-use App\Services\StreamService;
-use App\Video;
-use App\WowzaMediaServer;
-use App\WowzaVhost;
-use App\WowzaPublisher;
-use App\WowzaVhostHostPort;
+use Modules\Livestream\Http\Requests;
+use Modules\Livestream\Http\Controllers\LivestreamController;
+use Modules\Livestream\LivestreamApplication;
+use Modules\Livestream\Player;
+use Modules\Livestream\Services\PlayerService;
+use Modules\Livestream\Services\StreamService;
+use Modules\Livestream\Video;
+use Modules\Livestream\WowzaMediaServer;
+use Modules\Livestream\WowzaVhost;
+use Modules\Livestream\WowzaPublisher;
+use Modules\Livestream\WowzaVhostHostPort;
 
 class DashboardController extends LivestreamController
 {

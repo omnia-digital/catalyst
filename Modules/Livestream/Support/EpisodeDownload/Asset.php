@@ -1,4 +1,4 @@
-<?php namespace App\Support\EpisodeDownload;
+<?php namespace Modules\Livestream\Support\EpisodeDownload;
 
 use Illuminate\Support\Arr;
 use MuxPhp\Models\Asset as MuxAsset;

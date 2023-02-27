@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Livestream\Models;
 
-use App\Traits\Downloadable;
+use Modules\Livestream\Traits\Downloadable;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
 

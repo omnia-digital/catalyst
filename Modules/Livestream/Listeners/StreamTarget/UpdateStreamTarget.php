@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners\StreamTarget;
+namespace Modules\Livestream\Listeners\StreamTarget;
 
 class UpdateStreamTarget
 {

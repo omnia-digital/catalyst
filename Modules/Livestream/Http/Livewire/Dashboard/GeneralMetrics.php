@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard;
+namespace Modules\Livestream\Http\Livewire\Dashboard;
 
-use App\Metrics\EpisodeWithMostAttachmentDownloads;
-use App\Metrics\MostViewedSeries;
-use App\Metrics\TimeFilters\TimeFilterRegistry;
-use App\Metrics\TotalAttachmentDownloads;
-use App\Metrics\TotalEpisodeViews;
-use App\Support\Livewire\WithTimeFilter;
+use Modules\Livestream\Metrics\EpisodeWithMostAttachmentDownloads;
+use Modules\Livestream\Metrics\MostViewedSeries;
+use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
+use Modules\Livestream\Metrics\TotalAttachmentDownloads;
+use Modules\Livestream\Metrics\TotalEpisodeViews;
+use Modules\Livestream\Support\Livewire\WithTimeFilter;
 use Livewire\Component;
 
 class GeneralMetrics extends Component

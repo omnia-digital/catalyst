@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Nova\Actions;
+namespace Modules\Livestream\Nova\Actions;
 
-use App\Omnia;
+use Modules\Livestream\Omnia;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;

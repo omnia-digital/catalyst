@@ -1,8 +1,8 @@
-<?php namespace App\Http\Livewire\Player;
+<?php namespace Modules\Livestream\Http\Livewire\Player;
 
-use App\Models\LivestreamAccount;
-use App\Support\Livestream\WithLivestreamAccount;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;

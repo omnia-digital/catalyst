@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Services;
+namespace Modules\Livestream\Services;
 
-use App\Services\Service;
+use Modules\Livestream\Services\Service;
 use GuzzleHttp\Client;
 use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\TransVideoException;
-use App\LivestreamAccount;
+use Modules\Livestream\Exceptions\TransVideoException;
+use Modules\Livestream\LivestreamAccount;
 use Auth;
-use App\Repositories\EpisodeTemplateRepository;
-use App\StreamIntegration;
+use Modules\Livestream\Repositories\EpisodeTemplateRepository;
+use Modules\Livestream\StreamIntegration;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StreamTargetService extends Service

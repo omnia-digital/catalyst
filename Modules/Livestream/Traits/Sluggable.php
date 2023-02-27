@@ -1,5 +1,5 @@
 <?php
-namespace App\Traits;
+namespace Modules\Livestream\Traits;
 
 use Exception;
 use Illuminate\Support\Facades\Log;

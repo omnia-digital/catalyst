@@ -1,11 +1,11 @@
 <?php
 
-    namespace App\Repositories;
+    namespace Modules\Livestream\Repositories;
 
-    use App\Http\Requests\Request;
-    use App\Services\MuxService;
-    use App\Stream;
-    use App\StreamTarget;
+    use Modules\Livestream\Http\Requests\Request;
+    use Modules\Livestream\Services\MuxService;
+    use Modules\Livestream\Stream;
+    use Modules\Livestream\StreamTarget;
 
     class StreamTargetRepository
     {

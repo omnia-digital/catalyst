@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Nova\Filters;
+namespace Modules\Livestream\Nova\Filters;
 
-use App\Models\Team;
+use Modules\Livestream\Models\Team;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
 

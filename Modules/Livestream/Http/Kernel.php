@@ -2,7 +2,7 @@
 
 namespace Modules\Livestream\Http;
 
-use App\Http\Middleware\TrackGoalBillingPageMiddleware;
+use Modules\Livestream\Http\Middleware\TrackGoalBillingPageMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Spark\Http\Middleware\VerifyBillableIsSubscribed;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\Jetstream;
+namespace Modules\Livestream\Actions\Jetstream;
 
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 
 class DeleteTeam implements DeletesTeams

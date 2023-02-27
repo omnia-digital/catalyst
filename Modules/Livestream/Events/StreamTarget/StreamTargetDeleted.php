@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Events\StreamTarget;
+namespace Modules\Livestream\Events\StreamTarget;
 
-use App\Events\Event;
+use Modules\Livestream\Events\Event;
 
 class StreamTargetDeleted extends Event
 {

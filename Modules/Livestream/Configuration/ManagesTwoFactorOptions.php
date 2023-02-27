@@ -1,4 +1,4 @@
-<?php namespace App\Configuration;
+<?php namespace Modules\Livestream\Configuration;
 
 trait ManagesTwoFactorOptions
 {

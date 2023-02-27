@@ -1,19 +1,19 @@
 <?php
 
-    namespace App\Http\Controllers;
+    namespace Modules\Livestream\Http\Controllers;
 
 
-    use App\Omnia;
+    use Modules\Livestream\Omnia;
     use Illuminate\Http\Request;
     use Illuminate\Support\Collection;
     use Illuminate\Support\Facades\Auth;
-    use App\Http\Requests\LivestreamRequest;
-    use App\LivestreamAccount;
-    use App\Player;
-    use App\Repositories\StreamRepository;
-    use App\Services\MuxService;
-    use App\Services\StreamService;
-    use App\Stream;
+    use Modules\Livestream\Http\Requests\LivestreamRequest;
+    use Modules\Livestream\LivestreamAccount;
+    use Modules\Livestream\Player;
+    use Modules\Livestream\Repositories\StreamRepository;
+    use Modules\Livestream\Services\MuxService;
+    use Modules\Livestream\Services\StreamService;
+    use Modules\Livestream\Stream;
     use Livestream\Livestream;
 
     class StreamController extends LivestreamController

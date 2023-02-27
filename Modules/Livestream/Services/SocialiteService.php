@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace Modules\Livestream\Services;
 
-use App\SocialAccount;
-use App\User;
+use Modules\Livestream\SocialAccount;
+use Modules\Livestream\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

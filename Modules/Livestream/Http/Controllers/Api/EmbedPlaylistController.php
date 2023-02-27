@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace Modules\Livestream\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\Episode;
-use App\Models\Person;
-use App\Models\Playlist;
-use App\Models\Series;
+use Modules\Livestream\Http\Controllers\Controller;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\Person;
+use Modules\Livestream\Models\Playlist;
+use Modules\Livestream\Models\Series;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;

@@ -1,34 +1,34 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Events\Video\VideoAssetCreated;
-use App\Events\Video\VideoAssetDeleted;
-use App\Events\Video\VideoAssetErrored;
-use App\Events\Video\VideoAssetLivestreamCompleted;
-use App\Events\Video\VideoAssetMasterDeleted;
-use App\Events\Video\VideoAssetMasterErrored;
-use App\Events\Video\VideoAssetMasterPreparing;
-use App\Events\Video\VideoAssetMasterReady;
-use App\Events\Video\VideoAssetReady;
-use App\Events\Video\VideoAssetStaticDeleted;
-use App\Events\Video\VideoAssetStaticErrored;
-use App\Events\Video\VideoAssetStaticPreparing;
-use App\Events\Video\VideoAssetStaticReady;
-use App\Events\Stream\StreamActive;
-use App\Events\Stream\StreamConnected;
-use App\Events\Stream\StreamCreated;
-use App\Events\Stream\StreamDeleted;
-use App\Events\Stream\StreamDisconnected;
-use App\Events\Stream\StreamIdle;
-use App\Events\Stream\StreamRecording;
-use App\Events\Stream\StreamUpdated;
-use App\Events\Video\VideoAssetUpdated;
-use App\Events\Video\VideoUploadAssetCreated;
-use App\Events\Video\VideoUploadCancelled;
-use App\Events\Video\VideoUploadCreated;
-use App\Events\Video\VideoUploadErrored;
+use Modules\Livestream\Events\Video\VideoAssetCreated;
+use Modules\Livestream\Events\Video\VideoAssetDeleted;
+use Modules\Livestream\Events\Video\VideoAssetErrored;
+use Modules\Livestream\Events\Video\VideoAssetLivestreamCompleted;
+use Modules\Livestream\Events\Video\VideoAssetMasterDeleted;
+use Modules\Livestream\Events\Video\VideoAssetMasterErrored;
+use Modules\Livestream\Events\Video\VideoAssetMasterPreparing;
+use Modules\Livestream\Events\Video\VideoAssetMasterReady;
+use Modules\Livestream\Events\Video\VideoAssetReady;
+use Modules\Livestream\Events\Video\VideoAssetStaticDeleted;
+use Modules\Livestream\Events\Video\VideoAssetStaticErrored;
+use Modules\Livestream\Events\Video\VideoAssetStaticPreparing;
+use Modules\Livestream\Events\Video\VideoAssetStaticReady;
+use Modules\Livestream\Events\Stream\StreamActive;
+use Modules\Livestream\Events\Stream\StreamConnected;
+use Modules\Livestream\Events\Stream\StreamCreated;
+use Modules\Livestream\Events\Stream\StreamDeleted;
+use Modules\Livestream\Events\Stream\StreamDisconnected;
+use Modules\Livestream\Events\Stream\StreamIdle;
+use Modules\Livestream\Events\Stream\StreamRecording;
+use Modules\Livestream\Events\Stream\StreamUpdated;
+use Modules\Livestream\Events\Video\VideoAssetUpdated;
+use Modules\Livestream\Events\Video\VideoUploadAssetCreated;
+use Modules\Livestream\Events\Video\VideoUploadCancelled;
+use Modules\Livestream\Events\Video\VideoUploadCreated;
+use Modules\Livestream\Events\Video\VideoUploadErrored;
 
 class MuxEventController extends LivestreamController
 {

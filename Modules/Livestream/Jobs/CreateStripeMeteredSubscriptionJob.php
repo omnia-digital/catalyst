@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Jobs;
+namespace Modules\Livestream\Jobs;
 
-use App\Models\Team;
+use Modules\Livestream\Models\Team;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;

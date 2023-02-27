@@ -1,10 +1,10 @@
-<?php namespace App\Http\Livewire\Dashboard;
+<?php namespace Modules\Livestream\Http\Livewire\Dashboard;
 
-use App\Metrics\StorageDurationChart;
-use App\Metrics\TimeFilters\TimeFilterRegistry;
-use App\Metrics\TotalVideoViewsByLivestreamAccountChart;
-use App\Services\Mux\DataTransferObjects\VideoView;
-use App\Support\Livewire\WithTimeFilter;
+use Modules\Livestream\Metrics\StorageDurationChart;
+use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
+use Modules\Livestream\Metrics\TotalVideoViewsByLivestreamAccountChart;
+use Modules\Livestream\Services\Mux\DataTransferObjects\VideoView;
+use Modules\Livestream\Support\Livewire\WithTimeFilter;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Collection;

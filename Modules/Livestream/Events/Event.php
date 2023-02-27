@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace Modules\Livestream\Events;
 
 abstract class Event
 {

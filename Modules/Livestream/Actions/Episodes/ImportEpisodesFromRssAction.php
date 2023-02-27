@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Actions\Episodes;
+namespace Modules\Livestream\Actions\Episodes;
 
-use App\Jobs\Episode\ImportEpisodeItemFromRssJob;
-use App\Models\Episode;
-use App\Models\LivestreamAccount;
-use App\Models\Person;
+use Modules\Livestream\Jobs\Episode\ImportEpisodeItemFromRssJob;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Models\Person;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use SimplePie_Item;

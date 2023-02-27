@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners\Stream;
+namespace Modules\Livestream\Listeners\Stream;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
-use App\Events\Stream\StreamWasInterrupted;
-use App\Notifications\StreamWasInterruptedNotification;
+use Modules\Livestream\Events\Stream\StreamWasInterrupted;
+use Modules\Livestream\Notifications\StreamWasInterruptedNotification;
 
 class NotifyWhenEpisodeHasReachedLimit
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace Modules\Livestream\View\Components;
 
 use Illuminate\View\Component;
 

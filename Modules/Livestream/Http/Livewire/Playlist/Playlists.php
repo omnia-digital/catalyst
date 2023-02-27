@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Playlist;
+namespace Modules\Livestream\Http\Livewire\Playlist;
 
-use App\Models\LivestreamAccount;
-use App\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Livewire\Component;
 
 /**

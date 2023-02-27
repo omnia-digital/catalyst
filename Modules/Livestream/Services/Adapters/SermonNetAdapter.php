@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Adapters;
+namespace Modules\Livestream\Services\Adapters;
 
-use App\Http\Requests\ImportRequest;
+use Modules\Livestream\Http\Requests\ImportRequest;
 
 /**
  * Class SermonNetAdapter

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Events\Episode;
+namespace Modules\Livestream\Events\Episode;
 
-use App\Events\Event;
+use Modules\Livestream\Events\Event;
 use Illuminate\Queue\SerializesModels;
-use App\Services\EpisodeService;
+use Modules\Livestream\Services\EpisodeService;
 
 class EpisodeFinishedRecording extends Event
 {

@@ -1,7 +1,7 @@
-<?php namespace App\Support\Episode;
+<?php namespace Modules\Livestream\Support\Episode;
 
-use App\Services\MuxService;
-use App\Support\EpisodeDownload\Asset;
+use Modules\Livestream\Services\MuxService;
+use Modules\Livestream\Support\EpisodeDownload\Asset;
 
 trait BeAsset
 {

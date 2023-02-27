@@ -1,6 +1,6 @@
-<?php namespace App\Registries\VideoSource\Concerns;
+<?php namespace Modules\Livestream\Registries\VideoSource\Concerns;
 
-use App\Models\Video;
+use Modules\Livestream\Models\Video;
 
 interface BaseVideoSource
 {

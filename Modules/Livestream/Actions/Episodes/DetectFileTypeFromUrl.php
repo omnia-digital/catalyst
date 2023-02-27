@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Episodes;
+namespace Modules\Livestream\Actions\Episodes;
 
 class DetectFileTypeFromUrl
 {

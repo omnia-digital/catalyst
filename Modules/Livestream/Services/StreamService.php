@@ -1,18 +1,18 @@
 <?php
 
-    namespace App\Services;
+    namespace Modules\Livestream\Services;
 
-    use App\Services\Service;
+    use Modules\Livestream\Services\Service;
     use Illuminate\Support\Collection;
     use Illuminate\Support\Facades\Log;
-    use App\Exceptions\LivestreamAccountIdNotFoundException;
-    use App\LivestreamAccount;
-    use App\Player;
+    use Modules\Livestream\Exceptions\LivestreamAccountIdNotFoundException;
+    use Modules\Livestream\LivestreamAccount;
+    use Modules\Livestream\Player;
     use Auth;
     use Illuminate\Http\Request;
-    use App\Http\Requests;
-    use App\WowzaMediaServer;
-    use App\WowzaVhost;
+    use Modules\Livestream\Http\Requests;
+    use Modules\Livestream\WowzaMediaServer;
+    use Modules\Livestream\WowzaVhost;
     use Livestream\Livestream;
     use SimpleXMLElement;
 

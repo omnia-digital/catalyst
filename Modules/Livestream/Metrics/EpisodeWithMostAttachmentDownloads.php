@@ -1,7 +1,7 @@
-<?php namespace App\Metrics;
+<?php namespace Modules\Livestream\Metrics;
 
-use App\Actions\Episodes\GetEpisodeWithMostAttachmentDownloadsAction;
-use App\Metrics\MetricTypes\ObjectModel;
+use Modules\Livestream\Actions\Episodes\GetEpisodeWithMostAttachmentDownloadsAction;
+use Modules\Livestream\Metrics\MetricTypes\ObjectModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 

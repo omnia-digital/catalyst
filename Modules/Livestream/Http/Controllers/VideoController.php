@@ -1,11 +1,11 @@
 <?php
 
-    namespace App\Http\Controllers;
+    namespace Modules\Livestream\Http\Controllers;
 
-    use App\Exceptions\MissingParameterException;
-    use App\Http\Requests\Request;
-    use App\Omnia;
-    use App\SocialAccount;
+    use Modules\Livestream\Exceptions\MissingParameterException;
+    use Modules\Livestream\Http\Requests\Request;
+    use Modules\Livestream\Omnia;
+    use Modules\Livestream\SocialAccount;
     use Carbon\Carbon;
     use Illuminate\Auth\AuthenticationException;
     use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -14,16 +14,16 @@
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Log;
     use Illuminate\Support\Facades\Storage;
-    use App\Episode;
-    use App\Http\Requests\LivestreamRequest;
-    use App\LivestreamAccount;
-    use App\Repositories\VideoRepository;
-    use App\Services\SocialAccountService;
-    use App\Services\StreamIntegrationService;
-    use App\Services\StreamTargetService;
-    use App\StreamIntegration;
-    use App\Video;
-    use App\VideoSourceType;
+    use Modules\Livestream\Episode;
+    use Modules\Livestream\Http\Requests\LivestreamRequest;
+    use Modules\Livestream\LivestreamAccount;
+    use Modules\Livestream\Repositories\VideoRepository;
+    use Modules\Livestream\Services\SocialAccountService;
+    use Modules\Livestream\Services\StreamIntegrationService;
+    use Modules\Livestream\Services\StreamTargetService;
+    use Modules\Livestream\StreamIntegration;
+    use Modules\Livestream\Video;
+    use Modules\Livestream\VideoSourceType;
     use Livestream\Livestream;
     use mysql_xdevapi\Exception;
 

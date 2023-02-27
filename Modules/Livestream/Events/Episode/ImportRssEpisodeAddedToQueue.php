@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Events\Episode;
+namespace Modules\Livestream\Events\Episode;
 
-use App\Events\Event;
+use Modules\Livestream\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use App\Http\Requests\Notifications\StreamEndNotificationRequest;
+use Modules\Livestream\Http\Requests\Notifications\StreamEndNotificationRequest;
 
 class ImportRssEpisodeAddedToQueue extends Event
 {

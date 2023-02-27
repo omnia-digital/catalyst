@@ -1,31 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
-use App\Omnia;
+use Modules\Livestream\Omnia;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Validator;
-use App\Episode;
+use Modules\Livestream\Episode;
 use Illuminate\Http\Request;
-use App\EpisodeTemplate;
-use App\Http\Requests;
-use App\Http\Requests\EpisodeRequest;
-use App\Http\Requests\EpisodeTemplateRequest;
-use App\Http\Requests\S3Request;
-use App\Http\Controllers\LivestreamController;
-use App\Interactions\DeleteEpisodeTemplateThumbnail;
-use App\Interactions\UpdateEpisodeTemplateThumbnail;
-use App\LivestreamAccount;
-use App\LivestreamApplication;
-use App\Player;
-use App\WowzaMediaServer;
-use App\WowzaVhost;
-use App\WowzaPublisher;
-use App\WowzaVhostHostPort;
+use Modules\Livestream\EpisodeTemplate;
+use Modules\Livestream\Http\Requests;
+use Modules\Livestream\Http\Requests\EpisodeRequest;
+use Modules\Livestream\Http\Requests\EpisodeTemplateRequest;
+use Modules\Livestream\Http\Requests\S3Request;
+use Modules\Livestream\Http\Controllers\LivestreamController;
+use Modules\Livestream\Interactions\DeleteEpisodeTemplateThumbnail;
+use Modules\Livestream\Interactions\UpdateEpisodeTemplateThumbnail;
+use Modules\Livestream\LivestreamAccount;
+use Modules\Livestream\LivestreamApplication;
+use Modules\Livestream\Player;
+use Modules\Livestream\WowzaMediaServer;
+use Modules\Livestream\WowzaVhost;
+use Modules\Livestream\WowzaPublisher;
+use Modules\Livestream\WowzaVhostHostPort;
 use Redirect;
 
 

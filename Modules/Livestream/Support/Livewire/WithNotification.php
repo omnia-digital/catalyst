@@ -1,4 +1,4 @@
-<?php namespace App\Support\Livewire;
+<?php namespace Modules\Livestream\Support\Livewire;
 
 trait WithNotification
 {

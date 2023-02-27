@@ -1,7 +1,7 @@
-<?php namespace App\Jobs\Billing;
+<?php namespace Modules\Livestream\Jobs\Billing;
 
-use App\Models\Episode;
-use App\Models\Team;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;

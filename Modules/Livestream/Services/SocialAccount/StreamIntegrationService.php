@@ -1,4 +1,4 @@
-<?php namespace App\Services\SocialAccount;
+<?php namespace Modules\Livestream\Services\SocialAccount;
 
 use Facebook\Facebook;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

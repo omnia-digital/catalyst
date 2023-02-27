@@ -1,6 +1,6 @@
-<?php namespace App\Configuration;
+<?php namespace Modules\Livestream\Configuration;
 
-use App\User;
+use Modules\Livestream\User;
 use Illuminate\Support\HtmlString;
 
 trait ManagesAppDetails

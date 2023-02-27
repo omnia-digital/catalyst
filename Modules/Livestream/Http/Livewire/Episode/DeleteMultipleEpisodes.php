@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Episode;
+namespace Modules\Livestream\Http\Livewire\Episode;
 
-use App\Models\Episode;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
@@ -37,7 +37,7 @@ class DeleteMultipleEpisodes extends Component
 
             // Only soft-delete episode
             $episode->delete();
-            
+
         }
 
         $this->success('Your episodes were deleted successfully!');

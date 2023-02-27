@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Modules\Livestream\Console\Commands;
 
-use App\Omnia;
-use App\Services\SubscriptionService;
-use App\Team;
+use Modules\Livestream\Omnia;
+use Modules\Livestream\Services\SubscriptionService;
+use Modules\Livestream\Team;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;

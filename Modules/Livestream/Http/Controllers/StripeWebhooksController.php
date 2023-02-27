@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Modules\Livestream\Http\Controllers;
 
-use App\Jobs\Billing\AddMeteredBillingInvoiceItemsJob;
-use App\Models\Team;
+use Modules\Livestream\Jobs\Billing\AddMeteredBillingInvoiceItemsJob;
+use Modules\Livestream\Models\Team;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Spark\Http\Controllers\WebhookController as SparkWebhookController;

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Policies;
+namespace Modules\Livestream\Policies;
 
-use App\Models\Team;
-use App\Models\User;
-use App\Policies\Traits\HasDefaultPolicy;
+use Modules\Livestream\Models\Team;
+use Modules\Livestream\Models\User;
+use Modules\Livestream\Policies\Traits\HasDefaultPolicy;
 
 class TeamPolicy
 {

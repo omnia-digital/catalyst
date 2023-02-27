@@ -1,7 +1,7 @@
-<?php namespace App\Registries\VideoSource;
+<?php namespace Modules\Livestream\Registries\VideoSource;
 
-use App\Exceptions\InvalidVideoSourceException;
-use App\Registries\VideoSource\Concerns\BaseVideoSource;
+use Modules\Livestream\Exceptions\InvalidVideoSourceException;
+use Modules\Livestream\Registries\VideoSource\Concerns\BaseVideoSource;
 
 class VideoSourceRegistry
 {

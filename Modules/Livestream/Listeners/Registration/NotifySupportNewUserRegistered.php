@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Listeners\Registration;
+namespace Modules\Livestream\Listeners\Registration;
 
-use App\Omnia;
+use Modules\Livestream\Omnia;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Spark\Events\Auth\UserRegistered;
 use Laravel\Spark\Interactions\Support\SendSupportEmail;

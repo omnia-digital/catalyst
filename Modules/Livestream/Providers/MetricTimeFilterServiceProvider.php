@@ -1,14 +1,14 @@
-<?php namespace App\Providers;
+<?php namespace Modules\Livestream\Providers;
 
-use App\Metrics\TimeFilters\AllTimeFilter;
-use App\Metrics\TimeFilters\LastMonthTimeFilter;
-use App\Metrics\TimeFilters\LastSevenDaysTimeFilter;
-use App\Metrics\TimeFilters\LastSixMonthsTimeFilter;
-use App\Metrics\TimeFilters\LastThirtyDaysTimeFilter;
-use App\Metrics\TimeFilters\ThisMonthTimeFilter;
-use App\Metrics\TimeFilters\ThisYearTimeFilter;
-use App\Metrics\TimeFilters\TimeFilterRegistry;
-use App\Metrics\TimeFilters\TodayTimeFilter;
+use Modules\Livestream\Metrics\TimeFilters\AllTimeFilter;
+use Modules\Livestream\Metrics\TimeFilters\LastMonthTimeFilter;
+use Modules\Livestream\Metrics\TimeFilters\LastSevenDaysTimeFilter;
+use Modules\Livestream\Metrics\TimeFilters\LastSixMonthsTimeFilter;
+use Modules\Livestream\Metrics\TimeFilters\LastThirtyDaysTimeFilter;
+use Modules\Livestream\Metrics\TimeFilters\ThisMonthTimeFilter;
+use Modules\Livestream\Metrics\TimeFilters\ThisYearTimeFilter;
+use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
+use Modules\Livestream\Metrics\TimeFilters\TodayTimeFilter;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 

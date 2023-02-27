@@ -1,6 +1,6 @@
-<?php namespace App\Metrics\TimeFilters;
+<?php namespace Modules\Livestream\Metrics\TimeFilters;
 
-use App\Omnia;
+use Modules\Livestream\Omnia;
 use Carbon\Carbon;
 
 abstract class TimeFilter

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Series;
+namespace Modules\Livestream\Http\Livewire\Series;
 
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 

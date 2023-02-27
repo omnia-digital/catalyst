@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Providers;
+namespace Modules\Livestream\Providers;
 
-use App\Models\LivestreamAccount;
-use App\Models\Series;
-use App\Models\Stream;
-use App\Models\User;
-use App\Nova\Policies\NovaLivestreamAccountPolicy;
-use App\Nova\Policies\NovaStreamPolicy;
-use App\Policies\NovaSeriesPolicy;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Models\Series;
+use Modules\Livestream\Models\Stream;
+use Modules\Livestream\Models\User;
+use Modules\Livestream\Nova\Policies\NovaLivestreamAccountPolicy;
+use Modules\Livestream\Nova\Policies\NovaStreamPolicy;
+use Modules\Livestream\Policies\NovaSeriesPolicy;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;

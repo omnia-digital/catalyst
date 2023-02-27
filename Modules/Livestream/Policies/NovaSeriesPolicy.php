@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Policies;
+namespace Modules\Livestream\Policies;
 
-use App\Models\Series;
-use App\Models\User;
+use Modules\Livestream\Models\Series;
+use Modules\Livestream\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class NovaSeriesPolicy

@@ -1,9 +1,9 @@
-<?php namespace App\Http\Livewire\Person;
+<?php namespace Modules\Livestream\Http\Livewire\Person;
 
-use App\Models\Person;
-use App\Support\Livewire\WithCachedRows;
-use App\Support\Livewire\WithLayoutSwitcher;
-use App\Support\Livewire\WithNotification;
+use Modules\Livestream\Models\Person;
+use Modules\Livestream\Support\Livewire\WithCachedRows;
+use Modules\Livestream\Support\Livewire\WithLayoutSwitcher;
+use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;

@@ -1,4 +1,4 @@
-<?php namespace App\Notifications;
+<?php namespace Modules\Livestream\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

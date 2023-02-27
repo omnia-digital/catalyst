@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Interactions;
+    namespace Modules\Livestream\Interactions;
 
     use Intervention\Image\ImageManager;
     use Illuminate\Support\Facades\Storage;

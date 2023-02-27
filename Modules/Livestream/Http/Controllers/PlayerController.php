@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\EnvironmentDetector;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use App\Exceptions\UnsupportedBroswerException;
-use App\Services\PlayerService;
-use App\Http\Requests\PlayerRequest;
-use App\LivestreamAccount;
-use App\Player;
+use Modules\Livestream\Exceptions\UnsupportedBroswerException;
+use Modules\Livestream\Services\PlayerService;
+use Modules\Livestream\Http\Requests\PlayerRequest;
+use Modules\Livestream\LivestreamAccount;
+use Modules\Livestream\Player;
 use Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\LivestreamController;
-use App\Video;
-use App\WowzaMediaServer;
-use App\WowzaVhost;
-use App\WowzaPublisher;
-use App\WowzaVhostHostPort;
-use App\Services\StreamService;
+use Modules\Livestream\Http\Requests;
+use Modules\Livestream\Http\Controllers\LivestreamController;
+use Modules\Livestream\Video;
+use Modules\Livestream\WowzaMediaServer;
+use Modules\Livestream\WowzaVhost;
+use Modules\Livestream\WowzaPublisher;
+use Modules\Livestream\WowzaVhostHostPort;
+use Modules\Livestream\Services\StreamService;
 
 
 class PlayerController extends LivestreamController

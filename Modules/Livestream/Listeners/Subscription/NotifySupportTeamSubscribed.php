@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Listeners\Subscription;
+namespace Modules\Livestream\Listeners\Subscription;
 
-use App\Omnia;
+use Modules\Livestream\Omnia;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Spark\Events\Auth\UserRegistered;
 use Laravel\Spark\Events\Teams\Subscription\TeamSubscribed;

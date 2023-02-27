@@ -1,21 +1,21 @@
 <?php
 
-    namespace App\Console\Commands;
+    namespace Modules\Livestream\Console\Commands;
 
-    use App\Omnia;
+    use Modules\Livestream\Omnia;
     use Carbon\Carbon;
     use Exception;
     use Illuminate\Console\Command;
     use Illuminate\Support\Facades\Config;
     use Illuminate\Support\Facades\Storage;
-    use App\Episode;
-    use App\LivestreamAccount;
-    use App\PlaybackId;
-    use App\Repositories\VideoRepository;
-    use App\Services\EpisodeService;
-    use App\Services\MuxService;
-    use App\Video;
-    use App\VideoSourceType;
+    use Modules\Livestream\Episode;
+    use Modules\Livestream\LivestreamAccount;
+    use Modules\Livestream\PlaybackId;
+    use Modules\Livestream\Repositories\VideoRepository;
+    use Modules\Livestream\Services\EpisodeService;
+    use Modules\Livestream\Services\MuxService;
+    use Modules\Livestream\Video;
+    use Modules\Livestream\VideoSourceType;
 
     class RestoreS3GlacierObjects extends Command
     {

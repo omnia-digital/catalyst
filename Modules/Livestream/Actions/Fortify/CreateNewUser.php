@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Actions\Fortify;
+namespace Modules\Livestream\Actions\Fortify;
 
-use App\Models\Person;
-use App\Models\Team;
-use App\Models\User;
+use Modules\Livestream\Models\Person;
+use Modules\Livestream\Models\Team;
+use Modules\Livestream\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

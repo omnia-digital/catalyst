@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners\Video;
+namespace Modules\Livestream\Listeners\Video;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Episode;
-use App\Events\Stream\StreamStarted;
-use App\Events\Stream\StreamEnded;
+use Modules\Livestream\Episode;
+use Modules\Livestream\Events\Stream\StreamStarted;
+use Modules\Livestream\Events\Stream\StreamEnded;
 
 /**
  * Class UpdateVideosProcessingStatus

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Mux\Collections;
+namespace Modules\Livestream\Services\Mux\Collections;
 
-use App\Services\Mux\DataTransferObjects\VideoView;
+use Modules\Livestream\Services\Mux\DataTransferObjects\VideoView;
 use Illuminate\Support\Collection;
 use MuxPhp\Models\AbridgedVideoView;
 

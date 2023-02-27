@@ -1,8 +1,8 @@
-<?php namespace App\Http\Livewire\Setting;
+<?php namespace Modules\Livestream\Http\Livewire\Setting;
 
-use App\Actions\Livestream\CreateMuxStreamAction;
-use App\Models\LivestreamAccount;
-use App\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Actions\Livestream\CreateMuxStreamAction;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Livewire\Component;
 
 /**

@@ -1,4 +1,4 @@
-<?php namespace App\Support\Livestream;
+<?php namespace Modules\Livestream\Support\Livestream;
 
 use Illuminate\Support\Facades\Auth;
 

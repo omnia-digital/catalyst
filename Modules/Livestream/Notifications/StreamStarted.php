@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Notifications;
+    namespace Modules\Livestream\Notifications;
 
     use Darkin1\Intercom\Facades\Intercom;
     use Illuminate\Bus\Queueable;

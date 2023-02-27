@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
-use App\Account;
-use App\Omnia;
+use Modules\Livestream\Account;
+use Modules\Livestream\Omnia;
 use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\DB;
 use Laravel\Spark\Repositories\LivestreamAccountRepository;
-use App\Http\Requests\LivestreamAccountRequest;
-use App\Interactions\DeleteLivestreamAccountImage;
-use App\Interactions\UpdateLivestreamAccountImage;
-use App\LivestreamAccount;
+use Modules\Livestream\Http\Requests\LivestreamAccountRequest;
+use Modules\Livestream\Interactions\DeleteLivestreamAccountImage;
+use Modules\Livestream\Interactions\UpdateLivestreamAccountImage;
+use Modules\Livestream\LivestreamAccount;
 use Auth;
 use Illuminate\Http\Request;
-use App\Repositories\StreamRepository;
+use Modules\Livestream\Repositories\StreamRepository;
 
 class LivestreamAccountController extends LivestreamController
 {

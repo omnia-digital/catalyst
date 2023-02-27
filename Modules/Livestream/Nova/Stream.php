@@ -1,8 +1,8 @@
-<?php namespace App\Nova;
+<?php namespace Modules\Livestream\Nova;
 
-use App\Models\Stream as StreamModel;
-use App\Nova\Actions\DisableStream;
-use App\Nova\Actions\EnableStream;
+use Modules\Livestream\Models\Stream as StreamModel;
+use Modules\Livestream\Nova\Actions\DisableStream;
+use Modules\Livestream\Nova\Actions\EnableStream;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;

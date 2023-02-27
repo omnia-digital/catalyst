@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Series;
+namespace Modules\Livestream\Http\Livewire\Series;
 
-use App\Models\LivestreamAccount;
-use App\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 

@@ -1,8 +1,8 @@
-<?php namespace App\Actions\Livestream;
+<?php namespace Modules\Livestream\Actions\Livestream;
 
-use App\Models\Stream;
-use App\Models\StreamTarget;
-use App\Services\Mux\MuxLivestream;
+use Modules\Livestream\Models\Stream;
+use Modules\Livestream\Models\StreamTarget;
+use Modules\Livestream\Services\Mux\MuxLivestream;
 
 class CreateStreamTargetAction
 {

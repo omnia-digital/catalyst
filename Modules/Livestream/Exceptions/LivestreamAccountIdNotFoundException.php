@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Exceptions;
+namespace Modules\Livestream\Exceptions;
 
-use App\Exceptions\MissingParameterException;
+use Modules\Livestream\Exceptions\MissingParameterException;
 use Illuminate\Support\Collection;
 
 class LivestreamAccountIdNotFoundException extends MissingParameterException

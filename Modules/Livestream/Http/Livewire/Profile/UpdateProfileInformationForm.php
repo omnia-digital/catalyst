@@ -1,4 +1,4 @@
-<?php namespace App\Http\Livewire\Profile;
+<?php namespace Modules\Livestream\Http\Livewire\Profile;
 
 use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;

@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\EnvironmentDetector;
-use App\EpisodeTemplate;
-use App\Http\Requests\ScheduleRequest;
-use App\LivestreamAccount;
-use App\Schedule;
-use App\Http\Requests;
-use App\Http\Controllers\LivestreamController;
-use App\WowzaMediaServer;
-use App\WowzaVhost;
-use App\WowzaPublisher;
-use App\WowzaVhostHostPort;
-use App\Services\StreamService;
+use Modules\Livestream\EpisodeTemplate;
+use Modules\Livestream\Http\Requests\ScheduleRequest;
+use Modules\Livestream\LivestreamAccount;
+use Modules\Livestream\Schedule;
+use Modules\Livestream\Http\Requests;
+use Modules\Livestream\Http\Controllers\LivestreamController;
+use Modules\Livestream\WowzaMediaServer;
+use Modules\Livestream\WowzaVhost;
+use Modules\Livestream\WowzaPublisher;
+use Modules\Livestream\WowzaVhostHostPort;
+use Modules\Livestream\Services\StreamService;
 
 
 class ScheduleController extends LivestreamController
