@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class EnsureTeamInfoIsFilled
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
+     * @return mixed
+     */
+    public function handle(Request $request, Closure $next)
+    {
+        $team = $request->user()->currentTeam;
+
+        if (!$team->hasInfoIsFilled()) {
+            return redirect()->route('teams.show', [
+                'team'  => $team,
+                'alert' => true
+            ]);
+        }
+
+        return $next($request);
+    }
+}
