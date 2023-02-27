@@ -19,5 +19,6 @@ class LivestreamDatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class
-        ]);    }
+        ]);
+    }
 }
