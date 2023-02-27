@@ -7,15 +7,28 @@
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
     "prod": "npm run production",
-    "production": "mix --production"
+    "production": "mix --production",
+    "omnia-script": "mix --mix-config=./webpack.mix.omnia.js --production",
+    "omnia-script-watch": "mix watch --mix-config=./webpack.mix.omnia.js"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.2.1",
+    "@tailwindcss/typography": "^0.3.0",
+    "alpinejs": "^3.4.2",
+    "autoprefixer": "^10.3.7",
     "axios": "^0.21.4",
-    "dotenv": "^10.0.0",
-    "dotenv-expand": "^5.1.0",
-    "laravel-mix": "^6.0.31",
-    "laravel-mix-merge-manifest": "^2.0.0",
-    "lodash": "^4.17.21",
-    "postcss": "^8.3.7"
+    "laravel-mix": "^6.0.32",
+    "lodash": "^4.17.19",
+    "postcss": "^8.3.9",
+    "postcss-import": "^12.0.1",
+    "tailwindcss": "^2.2.16"
+  },
+  "dependencies": {
+    "@alpinejs/focus": "^3.10.5",
+    "@alpinejs/trap": "^3.7.0",
+    "@ryangjchandler/alpine-clipboard": "^2.0.0",
+    "@tailwindcss/aspect-ratio": "^0.2.2",
+    "@tailwindcss/line-clamp": "^0.2.2",
+    "laravel-vapor": "^0.4.2"
   }
 }

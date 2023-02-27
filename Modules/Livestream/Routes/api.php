@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\EmbedPlayersController;
+use App\Http\Controllers\Api\EmbedPlaylistController;
+use App\Http\Controllers\Api\VideoViewsController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/livestream', function (Request $request) {
-    return $request->user();
-});
+Route::post('/videos/view', [VideoViewsController::class, 'dispatchVideoView'])->name('dispatch-video-view');
+
+Route::get('/embed-players/{player}', [EmbedPlayersController::class, 'load'])->name('players.embed');
+Route::get('/embed-players/{player}/gallery', [EmbedPlayersController::class, 'loadGallery']);
+
+Route::get('/embed-playlist/{playlist}', [EmbedPlaylistController::class, 'index'])->name('playlists.embed');

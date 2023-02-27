@@ -2,6 +2,7 @@
 
 namespace Modules\Livestream\Database\Seeders;
 
+use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,7 @@ class LivestreamDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
-    }
+        $this->call([
+            UserSeeder::class
+        ]);    }
 }
