@@ -10,7 +10,7 @@ class WhoToFollowSection extends Component
 {
     public function getUsersQueryProperty()
     {
-        return User::query();
+        return User::query()->with(['profile']);
     }
 
     public function getWhoToFollowProperty()
