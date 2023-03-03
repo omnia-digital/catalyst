@@ -37,6 +37,20 @@
                     'module'  => 'social',
                     'current' => false
                 ],
+                [
+                    'label'   => \Trans::get('Map'),
+                    'name'    => 'social.teams.map',
+                    'icon'    => 'fa-regular fa-map',
+                    'module'  => 'social',
+                    'current' => false
+                ],
+                [
+                    'label'   => \Trans::get('Calendar'),
+                    'name'    => 'social.teams.calendar',
+                    'icon'    => 'fa-regular fa-calendar',
+                    'module'  => 'social',
+                    'current' => false
+                ],
 //                [
 //                    'label'   => \Trans::get('Games'),
 //                    'name'    => 'games.home',

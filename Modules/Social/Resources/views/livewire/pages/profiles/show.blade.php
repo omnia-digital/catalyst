@@ -61,7 +61,7 @@
             {{-- Teams --}}
             <div class="block xl:hidden">
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <p class="text-sm">{{ \Platform::getTeamsWord() }}</p>
+                    <p class="text-sm">{{ \Platform::getTeamsWordUpper() }}</p>
                     @if($this->user->teams()->count())
                         <a href="{{ route('social.profile.teams', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
@@ -122,7 +122,7 @@
             {{-- Teams --}}
             <div>
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <p class="text-sm">{{ \Platform::getTeamsWord() }}</p>
+                    <p class="text-sm">{{ \Platform::getTeamsWordUpper() }}</p>
                     @if($this->user->teams()->count())
                         <a href="{{ route('social.profile.teams', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
