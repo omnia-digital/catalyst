@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Components;
+namespace Modules\Social\Http\Livewire\Components\Teams;
 
 use App\Models\Location;
 use App\Models\Team;
@@ -37,7 +37,7 @@ class Map extends Component
 
     public function showPlaceDetail($placeId)
     {
-        $this->emitTo('social::components.team-calendar-list', 'teamSelected', $placeId);
+        $this->emitTo('social::components.teams.team-calendar-list', 'teamSelected', $placeId);
     }
 
     public function getPlacesProperty()
@@ -76,7 +76,7 @@ class Map extends Component
 
     public function render()
     {
-        return view('social::livewire.components.map', [
+        return view('social::livewire.components.teams.map', [
             'places' => $this->places,
         ]);
     }

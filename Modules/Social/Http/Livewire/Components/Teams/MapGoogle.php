@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Components;
+namespace Modules\Social\Http\Livewire\Components\Teams;
 
 use App\Models\ContactCategory;
 use Illuminate\Support\Arr;
@@ -54,7 +54,7 @@ class MapGoogle extends Component
 
     public function render()
     {
-        return view('social::livewire.components.map_google', [
+        return view('social::livewire.components.teams.map_google', [
             'countries'  => Country::orderBy('name')->get(),
         ]);
     }

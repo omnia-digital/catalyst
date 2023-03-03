@@ -64,8 +64,8 @@
             <!-- Featured Section -->
             @if(config('app.modules.social.map'))
                 <div class="mt-4 justify-center mx-auto max-w-post-card-max-w">
-                    <x-library::heading.3>{{ Trans::get('Team Map') }}</x-library::heading.3>
-                    <livewire:social::components.map :places="$places"/>
+{{--                    <x-library::heading.3>{{ Trans::get('Team Map') }}</x-library::heading.3>--}}
+                    <livewire:social::components.teams.map :places="$places"/>
                 </div>
             @endif
             <div class="mt-4 mx-auto max-w-post-card-max-w">
