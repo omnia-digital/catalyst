@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Components\Teams;
+namespace Modules\Social\Http\Livewire\Components;
 
 use App\Models\Team;
 use App\Models\User;
@@ -8,7 +8,7 @@ use Asantibanez\LivewireCalendar\LivewireCalendar;
 use Auth;
 use Modules\Social\Support\Livewire\InteractsWithCalendarTeams;
 
-class TeamCalendar extends LivewireCalendar
+class Calendar extends LivewireCalendar
 {
     use InteractsWithCalendarTeams;
 
@@ -35,10 +35,5 @@ class TeamCalendar extends LivewireCalendar
     public function getUserProperty()
     {
         return User::find(Auth::id());
-    }
-
-    public function render()
-    {
-        return view('social::livewire.components.teams.team-calendar');
     }
 }
