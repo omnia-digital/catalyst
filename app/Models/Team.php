@@ -282,7 +282,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function members(): BelongsToMany
     {
-        $roleId = $this->getRoleByName(config('platform.teams.default_owner_role'))->id;
+        $roleId = $this->getRoleByName(config('platform.teams.default_owner_role'))?->id;
 
         return $this->users()
                     ->wherePivotNotIn('role_id', [$roleId]);

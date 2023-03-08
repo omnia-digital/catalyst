@@ -72,7 +72,7 @@
                     @if($this->user->teams()->count())
                         <div class="w-full grid {{ $this->user->teams()->count() > 1 ? 'grid-cols-2' : '' }} gap-2">
                             @foreach ($this->user->teams->take(2) as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                                <livewire:social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                             @endforeach
                         </div>
                     @else
@@ -133,7 +133,7 @@
                     @if($this->user->teams()->count())
                         <div class="w-full grid {{ $this->user->teams()->count() > 1 ? 'grid-cols-2' : '' }} gap-2">
                             @foreach ($this->user->teams->take(2) as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                                <livewire:social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                             @endforeach
                         </div>
                     @else
