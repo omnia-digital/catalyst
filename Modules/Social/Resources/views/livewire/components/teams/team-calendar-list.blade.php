@@ -44,7 +44,7 @@
         <div class="h-full flex flex-col">
             <div class="bg-secondary flex justify-between items-center text-xl min-h-[64px] pt-2 px-4">
                 <div class="font-medium">
-                    <div class="text-xl" x-show="!showDetail">{{ \Platform::getTeamsWord() }}</div>
+                    <div class="text-xl" x-show="!showDetail">{{ \Trans::get('Teams') }}</div>
                     <div x-show="showDetail" class="text-lg font-bold" x-text="title"></div>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -82,7 +82,7 @@
             <div x-show="!showDetail" class="bg-secondary space-y-2 pt-4 pb-2 flex-1 overflow-y-scroll scrollbar-hide">
                 @forelse ($teams as $item)
                     <div
-                        class="space-y-2 mx-2 p-4 bg-secondary rounded-lg border border-neutral cursor-pointer
+                        class="space-y-2 mx-2 p-4 bg-secondary rounded-sm border border-neutral cursor-pointer
                             {{ (!is_null($team) && ($team->handle === $item->handle)) ? 'shadow-md ring-1 ring-neutral-dark' : '' }}
                             hover:shadow-lg  hover:ring-2 hover:ring-neutral-dark active:shadow-lg active:ring-2 active:ring-neutral-dark focus:shadow-lg focus:ring-2 focus:ring-neutral-dark"
                         {{-- wire:click="selectEvent({{ $item->id }})" --}}
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                 @empty
-                    <div>No {{ \Platform::getTeamsWord() }} to show</div>
+                    <div>No {{ \Platform::getTeamsWordUpper() }} to show</div>
                 @endforelse
             </div>
 
@@ -134,7 +134,7 @@
                 </div>
                 <div class="absolute bottom-0 left-0 right-0 p-6 flex items-center justify-center bg-secondary">
                     <div wire:loading wire:target="selectTeam" class="absolute inset-0 bg-white/75"></div>
-                    <div class="absolute inset-auto -translate-y-12 rounded-md p-2 text-success-700"
+                    <div class="absolute inset-auto -translate-y-12 rounded-sm p-2 text-success-700"
                         x-show="message"
                         x-transition:enter="transition ease-out duration-300"
                         x-transition:enter-start="opacity-0 translate-y-0"

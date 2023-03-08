@@ -84,6 +84,11 @@ class Platform
         return \Trans::get('teams');
     }
 
+    public static function getTeamsWordUpper()
+    {
+        return ucfirst(self::getTeamsWord());
+    }
+
     public static function getTeamsLetter()
     {
         return lcfirst(substr(self::getTeamsWord(),0,1));

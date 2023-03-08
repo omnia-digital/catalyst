@@ -6,11 +6,9 @@ use App\Models\Team;
 use App\Models\User;
 use Asantibanez\LivewireCalendar\LivewireCalendar;
 use Auth;
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Modules\Social\Support\Livewire\InteractsWithCalendarTeams;
 
-class TeamCalendar extends LivewireCalendar
+class Calendar extends LivewireCalendar
 {
     use InteractsWithCalendarTeams;
 
@@ -31,7 +29,7 @@ class TeamCalendar extends LivewireCalendar
 
     public function onEventClick($eventId)
     {
-        $this->emitTo('social::components.team-calendar-list', 'teamSelected', $eventId);
+        $this->emitTo('social::components.teams.team-calendar-list', 'teamSelected', $eventId);
     }
 
     public function getUserProperty()

@@ -49,7 +49,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top ' . {{ \Platform::getTeamsWord() }},
+                        title: 'Top ' . {{ \Platform::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

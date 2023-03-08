@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Components;
+namespace Modules\Social\Http\Livewire\Components\Teams;
 
 use App\Models\Location;
 use App\Models\Team;
@@ -113,7 +113,7 @@ class TeamCalendarList extends Component
 
     public function render()
     {
-        return view('social::livewire.components.team-calendar-list', [
+        return view('social::livewire.components.teams.team-calendar-list', [
             'teams' => $this->rows,
             'teamsCount' => $this->rowsQuery->count()
         ]);

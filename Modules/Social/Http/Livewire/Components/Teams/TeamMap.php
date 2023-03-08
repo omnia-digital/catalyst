@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Components;
+namespace Modules\Social\Http\Livewire\Components\Teams;
 
 use App\Models\Location;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -54,7 +54,7 @@ class TeamMap extends Component
 
     public function render()
     {
-        return view('social::livewire.components.team-map', [
+        return view('social::livewire.components.teams.team-map', [
             'places' => $this->places,
         ]);
     }

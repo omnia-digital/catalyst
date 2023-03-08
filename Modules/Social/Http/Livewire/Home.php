@@ -64,6 +64,7 @@ class Home extends Component
     public function getNewsRssFeeds()
     {
         $feeds = collect();
+        $feeds->push(['', 'https://rss.app/feeds/YYS8qbgAE8mUDqIZ.xml']);
         $feeds->push(['', 'https://feeds.feedburner.com/ign/all']);
         $feeds->push(['', 'https://www.gamedeveloper.com/rss.xml']);
         $feeds->push(['', 'https://www.gamespot.com/feeds/game-news']);
