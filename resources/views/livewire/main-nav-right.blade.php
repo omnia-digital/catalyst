@@ -110,6 +110,10 @@
                                 {{ auth()->user()->name }}
                             </x-jet-dropdown-link>
 
+                            <x-jet-dropdown-link href="{{ route('resources.drafts') }}">
+                                My Resources
+                            </x-jet-dropdown-link>
+
                             <x-jet-dropdown-link href="{{ route('account') }}">
                                 {{ \Trans::get('Account') }}
                             </x-jet-dropdown-link>
