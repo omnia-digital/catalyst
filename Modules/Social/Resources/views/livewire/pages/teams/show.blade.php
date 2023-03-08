@@ -81,7 +81,7 @@
                                 <span class="col-span-1 text-gray-400 text-2xs uppercase ">Organizer:</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-s-user-circle class="w-4 h-4"/>
-                                    <span>{{ $team->owner->name }}</span>
+                                    <span>{{ $team?->owner?->name }}</span>
                                 </div>
                             </div>
                             <div class="flex justify-between items-center">
