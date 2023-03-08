@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Http\Livewire\Components;
+namespace Modules\Social\Http\Livewire\Components\Teams;
 
 use App\Models\Team;
 use Livewire\Component;
@@ -18,9 +18,9 @@ class TeamCard extends Component
     {
         return redirect($this->team->profile());
     }
-    
+
     public function render()
     {
-        return view('social::livewire.components.team-card');
+        return view('social::livewire.components.teams.team-card');
     }
 }

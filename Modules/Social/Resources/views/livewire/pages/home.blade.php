@@ -3,28 +3,28 @@
 @section('banner-with-sidebar')
     <div class="w-full mb-4">
         <div class="relative shadow-xl sm:rounded-b-2xl sm:overflow-hidden">
-            <div class="absolute inset-0 grayscale">
-                <img class="h-full w-full object-cover"
-                     src="https://source.unsplash.com/random?community&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100"
-                     alt="Community platform">
-                <div class="absolute inset-0 bg-indigo-700 mix-blend-multiply"></div>
-            </div>
-            <div class="relative px-4 py-12 sm:px-6 sm:py-12 lg:py-12 lg:px-8 text-center">
-                <x-library::heading.1 class="text-center uppercase" text-size="text-5xl">{{ Trans::get('Community') }}</x-library::heading.1>
-                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">{{ Trans::get('Welcome to the community.') }}</p>
-                </p>
-                @auth
-                    <x-library::button x-data=""
-                                       x-on:click.prevent="$openModal('create-team')"
-                                       class="mx-auto mt-4 px-16 py-2">
-                        {{ Trans::get('Create a new Team') }}
-                    </x-library::button>
-                @else
-                    <x-library::button wire:click.prevent="showAuthenticationModal" class="mx-auto mt-4 px-16 py-2">
-                        {{ Trans::get('Create a new Team') }}
-                    </x-library::button>
-                @endauth
-            </div>
+{{--            <div class="absolute inset-0 grayscale">--}}
+{{--                <img class="h-full w-full object-cover"--}}
+{{--                     src="https://source.unsplash.com/random?community&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100"--}}
+{{--                     alt="Community platform">--}}
+{{--                <div class="absolute inset-0 bg-indigo-700 mix-blend-multiply"></div>--}}
+{{--            </div>--}}
+{{--            <div class="relative px-4 py-12 sm:px-6 sm:py-12 lg:py-12 lg:px-8 text-center">--}}
+{{--                <x-library::heading.1 class="text-center uppercase" text-size="text-5xl">{{ Trans::get('Community') }}</x-library::heading.1>--}}
+{{--                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">{{ Trans::get('Welcome to the community.') }}</p>--}}
+{{--                </p>--}}
+{{--                @auth--}}
+{{--                    <x-library::button x-data=""--}}
+{{--                                       x-on:click.prevent="$openModal('create-team')"--}}
+{{--                                       class="mx-auto mt-4 px-16 py-2">--}}
+{{--                        {{ Trans::get('Create a new Team') }}--}}
+{{--                    </x-library::button>--}}
+{{--                @else--}}
+{{--                    <x-library::button wire:click.prevent="showAuthenticationModal" class="mx-auto mt-4 px-16 py-2">--}}
+{{--                        {{ Trans::get('Create a new Team') }}--}}
+{{--                    </x-library::button>--}}
+{{--                @endauth--}}
+{{--            </div>--}}
             <livewire:teams.create-team-modal/>
         </div>
     </div>
@@ -64,8 +64,8 @@
             <!-- Featured Section -->
             @if(config('app.modules.social.map'))
                 <div class="mt-4 justify-center mx-auto max-w-post-card-max-w">
-                    <x-library::heading.3>{{ Trans::get('Team Map') }}</x-library::heading.3>
-                    <livewire:social::pages.teams.map class=""/>
+{{--                    <x-library::heading.3>{{ Trans::get('Team Map') }}</x-library::heading.3>--}}
+                    <livewire:social::components.teams.map :places="$places"/>
                 </div>
             @endif
             <div class="mt-4 mx-auto max-w-post-card-max-w">
