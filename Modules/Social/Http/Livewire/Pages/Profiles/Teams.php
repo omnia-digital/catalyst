@@ -43,7 +43,6 @@ class Teams extends Component
     public function getRowsQueryProperty()
     {
         $query = Team::query()
-            ->where('user_id', $this->user->id)
             ->withUser($this->user)
             ->withCount(['users']);
             
