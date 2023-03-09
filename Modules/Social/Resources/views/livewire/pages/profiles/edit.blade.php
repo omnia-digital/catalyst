@@ -108,7 +108,7 @@
             </div>
             <div class="col-span-4">
                 <div class="flex items-center">
-                    <x-library::input.label value="{{ \Trans::get('What are you associated with?') }}" class="inline"/>
+                    <x-library::input.label value="{{ \Trans::get('What type of profile is this?') }}" class="inline"/>
                     <span class="text-neutral-dark ml-1">{{ \Trans::get('(you can choose more than one)') }}</span>
                     <span class="text-red-600 text-sm">*</span>
                 </div>
