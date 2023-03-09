@@ -8,13 +8,25 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class TeamsRelationManager extends RelationManager
 {
     protected static string $relationship = 'teams';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getTitle(): string
+    {
+        return \Trans::get(Str::headline(static::getPluralModelLabel()));
+    }
+
+    protected static function getRecordLabel(): ?string
+    {
+        return \Trans::get('Team');
+    }
 
     public static function form(Form $form): Form
     {
