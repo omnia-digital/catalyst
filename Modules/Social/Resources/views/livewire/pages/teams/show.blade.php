@@ -51,7 +51,7 @@
                 <div class="col-span-12 2xl:col-span-6">
                     <div class="flex flex-col flex-1 bg-secondary rounded">
                         <div class="h-44 bg-primary"
-                             style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
+                             style="background-image: url({{ $team->mainImage()->getFullUrl() ?? config('teams.defaults.cover_photo') }}); background-size: cover; background-repeat: no-repeat;"
                         ></div>
                         <div class="p-4 flex flex-col flex-1">
                             <p class="text-sm flex-1">{{ $team->summary }}</p>
