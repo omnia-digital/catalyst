@@ -116,12 +116,12 @@ class PermissionResource extends Resource implements HasShieldPermissions
 
     public static function getModelLabel(): string
     {
-        return __('Permission');
+        return __('filament-shield::filament-shield.resource.label.permission');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Permissions');
+        return __('filament-shield::filament-shield.resource.label.permissions');
     }
 
     protected static function shouldRegisterNavigation(): bool
@@ -138,23 +138,22 @@ class PermissionResource extends Resource implements HasShieldPermissions
 
     protected static function getNavigationLabel(): string
     {
-        return __('Permissions');
+        return __('filament-shield::filament-shield.nav.permission.label');
     }
 
     protected static function getNavigationIcon(): string
     {
-        return __('heroicon-o-shield-check');
-//        return __('filament-shield::filament-shield.nav.role.icon');
+        return __('filament-shield::filament-shield.nav.permission.icon');
     }
 
     protected static function getNavigationSort(): ?int
     {
-        return Utils::getResourceNavigationSort();
+        return 2;
     }
 
     public static function getSlug(): string
     {
-        return 'shield/permissions';
+        return (string) config('filament-shield.shield_resource.permission_slug');
     }
 
     protected static function getNavigationBadge(): ?string

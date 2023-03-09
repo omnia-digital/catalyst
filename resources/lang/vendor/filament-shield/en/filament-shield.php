@@ -31,11 +31,15 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'nav.group' => 'Filament Shield',
+    'nav.group' => 'People',
     'nav.role.label' => 'Roles',
     'nav.role.icon' => 'heroicon-o-shield-check',
     'resource.label.role' => 'Role',
     'resource.label.roles' => 'Roles',
+    'nav.permission.label' => 'Permissions',
+    'nav.permission.icon' => 'heroicon-o-shield-check',
+    'resource.label.permission' => 'Permission',
+    'resource.label.permissions' => 'Permissions',
 
     /*
     |--------------------------------------------------------------------------

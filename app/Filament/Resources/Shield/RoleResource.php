@@ -227,7 +227,7 @@ class RoleResource extends Resource implements HasShieldPermissions
 
     protected static function getNavigationSort(): ?int
     {
-        return Utils::getResourceNavigationSort();
+        return 1;
     }
 
     public static function getSlug(): string
