@@ -51,7 +51,7 @@ class UserFactory extends Factory
 
     /**
      * Indicate that the user should have a personal team.
-     * 
+     *
      * @return $this
      */
     public function withTeam()
@@ -76,7 +76,7 @@ class UserFactory extends Factory
 
     /**
      * Indicate that the user should have a personal team.
-     * 
+     *
      * @param $position
      * @return $this
      */
@@ -92,7 +92,7 @@ class UserFactory extends Factory
         setPermissionsTeamId($team->id);
 
         return $this->hasAttached(
-            $team, 
+            $team,
             ['role_id' => Role::findOrCreate($member)->id, 'team_id' => $team->id],
             'teams'
         );
@@ -103,17 +103,17 @@ class UserFactory extends Factory
      *
      * @return $this
      */
-    public function withProfile()
+    public function withProfile($fillData = [])
     {
         if (!class_exists(\Modules\Social\Models\Profile::class)) return;
 
         return $this->has(
             Profile::factory()
-                ->state(function (array $attributes, User $user) {
+                ->state(function (array $attributes, User $user) use ($fillData) {
                     return [
                         'user_id' => $user->id,
-                        'first_name' => $attributes['first_name'],
-                        'last_name' => $attributes['last_name'],
+                        'first_name' => $fillData['first_name'] ?? $attributes['first_name'],
+                        'last_name' => $fillData['last_name'] ?? $attributes['last_name'],
                     ];
                 })
         );
