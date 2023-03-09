@@ -13,11 +13,11 @@ use Modules\Social\Http\Livewire\Pages\Posts\Edit as EditPosts;
 use Modules\Social\Http\Livewire\Pages\Posts\Show as ShowPosts;
 use Modules\Social\Http\Livewire\Pages\Posts\Trending as DiscoverIndex;
 use Modules\Social\Http\Livewire\Pages\Profiles\Awards as ProfileAwards;
+use Modules\Social\Http\Livewire\Pages\Profiles\Teams as ProfileTeams;
 use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
 use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
 use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
-use Modules\Social\Http\Livewire\Pages\Profiles\Teams as ProfileTeams;
 use Modules\Social\Http\Livewire\Pages\Teams\Admin\ManageTeamMembers as TeamMembers;
 use Modules\Social\Http\Livewire\Pages\Teams\Admin\TeamAdmin as EditTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Apply as ApplyToTeam;
@@ -88,6 +88,8 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
     Route::name('contacts.')->prefix('contacts')->group(function () {
         Route::get('/', ContactsIndex::class)->name('index');
     });
+
+    Route::get('/art', \Modules\Social\Http\Livewire\Pages\Art\Index::class)->name('art');
 
     Route::get('/learn', function () {
         return "Learn";

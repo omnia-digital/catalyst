@@ -1,6 +1,6 @@
 <div class="sticky top-0 z-40">
     <div class="h-40 relative overlay before:bg-black before:inset-0 before:opacity-60 bg-black shadow-md"
-        style="background-image: url({{ $team->bannerImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
+        style="background-image: url({{ $team->bannerImage()->getFullUrl() ?? config('teams.defaults.cover_photo') }}); background-size: cover; background-repeat: no-repeat;"
     >
         <div class="mb-1 mx-4 absolute bottom-0 left-0 right-0 flex justify-between items-end">
             <div class="flex items-end">
