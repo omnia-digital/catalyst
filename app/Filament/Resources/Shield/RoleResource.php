@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -55,6 +56,9 @@ class RoleResource extends Resource implements HasShieldPermissions
                                                                                             ->default(Utils::getFilamentAuthGuard())
                                                                                             ->nullable()
                                                                                             ->maxLength(255),
+                                                                  Forms\Components\Select::make('team_id')
+                                                                                         ->relationship('team', 'name')
+                                                                                         ->nullable(),
                                                                   Forms\Components\Toggle::make('select_all')
                                                                                          ->onIcon('heroicon-s-shield-check')
                                                                                          ->offIcon('heroicon-s-shield-exclamation')
