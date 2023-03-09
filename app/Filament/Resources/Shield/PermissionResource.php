@@ -52,84 +52,12 @@ class PermissionResource extends Resource implements HasShieldPermissions
                                     ->default(Utils::getFilamentAuthGuard())
                                     ->nullable()
                                     ->maxLength(255),
-                                Forms\Components\Toggle::make('select_all')
-                                    ->onIcon('heroicon-s-shield-check')
-                                    ->offIcon('heroicon-s-shield-exclamation')
-                                    ->label(__('filament-shield::filament-shield.field.select_all.name'))
-                                    ->helperText(__('filament-shield::filament-shield.field.select_all.message'))
-                                    ->reactive()
-                                    ->afterStateUpdated(function (Closure $set, $state) {
-                                        static::refreshEntitiesStatesViaSelectAll($set, $state);
-                                    })
-                                    ->dehydrated(fn ($state): bool => $state),
                             ])
                             ->columns([
                                 'sm' => 2,
                                 'lg' => 3,
                             ]),
                     ]),
-                Forms\Components\Tabs::make('Permissions')
-                    ->tabs([
-                        Forms\Components\Tabs\Tab::make(__('filament-shield::filament-shield.resources'))
-                            ->visible(fn (): bool => (bool) Utils::isResourceEntityEnabled())
-                            ->reactive()
-                            ->schema([
-                                Forms\Components\Grid::make([
-                                    'sm' => 2,
-                                    'lg' => 3,
-                                ])
-                                ->schema(static::getResourceEntitiesSchema())
-                                ->columns([
-                                    'sm' => 2,
-                                    'lg' => 3,
-                                ]),
-                            ]),
-                        Forms\Components\Tabs\Tab::make(__('filament-shield::filament-shield.pages'))
-                            ->visible(fn (): bool => (bool) Utils::isPageEntityEnabled() && (count(FilamentShield::getPages()) > 0 ? true : false))
-                            ->reactive()
-                            ->schema([
-                                Forms\Components\Grid::make([
-                                    'sm' => 3,
-                                    'lg' => 4,
-                                ])
-                                ->schema(static::getPageEntityPermissionsSchema())
-                                ->columns([
-                                    'sm' => 3,
-                                    'lg' => 4,
-                                ]),
-                            ]),
-                        Forms\Components\Tabs\Tab::make(__('filament-shield::filament-shield.widgets'))
-                            ->visible(fn (): bool => (bool) Utils::isWidgetEntityEnabled() && (count(FilamentShield::getWidgets()) > 0 ? true : false))
-                            ->reactive()
-                            ->schema([
-                                Forms\Components\Grid::make([
-                                    'sm' => 3,
-                                    'lg' => 4,
-                                ])
-                                ->schema(static::getWidgetEntityPermissionSchema())
-                                ->columns([
-                                    'sm' => 3,
-                                    'lg' => 4,
-                                ]),
-                            ]),
-
-                        Forms\Components\Tabs\Tab::make(__('filament-shield::filament-shield.custom'))
-                            ->visible(fn (): bool => (bool) Utils::isCustomPermissionEntityEnabled())
-                            ->reactive()
-                            ->schema([
-                                Forms\Components\Grid::make([
-                                    'sm' => 3,
-                                    'lg' => 4,
-                                ])
-                                ->schema(static::getCustomEntitiesPermisssionSchema())
-                                ->columns([
-                                    'sm' => 3,
-                                    'lg' => 4,
-                                ]),
-                            ]),
-                    ])
-                    ->columnSpan('full'),
-
             ]);
     }
 
@@ -144,9 +72,9 @@ class PermissionResource extends Resource implements HasShieldPermissions
                     ->searchable(),
                 Tables\Columns\BadgeColumn::make('guard_name')
                     ->label(__('filament-shield::filament-shield.column.guard_name')),
-                Tables\Columns\BadgeColumn::make('permissions_count')
-                    ->label(__('filament-shield::filament-shield.column.permissions'))
-                    ->counts('permissions')
+                Tables\Columns\BadgeColumn::make('roles_count')
+                    ->label(__('filament-shield::filament-shield.column.roles'))
+                    ->counts('roles')
                     ->colors(['success']),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label(__('filament-shield::filament-shield.column.updated_at'))
@@ -188,12 +116,12 @@ class PermissionResource extends Resource implements HasShieldPermissions
 
     public static function getModelLabel(): string
     {
-        return __('filament-shield::filament-shield.resource.label.permission');
+        return __('Permission');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('filament-shield::filament-shield.resource.label.permissions');
+        return __('Permissions');
     }
 
     protected static function shouldRegisterNavigation(): bool
@@ -226,7 +154,7 @@ class PermissionResource extends Resource implements HasShieldPermissions
 
     public static function getSlug(): string
     {
-        return Utils::getResourceSlug();
+        return 'shield/permissions';
     }
 
     protected static function getNavigationBadge(): ?string
