@@ -47,6 +47,11 @@ class Form extends Model
         return $this->belongsTo(FormTemplate::class);
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(FormNotification::class);
+    }
+
     public function submissions()
     {
         return $this->hasMany(FormSubmission::class);

@@ -32,7 +32,7 @@
                             @endif
 
                             {{--                                <div class="inline-flex items-center text-md">--}}
-                            {{--                                    <button type="button" class="inline-flex items-center px-4 py-2 rounded-full bg-secondary text-white-text-color text-sm tracking-wide font-medium hover:opacity-75">--}}
+                            {{--                                    <button type="button" class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-white-text-color text-sm tracking-wide font-medium hover:opacity-75">--}}
                             {{--                                        <span>Follow</span>--}}
                             {{--                                    </button>--}}
                             {{--                                </div>--}}

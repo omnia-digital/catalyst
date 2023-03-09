@@ -18,12 +18,17 @@ class MainNavigationMenu extends Component
 
     public function mount()
     {
-        $this->navigation = [
+        $this->navigation = self::getDefaultNavItems();
+    }
+
+    public static function getDefaultNavItems()
+    {
+        return [
             [
                 'label'   => 'Community',
                 'name'    => 'social.home',
                 'icon'    => 'fa-duotone fa-house',
-//                'icon'    => 'heroicon-o-home',
+                //                'icon'    => 'heroicon-o-home',
                 'module'  => 'social',
                 'current' => false
             ],
@@ -31,55 +36,60 @@ class MainNavigationMenu extends Component
                 'label'   => 'Resources',
                 'name'    => 'resources.home',
                 'icon'    => 'fa-duotone fa-newspaper',
-//                'icon'    => 'heroicon-o-newspaper',
+                //                'icon'    => 'heroicon-o-newspaper',
                 'module'  => 'resources',
                 'current' => false
             ],
             [
-                'label'   => 'Games',
-                'name'    => 'games.home',
-                'icon'    => 'fa-regular fa-gamepad-modern',
+                'label'   => \Trans::get('News'),
+                'name'    => 'games.feeds',
+                'icon'    => 'fa-regular fa-rss',
                 'module'  => 'games',
                 'current' => false
             ],
 //            [
-//                'label'   => 'Jobs',
-//                'name'    => 'jobs.home',
-//                'icon'    => 'heroicon-o-briefcase',
-//                'module'  => 'jobs',
+//                'label'   => 'Games',
+//                'name'    => 'games.feeds',
+//                'icon'    => 'fa-regular fa-gamepad-modern',
+//                'module'  => 'games',
 //                'current' => false
 //            ],
-//            [
-//                'label'   => 'Advice',
-//                'name'    => 'advice.home',
-//                'icon'    => 'heroicon-o-briefcase',
-//                'module'  => 'advice',
-//                'current' => false
-//            ],
-//            [
-//                'label'   => 'Crm',
-//                'name'    => 'social.crm',
-//                'icon'    => 'heroicon-o-users',
-//                'module'  => 'advice',
-//                'current' => false
-//            ],
-//            [
-//                'label'   => 'Learn',
-//                'name'    => 'advice.home',
-//                'icon'    => 'heroicon-o-academic-cap',
-//                'module'  => 'advice',
-//                'current' => false
-//            ],
-//            [
-//                'label'   => 'Marketplace',
-//                'name'    => 'advice.home',
-//                'icon'    => 'heroicon-o-shopping-bag',
-//                'module'  => 'jobs',
-//                'current' => false
-//            ],
+            //            [
+            //                'label'   => 'Jobs',
+            //                'name'    => 'jobs.home',
+            //                'icon'    => 'heroicon-o-briefcase',
+            //                'module'  => 'jobs',
+            //                'current' => false
+            //            ],
+            //            [
+            //                'label'   => 'Advice',
+            //                'name'    => 'advice.home',
+            //                'icon'    => 'heroicon-o-briefcase',
+            //                'module'  => 'advice',
+            //                'current' => false
+            //            ],
+            [
+                'label'   => 'Crm',
+                'name'    => 'filament.pages.dashboard',
+                'icon'    => 'heroicon-o-users',
+                'module'  => 'crm',
+                'current' => false
+            ],
+            //            [
+            //                'label'   => 'Learn',
+            //                'name'    => 'advice.home',
+            //                'icon'    => 'heroicon-o-academic-cap',
+            //                'module'  => 'advice',
+            //                'current' => false
+            //            ],
+            //            [
+            //                'label'   => 'Marketplace',
+            //                'name'    => 'advice.home',
+            //                'icon'    => 'heroicon-o-shopping-bag',
+            //                'module'  => 'jobs',
+            //                'current' => false
+            //            ],
         ];
-
-
     }
 
     /**

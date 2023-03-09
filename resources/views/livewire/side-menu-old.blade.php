@@ -18,7 +18,7 @@
                     </div>
                     <div class="flex-shrink-0 flex items-center px-4">
                         <!-- mobile logo -->
-                        <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-secondary.svg" alt="Indie Game Dev logo">
+                        <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-primary.svg" alt="Indie Game Dev logo">
                         <p class="text-green-500 text-3xl font-bold">IGD</p>
                     </div>
                     <div class="mt-5 flex-1 h-0 overflow-y-auto">
@@ -46,10 +46,10 @@
 <!-- Static sidebar for desktop -->
     <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 shadow-lg">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
-        <div class="flex-1 flex flex-col min-h-0 bg-secondary">
+        <div class="flex-1 flex flex-col min-h-0 bg-primary">
             <div class="flex items-center pl-6 h-16 flex-shrink-0">
                 <!-- desktop logo -->
-                <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-secondary.svg" alt="Workflow">
+                <img class="h-8 mr-2 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-primary.svg" alt="Workflow">
                 <p class="text-green-500 text-3xl font-bold">IGD</p>
             </div>
             <a href="{{ route('social.home') }}">
@@ -64,7 +64,7 @@
                             <p class="text-lg font-medium text-white-text-color">
                                 Joshua Torres
                             </p>
-                            <p class="text-base-text-color font-medium text-primary group-hover:text-white-text-color">
+                            <p class="text-base-text-color font-medium text-secondary group-hover:text-white-text-color">
                                 Lvl 5 <span class="text-gold">5348</span>
                             </p>
                         </div>

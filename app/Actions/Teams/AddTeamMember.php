@@ -8,7 +8,7 @@ use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Events\AddingTeamMember;
 use Laravel\Jetstream\Events\TeamMemberAdded;
 use Laravel\Jetstream\Jetstream;
-use Laravel\Jetstream\Rules\Role;
+use Spatie\Permission\Models\Role;
 
 class AddTeamMember implements AddsTeamMembers
 {
@@ -25,6 +25,8 @@ class AddTeamMember implements AddsTeamMembers
     {
         Gate::forUser($user)->authorize('addTeamMember', $team);
 
+        setPermissionsTeamId($team->id);
+
         $this->validate($team, $email, $role);
 
         $newTeamMember = Jetstream::findUserByEmailOrFail($email);
@@ -32,7 +34,7 @@ class AddTeamMember implements AddsTeamMembers
         AddingTeamMember::dispatch($team, $newTeamMember);
 
         $team->users()->attach(
-            $newTeamMember, ['role' => $role]
+            $newTeamMember, ['role_id' => Role::findOrCreate($role)->id]
         );
 
         TeamMemberAdded::dispatch($team, $newTeamMember);
@@ -67,9 +69,7 @@ class AddTeamMember implements AddsTeamMembers
     {
         return array_filter([
             'email' => ['required', 'email', 'exists:users'],
-            'role' => Jetstream::hasRoles()
-                            ? ['required', 'string', new Role]
-                            : null,
+            'role' => ['required', 'string'],
         ]);
     }
 

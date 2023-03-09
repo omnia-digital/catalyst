@@ -59,7 +59,6 @@ class Show extends Component
 
     public function mount(Team $team)
     {
-        $team->owner;
         $this->displayUrl = $team->sampleImages()->first()->getFullUrl();
         $this->displayID = $team->sampleImages()->first()->id;
         $this->applicationsCount = $this->team->teamApplications->count();

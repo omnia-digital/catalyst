@@ -8,6 +8,7 @@ namespace App\Support\Platform;
 
 use App\Settings\BillingSettings;
 use App\Settings\GeneralSettings;
+use Carbon\CarbonTimeZone;
 use Nwidart\Modules\Facades\Module;
 
 class Platform
@@ -78,6 +79,31 @@ class Platform
         return \Trans::get(self::getGeneralSetting('teams_apply_button_text') ?? 'Apply');
     }
 
+    public static function getTeamsWord()
+    {
+        return \Trans::get('teams');
+    }
+
+    public static function getTeamsWordUpper()
+    {
+        return ucfirst(self::getTeamsWord());
+    }
+
+    public static function getTeamsLetter()
+    {
+        return lcfirst(substr(self::getTeamsWord(),0,1));
+    }
+
+    public static function getUsersWord()
+    {
+        return \Trans::get('users');
+    }
+
+    public static function getUsersLetter()
+    {
+        return lcfirst(substr(self::getUsersWord(),0,1));
+    }
+
     //Billing Settings //
 
     public static function hasBillingSettingEnabled($setting)
@@ -143,5 +169,14 @@ class Platform
     public static function isSubscriptionShownInProfileHeader()
     {
         return self::getBillingSetting('show_user_subscription_plan_in_profile_header');
+    }
+
+    public static function timezoneList()
+    {
+        foreach (timezone_identifiers_list() as $timezone) {
+            $timezones[$timezone] = $timezone . " " . CarbonTimeZone::create($timezone)->toOffsetName();
+        }
+
+        return $timezones ?? [];
     }
 }

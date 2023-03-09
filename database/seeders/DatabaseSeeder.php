@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Modules\Advice\Database\Seeders\AdviceDatabaseSeeder;
 use Modules\Forms\Database\Seeders\FormsDatabaseSeeder;
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UsersTableSeeder::class);
         $this->call(TeamTableSeeder::class);
+        $this->call(PermissionSeeder::class);
         $this->call(AwardsTableSeeder::class);
         $this->call(SocialDatabaseSeeder::class);
         $this->call(ResourcesDatabaseSeeder::class);

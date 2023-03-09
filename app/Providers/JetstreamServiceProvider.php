@@ -10,6 +10,7 @@ use App\Actions\Teams\InviteTeamMember;
 use App\Actions\Teams\RemoveTeamMember;
 use App\Actions\Teams\UpdateTeamName;
 use App\Contracts\InvitesTeamMembers;
+use App\Models\Membership;
 use App\Settings\BillingSettings;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
@@ -34,6 +35,8 @@ class JetstreamServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configurePermissions();
+
+        Jetstream::useMembershipModel(Membership::class);
 
         Jetstream::createTeamsUsing(CreateTeam::class);
         Jetstream::updateTeamNamesUsing(UpdateTeamName::class);

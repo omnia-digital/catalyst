@@ -20,6 +20,7 @@ return [
     'theme_light_type' => env('APP_THEME_LIGHT_TYPE', 'light'),
     'logo_path' => env('APP_LOGO'),
     'logo_path_dark' => env('APP_LOGO_DARK'),
+    'admin_email' => env('APP_ADMIN_EMAIL', ''),
 
     'modules' => [
         'social' => [
@@ -180,6 +181,7 @@ return [
          * Package Service Providers...
          */
         \App\Providers\PlatformServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
 
         /*

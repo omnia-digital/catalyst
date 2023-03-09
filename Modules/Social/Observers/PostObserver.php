@@ -15,8 +15,6 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        $post->published_at = $post->published_at;
-
         if ($post->type == PostType::RESOURCE) {
             $post->attachTags(['resource']);
         }

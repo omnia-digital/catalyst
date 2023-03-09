@@ -14,7 +14,7 @@ class Builder extends Component implements HasForms
 
     public Team $team;
 
-    public ?Form $formModel;
+    public $formModel;
 
     public function mount(Team $team, $form = null)
     {

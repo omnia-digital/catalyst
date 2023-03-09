@@ -4,7 +4,7 @@
     <x-profiles.partials.header :user="$this->user"/>
     <div class="mt-6 grid grid-cols-6 xl:grid-cols-12 gap-6 px-4 lg:px-0">
         <div class="col-span-6 md:col-span-3 xl:col-span-3 space-y-4">
-            <div class="p-4 rounded bg-primary text-base-text-color">
+            <div class="p-4 rounded bg-secondary text-base-text-color">
                 <div class="flex justify-start text-sm space-x-4">
                     @isset ($profile->website)
                         <div class="flex items-center space-x-2">
@@ -61,7 +61,7 @@
             {{-- Teams --}}
             <div class="block xl:hidden">
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <p class="text-sm">{{ \Trans::get('Teams') }}</p>
+                    <p class="text-sm">{{ \Platform::getTeamsWordUpper() }}</p>
                     @if($this->user->teams()->count())
                         <a href="{{ route('social.profile.teams', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
@@ -72,7 +72,7 @@
                     @if($this->user->teams()->count())
                         <div class="w-full grid {{ $this->user->teams()->count() > 1 ? 'grid-cols-2' : '' }} gap-2">
                             @foreach ($this->user->teams->take(2) as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                                <livewire:social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                             @endforeach
                         </div>
                     @else
@@ -91,7 +91,7 @@
                         <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                     </a>
                 </div>
-                <div class="flex justify-start items-start mt-2 bg-primary border border-neutral-light p-4">
+                <div class="flex justify-start items-start mt-2 bg-secondary border border-neutral-light p-4">
                     <div class="mr-4">
                         <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1" alt="Arlene McCoy"/>
                     </div>
@@ -112,7 +112,7 @@
         </div>
         <div class="block col-span-6 md:col-span-3 xl:col-span-5 lg:mr-4 xl:mr-0">
             <!-- User Posts -->
-            <x-social::user-posts 
+            <x-social::user-posts
                 :posts="$this->user->posts()->onlyPosts()->get()"
                 :likes="$this->user->likes"
                 :resources="$this->user->posts()->onlyResources()->get()"
@@ -122,7 +122,7 @@
             {{-- Teams --}}
             <div>
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <p class="text-sm">{{ \Trans::get('Teams') }}</p>
+                    <p class="text-sm">{{ \Platform::getTeamsWordUpper() }}</p>
                     @if($this->user->teams()->count())
                         <a href="{{ route('social.profile.teams', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
@@ -133,7 +133,7 @@
                     @if($this->user->teams()->count())
                         <div class="w-full grid {{ $this->user->teams()->count() > 1 ? 'grid-cols-2' : '' }} gap-2">
                             @foreach ($this->user->teams->take(2) as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                                <livewire:social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                             @endforeach
                         </div>
                     @else
@@ -152,7 +152,7 @@
                         <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                     </a>
                 </div>
-                <div class="flex justify-start items-start mt-2 bg-primary border border-neutral-light p-4">
+                <div class="flex justify-start items-start mt-2 bg-secondary border border-neutral-light p-4">
                     <div class="mr-4">
                         <img class="h-8 w-8 rounded-full" src="https://source.unsplash.com/24x24/?face&crop-face&v=1" alt="Arlene McCoy"/>
                     </div>

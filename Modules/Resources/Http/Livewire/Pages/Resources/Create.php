@@ -42,11 +42,14 @@ class Create extends Component
                 'title' => $validated['title'],
                 'body' => $validated['body'],
                 'url'   => $validated['url'],
-                'image' => $validated['image']
             ]);
 
         $tags = Tag::getTags($hashtags);
         $resource->attachTags($tags,'post');
+
+        if (isset($validated['image'])) {
+            $resource->attachMedia([$validated['image']]);
+        }
 
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);

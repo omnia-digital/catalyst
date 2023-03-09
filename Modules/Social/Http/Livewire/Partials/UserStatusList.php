@@ -20,7 +20,7 @@ class UserStatusList extends Component
     {
         return $query
             ->whereHas('teams', function ($query) use ($team) {
-                $query->where('team_user.team_id', $team->id);
+                $query->where('model_has_roles.team_id', $team->id);
             });
     }
 

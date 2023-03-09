@@ -31,7 +31,7 @@
                 {{ $resource->body }}
             </div>
 
-            <a href="{{ $resource->url }}" target="_blank" class="bg-primary hover:shadow-lg rounded-lg px-4 py-2 text-xl inline-flex items-center space-x-2">
+            <a href="{{ $resource->url }}" target="_blank" class="bg-secondary hover:shadow-lg rounded-lg px-4 py-2 text-xl inline-flex items-center space-x-2">
                     <p>Go to Resource</p>
                     <x-heroicon-o-arrow-right class="h-6 w-6"/>
             </a>
@@ -54,7 +54,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top ' . {{ \Trans::get('teams') }},
+                        title: 'Top ' . {{ \Platform::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

@@ -45,10 +45,6 @@ class Post extends Model implements HasMedia, Searchable
         'published_at'
     ];
 
-    protected $appends = [
-        'published_at',
-    ];
-
     protected static function booted()
     {
         // @NOTE - this is so we don't accidentally pull in comments when we are trying to just get regular posts
@@ -77,11 +73,11 @@ class Post extends Model implements HasMedia, Searchable
 
     public function getPublishedAtAttribute($value)
     {
-        if (empty($value)) {
-            return $this->created_at;
-        } else {
-            return new Carbon($value);
+        if ($this->type === PostType::RESOURCE) {
+            return is_null($value) ? null : $this->asDateTime($value);
         }
+        
+        return $this->created_at;
     }
 
     public function user(): BelongsTo
@@ -150,8 +146,10 @@ class Post extends Model implements HasMedia, Searchable
         $trendingPosts = Post::withCount('likes')
                    ->with('user')
                    ->when($type, fn($query) => $query->where('type', $type))
+                   ->whereNotNull('published_at')
                    ->orderBy('likes_count', 'desc')
                    ->orderBy('created_at', 'desc');
+                   
         return $trendingPosts;
     }
 

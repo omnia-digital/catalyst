@@ -113,7 +113,7 @@
                 x-on:keydown.enter.stop.prevent="submit"
                 x-on:keydown.space.stop.prevent="submit"
                 x-on:keydown.escape="listShow = false"
-                class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+                class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none"
                 tabindex="-1"
                 role="listbox"
                 style="display: none"

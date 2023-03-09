@@ -47,7 +47,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top ' . {{ \Trans::get('teams') }},
+                        title: 'Top ' . {{ \Platform::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

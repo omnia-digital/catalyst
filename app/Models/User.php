@@ -7,6 +7,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,28 +27,33 @@ use Modules\Billing\Traits\WithChargentSubscriptions;
 use Modules\Forms\Models\FormSubmission;
 use Modules\Social\Traits\HasHandle;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
+use Spatie\Permission\PermissionRegistrar;
+use Spatie\Permission\Traits\HasRoles;
+use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable;
 use Wimil\Followers\Traits\Followable;
 
-class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Searchable
-    {
-        use HasApiTokens,
-            TwoFactorAuthenticatable,
-            Notifiable,
-            SoftDeletes,
-            HasFactory,
-            HasBookmarks,
-            Followable,
-            Awardable,
-            HasHandle;
-        use HasTeams, JetstreamHasTeams {
-            HasTeams::hasTeamRole insteadof JetstreamHasTeams;
-            HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
-            HasTeams::ownsTeam insteadof JetstreamHasTeams;
-            HasTeams::ownedTeams insteadof JetstreamHasTeams;
-            HasTeams::currentTeam insteadof JetstreamHasTeams;
-        }
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
+{
+    use HasApiTokens,
+        TwoFactorAuthenticatable,
+        Notifiable,
+        SoftDeletes,
+        HasFactory,
+        HasBookmarks,
+        Followable,
+        Awardable,
+        HasHandle,
+        HasRoles,
+        SnoozeNotifiable;
+    use HasTeams, JetstreamHasTeams {
+        HasTeams::teams insteadof JetstreamHasTeams;
+        HasTeams::hasTeamRole insteadof JetstreamHasTeams;
+        HasTeams::isCurrentTeam insteadof JetstreamHasTeams;
+        HasTeams::ownsTeam insteadof JetstreamHasTeams;
+        HasTeams::ownedTeams insteadof JetstreamHasTeams;
+        HasTeams::currentTeam insteadof JetstreamHasTeams;
+        HasTeams::teamRole insteadof JetstreamHasTeams;
+    }
 
     use Billable, WithChargentSubscriptions;
 
@@ -61,15 +67,21 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Sea
         ];
 
         protected $hidden = [
-            'email',
+//            'email',
             'password',
-            'is_admin',
+//            'is_admin',
             'remember_token',
-            'email_verified_at',
+//            'email_verified_at',
             'two_factor_recovery_codes',
             'two_factor_secret',
-            'deleted_at',
-            'updated_at'
+            '2fa_secret',
+            '2fa_backup_codes',
+            '2fa_setup_at',
+            'stripe_id',
+            'pm_type',
+            'pm_last_four',
+//            'deleted_at',
+//            'updated_at'
         ];
 
         protected $appends = [
@@ -77,6 +89,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Sea
 
     public function canAccessFilament(): bool
     {
+            return true;
         if ($this->is_admin) {
             return true;
         }
@@ -120,7 +133,23 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Sea
         return true;
     }
 
+    public function deleteProfilePhoto()
+    {
+        $this->profile->deleteProfilePhoto();
+    }
+
     //// Relations ////
+
+    public function roles(): BelongsToMany
+    {
+        return $this->morphToMany(
+            config('permission.models.role'),
+            'model',
+            config('permission.table_names.model_has_roles'),
+            config('permission.column_names.model_morph_key'),
+            PermissionRegistrar::$pivotRole
+        );
+    }
 
     public function profile() {
         if (!class_exists(Profile::class)) return;
@@ -217,11 +246,4 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Sea
     //        ->where('team_id', $team->id)
     //        ->first();
     //}
-
-    public function getSearchResult(): SearchResult
-    {
-        $url = route('profile.show', $this);
-
-        return new SearchResult($this, $this->name, $url);
-    }
 }

@@ -4,7 +4,7 @@
 ])
 
 @php
-    $class = $selected ? 'ring-2 ring-offset-2 ring-secondary' : 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-secondary';
+    $class = $selected ? 'ring-2 ring-offset-2 ring-primary' : 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-primary';
     $class .= ' col-span-1 flex shadow-sm rounded-md cursor-pointer';
 @endphp
 
@@ -21,10 +21,10 @@
             </div>
         @endif
     </div>
-    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-neutral-light bg-primary rounded-r-md">
+    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-neutral-light bg-secondary rounded-r-md">
         <div class="px-4 py-4 sm:px-6 w-full">
             <div class="flex items-center justify-between">
-                <p class="font-medium text-secondary truncate">
+                <p class="font-medium text-primary truncate">
                     {{ Str::limit($episode->title, 40) }}
                 </p>
                 <div class="ml-2 flex-shrink-0 flex">

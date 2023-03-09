@@ -10,16 +10,15 @@ use App\Models\TeamInvitation;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
-use Laravel\Jetstream\Role;
 use Modules\Social\Notifications\ApplicationAcceptedToTeamNotification;
 use Modules\Social\Notifications\NewApplicationToTeamNotification;
 use Modules\Social\Notifications\NewMemberOfMyTeamNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
+use Spatie\Permission\Models\Role;
 use Trans;
 
 trait WithTeamManagement
@@ -173,7 +172,7 @@ trait WithTeamManagement
             $this->user,
             $this->team,
             $user->email,
-            'member'
+            config('platform.teams.default_member_role')
         );
 
         $this->team->teamApplications()->where('user_id', $userID)->delete();
@@ -268,7 +267,7 @@ trait WithTeamManagement
         $remover->remove(
             $this->user,
             $this->team,
-            $user = Jetstream::findUserByIdOrFail($this->teamMemberIdBeingRemoved)
+            Jetstream::findUserByIdOrFail($this->teamMemberIdBeingRemoved)
         );
 
         $this->confirmingTeamMemberRemoval = false;
@@ -289,23 +288,20 @@ trait WithTeamManagement
     {
         $this->currentlyManagingRole = true;
         $this->managingRoleFor = Jetstream::findUserByIdOrFail($userId);
-        $this->currentRole = $this->managingRoleFor->teamRole($this->team)->key ?? 'no-role';
+        $this->currentRole = $this->managingRoleFor->teamRole($this->team)->id ?? 'No Role';
     }
 
     /**
      * Save the role for the user being managed.
      *
-     * @param  \Laravel\Jetstream\Actions\UpdateTeamMemberRole  $updater
      * @return void
      */
-    public function updateRole(UpdateTeamMemberRole $updater)
+    public function updateUserRole()
     {
-        $updater->update(
-            $this->user,
-            $this->team,
-            $this->managingRoleFor->id,
-            $this->currentRole
-        );
+        Gate::authorize('updateTeamRole', $this->team);
+
+        $this->managingRoleFor->roles()->detach($this->managingRoleFor->teamRole($this->team)->id);
+        $this->managingRoleFor->roles()->attach($this->currentRole, ['team_id' => $this->team->id]);
 
         $this->team = $this->team->fresh();
 
@@ -339,14 +335,6 @@ trait WithTeamManagement
      */
     public function getRolesProperty()
     {
-        return collect(Jetstream::$roles)->transform(function ($role) {
-            return with($role->jsonSerialize(), function ($data) {
-                return (new Role(
-                    $data['key'],
-                    $data['name'],
-                    $data['permissions']
-                ))->description($data['description']);
-            });
-        })->values()->all();
+        return Role::where('team_id', $this->team->id)->get();
     }
 }

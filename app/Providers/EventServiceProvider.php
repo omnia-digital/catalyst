@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Membership;
 use App\Models\Team;
 use App\Models\User;
+use App\Observers\MembershipObserver;
 use App\Observers\TeamObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
@@ -16,6 +18,7 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         Team::class => [TeamObserver::class,],
         User::class => [UserObserver::class,],
+        Membership::class => [MembershipObserver::class,],
     ];
 
     protected $listen = [

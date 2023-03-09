@@ -7,16 +7,22 @@ use App\Models\Team;
 use App\Support\Platform\Platform;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\Social\Support\Livewire\ManagesTeamNotifications;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Trans;
 
-class TeamAdmin extends Component/*  implements HasForms */
+class TeamAdmin extends Component
 {
-    use WithPlace, AuthorizesRequests, WithFileUploads, WithNotification/* , InteractsWithForms */;
+    use WithPlace,
+        AuthorizesRequests,
+        WithFileUploads,
+        WithNotification,
+        ManagesTeamNotifications;
 
     public Team $team;
 
@@ -42,23 +48,21 @@ class TeamAdmin extends Component/*  implements HasForms */
 
     public $confirmingRemoveMedia = false;
     public $mediaToRemove;
-    public $applicationsCount = 0;
 
     public function mount(Team $team)
     {
-        $this->authorize('update-team', $team);
-        $this->team = $team->load('owner');
-        $this->applicationsCount = $this->team->teamApplications->count();
+        $this->authorize('update', $team);
+        $this->team = $team;
     }
 
     protected function rules(): array
     {
         $rules = [
             'team.name' => ['required', 'max:254'],
-            'team.start_date' => ['date'],
-            'team.end_date' => ['date', 'after_or_equal:team.start_date'],
-            'team.summary' => ['max:280'],
-            'team.content' => ['max:65500'],
+            'team.start_date' => ['nullable','date'],
+            'team.end_date' => ['nullable','date', 'after_or_equal:team.start_date' ],
+            'team.summary' => ['nullable','max:280'],
+            'team.content' => ['nullable','max:65500'],
         ];
 
         // if (Platform::hasGeneralSettingEnabled('team_require_start_date')) {
@@ -68,8 +72,8 @@ class TeamAdmin extends Component/*  implements HasForms */
         // }
 
         if (\Platform::isModuleEnabled('games')) {
-            // $rules['team.youtube_channel_id'] = ['max:65500'];
-            // $rules['team.twitch_channel_id'] = ['max:65500'];
+             $rules['team.youtube_channel_id'] = ['max:65500'];
+             $rules['team.twitch_channel_id'] = ['max:65500'];
         }
 
         return $rules;

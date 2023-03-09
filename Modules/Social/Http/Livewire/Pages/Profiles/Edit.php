@@ -35,7 +35,7 @@ class Edit extends Component
             'profile.website' => ['max:280'],
             'profile.birth_date' => ['required', 'date'],
             'country' => ['required', Rule::in(Country::select('code_3')->pluck('code_3')->toArray())],
-            'profileTypes' => ['required', 'array']
+            'profileTypes' => ['nullable', 'array']
         ];
     }
 
@@ -71,13 +71,13 @@ class Edit extends Component
     {
         $this->authorize('update-profile', $profile);
         $this->profile = $profile->load('user');
-        $this->country = $profile->country;
+        $this->country = $profile->country ?? array_keys($this->countriesArray())[0];
     }
-    
+
     public function saveChanges()
     {
         $this->validate();
-        
+
         $this->profile->country = $this->country;
         $this->profile->save();
 
@@ -109,10 +109,15 @@ class Edit extends Component
         $this->profile->refresh();
     }
 
+    public function countriesArray()
+    {
+        return Country::orderBy('name')->pluck('name', 'code_3')->toArray();
+    }
+
     public function render()
     {
         return view('social::livewire.pages.profiles.edit', [
-            'countries'  => Country::orderBy('name')->pluck('name', 'code_3')->toArray(),
+            'countries'  => $this->countriesArray(),
             'profileTags' => $this->profileTags,
         ]);
     }

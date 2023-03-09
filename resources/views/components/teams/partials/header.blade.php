@@ -8,8 +8,8 @@
                     <img class="h-24 w-24 rounded-full" src="{{ $team->profile_photo_url }}" alt="{{ $team->name }}" />
                 </div>
                 <div>
-                    <x-library::heading.1 textColor="text-primary">{{ $team->name  }}</x-library::heading.1>
-                    <p class="text-sm text-primary">{{ '@' .  $team->handle }}</p>
+                    <x-library::heading.1 textColor="text-secondary">{{ $team->name  }}</x-library::heading.1>
+                    <p class="text-sm text-secondary">{{ '@' .  $team->handle }}</p>
                 </div>
             </div>
             {{-- No program to calculate reviewScore yet
@@ -29,5 +29,5 @@
             </div>
         </div>
     </div>
-    <x-teams.overview-navigation class="bg-primary" :team="$team" />
+    <x-teams.overview-navigation class="bg-secondary" :team="$team" />
 </div>
