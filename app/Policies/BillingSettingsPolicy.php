@@ -12,8 +12,7 @@ class BillingSettingsPolicy
 
     private function isSuperAdmin(User $user)
     {
-        return false;
-        return $user->is_admin;
+        return $user->hasRole('super-admin');
     }
 
     public function viewAny(User $user)

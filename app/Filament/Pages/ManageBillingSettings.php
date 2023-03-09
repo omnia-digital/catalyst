@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Resources\UserResource\Widgets\AdminUserStatsOverview;
 use App\Settings\BillingSettings;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -16,6 +17,8 @@ use Modules\Billing\Models\FormAssemblyForm;
 
 class ManageBillingSettings extends SettingsPage
 {
+    use HasPageShield;
+    
     protected static ?string $title = 'Billing';
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
     protected static string $settings = BillingSettings::class;
