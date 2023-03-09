@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Team;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
@@ -14,46 +15,46 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $teamPermissions         = [
-            'create team',
-            'read team',
-            'update team',
-            'delete team',
+            'create_team',
+            'read_team',
+            'update_team',
+            'delete_team',
         ];
         $postPermissions         = [
-            'create post',
-            'read post',
-            'update post',
-            'delete post',
+            'create_post',
+            'read_post',
+            'update_post',
+            'delete_post',
         ];
         $feedPermissions         = [
-            'create feed',
-            'read feed',
-            'update feed',
-            'delete feed',
+            'create_feed',
+            'read_feed',
+            'update_feed',
+            'delete_feed',
         ];
         $awardPermissions        = [
-            'create award',
-            'read award',
-            'update award',
-            'delete award',
+            'create_award',
+            'read_award',
+            'update_award',
+            'delete_award',
         ];
         $reviewPermissions       = [
-            'create review',
-            'read review',
-            'update review',
-            'delete review',
+            'create_review',
+            'read_review',
+            'update_review',
+            'delete_review',
         ];
         $subscriptionPermissions = [
-            'create sub',
-            'read sub',
-            'update sub',
-            'delete sub',
+            'create_subscription',
+            'read_subscription',
+            'update_subscription',
+            'delete_subscription',
         ];
         $eventPermissions        = [
-            'create event',
-            'read event',
-            'update event',
-            'delete event',
+            'create_event',
+            'read_event',
+            'update_event',
+            'delete_event',
         ];
 
         $allPermissions = [
@@ -83,26 +84,26 @@ class PermissionSeeder extends Seeder
                 ]
             ],
             config('platform.teams.default_moderator_role') => [
-                'description' => "Moderators can also can edit and delete posts.",
+                'description' => "Moderators can also can edit and delete_posts.",
                 'permissions' => [
-                    'view posts',
-                    'create posts',
-                    'update posts',
-                    'delete posts'
+                    'view_posts',
+                    'create_posts',
+                    'update_posts',
+                    'delete_posts'
                 ]
             ],
             config('platform.teams.default_editor_role') => [
-                'description' => "Editors can create and update posts but never delete posts.",
+                'description' => "Editors can create_and update_posts but never delete_posts.",
                 'permissions' => [
-                    'view posts',
-                    'create posts',
-                    'update posts',
+                    'view_posts',
+                    'create_posts',
+                    'update_posts',
                 ]
             ],
             config('platform.teams.default_member_role') => [
                 'description' => "Members are a part of your Team and can see content inside the Team.",
                 'permissions' => [
-                    'view posts',
+                    'view_posts',
                 ]
             ]
         ];
@@ -112,7 +113,7 @@ class PermissionSeeder extends Seeder
                 config('platform.teams.default_subscriber_role') => [
                     'description' => "Subscribers can view 'sub-only' content, including posts, chats, events and more. Assigning a new member this role is equivalent to giving a subscription for free.",
                     'permissions' => [
-                        'view posts',
+                        'view_posts',
                     ]
                 ]
             ]);
@@ -129,5 +130,12 @@ class PermissionSeeder extends Seeder
                 });
             });
         }
+
+        // Generate all remaining permissions using shield
+        Artisan::call('shield:generate --option=permissions --all');
+
+        // add Omnia Admin as super admin
+        Artisan::call('shield:super_admin --user=1');
+
     }
 }

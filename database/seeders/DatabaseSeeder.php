@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Modules\Advice\Database\Seeders\AdviceDatabaseSeeder;
 use Modules\Forms\Database\Seeders\FormsDatabaseSeeder;
@@ -41,7 +42,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ReviewsDatabaseSeeder::class);
         $this->call(BillingDatabaseSeeder::class);
         $this->call(FormsDatabaseSeeder::class);
-        $this->call(ShieldSeeder::class);
 
         if (DB::connection() instanceof \Illuminate\Database\MySqlConnection) {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
