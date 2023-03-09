@@ -135,7 +135,7 @@ class PermissionSeeder extends Seeder
         Artisan::call('shield:generate --option=permissions --all');
 
         // add Omnia Admin as super admin
-        Artisan::call('shield:super_admin --user=1');
+        Artisan::call('shield:super-admin --user=1');
 
     }
 }
