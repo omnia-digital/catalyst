@@ -57,7 +57,7 @@ class ProfileResource extends Resource
                                 Forms\Components\TextInput::make('email')->columnSpan(6),
                             ]),
                             Timestamp::make('last_active_at'),
-                            Forms\Components\Select::make('current_team_id')->relationship('currentTeam','name'),
+//                            Forms\Components\Select::make('current_team_id')->relationship('currentTeam','name'),
                         ]),
                 CreatedAt::make()->visibleOn('edit'),
                 UpdatedAt::make()->visibleOn('edit'),
