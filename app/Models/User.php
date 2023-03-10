@@ -96,6 +96,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return str_ends_with($this->email, '@omniadigital.io') && $this->hasVerifiedEmail();
     }
 
+    public function getIsAdminAttribute()
+    {
+        return $this->hasRole('super-admin');
+    }
+
         //// Attributes ////
 
     public function getHandleAttribute()
