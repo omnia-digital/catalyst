@@ -1,6 +1,7 @@
 name: Test and Deploy
 on:
   pull_request:
+    branches: [ main, dev ]
   push:
     branches: [ main, dev ]
 jobs:
@@ -21,7 +22,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql
       - name: Copy environment config file
         run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
@@ -43,7 +44,7 @@ jobs:
           SF_CONSUMER_SECRET: "${{ secrets.SF_CONSUMER_SECRET }}"
           SF_USERNAME: "${{ secrets.SF_USERNAME }}"
           SF_PASSWORD: "${{ secrets.SF_PASSWORD }}"
-        run: vendor/bin/phpunit
+        run: php artisan test
 #      - name: Run migrations
 #        env:
 #          DB_CONNECTION: sqlite
@@ -77,7 +78,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.2
           tools: composer:v2
           coverage: none
       - name: Register Font-Awesome Key
