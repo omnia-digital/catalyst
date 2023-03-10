@@ -1,6 +1,6 @@
-<article wire:click.prevent.stop="showPost" class="w-full sm:max-w-post-card-max-w bg-post-card-bg-color pt-4 shadow rounded-lg z-10 border-2 border-transparent {{ $clickable ? '
-cursor-pointer' : ''
-}}">
+<article wire:click.prevent.stop="showPost" 
+    class="w-full sm:max-w-post-card-max-w bg-post-card-bg-color pt-4 shadow rounded-lg z-10 border-2 border-transparent {{ $clickable ? 'cursor-pointer' : '' }}"
+>
     <div class="flex justify-between px-5">
         <div class="flex space-x-3">
             <div class="flex-shrink-0">
