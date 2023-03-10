@@ -31,10 +31,19 @@ jobs:
           npm config set "//npm.fontawesome.com/:_authToken" ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
       - name: Validate Composer
         run: composer validate
-#      - name: Create SQLite database
-#        run: |
-#          mkdir -p database
-#          touch database/database.sqlite
+      - name: Create SQLite database
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+          SF_CONSUMER_KEY:  "${{ secrets.SF_CONSUMER_KEY }}"
+          SF_CONSUMER_SECRET: "${{ secrets.SF_CONSUMER_SECRET }}"
+          SF_USERNAME: "${{ secrets.SF_USERNAME }}"
+          SF_PASSWORD: "${{ secrets.SF_PASSWORD }}"
+        run: vendor/bin/phpunit
 #      - name: Run migrations
 #        env:
 #          DB_CONNECTION: sqlite
