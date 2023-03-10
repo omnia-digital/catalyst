@@ -8,7 +8,7 @@ jobs:
   tests:
     name: Run Tests
     runs-on: ubuntu-latest
-#    if: ${{ github.ref != 'refs/heads/main' }}
+    
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -26,12 +26,18 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql
       - name: Copy environment config file
         run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Register Font-Awesome Key
         run: |
           npm config set "@fortawesome:registry" https://npm.fontawesome.com/
           npm config set "//npm.fontawesome.com/:_authToken" ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
       - name: Validate Composer
         run: composer validate
+      - name: Generate key
+        run: php artisan key:generate
+      - name: Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
       - name: Create SQLite database
         run: |
           mkdir -p database
