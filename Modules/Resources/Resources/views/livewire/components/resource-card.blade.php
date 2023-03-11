@@ -64,23 +64,23 @@
                 {!! strip_tags($post->body) !!}
             </div>
 
-{{--            @if($post->image)--}}
-{{--                <div class="block w-full aspect-w-10 aspect-h-3 overflow-hidden">--}}
-{{--                    <img src="{{ $post->image }}" alt="{{ $post->title }}" class="object-cover">--}}
-{{--                </div>--}}
-{{--            @endif--}}
-
-            @if ($post->media ?? null)
-                <div class="mt-3 overflow-hidden">
-                    <div class="grid grid-cols-{{ sizeof($post->media) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($post->media) > 2 ? '2 h-80' : '1' }} gap-px">
-                        @foreach ($post->media as $media)
-                            <div class="w-full overflow-hidden @if($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">
-                                <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover w-full">
-                            </div>
-                        @endforeach
-                    </div>
+            @if($post->image)
+                <div class="block w-full aspect-w-10 aspect-h-3 overflow-hidden">
+                    <img src="{{ $post->image }}" alt="{{ $post->title }}" class="object-cover">
                 </div>
             @endif
+
+{{--            @if ($post->media ?? null)--}}
+{{--                <div class="mt-3 overflow-hidden">--}}
+{{--                    <div class="grid grid-cols-{{ sizeof($post->media) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($post->media) > 2 ? '2 h-80' : '1' }} gap-px">--}}
+{{--                        @foreach ($post->media as $media)--}}
+{{--                            <div class="w-full overflow-hidden @if($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">--}}
+{{--                                <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover w-full">--}}
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endif--}}
         </div>
     </div>
 
