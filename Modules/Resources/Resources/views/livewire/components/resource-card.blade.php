@@ -1,5 +1,5 @@
-<article 
-    wire:click.prevent.stop="showPost" 
+<article
+    wire:click.prevent.stop="showPost"
     class="pt-4 shadow-sm rounded-lg cursor-pointer border-2 z-10 bg-secondary {{ $clickable ? 'cursor-pointer' : '' }}"
 >
     <!-- Content -->
@@ -47,9 +47,9 @@
                                 {{ $post->isBookmarkedBy() ? 'Un-bookmark' : 'Bookmark' }}
                             </x-library::dropdown.item>
                             @can('update', $post)
-                                <a 
-                                    x-data x-on:click.stop="" 
-                                    class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color" 
+                                <a
+                                    x-data x-on:click.stop=""
+                                    class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color"
                                     href="{{ route('resources.edit', $post->id) }}"
                                 >
                                     Edit
@@ -64,11 +64,11 @@
                 {!! strip_tags($post->body) !!}
             </div>
 
-            @if($post->image)
-                <div class="block w-full aspect-w-10 aspect-h-3 overflow-hidden">
-                    <img src="{{ $post->image }}" alt="{{ $post->title }}" class="object-cover">
-                </div>
-            @endif
+{{--            @if($post->image)--}}
+{{--                <div class="block w-full aspect-w-10 aspect-h-3 overflow-hidden">--}}
+{{--                    <img src="{{ $post->image }}" alt="{{ $post->title }}" class="object-cover">--}}
+{{--                </div>--}}
+{{--            @endif--}}
 
             @if ($post->media ?? null)
                 <div class="mt-3 overflow-hidden">
