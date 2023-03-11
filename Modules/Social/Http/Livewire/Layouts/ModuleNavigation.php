@@ -71,23 +71,23 @@
 //                    'icon'    => 'heroicon-o-collection',
 //                    'current' => false
 //                ],
-                [
-                    'label'   => 'Resources',
-                    'name'    => 'resources.home',
-                    'icon'    => 'fa-regular fa-newspaper',
+//                [
+//                    'label'   => 'Resources',
+//                    'name'    => 'resources.home',
 //                    'icon'    => 'fa-regular fa-newspaper',
-//                    'icon'    => 'heroicon-o-book-open',
-                    'module'  => 'social',
-                    'current' => false
-                ],
-                [
-                    'label'   => 'Bookmarks',
-                    'name'    => 'social.bookmarks',
-                    'icon'    => 'fa-regular fa-bookmark',
-//                    'icon'    => 'heroicon-o-bookmark',
-                    'module'  => 'social',
-                    'current' => false
-                ],
+////                    'icon'    => 'fa-regular fa-newspaper',
+////                    'icon'    => 'heroicon-o-book-open',
+//                    'module'  => 'social',
+//                    'current' => false
+//                ],
+//                [
+//                    'label'   => 'Bookmarks',
+//                    'name'    => 'social.bookmarks',
+//                    'icon'    => 'fa-regular fa-bookmark',
+////                    'icon'    => 'heroicon-o-bookmark',
+//                    'module'  => 'social',
+//                    'current' => false
+//                ],
 //                [
 //                    'label'   => \Trans::get('Companies'),
 //                    'name'    => 'social.companies.home',

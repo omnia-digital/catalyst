@@ -25,9 +25,17 @@ class MainNavigationMenu extends Component
     {
         return [
             [
-                'label'   => 'Community',
+                'label'   => 'Home',
                 'name'    => 'social.home',
                 'icon'    => 'fa-duotone fa-house',
+                //                'icon'    => 'heroicon-o-home',
+                'module'  => 'social',
+                'current' => false
+            ],
+            [
+                'label'   => 'Groups',
+                'name'    => 'social.home',
+                'icon'    => 'fa-duotone fa-globe',
                 //                'icon'    => 'heroicon-o-home',
                 'module'  => 'social',
                 'current' => false
