@@ -11,7 +11,7 @@
         </div>
         <div class="mt-6">
             <div class="flex items-center">
-                <x-library::input.label value="{{ \Trans::get('What is your Team associated with?') }}" /><span class="text-red-600 text-sm ml-1">*</span>
+                <x-library::input.label value="{{ \Trans::get('What type of Team is this?') }}" /><span class="text-red-600 text-sm ml-1">*</span>
             </div>
             <p class="text-neutral-dark">{{ \Trans::get('(you can choose more than one)') }}</p>
             <x-library::input.selects wire:model="teamTypes" :options="$teamTags"/>

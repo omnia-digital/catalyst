@@ -19,10 +19,10 @@
             </div> --}}
 
             <div class="mb-2">
-            @if ($team->tags()->count() > 0)
+            @if ($team->teamTypes->count() > 0)
                 <div class="flex flex-wrap justify-start mt-1 space-x-2">
-                    @foreach($team->tags as $tag)
-                        <x-tag :name="$tag->name" bg-color="neutral-dark-75" text-color="primary" text-size="2xs" link=""/>
+                    @foreach($team->teamTypes as $tag)
+                        <x-tag :name="$tag->name" text-color="primary" text-size="2xs" link=""/>
                     @endforeach
                 </div>
             @endif
