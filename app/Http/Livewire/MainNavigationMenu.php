@@ -97,6 +97,14 @@ class MainNavigationMenu extends Component
             //                'module'  => 'jobs',
             //                'current' => false
             //            ],
+
+            [
+                'label'   => 'Livestream',
+                'url'     => 'https://app.omnia.church',
+                'icon'    => 'fa-duotone fa-camcorder',
+                'module'  => 'livestream',
+                'current' => false
+            ],
         ];
     }
 
