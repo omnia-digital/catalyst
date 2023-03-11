@@ -24,7 +24,7 @@ class ModuleNavigation extends Component
             [
                 'label'   => \Trans::get('My Resources'),
                 'name'    => 'resources.drafts',
-                'icon'    => 'fa-duotone fa-newspaper',
+                'icon'    => 'fa-regular fa-photo-film-music',
                 //                    'icon'    => 'heroicon-o-briefcase',
                 'module'  => 'resources',
                 'current' => false

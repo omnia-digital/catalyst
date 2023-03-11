@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Actions\Posts;
 
+use App\Models\Tag;
 use App\Models\Team;
 use App\Models\User;
 use App\Support\Platform\TextProcessor;
@@ -69,6 +70,10 @@ class CreateNewPostAction
             'postable_type'      => $this->postable ? get_class($this->postable) : ($options['postable_type'] ?? null),
             'repost_original_id' => $this->repost?->id,
         ]);
+
+        $hashtags = Tag::pullTags($content);
+        $tags = Tag::getTags($hashtags, 'post');
+        $post->attachTags($tags,'post');
 
         [$userMentions, $teamMentions] = Mention::getAllMentions($content);
 

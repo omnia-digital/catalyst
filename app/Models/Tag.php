@@ -17,12 +17,12 @@ class Tag extends \Spatie\Tags\Tag
         return $hashtags[1];
     }
 
-    public static function getTags($hashtags)
+    public static function getTags($hashtags, $type = '')
     {
         $tags = array();
 
         foreach ($hashtags as $hashtag) {
-            $tags[] = Tag::findOrCreateFromString($hashtag);
+            $tags[] = Tag::findOrCreateFromString($hashtag, $type);
         }
 
         return $tags;

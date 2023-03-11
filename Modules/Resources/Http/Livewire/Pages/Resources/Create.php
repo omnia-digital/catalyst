@@ -44,7 +44,7 @@ class Create extends Component
                 'url'   => $validated['url'],
             ]);
 
-        $tags = Tag::getTags($hashtags);
+        $tags = Tag::getTags($hashtags, 'post');
         $resource->attachTags($tags,'post');
 
         if (isset($validated['image'])) {

@@ -33,7 +33,7 @@ class MainNavigationMenu extends Component
                 'current' => false
             ],
             [
-                'label'   => 'Groups',
+                'label'   => \Trans::get('Teams'),
                 'name'    => 'social.home',
                 'icon'    => 'fa-duotone fa-globe',
                 //                'icon'    => 'heroicon-o-home',
@@ -43,7 +43,7 @@ class MainNavigationMenu extends Component
             [
                 'label'   => 'Resources',
                 'name'    => 'resources.home',
-                'icon'    => 'fa-duotone fa-newspaper',
+                'icon'    => 'fa-regular fa-photo-film-music',
                 //                'icon'    => 'heroicon-o-newspaper',
                 'module'  => 'resources',
                 'current' => false
