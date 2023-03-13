@@ -2,11 +2,11 @@
 
 namespace Modules\Jobs\Models;
 
-use Modules\Jobs\Models\User;
-use Modules\Jobs\Traits\Coupon\HasCoupon;
-use Modules\Jobs\Traits\Transaction\HasTransaction;
-use Illuminate\Database\Eloquent\Builder;
+use App\Traits\Coupon\HasCoupon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Jobs\Models\User;
+use Modules\Jobs\Support\Transaction\HasTransaction;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Jetstream;

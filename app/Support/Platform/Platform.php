@@ -9,6 +9,7 @@ namespace App\Support\Platform;
 use App\Settings\BillingSettings;
 use App\Settings\GeneralSettings;
 use Carbon\CarbonTimeZone;
+use Modules\Jobs\Settings\JobsSettings;
 use Nwidart\Modules\Facades\Module;
 
 class Platform
@@ -114,6 +115,11 @@ class Platform
     public static function getBillingSetting($setting)
     {
         return (new BillingSettings())?->{$setting};
+    }
+
+    public static function getJobSetting($setting)
+    {
+        return (new JobsSettings())?->{$setting};
     }
 
     public static function getAppFee()

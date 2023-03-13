@@ -2,6 +2,7 @@
 
 namespace Modules\Jobs\Http\Livewire\Jobs;
 
+use App\Support\Platform\Platform;
 use Modules\Jobs\Actions\Fortify\CreateNewUser;
 use Modules\Jobs\Data\Transaction;
 use Modules\Jobs\Events\JobWasCreated;
@@ -72,7 +73,7 @@ class NewJob extends Component
     public function mount()
     {
         $this->setTeamId();
-        $this->price = nova_get_setting('job:posting_price');
+        $this->price = Platform::getJobSetting('posting_price');
 
     }
 
@@ -292,7 +293,7 @@ class NewJob extends Component
      */
     public function getTotalPriceProperty()
     {
-        return nova_get_setting('job:posting_price') + $this->addonsPrice;
+        return Platform::getJobSetting('posting_price') + $this->addonsPrice;
     }
 
     /**

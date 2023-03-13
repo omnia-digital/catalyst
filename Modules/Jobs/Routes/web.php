@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Modules\Jobs\Http\Controllers\DownloadInvoiceController;
 use Modules\Jobs\Http\Livewire\Jobs\JobDetail;
 use Modules\Jobs\Http\Livewire\Jobs\MyJobs;
 use Modules\Jobs\Http\Livewire\Jobs\NewJob;

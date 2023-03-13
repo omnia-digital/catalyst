@@ -1,6 +1,6 @@
 <?php namespace Modules\Jobs\Http\Controllers;
 
-use Modules\Jobs\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class DownloadInvoiceController extends Controller
