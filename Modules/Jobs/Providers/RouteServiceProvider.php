@@ -4,6 +4,7 @@ namespace Modules\Jobs\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Modules\Jobs\Models\JobPosition;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,10 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
+        Route::bind('job-position', function($id) {
+            return JobPosition::withoutGlobalScopes()->findOrFail($id);
+        });
     }
 
     /**

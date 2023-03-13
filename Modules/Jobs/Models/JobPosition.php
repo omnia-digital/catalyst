@@ -52,10 +52,11 @@ class JobPosition extends Model
         static::creating(function (self $job) {
             $job->user_id = Auth::id();
         });
+    }
 
-        static::addGlobalScope('active', function (Builder $builder) {
-            $builder->where('is_active', 1);
-        });
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('is_active', 1);
     }
 
     /**

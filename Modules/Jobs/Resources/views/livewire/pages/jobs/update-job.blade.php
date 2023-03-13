@@ -142,7 +142,7 @@
                         <x-library::button.link href="{{ route('jobs.job.show', ['team' => $job->company->id, 'job' => $job]) }}" target="_blank">{{ \Trans::get('Preview Job') }}</x-library::button.link>
                     </span>
                         <span class="inline-flex rounded-md shadow-sm">
-                        <x-library::button>{{ \Trans::get('Save') }}</x-library::button>
+                        <x-library::button wire:click="save">{{ \Trans::get('Save') }}</x-library::button>
                     </span>
                     </div>
                 </div>

@@ -56,18 +56,24 @@ class UpdateJob extends Component
     {
         $this->validate();
 
+        if (empty($this->is_active)) {
+            $this->job->is_active = false;
+        }
         $this->job->save();
 
-        $this->job->tags()
-                  ->sync($this->selected_tags);
+        $this->job->skills()
+                  ->sync($this->selected_skills);
 
         $this->success('Update the job successfully!');
+
+        $this->redirectRoute('jobs.job.show', [
+            'team' => $this->job->company->team,
+            'job'  => $this->job
+        ]);
     }
 
     public function getJobPositionSkillOptionsProperty()
     {
-        //        return Tag::withType('job_position_skill')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
-
         return \App\Models\Tag::getWithType('job_position_skill')
                               ->pluck('name', 'id');
     }

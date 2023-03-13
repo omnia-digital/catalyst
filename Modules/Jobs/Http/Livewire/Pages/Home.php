@@ -10,19 +10,21 @@ class Home extends Component
 {
     public function render()
     {
-        $featuredJobs = \Modules\Jobs\Models\JobPosition::with(['company', 'tags', 'addons'])
+        $featuredJobs = \Modules\Jobs\Models\JobPosition::with(['company', 'skills', 'addons'])
                                                         ->featured(Platform::getJobSetting('featured_days', 30))
+                                                        ->active()
                                                         ->latest()
                                                         ->when(Platform::getJobSetting('featured_jobs_limit'), fn($query, $limit) => $query->take($limit))
                                                         ->get();
 
-        $jobs = JobPosition::with(['company', 'tags', 'addons'])
+        $jobs = JobPosition::with(['company', 'skills', 'addons'])
                            ->whereNotIn('id', $featuredJobs->pluck('id'))
+                           ->active()
                            ->latest()
                            ->get();
 
-        return view('jobs::livewire.pages.home',[
-                    'jobs'         => $jobs,
+        return view('jobs::livewire.pages.home', [
+            'jobs'         => $jobs,
             'featuredJobs' => $featuredJobs
         ]);
     }
