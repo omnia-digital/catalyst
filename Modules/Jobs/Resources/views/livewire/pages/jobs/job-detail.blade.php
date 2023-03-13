@@ -48,33 +48,33 @@
                         </div>
                     </div>
                     <div class="mt-5 flex lg:mt-0 lg:ml-4">
-                        @if (false)
+                        @if (auth()->check() && auth()->user()->can('update', $job))
                             <span class="mr-3 shadow-sm rounded-md">
-                            <button type="button"
+                            <x-library::button.link href="{{ route('jobs.job.update', $job) }}" type="button"
                                     class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out">
-                                <x-heroicon-s-pencil class="-ml-1 mr-2 h-5 w-5 text-gray-500"/> Edit
-                            </button>
+                                <x-heroicon-s-pencil class="-ml-1 mr-2 h-5 w-5 text-gray-500"/> {{ \Trans::get('Edit') }}
+                            </x-library::button.link>
                         </span>
+                        @elseif(auth()->check() && auth()->user()->can('apply', $job))
+                            <span class="shadow-sm rounded-md">
+                            <x-library::button.link href="{{ $job->applyLink }}" target="_blank"
+                               class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-light-blue-600 hover:bg-light-blue-500 focus:outline-none focus:shadow-outline-light-blue focus:border-light-blue-700 active:bg-light-blue-700 transition duration-150 ease-in-out">
+                                <x-heroicon-s-cursor-click class="-ml-1 mr-2 h-5 w-5"/> {{ \Trans::get('Apply') }}
+                            </x-library::button.link>
                         @endif
-
-                        <span class="shadow-sm rounded-md">
-                        <a href="{{ $job->applyLink }}" target="_blank"
-                           class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-light-blue-600 hover:bg-light-blue-500 focus:outline-none focus:shadow-outline-light-blue focus:border-light-blue-700 active:bg-light-blue-700 transition duration-150 ease-in-out">
-                            <x-heroicon-s-cursor-click class="-ml-1 mr-2 h-5 w-5"/> Apply
-                        </a>
                     </span>
                     </div>
                 </div>
             </div>
             <div class="px-6">
                 <h3 class="text-base font-medium leading-7 text-gray-900 sm:text-xl sm:leading-9 sm:truncate">
-                    JobPosition Description
+                    {{ \Trans::get('Job Description') }}
                 </h3>
                 <p class="text-base text-gray-900 mt-2">{{ $job->description }}</p>
             </div>
             <div class="border-t border-gray-200 px-4 py-4 sm:px-6">
                 <h3 class="text-base font-medium leading-7 text-gray-900 sm:text-xl sm:leading-9 sm:truncate">
-                    About {{ $this->job->company->name }}
+                    {{ \Trans::get('About') }} {{ $this->job->company->name }}
                 </h3>
                 <p class="text-base text-gray-900 mt-2">{{ $this->job->company->about }}</p>
             </div>
@@ -85,9 +85,9 @@
         {{--    </aside>--}}
 
         {{--  Tooltips  --}}
-        <x-jobs::tooltip trigger="company">Company</x-jobs::tooltip>
-        <x-jobs::tooltip trigger="location">Location</x-jobs::tooltip>
-        <x-jobs::tooltip trigger="payment-type-budget">Payment Type & Budget</x-jobs::tooltip>
+        <x-jobs::tooltip trigger="company">{{ \Trans::get('Company') }}</x-jobs::tooltip>
+        <x-jobs::tooltip trigger="location">{{ \Trans::get('Location') }}</x-jobs::tooltip>
+        <x-jobs::tooltip trigger="payment-type-budget">{{ \Trans::get('Payment Type & Budget') }}</x-jobs::tooltip>
         <x-jobs::tooltip trigger="posted-on">{{ $job->created_at->format('Y-m-d') }}</x-jobs::tooltip>
     </div>
 @endsection

@@ -139,10 +139,10 @@
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <span class="inline-flex rounded-md shadow-sm">
-                        <x-jobs::form.button.link href="{{ route('jobs.job.show', ['team' => $job->company->id, 'job' => $job]) }}" target="blank">Preview Job</x-jobs::form.button.link>
+                        <x-library::button.link href="{{ route('jobs.job.show', ['team' => $job->company->id, 'job' => $job]) }}" target="_blank">{{ \Trans::get('Preview Job') }}</x-library::button.link>
                     </span>
                         <span class="inline-flex rounded-md shadow-sm">
-                        <x-jobs::form.button>Save</x-jobs::form.button>
+                        <x-library::button>{{ \Trans::get('Save') }}</x-library::button>
                     </span>
                     </div>
                 </div>
