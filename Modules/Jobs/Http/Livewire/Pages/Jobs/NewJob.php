@@ -71,7 +71,7 @@ class NewJob extends Component
     public $job_length_id;
     public $experience_level_id;
     public $project_size_id;
-    public $is_active = true;
+    public $is_active = false;
     public $default_description = "The description of the job position will appear here. Write this in the \"JobPosition Description\" box above.";
 
     public function mount()
@@ -205,13 +205,16 @@ class NewJob extends Component
 
             // Charge via user's default payment method
             // Note: Stripe accepts charges in cents
-            $invoice = Auth::user()
-                           ->invoiceFor('Publish job: ' . $this->title, $price * 100);
+            if ( ! empty($price) && $price > 0) {
+                $invoice = Auth::user()
+                               ->invoiceFor('Publish job: ' . $this->title, $price * 100);
 
-            // Save a transaction into the database
-            $job->transactions()
-                ->create($this->prepareTransaction($invoice)
-                              ->all());
+                // Save a transaction into the database
+                $job->transactions()
+                    ->create($this->prepareTransaction($invoice)
+                                  ->all());
+            }
+
         } catch (\Exception $exception) {
             DB::rollBack();
 
@@ -226,7 +229,7 @@ class NewJob extends Component
 
         event(new JobPositionWasCreated($job));
 
-        $this->redirectRoute('jobs.show', [
+        $this->redirectRoute('jobs.job.show', [
             'team' => $job->company,
             'job'  => $job
         ]);
@@ -258,6 +261,7 @@ class NewJob extends Component
             'job_length_id'     => 'required',
             'hours_per_week_id' => 'required',
             'project_size_id'   => 'required',
+            'experience_level_id'   => 'required',
             'is_active'         => 'boolean',
         ];
     }

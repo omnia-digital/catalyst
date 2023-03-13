@@ -153,6 +153,9 @@
                                             <x-library::input.error for="{{ $jobLength['title'] }}"/>
                                         </div>
                                     @endforeach
+                                    <div>
+                                        <h2 class="text-lg leading-6 font-medium text-gray-900">What's the size of your project?</h2>
+                                    </div>
                                     @foreach ($projectSizes as $key => $project)
                                         <div class="flex pt-4">
                                             <x-jobs::input.radio wire:model.defer="project_size_id" name="project_size_id" id="{{ $project['title'] }}" value="{{ $project['id'] }}"/>
@@ -164,6 +167,7 @@
 
                                     @endforeach
                                     <x-library::input.error for="job.project_size_id"/>
+
                                     <x-library::input.label value="Active"/>
                                     <x-library::input.toggle wire:model.defer="is_active" id="is-active"/>
                                     <x-library::input.error for="is_active"/>

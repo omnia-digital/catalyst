@@ -3,6 +3,7 @@
 namespace Modules\Jobs\Models;
 
 use App\Models\Tag;
+use App\Models\Team;
 use App\Traits\Coupon\HasCoupon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Jobs\Models\User;
@@ -85,7 +86,7 @@ class JobPosition extends Model
      */
     public function company()
     {
-        return $this->belongsTo(Jetstream::$teamModel, 'team_id');
+        return $this->belongsTo(Team::class, 'team_id');
     }
 
     /**
