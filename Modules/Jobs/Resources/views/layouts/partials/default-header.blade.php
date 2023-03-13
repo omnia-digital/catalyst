@@ -24,7 +24,7 @@
             <span class="hidden sm:inline-flex rounded-md shadow">
                 <a href="{{ route('jobs.create') }}"
                    class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-black bg-white hover:text-gray-600 focus:outline-none focus:border-light-blue-300 focus:shadow-outline-light-blue active:bg-gray-50 active:text-light-blue-700 transition duration-150 ease-in-out">
-                    Post A JobPosition
+                    Post a job
                 </a>
             </span>
 
@@ -167,7 +167,7 @@
                 <a href="{{ route('jobs.create') }}"
                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
                    role="menuitem">
-                    Post A JobPosition
+                    Post a job
                 </a>
             </div>
         </div>

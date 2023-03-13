@@ -2,7 +2,18 @@
 
 @section('content')
 <div>
-    <h1 class="w-full text-3xl px-4">Post a Job </h1>
+    <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
+        <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary">
+            <a href="{{ route('jobs.home') }}">
+                <x-heroicon-o-arrow-left class="h-6"/>
+            </a>
+        </div>
+        <a href="{{route('jobs.home')}}">
+            <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Jobs') }}</x-library::heading.1>
+        </a>
+    </div>
+    <x-library::heading.1 text-color="text-color" class="ml-4 pt-2 pb-1 hover:cursor-pointer">{{ Trans::get('Post a Job') }}</x-library::heading.1>
+
 
     <div class="flex justify-between my-6">
         <div class="w-full md:w-10/12 px-2 md:pr-6">
@@ -26,9 +37,6 @@
             <form wire:submit.prevent="{{ Auth::guest() ? 'showRegisterModal' : 'save' }}" action="#" method="POST">
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                     <div class="bg-white py-6 px-4 space-y-6 sm:p-6">
-                        <div>
-                            <h2 class="text-lg leading-6 font-medium text-gray-900">New Job</h2>
-                        </div>
 
                         <div class="grid grid-cols-3 gap-6">
                             <div class="col-span-3 space-y-1 sm:col-span-2">
