@@ -2,7 +2,7 @@
 
 namespace Modules\Jobs\Rules;
 
-use Modules\Jobs\Models\Tag;
+use App\Models\Tag;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidTags implements Rule

@@ -2,6 +2,7 @@
 
 namespace Modules\Jobs\Http\Livewire\Pages\Jobs;
 
+use App\Models\Tag;
 use App\Support\Platform\Platform;
 use Illuminate\Validation\Validator;
 use Livewire\ComponentConcerns\ValidatesInput;
@@ -17,7 +18,6 @@ use Modules\Jobs\Models\JobPositionAddon;
 use Modules\Jobs\Models\JobPositionLength;
 use Modules\Jobs\Models\PaymentType;
 use Modules\Jobs\Models\ProjectSize;
-use Modules\Jobs\Models\Tag;
 use Modules\Jobs\Rules\ValidJobAddons;
 use Modules\Jobs\Rules\ValidTags;
 use Modules\Jobs\Support\Livewire\WithNotification;
@@ -185,8 +185,8 @@ class NewJob extends Component
                 ->except('selected_skills')
                 ->all());
 
-            // Attach maximum 5 tags to job
-            $job->tags()
+            // Attach maximum 5 skills to job
+            $job->skills()
                 ->attach(collect($this->selected_skills)
                     ->take(5)
                     ->all());
@@ -397,6 +397,13 @@ class NewJob extends Component
         return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : 'public';
     }
 
+    public function getJobPositionSkillOptionsProperty()
+    {
+//        return Tag::withType('job_position_skill')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
+
+        return Tag::getWithType('job_position_skill')->pluck('name','id');
+    }
+
     public function render()
     {
         return view('jobs::livewire.pages.jobs.new-job', [
@@ -404,8 +411,7 @@ class NewJob extends Component
                                                                      ->allTeams(),
             'applyTypes'                 => ApplyType::pluck('name', 'code'),
             'paymentTypes'               => PaymentType::pluck('name', 'code'),
-            'job_position_skill_options' => \App\Models\Tag::getWithType('job_position_skill')
-                                                           ->pluck('name', 'id'),
+            'jobPositionSkillOptions' => $this->jobPositionSkillOptions,
             'addons'                     => JobPositionAddon::all(),
             'intent'                     => Auth::guest() ? null : Auth::user()
                                                                        ->createSetupIntent(),

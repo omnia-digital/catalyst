@@ -2,6 +2,7 @@
 
 namespace Modules\Jobs\Models;
 
+use App\Models\Tag;
 use App\Traits\Coupon\HasCoupon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Jobs\Models\User;
@@ -66,12 +67,17 @@ class JobPosition extends Model
                           ->saveSlugsTo('slug');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function tags()
+    public function skillsTags()
     {
-        return $this->belongsToMany(Tag::class)->whereType('job_position');
+        return $this
+            ->morphToMany(self::getTagClassName(), 'taggable')
+            ->where('type', 'job_position_skill')
+            ->ordered();
+    }
+
+    public function skills()
+    {
+        return $this->skillsTags();
     }
 
     /**
