@@ -67,7 +67,7 @@ class UpdateJob extends Component
         $this->success('Update the job successfully!');
 
         $this->redirectRoute('jobs.job.show', [
-            'team' => $this->job->company->team,
+            'team' => $this->job->company->id,
             'job'  => $this->job
         ]);
     }
