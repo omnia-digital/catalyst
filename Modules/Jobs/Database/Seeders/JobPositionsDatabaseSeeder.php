@@ -5,7 +5,7 @@ namespace Modules\Jobs\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class JobsDatabaseSeeder extends Seeder
+class JobPositionsDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.

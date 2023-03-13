@@ -8,7 +8,10 @@
     {
         public string $class;
         public array $navigation = [];
-
+        protected $listeners = [
+            'LoggedIn' => '$refresh'
+        ];
+        
         public function mount() {
             $this->navigation = [
                 [

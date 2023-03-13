@@ -8,6 +8,8 @@
         <!-- SideMenu -->
         <livewire:social::layouts.module-navigation class="col-span-2"/>
 
+        @includeWhen(request()->route()->named('home'), 'layouts.partials.hero')
+
         <!-- Main Content -->
         <div class="col-span-8">
             <div class="">

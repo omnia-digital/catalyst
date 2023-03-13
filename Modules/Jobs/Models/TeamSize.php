@@ -2,7 +2,7 @@
 
 namespace Modules\Jobs\Models;
 
-use App\Models\User;
+use Modules\Jobs\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

@@ -2,9 +2,9 @@
 
 namespace Modules\Jobs\Models;
 
-use App\Models\User;
-use App\Traits\Coupon\HasCoupon;
-use App\Traits\Transaction\HasTransaction;
+use Modules\Jobs\Models\User;
+use Modules\Jobs\Traits\Coupon\HasCoupon;
+use Modules\Jobs\Traits\Transaction\HasTransaction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +32,8 @@ class Job extends Model
         'location',
         'hours_per_week_id',
         'is_remote',
+        'experience_level_id',
+        'job_length_id',
         'project_size_id',
         'is_active'
     ];
@@ -65,6 +67,14 @@ class Job extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function company()
@@ -95,7 +105,7 @@ class Job extends Model
     public function scopeFeatured($query, $inDays = null)
     {
         return $query->whereHas('addons', fn($query) => $query->where('code', JobAddons::FEATURED_JOB))
-                     ->when($inDays, fn($query) => $query->whereDate('created_at', '>=', now()->subDays($inDays)));
+            ->when($inDays, fn($query) => $query->whereDate('created_at', '>=', now()->subDays($inDays)));
     }
 
     /**

@@ -8,5 +8,6 @@
   "Reviews": true,
   "Crm": false,
   "Billing": true,
-  "Forms": true
+  "Forms": true,
+  "Livestream": true
 }
