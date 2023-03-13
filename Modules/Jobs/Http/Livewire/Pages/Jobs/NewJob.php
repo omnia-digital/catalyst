@@ -3,6 +3,8 @@
 namespace Modules\Jobs\Http\Livewire\Pages\Jobs;
 
 use App\Support\Platform\Platform;
+use Illuminate\Validation\Validator;
+use Livewire\ComponentConcerns\ValidatesInput;
 use Modules\Jobs\Actions\Fortify\CreateNewUser;
 use Modules\Jobs\Data\Transaction;
 use Modules\Jobs\Events\JobPositionWasCreated;
@@ -31,7 +33,7 @@ use Livewire\WithFileUploads;
 
 class NewJob extends Component
 {
-    use WithNotification, WithValidationFails, WithFileUploads;
+    use WithNotification, WithFileUploads, ValidatesInput;
 
     public $title;
     public $description;
@@ -75,6 +77,11 @@ class NewJob extends Component
         $this->setTeamId();
         $this->price = Platform::getJobSetting('posting_price');
 
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName, $this->rules());
     }
 
     public function updatedLogo()
@@ -135,7 +142,7 @@ class NewJob extends Component
         // Emit an event to Navigation component to reload the user information.
         $this->emitTo('navigation', 'LoggedIn');
 
-        // Set the the current team is default company.
+        // Set the current team is default company.
         $this->setTeamId();
 
         // Close register modal.
@@ -149,7 +156,12 @@ class NewJob extends Component
      */
     public function save()
     {
-        $validated = $this->whenFails(fn() => $this->alertInvalidInput())->validate($this->rules());
+        $validated = $this->withValidator(function (Validator $validator) {
+            if ($validator->fails()) {
+                $this->alertInvalidInput();
+                $this->emit('validation-fails', $validator->errors());
+            }
+        })->validate($this->rules());
 
         // Make sure users have their default payment method.
         if (!Auth::user()->hasDefaultPaymentMethod()) {

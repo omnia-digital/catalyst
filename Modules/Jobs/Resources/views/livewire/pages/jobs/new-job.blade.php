@@ -75,14 +75,14 @@
                                 <x-library::input.label value="Apply Type"/>
                                 <x-library::input.select wire:model.defer="apply_type" :options="$applyTypes" id="apply-type"/>
                                 <x-library::input.error for="apply_type"/>
-                                <x-library::input.help value="Choose the method you want contractors to apply to your job."/>
+                                <x-library::input.help :value="\Trans::get('Choose how you want people to apply.')"/>
                             </div>
 
                             <div class="col-span-3 space-y-1 sm:col-span-2">
                                 <x-library::input.label value="Hours needed per week"/>
                                 <x-library::input.select wire:model.defer="hours_per_week_id" :options="$hoursPerWeek" id="hours-per-week-id"/>
                                 <x-library::input.error for="hours_per_week_id"/>
-                                <x-library::input.help value="Choose the hours per week you need contractors to apply to your job."/>
+                                <x-library::input.help :value="\Trans::get('Choose the hours per week you need.')"/>
                             </div>
 
                             <div class="col-span-3 space-y-1 sm:col-span-2">
@@ -199,7 +199,9 @@
                                     <x-library::input.error class="mt-2" for="selected_addons"/>
                                 </fieldset>
 
-                                <p class="font-bold text-lg pt-5">Price: {{ \Platform::money($price ?? 0) }}</p>
+                                @if(!empty($price))
+                                    <p class="font-bold text-lg pt-5">Price: {{ \Platform::money($price ?? 0) }}</p>
+                                @endif
                             </div>
 
                             <div class="col-span-3 space-y-1 sm:col-span-2">
@@ -220,7 +222,7 @@
                                 </div>
                             @endif
 
-                            @if ($intent)
+                            @if ($intent && !empty($price))
                                 <div
                                     wire:ignore.self
                                     x-data="{
@@ -442,7 +444,7 @@
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <span class="w-full md:w-auto inline-flex rounded-md shadow-sm">
-                        <x-library::button wire:target="save" class="w-full md:w-auto">Publish Job</x-library::button>
+                        <x-library::button wire:click="save" class="w-full md:w-auto">{{ \Trans::get('Publish Job') }}</x-library::button>
                     </span>
                     </div>
                 </div>

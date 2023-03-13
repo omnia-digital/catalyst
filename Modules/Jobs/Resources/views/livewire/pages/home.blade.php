@@ -3,7 +3,7 @@
 @section('content')
     <div>
     {{--  Subscribe widget  --}}
-    <livewire:jobs::components.subscribe-widget/>
+{{--    <livewire:jobs::components.subscribe-widget/>--}}
 
     {{--  Featured Jobs  --}}
     @if (count($featuredJobs))
