@@ -65,10 +65,25 @@
                             </div>
 
                             <div class="col-span-3 space-y-1 sm:col-span-2">
-                                <x-library::input.label value="Tags"/>
-                                <x-library::input.selects wire:model="selected_tags" :options="$tags" max="5" id="tags" placeholder="Type for searching a tag."/>
-                                <x-library::input.error for="selected_tags"/>
-                                <x-library::input.help value="Maximum is 5 tags. Tags are useful for reaching the contractors with the experience you need."/>
+                                <x-library::input.label value="Skills"/>
+                                <x-library::input.selects wire:model="selected_skills" :options="$job_position_skill_options" max="5" id="job_position_skills" :placeholder="\Trans::get('Type tosearch for a skill.')"/>
+                                <x-library::input.error for="selected_skills"/>
+                                <x-library::input.help :value="\Trans::get('Adding skills helps you reach workers with the skills that you need. Maximum is 5. ')"/>
+                                <div>
+                                    <div class="flex items-center space-x-3 mt-1">
+                                        @foreach ($selected_skills as $tag)
+                                            <div class="relative">
+                                                <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4" :name="$tag->name"/>
+                                                <button
+                                                        wire:click="removeTag('{{ $tag->name }}')"
+                                                        class="absolute -top-2 -right-2 p-1 rounded-full bg-white"
+                                                >
+                                                    <x-library::icons.icon name="heroicon-o-x" color="text-danger-600" class="h-3 w-3"/>
+                                                </button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-span-3 space-y-1 sm:col-span-2">
@@ -436,7 +451,7 @@
                                         :paymentType="$payment_type"
                                         :budget="$budget"
                                         :tags="$tags"
-                                        :selectedTags="$selected_tags"
+                                        :selectedTags="$selected_skills"
                                     />
                                 </ul>
                             </div>

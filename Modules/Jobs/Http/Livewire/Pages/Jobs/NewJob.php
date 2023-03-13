@@ -44,7 +44,9 @@ class NewJob extends Component
     public $budget;
     public $is_remote = false;
     public $location;
-    public $selected_tags = [];
+    public $selected_skills = [];
+    public $job_position_skill_options = [];
+
     public $selected_addons = [];
     public $price = 0;
     public $payment_method;
@@ -177,10 +179,10 @@ class NewJob extends Component
             $this->storeLogo();
 
             // Save job
-            $job = JobPosition::create(collect($validated)->except('selected_tags')->all());
+            $job = JobPosition::create(collect($validated)->except('selected_skills')->all());
 
             // Attach maximum 5 tags to job
-            $job->tags()->attach(collect($this->selected_tags)->take(5)->all());
+            $job->tags()->attach(collect($this->selected_skills)->take(5)->all());
 
             // Attach job addons to job
             $job->addons()->attach($this->selected_addons);
@@ -231,7 +233,7 @@ class NewJob extends Component
             'budget'            => 'nullable|numeric|min:0',
             'is_remote'         => 'boolean',
             'location'          => 'nullable|max:254',
-            'selected_tags'     => ['required', new ValidTags],
+            'selected_skills'     => ['required', new ValidTags],
             'selected_addons'   => [new ValidJobAddons],
             'line1'             => 'required_if:selected_payment_method,new-card|nullable|string|max:254',
             'city'              => 'required_if:selected_payment_method,new-card|nullable|string|max:254',
