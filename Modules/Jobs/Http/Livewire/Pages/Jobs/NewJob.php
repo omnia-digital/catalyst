@@ -230,7 +230,7 @@ class NewJob extends Component
         event(new JobPositionWasCreated($job));
 
         $this->redirectRoute('jobs.job.show', [
-            'team' => $job->company,
+            'team' => $job->company->id,
             'job'  => $job
         ]);
     }
