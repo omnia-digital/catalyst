@@ -2,14 +2,14 @@
 
 @section('content')
     <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
-        <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary">
-            <a href="{{ route('jobs.home') }}">
-                <x-heroicon-o-arrow-left class="h-6"/>
+            <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary">
+                <a href="{{ route('jobs.home') }}">
+                    <x-heroicon-o-arrow-left class="h-6"/>
+                </a>
+            </div>
+            <a href="{{route('jobs.home')}}">
+                <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Job Detail') }}</x-library::heading.1>
             </a>
-        </div>
-        <a href="{{route('jobs.home')}}">
-            <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Job Detail') }}</x-library::heading.1>
-        </a>
     </div>
 
     <div class="mt-4 lg:grid lg:grid-cols-12 lg:gap-x-5">
@@ -51,14 +51,14 @@
                         @if (auth()->check() && auth()->user()->can('update', $job))
                             <span class="mr-3 shadow-sm rounded-md">
                             <x-library::button.link href="{{ route('jobs.job.update', $job) }}" type="button"
-                                    class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out">
+                                                    class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out">
                                 <x-heroicon-s-pencil class="-ml-1 mr-2 h-5 w-5 text-gray-500"/> {{ \Trans::get('Edit') }}
                             </x-library::button.link>
                         </span>
                         @elseif(auth()->check() && auth()->user()->can('apply', $job))
                             <span class="shadow-sm rounded-md">
                             <x-library::button.link href="{{ $job->applyLink }}" target="_blank"
-                               class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-light-blue-600 hover:bg-light-blue-500 focus:outline-none focus:shadow-outline-light-blue focus:border-light-blue-700 active:bg-light-blue-700 transition duration-150 ease-in-out">
+                                                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-light-blue-600 hover:bg-light-blue-500 focus:outline-none focus:shadow-outline-light-blue focus:border-light-blue-700 active:bg-light-blue-700 transition duration-150 ease-in-out">
                                 <x-heroicon-s-cursor-click class="-ml-1 mr-2 h-5 w-5"/> {{ \Trans::get('Apply') }}
                             </x-library::button.link>
                         @endif

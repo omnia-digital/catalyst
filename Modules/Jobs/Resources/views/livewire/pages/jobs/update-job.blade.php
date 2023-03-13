@@ -3,7 +3,7 @@
 @section('content')
     <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
         <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary">
-            <a href="{{ route('jobs.home') }}">
+            <a href="{{ route('jobs.my-jobs') }}">
                 <x-heroicon-o-arrow-left class="h-6"/>
             </a>
         </div>
