@@ -56,7 +56,7 @@ class UpdateJob extends Component
     {
         $this->validate();
 
-        if (empty($this->is_active)) {
+        if (empty($this->job->is_active)) {
             $this->job->is_active = false;
         }
         $this->job->save();
