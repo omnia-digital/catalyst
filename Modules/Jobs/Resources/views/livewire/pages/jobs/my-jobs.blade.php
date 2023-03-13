@@ -15,7 +15,7 @@
             @empty
                 <li class="p-20 text-center">
                     <p class="mb-4 text-lg text-gray-600">You don't have any jobs.</p>
-                    <a href="{{ route('jobs.job.create') }}" class="rounded shadow py-2 px-4 bg-light-blue-500 text-white hover:bg-light-blue-600 hover:shadow-2xl transition duration-200">
+                    <a href="{{ route('jobs.job.create') }}" class="rounded shadow py-2 px-4 bg-primary text-white hover:bg-primary hover:shadow-2xl transition duration-200">
                         Create your first job
                     </a>
                 </li>

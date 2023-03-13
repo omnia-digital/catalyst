@@ -105,7 +105,7 @@
                                 </div>
                                 @foreach ($experienceLevels as $key => $experience)
                                     <div class="flex pt-4">
-                                        <x-library::input.radio-group wire:model.defer="experience_level_id" name="experience_level_id" id="{{ $experience['title'] }}" value="{{ $experience['id'] }}" />
+                                        <x-jobs::input.radio wire:model.defer="experience_level_id" name="experience_level_id" id="{{ $experience['title'] }}" value="{{ $experience['id'] }}" />
                                         <x-library::input.label class="pl-4 font-bold" value="{{ $experience['title'] }}"/>
                                         <x-library::input.error for="{{ $experience['title'] }}"/>
                                     </div>
@@ -121,14 +121,14 @@
                                 </div>
                                 @foreach ($jobLengths as $key => $jobLength)
                                     <div class="flex pt-4">
-                                        <x-library::input.radio-group wire:model.defer="job_length_id" name="job_length_id" id="{{ $jobLength['title'] }}" value="{{ $jobLength['id'] }}" />
+                                        <x-jobs::input.radio wire:model.defer="job_length_id" name="job_length_id" id="{{ $jobLength['title'] }}" value="{{ $jobLength['id'] }}" />
                                         <x-library::input.label class="pl-4 font-bold" value="{{ $jobLength['description'] }}"/>
                                         <x-library::input.error for="{{ $jobLength['title'] }}"/>
                                     </div>
                                 @endforeach
                                 @foreach ($projectSizes as $key => $project)
                                     <div class="flex pt-4">
-                                        <x-library::input.radio-group wire:model.defer="project_size_id" name="project_size_id" id="{{ $project['title'] }}" value="{{ $project['id'] }}" />
+                                        <x-jobs::input.radio wire:model.defer="project_size_id" name="project_size_id" id="{{ $project['title'] }}" value="{{ $project['id'] }}" />
                                         <x-library::input.label class="pl-4 font-bold" value="{{ $project['title'] }}"/>
                                     </div>
                                     <div class="pl-8 pt-1">
@@ -302,7 +302,7 @@
                                                 x-bind:class="{'bg-light-blue-50 border-light-blue-200 z-10': paymentMethod === 'new-card', 'border-gray-200': paymentMethod !== 'new-card'}"
                                                 class="relative border rounded-tl-md rounded-tr-md p-4 flex {{ !Auth::user()->hasDefaultPaymentMethod() ? 'border rounded-bl-md rounded-br-md' : '' }}"
                                             >
-                                                <x-library::input.radio-group x-model="paymentMethod" value="new-card" id="new-card"/>
+                                                <x-jobs::input.radio x-model="paymentMethod" value="new-card" id="new-card"/>
                                                 <x-library::input.label for="new-card" class="ml-3 flex flex-col cursor-pointer">
                                             <span
                                                 x-bind:class="{'text-light-blue-900': paymentMethod === 'new-card', 'text-gray-900': paymentMethod !== 'new-card'}"
@@ -318,7 +318,7 @@
                                                     x-bind:class="{'bg-light-blue-50 border-light-blue-200 z-10': paymentMethod === 'previous-card', 'border-gray-200': paymentMethod !== 'previous-card'}"
                                                     class="relative border rounded-bl-md rounded-br-md p-4 flex"
                                                 >
-                                                    <x-library::input.radio-group x-model="paymentMethod" value="previous-card" id="previous-card"/>
+                                                    <x-jobs::input.radio x-model="paymentMethod" value="previous-card" id="previous-card"/>
                                                     <x-library::input.label for="previous-card" class="ml-3 flex flex-col cursor-pointer">
                                                 <span
                                                     x-bind:class="{'text-light-blue-900': paymentMethod === 'previous-card', 'text-gray-900': paymentMethod !== 'previous-card'}"
