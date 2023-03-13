@@ -55,8 +55,8 @@ class Edit extends Component
             'body' => Mention::processMentionContent($validated['body']),
         ]);
 
-        $hashtags = Tag::pullTags($validated['body']);
-        $tags = Tag::getTags($hashtags, 'post');
+        $hashtags = Tag::parseHashTagsFromString($validated['body']);
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
         $this->post->attachTags($tags,'post');
 
         $this->post->attachMedia($this->images);

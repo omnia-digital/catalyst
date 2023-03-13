@@ -25,12 +25,11 @@ class MainNavigationMenu extends Component
     {
         return [
             [
-                'label'   => 'Home',
+                'label'   => \Trans::get('Home'),
                 'name'    => 'social.home',
                 'icon'    => 'fa-duotone fa-house',
                 //                'icon'    => 'heroicon-o-home',
                 'module'  => 'social',
-                'current' => false
             ],
             [
                 'label'   => \Trans::get('Teams'),
@@ -38,22 +37,19 @@ class MainNavigationMenu extends Component
                 'icon'    => 'fa-duotone fa-globe',
                 //                'icon'    => 'heroicon-o-home',
                 'module'  => 'social',
-                'current' => false
             ],
             [
-                'label'   => 'Resources',
+                'label'   => \Trans::get('Resources'),
                 'name'    => 'resources.home',
                 'icon'    => 'fa-regular fa-photo-film-music',
                 //                'icon'    => 'heroicon-o-newspaper',
                 'module'  => 'resources',
-                'current' => false
             ],
             [
                 'label'   => \Trans::get('News'),
                 'name'    => 'games.feeds',
                 'icon'    => 'fa-regular fa-rss',
                 'module'  => 'games',
-                'current' => false
             ],
 //            [
 //                'label'   => 'Games',
@@ -62,13 +58,12 @@ class MainNavigationMenu extends Component
 //                'module'  => 'games',
 //                'current' => false
 //            ],
-            //            [
-            //                'label'   => 'Jobs',
-            //                'name'    => 'jobs.home',
-            //                'icon'    => 'heroicon-o-briefcase',
-            //                'module'  => 'jobs',
-            //                'current' => false
-            //            ],
+            [
+                'label'   => \Trans::get('Jobs'),
+                'name'    => 'jobs.home',
+                'icon'    => 'heroicon-o-briefcase',
+                'module'  => 'jobs',
+            ],
             //            [
             //                'label'   => 'Advice',
             //                'name'    => 'advice.home',
@@ -77,11 +72,10 @@ class MainNavigationMenu extends Component
             //                'current' => false
             //            ],
             [
-                'label'   => 'Crm',
+                'label'   => 'CRM',
                 'name'    => 'filament.pages.dashboard',
                 'icon'    => 'heroicon-o-users',
                 'module'  => 'crm',
-                'current' => false
             ],
             //            [
             //                'label'   => 'Learn',
@@ -103,7 +97,6 @@ class MainNavigationMenu extends Component
                 'url'     => 'https://app.omnia.church',
                 'icon'    => 'fa-duotone fa-camcorder',
                 'module'  => 'livestream',
-                'current' => false
             ],
         ];
     }

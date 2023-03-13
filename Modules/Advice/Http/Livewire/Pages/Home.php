@@ -3,7 +3,7 @@
 namespace Modules\Advice\Http\Livewire\Pages;
 
 use Livewire\Component;
-use Modules\Jobs\Models\Job;
+use Modules\Jobs\Models\JobPosition;
 use Modules\Social\Models\Post;
 
 class Home extends Component

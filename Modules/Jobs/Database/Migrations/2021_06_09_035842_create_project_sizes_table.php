@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectSizesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -20,6 +20,10 @@ class CreateProjectSizesTable extends Migration
             $table->integer('order')->default(0);
             $table->timestamps();
         });
+
+        Schema::table('job_positions', function (Blueprint $table) {
+            $table->foreignId('project_size_id')->index();
+        });
     }
 
     /**
@@ -30,5 +34,9 @@ class CreateProjectSizesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('project_sizes');
+
+        Schema::table('job_positions', function (Blueprint $table) {
+            $table->dropColumn('project_size_id');
+        });
     }
-}
+};

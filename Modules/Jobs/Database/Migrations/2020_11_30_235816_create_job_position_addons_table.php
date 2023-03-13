@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobAddonsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -30,6 +30,6 @@ class CreateJobAddonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_position_addons');
+        Schema::dropIfExists('job_addons');
     }
-}
+};

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobJobAddonTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateJobJobAddonTable extends Migration
      */
     public function up()
     {
-        Schema::create('job_job_addon', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('job_id')->index();
-            $table->unsignedBigInteger('job_addon_id')->index();
+        Schema::table('job_positions', function (Blueprint $table) {
+            $table->unsignedBigInteger('job_length_id')->index();
         });
     }
 
@@ -27,6 +25,8 @@ class CreateJobJobAddonTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_job_addon');
+        Schema::table('job_positions', function (Blueprint $table) {
+            $table->dropColumn('job_length_id');
+        });
     }
-}
+};

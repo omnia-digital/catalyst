@@ -3,11 +3,11 @@
 namespace Modules\Jobs\View\Component\Job;
 
 use Illuminate\View\Component;
-use Modules\Jobs\Models\Job;
+use Modules\Jobs\Models\JobPosition;
 
 class Item extends Component
 {
-    public Job $job;
+    public JobPosition $job;
 
     public $attributes;
 

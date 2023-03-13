@@ -91,9 +91,9 @@ class Edit extends Component
 
     public function addTags($content)
     {
-        $hashtags = Tag::pullTags($content);
+        $hashtags = Tag::parseHashTagsFromString($content);
 
-        $tags = Tag::getTags($hashtags, 'post');
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
 
         $this->resource->attachTags($tags, 'post');
     }
