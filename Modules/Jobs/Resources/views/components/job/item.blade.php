@@ -21,7 +21,7 @@
                     <div>
                         <h3 class="leading-5 font-medium truncate text-primary">{{ $job->title }}</h3>
                         <div class="mt-2 flex items-center text-sm leading-5 text-base-text-color ">
-                            <div class="sm:flex">
+                            <div class="sm:flex-1">
                                 <div class="mr-6 flex items-center text-sm leading-5 text-base-text-color">
                                     <x-heroicon-o-briefcase id="company" class="flex-shrink-0 mr-1.5 h-5 w-5 text-light-text-color"/>
                                     {{ $job->company->name }}
