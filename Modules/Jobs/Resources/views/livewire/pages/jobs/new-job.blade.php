@@ -66,8 +66,11 @@
 
                                 <div class="col-span-3 space-y-1 sm:col-span-2">
                                     <x-library::input.label value="Skills"/>
-                                    <x-library::input.selects wire:model="selected_skills" :options="$job_position_skill_options" max="5" id="job_position_skills"
-                                                              :placeholder="\Trans::get('Type tosearch for a skill.')"/>
+                                    <x-library::input.selects wire:model="selected_skills"
+                                                              id="job_position_skills"
+                                                              :options="$job_position_skill_options"
+                                                              max="5"
+                                                              :placeholder="\Trans::get('Type to search for a skill.')"/>
                                     <x-library::input.error for="selected_skills"/>
                                     <x-library::input.help :value="\Trans::get('Adding skills helps you reach workers with the skills that you need. Maximum is 5. ')"/>
                                     <div>
