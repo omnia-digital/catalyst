@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Jobs\Http\Livewire\Jobs;
+namespace Modules\Jobs\Http\Livewire\Pages\Jobs;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -14,7 +14,7 @@ class MyJobs extends Component
             ->latest()
             ->get();
 
-        return view('livewire.jobs.my-jobs', [
+        return view('jobs::livewire.pages.jobs.my-jobs', [
             'jobs' => $jobs
         ]);
     }

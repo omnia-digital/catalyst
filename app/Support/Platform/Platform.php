@@ -185,4 +185,32 @@ class Platform
 
         return $timezones ?? [];
     }
+
+    /**
+     * @param string $string
+     * @return bool|string
+     */
+    public static function money(string $string)
+    {
+        $amount = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
+        $amount->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, 2);
+
+        return $amount->format($string);
+    }
+
+    /**
+     * Get the list of country.
+     *
+     * @return array
+     */
+    public static function countries()
+    {
+        $countries = [];
+
+//        foreach ((new ISO3166)->all() as $country) {
+//            $countries[$country['alpha2']] = $country['name'];
+//        }
+
+        return $countries;
+    }
 }

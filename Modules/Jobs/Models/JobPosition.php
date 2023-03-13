@@ -15,7 +15,7 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
 
-class Job extends Model
+class JobPosition extends Model
 {
     use HasFactory, HasTransaction, HasCoupon, HasSlug, HasTags;
 
@@ -92,7 +92,7 @@ class Job extends Model
 
     public function addons()
     {
-        return $this->belongsToMany(JobAddon::class);
+        return $this->belongsToMany(JobPositionAddon::class);
     }
 
     /**

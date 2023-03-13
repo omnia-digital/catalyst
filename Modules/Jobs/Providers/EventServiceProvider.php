@@ -2,7 +2,8 @@
 
 namespace Modules\Jobs\Providers;
 
-use Modules\Jobs\Events\JobWasCreated;
+use Modules\Jobs\Events\JobPositionWasCreated;
+use Modules\Jobs\Events\JobPositionWasCreated;
 use Modules\Jobs\Listeners\CreateStripeCustomer;
 use Modules\Jobs\Listeners\NotifyAdminsWhenJobCreated;
 use Modules\Jobs\Listeners\NotifyContractorsWhenJobCreated;
@@ -25,7 +26,7 @@ class EventServiceProvider extends ServiceProvider
             CreateStripeCustomer::class
         ],
 
-        JobWasCreated::class => [
+        JobPositionWasCreated::class => [
             NotifyContractorsWhenJobCreated::class,
             NotifyAdminsWhenJobCreated::class,
             TweetJob::class,

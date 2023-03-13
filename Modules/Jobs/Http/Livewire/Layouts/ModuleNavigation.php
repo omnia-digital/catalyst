@@ -11,20 +11,26 @@
         protected $listeners = [
             'LoggedIn' => '$refresh'
         ];
-        
+
         public function mount() {
             $this->navigation = [
                 [
                     'label'   => 'Home',
                     'name'    => 'jobs.home',
-                    'icon'    => 'heroicon-o-home',
-                    'current' => false
+                    'icon'    => 'fa-regular fa-house',
+                    'module'  => 'jobs',
                 ],
                 [
-                    'label'   => 'Notification',
-                    'name'    => 'notifications',
-                    'icon'    => 'heroicon-o-bell',
-                    'current' => false
+                    'label'   => 'Discover',
+                    'name'    => 'jobs.home',
+                    'icon'    => 'fa-regular fa-house',
+                    'module'  => 'jobs',
+                ],
+                [
+                    'label'   => 'My Jobs',
+                    'name'    => 'jobs.my-jobs',
+                    'icon'    => 'fa-regular fa-briefcase',
+                    'module'  => 'jobs',
                 ],
             ];
         }

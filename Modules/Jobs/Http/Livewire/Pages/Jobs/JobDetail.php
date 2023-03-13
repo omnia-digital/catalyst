@@ -1,15 +1,15 @@
 <?php
 
-namespace Modules\Jobs\Http\Livewire\Jobs;
+namespace Modules\Jobs\Http\Livewire\Pages\Jobs;
 
-use Modules\Jobs\Models\Job;
+use Modules\Jobs\Models\JobPosition;
 use Livewire\Component;
 
 class JobDetail extends Component
 {
     public $job;
 
-    public function mount(Job $job)
+    public function mount(JobPosition $job)
     {
         $this->job = $job;
     }

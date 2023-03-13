@@ -2,7 +2,7 @@
 
 namespace Modules\Jobs\Policies;
 
-use Modules\Jobs\Models\Job;
+use Modules\Jobs\Models\JobPosition;
 use Modules\Jobs\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -24,11 +24,12 @@ class JobPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Job  $job
+     * @param  \Modules\Jobs\Models\User        $user
+     * @param  \Modules\Jobs\Models\JobPosition $job
+     *
      * @return mixed
      */
-    public function view(User $user, Job $job)
+    public function view(User $user, JobPosition $job)
     {
         return true;
     }
@@ -47,11 +48,12 @@ class JobPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Job  $job
+     * @param  \Modules\Jobs\Models\User        $user
+     * @param  \Modules\Jobs\Models\JobPosition $job
+     *
      * @return mixed
      */
-    public function update(User $user, Job $job)
+    public function update(User $user, JobPosition $job)
     {
         return true;
     }
@@ -59,11 +61,12 @@ class JobPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Job  $job
+     * @param  \Modules\Jobs\Models\User        $user
+     * @param  \Modules\Jobs\Models\JobPosition $job
+     *
      * @return mixed
      */
-    public function delete(User $user, Job $job)
+    public function delete(User $user, JobPosition $job)
     {
         return true;
     }
@@ -71,11 +74,12 @@ class JobPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Job  $job
+     * @param  \Modules\Jobs\Models\User        $user
+     * @param  \Modules\Jobs\Models\JobPosition $job
+     *
      * @return mixed
      */
-    public function restore(User $user, Job $job)
+    public function restore(User $user, JobPosition $job)
     {
         //
     }
@@ -83,11 +87,12 @@ class JobPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Job  $job
+     * @param  \Modules\Jobs\Models\User       $user
+     * @param \Modules\Jobs\Models\JobPosition $job
+     *
      * @return mixed
      */
-    public function forceDelete(User $user, Job $job)
+    public function forceDelete(User $user, JobPosition $job)
     {
         //
     }

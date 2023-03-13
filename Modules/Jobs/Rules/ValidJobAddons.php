@@ -2,7 +2,7 @@
 
 namespace Modules\Jobs\Rules;
 
-use Modules\Jobs\Models\JobAddon;
+use Modules\Jobs\Models\JobPositionAddon;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidJobAddons implements Rule
@@ -25,7 +25,7 @@ class ValidJobAddons implements Rule
             return true;
         }
 
-        return JobAddon::whereIn('id', $value)->count() === count($value);
+        return JobPositionAddon::whereIn('id', $value)->count() === count($value);
     }
 
     /**

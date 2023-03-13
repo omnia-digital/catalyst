@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Jobs\Http\Livewire\Jobs;
+namespace Modules\Jobs\Http\Livewire\Components;
 
+use Illuminate\Support\Facades\Http;
+use Livewire\Component;
 use Modules\Jobs\Actions\Subscriber\Subscribe;
 use Modules\Jobs\Mail\WelcomeEmailForSubscribers;
 use Modules\Jobs\Support\Livewire\WithNotification;
-use Illuminate\Support\Facades\Http;
-use Livewire\Component;
 
 class SubscribeWidget extends Component
 {
@@ -49,7 +49,7 @@ class SubscribeWidget extends Component
 
     public function render()
     {
-        return view('livewire.jobs.subscribe-widget', [
+        return view('jobs::livewire.components.subscribe-widget', [
             'frequencies' => [
                 'instant' => 'Instant',
                 'weekly'  => 'Weekly'

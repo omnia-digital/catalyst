@@ -3,28 +3,28 @@
 namespace Modules\Jobs\Notifications;
 
 use Modules\Jobs\LaraContract;
-use Modules\Jobs\Models\Job;
+use Modules\Jobs\Models\JobPosition;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
-class JobWasCreatedNotification extends Notification implements ShouldQueue
+class JobPositionWasCreatedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
-     * @var Job
+     * @var JobPosition
      */
-    private Job $job;
+    private JobPosition $job;
 
     /**
      * Create a new notification instance.
      *
-     * @param Job $job
+     * @param JobPosition $job
      */
-    public function __construct(Job $job)
+    public function __construct(JobPosition $job)
     {
         $this->job = $job;
     }
@@ -62,8 +62,8 @@ class JobWasCreatedNotification extends Notification implements ShouldQueue
             $message->line('Preferred Location: ' . $this->job->location);
         }
 
-        $message->line('Job Title: ' . $this->job->title)
-            ->line('Job Description: ' . $this->job->description);
+        $message->line('JobPosition Title: ' . $this->job->title)
+            ->line('JobPosition Description: ' . $this->job->description);
 
         if ($this->job->budget) {
             $message->line('Budget: ' . LaraContract::money($this->job->budget));
@@ -87,7 +87,7 @@ class JobWasCreatedNotification extends Notification implements ShouldQueue
         return (new SlackMessage)
             ->from(config('services.slack.from'), ':ghost:')
             ->to('services.slack.from')
-            ->content('Job: ' . $this->job->title . ' was posted by ' . $this->job->company->name);
+            ->content('JobPosition: ' . $this->job->title . ' was posted by ' . $this->job->company->name);
     }
 
     /**

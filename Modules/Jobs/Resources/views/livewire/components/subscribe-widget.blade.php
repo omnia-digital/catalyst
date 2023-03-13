@@ -9,8 +9,8 @@
 {{--                </div>--}}
             </div>
             <div class="w-full mb-2 flex-grow xl:mb-0 items-center">
-                <x-input.text wire:model.defer="email" name="email" placeholder="Your Email"/>
-                <x-input.error for="email"/>
+                <x-library::input.text wire:model.defer="email" name="email" placeholder="Your Email"/>
+                <x-library::input.error for="email"/>
             </div>
             <div class="items-center flex justify-end md:pl-4">
                 <button class="bg-gradient-to-r from-red-700 via-red-600 to-red-500 rounded-lg shadow px-4 py-1 text-white hover:shadow-lg w-full xl:w-40 hover:bg-red-500

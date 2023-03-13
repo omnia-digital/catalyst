@@ -23,7 +23,7 @@ class Job extends Resource
      *
      * @var string
      */
-    public static $model = \Modules\Jobs\Models\Job::class;
+    public static $model = \Modules\Jobs\Models\JobPosition::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -94,7 +94,7 @@ class Job extends Resource
 
             MorphTo::make('Redeemed Coupon', 'redeemedCoupon')->onlyOnDetail(),
 
-            BelongsToMany::make('JobAddon', 'addons')
+            BelongsToMany::make('JobPositionAddon', 'addons')
         ];
     }
 

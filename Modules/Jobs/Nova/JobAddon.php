@@ -17,7 +17,7 @@ class JobAddon extends Resource
      *
      * @var string
      */
-    public static $model = \Modules\Jobs\Models\JobAddon::class;
+    public static $model = \Modules\Jobs\Models\JobPositionAddon::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.

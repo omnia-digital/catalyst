@@ -34,7 +34,7 @@ class Create extends Component
     {
         $validated = $this->validate();
 
-        $hashtags = Tag::pullTags($validated['body']);
+        $hashtags = Tag::parseHashTagsFromString($validated['body']);
 
         $resource = (new CreateNewPostAction)
             ->type(PostType::RESOURCE)
@@ -44,7 +44,7 @@ class Create extends Component
                 'url'   => $validated['url'],
             ]);
 
-        $tags = Tag::getTags($hashtags, 'post');
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
         $resource->attachTags($tags,'post');
 
         if (isset($validated['image'])) {

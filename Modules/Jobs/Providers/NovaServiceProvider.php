@@ -33,7 +33,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         });
 
         NovaSettings::addSettingsFields([
-            Currency::make('Job Posting Price', 'job:posting_price')
+            Currency::make('JobPosition Posting Price', 'job:posting_price')
                 ->rules('required'),
 
             Number::make('Featured Days', 'job:featured_days')
@@ -43,7 +43,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             Number::make('Featured Jobs Limit', 'job:featured_jobs_limit')
                 ->help('How many featured jobs should be shown? Leave blank or enter 0 to show unlimited.')
                 ->rules('nullable', 'integer', 'min:0')
-        ], [], 'Job');
+        ], [], 'JobPosition');
     }
 
     /**

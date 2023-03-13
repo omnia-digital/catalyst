@@ -71,8 +71,8 @@ class CreateNewPostAction
             'repost_original_id' => $this->repost?->id,
         ]);
 
-        $hashtags = Tag::pullTags($content);
-        $tags = Tag::getTags($hashtags, 'post');
+        $hashtags = Tag::parseHashTagsFromString($content);
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
         $post->attachTags($tags,'post');
 
         [$userMentions, $teamMentions] = Mention::getAllMentions($content);

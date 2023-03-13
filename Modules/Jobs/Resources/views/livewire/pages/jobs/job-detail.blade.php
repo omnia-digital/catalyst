@@ -1,4 +1,7 @@
-<div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+@extends('jobs::livewire.layouts.pages.default-page-layout')
+
+@section('content')
+    <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
     <div class="bg-white overflow-hidden shadow rounded-lg space-y-6 sm:px-6 lg:px-0 lg:col-span-12">
         <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
             <div class="lg:flex lg:items-center lg:justify-between">
@@ -17,7 +20,7 @@
                         </div>
                         <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
                             <x-heroicon-o-credit-card id="payment-type-budget" class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
-                            {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . \Modules\Jobs\LaraContract::money($job->budget) : '' }}
+                            {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . \Platform::money($job->budget) : '' }}
                         </div>
                         <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
                             <x-heroicon-s-calendar id="posted-on" class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
@@ -52,7 +55,7 @@
         </div>
         <div class="px-6">
             <h3 class="text-base font-medium leading-7 text-gray-900 sm:text-xl sm:leading-9 sm:truncate">
-                Job Description
+                JobPosition Description
             </h3>
             <p class="text-base text-gray-900 mt-2">{{ $job->description }}</p>
         </div>
@@ -74,3 +77,4 @@
     <x-tooltip trigger="payment-type-budget">Payment Type & Budget</x-tooltip>
     <x-tooltip trigger="posted-on">{{ $job->created_at->format('Y-m-d') }}</x-tooltip>
 </div>
+@endsection

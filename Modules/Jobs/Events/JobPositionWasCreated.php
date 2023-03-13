@@ -2,7 +2,7 @@
 
 namespace Modules\Jobs\Events;
 
-use Modules\Jobs\Models\Job;
+use Modules\Jobs\Models\JobPosition;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -16,16 +16,16 @@ class JobPositionWasCreated
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var Job
+     * @var JobPosition
      */
-    public Job $job;
+    public JobPosition $job;
 
     /**
      * Create a new event instance.
      *
-     * @param Job $job
+     * @param JobPosition $job
      */
-    public function __construct(Job $job)
+    public function __construct(JobPosition $job)
     {
         $this->job = $job;
     }

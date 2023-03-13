@@ -1,18 +1,18 @@
 <?php
 
-namespace Modules\Jobs\Http\Livewire\Jobs;
+namespace Modules\Jobs\Http\Livewire\Pages\Jobs;
 
 use App\Support\Platform\Platform;
 use Modules\Jobs\Actions\Fortify\CreateNewUser;
 use Modules\Jobs\Data\Transaction;
-use Modules\Jobs\Events\JobWasCreated;
+use Modules\Jobs\Events\JobPositionWasCreated;
 use Modules\Jobs\Models\ApplyType;
 use Modules\Jobs\Models\Coupon;
 use Modules\Jobs\Models\HoursPerWeek;
 use Modules\Jobs\Models\ExperienceLevel;
-use Modules\Jobs\Models\Job;
-use Modules\Jobs\Models\JobAddon;
-use Modules\Jobs\Models\JobLength;
+use Modules\Jobs\Models\JobPosition;
+use Modules\Jobs\Models\JobPositionAddon;
+use Modules\Jobs\Models\JobPositionLength;
 use Modules\Jobs\Models\PaymentType;
 use Modules\Jobs\Models\ProjectSize;
 use Modules\Jobs\Models\Tag;
@@ -68,7 +68,7 @@ class NewJob extends Component
     public $experience_level_id;
     public $project_size_id;
     public $is_active = true;
-    public $default_description = "The description of the job position will appear here. Write this in the \"Job Description\" box above.";
+    public $default_description = "The description of the job position will appear here. Write this in the \"JobPosition Description\" box above.";
 
     public function mount()
     {
@@ -113,7 +113,7 @@ class NewJob extends Component
     }
 
     /**
-     * Show register modal when user click Publish Job without logged in.
+     * Show register modal when user click Publish JobPosition without logged in.
      */
     public function showRegisterModal()
     {
@@ -165,7 +165,7 @@ class NewJob extends Component
             $this->storeLogo();
 
             // Save job
-            $job = Job::create(collect($validated)->except('selected_tags')->all());
+            $job = JobPosition::create(collect($validated)->except('selected_tags')->all());
 
             // Attach maximum 5 tags to job
             $job->tags()->attach(collect($this->selected_tags)->take(5)->all());
@@ -199,7 +199,7 @@ class NewJob extends Component
 
         DB::commit();
 
-        event(new JobWasCreated($job));
+        event(new JobPositionWasCreated($job));
 
         $this->redirectRoute('jobs.show', [
             'team' => $job->company,
@@ -283,11 +283,11 @@ class NewJob extends Component
      */
     public function getAddonsPriceProperty()
     {
-        return JobAddon::whereIn('id', $this->selected_addons)->sum('price');
+        return JobPositionAddon::whereIn('id', $this->selected_addons)->sum('price');
     }
 
     /**
-     * Job posting price + addons.
+     * JobPosition posting price + addons.
      *
      * @return mixed
      */
@@ -367,14 +367,14 @@ class NewJob extends Component
 
     public function render()
     {
-        return view('livewire.jobs.new-job', [
+        return view('jobs::livewire.pages.jobs.new-job', [
             'companies'    => Auth::guest() ? [] : Auth::user()->allTeams(),
             'applyTypes'   => ApplyType::pluck('name', 'code'),
             'paymentTypes' => PaymentType::pluck('name', 'code'),
-            'tags'         => Tag::pluck('name', 'id'),
-            'addons'       => JobAddon::all(),
+            'tags'         => \App\Models\Tag::getWithType('job_position')->pluck('name', 'id'),
+            'addons'       => JobPositionAddon::all(),
             'intent'       => Auth::guest() ? null : Auth::user()->createSetupIntent(),
-            'jobLengths'   => JobLength::all(),
+            'jobLengths'   => JobPositionLength::all(),
             'experienceLevels' => ExperienceLevel::all(),
             'hoursPerWeek' => HoursPerWeek::pluck('value', 'id'),
             'projectSizes' => ProjectSize::orderBy('order')->get()->toArray()

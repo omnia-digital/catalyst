@@ -23,7 +23,7 @@
                     @if ($logoUrl)
                         <img class="w-16 h-16 rounded-full flex-shrink-0" src="{{ $logoUrl }}" alt="{{ $companyName }}">
                     @else
-                        <x-icons.default-logo class="w-16 h-16 rounded-full flex-shrink-0"/>
+                        <x-jobs::icons.default-logo class="w-16 h-16 rounded-full flex-shrink-0"/>
                     @endif
                 </div>
                 <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">

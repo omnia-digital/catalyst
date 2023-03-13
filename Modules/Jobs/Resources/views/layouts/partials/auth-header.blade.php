@@ -42,7 +42,7 @@
         @if (Auth::user() && Auth::user()->hasRole('Client'))
             <a href="{{ route('jobs.create') }}"
                class="block py-2 text-lg">
-                New Job
+                New JobPosition
             </a>
         @endif
         @if (Auth::user() && Auth::user()->isSuperAdmin())

@@ -53,7 +53,7 @@ class Tag extends Resource
                 ->updateRules('unique:tags,name,{{resourceId}}')
                 ->sortable(),
 
-            Text::make('Job Count', fn() => $this->jobs->count()),
+            Text::make('JobPosition Count', fn() => $this->jobs->count()),
 
             Date::make('Created At')
                 ->exceptOnForms()

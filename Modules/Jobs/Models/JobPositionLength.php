@@ -5,7 +5,7 @@ namespace Modules\Jobs\Models;
 use Illuminate\Database\Eloquent\Model;
 use Sushi\Sushi;
 
-class JobLength extends Model
+class JobPositionLength extends Model
 {
     use Sushi;
 

@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="flex items-center text-sm leading-5 text-base-text-color sm:mt-0">
                                     <x-heroicon-o-credit-card id="payment-type-budget" class="flex-shrink-0 mr-1.5 h-5 w-5 text-light-text-color"/>
-                                    {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . \Modules\Jobs\LaraContract::money($job->budget) : '' }}
+                                    {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . \Platform::money($job->budget) : '' }}
                                 </div>
                             </div>
                         </div>

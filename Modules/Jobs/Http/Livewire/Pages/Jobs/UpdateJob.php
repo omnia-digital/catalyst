@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Jobs\Http\Livewire\Jobs;
+namespace Modules\Jobs\Http\Livewire\Pages\Jobs;
 
 use Modules\Jobs\Models\ApplyType;
 use Modules\Jobs\Models\ExperienceLevel;
 use Modules\Jobs\Models\HoursPerWeek;
-use Modules\Jobs\Models\Job;
-use Modules\Jobs\Models\JobLength;
+use Modules\Jobs\Models\JobPosition;
+use Modules\Jobs\Models\JobPositionLength;
 use Modules\Jobs\Models\PaymentType;
 use Modules\Jobs\Models\ProjectSize;
 use Modules\Jobs\Models\Tag;
@@ -18,7 +18,7 @@ class UpdateJob extends Component
 {
     use WithNotification;
 
-    public Job $job;
+    public JobPosition $job;
 
     public $selected_tags;
 
@@ -37,7 +37,7 @@ class UpdateJob extends Component
         'job.is_active'        => 'boolean',
     ];
 
-    public function mount(Job $job)
+    public function mount(JobPosition $job)
     {
         // Cannot access job of another user or company.
         if ($job->user_id !== Auth::id() || $job->team_id !== Auth::user()->currentTeam->id) {
@@ -69,7 +69,7 @@ class UpdateJob extends Component
             'applyTypes'   => ApplyType::pluck('name', 'code'),
             'paymentTypes' => PaymentType::pluck('name', 'code'),
             'tags'         => Tag::pluck('name', 'id'),
-            'jobLengths'   => JobLength::all(),
+            'jobLengths'   => JobPositionLength::all(),
             'hoursPerWeek' => HoursPerWeek::pluck('value', 'id'),
             'experienceLevels' => ExperienceLevel::all(),
             'projectSizes' => ProjectSize::orderBy('order')->get()->toArray(),

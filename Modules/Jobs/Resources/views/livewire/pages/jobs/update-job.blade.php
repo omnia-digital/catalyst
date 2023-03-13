@@ -1,3 +1,6 @@
+@extends('jobs::livewire.layouts.pages.default-page-layout')
+
+@section('content')
 <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
 {{--    <aside class="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-3">--}}
 {{--        <nav class="space-y-1 bg-white rounded-lg shadow p-4 min-h-screen">--}}
@@ -10,7 +13,7 @@
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <div class="bg-white py-6 px-4 space-y-6 sm:p-6">
                     <div>
-                        <h2 class="text-lg leading-6 font-medium text-gray-900">Update Job</h2>
+                        <h2 class="text-lg leading-6 font-medium text-gray-900">Update JobPosition</h2>
                         <p class="mt-1 text-sm leading-5 text-gray-500">This information will be displayed publicly so be careful what you share.</p>
                     </div>
 
@@ -124,7 +127,7 @@
                 </div>
                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <span class="inline-flex rounded-md shadow-sm">
-                        <x-form.button.link href="{{ route('jobs.show', ['team' => $job->company, 'job' => $job]) }}" target="blank" >Preview Job</x-form.button.link>
+                        <x-form.button.link href="{{ route('jobs.show', ['team' => $job->company, 'job' => $job]) }}" target="blank" >Preview JobPosition</x-form.button.link>
                     </span>
                     <span class="inline-flex rounded-md shadow-sm">
                         <x-form.button>Save</x-form.button>
@@ -134,3 +137,4 @@
         </form>
     </div>
 </div>
+@endsection
