@@ -40,7 +40,7 @@ class NewsFeed extends Component
         if ($this->team) {
             return $this->team->postsWithinTeam()->with(['user', 'user.profile', 'media'])->orderBy('published_at', 'desc');
         }
-        return Post::with(['user', 'user.profile', 'media'])->orderBy('published_at', 'desc');
+        return Post::with(['user', 'user.profile', 'media'])->orderByDesc('published_at')->orderByDesc('created_at');
     }
 
     public function getRowsProperty()
