@@ -71,15 +71,12 @@
 //                    'icon'    => 'heroicon-o-collection',
 //                    'current' => false
 //                ],
-//                [
-//                    'label'   => 'Resources',
-//                    'name'    => 'resources.home',
-//                    'icon'    => 'fa-regular fa-newspaper',
-////                    'icon'    => 'fa-regular fa-newspaper',
-////                    'icon'    => 'heroicon-o-book-open',
-//                    'module'  => 'social',
-//                    'current' => false
-//                ],
+                [
+                    'label'   => 'Resources',
+                    'name'    => 'resources.home',
+                    'icon'    => 'fa-regular fa-newspaper',
+                    'module'  => 'social',
+                ],
 //                [
 //                    'label'   => 'Bookmarks',
 //                    'name'    => 'social.bookmarks',

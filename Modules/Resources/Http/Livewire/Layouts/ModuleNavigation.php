@@ -22,9 +22,17 @@ class ModuleNavigation extends Component
                 'current' => false
             ],
             [
-                'label'   => \Trans::get('My Resources'),
+                'label'   => \Trans::get('Media'),
                 'name'    => 'resources.drafts',
                 'icon'    => 'fa-regular fa-photo-film-music',
+                //                    'icon'    => 'heroicon-o-briefcase',
+                'module'  => 'resources',
+                'current' => false
+            ],
+            [
+                'label'   => \Trans::get('Articles'),
+                'name'    => 'resources.drafts',
+                'icon'    => 'fa-duotone fa-newspaper',
                 //                    'icon'    => 'heroicon-o-briefcase',
                 'module'  => 'resources',
                 'current' => false

@@ -18,6 +18,8 @@ class Index extends Component
 {
     use WithPagination, WithCachedRows, WithSortAndFilters, WithGuestAccess;
 
+    public $showMyResources = false;
+
     public array $sortLabels = [
         'title' => 'Title',
         'bookmarks_count' => 'Bookmarks',
