@@ -1,18 +1,39 @@
 @extends('social::livewire.layouts.pages.sidebar-page-layout')
 
 @section('content')
-    <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
+    <div class="mb-3 rounded-b-lg px-4 flex items-center justify-between bg-primary">
         <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Resources') }}</x-library::heading.1>
+        <div class="flex items-center">
+            @if(auth()->user()->can('create', \Modules\Social\Models\Post::class))
+                @auth
+                    <x-library::button.link
+                            href="{{ route('resources.create') }}"
+                            class="py-2 w-full h-10"
+                    >{{ \Trans::get('Add Resource') }}</x-library::button.link>
+                    <livewire:resources::pages.resources.create/>
+                @else
+                    <x-library::button
+                            class="py-2 w-full h-10"
+                            wire:click="loginCheck"
+                    >{{ \Trans::get('Add Resource') }}</x-library::button>
+                    <livewire:authentication-modal/>
+                @endauth
+            @endif
+        </div>
+    </div>
+
+    <div class="mx-auto max-w-post-card-max-w">
+        <livewire:social::news-feed-editor/>
     </div>
 
     <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
         <nav class="flex space-x-8 py-2" aria-label="Global">
             <a href="{{ route('resources.home') }}" class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
                aria-current="page">
-                <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>All Resources</a>
+                <x-library::icons.icon name="fa-regular fa-photo-film-music" size="w-5 h-5" class="pr-2"/>All Resources</a>
             <a href="{{ route('resources.drafts') }}" class="text-base-text-color hover:bg-neutral hover:text-base-text-color inline-flex items-center rounded-md py-2 px-3
             font-medium">
-                <x-library::icons.icon name="fa-duotone fa-newspaper" size="w-5 h-5" class="pr-2"/>My Resources</a>
+                <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>My Resources</a>
         </nav>
     </div>
 
@@ -48,7 +69,7 @@
                     </div>
                 </div>
             @empty
-                <li class="p-4 bg-secondary rounded-md text-base-text-color">No resources to show</li>
+                <p class="p-4 bg-secondary rounded-md text-base-text-color">No resources to show</p>
             @endforelse
         </div>
 

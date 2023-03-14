@@ -30,6 +30,12 @@
                     'current' => false
                 ],
                 [
+                    'label'   => 'Resources',
+                    'name'    => 'resources.home',
+                    'icon'    => 'fa-regular fa-photo-film-music',
+                    'module'  => 'social',
+                ],
+                [
                     'label'   => \Trans::get('My Teams'),
                     'name'    => 'social.teams.my-teams',
                     'icon'    => 'fa-regular fa-users',
@@ -71,12 +77,6 @@
 //                    'icon'    => 'heroicon-o-collection',
 //                    'current' => false
 //                ],
-                [
-                    'label'   => 'Resources',
-                    'name'    => 'resources.home',
-                    'icon'    => 'fa-regular fa-newspaper',
-                    'module'  => 'social',
-                ],
 //                [
 //                    'label'   => 'Bookmarks',
 //                    'name'    => 'social.bookmarks',

@@ -5,7 +5,7 @@
         <x-library::heading.2>No Resource found</x-library::heading.2>
     @else
         <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
-            <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary">
+            <div class="mr-4 p-2 rounded-full bg-secondary">
                 <a href="{{ route('resources.home') }}">
                     <x-heroicon-o-arrow-left class="h-6"/>
                 </a>
