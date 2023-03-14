@@ -19,12 +19,12 @@ jobs:
             ~/.composer/cache/files
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-      - name: Setup SSH Keys and known_hosts
-        env:
-            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-            ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+      # - name: Setup SSH Keys and known_hosts
+      #   env:
+      #       SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      #   run: |
+      #       ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+      #       ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
