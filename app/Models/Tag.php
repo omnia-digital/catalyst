@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Modules\Jobs\Models\JobPosition;
 use Modules\Jobs\Support\HasJobs;
 use Modules\Social\Models\Post;
 
 class Tag extends \Spatie\Tags\Tag
 {
-    use HasJobs;
     public CONST TAG_REGEX = '/(?<![\S])#([a-z0-9_-]+)/';
 
     public static function parseHashTagsFromString($text)
@@ -43,5 +43,10 @@ class Tag extends \Spatie\Tags\Tag
     public function posts()
     {
         return $this->morphedByMany(Post::class, 'taggable');
+    }
+
+    public function job_positions()
+    {
+        return $this->morphedByMany(JobPosition::class, 'taggable');
     }
 }

@@ -9,17 +9,13 @@ class Item extends Component
 {
     public JobPosition $job;
 
-    public $attributes;
-
-    public function __construct($job, $attributes)
+    public function __construct($job)
     {
         $this->job = $job;
-        $this->attributes = $attributes;
-
     }
 
     public function render()
     {
-        return view('components.job.item');
+        return view('jobs::components.job.item');
     }
 }

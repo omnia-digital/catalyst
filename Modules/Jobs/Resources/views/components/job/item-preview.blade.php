@@ -6,8 +6,7 @@
 'isRemote',
 'paymentType',
 'budget',
-'tags',
-'selectedTags',
+'skills',
 'editable' => false
 ])
 
@@ -49,10 +48,8 @@
                     <div class="hidden md:block">
                         <div>
                             <div class="text-sm leading-5 text-gray-900">
-                                @foreach ($selectedTags as $key)
-                                    <x-tag class="rounded-full bg-green-100 text-green-800 text-sm">
-                                        {{ $tags[$key] }}
-                                    </x-tag>
+                                @foreach ($skills as $skill)
+                                    <x-tag :name="\App\Models\Tag::find($skill)->name" class="rounded-full bg-green-100 text-green-800 text-sm"/>
                                 @endforeach
                             </div>
                         </div>

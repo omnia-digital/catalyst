@@ -1,4 +1,4 @@
-@extends('jobs::livewire.layouts.main-layout')
+@extends('advice::livewire.layouts.main-layout')
 
 
 @section('page-layout')

@@ -9,10 +9,12 @@ class MyJobs extends Component
 {
     public function render()
     {
+
         $jobs = Auth::user()->currentTeam
             ->jobs()
             ->latest()
-            ->get();
+            ->get()
+        ->sortByDesc(['is_active','created_at']);
 
         return view('jobs::livewire.pages.jobs.my-jobs', [
             'jobs' => $jobs

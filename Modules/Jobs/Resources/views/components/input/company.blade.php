@@ -3,7 +3,7 @@
         <select
             {{ $attributes->merge(['class' => 'form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5']) }}
         >
-            <option disabled selected>Select a company</option>
+            <option disabled selected>{{ \Trans::get('Select a team') }}</option>
 
             @foreach ($companies as $company)
                 <option value="{{ $company->id }}">{{ $company->name }}</option>

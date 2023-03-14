@@ -20,21 +20,21 @@ class UpdateJob extends Component
 
     public JobPosition $job;
 
-    public $selected_tags;
+    public $selected_skills;
 
     protected $rules = [
-        'job.title'        => 'required|max:254',
-        'job.description'  => 'required|min:50',
-        'job.apply_type'   => 'required|in:link,email',
-        'job.apply_value'  => 'required',
-        'job.payment_type' => 'required|in:hourly,fixed',
-        'job.budget'       => 'required|numeric|min:0',
-        'job.location'     => 'required|max:254',
-        'selected_tags'    => 'required',
-        'job.hours_per_week_id' => 'required',
-        'job.experience_level_id'   => 'required',
-        'job.job_length_id' => 'required',
-        'job.is_active'        => 'boolean',
+        'job.title'               => 'required|max:254',
+        'job.description'         => 'required|min:50',
+        'job.apply_type'          => 'required|in:link,email',
+        'job.apply_value'         => 'required',
+        'job.payment_type'        => 'required|in:hourly,fixed',
+        'job.budget'              => 'required|numeric|min:0',
+        'job.location'            => 'required|max:254',
+        'selected_skills'           => 'required',
+        'job.hours_per_week_id'   => 'required',
+        'job.experience_level_id' => 'required',
+        'job.job_length_id'       => 'required',
+        'job.is_active'           => 'boolean',
     ];
 
     public function mount(JobPosition $job)
@@ -44,8 +44,9 @@ class UpdateJob extends Component
             abort(403);
         }
 
-        $this->job = $job;
-        $this->selected_tags = $job->tags->pluck('id')->all();
+        $this->job           = $job;
+        $this->selected_skills = $job->skills->pluck('id')
+                                         ->all();
     }
 
     /**
@@ -55,24 +56,43 @@ class UpdateJob extends Component
     {
         $this->validate();
 
+        if (empty($this->job->is_active)) {
+            $this->job->is_active = false;
+        }
         $this->job->save();
 
-        $this->job->tags()->sync($this->selected_tags);
+        $this->job->skills()
+                  ->sync($this->selected_skills);
 
         $this->success('Update the job successfully!');
+
+        $this->redirectRoute('jobs.job.show', [
+            'team' => $this->job->company->id,
+            'job'  => $this->job
+        ]);
+    }
+
+    public function getJobPositionSkillOptionsProperty()
+    {
+        return \App\Models\Tag::getWithType('job_position_skill')
+                              ->pluck('name', 'id');
     }
 
     public function render()
     {
-        return view('livewire.jobs.update-job', [
-            'companies'    => Auth::user()->allTeams(),
-            'applyTypes'   => ApplyType::pluck('name', 'code'),
-            'paymentTypes' => PaymentType::pluck('name', 'code'),
-            'tags'         => Tag::pluck('name', 'id'),
-            'jobLengths'   => JobPositionLength::all(),
-            'hoursPerWeek' => HoursPerWeek::pluck('value', 'id'),
-            'experienceLevels' => ExperienceLevel::all(),
-            'projectSizes' => ProjectSize::orderBy('order')->get()->toArray(),
+        return view('jobs::livewire.pages.jobs.update-job', [
+            'companies'                => Auth::user()
+                                              ->allTeams(),
+            'applyTypes'               => ApplyType::pluck('name', 'code'),
+            'paymentTypes'             => PaymentType::pluck('name', 'code'),
+            'currentJobPositionSkills' => $this->job->skills->pluck('name', 'id'),
+            'jobPositionSkillOptions'  => $this->jobPositionSkillOptions,
+            'jobLengths'               => JobPositionLength::all(),
+            'hoursPerWeek'             => HoursPerWeek::pluck('value', 'id'),
+            'experienceLevels'         => ExperienceLevel::all(),
+            'projectSizes'             => ProjectSize::orderBy('order')
+                                                     ->get()
+                                                     ->toArray(),
         ]);
     }
 }
