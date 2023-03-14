@@ -45,6 +45,11 @@ class JobPosition extends Model
         'is_active' => 'boolean'
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
     protected $table = 'job_positions';
 
     protected static function booted()

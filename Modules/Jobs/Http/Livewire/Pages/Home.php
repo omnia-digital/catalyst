@@ -3,11 +3,26 @@
 namespace Modules\Jobs\Http\Livewire\Pages;
 
 use App\Support\Platform\Platform;
+use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Modules\Jobs\Models\JobPosition;
+use Modules\Jobs\Traits\WithSortAndFilters;
+use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class Home extends Component
 {
+    use WithPagination, WithCachedRows, WithSortAndFilters, WithGuestAccess;
+
+    public $perPage = 25;
+    public $loadMoreCount = 25;
+
+    public array $sortLabels = [
+        'title' => 'title',
+    ];
+
+    public string $dateColumn = 'created_at';
+
     public function render()
     {
         $featuredJobs = \Modules\Jobs\Models\JobPosition::with(['company', 'skills', 'addons'])

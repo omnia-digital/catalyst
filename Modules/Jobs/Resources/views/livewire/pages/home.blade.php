@@ -5,6 +5,8 @@
         <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
             <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Jobs') }}</x-library::heading.1>
         </div>
+        @include('jobs::livewire.components.filters', ['skipFilters' => ['has_attachment', 'members']])
+
         <div>
             {{--  Subscribe widget  --}}
             {{--    <livewire:jobs::components.subscribe-widget/>--}}
