@@ -25,57 +25,56 @@ class MainNavigationMenu extends Component
     {
         return [
             [
-                'label'   => \Trans::get('Home'),
-                'name'    => 'social.home',
-                'icon'    => 'fa-duotone fa-house',
+                'label'  => \Trans::get('Home'),
+                'name'   => 'social.home',
+                'icon'   => 'fa-duotone fa-house',
                 //                'icon'    => 'heroicon-o-home',
-                'module'  => 'social',
+                'module' => 'social',
             ],
             [
-                'label'   => \Trans::get('Teams'),
-                'name'    => 'social.home',
-                'icon'    => 'fa-duotone fa-globe',
+                'label'  => \Trans::get('Teams'),
+                'name'   => 'social.home',
+                'icon'   => 'fa-duotone fa-globe',
                 //                'icon'    => 'heroicon-o-home',
-                'module'  => 'social',
+                'module' => 'social',
             ],
             [
-                'label'   => \Trans::get('Resources'),
-                'name'    => 'resources.home',
-                'icon'    => 'fa-regular fa-photo-film-music',
+                'label'  => \Trans::get('Resources'),
+                'name'   => 'resources.home',
+                'icon'   => 'fa-regular fa-photo-film-music',
                 //                'icon'    => 'heroicon-o-newspaper',
-                'module'  => 'resources',
+                'module' => 'resources',
             ],
             [
-                'label'   => \Trans::get('News'),
-                'name'    => 'games.feeds',
-                'icon'    => 'fa-regular fa-rss',
-                'module'  => 'games',
-            ],
-//            [
-//                'label'   => 'Games',
-//                'name'    => 'games.feeds',
-//                'icon'    => 'fa-regular fa-gamepad-modern',
-//                'module'  => 'games',
-//                'current' => false
-//            ],
-            [
-                'label'   => \Trans::get('Jobs'),
-                'name'    => 'jobs.home',
-                'icon'    => 'heroicon-o-briefcase',
-                'module'  => 'jobs',
+                'label'  => \Trans::get('News'),
+                'name'   => 'games.feeds',
+                'icon'   => 'fa-regular fa-rss',
+                'module' => 'games',
             ],
             //            [
-            //                'label'   => 'Advice',
-            //                'name'    => 'advice.home',
-            //                'icon'    => 'heroicon-o-briefcase',
-            //                'module'  => 'advice',
+            //                'label'   => 'Games',
+            //                'name'    => 'games.feeds',
+            //                'icon'    => 'fa-regular fa-gamepad-modern',
+            //                'module'  => 'games',
             //                'current' => false
             //            ],
             [
-                'label'   => 'CRM',
-                'name'    => 'filament.pages.dashboard',
-                'icon'    => 'heroicon-o-users',
-                'module'  => 'crm',
+                'label'  => \Trans::get('Jobs'),
+                'name'   => 'jobs.home',
+                'icon'   => 'heroicon-o-briefcase',
+                'module' => 'jobs',
+            ],
+            [
+                'label'  => 'Advice',
+                'name'   => 'advice.home',
+                'icon'   => 'fa-duotone fa-comments-question',
+                'module' => 'advice',
+            ],
+            [
+                'label'  => 'CRM',
+                'name'   => 'filament.pages.dashboard',
+                'icon'   => 'heroicon-o-users',
+                'module' => 'crm',
             ],
             //            [
             //                'label'   => 'Learn',
@@ -93,10 +92,10 @@ class MainNavigationMenu extends Component
             //            ],
 
             [
-                'label'   => 'Livestream',
-                'url'     => 'https://app.omnia.church',
-                'icon'    => 'fa-duotone fa-camcorder',
-                'module'  => 'livestream',
+                'label'  => 'Livestream',
+                'url'    => 'https://app.omnia.church',
+                'icon'   => 'fa-duotone fa-camcorder',
+                'module' => 'livestream',
             ],
         ];
     }
