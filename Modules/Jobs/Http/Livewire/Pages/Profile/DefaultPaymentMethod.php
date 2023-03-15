@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Jobs\Http\Livewire\Profile;
+namespace Modules\Jobs\Http\Livewire\Pages\Profile;
 
 use Modules\Jobs\Support\Livewire\WithStripe;
 use Illuminate\Support\Facades\Auth;

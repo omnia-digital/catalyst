@@ -23,7 +23,7 @@ class ResourceModuleTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-    
+
         $this->actingAs($user = User::factory()->withTeam()->create([
             'email' => 'test@omniadigital.io',
             'is_admin' => true
@@ -63,7 +63,7 @@ class ResourceModuleTest extends TestCase
 
     public function test_load_view_resource_page()
     {
-        $resource = (new CreateNewPostAction)->type(PostType::RESOURCE)->execute(
+        $resource = (new CreateNewPostAction)->type(PostType::ARTICLE)->execute(
             $this->faker->paragraphs(3, true),
             [
                 'title' => $this->faker->sentence(),
@@ -77,7 +77,7 @@ class ResourceModuleTest extends TestCase
 
     public function test_load_edit_resource_page()
     {
-        $resource = app(CreateNewPostAction::class)->type(PostType::RESOURCE)->execute(
+        $resource = app(CreateNewPostAction::class)->type(PostType::ARTICLE)->execute(
             $this->faker->paragraphs(3, true),
             [
                 'title' => $this->faker->sentence(),
@@ -94,7 +94,7 @@ class ResourceModuleTest extends TestCase
     {
         $this->actingAs($user = User::factory()->withProfile()->create());
 
-        $resource = app(CreateNewPostAction::class)->user($user)->type(PostType::RESOURCE)->execute(
+        $resource = app(CreateNewPostAction::class)->user($user)->type(PostType::ARTICLE)->execute(
             $this->faker->paragraphs(3, true),
             [
                 'title' => $this->faker->sentence(),
@@ -111,7 +111,7 @@ class ResourceModuleTest extends TestCase
 
         $this->assertTrue(Post::where('title', 'Updated Title')->exists());
         $this->assertTrue(Post::where('body', 'This is the updated body of the resource which is at least 50 characters in order to avoid errors in validation.')->exists());
-        
+
     }
 
 }

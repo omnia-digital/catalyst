@@ -56,7 +56,7 @@ class SomeoneMentionedYouNotification extends Notification implements ShouldQueu
             ? Trans::get($this->mention->postable->user->name . ' mentioned your team, ' . $this->mention->mentionable->name . ' in their post')
             : Trans::get($this->mention->postable->user->name . ' mentioned you in their post');
 
-        $subtitle = $this->mention->postable->type === PostType::RESOURCE->value
+        $subtitle = $this->mention->postable->type === PostType::ARTICLE->value
             ? Str::of($this->mention->postable->body)->stripTags()->limit(155)
             : Str::of($this->mention->postable->body)->stripTags();
 

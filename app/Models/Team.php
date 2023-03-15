@@ -164,6 +164,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     public function resources(): HasMany
     {
         return $this->hasMany(Post::class)
+                    ->ofType(PostType::ARTICLE)
                     ->ofType(PostType::RESOURCE);
     }
 

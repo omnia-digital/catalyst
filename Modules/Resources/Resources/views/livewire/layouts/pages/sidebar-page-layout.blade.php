@@ -9,6 +9,6 @@
                 @yield('content')
             </div>
         </div>
-        <x-sidebar-column class="mt-4 hidden sm:block col-span-4 2xl:col-span-3" type="{{\Modules\Social\Enums\PostType::RESOURCE->value}}"/>
+        <x-sidebar-column class="mt-4 hidden sm:block col-span-4 2xl:col-span-3" type="{{\Modules\Social\Enums\PostType::ARTICLE->value}}"/>
     </div>
 @endsection

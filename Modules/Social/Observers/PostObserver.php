@@ -15,7 +15,7 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        if ($post->type == PostType::RESOURCE) {
+        if ($post->type == PostType::ARTICLE) {
             $post->attachTags(['resource']);
         }
 

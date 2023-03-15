@@ -22,9 +22,9 @@
         </div>
     </div>
 
-    <div class="mx-auto max-w-post-card-max-w">
-        <livewire:social::news-feed-editor/>
-    </div>
+{{--    <div class="mx-auto max-w-post-card-max-w">--}}
+{{--        <livewire:social::news-feed-editor/>--}}
+{{--    </div>--}}
 
     <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
         <nav class="flex space-x-8 py-2" aria-label="Global">
@@ -58,14 +58,15 @@
 
     <div class="">
         <div class="masonry sm:masonry-1 md:masonry-2">
-            @forelse($resources as $resource)
+            @forelse($resources as $post)
                 <div class="w-full break-inside mb-3">
                     <div class="">
-                        <livewire:resources::components.resource-card
-                                as="li"
-                                :post="$resource"
-                                :wire:key="'resource-card-' . $resource->id"
-                        />
+                        <livewire:social::components.post-card-dynamic :post="$post" :wire:key="'post-card-' . $post->id"/>
+{{--                        <livewire:resources::components.resource-card--}}
+{{--                                as="li"--}}
+{{--                                :post="$resource"--}}
+{{--                                :wire:key="'resource-card-' . $resource->id"--}}
+{{--                        />--}}
                     </div>
                 </div>
             @empty

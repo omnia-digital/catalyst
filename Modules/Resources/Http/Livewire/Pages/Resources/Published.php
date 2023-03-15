@@ -12,10 +12,10 @@ use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 class Published extends Component
 {
     use WithPagination, WithCachedRows;
-    
+
     public function getRowsQueryProperty()
     {
-        $query = Post::where('type', '=', PostType::RESOURCE)
+        $query = Post::where('type', '=', PostType::ARTICLE)
             ->where('user_id', auth()->id())
             ->whereNotNull('published_at')
             ->withCount(['bookmarks', 'likes', 'media']);

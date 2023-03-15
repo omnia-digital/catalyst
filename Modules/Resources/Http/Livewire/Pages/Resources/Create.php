@@ -37,7 +37,7 @@ class Create extends Component
         $hashtags = Tag::parseHashTagsFromString($validated['body']);
 
         $resource = (new CreateNewPostAction)
-            ->type(PostType::RESOURCE)
+            ->type(PostType::ARTICLE)
             ->execute($validated['body'], [
                 'title' => $validated['title'],
                 'body' => $validated['body'],
