@@ -35,15 +35,19 @@ class MainNavigationMenu extends Component
                 'label'  => \Trans::get('Teams'),
                 'name'   => 'social.home',
                 'icon'   => 'fa-duotone fa-globe',
-                //                'icon'    => 'heroicon-o-home',
                 'module' => 'social',
             ],
             [
                 'label'  => \Trans::get('Resources'),
                 'name'   => 'resources.home',
                 'icon'   => 'fa-regular fa-photo-film-music',
-                //                'icon'    => 'heroicon-o-newspaper',
                 'module' => 'resources',
+            ],
+            [
+                'label'  => \Trans::get('Articles'),
+                'name'   => 'articles.home',
+                'icon'   => 'fa-duotone fa-newspaper',
+                'module' => 'articles',
             ],
             [
                 'label'  => \Trans::get('News'),

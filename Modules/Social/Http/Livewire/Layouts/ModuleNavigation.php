@@ -38,7 +38,7 @@
                 [
                     'label'   => \Trans::get('Articles'),
                     'name'    => 'articles.home',
-                    'icon'    => 'fa-regular fa-photo-film-music',
+                    'icon'    => 'fa-duotone fa-newspaper',
                     'module'  => 'articles',
                 ],
                 [

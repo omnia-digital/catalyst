@@ -55,7 +55,6 @@ class Index extends Component
     public function getRowsQueryProperty()
     {
         $query = Post::where('type', '=', PostType::ARTICLE)
-                     ->orWhere('type', '=', PostType::ARTICLE)
                      ->whereNotNull('published_at')
                      ->withCount(['bookmarks', 'likes', 'media']);
 
