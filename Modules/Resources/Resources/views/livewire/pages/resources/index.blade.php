@@ -22,9 +22,9 @@
         </div>
     </div>
 
-{{--    <div class="mx-auto max-w-post-card-max-w">--}}
-{{--        <livewire:social::news-feed-editor/>--}}
-{{--    </div>--}}
+    <div class="mx-auto max-w-post-card-max-w">
+        <livewire:social::news-feed-editor submitButtonText="123"/>
+    </div>
 
     <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
         <nav class="flex space-x-8 py-2" aria-label="Global">

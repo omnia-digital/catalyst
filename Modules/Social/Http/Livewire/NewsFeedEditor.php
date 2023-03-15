@@ -17,6 +17,7 @@ class NewsFeedEditor extends Component
     use WithPostEditor, WithNotification, WithGuestAccess;
 
     public ?string $content = null;
+    public string $submitButtonText = 'Post';
 
     protected $listeners = [
         'post-editor:submitted' => 'createPost'
