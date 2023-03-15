@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+      - name: Checout private repo
+        uses: actions/checkout@v3
+        with:
+          repository: https://github.com/omnia-digital/library
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -19,10 +24,6 @@ jobs:
             ~/.composer/cache/files
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-      - name: Set Github Token
-        uses: actions/labeler@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
       # - name: Setup SSH Keys and known_hosts
       #   env:
       #       SSH_AUTH_SOCK: /tmp/ssh_agent.sock
