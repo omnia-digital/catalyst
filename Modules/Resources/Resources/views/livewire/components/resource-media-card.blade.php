@@ -1,6 +1,8 @@
 <div wire:click.prevent.stop="showTeam"
-     class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
-     style="background-image: url({{ $post->media ? $post->media->first()->getUrl() : config('teams.defaults.cover_photo') }}); background-size: cover; background-repeat: no-repeat;"
+     class="w-full bg-secondary rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
+     style="background-image: url({{ $post->media?->first()?->getUrl() ? $post->media?->first()?->getUrl() : config('teams.defaults.cover_photo') }}); background-size: cover;
+     background-repeat:
+     no-repeat;"
 >
     <div class="h-80 rounded"></div>
 {{--    <div class="space-y-2 p-4 bg-secondary rounded absolute bottom-0 right-0 left-0">--}}

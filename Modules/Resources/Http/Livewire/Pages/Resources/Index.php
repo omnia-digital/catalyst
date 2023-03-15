@@ -19,6 +19,7 @@ class Index extends Component
     use WithPagination, WithCachedRows, WithSortAndFilters, WithGuestAccess;
 
     public $showMyResources = false;
+    public $showPostEditor = false;
 
     public array $sortLabels = [
         'title'           => 'Title',
@@ -55,7 +56,6 @@ class Index extends Component
     public function getRowsQueryProperty()
     {
         $query = Post::where('type', '=', PostType::RESOURCE)
-                     ->whereNotNull('published_at')
                      ->withCount(['bookmarks', 'likes', 'media']);
 
         $query = $this->applyFilters($query);
