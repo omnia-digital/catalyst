@@ -19,6 +19,10 @@ jobs:
             ~/.composer/cache/files
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+      - name: Set Github Token
+        uses: actions/labeler@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       # - name: Setup SSH Keys and known_hosts
       #   env:
       #       SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -34,8 +38,6 @@ jobs:
         run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Register Font-Awesome Key
         run: |
           npm config set "@fortawesome:registry" https://npm.fontawesome.com/
