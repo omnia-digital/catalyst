@@ -11,7 +11,7 @@
     {{ $attributes->merge($getExtraAttributes())->class([
         'filament-tables-text-column filament-badgeable-tags-column',
         'px-4 py-3' => ! $isInline(),
-        'text-primary-600 transition hover:underline hover:text-primary-500 focus:underline focus:text-primary-500' => $getAction() || $getUrl(),
+        'text-primary-600 transition hover:underline hover:text-primary focus:underline focus:text-primary' => $getAction() || $getUrl(),
         match ($getColor()) {
             'secondary' => 'dark:text-gray-400',
             default => null,
