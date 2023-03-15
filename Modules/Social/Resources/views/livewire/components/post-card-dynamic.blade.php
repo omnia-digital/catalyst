@@ -1,5 +1,5 @@
 @if($post->type == \Modules\Social\Enums\PostType::ARTICLE)
-    <livewire:resources::components.article-card
+    <livewire:articles::components.article-card
             :post="$post"
             :wire:key="'article-card-' . $post->id"
             :show-post-actions="true"
