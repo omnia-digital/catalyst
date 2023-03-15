@@ -58,7 +58,7 @@ class Edit extends Component
 
         $this->redirectRoute('resources.show', $this->resource);
     }
-    
+
     public function publishResource()
     {
         $validated = $this->validate()['resource'];
@@ -73,7 +73,7 @@ class Edit extends Component
         $this->addMentions($validated['body']);
 
         $this->addTags($validated['body']);
-        
+
         if (isset($validated['image'])) {
             $this->resource->attachMedia([$validated['image']]);
         }
@@ -91,9 +91,9 @@ class Edit extends Component
 
     public function addTags($content)
     {
-        $hashtags = Tag::pullTags($content);
+        $hashtags = Tag::parseHashTagsFromString($content);
 
-        $tags = Tag::getTags($hashtags);
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
 
         $this->resource->attachTags($tags, 'post');
     }

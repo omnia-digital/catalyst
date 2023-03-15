@@ -9,6 +9,7 @@ namespace App\Support\Platform;
 use App\Settings\BillingSettings;
 use App\Settings\GeneralSettings;
 use Carbon\CarbonTimeZone;
+use Modules\Jobs\Settings\JobsSettings;
 use Nwidart\Modules\Facades\Module;
 
 class Platform
@@ -116,6 +117,11 @@ class Platform
         return (new BillingSettings())?->{$setting};
     }
 
+    public static function getJobSetting($setting)
+    {
+        return (new JobsSettings())?->{$setting};
+    }
+
     public static function getAppFee()
     {
         return self::getBillingSetting('application_fee_percent') ?? config('billing.team_member_subscriptions.application_fee_percent');
@@ -178,5 +184,33 @@ class Platform
         }
 
         return $timezones ?? [];
+    }
+
+    /**
+     * @param string $string
+     * @return bool|string
+     */
+    public static function money(string $string)
+    {
+        $amount = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
+        $amount->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, 2);
+
+        return $amount->format($string);
+    }
+
+    /**
+     * Get the list of country.
+     *
+     * @return array
+     */
+    public static function countries()
+    {
+        $countries = [];
+
+//        foreach ((new ISO3166)->all() as $country) {
+//            $countries[$country['alpha2']] = $country['name'];
+//        }
+
+        return $countries;
     }
 }

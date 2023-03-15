@@ -4,7 +4,7 @@ namespace Modules\Jobs\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Modules\Jobs\Models\JobAddon;
+use Modules\Jobs\Models\JobPositionAddon;
 
 class JobAddonFactory extends Factory
 {
@@ -13,7 +13,7 @@ class JobAddonFactory extends Factory
      *
      * @var string
      */
-    protected $model = JobAddon::class;
+    protected $model = JobPositionAddon::class;
 
     /**
      * Define the model's default state.

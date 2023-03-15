@@ -16,8 +16,8 @@ Route::name('resources.')->prefix('resources')->middleware([GuestAccessMiddlewar
     Route::get('published', ResourcesPublished::class)->middleware(['auth'])->withoutMiddleware([GuestAccessMiddleware::class])->name('published');
     Route::get('bookmarks', BookmarkIndex::class)->name('bookmarks');
     Route::get('create', function () {
-        $resource = (new CreateNewPostAction)->type(PostType::RESOURCE)->execute('', ['title' => '', 'url' => '']);
-        
+        $resource = (new CreateNewPostAction)->type(PostType::ARTICLE)->execute('', ['title' => '', 'url' => '']);
+
         return redirect()->route('resources.edit', $resource->id);
     })->name('create');
     Route::get('{resource}', Show::class)->name('show');

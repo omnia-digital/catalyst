@@ -18,9 +18,19 @@ class PostPolicy
      */
     public function before(User $user)
     {
-        if ($user->is_admin) {
+        if ($user->hasRole('super_admin')) {
             return true;
         }
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return true
+     */
+    public function create(User $user)
+    {
+        return true;
     }
 
     /**

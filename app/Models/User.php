@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\Team\HasTeams;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,15 +15,17 @@ use Laravel\Cashier\Billable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
 use Laravel\Passport\HasApiTokens;
+use Modules\Billing\Models\Builders\CashierSubscriptionBuilder;
+use Modules\Billing\Traits\WithChargentSubscriptions;
+use Modules\Forms\Models\FormSubmission;
+use Modules\Jobs\Support\HasJobs;
+use Modules\Jobs\Support\HasTransactions;
 use Modules\Reviews\Models\Review;
 use Modules\Social\Models\Like;
 use Modules\Social\Models\Post;
 use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
-use Modules\Billing\Models\Builders\CashierSubscriptionBuilder;
-use Modules\Billing\Traits\WithChargentSubscriptions;
-use Modules\Forms\Models\FormSubmission;
 use Modules\Social\Traits\HasHandle;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\PermissionRegistrar;
@@ -44,6 +45,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         Awardable,
         HasHandle,
         HasRoles,
+        HasJobs,
+        HasTransactions,
         SnoozeNotifiable;
     use HasTeams, JetstreamHasTeams {
         HasTeams::teams insteadof JetstreamHasTeams;
