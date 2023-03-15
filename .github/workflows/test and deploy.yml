@@ -34,6 +34,8 @@ jobs:
         run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Register Font-Awesome Key
         run: |
           npm config set "@fortawesome:registry" https://npm.fontawesome.com/
