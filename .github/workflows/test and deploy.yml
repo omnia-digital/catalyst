@@ -17,7 +17,7 @@ jobs:
         with:
           repository: omnia-digital/library
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: main
+          ref: main
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
