@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-      - name: Checout private repo
+      - name: Checkout private repo
         uses: actions/checkout@v3
         with:
-          repository: https://github.com/omnia-digital/library
+          repository: omnia-digital/library
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cache dependencies
         uses: actions/cache@v2
