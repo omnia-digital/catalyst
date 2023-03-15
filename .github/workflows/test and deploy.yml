@@ -15,8 +15,8 @@ jobs:
       - name: Checkout private repo
         uses: actions/checkout@v3
         with:
-          repository: omnia-digital/library
           token: ${{ secrets.GITHUB_TOKEN }}
+          repository: omnia-digital/library
           ref: main
       - name: Cache dependencies
         uses: actions/cache@v2
