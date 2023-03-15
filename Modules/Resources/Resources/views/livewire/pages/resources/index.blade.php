@@ -5,7 +5,7 @@
         <div class="mb-3 rounded-b-lg px-4 flex items-center justify-between bg-primary">
             <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Resources') }}</x-library::heading.1>
             <div class="flex items-center">
-                @if(auth()->user()->can('create', \Modules\Social\Models\Post::class))
+                @if(auth()->user()?->can('create', \Modules\Social\Models\Post::class))
                     @auth
                         <x-library::button
                                 class="py-2 w-full h-10"
