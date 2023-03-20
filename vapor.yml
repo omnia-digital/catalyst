@@ -1,10 +1,10 @@
-id: 30889
-name: PlatformFramework
+id: 44297
+name: ChurchWorld
 environments:
   production:
-    domain: platform.omniadigital.io
-    database: platform-db-prod
-    storage: platform-prod
+    domain: app.churchworld.io
+    database: churchworld-db-prod
+    storage: churchworld-prod
     runtime: docker
     memory: 1024
     cli-memory: 512
@@ -22,9 +22,9 @@ environments:
       - default
       - mail
   staging:
-    domain: staging.platform.omniadigital.io
-    database: platform-db-staging
-    storage: platform-staging
+    domain: staging.churchworld.io
+    database: churchworld-db-staging
+    storage: churchworld-staging
     runtime: docker
     memory: 1024
     cli-memory: 512
