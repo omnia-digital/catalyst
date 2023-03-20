@@ -9,6 +9,8 @@ use function view;
 
 class ResourceMediaCard extends PostCard
 {
+    public $showDetails = false;
+    public $showTeamDetails = false;
     public function showPost() {
         return $this->redirectRoute('resources.show', $this->post);
     }
