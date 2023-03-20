@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Support\Livewire\WithPostEditor;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
@@ -17,6 +18,9 @@ class NewsFeedEditor extends Component
     use WithPostEditor, WithNotification, WithGuestAccess;
 
     public ?string $content = null;
+    public ?PostType $postType;
+    public string $submitButtonText = 'Post';
+    public string $placeholder = "What\'s on your mind?";
 
     protected $listeners = [
         'post-editor:submitted' => 'createPost'
@@ -41,7 +45,11 @@ class NewsFeedEditor extends Component
             if (!empty($this->team)) {
                 $options['team_id'] = $this->team->id;
             }
-            $post = (new CreateNewPostAction)->execute($data['content'], $options);
+            $post = (new CreateNewPostAction);
+            if (!empty($this->postType)) {
+                $post->type($this->postType);
+            }
+            $post = $post->execute($data['content'], $options);
             $post->attachMedia($data['images'] ?? []);
         });
 

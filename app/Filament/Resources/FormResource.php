@@ -32,6 +32,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Modules\Forms\Http\Livewire\UserRegistrationForm;
 use Modules\Forms\Models\FormType;
 
 class FormResource extends Resource
@@ -53,76 +54,88 @@ class FormResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                TextInput::make('name')
-                    ->label('Name')
-                    ->required(true),
-                Select::make('form_type_id')
-                    ->label('Form Type')
-                    ->options(FormType::pluck('name', 'id')->toArray()),
-                TextInput::make('slug')
-                    ->label('Slug')
-                    ->required(true)
-                    ->hint('Do not change this if this form has been sent to users because it is used in the form link, so any previous links sent will be broken.')
-                    ->columnSpan(2),
-                Builder::make('content')
-                    ->columnSpan(2)
-                    ->blocks([
-                        Block::make('text')
-                            ->label('Text input')
-                            ->icon('heroicon-o-annotation')
-                            ->schema([
-                                self::getFieldNameInput(),
-                                Checkbox::make('is_required'),
-                                Select::make('type')
-                                    ->options([
-                                        'email' => 'Email',
-                                        'password' => 'Password',
-                                        'text' => 'Text',
-                                    ])
-                                    ->default('text')
-                                    ->disablePlaceholderSelection()
-                                    ->required(),
-                                TextInput::make('helper_text'),
-                                TextInput::make('hint'),
-                            ]),
-                        Block::make('select')
-                            ->icon('heroicon-o-selector')
-                            ->schema([
-                                self::getFieldNameInput(),
-                                KeyValue::make('options')
-                                        ->addButtonLabel('Add option')
-                                        ->keyLabel('Value')
-                                        ->valueLabel('Label'),
-                                Checkbox::make('is_required'),
-                                TextInput::make('helper_text'),
-                                TextInput::make('hint'),
-                            ]),
-                        Block::make('checkbox')
-                            ->icon('heroicon-o-check-circle')
-                            ->schema([
-                                self::getFieldNameInput(),
-                                Checkbox::make('is_required'),
-                                TextInput::make('helper_text'),
-                                TextInput::make('hint'),
-                            ]),
-                        Block::make('file')
-                            ->icon('heroicon-o-photograph')
-                            ->schema([
-                                self::getFieldNameInput(),
-                                Grid::make()
-                                    ->schema([
-                                        Checkbox::make('is_multiple'),
-                                        Checkbox::make('is_required'),
-                                        TextInput::make('helper_text'),
-                                        TextInput::make('hint'),
-                                    ]),
-                            ]),
-                    ])
-                    ->createItemButtonLabel('Add Form Element')
-                    ->disableLabel()
-            ]);
+        return $form->schema([
+            TextInput::make('name')
+                ->label('Name')
+                ->required(true)
+                ->reactive()
+                ->lazy()
+                ->afterStateUpdated(function ($state, callable $set) {
+                    $set('slug', Str::slug($state));
+                }),
+            Select::make('form_type_id')
+                ->label('Form Type')
+                ->options(FormType::pluck('name', 'id')->toArray())
+                ->reactive()
+                ->afterStateUpdated(function ($state, callable $set) {
+                    if (FormType::find($state)->slug === 'registration') {
+                        $set('content', UserRegistrationForm::getDefaultRegistrationContent());
+                    } else {
+                        $set('content', []);
+                    }
+                }),
+            TextInput::make('slug')
+                ->label('Slug')
+                ->required(true)
+                ->hint('Do not change this if this form has been sent to users because it is used in the form link, so any previous links sent will be broken.')
+                ->columnSpan(2),
+            Builder::make('content')
+                ->columnSpan(2)
+                ->blocks([
+                    Block::make('text')
+                        ->label('Text input')
+                        ->icon('heroicon-o-annotation')
+                        ->schema([
+                            self::getFieldNameInput(),
+                            Checkbox::make('is_required'),
+                            Select::make('type')
+                                ->options([
+                                    'email' => 'Email',
+                                    'password' => 'Password',
+                                    'text' => 'Text',
+                                ])
+                                ->default('text')
+                                ->disablePlaceholderSelection()
+                                ->required(),
+                            TextInput::make('helper_text'),
+                            TextInput::make('hint'),
+                        ]),
+                    Block::make('select')
+                        ->icon('heroicon-o-selector')
+                        ->schema([
+                            self::getFieldNameInput(),
+                            KeyValue::make('options')
+                                    ->addButtonLabel('Add option')
+                                    ->keyLabel('Value')
+                                    ->valueLabel('Label'),
+                            Checkbox::make('is_required'),
+                            TextInput::make('helper_text'),
+                            TextInput::make('hint'),
+                        ]),
+                    Block::make('checkbox')
+                        ->icon('heroicon-o-check-circle')
+                        ->schema([
+                            self::getFieldNameInput(),
+                            Checkbox::make('is_required'),
+                            TextInput::make('helper_text'),
+                            TextInput::make('hint'),
+                        ]),
+                    Block::make('file')
+                        ->icon('heroicon-o-photograph')
+                        ->schema([
+                            self::getFieldNameInput(),
+                            Grid::make()
+                                ->schema([
+                                    Checkbox::make('is_multiple'),
+                                    Checkbox::make('is_required'),
+                                    TextInput::make('helper_text'),
+                                    TextInput::make('hint'),
+                                ]),
+                        ]),
+                ])
+                ->createItemButtonLabel('Add Form Element')
+                ->disableLabel()
+        ]);
     }
 
     protected static function getFieldNameInput(): Grid
@@ -131,18 +144,20 @@ class FormResource extends Resource
         // between our builder blocks.
         return Grid::make()
             ->schema([
-                TextInput::make('name')
+                TextInput::make('label')
                     ->lazy()
                     ->afterStateUpdated(function (\Closure $set, $state) {
-                        $label = Str::of($state)
-                                    ->kebab()
-                                    ->replace(['-', '_'], ' ')
-                                    ->ucfirst();
-                        $set('label', $label);
+                        $name = Str::of($state)
+                                    ->snake()
+                                    ->replace(['-'], '_')
+                                    ->lower();
+                        $set('name', $name);
                     })
                     ->required(),
-                TextInput::make('label')
+                TextInput::make('name')
+                    ->label('Field Slug')
                     ->required(),
+                
             ]);
     }
 

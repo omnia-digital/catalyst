@@ -25,8 +25,8 @@
                 </div>
 
                 <!-- Teams Dropdown -->
-                {{-- @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->isMemberOfATeam())
-                    <div class="md:relative">
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user()->isMemberOfATeam())
+                    <div class="md:relative mr-2">
                         <x-jet-dropdown align="right" width="60">
                             <x-slot name="trigger">
                                 <button type="button"
@@ -45,11 +45,11 @@
                                         {{  Auth::user()->currentTeam->name }}
                                     </x-jet-dropdown-link>
 
-                                                                            @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                                                                <x-jet-dropdown-link href="{{ route('teams.create') }}">
-                                                                                    {{ \Trans::get('Create New Team') }}
-                                                                                </x-jet-dropdown-link>
-                                                                            @endcan
+{{--                                                                            @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
+{{--                                                                                <x-jet-dropdown-link href="{{ route('teams.create') }}">--}}
+{{--                                                                                    {{ \Trans::get('Create New Team') }}--}}
+{{--                                                                                </x-jet-dropdown-link>--}}
+{{--                                                                            @endcan--}}
 
                                     @if(Auth::user()->hasMultipleTeams())
                                         <div class="border-t border-gray-100"></div>
@@ -67,7 +67,7 @@
                             </x-slot>
                         </x-jet-dropdown>
                     </div>
-                @endif --}}
+                @endif
 
                 <!-- Settings Dropdown -->
                 <div class="relative flex">
@@ -108,6 +108,10 @@
 
                             <x-jet-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
                                 {{ auth()->user()->name }}
+                            </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('resources.drafts') }}">
+                                My Resources
                             </x-jet-dropdown-link>
 
                             <x-jet-dropdown-link href="{{ route('account') }}">

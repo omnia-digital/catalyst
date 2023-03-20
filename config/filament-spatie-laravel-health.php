@@ -13,7 +13,7 @@ return [
     */
 
 	'pages' => [
-		'health' => \ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults::class
+		'health' => \App\Filament\Pages\HealthCheckResults::class
     ],
 
 ];

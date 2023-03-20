@@ -51,7 +51,7 @@
                 <div class="col-span-12 2xl:col-span-6">
                     <div class="flex flex-col flex-1 bg-secondary rounded">
                         <div class="h-44 bg-primary"
-                             style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
+                             style="background-image: url({{ $team->mainImage()->getFullUrl() ?? config('teams.defaults.cover_photo') }}); background-size: cover; background-repeat: no-repeat;"
                         ></div>
                         <div class="p-4 flex flex-col flex-1">
                             <p class="text-sm flex-1">{{ $team->summary }}</p>
@@ -81,7 +81,7 @@
                                 <span class="col-span-1 text-gray-400 text-2xs uppercase ">Organizer:</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-s-user-circle class="w-4 h-4"/>
-                                    <span>{{ $team->owner->name }}</span>
+                                    <span>{{ $team?->owner?->name }}</span>
                                 </div>
                             </div>
                             <div class="flex justify-between items-center">

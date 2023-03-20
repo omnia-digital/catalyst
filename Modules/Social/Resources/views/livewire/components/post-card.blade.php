@@ -1,6 +1,6 @@
-<article wire:click.prevent.stop="showPost" class="w-full sm:max-w-post-card-max-w bg-post-card-bg-color pt-4 shadow rounded-lg z-10 border-2 border-transparent {{ $clickable ? '
-cursor-pointer' : ''
-}}">
+<article wire:click.prevent.stop="showPost" 
+    class="w-full sm:max-w-post-card-max-w bg-post-card-bg-color pt-4 shadow rounded-lg z-10 border-2 border-transparent {{ $clickable ? 'cursor-pointer' : '' }}"
+>
     <div class="flex justify-between px-5">
         <div class="flex space-x-3">
             <div class="flex-shrink-0">
@@ -16,7 +16,7 @@ cursor-pointer' : ''
                         <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
                         <x-dot/>
                         <a href="{{ $post->getUrl() }}" class="hover:underline">
-                            <time datetime="{{ $post->published_at }}">{{ $post->published_at->diffForHumans(short: true) }}</time>
+                            <time datetime="{{ $post->published_at }}">{{ $post->published_at?->diffForHumans(short: true) }}</time>
                         </a>
                     </div>
                 </div>
@@ -106,7 +106,7 @@ cursor-pointer' : ''
                                        href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}" class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
                                 </div>
                                 <div class="text-base-text-color">
-                                    {{ $post->repostOriginal->published_at->diffForHumans() }}
+                                    {{ $post->repostOriginal->published_at?->diffForHumans() }}
                                 </div>
                             </div>
                         </div>

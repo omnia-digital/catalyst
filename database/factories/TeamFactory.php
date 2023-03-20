@@ -31,12 +31,21 @@ class TeamFactory extends Factory
         ];
     }
 
-    public function withUsers($amount = 1, $role = 'Member')
+    public function withUsers($amount = 1, $roleName = 'Member')
     {
-        return $this->hasAttached(User::factory($amount)->withProfile(), function(Team $team) use ($role) {
+        return $this->hasAttached(User::factory($amount)->withProfile(), function(Team $team) use ($roleName) {
+            $role = Role::where('name', $roleName)->where('team_id', $team->id)->first();
             setPermissionsTeamId($team->id);
+
+            if (is_null($role)) {
+                $role = Role::create([
+                    'name' => $roleName, 
+                    'team_id' => $team->id
+                ]);
+            }
+
             return [
-                'role_id' => Role::findOrCreate($role)->id,
+                'role_id' => $role->id,
             ];
         });
 

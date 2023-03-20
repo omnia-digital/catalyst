@@ -199,13 +199,13 @@
                         </div>
                         <div>
                             <div class="flex items-center">
-                                <x-library::input.label value="{{ \Trans::get('What is your Team associated with?') }}" class="inline" />
+                                <x-library::input.label value="{{ \Trans::get('What type of Team is this?') }}" class="inline" />
                                 <span class="text-neutral-dark ml-1">{{ \Trans::get('(you can choose more than one)') }}</span>
                                 <span class="text-red-600 text-sm">*</span>
                             </div>
                             <x-library::input.selects wire:model="teamTypes" :options="$teamTags" hidden />
                             <div>
-                                <p>Current Tags:</p>
+                                <p>{{ \Trans::get('Current Team Types') }}:</p>
                                 <div class="flex items-center space-x-3 mt-1">
                                     @foreach ($team->teamTypes as $tag)
                                         <div class="relative">

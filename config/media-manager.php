@@ -3,7 +3,7 @@
 return [
 
     'storage'    => [
-        'disk' => 's3'
+        'disk' => env('MEDIA_DRIVER', 'public')
     ],
 
     'image' => [

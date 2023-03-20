@@ -1,6 +1,6 @@
 <div>
 
-    <x-library::heading.1 class="w-full px-4">Post a Job</x-library::heading.1>
+    <x-library::heading.1 class="w-full px-4">Post a job</x-library::heading.1>
 
     <div class="flex justify-between my-6">
         <div class="w-full md:w-10/12 px-2 md:pr-6">
@@ -25,19 +25,19 @@
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                     <div class="bg-secondary py-6 px-4 space-y-6 sm:p-6">
                         <div>
-                            <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">New Job</x-library::heading.2>
+                            <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">New JobPosition</x-library::heading.2>
                         </div>
 
                         <div class="grid grid-cols-3 gap-6">
                             <div class="col-span-3 space-y-1 sm:col-span-2">
-                                <x-input.label for="title" value="Job Title"/>
-                                <x-input.text wire:model="title" id="title" placeholder="Job Title"/>
+                                <x-input.label for="title" value="JobPosition Title"/>
+                                <x-input.text wire:model="title" id="title" placeholder="JobPosition Title"/>
                                 <x-input.error for="title"/>
                             </div>
 
                             <div class="col-span-3 space-y-1">
-                                <x-input.label value="Job Description"/>
-                                <x-input.textarea wire:model="description" id="description" placeholder="Job Description"/>
+                                <x-input.label value="JobPosition Description"/>
+                                <x-input.textarea wire:model="description" id="description" placeholder="JobPosition Description"/>
                                 <x-input.error for="description"/>
                             </div>
 
@@ -123,7 +123,7 @@
                             <div class="col-span-3 space-y-1 sm:col-span-2">
                                 <fieldset>
                                     <div class="mb-2">
-                                        <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">Job Addons</x-library::heading.2>
+                                        <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">JobPosition Addons</x-library::heading.2>
                                         <p class="mt-1 text-sm leading-5 text-base-text-color">This information will be displayed publicly so be careful what you share.</p>
                                     </div>
 
@@ -151,7 +151,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-2 flex text-sm leading-5 space-x-1 sm:mt-0 sm:block sm:space-x-0 sm:text-right">
-                                                        <div class="font-medium text-dark-text-color">{{ \App\LaraContract::money($addon->price) }}</div>
+                                                        <div class="font-medium text-dark-text-color">{{ \Platform::money($addon->price) }}</div>
                                                     </div>
                                                 </div>
                                                 <div
@@ -163,7 +163,7 @@
                                     <x-input.error class="mt-2" for="selected_addons"/>
                                 </fieldset>
 
-                                <p class="font-bold text-lg pt-5">Price: {{ \App\LaraContract::money($price ?? 0) }}</p>
+                                <p class="font-bold text-lg pt-5">Price: {{ \Platform::money($price ?? 0) }}</p>
                             </div>
 
                             <div class="col-span-3 space-y-1 sm:col-span-2">
@@ -334,7 +334,7 @@
 
                                         <div>
                                             <x-input.label for="country" value="Country"/>
-                                            <x-input.select x-model="country" :options="\App\LaraContract::countries()" id="country"/>
+                                            <x-input.select x-model="country" :options="\Platform::countries()" id="country"/>
                                             <x-input.error for="country"/>
                                         </div>
 
@@ -381,7 +381,7 @@
                                 </div>
                             @endif
                         </div>
-                        {{--  Preview Job  --}}
+                        {{--  Preview JobPosition  --}}
                         <div class="rounded border-2 mt-10">
                             <x-library::heading.2 class="text-xl text-center font-medium text-dark-text-color py-2">Preview</x-library::heading.2>
                             <p class="text-center font-bold">Here's a preview of how your jobpost will look like</p>
@@ -406,7 +406,7 @@
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <span class="w-full md:w-auto inline-flex rounded-md shadow-sm">
-                        <x-form.button wire:target="save" class="w-full md:w-auto">Publish Job</x-form.button>
+                        <x-form.button wire:target="save" class="w-full md:w-auto">Publish JobPosition</x-form.button>
                     </span>
                     </div>
                 </div>
@@ -421,7 +421,7 @@
         <x-slot name="title">Register an account</x-slot>
         <x-slot name="content">
             <div class="space-y-2">
-                <x-alert.info>Create an account to edit the job later.</x-alert.info>
+                <x-library::alert.info><x-slot:content>Create an account to edit the job later.</x-slot:content></x-library::alert.info>
 
                 <div class="space-y-1">
                     <x-input.label value="Name"/>

@@ -11,6 +11,29 @@ class PostPolicy
     use HandlesAuthorization;
 
     /**
+     * Perform pre-authorization checks.
+     *
+     * @param  \App\Models\User  $user
+     * @return void|bool
+     */
+    public function before(User $user)
+    {
+        if ($user->hasRole('super_admin')) {
+            return true;
+        }
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return true
+     */
+    public function create(User $user)
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can update the post.
      *
      * @param \App\Models\User $user

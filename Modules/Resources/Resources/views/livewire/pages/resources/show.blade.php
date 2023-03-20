@@ -5,7 +5,7 @@
         <x-library::heading.2>No Resource found</x-library::heading.2>
     @else
         <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
-            <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary">
+            <div class="mr-4 p-2 rounded-full bg-secondary">
                 <a href="{{ route('resources.home') }}">
                     <x-heroicon-o-arrow-left class="h-6"/>
                 </a>
@@ -22,7 +22,7 @@
                     </div>
                 @endif
                 <div class="px-6">
-                    <div class="flex mt-6 px-4e">
+                    <div class="flex items-center space-x-2 mt-6">
                         <x-library::heading.3 class="text-2xl text-dark-text-color sm:text-4xl hover:underline font-bold">{{ $resource->title }}</x-library::heading.3>
                         @empty(!$resource->is_verified)
                             <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
@@ -30,10 +30,14 @@
                     </div>
                     <div class="flex justify-start items-center my-2">
                         <div class="flex">
-                            <x-heroicon-o-calendar class="w-5 h-5"/>
-                            <p class="ml-2 text-base-text-color text-md">{{ $resource->created_at->format('M d, Y') }}</p>
+                            @if (is_null($resource->published_at))
+                                <p class="italic text-base-text-color text-md"><span class="text-primary-400">Draft</span> created {{ $resource->created_at->format('M d, Y') }}</p>
+                            @else
+                                <x-heroicon-o-calendar class="w-5 h-5"/>
+                                <p class="ml-2 text-base-text-color text-md">{{ $resource->published_at->format('M d, Y') }}</p>
+                            @endif
                         </div>
-                        <div class="flex ml-3 space-x-2">
+                        <div class="flex ml-2 space-x-2">
                             <p>by</p>
                             <a href="{{ route('social.profile.show', $resource->user->handle) }}" class="hover:underline block text-base-text-color">{{  $resource->user->name }}</a>
                         </div>
@@ -49,7 +53,7 @@
                     @empty(!$resource->tags)
                         <div class="flex justify-start space-x-2">
                             @foreach($resource->tags as $tag)
-                                <x-tag :name="$tag->name" bg-color="neutral-dark" text-color="primary"/>
+                                <x-tag :name="$tag->name" bg-color="neutral-dark" text-color="white"/>
                             @endforeach
                         </div>
                     @endempty
@@ -75,7 +79,7 @@
                 <div class="py-4 justify-center w-full xl:w-3/4 2xl:1/2 m-auto max-w-post-card-max-w">
                     <div class="max-w-post-card-max-w">
                     <x-library::heading.3>{{ Trans::get('Discussion') }}</x-library::heading.3>
-                    <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::RESOURCE"/>
+                    <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::ARTICLE"/>
                     </div>
                 </div>
             @endif
@@ -97,7 +101,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top '.{{ \Platform::getTeamsWord() }},
+                        title: 'Top '.{{ \Platform::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

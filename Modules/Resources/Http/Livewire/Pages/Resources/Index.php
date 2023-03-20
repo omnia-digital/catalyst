@@ -18,12 +18,15 @@ class Index extends Component
 {
     use WithPagination, WithCachedRows, WithSortAndFilters, WithGuestAccess;
 
+    public $showMyResources = false;
+    public $showPostEditor = false;
+
     public array $sortLabels = [
-        'title' => 'Title',
+        'title'           => 'Title',
         'bookmarks_count' => 'Bookmarks',
-        'likes_count' => 'Likes',
-        'user_id' => 'User',
-        'published_at' => 'Published Date'
+        'likes_count'     => 'Likes',
+        'user_id'         => 'User',
+        'published_at'    => 'Published Date'
     ];
 
     public string $dateColumn = 'published_at';
@@ -36,14 +39,14 @@ class Index extends Component
     {
         $this->orderBy = 'published_at';
 
-        if (!\App::environment('production')) {
+        if ( ! \App::environment('production')) {
             $this->useCache = false;
         }
     }
 
     public function loginCheck()
     {
-        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+        if (Platform::isAllowingGuestAccess() && ! Auth::check()) {
             $this->showAuthenticationModal(route('resources.home'));
 
             return;
@@ -53,13 +56,13 @@ class Index extends Component
     public function getRowsQueryProperty()
     {
         $query = Post::where('type', '=', PostType::RESOURCE)
-            ->withCount(['bookmarks', 'likes', 'media']);
+                     ->withCount(['bookmarks', 'likes', 'media']);
 
         $query = $this->applyFilters($query);
 
-        $query->where(function($q) {
+        $query->where(function ($q) {
             $q->where('title', 'like', "%{$this->search}%")
-            ->orWhere('body', 'like', "%{$this->search}%");
+              ->orWhere('body', 'like', "%{$this->search}%");
         });
 
         $query = $this->applySorting($query);

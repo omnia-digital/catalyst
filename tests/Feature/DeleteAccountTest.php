@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\DeleteUserForm;
 use Livewire\Livewire;
+use Modules\Social\Models\Profile;
 use Tests\TestCase;
 
 class DeleteAccountTest extends TestCase
@@ -21,11 +22,21 @@ class DeleteAccountTest extends TestCase
 
         $this->actingAs($user = User::factory()->create());
 
+        $profile = new Profile([
+            'first_name'       => 'test first name',
+            'last_name'       => 'test last name',
+            'bio'        => 'test bio',
+            'remote_url' => 'http://test.url/',
+            'location'   => 'test location',
+        ]);
+
+        $user->profile()->save($profile);
+
         $component = Livewire::test(DeleteUserForm::class)
                         ->set('password', 'password')
                         ->call('deleteUser');
 
-        $this->assertNull($user->fresh());
+        $this->assertNotNull($user->fresh()->deleted_at);
     }
 
     public function test_correct_password_must_be_provided_before_account_can_be_deleted()

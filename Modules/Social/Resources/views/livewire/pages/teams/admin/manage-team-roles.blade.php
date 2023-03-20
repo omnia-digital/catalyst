@@ -28,9 +28,9 @@
                                         <div class="mt-2 text-xs text-base-text-color text-left">
                                             {{ $role->description }}
                                         </div>
-                                        @if ($role->permissions->count())
-                                            <div x-id="['role-permissions']" x-data="{ expanded: false }" class="mt-4 space-y-2 text-base-text-color">
-                                                <div class="flex justify-between items-center">
+                                        <div x-id="['role-permissions']" x-data="{ expanded: false }" class="mt-4 space-y-2 text-base-text-color">
+                                            <div class="flex justify-between items-center">
+                                                @if ($role->permissions->count())
                                                     <button 
                                                         type="button" 
                                                         class="text-sm flex items-center space-x-1" 
@@ -40,15 +40,19 @@
                                                         <x-heroicon-o-chevron-down class="w-3 h-3" x-show="!expanded" />
                                                         <x-heroicon-o-chevron-up class="w-3 h-3" x-show="expanded" />
                                                     </button>
-                                                    <button 
-                                                        type="button" 
-                                                        class="text-sm flex items-center p-1" 
-                                                        x-tooltip="Attach new permission"
-                                                        wire:click="addPermissions('{{ $role->id }}')"
-                                                    >
-                                                        <x-heroicon-o-plus class="w-4 h-4" />
-                                                    </button>
-                                                </div>
+                                                @else
+                                                    <p class="text-sm">No permissions</p>
+                                                @endif
+                                                <button 
+                                                    type="button" 
+                                                    class="text-sm flex items-center p-1" 
+                                                    x-tooltip="Attach new permission"
+                                                    wire:click="addPermissions('{{ $role->id }}')"
+                                                >
+                                                    <x-heroicon-o-plus class="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                            @if ($role->permissions->count())
                                                 <ul class="space-y-2 pl-2 columns-[100px]" x-show="expanded" x-collapse>
                                                     @foreach ($role->permissions as $permission)
                                                         <li class="text-xs group flex items-center space-x-1" wire:key="permission-{{ $permission->id }}">
@@ -57,10 +61,8 @@
                                                         </li> 
                                                     @endforeach
                                                 </ul>
-                                            </div>
-                                        @else
-                                            <p class="mt-4 pl-2 text-sm">No permissions...</p>
-                                        @endif
+                                            @endif
+                                        </div>
                                     </div>
 
                                     <!-- Actions -->
@@ -173,7 +175,7 @@
 
             <x-slot name="content">
                 <div class="space-y-4">
-                    <div wire:key="permissions-{{ now() }}" class="flex-col min-h-[300px]">
+                    <div wire:key="permissions" class="flex-col min-h-[300px]">
                         <x-library::input.selects
                             wire:model="permissionsToAttach" 
                             :options="$this->availablePermissions"

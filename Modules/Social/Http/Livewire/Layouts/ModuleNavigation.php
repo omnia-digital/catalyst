@@ -30,10 +30,36 @@
                     'current' => false
                 ],
                 [
-                    'label'   => \Trans::get('Teams'),
-                    'name'    => 'social.teams.home',
+                    'label'   => \Trans::get('Resources'),
+                    'name'    => 'resources.home',
+                    'icon'    => 'fa-regular fa-photo-film-music',
+                    'module'  => 'resources',
+                ],
+                [
+                    'label'   => \Trans::get('Articles'),
+                    'name'    => 'articles.home',
+                    'icon'    => 'fa-duotone fa-newspaper',
+                    'module'  => 'articles',
+                ],
+                [
+                    'label'   => \Trans::get('My Teams'),
+                    'name'    => 'social.teams.my-teams',
                     'icon'    => 'fa-regular fa-users',
 //                    'icon'    => 'heroicon-o-briefcase',
+                    'module'  => 'social',
+                    'current' => false
+                ],
+                [
+                    'label'   => \Trans::get('Map'),
+                    'name'    => 'social.teams.map',
+                    'icon'    => 'fa-regular fa-map',
+                    'module'  => 'social',
+                    'current' => false
+                ],
+                [
+                    'label'   => \Trans::get('Calendar'),
+                    'name'    => 'social.teams.calendar',
+                    'icon'    => 'fa-regular fa-calendar',
                     'module'  => 'social',
                     'current' => false
                 ],
@@ -57,23 +83,14 @@
 //                    'icon'    => 'heroicon-o-collection',
 //                    'current' => false
 //                ],
-                [
-                    'label'   => 'Resources',
-                    'name'    => 'resources.home',
-                    'icon'    => 'fa-regular fa-newspaper',
-//                    'icon'    => 'fa-regular fa-newspaper',
-//                    'icon'    => 'heroicon-o-book-open',
-                    'module'  => 'social',
-                    'current' => false
-                ],
-                [
-                    'label'   => 'Bookmarks',
-                    'name'    => 'social.bookmarks',
-                    'icon'    => 'fa-regular fa-bookmark',
-//                    'icon'    => 'heroicon-o-bookmark',
-                    'module'  => 'social',
-                    'current' => false
-                ],
+//                [
+//                    'label'   => 'Bookmarks',
+//                    'name'    => 'social.bookmarks',
+//                    'icon'    => 'fa-regular fa-bookmark',
+////                    'icon'    => 'heroicon-o-bookmark',
+//                    'module'  => 'social',
+//                    'current' => false
+//                ],
 //                [
 //                    'label'   => \Trans::get('Companies'),
 //                    'name'    => 'social.companies.home',

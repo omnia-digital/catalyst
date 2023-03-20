@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace Modules\Forms\Http\Livewire;
 
 use Closure;
 use Filament\Forms\Components\Builder\Block;

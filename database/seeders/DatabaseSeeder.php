@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Modules\Advice\Database\Seeders\AdviceDatabaseSeeder;
 use Modules\Forms\Database\Seeders\FormsDatabaseSeeder;

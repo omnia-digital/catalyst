@@ -32,11 +32,11 @@ class PostWasRepostedNotification extends Notification implements ShouldQueue
 
     public function toArray($notifiable): array
     {
-        $url = $this->post->type === PostType::RESOURCE->value
+        $url = $this->post->type === PostType::ARTICLE->value
             ? route('resources.show', $this->post)
             : route('social.posts.show', $this->post);
 
-        $subtitle = $this->post->type === PostType::RESOURCE->value
+        $subtitle = $this->post->type === PostType::ARTICLE->value
             ? Str::of($this->post->body)->stripTags()->limit(155)
             : Str::of($this->post->body)->stripTags();
 

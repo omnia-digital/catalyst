@@ -1,11 +1,12 @@
 <?php
 
 
+use App\Http\Livewire\Pages\Companies\Index as AllCompanies;
 use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
 use App\Http\Livewire\Pages\Teams\Index as AllTeams;
-use App\Http\Livewire\Pages\Companies\Index as AllCompanies;
 use Illuminate\Support\Facades\Route;
 use Modules\Social\Http\Livewire\Home;
+use Modules\Social\Http\Livewire\Pages\Teams\Map as TeamMap;
 use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;
 use Modules\Social\Http\Livewire\Pages\Contacts\Index as ContactsIndex;
 use Modules\Social\Http\Livewire\Pages\Posts\Edit as EditPosts;
@@ -17,14 +18,13 @@ use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
 use Modules\Social\Http\Livewire\Pages\Profiles\Followers as ProfileFollowers;
 use Modules\Social\Http\Livewire\Pages\Profiles\Media as ProfileMedia;
 use Modules\Social\Http\Livewire\Pages\Profiles\Show as ShowProfile;
-use Modules\Social\Http\Livewire\Pages\Teams\Admin\TeamAdmin as EditTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Admin\ManageTeamMembers as TeamMembers;
+use Modules\Social\Http\Livewire\Pages\Teams\Admin\TeamAdmin as EditTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Apply as ApplyToTeam;
 use Modules\Social\Http\Livewire\Pages\Teams\Awards as TeamAwards;
 use Modules\Social\Http\Livewire\Pages\Teams\Calendar as TeamMapCalendar;
 use Modules\Social\Http\Livewire\Pages\Teams\Followers as TeamFollowers;
 use Modules\Social\Http\Livewire\Pages\Teams\Forms\Builder as TeamFormBuilder;
-use Modules\Social\Http\Livewire\Pages\Teams\Map as TeamMap;
 use Modules\Social\Http\Livewire\Pages\Teams\Forms\Submissions as TeamFormSubmissions;
 use Modules\Social\Http\Livewire\Pages\Teams\MyTeams;
 use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
@@ -88,6 +88,8 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
     Route::name('contacts.')->prefix('contacts')->group(function () {
         Route::get('/', ContactsIndex::class)->name('index');
     });
+
+    Route::get('/art', \Modules\Social\Http\Livewire\Pages\Art\Index::class)->name('art');
 
     Route::get('/learn', function () {
         return "Learn";

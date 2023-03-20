@@ -41,7 +41,7 @@ class Index extends Component
     public function getRowsQueryWithoutFiltersProperty()
     {
         return Bookmark::where('user_id', '=', \Auth::user()->id)->whereHas('bookmarkable', function(Builder $query) {
-            return $query->scopes(['ofType' => PostType::RESOURCE]);
+            return $query->scopes(['ofType' => PostType::ARTICLE]);
         })
             ->orderBy($this->orderBy, $this->sortOrder);
     }

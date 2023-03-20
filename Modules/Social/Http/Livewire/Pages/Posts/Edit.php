@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Posts;
 
+use App\Models\Tag;
 use App\Models\Team;
 use App\Models\User;
 use Livewire\Component;
@@ -35,7 +36,7 @@ class Edit extends Component
     protected function rules(): array
     {
         return [
-            'post.body'  => ['required', 'min:50'],
+            'post.body'  => ['required'],
             'post.image' => ['nullable','string'],
         ];
     }
@@ -53,6 +54,10 @@ class Edit extends Component
         $this->post->update([
             'body' => Mention::processMentionContent($validated['body']),
         ]);
+
+        $hashtags = Tag::parseHashTagsFromString($validated['body']);
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
+        $this->post->attachTags($tags,'post');
 
         $this->post->attachMedia($this->images);
 
@@ -98,7 +103,7 @@ class Edit extends Component
         $this->post->fresh();
 
         $this->emit('refreshComponent');
-        
+
         $this->reset('confirmingMediaRemoval', 'mediaIdBeingRemoved');
 
         $this->success(Trans::get('Image removed.'));

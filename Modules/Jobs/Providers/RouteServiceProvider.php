@@ -4,6 +4,7 @@ namespace Modules\Jobs\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Modules\Jobs\Models\JobPosition;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,10 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
+        Route::bind('job-position', function($id) {
+            return JobPosition::withoutGlobalScopes()->findOrFail($id);
+        });
     }
 
     /**
@@ -65,5 +70,17 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->moduleNamespace)
             ->group(module_path('Jobs', '/Routes/api.php'));
+    }
+
+    /**
+     * Configure the rate limiters for the application.
+     *
+     * @return void
+     */
+    protected function configureRateLimiting()
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        });
     }
 }

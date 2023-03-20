@@ -27,4 +27,65 @@ class UserRegistrationForm extends LivewireForm
             'data' => $formData,
         ]);
     }
+    
+    public static function getDefaultRegistrationContent()
+    {
+        return [
+            [
+                "data" => [
+                    "hint" => null, 
+                    "name" => "first_name", 
+                    "type" => "text", 
+                    "label" => "First name", 
+                    "helper_text" => null, 
+                    "is_required" => true
+                ], 
+                "type" => "text"
+            ], 
+            [
+                "data" => [
+                    "hint" => null, 
+                    "name" => "last_name", 
+                    "type" => "text", 
+                    "label" => "Last name", 
+                    "helper_text" => null, 
+                    "is_required" => true
+                ], 
+                "type" => "text"
+            ],
+            [
+                "data" => [
+                    "hint" => null, 
+                    "name" => "email", 
+                    "type" => "email", 
+                    "label" => "Email", 
+                    "helper_text" => null, 
+                    "is_required" => true
+                ], 
+                "type" => "text"
+            ], 
+            [
+                "data" => [
+                    "hint" => null, 
+                    "name" => "password", 
+                    "type" => "password", 
+                    "label" => "Password", 
+                    "helper_text" => null, 
+                    "is_required" => true
+                ], 
+                "type" => "text"
+            ], 
+            [
+                "data" => [
+                    "hint" => null, 
+                    "name" => "password_confirmation", 
+                    "type" => "password", 
+                    "label" => "Password confirmation", 
+                    "helper_text" => null, 
+                    "is_required" => true
+                ], 
+                "type" => "text"
+            ]
+        ];
+    }
 }

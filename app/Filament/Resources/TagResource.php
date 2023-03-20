@@ -28,7 +28,7 @@ class TagResource extends Resource
 
     public static function registerNavigationItems(): void
     {
-        if (auth()->user()->is_admin) {
+        if (auth()->user()->hasRole('super_admin')) {
             parent::registerNavigationItems();
         }
     }
