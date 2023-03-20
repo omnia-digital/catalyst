@@ -63,7 +63,7 @@
         @include('livewire.partials.filters', ['skipFilters' => ['members', 'location', 'tags']])
 
         <div class="">
-            <div class="grid grid-cols-4">
+            <div class="grid sm:grid-cols-2 xl:grid-cols-4">
                 @forelse($resources as $post)
                     <div class="w-full break-inside">
                         <div class="">
