@@ -73,10 +73,10 @@ class Post extends Model implements HasMedia, Searchable
 
     public function getPublishedAtAttribute($value)
     {
-        if ($this->type === PostType::RESOURCE) {
+        if ($this->type === PostType::ARTICLE) {
             return is_null($value) ? null : $this->asDateTime($value);
         }
-        
+
         return $this->created_at;
     }
 
@@ -119,7 +119,7 @@ class Post extends Model implements HasMedia, Searchable
 
     public function getUrl(): string
     {
-        if ($this->type === PostType::RESOURCE) {
+        if ($this->type === PostType::ARTICLE) {
             return route('resources.show', $this);
         }
 
@@ -128,7 +128,7 @@ class Post extends Model implements HasMedia, Searchable
 
     public function scopeOnlyResources($query)
     {
-        return $query->where('type', PostType::RESOURCE);
+        return $query->where('type', PostType::ARTICLE);
     }
 
     public function scopeOnlyPosts($query)
@@ -149,7 +149,7 @@ class Post extends Model implements HasMedia, Searchable
                    ->whereNotNull('published_at')
                    ->orderBy('likes_count', 'desc')
                    ->orderBy('created_at', 'desc');
-                   
+
         return $trendingPosts;
     }
 

@@ -22,7 +22,7 @@ class Show extends Component
     {
         $this->post = Post::withoutGlobalScope('parent')->findOrFail($post);
 
-        if ($this->post->type === PostType::RESOURCE) {
+        if ($this->post->type === PostType::ARTICLE) {
             $this->redirectRoute('resources.show', $this->post->id);
 
             return;

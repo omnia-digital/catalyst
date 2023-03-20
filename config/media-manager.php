@@ -3,7 +3,7 @@
 return [
 
     'storage'    => [
-        'disk' => env('MEDIA_DRIVER', config('filesystems.disks.public'))
+        'disk' => env('MEDIA_DRIVER', 'public')
     ],
 
     'image' => [

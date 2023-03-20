@@ -18,11 +18,7 @@ use Trans;
 
 class TeamAdmin extends Component
 {
-    use WithPlace,
-        AuthorizesRequests,
-        WithFileUploads,
-        WithNotification,
-        ManagesTeamNotifications;
+    use WithPlace, AuthorizesRequests, WithFileUploads, WithNotification, ManagesTeamNotifications;
 
     public Team $team;
 
@@ -58,11 +54,11 @@ class TeamAdmin extends Component
     protected function rules(): array
     {
         $rules = [
-            'team.name' => ['required', 'max:254'],
-            'team.start_date' => ['nullable','date'],
-            'team.end_date' => ['nullable','date', 'after_or_equal:team.start_date' ],
-            'team.summary' => ['nullable','max:280'],
-            'team.content' => ['nullable','max:65500'],
+            'team.name'       => ['required', 'max:254'],
+            'team.start_date' => ['nullable', 'date'],
+            'team.end_date'   => ['nullable', 'date', 'after_or_equal:team.start_date'],
+            'team.summary'    => ['nullable', 'max:280'],
+            'team.content'    => ['nullable', 'max:65500'],
         ];
 
         // if (Platform::hasGeneralSettingEnabled('team_require_start_date')) {
@@ -72,8 +68,8 @@ class TeamAdmin extends Component
         // }
 
         if (\Platform::isModuleEnabled('games')) {
-             $rules['team.youtube_channel_id'] = ['max:65500'];
-             $rules['team.twitch_channel_id'] = ['max:65500'];
+            $rules['team.youtube_channel_id'] = ['max:65500'];
+            $rules['team.twitch_channel_id']  = ['max:65500'];
         }
 
         return $rules;
@@ -119,24 +115,29 @@ class TeamAdmin extends Component
 
     public function setAddress()
     {
-        if(is_null($this->placeId)) {
+        if (is_null($this->placeId)) {
             return;
         }
-        $place = $this->findPlace();
+        $place            = $this->findPlace();
         $this->newAddress = [
-            'address'          => $place->address(),
-            'address_line_2'   => $place->addressLine2(),
-            'city'             => $place->city(),
-            'state'            => $place->state(),
-            'postal_code'      => $place->postalCode(),
-            'country'          => $place->country()
+            'address'        => $place->address(),
+            'address_line_2' => $place->addressLine2(),
+            'city'           => $place->city(),
+            'state'          => $place->state(),
+            'postal_code'    => $place->postalCode(),
+            'country'        => $place->country(),
+            'lat'            => $place->lat(),
+            'lng'            => $place->lng(),
         ];
 
     }
 
     public function getTeamTagsProperty()
     {
-        return Tag::withType('team_type')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
+        return Tag::withType('team_type')
+                  ->get()
+                  ->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])
+                  ->all();
     }
 
     public function saveChanges()
@@ -145,40 +146,46 @@ class TeamAdmin extends Component
 
         $this->team->save();
 
-        if (!empty($this->teamTypes)) {
+        if ( ! empty($this->teamTypes)) {
             $this->team->attachTags($this->teamTypes, 'team_type');
         }
 
-        $this->removeAddress && $this->team->location()->delete();
+        $this->removeAddress && $this->team->location()
+                                           ->delete();
 
-        if(!empty($this->newAddress)) {
-            $this->team->location()->updateOrCreate(
-                ['model_id' => $this->team->id, 'model_type' => Team::class],
-                $this->newAddress
-            );
+        if ( ! empty($this->newAddress)) {
+            $this->team->location()
+                       ->updateOrCreate(['model_id' => $this->team->id, 'model_type' => Team::class], $this->newAddress);
         }
 
-        if(!is_null($this->bannerImage) && $this->team->bannerImage()->count()) {
-            $this->team->bannerImage()->delete();
+        if ( ! is_null($this->bannerImage) && $this->team->bannerImage()
+                                                         ->count()) {
+            $this->team->bannerImage()
+                       ->delete();
         }
-        $this->bannerImage &&
-            $this->team->addMedia($this->bannerImage)->toMediaCollection('team_banner_images');
+        $this->bannerImage && $this->team->addMedia($this->bannerImage)
+                                         ->toMediaCollection('team_banner_images');
 
-        if($this->mainImage && $this->team->mainImage()->count()) {
-            $this->team->mainImage()->delete();
+        if ($this->mainImage && $this->team->mainImage()
+                                           ->count()) {
+            $this->team->mainImage()
+                       ->delete();
         }
-        $this->mainImage &&
-            $this->team->addMedia($this->mainImage)->toMediaCollection('team_main_images');
+        $this->mainImage && $this->team->addMedia($this->mainImage)
+                                       ->toMediaCollection('team_main_images');
 
-        if($this->profilePhoto && $this->team->profilePhoto()->count()) {
-            $this->team->profilePhoto()->delete();
+        if ($this->profilePhoto && $this->team->profilePhoto()
+                                              ->count()) {
+            $this->team->profilePhoto()
+                       ->delete();
         }
-        $this->profilePhoto &&
-            $this->team->addMedia($this->profilePhoto)->toMediaCollection('team_profile_photos');
+        $this->profilePhoto && $this->team->addMedia($this->profilePhoto)
+                                          ->toMediaCollection('team_profile_photos');
 
         if (sizeof($this->sampleMedia)) {
             foreach ($this->sampleMedia as $media) {
-                $this->team->addMedia($media)->toMediaCollection('team_sample_images');
+                $this->team->addMedia($media)
+                           ->toMediaCollection('team_sample_images');
             }
         }
 
@@ -199,8 +206,9 @@ class TeamAdmin extends Component
     public function confirmRemoval(Media $media)
     {
         $this->confirmingRemoveMedia = true;
-        $this->mediaToRemove = $media;
+        $this->mediaToRemove         = $media;
     }
+
     public function removeMedia()
     {
         $this->mediaToRemove->delete();

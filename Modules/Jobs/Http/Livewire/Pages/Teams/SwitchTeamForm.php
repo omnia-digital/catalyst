@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Jobs\Http\Livewire\Teams;
+namespace Modules\Jobs\Http\Livewire\Pages\Teams;
 
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Jetstream;

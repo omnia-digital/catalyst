@@ -79,7 +79,7 @@
                 <div class="py-4 justify-center w-full xl:w-3/4 2xl:1/2 m-auto max-w-post-card-max-w">
                     <div class="max-w-post-card-max-w">
                     <x-library::heading.3>{{ Trans::get('Discussion') }}</x-library::heading.3>
-                    <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::RESOURCE"/>
+                    <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::ARTICLE"/>
                     </div>
                 </div>
             @endif

@@ -36,10 +36,11 @@
             @forelse($resources as $resource)
                 <div class="w-full break-inside mb-3">
                     <div class="">
-                        <livewire:resources::components.resource-card
+                        <livewire:resources::components.resource-media-card
                                 as="li"
                                 :post="$resource"
                                 :wire:key="'resource-card-' . $resource->id"
+                                :showDetails="true"
                         />
                     </div>
                 </div>

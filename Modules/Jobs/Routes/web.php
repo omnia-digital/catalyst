@@ -18,7 +18,7 @@ use Modules\Jobs\Http\Livewire\Pages\Jobs\MyJobs;
 use Modules\Jobs\Http\Livewire\Pages\Jobs\NewJob;
 use Modules\Jobs\Http\Livewire\Pages\Jobs\UpdateJob;
 use Modules\Jobs\Http\Livewire\Pages\Home;
-use Modules\Jobs\Http\Livewire\Profile\Transaction;
+use Modules\Jobs\Http\Livewire\Pages\Profile\Transaction;
 
 Route::name('jobs.')->prefix('jobs')->middleware(['auth','verified'])->group(function () {
     Route::get('/', Home::class)->name('home');

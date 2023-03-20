@@ -30,10 +30,16 @@
                     'current' => false
                 ],
                 [
-                    'label'   => 'Resources',
+                    'label'   => \Trans::get('Resources'),
                     'name'    => 'resources.home',
                     'icon'    => 'fa-regular fa-photo-film-music',
-                    'module'  => 'social',
+                    'module'  => 'resources',
+                ],
+                [
+                    'label'   => \Trans::get('Articles'),
+                    'name'    => 'articles.home',
+                    'icon'    => 'fa-duotone fa-newspaper',
+                    'module'  => 'articles',
                 ],
                 [
                     'label'   => \Trans::get('My Teams'),
