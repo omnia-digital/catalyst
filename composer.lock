@@ -8328,12 +8328,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:omnia-digital/library.git",
-                "reference": "0da27653bab430ff1e78b50698bffb3294151e9e"
+                "reference": "60afdaa0141891983e804b3c8009f210389d5dc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/0da27653bab430ff1e78b50698bffb3294151e9e",
-                "reference": "0da27653bab430ff1e78b50698bffb3294151e9e",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/60afdaa0141891983e804b3c8009f210389d5dc8",
+                "reference": "60afdaa0141891983e804b3c8009f210389d5dc8",
                 "shasum": ""
             },
             "require": {
@@ -8417,7 +8417,7 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2023-03-15T17:36:24+00:00"
+            "time": "2023-03-20T03:31:35+00:00"
         },
         {
             "name": "omniphx/forrest",
