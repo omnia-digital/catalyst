@@ -23,6 +23,7 @@
         "doctrine/dbal": "^3.3",
         "filament/filament": "^2.0",
         "filament/forms": "^2.0",
+        "filament/spatie-laravel-media-library-plugin": "^2.0",
         "filament/spatie-laravel-settings-plugin": "^2.0",
         "filament/spatie-laravel-tags-plugin": "^2.0",
         "filament/spatie-laravel-translatable-plugin": "^2.0",
