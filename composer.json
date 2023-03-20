@@ -129,6 +129,7 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi",
             "@php artisan vendor:publish --tag=library-assets --force",
+            "@php artisan vapor-ui:publish --ansi",
             "@php artisan filament:upgrade",
             "@php artisan config:clear",
             "@php artisan view:clear",
