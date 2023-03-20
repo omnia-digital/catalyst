@@ -22,7 +22,7 @@ environments:
       - default
       - mail
   staging:
-    domain: staging.platform.omniadigital.io
+    domain: platform-staging.omniadigital.io
     database: platform-db-staging
     storage: platform-framework-staging-main
     runtime: docker
