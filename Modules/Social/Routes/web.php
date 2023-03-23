@@ -2,6 +2,7 @@
 
 
 use App\Http\Livewire\Pages\Companies\Index as AllCompanies;
+use App\Http\Livewire\Pages\Media\Index as MediaIndex;
 use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
 use App\Http\Livewire\Pages\Teams\Index as AllTeams;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,11 @@ use Modules\Social\Http\Middleware\GuestAccessMiddleware;
 // Shorten URLs
 Route::get('/'.\Platform::getUsersLetter().'/{profile}', ShowProfile::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.profile.show');
 Route::get('/'.\Platform::getTeamsLetter().'/{team}', ShowTeam::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.teams.show');
+
+
+Route::name('media.')->prefix('media')->group(function () {
+    Route::get('/', MediaIndex::class)->name('index');
+});
 
 Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
 
