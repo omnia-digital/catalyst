@@ -1,6 +1,6 @@
 <div>
     <!-- Sidebar -->
-    <aside class="hidden w-96 h-full bg-white p-8 border-l border-gray-200 rounded-lg overflow-y-auto lg:block">
+    <aside class="hidden w-96 h-full bg-white p-8 border-l border-gray-200 rounded-lg overflow-y-auto lg:block min-h-screen">
         <livewire:partials.media-library-details :mediaId="$selectedMedia" />
     </aside>
 

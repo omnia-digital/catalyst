@@ -24,7 +24,7 @@
     x-show="show"
     x-on:show-slide-over.window="show = true"
     x-on:hide-slide-over.window="closeSlideOver"
-    {{ $attributes->merge(['class' => 'fixed inset-0 overflow-hidden z-30']) }}
+    {{ $attributes->merge(['class' => 'fixed inset-0 overflow-hidden z-[70]']) }}
     aria-labelledby="slide-over-title" role="dialog" aria-modal="true"
     style="display: none;"
 >
@@ -41,9 +41,9 @@
                 x-transition:leave-start="translate-x-0"
                 x-transition:leave-end="translate-x-full"
                 x-on:click.away="closeSlideOver(true)"
-                class="mt-16 w-screen max-w-md"
+                class="w-screen max-w-md"
             >
-                <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
+                <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll overscroll-none">
                     <div class="px-4 sm:px-6">
                         <div class="flex items-start justify-between">
                             @if (isset($title))

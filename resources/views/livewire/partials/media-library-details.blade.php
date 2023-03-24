@@ -47,8 +47,8 @@
                 <div class="mt-auto">
                     <h3 class="text-dark-text-color font-bold">Actions</h3>
                     <div class="grid grid-cols-2 gap-2">
-                        <x-library::button>View</x-library::button>
-                        <x-library::button.secondary>Delete</x-library::button.secondary>
+                        <x-library::button.link target="_blank" href="{{ $media->getFullUrl() }}" primary="true">View</x-library::button.link>
+                        <x-library::button.secondary wire:click.prevent="$set('showDeleteMediaModal', true)">Delete</x-library::button.secondary>
                     </div>
                 </div>
             </div>
@@ -60,4 +60,24 @@
             <h2 class="font-medium text-gray-400 text-center">Select a file to view its information.</h2>
         </div>
     @endif
+    @once
+        <!-- Delete Modal -->
+        <form wire:submit.prevent="deleteMedia">
+            <x-jet-dialog-modal wire:model.defer="showDeleteMediaModal">
+                <x-slot name="title">Delete Media</x-slot>
+                <x-slot name="content">
+                    <div>Are you sure you? This action is irreversible.</div>
+                </x-slot>
+                <x-slot name="footer">
+                    <x-jet-secondary-button wire:click="$set('showDeleteMediaModal', false)" wire:loading.attr="disabled">
+                        {{ __('Cancel') }}
+                    </x-jet-secondary-button>
+            
+                    <x-jet-button class="ml-2" type="submit" wire:loading.attr="disabled">
+                        {{ __('Delete') }}
+                    </x-jet-button>
+                </x-slot>
+            </x-jet-dialog-modal>
+        </form>
+    @endonce
 </div>

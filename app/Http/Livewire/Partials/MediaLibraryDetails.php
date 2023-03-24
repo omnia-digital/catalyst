@@ -4,13 +4,16 @@ namespace App\Http\Livewire\Partials;
 
 use App\Traits\WithSlideOver;
 use Livewire\Component;
+use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaLibraryDetails extends Component
 {
-    use WithSlideOver;
+    use WithSlideOver, WithNotification;
 
     public ?Media $media = null;
+
+    public $showDeleteMediaModal = false;
 
     protected $listeners = [
         'mediaSelected'    => 'findMedia',
@@ -20,6 +23,23 @@ class MediaLibraryDetails extends Component
     public function mount($mediaId = null)
     {
         $this->findMedia($mediaId);
+    }
+
+    public function deleteMedia()
+    {
+        if (is_null($this->media)) {
+            return;
+        }
+
+        $this->media->delete();
+
+        $this->showDeleteMediaModal = false;
+
+        $this->media = null;
+
+        $this->emit('refreshMedia');
+
+        $this->success('Media deleted');
     }
 
     public function findMedia($mediaId)
@@ -33,6 +53,11 @@ class MediaLibraryDetails extends Component
 
         // Dispatch event for open the over-slide on mobile
         $this->showSlideOver();
+    }
+
+    public function resetMedia()
+    {
+        $this->reset('media');
     }
 
     public function getModelName($model)

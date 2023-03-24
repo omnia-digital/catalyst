@@ -37,7 +37,10 @@ class Index extends Component
         'date_max' => null,
     ];
 
-    protected $listeners = ['refreshMedia' => '$refresh'];
+    protected $listeners = [
+        'media-deselected' => 'deselectMedia',
+        'refreshMedia' => '$refresh'
+    ];
 
     protected function rules() { return [
         'editingMedia.name' => ['nullable', 'max:254'],
@@ -110,6 +113,13 @@ class Index extends Component
         $this->selectedMedia = $media;
 
         $this->emitTo('partials.media-library-details', 'mediaSelected', $media);
+    }
+
+    public function deselectMedia()
+    {
+        $this->useCachedRows();
+
+        $this->reset('selectedMedia');
     }
 
     public function getRowsProperty()
