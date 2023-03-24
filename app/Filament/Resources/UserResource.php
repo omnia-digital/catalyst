@@ -20,6 +20,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -65,14 +66,14 @@ class UserResource extends Resource
                                      ->schema([
                                          Forms\Components\Grid::make(12)
                                                               ->schema([
-                                                                  Forms\Components\TextInput::make('first_name')
-                                                                                            ->columnSpan(6)
-                                                                                            ->required()
-                                                                                            ->maxLength(255),
-                                                                  Forms\Components\TextInput::make('last_name')
-                                                                                            ->columnSpan(6)
-                                                                                            ->required()
-                                                                                            ->maxLength(255),
+                                                                Forms\Components\TextInput::make('first_name')
+                                                                                        ->columnSpan(6)
+                                                                                        ->required()
+                                                                                        ->maxLength(255),
+                                                                Forms\Components\TextInput::make('last_name')
+                                                                                        ->columnSpan(6)
+                                                                                        ->required()
+                                                                                        ->maxLength(255),
                                                               ]),
                                      ]),
             TextInput::make('email')
@@ -110,9 +111,10 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
-            TextColumn::make('profile.id'),
-            TextColumn::make('profile.first_name'),
-            TextColumn::make('profile.last_name'),
+            TextColumn::make('profile.id')->label('ID'),
+            SpatieMediaLibraryImageColumn::make('profile.profile_photo_url')->label('Photo'),
+            TextColumn::make('profile.first_name')->label('First Name'),
+            TextColumn::make('profile.last_name')->label('Last Name'),
             TextColumn::make('email'),
             TextColumn::make('email_verified_at')
                       ->dateTime(config('app.default_datetime_format')),

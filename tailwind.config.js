@@ -136,7 +136,8 @@ module.exports = {
 
     variants: {
         extend: {
-            textOpacity: ['dark']
+            textOpacity: ['dark'],
+            display: ["group-hover"]
         }
     },
 

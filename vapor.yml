@@ -1,10 +1,10 @@
-id: 30889
+id: 44298
 name: PlatformFramework
 environments:
   production:
     domain: platform.omniadigital.io
     database: platform-db-prod
-    storage: platform-prod
+    storage: platform-framework-prod-main
     runtime: docker
     memory: 1024
     cli-memory: 512
@@ -22,9 +22,9 @@ environments:
       - default
       - mail
   staging:
-    domain: staging.platform.omniadigital.io
+    domain: platform-staging.omniadigital.io
     database: platform-db-staging
-    storage: platform-staging
+    storage: platform-framework-staging-main
     runtime: docker
     memory: 1024
     cli-memory: 512

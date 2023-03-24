@@ -7,7 +7,7 @@ jobs:
   tests:
     name: Run Tests
     runs-on: ubuntu-latest
-#    if: ${{ github.ref != 'refs/heads/main' }}
+    if: ${{ github.ref != 'refs/heads/main' }}
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -59,8 +59,7 @@ jobs:
   deploy:
     name: Deploy to Vapor
     runs-on: ubuntu-latest
-    if: github.ref == 'false'
-#    if: ${{ github.event.pull_request.merged && github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main' }}
+    if: ${{ github.event.pull_request.merged && github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main' }}
     needs: tests
     steps:
       - name: Check out code
