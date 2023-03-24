@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Pages\Media;
 
+use App\Models\Team;
 use App\Traits\Filter\WithBulkActions;
 use App\Traits\Filter\WithPerPagePagination;
 use Carbon\Carbon;
@@ -132,23 +133,34 @@ class Index extends Component
     public function getRowsQueryProperty()
     {
         return Media::query()
+            ->whereHasMorph('model', [Post::class, Profile::class], function ($q, $type) {
+                return $q->where('user_id', auth()->id());
+            })
             ->when($this->filters['date_min'], fn($query, $date) => $query->where('created_at', '>=', Carbon::parse($date)))
             ->when($this->filters['date_max'], fn($query, $date) => $query->where('created_at', '<=', Carbon::parse($date)))
             ->when($this->filters['search'], function ($query, $search) { 
-
                 return $query
                     ->whereHasMorph('model', '*', function ($query, $type) use ($search) {
                         $column = match ($type) {
                             Post::class => 'body',
-                            Team::class => 'name',
-                            Profile::class => 'handle',
+                            Profile::class => ['handle', 'first_name', 'last_name'],
                             default => 'name'
                         };
 
-                        return $query->where($column, 'like', '%'.$search.'%'); 
+                        if (is_array($column)) {
+                            foreach ($column as $key => $attribute) {
+                                $query = ($key === 0) ? 
+                                    $query->where($attribute, 'like', '%'.$search.'%') :
+                                    $query->orWhere($attribute, 'like', '%'.$search.'%');
+                            }
+                        } else {
+                            $query = $query->where($column, 'like', '%'.$search.'%');
+                        }
+
+                        return $query; 
                     })
                     ->orWhere('name', 'like', '%'.$search.'%');
-            });
+            })->whereNot('model_type', Team::class);
     }
 
     public function render()
