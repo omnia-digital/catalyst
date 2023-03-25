@@ -39,7 +39,7 @@
         "laravel/passport": "^11.2",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/vapor-cli": "^1.38",
+        "laravel/vapor-cli": "^1.54",
         "laravel/vapor-core": "^2.28",
         "laravel/vapor-ui": "^1.5",
         "league/commonmark": "^2.3",
