@@ -39,7 +39,47 @@ class SomeoneMentionedYouNotification extends Notification implements ShouldQueu
             return [];
         }
 
-        return ['broadcast', 'database'];
+        return ['broadcast', 'database', 'mail'];
+    }
+
+    public function getTitle()
+    {
+        return \Trans::get("Someone mentioned you");
+    }
+
+    public function getSubTitle()
+    {
+        return $this->mention->postable->type === PostType::ARTICLE->value
+            ? Str::of($this->mention->postable->body)->stripTags()->limit(155)
+            : Str::of($this->mention->postable->body)->stripTags();
+    }
+
+    public function getMessage()
+    {
+        return $this->mention->mentionable::class === Team::class
+            ? Trans::get($this->mention->postable->user->name . ' mentioned your team, ' . $this->mention->mentionable->name . ' in their post')
+            : Trans::get($this->mention->postable->user->name . ' mentioned you in their post');
+    }
+
+    public function getUrl()
+    {
+        return route('social.posts.show', $this->mention->postable);
+    }
+
+    public function getImage()
+    {
+        return $this->mention->postable->user->profile_photo_url;
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     */
+    public function toMail(object $notifiable): MailMessage
+    {
+        return (new MailMessage)
+            ->greeting($this->getTitle())
+            ->line($this->getMessage())
+            ->action('View Notifications', $this->getUrl());
     }
 
     /**
@@ -50,22 +90,12 @@ class SomeoneMentionedYouNotification extends Notification implements ShouldQueu
      */
     public function toArray($notifiable)
     {
-        $url = route('social.posts.show', $this->mention->postable);
-
-        $message = $this->mention->mentionable::class === Team::class
-            ? Trans::get($this->mention->postable->user->name . ' mentioned your team, ' . $this->mention->mentionable->name . ' in their post')
-            : Trans::get($this->mention->postable->user->name . ' mentioned you in their post');
-
-        $subtitle = $this->mention->postable->type === PostType::ARTICLE->value
-            ? Str::of($this->mention->postable->body)->stripTags()->limit(155)
-            : Str::of($this->mention->postable->body)->stripTags();
-
         return NotificationCenter::make()
             ->icon('heroicon-o-user-group')
-            ->success($message)
-            ->image($this->mention->postable->user->profile_photo_url)
-            ->subtitle($subtitle)
-            ->actionLink($url)
+            ->success($this->getMessage())
+            ->image($this->getImage())
+            ->subtitle($this->getSubTitle())
+            ->actionLink($this->getUrl())
             ->actionText('View')
             ->toArray();
     }

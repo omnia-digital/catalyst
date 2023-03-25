@@ -34,7 +34,43 @@ class ApplicationAcceptedToTeamNotification extends Notification implements Shou
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'database'];
+        return ['broadcast', 'database', 'mail'];
+    }
+
+    public function getTitle()
+    {
+        return Trans::get('Your application to ' . $this->team->name . ' has been accepted');
+    }
+
+    public function getSubTitle()
+    {
+        return '';
+    }
+
+    public function getMessage()
+    {
+        return Trans::get('Your application to ' . $this->team->name . ' has been accepted');
+    }
+
+    public function getUrl()
+    {
+        return $this->team->profile() ?? route('notifications');
+    }
+
+    public function getImage()
+    {
+        return $this->team->profile_photo_url;
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     */
+    public function toMail(object $notifiable): MailMessage
+    {
+        return (new MailMessage)
+            ->greeting($this->getTitle())
+            ->line($this->getMessage())
+            ->action('View Notifications', $this->getUrl());
     }
 
     /**
@@ -45,13 +81,11 @@ class ApplicationAcceptedToTeamNotification extends Notification implements Shou
      */
     public function toArray($notifiable)
     {
-        $url = $this->team->profile();
-
         return NotificationCenter::make()
             ->icon('heroicon-o-check')
-            ->success(Trans::get('Your application to ' . $this->team->name . ' has been accepted'))
-            ->image($this->team->profile_photo_url)
-            ->actionLink($url)
+            ->success($this->getMessage())
+            ->image($this->getImage())
+            ->actionLink($this->getUrl())
             ->actionText('View')
             ->toArray();
     }

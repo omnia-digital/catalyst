@@ -34,7 +34,43 @@ class NewApplicationToTeamNotification extends Notification implements ShouldQue
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'database'];
+        return ['broadcast', 'database', 'mail'];
+    }
+
+    public function getTitle()
+    {
+        return Trans::get($this->applicant->name . ' applied to your team, ' . $this->team->name);
+    }
+
+    public function getSubTitle()
+    {
+        return '';
+    }
+
+    public function getMessage()
+    {
+        return Trans::get('Your application to ' . $this->team->name . ' has been accepted');
+    }
+
+    public function getUrl()
+    {
+        return $this->team->profile() ?? route('notifications');
+    }
+
+    public function getImage()
+    {
+        return $this->applicant->profile_photo_url;
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     */
+    public function toMail(object $notifiable): MailMessage
+    {
+        return (new MailMessage)
+            ->greeting($this->getTitle())
+            ->line($this->getMessage())
+            ->action('View Notifications', $this->getUrl());
     }
 
     /**
@@ -45,13 +81,11 @@ class NewApplicationToTeamNotification extends Notification implements ShouldQue
      */
     public function toArray($notifiable): array
     {
-        $url = $this->team->profile();
-
         return NotificationCenter::make()
             ->icon('heroicon-o-user')
-            ->success(Trans::get($this->applicant->name . ' applied to your team, ' . $this->team->name))
-            ->image($this->applicant->profile_photo_url)
-            ->actionLink($url)
+            ->success($this->getMessage())
+            ->image($this->getImage())
+            ->actionLink($this->getUrl())
             ->actionText('View')
             ->toArray();
     }
