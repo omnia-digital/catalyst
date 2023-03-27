@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Pages\Media;
 
+use App\Models\MediaFile;
+use App\Models\NullMedia;
 use App\Models\Team;
 use App\Traits\Filter\WithBulkActions;
 use App\Traits\Filter\WithPerPagePagination;
@@ -14,6 +16,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithLayoutSwitcher;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithSorting;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Support\Str;
 
 class Index extends Component
 {
@@ -23,6 +26,11 @@ class Index extends Component
     public $showDeleteModal = false;
     public $showEditModal = false;
     public $showFilters = false;
+    
+    public $showCreateModal = false;
+    public ?string $editorId = null;
+    public array $images = [];
+    public bool $openState = false;
 
     public ?int $selectedMedia = null;
 
@@ -42,6 +50,11 @@ class Index extends Component
         'media-deselected' => 'deselectMedia',
         'refreshMedia' => '$refresh'
     ];
+
+    public function mount()
+    {
+        $this->editorId = uniqid();
+    }
 
     protected function rules() { return [
         'editingMedia.name' => ['nullable', 'max:254'],
@@ -89,6 +102,26 @@ class Index extends Component
         $this->showEditModal = true;
     }
 
+    public function createMedia()
+    {
+        $mediaFile = MediaFile::create([
+            'name' => 'Not Attached',
+            'user_id' => auth()->id()
+        ]);
+
+        $mediaFile->attachMedia($this->images);
+
+        $this->reset('images');
+
+        $this->emitImagesSet();
+
+        $this->showCreateModal = false;
+
+        $this->resetPage();
+
+        $this->success('Media added successfully');
+    }
+
     public function saveMedia()
     {
         $this->validate();
@@ -121,6 +154,30 @@ class Index extends Component
         $this->useCachedRows();
 
         $this->reset('selectedMedia');
+    }
+
+    public function setImage($image)
+    {
+        array_push($this->images, $image['url']);
+
+        $this->emitImagesSet();
+    }
+
+    public function removeImage($index)
+    {
+        if (isset($this->images[$index])) {
+            unset($this->images[$index]);
+        }
+
+        $this->emitImagesSet();
+    }
+
+    private function emitImagesSet(): void
+    {
+        $this->dispatchBrowserEvent('media-library:image-set', [
+            'id'     => $this->editorId,
+            'images' => $this->images
+        ]);
     }
 
     public function getRowsProperty()

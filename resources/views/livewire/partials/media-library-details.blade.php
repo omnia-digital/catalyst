@@ -39,8 +39,18 @@
                     </div>
                     
                     <div class="py-3 flex justify-between text-sm font-medium">
-                        <dt class="text-gray-500">Date</dt>
+                        <dt class="text-gray-500">Uploaded by</dt>
+                        <dd class="text-gray-900">{{ $media->model->user?->name }}</dd>
+                    </div>
+                    
+                    <div class="py-3 flex justify-between text-sm font-medium">
+                        <dt class="text-gray-500">Uploaded at</dt>
                         <dd class="text-gray-900">{{ $media->created_at->format('m/d/y') }}</dd>
+                    </div>
+                    
+                    <div class="py-3 flex justify-between text-sm font-medium">
+                        <dt class="text-gray-500">Dimensions</dt>
+                        <dd class="text-gray-900">{{ $this->getWidth($media) . ' x ' . $this->getHeight($media)  }}</dd>
                     </div>
                 </div>
 

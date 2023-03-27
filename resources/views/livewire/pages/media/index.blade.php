@@ -33,11 +33,14 @@
                         </div>
                     </div>
                     
-                    <div class="ml-auto">
+                    <div class="ml-auto flex space-x-4">
                         <button type="button" {{ empty($selected) ? 'disabled' : '' }} wire:click="$toggle('showDeleteModal')" class="p-1.5 rounded-md border border-gray-300 text-gray-400 flex items-center space-x-2 {{ empty($selected) ? '' : 'hover:shadow-md text-blue-500 border-blue-400' }} focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                             <x-heroicon-o-trash  class="h-5 w-5" />
                             <span class="whitespace-nowrap">Delete Selected</span>
                         </button>
+                        <x-library::button wire:click="$set('showCreateModal', true)">
+                            <span class="whitespace-nowrap">Create Media</span>
+                        </x-library::button>
                     </div>
                 </div>
                 <div class="flex justify-between flex-wrap">
@@ -200,6 +203,7 @@
                         />
                     @endif
             </div>
+            <livewire:media-manager :handleUploadProcess="false"/>
         </main>
 
         <!-- Delete Modal -->
@@ -251,6 +255,101 @@
                 </x-slot>
                 <x-slot name="footer">
                     <x-jet-secondary-button wire:click="$set('showEditModal', false)" wire:loading.attr="disabled">
+                        {{ __('Cancel') }}
+                    </x-jet-secondary-button>
+            
+                    <x-jet-button class="ml-2" type="submit" wire:loading.attr="disabled">
+                        {{ __('Submit') }}
+                    </x-jet-button>
+                </x-slot>
+            </x-jet-dialog-modal>
+        </form>
+        
+        <!-- Create Media Modal -->
+        <form wire:submit.prevent="createMedia">
+            <x-jet-dialog-modal wire:model.defer="showCreateModal">
+                <x-slot name="title">Create Media</x-slot>
+                <x-slot name="content">
+                    <div 
+                        x-data="{
+                            openState: false,
+                            showImages: true,
+                            images: [],
+                            users: {},
+                            showMediaManager(file, metadata) {
+                                this.$wire.emitTo(
+                                    'media-manager',
+                                    'media-manager:show',
+                                    {
+                                        id: '{{ $editorId }}',
+                                        file: file,
+                                        metadata: metadata
+                                    }
+                                );
+                            },
+                    
+                            setImage(event) {
+                                if (event.detail.id === '{{ $editorId }}') {
+                                    this.$wire.call('setImage', event.detail);
+                                }
+                            },
+                    
+                            setImages(event) {
+                                if (event.detail.id === '{{ $editorId }}') {
+                                    this.images = event.detail.images
+                                }
+                            },
+                    
+                            removeImage(index) {
+                                this.$wire.call('removeImage', index);
+                            },
+                    
+                        }"
+                        x-on:media-manager:file-selected.window="setImage"
+                        x-on:media-library:image-set.window="setImages"
+                        class="mt-4"
+                    >
+                        @if($openState == false)
+                            <button 
+                                x-on:click.prevent.stop="showMediaManager(null, {})" 
+                                type="button" 
+                                class="bg-gray-200 rounded-md w-full flex justify-center items-center space-x-2 p-4"
+                            >
+                                <i class="fa-solid fa-image w-5 h-5 text-gray-500"></i>
+                                <span>Click here to start adding images</span>
+                            </button>
+                            <div>
+                                <x-library::input.error for="image" class="mt-2"/>
+                            </div>
+                        @endif
+                        <ul
+                            x-show="showImages"
+                            x-transition
+                            role="list"
+                            class="mt-4 grid gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
+                            x-bind:class="{'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6': images.length > 2, 'grid-cols-2': images.length === 1, 'grid-cols-2': images.length === 2}"
+                        >
+                            <template x-for="(image, index) in images" :key="index">
+                                <li class="relative cursor-pointer">
+                                    <button
+                                        x-on:click.prevent.stop="removeImage(index)"
+                                        type="button"
+                                        class="absolute -top-2 -right-2 z-10 bg-red-100 rounded-full p-1 inline-flex items-center justify-center hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500"
+                                    >
+                                        <x-heroicon-o-x class="w-5 h-5 text-red-500 hover:text-red-400"/>
+                                    </button>
+
+                                    <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden">
+                                        <img x-bind:src="image" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                    
+                </x-slot>
+                <x-slot name="footer">
+                    <x-jet-secondary-button wire:click="$set('showCreateModal', false)" wire:loading.attr="disabled">
                         {{ __('Cancel') }}
                     </x-jet-secondary-button>
             

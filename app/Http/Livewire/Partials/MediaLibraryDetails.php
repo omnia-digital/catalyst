@@ -6,6 +6,7 @@ use App\Traits\WithSlideOver;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\Support\ImageFactory;
 
 class MediaLibraryDetails extends Component
 {
@@ -70,6 +71,20 @@ class MediaLibraryDetails extends Component
         };
 
         return $model->$column;
+    }
+
+    public function getWidth(Media $media)
+    {
+        $image = ImageFactory::load($media->getPath());
+
+        return $image->getWidth();
+    }
+
+    public function getHeight(Media $media)
+    {
+        $image = ImageFactory::load($media->getPath());
+
+        return $image->getHeight();
     }
 
     public function render()
