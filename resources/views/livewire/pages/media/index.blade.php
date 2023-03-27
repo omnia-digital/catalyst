@@ -34,10 +34,12 @@
                     </div>
                     
                     <div class="ml-auto flex space-x-4">
-                        <button type="button" {{ empty($selected) ? 'disabled' : '' }} wire:click="$toggle('showDeleteModal')" class="p-1.5 rounded-md border border-gray-300 text-gray-400 flex items-center space-x-2 {{ empty($selected) ? '' : 'hover:shadow-md text-blue-500 border-blue-400' }} focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
-                            <x-heroicon-o-trash  class="h-5 w-5" />
-                            <span class="whitespace-nowrap">Delete Selected</span>
-                        </button>
+                        @if ($this->isUsingListLayout())
+                            <button type="button" {{ empty($selected) ? 'disabled' : '' }} wire:click="$toggle('showDeleteModal')" class="p-1.5 rounded-md border border-gray-300 text-gray-400 flex items-center space-x-2 {{ empty($selected) ? '' : 'hover:shadow-md text-blue-500 border-blue-400' }} focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                                <x-heroicon-o-trash  class="h-5 w-5" />
+                                <span class="whitespace-nowrap">Delete Selected</span>
+                            </button>
+                        @endif
                         <x-library::button wire:click="$set('showCreateModal', true)">
                             <span class="whitespace-nowrap">Create Media</span>
                         </x-library::button>
