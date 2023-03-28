@@ -2,13 +2,13 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Teams;
 
+use App;
 use App\Models\Team;
 use App\Models\User;
 use App\Support\Platform\Platform;
 use App\Support\Platform\WithGuestAccess;
 use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
@@ -23,14 +23,14 @@ class MyTeams extends Component
     public array $sortLabels = [
         'name' => 'Name',
         'users_count' => 'Users',
-        'start_date' => 'Launch Date'
+        'start_date' => 'Launch Date',
     ];
 
     public string $dateColumn = 'start_date';
 
     public function mount()
     {
-        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
             $this->redirectToAuthenticationPage();
 
             return;
@@ -38,7 +38,7 @@ class MyTeams extends Component
 
         $this->orderBy = 'name';
 
-        if (!\App::environment('production')) {
+        if (! App::environment('production')) {
             $this->useCache = false;
         }
     }
@@ -48,9 +48,9 @@ class MyTeams extends Component
         $query = Team::query()
             ->withUser($this->user)
             ->withCount(['users']);
-            
+
         $query = $this->applyFilters($query)
-            ->when($this->search, fn(Builder $q) => $q->search($this->search));
+            ->when($this->search, fn (Builder $q) => $q->search($this->search));
         $query = $this->applySorting($query);
 
         return $query;
@@ -65,9 +65,9 @@ class MyTeams extends Component
 
     public function getUserProperty()
     {
-        return User::find(Auth::id());
+        return User::find(auth()->id());
     }
-    
+
     public function loadMore()
     {
         $this->perPage += $this->loadMoreCount;
@@ -82,7 +82,7 @@ class MyTeams extends Component
     {
         return view('social::livewire.pages.teams.my-teams', [
             'teams' => $this->rows,
-            'teamsCount' => $this->rowsQuery->count()
+            'teamsCount' => $this->rowsQuery->count(),
         ]);
     }
 }

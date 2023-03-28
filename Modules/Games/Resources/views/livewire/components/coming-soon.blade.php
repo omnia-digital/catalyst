@@ -1,4 +1,4 @@
-@if($small)
+@if ($small)
     <div wire:init="load" class="most-anticipated-container space-y-10 mt-8">
         @forelse ($comingSoon as $game)
             <livewire:games::components.game-card-small :game="$game"/>

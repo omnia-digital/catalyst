@@ -14,7 +14,7 @@ class Game extends Model
     protected $fillable = [
         'igdb_id',
         'name',
-        'slug'
+        'slug',
     ];
 
     public function getDetailsAttribute()

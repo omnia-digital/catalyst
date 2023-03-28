@@ -21,7 +21,7 @@
 
 @section('content')
     <div class="mt-2 sm:mt-6 space-y-8 px-4 sm:px-2 lg:px-0">
-        @if(!empty($featuredTeams) && $featuredTeams->count() > 0)
+        @if (!empty($featuredTeams) && $featuredTeams->count() > 0)
             {{-- Featured Teams --}}
             <div>
                 <x-library::heading.3 class="uppercase">{{ \Trans::get('Featured Teams') }}</x-library::heading.3>
@@ -47,23 +47,23 @@
             </div>
         </div>
 
-        @if(\Platform::isModuleEnabled('games'))
+        @if (\Platform::isModuleEnabled('games'))
             {{--            <h2>Recommended YouTube Channels</h2>--}}
             {{--            <div class="space-y-6">--}}
-            {{--                @foreach($youtubeFeeds as $youtubeFeed)--}}
+            {{--                @foreach ($youtubeFeeds as $youtubeFeed)--}}
             {{--                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>--}}
             {{--                @endforeach--}}
             {{--            </div>--}}
 
             {{--            <h2>Recommended Twitch Channels</h2>--}}
             {{--            <div class="space-y-6">--}}
-            {{--                @foreach($twitchFeeds as $youtubeFeed)--}}
+            {{--                @foreach ($twitchFeeds as $youtubeFeed)--}}
             {{--                    <livewire:games::components.feed-section :feed-url="$youtubeFeed" type="youtube"/>--}}
             {{--                @endforeach--}}
             {{--            </div>--}}
         @endif
 
-        @if(config('app.modules.social.map'))
+        @if (config('app.modules.social.map'))
             <div>
                 <x-library::heading.3 class="uppercase">{{ \Trans::get('Team Map') }}</x-library::heading.3>
                 <livewire:social::components.teams.map class=""/>
@@ -71,14 +71,14 @@
         @endif
 
         <div>
-            @if($trendingTeams->count())
+            @if ($trendingTeams->count())
                 <div class="flex items-center space-x-2">
                     <x-library::heading.3 class="uppercase">{{ \Trans::get('Trending') }}</x-library::heading.3>
                 </div>
                 <div class="px-4 sm:px-6 md:px-0">
                     <div class="py-4">
                         <div class="col-span-2 grid grid-cols-5 gap-3">
-                            @foreach($trendingTeams as $team)
+                            @foreach ($trendingTeams as $team)
                                 <livewire:social::components.teams.team-card :team="$team" wire:key="trending-team-{{ $team->id }}"/>
                             @endforeach
                         </div>
@@ -87,7 +87,7 @@
             @endif
         </div>
 
-        @if(count($categories))
+        @if (count($categories))
             <div>
                 <div class="flex items-center space-x-2">
                     <x-library::heading.3 class="uppercase">{{ \Trans::get('Categories') }} ({{ count($categories) }})</x-library::heading.3>
@@ -103,8 +103,8 @@
                 </div>
             </div>
 
-            @foreach($categories as $category)
-                @if($this->getTeams($category['slug'])->get()->count() > 0)
+            @foreach ($categories as $category)
+                @if ($this->getTeams($category['slug'])->get()->count() > 0)
                     <div>
                         <div class="flex items-center space-x-2">
                             <x-library::heading.3 class="uppercase">{{ \Trans::get($category['name']) }}</x-library::heading.3>
@@ -114,7 +114,7 @@
                         <div class="px-4 sm:px-6 md:px-0">
                             <div class="py-4">
                                 <div class="col-span-2 grid grid-cols-4 gap-3">
-                                    @foreach($this->getTeams($category['slug'])->take(4) as $team)
+                                    @foreach ($this->getTeams($category['slug'])->take(4) as $team)
                                         <livewire:social::components.teams.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>
                                     @endforeach
                                 </div>
@@ -125,7 +125,7 @@
             @endforeach
         @endif
         {{--        <div>--}}
-        {{--            @if($curatedTeams->count())--}}
+        {{--            @if ($curatedTeams->count())--}}
         {{--                <div class="flex items-center space-x-2">--}}
         {{--                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Curated') }}</x-library::heading.3>--}}
         {{--                    <a href="{{ route('social.teams.home', ['tags[0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>--}}
@@ -134,7 +134,7 @@
         {{--                <div class="px-4 sm:px-6 md:px-0">--}}
         {{--                    <div class="py-4">--}}
         {{--                        <div class="col-span-2 grid grid-cols-4 gap-3">--}}
-        {{--                            @foreach($curatedTeams->take(4) as $team)--}}
+        {{--                            @foreach ($curatedTeams->take(4) as $team)--}}
         {{--                                <livewire:social::components.teams.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>--}}
         {{--                            @endforeach--}}
         {{--                        </div>--}}
@@ -152,7 +152,7 @@
         {{--            <div class="px-4 sm:px-6 md:px-0">--}}
         {{--                <div class="py-4">--}}
         {{--                    <div class="col-span-2 grid grid-cols-5 gap-3">--}}
-        {{--                        @foreach($popularIndiesTeams as $team)--}}
+        {{--                        @foreach ($popularIndiesTeams as $team)--}}
         {{--                            <x-teams.card :team="$team"/>--}}
         {{--                        @endforeach--}}
         {{--                    </div>--}}
@@ -161,7 +161,7 @@
         {{--        </div>--}}
 
         {{--        <div>--}}
-        {{--            @if($popularIndiesTeams->count())--}}
+        {{--            @if ($popularIndiesTeams->count())--}}
         {{--                <div class="flex items-center space-x-2">--}}
         {{--                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Popular Upcoming') }}</x-library::heading.3>--}}
         {{--                    <a href="{{ route('social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">{{ \Trans::get('View All') }}</a>--}}
@@ -170,7 +170,7 @@
         {{--                <div class="px-4 sm:px-6 md:px-0">--}}
         {{--                    <div class="py-4">--}}
         {{--                        <div class="col-span-2 grid grid-cols-5 gap-3">--}}
-        {{--                            @foreach($popularIndiesTeams as $team)--}}
+        {{--                            @foreach ($popularIndiesTeams as $team)--}}
         {{--                                <livewire:social::components.teams.team-card :team="$team" wire:key="popular-indies-team-{{ $team->id }}"/>--}}
         {{--                            @endforeach--}}
         {{--                        </div>--}}

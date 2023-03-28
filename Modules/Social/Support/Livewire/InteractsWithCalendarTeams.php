@@ -20,7 +20,7 @@ trait InteractsWithCalendarTeams
                     'description' => $team->summary,
                     'date' => $team->start_date,
                     'count' => $team->allUsers()->count(),
-                    'location' => $team->location
+                    'location' => $team->location,
                 ];
             });
     }

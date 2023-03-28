@@ -3,8 +3,6 @@
 namespace App\Actions\Teams;
 
 use App\Models\Tag;
-use App\Models\Team;
-use Illuminate\Database\Eloquent\Collection;
 
 class GetTeamCategoriesAction
 {

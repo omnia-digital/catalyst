@@ -144,11 +144,11 @@
                                 <div class="px-6">
                                     <nav class="-mb-px flex flex-wrap justify-center -mx-4">
                                         <a wire:click="selectCategory('All')" href="#"
-                                           class="{{'All' === $selectedCategoryId ? 'border-primary text-primary whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' : 'border-transparent text-base-text-color hover:text-dark-text-color hover:border-gray-300 whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' }}" aria-current="page">
+                                           class="{{ 'All' === $selectedCategoryId ? 'border-primary text-primary whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' : 'border-transparent text-base-text-color hover:text-dark-text-color hover:border-gray-300 whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm' }}" aria-current="page">
                                             All
                                         </a>
 
-                                        @foreach($categories as $category)
+                                        @foreach ($categories as $category)
                                             @if ($category->id == $selectedCategoryId)
                                                 <a wire:click="selectCategory('{{ $category->id }}')" href="#"
                                                    class="border-primary text-primary whitespace-nowrap py-2 px-2 border-2 rounded-full font-medium text-sm" aria-current="page">
@@ -166,7 +166,7 @@
                             </div>
 
                             <ul wire:loading.class="opacity-50" wire:target="selectCategory" class="divide-y divide-neutral-light overflow-y-auto">
-                                @foreach($contacts as $contact)
+                                @foreach ($contacts as $contact)
                                     <li class="px-6 py-5 relative">
                                         <div class="group flex justify-between items-center">
                                             <a

@@ -38,10 +38,10 @@
                 {{--                {{ $recommendedTeams }}--}}
             </div>
 
-            @if(Platform::isModuleEnabled('games'))
+            @if (Platform::isModuleEnabled('games'))
                 <div class="my-4">
                     <x-library::heading.3>{{ Trans::get('Latest Gaming News') }}</x-library::heading.3>
-                    @foreach($newsRssFeeds->take(1) as $newsFeed)
+                    @foreach ($newsRssFeeds->take(1) as $newsFeed)
                         <livewire:games::components.feed-section :type="$newsFeed[0]" :feed-url="$newsFeed[1]" :show-description="false" :show-link-to-news-page="true"/>
                     @endforeach
                 </div>
@@ -62,7 +62,7 @@
             {{--                        </div>--}}
 
             <!-- Featured Section -->
-            @if(config('app.modules.social.map'))
+            @if (config('app.modules.social.map'))
                 <div class="mt-4 justify-center mx-auto max-w-post-card-max-w">
 {{--                    <x-library::heading.3>{{ Trans::get('Team Map') }}</x-library::heading.3>--}}
                     <livewire:social::components.teams.map :places="$places"/>

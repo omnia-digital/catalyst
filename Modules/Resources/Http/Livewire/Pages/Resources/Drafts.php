@@ -37,8 +37,8 @@ class Drafts extends Component
 
     public function render()
     {
-        return view('resources::livewire.pages.resources.drafts',[
-            'resources' => $this->rows
+        return view('resources::livewire.pages.resources.drafts', [
+            'resources' => $this->rows,
         ]);
     }
 }

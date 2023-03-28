@@ -2,8 +2,8 @@
 
 return [
 
-    'storage'    => [
-        'disk' => env('MEDIA_DRIVER', 'public')
+    'storage' => [
+        'disk' => env('MEDIA_DRIVER', 'public'),
     ],
 
     'image' => [
@@ -12,13 +12,13 @@ return [
         /*
          * Max file size in KB.
          */
-        'max_file_size'      => 5000,
+        'max_file_size' => 5000,
     ],
 
     'unsplash' => [
         'access_key' => env('UNSPLASH_ACCESS_KEY'),
 
-        'utm_source' => env('APP_NAME')
-    ]
+        'utm_source' => env('APP_NAME'),
+    ],
 
 ];

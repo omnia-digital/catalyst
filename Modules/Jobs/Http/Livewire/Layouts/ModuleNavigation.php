@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules\Jobs\Http\Livewire\Layouts;
+namespace Modules\Jobs\Http\Livewire\Layouts;
 
     use Livewire\Component;
 
@@ -8,29 +8,31 @@
     {
         public string $class;
         public array $navigation = [];
+
         protected $listeners = [
-            'LoggedIn' => '$refresh'
+            'LoggedIn' => '$refresh',
         ];
 
-        public function mount() {
+        public function mount()
+        {
             $this->navigation = [
                 [
-                    'label'   => 'Home',
-                    'name'    => 'jobs.home',
-                    'icon'    => 'fa-regular fa-house',
-                    'module'  => 'jobs',
+                    'label' => 'Home',
+                    'name' => 'jobs.home',
+                    'icon' => 'fa-regular fa-house',
+                    'module' => 'jobs',
                 ],
                 [
-                    'label'   => 'Discover',
-                    'name'    => 'jobs.home',
-                    'icon'    => 'fa-regular fa-house',
-                    'module'  => 'jobs',
+                    'label' => 'Discover',
+                    'name' => 'jobs.home',
+                    'icon' => 'fa-regular fa-house',
+                    'module' => 'jobs',
                 ],
                 [
-                    'label'   => 'My Jobs',
-                    'name'    => 'jobs.my-jobs',
-                    'icon'    => 'fa-regular fa-briefcase',
-                    'module'  => 'jobs',
+                    'label' => 'My Jobs',
+                    'name' => 'jobs.my-jobs',
+                    'icon' => 'fa-regular fa-briefcase',
+                    'module' => 'jobs',
                 ],
             ];
         }

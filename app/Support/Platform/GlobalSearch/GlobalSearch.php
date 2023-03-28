@@ -10,7 +10,7 @@ class GlobalSearch extends Search
 {
     public function perform(string $query, ?User $user = null): GlobalSearchResultCollection
     {
-        $searchResults = new GlobalSearchResultCollection();
+        $searchResults = new GlobalSearchResultCollection;
 
         collect($this->getSearchAspects())
             ->each(function (SearchAspect $aspect) use ($query, $user, $searchResults) {

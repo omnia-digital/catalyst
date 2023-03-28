@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules\Social\Traits;
+namespace Modules\Social\Traits;
 
     use Illuminate\Database\Eloquent\Relations\MorphMany;
     use Modules\Social\Models\Bookmark;
@@ -9,21 +9,19 @@
     {
         /**
          * Get the bookmarks that User has created
-         *
-         * @return MorphMany
          */
         public function bookmarks(): MorphMany
         {
             return $this->morphMany(Bookmark::class, 'bookmarkable');
         }
 
-        public function createBookmark($model, $modelId, $order = null, $userId = null, $teamId = null, )
+        public function createBookmark($model, $modelId, $order = null, $userId = null, $teamId = null)
         {
             return $this->bookmarks()->create([
-                'user_id'   => $userId ?? $this->id,
-                'team_id'   => $teamId,
+                'user_id' => $userId ?? $this->id,
+                'team_id' => $teamId,
                 'bookmarkable_type' => $model,
-                'bookmarkable_id' => $modelId
+                'bookmarkable_id' => $modelId,
             ]);
         }
     }

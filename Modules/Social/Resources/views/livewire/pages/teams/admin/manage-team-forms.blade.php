@@ -29,7 +29,7 @@
                     <tr class="border-t border-gray-200">
                         <th colspan="5" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ \Trans::get('Team Forms') }}</th>
                     </tr>
-                    @forelse($teamForms as $form)
+                    @forelse ($teamForms as $form)
                         <tr>
                             <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-black sm:w-auto sm:max-w-none sm:pl-6">
                                 {{ $form->name }} @if (!$form->isActive)<span class="italic text-light-text-color">(Draft)</span>@endif
@@ -138,7 +138,7 @@
                     <tr class="border-t border-gray-200">
                         <th colspan="5" scope="colgroup" class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ \Trans::get('Platform Forms') }}</th>
                     </tr>
-                    @forelse($platformForms as $form)
+                    @forelse ($platformForms as $form)
                         <tr>
                             <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-black sm:w-auto sm:max-w-none sm:pl-6">
                                 {{ $form->name }}

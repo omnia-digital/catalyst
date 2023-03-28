@@ -1,5 +1,5 @@
 <div wire:init="ready">
-    @if($loaded)
+    @if ($loaded)
         <div class="space-y-4">
             <div class="accordion accordion-flush" id="accordion-{{ \Str::slug($feed->get_title()) }}">
                 <div class="accordion-item">
@@ -23,12 +23,12 @@
 
                                     <x-library::heading.2 class="text-heading-default-color uppercase tracking-wide font-semibold">{{ $feed->get_title() }}</x-library::heading.2>
 
-                                    @if($feed->get_image_url())
-                                        @if($feed->get_image_link())
+                                    @if ($feed->get_image_url())
+                                        @if ($feed->get_image_link())
                                             <a href="{{ $feed->get_image_link() }}" target="_blank">
                                                 @endif
                                                 <img src="{{ $feed->get_image_url() }}" class="h-12 rounded-full object-cover"/>
-                                                @if($feed->get_image_link())
+                                                @if ($feed->get_image_link())
                                             </a>
                                         @endif
                                     @endif
@@ -47,9 +47,9 @@
                          data-bs-parent="#accordion-{{ \Str::slug($feed->get_title()) }}">
                         <div class="accordion-body md:py-4 md:px-5">
                             <div class="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4">
-                                @foreach($feed->get_items(0,4) as $item)
+                                @foreach ($feed->get_items(0,4) as $item)
                                     <a href="{{ $item->get_link() }}" target="_blank">
-                                        @if($item->get_media() && !empty($item->get_media()['url']))
+                                        @if ($item->get_media() && !empty($item->get_media()['url']))
                                             <div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
                                                  style="background-image: url({{ ($item->get_media() && $item->get_media()['url'])? $item->get_media()['url'] : 'https://source.unsplash.com/random?gaming'
                                   }}); background-size: cover;
@@ -65,7 +65,7 @@
                                                         <div class="h-80 rounded"></div>
                                                         <div class="space-y-2 p-4 bg-secondary rounded absolute bottom-0 right-0 left-0">
                                                             <div class="flex justify-between">
-                                                                <p class="text-heading-default-color font-semibold text-base">{{$item->get_title()}}</p>
+                                                                <p class="text-heading-default-color font-semibold text-base">{{ $item->get_title() }}</p>
                                                                 {{--                                        <div class="flex items-center">--}}
                                                                 {{--                                            <x-heroicon-o-users class="h-4 w-4 mr-2" />--}}
                                                                 {{--                                            <p>{{ $team->users_count ?? $team->users()->count() }}</p>--}}
@@ -74,7 +74,7 @@
                                                             <div class="flex items-center text-base-text-color">
                                                                 @empty($item->get_authors())
                                                                 @else
-                                                                    @foreach($item->get_authors() as $author)
+                                                                    @foreach ($item->get_authors() as $author)
                                                                         by {{ $author->get_name() }}
                                                                     @endforeach
                                                                 @endif

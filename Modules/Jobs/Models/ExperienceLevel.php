@@ -11,20 +11,19 @@ class ExperienceLevel extends Model
 
     protected $rows = [
         [
-            'id'          => 1,
-            'title'       => 'Entry',
+            'id' => 1,
+            'title' => 'Entry',
             'description' => 'Looking for someone relatively new to this field',
         ],
         [
-            'id'          => 2,
-            'title'       => 'Intermediate',
+            'id' => 2,
+            'title' => 'Intermediate',
             'description' => 'Looking for substantial experience in this field',
         ],
         [
-            'id'          => 3,
-            'title'       => 'Expert',
+            'id' => 3,
+            'title' => 'Expert',
             'description' => 'Looking for comprehesive and deep expertise in this field',
-        ]
+        ],
     ];
-
 }

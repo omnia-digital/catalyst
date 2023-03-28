@@ -12,7 +12,7 @@ class MapGoogle extends Component
     public $selectedCategoryId = 'All';
 
     public $filters = [
-        'country'
+        'country',
     ];
 
     public function updatedFilters($value, $key)
@@ -33,14 +33,14 @@ class MapGoogle extends Component
 
     public function getCategoriesProperty()
     {
-        return ['Category 1', 'Category 2', 'Category 3'];//ContactCategory::all();
+        return ['Category 1', 'Category 2', 'Category 3']; //ContactCategory::all();
     }
 
     public function getRowsQueryProperty()
     {
         $country = Arr::get($this->filters, 'country');
 
-        return null;/* Contact::query()
+        return null; /* Contact::query()
             ->with('contactCategories')
             ->available()
             ->when($this->selectedCategoryId && $this->selectedCategoryId !== 'All', fn($query, $category) => $query->whereHas('contactCategories', fn($query) => $query->where('contact_category_id', $this->selectedCategoryId)))
@@ -49,13 +49,13 @@ class MapGoogle extends Component
 
     public function getRowsProperty()
     {
-        return null;//$this->rowsQuery->get();
+        return null; //$this->rowsQuery->get();
     }
 
     public function render()
     {
         return view('social::livewire.components.teams.map_google', [
-            'countries'  => Country::orderBy('name')->get(),
+            'countries' => Country::orderBy('name')->get(),
         ]);
     }
 }

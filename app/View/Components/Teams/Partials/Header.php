@@ -3,12 +3,13 @@
 namespace App\View\Components\Teams\Partials;
 
 use App\Models\Team;
+use Closure;
 use Illuminate\View\Component;
 
 class Header extends Component
 {
     public Team $team;
-    
+
     /**
      * Create a new component instance.
      *
@@ -22,7 +23,7 @@ class Header extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return \Illuminate\Contracts\View\View|Closure|string
      */
     public function render()
     {

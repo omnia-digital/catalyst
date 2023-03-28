@@ -1,17 +1,15 @@
-<?php namespace Modules\Billing\Actions\Salesforce;
+<?php
 
-use Carbon\Carbon;
+namespace Modules\Billing\Actions\Salesforce;
+
 use Modules\Billing\Models\ChargentSubscription;
 use Omniphx\Forrest\Providers\Laravel\Facades\Forrest;
 
 class StopRecurringBillingOnChargentOrderAction
 {
-    /**
-     * @param ChargentSubscription $subscription
-     */
     public function execute(ChargentSubscription $subscription)
     {
-        if (!$subscription->chargent_order_id) {
+        if (! $subscription->chargent_order_id) {
             return null;
         }
 
@@ -20,15 +18,15 @@ class StopRecurringBillingOnChargentOrderAction
         Forrest::sobjects("ChargentOrders__ChargentOrder__c/{$subscription->chargent_order_id}", [
             'method' => 'patch',
             'body' => [
-                'ChargentOrders__Payment_Status__c'     => 'Stopped',
-                'ChargentOrders__Payment_Stop__c'       => 'Date',
-                'ChargentOrders__Payment_End_Date__c'   => now(),
-            ]
+                'ChargentOrders__Payment_Status__c' => 'Stopped',
+                'ChargentOrders__Payment_Stop__c' => 'Date',
+                'ChargentOrders__Payment_End_Date__c' => now(),
+            ],
         ]);
 
         $subscription->update([
-            'status'                => 'Stopped',
-            'ends_at'               => now(),
+            'status' => 'Stopped',
+            'ends_at' => now(),
         ]);
     }
 }

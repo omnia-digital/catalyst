@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules\Advice\Http\Livewire\Layouts;
+namespace Modules\Advice\Http\Livewire\Layouts;
 
     use Livewire\Component;
 
@@ -9,13 +9,14 @@
         public string $class;
         public array $navigation = [];
 
-        public function mount() {
+        public function mount()
+        {
             $this->navigation = [
                 [
-                    'label'   => 'Home',
-                    'name'    => 'advice.home',
-                    'icon'    => 'fa-regular fa-house',
-                    'module'  => 'social',
+                    'label' => 'Home',
+                    'name' => 'advice.home',
+                    'icon' => 'fa-regular fa-house',
+                    'module' => 'social',
                 ],
             ];
         }

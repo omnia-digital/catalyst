@@ -2,14 +2,12 @@
 
 namespace Modules\Jobs\Nova;
 
-use Modules\Jobs\Models\Team;
 use Illuminate\Http\Request;
-use Laravel\Jetstream\Jetstream;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use Modules\Jobs\Models\Team;
 
 class Company extends Resource
 {
@@ -41,7 +39,6 @@ class Company extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function fields(Request $request)
@@ -59,14 +56,13 @@ class Company extends Resource
 
             Boolean::make('Default Company', 'personal_team')
                 ->exceptOnForms()
-                ->sortable()
+                ->sortable(),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function cards(Request $request)
@@ -77,7 +73,6 @@ class Company extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function filters(Request $request)
@@ -88,7 +83,6 @@ class Company extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function lenses(Request $request)
@@ -99,7 +93,6 @@ class Company extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function actions(Request $request)

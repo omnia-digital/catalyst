@@ -7,7 +7,7 @@
         <div class="flex justify-between">
             <p class="text-dark-text-color font-semibold text-base">{{ $team->name }}</p>
             <div class="flex items-center">
-                @if($team->teamTypes->count() > 0)
+                @if ($team->teamTypes->count() > 0)
                     <div class="flex items-center mr-2">
                         <x-library::icons.icon name="users" class="h-4 w-4 mr-2"/>
                         <x-tag name="{{ $team->teamTypes->first()?->name }}"/>

@@ -25,7 +25,7 @@ return [
     'modules' => [
         'social' => [
             'map' => env('SOCIAL_SHOW_MAP', true),
-        ]
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'debug' => (bool)env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -182,7 +182,6 @@ return [
          */
         \App\Providers\PlatformServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-
 
         /*
          * Application Service Providers...

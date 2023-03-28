@@ -33,7 +33,7 @@
 
     <div class="mt-4">
         <div class="masonry sm:masonry-1 md:masonry-2">
-            @forelse($resources as $resource)
+            @forelse ($resources as $resource)
                 <div class="w-full break-inside mb-3">
                     <div class="">
                         <livewire:resources::components.resource-media-card

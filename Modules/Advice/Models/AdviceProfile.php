@@ -1,6 +1,6 @@
 <?php
 
-    namespace Advice\App\Models;
+namespace Advice\App\Models;
 
     use Illuminate\Database\Eloquent\Model;
 
@@ -25,7 +25,6 @@
 
         public function getCredibilityRatingAttribute()
         {
-
         }
 
         public function person()

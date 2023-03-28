@@ -13,7 +13,7 @@ class LensesServiceProvider extends ServiceProvider implements DeferrableProvide
     {
         $this->lensClasses[] = $class;
 
-        $this->app->singleton("lenses.$name", function () use ($class) {
+        $this->app->singleton("lenses.{$name}", function () use ($class) {
             return new $class;
         });
 

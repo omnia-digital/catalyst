@@ -26,6 +26,7 @@ environments:
     database: platform-db-staging
     storage: platform-framework-staging-main
     runtime: docker
+    scheduler: false
     memory: 1024
     cli-memory: 512
     cli-timeout: 600

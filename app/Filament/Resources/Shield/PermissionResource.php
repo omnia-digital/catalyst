@@ -2,19 +2,14 @@
 
 namespace App\Filament\Resources\Shield;
 
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use BezhanSalleh\FilamentShield\FilamentShield;
 use App\Filament\Resources\Shield\PermissionResource\Pages;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Support\Utils;
-use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class PermissionResource extends Resource implements HasShieldPermissions
@@ -124,6 +119,16 @@ class PermissionResource extends Resource implements HasShieldPermissions
         return __('filament-shield::filament-shield.resource.label.permissions');
     }
 
+    public static function getSlug(): string
+    {
+        return (string) config('filament-shield.shield_resource.permission_slug');
+    }
+
+    public static function canGloballySearch(): bool
+    {
+        return Utils::isResourceGloballySearchable() && count(static::getGloballySearchableAttributes()) && static::canViewAny();
+    }
+
     protected static function shouldRegisterNavigation(): bool
     {
         return Utils::isResourceNavigationRegistered();
@@ -151,20 +156,10 @@ class PermissionResource extends Resource implements HasShieldPermissions
         return 2;
     }
 
-    public static function getSlug(): string
-    {
-        return (string) config('filament-shield.shield_resource.permission_slug');
-    }
-
     protected static function getNavigationBadge(): ?string
     {
         return Utils::isResourceNavigationBadgeEnabled()
             ? static::getModel()::count()
             : null;
-    }
-
-    public static function canGloballySearch(): bool
-    {
-        return Utils::isResourceGloballySearchable() && count(static::getGloballySearchableAttributes()) && static::canViewAny();
     }
 }
