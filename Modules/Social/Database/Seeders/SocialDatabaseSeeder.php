@@ -19,5 +19,6 @@ class SocialDatabaseSeeder extends Seeder
         $this->call(PostsTableSeeder::class);
         $this->call(BookmarksTableSeeder::class);
         $this->call(MentionsTableSeeder::class);
+        $this->call(UserScoreContributionTableSeeder::class);
     }
 }
