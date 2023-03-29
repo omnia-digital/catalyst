@@ -28,6 +28,9 @@ class UserScoreLevelResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                TextInput::make('level')
+                    ->integer()
+                    ->minValue(0),
                 TextInput::make('min_points')
                     ->label('Minimum Points')
                     ->integer()
@@ -40,6 +43,7 @@ class UserScoreLevelResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
+                TextColumn::make('level'),
                 TextColumn::make('min_points')->label('Minimum Points')
             ])
             ->filters([

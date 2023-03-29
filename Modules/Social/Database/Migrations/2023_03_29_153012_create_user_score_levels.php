@@ -16,6 +16,7 @@ class CreateUserScoreLevels extends Migration
         Schema::create('user_score_levels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('level');
             $table->integer('min_points');
             $table->timestamps();
         });

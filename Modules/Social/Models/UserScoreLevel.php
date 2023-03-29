@@ -9,7 +9,7 @@ class UserScoreLevel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['min_points', 'name'];
+    protected $fillable = ['min_points', 'name', 'level'];
     
     protected static function newFactory()
     {
