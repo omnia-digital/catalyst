@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserScoreLevelResource\Pages;
-use App\Filament\Resources\UserScoreLevelResource\RelationManagers;
+use App\Filament\Resources\UserScoreContributionResource\Pages;
+use App\Filament\Resources\UserScoreContributionResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -13,11 +13,11 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Social\Models\UserScoreLevel;
+use Modules\Social\Models\UserScoreContribution;
 
-class UserScoreLevelResource extends Resource
+class UserScoreContributionResource extends Resource
 {
-    protected static ?string $model = UserScoreLevel::class;
+    protected static ?string $model = UserScoreContribution::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -28,12 +28,9 @@ class UserScoreLevelResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('level')
-                    ->integer()
-                    ->minValue(0)
+                TextInput::make('slug')
                     ->required(),
-                TextInput::make('min_points')
-                    ->label('Minimum Points')
+                TextInput::make('points')
                     ->integer()
                     ->minValue(0)
                     ->required()
@@ -45,8 +42,8 @@ class UserScoreLevelResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                TextColumn::make('level'),
-                TextColumn::make('min_points')->label('Minimum Points')
+                TextColumn::make('slug'),
+                TextColumn::make('points')
             ])
             ->filters([
                 //
@@ -69,9 +66,9 @@ class UserScoreLevelResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUserScoreLevels::route('/'),
-            'create' => Pages\CreateUserScoreLevel::route('/create'),
-            'edit' => Pages\EditUserScoreLevel::route('/{record}/edit'),
+            'index' => Pages\ListUserScoreContributions::route('/'),
+            'create' => Pages\CreateUserScoreContribution::route('/create'),
+            'edit' => Pages\EditUserScoreContribution::route('/{record}/edit'),
         ];
     }    
 }
