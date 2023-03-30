@@ -2,14 +2,12 @@
 
 namespace Modules\Games\Actions\Games;
 
-
 use Carbon\Carbon;
 use Modules\Games\Models\Game;
 use Modules\Games\Models\IGDB\Game as IGDBGame;
 
 class GamesAction
 {
-
     public function query()
     {
         // allow us to pass in a custom query to igdb
@@ -22,17 +20,17 @@ class GamesAction
 //                                 ->limit(15)
 //                                 ->get();
         $igdbGames = IGDBGame::fuzzySearch(
-        // fields to search in
+            // fields to search in
             [
                 'name',
-//                'involved_companies.company.name', // you can search for nested values as well
+                //                'involved_companies.company.name', // you can search for nested values as well
             ],
             // the query to search for
             $search,
             // enable/disable case sensitivity (disabled by default)
             false,
         )->get();
-        $games     = $this->syncIgdbGames($igdbGames);
+        $games = $this->syncIgdbGames($igdbGames);
 
         return $games;
     }
@@ -41,7 +39,7 @@ class GamesAction
     {
         $igdbGames = IGDBGame::where('first_release_date', '>', now()->subDays(30))
                              ->get();
-        $games     = $this->syncIgdbGames($igdbGames);
+        $games = $this->syncIgdbGames($igdbGames);
 
         return $games;
     }
@@ -79,8 +77,8 @@ class GamesAction
 
     public function popular($limit = 10)
     {
-        $igdbGames = (new GetPopularGamesAction())->execute($limit);
-        $games     = $this->syncIgdbGames($igdbGames);
+        $igdbGames = (new GetPopularGamesAction)->execute($limit);
+        $games = $this->syncIgdbGames($igdbGames);
 
         return $games;
     }
@@ -95,7 +93,7 @@ class GamesAction
         return $this->popular()
                     ->take(5);
 
-        $current         = Carbon::now()->timestamp;
+        $current = Carbon::now()->timestamp;
         $afterFourMonths = Carbon::now()
                                  ->addMonths(4)->timestamp;
 
@@ -128,8 +126,8 @@ class GamesAction
                 'igdb_id' => $game['id'],
             ], [
                 'igdb_id' => $game['id'],
-                'name'    => $game['name'],
-                'slug'    => $game['slug'],
+                'name' => $game['name'],
+                'slug' => $game['slug'],
             ]);
         });
     }

@@ -11,7 +11,7 @@ class HoursPerWeek extends Model
 {
     use HasFactory, HasJobs;
 
-    public $table= "hours_per_week";
+    public $table = 'hours_per_week';
 
     protected $fillable = [
         'value',
@@ -21,5 +21,4 @@ class HoursPerWeek extends Model
     {
         return $this->hasManyThrough(User::class, JobPosition::class, 'user_id', 'id');
     }
-
 }

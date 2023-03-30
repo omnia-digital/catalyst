@@ -6,8 +6,6 @@ use App\Models\Tag;
 use App\Models\Team;
 use App\Support\Platform\Platform;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Social\Support\Livewire\ManagesTeamNotifications;
@@ -49,30 +47,6 @@ class TeamAdmin extends Component
     {
         $this->authorize('update', $team);
         $this->team = $team;
-    }
-
-    protected function rules(): array
-    {
-        $rules = [
-            'team.name'       => ['required', 'max:254'],
-            'team.start_date' => ['nullable', 'date'],
-            'team.end_date'   => ['nullable', 'date', 'after_or_equal:team.start_date'],
-            'team.summary'    => ['nullable', 'max:280'],
-            'team.content'    => ['nullable', 'max:65500'],
-        ];
-
-        // if (Platform::hasGeneralSettingEnabled('team_require_start_date')) {
-        //     $rules['team.start_date'] = ['required', 'date'];
-        // } else {
-        //     $rules['team.start_date'] = ['date'];
-        // }
-
-        if (\Platform::isModuleEnabled('games')) {
-            $rules['team.youtube_channel_id'] = ['max:65500'];
-            $rules['team.twitch_channel_id']  = ['max:65500'];
-        }
-
-        return $rules;
     }
 
     public function updatedBannerImage()
@@ -118,25 +92,24 @@ class TeamAdmin extends Component
         if (is_null($this->placeId)) {
             return;
         }
-        $place            = $this->findPlace();
+        $place = $this->findPlace();
         $this->newAddress = [
-            'address'        => $place->address(),
+            'address' => $place->address(),
             'address_line_2' => $place->addressLine2(),
-            'city'           => $place->city(),
-            'state'          => $place->state(),
-            'postal_code'    => $place->postalCode(),
-            'country'        => $place->country(),
-            'lat'            => $place->lat(),
-            'lng'            => $place->lng(),
+            'city' => $place->city(),
+            'state' => $place->state(),
+            'postal_code' => $place->postalCode(),
+            'country' => $place->country(),
+            'lat' => $place->lat(),
+            'lng' => $place->lng(),
         ];
-
     }
 
     public function getTeamTagsProperty()
     {
         return Tag::withType('team_type')
                   ->get()
-                  ->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])
+                  ->mapWithKeys(fn (Tag $tag) => [$tag->name => ucwords($tag->name)])
                   ->all();
     }
 
@@ -146,19 +119,19 @@ class TeamAdmin extends Component
 
         $this->team->save();
 
-        if ( ! empty($this->teamTypes)) {
+        if (! empty($this->teamTypes)) {
             $this->team->attachTags($this->teamTypes, 'team_type');
         }
 
         $this->removeAddress && $this->team->location()
                                            ->delete();
 
-        if ( ! empty($this->newAddress)) {
+        if (! empty($this->newAddress)) {
             $this->team->location()
                        ->updateOrCreate(['model_id' => $this->team->id, 'model_type' => Team::class], $this->newAddress);
         }
 
-        if ( ! is_null($this->bannerImage) && $this->team->bannerImage()
+        if (! is_null($this->bannerImage) && $this->team->bannerImage()
                                                          ->count()) {
             $this->team->bannerImage()
                        ->delete();
@@ -182,7 +155,7 @@ class TeamAdmin extends Component
         $this->profilePhoto && $this->team->addMedia($this->profilePhoto)
                                           ->toMediaCollection('team_profile_photos');
 
-        if (sizeof($this->sampleMedia)) {
+        if (count($this->sampleMedia)) {
             foreach ($this->sampleMedia as $media) {
                 $this->team->addMedia($media)
                            ->toMediaCollection('team_sample_images');
@@ -206,7 +179,7 @@ class TeamAdmin extends Component
     public function confirmRemoval(Media $media)
     {
         $this->confirmingRemoveMedia = true;
-        $this->mediaToRemove         = $media;
+        $this->mediaToRemove = $media;
     }
 
     public function removeMedia()
@@ -229,10 +202,10 @@ class TeamAdmin extends Component
         $address .= $this->newAddress['address'];
 
         if ($this->newAddress['address_line_2']) {
-            $address .= " " . $this->newAddress['address_line_2'];
+            $address .= ' ' . $this->newAddress['address_line_2'];
         }
 
-        $address .= ", " . $this->newAddress['city'] . ', ' . $this->newAddress['state'] . ', ' . $this->newAddress['postal_code'] . " " . $this->newAddress['country'];
+        $address .= ', ' . $this->newAddress['city'] . ', ' . $this->newAddress['state'] . ', ' . $this->newAddress['postal_code'] . ' ' . $this->newAddress['country'];
 
         return $address;
     }
@@ -244,13 +217,37 @@ class TeamAdmin extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        return auth()->user();
     }
 
     public function render()
     {
         return view('social::livewire.pages.teams.admin.team-admin', [
-            'teamTags' => $this->teamTags
+            'teamTags' => $this->teamTags,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        $rules = [
+            'team.name' => ['required', 'max:254'],
+            'team.start_date' => ['nullable', 'date'],
+            'team.end_date' => ['nullable', 'date', 'after_or_equal:team.start_date'],
+            'team.summary' => ['nullable', 'max:280'],
+            'team.content' => ['nullable', 'max:65500'],
+        ];
+
+        // if (Platform::hasGeneralSettingEnabled('team_require_start_date')) {
+        //     $rules['team.start_date'] = ['required', 'date'];
+        // } else {
+        //     $rules['team.start_date'] = ['date'];
+        // }
+
+        if (\Platform::isModuleEnabled('games')) {
+            $rules['team.youtube_channel_id'] = ['max:65500'];
+            $rules['team.twitch_channel_id'] = ['max:65500'];
+        }
+
+        return $rules;
     }
 }

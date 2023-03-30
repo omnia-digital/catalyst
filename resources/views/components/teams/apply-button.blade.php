@@ -14,7 +14,7 @@
                     <span class="sr-only">{{ \Trans::get('Remove Application') }}</span>
                 </button>
             </div>
-        @elseif(!$team?->hasUser(auth()->user()))
+        @elseif (!$team?->hasUser(auth()->user()))
             <div class="absolute -top-9 right-0 w-96">
                 <x-jet-input-error for="user_id" class="mt-2"/>
             </div>

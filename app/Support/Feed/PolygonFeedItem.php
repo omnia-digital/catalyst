@@ -2,8 +2,6 @@
 
 namespace App\Support\Feed;
 
-use SimplePie_Item;
-
 class PolygonFeedItem extends FeedItem
 {
     /**
@@ -18,17 +16,14 @@ class PolygonFeedItem extends FeedItem
     {
         $return = $this->get_item_tags(SIMPLEPIE_NAMESPACE_ATOM_10, 'content');
 
-        if (!isset($this->data['content']))
-        {
-            if ($return = $this->get_item_tags(SIMPLEPIE_NAMESPACE_ATOM_10, 'content'))
-            {
+        if (! isset($this->data['content'])) {
+            if ($return = $this->get_item_tags(SIMPLEPIE_NAMESPACE_ATOM_10, 'content')) {
                 $this->data['content'] = html_entity_decode($return[0]['data']);
-            }
-            else
-            {
+            } else {
                 $this->data['content'] = null;
             }
         }
+
         return $this->data['content'];
     }
 }

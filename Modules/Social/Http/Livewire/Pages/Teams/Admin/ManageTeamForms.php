@@ -4,7 +4,6 @@ namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 
 use App\Models\Team;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Laravel\Jetstream\Jetstream;
 use Livewire\Component;
@@ -30,9 +29,9 @@ class ManageTeamForms extends Component
     public $editingNotification = [
         'form_id' => '',
         'role_id' => '',
-        'name' => '', 
+        'name' => '',
         'send_date_edit' => '',
-        'timezone' => ''
+        'timezone' => '',
     ];
 
     protected $listeners = [
@@ -47,7 +46,7 @@ class ManageTeamForms extends Component
     {
         $this->editingNotification = $this->makeBlankNotification();
     }
-    
+
     public function onLoad()
     {
         $this->loadForms();
@@ -55,7 +54,7 @@ class ManageTeamForms extends Component
 
     public function getUserProperty()
     {
-        return Auth::user();
+        return auth()->user();
     }
 
     public function sendReminderNow(FormNotification $formNotification)
@@ -71,16 +70,19 @@ class ManageTeamForms extends Component
         return [
             'form_id' => $formId,
             'role_id' => Role::first()?->id,
-            'name' => 'New Form Notification', 
+            'name' => 'New Form Notification',
             'send_date_edit' => now(),
-            'timezone' => 'UTC'
+            'timezone' => 'UTC',
         ];
     }
 
     public function createFormNotification($formId)
     {
-        if (isset($this->editingNotification['id'])) $this->editingNotification = $this->makeBlankNotification($formId);
-        else $this->editingNotification['form_id'] = $formId;
+        if (isset($this->editingNotification['id'])) {
+            $this->editingNotification = $this->makeBlankNotification($formId);
+        } else {
+            $this->editingNotification['form_id'] = $formId;
+        }
 
         $this->openModal('form-notification-modal');
     }
@@ -90,14 +92,14 @@ class ManageTeamForms extends Component
         $attributes = $this->validate([
             'editingNotification.form_id' => ['required'],
             'editingNotification.role_id' => [
-                'required', 
+                'required',
                 Rule::exists(config('permission.table_names.roles'), 'id')
                     ->where(fn ($q) => $q->where('team_id', $this->team->id)),
             ],
             'editingNotification.name' => ['required', 'string'],
             'editingNotification.message' => ['nullable', 'string'],
             'editingNotification.send_date_edit' => ['required', 'date'],
-            'editingNotification.timezone' => ['required', 'timezone']
+            'editingNotification.timezone' => ['required', 'timezone'],
         ]);
 
         if (isset($this->editingNotification['id'])) {
@@ -107,12 +109,12 @@ class ManageTeamForms extends Component
         }
 
         $this->scheduleNotification($formNotification);
-        
+
         $this->success('Notification created successfully');
 
         $this->reset('editingNotification', 'formId');
         $this->editingNotification = $this->makeBlankNotification();
-        
+
         $this->closeModal('form-notification-modal');
 
         $this->emit('notificationSaved');

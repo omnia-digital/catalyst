@@ -24,6 +24,18 @@ class Builder extends Component implements HasForms
         $this->form->fill();
     }
 
+    public function save(): void
+    {
+        $form = \App\Models\Form::create($this->form->getState());
+
+        redirect()->route('form', ['form' => $form]);
+    }
+
+    public function render()
+    {
+        return view('livewire.builder');
+    }
+
     protected function getFormSchema(): array
     {
         return [
@@ -89,17 +101,5 @@ class Builder extends Component implements HasForms
                 TextInput::make('label')
                     ->required(),
             ]);
-    }
-
-    public function save(): void
-    {
-        $form = \App\Models\Form::create($this->form->getState());
-
-        redirect()->route('form', ['form' => $form]);
-    }
-
-    public function render()
-    {
-        return view('livewire.builder');
     }
 }

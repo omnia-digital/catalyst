@@ -18,7 +18,7 @@ trait WithPostEditor
     public function validatePostEditor(array $rules = ['required'], string $property = 'content'): array
     {
         return $this->withPostEditorEvent()->validate([
-            $property => $rules
+            $property => $rules,
         ]);
     }
 

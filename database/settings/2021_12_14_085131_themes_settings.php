@@ -18,4 +18,4 @@ class ThemesSettings extends SettingsMigration
 //        $this->migrator->add('themes.theme_footer', '');
 //        $this->migrator->add('themes.theme_copyright', '');
     }
-};
+}

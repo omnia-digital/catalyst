@@ -4,6 +4,7 @@ namespace Modules\Social\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Social\Models\Like;
+
 use function auth;
 
 trait Likable
@@ -80,12 +81,10 @@ trait Likable
         if ($this->isLiked) {
             // If the current model is liked by the user then remove the like
             $this->likes()->where('user_id', auth()->id())->where('liked', true)->delete();
-
-        } else if ($this->wasLikedOrDisliked) {
+        } elseif ($this->wasLikedOrDisliked) {
             // Else if the current model was previously liked by the user then restore the like
             $this->likes()->withTrashed()->where('user_id', auth()->id())->restore();
             $this->likes()->withTrashed()->where('user_id', auth()->id())->update(['liked' => true]);
-
         } else {
             // Else if the current model was never liked by the user, then create/update the like
             $this->likes()->updateOrCreate(
@@ -103,12 +102,10 @@ trait Likable
         if ($this->isDisliked) {
             // If the current model is disliked by the user then remove the like
             $this->likes()->where('user_id', auth()->id())->where('liked', false)->delete();
-
-        } else if ($this->wasLikedOrDisliked) {
+        } elseif ($this->wasLikedOrDisliked) {
             // Else if the current model was previously disliked by the user then restore the like
             $this->likes()->withTrashed()->where('user_id', auth()->id())->restore();
             $this->likes()->withTrashed()->where('user_id', auth()->id())->update(['liked' => false]);
-
         } else {
             // Else if the current model was never disliked by the user, then create/update the like
             $this->likes()->updateOrCreate(

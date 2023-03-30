@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Teams;
 
 use App\Models\Team;
 use App\Models\User;
-use App\Settings\BillingSettings;
 use App\Support\Platform\Platform;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -23,13 +22,6 @@ class SubscribeTeamModal extends Component
 
     public ?string $plan = null;
 
-    protected function rules(): array
-    {
-        return [
-            'plan' => ['required', Rule::in(collect($this->teamPlans)->pluck('stripe_id'))]
-        ];
-    }
-
     public function getTeamPlansProperty()
     {
         return config('billing.team_member_subscriptions.plans');
@@ -37,7 +29,7 @@ class SubscribeTeamModal extends Component
 
     public function subscribeTeam()
     {
-        if (!$this->team?->hasStripeConnectAccount()) {
+        if (! $this->team?->hasStripeConnectAccount()) {
             $this->error('This team is not ready to receive subscriptions yet!');
 
             return;
@@ -47,7 +39,7 @@ class SubscribeTeamModal extends Component
 
         $this->billable->createOrGetStripeCustomer();
 
-        if (!$this->billable->hasDefaultPaymentMethod()) {
+        if (! $this->billable->hasDefaultPaymentMethod()) {
             $this->error('You do not have a default payment method. Please add one!');
 
             return;
@@ -83,7 +75,14 @@ class SubscribeTeamModal extends Component
     public function render()
     {
         return view('livewire.teams.subscribe-team-modal', [
-            'teamPlans' => $this->teamPlans
+            'teamPlans' => $this->teamPlans,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'plan' => ['required', Rule::in(collect($this->teamPlans)->pluck('stripe_id'))],
+        ];
     }
 }

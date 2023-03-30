@@ -3,16 +3,15 @@
 namespace App\Models;
 
 use Modules\Jobs\Models\JobPosition;
-use Modules\Jobs\Support\HasJobs;
 use Modules\Social\Models\Post;
 
 class Tag extends \Spatie\Tags\Tag
 {
-    public CONST TAG_REGEX = '/(?<![\S])#([a-z0-9_-]+)/';
+    public const TAG_REGEX = '/(?<![\S])#([a-z0-9_-]+)/';
 
     public static function parseHashTagsFromString($text)
     {
-        $hashtags = array();
+        $hashtags = [];
 
         preg_match_all(Tag::TAG_REGEX, $text, $hashtags);
 
@@ -21,7 +20,7 @@ class Tag extends \Spatie\Tags\Tag
 
     public static function findOrCreateTags($hashtags, $type = '')
     {
-        $tags = array();
+        $tags = [];
 
         foreach ($hashtags as $hashtag) {
             $tags[] = Tag::findOrCreateFromString($hashtag, $type);

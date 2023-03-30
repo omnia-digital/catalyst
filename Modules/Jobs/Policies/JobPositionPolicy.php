@@ -3,8 +3,8 @@
 namespace Modules\Jobs\Policies;
 
 use App\Models\User;
-use Modules\Jobs\Models\JobPosition;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Jobs\Models\JobPosition;
 
 class JobPositionPolicy
 {
@@ -13,7 +13,6 @@ class JobPositionPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param User $user
      *
      * @return mixed
      */
@@ -25,8 +24,6 @@ class JobPositionPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param User        $user
-     * @param JobPosition $job
      *
      * @return mixed
      */
@@ -36,9 +33,6 @@ class JobPositionPolicy
     }
 
     /**
-     * @param User        $user
-     * @param JobPosition $job
-     *
      * @return bool
      */
     public function apply(User $user, JobPosition $job)
@@ -49,7 +43,6 @@ class JobPositionPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param User $user
      *
      * @return mixed
      */
@@ -61,8 +54,6 @@ class JobPositionPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param User        $user
-     * @param JobPosition $job
      *
      * @return mixed
      */
@@ -74,8 +65,6 @@ class JobPositionPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User        $user
-     * @param JobPosition $job
      *
      * @return mixed
      */
@@ -87,8 +76,6 @@ class JobPositionPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param User        $user
-     * @param JobPosition $job
      *
      * @return mixed
      */
@@ -100,8 +87,6 @@ class JobPositionPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param User        $user
-     * @param JobPosition $job
      *
      * @return mixed
      */

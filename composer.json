@@ -11,7 +11,6 @@
         "php": "^8.2",
         "3x1io/filament-themes": "^1.0",
         "ariaieboy/filament-jalali-datetime": "^1.0",
-        "asantibanez/livewire-calendar": "dev-master",
         "awcodes/filament-badgeable-column": "^1.1",
         "awssat/laravel-visits": "^3.0",
         "bezhansalleh/filament-exceptions": "^1.0",
@@ -42,20 +41,21 @@
         "laravel/tinker": "^2.5",
         "laravel/vapor-cli": "^1.54",
         "laravel/vapor-core": "^2.28",
-        "laravel/vapor-ui": "^1.5",
+        "laravel/vapor-ui": "^1.7",
         "league/commonmark": "^2.3",
         "livewire/livewire": "^2",
         "marcreichel/igdb-laravel": "^3.6",
         "mhmiton/laravel-modules-livewire": "^1.3",
         "nwidart/laravel-modules": "^9.0",
         "omnia-digital/library": "dev-main",
+        "omnia-digital/livewire-calendar": "dev-main",
+        "omnia-digital/media-manager": "dev-main",
         "omniphx/forrest": "2.*",
         "owenvoke/blade-fontawesome": "^2.0",
         "pestphp/pest": "^1.16",
         "pestphp/pest-plugin-laravel": "^1.1",
         "phpsa/filament-dadjokes": "^1.1",
         "phpsa/filament-password-reveal": "^1.1",
-        "phuclh/media-manager": "^0.0.2",
         "pusher/pusher-php-server": "^7.0",
         "ralphjsmit/laravel-filament-components": "^1.1",
         "sentry/sentry-laravel": "^2.11",
@@ -92,7 +92,8 @@
         "nunomaduro/collision": "^6.1",
         "pestphp/pest-plugin-livewire": "^1.0",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "spatie/laravel-ignition": "^1.0",
+        "tightenco/duster": "^1.1"
     },
     "repositories": [
         {
@@ -101,7 +102,11 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/Osimba/livewire-calendar.git"
+            "url": "https://github.com/omnia-digital/media-manager"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/omnia-digital/livewire-calendar"
         },
         {
             "type": "composer",
@@ -156,7 +161,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "dev",

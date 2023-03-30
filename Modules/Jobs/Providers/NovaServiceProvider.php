@@ -42,8 +42,32 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             Number::make('Featured Jobs Limit', 'job:featured_jobs_limit')
                 ->help('How many featured jobs should be shown? Leave blank or enter 0 to show unlimited.')
-                ->rules('nullable', 'integer', 'min:0')
+                ->rules('nullable', 'integer', 'min:0'),
         ], [], 'JobPosition');
+    }
+
+    /**
+     * Get the tools that should be listed in the Nova sidebar.
+     *
+     * @return array
+     */
+    public function tools()
+    {
+        return [
+            NovaSettings::make(),
+
+            NovaPermissionTool::make(),
+        ];
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
     }
 
     /**
@@ -93,30 +117,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function dashboards()
     {
         return [];
-    }
-
-    /**
-     * Get the tools that should be listed in the Nova sidebar.
-     *
-     * @return array
-     */
-    public function tools()
-    {
-        return [
-            NovaSettings::make(),
-
-            NovaPermissionTool::make(),
-        ];
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 
     /**

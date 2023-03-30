@@ -25,7 +25,6 @@ class Submissions extends Component
         $this->form = $form;
 
         $this->selectedSubmission = $form->submissions()->first();
-    
     }
 
     public function updateCurrentSelected(FormSubmission $submission)

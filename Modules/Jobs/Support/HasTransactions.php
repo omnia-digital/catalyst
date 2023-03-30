@@ -1,8 +1,11 @@
 <?php
+
 namespace Modules\Jobs\Support;
+
 use Modules\Jobs\Models\Transaction;
 
-trait HasTransactions {
+trait HasTransactions
+{
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

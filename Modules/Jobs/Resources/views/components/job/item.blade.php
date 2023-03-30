@@ -26,7 +26,7 @@
                                     <x-heroicon-o-briefcase id="company" class="flex-shrink-0 mr-1.5 h-5 w-5 text-light-text-color"/>
                                     {{ $job->company->name }}
                                 </div>
-                                @if(!empty($job->location) || !empty($job->is_remote))
+                                @if (!empty($job->location) || !empty($job->is_remote))
                                     <div class="mr-6 flex items-center text-sm leading-5 text-base-text-color sm:mt-0">
                                         <x-heroicon-o-location-marker id="location" class="flex-shrink-0 mr-1.5 h-5 w-5 text-light-text-color "/>
                                         {{ $job->location }} {{ $job->is_remote ? '(Remote)' : '' }}
@@ -62,7 +62,7 @@
             </div>
             <div class="flex items-center justify-end">
                 <div class="flex items-center mr-4">
-                    @if($job->is_active)
+                    @if ($job->is_active)
                         <span class="text-success-600 flex items-center "><x-library::icons.icon name="fa-solid fa-circle" size="w-3 h-3" class="mr-2"/> {{
                         \Trans::get('Active') }}</span>
                     @else

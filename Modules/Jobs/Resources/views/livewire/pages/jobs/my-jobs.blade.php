@@ -5,12 +5,12 @@
         <div class="mb-3 rounded-b-lg px-4 flex items-center justify-between bg-primary">
             <div class="flex items-center">
 
-                <a href="{{route('jobs.home')}}">
+                <a href="{{ route('jobs.home') }}">
                     <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('My Jobs') }}</x-library::heading.1>
                 </a>
             </div>
             <div class="flex items-center">
-                @if(auth()->user()->can('create', \Modules\Jobs\Models\JobPosition::class))
+                @if (auth()->user()->can('create', \Modules\Jobs\Models\JobPosition::class))
                     @auth
                         <x-library::button.link
                                 href="{{ route('jobs.job.create') }}"
@@ -32,7 +32,7 @@
 
             <div class="bg-white shadow overflow-hidden sm:rounded-md">
                 <ul>
-                    @forelse($jobs as $job)
+                    @forelse ($jobs as $job)
                         <x-job.item
                                 wire:key="latest-job-{{ $job->id }}"
                                 class="{{ $loop->first ? 'border-t border-gray-200' : '' }}"

@@ -5,7 +5,7 @@
         <div class="mb-3 rounded-b-lg px-4 flex items-center justify-between bg-primary">
             <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Resources') }}</x-library::heading.1>
             <div class="flex items-center">
-                @if(auth()->user()?->can('create', \Modules\Social\Models\Post::class))
+                @if (auth()->user()?->can('create', \Modules\Social\Models\Post::class))
                     @auth
                         <x-library::button
                                 class="py-2 w-full h-10"
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        @if($showPostEditor)
+        @if ($showPostEditor)
             <div class="my-4 mx-auto max-w-post-card-max-w">
                 <x-library::heading.2 class="mb-2">{{ \Trans::get('Add New Resource') }}</x-library::heading.2>
                 <livewire:social::news-feed-editor :postType="\Modules\Social\Enums\PostType::RESOURCE" submitButtonText="Add Resource" placeholder="What do you want to call this resource?"/>
@@ -43,7 +43,7 @@
             </nav>
         </div>
 
-        @if($showMyResources)
+        @if ($showMyResources)
             {{-- Drafts/Published    --}}
             <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
                 <nav class="flex space-x-8 py-2" aria-label="Global">
@@ -64,7 +64,7 @@
 
         <div class="">
             <div class="grid sm:grid-cols-2 xl:grid-cols-4">
-                @forelse($resources as $post)
+                @forelse ($resources as $post)
                     <div class="w-full break-inside">
                         <div class="">
                             <livewire:social::components.post-card-dynamic :post="$post" :wire:key="'post-card-' . $post->id"/>

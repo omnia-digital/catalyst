@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-neutral-dark">
-        <a 
-            href="{{ route('social.posts.show', $post->id) }}" 
+        <a
+            href="{{ route('social.posts.show', $post->id) }}"
             class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary"
         >Cancel</a>
         <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Edit Post') }}</x-library::heading.1>
@@ -50,7 +50,7 @@
         <div class="col-span-4 card">
             <div class="p-6 space-y-4">
                 <div>
-                    <x-library::tiptap 
+                    <x-library::tiptap
                         wire:model.defer="post.body"
                         heightClass="m-1 text-lg"
                         wordCountType="character"
@@ -74,7 +74,7 @@
                                             >
                                                 <x-heroicon-o-x class="w-5 h-5 text-red-500 hover:text-red-400"/>
                                             </button>
-            
+
                                             <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden">
                                                 <img x-bind:src="image" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
                                             </div>
@@ -86,11 +86,11 @@
                     </x-library::tiptap>
                     <hr class="text-neutral-light"/>
                     <div class="flex items-center pt-3 pb-2 space-x-4">
-                        @if($openState == false)
+                        @if ($openState == false)
                             <div class="flex items-center space-x-2 px-4">
-                                <button 
-                                    title="Add Image" 
-                                    x-on:click.prevent.stop="showMediaManager(null, {})" 
+                                <button
+                                    title="Add Image"
+                                    x-on:click.prevent.stop="showMediaManager(null, {})"
                                     type="button"
                                     class="group"
                                 >
@@ -111,9 +111,9 @@
                         <div class="flex flex-wrap w-full space-x-4">
                             @foreach ($postMedia as $key => $media)
                                 <div class="w-56 relative">
-                                    <div 
-                                        wire:loading 
-                                        wire:target="removeImage, setFeaturedImage" 
+                                    <div
+                                        wire:loading
+                                        wire:target="removeImage, setFeaturedImage"
                                         class="absolute z-10 rounded-lg w-full h-full flex justify-center items-center bg-gray-500/75"
                                     >
                                         <x-heroicon-o-refresh class="animate-spin w-8 h-8 absolute top-1/2 right-1/2 -mr-4 -mt-4" role="status" />
@@ -143,7 +143,7 @@
                     <x-library::button wire:click="updatePost">Update Post</x-library::button>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
     <livewire:media-manager/>
     <!-- Remove Media Confirmation Modal -->

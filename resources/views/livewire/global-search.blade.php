@@ -25,8 +25,8 @@
 
             @if ($searchResults && !empty($search))
                 <ul x-show="show" x-on:click.away="show = false" class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" role="listbox">
-                    @forelse($searchResults->groupByType() as $type => $modelSearchResults)
-                        @foreach($modelSearchResults as $searchResult)
+                    @forelse ($searchResults->groupByType() as $type => $modelSearchResults)
+                        @foreach ($modelSearchResults as $searchResult)
                             <li wire:key="{{ $type }} - {{ uniqid() }}" class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900" id="option-0" role="option" tabindex="-1">
                                 <a href="{{ $searchResult->url }}">
                                     <span class="block truncate">{{ $searchResult->title }}</span>

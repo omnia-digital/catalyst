@@ -96,7 +96,7 @@
                                                     <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative bg-secondary border-4 border-dashed border-neutral-dark">
                                                         <img src="{{ $media->temporaryUrl() }}" title="{{ $sampleMediaNames[$key] }}" alt="{{ $sampleMediaNames[$key] }}"
                                                              class="max-w-[152px] max-h-[120px]">
-                                                        <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key}})">
+                                                        <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key }})">
                                                             <x-heroicon-o-x class="w-6 h-6"/>
                                                         </button>
                                                     </div>
@@ -138,7 +138,7 @@
                         </div>
                     </div>
 
-                    @if(\Platform::isModuleEnabled('games'))
+                    @if (\Platform::isModuleEnabled('games'))
                         <div class="space-y-4">
                             <div class="space-y-2">
                                 <x-library::heading.2 class="col-span-2">{{ Trans::get('Feeds') }}</x-library::heading.2>
@@ -177,7 +177,7 @@
                     <div class="space-y-4">
                         <x-library::heading.2>{{ Trans::get('Details') }}</x-library::heading.2>
                         <div class="flex-col">
-                            <x-library::input.label value="{{Trans::get('Name')}}" class="inline"/>
+                            <x-library::input.label value="{{ Trans::get('Name') }}" class="inline"/>
                             <span class="text-red-600 text-sm">*</span>
                             <x-library::input.text id="name" wire:model.defer="team.name" required/>
                             <x-library::input.error for="team.name"/>
@@ -392,7 +392,7 @@
                 </div>
             </div>
 
-            @if(\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
+            @if (\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
                 <!-- Subscriptions -->
                 <div x-cloak x-show="activeTab === 4" class="mt-6 pb-12 space-y-6">
                     <div>

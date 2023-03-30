@@ -12,7 +12,7 @@
                 <h3 class="text-gray-900 text-base leading-5 font-medium truncate">{{ $job->title }}</h3>
             </div>
 
-            @foreach($job->tags->pluck('name') as $tag)
+            @foreach ($job->tags->pluck('name') as $tag)
                 <x-tag class="bg-teal-100 text-teal-800 rounded-full text-sm">{{ $tag }}</x-tag>
             @endforeach
 

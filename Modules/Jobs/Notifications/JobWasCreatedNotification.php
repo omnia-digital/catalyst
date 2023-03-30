@@ -2,27 +2,22 @@
 
 namespace Modules\Jobs\Notifications;
 
-use Modules\Jobs\LaraContract;
-use Modules\Jobs\Models\JobPosition;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use Modules\Jobs\LaraContract;
+use Modules\Jobs\Models\JobPosition;
 
 class JobPositionWasCreatedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * @var JobPosition
-     */
     private JobPosition $job;
 
     /**
      * Create a new notification instance.
-     *
-     * @param JobPosition $job
      */
     public function __construct(JobPosition $job)
     {
@@ -32,7 +27,7 @@ class JobPositionWasCreatedNotification extends Notification implements ShouldQu
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -43,7 +38,7 @@ class JobPositionWasCreatedNotification extends Notification implements ShouldQu
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
@@ -79,7 +74,7 @@ class JobPositionWasCreatedNotification extends Notification implements ShouldQu
     /**
      * Get the Slack representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return SlackMessage
      */
     public function toSlack($notifiable)
@@ -93,7 +88,7 @@ class JobPositionWasCreatedNotification extends Notification implements ShouldQu
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

@@ -122,7 +122,7 @@
 {{--                    <div class="mt-3 rounded-lg overflow-hidden">--}}
 {{--                        <div class="grid grid-cols-{{ sizeof($sampleMedia) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($sampleMedia) > 2 ? '2 h-80' : '1' }} gap-px">--}}
 {{--                            @foreach ($sampleMedia as $key => $media)--}}
-{{--                                <div class="w-full overflow-hidden @if($loop->odd && $loop->last) col-span-2 fill-row-span @endif">--}}
+{{--                                <div class="w-full overflow-hidden @if ($loop->odd && $loop->last) col-span-2 fill-row-span @endif">--}}
 {{--                                    <img src="{{ $media->temporaryUrl() }}" title="{{ $sampleMediaNames[$key] }}" alt="{{ $sampleMediaNames[$key] }}" class="object-cover w-full">--}}
 {{--                                </div>--}}
 {{--                            @endforeach--}}

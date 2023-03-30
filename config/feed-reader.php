@@ -33,7 +33,7 @@ return [
                 /**
                  * Whether or not caching is enabled.
                  *
-                 * @var boolean
+                 * @var bool
                  */
                 'enabled' => true,
 
@@ -49,21 +49,21 @@ return [
              * Whether or not to force the data feed to be treated as an
              * RSS feed.
              *
-             * @var boolean
+             * @var bool
              */
             'force-feed' => false,
 
             /**
              * Whether or not the RSS feed should have it's output ordered by date.
              *
-             * @var boolean
+             * @var bool
              */
             'order-by-date' => false,
 
             /**
              * Whether it should verify SSL, set false to make it work with self-signed certificates
              *
-             * @var boolean
+             * @var bool
              */
             'ssl-verify' => true,
         ],

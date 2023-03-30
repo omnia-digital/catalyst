@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-            </section>       
+            </section>
         </x-slot>
     </x-library::modal>
     {{--@endonce--}}

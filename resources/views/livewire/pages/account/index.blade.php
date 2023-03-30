@@ -32,7 +32,7 @@
                     <x-jet-action-message class="mr-3 text-success-600" on="account_saved">
                         {{ \Trans::get('Saved.') }}
                     </x-jet-action-message>
-            
+
                     <x-jet-button wire:click="updateAccount" wire:loading.attr="disabled">
                         <span wire:loading.remove wire:target="updateAccount">{{ \Trans::get('Save') }}</span>
                         <span wire:loading wire:target="updateAccount">{{ \Trans::get('Saving...') }}</span>
@@ -49,13 +49,13 @@
                                 <x-jet-input id="current_password" type="password" class="mt-1 block w-full" wire:model.defer="state.current_password" autocomplete="current-password" />
                                 <x-jet-input-error for="current_password" class="mt-2" />
                             </div>
-                    
+
                             <div class="col-span-4">
                                 <x-jet-label for="password" value="{{ \Trans::get('New Password') }}" />
                                 <x-jet-input id="password" type="password" class="mt-1 block w-full" wire:model.defer="state.password" autocomplete="new-password" />
                                 <x-jet-input-error for="password" class="mt-2" />
                             </div>
-                    
+
                             <div class="col-span-4">
                                 <x-jet-label for="password_confirmation" value="{{ \Trans::get('Confirm Password') }}" />
                                 <x-jet-input id="password_confirmation" type="password" class="mt-1 block w-full" wire:model.defer="state.password_confirmation" autocomplete="new-password" />
@@ -66,7 +66,7 @@
                             <x-jet-action-message class="mr-3 text-success-600" on="password_saved">
                                 {{ \Trans::get('Saved.') }}
                             </x-jet-action-message>
-                    
+
                             <x-jet-button wire:click="updatePassword" wire:loading.attr="disabled">
                                 <span wire:loading.remove wire:target="updatePassword">{{ \Trans::get('Save') }}</span>
                                 <span wire:loading wire:target="updatePassword">{{ \Trans::get('Saving...') }}</span>

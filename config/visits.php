@@ -7,12 +7,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | Supported Engines: "redis", "eloquent"
-    | Connection Name: see config/database.php 
+    | Connection Name: see config/database.php
     |
     */
     'engine' => 'eloquent',
     'connection' => 'laravel-visits',
-
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +33,7 @@ return [
     | Redis prefix
     |--------------------------------------------------------------------------
     */
-    'keys_prefix' =>  'visits',
+    'keys_prefix' => 'visits',
 
     /*
     |--------------------------------------------------------------------------
@@ -53,7 +52,6 @@ return [
     */
     'always_fresh' => false,
 
-
     /*
     |--------------------------------------------------------------------------
     | Ignore Crawlers
@@ -66,7 +64,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Global Ignore Recording 
+    | Global Ignore Recording
     |--------------------------------------------------------------------------
     |
     | stop recording specific items (can be any of these: 'country', 'refer', 'periods', 'operatingSystem', 'language')
@@ -75,4 +73,3 @@ return [
     'global_ignore' => ['country'],
 
 ];
-

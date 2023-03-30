@@ -38,7 +38,7 @@ class Published extends Component
     public function render()
     {
         return view('resources::livewire.pages.resources.published', [
-            'resources' => $this->rows
+            'resources' => $this->rows,
         ]);
     }
 }

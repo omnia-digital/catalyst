@@ -2,7 +2,6 @@
 
 namespace Modules\Jobs\Models;
 
-use Modules\Jobs\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Jobs\Support\HasJobs;
@@ -21,5 +20,4 @@ class TeamSize extends Model
     {
         return $this->hasManyThrough(User::class, JobPosition::class, 'user_id', 'id');
     }
-
 }

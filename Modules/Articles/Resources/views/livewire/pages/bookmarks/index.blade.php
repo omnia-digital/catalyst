@@ -15,12 +15,12 @@
     <!-- Filters -->
     @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
-    @if(empty($bookmarks))
+    @if (empty($bookmarks))
         <x-library::heading.2>No Bookmarked Articles</x-library::heading.2>
     @else
         <div class="">
             <ul role="list" class="grid grid-cols-1 gap-6">
-                @foreach($bookmarks as $bookmark)
+                @foreach ($bookmarks as $bookmark)
                     <li>
                         <livewire:articles::components.article-card
                                 :post="$bookmark->bookmarkable()->first()"/>

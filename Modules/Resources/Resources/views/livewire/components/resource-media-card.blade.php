@@ -6,10 +6,10 @@
 >
     <div class="h-80 rounded"></div>
 
-    @if($showDetails)
+    @if ($showDetails)
         <div class="hidden group-hover:block transition-all ease-in-out delay-25 duration-300 h-0 line-clamp-3 group-hover:h-min group-hover:p-3 absolute bg-secondary bottom-0 right-0
         left-0">
-            @if($showTeamDetails)
+            @if ($showTeamDetails)
                 <div class="flex justify-between">
                     <div class="flex items-center">
                         <div class="flex justify-end px-5">

@@ -2,6 +2,9 @@
 
 namespace Modules\Jobs\Providers;
 
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\Jobs\Events\JobPositionWasCreated;
 use Modules\Jobs\Events\JobPositionWasCreated;
 use Modules\Jobs\Listeners\CreateStripeCustomer;
@@ -9,9 +12,6 @@ use Modules\Jobs\Listeners\NotifyAdminsWhenJobCreated;
 use Modules\Jobs\Listeners\NotifyContractorsWhenJobCreated;
 use Modules\Jobs\Listeners\TweetJob;
 use Modules\Jobs\Listeners\UpdateGoogleJobsWhenJobCreated;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -23,15 +23,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-            CreateStripeCustomer::class
+            CreateStripeCustomer::class,
         ],
 
         JobPositionWasCreated::class => [
             NotifyContractorsWhenJobCreated::class,
             NotifyAdminsWhenJobCreated::class,
             TweetJob::class,
-            UpdateGoogleJobsWhenJobCreated::class
-        ]
+            UpdateGoogleJobsWhenJobCreated::class,
+        ],
     ];
 
     /**

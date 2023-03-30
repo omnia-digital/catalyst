@@ -1,4 +1,6 @@
-<?php namespace Modules\Jobs\Support\Transaction;
+<?php
+
+namespace Modules\Jobs\Support\Transaction;
 
 use Modules\Jobs\Models\Transaction;
 

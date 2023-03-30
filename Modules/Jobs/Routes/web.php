@@ -13,14 +13,14 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Jobs\Http\Controllers\DownloadInvoiceController;
+use Modules\Jobs\Http\Livewire\Pages\Home;
 use Modules\Jobs\Http\Livewire\Pages\Jobs\JobDetail;
 use Modules\Jobs\Http\Livewire\Pages\Jobs\MyJobs;
 use Modules\Jobs\Http\Livewire\Pages\Jobs\NewJob;
 use Modules\Jobs\Http\Livewire\Pages\Jobs\UpdateJob;
-use Modules\Jobs\Http\Livewire\Pages\Home;
 use Modules\Jobs\Http\Livewire\Pages\Profile\Transaction;
 
-Route::name('jobs.')->prefix('jobs')->middleware(['auth','verified'])->group(function () {
+Route::name('jobs.')->prefix('jobs')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', Home::class)->name('home');
     Route::get('/jobs', MyJobs::class)->name('my-jobs');
     Route::name('job.')->prefix('jobs')->group(function () {

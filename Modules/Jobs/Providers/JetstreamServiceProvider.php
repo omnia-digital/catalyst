@@ -2,13 +2,13 @@
 
 namespace Modules\Jobs\Providers;
 
+use Illuminate\Support\ServiceProvider;
+use Laravel\Jetstream\Jetstream;
 use Modules\Jobs\Actions\Jetstream\AddTeamMember;
 use Modules\Jobs\Actions\Jetstream\CreateTeam;
 use Modules\Jobs\Actions\Jetstream\DeleteTeam;
 use Modules\Jobs\Actions\Jetstream\DeleteUser;
 use Modules\Jobs\Actions\Jetstream\UpdateTeamName;
-use Illuminate\Support\ServiceProvider;
-use Laravel\Jetstream\Jetstream;
 
 class JetstreamServiceProvider extends ServiceProvider
 {

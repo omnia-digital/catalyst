@@ -24,12 +24,11 @@ class BookmarkFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'           => User::all()->random()->id,
-            'bookmarkable_id'   => Post::all()->random()->id,
+            'user_id' => User::all()->random()->id,
+            'bookmarkable_id' => Post::all()->random()->id,
             'bookmarkable_type' => Post::class,
-            'created_at'        => now(),
-            'updated_at'        => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
-

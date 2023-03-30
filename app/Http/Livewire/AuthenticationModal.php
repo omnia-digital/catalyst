@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use App\Support\Platform\Platform;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Rules\Password;
@@ -32,25 +31,8 @@ class AuthenticationModal extends Component
     public bool $showLoginModal = false;
 
     protected $listeners = [
-        'showAuthenticationModal' => 'handleShowAuthenticationModal'
+        'showAuthenticationModal' => 'handleShowAuthenticationModal',
     ];
-
-    protected function rules(): array
-    {
-        if ($this->showLoginModal) {
-            return [
-                'email' => ['required'],
-                'password' => ['required'],
-            ];
-        }
-
-        return [
-            'firstName' => ['required', 'string', 'max:255'],
-            'lastName' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', new Password, 'confirmed'],
-        ];
-    }
 
     public function mount()
     {
@@ -107,6 +89,28 @@ class AuthenticationModal extends Component
         $this->redirect($this->redirectAfterLogin);
     }
 
+    public function render()
+    {
+        return view('livewire.authentication-modal');
+    }
+
+    protected function rules(): array
+    {
+        if ($this->showLoginModal) {
+            return [
+                'email' => ['required'],
+                'password' => ['required'],
+            ];
+        }
+
+        return [
+            'firstName' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', new Password, 'confirmed'],
+        ];
+    }
+
     protected function createProfile(User $user)
     {
         $user->profile()->create([
@@ -117,11 +121,6 @@ class AuthenticationModal extends Component
 
     protected function guard()
     {
-        return Auth::guard();
-    }
-
-    public function render()
-    {
-        return view('livewire.authentication-modal');
+        return auth()->guard();
     }
 }
