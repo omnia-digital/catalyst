@@ -8301,12 +8301,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:omnia-digital/library.git",
-                "reference": "60afdaa0141891983e804b3c8009f210389d5dc8"
+                "reference": "b536d664fe3b73518cf1d744e47a8ca10124ada6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/60afdaa0141891983e804b3c8009f210389d5dc8",
-                "reference": "60afdaa0141891983e804b3c8009f210389d5dc8",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/b536d664fe3b73518cf1d744e47a8ca10124ada6",
+                "reference": "b536d664fe3b73518cf1d744e47a8ca10124ada6",
                 "shasum": ""
             },
             "require": {
@@ -8390,7 +8390,7 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2023-03-20T03:31:35+00:00"
+            "time": "2023-03-30T04:44:45+00:00"
         },
         {
             "name": "omnia-digital/livewire-calendar",
@@ -8482,12 +8482,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/omnia-digital/media-manager.git",
-                "reference": "0f8530fca778dad9d164cb09801dee457eadb0a0"
+                "reference": "2da132d7db28cb0a7118e21e3b378d5d079edc9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/media-manager/zipball/0f8530fca778dad9d164cb09801dee457eadb0a0",
-                "reference": "0f8530fca778dad9d164cb09801dee457eadb0a0",
+                "url": "https://api.github.com/repos/omnia-digital/media-manager/zipball/2da132d7db28cb0a7118e21e3b378d5d079edc9a",
+                "reference": "2da132d7db28cb0a7118e21e3b378d5d079edc9a",
                 "shasum": ""
             },
             "require": {
@@ -8572,7 +8572,7 @@
                     "url": "https://github.com/omnia-digital"
                 }
             ],
-            "time": "2023-03-30T03:53:53+00:00"
+            "time": "2023-03-30T04:44:23+00:00"
         },
         {
             "name": "omniphx/forrest",
