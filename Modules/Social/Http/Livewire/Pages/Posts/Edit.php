@@ -9,7 +9,7 @@ use Livewire\Component;
 use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
-use Phuclh\MediaManager\WithMediaManager;
+use Omnia\MediaManager\WithMediaManager;
 use Trans;
 
 class Edit extends Component

@@ -3,7 +3,7 @@
 namespace Modules\Advice\Http\Livewire\Pages\Questions;
 
 use Livewire\Component;
-use Phuclh\MediaManager\WithMediaManager;
+use Omnia\MediaManager\WithMediaManager;
 
 class Create extends Component
 {

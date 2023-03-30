@@ -6,7 +6,7 @@ use App\Models\Tag;
 use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
-use Phuclh\MediaManager\WithMediaManager;
+use Omnia\MediaManager\WithMediaManager;
 
 class Create extends Component
 {

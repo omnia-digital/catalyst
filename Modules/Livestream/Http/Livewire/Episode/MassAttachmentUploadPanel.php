@@ -115,7 +115,7 @@ class MassAttachmentUploadPanel extends Component
         Mail::html($this->reportHtml, function($message) {
             return $message
                 ->to(auth()->user()->email)
-                ->cc('osei@omniadigital.io')
+                ->cc('info@omniadigital.io')
                 ->subject('Upload Report ' . now()->toFormattedDateString());
         });
     }

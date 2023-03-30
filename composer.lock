@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "144607b5fa868f62be59c753d9d93742",
+    "content-hash": "5a61a15d54a021550db62ed2b26142bc",
     "packages": [
         {
             "name": "3x1io/filament-themes",
@@ -213,79 +213,6 @@
             "time": "2023-01-11T18:15:19+00:00"
         },
         {
-            "name": "asantibanez/livewire-calendar",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Osimba/livewire-calendar.git",
-                "reference": "edea039165066200664464c43cdec1808f726de0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Osimba/livewire-calendar/zipball/edea039165066200664464c43cdec1808f726de0",
-                "reference": "edea039165066200664464c43cdec1808f726de0",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
-                "livewire/livewire": "^2.0",
-                "php": "^7.2|^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^5.0|^6.0",
-                "phpunit/phpunit": "^8.0|^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Asantibanez\\LivewireCalendar\\LivewireCalendarServiceProvider"
-                    ],
-                    "aliases": {
-                        "LivewireCalendar": "Asantibanez\\LivewireCalendar\\LivewireCalendarFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Asantibanez\\LivewireCalendar\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Asantibanez\\LivewireCalendar\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/phpunit"
-                ],
-                "test-coverage": [
-                    "vendor/bin/phpunit --coverage-html coverage"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andrés Santibáñez",
-                    "email": "santibanez.andres@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel Livewire calendar component",
-            "homepage": "https://github.com/asantibanez/livewire-calendar",
-            "keywords": [
-                "asantibanez",
-                "livewire-calendar"
-            ],
-            "support": {
-                "source": "https://github.com/Osimba/livewire-calendar/tree/master"
-            },
-            "time": "2022-07-01T06:10:12+00:00"
-        },
-        {
             "name": "asm89/stack-cors",
             "version": "v2.1.1",
             "source": {
@@ -472,16 +399,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.262.2",
+            "version": "3.262.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "6359e467b6f099149f93769e014416b5f841bb42"
+                "reference": "2673d06dd47793c87e8d1616720066030676fa1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6359e467b6f099149f93769e014416b5f841bb42",
-                "reference": "6359e467b6f099149f93769e014416b5f841bb42",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2673d06dd47793c87e8d1616720066030676fa1f",
+                "reference": "2673d06dd47793c87e8d1616720066030676fa1f",
                 "shasum": ""
             },
             "require": {
@@ -560,9 +487,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.262.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.262.4"
             },
-            "time": "2023-03-27T18:22:32+00:00"
+            "time": "2023-03-29T18:20:24+00:00"
         },
         {
             "name": "awssat/laravel-visits",
@@ -4894,16 +4821,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.52.4",
+            "version": "v9.52.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "9239128cfb4d22afefb64060dfecf53e82987267"
+                "reference": "e14d28c0f9403630d13f308bb43f3d3cb73d6d67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/9239128cfb4d22afefb64060dfecf53e82987267",
-                "reference": "9239128cfb4d22afefb64060dfecf53e82987267",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e14d28c0f9403630d13f308bb43f3d3cb73d6d67",
+                "reference": "e14d28c0f9403630d13f308bb43f3d3cb73d6d67",
                 "shasum": ""
             },
             "require": {
@@ -5088,7 +5015,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-02-22T14:38:06+00:00"
+            "time": "2023-03-28T18:03:54+00:00"
         },
         {
             "name": "laravel/jetstream",
@@ -5162,16 +5089,16 @@
         },
         {
             "name": "laravel/passport",
-            "version": "v11.8.3",
+            "version": "v11.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/passport.git",
-                "reference": "d60300185cfd066190b7842982cce314f779f9dd"
+                "reference": "b6b68fad1d02e39c6c659705159487f643393cdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/passport/zipball/d60300185cfd066190b7842982cce314f779f9dd",
-                "reference": "d60300185cfd066190b7842982cce314f779f9dd",
+                "url": "https://api.github.com/repos/laravel/passport/zipball/b6b68fad1d02e39c6c659705159487f643393cdd",
+                "reference": "b6b68fad1d02e39c6c659705159487f643393cdd",
                 "shasum": ""
             },
             "require": {
@@ -5236,7 +5163,7 @@
                 "issues": "https://github.com/laravel/passport/issues",
                 "source": "https://github.com/laravel/passport"
             },
-            "time": "2023-03-01T15:56:44+00:00"
+            "time": "2023-03-18T18:55:20+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -5572,16 +5499,16 @@
         },
         {
             "name": "laravel/vapor-ui",
-            "version": "v1.7.2",
+            "version": "v1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-ui.git",
-                "reference": "2d145e1b19616aff4d7cb62a7e44b4c522091d52"
+                "reference": "9d6ea8f401d2500e1033b1e5bf3a61de00799923"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-ui/zipball/2d145e1b19616aff4d7cb62a7e44b4c522091d52",
-                "reference": "2d145e1b19616aff4d7cb62a7e44b4c522091d52",
+                "url": "https://api.github.com/repos/laravel/vapor-ui/zipball/9d6ea8f401d2500e1033b1e5bf3a61de00799923",
+                "reference": "9d6ea8f401d2500e1033b1e5bf3a61de00799923",
                 "shasum": ""
             },
             "require": {
@@ -5633,7 +5560,7 @@
                 "issues": "https://github.com/laravel/vapor-ui/issues",
                 "source": "https://github.com/laravel/vapor-ui"
             },
-            "time": "2023-02-16T15:30:47+00:00"
+            "time": "2023-03-23T14:33:49+00:00"
         },
         {
             "name": "lcobucci/clock",
@@ -8466,6 +8393,188 @@
             "time": "2023-03-20T03:31:35+00:00"
         },
         {
+            "name": "omnia-digital/livewire-calendar",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/omnia-digital/livewire-calendar.git",
+                "reference": "65fc777a292894a13a8b19d36b15b31f9e98ce2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/omnia-digital/livewire-calendar/zipball/65fc777a292894a13a8b19d36b15b31f9e98ce2f",
+                "reference": "65fc777a292894a13a8b19d36b15b31f9e98ce2f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "livewire/livewire": "^2.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Omnia\\LivewireCalendar\\LivewireCalendarServiceProvider"
+                    ],
+                    "aliases": {
+                        "LivewireCalendar": "Omnia\\LivewireCalendar\\LivewireCalendarFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Omnia\\LivewireCalendar\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Omnia\\LivewireCalendar\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrés Santibáñez",
+                    "email": "santibanez.andres@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Osei Quashie",
+                    "email": "osei@omniadigital.io",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Josh Torres",
+                    "email": "josht@omniadigital.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Livewire calendar component",
+            "homepage": "https://github.com/omnia-digital/livewire-calendar",
+            "keywords": [
+                "livewire-calendar",
+                "omnia",
+                "omnia-digital"
+            ],
+            "support": {
+                "source": "https://github.com/omnia-digital/livewire-calendar/tree/main"
+            },
+            "time": "2023-03-30T03:59:02+00:00"
+        },
+        {
+            "name": "omnia-digital/media-manager",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/omnia-digital/media-manager.git",
+                "reference": "0f8530fca778dad9d164cb09801dee457eadb0a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/omnia-digital/media-manager/zipball/0f8530fca778dad9d164cb09801dee457eadb0a0",
+                "reference": "0f8530fca778dad9d164cb09801dee457eadb0a0",
+                "shasum": ""
+            },
+            "require": {
+                "codeat3/blade-coolicons": "^1.2",
+                "illuminate/contracts": "^8.0 || ^9.0",
+                "livewire/livewire": "^2.10",
+                "omnia-digital/library": "*",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.9.2",
+                "unsplash/unsplash": "^3.2"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^6.0",
+                "orchestra/testbench": "^7.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpunit/phpunit": "^9.5",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Omnia\\MediaManager\\MediaManagerServiceProvider"
+                    ],
+                    "aliases": {
+                        "MediaManager": "Omnia\\MediaManager\\Facades\\MediaManager"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Omnia\\MediaManager\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Omnia\\MediaManager\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "analyse": [
+                    "vendor/bin/phpstan analyse"
+                ],
+                "test": [
+                    "vendor/bin/pest"
+                ],
+                "test-coverage": [
+                    "vendor/bin/pest --coverage"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "phucle",
+                    "email": "phuclh93@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Josh Torres",
+                    "email": "josht@omniadigital.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A media manager to upload media files to multiple storages or select image from Unsplash, URL",
+            "homepage": "https://github.com/omnia-digital/media-manager",
+            "keywords": [
+                "laravel",
+                "media-manager",
+                "omnia",
+                "omnia-digital"
+            ],
+            "support": {
+                "source": "https://github.com/omnia-digital/media-manager/tree/main"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/omnia-digital"
+                }
+            ],
+            "time": "2023-03-30T03:53:53+00:00"
+        },
+        {
             "name": "omniphx/forrest",
             "version": "v2.16.1",
             "source": {
@@ -10557,83 +10666,6 @@
             "time": "2023-03-27T11:43:46+00:00"
         },
         {
-            "name": "phuclh/media-manager",
-            "version": "0.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phuclh/media-manager.git",
-                "reference": "1b38fcfd3fa7f471a8796ff4f4fd5d18f0c102ae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phuclh/media-manager/zipball/1b38fcfd3fa7f471a8796ff4f4fd5d18f0c102ae",
-                "reference": "1b38fcfd3fa7f471a8796ff4f4fd5d18f0c102ae",
-                "shasum": ""
-            },
-            "require": {
-                "codeat3/blade-coolicons": "^1.2",
-                "illuminate/contracts": "^8.0 || ^9.0",
-                "livewire/livewire": "^2.10",
-                "omnia-digital/library": "*",
-                "php": "^8.0",
-                "spatie/laravel-package-tools": "^1.9.2",
-                "unsplash/unsplash": "^3.2"
-            },
-            "require-dev": {
-                "nunomaduro/collision": "^6.0",
-                "orchestra/testbench": "^7.0",
-                "pestphp/pest": "^1.21",
-                "pestphp/pest-plugin-laravel": "^1.1",
-                "phpunit/phpunit": "^9.5",
-                "spatie/laravel-ray": "^1.26"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Phuclh\\MediaManager\\MediaManagerServiceProvider"
-                    ],
-                    "aliases": {
-                        "MediaManager": "Phuclh\\MediaManager\\Facades\\MediaManager"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Phuclh\\MediaManager\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "phucle",
-                    "email": "phuclh93@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A media manager to upload media files to multiple storages or select image from Unsplash, URL",
-            "homepage": "https://github.com/phuclh/media-manager",
-            "keywords": [
-                "laravel",
-                "media-manager",
-                "phuclh"
-            ],
-            "support": {
-                "issues": "https://github.com/phuclh/media-manager/issues",
-                "source": "https://github.com/phuclh/media-manager/tree/0.0.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/phuclh",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-03-26T05:34:35+00:00"
-        },
-        {
             "name": "pragmarx/google2fa",
             "version": "v8.0.1",
             "source": {
@@ -11148,16 +11180,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.13",
+            "version": "v0.11.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "722317c9f5627e588788e340f29b923e58f92f54"
+                "reference": "8c2e264def7a8263a68ef6f0b55ce90b77d41e17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/722317c9f5627e588788e340f29b923e58f92f54",
-                "reference": "722317c9f5627e588788e340f29b923e58f92f54",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/8c2e264def7a8263a68ef6f0b55ce90b77d41e17",
+                "reference": "8c2e264def7a8263a68ef6f0b55ce90b77d41e17",
                 "shasum": ""
             },
             "require": {
@@ -11218,9 +11250,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.13"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.14"
             },
-            "time": "2023-03-21T14:22:44+00:00"
+            "time": "2023-03-28T03:41:01+00:00"
         },
         {
             "name": "pusher/pusher-php-server",
@@ -11554,12 +11586,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "bf2bee216a4379eaf62162307d62bb7850405fec"
+                "reference": "8e955307d32dc9b6992440ff81321d3cb09db75a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/bf2bee216a4379eaf62162307d62bb7850405fec",
-                "reference": "bf2bee216a4379eaf62162307d62bb7850405fec",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/8e955307d32dc9b6992440ff81321d3cb09db75a",
+                "reference": "8e955307d32dc9b6992440ff81321d3cb09db75a",
                 "shasum": ""
             },
             "require": {
@@ -11639,7 +11671,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-07T16:14:23+00:00"
+            "time": "2023-03-27T22:05:11+00:00"
         },
         {
             "name": "riverline/multipart-parser",
@@ -14091,16 +14123,16 @@
         },
         {
             "name": "spatie/laravel-health",
-            "version": "1.22.4",
+            "version": "1.22.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-health.git",
-                "reference": "3714c9f08349b9a913753f3bfb5706a81234e4b0"
+                "reference": "eb61cc060f9e24c95801e76815367f4fe3555807"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/3714c9f08349b9a913753f3bfb5706a81234e4b0",
-                "reference": "3714c9f08349b9a913753f3bfb5706a81234e4b0",
+                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/eb61cc060f9e24c95801e76815367f4fe3555807",
+                "reference": "eb61cc060f9e24c95801e76815367f4fe3555807",
                 "shasum": ""
             },
             "require": {
@@ -14171,7 +14203,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-health/tree/1.22.4"
+                "source": "https://github.com/spatie/laravel-health/tree/1.22.5"
             },
             "funding": [
                 {
@@ -14179,7 +14211,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-21T20:57:21+00:00"
+            "time": "2023-03-29T07:39:16+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
@@ -14273,27 +14305,28 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "10.7.12",
+            "version": "10.7.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "79b7295cf9ed810c777b3ab7f501319146ac8629"
+                "reference": "fbdcba9d7ff34d4d781d28bfddb51b4c73bddffc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/79b7295cf9ed810c777b3ab7f501319146ac8629",
-                "reference": "79b7295cf9ed810c777b3ab7f501319146ac8629",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/fbdcba9d7ff34d4d781d28bfddb51b4c73bddffc",
+                "reference": "fbdcba9d7ff34d4d781d28bfddb51b4c73bddffc",
                 "shasum": ""
             },
             "require": {
                 "ext-exif": "*",
                 "ext-fileinfo": "*",
                 "ext-json": "*",
-                "illuminate/bus": "^9.18|^10.0",
-                "illuminate/console": "^9.18|^10.0",
-                "illuminate/database": "^9.18|^10.0",
-                "illuminate/pipeline": "^9.18|^10.0",
-                "illuminate/support": "^9.18|^10.0",
+                "illuminate/bus": "^9.52|^10.0",
+                "illuminate/conditionable": "^9.52|^10.0",
+                "illuminate/console": "^9.52|^10.0",
+                "illuminate/database": "^9.52|^10.0",
+                "illuminate/pipeline": "^9.52|^10.0",
+                "illuminate/support": "^9.52|^10.0",
                 "intervention/image": "^2.7",
                 "maennchen/zipstream-php": "^2.0",
                 "php": "^8.0",
@@ -14365,7 +14398,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-medialibrary/issues",
-                "source": "https://github.com/spatie/laravel-medialibrary/tree/10.7.12"
+                "source": "https://github.com/spatie/laravel-medialibrary/tree/10.7.14"
             },
             "funding": [
                 {
@@ -14377,7 +14410,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-06T08:33:25+00:00"
+            "time": "2023-03-29T07:06:33+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -20400,16 +20433,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.21.2",
+            "version": "v1.21.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "19d6fe167e2389b41fe1b4ee52293d1eaf8a43fc"
+                "reference": "3042ff8cf403817c340d5a7762b2d32900239f46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/19d6fe167e2389b41fe1b4ee52293d1eaf8a43fc",
-                "reference": "19d6fe167e2389b41fe1b4ee52293d1eaf8a43fc",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/3042ff8cf403817c340d5a7762b2d32900239f46",
+                "reference": "3042ff8cf403817c340d5a7762b2d32900239f46",
                 "shasum": ""
             },
             "require": {
@@ -20461,7 +20494,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-03-06T14:23:15+00:00"
+            "time": "2023-03-13T01:22:10+00:00"
         },
         {
             "name": "maximebf/debugbar",
@@ -20825,8 +20858,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "asantibanez/livewire-calendar": 20,
-        "omnia-digital/library": 20
+        "omnia-digital/library": 20,
+        "omnia-digital/livewire-calendar": 20,
+        "omnia-digital/media-manager": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
