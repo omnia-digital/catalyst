@@ -4,6 +4,7 @@ use App\Http\Controllers\HandleStripeConnectRefreshUrlController;
 use App\Http\Livewire\Pages\Account\Index as AccountIndex;
 use App\Http\Livewire\UserNotifications;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Pages\Media\Index as MediaIndex;
 
 Route::get('r/{url?}', function ($url) {
     return redirect($url);
@@ -19,6 +20,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
     Route::get('notifications', UserNotifications::class)->name('notifications');
     Route::get('account', AccountIndex::class)->name('account');
+    Route::name('media.')->prefix('media')->group(function () {
+        Route::get('/', MediaIndex::class)->name('index');
+    });
 });
 
 // Stripe Connect

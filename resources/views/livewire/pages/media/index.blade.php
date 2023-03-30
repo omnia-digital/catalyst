@@ -8,11 +8,11 @@
         </div>
     </div>
 
-    <div class="px-4 sm:px-2 lg:px-0">
+    <div class=" px-4 sm:px-6 lg:px-4">
 
         <!-- List of Media -->
         <main class="flex-1 overflow-y-auto">
-            <div class="pt-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
+            <div class="pt-4 space-y-2">
                 <div class="relative flex items-center space-x-4 w-full">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" hidden>
                         <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
