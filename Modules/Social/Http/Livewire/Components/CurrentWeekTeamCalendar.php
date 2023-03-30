@@ -3,7 +3,7 @@
 namespace Modules\Social\Http\Livewire\Components;
 
 use App\Models\User;
-use Asantibanez\LivewireCalendar\LivewireCalendar;
+use Omnia\LivewireCalendar\LivewireCalendar;
 use Carbon\Carbon;
 use Modules\Social\Support\Livewire\InteractsWithCalendarTeams;
 
