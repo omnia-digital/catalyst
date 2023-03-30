@@ -44,7 +44,7 @@
                                                     <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4 py-0 rounded-full" :name="$notification->print_send_date" />
                                                     <button
                                                         wire:click="editFormNotification('{{ $notification->id }}')"
-                                                        class="absolute -top-2 -right-2 p-1 rounded-full bg-white group hover:bg-primary-500"
+                                                        class="absolute -top-2 -right-2 p-1 rounded-full bg-white group hover:bg-primary"
                                                     >
                                                         <x-library::icons.icon name="heroicon-s-pencil-alt" color="text-primary-600 group-hover:text-white" class="h-3 w-3"/>
                                                     </button>
@@ -73,7 +73,7 @@
                                             <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4 py-0 rounded-full" :name="$notification->print_send_date" />
                                             <button
                                                 wire:click="confirmFormNotificationRemoval('{{ $notification->id }}')"
-                                                class="absolute -top-2 -right-2 p-1 rounded-full bg-white group hover:bg-primary-500"
+                                                class="absolute -top-2 -right-2 p-1 rounded-full bg-white group hover:bg-primary"
                                             >
                                                 <x-library::icons.icon name="heroicon-o-x" color="text-primary-600 group-hover:text-white" class="h-3 w-3"/>
                                             </button>
