@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Partials;
 
 use App\Models\Team;
 use App\Support\Platform\GlobalSearch\GlobalSearch as Search;
@@ -33,6 +33,6 @@ class GlobalSearch extends Component
 
     public function render()
     {
-        return view('livewire.global-search');
+        return view('livewire.partials.global-search');
     }
 }

@@ -21,7 +21,7 @@
             <input x-model.debounce.500ms="search"
                    id="search" name="search"
                    class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
-                   placeholder="{{ Trans::get('Search ' . config('app.name')) }}" type="search"/>
+                   placeholder="{{ Trans::get('Search') }}" type="search"/>
 
             @if ($searchResults && !empty($search))
                 <ul x-show="show" x-on:click.away="show = false" class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" role="listbox">
