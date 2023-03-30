@@ -3,11 +3,11 @@
 namespace Modules\Livestream\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Modules\Livestream\Http\Requests\PlaylistRequest;
 use Modules\Livestream\LivestreamAccount;
 use Modules\Livestream\Playlist;
 use Modules\Livestream\Services\PlayerService;
-use Redirect;
 
 class PlaylistController extends LivestreamController
 {

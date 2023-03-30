@@ -2,8 +2,8 @@
 
 namespace Modules\Livestream\Providers;
 
-use Config;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class LivestreamServiceProvider extends ServiceProvider

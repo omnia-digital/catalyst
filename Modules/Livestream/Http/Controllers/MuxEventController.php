@@ -188,6 +188,5 @@ class MuxEventController extends LivestreamController
 //                      "accessor_source": null,
 //                      "accessor": null
 //                }
-
     }
 }

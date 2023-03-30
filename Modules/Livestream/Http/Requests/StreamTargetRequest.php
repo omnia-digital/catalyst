@@ -2,30 +2,30 @@
 
 namespace Modules\Livestream\Http\Requests;
 
-    class StreamTargetRequest extends LivestreamRequest
+class StreamTargetRequest extends LivestreamRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
     {
-        /**
-         * Determine if the user is authorized to make this request.
-         *
-         * @return bool
-         */
-        public function authorize()
-        {
-            return true;
-        }
-
-        /**
-         * Get the validation rules that apply to the request.
-         *
-         * @return array
-         */
-        public function rules()
-        {
-            return [
-                'name' => 'required | string',
-                'url' => 'required | string',
-                'stream_key' => 'required | string',
-                //                'stream_id'  => 'required',
-            ];
-        }
+        return true;
     }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name' => 'required | string',
+            'url' => 'required | string',
+            'stream_key' => 'required | string',
+            //                'stream_id'  => 'required',
+        ];
+    }
+}

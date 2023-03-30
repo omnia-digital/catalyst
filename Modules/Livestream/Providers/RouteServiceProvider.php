@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
     public const HOME = '/episodes';
+
     /**
      * The module namespace to assume when generating URLs to actions.
      *

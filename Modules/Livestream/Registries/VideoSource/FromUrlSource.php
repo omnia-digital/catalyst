@@ -29,7 +29,6 @@ class FromUrlSource implements BaseVideoSource
 
     public function delete(Video $video): void
     {
-
     }
 
     public function isProcessing(Video $video): bool

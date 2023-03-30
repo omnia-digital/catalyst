@@ -3,11 +3,11 @@
 namespace Modules\Livestream\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 use Modules\Livestream\EpisodeTemplate;
 use Modules\Livestream\Http\Requests\ScheduleRequest;
 use Modules\Livestream\LivestreamAccount;
 use Modules\Livestream\Schedule;
-use Redirect;
 
 class ScheduleController extends LivestreamController
 {

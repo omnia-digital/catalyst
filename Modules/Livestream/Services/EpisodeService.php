@@ -33,6 +33,7 @@ class EpisodeService extends LivestreamService
     public $episode;
 
     public $successFullyMovedToVodTmpFiles = [];
+
     // @TODO [Josh] - need to completely refactor this class because it will be heavily used and needs to be as efficient and clear as possible. right now its very confusing and has a lot of anti-patterns, but I need to get things done quickly so I don't have time to refactor it right now
     /**
      * LivestreamAccount
