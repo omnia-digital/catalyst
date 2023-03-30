@@ -2,13 +2,15 @@
 
 namespace Modules\Social\Events;
 
+use App\Contracts\Events\ContributesToUserScore;
+use App\Events\BaseEvent;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Modules\Social\Models\UserScoreContribution;
 
-class LikedUserPost implements TracksContributions
+class LikedUserPost extends BaseEvent implements ContributesToUserScore
 {
     use SerializesModels, Dispatchable;
 
@@ -27,21 +29,9 @@ class LikedUserPost implements TracksContributions
     public function __construct(User $user)
     {
         $this->user = $user;
-
-        $this->updateUserScore();
     }
 
-    /**
-     * Get the channels the event should be broadcast on.
-     *
-     * @return array
-     */
-    public function broadcastOn()
-    {
-        return [];
-    }
-
-    public function updateUserScore()
+    public function trackContributionToUserScore()
     {
         $this->user->profile->score += UserScoreContribution::getPointsFor('Liked User Post');
         $this->user->profile->save();
