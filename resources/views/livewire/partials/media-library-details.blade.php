@@ -23,7 +23,7 @@
                     <div class="py-3 flex justify-between text-sm font-medium">
                         <dt class="text-gray-500">Attached to</dt>
                         <dd class="text-gray-900">
-                            @isset ($media->model)
+                            @isset($media->model)
                                 <span class="font-bold">{{ class_basename($media->model) }}</span>: {{ $this->getModelName($media->model) }}
                             @else
                                 <div>(Unattached)</div>
@@ -31,26 +31,26 @@
                             @endisset
                         </dd>
                     </div>
-                    
+
 
                     <div class="py-3 flex justify-between text-sm font-medium">
                         <dt class="text-gray-500">Collection</dt>
                         <dd class="text-gray-900">{{ $media->collection_name }}</dd>
                     </div>
-                    
+
                     <div class="py-3 flex justify-between text-sm font-medium">
                         <dt class="text-gray-500">Uploaded by</dt>
                         <dd class="text-gray-900">{{ $media->model->user?->name }}</dd>
                     </div>
-                    
+
                     <div class="py-3 flex justify-between text-sm font-medium">
                         <dt class="text-gray-500">Uploaded at</dt>
                         <dd class="text-gray-900">{{ $media->created_at->format('m/d/y') }}</dd>
                     </div>
-                    
+
                     <div class="py-3 flex justify-between text-sm font-medium">
                         <dt class="text-gray-500">Dimensions</dt>
-                        <dd class="text-gray-900">{{ $this->getWidth($media) . ' x ' . $this->getHeight($media)  }}</dd>
+                        <dd class="text-gray-900">{{ $this->getWidth($media) . ' x ' . $this->getHeight($media) }}</dd>
                     </div>
                 </div>
 
@@ -82,7 +82,7 @@
                     <x-jet-secondary-button wire:click="$set('showDeleteMediaModal', false)" wire:loading.attr="disabled">
                         {{ __('Cancel') }}
                     </x-jet-secondary-button>
-            
+
                     <x-jet-button class="ml-2" type="submit" wire:loading.attr="disabled">
                         {{ __('Delete') }}
                     </x-jet-button>

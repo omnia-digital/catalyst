@@ -4,7 +4,7 @@ namespace App\Traits\Filter;
 
 use Livewire\WithPagination;
 
-trait WithPerPagePagination 
+trait WithPerPagePagination
 {
     use WithPagination;
 

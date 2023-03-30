@@ -17,7 +17,7 @@ class MediaLibraryDetails extends Component
     public $showDeleteMediaModal = false;
 
     protected $listeners = [
-        'mediaSelected'    => 'findMedia',
+        'mediaSelected' => 'findMedia',
         'media-deselected' => 'resetMedia',
     ];
 

@@ -3,11 +3,11 @@
 namespace App\Http\Livewire\Pages\Media;
 
 use App\Models\MediaFile;
-use App\Models\NullMedia;
 use App\Models\Team;
 use App\Traits\Filter\WithBulkActions;
 use App\Traits\Filter\WithPerPagePagination;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use Modules\Social\Models\Profile;
@@ -16,7 +16,6 @@ use OmniaDigital\OmniaLibrary\Livewire\WithLayoutSwitcher;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithSorting;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Illuminate\Support\Str;
 
 class Index extends Component
 {
@@ -26,7 +25,7 @@ class Index extends Component
     public $showDeleteModal = false;
     public $showEditModal = false;
     public $showFilters = false;
-    
+
     public $showCreateModal = false;
     public ?string $editorId = null;
     public array $images = [];
@@ -35,7 +34,7 @@ class Index extends Component
     public ?int $selectedMedia = null;
 
     public $availableModelTypes = [
-        Episode::class => "Episodes",
+        Episode::class => 'Episodes',
     ];
 
     public $filters = [
@@ -48,20 +47,13 @@ class Index extends Component
 
     protected $listeners = [
         'media-deselected' => 'deselectMedia',
-        'refreshMedia' => '$refresh'
+        'refreshMedia' => '$refresh',
     ];
 
     public function mount()
     {
         $this->editorId = uniqid();
     }
-
-    protected function rules() { return [
-        'editingMedia.name' => ['nullable', 'max:254'],
-        'editingMedia.model_type' => ['string', 'in:' . collect($this->availableModelTypes)->map(fn ($type, $key) => $key)->implode(',')],
-        'editingMedia.model_id' => ['integer'],
-        'editingMedia.collection_name' => ['string']
-    ]; }
 
     public function toggleShowFilters()
     {
@@ -70,16 +62,21 @@ class Index extends Component
         $this->showFilters = ! $this->showFilters;
     }
 
-    public function resetFilters() { $this->reset('filters'); }
+    public function resetFilters()
+    {
+        $this->reset('filters');
+    }
 
     public function getAttachedTypes()
     {
-        return Media::pluck('model_type')->unique()->map(function ($type) { return class_basename($type); })->toArray();   
+        return Media::pluck('model_type')->unique()->map(function ($type) {
+        return class_basename($type);
+        })->toArray();
     }
 
     public function getCollectionNames()
     {
-        return Media::pluck('collection_name')->unique()->toArray();   
+        return Media::pluck('collection_name')->unique()->toArray();
     }
 
     public function deleteSelected()
@@ -97,7 +94,9 @@ class Index extends Component
     {
         $this->useCachedRows();
 
-        if ($this->editingMedia?->isNot($media) || is_null($this->editingMedia)) $this->editingMedia = $media;
+        if ($this->editingMedia?->isNot($media) || is_null($this->editingMedia)) {
+            $this->editingMedia = $media;
+        }
 
         $this->showEditModal = true;
     }
@@ -106,7 +105,7 @@ class Index extends Component
     {
         $mediaFile = MediaFile::create([
             'name' => 'Not Attached',
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
         ]);
 
         $mediaFile->attachMedia($this->images);
@@ -125,7 +124,7 @@ class Index extends Component
     public function saveMedia()
     {
         $this->validate();
-        
+
         $this->editingMedia->save();
 
         $this->showEditModal = false;
@@ -172,14 +171,6 @@ class Index extends Component
         $this->emitImagesSet();
     }
 
-    private function emitImagesSet(): void
-    {
-        $this->dispatchBrowserEvent('media-library:image-set', [
-            'id'     => $this->editorId,
-            'images' => $this->images
-        ]);
-    }
-
     public function getRowsProperty()
     {
         return $this->cache(function () {
@@ -193,9 +184,9 @@ class Index extends Component
             ->whereHasMorph('model', [Post::class, Profile::class], function ($q, $type) {
                 return $q->where('user_id', auth()->id());
             })
-            ->when($this->filters['date_min'], fn($query, $date) => $query->where('created_at', '>=', Carbon::parse($date)))
-            ->when($this->filters['date_max'], fn($query, $date) => $query->where('created_at', '<=', Carbon::parse($date)))
-            ->when($this->filters['search'], function ($query, $search) { 
+            ->when($this->filters['date_min'], fn ($query, $date) => $query->where('created_at', '>=', Carbon::parse($date)))
+            ->when($this->filters['date_max'], fn ($query, $date) => $query->where('created_at', '<=', Carbon::parse($date)))
+            ->when($this->filters['search'], function ($query, $search) {
                 return $query
                     ->whereHasMorph('model', '*', function ($query, $type) use ($search) {
                         $column = match ($type) {
@@ -206,22 +197,40 @@ class Index extends Component
 
                         if (is_array($column)) {
                             foreach ($column as $key => $attribute) {
-                                $query = ($key === 0) ? 
-                                    $query->where($attribute, 'like', '%'.$search.'%') :
-                                    $query->orWhere($attribute, 'like', '%'.$search.'%');
+                                $query = ($key === 0) ?
+                                    $query->where($attribute, 'like', '%' . $search . '%') :
+                                    $query->orWhere($attribute, 'like', '%' . $search . '%');
                             }
                         } else {
-                            $query = $query->where($column, 'like', '%'.$search.'%');
+                            $query = $query->where($column, 'like', '%' . $search . '%');
                         }
 
-                        return $query; 
+                        return $query;
                     })
-                    ->orWhere('name', 'like', '%'.$search.'%');
+                    ->orWhere('name', 'like', '%' . $search . '%');
             })->whereNot('model_type', Team::class);
     }
 
     public function render()
     {
         return view('livewire.pages.media.index', ['mediaList' => $this->rows]);
+    }
+
+    protected function rules()
+    {
+        return [
+            'editingMedia.name' => ['nullable', 'max:254'],
+            'editingMedia.model_type' => ['string', 'in:' . collect($this->availableModelTypes)->map(fn ($type, $key) => $key)->implode(',')],
+            'editingMedia.model_id' => ['integer'],
+            'editingMedia.collection_name' => ['string'],
+        ];
+    }
+
+    private function emitImagesSet(): void
+    {
+        $this->dispatchBrowserEvent('media-library:image-set', [
+            'id' => $this->editorId,
+            'images' => $this->images,
+        ]);
     }
 }
