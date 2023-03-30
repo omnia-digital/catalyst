@@ -28,5 +28,5 @@ abstract class TracksContributions
         return [];
     }
 
-    public abstract function trackContribution();
+    abstract public function trackContribution();
 }

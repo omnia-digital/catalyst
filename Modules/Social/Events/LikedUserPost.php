@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Modules\Social\Models\Like;
 use Modules\Social\Models\UserScoreContribution;
 
 class LikedUserPost implements TracksContributions
@@ -44,7 +43,7 @@ class LikedUserPost implements TracksContributions
 
     public function updateUserScore()
     {
-        $this->user->profile->score += UserScoreContribution::getPointsFor("Liked User Post");
+        $this->user->profile->score += UserScoreContribution::getPointsFor('Liked User Post');
         $this->user->profile->save();
     }
 }

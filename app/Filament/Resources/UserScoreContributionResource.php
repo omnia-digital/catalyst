@@ -3,16 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserScoreContributionResource\Pages;
-use App\Filament\Resources\UserScoreContributionResource\RelationManagers;
-use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Modules\Social\Models\UserScoreContribution;
 
 class UserScoreContributionResource extends Resource
@@ -33,7 +29,7 @@ class UserScoreContributionResource extends Resource
                 TextInput::make('points')
                     ->integer()
                     ->minValue(0)
-                    ->required()
+                    ->required(),
             ]);
     }
 
@@ -43,7 +39,7 @@ class UserScoreContributionResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('slug'),
-                TextColumn::make('points')
+                TextColumn::make('points'),
             ])
             ->filters([
                 //
@@ -55,14 +51,14 @@ class UserScoreContributionResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -70,5 +66,5 @@ class UserScoreContributionResource extends Resource
             'create' => Pages\CreateUserScoreContribution::route('/create'),
             'edit' => Pages\EditUserScoreContribution::route('/{record}/edit'),
         ];
-    }    
+    }
 }

@@ -118,6 +118,14 @@ class Profile extends Model implements HasMedia, Searchable
         return ProfileFactory::new();
     }
 
+    protected static function booted()
+    {
+        static::updating(function (self $model) {
+            $model->isDirty('score') &&
+                $model->score_updated_at = now();
+        });
+    }
+
     /**
      * Get the route key for the model.
      *
@@ -170,20 +178,10 @@ class Profile extends Model implements HasMedia, Searchable
         return $this->getMedia('profile_banner_images')->first() ?? (new NullMedia('profile'));
     }
 
-
-    protected static function booted()
-    {
-        static::updating(function (self $model) {
-            $model->isDirty('score') &&
-                $model->score_updated_at = now();
-        });
-    }
-
     public function photo()
     {
         return optional($this->getMedia('profile_photos')->first());
     }
-
 
     /**
      * Get the URL to the user's profile photo.
