@@ -25,7 +25,7 @@ class Builder extends Component implements HasForms
             $this->form->fill($this->formModel->toArray());
         }
     }
-    
+
     public function render()
     {
         return view('social::livewire.pages.teams.forms.builder');

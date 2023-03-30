@@ -33,7 +33,7 @@
 
     <div class="mt-4">
         <div class="masonry sm:masonry-1 md:masonry-2">
-            @forelse($articles as $article)
+            @forelse ($articles as $article)
                 <div class="w-full break-inside mb-3">
                     <div class="">
                         <livewire:articles::components.article-card

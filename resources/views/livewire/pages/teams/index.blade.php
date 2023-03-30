@@ -23,7 +23,7 @@
     </div>
 
     <div x-data="{}" class="px-4 sm:px-2 lg:px-0">
-        @if(count($categories))
+        @if (count($categories))
             <div class="flex justify-between space-x-2 pt-4 mb-4">
                 @foreach ($categories as $category)
                     <x-library::button.link :href="route('social.teams.home', ['lens' => str($category['slug'])->slug()->value()])" class="w-full h-16 {{ str($lens) == str($category['slug'])->slug()
@@ -37,11 +37,11 @@
         <!-- Filters -->
         @include('livewire.partials.filters', ['skipFilters' => ['has_attachment', 'members']])
 
-        @if($lens)
+        @if ($lens)
             <x-library::heading.2 class="pt-3">{{ str($lens)->headline() }}</x-library::heading.2>
         @endif
         <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
-            @forelse($teams as $team)
+            @forelse ($teams as $team)
                 <livewire:social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
             @empty
                 <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>

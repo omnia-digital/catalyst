@@ -27,7 +27,6 @@ return [
 
     'path' => env('FILAMENT_PATH', 'admin'),
 
-
     /*
     |--------------------------------------------------------------------------
     | Filament Core Path
@@ -39,7 +38,6 @@ return [
     */
 
     'core_path' => env('FILAMENT_CORE_PATH', 'filament'),
-
 
     /*
     |--------------------------------------------------------------------------
@@ -107,7 +105,7 @@ return [
         'namespace' => 'App\\Filament\\Pages',
         'path' => app_path('Filament/Pages'),
         'register' => [
-//            Pages\Dashboard::class,
+            //            Pages\Dashboard::class,
         ],
     ],
 

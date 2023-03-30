@@ -2,9 +2,9 @@
 
 namespace Modules\Jobs\Listeners;
 
-use Modules\Jobs\Events\JobPositionWasCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Modules\Jobs\Events\JobPositionWasCreated;
 use Modules\Jobs\Google\Client;
 
 class UpdateGoogleJobsWhenJobCreated implements ShouldQueue
@@ -21,7 +21,6 @@ class UpdateGoogleJobsWhenJobCreated implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param JobPositionWasCreated $event
      * @return void
      */
     public function handle(JobPositionWasCreated $event)
@@ -32,10 +31,10 @@ class UpdateGoogleJobsWhenJobCreated implements ShouldQueue
 
         // Define contents here. The structure of the content is described in the next step.
         $content = '{
-          "url":' . route("jobs.show", ["team" => $event->job->company, "job" => $event->job]) . ',
+          "url":' . route('jobs.show', ['team' => $event->job->company, 'job' => $event->job]) . ',
           "type": "URL_UPDATED"
         }';
 
-        $httpClient->request('post', $endpoint, [ 'body' => $content ]);
+        $httpClient->request('post', $endpoint, ['body' => $content]);
     }
 }

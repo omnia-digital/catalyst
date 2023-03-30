@@ -4,8 +4,7 @@ namespace Modules\Social\Http\Livewire\Components\Teams;
 
 use App\Models\Team;
 use App\Models\User;
-use Asantibanez\LivewireCalendar\LivewireCalendar;
-use Auth;
+use Omnia\LivewireCalendar\LivewireCalendar;
 use Modules\Social\Support\Livewire\InteractsWithCalendarTeams;
 
 class TeamCalendar extends LivewireCalendar
@@ -34,7 +33,7 @@ class TeamCalendar extends LivewireCalendar
 
     public function getUserProperty()
     {
-        return User::find(Auth::id());
+        return User::find(auth()->id());
     }
 
     public function render()

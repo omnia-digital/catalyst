@@ -22,11 +22,11 @@ class Sidebar extends Component
             [
                 'name' => 'Billing & Payments',
                 'icon' => 'o-credit-card',
-            ]
+            ],
         ];
 
         return view('profile.sidebar', [
-            'items' => $items
+            'items' => $items,
         ]);
     }
 }

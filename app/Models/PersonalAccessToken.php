@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Models;
+namespace App\Models;
 
     use Illuminate\Database\Eloquent\Model;
 
@@ -18,21 +18,24 @@
         /**
          * Indicates if the model should be timestamped.
          *
-         * @var boolean
+         * @var bool
          */
         public $timestamps = false;
+
         /**
          * The database table used by the model.
          *
          * @var string
          */
         protected $table = 'personal_access_tokens';
+
         /**
          * The primary key for the model.
          *
          * @var string
          */
         protected $primaryKey = 'id';
+
         /**
          * Attributes that should be mass-assignable.
          *
@@ -46,8 +49,9 @@
             'abilities',
             'last_used_at',
             'created_at',
-            'updated_at'
+            'updated_at',
         ];
+
         /**
          * The attributes excluded from the model's JSON form.
          *
@@ -56,6 +60,7 @@
         protected $hidden = [
 
         ];
+
         /**
          * The attributes that should be casted to native types.
          *
@@ -63,13 +68,14 @@
          */
         protected $casts = [
             'tokenable_type' => 'string',
-            'name'           => 'string',
-            'token'          => 'string',
-            'abilities'      => 'string',
-            'last_used_at'   => 'timestamp',
-            'created_at'     => 'timestamp',
-            'updated_at'     => 'timestamp'
+            'name' => 'string',
+            'token' => 'string',
+            'abilities' => 'string',
+            'last_used_at' => 'timestamp',
+            'created_at' => 'timestamp',
+            'updated_at' => 'timestamp',
         ];
+
         /**
          * The attributes that should be mutated to dates.
          *
@@ -78,7 +84,7 @@
         protected $dates = [
             'last_used_at',
             'created_at',
-            'updated_at'
+            'updated_at',
         ];
 
         // Scopes...

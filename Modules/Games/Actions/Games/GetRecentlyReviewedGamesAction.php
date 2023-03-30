@@ -6,14 +6,12 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use MarcReichel\IGDBLaravel\Models\Cover;
 use Modules\Games\Models\Game;
-use Modules\Games\Models\IGDB\Game as IGDBGame;
 
 class GetRecentlyReviewedGamesAction
 {
     public function execute(int $limit = 5): Collection
     {
-
-        $before  = Carbon::now()
+        $before = Carbon::now()
                          ->subMonths(2)->timestamp;
         $current = Carbon::now()->timestamp;
 
@@ -43,22 +41,21 @@ class GetRecentlyReviewedGamesAction
             })
             ->each(function ($game) {
                 $this->emit('reviewGameWithRatingAdded', [
-                    'slug'   => 'review_' . $game['slug'],
-                    'rating' => $game['rating'] / 100
+                    'slug' => 'review_' . $game['slug'],
+                    'rating' => $game['rating'] / 100,
                 ]);
             });
     }
-
 
     private function formatForView($games)
     {
         return collect($games)
             ->map(function ($game) {
                 return collect($game)->merge([
-                    'coverUrl'      => $game->cover_url,
+                    'coverUrl' => $game->cover_url,
                     'coverImageUrl' => $game->cover_url,
-                    'rating'        => isset($game['rating']) ? round($game['rating']) : null,
-                    'platforms'     => collect($game['platforms'])
+                    'rating' => isset($game['rating']) ? round($game['rating']) : null,
+                    'platforms' => collect($game['platforms'])
                         ->pluck('abbreviation')
                         ->implode(', '),
                 ]);

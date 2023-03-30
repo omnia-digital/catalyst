@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules\Games\Http\Livewire\Layouts;
+namespace Modules\Games\Http\Livewire\Layouts;
 
     use Livewire\Component;
 
@@ -9,26 +9,27 @@
         public string $class;
         public array $navigation = [];
 
-        public function mount() {
+        public function mount()
+        {
             $this->navigation = [
                 [
-                    'label'   => 'Home',
-                    'name'    => 'games.home',
-                    'icon'    => 'heroicon-o-home',
-                    'current' => false
+                    'label' => 'Home',
+                    'name' => 'games.home',
+                    'icon' => 'heroicon-o-home',
+                    'current' => false,
                 ],
-//                [
-//                    'label'   => 'Reviews',
-//                    'name'    => 'games.reviews',
-//                    'icon'    => 'heroicon-o-globe',
-//                    'current' => false
-//                ],
-//                [
-//                    'label'   => 'Coming Soon',
-//                    'name'    => 'games.coming-soon',
-//                    'icon'    => 'heroicon-o-bell',
-//                    'current' => false
-//                ],
+                //                [
+                //                    'label'   => 'Reviews',
+                //                    'name'    => 'games.reviews',
+                //                    'icon'    => 'heroicon-o-globe',
+                //                    'current' => false
+                //                ],
+                //                [
+                //                    'label'   => 'Coming Soon',
+                //                    'name'    => 'games.coming-soon',
+                //                    'icon'    => 'heroicon-o-bell',
+                //                    'current' => false
+                //                ],
             ];
         }
 

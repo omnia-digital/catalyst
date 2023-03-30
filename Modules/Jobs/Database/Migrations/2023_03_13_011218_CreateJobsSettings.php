@@ -1,4 +1,5 @@
 <?php
+
 use Spatie\LaravelSettings\Migrations\SettingsMigration;
 
 class CreateJobsSettings extends SettingsMigration

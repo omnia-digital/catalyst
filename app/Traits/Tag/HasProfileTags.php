@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Traits\Tag;
+namespace App\Traits\Tag;
 
     use Illuminate\Database\Eloquent\Relations\MorphToMany;
 

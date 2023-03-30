@@ -2,12 +2,12 @@
 
 namespace Modules\Social\Http\Livewire\Components\Teams;
 
+use App;
 use App\Models\Location;
 use App\Models\Team;
 use App\Models\User;
 use App\Traits\Filter\WithSortAndFilters;
 use App\Traits\Team\WithTeamManagement;
-use Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
@@ -19,7 +19,7 @@ class TeamCalendarList extends Component
     public array $sortLabels = [
         'name' => 'Name',
         'users_count' => 'Users',
-        'start_date' => 'Launch Date'
+        'start_date' => 'Launch Date',
     ];
 
     public string $dateColumn = 'start_date';
@@ -29,7 +29,7 @@ class TeamCalendarList extends Component
     public ?string $classes = '';
 
     protected $listeners = [
-        'teamSelected' => 'handleTeamSelected'
+        'teamSelected' => 'handleTeamSelected',
     ];
 
     public function getRowsQueryProperty()
@@ -52,7 +52,7 @@ class TeamCalendarList extends Component
 
     public function getUserProperty()
     {
-        return User::find(Auth::id());
+        return User::find(auth()->id());
     }
 
     public function getPlacesProperty()
@@ -106,7 +106,7 @@ class TeamCalendarList extends Component
         $this->classes = $classes;
         $this->orderBy = 'name';
 
-        if (!\App::environment('production')) {
+        if (! App::environment('production')) {
             $this->useCache = false;
         }
     }
@@ -115,7 +115,7 @@ class TeamCalendarList extends Component
     {
         return view('social::livewire.components.teams.team-calendar-list', [
             'teams' => $this->rows,
-            'teamsCount' => $this->rowsQuery->count()
+            'teamsCount' => $this->rowsQuery->count(),
         ]);
     }
 }

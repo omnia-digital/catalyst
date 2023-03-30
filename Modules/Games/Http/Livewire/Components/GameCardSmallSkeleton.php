@@ -6,7 +6,6 @@ use Livewire\Component;
 
 class GameCardSmallSkeleton extends Component
 {
-
     /**
      * Create a new component instance.
      *

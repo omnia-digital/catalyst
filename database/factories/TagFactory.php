@@ -17,7 +17,7 @@ class TagFactory extends Factory
     public function definition()
     {
         return [
-            'type' => strtolower($this->faker->month()) . "_type",
+            'type' => strtolower($this->faker->month()) . '_type',
             'name' => $this->faker->jobTitle(),
         ];
     }

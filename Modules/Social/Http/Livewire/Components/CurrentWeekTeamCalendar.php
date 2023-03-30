@@ -3,8 +3,7 @@
 namespace Modules\Social\Http\Livewire\Components;
 
 use App\Models\User;
-use Asantibanez\LivewireCalendar\LivewireCalendar;
-use Auth;
+use Omnia\LivewireCalendar\LivewireCalendar;
 use Carbon\Carbon;
 use Modules\Social\Support\Livewire\InteractsWithCalendarTeams;
 
@@ -17,7 +16,7 @@ class CurrentWeekTeamCalendar extends LivewireCalendar
     public ?string $selectedStartDate = null;
 
     protected $listeners = [
-        'startDateUpdated' => 'handleStartDateUpdated'
+        'startDateUpdated' => 'handleStartDateUpdated',
     ];
 
     public function handleStartDateUpdated($data)
@@ -37,6 +36,6 @@ class CurrentWeekTeamCalendar extends LivewireCalendar
 
     public function getUserProperty()
     {
-        return User::find(Auth::id());
+        return User::find(auth()->id());
     }
 }

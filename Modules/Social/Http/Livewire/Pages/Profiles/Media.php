@@ -7,7 +7,7 @@ use Modules\Social\Models\Profile;
 
 class Media extends Component
 {
-    public $profile; 
+    public $profile;
     public $media;
 
     public function getUserProperty()

@@ -17,7 +17,7 @@
 --}}
             <div class="">
                 <ul role="list" class="space-y-4">
-                    @foreach($questions as $question)
+                    @foreach ($questions as $question)
                         <li>
                             <livewire:social::components.post-card :post="$question" :wire:key="$question->id" />
                         </li>

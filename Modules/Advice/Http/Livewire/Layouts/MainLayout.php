@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules\Advice\Http\Livewire\Layouts;
+namespace Modules\Advice\Http\Livewire\Layouts;
 
     use Livewire\Component;
 

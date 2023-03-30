@@ -3,7 +3,6 @@
 namespace Modules\Articles\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 use Modules\Social\Database\Seeders\BookmarksTableSeeder;
 use Modules\Social\Models\Post;
 
@@ -18,6 +17,5 @@ class ArticlesDatabaseSeeder extends Seeder
     {
         Post::factory(15)->asArticle()->create();
         $this->call(BookmarksTableSeeder::class);
-
     }
 }

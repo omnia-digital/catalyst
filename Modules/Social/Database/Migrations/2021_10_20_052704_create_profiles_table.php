@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('handle')->nullable()->index();
             $table->string('first_name');
-            $table->string('last_name');            $table->text('bio')->nullable();
+            $table->string('last_name');
+            $table->text('bio')->nullable();
             $table->string('website')->nullable();
             $table->boolean('is_private')->default(false);
             $table->timestamps();

@@ -9,23 +9,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
-use Phuclh\MediaManager\WithMediaManager;
+use Omnia\MediaManager\WithMediaManager;
 
 class Edit extends Component
 {
     use WithMediaManager, AuthorizesRequests;
 
     public Post $article;
-
-    protected function rules(): array
-    {
-        return [
-            'article.title' => ['required', 'max:255'],
-            'article.url'   => ['nullable', 'url', 'max:255'],
-            'article.body'  => ['required', 'min:50'],
-            'article.image' => ['nullable','string'],
-        ];
-    }
 
     public function mount(Post $article)
     {
@@ -43,7 +33,7 @@ class Edit extends Component
 
         $this->saveArticle($validated);
 
-        if (!is_null($this->article->published_at)) {
+        if (! is_null($this->article->published_at)) {
             $this->article->published_at = null;
             $this->article->save();
         }
@@ -104,7 +94,7 @@ class Edit extends Component
             'title' => $attributes['title'],
             'body' => Mention::processMentionContent($attributes['body']),
             'url' => $attributes['url'],
-            'image' => $attributes['image']
+            'image' => $attributes['image'],
         ]);
 
         $this->article->fresh();
@@ -125,5 +115,15 @@ class Edit extends Component
     public function render()
     {
         return view('articles::livewire.pages.articles.edit');
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'article.title' => ['required', 'max:255'],
+            'article.url' => ['nullable', 'url', 'max:255'],
+            'article.body' => ['required', 'min:50'],
+            'article.image' => ['nullable', 'string'],
+        ];
     }
 }

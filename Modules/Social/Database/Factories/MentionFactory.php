@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Social\Database\Factories;
 
 use App\Models\User;
@@ -30,8 +31,7 @@ class MentionFactory extends Factory
             'mentionable_id' => $user->id,
             'mentionable_type' => $user::class,
             'postable_id' => $post->id,
-            'postable_type' => $post::class
+            'postable_type' => $post::class,
         ];
     }
 }
-

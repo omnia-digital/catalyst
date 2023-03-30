@@ -6,7 +6,7 @@
 {{--                <livewire:games::components.popular-games/>--}}
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4">
-            @foreach($games as $game)
+            @foreach ($games as $game)
                 <livewire:games::components.game-card :game="$game"/>
             @endforeach
         </div> <!-- end container -->

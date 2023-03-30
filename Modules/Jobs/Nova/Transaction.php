@@ -7,9 +7,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphTo;
-use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Sixlive\TextCopy\TextCopy;
 
 class Transaction extends Resource
@@ -28,11 +26,6 @@ class Transaction extends Resource
      */
     public static $title = 'transaction_id';
 
-    public function subtitle()
-    {
-        return $this->gateway;
-    }
-
     /**
      * The columns that should be searched.
      *
@@ -41,13 +34,17 @@ class Transaction extends Resource
     public static $search = [
         'id',
         'transaction_id',
-        'invoice_number'
+        'invoice_number',
     ];
+
+    public function subtitle()
+    {
+        return $this->gateway;
+    }
 
     /**
      * Get the fields displayed by the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function fields(Request $request)
@@ -71,14 +68,13 @@ class Transaction extends Resource
 
             TextCopy::make('Invoice Number')->sortable()->onlyOnDetail(),
 
-            MorphTo::make('Type', 'transactionable')
+            MorphTo::make('Type', 'transactionable'),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function cards(Request $request)
@@ -89,7 +85,6 @@ class Transaction extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function filters(Request $request)
@@ -100,7 +95,6 @@ class Transaction extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function lenses(Request $request)
@@ -111,7 +105,6 @@ class Transaction extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function actions(Request $request)

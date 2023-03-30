@@ -1,8 +1,9 @@
 <?php
 
-    namespace Modules\Social\Models;
+namespace Modules\Social\Models;
 
     use Illuminate\Database\Eloquent\Model;
+use Trans;
 
     class Follow extends Model
     {
@@ -34,14 +35,14 @@
         {
             $actorName = $this->actor->handle;
 
-            return "{$actorName} " . \Trans::get('notification.startedFollowingYou');
+            return "{$actorName} " . Trans::get('notification.startedFollowingYou');
         }
 
         public function toHtml()
         {
             $actorName = $this->actor->handle;
-            $actorUrl  = $this->actor->url();
+            $actorUrl = $this->actor->url();
 
-            return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . \Trans::get('notification.startedFollowingYou');
+            return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . Trans::get('notification.startedFollowingYou');
         }
     }

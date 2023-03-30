@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 use Modules\Social\Models\Profile;
-use Nwidart\Modules\Module;
 use Spatie\Permission\Models\Role;
 
 class UserFactory extends Factory
@@ -64,7 +63,7 @@ class UserFactory extends Factory
 
         $role = Role::create([
             'name' => config('platform.teams.default_owner_role'),
-            'team_id' => $team->id
+            'team_id' => $team->id,
         ]);
 
         return $this->hasAttached(
@@ -105,7 +104,9 @@ class UserFactory extends Factory
      */
     public function withProfile($fillData = [])
     {
-        if (!class_exists(\Modules\Social\Models\Profile::class)) return;
+        if (! class_exists(\Modules\Social\Models\Profile::class)) {
+            return;
+        }
 
         return $this->has(
             Profile::factory()

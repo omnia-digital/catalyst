@@ -13,7 +13,7 @@ return [
     */
 
     'pages' => [
-        'backups' => \App\Filament\Pages\ManageBackups::class
+        'backups' => \App\Filament\Pages\ManageBackups::class,
     ],
 
     /*
@@ -27,7 +27,7 @@ return [
     */
 
     'polling' => [
-        'interval' => '4s'
+        'interval' => '4s',
     ],
 
     /*

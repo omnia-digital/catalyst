@@ -8,5 +8,4 @@ use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults as HealthChec
 class HealthCheckResults extends HealthCheckResultsBase
 {
     use HasPageShield;
-
 }
