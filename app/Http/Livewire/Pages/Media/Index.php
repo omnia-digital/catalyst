@@ -70,7 +70,7 @@ class Index extends Component
     public function getAttachedTypes()
     {
         return Media::pluck('model_type')->unique()->map(function ($type) {
-        return class_basename($type);
+            return class_basename($type);
         })->toArray();
     }
 
