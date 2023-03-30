@@ -19,18 +19,18 @@ class UpdateTeamNameTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-    
+
         $this->actingAs($user = User::factory()->withTeam()->create([
             'email' => 'test@omniadigital.io',
-            'is_admin' => true
+            'is_admin' => true,
         ]));
 
         $profile = new Profile([
-            'first_name'       => 'test first name',
-            'last_name'       => 'test last name',
-            'bio'        => 'test bio',
+            'first_name' => 'test first name',
+            'last_name' => 'test last name',
+            'bio' => 'test bio',
             'remote_url' => 'http://test.url/',
-            'location'   => 'test location',
+            'location' => 'test location',
         ]);
 
         $user->profile()->save($profile);
@@ -38,7 +38,10 @@ class UpdateTeamNameTest extends TestCase
         $this->user = $user;
     }
 
-    public function test_team_names_can_be_updated()
+    /**
+     * @test
+     */
+    public function team_names_can_be_updated()
     {
         $team = $this->user->teams()->first();
 

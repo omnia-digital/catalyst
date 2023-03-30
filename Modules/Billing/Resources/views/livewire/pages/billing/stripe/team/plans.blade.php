@@ -13,7 +13,7 @@
                 </x-slot>
 
                 <x-slot name="body">
-                    @foreach($plans as $plan)
+                    @foreach ($plans as $plan)
                         <x-tables::row>
                             <x-library::table.cell>
                                 <p>{{ $plan->name }}</p>

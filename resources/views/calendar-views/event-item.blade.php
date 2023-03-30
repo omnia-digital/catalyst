@@ -1,6 +1,6 @@
 <div
-    @if($eventClickEnabled)
-        wire:click.stop="onEventClick('{{ $event['id']  }}')"
+    @if ($eventClickEnabled)
+        wire:click.stop="onEventClick('{{ $event['id'] }}')"
     @endif
     class="bg-neutral p-1 cursor-pointer {{ $extra['selectedID'] === $event['id'] ? 'ring-1' : '' }}">
 

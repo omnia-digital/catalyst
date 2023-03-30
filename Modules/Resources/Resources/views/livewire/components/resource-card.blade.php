@@ -13,7 +13,7 @@
         <div class="mt-3 overflow-hidden">
             <div class="grid grid-cols-{{ sizeof($post->media) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($post->media) > 2 ? '2 h-80' : '1' }} gap-px">
                 @foreach ($post->media as $media)
-                    <div class="w-full overflow-hidden @if($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">
+                    <div class="w-full overflow-hidden @if ($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">
                         <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover w-full">
                     </div>
                 @endforeach
@@ -134,7 +134,7 @@
         @endif
     </div>
 
-    @if($showPostActions)
+    @if ($showPostActions)
         <div wire:click.prevent.stop="" class="z-20 px-5">
             <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
         </div>

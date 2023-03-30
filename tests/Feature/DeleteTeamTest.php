@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Team;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\DeleteTeamForm;
@@ -13,7 +12,10 @@ class DeleteTeamTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_teams_can_be_deleted()
+    /**
+     * @test
+     */
+    public function teams_can_be_deleted()
     {
         $this->actingAs($user = User::factory()->withTeam()->create());
 
@@ -25,5 +27,4 @@ class DeleteTeamTest extends TestCase
         $this->assertNull($team->fresh());
         $this->assertCount(0, $user->fresh()->teams);
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'next'     => 'Кейинги &raquo;',
+    'next' => 'Кейинги &raquo;',
     'previous' => '&laquo; Олдинги',
 ];

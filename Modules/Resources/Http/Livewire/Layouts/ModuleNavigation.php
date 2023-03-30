@@ -3,6 +3,7 @@
 namespace Modules\Resources\Http\Livewire\Layouts;
 
 use Livewire\Component;
+use Trans;
 
 class ModuleNavigation extends Component
 {
@@ -13,30 +14,30 @@ class ModuleNavigation extends Component
     {
         $this->navigation = [
             [
-                'label'   => 'Discover',
-                'name'    => 'resources.home',
-                'icon'    => 'fa-regular fa-telescope',
+                'label' => 'Discover',
+                'name' => 'resources.home',
+                'icon' => 'fa-regular fa-telescope',
                 //                    'icon'    => 'fa-regular fa-earth-americas',
                 //                    'icon'    => 'heroicon-o-globe',
-                'module'  => 'resources',
-                'current' => false
+                'module' => 'resources',
+                'current' => false,
             ],
             [
-                'label'   => \Trans::get('Media'),
-                'name'    => 'resources.drafts',
-                'icon'    => 'fa-regular fa-photo-film-music',
+                'label' => Trans::get('Media'),
+                'name' => 'resources.drafts',
+                'icon' => 'fa-regular fa-photo-film-music',
                 //                    'icon'    => 'heroicon-o-briefcase',
-                'module'  => 'resources',
-                'current' => false
+                'module' => 'resources',
+                'current' => false,
             ],
             [
-                'label'   => \Trans::get('Articles'),
-                'name'    => 'resources.drafts',
-                'icon'    => 'fa-duotone fa-newspaper',
+                'label' => Trans::get('Articles'),
+                'name' => 'resources.drafts',
+                'icon' => 'fa-duotone fa-newspaper',
                 //                    'icon'    => 'heroicon-o-briefcase',
-                'module'  => 'resources',
-                'current' => false
-            ]
+                'module' => 'resources',
+                'current' => false,
+            ],
         ];
     }
 

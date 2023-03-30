@@ -3,14 +3,13 @@
 namespace Modules\Social\Http\Livewire\Partials;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class WhoToFollowSection extends Component
 {
     public function getUsersQueryProperty()
     {
-        return User::query();
+        return User::query()->with(['profile']);
     }
 
     public function getWhoToFollowProperty()
@@ -18,7 +17,7 @@ class WhoToFollowSection extends Component
         return $this
             ->usersQuery
             ->withCount(['followers'])
-            ->where('id', '<>', Auth::id())
+            ->where('id', '<>', auth()->id())
             ->orderBy('followers_count', 'desc')
             ->distinct()
             ->limit(3)->get();

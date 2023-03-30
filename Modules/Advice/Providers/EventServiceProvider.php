@@ -1,10 +1,10 @@
 <?php
 
-    namespace Modules\Advice\Providers;
+namespace Modules\Advice\Providers;
 
-    use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
-    class EventServiceProvider extends ServiceProvider
-    {
-        protected $listen = [];
-    }
+class EventServiceProvider extends ServiceProvider
+{
+    protected $listen = [];
+}

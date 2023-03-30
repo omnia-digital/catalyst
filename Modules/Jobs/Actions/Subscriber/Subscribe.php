@@ -1,15 +1,15 @@
-<?php namespace Modules\Jobs\Actions\Subscriber;
+<?php
 
-use Modules\Jobs\Models\Subscriber;
+namespace Modules\Jobs\Actions\Subscriber;
+
 use Illuminate\Support\Arr;
+use Modules\Jobs\Models\Subscriber;
 
 class Subscribe
 {
     /**
      * Subscribe an email to the list.
      *
-     * @param string $email
-     * @param array|null $options
      * @return Subscriber;
      */
     public function execute(string $email, ?array $options = [])
@@ -18,8 +18,8 @@ class Subscribe
             ['email' => $email],
             [
                 'first_name' => Arr::get($options, 'first_name'),
-                'last_name'  => Arr::get($options, 'last_name'),
-                'options'    => collect($options)->except(['first_name', 'last_name'])->all()
+                'last_name' => Arr::get($options, 'last_name'),
+                'options' => collect($options)->except(['first_name', 'last_name'])->all(),
             ]);
 
         // Update frequency if subscriber change his frequency.

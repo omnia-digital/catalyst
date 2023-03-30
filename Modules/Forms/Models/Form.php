@@ -17,14 +17,6 @@ class Form extends Model
 
     protected $guarded = [];
 
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-                          ->generateSlugsFrom('name')
-                          ->saveSlugsTo('slug')
-                          ->doNotGenerateSlugsOnUpdate();
-    }
-
     public static function getRegistrationForm()
     {
         return self::query()
@@ -33,11 +25,19 @@ class Form extends Model
             ->first();
     }
 
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+                          ->generateSlugsFrom('name')
+                          ->saveSlugsTo('slug')
+                          ->doNotGenerateSlugsOnUpdate();
+    }
+
     // Attributes
 
     public function getIsActiveAttribute()
     {
-        return !is_null($this->published_at);
+        return ! is_null($this->published_at);
     }
 
     // Relationships
@@ -61,5 +61,4 @@ class Form extends Model
     {
         return $this->belongsTo(FormType::class);
     }
-
 }

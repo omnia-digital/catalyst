@@ -14,7 +14,10 @@ class DeleteAccountTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_user_accounts_can_be_deleted()
+    /**
+     * @test
+     */
+    public function user_accounts_can_be_deleted()
     {
         if (! Features::hasAccountDeletionFeatures()) {
             return $this->markTestSkipped('Account deletion is not enabled.');
@@ -23,11 +26,11 @@ class DeleteAccountTest extends TestCase
         $this->actingAs($user = User::factory()->create());
 
         $profile = new Profile([
-            'first_name'       => 'test first name',
-            'last_name'       => 'test last name',
-            'bio'        => 'test bio',
+            'first_name' => 'test first name',
+            'last_name' => 'test last name',
+            'bio' => 'test bio',
             'remote_url' => 'http://test.url/',
-            'location'   => 'test location',
+            'location' => 'test location',
         ]);
 
         $user->profile()->save($profile);
@@ -39,7 +42,10 @@ class DeleteAccountTest extends TestCase
         $this->assertNotNull($user->fresh()->deleted_at);
     }
 
-    public function test_correct_password_must_be_provided_before_account_can_be_deleted()
+    /**
+     * @test
+     */
+    public function correct_password_must_be_provided_before_account_can_be_deleted()
     {
         if (! Features::hasAccountDeletionFeatures()) {
             return $this->markTestSkipped('Account deletion is not enabled.');

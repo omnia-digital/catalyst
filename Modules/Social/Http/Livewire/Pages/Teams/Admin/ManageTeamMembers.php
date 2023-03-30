@@ -33,10 +33,10 @@ class ManageTeamMembers extends Component
     {
         $this->validate([
             'roleName' => [
-                'required', 
-                'string', 
-                Rule::unique(config('permission.table_names.roles'), 'name')->where(fn ($q) => $q->where('team_id', $this->team->id))
-            ]
+                'required',
+                'string',
+                Rule::unique(config('permission.table_names.roles'), 'name')->where(fn ($q) => $q->where('team_id', $this->team->id)),
+            ],
         ]);
 
         Role::create([

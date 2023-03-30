@@ -16,7 +16,7 @@ class FormSubmission extends Model
         'form_id',
         'team_id',
         'user_id',
-        'data'
+        'data',
     ];
 
     protected $casts = [

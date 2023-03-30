@@ -2,14 +2,10 @@
 
 namespace Modules\Social\Database\Factories;
 
-use App\Models\Team;
 use App\Models\User;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Laravel\Jetstream\Features;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
-use Modules\Social\Models\Profile;
 
 class PostFactory extends Factory
 {
@@ -28,8 +24,8 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'    => User::all()->random()->id,
-            'body'       => $this->faker->paragraph(4),
+            'user_id' => User::all()->random()->id,
+            'body' => $this->faker->paragraph(4),
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -41,14 +37,14 @@ class PostFactory extends Factory
     public function withType($type): static
     {
         return $this->state([
-            'type' => $type
+            'type' => $type,
         ]);
     }
 
     public function asResource(): PostFactory
     {
         return $this->withType(PostType::ARTICLE)->state([
-            'title' => $this->faker->company()
+            'title' => $this->faker->company(),
         ]);
     }
 
@@ -56,7 +52,7 @@ class PostFactory extends Factory
     {
         return $this->withType(PostType::QUESTION)->state([
             'title' => $this->faker->sentence,
-            'body' => $this->faker->paragraph(6)
+            'body' => $this->faker->paragraph(6),
         ]);
     }
 
@@ -69,11 +65,10 @@ class PostFactory extends Factory
             Post::factory($replies)
                 ->state(function (array $attributes, Post $post) {
                     return [
-                        'postable_id'   => $post->id,
+                        'postable_id' => $post->id,
                         'postable_type' => Post::class,
                     ];
                 })
         );
     }
 }
-

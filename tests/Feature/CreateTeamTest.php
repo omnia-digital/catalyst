@@ -13,16 +13,19 @@ class CreateTeamTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_teams_can_be_created()
+    /**
+     * @test
+     */
+    public function teams_can_be_created()
     {
         $this->actingAs($user = User::factory()->withTeam()->create());
 
         $profile = new Profile([
-            'first_name'       => 'test first name',
-            'last_name'       => 'test last name',
-            'bio'        => 'test bio',
+            'first_name' => 'test first name',
+            'last_name' => 'test last name',
+            'bio' => 'test bio',
             'remote_url' => 'http://test.url/',
-            'location'   => 'test location',
+            'location' => 'test location',
         ]);
 
         $user->profile()->save($profile);

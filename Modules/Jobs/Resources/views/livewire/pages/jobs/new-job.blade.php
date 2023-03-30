@@ -8,7 +8,7 @@
                     <x-heroicon-o-arrow-left class="h-6"/>
                 </a>
             </div>
-            <a href="{{route('jobs.home')}}">
+            <a href="{{ route('jobs.home') }}">
                 <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Jobs') }}</x-library::heading.1>
             </a>
         </div>
@@ -222,7 +222,7 @@
                                         <x-library::input.error class="mt-2" for="selected_addons"/>
                                     </fieldset>
 
-                                    @if(!empty($price))
+                                    @if (!empty($price))
                                         <p class="font-bold text-lg pt-5">Price: {{ \Platform::money($price ?? 0) }}</p>
                                     @endif
                                 </div>
@@ -401,7 +401,7 @@
 
                                             <div>
                                                 <x-library::input.label for="card_holder_name" value="Card Holder Name"/>
-                                                <x-library::input.text x-model="cardHolderName" id="card_holder_name" placeholder="Phuc Le"/>
+                                                <x-library::input.text x-model="cardHolderName" id="card_holder_name" placeholder="John Smith"/>
                                                 <x-library::input.error for="card_holder_name"/>
                                             </div>
 

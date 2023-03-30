@@ -10,14 +10,13 @@ class PostObserver
     /**
      * Handle the Post "created" event.
      *
-     * @param  \Modules\Social\Models\Post  $post
      * @return void
      */
     public function created(Post $post)
     {
         if ($post->type == PostType::ARTICLE) {
             $post->attachTags(['article']);
-        } else if ($post->type == PostType::RESOURCE) {
+        } elseif ($post->type == PostType::RESOURCE) {
             $post->attachTags(['resource']);
         }
 
@@ -27,7 +26,6 @@ class PostObserver
     /**
      * Handle the Post "updated" event.
      *
-     * @param  \Modules\Social\Models\Post  $post
      * @return void
      */
     public function updated(Post $post)
@@ -38,7 +36,6 @@ class PostObserver
     /**
      * Handle the Post "deleted" event.
      *
-     * @param  \Modules\Social\Models\Post  $post
      * @return void
      */
     public function deleted(Post $post)
@@ -49,7 +46,6 @@ class PostObserver
     /**
      * Handle the Post "restored" event.
      *
-     * @param  \Modules\Social\Models\Post  $post
      * @return void
      */
     public function restored(Post $post)
@@ -60,7 +56,6 @@ class PostObserver
     /**
      * Handle the Post "force deleted" event.
      *
-     * @param  \Modules\Social\Models\Post  $post
      * @return void
      */
     public function forceDeleted(Post $post)

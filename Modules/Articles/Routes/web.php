@@ -1,11 +1,11 @@
 <?php
 
-use Modules\Articles\Http\Livewire\Pages\Bookmarks\Index as BookmarkIndex;
 use Modules\Articles\Http\Livewire\Pages\Articles\Drafts as ArticlesDrafts;
 use Modules\Articles\Http\Livewire\Pages\Articles\Edit;
 use Modules\Articles\Http\Livewire\Pages\Articles\Index;
 use Modules\Articles\Http\Livewire\Pages\Articles\Published as ArticlesPublished;
 use Modules\Articles\Http\Livewire\Pages\Articles\Show;
+use Modules\Articles\Http\Livewire\Pages\Bookmarks\Index as BookmarkIndex;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Http\Middleware\GuestAccessMiddleware;

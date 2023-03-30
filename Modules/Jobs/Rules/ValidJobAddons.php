@@ -2,21 +2,21 @@
 
 namespace Modules\Jobs\Rules;
 
-use Modules\Jobs\Models\JobPositionAddon;
 use Illuminate\Contracts\Validation\Rule;
+use Modules\Jobs\Models\JobPositionAddon;
 
 class ValidJobAddons implements Rule
 {
     /**
      * Determine if the validation rule passes.
      *
-     * @param string $attribute
-     * @param mixed $value
+     * @param  string  $attribute
+     * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
     {
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             return false;
         }
 

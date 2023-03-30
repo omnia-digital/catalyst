@@ -2,8 +2,8 @@
 
 namespace Modules\Jobs\Http\Livewire\Pages\Jobs;
 
-use Modules\Jobs\Models\JobPosition;
 use Livewire\Component;
+use Modules\Jobs\Models\JobPosition;
 
 class JobDetail extends Component
 {

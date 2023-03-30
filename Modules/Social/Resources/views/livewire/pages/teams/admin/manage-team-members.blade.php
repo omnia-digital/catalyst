@@ -39,8 +39,8 @@
                         >
                             <span x-text="tab.title"></span>
                             <span
-                                x-show="tab.count" 
-                                x-text="tab.count" 
+                                x-show="tab.count"
+                                x-text="tab.count"
                                 class=" ml-3 py-0.5 px-2.5 rounded-full text-xs font-bold text-white md:inline-block bg-primary"
                             ></span>
                         </a>
@@ -91,9 +91,9 @@
 
                                 <!-- Remove Team Member -->
                             @elseif (Gate::check('removeTeamMember', $team))
-                                <button 
+                                <button
                                     wire:click="confirmTeamMemberRemoval('{{ $member->id }}')"
-                                    class="cursor-pointer ml-6 text-sm text-red-500 hover:underline focus:underline" 
+                                    class="cursor-pointer ml-6 text-sm text-red-500 hover:underline focus:underline"
                                 >{{ \Trans::get('Remove') }}</button>
                             @endif
                         </div>

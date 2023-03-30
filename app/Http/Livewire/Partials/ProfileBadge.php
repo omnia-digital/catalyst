@@ -23,8 +23,6 @@ class ProfileBadge extends Component
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
     public function render(): \Illuminate\View\View
     {

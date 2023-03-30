@@ -23,10 +23,10 @@ class JobAddonFactory extends Factory
     public function definition()
     {
         return [
-            'name'        => $name = $this->faker->name,
-            'code'        => Str::slug($name),
+            'name' => $name = $this->faker->name,
+            'code' => Str::slug($name),
             'description' => $this->faker->paragraph,
-            'price'       => $this->faker->numberBetween(10, 100),
+            'price' => $this->faker->numberBetween(10, 100),
         ];
     }
 }

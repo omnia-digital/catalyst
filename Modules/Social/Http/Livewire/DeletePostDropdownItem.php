@@ -2,16 +2,8 @@
 
 namespace Modules\Social\Http\Livewire;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use Modules\Social\Actions\Posts\CreateNewPostAction;
-use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
-use Modules\Social\Notifications\NewCommentNotification;
-use Modules\Social\Support\Livewire\WithPostEditor;
-use OmniaDigital\OmniaLibrary\Livewire\WithModal;
-use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class DeletePostDropdownItem extends Component
 {

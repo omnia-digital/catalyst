@@ -8,7 +8,7 @@ module.exports = {
         './vendor/laravel/jetstream/**/*.blade.php',
         './vendor/omnia-digital/library/resources/views/**/*.blade.php',
         './vendor/omnia-digital/library/resources/js/**/*.js',
-        './vendor/phuclh/media-manager/resources/views/**/*.blade.php',
+        './vendor/omnia-digitl/media-manager/resources/views/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './Modules/*/Resources/views/**/*.blade.php',

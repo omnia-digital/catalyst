@@ -9,9 +9,9 @@
                     <a href="{{ route('social.home') }}"
                        title="{{ env('APP_NAME') }}"
                        class="text-base-text-color py-2 group flex justify-left items-center text-xl space-x-2 font-medium">
-                        @if(config('app.logo_path'))
+                        @if (config('app.logo_path'))
                             <div class="flex items-center h-14 flex-shrink-0">
-                                @if(config('app.theme_light_type') === 'light')
+                                @if (config('app.theme_light_type') === 'light')
                                     <img src="{{ config('app.logo_path') }}" class="h-10"/>
                                 @else
                                     <img src="{{ config('app.logo_path_dark') }}" class="h-10"/>
@@ -99,7 +99,7 @@
                         {{--                        </x-jet-responsive-nav-link>--}}
                         {{--                    @endcan--}}
 
-                        @if(Auth::user()->hasMultipleTeams())
+                        @if (Auth::user()->hasMultipleTeams())
                             <div class="border-t border-neutral-light"></div>
 
                             <!-- Team Switcher -->

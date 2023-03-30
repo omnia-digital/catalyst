@@ -2,7 +2,6 @@
 
 namespace Modules\Jobs\Nova;
 
-use Modules\Jobs\LaraContract;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
@@ -14,7 +13,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use Modules\Jobs\LaraContract;
 use Sixlive\TextCopy\TextCopy;
 
 class Coupon extends Resource
@@ -44,20 +43,19 @@ class Coupon extends Resource
      */
     public static $search = [
         'name',
-        'code'
+        'code',
     ];
 
     /**
      * Get the fields displayed by the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function fields(Request $request)
     {
         $types = [
             static::$model::PERCENT => 'Percent',
-            static::$model::FIXED   => 'Fixed'
+            static::$model::FIXED => 'Fixed',
         ];
 
         return [
@@ -82,31 +80,30 @@ class Coupon extends Resource
             NovaDependencyContainer::make([
                 Number::make('Percent', 'discount')
                     ->rules('required', 'min:0', 'max:100', 'numeric')
-                    ->displayUsing(fn($value) => $value . '%')
+                    ->displayUsing(fn ($value) => $value . '%'),
             ])->dependsOn('type', static::$model::PERCENT),
 
             NovaDependencyContainer::make([
                 Currency::make('Amount', 'discount')
                     ->rules('required', 'numeric')
-                    ->displayUsing(fn($value) => LaraContract::money($value))
+                    ->displayUsing(fn ($value) => LaraContract::money($value)),
             ])->dependsOn('type', static::$model::FIXED),
 
             Text::make('Discount')
-                ->displayUsing(fn($value) => $this->type === static::$model::PERCENT ? $value . '%' : LaraContract::money($value))
+                ->displayUsing(fn ($value) => $this->type === static::$model::PERCENT ? $value . '%' : LaraContract::money($value))
                 ->onlyOnIndex(),
 
             DateTime::make('Expires At')->sortable(),
 
-            Text::make('Redeems', fn() => $this->redeems->count())->sortable(),
+            Text::make('Redeems', fn () => $this->redeems->count())->sortable(),
 
-            HasMany::make('Redeems', 'redeems', RedeemedCoupon::class)
+            HasMany::make('Redeems', 'redeems', RedeemedCoupon::class),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function cards(Request $request)
@@ -117,7 +114,6 @@ class Coupon extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function filters(Request $request)
@@ -128,7 +124,6 @@ class Coupon extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function lenses(Request $request)
@@ -139,7 +134,6 @@ class Coupon extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function actions(Request $request)

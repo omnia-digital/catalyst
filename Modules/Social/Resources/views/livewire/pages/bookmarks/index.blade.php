@@ -13,12 +13,12 @@
             <!-- Filters -->
             @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
-            @if(empty($bookmarks))
+            @if (empty($bookmarks))
                 <x-library::heading.2>No Bookmarked Resources</x-library::heading.2>
             @else
                 <div class="">
                     <ul role="list" class="masonry masonry-2 space-y-4">
-                        @foreach($bookmarks as $bookmark)
+                        @foreach ($bookmarks as $bookmark)
                             <li>
                                 <livewire:social::components.post-card :post="$bookmark->bookmarkable()->first()"/>
                             </li>

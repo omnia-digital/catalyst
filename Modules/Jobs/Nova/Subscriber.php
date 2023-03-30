@@ -3,13 +3,8 @@
 namespace Modules\Jobs\Nova;
 
 use Illuminate\Http\Request;
-use KABBOUCHI\NovaImpersonate\Impersonate;
-use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
-use Vyuldashev\NovaPermission\PermissionBooleanGroup;
-use Vyuldashev\NovaPermission\RoleSelect;
 
 class Subscriber extends Resource
 {
@@ -39,7 +34,6 @@ class Subscriber extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function fields(Request $request)
@@ -48,14 +42,13 @@ class Subscriber extends Resource
             ID::make()->sortable(),
 
             Text::make('Email')
-                ->sortable()
+                ->sortable(),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function cards(Request $request)
@@ -66,7 +59,6 @@ class Subscriber extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function filters(Request $request)
@@ -77,7 +69,6 @@ class Subscriber extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function lenses(Request $request)
@@ -88,7 +79,6 @@ class Subscriber extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function actions(Request $request)

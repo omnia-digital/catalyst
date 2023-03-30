@@ -9,7 +9,6 @@ use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Sixlive\TextCopy\TextCopy;
 
 class RedeemedCoupon extends Resource
@@ -44,7 +43,6 @@ class RedeemedCoupon extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function fields(Request $request)
@@ -58,7 +56,7 @@ class RedeemedCoupon extends Resource
 
             TextCopy::make('Code')->sortable(),
 
-            Text::make('Type', 'type', fn($value) => ucfirst($value))->sortable(),
+            Text::make('Type', 'type', fn ($value) => ucfirst($value))->sortable(),
 
             Currency::make('Original Price')->sortable(),
 
@@ -66,14 +64,13 @@ class RedeemedCoupon extends Resource
 
             Currency::make('After Discount Price')->onlyOnDetail(),
 
-            Date::make('Redeemed At')->sortable()
+            Date::make('Redeemed At')->sortable(),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function cards(Request $request)
@@ -84,7 +81,6 @@ class RedeemedCoupon extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function filters(Request $request)
@@ -95,7 +91,6 @@ class RedeemedCoupon extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function lenses(Request $request)
@@ -106,7 +101,6 @@ class RedeemedCoupon extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function actions(Request $request)

@@ -2,17 +2,13 @@
 
 namespace Modules\Jobs\Models;
 
-use App\Models\Tag;
 use App\Models\Team;
 use App\Traits\Coupon\HasCoupon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Jobs\Models\User;
-use Modules\Jobs\Support\Transaction\HasTransaction;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Jetstream\Jetstream;
 use Modules\Jobs\Enums\JobAddons;
+use Modules\Jobs\Support\Transaction\HasTransaction;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
@@ -37,12 +33,12 @@ class JobPosition extends Model
         'experience_level_id',
         'job_length_id',
         'project_size_id',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'is_remote' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     protected $dates = [
@@ -55,7 +51,7 @@ class JobPosition extends Model
     protected static function booted()
     {
         static::creating(function (self $job) {
-            $job->user_id = Auth::id();
+            $job->user_id = auth()->id();
         });
     }
 
@@ -67,7 +63,7 @@ class JobPosition extends Model
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
                           ->generateSlugsFrom('title')
@@ -111,18 +107,16 @@ class JobPosition extends Model
     /**
      * Get featured jobs
      *
-     * @param $query
-     * @param null $inDays
+     * @param  null  $inDays
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function scopeFeatured($query, $inDays = null)
     {
-        return $query->whereHas('addons', fn($query) => $query->where('code', JobAddons::FEATURED_JOB))
-            ->when($inDays, fn($query) => $query->whereDate('created_at', '>=', now()->subDays($inDays)));
+        return $query->whereHas('addons', fn ($query) => $query->where('code', JobAddons::FEATURED_JOB))
+            ->when($inDays, fn ($query) => $query->whereDate('created_at', '>=', now()->subDays($inDays)));
     }
 
     /**
-     * @param string $code
      * @return bool
      */
     public function hasAddon(string $code)

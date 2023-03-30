@@ -2,14 +2,12 @@
 
 namespace Modules\Forms\Http\Livewire;
 
-
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Modules\Forms\Models\FormSubmission;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
@@ -26,12 +24,68 @@ class Form extends Component implements HasForms
     public bool $needBootcamp = false;
     public string $submitText;
 
-    public function mount(\Modules\Forms\Models\Form $form, int $team_id = null, $submitText = "Submit")
+    public function mount(\Modules\Forms\Models\Form $form, int $team_id = null, $submitText = 'Submit')
     {
         $this->formModel = $form;
         $this->team_id = $team_id;
         $this->submitText = $submitText;
         $this->form->fill();
+    }
+
+    public function submit(): void
+    {
+        $formData = $this->prepareFormData($this->form->getState());
+
+        $this->processFormSubmission($formData);
+
+        $this->afterSubmission();
+    }
+
+    public function prepareFormData($formData)
+    {
+        $formModelFields = collect($this->formModel->content);
+
+        foreach ($formData as $formDataKey => $value) {
+            // Search Form Model fields for the field that matches the form data
+            $formFieldKeyFound = $formModelFields->search(function ($formModelField, $formModelFieldKey) use ($formDataKey) {
+                if ($formModelField['data']['name'] === $formDataKey) {
+                    return true;
+                }
+            });
+            $formFieldType = $formModelFields[$formFieldKeyFound]['type'];
+            $formFieldLabel = $formModelFields[$formFieldKeyFound]['data']['label'];
+            $formData[$formDataKey] = [
+                'field_type' => $formFieldType,
+                'data' => $value,
+                'label' => $formFieldLabel,
+            ];
+        }
+
+        return $formData;
+    }
+
+    public function processFormSubmission($formData)
+    {
+        FormSubmission::create([
+            'form_id' => $this->formModel->id,
+            'user_id' => auth()->id(),
+            'team_id' => $team_id ?? null,
+            'data' => $formData,
+        ]);
+    }
+
+    public function afterSubmission()
+    {
+        $this->formSubmitted = true;
+
+        $this->success('Form submitted successfully');
+
+        $this->redirectRoute('social.home');
+    }
+
+    public function render()
+    {
+        return view('forms::livewire.form');
     }
 
     protected function getFormSchema(): array
@@ -75,61 +129,5 @@ class Form extends Component implements HasForms
         // as the form is dynamic and we can't add a public property for
         // every field.
         return 'data';
-    }
-
-    public function submit(): void
-    {
-        $formData = $this->prepareFormData($this->form->getState());
-
-        $this->processFormSubmission($formData);
-
-        $this->afterSubmission();
-    }
-
-    public function prepareFormData($formData)
-    {
-        $formModelFields = collect($this->formModel->content);
-
-        foreach($formData as $formDataKey => $value) {
-            // Search Form Model fields for the field that matches the form data
-            $formFieldKeyFound = $formModelFields->search(function($formModelField, $formModelFieldKey) use ($formDataKey) {
-                if ($formModelField['data']['name'] === $formDataKey) {
-                    return true;
-                }
-            });
-            $formFieldType = $formModelFields[$formFieldKeyFound]['type'];
-            $formFieldLabel = $formModelFields[$formFieldKeyFound]['data']['label'];
-            $formData[$formDataKey] = [
-                'field_type' => $formFieldType,
-                'data' => $value,
-                'label' => $formFieldLabel
-            ];
-        }
-
-        return $formData;
-    }
-
-    public function processFormSubmission($formData)
-    {
-        FormSubmission::create([
-            'form_id' => $this->formModel->id,
-            'user_id' => auth()->id(),
-            'team_id' => $team_id ?? null,
-            'data' => $formData,
-        ]);
-    }
-
-    public function afterSubmission()
-    {
-        $this->formSubmitted = true;
-        
-        $this->success('Form submitted successfully');
-
-        $this->redirectRoute('social.home');
-    }
-
-    public function render()
-    {
-        return view('forms::livewire.form');
     }
 }

@@ -11,10 +11,10 @@ class Subscriber extends Model
 
     protected $fillable = [
         'email',
-        'options'
+        'options',
     ];
 
     protected $casts = [
-        'options' => 'array'
+        'options' => 'array',
     ];
 }

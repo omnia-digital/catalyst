@@ -20,6 +20,11 @@ class UserTable extends Component implements HasTable
         return view('crm::livewire.components.user-table');
     }
 
+    public function isTableSearchable(): bool
+    {
+        return true;
+    }
+
     protected function getTableQuery()
     {
         return User::query()->where;
@@ -67,10 +72,5 @@ class UserTable extends Component implements HasTable
         return [
             DeleteBulkAction::make(),
         ];
-    }
-
-    public function isTableSearchable(): bool
-    {
-        return true;
     }
 }

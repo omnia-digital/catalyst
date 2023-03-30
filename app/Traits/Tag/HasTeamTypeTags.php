@@ -1,19 +1,19 @@
 <?php
 
-    namespace App\Traits\Tag;
+namespace App\Traits\Tag;
 
-    trait HasTeamTypeTags
+trait HasTeamTypeTags
+{
+    public function teamTypeTags()
     {
-        public function teamTypeTags()
-        {
-            return $this
-                ->morphToMany(self::getTagClassName(), 'taggable')
-                ->where('type', 'team_type')
-                ->ordered();
-        }
-
-        public function teamTypes()
-        {
-            return $this->teamTypeTags();
-        }
+        return $this
+            ->morphToMany(self::getTagClassName(), 'taggable')
+            ->where('type', 'team_type')
+            ->ordered();
     }
+
+    public function teamTypes()
+    {
+        return $this->teamTypeTags();
+    }
+}

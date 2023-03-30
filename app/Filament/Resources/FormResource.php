@@ -4,12 +4,17 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\FormResource\Pages\CreateForm;
 use App\Filament\Resources\FormResource\Pages\EditForm;
-use App\Filament\Resources\FormResource\Pages\EditFormType;
 use App\Filament\Resources\FormResource\Pages\ListForms;
-use App\Filament\Resources\FormResource\Pages\ListFormsType;
 use App\Filament\Resources\FormResource\Pages\ViewForm;
-use App\Filament\Resources\FormResource\Pages\ViewFormType;
 use Closure;
+use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Actions\ActionGroup;
@@ -20,16 +25,6 @@ use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
-use Filament\Forms;
-use Filament\Forms\Components\Builder;
-use Filament\Forms\Components\Builder\Block;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\KeyValue;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Modules\Forms\Http\Livewire\UserRegistrationForm;
@@ -41,16 +36,6 @@ class FormResource extends Resource
     protected static ?string $model = \Modules\Forms\Models\Form::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Forms';
-
-    protected static function getNavigationBadge(): ?string
-    {
-        return static::getEloquentQuery()->get()->count();
-    }
-
-    protected static function getNavigationBadgeColor(): ?string
-    {
-        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
-    }
 
     public static function form(Form $form): Form
     {
@@ -134,41 +119,18 @@ class FormResource extends Resource
                         ]),
                 ])
                 ->createItemButtonLabel('Add Form Element')
-                ->disableLabel()
+                ->disableLabel(),
         ]);
-    }
-
-    protected static function getFieldNameInput(): Grid
-    {
-        // This is not a Filament-specific method, simply saves on repetition
-        // between our builder blocks.
-        return Grid::make()
-            ->schema([
-                TextInput::make('label')
-                    ->lazy()
-                    ->afterStateUpdated(function (\Closure $set, $state) {
-                        $name = Str::of($state)
-                                    ->snake()
-                                    ->replace(['-'], '_')
-                                    ->lower();
-                        $set('name', $name);
-                    })
-                    ->required(),
-                TextInput::make('name')
-                    ->label('Field Slug')
-                    ->required(),
-                
-            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('name'),
             ])
             ->filters([
-                Filter::make('name')
+                Filter::make('name'),
             ])
             ->actions([
                 ViewAction::make(),
@@ -176,7 +138,7 @@ class FormResource extends Resource
                     EditAction::make(),
                     ReplicateAction::make(),
                     DeleteAction::make(),
-                ])
+                ]),
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),
@@ -197,6 +159,39 @@ class FormResource extends Resource
             'view' => ViewForm::route('/{record}'),
             'edit' => EditForm::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getEloquentQuery()->get()->count();
+    }
+
+    protected static function getNavigationBadgeColor(): ?string
+    {
+        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
+    }
+
+    protected static function getFieldNameInput(): Grid
+    {
+        // This is not a Filament-specific method, simply saves on repetition
+        // between our builder blocks.
+        return Grid::make()
+            ->schema([
+                TextInput::make('label')
+                    ->lazy()
+                    ->afterStateUpdated(function (Closure $set, $state) {
+                        $name = Str::of($state)
+                                    ->snake()
+                                    ->replace(['-'], '_')
+                                    ->lower();
+                        $set('name', $name);
+                    })
+                    ->required(),
+                TextInput::make('name')
+                    ->label('Field Slug')
+                    ->required(),
+
+            ]);
     }
 
     protected function getTableRecordUrlUsing(): Closure

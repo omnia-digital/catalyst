@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class UserNotifications extends Component
@@ -13,13 +12,13 @@ class UserNotifications extends Component
     {
         return [
             'notificationRead' => 'markAsRead',
-            'echo-notification:App.Models.User.' . Auth::id() => '$refresh',
+            'echo-notification:App.Models.User.' . auth()->id() => '$refresh',
         ];
     }
 
     public function markAsRead($notificationId)
     {
-        Auth::user()->notifications()->where('id', $notificationId)->first()?->markAsRead();
+        auth()->user()->notifications()->where('id', $notificationId)->first()?->markAsRead();
     }
 
     public function showAlert($notification)
@@ -34,7 +33,7 @@ class UserNotifications extends Component
 
     public function getRowsQueryProperty()
     {
-        return Auth::user()
+        return auth()->user()
             ->notifications()
             ->orderByDesc('created_at');
     }
@@ -46,14 +45,14 @@ class UserNotifications extends Component
 
     public function getAllNotificationCountProperty()
     {
-        return Auth::user()->notifications()->count();
+        return auth()->user()->notifications()->count();
     }
 
     public function render()
     {
         return view('livewire.user-notifications', [
             'notifications' => $this->rows,
-            'allNotificationCount' => $this->allNotificationCount
+            'allNotificationCount' => $this->allNotificationCount,
         ]);
     }
 }

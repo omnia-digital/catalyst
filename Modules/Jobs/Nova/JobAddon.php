@@ -7,7 +7,6 @@ use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Sixlive\TextCopy\TextCopy;
 
 class JobAddon extends Resource
@@ -38,7 +37,6 @@ class JobAddon extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function fields(Request $request)
@@ -64,7 +62,6 @@ class JobAddon extends Resource
     /**
      * Get the cards available for the request.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function cards(Request $request)
@@ -75,7 +72,6 @@ class JobAddon extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function filters(Request $request)
@@ -86,7 +82,6 @@ class JobAddon extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function lenses(Request $request)
@@ -97,7 +92,6 @@ class JobAddon extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function actions(Request $request)

@@ -3,13 +3,11 @@
 namespace App\Observers;
 
 use App\Models\User;
-use App\Models\UserType;
 
 class UserObserver
 {
     public function created(User $user)
     {
-
     }
 
     public function updated(User $user)
