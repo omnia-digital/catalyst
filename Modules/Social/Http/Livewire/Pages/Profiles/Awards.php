@@ -8,7 +8,7 @@ use Modules\Social\Models\Profile;
 class Awards extends Component
 {
     public $profile;
-        
+
     public function getUserProperty()
     {
         return $this->profile->user;

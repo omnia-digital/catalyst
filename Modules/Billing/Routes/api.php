@@ -36,8 +36,8 @@ Route::name('billing.')
              $user->chargentSubscription()
                   ->where('chargent_order_id', $request->chargent_order_object_id)
                   ->latest()->first()->update([
-                     'card_type' => $request->card_type,
-                     'last_4' => $request->last_4,
-                 ]);
+                      'card_type' => $request->card_type,
+                      'last_4' => $request->last_4,
+                  ]);
          });
      });

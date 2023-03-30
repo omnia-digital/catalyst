@@ -7,7 +7,6 @@ use Modules\Reviews\Models\Review;
 
 trait Reviewable
 {
-    
     /**
      * Get the model's reviews
      */
@@ -30,5 +29,4 @@ trait Reviewable
     {
         return $this->reviews()->where('recommend', 1)->count();
     }
-
 }

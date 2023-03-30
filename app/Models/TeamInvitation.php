@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Models;
+namespace App\Models;
 
     use Illuminate\Database\Eloquent\Relations\BelongsTo;
     use Laravel\Jetstream\Jetstream;
@@ -23,8 +23,6 @@
 
         /**
          * Get the user that was invited.
-         *
-         * @return BelongsTo
          */
         public function user(): BelongsTo
         {
@@ -33,8 +31,6 @@
 
         /**
          * Get the user who sent the invitation.
-         *
-         * @return BelongsTo
          */
         public function inviter(): BelongsTo
         {

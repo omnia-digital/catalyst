@@ -7,21 +7,21 @@ use App\Traits\Tag\HasTeamTags;
 use App\Traits\Tag\HasTeamTypeTags;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Collection;
 use Laravel\Cashier\Subscription;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Forms\Models\Form;
 use Modules\Forms\Models\FormType;
+use Modules\Jobs\Models\JobPosition;
+use Modules\Jobs\Support\HasJobs;
 use Modules\Reviews\Traits\Reviewable;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
@@ -33,12 +33,13 @@ use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Permission\Models\Role;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
-use Spatie\Permission\Models\Role;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
+use Trans;
 use Wimil\Followers\Traits\CanBeFollowed;
 
 /**
@@ -46,7 +47,7 @@ use Wimil\Followers\Traits\CanBeFollowed;
  */
 class Team extends JetstreamTeam implements HasMedia, Searchable
 {
-    use HasFactory, Notifiable, Likable, Postable, CanBeFollowed, Awardable, Reviewable, HasProfilePhoto, HasSlug, HasHandle, HasLocation, HasTeamTypeTags, InteractsWithMedia, HasAssociations;
+    use HasFactory, Notifiable, Likable, Postable, CanBeFollowed, Awardable, Reviewable, HasProfilePhoto, HasSlug, HasHandle, HasLocation, HasTeamTypeTags, InteractsWithMedia, HasAssociations, HasJobs;
 
     use HasTeamTags, HasTags {
         HasTeamTags::tags insteadof HasTags;
@@ -68,17 +69,17 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     ];
 
     protected $dates = [
-        'start_date'
+        'start_date',
     ];
 
     protected $casts = [
-        'stripe_connect_onboarding_completed' => 'boolean'
+        'stripe_connect_onboarding_completed' => 'boolean',
     ];
 
     protected $appends = [
         'profile_photo_url',
         'location_short',
-        'start_date_string'
+        'start_date_string',
     ];
 
     /**
@@ -91,6 +92,12 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+    public static function findByHandle($handle)
+    {
+        return Team::where('handle', $handle)
+                   ->first();
+    }
 
     public function getSlugOptions(): SlugOptions
     {
@@ -107,12 +114,6 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     public function getRouteKeyName()
     {
         return 'handle';
-    }
-
-    public static function findByHandle($handle)
-    {
-        return Team::where('handle', $handle)
-                   ->first();
     }
 
     public function getThumbnailAttribute($value)
@@ -153,8 +154,6 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     /**
      * Get all of the pending user applications for the team.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function teamApplications(): HasMany
     {
@@ -164,6 +163,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     public function resources(): HasMany
     {
         return $this->hasMany(Post::class)
+                    ->ofType(PostType::ARTICLE)
                     ->ofType(PostType::RESOURCE);
     }
 
@@ -282,7 +282,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function members(): BelongsToMany
     {
-        $roleId = $this->getRoleByName(config('platform.teams.default_owner_role'))->id;
+        $roleId = $this->getRoleByName(config('platform.teams.default_owner_role'))?->id;
 
         return $this->users()
                     ->wherePivotNotIn('role_id', [$roleId]);
@@ -336,7 +336,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
-        return $query->where('name', 'LIKE', "%$search%");
+        return $query->where('name', 'LIKE', "%{$search}%");
     }
 
     public function scopeWithuser(Builder $query, User $user): Builder
@@ -353,7 +353,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function stripeConnectOnboardingCompleted(): bool
     {
-        return (bool)$this->stripe_connect_onboarding_completed;
+        return (bool) $this->stripe_connect_onboarding_completed;
     }
 
     public function subscription(): BelongsTo
@@ -376,6 +376,27 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     {
         $url = route('social.teams.show', $this);
 
-        return (new SearchResult($this, $this->name, $url))->setType(\Trans::get('Teams'));
+        return (new SearchResult($this, $this->name, $url))->setType(Trans::get('Teams'));
+    }
+
+    /**
+     * Jobs
+     */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jobs()
+    {
+        return $this->hasMany(JobPosition::class);
+    }
+
+    /**
+     * Check if the company is default or not.
+     *
+     * @return mixed
+     */
+    public function isDefaultCompany()
+    {
+        return $this->personal_team;
     }
 }

@@ -1,8 +1,6 @@
 @extends('advice::livewire.layouts.pages.default-page-layout')
 
 @section('content')
-    <div class="xl:grid xl:grid-cols-9 xl:gap-9">
-        <div class="xl:col-span-6">
             <div class="mb-2 flex justify-between items-center">
                 <div class="flex-1 flex items-center">
                     <x-library::heading.1 class="py-2">Questions</x-library::heading.1>
@@ -15,11 +13,11 @@
             </div>
 
             <!-- Filters -->
-            @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
-
+            {{--@include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
+--}}
             <div class="">
                 <ul role="list" class="space-y-4">
-                    @foreach($questions as $question)
+                    @foreach ($questions as $question)
                         <li>
                             <livewire:social::components.post-card :post="$question" :wire:key="$question->id" />
                         </li>
@@ -30,11 +28,6 @@
                     {{ $questions->onEachSide(1)->links() }}
                 </div>
             </div>
-        </div>
-
-        <x-sidebar-column post-type="resource"/>
-
-    </div>
 @endsection
 @push('scripts')
     <script>
@@ -49,7 +42,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top ' . {{ \Platform::getTeamsWord() }},
+                        title: 'Top ' . {{ \Platform::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

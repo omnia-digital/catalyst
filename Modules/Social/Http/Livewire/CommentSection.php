@@ -5,7 +5,6 @@ namespace Modules\Social\Http\Livewire;
 use App\Support\Platform\Platform;
 use App\Support\Platform\WithGuestAccess;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
@@ -27,7 +26,7 @@ class CommentSection extends Component
     public ?string $content = null;
 
     protected $listeners = [
-        'post-editor:submitted' => 'saveComment'
+        'post-editor:submitted' => 'saveComment',
     ];
 
     public function mount(Post $post, $type = null)
@@ -40,7 +39,7 @@ class CommentSection extends Component
 
     public function saveComment($data)
     {
-        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('social.posts.show', $this->post));
 
             return;
@@ -61,10 +60,15 @@ class CommentSection extends Component
             return $comment;
         });
 
-        $this->post->user->notify(new NewCommentNotification($comment, Auth::user()));
+        $this->post->user->notify(new NewCommentNotification($comment, auth()->user()));
 
         $this->loadComments();
         $this->emitPostSaved($data['id']);
+    }
+
+    public function render()
+    {
+        return view('social::livewire.partials.comment-section');
     }
 
     private function loadComments(): void
@@ -72,10 +76,5 @@ class CommentSection extends Component
         $this->comments = $this->post->comments()
             ->latest()
             ->get();
-    }
-
-    public function render()
-    {
-        return view('social::livewire.partials.comment-section');
     }
 }

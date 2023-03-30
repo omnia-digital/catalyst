@@ -30,16 +30,6 @@ class FormTypeResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Forms';
 
-    protected static function getNavigationBadge(): ?string
-    {
-        return static::getEloquentQuery()->get()->count();
-    }
-
-    protected static function getNavigationBadgeColor(): ?string
-    {
-        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -59,10 +49,11 @@ class FormTypeResource extends Resource
                     ->required()
                     ->options([
                         'teams' => 'Teams',
-                        'admin' => 'Admin'
-                    ])
+                        'admin' => 'Admin',
+                    ]),
             ]);
     }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -72,7 +63,7 @@ class FormTypeResource extends Resource
                 TextColumn::make('for'),
             ])
             ->filters([
-                Filter::make('name')
+                Filter::make('name'),
             ])
             ->actions([
                 ViewAction::make(),
@@ -80,7 +71,7 @@ class FormTypeResource extends Resource
                     EditAction::make(),
                     ReplicateAction::make(),
                     DeleteAction::make(),
-                ])
+                ]),
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),
@@ -101,6 +92,16 @@ class FormTypeResource extends Resource
             'view' => ViewFormType::route('/{record}'),
             'edit' => EditFormType::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getEloquentQuery()->get()->count();
+    }
+
+    protected static function getNavigationBadgeColor(): ?string
+    {
+        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 
     protected function getTableRecordUrlUsing(): Closure

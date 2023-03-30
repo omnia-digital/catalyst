@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mx-auto px-4">
-        @if($game)
+        @if ($game)
             <div class="game-details border-b border-gray-800 pb-12 flex flex-col lg:flex-row">
                 <div class="flex-none">
                     <img src="{{ $game->details->cover_url }}" alt="cover">
@@ -10,15 +10,15 @@
                 <div class="lg:ml-12 xl:mr-64">
                     <x-library::heading.2 class="font-semibold text-4xl leading-tight mt-1">{{ $game->details->name }}</x-library::heading.2>
                     <div class="text-gray-400">
-                        @if(!empty($game->details->genres))
-                            @foreach($game?->details?->genres as $genre)
+                        @if (!empty($game->details->genres))
+                            @foreach ($game?->details?->genres as $genre)
                                 {{ $genre }}
                             @endforeach
                         @endif
                         <span>{{ $game->details->involvedCompanies }}</span>
                         <span>
-                        @if(!empty($game?->details?->platforms))
-                                @foreach($game->details->platforms as $platform)
+                        @if (!empty($game?->details?->platforms))
+                                @foreach ($game->details->platforms as $platform)
                                     {{ \MarcReichel\IGDBLaravel\Models\Platform::firstOrFail($platform)->name }}
                                 @endforeach
                             @endif
@@ -51,8 +51,8 @@
                             <div class="ml-4 text-xs">Critic <br> Score</div>
                         </div>
                         <div class="flex items-center space-x-4 mt-4 sm:mt-0 sm:ml-12">
-{{--                            @if(!empty($game->details->websites))--}}
-{{--                                @foreach($game->details->websites as $website)--}}
+{{--                            @if (!empty($game->details->websites))--}}
+{{--                                @foreach ($game->details->websites as $website)--}}
 {{--                                    {{ \MarcReichel\IGDBLaravel\Models\Website::firstOrFail($website)?->url }}--}}
 {{--                                    @switch($website['category'])--}}
 {{--                                        @case(\MarcReichel\IGDBLaravel\Enums\Website\Category::OFFICIAL)--}}
@@ -158,7 +158,7 @@
                     x-data="{ isImageModalVisible: false, image: '' }"
             >
                 <x-library::heading.2 class="text-blue-500 uppercase tracking-wide font-semibold">Images</x-library::heading.2>
-                @if($game->details->screenshots)
+                @if ($game->details->screenshots)
                     <div class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8">
                         @foreach ($game->details->screenshots as $screenshot)
                             <div>
@@ -198,11 +198,11 @@
                 </template>
             </div> <!-- end images-container -->
 
-            @if($game->details->screenshots)
+            @if ($game->details->screenshots)
                 <div class="similar-games-container mt-8">
                     <x-library::heading.2 class="text-blue-500 uppercase tracking-wide font-semibold">Similar Games</x-library::heading.2>
                     <div class="similar-games text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-12">
-                        @if($game->details->similarGames )
+                        @if ($game->details->similarGames )
                             @foreach ($game->details->similarGames as $game)
                                 {{--                        <livewire:games::components.game-card :game="$game"/>--}}
                             @endforeach

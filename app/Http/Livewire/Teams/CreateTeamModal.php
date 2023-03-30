@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Teams;
 
 use App\Actions\Teams\CreateTeam;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
@@ -73,30 +72,22 @@ class CreateTeamModal extends Component
 
     public function getTeamTagsProperty()
     {
-        return Tag::withType('team_type')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
-    }
-
-    protected function rules(): array
-    {
-        return [
-            'name' => ['required', 'max:254'],
-            'teamTypes' => ['required', 'array'],
-        ];
+        return Tag::withType('team_type')->get()->mapWithKeys(fn (Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
     }
 
     public function create()
     {
         $this->validate();
 
-        $team = (new CreateTeam())->create(Auth::user(), [
+        $team = app(CreateTeam::class)->create(auth()->user(), [
             'name' => $this->name,
             'teamTypes' => $this->teamTypes,
-//            'start_date' => $this->startDate,
-//            'summary' => $this->summary,
-//            'bannerImage' => $this->bannerImage,
-//            'mainImage' => $this->mainImage,
-//            'profilePhoto' => $this->profilePhoto,
-//            'sampleMedia' => $this->sampleMedia,
+            //            'start_date' => $this->startDate,
+            //            'summary' => $this->summary,
+            //            'bannerImage' => $this->bannerImage,
+            //            'mainImage' => $this->mainImage,
+            //            'profilePhoto' => $this->profilePhoto,
+            //            'sampleMedia' => $this->sampleMedia,
         ]);
 
         $this->closeModal('create-team');
@@ -108,7 +99,15 @@ class CreateTeamModal extends Component
     public function render()
     {
         return view('livewire.teams.create-team-modal', [
-            'teamTags' => $this->teamTags
+            'teamTags' => $this->teamTags,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'name' => ['required', 'max:254'],
+            'teamTypes' => ['required', 'array'],
+        ];
     }
 }

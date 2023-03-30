@@ -17,16 +17,6 @@ class Edit extends Component
 
     public Post $resource;
 
-    protected function rules(): array
-    {
-        return [
-            'resource.title' => ['required', 'max:255'],
-            'resource.url'   => ['nullable', 'url', 'max:255'],
-            'resource.body'  => ['required', 'min:50'],
-            'resource.image' => ['nullable','string'],
-        ];
-    }
-
     public function mount(Post $resource)
     {
         $this->resource = $resource;
@@ -43,7 +33,7 @@ class Edit extends Component
 
         $this->saveResource($validated);
 
-        if (!is_null($this->resource->published_at)) {
+        if (! is_null($this->resource->published_at)) {
             $this->resource->published_at = null;
             $this->resource->save();
         }
@@ -58,7 +48,7 @@ class Edit extends Component
 
         $this->redirectRoute('resources.show', $this->resource);
     }
-    
+
     public function publishResource()
     {
         $validated = $this->validate()['resource'];
@@ -73,7 +63,7 @@ class Edit extends Component
         $this->addMentions($validated['body']);
 
         $this->addTags($validated['body']);
-        
+
         if (isset($validated['image'])) {
             $this->resource->attachMedia([$validated['image']]);
         }
@@ -91,9 +81,9 @@ class Edit extends Component
 
     public function addTags($content)
     {
-        $hashtags = Tag::pullTags($content);
+        $hashtags = Tag::parseHashTagsFromString($content);
 
-        $tags = Tag::getTags($hashtags);
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
 
         $this->resource->attachTags($tags, 'post');
     }
@@ -104,7 +94,7 @@ class Edit extends Component
             'title' => $attributes['title'],
             'body' => Mention::processMentionContent($attributes['body']),
             'url' => $attributes['url'],
-            'image' => $attributes['image']
+            'image' => $attributes['image'],
         ]);
 
         $this->resource->fresh();
@@ -125,5 +115,15 @@ class Edit extends Component
     public function render()
     {
         return view('resources::livewire.pages.resources.edit');
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'resource.title' => ['required', 'max:255'],
+            'resource.url' => ['nullable', 'url', 'max:255'],
+            'resource.body' => ['required', 'min:50'],
+            'resource.image' => ['nullable', 'string'],
+        ];
     }
 }

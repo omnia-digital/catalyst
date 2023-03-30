@@ -5,7 +5,6 @@ namespace Modules\Games\Http\Livewire\Components;
 use Carbon\Carbon;
 use Livewire\Component;
 use Modules\Games\Actions\Games\GamesAction;
-use Modules\Games\Models\Game;
 
 class ComingSoon extends Component
 {
@@ -19,7 +18,7 @@ class ComingSoon extends Component
 
     public function getComingSoonProperty()
     {
-        return (new GamesAction())->comingSoon();
+        return (new GamesAction)->comingSoon();
     }
 
     public function render()

@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AwardResource\Pages;
-use App\Filament\Resources\AwardResource\RelationManagers;
 use App\Models\Award;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AwardResource extends Resource
 {
@@ -29,7 +26,7 @@ class AwardResource extends Resource
                     ->default('heroicon-o-academic-cap')
                     ->required(),
                 Forms\Components\TextInput::make('bg_color')->nullable(),
-                Forms\Components\TextInput::make('text_color')->nullable()
+                Forms\Components\TextInput::make('text_color')->nullable(),
             ]);
     }
 

@@ -7,7 +7,7 @@
 <span
     @class([
         'filament-badgeable-badge px-2 inline-flex  text-xs font-medium',
-        'text-primary-800 bg-primary-500/20 dark:text-primary-400' => $color === 'primary',
+        'text-primary-800 bg-primary/20 dark:text-primary-400' => $color === 'primary',
         'text-secondary-800 bg-secondary-500/20 dark:text-secondary-400' => $color === 'secondary',
         'text-success-800 bg-success-500/20 dark:text-success-400' => $color === 'success',
         'text-warning-800 bg-warning-500/20 dark:text-warning-400' => $color === 'warning',

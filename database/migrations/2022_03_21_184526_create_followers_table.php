@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateFollowersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create(config('follow.table_name', 'followers'), function (Blueprint $table) {
@@ -21,16 +16,9 @@ class CreateFollowersTable extends Migration
 
             $table->unique(['follower_type', 'follower_id', 'followable_type', 'followable_id'], 'morph_unique');
             //$table->timestamps();
-
         });
-
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists(config('followers.table_name', 'followers'));

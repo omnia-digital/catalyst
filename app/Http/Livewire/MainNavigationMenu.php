@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Settings\BillingSettings;
 use Livewire\Component;
+use Trans;
 
 class MainNavigationMenu extends Component
 {
@@ -16,64 +16,64 @@ class MainNavigationMenu extends Component
         'refresh-navigation-menu' => '$refresh',
     ];
 
-    public function mount()
-    {
-        $this->navigation = self::getDefaultNavItems();
-    }
-
     public static function getDefaultNavItems()
     {
         return [
             [
-                'label'   => 'Community',
-                'name'    => 'social.home',
-                'icon'    => 'fa-duotone fa-house',
+                'label' => Trans::get('Home'),
+                'name' => 'social.home',
+                'icon' => 'fa-duotone fa-house',
                 //                'icon'    => 'heroicon-o-home',
-                'module'  => 'social',
-                'current' => false
+                'module' => 'social',
             ],
             [
-                'label'   => 'Resources',
-                'name'    => 'resources.home',
-                'icon'    => 'fa-duotone fa-newspaper',
-                //                'icon'    => 'heroicon-o-newspaper',
-                'module'  => 'resources',
-                'current' => false
+                'label' => Trans::get('Teams'),
+                'name' => 'social.home',
+                'icon' => 'fa-duotone fa-globe',
+                'module' => 'social',
             ],
             [
-                'label'   => \Trans::get('News'),
-                'name'    => 'games.feeds',
-                'icon'    => 'fa-regular fa-rss',
-                'module'  => 'games',
-                'current' => false
+                'label' => Trans::get('Resources'),
+                'name' => 'resources.home',
+                'icon' => 'fa-regular fa-photo-film-music',
+                'module' => 'resources',
             ],
-//            [
-//                'label'   => 'Games',
-//                'name'    => 'games.feeds',
-//                'icon'    => 'fa-regular fa-gamepad-modern',
-//                'module'  => 'games',
-//                'current' => false
-//            ],
+            [
+                'label' => Trans::get('Articles'),
+                'name' => 'articles.home',
+                'icon' => 'fa-duotone fa-newspaper',
+                'module' => 'articles',
+            ],
+            [
+                'label' => Trans::get('News'),
+                'name' => 'games.feeds',
+                'icon' => 'fa-regular fa-rss',
+                'module' => 'games',
+            ],
             //            [
-            //                'label'   => 'Jobs',
-            //                'name'    => 'jobs.home',
-            //                'icon'    => 'heroicon-o-briefcase',
-            //                'module'  => 'jobs',
-            //                'current' => false
-            //            ],
-            //            [
-            //                'label'   => 'Advice',
-            //                'name'    => 'advice.home',
-            //                'icon'    => 'heroicon-o-briefcase',
-            //                'module'  => 'advice',
+            //                'label'   => 'Games',
+            //                'name'    => 'games.feeds',
+            //                'icon'    => 'fa-regular fa-gamepad-modern',
+            //                'module'  => 'games',
             //                'current' => false
             //            ],
             [
-                'label'   => 'Crm',
-                'name'    => 'filament.pages.dashboard',
-                'icon'    => 'heroicon-o-users',
-                'module'  => 'crm',
-                'current' => false
+                'label' => Trans::get('Jobs'),
+                'name' => 'jobs.home',
+                'icon' => 'heroicon-o-briefcase',
+                'module' => 'jobs',
+            ],
+            [
+                'label' => 'Advice',
+                'name' => 'advice.home',
+                'icon' => 'fa-duotone fa-comments-question',
+                'module' => 'advice',
+            ],
+            [
+                'label' => 'CRM',
+                'name' => 'filament.pages.dashboard',
+                'icon' => 'heroicon-o-users',
+                'module' => 'crm',
             ],
             //            [
             //                'label'   => 'Learn',
@@ -89,13 +89,23 @@ class MainNavigationMenu extends Component
             //                'module'  => 'jobs',
             //                'current' => false
             //            ],
+
+            [
+                'label' => 'Livestream',
+                'url' => 'https://app.omnia.church',
+                'icon' => 'fa-duotone fa-camcorder',
+                'module' => 'livestream',
+            ],
         ];
+    }
+
+    public function mount()
+    {
+        $this->navigation = self::getDefaultNavItems();
     }
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
     public function render(): \Illuminate\View\View
     {

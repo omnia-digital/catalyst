@@ -5,20 +5,20 @@
         <x-library::heading.2>No Resource found</x-library::heading.2>
     @else
         <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
-            <div class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary">
+            <div class="mr-4 p-2 rounded-full bg-secondary">
                 <a href="{{ route('resources.home') }}">
                     <x-heroicon-o-arrow-left class="h-6"/>
                 </a>
             </div>
-            <a href="{{route('resources.home')}}">
+            <a href="{{ route('resources.home') }}">
                 <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Resources') }}</x-library::heading.1>
             </a>
         </div>
         <div class="w-full">
             <div class="col-span-4 card">
-                @if($resource->image)
+                @if ($resource->image)
                     <div>
-                        <img class="rounded-lg rounded-b w-full object-cover max-h-96 bg-neutral-dark flex-shrink-0" src="{{$resource->image}}" alt="{{$resource->title}}">
+                        <img class="rounded-lg rounded-b w-full object-cover max-h-96 bg-neutral-dark flex-shrink-0" src="{{ $resource->image }}" alt="{{ $resource->title }}">
                     </div>
                 @endif
                 <div class="px-6">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="flex ml-2 space-x-2">
                             <p>by</p>
-                            <a href="{{ route('social.profile.show', $resource->user->handle) }}" class="hover:underline block text-base-text-color">{{  $resource->user->name }}</a>
+                            <a href="{{ route('social.profile.show', $resource->user->handle) }}" class="hover:underline block text-base-text-color">{{ $resource->user->name }}</a>
                         </div>
                         @can('update', $resource)
                             <div class="ml-auto flex justify-end items-center">
@@ -52,7 +52,7 @@
 
                     @empty(!$resource->tags)
                         <div class="flex justify-start space-x-2">
-                            @foreach($resource->tags as $tag)
+                            @foreach ($resource->tags as $tag)
                                 <x-tag :name="$tag->name" bg-color="neutral-dark" text-color="white"/>
                             @endforeach
                         </div>
@@ -62,7 +62,7 @@
                         {!! $resource->body !!}
                     </div>
 
-                    @if($resource->url)
+                    @if ($resource->url)
                         <a href="{{ $resource->url }}" target="_blank" class="bg-primary hover:shadow-lg rounded-lg px-4 py-2 text-xl text-white-text-color inline-flex items-center space-x-2">
                             <p class="text-white-text-color">Go to URL</p>
                             <x-heroicon-o-arrow-right class="h-6 w-6"/>
@@ -79,7 +79,7 @@
                 <div class="py-4 justify-center w-full xl:w-3/4 2xl:1/2 m-auto max-w-post-card-max-w">
                     <div class="max-w-post-card-max-w">
                     <x-library::heading.3>{{ Trans::get('Discussion') }}</x-library::heading.3>
-                    <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::RESOURCE"/>
+                    <livewire:social::comment-section :post="$resource" :type="\Modules\Social\Enums\PostType::ARTICLE"/>
                     </div>
                 </div>
             @endif
@@ -101,7 +101,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top '.{{ \Platform::getTeamsWord() }},
+                        title: 'Top '.{{ \Platform::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

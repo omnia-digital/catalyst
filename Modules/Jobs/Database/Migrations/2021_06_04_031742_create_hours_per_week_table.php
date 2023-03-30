@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHoursPerWeekTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -18,6 +18,10 @@ class CreateHoursPerWeekTable extends Migration
             $table->string('value')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('job_positions', function (Blueprint $table) {
+            $table->foreignIdFor(\Modules\Jobs\Models\HoursPerWeek::class, 'hours_per_week_id')->index();
+        });
     }
 
     /**
@@ -28,5 +32,13 @@ class CreateHoursPerWeekTable extends Migration
     public function down()
     {
         Schema::dropIfExists('hours_per_week');
+
+        Schema::table('job_positions', function (Blueprint $table) {
+            $table
+            ->string('hours_per_week')
+            ->after('location')
+            ->nullable();
+            $table->dropColumn('hours_per_week_id');
+        });
     }
-}
+};

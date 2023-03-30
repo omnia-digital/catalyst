@@ -24,7 +24,7 @@
             <x-slot:trigger class="flex items-center hover:cursor-pointer text-base-text-color hover:text-primary">
                 <x-heroicon-o-filter class="w-4 h-4" /><span class="ml-2 font-semibold">Filter {{ $filterCount ? "({$filterCount})" : '' }}</span>
             </x-slot>
-            @unless(in_array('date', $skipFilters))
+            @unless (in_array('date', $skipFilters))
                 <x-library::dropdown.item class="bg-secondary relative border-none">
                     <x-library::input.date wire:model="dateFilter" class="pl-8 text-xs" placeholder="Launch Date"/>
                     <div class="absolute top-0 flex items-center h-full ml-3">
@@ -35,7 +35,7 @@
                     </div>
                 </x-library::dropdown.item>
             @endunless
-            @unless(in_array('has_attachment', $skipFilters))
+            @unless (in_array('has_attachment', $skipFilters))
                 <x-library::dropdown.item class="bg-secondary border-none flex items-center">
                     <x-library::input.toggle wire:model="filters.has_attachment"/>
                     <div class="text-xs text-base-text-color ml-2">Has Media</div>

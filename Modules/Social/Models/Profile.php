@@ -1,15 +1,17 @@
 <?php
 
-    namespace Modules\Social\Models;
+namespace Modules\Social\Models;
 
     use App\Models\NullMedia;
     use App\Models\User;
     use App\Support\Lexer\PrettyNumber;
-use App\Traits\Tag\HasProfileTags;
-use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
+    use App\Traits\Tag\HasProfileTags;
     use Filament\Tables\Columns\IconColumn;
-    use Filament\Tables\Columns\ImageColumn;
-    use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\SoftDeletes;
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Storage;
@@ -17,9 +19,9 @@ use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, SoftDeletes};
     use Modules\Social\Database\Factories\ProfileFactory;
     use Spatie\MediaLibrary\HasMedia;
     use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
-use Spatie\Sluggable\HasSlug;
+    use Spatie\Searchable\Searchable;
+    use Spatie\Searchable\SearchResult;
+    use Spatie\Sluggable\HasSlug;
     use Spatie\Sluggable\SlugOptions;
     use Spatie\Tags\HasTags;
     use Squire\Models\Country;
@@ -35,7 +37,7 @@ use Spatie\Sluggable\HasSlug;
 
         protected $dates = [
             'deleted_at',
-            'last_fetched_at'
+            'last_fetched_at',
         ];
 
         protected $casts = [
@@ -64,13 +66,57 @@ use Spatie\Sluggable\HasSlug;
             'website',
             'birth_date',
             'user_id',
-            'salesforce_contact_id'
+            'salesforce_contact_id',
         ];
 
         protected $appends = [
             'name',
-            'profile_photo_url'
+            'profile_photo_url',
         ];
+
+        public static function getTrending()
+        {
+            return Profile::query()->orderByDesc('followers_count');
+
+            $trending = Profile::withCount('followers')
+                                ->with('user')
+                                ->orderBy('followers_count', 'desc')
+                                ->orderBy('created_at', 'desc');
+
+            return $trending;
+        }
+
+        public static function getTableColumns(): array
+        {
+            return [
+                ImageColumn::make('profile_photo_url')
+                           ->label('Photo'),
+                TextColumn::make('first_name')->sortable()->searchable(),
+                TextColumn::make('last_name')->sortable()->searchable(),
+                IconColumn::make('user.is_admin')
+                          ->label('Admin')
+                          ->boolean()->sortable(),
+                TextColumn::make('user.id')->label('User ID')->sortable()->searchable(),
+                TextColumn::make('user.email')
+                          ->label('Email')->sortable()->searchable(),
+                TextColumn::make('user.stripe_id')
+                          ->label('Stripe')
+                          ->sortable()
+                          ->searchable()
+                          ->url(function (Profile $record): string {
+                              return "https://dashboard.stripe.com/customers/{$record->user?->stripe_id}";
+                          }, true),
+                TextColumn::make('created_at')
+                          ->dateTime()->sortable()->searchable(),
+                TextColumn::make('updated_at')
+                          ->dateTime()->sortable()->searchable(),
+            ];
+        }
+
+        protected static function newFactory()
+        {
+            return ProfileFactory::new();
+        }
 
         /**
          * Get the route key for the model.
@@ -84,12 +130,7 @@ use Spatie\Sluggable\HasSlug;
 
         public function getNameAttribute()
         {
-            return $this->first_name . " " . $this->last_name;
-        }
-
-        protected static function newFactory()
-        {
-            return ProfileFactory::new();
+            return $this->first_name . ' ' . $this->last_name;
         }
 
         public function getSlugOptions(): SlugOptions
@@ -119,8 +160,8 @@ use Spatie\Sluggable\HasSlug;
             return $this->is_private == true ? 'private' : 'public';
         }
 
-
-        public function urlLink() {
+        public function urlLink()
+        {
             return route('social.profile.show', $this->handle);
         }
 
@@ -198,15 +239,17 @@ use Spatie\Sluggable\HasSlug;
 
         /**
          * Get the Profiles with the most likes on posts
+         *
          * @return void
          */
         public function getMostPostLikes()
         {
-            if (!empty($this->user)) {
+            if (! empty($this->user)) {
                 $type = 'post';
+
                 return Post::where('user_id', $this->user->id)
                     ->withCount('post.likes')
-                    ->when($type, fn($query) => $query->where('type', $this->type))
+                    ->when($type, fn ($query) => $query->where('type', $this->type))
                     ->orderBy('likes_count', 'desc');
             }
         }
@@ -224,8 +267,8 @@ use Spatie\Sluggable\HasSlug;
         public function avatar()
         {
             return $this->hasOne(Avatar::class)->withDefault([
-                'media_path'   => 'public/avatars/default.jpg',
-                'change_count' => 0
+                'media_path' => 'public/avatars/default.jpg',
+                'change_count' => 0,
             ]);
         }
 
@@ -276,19 +319,6 @@ use Spatie\Sluggable\HasSlug;
             return $this->belongsTo(User::class);
         }
 
-        public static function getTrending()
-        {
-
-            return Profile::query()->orderByDesc('followers_count');
-
-            $trending = Profile::withCount('followers')
-                                ->with('user')
-                                ->orderBy('followers_count', 'desc')
-                                ->orderBy('created_at', 'desc');
-
-            return $trending;
-        }
-
         /**
          * Advice
          */
@@ -300,7 +330,6 @@ use Spatie\Sluggable\HasSlug;
          */
         public function getCredibilityRatingAttribute()
         {
-
         }
 
         public function getSearchResult(): SearchResult
@@ -308,32 +337,5 @@ use Spatie\Sluggable\HasSlug;
             $url = $this->urlLink();
 
             return new SearchResult($this, $this->name, $url);
-        }
-
-        public static function getTableColumns(): array
-        {
-            return [
-                ImageColumn::make('profile_photo_url')
-                           ->label('Photo'),
-                TextColumn::make('first_name')->sortable()->searchable(),
-                TextColumn::make('last_name')->sortable()->searchable(),
-                IconColumn::make('user.is_admin')
-                          ->label('Admin')
-                          ->boolean()->sortable(),
-                TextColumn::make('user.id')->label('User ID')->sortable()->searchable(),
-                TextColumn::make('user.email')
-                          ->label('Email')->sortable()->searchable(),
-                TextColumn::make('user.stripe_id')
-                          ->label('Stripe')
-                          ->sortable()
-                          ->searchable()
-                          ->url(function (Profile $record):string {
-                              return "https://dashboard.stripe.com/customers/{$record->user->stripe_id}";
-                          }, true),
-                TextColumn::make('created_at')
-                          ->dateTime()->sortable()->searchable(),
-                TextColumn::make('updated_at')
-                          ->dateTime()->sortable()->searchable(),
-            ];
         }
     }

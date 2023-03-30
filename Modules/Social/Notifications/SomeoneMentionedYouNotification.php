@@ -5,12 +5,11 @@ namespace Modules\Social\Notifications;
 use App\Models\Team;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Mention;
-use Str;
 use Trans;
 
 class SomeoneMentionedYouNotification extends Notification implements ShouldQueue
@@ -30,7 +29,7 @@ class SomeoneMentionedYouNotification extends Notification implements ShouldQueu
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -45,7 +44,7 @@ class SomeoneMentionedYouNotification extends Notification implements ShouldQueu
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)
@@ -56,7 +55,7 @@ class SomeoneMentionedYouNotification extends Notification implements ShouldQueu
             ? Trans::get($this->mention->postable->user->name . ' mentioned your team, ' . $this->mention->mentionable->name . ' in their post')
             : Trans::get($this->mention->postable->user->name . ' mentioned you in their post');
 
-        $subtitle = $this->mention->postable->type === PostType::RESOURCE->value
+        $subtitle = $this->mention->postable->type === PostType::ARTICLE->value
             ? Str::of($this->mention->postable->body)->stripTags()->limit(155)
             : Str::of($this->mention->postable->body)->stripTags();
 

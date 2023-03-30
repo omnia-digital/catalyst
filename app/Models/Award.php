@@ -13,7 +13,7 @@ class Award extends Model
         'name',
         'icon',
         'bg_color',
-        'text_color'
+        'text_color',
     ];
 
     protected $guarded = [];

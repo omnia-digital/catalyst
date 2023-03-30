@@ -6,7 +6,7 @@
         <div class="col-span-6 md:col-span-3 xl:col-span-3 space-y-4">
             <div class="p-4 rounded bg-secondary text-base-text-color">
                 <div class="flex justify-start text-sm space-x-4">
-                    @isset ($profile->website)
+                    @isset($profile->website)
                         <div class="flex items-center space-x-2">
                             <x-heroicon-o-link class="w-4 h-4"/>
                             <span>{{ $profile->website }}</span>
@@ -20,7 +20,7 @@
             <div class="block">
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
                     <p class="text-sm">{{ \Trans::get('Awards') }}</p>
-                    @if($this->user->awards()->count())
+                    @if ($this->user->awards()->count())
                         <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                         </a>
@@ -41,7 +41,7 @@
 {{--            <div class="hidden sm:block">--}}
 {{--                <div class="flex justify-between items-center text-base-text-color font-semibold">--}}
 {{--                    <p class="text-sm">{{ \Trans::get('Skills') }}</p>--}}
-{{--                    @if($this->user->awards()->count())--}}
+{{--                    @if ($this->user->awards()->count())--}}
 {{--                        <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}--}}
 {{--                            <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>--}}
 {{--                        </a>--}}
@@ -61,18 +61,18 @@
             {{-- Teams --}}
             <div class="block xl:hidden">
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <p class="text-sm">{{ \Platform::getTeamsWord() }}</p>
-                    @if($this->user->teams()->count())
+                    <p class="text-sm">{{ \Platform::getTeamsWordUpper() }}</p>
+                    @if ($this->user->teams()->count())
                         <a href="{{ route('social.profile.teams', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                         </a>
                     @endif
                 </div>
                 <div class="mt-4 flex space-x-2">
-                    @if($this->user->teams()->count())
+                    @if ($this->user->teams()->count())
                         <div class="w-full grid {{ $this->user->teams()->count() > 1 ? 'grid-cols-2' : '' }} gap-2">
                             @foreach ($this->user->teams->take(2) as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                                <livewire:social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                             @endforeach
                         </div>
                     @else
@@ -122,18 +122,18 @@
             {{-- Teams --}}
             <div>
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <p class="text-sm">{{ \Platform::getTeamsWord() }}</p>
-                    @if($this->user->teams()->count())
+                    <p class="text-sm">{{ \Platform::getTeamsWordUpper() }}</p>
+                    @if ($this->user->teams()->count())
                         <a href="{{ route('social.profile.teams', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                         </a>
                     @endif
                 </div>
                 <div class="mt-4 flex space-x-2">
-                    @if($this->user->teams()->count())
+                    @if ($this->user->teams()->count())
                         <div class="w-full grid {{ $this->user->teams()->count() > 1 ? 'grid-cols-2' : '' }} gap-2">
                             @foreach ($this->user->teams->take(2) as $team)
-                                <livewire:social::components.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                                <livewire:social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                             @endforeach
                         </div>
                     @else

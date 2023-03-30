@@ -43,7 +43,7 @@
         @endauth
     </div>
     <div class="flex-1">
-        @if($includeTitle)
+        @if ($includeTitle)
             <div class="">
                 <x-library::input.text label="Title" wire:model.defer="title"/>
                 <x-library::input.error for="title"/>
@@ -52,7 +52,7 @@
 
         <x-library::tiptap
                 wire:model.defer="content"
-                heightClass="{{ $openState == false ?? 'min-h-[80px]'}} m-1 text-lg"
+                heightClass="{{ $openState == false ?? 'min-h-[80px]' }} m-1 text-lg"
                 wordCountType="character"
                 characterLimit="500"
                 :placeholder="$placeholder"
@@ -88,7 +88,7 @@
         </x-library::tiptap>
         <hr class="text-neutral-light"/>
         <div class="flex justify-between items-center pt-3 pb-2">
-            @if($openState == false)
+            @if ($openState == false)
                 <div class="flex items-center space-x-2 px-4">
                     <button x-on:click.prevent.stop="showMediaManager(null, {})" type="button">
                         <i class="fa-solid fa-image w-5 h-5 text-gray-500"></i>
