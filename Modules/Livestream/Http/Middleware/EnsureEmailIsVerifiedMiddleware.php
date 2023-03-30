@@ -17,7 +17,7 @@ class EnsureEmailIsVerifiedMiddleware
             return $request->expectsJson()
                 ? abort(403, 'Your email address is not verified.')
                 : Redirect::guest(URL::route($redirectToRoute ?: 'verification.notice', [
-                    'registered' => true
+                    'registered' => true,
                 ]));
         }
 

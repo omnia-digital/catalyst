@@ -2,8 +2,8 @@
 
 namespace Modules\Livestream\Events;
 
-use Modules\Livestream\Models\Episode;
 use Illuminate\Foundation\Events\Dispatchable;
+use Modules\Livestream\Models\Episode;
 
 class EpisodeCreatedEvent
 {
@@ -11,5 +11,6 @@ class EpisodeCreatedEvent
 
     public function __construct(
         public Episode $episode
-    ) {}
+    ) {
+    }
 }

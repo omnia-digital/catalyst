@@ -1,47 +1,16 @@
-<?php namespace Modules\Livestream\Http\Controllers;
+<?php
 
-use Modules\Livestream\Jobs\Billing\AddMeteredBillingInvoiceItemsJob;
-use Modules\Livestream\Models\Team;
+namespace Modules\Livestream\Http\Controllers;
+
+use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Modules\Livestream\Jobs\Billing\AddMeteredBillingInvoiceItemsJob;
+use Modules\Livestream\Models\Team;
 use Spark\Http\Controllers\WebhookController as SparkWebhookController;
 
 class StripeWebhooksController extends SparkWebhookController
 {
-    /**
-     * Subscription Updated
-     *
-     * @param array $payload
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    protected function handleCustomerSubscriptionUpdated(array $payload)
-    {
-        // Skip logic if its the omnia-metered plan
-        if ($this->containsOmniaMeteredPlan($payload)) {
-            return $this->successMethod();
-        }
-
-        return parent::handleCustomerSubscriptionUpdated($payload);
-    }
-
-    /**
-     * Subscription Deleted
-     *
-     * @param array $payload
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    protected function handleCustomerSubscriptionDeleted(array $payload)
-    {
-        // Skip logic if its the omnia-metered plan
-        if ($this->containsOmniaMeteredPlan($payload)) {
-            return $this->successMethod();
-        }
-
-        return parent::handleCustomerSubscriptionDeleted($payload);
-    }
-
     /**
      * Check for Omnia Metered Plan
      *
@@ -60,7 +29,6 @@ class StripeWebhooksController extends SparkWebhookController
      * Handle When an Invoice is Created. This is here to pause the invoice,
      * add monthly items (metered billing), then resume invoice payment
      *
-     * @param array $payload
      *
      * @return Response|\Illuminate\Http\Response
      */
@@ -77,11 +45,39 @@ class StripeWebhooksController extends SparkWebhookController
     }
 
     /**
-     * Handle a successful invoice payment from a Stripe subscription.
+     * Subscription Updated
      *
-     * @param Team $team
-     * @param array $payload
-     * @return Response
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function handleCustomerSubscriptionUpdated(array $payload)
+    {
+        // Skip logic if its the omnia-metered plan
+        if ($this->containsOmniaMeteredPlan($payload)) {
+            return $this->successMethod();
+        }
+
+        return parent::handleCustomerSubscriptionUpdated($payload);
+    }
+
+    /**
+     * Subscription Deleted
+     *
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function handleCustomerSubscriptionDeleted(array $payload)
+    {
+        // Skip logic if its the omnia-metered plan
+        if ($this->containsOmniaMeteredPlan($payload)) {
+            return $this->successMethod();
+        }
+
+        return parent::handleCustomerSubscriptionDeleted($payload);
+    }
+
+    /**
+     * Handle a successful invoice payment from a Stripe subscription.
      */
     protected function teamInvoiceCreated(Team $team, array $payload): Response
     {
@@ -92,20 +88,19 @@ class StripeWebhooksController extends SparkWebhookController
             // get items that have metered billing and their stats
             // calculate prices for each apps
             // itemize prices for each app
-            $invoiceId = (!empty($invoiceData['id']) ? $invoiceData['id'] : null);
+            $invoiceId = (! empty($invoiceData['id']) ? $invoiceData['id'] : null);
 
             // Add Metered Billing Items
             foreach ($invoiceData['lines']['data'] as $invoiceLineItem) {
-                if (!empty($invoiceLineItem['plan']) && $invoiceLineItem['plan']['id'] === 'omnia-metered') {
-                    $subscriptionId = (!empty($invoiceLineItem['id']) ? $invoiceLineItem['id'] : null);
+                if (! empty($invoiceLineItem['plan']) && $invoiceLineItem['plan']['id'] === 'omnia-metered') {
+                    $subscriptionId = (! empty($invoiceLineItem['id']) ? $invoiceLineItem['id'] : null);
 
                     dispatch(new AddMeteredBillingInvoiceItemsJob($team, $invoiceId, $subscriptionId));
                 }
-            };
+            }
 
             return new Response('Webhook Handled', 200);
-
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($msg = 'Failed to handle webhook due to error: ' . $e->getMessage());
 
             return new Response($msg, 500);

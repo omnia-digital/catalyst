@@ -2,9 +2,9 @@
 
 namespace Modules\Livestream\Listeners;
 
-use Modules\Livestream\Events\EpisodeViewedEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Modules\Livestream\Events\EpisodeViewedEvent;
 
 class UpdateLastViewedAtListener implements ShouldQueue
 {
@@ -13,7 +13,7 @@ class UpdateLastViewedAtListener implements ShouldQueue
     public function handle(EpisodeViewedEvent $event)
     {
         $event->episode->update([
-            'last_viewed_at' => now()
+            'last_viewed_at' => now(),
         ]);
     }
 }

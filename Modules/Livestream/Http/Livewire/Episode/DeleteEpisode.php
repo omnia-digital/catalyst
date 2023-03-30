@@ -2,10 +2,10 @@
 
 namespace Modules\Livestream\Http\Livewire\Episode;
 
-use Modules\Livestream\Models\Episode;
-use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Support\Livewire\WithNotification;
 
 /**
  * @property array $organizations
@@ -21,12 +21,8 @@ class DeleteEpisode extends Component
     public bool $loading = false;
 
     protected $listeners = [
-        'episode-deleted'    => 'handleEpisodeDeleted'
+        'episode-deleted' => 'handleEpisodeDeleted',
     ];
-    protected function rules(): array
-    {
-        return [];
-    }
 
     public function deleteEpisode()
     {
@@ -51,5 +47,10 @@ class DeleteEpisode extends Component
     public function render()
     {
         return view('episode.delete');
+    }
+
+    protected function rules(): array
+    {
+        return [];
     }
 }

@@ -2,20 +2,20 @@
 
 namespace App\Traits\Tag;
 
-    use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-    trait HasProfileTags
+trait HasProfileTags
+{
+    public function profileTags()
     {
-        public function profileTags()
-        {
-            return $this
-                ->morphToMany(self::getTagClassName(), 'taggable')
-                ->where('type', 'profile_type')
-                ->ordered();
-        }
-
-        public function tags(): MorphToMany
-        {
-            return $this->profileTags();
-        }
+        return $this
+            ->morphToMany(self::getTagClassName(), 'taggable')
+            ->where('type', 'profile_type')
+            ->ordered();
     }
+
+    public function tags(): MorphToMany
+    {
+        return $this->profileTags();
+    }
+}

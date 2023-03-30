@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules\Livestream\Traits;
+namespace Modules\Livestream\Traits;
 
     use Illuminate\Support\Carbon;
     use Livestream\Livestream;
@@ -9,8 +9,6 @@
     /**
      * Trait HasLocalDates
      * Converts all fields in $dates array to local timezone, if it's able to
-     *
-     * @package App\Traits
      */
     trait HasLocalDates
     {
@@ -34,12 +32,12 @@
                     $livestreamAccount = Livestream::getLivestreamAccount();
                 }
 
-                if ( ! empty($livestreamAccount)) {
+                if (! empty($livestreamAccount)) {
                     $team = $livestreamAccount->team;
                 }
             }
 
-            if ( ! empty($team)) {
+            if (! empty($team)) {
                 $timezone = Omnia::getTimezone(null, $team);
 
                 foreach ($this->getDates() as $dateField) {
@@ -48,7 +46,6 @@
                     $data[$dateField] = $date->toDateTimeString();
                 }
             }
-
 
             return $data;
         }

@@ -1,11 +1,11 @@
-<?php namespace Modules\Livestream\Support\Livestream;
+<?php
 
-use Illuminate\Support\Facades\Auth;
+namespace Modules\Livestream\Support\Livestream;
 
 trait WithLivestreamAccount
 {
     public function getLivestreamAccountProperty()
     {
-        return Auth::user()->currentTeam->livestreamAccount;
+        return auth()->user()->currentTeam->livestreamAccount;
     }
 }

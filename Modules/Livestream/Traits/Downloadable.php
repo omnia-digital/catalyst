@@ -6,7 +6,6 @@ use Modules\Livestream\Models\Download;
 
 trait Downloadable
 {
-
     /**
      * Get the model's reviews
      */
@@ -19,5 +18,4 @@ trait Downloadable
     {
         return $this->downloads()->sum('count');
     }
-
 }

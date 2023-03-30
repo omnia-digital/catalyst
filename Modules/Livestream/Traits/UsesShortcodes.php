@@ -1,23 +1,22 @@
-<?php namespace Modules\Livestream\Traits;
+<?php
 
-use Illuminate\Support\Facades\Auth;
+namespace Modules\Livestream\Traits;
 
 trait UsesShortcodes
 {
     /**
      * Replace Shortcode in a string with the shortcodes value
      *
-     * @param $string
-     * @param null $team
+     * @param  null  $team
      * @return mixed
      */
     public static function replaceShortcodesInString(&$string, $team = null)
     {
-        if (!str_contains($string, '[')) {
+        if (! str_contains($string, '[')) {
             return $string;
         }
 
-        if (!$team && $user = Auth::user()) {
+        if (! $team && $user = auth()->user()) {
             $team = $user->currentTeam;
         }
 
@@ -44,17 +43,16 @@ trait UsesShortcodes
     /**
      * Replace Shortcode in a string with the shortcodes value
      *
-     * @param $string
-     * @param null $team
+     * @param  null  $team
      * @return mixed
      */
     public static function replaceShortcodesInStringUsingGivenTimestamp(&$string, $time, $team = null)
     {
-        if (!str_contains($string, '[')) {
+        if (! str_contains($string, '[')) {
             return $string;
         }
 
-        if (!$team && $user = Auth::user()) {
+        if (! $team && $user = auth()->user()) {
             $team = $user->currentTeam;
         }
 
@@ -88,18 +86,18 @@ trait UsesShortcodes
         }
 
         return collect([
-            'current_hour'         => date('g a', $time->timestamp),
-            'current_hour_24'      => date('G', $time->timestamp),
-            'current_hour_time'    => date('g:i a', $time->timestamp),
+            'current_hour' => date('g a', $time->timestamp),
+            'current_hour_24' => date('G', $time->timestamp),
+            'current_hour_time' => date('g:i a', $time->timestamp),
             'current_hour_time_24' => date('G:i', $time->timestamp),
-            'day_of_week'          => date('l', $time->timestamp),
-            'day_of_month'         => date('d', $time->timestamp),
-            'month_full'           => date('F', $time->timestamp),
-            'month_short'          => date('M', $time->timestamp),
-            'month_number'         => date('m', $time->timestamp),
-            'year_full'            => date('Y', $time->timestamp),
-            'year_short'           => date('y', $time->timestamp),
-            'timezone'             => date('T', $time->timestamp),
+            'day_of_week' => date('l', $time->timestamp),
+            'day_of_month' => date('d', $time->timestamp),
+            'month_full' => date('F', $time->timestamp),
+            'month_short' => date('M', $time->timestamp),
+            'month_number' => date('m', $time->timestamp),
+            'year_full' => date('Y', $time->timestamp),
+            'year_short' => date('y', $time->timestamp),
+            'timezone' => date('T', $time->timestamp),
         ]);
     }
 }

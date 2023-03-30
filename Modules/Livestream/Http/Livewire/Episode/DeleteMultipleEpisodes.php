@@ -2,10 +2,10 @@
 
 namespace Modules\Livestream\Http\Livewire\Episode;
 
-use Modules\Livestream\Models\Episode;
-use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Support\Livewire\WithNotification;
 
 /**
  * @property array $organizations
@@ -21,23 +21,20 @@ class DeleteMultipleEpisodes extends Component
     public bool $loading = false;
 
     protected $listeners = [
-        'episodes-deleted'    => 'handleEpisodesDeleted'
+        'episodes-deleted' => 'handleEpisodesDeleted',
     ];
-    protected function rules(): array
-    {
-        return [];
-    }
 
     public function deleteEpisodes()
     {
         $this->loading = true;
 
         foreach (Episode::whereIn('id', $this->episodeIDs)->get() as $episode) {
-            if ($episode->video?->isProcessing()) continue;
+            if ($episode->video?->isProcessing()) {
+                continue;
+            }
 
             // Only soft-delete episode
             $episode->delete();
-
         }
 
         $this->success('Your episodes were deleted successfully!');
@@ -48,5 +45,10 @@ class DeleteMultipleEpisodes extends Component
     public function render()
     {
         return view('episode.delete-multiple-episodes');
+    }
+
+    protected function rules(): array
+    {
+        return [];
     }
 }

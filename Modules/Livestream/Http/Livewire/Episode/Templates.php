@@ -1,11 +1,13 @@
-<?php namespace Modules\Livestream\Http\Livewire\Episode;
+<?php
 
+namespace Modules\Livestream\Http\Livewire\Episode;
+
+use Livewire\Component;
+use Livewire\WithFileUploads;
 use Modules\Livestream\Models\LivestreamAccount;
 use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Modules\Livestream\Support\Livewire\WithNotification;
 use Modules\Livestream\Support\Series\WithSeries;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 use Spatie\ValidationRules\Rules\Delimited;
 
 /**
@@ -30,29 +32,17 @@ class Templates extends Component
 
     public ?string $topics = null;
 
-    protected function rules(): array
-    {
-        return [
-            'name'           => ['required', 'max:254'],
-            'title'          => ['required'],
-            'description'    => ['required'],
-            'thumbnail'      => ['nullable', 'image', 'max:2048'],
-            'selectedSeries' => ['nullable'],
-            'topics'         => ['nullable', new Delimited('string')],
-        ];
-    }
-
     public function createEpisodeTemplate()
     {
         $this->validate();
 
         $template = $this->livestreamAccount->episodeTemplates()->create([
-            'title'             => $this->name,
-            'template'          => [
-                'title'       => $this->title,
-                'description' => $this->description
+            'title' => $this->name,
+            'template' => [
+                'title' => $this->title,
+                'description' => $this->description,
             ],
-            'default_thumbnail' => $this->thumbnail?->store('thumbnails', 'episode-templates')
+            'default_thumbnail' => $this->thumbnail?->store('thumbnails', 'episode-templates'),
         ]);
 
         $template->series()->sync($this->selectedSeries);
@@ -75,9 +65,21 @@ class Templates extends Component
             ->get();
 
         return view('episode.templates', [
-            'episodeTemplates'         => $episodeTemplates,
+            'episodeTemplates' => $episodeTemplates,
             'defaultEpisodeTemplateId' => $this->livestreamAccount->refresh()->default_episode_template_id,
-            'series'                   => $this->series
+            'series' => $this->series,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'name' => ['required', 'max:254'],
+            'title' => ['required'],
+            'description' => ['required'],
+            'thumbnail' => ['nullable', 'image', 'max:2048'],
+            'selectedSeries' => ['nullable'],
+            'topics' => ['nullable', new Delimited('string')],
+        ];
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Modules\Livestream\Http\Livewire\Person;
 
-use Modules\Livestream\Models\person;
-use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Modules\Livestream\Models\person;
+use Modules\Livestream\Support\Livewire\WithNotification;
 
 /**
  * @property array $organizations
@@ -21,12 +21,8 @@ class DeletePerson extends Component
     public bool $loading = false;
 
     protected $listeners = [
-        'person-deleted'    => 'handlepersonDeleted'
+        'person-deleted' => 'handlepersonDeleted',
     ];
-    protected function rules(): array
-    {
-        return [];
-    }
 
     public function deleteperson()
     {
@@ -50,5 +46,10 @@ class DeletePerson extends Component
     public function render()
     {
         return view('person.delete');
+    }
+
+    protected function rules(): array
+    {
+        return [];
     }
 }

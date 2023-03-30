@@ -43,10 +43,10 @@ return [
     |
     */
 
-     'brand' =>  [
-         //'logo' => realpath(__DIR__.'/../public/svg/billing-logo.svg'),
-         'color' => 'bg-blue-500',
-     ],
+    'brand' => [
+        //'logo' => realpath(__DIR__.'/../public/svg/billing-logo.svg'),
+        'color' => 'bg-blue-500',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -75,9 +75,8 @@ return [
     'features' => [
         // Features::euVatCollection(['home-country' => 'BE']),
         // Features::receiptEmails(['custom-addresses' => true]),
-//        Features::paymentNotificationEmails(),
+        //        Features::paymentNotificationEmails(),
     ],
-
 
     /*
     |--------------------------------------------------------------------------
@@ -131,7 +130,7 @@ return [
                         '90 days of Video Storage',
                         '1 Stream Target (Facebook or YouTube)',
                         'Email/Chat Support',
-                        'Free Basic Omnia Sites website ($29/mo value)'
+                        'Free Basic Omnia Sites website ($29/mo value)',
                     ],
                     'yearly_incentive' => '$119/mo',
                     'options' => [
@@ -160,5 +159,5 @@ return [
                 ],
             ],
         ],
-    ]
+    ],
 ];

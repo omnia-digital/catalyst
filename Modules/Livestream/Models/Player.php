@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Models;
+<?php
+
+namespace Modules\Livestream\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,17 +29,16 @@ class Player extends Model
         'embedCode',
         'not_live_image',
         'before_live_image',
-        'layout'
+        'layout',
     ];
 
     protected $casts = [
-        'layout' => 'array'
+        'layout' => 'array',
     ];
 
     /**
      * Get the layout setting of a specific player.
      *
-     * @param string $field
      * @return mixed
      */
     public function layoutSetting(string $field)
@@ -59,7 +60,6 @@ class Player extends Model
      * Get Livestream Account default image if this image is null
      *
      * @param $value
-     *
      * @return string|null
      */
     public function getNotLiveImageUrlAttribute()
@@ -68,7 +68,7 @@ class Player extends Model
             return $this->not_live_image;
         }
 
-        if (!empty($this->not_live_image)) {
+        if (! empty($this->not_live_image)) {
             return Storage::disk('players')->url($this->not_live_image);
         }
 
@@ -79,7 +79,6 @@ class Player extends Model
      * Get Livestream Account default image if this image is null
      *
      * @param $value
-     *
      * @return string|null
      */
     public function getBeforeLiveImageUrlAttribute()
@@ -88,7 +87,7 @@ class Player extends Model
             return $this->before_live_image;
         }
 
-        if (!empty($this->before_live_image)) {
+        if (! empty($this->before_live_image)) {
             return Storage::disk('players')->url($this->before_live_image);
         }
 

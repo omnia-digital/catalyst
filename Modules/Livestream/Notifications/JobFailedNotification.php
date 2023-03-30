@@ -5,8 +5,6 @@ namespace Modules\Livestream\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Log;
 
 class JobFailedNotification extends Notification
@@ -44,8 +42,8 @@ class JobFailedNotification extends Notification
      */
     public function toSlack($notifiable)
     {
-        $event_id = (!empty($this->event['id']) ? $this->event['id'] : null );
-        $event_name = (!empty($this->event['name']) ? $this->event['name'] : null );
+        $event_id = (! empty($this->event['id']) ? $this->event['id'] : null);
+        $event_name = (! empty($this->event['name']) ? $this->event['name'] : null);
         Log::info('Sent slack notification for job #' . $event_id . ' for ' . $event_name);
 
         return (new SlackMessage)
@@ -54,7 +52,7 @@ class JobFailedNotification extends Notification
             ->image('SLACK_ERRORS_ICON')
             ->error()
             ->content('Queued job failed: ' . $this->event['job'])
-            ->attachment(function ($attachment) use ( $event_id, $event_name ) {
+            ->attachment(function ($attachment) use ($event_id, $event_name) {
                 $attachment->title($this->event['exception']['message'])
                            ->fields([
                                'ID' => $event_id,
@@ -64,7 +62,7 @@ class JobFailedNotification extends Notification
                                'Server' => env('APP_ENV'),
                                'Queue' => $this->event['queue'],
                            ]);
-        });
+            });
     }
 
     /**

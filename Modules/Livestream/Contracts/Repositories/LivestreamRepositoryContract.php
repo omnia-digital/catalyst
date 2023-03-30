@@ -26,8 +26,7 @@ interface LivestreamRepositoryContract extends RepositoryContract
     /**
      * Create a new LivestreamAccount with the given data.
      *
-     * @param  array  $data
      * @return \Illuminate\Contracts\Auth\Authenticatable
      */
-    public function create($user,array $data);
+    public function create($user, array $data);
 }

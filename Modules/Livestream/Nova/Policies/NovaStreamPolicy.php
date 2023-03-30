@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Nova\Policies;
+<?php
+
+namespace Modules\Livestream\Nova\Policies;
 
 use Modules\Livestream\Models\Stream;
 use Modules\Livestream\Models\User;

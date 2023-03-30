@@ -1,6 +1,7 @@
-<?php namespace Modules\Livestream\Http\Livewire\Profile;
+<?php
 
-use Illuminate\Support\Facades\Auth;
+namespace Modules\Livestream\Http\Livewire\Profile;
+
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -30,13 +31,12 @@ class UpdateProfileInformationForm extends Component
      */
     public function mount()
     {
-        $this->state = Auth::user()->load('person')->toArray();
+        $this->state = auth()->user()->load('person')->toArray();
     }
 
     /**
      * Update the user's profile information.
      *
-     * @param  \Laravel\Fortify\Contracts\UpdatesUserProfileInformation  $updater
      * @return void
      */
     public function updateProfileInformation(UpdatesUserProfileInformation $updater)
@@ -44,7 +44,7 @@ class UpdateProfileInformationForm extends Component
         $this->resetErrorBag();
 
         $updater->update(
-            Auth::user(),
+            auth()->user(),
             $this->photo
                 ? array_merge($this->state, ['photo' => $this->photo])
                 : $this->state
@@ -66,7 +66,7 @@ class UpdateProfileInformationForm extends Component
      */
     public function deleteProfilePhoto()
     {
-        Auth::user()->deleteProfilePhoto();
+        auth()->user()->deleteProfilePhoto();
 
         $this->emit('refresh-navigation-menu');
     }
@@ -78,7 +78,7 @@ class UpdateProfileInformationForm extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        return auth()->user();
     }
 
     /**

@@ -1,11 +1,12 @@
-<?php namespace Modules\Livestream\Http\Livewire\Player;
+<?php
 
+namespace Modules\Livestream\Http\Livewire\Player;
+
+use Livewire\Component;
+use Livewire\WithFileUploads;
 use Modules\Livestream\Models\LivestreamAccount;
 use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Modules\Livestream\Support\Livewire\WithNotification;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 
 /**
  * @property LivestreamAccount $livestreamAccount
@@ -23,8 +24,8 @@ class Players extends Component
     public $beforeLiveImage;
 
     protected array $rules = [
-        'name'            => ['required', 'max:254'],
-        'notLiveImage'    => ['nullable', 'image', 'max:2048'],
+        'name' => ['required', 'max:254'],
+        'notLiveImage' => ['nullable', 'image', 'max:2048'],
         'beforeLiveImage' => ['nullable', 'image', 'max:2048'],
     ];
 
@@ -32,10 +33,10 @@ class Players extends Component
     {
         $this->validate();
 
-        Auth::user()->currentTeam->livestreamAccount->players()->create([
-            'name'              => $this->name,
-            'not_live_image'    => $this->notLiveImage ? $this->notLiveImage->store('thumbnails', 'players') : null,
-            'before_live_image' => $this->beforeLiveImage ? $this->beforeLiveImage->store('thumbnails', 'players') : null
+        auth()->user()->currentTeam->livestreamAccount->players()->create([
+            'name' => $this->name,
+            'not_live_image' => $this->notLiveImage ? $this->notLiveImage->store('thumbnails', 'players') : null,
+            'before_live_image' => $this->beforeLiveImage ? $this->beforeLiveImage->store('thumbnails', 'players') : null,
         ]);
 
         $this->reset('name', 'createPlayerModalOpen');
@@ -50,7 +51,7 @@ class Players extends Component
             ->get();
 
         return view('player.players', [
-            'players' => $players
+            'players' => $players,
         ]);
     }
 }

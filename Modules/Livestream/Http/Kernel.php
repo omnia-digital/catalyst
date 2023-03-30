@@ -2,8 +2,8 @@
 
 namespace Modules\Livestream\Http;
 
-use Modules\Livestream\Http\Middleware\TrackGoalBillingPageMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Modules\Livestream\Http\Middleware\TrackGoalBillingPageMiddleware;
 use Spark\Http\Middleware\VerifyBillableIsSubscribed;
 
 class Kernel extends HttpKernel
@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            TrackGoalBillingPageMiddleware::class
+            TrackGoalBillingPageMiddleware::class,
         ],
 
         'api' => [
@@ -66,6 +66,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \App\Http\Middleware\EnsureEmailIsVerifiedMiddleware::class,
         'info-filled' => \App\Http\Middleware\EnsureTeamInfoIsFilled::class,
-        'subscribed' => VerifyBillableIsSubscribed::class
+        'subscribed' => VerifyBillableIsSubscribed::class,
     ];
 }

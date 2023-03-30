@@ -1,12 +1,7 @@
-<?php namespace Modules\Livestream\Models;
+<?php
 
-use Modules\Livestream\Enums\VideoStorageOption;
-use Modules\Livestream\Events\EpisodeCreatedEvent;
-use Modules\Livestream\Omnia;
-use Modules\Livestream\Services\Mux\MuxAsset;
-use Modules\Livestream\Support\Media\InteractsWithStaticMediaUrl;
-use Modules\Livestream\Traits\Downloadable;
-use Modules\Livestream\Traits\InteractsWithTopic;
+namespace Modules\Livestream\Models;
+
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +14,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Modules\Livestream\Enums\VideoStorageOption;
+use Modules\Livestream\Events\EpisodeCreatedEvent;
+use Modules\Livestream\Omnia;
+use Modules\Livestream\Services\Mux\MuxAsset;
+use Modules\Livestream\Support\Media\InteractsWithStaticMediaUrl;
+use Modules\Livestream\Traits\Downloadable;
+use Modules\Livestream\Traits\InteractsWithTopic;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Tags\HasTags;
@@ -75,7 +77,7 @@ class Episode extends Model implements HasMedia
      */
     protected $casts = [
         'is_published' => 'boolean',
-        'is_live_now'  => 'boolean',
+        'is_live_now' => 'boolean',
     ];
 
     protected $dates = [
@@ -86,17 +88,33 @@ class Episode extends Model implements HasMedia
     ];
 
     protected $dispatchesEvents = [
-        'created' => EpisodeCreatedEvent::class
+        'created' => EpisodeCreatedEvent::class,
     ];
-
-    public function isLive(): bool
-    {
-        return (bool)$this->is_live_now;
-    }
 
     public static function findByUploadId(string $uploadId)
     {
         return self::where('upload_id', $uploadId)->first();
+    }
+
+    /**
+     * Create episode from template.
+     */
+    public static function createFromTemplate(array $episodeData): Episode
+    {
+        if (! empty($episodeData['title'])) {
+            Omnia::replaceShortcodesInString($episodeData['title']);
+        }
+
+        if (! empty($episodeData['description'])) {
+            Omnia::replaceShortcodesInString($episodeData['description']);
+        }
+
+        return Episode::create($episodeData);
+    }
+
+    public function isLive(): bool
+    {
+        return (bool) $this->is_live_now;
     }
 
     public function getThumbnailAttribute($value)
@@ -126,7 +144,7 @@ class Episode extends Model implements HasMedia
 
     public function getPlayerThumbnail(Player $player): string
     {
-        if (!$this->isLive() && $player->notLiveImageUrl) {
+        if (! $this->isLive() && $player->notLiveImageUrl) {
             return $player->notLiveImageUrl;
         }
 
@@ -145,7 +163,7 @@ class Episode extends Model implements HasMedia
      */
     public function getFormattedDurationAttribute()
     {
-        if (!$this->duration) {
+        if (! $this->duration) {
             return;
         }
 
@@ -166,7 +184,7 @@ class Episode extends Model implements HasMedia
 
     public function setMainSpeakerIdAttribute($value)
     {
-        $this->attributes['main_speaker_id'] = empty($value) ? null : (int)$value;
+        $this->attributes['main_speaker_id'] = empty($value) ? null : (int) $value;
     }
 
     public function setCategoryIdAttribute($value)
@@ -196,7 +214,6 @@ class Episode extends Model implements HasMedia
     /**
      * Get the expired episodes for storing based on plan option and expires_at.
      *
-     * @param Builder $query
      * @return Builder
      */
     public function scopeExpired(Builder $query)
@@ -207,14 +224,13 @@ class Episode extends Model implements HasMedia
     /**
      * Get all episodes that marked do not store (or not willing to pay for storage).
      *
-     * @param Builder $query
      * @return Builder
      */
     public function scopeDoNotStore(Builder $query)
     {
         return $query->whereHas(
             'livestreamAccount',
-            fn(Builder $query) => $query->where('video_storage_option', VideoStorageOption::DELETE_VIDEO)
+            fn (Builder $query) => $query->where('video_storage_option', VideoStorageOption::DELETE_VIDEO)
         );
     }
 
@@ -280,7 +296,7 @@ class Episode extends Model implements HasMedia
 
     public function scopeWhereVideoViewsInDateRange($query, $from, $to)
     {
-        return $query->withCount(['videoViews' => function($query) use ($from, $to) {
+        return $query->withCount(['videoViews' => function ($query) use ($from, $to) {
             $query->whereBetween('video_views.created_at', [$from, $to]);
         }]);
     }
@@ -300,44 +316,21 @@ class Episode extends Model implements HasMedia
     }
 
     /**
-     * Create episode from template.
-     *
-     * @param array $episodeData
-     * @return Episode
-     */
-    public static function createFromTemplate(array $episodeData): Episode
-    {
-        if (!empty($episodeData['title'])) {
-            Omnia::replaceShortcodesInString($episodeData['title']);
-        }
-
-        if (!empty($episodeData['description'])) {
-            Omnia::replaceShortcodesInString($episodeData['description']);
-        }
-
-        return Episode::create($episodeData);
-    }
-
-    /**
      * Create video + playback ids for the give episode.
-     *
-     * @param string $muxVideoSourceId
-     * @param array $playbackIds
-     * @return Video
      */
     public function createMuxVideo(string $muxVideoSourceId, array $playbackIds): Video
     {
         $video = $this->video()->create([
-            'title'                => $this->title,
-            'video_source_id'      => $muxVideoSourceId,
-            'video_source_type_id' => 3 // Mux Video Source Type ID.
+            'title' => $this->title,
+            'video_source_id' => $muxVideoSourceId,
+            'video_source_type_id' => 3, // Mux Video Source Type ID.
         ]);
 
         // Create playback ids.
         $video->playbackIds()->createMany(
-            collect($playbackIds)->map(fn(array $playbackId) => [
+            collect($playbackIds)->map(fn (array $playbackId) => [
                 'playback_id' => $playbackId['id'],
-                'policy'      => $playbackId['policy']
+                'policy' => $playbackId['policy'],
             ])
         );
 
@@ -350,17 +343,17 @@ class Episode extends Model implements HasMedia
     public function createMuxAudio(string $muxAudioSourceId, array $playbackIds): Video
     {
         $audio = $this->video()->create([
-            'title'                => $this->title,
-            'video_source_id'      => $muxAudioSourceId,
-            'file_type'            => 'mp3',
-            'video_source_type_id' => 3 // Mux Video Source Type ID.
+            'title' => $this->title,
+            'video_source_id' => $muxAudioSourceId,
+            'file_type' => 'mp3',
+            'video_source_type_id' => 3, // Mux Video Source Type ID.
         ]);
 
         // Create playback ids.
         $audio->playbackIds()->createMany(
-            collect($playbackIds)->map(fn(array $playbackId) => [
+            collect($playbackIds)->map(fn (array $playbackId) => [
                 'playback_id' => $playbackId['id'],
-                'policy'      => $playbackId['policy']
+                'policy' => $playbackId['policy'],
             ])
         );
 
@@ -369,19 +362,19 @@ class Episode extends Model implements HasMedia
 
     public function toPlayer(?Player $player = null): array
     {
-        if (!($video = $this->video)) {
+        if (! ($video = $this->video)) {
             return [];
         }
 
         return [
-            'episode_id'      => $this->id,
-            'video_id'        => $video->id,
-            'video_title'     => $video->title,
-            'playback_url'    => $video->getPlaybackUrl(),
-            'thumbnail'       => $player ? $this->getPlayerThumbnail($player) : $this->thumbnail,
+            'episode_id' => $this->id,
+            'video_id' => $video->id,
+            'video_title' => $video->title,
+            'playback_url' => $video->getPlaybackUrl(),
+            'thumbnail' => $player ? $this->getPlayerThumbnail($player) : $this->thumbnail,
             'sub_property_id' => $this->livestreamAccount->id,
-            'player_name'     => null,
-            'player_version'  => '2.0.0'
+            'player_name' => null,
+            'player_version' => '2.0.0',
         ];
     }
 

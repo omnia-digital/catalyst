@@ -2,18 +2,15 @@
 
 namespace Modules\Livestream\Listeners\Registration;
 
-use Modules\Livestream\Omnia;
-use Illuminate\Support\Facades\Mail;
 use Laravel\Spark\Events\Auth\UserRegistered;
 use Laravel\Spark\Interactions\Support\SendSupportEmail;
+use Modules\Livestream\Omnia;
 
 class NotifySupportNewUserRegistered
 {
-
     /**
      * Handle the event.
      *
-     * @param  UserRegistered  $event
      * @return void
      */
     public function handle(UserRegistered $event)
@@ -21,7 +18,7 @@ class NotifySupportNewUserRegistered
         $emailData = [
             'from' => $event->user->email,
             'subject' => 'New User Registered',
-            'user' => $event->user
+            'user' => $event->user,
         ];
 
         Omnia::interact(SendSupportEmail::class, [$emailData, 'auth.emails.new-user-registered']);

@@ -13,13 +13,13 @@ class CreateChannelsForOldAccounts extends Migration
     {
         \App\Models\LivestreamAccount::with('players')
             ->get()
-            ->each(function (\App\Models\LivestreamAccount $livestreamAccount) {
+            ->each(function (App\Models\LivestreamAccount $livestreamAccount) {
                 $player = $livestreamAccount->players->first();
 
                 if ($player) {
                     $livestreamAccount->channels()->create([
-                        'name'      => $livestreamAccount->name . ' Live',
-                        'player_id' => $player->id
+                        'name' => $livestreamAccount->name . ' Live',
+                        'player_id' => $player->id,
                     ]);
                 }
             });
@@ -32,6 +32,5 @@ class CreateChannelsForOldAccounts extends Migration
      */
     public function down()
     {
-
     }
 }

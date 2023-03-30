@@ -3,10 +3,7 @@
 namespace Modules\Livestream\Events\Stream;
 
 use Modules\Livestream\Events\Event;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Modules\Livestream\Events\Video\MuxEvent;
-use Modules\Livestream\Services\EpisodeService;
 
 class StreamDisconnected extends MuxEvent
 {
@@ -14,8 +11,6 @@ class StreamDisconnected extends MuxEvent
 
     /**
      * Create a new event instance.
-     *
-     * @param $data
      */
     public function __construct($data)
     {

@@ -15,11 +15,11 @@ class MigrateInvoicesToReceipts extends Migration
             ->get()
             ->each(function ($invoice) {
                 \Spark\Receipt::create([
-                    'team_id'     => $invoice->team_id,
+                    'team_id' => $invoice->team_id,
                     'provider_id' => $invoice->provider_id,
-                    'amount'      => $invoice->total,
-                    'tax'         => $invoice->tax,
-                    'paid_at'     => $invoice->created_at
+                    'amount' => $invoice->total,
+                    'tax' => $invoice->tax,
+                    'paid_at' => $invoice->created_at,
                 ]);
             });
     }
@@ -31,6 +31,5 @@ class MigrateInvoicesToReceipts extends Migration
      */
     public function down()
     {
-
     }
 }

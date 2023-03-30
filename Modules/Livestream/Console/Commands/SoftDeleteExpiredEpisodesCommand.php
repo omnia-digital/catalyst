@@ -1,7 +1,9 @@
-<?php namespace Modules\Livestream\Console\Commands;
+<?php
 
-use Modules\Livestream\Models\Episode;
+namespace Modules\Livestream\Console\Commands;
+
 use Illuminate\Console\Command;
+use Modules\Livestream\Models\Episode;
 
 class SoftDeleteExpiredEpisodesCommand extends Command
 {

@@ -4,8 +4,8 @@ namespace Modules\Social\Http\Livewire\Components;
 
 use App\Models\Team;
 use App\Models\User;
-use Omnia\LivewireCalendar\LivewireCalendar;
 use Modules\Social\Support\Livewire\InteractsWithCalendarTeams;
+use Omnia\LivewireCalendar\LivewireCalendar;
 
 class Calendar extends LivewireCalendar
 {

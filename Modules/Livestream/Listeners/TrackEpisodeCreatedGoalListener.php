@@ -10,7 +10,7 @@ class TrackEpisodeCreatedGoalListener
     public function handle(EpisodeCreatedEvent $event)
     {
         app(Plausible::class)->dispatchCustomEvent(config('plausible.events.episode-created'), [
-            'team' => $event->episode->livestreamAccount->team_id
+            'team' => $event->episode->livestreamAccount->team_id,
         ]);
     }
 }

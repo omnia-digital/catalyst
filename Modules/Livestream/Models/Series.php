@@ -2,8 +2,6 @@
 
 namespace Modules\Livestream\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,7 +16,7 @@ class Series extends Model
     protected $guarded = [];
 
     protected $appends = [
-//        'episode_views'
+        //        'episode_views'
     ];
 
     public function episodes(): BelongsToMany
@@ -48,9 +46,8 @@ class Series extends Model
 
     public function getTotalEpisodeViewsByDateRange($from, $to)
     {
-        return $this->episodes()->withCount(['videoViews' => function($query) use ($from, $to) {
+        return $this->episodes()->withCount(['videoViews' => function ($query) use ($from, $to) {
             $query->whereBetween('video_views.created_at', [$from, $to]);
         }])->get()->sum('video_views_count');
     }
-
 }

@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Models;
+<?php
+
+namespace Modules\Livestream\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

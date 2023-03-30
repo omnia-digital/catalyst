@@ -2,10 +2,10 @@
 
 namespace Modules\Livestream\Providers;
 
-use Modules\Livestream\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\ValidationException;
+use Modules\Livestream\Models\Team;
 use Spark\Plan;
 use Spark\Spark;
 

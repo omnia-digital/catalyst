@@ -2,15 +2,14 @@
 
 namespace Modules\Livestream\Listeners\EpisodeDownload;
 
-use Modules\Livestream\Notifications\EpisodeDownloadWasCompletedNotification;
 use Modules\Livestream\Events\EpisodeDownload\EpisodeDownloadIsReady;
+use Modules\Livestream\Notifications\EpisodeDownloadWasCompletedNotification;
 
 class NotifyWhenEpisodeDownloadReady
 {
     /**
      * Handle the event.
      *
-     * @param EpisodeDownloadIsReady $event
      * @return void
      */
     public function handle(EpisodeDownloadIsReady $event)

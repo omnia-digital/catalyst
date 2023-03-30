@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use Modules\Livestream\Http\Controllers\AttachmentController;
 use Modules\Livestream\Http\Controllers\AuthSocialController;
 use Modules\Livestream\Http\Controllers\MuxWebhooksController;
@@ -26,7 +27,6 @@ use Modules\Livestream\Http\Livewire\Setting\VideoSetting;
 use Modules\Livestream\Http\Livewire\Stream\Streams;
 use Modules\Livestream\Http\Livewire\Stream\StreamTargets;
 use Modules\Livestream\Http\Livewire\Stream\UpdateStreamTarget;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
@@ -67,7 +67,7 @@ Route::middleware(['auth', 'verified', 'subscribed', 'info-filled'])->group(func
     Route::get('/playlists', Playlists::class)->name('playlists');
     Route::get('/playlists/{playlist}', UpdatePlaylist::class)->name('playlists.update');
 
-    Route::get('/settings', fn() => redirect()->route('settings.video'))->name('settings');
+    Route::get('/settings', fn () => redirect()->route('settings.video'))->name('settings');
     Route::get('/settings/video', VideoSetting::class)->name('settings.video');
     Route::get('/settings/streaming', StreamingSetting::class)->name('settings.streaming');
     Route::get('/settings/player', PlayerSetting::class)->name('settings.player');

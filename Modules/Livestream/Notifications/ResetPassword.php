@@ -1,9 +1,9 @@
 <?php
 
-    namespace Modules\Livestream\Notifications;
+namespace Modules\Livestream\Notifications;
 
-    use Illuminate\Notifications\Notification;
     use Illuminate\Notifications\Messages\MailMessage;
+    use Illuminate\Notifications\Notification;
 
     class ResetPassword extends Notification
     {

@@ -22,10 +22,10 @@
         @endif
     </div>
     <p class="mt-2 block text-sm font-medium text-gray-900 line-clamp-2 pointer-events-none">{{ $episode->title }}</p>
-    @if(!$embed)
+    @if (!$embed)
         <p class="flex items-center justify-start text-sm space-x-2 font-medium text-gray-500 pointer-events-none">
             <span>
-            @if($episode->is_published)
+            @if ($episode->is_published)
                     <x-heroicon-s-check-circle class="h-5 w-5 text-green-500"/>
                 @else
                     <x-heroicon-s-x-circle class="h-5 w-5 text-red-500"/>

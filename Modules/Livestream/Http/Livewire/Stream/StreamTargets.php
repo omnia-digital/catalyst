@@ -2,13 +2,12 @@
 
 namespace Modules\Livestream\Http\Livewire\Stream;
 
+use Livewire\Component;
 use Modules\Livestream\Actions\Livestream\CreateStreamTargetAction;
 use Modules\Livestream\Models\LivestreamAccount;
 use Modules\Livestream\Plans\Features\StreamTargetFeature;
 use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Modules\Livestream\Support\Livewire\WithNotification;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 
 /**
  * @property LivestreamAccount $livestreamAccount
@@ -22,8 +21,8 @@ class StreamTargets extends Component
     public array $streamTarget = [];
 
     protected array $rules = [
-        'streamTarget.name'       => ['required', 'max:254'],
-        'streamTarget.url'        => ['required', 'starts_with:rtmp'],
+        'streamTarget.name' => ['required', 'max:254'],
+        'streamTarget.url' => ['required', 'starts_with:rtmp'],
         'streamTarget.stream_key' => ['required'],
     ];
 
@@ -33,13 +32,13 @@ class StreamTargets extends Component
 
         $stream = $this->livestreamAccount->defaultStream();
 
-        if (!$stream) {
+        if (! $stream) {
             $this->error('Could not find Stream. Please make sure you have created one.');
 
             return;
         }
 
-        if (Auth::user()->currentTeam->hasReachedLimit(StreamTargetFeature::class)) {
+        if (auth()->user()->currentTeam->hasReachedLimit(StreamTargetFeature::class)) {
             $this->reset('createStreamTargetModalOpen');
             $this->upgradePlan();
 
@@ -59,7 +58,7 @@ class StreamTargets extends Component
             ->get();
 
         return view('stream.stream-targets', [
-            'streamTargets' => $streamTargets
+            'streamTargets' => $streamTargets,
         ]);
     }
 }

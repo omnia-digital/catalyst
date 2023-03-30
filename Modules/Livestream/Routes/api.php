@@ -1,9 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use Modules\Livestream\Http\Controllers\Api\EmbedPlayersController;
 use Modules\Livestream\Http\Controllers\Api\EmbedPlaylistController;
 use Modules\Livestream\Http\Controllers\Api\VideoViewsController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------

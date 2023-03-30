@@ -2,8 +2,6 @@
 
 namespace Modules\Livestream\Http\Requests;
 
-use Auth;
-
 class EpisodeEditRequest extends LivestreamRequest
 {
     /**
@@ -13,8 +11,9 @@ class EpisodeEditRequest extends LivestreamRequest
      */
     public function authorize()
     {
-        if ($user = Auth::user()) {
+        if ($user = auth()->user()) {
             $user->id = $this->user()->id;
+
             return true;
         } else {
             return false;
@@ -30,7 +29,7 @@ class EpisodeEditRequest extends LivestreamRequest
     {
         // @TODO [Josh] - need to add functionality to pass back validation errors before I can enable validation again. Right now it is just failing without telling what the reason is, so it's too hard to debug.
         return [
-           'title' => 'required | min:5'
+            'title' => 'required | min:5',
         ];
     }
 }

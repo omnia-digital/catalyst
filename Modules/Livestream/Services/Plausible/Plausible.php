@@ -15,7 +15,7 @@ class Plausible
         $this->httpClient = Http::withHeaders([
             'X-Forwarded-For' => request()->ip(),
             'User-Agent' => request()->userAgent(),
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
         ]);
     }
 
@@ -23,7 +23,7 @@ class Plausible
     {
         $data = array_merge([
             'name' => $name,
-            'props' => $props
+            'props' => $props,
         ], $this->defaultEventData());
 
         $this->httpClient

@@ -45,7 +45,6 @@ class UpdateCompanyLogo extends Component
 
             return redirect()->route('teams.show', $this->company->id);
         }
-
     }
 
     public function deleteCompanyLogo()

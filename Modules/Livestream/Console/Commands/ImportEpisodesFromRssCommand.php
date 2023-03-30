@@ -1,9 +1,9 @@
 <?php
 
-    namespace Modules\Livestream\Console\Commands;
+namespace Modules\Livestream\Console\Commands;
 
-    use Modules\Livestream\Actions\Episodes\ImportEpisodesFromRssAction;
     use Illuminate\Console\Command;
+    use Modules\Livestream\Actions\Episodes\ImportEpisodesFromRssAction;
 
     class ImportEpisodesFromRssCommand extends Command
     {
@@ -13,7 +13,7 @@
 
         public function handle()
         {
-            $url     = $this->option('url');
+            $url = $this->option('url');
             $account = $this->option('account');
             $check_duplicate = $this->option('check-duplicate');
 

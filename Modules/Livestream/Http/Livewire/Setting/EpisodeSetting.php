@@ -2,12 +2,11 @@
 
 namespace Modules\Livestream\Http\Livewire\Setting;
 
+use Livewire\Component;
 use Modules\Livestream\Jobs\Episode\DeleteEpisodeJob;
 use Modules\Livestream\Models\Episode;
 use Modules\Livestream\Models\Team;
 use Modules\Livestream\Support\Livewire\WithNotification;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 
 /**
  * @property Team $team
@@ -23,7 +22,7 @@ class EpisodeSetting extends Component
         $this->team
             ->livestreamAccount
             ->episodes
-            ->each(fn(Episode $episode) => dispatch(new DeleteEpisodeJob($episode)));
+            ->each(fn (Episode $episode) => dispatch(new DeleteEpisodeJob($episode)));
 
         $this->reset('confirmingEpisodesDeletion');
         $this->success('Deleting episodes in the background.');
@@ -31,7 +30,7 @@ class EpisodeSetting extends Component
 
     public function getTeamProperty()
     {
-        return Auth::user()->currentTeam;
+        return auth()->user()->currentTeam;
     }
 
     public function render()

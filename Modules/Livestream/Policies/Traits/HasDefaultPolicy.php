@@ -1,9 +1,9 @@
 <?php
 
-    namespace Modules\Livestream\Policies\Traits;
+namespace Modules\Livestream\Policies\Traits;
 
-    use Modules\Livestream\Models\User;
     use Illuminate\Auth\Access\HandlesAuthorization;
+    use Modules\Livestream\Models\User;
 
     trait HasDefaultPolicy
     {

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use Modules\Livestream\Actions\Fortify\CreateNewUser;
 use Modules\Livestream\Models\User;
-use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
@@ -16,11 +16,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         $adminUser = (new CreateNewUser)->create([
-            'email'             => 'admin@omniadigital.io',
-            'first_name'        => 'Omnia',
-            'last_name'         => 'Admin',
-            'password'          => 'testing',
-            'terms'             => 'accepted',
+            'email' => 'admin@omniadigital.io',
+            'first_name' => 'Omnia',
+            'last_name' => 'Admin',
+            'password' => 'testing',
+            'terms' => 'accepted',
         ], false, false);
 
         $adminUser->email_verified_at = now();

@@ -2,15 +2,15 @@
 
 namespace Modules\Livestream\Http\Controllers\Api;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Modules\Livestream\Http\Controllers\Controller;
 use Modules\Livestream\Models\Episode;
 use Modules\Livestream\Models\Person;
 use Modules\Livestream\Models\Playlist;
 use Modules\Livestream\Models\Series;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Spatie\Tags\Tag;
 
 class EmbedPlaylistController extends Controller
@@ -23,7 +23,7 @@ class EmbedPlaylistController extends Controller
             ->with(['mainSpeaker', 'video', 'video.playbackIds', 'livestreamAccount.team', 'series', 'media', 'staticMedia', 'tags', 'category'])
             ->withCount(['videoViews'])
             ->where('livestream_account_id', $playlist->livestream_account_id)
-            ->when(Arr::get($data, 'search'), fn (Builder $query, $search) => $query->where('title', 'LIKE', "%$search%"))
+            ->when(Arr::get($data, 'search'), fn (Builder $query, $search) => $query->where('title', 'LIKE', "%{$search}%"))
             ->when(Arr::get($data, 'speaker'), fn (Builder $query, $speaker) => $query->where('main_speaker_id', $speaker))
             ->when(Arr::get($data, 'series'), fn (Builder $query, $series) => $query->whereHas('series', fn (Builder $query) => $query->where('series_id', $series)))
             ->when(Arr::get($data, 'topics'), fn (Builder $query, $topics) => $query->whereHas('tags', fn (Builder $query) => $query->where('tag_id', $topics)->where('type', 'topic')))
@@ -33,8 +33,8 @@ class EmbedPlaylistController extends Controller
         return view('playlist.embed.index', [
             'episodes' => $episodes,
             'speakers' => $this->getSpeakers($playlist),
-            'series'   => $this->getSeries($playlist),
-            'topics'   => $this->getTopics(),
+            'series' => $this->getSeries($playlist),
+            'topics' => $this->getTopics(),
         ]);
     }
 

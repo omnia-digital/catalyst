@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Exceptions;
+<?php
+
+namespace Modules\Livestream\Exceptions;
 
 use Exception;
 

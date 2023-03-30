@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Shortcodes;
+<?php
+
+namespace Modules\Livestream\Shortcodes;
 
 class MonthNumberShortcode implements Shortcode
 {

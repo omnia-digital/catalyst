@@ -2,6 +2,7 @@
 
 namespace Modules\Livestream\Console\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Modules\Livestream\Episode;
@@ -37,6 +38,7 @@ class UpdateEpisodeDurationCommand extends Command
      * Execute the console command.
      *
      * @return void
+     *
      * @throws \MuxPhp\ApiException
      */
     public function handle()
@@ -63,7 +65,7 @@ class UpdateEpisodeDurationCommand extends Command
                 $durationInMillisecond = $duration * 1000;
 
                 $episode->update(['duration' => $durationInMillisecond]);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Log::error($e);
             }
         });

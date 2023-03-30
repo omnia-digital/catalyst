@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Registries\VideoSource\Concerns;
+<?php
+
+namespace Modules\Livestream\Registries\VideoSource\Concerns;
 
 use Modules\Livestream\Models\Video;
 use Modules\Livestream\Registries\VideoSource\VideoSourceRegistry;
@@ -15,8 +17,6 @@ trait HasSourceVideo
 
     /**
      * Get the download url of video source.
-     *
-     * @return string|null
      */
     public function getDownloadUrl(): ?string
     {
@@ -37,8 +37,6 @@ trait HasSourceVideo
 
     /**
      * Check if the video is processing or ready.
-     *
-     * @return bool
      */
     public function isProcessing(): bool
     {

@@ -2,17 +2,17 @@
 
 namespace Modules\Livestream\Providers;
 
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\ServiceProvider;
+use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
+use Laravel\Fortify\Fortify;
 use Modules\Livestream\Actions\Fortify\CreateNewUser;
 use Modules\Livestream\Actions\Fortify\ResetUserPassword;
 use Modules\Livestream\Actions\Fortify\UpdateUserPassword;
 use Modules\Livestream\Actions\Fortify\UpdateUserProfileInformation;
 use Modules\Livestream\Http\Responses\RegisterResponse;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\ServiceProvider;
-use Laravel\Fortify\Fortify;
-use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 
 class FortifyServiceProvider extends ServiceProvider
 {

@@ -2,9 +2,9 @@
 
 namespace Modules\Livestream\Providers;
 
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Modules\Livestream\Models\Team;
 use Modules\Livestream\Policies\TeamPolicy;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {

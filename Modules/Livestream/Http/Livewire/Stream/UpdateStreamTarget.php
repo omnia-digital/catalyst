@@ -1,10 +1,12 @@
-<?php namespace Modules\Livestream\Http\Livewire\Stream;
+<?php
 
+namespace Modules\Livestream\Http\Livewire\Stream;
+
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\Component;
 use Modules\Livestream\Models\StreamTarget;
 use Modules\Livestream\Services\Mux\MuxLivestream;
 use Modules\Livestream\Support\Livewire\WithNotification;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Livewire\Component;
 
 class UpdateStreamTarget extends Component
 {

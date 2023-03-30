@@ -2,6 +2,13 @@
 
 namespace Modules\Livestream\Http\Livewire\Episode;
 
+use Exception;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 use Modules\Livestream\Models\Category;
 use Modules\Livestream\Models\Episode;
 use Modules\Livestream\Models\LivestreamAccount;
@@ -10,12 +17,6 @@ use Modules\Livestream\Support\Livewire\WithModal;
 use Modules\Livestream\Support\Livewire\WithNotification;
 use Modules\Livestream\Support\Livewire\WithSlideOver;
 use Modules\Livestream\Support\Series\WithSeries;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\ValidationRules\Rules\Delimited;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
@@ -44,27 +45,10 @@ class EpisodeInfoPanel extends Component
     public null|int|string $deletingAttachment = null;
 
     protected $listeners = [
-        'episodeSelected'    => 'findEpisode',
+        'episodeSelected' => 'findEpisode',
         'episode-deselected' => 'resetEpisode',
-        'attachmentUploaded' => '$refresh'
+        'attachmentUploaded' => '$refresh',
     ];
-
-    protected function rules(): array
-    {
-        return [
-            'state.title'           => ['required', 'max:254'],
-            'state.is_published'    => ['required', 'bool'],
-            'state.description'     => ['nullable'],
-            'state.date_recorded'   => ['required'],
-            'state.main_speaker_id' => ['nullable', Rule::in(array_keys($this->speakers))],
-            'state.main_passage'    => ['nullable', 'max:254'],
-            'state.other_passages'  => ['nullable'],
-            'state.category_id'     => ['nullable', Rule::in(array_keys($this->categories))],
-            'topics'                => ['nullable', new Delimited('string')],
-            'thumbnail'             => ['nullable', 'image', 'max:2048'],
-            'selectedSeries'        => ['nullable']
-        ];
-    }
 
     public function mount($episodeId = null)
     {
@@ -123,7 +107,7 @@ class EpisodeInfoPanel extends Component
     {
         $this->authorize('download', $this->episode);
 
-        if (!($url = $this->episode->video->getDownloadUrl())) {
+        if (! ($url = $this->episode->video->getDownloadUrl())) {
             $this->error('Converting file to be able to be downloaded. The time this process takes depends on the length of the video. If the video is over 1 hour long, please check back in a few hours.');
 
             return;
@@ -146,15 +130,15 @@ class EpisodeInfoPanel extends Component
         // we don't want to use the data from model binding
         // because it will show title as empty when user delete title in the edit form.
         $this->state = $this->episode?->only([
-                'title',
-                'description',
-                'date_recorded',
-                'is_published',
-                'main_speaker_id',
-                'main_passage',
-                'other_passages',
-                'category_id',
-            ]) ?? [];
+            'title',
+            'description',
+            'date_recorded',
+            'is_published',
+            'main_speaker_id',
+            'main_passage',
+            'other_passages',
+            'category_id',
+        ]) ?? [];
 
         $this->topics = $this->episode->tagsWithType('topic')->implode('name', ',');
 
@@ -171,7 +155,7 @@ class EpisodeInfoPanel extends Component
     {
         $media = Media::findByUuid($mediaUuid);
 
-        if (!$media) {
+        if (! $media) {
             $this->error('Cannot find the attachment object.');
 
             return;
@@ -182,12 +166,12 @@ class EpisodeInfoPanel extends Component
                 ->getDriver()
                 ->readStream('/' . $media->id . '/' . $media->file_name);
 
-            return Response::stream(fn() => fpassthru($file), 200, [
-                'Content-Type'        => $media->mime_type,
+            return Response::stream(fn () => fpassthru($file), 200, [
+                'Content-Type' => $media->mime_type,
                 'Content-Disposition' => 'attachment; filename="' . $media->name . '"',
-                'Content-Length'      => $media->size
+                'Content-Length' => $media->size,
             ]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             if ($e instanceof FileNotFoundException) {
                 $this->error('Cannot find the attachment from server.');
 
@@ -202,7 +186,7 @@ class EpisodeInfoPanel extends Component
     {
         $media = Media::findByUuid($mediaUuid);
 
-        if (!$media) {
+        if (! $media) {
             $this->error('Cannot find the attachment object.');
 
             return;
@@ -236,11 +220,28 @@ class EpisodeInfoPanel extends Component
     public function render()
     {
         return view('episode.episode-info-panel', [
-            'attachments'       => $this->episode?->getMedia()->sortBy('mime_type'),
+            'attachments' => $this->episode?->getMedia()->sortBy('mime_type'),
             'staticAttachments' => $this->episode?->getStaticUrlMediaOnly()->sortBy('mime_type'),
-            'series'            => $this->series,
-            'speakers'          => $this->speakers,
-            'categories'        => $this->categories,
+            'series' => $this->series,
+            'speakers' => $this->speakers,
+            'categories' => $this->categories,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'state.title' => ['required', 'max:254'],
+            'state.is_published' => ['required', 'bool'],
+            'state.description' => ['nullable'],
+            'state.date_recorded' => ['required'],
+            'state.main_speaker_id' => ['nullable', Rule::in(array_keys($this->speakers))],
+            'state.main_passage' => ['nullable', 'max:254'],
+            'state.other_passages' => ['nullable'],
+            'state.category_id' => ['nullable', Rule::in(array_keys($this->categories))],
+            'topics' => ['nullable', new Delimited('string')],
+            'thumbnail' => ['nullable', 'image', 'max:2048'],
+            'selectedSeries' => ['nullable'],
+        ];
     }
 }

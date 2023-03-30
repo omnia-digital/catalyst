@@ -2,8 +2,6 @@
 
 namespace Modules\Livestream\Listeners\Stream;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
 use Modules\Livestream\Events\Stream\StreamWasInterrupted;
 use Modules\Livestream\Notifications\StreamWasInterruptedNotification;
@@ -13,7 +11,6 @@ class NotifyWhenEpisodeHasReachedLimit
     /**
      * Handle the event.
      *
-     * @param  StreamWasInterrupted  $event
      * @return void
      */
     public function handle(StreamWasInterrupted $event)

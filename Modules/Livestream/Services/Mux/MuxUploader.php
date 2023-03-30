@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Services\Mux;
+<?php
+
+namespace Modules\Livestream\Services\Mux;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
@@ -18,16 +20,16 @@ class MuxUploader
     public function make(): array
     {
         $upload = $this->directUploadsApi->createDirectUpload(new CreateUploadRequest([
-            'cors_origin'        => config('app.url'),
+            'cors_origin' => config('app.url'),
             'new_asset_settings' => [
-                'passthrough'     => $omniaVideoId = Str::random(),
-                'playback_policy' => 'public'
-            ]
+                'passthrough' => $omniaVideoId = Str::random(),
+                'playback_policy' => 'public',
+            ],
         ]));
 
         return [
-            'id'   => $omniaVideoId,
-            'data' => $upload->getData()
+            'id' => $omniaVideoId,
+            'data' => $upload->getData(),
         ];
     }
 }

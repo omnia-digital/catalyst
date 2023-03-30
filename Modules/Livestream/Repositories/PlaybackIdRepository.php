@@ -2,14 +2,14 @@
 
 namespace Modules\Livestream\Repositories;
 
-use Modules\Livestream\Module;
-use Modules\Livestream\Role;
 use Illuminate\Support\Facades\Config;
 use Modules\Livestream\Contracts\Repositories\LivestreamRepositoryContract;
 use Modules\Livestream\EpisodeTemplate;
+use Modules\Livestream\Module;
+use Modules\Livestream\Player;
+use Modules\Livestream\Role;
 use Modules\Livestream\Services\MuxService;
 use Modules\Livestream\Stream;
-use Modules\Livestream\Player;
 
 class PlaybackIdRepository implements LivestreamRepositoryContract
 {
@@ -20,7 +20,9 @@ class PlaybackIdRepository implements LivestreamRepositoryContract
      * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $excludeStream
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search($query, $excludeStream = null){}
+    public function search($query, $excludeStream = null)
+    {
+    }
 
     /**
      * {@inheritdoc}
@@ -41,11 +43,10 @@ class PlaybackIdRepository implements LivestreamRepositoryContract
     /**
      * {@inheritdoc}
      */
-    public function create($user,array $data)
+    public function create($user, array $data)
     {
         // create a stream on Mux
-        $mux_service = new MuxService();
-
+        $mux_service = new MuxService;
 
         // then create it on omnia
 
@@ -57,26 +58,26 @@ class PlaybackIdRepository implements LivestreamRepositoryContract
             'description' => 'Administrator of the account',
             'level' => 1,
             'module_id' => $module->id,
-            'team_id' => $data['team_id']
+            'team_id' => $data['team_id'],
         ]);
         $user->attachRole($role);
 
-	    // Create Default Player
+        // Create Default Player
         $player = Player::create([
             'name' => 'Live Player',
-            'livestream_account_id' => $stream->id
+            'livestream_account_id' => $stream->id,
         ]);
 
-	    // Create Default Episode Template for this account
-	    $defaultEpisodeTemplate = EpisodeTemplate::getSystemDefault()->replicate();
-	    $defaultEpisodeTemplate->livestream_account_id = $stream->id;
-	    $defaultEpisodeTemplate->save();
+        // Create Default Episode Template for this account
+        $defaultEpisodeTemplate = EpisodeTemplate::getSystemDefault()->replicate();
+        $defaultEpisodeTemplate->livestream_account_id = $stream->id;
+        $defaultEpisodeTemplate->save();
 
-	    $defaultStream = Stream::create();
-
+        $defaultStream = Stream::create();
 
         $stream->default_episode_template_id = $defaultEpisodeTemplate->id;
         $stream->save();
+
         return $stream;
     }
 }

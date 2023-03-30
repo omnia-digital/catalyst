@@ -2,12 +2,12 @@
 
 namespace Modules\Livestream\Http\Livewire\Channel;
 
-use Modules\Livestream\Models\LivestreamAccount;
-use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
-use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Support\Livewire\WithNotification;
 
 /**
  * @property LivestreamAccount $livestreamAccount
@@ -23,21 +23,13 @@ class Channels extends Component
 
     public string|int $player = '';
 
-    protected function rules()
-    {
-        return [
-            'name'   => ['required', 'max:254'],
-            'player' => ['required', Rule::in($this->players->keys())]
-        ];
-    }
-
     public function createChannel()
     {
         $validated = $this->validate();
 
         $this->livestreamAccount->channels()->create([
-            'name'      => $validated['name'],
-            'player_id' => $validated['player']
+            'name' => $validated['name'],
+            'player_id' => $validated['player'],
         ]);
 
         $this->reset('createChannelModalOpen', 'name', 'player');
@@ -61,7 +53,15 @@ class Channels extends Component
 
         return view('channel.channels', [
             'channels' => $channels,
-            'players'  => $this->players->all()
+            'players' => $this->players->all(),
         ]);
+    }
+
+    protected function rules()
+    {
+        return [
+            'name' => ['required', 'max:254'],
+            'player' => ['required', Rule::in($this->players->keys())],
+        ];
     }
 }

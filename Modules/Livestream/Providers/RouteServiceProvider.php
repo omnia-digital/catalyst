@@ -3,22 +3,20 @@
 namespace Modules\Livestream\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    public const HOME = '/episodes';
     /**
      * The module namespace to assume when generating URLs to actions.
      *
      * @var string
      */
     protected $moduleNamespace = '';
-
-    public const HOME = '/episodes';
-
 
     /**
      * Called before routes are registered.
@@ -35,18 +33,6 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Configure the rate limiters for the application.
-     *
-     * @return void
-     */
-    protected function configureRateLimiting()
-    {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
-        });
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @return void
@@ -56,6 +42,18 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+    }
+
+    /**
+     * Configure the rate limiters for the application.
+     *
+     * @return void
+     */
+    protected function configureRateLimiting()
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        });
     }
 
     /**

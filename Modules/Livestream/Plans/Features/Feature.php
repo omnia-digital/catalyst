@@ -1,8 +1,10 @@
-<?php namespace Modules\Livestream\Plans\Features;
+<?php
 
+namespace Modules\Livestream\Plans\Features;
+
+use Closure;
 use Modules\Livestream\Models\LivestreamAccount;
 use Modules\Livestream\Models\Team;
-use Illuminate\Support\Facades\Auth;
 
 abstract class Feature
 {
@@ -18,33 +20,27 @@ abstract class Feature
 
     /**
      * Get the current billable.
-     *
-     * @return Team
      */
     public function billable(): Team
     {
-        return Auth::user()->currentTeam;
+        return auth()->user()->currentTeam;
     }
 
     /**
      * Get the default livestream account.
-     *
-     * @return LivestreamAccount
      */
     public function livestreamAccount(): LivestreamAccount
     {
-        return Auth::user()->currentTeam->livestreamAccount;
+        return auth()->user()->currentTeam->livestreamAccount;
     }
 
     /**
      * Set feature is available on trial.
-     *
-     * @param \Closure $callback
      */
-    public function isAvailableOnTrial(\Closure $callback)
+    public function isAvailableOnTrial(Closure $callback)
     {
         $this->isAvailableOnTrial = $callback();
     }
 
-    public abstract function usage(): int;
+    abstract public function usage(): int;
 }

@@ -1,20 +1,15 @@
-<?php namespace Modules\Livestream\Actions\Episodes;
+<?php
 
-use Modules\Livestream\Models\Team;
+namespace Modules\Livestream\Actions\Episodes;
+
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Modules\Livestream\Models\Team;
 
 class GetStorageDurationAction
 {
-    /**
-     * @param Carbon $from
-     * @param Carbon $to
-     * @param Team|null $team
-     * @return int|float
-     */
     public function execute(Carbon $from, Carbon $to, bool $expiredOnly = true, ?Team $team = null): int|float
     {
-        is_null($team) && $team = Auth::user()->currentTeam;
+        is_null($team) && $team = auth()->user()->currentTeam;
 
         // For normal episodes, get all episodes to calculate the storage duration.
         if ($expiredOnly) {

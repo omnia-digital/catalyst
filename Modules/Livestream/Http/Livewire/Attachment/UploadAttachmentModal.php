@@ -2,12 +2,12 @@
 
 namespace Modules\Livestream\Http\Livewire\Attachment;
 
-use Modules\Livestream\Models\Episode;
-use Modules\Livestream\Support\Livewire\WithNotification;
 use GuzzleHttp\Psr7\Uri;
 use Livewire\Component;
 use Livewire\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Support\Livewire\WithNotification;
 
 class UploadAttachmentModal extends Component
 {
@@ -26,7 +26,7 @@ class UploadAttachmentModal extends Component
     public ?string $url = null;
 
     protected $listeners = [
-        'uploadAttachmentShow' => 'showUploadAttachmentModal'
+        'uploadAttachmentShow' => 'showUploadAttachmentModal',
     ];
 
     public function updatedAttachment()
@@ -63,6 +63,11 @@ class UploadAttachmentModal extends Component
         $this->emitTo('episode.episode-info-panel', 'attachmentUploaded');
     }
 
+    public function render()
+    {
+        return view('attachment.upload-attachment-modal');
+    }
+
     private function upload(): void
     {
         $this->episode
@@ -84,12 +89,7 @@ class UploadAttachmentModal extends Component
             'attachment' => [
                 'mimes:' . implode(',', config('media-library.allowed_file_types')),
                 'max:' . config('media-library.max_file_size'),
-            ]
+            ],
         ];
-    }
-
-    public function render()
-    {
-        return view('attachment.upload-attachment-modal');
     }
 }

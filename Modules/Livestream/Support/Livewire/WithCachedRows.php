@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Support\Livewire;
+<?php
+
+namespace Modules\Livestream\Support\Livewire;
 
 trait WithCachedRows
 {

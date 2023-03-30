@@ -2,9 +2,9 @@
 
 namespace Modules\Livestream\Http\Livewire\Playlist;
 
+use Livewire\Component;
 use Modules\Livestream\Models\LivestreamAccount;
 use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
-use Livewire\Component;
 
 /**
  * @property LivestreamAccount $livestreamAccount
@@ -16,13 +16,6 @@ class Playlists extends Component
     public bool $createPlaylistModalOpen = false;
 
     public ?string $name = null;
-
-    protected function rules(): array
-    {
-        return [
-            'name' => ['required', 'max:254']
-        ];
-    }
 
     public function createPlaylist()
     {
@@ -48,7 +41,14 @@ class Playlists extends Component
     public function render()
     {
         return view('playlist.playlists', [
-            'playlists' => $this->rows
+            'playlists' => $this->rows,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'name' => ['required', 'max:254'],
+        ];
     }
 }

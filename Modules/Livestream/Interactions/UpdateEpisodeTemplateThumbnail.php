@@ -1,10 +1,11 @@
 <?php
 
-    namespace Modules\Livestream\Interactions;
+namespace Modules\Livestream\Interactions;
 
-    use Intervention\Image\ImageManager;
     use Illuminate\Support\Facades\Storage;
     use Illuminate\Support\Facades\Validator;
+    use Intervention\Image\ImageManager;
+use SplFileInfo;
 
     class UpdateEpisodeTemplateThumbnail
     {
@@ -18,7 +19,6 @@
         /**
          * Create a new interaction instance.
          *
-         * @param  ImageManager  $images
          * @return void
          */
         public function __construct(ImageManager $images)
@@ -26,9 +26,6 @@
             $this->images = $images;
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function validator($episodeTemplate, array $data)
         {
             return Validator::make($data, [
@@ -36,9 +33,6 @@
             ]);
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function handle($episodeTemplate, array $data)
         {
             $file = $data['default_thumbnail'];
@@ -70,11 +64,11 @@
         /**
          * Resize an image instance for the given file.
          *
-         * @param  \SplFileInfo  $file
+         * @param  SplFileInfo  $file
          * @return \Intervention\Image\Image
          */
         protected function formatImage($file)
         {
-            return (string) $this->images->make($file->path())->fit(1920,1080)->encode();
+            return (string) $this->images->make($file->path())->fit(1920, 1080)->encode();
         }
     }

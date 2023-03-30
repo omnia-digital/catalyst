@@ -1,21 +1,25 @@
-<?php namespace Modules\Livestream\Notifications;
+<?php
+
+namespace Modules\Livestream\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\MailMessage;
 
 class LivestreamNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(private string $message) {}
+    public function __construct(private string $message)
+    {
+    }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -24,7 +28,6 @@ class LivestreamNotification extends Notification implements ShouldQueue
     }
 
     /**
-     * @param $notifiable
      * @return mixed
      */
     public function toSlack($notifiable)
@@ -38,7 +41,7 @@ class LivestreamNotification extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return MailMessage
      */
     public function toMail($notifiable)
@@ -52,7 +55,7 @@ class LivestreamNotification extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

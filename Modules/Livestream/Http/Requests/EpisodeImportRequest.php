@@ -6,7 +6,6 @@ namespace Modules\Livestream\Http\Requests;
  * Handles Importing Episodes from another provider
  *
  * Class EpisodeImportRequest
- * @package App\Http\Requests
  */
 class EpisodeImportRequest extends ImportRequest
 {
@@ -20,7 +19,7 @@ class EpisodeImportRequest extends ImportRequest
         return [
             'import_path' => 'required | string',
             'import_type' => 'required | string',
-            'provider' => 'required | string'
+            'provider' => 'required | string',
         ];
     }
 }

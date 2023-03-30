@@ -3,25 +3,14 @@
 namespace Modules\Livestream\Http\Controllers;
 
 use Carbon\Carbon;
-use Auth;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\EnvironmentDetector;
 use Modules\Livestream\EpisodeTemplate;
 use Modules\Livestream\Http\Requests\ScheduleRequest;
 use Modules\Livestream\LivestreamAccount;
 use Modules\Livestream\Schedule;
-use Modules\Livestream\Http\Requests;
-use Modules\Livestream\Http\Controllers\LivestreamController;
-use Modules\Livestream\WowzaMediaServer;
-use Modules\Livestream\WowzaVhost;
-use Modules\Livestream\WowzaPublisher;
-use Modules\Livestream\WowzaVhostHostPort;
-use Modules\Livestream\Services\StreamService;
-
+use Redirect;
 
 class ScheduleController extends LivestreamController
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -29,8 +18,8 @@ class ScheduleController extends LivestreamController
      */
     public function index()
     {
-        $start_date = new Carbon();
-        $end_date = new Carbon();
+        $start_date = new Carbon;
+        $end_date = new Carbon;
         $start_date->setTimezone($this->_livestreamAccount->team->timezone);
         $end_date->setTimezone($this->_livestreamAccount->team->timezone);
 
@@ -59,17 +48,16 @@ class ScheduleController extends LivestreamController
      */
     public function create()
     {
-        $availableHours = ['01'=>'01','02'=>'02','03'=>'03','04'=>'04','05'=>'05','06'=>'06','07'=>'07','08'=>'08','09'=>'09','10'=>'10','11'=>'11','12'=>'12'];
-        $availableMinutes = ['00'=>'00','15'=>'15','30'=>'30','45'=>'45'];
+        $availableHours = ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' => '05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12'];
+        $availableMinutes = ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];
         $LivestreamAccount = $this->_livestreamAccount;
 
-        return view('livestream::schedule/create', compact('availableHours','availableMinutes','LivestreamAccount'));
+        return view('livestream::schedule/create', compact('availableHours', 'availableMinutes', 'LivestreamAccount'));
     }
 
     /**
      * Store a newly created Schedule in storage.
      *
-     * @param ScheduleRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -78,24 +66,22 @@ class ScheduleController extends LivestreamController
         $request = $request->all();
         $request['livestream_account_id'] = $this->_livestreamAccount->id;
 
-        $start_date = Carbon::createFromFormat('Y-m-d',$request['start_date']);
-        $start_date->setTimeFromTimeString($request['start_time_hour'] . ":" . $request['start_time_min']);
+        $start_date = Carbon::createFromFormat('Y-m-d', $request['start_date']);
+        $start_date->setTimeFromTimeString($request['start_time_hour'] . ':' . $request['start_time_min']);
         $request['start_date'] = $start_date;
 
-        $end_date = Carbon::createFromFormat('Y-m-d',$request['end_date']);
-        $end_date->setTimeFromTimeString($request['end_time_hour'] . ":" . $request['end_time_min']);
+        $end_date = Carbon::createFromFormat('Y-m-d', $request['end_date']);
+        $end_date->setTimeFromTimeString($request['end_time_hour'] . ':' . $request['end_time_min']);
         $request['end_date'] = $end_date;
 
         $schedule = Schedule::create($request);
 
-        return redirect(route('livestream::schedule.edit',[$schedule->id]));
-
+        return redirect(route('livestream::schedule.edit', [$schedule->id]));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Schedule $schedule
      * @return \Illuminate\Http\Response
      */
     public function show(Schedule $schedule)
@@ -106,38 +92,36 @@ class ScheduleController extends LivestreamController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Schedule $schedule
      * @return \Illuminate\Http\Response
      */
     public function edit(Schedule $schedule)
     {
-        $availableHours = ['01'=>'01','02'=>'02','03'=>'03','04'=>'04','05'=>'05','06'=>'06','07'=>'07','08'=>'08','09'=>'09','10'=>'10','11'=>'11','12'=>'12'];
-        $availableMinutes = ['00'=>'00','15'=>'15','30'=>'30','45'=>'45'];
-        return view('livestream::schedule.edit', compact('schedule','availableHours','availableMinutes'));
+        $availableHours = ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' => '05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12'];
+        $availableMinutes = ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];
+
+        return view('livestream::schedule.edit', compact('schedule', 'availableHours', 'availableMinutes'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param ScheduleRequest $request
-     * @param Schedule $schedule
      * @return \Illuminate\Http\Response
      */
     public function update(ScheduleRequest $request, Schedule $schedule)
     {
         $request = $request->all();
 
-        $start_date = Carbon::createFromFormat('Y-m-d',$request['start_date']);
-        $start_date->setTimeFromTimeString($request['start_time_hour'] . ":" . $request['start_time_min']);
+        $start_date = Carbon::createFromFormat('Y-m-d', $request['start_date']);
+        $start_date->setTimeFromTimeString($request['start_time_hour'] . ':' . $request['start_time_min']);
         $request['start_date'] = $start_date;
 
-        $end_date = Carbon::createFromFormat('Y-m-d',$request['end_date']);
-        $end_date->setTimeFromTimeString($request['end_time_hour'] . ":" . $request['end_time_min']);
+        $end_date = Carbon::createFromFormat('Y-m-d', $request['end_date']);
+        $end_date->setTimeFromTimeString($request['end_time_hour'] . ':' . $request['end_time_min']);
         $request['end_date'] = $end_date;
 
         $schedule->update($request);
 
-        return \Redirect::back()->with(['flash.message' => 'Save Successful!','flash.level' => 'success']);
+        return Redirect::back()->with(['flash.message' => 'Save Successful!', 'flash.level' => 'success']);
     }
 
     /**
@@ -149,8 +133,8 @@ class ScheduleController extends LivestreamController
     public function destroy(Schedule $schedule)
     {
         Schedule::destroy($schedule->id);
+
         return redirect('/livestream');
         // @TODO [Josh] - set it up so it soft deletes and can be recovered within 30 days
     }
-
 }

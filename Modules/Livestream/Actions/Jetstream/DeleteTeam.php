@@ -2,8 +2,8 @@
 
 namespace Modules\Livestream\Actions\Jetstream;
 
-use Modules\Livestream\Support\Livewire\WithNotification;
 use Laravel\Jetstream\Contracts\DeletesTeams;
+use Modules\Livestream\Support\Livewire\WithNotification;
 
 class DeleteTeam implements DeletesTeams
 {
@@ -12,13 +12,13 @@ class DeleteTeam implements DeletesTeams
     /**
      * Delete the given team.
      *
-     * @param mixed $team
+     * @param  mixed  $team
      * @return void
      */
     public function delete($team)
     {
         if (
-            ($team->subscribed() && !$team->subscription()->onGracePeriod())
+            ($team->subscribed() && ! $team->subscription()->onGracePeriod())
             || $team->hasUnpaidExtraInvoiceItems()
             || $team->livestreamAccount->hasEpisodes()
         ) {

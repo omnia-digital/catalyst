@@ -2,9 +2,9 @@
 
 namespace Modules\Livestream\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Livestream\Models\Playlist;
 use Modules\Livestream\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PlaylistPolicy
 {

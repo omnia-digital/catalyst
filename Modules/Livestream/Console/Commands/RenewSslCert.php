@@ -2,12 +2,9 @@
 
 namespace Modules\Livestream\Console\Commands;
 
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\File;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,8 +12,6 @@ use Illuminate\Support\Facades\Storage;
  * Class CheckNewSslCert
  * Check directories in Cert Dir and get last modified dates. If any have been modified within the last minute,
  * get the cert, convert to needed format, then copy over to needed servers and put in the correct place.
- *
- * @package App\Console\Commands
  */
 class RenewSslCert extends Command
 {
@@ -61,11 +56,11 @@ class RenewSslCert extends Command
 
             // copy to Wowza server
             Log::info('Copy new certificate to Wowza server');
-            if (!empty($newCertFilePath)) {
+            if (! empty($newCertFilePath)) {
                 $wowza_cert_dir_path = env('WOWZA_SSL_CERT_DIR');
                 $certFileName = 'omnia-cert-' . date('Ymd-hms') . '.crt';
                 $wowza = Storage::disk('wowza');
-                $wowza->putFileAs($wowza_cert_dir_path,new File($newCertFilePath),$certFileName);
+                $wowza->putFileAs($wowza_cert_dir_path, new File($newCertFilePath), $certFileName);
             }
             Log::info('Import new certificate into Wowza JDK store');
 
@@ -73,12 +68,10 @@ class RenewSslCert extends Command
                 'sudo keytool -delete -alias omnia-app-org -keystore /usr/local/WowzaStreamingEngine-4.5.0/jre1.8.0_77/lib/security/cacerts',
                 'sudo keytool -import -file $WOWZACERTPATH -alias omnia-app-org -keystore /usr/local/WowzaStreamingEngine-4.5.0/jre1.8.0_77/lib/security/cacerts'
             );
-
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
 
         Log::info('[FINISHED] - Renew SSL Cert');
-
     }
 }

@@ -2,10 +2,8 @@
 
 namespace Modules\Livestream\Events\Episode;
 
-use Modules\Livestream\Events\Event;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Modules\Livestream\Http\Requests\Notifications\StreamEndNotificationRequest;
+use Modules\Livestream\Events\Event;
 
 class EpisodeStartedRecording extends Event
 {
@@ -17,10 +15,6 @@ class EpisodeStartedRecording extends Event
 
     /**
      * Create a new event instance.
-     *
-     * @param $episode
-     * @param $LivestreamAccount
-     * @param $realStreamName
      */
     public function __construct($episode, $LivestreamAccount, $realStreamName)
     {

@@ -4,7 +4,6 @@ namespace Modules\Livestream\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class ToggleAllLivestreamEpisodesPublishedStatus extends Command
 {
@@ -33,18 +32,17 @@ class ToggleAllLivestreamEpisodesPublishedStatus extends Command
 
         if (empty($status)) {
             $this->error('A Status is required. You can enter it as --status=true');
+
             return;
         }
 
-        if($this->confirm("Are you sure you want to change all Livestream Episodes Published Statuses to ($status)?")) {
+        if ($this->confirm("Are you sure you want to change all Livestream Episodes Published Statuses to ({$status})?")) {
             if ($status === 'true') {
                 DB::connection('default')->table('livestream_episodes')->update(['is_published' => 1]);
             } else {
                 DB::connection('default')->table('livestream_episodes')->update(['is_published' => 0]);
             }
-            $this->info("Livestream Episodes Published Statuses have been changed to ($status)");
+            $this->info("Livestream Episodes Published Statuses have been changed to ({$status})");
         }
-
-
     }
 }

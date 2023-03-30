@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Modules\Livestream\Models\Episode;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Livestream\Models\Episode;
 
 class EpisodeFactory extends Factory
 {
@@ -22,10 +22,10 @@ class EpisodeFactory extends Factory
     public function definition()
     {
         return [
-            'title'                 => $this->faker->name,
-            'description'           => $this->faker->paragraph,
-            'date_recorded'         => $this->faker->date(),
-            'livestream_account_id' => 1
+            'title' => $this->faker->name,
+            'description' => $this->faker->paragraph,
+            'date_recorded' => $this->faker->date(),
+            'livestream_account_id' => 1,
         ];
     }
 }

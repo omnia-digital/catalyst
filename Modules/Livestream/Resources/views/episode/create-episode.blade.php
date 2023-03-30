@@ -33,7 +33,7 @@
                             <div class="mt-4">
                                 <x-input.mux-uploader />
                             </div>
-                            @elseif($hasMedia)
+                            @elseif ($hasMedia)
                             <div class="mt-4">
                                 <x-input.label value="From URL" />
                                 <x-input.text id="from-url" wire:model.defer="url" placeholder="From URL" />

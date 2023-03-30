@@ -1,24 +1,21 @@
 <?php
 
-    namespace Modules\Livestream\Services;
+namespace Modules\Livestream\Services;
 
-    use Modules\Livestream\Services\Service;
+    use Exception;
+    use Illuminate\Http\Request;
     use Illuminate\Support\Collection;
     use Illuminate\Support\Facades\Log;
+    use Livestream\Livestream;
     use Modules\Livestream\Exceptions\LivestreamAccountIdNotFoundException;
     use Modules\Livestream\LivestreamAccount;
     use Modules\Livestream\Player;
-    use Auth;
-    use Illuminate\Http\Request;
-    use Modules\Livestream\Http\Requests;
     use Modules\Livestream\WowzaMediaServer;
     use Modules\Livestream\WowzaVhost;
-    use Livestream\Livestream;
-    use SimpleXMLElement;
+use SimpleXMLElement;
 
     class StreamService extends Service
     {
-
         private $_livestreamAccount;
         private $_player;
         private $_streamType = 'all';
@@ -29,27 +26,24 @@
         /**
          * StreamService constructor.
          *
-         * @param LivestreamAccount $livestreamAccount
-         * @param                   $player
-         * @param null              $streamType
+         * @param  null  $streamType
          */
         public function __construct(LivestreamAccount $livestreamAccount, $player = null, $streamType = null)
         {
             $this->_livestreamAccount = $livestreamAccount;
-            $this->_player            = $player;
-            if ( ! is_null($streamType)) {
+            $this->_player = $player;
+            if (! is_null($streamType)) {
                 $this->_streamType = $streamType;
             }
         }
 
-
         /**
          * Get Live Instances for given Account
          *
-         * @param $accountId
          *
          * @return Collection
-         * @throws \Exception
+         *
+         * @throws Exception
          */
         public function getAccountLiveInstances($accountId = null)
         {
@@ -80,17 +74,17 @@
                 Log::info('[END] - ' . __FUNCTION__);
 
                 return $accountLiveInstances;
-            } catch (\Exception $e) {
-                throw new \Exception('Could not get Account Live Instances: ' . $e->getMessage());
+            } catch (Exception $e) {
+                throw new Exception('Could not get Account Live Instances: ' . $e->getMessage());
             }
         }
-
 
         /**
          * Get All Live Instances currently being streamed
          *
          * @return Collection
-         * @throws \Exception
+         *
+         * @throws Exception
          */
         public function getAllLiveInstances()
         {
@@ -98,9 +92,9 @@
             $instanceCollection = collect();
             try {
                 // only grab live instances every second
-                if (!empty($this->_lastInstanceGrabTime)
-                    && (now()->diffInSeconds($this->_lastInstanceGrabTime) < 3 )
-                    && !empty($this->_live_instances)) {
+                if (! empty($this->_lastInstanceGrabTime)
+                    && (now()->diffInSeconds($this->_lastInstanceGrabTime) < 3)
+                    && ! empty($this->_live_instances)) {
                     return $this->_live_instances;
                 }
                 $this->_lastInstanceGrabTime = now();
@@ -119,18 +113,18 @@
                 curl_setopt($ch, CURLOPT_POST, false);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, env('WOWZA_CURL_TIMEOUT') * 60);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml'));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-type: text/xml']);
                 $resultXML = curl_exec($ch);
                 if ($errno = curl_errno($ch)) {
                     $error_message = curl_strerror($errno);
                     curl_close($ch);
-                    throw new \Exception('Error: ' . $errno . ': ' . $error_message);
+                    throw new Exception('Error: ' . $errno . ': ' . $error_message);
                 }
                 curl_close($ch);
 
                 if ($resultXML !== false) {
                     $result = simplexml_load_string($resultXML);
-                    if ( ! empty($result->InstanceList)) {
+                    if (! empty($result->InstanceList)) {
                         foreach ($result->InstanceList as $key => $instance) {
                             $instanceCollection->push($instance);
                         }
@@ -138,8 +132,7 @@
                 } else {
                     Log::info('Could not find any Live Instances');
                 }
-
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Log::error('There was an error when trying to get Live Instances: ' . $e->getMessage());
             }
 
@@ -147,16 +140,15 @@
             $this->_live_instances = $instanceCollection;
 
             return $instanceCollection;
-
         }
 
         /**
          * Check if there are any live instances currently streaming for this account
          *
-         * @param LivestreamAccount $livestreamAccount
-         *
+         * @param  LivestreamAccount  $livestreamAccount
          * @return bool
-         * @throws \Exception
+         *
+         * @throws Exception
          */
         public function isCurrentlyStreaming($livestreamAccount = null)
         {
@@ -170,25 +162,24 @@
 
             if ($livestreamAccount->mux_livestream_active) {
                 // Mux
-                $muxService = new MuxService();
+                $muxService = new MuxService;
                 $stream = $livestreamAccount->default_stream;
                 if (empty($stream)) {
-                    throw new \Exception("No Stream Found for this LivestreamAccount: " . $livestreamAccount->id);
+                    throw new Exception('No Stream Found for this LivestreamAccount: ' . $livestreamAccount->id);
                 }
                 $muxStream = $muxService->getLivestream($stream->stream_id);
 
-                if (!empty($muxStream)) {
+                if (! empty($muxStream)) {
                     $status = $muxStream->getStatus();
                     $stream->status = $status;
                     $stream->save();
                 }
 
-                if (!empty($stream) && $stream->status == 'active') {
+                if (! empty($stream) && $stream->status == 'active') {
                     return true;
                 } else {
                     return false;
                 }
-
             } else {
                 // Wowza
                 $instanceCollection = $this->getAccountLiveInstances($livestreamAccount->id);
@@ -200,7 +191,6 @@
             }
         }
 
-
         /**
          * Get Livestream Groups for this account
          */
@@ -208,7 +198,7 @@
         {
             try {
                 $accountLivestreamGroups = collect();
-                $accountLiveInstances    = $this->getAccountLiveInstances();
+                $accountLiveInstances = $this->getAccountLiveInstances();
 
                 if ($accountLiveInstances->isEmpty()) {
                     return $accountLiveInstances;
@@ -218,35 +208,31 @@
                     foreach ($accountLiveInstances as $instance) {
                         $accountLivestreamGroups->push($this->getStreamGroupsFromInstance($instance));
                     }
-
                 } else {
                     $instance = $accountLiveInstances->first();
                     $accountLivestreamGroups->push($this->getStreamGroupsFromInstance($instance));
                 }
-
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 throw $e;
             }
 
             return $accountLivestreamGroups;
-
         }
 
         /**
          * Get Stream Groups from Wowza Instance XML
          *
-         * @param SimpleXMLElement $instance
          *
          * @return Collection
          */
         public function getStreamGroupsFromInstance(SimpleXMLElement $instance)
         {
             $LivestreamGroups = collect();
-            if ( ! empty($instance->StreamGroups)) {
+            if (! empty($instance->StreamGroups)) {
                 $streamGroups = $instance->StreamGroups;
                 foreach ($streamGroups as $streamGroup) {
                     foreach ($streamGroup as $streamGroupName) {
-                        $LivestreamGroups->push((string)$streamGroupName->GroupName);
+                        $LivestreamGroups->push((string) $streamGroupName->GroupName);
                     }
                 }
             }
@@ -257,17 +243,16 @@
         /**
          * Checks if given instance from Wowza Server is for given Account. Defaults to current account if null
          *
-         * @param SimpleXMLElement $instance
-         * @param null|int         $accountId
-         *
+         * @param  null|int  $accountId
          * @return bool
-         * @throws \Exception
+         *
+         * @throws Exception
          */
         public function isCorrectAccountForInstance(SimpleXMLElement $instance, $accountId = null)
         {
             $accountId = $this->getAccountId($accountId);
 
-            if ((int)$instance->Name === $accountId) {
+            if ((int) $instance->Name === $accountId) {
                 $result = true;
             } else {
                 $result = false;
@@ -281,21 +266,21 @@
         /**
          * Get Account Id based on if one is passed in. Get current Livestream Account Id if one is not passed in.
          *
-         * @param null $accountId
-         *
+         * @param  null  $accountId
          * @return mixed|null
-         * @throws \Exception
+         *
+         * @throws Exception
          */
         public function getAccountId($accountId = null)
         {
             Log::info('[START] - ' . __FUNCTION__);
             if (is_null($accountId)) {
-                if ( ! empty($this->_livestreamAccount)) {
+                if (! empty($this->_livestreamAccount)) {
                     $accountId = $this->_livestreamAccount->id;
                 } else {
-                    throw new \Exception('Account Id not provided, and unable Current Livestream Account id');
+                    throw new Exception('Account Id not provided, and unable Current Livestream Account id');
                 }
-            } else if ($accountId instanceof LivestreamAccount) {
+            } elseif ($accountId instanceof LivestreamAccount) {
                 $accountId = $accountId->id;
             }
             Log::info('[END] - ' . __FUNCTION__);
@@ -303,16 +288,17 @@
             return $accountId;
         }
 
-
         /**
          * Gets the Live Playlist with Live streams based on the inserted Player
+         *
          * @TODO [Josh] - eventually need to figure out a way to only play streams that are associated with this player/playlist combo
          * for now we are going to play any stream that is live stream for this LivestreamAcount
          *
-         * @param Request $request
-         *
+         * @param  Request  $request
          * @return Collection | bool    Empty Collection if there are no live streams, collection with livestreams, or false on error
-         * @throws \Exception
+         *
+         * @throws Exception
+         *
          * @internal param Player $player
          */
         public function getLivestreams()
@@ -326,40 +312,40 @@
             // @TODO [Josh] - If we are going to use just one Live Application, we should be filtering out only the instances that belong to this account
 
             $currentLivestreams = collect();
-            $accountInstances   = $this->getAccountLiveInstances();
+            $accountInstances = $this->getAccountLiveInstances();
 
             if ($accountInstances === false || $accountInstances->isEmpty()) {
                 return $currentLivestreams;
             }
 
             foreach ($accountInstances as $accountInstance) {
-                if ( ! empty($accountInstance->StreamGroups)) {
+                if (! empty($accountInstance->StreamGroups)) {
                     //			        $incomingStreams = $accountInstance->InstanceList->IncomingStreams;
                     $streamGroups = $accountInstance->StreamGroups;
                     // this separates separate streams coming in
                     foreach ($streamGroups as $streamGroup) {
-                        $allVideoSources    = collect();
-                        $audioSources       = collect();
+                        $allVideoSources = collect();
+                        $audioSources = collect();
                         $mobileVideoSources = collect();
                         foreach ($streamGroup as $transGroup) {
                             $streamInfo = explode('_', $transGroup->GroupName);
                             $streamName = $streamInfo[0];
-                            $groupName  = $streamInfo[1];
+                            $groupName = $streamInfo[1];
                             switch ($groupName) {
-                                case "all":
+                                case 'all':
                                     // this group has all the streams
                                     foreach ($transGroup->Members->string as $source) {
-                                        $allVideoSources->push((string)$source);
+                                        $allVideoSources->push((string) $source);
                                     }
                                     break;
-                                case "audio":
+                                case 'audio':
                                     foreach ($transGroup->Members->string as $source) {
-                                        $audioSources->push((string)$source);
+                                        $audioSources->push((string) $source);
                                     }
                                     break;
-                                case "mobile":
+                                case 'mobile':
                                     foreach ($transGroup->Members->string as $source) {
-                                        $mobileVideoSources->push((string)$source);
+                                        $mobileVideoSources->push((string) $source);
                                     }
                                     break;
                             }
@@ -369,27 +355,27 @@
 
                         // Add the desired trans streams based on the StreamType
                         if ($this->_streamType === 'all') {
-                            if ( ! $allVideoSources->isEmpty()) {
+                            if (! $allVideoSources->isEmpty()) {
                                 $streamCollection->put('all', $allVideoSources);
                                 // Only add these two if they exist
                                 (! $audioSources->isEmpty() ? $streamCollection->put('audio', $audioSources) : null);
                                 (! $mobileVideoSources->isEmpty() ? $streamCollection->put('mobile', $mobileVideoSources) : null);
                             } else {
-                                throw new \Exception('Sorry, we couldn\'t find any live streams currently running');
+                                throw new Exception('Sorry, we couldn\'t find any live streams currently running');
                             }
                         }
                         if ($this->_streamType === 'audio') {
-                            if ( ! $audioSources->isEmpty()) {
+                            if (! $audioSources->isEmpty()) {
                                 $streamCollection->put('audio', $audioSources);
                             } else {
-                                throw new \Exception('Sorry, we couldn\'t find any audio-only live streams currently running');
+                                throw new Exception('Sorry, we couldn\'t find any audio-only live streams currently running');
                             }
                         }
                         if ($this->_streamType === 'mobile') {
-                            if ( ! $mobileVideoSources->isEmpty()) {
+                            if (! $mobileVideoSources->isEmpty()) {
                                 $streamCollection->put('mobile', $mobileVideoSources);
                             } else {
-                                throw new \Exception('Sorry, we couldn\'t find any mobile live streams currently running');
+                                throw new Exception('Sorry, we couldn\'t find any mobile live streams currently running');
                             }
                         }
                     }
@@ -414,15 +400,15 @@
          * Get The URL strings from current Livestreams based on streaming protocol and put in a collection
          * eg. Smil URL(/live/1/ngrp:1/auto_all/jwplayer.smil)
          *
-         * @param null|string $streamingProtocol rtmp or hls or null. If null, assume we want http/hls.
-         *
+         * @param  null|string  $streamingProtocol rtmp or hls or null. If null, assume we want http/hls.
          * @return Collection
-         * @throws \Exception
+         *
+         * @throws Exception
          */
         public function getLivestreamURL($streamingProtocol = 'http')
         {
             $livestreamURL = '';
-            $activePlanId  = $this->_livestreamAccount->team->currentActivePlan()->id;
+            $activePlanId = $this->_livestreamAccount->team->currentActivePlan()->id;
 
             if ($activePlanId !== 'livestream-premium' && $activePlanId !== 'livestream-premium-yr' && $activePlanId !== 'livestream-growth' && $activePlanId !== 'livestream-growth-yr') {
                 // check if they are on a plan with auto-transcoding, if not, then we will use the simple type of url
@@ -431,11 +417,9 @@
                 if ($accountLiveInstances->isNotEmpty()) {
                     $livestreamURL = $this->_getHttpSingleUrl();
                 }
-
-            } else if ( ! empty($this->_livestreamAccount) && ! empty($this->_livestreamAccount->cdn_playback_url)) {
+            } elseif (! empty($this->_livestreamAccount) && ! empty($this->_livestreamAccount->cdn_playback_url)) {
                 // Check if this livestreamAccount has a CDN playback URL and use that as the Livestream URL if they do
                 $livestreamURL = $this->_livestreamAccount->cdn_playback_url;
-
             } else {
                 // If they aren't a free account and don't have cdn_playback_url, look for regular livestream URLs using livestream Groups
                 $livestreamGroups = $this->getAccountLivestreamGroups();
@@ -449,8 +433,7 @@
                         if (strpos($livestreamGroup, 'all') !== false) {
                             if ($streamingProtocol === 'rtmp') {
                                 $livestreamURL = $this->_getRtmpGroupUrl($livestreamGroup);
-
-                            } else if ($streamingProtocol === 'http') {
+                            } elseif ($streamingProtocol === 'http') {
                                 $livestreamURL = $this->_getHttpGroupUrl($livestreamGroup);
                             }
                         }
@@ -461,9 +444,65 @@
             return $livestreamURL;
         }
 
+        //https://597f40af4ba7f.streamlock.net:1940/live/33/ngrp:33/auto_all/jwplayer.m3u8?DVR
+        //https://597f40af4ba7f.streamlock.net:1940/live/33/33/auto/jwplayer.m3u8?DVR
+
+        //  if ( $streamingProtocol === 'http' ) {
+        //      $sources .= 'file: "' . $streamingProtocol . config( 'livestream.vod_playback_url' ) . $episode->livestreamAccount->id . '/' . $episode->id . '/' . $videoObject->file_name . '.' . $videoObject->file_type . '/jwplayer.m3u8",';
+        //
+        //} else if ( $streamingProtocol === 'rtmp' ) {
+        //	    $sources .= 'file: "' . $streamingProtocol . config( 'livestream.vod_playback_url' ) . $episode->livestreamAccount->id . '/' . $episode->id . '/' . $videoObject->file_name . '.' . $videoObject->file_type . '",';
+        //
+        //}
+
         /**
-         * @param $livestreamGroup
+         * Get DVR Manifest Links for Current Live Streams
          *
+         * @param  Request  $request
+         * @return array|string
+         */
+        public function getDVRLivestreams()
+        {
+            // @TODO [Josh] - remove this once I have DVR setup and working
+            return $this->getLivestreams();
+
+            //        $InstancesXML = $this->getAccountLiveInstances();
+            //        if (!empty($InstancesXML->InstanceList->IncomingStreams)) {
+            //
+            //            $incomingStreams = $InstancesXML->InstanceList->IncomingStreams;
+            //
+            //            // this separates separate streams coming in
+            //            foreach ($incomingStreams as $streamGroup) {
+            //                foreach ($streamGroup as $stream) {
+            //                    $streamName = (string)$stream->Name;
+            //                    $streamProtocol = substr($stream->SourceIp,0,strpos($stream->SourceIp,'://'));
+            //                    if ( strpos($streamName,'trans') === false ) {
+            //                        $streamAtts['name'] = $streamName;
+            //                        $streamAtts['protocol'] = $streamProtocol;
+            //                        $streamsList[] = $streamAtts;
+            //                    }
+            //                }
+            //            }
+            //        }
+            //
+            //        if ( empty($streamsList) ) {
+            //            $dvrStreams = "There are no active live streams";
+            //        } else {
+            //            foreach ($streamsList as $stream) {
+            //                if ( $stream['protocol'] === 'rtmp') {
+            //                    $stream['url'] = $stream['protocol'] . '://' . $wowzaMediaServer->ip . ':1935/' . $LivestreamAccount_slug . '_live/_definst_/flv:' . $stream['name']. '.flv?DVR';
+            //                }
+            //                if ( $stream['protocol'] === 'hls') {
+            //                    $stream['url'] = $stream['protocol'] . '://' . $wowzaMediaServer->ip . ':1935/' . $LivestreamAccount_slug . '_live/_definst_/' . $stream['name'] . '/playlist.m3u8?DVR';
+            //                }
+            //                $dvrStreams[] = $stream;
+            //            }
+            //        }
+            //
+            //        return $dvrStreams;
+        }
+
+        /**
          * @return string
          */
         protected function _getRtmpGroupUrl($livestreamGroup)
@@ -472,8 +511,6 @@
         }
 
         /**
-         * @param $livestreamGroup
-         *
          * @return string
          */
         protected function _getHttpGroupUrl($livestreamGroup)
@@ -527,68 +564,6 @@
         {
             // added DVR so these accounts have DVR. This eventually needs to change to not include Free accounts.
             return '?DVR';
-        }
-
-        //https://597f40af4ba7f.streamlock.net:1940/live/33/ngrp:33/auto_all/jwplayer.m3u8?DVR
-        //https://597f40af4ba7f.streamlock.net:1940/live/33/33/auto/jwplayer.m3u8?DVR
-
-        //  if ( $streamingProtocol === 'http' ) {
-        //      $sources .= 'file: "' . $streamingProtocol . config( 'livestream.vod_playback_url' ) . $episode->livestreamAccount->id . '/' . $episode->id . '/' . $videoObject->file_name . '.' . $videoObject->file_type . '/jwplayer.m3u8",';
-        //
-        //} else if ( $streamingProtocol === 'rtmp' ) {
-        //	    $sources .= 'file: "' . $streamingProtocol . config( 'livestream.vod_playback_url' ) . $episode->livestreamAccount->id . '/' . $episode->id . '/' . $videoObject->file_name . '.' . $videoObject->file_type . '",';
-        //
-        //}
-
-
-        /**
-         * Get DVR Manifest Links for Current Live Streams
-         *
-         * @param Request $request
-         *
-         * @return array|string
-         */
-        public function getDVRLivestreams()
-        {
-            // @TODO [Josh] - remove this once I have DVR setup and working
-            return $this->getLivestreams();
-
-
-            //        $InstancesXML = $this->getAccountLiveInstances();
-            //        if (!empty($InstancesXML->InstanceList->IncomingStreams)) {
-            //
-            //            $incomingStreams = $InstancesXML->InstanceList->IncomingStreams;
-            //
-            //            // this separates separate streams coming in
-            //            foreach ($incomingStreams as $streamGroup) {
-            //                foreach ($streamGroup as $stream) {
-            //                    $streamName = (string)$stream->Name;
-            //                    $streamProtocol = substr($stream->SourceIp,0,strpos($stream->SourceIp,'://'));
-            //                    if ( strpos($streamName,'trans') === false ) {
-            //                        $streamAtts['name'] = $streamName;
-            //                        $streamAtts['protocol'] = $streamProtocol;
-            //                        $streamsList[] = $streamAtts;
-            //                    }
-            //                }
-            //            }
-            //        }
-            //
-            //        if ( empty($streamsList) ) {
-            //            $dvrStreams = "There are no active live streams";
-            //        } else {
-            //            foreach ($streamsList as $stream) {
-            //                if ( $stream['protocol'] === 'rtmp') {
-            //                    $stream['url'] = $stream['protocol'] . '://' . $wowzaMediaServer->ip . ':1935/' . $LivestreamAccount_slug . '_live/_definst_/flv:' . $stream['name']. '.flv?DVR';
-            //                }
-            //                if ( $stream['protocol'] === 'hls') {
-            //                    $stream['url'] = $stream['protocol'] . '://' . $wowzaMediaServer->ip . ':1935/' . $LivestreamAccount_slug . '_live/_definst_/' . $stream['name'] . '/playlist.m3u8?DVR';
-            //                }
-            //                $dvrStreams[] = $stream;
-            //            }
-            //        }
-            //
-            //        return $dvrStreams;
-
         }
         //
         //
@@ -655,6 +630,4 @@
         //            throw new \Exception('Could not start Stream Recorder on Wowza Media Server: ' . $wowzaMediaServer . ' for episode: ' . $episode->id);
         //        }
         //    }
-
-
     }

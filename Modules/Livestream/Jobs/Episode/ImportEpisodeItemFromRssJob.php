@@ -2,11 +2,6 @@
 
 namespace Modules\Livestream\Jobs\Episode;
 
-use Modules\Livestream\Actions\Episodes\CreateNewEpisode;
-use Modules\Livestream\Models\Category;
-use Modules\Livestream\Models\Episode;
-use Modules\Livestream\Models\LivestreamAccount;
-use Modules\Livestream\Services\Mux\MuxAsset;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -14,6 +9,11 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Modules\Livestream\Actions\Episodes\CreateNewEpisode;
+use Modules\Livestream\Models\Category;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Services\Mux\MuxAsset;
 
 class ImportEpisodeItemFromRssJob implements ShouldQueue
 {
@@ -41,7 +41,7 @@ class ImportEpisodeItemFromRssJob implements ShouldQueue
         DB::transaction(function () {
             // If episode exists, don't create anymore, just upload the video for that episode.
             // Otherwise, create new episode and then upload video.
-            if (!$this->episode) {
+            if (! $this->episode) {
                 $this->episode = (new CreateNewEpisode)->execute(
                     collect($this->episodeData)->only(['title', 'date_recorded', 'description', 'main_passage', 'main_speaker_id'])->all(),
                     $this->livestreamAccount

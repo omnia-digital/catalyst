@@ -2,23 +2,24 @@
 
 namespace Modules\Livestream\Listeners\Stream;
 
-use Modules\Livestream\Omnia;
-use Modules\Livestream\User;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Modules\Livestream\Notifications\StreamEnded;
+use Modules\Livestream\Omnia;
 use Modules\Livestream\Stream;
+use Modules\Livestream\User;
 
 /**
  * Class NotifyStreamStarted
- * @package App\Listeners\Episode
  */
 class NotifyStreamStarted
 {
     /**
      * Handle the event.
-     * @param $event
+     *
      * @return bool
-     * @throws \Exception
+     *
+     * @throws Exception
      */
     public function handle($event)
     {
@@ -26,12 +27,12 @@ class NotifyStreamStarted
 
         $message = 'Stream Started: ';
 
-        $stream = Stream::where('stream_id','=',$event->stream_id)->first();
+        $stream = Stream::where('stream_id', '=', $event->stream_id)->first();
         if (empty($stream)) {
-            $message .=  "Could not find stream";
+            $message .= 'Could not find stream';
         } else {
             $livestream_account = $stream->livestreamAccount;
-            if (!empty($livestream_account)) {
+            if (! empty($livestream_account)) {
                 $message .= $livestream_account->team->name . ' (' . $livestream_account->id . ', ' . $livestream_account->team->id . ', ' . $stream->stream_id . ')';
             } else {
                 $message .= $stream->stream_id . ': livestream account not found';
@@ -39,7 +40,7 @@ class NotifyStreamStarted
         }
 
         //** Send StreamStart Notification to channels **//
-        $systemAdminUser = User::where('email',Omnia::$systemAdminUser)->first();
+        $systemAdminUser = User::where('email', Omnia::$systemAdminUser)->first();
         $systemAdminUser->slack_webhook_url = env('SLACK_WEBHOOK_APP_URL');
         $systemAdminUser->notify(new StreamEnded($message));
 

@@ -1,24 +1,26 @@
-<?php namespace Modules\Livestream\Http\Controllers;
+<?php
 
+namespace Modules\Livestream\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Modules\Livestream\Events\StreamActive;
 use Modules\Livestream\Events\StreamCompleted;
 use Modules\Livestream\Events\StreamDeleted;
 use Modules\Livestream\Events\StreamIdle;
 use Modules\Livestream\Events\StreamUpdated;
 use Modules\Livestream\Events\VideoAssetReady;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class MuxWebhooksController extends Controller
 {
     public function __invoke(Request $request)
     {
-        if (config('services.mux.signing_secret') && !$this->verifySignature($request)) {
+        if (config('services.mux.signing_secret') && ! $this->verifySignature($request)) {
             abort(401, 'Signature Invalid');
         }
 
-        if (!($event = $request->get('type'))) {
+        if (! ($event = $request->get('type'))) {
             return;
         }
 
@@ -38,8 +40,7 @@ class MuxWebhooksController extends Controller
     /**
      * Verify the signature.
      *
-     * @param Request $request
-     * @return boolean
+     * @return bool
      */
     protected function verifySignature(Request $request)
     {
@@ -63,7 +64,7 @@ class MuxWebhooksController extends Controller
         $muxHash = Str::replaceFirst('v1=', '', $muxSigArray[1]);
 
         // Create a payload of the timestamp from the Mux signature and the request body with a '.' in-between
-        $payload = $muxTimestamp . "." . $request->getContent();
+        $payload = $muxTimestamp . '.' . $request->getContent();
 
         // Build a HMAC hash using SHA256 algo, using our webhook secret
         $ourSignature = hash_hmac('sha256', $payload, config('services.mux.signing_secret'));

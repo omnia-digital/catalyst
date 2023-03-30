@@ -1,16 +1,19 @@
-<?php namespace Modules\Livestream\Jobs\Episode;
+<?php
 
-use Modules\Livestream\Enums\EpisodeDownloadStatus;
-use Modules\Livestream\Notifications\EpisodeDownloadWasFailedNotification;
+namespace Modules\Livestream\Jobs\Episode;
+
+use Exception;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
+use Modules\Livestream\Enums\EpisodeDownloadStatus;
 use Modules\Livestream\Episode;
 use Modules\Livestream\EpisodeDownload;
 use Modules\Livestream\Events\EpisodeDownload\EpisodeDownloadIsReady;
+use Modules\Livestream\Notifications\EpisodeDownloadWasFailedNotification;
 use Throwable;
 use ZipArchive;
 
@@ -30,9 +33,6 @@ class DownloadEpisodes implements ShouldQueue
 
     /**
      * Create a new job instance.
-     *
-     * @param EpisodeDownload $episodeDownload
-     * @param int $livestreamAccountId
      */
     public function __construct(EpisodeDownload $episodeDownload, int $livestreamAccountId)
     {
@@ -44,8 +44,9 @@ class DownloadEpisodes implements ShouldQueue
      * Execute the job.
      *
      * @return void
+     *
      * @throws \MuxPhp\ApiException
-     * @throws \Exception
+     * @throws Exception
      */
     public function handle()
     {
@@ -58,8 +59,8 @@ class DownloadEpisodes implements ShouldQueue
         $downloadPath = $this->zipEpisodes();
 
         $this->episodeDownload->update([
-            'status'        => EpisodeDownloadStatus::READY,
-            'download_path' => $downloadPath
+            'status' => EpisodeDownloadStatus::READY,
+            'download_path' => $downloadPath,
         ]);
 
         event(new EpisodeDownloadIsReady($this->episodeDownload));
@@ -68,14 +69,13 @@ class DownloadEpisodes implements ShouldQueue
     /**
      * Handle a job failure.
      *
-     * @param Throwable $exception
      * @return void
      */
     public function failed(Throwable $exception)
     {
         $this->episodeDownload->update([
-            'status'        => EpisodeDownloadStatus::FAILED,
-            'failed_reason' => $exception->getMessage()
+            'status' => EpisodeDownloadStatus::FAILED,
+            'failed_reason' => $exception->getMessage(),
         ]);
 
         $this->episodeDownload->user->notify(new EpisodeDownloadWasFailedNotification($this->episodeDownload));
@@ -84,7 +84,6 @@ class DownloadEpisodes implements ShouldQueue
     /**
      * Download all episodes from Mux.
      *
-     * @param $episodes
      * @throws \MuxPhp\ApiException
      */
     private function downloadEpisodes($episodes)
@@ -95,11 +94,11 @@ class DownloadEpisodes implements ShouldQueue
             $asset = $episode->asMuxAsset();
 
             // Do nothing if asset is not found or this asset does not supports mp4.
-            if (!$asset || !$asset->isDownloadable()) {
+            if (! $asset || ! $asset->isDownloadable()) {
                 return;
             }
 
-            if (!($playbackId = $asset->defaultPlaybackId())) {
+            if (! ($playbackId = $asset->defaultPlaybackId())) {
                 return null;
             }
 
@@ -114,7 +113,8 @@ class DownloadEpisodes implements ShouldQueue
      * Zip all episodes in folder.
      *
      * @return string;
-     * @throws \Exception
+     *
+     * @throws Exception
      */
     private function zipEpisodes()
     {
@@ -125,8 +125,8 @@ class DownloadEpisodes implements ShouldQueue
         $folderPath = $rootFolderPath . '/' . $this->episodeDownload->code;
         $files = glob($folderPath . '/*');
 
-        if (!count($files)) {
-            throw new \Exception('Cannot find any files to zip');
+        if (! count($files)) {
+            throw new Exception('Cannot find any files to zip');
         }
 
         $zip = new ZipArchive;

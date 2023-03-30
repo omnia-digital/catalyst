@@ -1,6 +1,6 @@
 <?php
-    namespace Modules\Livestream\Services;
 
+namespace Modules\Livestream\Services;
 
     class DefaultApiCorsProfile
     {

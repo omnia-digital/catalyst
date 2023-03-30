@@ -31,7 +31,6 @@ interface PersonRepository
     /**
      * Create a new person with the given data.
      *
-     * @param  array  $data
      * @return \Illuminate\Contracts\Auth\Authenticatable
      */
     public function create(array $data);
@@ -40,7 +39,6 @@ interface PersonRepository
      * Update the billing address information with the given data.
      *
      * @param  \Illuminate\Contracts\Auth\Authenticatable  $person
-     * @param  array  $data
      * @return void
      */
     public function updateBillingAddress($person, array $data);

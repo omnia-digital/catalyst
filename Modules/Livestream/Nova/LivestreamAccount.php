@@ -1,11 +1,10 @@
 <?php
 
-    namespace Modules\Livestream\Nova;
+namespace Modules\Livestream\Nova;
 
     use Illuminate\Http\Request;
     use Laravel\Nova\Fields\BelongsTo;
     use Laravel\Nova\Fields\HasMany;
-    use Laravel\Nova\Fields\HasManyThrough;
     use Laravel\Nova\Fields\ID;
     use Laravel\Nova\Fields\Text;
 
@@ -27,24 +26,23 @@
          */
         public static $title = 'name';
 
-        public function subtitle()
-        {
-            return $this->admin_email;
-        }
-
         /**
          * The columns that should be searched.
          *
          * @var array
          */
         public static $search = [
-            'name'
+            'name',
         ];
+
+        public function subtitle()
+        {
+            return $this->admin_email;
+        }
 
         /**
          * Get the fields displayed by the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function fields(Request $request)
@@ -73,7 +71,6 @@
         /**
          * Get the cards available for the request.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function cards(Request $request)
@@ -84,7 +81,6 @@
         /**
          * Get the filters available for the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function filters(Request $request)
@@ -95,7 +91,6 @@
         /**
          * Get the lenses available for the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function lenses(Request $request)
@@ -106,7 +101,6 @@
         /**
          * Get the actions available for the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function actions(Request $request)

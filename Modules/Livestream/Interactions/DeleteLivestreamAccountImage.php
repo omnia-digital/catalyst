@@ -1,14 +1,12 @@
 <?php
 
-    namespace Modules\Livestream\Interactions;
+namespace Modules\Livestream\Interactions;
 
-    use Illuminate\Support\Facades\Storage;
+    use Exception;
+use Illuminate\Support\Facades\Storage;
 
     class DeleteLivestreamAccountImage
     {
-        /**
-         * {@inheritdoc}
-         */
         public function handle($livestreamAccount, $imageType)
         {
             $storage = Storage::disk('s3-images');
@@ -26,8 +24,8 @@
                 $livestreamAccount->forceFill([
                     $imageType => '',
                 ])->save();
-            } catch(\Exception $e) {
-                throw new \Exception('Could not delete Livestream Account Image:' . $imageType .': ' . $e->getMessage());
+            } catch(Exception $e) {
+                throw new Exception('Could not delete Livestream Account Image:' . $imageType . ': ' . $e->getMessage());
             }
         }
     }

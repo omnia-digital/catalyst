@@ -2,9 +2,9 @@
 
 namespace Modules\Livestream\Http\Middleware;
 
-use Modules\Livestream\Services\Plausible\Plausible;
 use Closure;
 use Illuminate\Http\Request;
+use Modules\Livestream\Services\Plausible\Plausible;
 
 class TrackGoalBillingPageMiddleware
 {

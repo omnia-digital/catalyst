@@ -1,14 +1,11 @@
 <?php
 
-    namespace Modules\Livestream\Notifications;
+namespace Modules\Livestream\Notifications;
 
-    use Darkin1\Intercom\Facades\Intercom;
     use Illuminate\Bus\Queueable;
+    use Illuminate\Notifications\Messages\MailMessage;
     use Illuminate\Notifications\Messages\SlackMessage;
     use Illuminate\Notifications\Notification;
-    use Illuminate\Contracts\Queue\ShouldQueue;
-    use Illuminate\Notifications\Messages\MailMessage;
-    use Illuminate\Support\Facades\Log;
 
     class StreamStarted extends Notification
     {
@@ -52,7 +49,6 @@
         }
 
         /**
-         * @param $notifiable
          * @return mixed
          */
         public function toSlack($notifiable)

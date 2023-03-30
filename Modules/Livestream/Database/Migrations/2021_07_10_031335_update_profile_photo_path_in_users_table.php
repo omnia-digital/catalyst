@@ -12,11 +12,13 @@ class UpdateProfilePhotoPathInUsersTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('users','photo_url')) return;
+        if (! Schema::hasColumn('users', 'photo_url')) {
+            return;
+        }
 
         \App\Models\User::whereNotNull('photo_url')
             ->get()
-            ->each(function (\App\Models\User $user) {
+            ->each(function (App\Models\User $user) {
                 $newPhotoUrl = \Illuminate\Support\Str::startsWith($user->photo_url, ['http', 'https'])
                     ? $user->photo_url
                     : str_replace('/storage/profiles', 'profile-photos', $user->photo_url);
@@ -36,6 +38,5 @@ class UpdateProfilePhotoPathInUsersTable extends Migration
      */
     public function down()
     {
-
     }
 }

@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Services\Mux;
+<?php
+
+namespace Modules\Livestream\Services\Mux;
 
 use GuzzleHttp\Client;
 use MuxPhp\Api\LiveStreamsApi;
@@ -22,41 +24,37 @@ class MuxLivestream
     /**
      * Create a livestream.
      *
-     * @return LiveStream|null
      * @throws \MuxPhp\ApiException
      */
     public function createLivestreamRequest(): ?LiveStream
     {
         $createAssetRequest = new CreateAssetRequest([
             'playback_policy' => [PlaybackPolicy::_PUBLIC],
-            'mp4_support'     => 'standard'
+            'mp4_support' => 'standard',
         ]);
 
         $createLivestreamRequest = new CreateLiveStreamRequest([
-            'playback_policy'    => PlaybackPolicy::_PUBLIC,
+            'playback_policy' => PlaybackPolicy::_PUBLIC,
             'new_asset_settings' => $createAssetRequest,
-            'reconnect_window'   => 300,
+            'reconnect_window' => 300,
             'max_continuous_duration' => 21600,
-            'reduced_latency'    => true,
-            'latency_mode'       => 'reduced',
+            'reduced_latency' => true,
+            'latency_mode' => 'reduced',
         ]);
 
         return $this->livestreamApi->createLiveStream($createLivestreamRequest)->getData();
     }
 
     /**
-     * @param $streamId
-     * @param $url
-     * @param $streamKey
-     * @param null $passthrough
-     * @return SimulcastTarget|null
+     * @param  null  $passthrough
+     *
      * @throws \MuxPhp\ApiException
      */
     public function createSimulcastTarget($streamId, $url, $streamKey, $passthrough = null): ?SimulcastTarget
     {
         $createTargetRequest = new CreateSimulcastTargetRequest([
-            'url'         => $url,
-            'stream_key'  => $streamKey,
+            'url' => $url,
+            'stream_key' => $streamKey,
             'passthrough' => $passthrough,
         ]);
 
@@ -64,8 +62,6 @@ class MuxLivestream
     }
 
     /**
-     * @param $streamId
-     * @param $simulcastTargetId
      * @throws \MuxPhp\ApiException
      */
     public function deleteSimulcastTargets($streamId, $simulcastTargetId): void
@@ -76,8 +72,8 @@ class MuxLivestream
     /**
      * Send a signal of live stream is completed.
      *
-     * @param $streamId
      * @return object|null
+     *
      * @throws \MuxPhp\ApiException
      */
     public function finishLivestreamRequest($streamId)
@@ -89,8 +85,6 @@ class MuxLivestream
 
     /**
      * Return the Livestream API instance.
-     *
-     * @return LiveStreamsApi
      */
     public function instance(): LiveStreamsApi
     {

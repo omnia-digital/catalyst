@@ -3,12 +3,9 @@
 namespace Modules\Livestream\Events\Video;
 
 use Modules\Livestream\Events\Event;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class LiveVideosProcessingAddedToQueue extends Event
 {
-
     /**
      * Create a new event instance.
      *

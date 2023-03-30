@@ -1,13 +1,15 @@
-<?php namespace Modules\Livestream\Jobs\Billing;
+<?php
 
-use Modules\Livestream\Models\Episode;
-use Modules\Livestream\Models\Team;
+namespace Modules\Livestream\Jobs\Billing;
+
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\Team;
 
 class CreateExtraInvoiceItemJob implements ShouldQueue
 {
@@ -31,9 +33,9 @@ class CreateExtraInvoiceItemJob implements ShouldQueue
 
         $this->team->extraInvoiceItems()->create([
             'livestream_account_id' => $this->episode->livestreamAccount->id,
-            'duration'              => $this->episode->duration ?? 0,
-            'amount'                => $this->calculateAmount(),
-            'billing_reason'        => 'Storage fee from ' . $this->from()->toDateString() . ' to ' . $this->to()->toDateString()
+            'duration' => $this->episode->duration ?? 0,
+            'amount' => $this->calculateAmount(),
+            'billing_reason' => 'Storage fee from ' . $this->from()->toDateString() . ' to ' . $this->to()->toDateString(),
         ]);
     }
 

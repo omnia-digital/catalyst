@@ -2,9 +2,9 @@
 
 namespace Modules\Livestream\Nova\Filters;
 
-use Modules\Livestream\Models\Team;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
+use Modules\Livestream\Models\Team;
 
 class EpisodeTeam extends Filter
 {
@@ -18,7 +18,6 @@ class EpisodeTeam extends Filter
     /**
      * Apply the filter to the given query.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param  mixed  $value
      * @return \Illuminate\Database\Eloquent\Builder
@@ -34,7 +33,6 @@ class EpisodeTeam extends Filter
     /**
      * Get the filter's available options.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function options(Request $request)

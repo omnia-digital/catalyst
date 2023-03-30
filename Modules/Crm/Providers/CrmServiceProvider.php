@@ -2,7 +2,7 @@
 
 namespace Modules\Crm\Providers;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class CrmServiceProvider extends ServiceProvider

@@ -1,11 +1,12 @@
-<?php namespace Modules\Livestream\Http\Controllers;
+<?php
 
+namespace Modules\Livestream\Http\Controllers;
+
+use Laravel\Socialite\Facades\Socialite;
 use Modules\Livestream\Models\SocialAccount;
 use Modules\Livestream\Models\User;
 use Modules\Livestream\Omnia;
 use Modules\Livestream\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
 
 class AuthSocialController extends Controller
 {
@@ -25,7 +26,7 @@ class AuthSocialController extends Controller
 
         // A Facebook account can be registered without an email,
         // so we need to redirect them to registration form to force user to fill them email
-        if (is_null($user->getEmail()) && !$socialAccount) {
+        if (is_null($user->getEmail()) && ! $socialAccount) {
             [$firstName, $lastName] = Omnia::extractFullName($user->getName());
 
             /// Put user data from social provider to session,
@@ -33,14 +34,14 @@ class AuthSocialController extends Controller
             session()->put($provider . $user->getId(), $user);
 
             return redirect()->route('register', [
-                'first_name'       => $firstName,
-                'last_name'        => $lastName,
-                'social-provider'  => $provider,
-                'provider_user_id' => $user->getId()
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'social-provider' => $provider,
+                'provider_user_id' => $user->getId(),
             ]);
         }
 
-        Auth::login(User::createUserFromFacebook($user), true);
+        auth()->login(User::createUserFromFacebook($user), true);
 
         return redirect()->to(RouteServiceProvider::HOME);
     }

@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Models;
+<?php
+
+namespace Modules\Livestream\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,17 +16,16 @@ class ExtraInvoiceItem extends Model
         'duration',
         'amount',
         'billing_reason',
-        'paid_at'
+        'paid_at',
     ];
 
     protected $casts = [
-        'added_to_invoice_at' => 'datetime'
+        'added_to_invoice_at' => 'datetime',
     ];
 
     /**
      * Get extra invoices of the current month.
      *
-     * @param Builder $query
      * @return Builder
      */
     public function scopeCurrentMonth(Builder $query)

@@ -2,12 +2,12 @@
 
 namespace Modules\Livestream\Actions\Episodes;
 
+use Carbon\Carbon;
+use Exception;
 use Modules\Livestream\Jobs\Episode\ImportEpisodeItemFromRssJob;
 use Modules\Livestream\Models\Episode;
 use Modules\Livestream\Models\LivestreamAccount;
 use Modules\Livestream\Models\Person;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use SimplePie_Item;
 use SimpleXMLElement;
 
@@ -48,21 +48,21 @@ class ImportEpisodesFromRssAction
     private function prepareEpisodeData(SimpleXMLElement $item): array
     {
         return [
-            'title'           => (string)$item->title,
-            'date_recorded'   => Carbon::parse((string)$item->pubDate),
-            'description'     => (string)$item->description,
-            'main_passage'    => (string)$item->passage,
-            'main_speaker_id' => (string)$this->findSpeaker($item)?->id,
-            'media_url'       => (string)$item->guid,
-            'attachments'     => $this->getAttachments($item),
-            'series'          => (string)$item->series,
-            'category'        => (string)$item->category,
+            'title' => (string) $item->title,
+            'date_recorded' => Carbon::parse((string) $item->pubDate),
+            'description' => (string) $item->description,
+            'main_passage' => (string) $item->passage,
+            'main_speaker_id' => (string) $this->findSpeaker($item)?->id,
+            'media_url' => (string) $item->guid,
+            'attachments' => $this->getAttachments($item),
+            'series' => (string) $item->series,
+            'category' => (string) $item->category,
         ];
     }
 
     private function getAttachments(SimpleXMLElement $item): array
     {
-        $attachments = (array)$item->attachments->attachment;
+        $attachments = (array) $item->attachments->attachment;
         unset($attachments[0]);
 
         return $attachments;
@@ -72,13 +72,13 @@ class ImportEpisodesFromRssAction
     {
         $itunes = $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
 
-        $author = explode(' ', (string)$itunes->author);
+        $author = explode(' ', (string) $itunes->author);
         $firstName = $author[0];
         $lastName = $author[1] ?? $firstName;
 
         return Person::firstOrCreate([
             'first_name' => $firstName,
-            'last_name'  => $lastName
+            'last_name' => $lastName,
         ]);
     }
 
@@ -89,11 +89,11 @@ class ImportEpisodesFromRssAction
         }
 
         if (is_null($livestreamAccount)) {
-            return Auth::user()->currentTeam->livestreamAccount;
+            return auth()->user()->currentTeam->livestreamAccount;
         }
 
-        if (!($livestreamAccount = LivestreamAccount::find($livestreamAccount))) {
-            throw new \Exception('Cannot find the livestream account');
+        if (! ($livestreamAccount = LivestreamAccount::find($livestreamAccount))) {
+            throw new Exception('Cannot find the livestream account');
         }
 
         return $livestreamAccount;
@@ -109,7 +109,7 @@ class ImportEpisodesFromRssAction
 
     private function checkDuplicate(?Episode $episode): bool
     {
-        if (!$episode) {
+        if (! $episode) {
             return false;
         }
 

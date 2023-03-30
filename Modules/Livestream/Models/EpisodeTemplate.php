@@ -1,11 +1,13 @@
-<?php namespace Modules\Livestream\Models;
+<?php
 
-use Modules\Livestream\Traits\InteractsWithTopic;
+namespace Modules\Livestream\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
+use Modules\Livestream\Traits\InteractsWithTopic;
 use Spatie\Tags\HasTags;
 
 class EpisodeTemplate extends Model
@@ -19,16 +21,16 @@ class EpisodeTemplate extends Model
         'description',
         'template',
         'livestream_account_id',
-        'default_thumbnail'
+        'default_thumbnail',
     ];
 
     protected $casts = [
-        'template' => 'array'
+        'template' => 'array',
     ];
 
     public function getDefaultThumbnailUrlAttribute()
     {
-        if (!$this->default_thumbnail) {
+        if (! $this->default_thumbnail) {
             return null;
         }
 

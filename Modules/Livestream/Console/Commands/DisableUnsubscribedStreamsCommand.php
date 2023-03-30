@@ -1,9 +1,10 @@
-<?php namespace Modules\Livestream\Console\Commands;
+<?php
 
+namespace Modules\Livestream\Console\Commands;
+
+use Illuminate\Console\Command;
 use Modules\Livestream\Jobs\Streams\DisableStreamJob;
 use Modules\Livestream\Models\Stream;
-use Modules\Livestream\Models\Team;
-use Illuminate\Console\Command;
 
 class DisableUnsubscribedStreamsCommand extends Command
 {
@@ -18,7 +19,7 @@ class DisableUnsubscribedStreamsCommand extends Command
             ->get()
             ->each(function (Stream $stream) {
                 $billable = $stream->livestreamAccount->team;
-                if (!$billable->subscribed() && !$billable->onTrial()) {
+                if (! $billable->subscribed() && ! $billable->onTrial()) {
                     dispatch(new DisableStreamJob($stream));
 
                     $this->info('Disabling stream ' . $stream->id);

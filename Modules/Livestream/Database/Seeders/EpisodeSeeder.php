@@ -1,7 +1,9 @@
-<?php namespace Database\Seeders;
+<?php
 
-use Modules\Livestream\Models\Episode;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use Modules\Livestream\Models\Episode;
 
 class EpisodeSeeder extends Seeder
 {

@@ -2,13 +2,13 @@
 
 namespace Modules\Livestream\Http\Livewire\Stream;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\Component;
 use Modules\Livestream\Models\LivestreamAccount;
 use Modules\Livestream\Models\Stream;
 use Modules\Livestream\Services\Mux\MuxLivestream;
 use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Modules\Livestream\Support\Livewire\WithNotification;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Livewire\Component;
 
 /**
  * @property LivestreamAccount $livestreamAccount
@@ -31,7 +31,7 @@ class Streams extends Component
     {
         $stream = Stream::where('stream_id', $this->streamId)->first();
 
-        if (!$stream) {
+        if (! $stream) {
             $this->error('Cannot find the Stream ID: ' . $this->streamId);
 
             return;
@@ -41,7 +41,7 @@ class Streams extends Component
 
         $newStreamKey = app(MuxLivestream::class)->instance()->resetStreamKey($this->streamId);
 
-        if (!isset($newStreamKey['data']['stream_key'])) {
+        if (! isset($newStreamKey['data']['stream_key'])) {
             $this->error('Cannot get the new stream key.');
 
             return;
@@ -60,7 +60,7 @@ class Streams extends Component
             ->get();
 
         return view('stream.streams', [
-            'streams' => $streams
+            'streams' => $streams,
         ]);
     }
 }

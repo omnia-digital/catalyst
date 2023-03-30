@@ -1,5 +1,8 @@
-<?php namespace Modules\Livestream\Services\Mux;
+<?php
 
+namespace Modules\Livestream\Services\Mux;
+
+use Exception;
 use GuzzleHttp\Client;
 use MuxPhp\Api\AssetsApi;
 use MuxPhp\ApiException;
@@ -20,8 +23,6 @@ class MuxAsset
     }
 
     /**
-     * @param string $muxAssetId
-     * @return AssetResponse
      * @throws \MuxPhp\ApiException
      */
     public function getAsset(string $muxAssetId): AssetResponse
@@ -30,8 +31,6 @@ class MuxAsset
     }
 
     /**
-     * @param string $muxAssetId
-     * @return void
      * @throws \MuxPhp\ApiException
      */
     public function deleteAsset(string $muxAssetId): void
@@ -47,8 +46,6 @@ class MuxAsset
 
     /**
      * Get Mux Asset Api instance.
-     *
-     * @return AssetsApi
      */
     public function getInstance(): AssetsApi
     {
@@ -58,9 +55,8 @@ class MuxAsset
     /**
      *  Update Mp4 support on an asset.
      *
-     * @param string $assetId
-     * @param string $supportType
      * @return Asset|null
+     *
      * @throws \MuxPhp\ApiException
      */
     public function addAssetMP4Support(string $assetId, string $supportType = 'standard')
@@ -68,14 +64,14 @@ class MuxAsset
         $asset = $this->assetsApi->getAsset($assetId)->getData();
         $mp4Support = $asset->getMp4Support();
 
-        if (!empty($mp4Support) && $mp4Support === 'standard') {
+        if (! empty($mp4Support) && $mp4Support === 'standard') {
             return null;
         }
 
         try {
             $updateAssetMp4SupportRequest = new UpdateAssetMP4SupportRequest(['mp4_support' => $supportType]);
             $assetResponse = $this->assetsApi->updateAssetMp4Support($assetId, $updateAssetMp4SupportRequest);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
 
             return;
@@ -89,7 +85,7 @@ class MuxAsset
         $options = array_merge(['mp4_support' => 'standard'], $options);
 
         $createAssetRequest = new CreateAssetRequest(array_merge($options, [
-            'input'           => $url,
+            'input' => $url,
             'playback_policy' => [PlaybackPolicy::_PUBLIC],
         ]));
 

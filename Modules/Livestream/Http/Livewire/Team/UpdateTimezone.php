@@ -1,10 +1,11 @@
-<?php namespace Modules\Livestream\Http\Livewire\Team;
+<?php
 
-use Modules\Livestream\Models\Team;
-use Modules\Livestream\Support\Livewire\WithTimezone;
-use Illuminate\Support\Facades\Auth;
+namespace Modules\Livestream\Http\Livewire\Team;
+
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Modules\Livestream\Models\Team;
+use Modules\Livestream\Support\Livewire\WithTimezone;
 
 /**
  * @property array $timezones
@@ -15,13 +16,6 @@ class UpdateTimezone extends Component
     use WithTimezone;
 
     public string $timezone = '';
-
-    protected function rules(): array
-    {
-        return [
-            'timezone' => ['required', Rule::in($this->timezones)]
-        ];
-    }
 
     public function mount()
     {
@@ -39,13 +33,20 @@ class UpdateTimezone extends Component
 
     public function getCurrentTeamProperty()
     {
-        return Auth::user()->currentTeam;
+        return auth()->user()->currentTeam;
     }
 
     public function render()
     {
         return view('team.update-timezone', [
-            'timezones' => $this->timezones
+            'timezones' => $this->timezones,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'timezone' => ['required', Rule::in($this->timezones)],
+        ];
     }
 }

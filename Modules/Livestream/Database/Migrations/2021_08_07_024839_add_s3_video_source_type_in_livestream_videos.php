@@ -12,9 +12,9 @@ class AddS3VideoSourceTypeInLivestreamVideos extends Migration
     public function up()
     {
         \App\Models\Video::query()
-            ->where(fn($query) => $query->whereNull('video_source_type_id')->orWhere('video_source_type_id', ''))
+            ->where(fn ($query) => $query->whereNull('video_source_type_id')->orWhere('video_source_type_id', ''))
             ->get()
-            ->each(function (\App\Models\Video $video) {
+            ->each(function (App\Models\Video $video) {
                 $video->update(['video_source_type_id' => 6]);
             });
     }
@@ -26,6 +26,5 @@ class AddS3VideoSourceTypeInLivestreamVideos extends Migration
      */
     public function down()
     {
-
     }
 }

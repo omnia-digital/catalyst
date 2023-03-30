@@ -1,13 +1,14 @@
-<?php namespace Modules\Livestream\Http\Livewire\Person;
+<?php
 
+namespace Modules\Livestream\Http\Livewire\Person;
+
+use Illuminate\Database\Eloquent\Builder;
+use Livewire\Component;
+use Livewire\WithPagination;
 use Modules\Livestream\Models\Person;
 use Modules\Livestream\Support\Livewire\WithCachedRows;
 use Modules\Livestream\Support\Livewire\WithLayoutSwitcher;
 use Modules\Livestream\Support\Livewire\WithNotification;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
-use Livewire\WithPagination;
 
 /**
  * @property Builder $rowsQueryWithoutFilters
@@ -15,11 +16,6 @@ use Livewire\WithPagination;
 class People extends Component
 {
     use WithPagination, WithLayoutSwitcher, WithCachedRows, WithNotification;
-
-    protected $listeners = [
-        'person-deselected' => 'deselectPerson',
-        'person-deleted'    => '$refresh'
-    ];
 
     public bool $addPersonModalOpen = false;
 
@@ -31,8 +27,13 @@ class People extends Component
 
     public string $orderBy = 'first_name';
 
+    protected $listeners = [
+        'person-deselected' => 'deselectPerson',
+        'person-deleted' => '$refresh',
+    ];
+
     protected $queryString = [
-        'search'
+        'search',
     ];
 
     public function mount(Person $person)
@@ -65,12 +66,12 @@ class People extends Component
     {
         $validated = $this->validate([
             'person.first_name' => ['required', 'max:254'],
-            'person.last_name'  => ['required', 'max:254'],
-            'person.email'      => ['required', 'email']
+            'person.last_name' => ['required', 'max:254'],
+            'person.email' => ['required', 'email'],
         ]);
 
         $person = Person::create($validated['person']);
-        Auth::user()->currentTeam->people()->attach($person->id);
+        auth()->user()->currentTeam->people()->attach($person->id);
 
         $this->reset('addPersonModalOpen');
         $this->success('Add person successfully!');
@@ -90,14 +91,14 @@ class People extends Component
         $query = clone $this->rowsQueryWithoutFilters;
 
         return $query
-            ->when(!empty($this->search), fn($query) => $query->search($this->search))
-            ->when($this->orderBy === 'first_name', fn($query) => $query->orderBy('first_name', 'asc'))
-            ->when($this->orderBy === 'created_at', fn($query) => $query->orderBy('created_at', 'asc'));
+            ->when(! empty($this->search), fn ($query) => $query->search($this->search))
+            ->when($this->orderBy === 'first_name', fn ($query) => $query->orderBy('first_name', 'asc'))
+            ->when($this->orderBy === 'created_at', fn ($query) => $query->orderBy('created_at', 'asc'));
     }
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-        return Auth::user()->currentTeam
+        return auth()->user()->currentTeam
             ?->people()
             ->with(['user']);
     }

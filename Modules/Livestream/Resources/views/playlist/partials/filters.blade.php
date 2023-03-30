@@ -25,7 +25,7 @@
                 },
 
                 searchEpisodes() {
-                    
+
                     let queryParams = {};
 
                     if (!!this.search) {
@@ -43,7 +43,7 @@
                         this.removeQueryStringParameter('speaker');
                         delete queryParams.speaker;
                     }
-                    
+
                     if (!!this.series) {
                         this.updateQueryStringParameter('series', this.series);
                         queryParams.series = this.series;
@@ -51,7 +51,7 @@
                         this.removeQueryStringParameter('series');
                         delete queryParams.series;
                     }
-                    
+
                     if (!!this.topics) {
                         this.updateQueryStringParameter('topics', this.topics);
                         queryParams.topics = this.topics;
@@ -59,7 +59,7 @@
                         this.removeQueryStringParameter('topics');
                         delete queryParams.topics;
                     }
-                    
+
                     omnia.loadPlaylist(queryParams);
                 }
             }"
@@ -87,8 +87,8 @@
                 </div>
             </div>
             <div class="order-last md:order-2 md:col-span-1">
-                <button 
-                    x-on:click="searchEpisodes()" 
+                <button
+                    x-on:click="searchEpisodes()"
                     class="leading-6 inline-flex justify-center w-full shadow-sm bg-gold rounded-md py-2 px-4 text-sm font-weight-500 line-height-15 font-Montserrat text-white font-style-normal hover:bg-yellow-600 hover:text-white focus:outline-none focus:shadow-outline focus:bg-yellow-600">
                     <span>Search</span>
                 </button>

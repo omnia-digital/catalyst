@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules\Livestream\Contracts;
+namespace Modules\Livestream\Contracts;
 
     interface RepositoryContract
     {
@@ -24,8 +24,7 @@
         /**
          * Create a new resource with the given data.
          *
-         * @param  array  $data
          * @return \Illuminate\Contracts\Auth\Authenticatable
          */
-        public function create($user,array $data);
+        public function create($user, array $data);
     }

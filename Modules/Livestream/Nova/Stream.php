@@ -1,8 +1,7 @@
-<?php namespace Modules\Livestream\Nova;
+<?php
 
-use Modules\Livestream\Models\Stream as StreamModel;
-use Modules\Livestream\Nova\Actions\DisableStream;
-use Modules\Livestream\Nova\Actions\EnableStream;
+namespace Modules\Livestream\Nova;
+
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -10,6 +9,9 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\Text;
+use Modules\Livestream\Models\Stream as StreamModel;
+use Modules\Livestream\Nova\Actions\DisableStream;
+use Modules\Livestream\Nova\Actions\EnableStream;
 
 class Stream extends Resource
 {
@@ -20,7 +22,7 @@ class Stream extends Resource
     public static $title = 'id';
 
     public static $search = [
-        'stream_id'
+        'stream_id',
     ];
 
     /**
@@ -30,7 +32,7 @@ class Stream extends Resource
      */
     public static $searchRelations = [
         'livestreamAccount' => ['id'],
-        'livestreamAccount.team' => ['name']
+        'livestreamAccount.team' => ['name'],
     ];
 
     public function fields(Request $request)
@@ -50,7 +52,7 @@ class Stream extends Resource
 
             Boolean::make('Is Active')->sortable(),
 
-            HasMany::make('Stream Targets')
+            HasMany::make('Stream Targets'),
         ];
     }
 
@@ -72,8 +74,8 @@ class Stream extends Resource
     public function actions(Request $request)
     {
         return [
-            (new EnableStream)->canRun(fn() => true),
-            (new DisableStream)->canRun(fn() => true)
+            (new EnableStream)->canRun(fn () => true),
+            (new DisableStream)->canRun(fn () => true),
         ];
     }
 }

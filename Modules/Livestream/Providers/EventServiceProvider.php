@@ -1,22 +1,23 @@
-<?php namespace Modules\Livestream\Providers;
+<?php
 
-use Modules\Livestream\Events\EpisodeCreatedEvent;
-use Modules\Livestream\Events\EpisodeViewedEvent;
-use Modules\Livestream\Listeners\CreateStripeStuffOnTheFirstTeamUpdatedListener;
-use Modules\Livestream\Listeners\EnableStream;
-use Modules\Livestream\Listeners\CreateEssentialStuffForTeam;
-use Modules\Livestream\Listeners\TrackEpisodeCreatedGoalListener;
-use Modules\Livestream\Listeners\TrackSubscriptionCancelledGoalListener;
-use Modules\Livestream\Listeners\TrackUserSubscribedGoalListener;
-use Modules\Livestream\Listeners\UpdateEpisodeViews;
-use Modules\Livestream\Listeners\UpdateLastViewedAtListener;
-use Modules\Livestream\Models\Episode;
-use Modules\Livestream\Observers\EpisodeObserver;
+namespace Modules\Livestream\Providers;
+
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamUpdated;
+use Modules\Livestream\Events\EpisodeCreatedEvent;
+use Modules\Livestream\Events\EpisodeViewedEvent;
+use Modules\Livestream\Listeners\CreateEssentialStuffForTeam;
+use Modules\Livestream\Listeners\CreateStripeStuffOnTheFirstTeamUpdatedListener;
+use Modules\Livestream\Listeners\EnableStream;
+use Modules\Livestream\Listeners\TrackEpisodeCreatedGoalListener;
+use Modules\Livestream\Listeners\TrackSubscriptionCancelledGoalListener;
+use Modules\Livestream\Listeners\TrackUserSubscribedGoalListener;
+use Modules\Livestream\Listeners\UpdateLastViewedAtListener;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Observers\EpisodeObserver;
 use Spark\Events\SubscriptionCancelled;
 use Spark\Events\SubscriptionCreated;
 
@@ -33,7 +34,7 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         TeamCreated::class => [
-            CreateEssentialStuffForTeam::class
+            CreateEssentialStuffForTeam::class,
         ],
 
         TeamUpdated::class => [
@@ -42,7 +43,7 @@ class EventServiceProvider extends ServiceProvider
 
         SubscriptionCreated::class => [
             EnableStream::class,
-            TrackUserSubscribedGoalListener::class
+            TrackUserSubscribedGoalListener::class,
         ],
 
         SubscriptionCancelled::class => [
@@ -55,7 +56,7 @@ class EventServiceProvider extends ServiceProvider
 
         EpisodeCreatedEvent::class => [
             //TrackEpisodeCreatedGoalListener::class,
-        ]
+        ],
     ];
 
     /**

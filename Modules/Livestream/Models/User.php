@@ -1,8 +1,7 @@
-<?php namespace Modules\Livestream\Models;
+<?php
 
-use Modules\Livestream\Actions\Fortify\CreateNewUser;
-use Modules\Livestream\Notifications\LivestreamNotification;
-use Modules\Livestream\Omnia;
+namespace Modules\Livestream\Models;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Lab404\Impersonate\Services\ImpersonateManager;
@@ -20,6 +18,8 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
+use Modules\Livestream\Actions\Fortify\CreateNewUser;
+use Modules\Livestream\Omnia;
 
 /**
  * @property Team $currentTeam
@@ -37,7 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'profile_photo_path',
-        'timezone'
+        'timezone',
     ];
 
     protected $hidden = [
@@ -49,8 +49,35 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'trial_ends_at'     => 'datetime'
+        'trial_ends_at' => 'datetime',
     ];
+
+    /**
+     * Create user from user's data of Facebook.
+     */
+    public static function createUserFromFacebook(SocialiteUser $user): User
+    {
+        $socialAccount = SocialAccount::findByProvider('facebook', $user->getId());
+
+        // If we found a social account then just return the attached user.
+        if ($socialAccount) {
+            return $socialAccount->user;
+        }
+
+        // Otherwise, create user + user account.
+        [$firstName, $lastName] = Omnia::extractFullName($user->getName());
+
+        $dbUser = (new CreateNewUser)->create([
+            'email' => $user->getEmail(),
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'avatar' => $user->getAvatar(),
+        ], true);
+
+        $dbUser->createSocialAccount($user);
+
+        return $dbUser;
+    }
 
     public function isAdmin(): bool
     {
@@ -127,7 +154,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Route notifications for the Slack channel.
      *
-     * @param \Illuminate\Notifications\Notification $notification
+     * @param  \Illuminate\Notifications\Notification  $notification
      * @return string
      */
     public function routeNotificationForSlack($notification)
@@ -135,56 +162,22 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->slack_webhook_url;
     }
 
-    /**
-     * Create user from user's data of Facebook.
-     *
-     * @param SocialiteUser $user
-     * @return User
-     */
-    public static function createUserFromFacebook(SocialiteUser $user): User
-    {
-        $socialAccount = SocialAccount::findByProvider('facebook', $user->getId());
-
-        // If we found a social account then just return the attached user.
-        if ($socialAccount) {
-            return $socialAccount->user;
-        }
-
-        // Otherwise, create user + user account.
-        [$firstName, $lastName] = Omnia::extractFullName($user->getName());
-
-        $dbUser = (new CreateNewUser)->create([
-            'email'      => $user->getEmail(),
-            'first_name' => $firstName,
-            'last_name'  => $lastName,
-            'avatar'     => $user->getAvatar()
-        ], true);
-
-        $dbUser->createSocialAccount($user);
-
-        return $dbUser;
-    }
-
-    /**
-     * @param SocialiteUser $user
-     * @return SocialAccount
-     */
     public function createSocialAccount(SocialiteUser $user): SocialAccount
     {
         [$firstName, $lastName] = Omnia::extractFullName($user->getName());
 
         return $this->socialAccount()->create([
             'provider_user_id' => $user->getId(),
-            'provider'         => 'facebook',
-            'avatar'           => $user->getAvatar(),
-            'nickname'         => $user->getNickname(),
-            'email'            => $this->email,
-            'first_name'       => $firstName,
-            'last_name'        => $lastName,
-            'gender'           => null,
-            'token'            => $user->token,
-            'expires_in'       => $user->expiresIn,
-            'refresh_token'    => $user->refreshToken
+            'provider' => 'facebook',
+            'avatar' => $user->getAvatar(),
+            'nickname' => $user->getNickname(),
+            'email' => $this->email,
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'gender' => null,
+            'token' => $user->token,
+            'expires_in' => $user->expiresIn,
+            'refresh_token' => $user->refreshToken,
         ]);
     }
 }

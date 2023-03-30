@@ -2,9 +2,9 @@
 
 namespace Modules\Livestream\Console\Commands;
 
-use Modules\Livestream\Enums\EpisodeDownloadStatus;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use Modules\Livestream\Enums\EpisodeDownloadStatus;
 use Modules\Livestream\EpisodeDownload;
 
 class DeleteExpiredEpisodeDownloadsCommand extends Command
@@ -37,6 +37,7 @@ class DeleteExpiredEpisodeDownloadsCommand extends Command
      * Execute the console command.
      *
      * @return void
+     *
      * @throws \MuxPhp\ApiException
      */
     public function handle()
@@ -47,7 +48,7 @@ class DeleteExpiredEpisodeDownloadsCommand extends Command
             $folderPath = Storage::disk('episode-download')->getAdapter()->getPathPrefix() . $episodeDownload->code;
 
             if (file_exists($folderPath)) {
-                array_map('unlink', glob("$folderPath/*.*"));
+                array_map('unlink', glob("{$folderPath}/*.*"));
                 rmdir($folderPath);
 
                 $episodeDownload->update(['status' => EpisodeDownloadStatus::EXPIRED]);

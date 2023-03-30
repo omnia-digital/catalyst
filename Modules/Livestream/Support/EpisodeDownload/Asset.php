@@ -1,5 +1,8 @@
-<?php namespace Modules\Livestream\Support\EpisodeDownload;
+<?php
 
+namespace Modules\Livestream\Support\EpisodeDownload;
+
+use ArrayAccess;
 use Illuminate\Support\Arr;
 use MuxPhp\Models\Asset as MuxAsset;
 
@@ -9,7 +12,6 @@ class Asset
 
     /**
      * Asset constructor.
-     * @param $asset
      */
     public function __construct(MuxAsset $asset)
     {
@@ -55,7 +57,7 @@ class Asset
     }
 
     /**
-     * @return array|\ArrayAccess|mixed
+     * @return array|ArrayAccess|mixed
      */
     public function defaultPlaybackId()
     {
@@ -63,7 +65,6 @@ class Asset
     }
 
     /**
-     * @param string $playbackId
      * @return string
      */
     public function downloadLink(string $playbackId = 'default')

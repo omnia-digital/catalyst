@@ -3,9 +3,9 @@
 namespace Modules\Livestream\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class StreamWasInterruptedNotification extends Notification implements ShouldQueue
 {
@@ -15,8 +15,6 @@ class StreamWasInterruptedNotification extends Notification implements ShouldQue
 
     /**
      * Create a new notification instance.
-     *
-     * @param string $message
      */
     public function __construct(string $message)
     {
@@ -26,7 +24,7 @@ class StreamWasInterruptedNotification extends Notification implements ShouldQue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -37,7 +35,7 @@ class StreamWasInterruptedNotification extends Notification implements ShouldQue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)

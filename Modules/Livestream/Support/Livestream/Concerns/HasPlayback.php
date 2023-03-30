@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Support\Livestream\Concerns;
+<?php
+
+namespace Modules\Livestream\Support\Livestream\Concerns;
 
 use Modules\Livestream\Models\PlaybackId;
 

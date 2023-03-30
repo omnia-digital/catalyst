@@ -13,7 +13,7 @@ class Download extends Model
     protected $fillable = [
         'downloadable_type',
         'downloadable_id',
-        'count'
+        'count',
     ];
 
     public function downloadable(): MorphTo

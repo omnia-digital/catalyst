@@ -3,7 +3,6 @@
 namespace Modules\Livestream\Events\Episode;
 
 use Modules\Livestream\Events\Event;
-use Illuminate\Queue\SerializesModels;
 use Modules\Livestream\Services\EpisodeService;
 
 class EpisodeFinishedRecording extends Event
@@ -12,7 +11,6 @@ class EpisodeFinishedRecording extends Event
 
     /**
      * Create a new event instance.
-     * @param EpisodeService $episodeService
      */
     public function __construct(EpisodeService $episodeService)
     {

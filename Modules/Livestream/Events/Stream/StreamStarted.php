@@ -2,9 +2,8 @@
 
 namespace Modules\Livestream\Events\Stream;
 
-use Modules\Livestream\Events\Event;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Modules\Livestream\Events\Event;
 use Modules\Livestream\Http\Requests\Notifications\StreamStartNotificationRequest;
 
 class StreamStarted extends Event
@@ -15,8 +14,6 @@ class StreamStarted extends Event
 
     /**
      * Create a new event instance.
-     *
-     * @param StreamStartNotificationRequest $notificationRequest
      */
     public function __construct(StreamStartNotificationRequest $notificationRequest)
     {

@@ -2,17 +2,13 @@
 
 namespace Modules\Livestream\Console\Commands;
 
-use Modules\Livestream\Models\User;
-use Modules\Livestream\Omnia;
-use Modules\Livestream\Services\SubscriptionService;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Modules\Livestream\Models\User;
 
 /**
  * Class BanUser
- *
- * @package App\Console\Commands
  */
 class BanUser extends Command
 {
@@ -46,22 +42,22 @@ class BanUser extends Command
             $user = User::find($id);
 
             if ($revert) {
-                if($this->confirm("Are you sure you want to revert the ban on this User ($id)?")) {
+                if ($this->confirm("Are you sure you want to revert the ban on this User ({$id})?")) {
                     if ($user->isNotBanned()) {
                         $this->info('That User is not banned');
                     } else {
                         $user->unban();
-                        $this->info("Successfully UnBanned User ($id)");
+                        $this->info("Successfully UnBanned User ({$id})");
                     }
                 } else {
                     $this->info('Cancelled Ban Revert');
                 }
-            } else if ($this->confirm("Are you sure you want to ban this User ($id)?")) {
+            } elseif ($this->confirm("Are you sure you want to ban this User ({$id})?")) {
                 if ($user->isBanned()) {
                     $this->info('That User is already banned');
                 } else {
                     $user->ban();
-                    $this->info("Successfully Banned User ($id)");
+                    $this->info("Successfully Banned User ({$id})");
                 }
             } else {
                 $this->info('Cancelled Ban');
@@ -72,6 +68,5 @@ class BanUser extends Command
         }
 
         Log::info('[FINISHED] - ' . __CLASS__);
-
     }
 }

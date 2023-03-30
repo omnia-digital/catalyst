@@ -1,11 +1,13 @@
-<?php namespace Modules\Livestream\Services\Mux;
+<?php
 
-use Modules\Livestream\Models\Episode;
-use Modules\Livestream\Models\LivestreamAccount;
-use Modules\Livestream\Models\VideoView;
+namespace Modules\Livestream\Services\Mux;
+
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Models\VideoView;
 use MuxPhp\Api\VideoViewsApi;
 use MuxPhp\Configuration;
 use MuxPhp\Models\AbridgedVideoView;
@@ -32,11 +34,11 @@ class MuxVideoView
         $videoViews = [];
         $filters = [];
 
-        if (!is_null($livestreamAccountId)) {
+        if (! is_null($livestreamAccountId)) {
             array_push($filters, 'sub_property_id:' . $livestreamAccountId);
         }
 
-        if (!is_null($muxAssetId)) {
+        if (! is_null($muxAssetId)) {
             array_push($filters, 'asset_id:' . $muxAssetId);
         }
 
@@ -45,19 +47,19 @@ class MuxVideoView
                 limit: 100,
                 page: $page,
                 filters: [
-                    'filters' => $filters
+                    'filters' => $filters,
                 ],
                 timeframe: [
                     'timeframe' => [
                         $from ? $from->timestamp : now()->subDays(30)->timestamp,
-                        $to ? $to->timestamp : now()->timestamp
-                    ]
+                        $to ? $to->timestamp : now()->timestamp,
+                    ],
                 ]
             );
 
             $videoViews = array_merge($videoViews, $result['data']);
             $page = $page + 1;
-        } while (!empty($result['data']));
+        } while (! empty($result['data']));
 
         return collect(array_map(function (AbridgedVideoView $item) {
             $videoView = new VideoView;

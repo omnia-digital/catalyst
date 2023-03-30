@@ -1,9 +1,6 @@
 <?php
 
-    namespace Modules\Livestream\Http\Requests;
-
-    use Modules\Livestream\Http\Requests\Request;
-    use Auth;
+namespace Modules\Livestream\Http\Requests;
 
     class StreamTargetRequest extends LivestreamRequest
     {
@@ -25,10 +22,10 @@
         public function rules()
         {
             return [
-                'name'       => 'required | string',
-                'url'        => 'required | string',
+                'name' => 'required | string',
+                'url' => 'required | string',
                 'stream_key' => 'required | string',
-//                'stream_id'  => 'required',
+                //                'stream_id'  => 'required',
             ];
         }
     }

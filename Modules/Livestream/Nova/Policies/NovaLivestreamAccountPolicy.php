@@ -1,6 +1,6 @@
 <?php
 
-    namespace Modules\Livestream\Nova\Policies;
+namespace Modules\Livestream\Nova\Policies;
 
     use Modules\Livestream\Policies\Traits\HasDefaultPolicy;
 

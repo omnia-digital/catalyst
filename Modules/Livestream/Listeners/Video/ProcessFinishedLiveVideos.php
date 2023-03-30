@@ -2,6 +2,7 @@
 
 namespace Modules\Livestream\Listeners\Video;
 
+use Exception;
 use Modules\Livestream\Events\Episode\EpisodeFinishedRecording;
 use Modules\Livestream\Events\Video\FinishedMovingLiveTmpVideosToVod;
 use Modules\Livestream\Events\Video\KickOffLiveVideoProcess;
@@ -12,8 +13,8 @@ class ProcessFinishedLiveVideos
 {
     /**
      * Handle the event.
-     * @param $event
-     * @throws \Exception
+     *
+     * @throws Exception
      */
     public function handle($event)
     {
@@ -22,10 +23,8 @@ class ProcessFinishedLiveVideos
         if ($event instanceof EpisodeFinishedRecording) {
             event(new KickOffLiveVideoProcess($event->episodeService));
             event(new LiveVideosProcessingAddedToQueue($event->episodeService));
-
-        } else if ($event instanceof FinishedMovingLiveTmpVideosToVod) {
+        } elseif ($event instanceof FinishedMovingLiveTmpVideosToVod) {
             event(new LiveVideosFinishedProcessing($event->episodeService));
         }
-
     }
 }

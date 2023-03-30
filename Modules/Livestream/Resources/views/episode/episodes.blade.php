@@ -106,7 +106,7 @@
                                             @if ($episode?->video?->isAudio())
                                                 <x-playlist.audio-episode-item
                                                         wire:key="episode-{{ $episode->id }}"
-                                                        wire:click="selectEpisode({{$episode->id }})"
+                                                        wire:click="selectEpisode({{ $episode->id }})"
                                                         :episode="$episode"
                                                         :class="in_array($episode->id, $selectedIDs) ? 'ring-1 ring-offset-4 ring-blue-500' : ''"
                                                         :selected="$episode->id === $selectedEpisode"
@@ -138,7 +138,7 @@
 
                 <!-- Episode Detail -->
                 @include('episode.partials.episode-detail', [
-                    'selectedEpisode' => $selectedEpisode, 
+                    'selectedEpisode' => $selectedEpisode,
                     'selectedIDs' => $selectedIDs
                 ])
             </div>

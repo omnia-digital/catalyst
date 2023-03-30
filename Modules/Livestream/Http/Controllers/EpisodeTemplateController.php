@@ -2,54 +2,38 @@
 
 namespace Modules\Livestream\Http\Controllers;
 
-use Modules\Livestream\Omnia;
 use Exception;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Validation\Validator;
-use Modules\Livestream\Episode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
+use Modules\Livestream\Episode;
 use Modules\Livestream\EpisodeTemplate;
-use Modules\Livestream\Http\Requests;
-use Modules\Livestream\Http\Requests\EpisodeRequest;
 use Modules\Livestream\Http\Requests\EpisodeTemplateRequest;
-use Modules\Livestream\Http\Requests\S3Request;
-use Modules\Livestream\Http\Controllers\LivestreamController;
 use Modules\Livestream\Interactions\DeleteEpisodeTemplateThumbnail;
 use Modules\Livestream\Interactions\UpdateEpisodeTemplateThumbnail;
 use Modules\Livestream\LivestreamAccount;
-use Modules\Livestream\LivestreamApplication;
-use Modules\Livestream\Player;
-use Modules\Livestream\WowzaMediaServer;
-use Modules\Livestream\WowzaVhost;
-use Modules\Livestream\WowzaPublisher;
-use Modules\Livestream\WowzaVhostHostPort;
-use Redirect;
-
+use Modules\Livestream\Omnia;
 
 /**
  * Class EpisodeTemplateController
- * @package App\Http\Controllers
  */
 class EpisodeTemplateController extends LivestreamController
 {
-
     /**
      * Display a listing of the resource.
+     *
      * @return \Illuminate\Http\Response
-     * @throws \Exception
+     *
+     * @throws Exception
      */
     public function index()
     {
-        if ( !empty($this->_livestreamAccount) ) {
+        if (! empty($this->_livestreamAccount)) {
             $episodeTemplates = $this->_livestreamAccount->episodeTemplates;
             $episodeTemplates->load('LivestreamAccount');
         } else {
             throw new ValidationException("Can't find livestream Account, which is necessary to get Episode Templates");
         }
-
 
         return $episodeTemplates;
     }
@@ -64,26 +48,25 @@ class EpisodeTemplateController extends LivestreamController
         return view('livestream::episodeTemplate/create');
     }
 
-	/**
-	 * Store a newly created Episode in storage.
-	 *
-	 * @param EpisodeTemplateRequest $request
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+    /**
+     * Store a newly created Episode in storage.
+     *
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function store(EpisodeTemplateRequest $request)
     {
         $request = $request->all();
-        $episode = new Episode();
+        $episode = new Episode;
 
-	    if (!empty($request['episode'])) {
+        if (! empty($request['episode'])) {
             $episode->fill($request['episode']);
         }
         $episodeTemplate = EpisodeTemplate::create([
             'title' => $request['title'],
             'description' => $request['description'],
             'template' => $episode,
-            'livestream_account_id' => $this->_livestreamAccount->id
+            'livestream_account_id' => $this->_livestreamAccount->id,
         ]);
 
         return $episodeTemplate;
@@ -92,7 +75,6 @@ class EpisodeTemplateController extends LivestreamController
     /**
      * Display the specified resource.
      *
-     * @param EpisodeTemplate $episodeTemplate
      *
      * @return EpisodeTemplate
      */
@@ -112,12 +94,10 @@ class EpisodeTemplateController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param EpisodeTemplateRequest $request
-     * @param EpisodeTemplate        $episodeTemplate
      *
      * @return EpisodeTemplate
      */
-    public function update( EpisodeTemplateRequest $request, EpisodeTemplate $episodeTemplate )
+    public function update(EpisodeTemplateRequest $request, EpisodeTemplate $episodeTemplate)
     {
         $request = $request->all();
         $templateData['title'] = $request['title'];
@@ -136,9 +116,9 @@ class EpisodeTemplateController extends LivestreamController
     /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param  int $id
-     *
+     * @param  int  $id
      * @return int
+     *
      * @throws Exception
      */
     public function destroy($id)
@@ -151,40 +131,39 @@ class EpisodeTemplateController extends LivestreamController
                 if ($this->_livestreamAccount->default_episode_template_id != $id) {
                     $count = EpisodeTemplate::destroy($id);
                     flash('Episode deleted: ' . $count);
+
                     return $count;
-//		    return redirect('/livestream');
+                //		    return redirect('/livestream');
                 } else {
-//	        throw new Exception("You must assign another Episode Template as the <b>Default</b> before you can delete this one");
-                    throw new Exception("You must assign another Episode Template as the <b>Default</b> before you can delete this one");
-//		    return Redirect::back()->with( [
-//			    'flash.title'   => "Cannot Delete Default Episode Template",
-//			    'flash.message' => "You must assign another Episode Template as the <b>Default</b> before you can delete this one",
-//			    'flash.level'   => 'danger'
-//		    ] );
+                    //	        throw new Exception("You must assign another Episode Template as the <b>Default</b> before you can delete this one");
+                    throw new Exception('You must assign another Episode Template as the <b>Default</b> before you can delete this one');
+                    //		    return Redirect::back()->with( [
+                    //			    'flash.title'   => "Cannot Delete Default Episode Template",
+                    //			    'flash.message' => "You must assign another Episode Template as the <b>Default</b> before you can delete this one",
+                    //			    'flash.level'   => 'danger'
+                    //		    ] );
                 }
             }
         } catch(Exception $e) {
 //            $data = ['errors' => $e->getMessage()];
             throw $e;
         }
-
     }
 
     /**
      * Change the Default Episode Template on this Livestream Account
      *
-     * @param $id
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function changeDefaultEpisodeTemplate($id)
     {
-        $this->_livestreamAccount->default_episode_template_id = (int)$id;
+        $this->_livestreamAccount->default_episode_template_id = (int) $id;
         $this->_livestreamAccount->save();
 
         $response = [
             'success' => true,
-            'data' => []
+            'data' => [],
         ];
 
         return response()->json($response);
@@ -193,8 +172,6 @@ class EpisodeTemplateController extends LivestreamController
     /**
      * Update the thumbnail on given Episode
      *
-     * @param Request         $request
-     * @param EpisodeTemplate $episodeTemplate
      *
      * @return mixed
      */
@@ -206,7 +183,6 @@ class EpisodeTemplateController extends LivestreamController
     /**
      * Delete the thumbnail file and remove from Episode
      *
-     * @param Episode $episodeTemplate
      *
      * @return mixed
      */

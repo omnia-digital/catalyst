@@ -8,7 +8,7 @@
                         <span class="truncate">Video</span>
                     </a>
 
-                    @if(\Auth::user()->isAdmin())
+                    @if (\Auth::user()->isAdmin())
                         <a href="{{ route('settings.streaming') }}" class="{{ request()->routeIs('settings.streaming') ? 'bg-gray-50 text-indigo-600 hover:bg-white' : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50' }} group rounded-md px-3 py-2 flex items-center text-sm font-medium">
                             <x-heroicon-o-video-camera class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"/>
                             <span class="truncate">Streaming</span>

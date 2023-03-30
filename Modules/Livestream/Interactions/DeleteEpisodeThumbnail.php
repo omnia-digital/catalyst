@@ -1,14 +1,12 @@
 <?php
 
-    namespace Modules\Livestream\Interactions;
+namespace Modules\Livestream\Interactions;
 
-    use Illuminate\Support\Facades\Storage;
+    use Exception;
+use Illuminate\Support\Facades\Storage;
 
     class DeleteEpisodeThumbnail
     {
-        /**
-         * {@inheritdoc}
-         */
         public function handle($episode)
         {
             $storage = Storage::disk('s3-images');
@@ -26,8 +24,8 @@
                 $episode->forceFill([
                     'thumbnail' => '',
                 ])->save();
-            } catch(\Exception $e) {
-                throw new \Exception('Could not delete Episode Thumbnail: ' . $e->getMessage());
+            } catch(Exception $e) {
+                throw new Exception('Could not delete Episode Thumbnail: ' . $e->getMessage());
             }
         }
     }

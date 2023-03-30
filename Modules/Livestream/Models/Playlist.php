@@ -9,5 +9,5 @@ class Playlist extends Model
 {
     use HasFactory;
 
-    protected $guarded =[];
+    protected $guarded = [];
 }

@@ -1,4 +1,8 @@
-<?php namespace Modules\Livestream\Metrics\TimeFilters;
+<?php
+
+namespace Modules\Livestream\Metrics\TimeFilters;
+
+use InvalidArgumentException;
 
 class TimeFilterRegistry
 {
@@ -13,8 +17,8 @@ class TimeFilterRegistry
 
     public function get(string $name): TimeFilter
     {
-        if (!array_key_exists($name, $this->timeFilters)) {
-            throw new \InvalidArgumentException('Invalid time filter: ' . $name);
+        if (! array_key_exists($name, $this->timeFilters)) {
+            throw new InvalidArgumentException('Invalid time filter: ' . $name);
         }
 
         return $this->timeFilters[$name];

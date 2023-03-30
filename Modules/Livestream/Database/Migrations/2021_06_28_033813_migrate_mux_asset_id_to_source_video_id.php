@@ -13,9 +13,9 @@ class MigrateMuxAssetIdToSourceVideoId extends Migration
      */
     public function up()
     {
-        \App\Models\Episode::withTrashed()->get()->each(function (\App\Models\Episode $episode) {
+        \App\Models\Episode::withTrashed()->get()->each(function (App\Models\Episode $episode) {
             $episode->video()->update([
-                'video_source_id' => $episode->mux_asset_id
+                'video_source_id' => $episode->mux_asset_id,
             ]);
         });
     }

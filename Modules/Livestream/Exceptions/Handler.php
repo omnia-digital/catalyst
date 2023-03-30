@@ -3,7 +3,6 @@
 namespace Modules\Livestream\Exceptions;
 
 use Exception;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -23,7 +22,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Validation\ValidationException::class,
         \App\Exceptions\VideoProcessingNotNeededException::class,
         \App\Exceptions\TransVideoException::class,
-//        \App\Exceptions\LivestreamAccountIdNotFoundException::class
+        //        \App\Exceptions\LivestreamAccountIdNotFoundException::class
     ];
 
     /**
@@ -37,14 +36,13 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-
     /**
      * Report or log an exception.
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception $e
-     *
+     * @param  Exception  $e
      * @return void
+     *
      * @throws Exception
      */
     public function report(Throwable $e)
@@ -73,7 +71,7 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
+     * @param  Exception  $e
      * @return \Illuminate\Http\Response
      */
     public function render($request, Throwable $e)

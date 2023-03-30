@@ -33,7 +33,7 @@
         @if (is_string($value) || is_string($previousValue))
             {{-- Do nothing if any of the values is a string --}}
         @elseif ($value != 0 && $previousValue !== false)
-            
+
             <span class="text-xs dark:text-gray-100">
                 <span class="{{ $value < $previousValue ? 'text-red-400' : 'text-green-400' }} font-bold">{{ $value < $previousValue ? '↓' : '↑' }}</span>
                 {{ round((abs($value - $previousValue)) / $value * 100, 2) }}%

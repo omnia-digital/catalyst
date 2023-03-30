@@ -1,9 +1,12 @@
-<?php namespace Modules\Livestream\Listeners;
+<?php
 
+namespace Modules\Livestream\Listeners;
+
+use Exception;
+use Illuminate\Support\Arr;
 use Modules\Livestream\Events\StreamCompleted;
 use Modules\Livestream\Models\Video;
 use Modules\Livestream\Services\Mux\Concerns\HasThumbnail;
-use Illuminate\Support\Arr;
 
 class UpdateEpisodeInfo
 {
@@ -13,12 +16,12 @@ class UpdateEpisodeInfo
     {
         $video = Video::where('video_source_id', $event->data['object']['id'])->first();
 
-        if (!$video) {
-            throw new \Exception('Could not find video with Mux Asset ID: ' . $event->data['object']['id']);
+        if (! $video) {
+            throw new Exception('Could not find video with Mux Asset ID: ' . $event->data['object']['id']);
         }
 
         $update = [
-            'duration'  => Arr::get($event->data, 'data.duration') * 1000
+            'duration' => Arr::get($event->data, 'data.duration') * 1000,
         ];
 
         if (empty($video->episode->thumbnail)) {

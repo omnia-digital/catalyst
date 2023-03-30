@@ -6,7 +6,7 @@
 
 <li {{ $attributes->merge(['class' => 'relative']) }}>
 
-    @if($person->photo)
+    @if ($person->photo)
         <div class="{{ $selected ? 'ring-2 ring-offset-2 ring-blue-500' : 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-blue-500' }} group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden cursor-pointer relative">
             <img src="{{ $person?->photo }}" alt="{{ $person->name }}" class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none">
         </div>

@@ -1,35 +1,35 @@
-<?php namespace Modules\Livestream\Configuration;
+<?php
 
-use Modules\Livestream\Omnia;
+namespace Modules\Livestream\Configuration;
+
 use Exception;
 use Laravel\Spark\Plan;
+use Modules\Livestream\Omnia;
 
 trait ManagesAvailableBundles
 {
+    /**
+     * @param  int|string  $id Searches by the Id of the plan
+     * @param  bool  $teamPlans
+     * @return Plan
+     *
+     * @throws Exception
+     */
+    public static function getPlanById($id, $teamPlans = false)
+    {
+        if ($teamPlans === false) {
+            $plans = Omnia::plans();
+        } else {
+            $plans = Omnia::teamPlans();
+        }
+        $plan = $plans->where('id', $id)->first();
 
-	/**
-	 * @param int|string $id Searches by the Id of the plan
-	 *
-	 * @param bool $teamPlans
-	 *
-	 * @return Plan
-	 * @throws Exception
-	 */
-	public static function getPlanById($id,$teamPlans = false)
-	{
-		if ($teamPlans === false) {
-			$plans = Omnia::plans();
-		} else {
-			$plans = Omnia::teamPlans();
-		}
-		$plan = $plans->where('id', $id)->first();
-
-		if (empty($plan)) {
-			throw new Exception('Could not find that plan by identifier: ' . $id);
-		} else {
-			return $plan;
-		}
-	}
+        if (empty($plan)) {
+            throw new Exception('Could not find that plan by identifier: ' . $id);
+        } else {
+            return $plan;
+        }
+    }
 
 //    /**
 //     * Indicates that the application will bill customers.

@@ -6,17 +6,15 @@ use Modules\Livestream\Http\Requests\ImportRequest;
 
 /**
  * Class SermonNetAdapter
- * @package App\Services\Adapters
  */
 class SermonNetAdapter
 {
     /**
-     * @param ImportRequest $importRequest
      * @return mixed|void
      */
-    public function handleImport( ImportRequest $importRequest )
+    public function handleImport(ImportRequest $importRequest)
     {
-        $importRssRequest = new SermonBrowserWPPluginImportRssRequest();
+        $importRssRequest = new SermonBrowserWPPluginImportRssRequest;
         $importRssRequest->rss_feed_path = $rss_feed_path;
 
         // if $import_type is episodes, call the import Episodes method
@@ -35,7 +33,7 @@ class SermonNetAdapter
         $feed = FeedsFacade::make($rss_feed_path);
         $items = $feed->get_items();
         foreach ($items as $item) {
-            $episode = new Episode();
+            $episode = new Episode;
             $episode->title = $item->get_title();
             $episode->description = $item->get_description();
             $date = new Carbon($item->get_gmdate());
@@ -48,7 +46,7 @@ class SermonNetAdapter
             foreach ($enclosures as $enclosure) {
                 $videoUrls = collect($enclosure->link);
             }
-            if (!empty($this->_livestreamAccount)) {
+            if (! empty($this->_livestreamAccount)) {
                 $episode->livestream_account_id = $this->_livestreamAccount->id;
             }
             $this->episode = $episode;
@@ -57,7 +55,7 @@ class SermonNetAdapter
             $job = (new importRemoteMP4FilesToVodAndCreateEpisodes($this))->onQueue($videoProcessorQueueName);
             $job->videoUrls = $videoUrls;
             dispatch($job);
-            event(new importRSSEpisodeAddedToQueue($this->episode,$this->_livestreamAccount));
+            event(new importRSSEpisodeAddedToQueue($this->episode, $this->_livestreamAccount));
             Log::info('Import Remote Episode from RSS Job added to queue: "' . $videoProcessorQueueName);
         }
         Log::info('[END - ' . __FUNCTION__ . ' ]');

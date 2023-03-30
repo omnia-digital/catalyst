@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Livestream\Models\Team;
 use Modules\Livestream\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TeamFactory extends Factory
 {
@@ -23,8 +23,8 @@ class TeamFactory extends Factory
     public function definition()
     {
         return [
-            'name'          => $this->faker->unique()->company,
-            'user_id'       => User::factory(),
+            'name' => $this->faker->unique()->company,
+            'user_id' => User::factory(),
             'personal_team' => true,
         ];
     }

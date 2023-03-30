@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Models;
+<?php
+
+namespace Modules\Livestream\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,7 +31,7 @@ class StreamTarget extends Model
         'status',
         'stream_id',
         'stream_integration_id',
-        'mux_simulcast_target_id'
+        'mux_simulcast_target_id',
     ];
 
     public function stream(): BelongsTo

@@ -1,5 +1,6 @@
-<?php namespace Modules\Livestream\Configuration;
+<?php
 
+namespace Modules\Livestream\Configuration;
 
 trait ManagesModelOptions
 {

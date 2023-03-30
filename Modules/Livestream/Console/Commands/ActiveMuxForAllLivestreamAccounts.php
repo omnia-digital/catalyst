@@ -2,9 +2,10 @@
 
 namespace Modules\Livestream\Console\Commands;
 
-use Modules\Livestream\Omnia;
+use Exception;
 use Illuminate\Console\Command;
 use Modules\Livestream\LivestreamAccount;
+use Modules\Livestream\Omnia;
 use Modules\Livestream\Repositories\StreamRepository;
 
 class ActiveMuxForAllLivestreamAccounts extends Command
@@ -30,10 +31,9 @@ class ActiveMuxForAllLivestreamAccounts extends Command
      */
     public function handle()
     {
-        if($this->confirm("Are you sure you want to activate Mux on all Livestream Accounts (that aren't already actived)?")) {
+        if ($this->confirm("Are you sure you want to activate Mux on all Livestream Accounts (that aren't already actived)?")) {
             $livestream_accounts = LivestreamAccount::all();
             foreach ($livestream_accounts as $livestream_account) {
-
                 // If Mux is already active, skip this $livestream_account
                 if ($livestream_account->mux_livestream_active === true) {
                     continue;
@@ -45,10 +45,10 @@ class ActiveMuxForAllLivestreamAccounts extends Command
                         $stream = Omnia::interact(StreamRepository::class . '@create', [$livestream_account]);
                         sleep(1);
                         if (empty($stream)) {
-                            throw new \Exception("Could not find new Stream after creating");
+                            throw new Exception('Could not find new Stream after creating');
                         }
-                    } catch(\Exception $e) {
-                        $this->error("Error when creating a Stream for LivestreamAccount: " . $livestream_account->id . " | Error: " . $e->getMessage());
+                    } catch(Exception $e) {
+                        $this->error('Error when creating a Stream for LivestreamAccount: ' . $livestream_account->id . ' | Error: ' . $e->getMessage());
                     }
                 }
                 $livestream_account->mux_livestream_active = true;
@@ -57,9 +57,7 @@ class ActiveMuxForAllLivestreamAccounts extends Command
                 $livestream_account->save();
             }
         } else {
-            $this->info("Cancelled");
+            $this->info('Cancelled');
         }
-
-
     }
 }

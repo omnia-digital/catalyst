@@ -1,9 +1,11 @@
-<?php namespace Modules\Livestream\Http\Livewire\Channel;
+<?php
 
+namespace Modules\Livestream\Http\Livewire\Channel;
+
+use Livewire\Component;
 use Modules\Livestream\Models\Channel;
 use Modules\Livestream\Models\Player;
 use Modules\Livestream\Support\Episode\WithEpisodeList;
-use Livewire\Component;
 
 class ChannelDetail extends Component
 {
@@ -21,7 +23,7 @@ class ChannelDetail extends Component
     public function render()
     {
         return view('channel.channel-detail', [
-            'episodes' => $this->episodes
+            'episodes' => $this->episodes,
         ])->layout('layouts.guest');
     }
 }

@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Enums;
+<?php
+
+namespace Modules\Livestream\Enums;
 
 class StreamStatus
 {

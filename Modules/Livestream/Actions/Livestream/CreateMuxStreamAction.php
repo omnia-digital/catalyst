@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Actions\Livestream;
+<?php
+
+namespace Modules\Livestream\Actions\Livestream;
 
 use Modules\Livestream\Models\LivestreamAccount;
 use Modules\Livestream\Models\Stream;
@@ -13,8 +15,6 @@ class CreateMuxStreamAction
     /**
      * Create mux stream of a team.
      *
-     * @param Team|null $team
-     * @return Stream
      * @throws \MuxPhp\ApiException
      */
     public function execute(?Team $team = null): Stream
@@ -23,9 +23,9 @@ class CreateMuxStreamAction
 
         // Create stream.
         $stream = $this->livestreamAccount($team)->streams()->create([
-            'stream_id'        => $muxStreamData->getId(),
-            'stream_key'       => $muxStreamData->getStreamKey(),
-            'status'           => $muxStreamData->getStatus(),
+            'stream_id' => $muxStreamData->getId(),
+            'stream_key' => $muxStreamData->getStreamKey(),
+            'status' => $muxStreamData->getStatus(),
             'reconnect_window' => $muxStreamData->getReconnectWindow(),
         ]);
 
@@ -35,7 +35,7 @@ class CreateMuxStreamAction
         foreach ($muxStreamData->getPlaybackIds() as $muxPlaybackId) {
             $playbackIds[] = [
                 'playback_id' => $muxPlaybackId->getId(),
-                'policy'      => $muxPlaybackId->getPolicy(),
+                'policy' => $muxPlaybackId->getPolicy(),
             ];
         }
 

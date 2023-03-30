@@ -3,14 +3,10 @@
 namespace Modules\Livestream\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\HasOneThrough;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Media extends Resource
 {
@@ -36,13 +32,12 @@ class Media extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name'
+        'id', 'name',
     ];
 
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function fields(Request $request)
@@ -53,17 +48,16 @@ class Media extends Resource
             Text::make('Name')->sortable(),
 
             MorphTo::make('Model')->types([
-                Episode::class
+                Episode::class,
             ]),
 
-            HasMany::make('Downloads')
+            HasMany::make('Downloads'),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function cards(Request $request)
@@ -74,7 +68,6 @@ class Media extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function filters(Request $request)
@@ -85,7 +78,6 @@ class Media extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function lenses(Request $request)
@@ -96,7 +88,6 @@ class Media extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function actions(Request $request)

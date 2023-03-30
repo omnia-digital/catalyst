@@ -14,7 +14,6 @@ class DeleteEpisodeFiles implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param EpisodeDownloadIsReady $event
      * @return void
      */
     public function handle(EpisodeDownloadIsReady $event)

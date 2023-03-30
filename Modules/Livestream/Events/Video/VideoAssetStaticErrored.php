@@ -3,9 +3,6 @@
 namespace Modules\Livestream\Events\Video;
 
 use Modules\Livestream\Events\Event;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Modules\Livestream\Services\EpisodeService;
 
 class VideoAssetStaticErrored extends MuxEvent
 {
@@ -13,8 +10,6 @@ class VideoAssetStaticErrored extends MuxEvent
 
     /**
      * Create a new event instance.
-     *
-     * @param $data
      */
     public function __construct($data)
     {

@@ -1,7 +1,9 @@
-<?php namespace Modules\Livestream\Support\Livewire;
+<?php
 
-use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
+namespace Modules\Livestream\Support\Livewire;
+
 use Carbon\CarbonPeriod;
+use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
 
 trait WithTimeFilter
 {

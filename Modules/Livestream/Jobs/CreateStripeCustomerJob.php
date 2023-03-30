@@ -2,12 +2,13 @@
 
 namespace Modules\Livestream\Jobs;
 
-use Modules\Livestream\Models\Team;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Log;
+use Modules\Livestream\Models\Team;
 
 class CreateStripeCustomerJob implements ShouldQueue
 {
@@ -15,15 +16,16 @@ class CreateStripeCustomerJob implements ShouldQueue
 
     public function __construct(
         private Team $team
-    ){}
+    ) {
+    }
 
     public function handle()
     {
-        \Log::debug('Creating Stripe for team ' . $this->team->name);
+        Log::debug('Creating Stripe for team ' . $this->team->name);
 
         $this->team->createAsStripeCustomer([
-            'name'  => $this->team->name,
-            'email' => $this->team->owner->email
+            'name' => $this->team->name,
+            'email' => $this->team->owner->email,
         ]);
     }
 }

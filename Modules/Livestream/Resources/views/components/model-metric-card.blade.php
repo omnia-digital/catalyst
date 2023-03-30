@@ -8,7 +8,7 @@
     <dt class="text-sm font-medium text-gray-500 truncate">
         {{ $name }}
     </dt>
-    @if($modelTitle)
+    @if ($modelTitle)
         <dd class="mt-1 text-3xl font-semibold text-gray-900">
             {{ $modelTitle ?? 'Not enough data' }}
         </dd>

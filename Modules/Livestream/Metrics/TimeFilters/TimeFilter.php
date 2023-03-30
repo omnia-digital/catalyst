@@ -1,7 +1,9 @@
-<?php namespace Modules\Livestream\Metrics\TimeFilters;
+<?php
 
-use Modules\Livestream\Omnia;
+namespace Modules\Livestream\Metrics\TimeFilters;
+
 use Carbon\Carbon;
+use Modules\Livestream\Omnia;
 
 abstract class TimeFilter
 {
@@ -10,13 +12,13 @@ abstract class TimeFilter
         return trim(str_replace('Time Filter', '', Omnia::humanize($this)));
     }
 
-    public abstract function from(): Carbon;
+    abstract public function from(): Carbon;
 
-    public abstract function to(): Carbon;
+    abstract public function to(): Carbon;
 
-    public abstract function previousFrom(): Carbon;
+    abstract public function previousFrom(): Carbon;
 
-    public abstract function previousTo(): Carbon;
+    abstract public function previousTo(): Carbon;
 
-    public abstract function step(): string;
+    abstract public function step(): string;
 }

@@ -5,13 +5,11 @@ namespace Modules\Livestream\Jobs\Videos;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\Livestream\Episode;
-use Modules\Livestream\Events\Video\LiveVideosProcessing;
 use Modules\Livestream\Jobs\LivestreamJob;
 use Modules\Livestream\Services\EpisodeService;
 
 /**
  * Class importRemoteMP4FilesToVodAndCreateEpisodes
- * @package App\Jobs\Videos
  */
 class importRemoteMP4FilesToVodAndCreateEpisodes extends LivestreamJob
 {
@@ -22,9 +20,7 @@ class importRemoteMP4FilesToVodAndCreateEpisodes extends LivestreamJob
     /**
      * Create a new job instance.
      *
-     * @param Episode $episode
-     * @param Collection $videoUrls
-     * @param null|string $vodStorageName
+     * @param  null|string  $vodStorageName
      */
     public function __construct(Episode $episode, Collection $videoUrls, $vodStorageName = null)
     {

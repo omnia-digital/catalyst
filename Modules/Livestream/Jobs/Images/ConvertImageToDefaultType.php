@@ -2,13 +2,13 @@
 
 namespace Modules\Livestream\Jobs\Images;
 
-use Modules\Livestream\Image;
-use Modules\Livestream\Services\ImageService;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Modules\Livestream\Image;
+use Modules\Livestream\Services\ImageService;
 
 class ConvertImageToDefaultType implements ShouldQueue
 {
@@ -21,14 +21,13 @@ class ConvertImageToDefaultType implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param $image_id
-     * @param ImageService $imageService
+     * @param  ImageService  $imageService
      */
     public function __construct($image_id, ImageService $imageService = null)
     {
         $this->_image_id = $image_id;
         if (is_null($imageService)) {
-            $this->_imageService = new ImageService();
+            $this->_imageService = new ImageService;
         } else {
             $this->_imageService = $imageService;
         }

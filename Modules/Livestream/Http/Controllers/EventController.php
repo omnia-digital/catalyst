@@ -2,27 +2,20 @@
 
 namespace Modules\Livestream\Http\Controllers;
 
-use Modules\Livestream\Http\Requests\EventRequest;
-use Modules\Livestream\Event;
-use Modules\Livestream\LivestreamAccount;
-use Auth;
 use Illuminate\Http\Request;
-use Modules\Livestream\Http\Requests;
-use Modules\Livestream\Http\Controllers\LivestreamController;
+use Illuminate\Support\Facades\Auth;
+use Modules\Livestream\Event;
+use Modules\Livestream\Http\Requests\EventRequest;
+use Modules\Livestream\LivestreamAccount;
 use Modules\Livestream\WowzaMediaServer;
-use Modules\Livestream\WowzaVhost;
-use Modules\Livestream\WowzaPublisher;
-use Modules\Livestream\WowzaVhostHostPort;
 
 class EventController extends LivestreamController
 {
-
     /**
      * Create a AccountController Instance
      */
-    public function __construct ()
+    public function __construct()
     {
-
     }
 
     /**
@@ -44,12 +37,12 @@ class EventController extends LivestreamController
      */
     public function create()
     {
-        $LivestreamAccounts = Auth::user()->LivestreamAccounts;
+        $LivestreamAccounts = auth()->user()->LivestreamAccounts;
 
 //        foreach ($LivestreamAccounts as $LivestreamAccount) {
 //            $items = $LivestreamAccount->LivestreamApplications;
 //        }
-        $LivestreamAccounts = $LivestreamAccounts->lists('account_name','id');
+        $LivestreamAccounts = $LivestreamAccounts->lists('account_name', 'id');
 //        $LivestreamApplications = collect($items)->lists('title', 'id');
         return view('livestream::event/create', compact('LivestreamAccounts', 'LivestreamApplications'));
     }
@@ -57,8 +50,7 @@ class EventController extends LivestreamController
     /**
      * Store a newly created Account in storage.
      *
-     * @param EventRequest|Request $request
-     *
+     * @param  EventRequest|Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(EventRequest $request)
@@ -66,7 +58,6 @@ class EventController extends LivestreamController
         // @TODO [Josh] - this whole process needs to be queued so user doesn't have to wait.
         // @TODO [Josh] - also, we need to add timers to it so we know how long it takes
         // Can only get this far if user is logged in and has module_active_liveevent = 'Y'
-
 
         // @TODO [Josh] - Need to get a Wowza media server check if it has a certain amount of accounts on it
         //  if it is under the account_limit,
@@ -81,7 +72,7 @@ class EventController extends LivestreamController
 
         // @TODO [Josh] - need to add check to see if this account has purchased a package that allows them to have another LivestreamAccount
 
-        $user = Auth::user();
+        $user = auth()->user();
         $wowzaMediaServer = WowzaMediaServer::find(1);
         $request = $request->all();
         $title = ucwords($request['event_title']);
@@ -90,11 +81,11 @@ class EventController extends LivestreamController
         $Livestream_account = LivestreamAccount::find($request['livestream_account']);
 
         // If its the same as the generic account, then we don't want to overide it.
-        if ( $user->account->timezone === $timezone ) {
+        if ($user->account->timezone === $timezone) {
             $timezone = null;
         }
 
-        $slugify = new Slugify();
+        $slugify = new Slugify;
         $liveApp = $Livestream_account->LivestreamApplications->where('app_type', 'live')->first();
 
         // Omnia Events === WowzaAppInstances
@@ -116,14 +107,13 @@ class EventController extends LivestreamController
 
         //            'recurring_day' => $request['recurring_day'],
 
-
         /** LEGEND **/
         // Omnia Account + StreamType === Wowza Application
-            // (eg. desertreign_live)
+        // (eg. desertreign_live)
         // Omnia Events === WowzaAppInstances
-            // (eg. sunday_service)
+        // (eg. sunday_service)
         // Omnia Episodes === Wowza Streams
-            // (eg. 11152015-1)
+        // (eg. 11152015-1)
         // rtmp://wowzahost/<appname>/<appinstance>/myStream
 
         flash()->overlay('You created your first Live Streaming Event!', 'Great Job!');
@@ -134,7 +124,6 @@ class EventController extends LivestreamController
     /**
      * Display the specified resource.
      *
-     * @param  Account  $account
      * @return \Illuminate\Http\Response
      */
     public function show(Account $account)
@@ -158,9 +147,7 @@ class EventController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param AccountRequest|Request $request
-     * @param  Account               $Account
-     *
+     * @param  AccountRequest|Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update(AccountRequest $request, Account $Account)
@@ -192,13 +179,10 @@ class EventController extends LivestreamController
     /**
      * Save a new Account
      *
-     * @param AccountRequest $request
      *
      * @return static
      */
     private function _createAccount(AccountRequest $request)
     {
-
     }
-
 }

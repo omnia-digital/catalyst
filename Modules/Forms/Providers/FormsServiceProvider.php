@@ -2,7 +2,7 @@
 
 namespace Modules\Forms\Providers;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class FormsServiceProvider extends ServiceProvider

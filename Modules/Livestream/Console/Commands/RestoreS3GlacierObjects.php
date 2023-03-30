@@ -1,21 +1,8 @@
 <?php
 
-    namespace Modules\Livestream\Console\Commands;
+namespace Modules\Livestream\Console\Commands;
 
-    use Modules\Livestream\Omnia;
-    use Carbon\Carbon;
-    use Exception;
     use Illuminate\Console\Command;
-    use Illuminate\Support\Facades\Config;
-    use Illuminate\Support\Facades\Storage;
-    use Modules\Livestream\Episode;
-    use Modules\Livestream\LivestreamAccount;
-    use Modules\Livestream\PlaybackId;
-    use Modules\Livestream\Repositories\VideoRepository;
-    use Modules\Livestream\Services\EpisodeService;
-    use Modules\Livestream\Services\MuxService;
-    use Modules\Livestream\Video;
-    use Modules\Livestream\VideoSourceType;
 
     class RestoreS3GlacierObjects extends Command
     {
@@ -40,7 +27,7 @@
          */
         public function handle()
         {
-            if ($this->confirm("Are you sure you want to restor s3 glacier objects?")) {
+            if ($this->confirm('Are you sure you want to restor s3 glacier objects?')) {
                 // Setup variables
                 $bucket = $this->option('bucket');
                 $file = $this->option('objectsFile');
@@ -59,14 +46,14 @@
                 }
 
                 // Run command on each line of file, only reading one line at a time
-                $handle = fopen($file, "r");
+                $handle = fopen($file, 'r');
                 if ($handle) {
                     while (($line = fgets($handle)) !== false) {
                         $command = '';
                         $command .= 'aws s3api restore-object --bucket ' . $bucket . ' ';
-                        $command .= '--restore-request "Days='.$days.',GlacierJobParameters={Tier='.$tier.'}" ';
-                        $line = substr($line, 0,strpos($line, ","));
-                        $line = trim($line,'"+');
+                        $command .= '--restore-request "Days=' . $days . ',GlacierJobParameters={Tier=' . $tier . '}" ';
+                        $line = substr($line, 0, strpos($line, ','));
+                        $line = trim($line, '"+');
                         $this->info($line);
                         $command .= '--key "' . $line . '" ';
                         $command .= '--profile ' . $profile;
@@ -78,9 +65,8 @@
                 } else {
                     $this->error('Could not open file');
                 }
-
             } else {
-                $this->info("Cancelled");
+                $this->info('Cancelled');
             }
         }
     }

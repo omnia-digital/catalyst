@@ -1,11 +1,13 @@
-<?php namespace Modules\Livestream\Support\Episode;
+<?php
 
+namespace Modules\Livestream\Support\Episode;
+
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\Builder;
 use Modules\Livestream\Models\Episode;
 use Modules\Livestream\Models\LivestreamAccount;
 use Modules\Livestream\Models\Player;
 use Modules\Livestream\Support\Livewire\WithCachedRows;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Query\Builder;
 
 /**
  * @property LivestreamAccount $livestreamAccount

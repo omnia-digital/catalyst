@@ -2,11 +2,10 @@
 
 namespace Modules\Livestream\Http\Livewire\Team;
 
-use Modules\Livestream\Models\Team;
-use Modules\Livestream\Omnia;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Modules\Livestream\Models\Team;
+use Modules\Livestream\Omnia;
 
 /**
  * @property array $bibleOptions
@@ -15,13 +14,6 @@ use Livewire\Component;
 class UpdateDefaultBible extends Component
 {
     public ?string $defaultBible = null;
-
-    protected function rules(): array
-    {
-        return [
-            'defaultBible' => ['nullable', Rule::in(array_keys($this->bibleOptions))]
-        ];
-    }
 
     public function mount()
     {
@@ -44,13 +36,20 @@ class UpdateDefaultBible extends Component
 
     public function getCurrentTeamProperty()
     {
-        return Auth::user()->currentTeam;
+        return auth()->user()->currentTeam;
     }
 
     public function render()
     {
         return view('team.update-default-bible', [
-            'bibleOptions' => $this->bibleOptions
+            'bibleOptions' => $this->bibleOptions,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'defaultBible' => ['nullable', Rule::in(array_keys($this->bibleOptions))],
+        ];
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
-    namespace Modules\Livestream\Interactions;
+namespace Modules\Livestream\Interactions;
 
-    use Intervention\Image\ImageManager;
     use Illuminate\Support\Facades\Storage;
     use Illuminate\Support\Facades\Validator;
+    use Intervention\Image\ImageManager;
+use SplFileInfo;
 
     class UpdateEpisodeThumbnail
     {
@@ -18,7 +19,6 @@
         /**
          * Create a new interaction instance.
          *
-         * @param ImageManager $images
          *
          * @return void
          */
@@ -27,9 +27,6 @@
             $this->images = $images;
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function validator($episode, array $data)
         {
             return Validator::make($data, [
@@ -37,15 +34,12 @@
             ]);
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function handle($episode, array $data)
         {
-            $file              = $data['thumbnail'];
-            $team              = $episode->livestreamAccount->team;
+            $file = $data['thumbnail'];
+            $team = $episode->livestreamAccount->team;
             $teamDirectoryPath = 'teams/' . $team->id;
-            $path              = $file->hashName($teamDirectoryPath);
+            $path = $file->hashName($teamDirectoryPath);
 
             // We will store the profile photos on the "public" disk, which is a convention
             // for where to place assets we want to be publicly accessible. Then, we can
@@ -71,12 +65,11 @@
         /**
          * Resize an image instance for the given file.
          *
-         * @param \SplFileInfo $file
-         *
+         * @param  SplFileInfo  $file
          * @return \Intervention\Image\Image
          */
         protected function formatImage($file)
         {
-            return (string)$this->images->make($file->path())->fit(1920, 1080)->encode();
+            return (string) $this->images->make($file->path())->fit(1920, 1080)->encode();
         }
     }

@@ -2,10 +2,6 @@
 
 namespace Modules\Livestream\Repositories;
 
-use Modules\Livestream\Omnia;
-use Carbon\Carbon;
-use Livestream\Livestream;
-
 class EpisodeTemplateRepository
 {
     private $_livestreamAccount;
@@ -18,9 +14,7 @@ class EpisodeTemplateRepository
     /**
      * Get the Current Episode Template to be used for this livestreamAccount
      *
-     * @param null $livestreamAccount
-     *
-     * @return
+     * @param  null  $livestreamAccount
      */
     public function current($livestreamAccount = null)
     {
@@ -29,6 +23,7 @@ class EpisodeTemplateRepository
         }
 
         $episodeTemplate = $livestreamAccount->default_episode_template->template;
+
         return $episodeTemplate;
     }
 }

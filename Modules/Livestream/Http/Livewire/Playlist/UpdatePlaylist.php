@@ -2,10 +2,10 @@
 
 namespace Modules\Livestream\Http\Livewire\Playlist;
 
-use Modules\Livestream\Models\Playlist;
-use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Modules\Livestream\Models\Playlist;
+use Modules\Livestream\Support\Livewire\WithNotification;
 
 class UpdatePlaylist extends Component
 {
@@ -14,14 +14,6 @@ class UpdatePlaylist extends Component
     public Playlist $playlist;
 
     public bool $deletePlaylistModalOpen = false;
-
-    protected function rules(): array
-    {
-        return [
-            'playlist.name' => ['required', 'max:254'],
-            'playlist.per_page' => ['required', 'integer', 'min:1', 'max:100']
-        ];
-    }
 
     public function mount()
     {
@@ -51,5 +43,13 @@ class UpdatePlaylist extends Component
     public function render()
     {
         return view('playlist.update-playlist');
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'playlist.name' => ['required', 'max:254'],
+            'playlist.per_page' => ['required', 'integer', 'min:1', 'max:100'],
+        ];
     }
 }

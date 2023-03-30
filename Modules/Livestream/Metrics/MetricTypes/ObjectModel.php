@@ -1,7 +1,6 @@
-<?php namespace Modules\Livestream\Metrics\MetricTypes;
+<?php
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+namespace Modules\Livestream\Metrics\MetricTypes;
 
 abstract class ObjectModel extends Metric
 {

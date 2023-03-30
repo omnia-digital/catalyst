@@ -1,11 +1,13 @@
-<?php namespace Modules\Livestream\Metrics\MetricTypes;
+<?php
 
-use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
+namespace Modules\Livestream\Metrics\MetricTypes;
+
 use Carbon\Carbon;
 use DateInterval;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
 
 abstract class Metric
 {
@@ -14,7 +16,6 @@ abstract class Metric
     /**
      * Calculate for the previous period.
      *
-     * @param bool $previous
      * @return static
      */
     public static function previous(bool $previous = true): self
@@ -25,17 +26,6 @@ abstract class Metric
     }
 
     /**
-     * Determine for how many minutes the metric should be cached.
-     *
-     * @return  \DateTimeInterface|\DateInterval|float|int|null|void
-     */
-    public function cacheFor()
-    {
-
-    }
-
-    /**
-     * @param string $timeFilter
      * @return Collection
      */
     public static function make(string $timeFilter)
@@ -53,9 +43,15 @@ abstract class Metric
     }
 
     /**
-     * @param Carbon $from
-     * @param Carbon $to
-     * @param string $timeFilter
+     * Determine for how many minutes the metric should be cached.
+     *
+     * @return  DateTimeInterface|DateInterval|float|int|null|void
+     */
+    public function cacheFor()
+    {
+    }
+
+    /**
      * @return Collection|mixed
      */
     protected function resolve(Carbon $from, Carbon $to, string $timeFilter)
@@ -79,16 +75,13 @@ abstract class Metric
 
     /**
      * Get the appropriate cache key for the metric.
-     *
-     * @param string $timeFilter
-     * @return string
      */
     protected function getCacheKey(string $timeFilter): string
     {
         return sprintf(
             'omnia.metric.%s.%s.%s.%s',
             get_class($this),
-            Auth::user()->currentTeam->id,
+            auth()->user()->currentTeam->id,
             $timeFilter,
             static::$previous ? 'previous' : 'current'
         );

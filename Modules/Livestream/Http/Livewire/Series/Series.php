@@ -2,10 +2,10 @@
 
 namespace Modules\Livestream\Http\Livewire\Series;
 
-use Modules\Livestream\Models\LivestreamAccount;
-use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 
 /**
  * @property LivestreamAccount $livestreamAccount
@@ -17,18 +17,6 @@ class Series extends Component
     public bool $createSeriesModalOpen = false;
 
     public ?string $name = null;
-
-    protected function rules(): array
-    {
-        return [
-            'name' => [
-                'required', 'max:254',
-                Rule::unique('series')->where(function ($query) {
-                    return $query->where('livestream_account_id', $this->livestreamAccount->id);
-                })
-            ]
-        ];
-    }
 
     public function createSeries()
     {
@@ -55,7 +43,19 @@ class Series extends Component
     public function render()
     {
         return view('series.series', [
-            'series' => $this->rows
+            'series' => $this->rows,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'name' => [
+                'required', 'max:254',
+                Rule::unique('series')->where(function ($query) {
+                    return $query->where('livestream_account_id', $this->livestreamAccount->id);
+                }),
+            ],
+        ];
     }
 }

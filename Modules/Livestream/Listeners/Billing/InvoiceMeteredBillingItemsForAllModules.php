@@ -2,18 +2,13 @@
 
 namespace Modules\Livestream\Listeners\Billing;
 
-
-use Illuminate\Support\Facades\Bus;
 use Modules\Livestream\Jobs\Billing\AddLivestreamMeteredBillingInvoiceItems;
 
 class InvoiceMeteredBillingItemsForAllModules
 {
-
-	/**
-	 * Handle the event.
-	 *
-	 * @param $event
-	 */
+    /**
+     * Handle the event.
+     */
     public function handle($event)
     {
         // Livestream

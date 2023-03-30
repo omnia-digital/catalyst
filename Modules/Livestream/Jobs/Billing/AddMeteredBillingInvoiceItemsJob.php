@@ -1,15 +1,17 @@
-<?php namespace Modules\Livestream\Jobs\Billing;
+<?php
 
+namespace Modules\Livestream\Jobs\Billing;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Modules\Livestream\Models\ExtraInvoiceItem;
 use Modules\Livestream\Models\Team;
 use Modules\Livestream\Services\Mux\MuxDeliveryUsage;
-use Illuminate\Bus\Queueable;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\Log;
 use Stripe\InvoiceItem;
 use Stripe\Stripe;
 
@@ -91,10 +93,10 @@ class AddMeteredBillingInvoiceItemsJob implements ShouldQueue
     {
         // Invoice item information.
         $params = [
-            'customer'    => $customerId,
-            'amount'      => round($amount, 2) * 100,
+            'customer' => $customerId,
+            'amount' => round($amount, 2) * 100,
             'description' => $description,
-            'currency'    => 'usd'
+            'currency' => 'usd',
         ];
 
         // If the Invoice Id exists, add it as the invoice to add these items to
@@ -108,8 +110,6 @@ class AddMeteredBillingInvoiceItemsJob implements ShouldQueue
 
     /**
      * Get the extra invoice items of the current month.
-     *
-     * @return Collection
      */
     private function getExtraInvoiceItemsForDeletedEpisodes(): Collection
     {
@@ -120,9 +120,6 @@ class AddMeteredBillingInvoiceItemsJob implements ShouldQueue
 
     /**
      * Get metered price based on the current plan of team.
-     *
-     * @param string $metered
-     * @return int|float
      */
     private function getMeteredPrice(string $metered): int|float
     {

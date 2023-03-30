@@ -1,7 +1,8 @@
-<?php namespace Modules\Livestream\Configuration;
+<?php
+
+namespace Modules\Livestream\Configuration;
 
 use Modules\Livestream\User;
-use Illuminate\Support\HtmlString;
 
 trait ManagesAppDetails
 {
@@ -13,7 +14,7 @@ trait ManagesAppDetails
     /**
      * Set the e-mail address of the System Admin User.
      *
-     * @param  string $email
+     * @param  string  $email
      * @return void
      */
     public static function systemAdminUser($email)

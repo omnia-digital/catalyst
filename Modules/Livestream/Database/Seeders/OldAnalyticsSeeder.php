@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Modules\Livestream\Models\OldAnalytics;
 use Illuminate\Database\Seeder;
+use Modules\Livestream\Models\OldAnalytics;
 
 class OldAnalyticsSeeder extends Seeder
 {
@@ -3034,7 +3034,7 @@ class OldAnalyticsSeeder extends Seeder
             [
                 'name' => 'Happiness Enemy 6 -  Negativity.pdf',
                 'count' => 5,
-            ]
+            ],
         ];
 
         foreach ($att as $item) {

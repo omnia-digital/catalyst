@@ -1,7 +1,7 @@
 <?php
 
-use Modules\Livestream\Models\Team;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Livestream\Models\Team;
 
 class UpdatePersonalTeamForOldTeams extends Migration
 {
@@ -18,7 +18,7 @@ class UpdatePersonalTeamForOldTeams extends Migration
             ->each(function (Team $team) {
                 $hasPersonalTeam = $team->owner?->personalTeam();
 
-                if (!$hasPersonalTeam) {
+                if (! $hasPersonalTeam) {
                     $team->update(['personal_team' => true]);
                 }
             });
@@ -31,6 +31,6 @@ class UpdatePersonalTeamForOldTeams extends Migration
      */
     public function down()
     {
-        Team::eachById(fn(Team $team) => $team->update(['personal_team' => false]));
+        Team::eachById(fn (Team $team) => $team->update(['personal_team' => false]));
     }
 }

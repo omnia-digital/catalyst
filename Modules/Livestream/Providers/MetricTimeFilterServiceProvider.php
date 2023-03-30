@@ -1,5 +1,9 @@
-<?php namespace Modules\Livestream\Providers;
+<?php
 
+namespace Modules\Livestream\Providers;
+
+use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\ServiceProvider;
 use Modules\Livestream\Metrics\TimeFilters\AllTimeFilter;
 use Modules\Livestream\Metrics\TimeFilters\LastMonthTimeFilter;
 use Modules\Livestream\Metrics\TimeFilters\LastSevenDaysTimeFilter;
@@ -9,8 +13,6 @@ use Modules\Livestream\Metrics\TimeFilters\ThisMonthTimeFilter;
 use Modules\Livestream\Metrics\TimeFilters\ThisYearTimeFilter;
 use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
 use Modules\Livestream\Metrics\TimeFilters\TodayTimeFilter;
-use Illuminate\Contracts\Support\DeferrableProvider;
-use Illuminate\Support\ServiceProvider;
 
 class MetricTimeFilterServiceProvider extends ServiceProvider implements DeferrableProvider
 {
@@ -46,7 +48,7 @@ class MetricTimeFilterServiceProvider extends ServiceProvider implements Deferra
     public function provides()
     {
         return [
-            TimeFilterRegistry::class
+            TimeFilterRegistry::class,
         ];
     }
 }

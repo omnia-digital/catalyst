@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Models;
+<?php
+
+namespace Modules\Livestream\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,12 +24,10 @@ class StreamIntegration extends Model
         'access_token',
         'provider_team_object',
         'episode_template_id',
-        'livestream_account_id'
+        'livestream_account_id',
     ];
 
     /**
-     * @param $value
-     *
      * @return bool
      */
     public function getEnabledAttribute($value)
@@ -35,17 +35,12 @@ class StreamIntegration extends Model
         return $this->attributes['enabled'] = $value === 1;
     }
 
-    /**
-     * @param $value
-     */
     public function setEnabledAttribute($value)
     {
-        $this->attributes['enabled'] = (int)$value;
+        $this->attributes['enabled'] = (int) $value;
     }
 
     /**
-     * @param $value
-     *
      * @return string
      */
     public function setProviderTeamObjectAttribute($value)
@@ -54,8 +49,6 @@ class StreamIntegration extends Model
     }
 
     /**
-     * @param $value
-     *
      * @return mixed
      */
     public function getProviderTeamObjectAttribute($value)

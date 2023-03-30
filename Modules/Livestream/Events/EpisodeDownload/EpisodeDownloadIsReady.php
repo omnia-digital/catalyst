@@ -2,10 +2,9 @@
 
 namespace Modules\Livestream\Events\EpisodeDownload;
 
+use Illuminate\Queue\SerializesModels;
 use Modules\Livestream\EpisodeDownload;
 use Modules\Livestream\Events\Event;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class EpisodeDownloadIsReady extends Event
 {
@@ -18,8 +17,6 @@ class EpisodeDownloadIsReady extends Event
 
     /**
      * Create a new event instance.
-     *
-     * @param EpisodeDownload $episodeDownload
      */
     public function __construct(EpisodeDownload $episodeDownload)
     {

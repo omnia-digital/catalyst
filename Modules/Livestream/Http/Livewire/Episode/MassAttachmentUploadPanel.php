@@ -2,12 +2,11 @@
 
 namespace Modules\Livestream\Http\Livewire\Episode;
 
+use Illuminate\Support\Facades\Mail;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 use Modules\Livestream\Models\Episode;
 use Modules\Livestream\Support\Livewire\WithNotification;
-use Livewire\Component;
-use Livewire\TemporaryUploadedFile;
-use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Mail;
 
 class MassAttachmentUploadPanel extends Component
 {
@@ -26,7 +25,7 @@ class MassAttachmentUploadPanel extends Component
             'massAttachments.*' => [
                 'mimes:' . implode(',', config('media-library.allowed_file_types')),
                 'max:' . config('media-library.max_file_size'),
-            ]
+            ],
         ]);
 
         // Loop through each file
@@ -38,7 +37,9 @@ class MassAttachmentUploadPanel extends Component
 
             $episode = Episode::where('title', 'like', $fileName)->first();
 
-            if (is_null($episode)) continue;
+            if (is_null($episode)) {
+                continue;
+            }
 
             // Check if the episode has a file with the same extension
             $sameExtensionExists = $episode->media()->where('file_name', 'like', '%' . $ext . '%')->exists();
@@ -46,7 +47,7 @@ class MassAttachmentUploadPanel extends Component
             // Check if the episode has a file name with the same title
             $sameNameExists = $episode->media()->where('name', 'like', $fileName)->exists();
 
-            if (!$sameExtensionExists || !$sameNameExists) {
+            if (! $sameExtensionExists || ! $sameNameExists) {
                 // If not, add that attachment
                 $mediaItem = $episode->addMediaFromUrl($attachment->temporaryUrl())
                     ->usingName($title)
@@ -63,13 +64,13 @@ class MassAttachmentUploadPanel extends Component
         $this->reset('massAttachments');
         $this->emit('clearUploadInput');
         $this->success('Uploaded attachments successfully');
-
     }
 
     public function openReport()
     {
-        if(empty($this->uploadedContent)) {
+        if (empty($this->uploadedContent)) {
             $this->error('Nothing to show');
+
             return;
         }
 
@@ -85,7 +86,7 @@ class MassAttachmentUploadPanel extends Component
 
     public function getReport()
     {
-        $this->reportHtml = <<<REPORT
+        $this->reportHtml = <<<'REPORT'
             <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50">
                     <tr>
@@ -107,12 +108,12 @@ class MassAttachmentUploadPanel extends Component
             REPORT;
         }
 
-        $this->reportHtml .= <<<REPORT
+        $this->reportHtml .= <<<'REPORT'
                 </tbody>
             </table>
         REPORT;
 
-        Mail::html($this->reportHtml, function($message) {
+        Mail::html($this->reportHtml, function ($message) {
             return $message
                 ->to(auth()->user()->email)
                 ->cc('info@omniadigital.io')

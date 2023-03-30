@@ -1,19 +1,20 @@
-<?php namespace Modules\Livestream\Metrics;
+<?php
 
-use Modules\Livestream\Metrics\MetricTypes\Chart;
-use Modules\Livestream\Models\ExtraInvoiceItem;
-use Modules\Livestream\Models\Episode;
+namespace Modules\Livestream\Metrics;
+
 use Carbon\Carbon;
-use DB;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Modules\Livestream\Metrics\MetricTypes\Chart;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\ExtraInvoiceItem;
 
 class StorageDurationChart extends Chart
 {
     public function calculate(Carbon $from, Carbon $to): Collection|EloquentCollection
     {
-        $team = Auth::user()->currentTeam;
+        $team = auth()->user()->currentTeam;
 
         // Normal Episodes
         $durationInSeconds = $team->livestreamAccount
@@ -23,7 +24,7 @@ class StorageDurationChart extends Chart
             ->orderBy('date', 'ASC')
             ->get([
                 DB::raw('Date(created_at) as date'),
-                DB::raw('SUM(duration / 1000 / 60) as "value"')
+                DB::raw('SUM(duration / 1000 / 60) as "value"'),
             ]);
 
         // Deleted Episodes
@@ -34,7 +35,7 @@ class StorageDurationChart extends Chart
             ->orderBy('date', 'ASC')
             ->get([
                 DB::raw('Date(created_at) as date'),
-                DB::raw('SUM(duration / 1000 / 60) as "value"')
+                DB::raw('SUM(duration / 1000 / 60) as "value"'),
             ]);
 
         // We need to sum values if the item in 2 collections have same date.
@@ -43,8 +44,8 @@ class StorageDurationChart extends Chart
             $duration = ($extraDuration['value'] ?? 0) + $episode['value'];
 
             return [
-                'date'  => $episode['date'],
-                'value' => round($duration)
+                'date' => $episode['date'],
+                'value' => round($duration),
             ];
         });
 
@@ -53,8 +54,8 @@ class StorageDurationChart extends Chart
             $alreadySum = $sumTwoDurations->where('date', $extraInvoiceItem['date'])->first();
 
             return $alreadySum ? null : [
-                'date'  => $extraInvoiceItem['date'],
-                'value' => round($extraInvoiceItem['value'])
+                'date' => $extraInvoiceItem['date'],
+                'value' => round($extraInvoiceItem['value']),
             ];
         })->filter();
 

@@ -2,13 +2,13 @@
 
 namespace Modules\Livestream\Http\Livewire\Dashboard;
 
+use Livewire\Component;
 use Modules\Livestream\Metrics\EpisodeWithMostAttachmentDownloads;
 use Modules\Livestream\Metrics\MostViewedSeries;
 use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
 use Modules\Livestream\Metrics\TotalAttachmentDownloads;
 use Modules\Livestream\Metrics\TotalEpisodeViews;
 use Modules\Livestream\Support\Livewire\WithTimeFilter;
-use Livewire\Component;
 
 class GeneralMetrics extends Component
 {

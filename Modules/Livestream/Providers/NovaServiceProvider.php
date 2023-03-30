@@ -2,6 +2,10 @@
 
 namespace Modules\Livestream\Providers;
 
+use Illuminate\Support\Facades\Gate;
+use Laravel\Nova\Cards\Help;
+use Laravel\Nova\Nova;
+use Laravel\Nova\NovaApplicationServiceProvider;
 use Modules\Livestream\Models\LivestreamAccount;
 use Modules\Livestream\Models\Series;
 use Modules\Livestream\Models\Stream;
@@ -9,10 +13,6 @@ use Modules\Livestream\Models\User;
 use Modules\Livestream\Nova\Policies\NovaLivestreamAccountPolicy;
 use Modules\Livestream\Nova\Policies\NovaStreamPolicy;
 use Modules\Livestream\Policies\NovaSeriesPolicy;
-use Illuminate\Support\Facades\Gate;
-use Laravel\Nova\Cards\Help;
-use Laravel\Nova\Nova;
-use Laravel\Nova\NovaApplicationServiceProvider;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -29,6 +29,30 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             Gate::policy(Stream::class, NovaStreamPolicy::class);
             Gate::policy(LivestreamAccount::class, NovaLivestreamAccountPolicy::class);
             Gate::policy(Series::class, NovaSeriesPolicy::class);
+        });
+    }
+
+    /**
+     * Get the tools that should be listed in the Nova sidebar.
+     *
+     * @return array
+     */
+    public function tools()
+    {
+        return [];
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        Nova::report(function ($exception) {
+            if (app()->bound('sentry')) {
+                app('sentry')->captureException($exception);
+            }
         });
     }
 
@@ -79,29 +103,5 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function dashboards()
     {
         return [];
-    }
-
-    /**
-     * Get the tools that should be listed in the Nova sidebar.
-     *
-     * @return array
-     */
-    public function tools()
-    {
-        return [];
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        Nova::report(function ($exception) {
-            if (app()->bound('sentry')) {
-                app('sentry')->captureException($exception);
-            }
-        });
     }
 }

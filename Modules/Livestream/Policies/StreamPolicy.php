@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Policies;
+<?php
+
+namespace Modules\Livestream\Policies;
 
 use Modules\Livestream\Models\Stream;
 use Modules\Livestream\Models\User;
@@ -27,5 +29,4 @@ class StreamPolicy
     {
         return false;
     }
-
 }

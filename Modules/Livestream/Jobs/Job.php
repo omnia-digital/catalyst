@@ -5,7 +5,6 @@ namespace Modules\Livestream\Jobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\Jobs\Job as Laravel_Job;
 use Illuminate\Queue\SerializesModels;
 
 class Job implements ShouldQueue
@@ -46,12 +45,11 @@ class Job implements ShouldQueue
     }
 
     /**
-    * Get the name of the queue the job belongs to.
-    *
-    * @return string
-    */
+     * Get the name of the queue the job belongs to.
+     *
+     * @return string
+     */
     public function getQueue()
     {
     }
-
 }

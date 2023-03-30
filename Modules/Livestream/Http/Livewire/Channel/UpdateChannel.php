@@ -2,14 +2,14 @@
 
 namespace Modules\Livestream\Http\Livewire\Channel;
 
-use Modules\Livestream\Models\Channel;
-use Modules\Livestream\Models\LivestreamAccount;
-use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
-use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Modules\Livestream\Models\Channel;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+use Modules\Livestream\Support\Livewire\WithNotification;
 
 /**
  * @property LivestreamAccount $livestreamAccount
@@ -22,14 +22,6 @@ class UpdateChannel extends Component
     public Channel $channel;
 
     public bool $deleteChannelModalOpen = false;
-
-    protected function rules()
-    {
-        return [
-            'channel.name'      => ['required', 'max:254'],
-            'channel.player_id' => ['required', Rule::in($this->players->keys())]
-        ];
-    }
 
     public function mount()
     {
@@ -66,7 +58,15 @@ class UpdateChannel extends Component
     public function render()
     {
         return view('channel.update-channel', [
-            'players' => $this->players
+            'players' => $this->players,
         ]);
+    }
+
+    protected function rules()
+    {
+        return [
+            'channel.name' => ['required', 'max:254'],
+            'channel.player_id' => ['required', Rule::in($this->players->keys())],
+        ];
     }
 }

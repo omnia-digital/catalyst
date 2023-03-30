@@ -1,10 +1,12 @@
-<?php namespace Modules\Livestream\Http\Controllers\Api;
+<?php
 
+namespace Modules\Livestream\Http\Controllers\Api;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Modules\Livestream\Events\EpisodeViewedEvent;
 use Modules\Livestream\Http\Controllers\Controller;
 use Modules\Livestream\Models\Episode;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class VideoViewsController extends Controller
 {

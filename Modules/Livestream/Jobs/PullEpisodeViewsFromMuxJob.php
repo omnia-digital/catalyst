@@ -2,14 +2,14 @@
 
 namespace Modules\Livestream\Jobs;
 
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Modules\Livestream\Models\Episode;
 use Modules\Livestream\Models\VideoView;
 use Modules\Livestream\Services\Mux\MuxVideoView;
-use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
 
 class PullEpisodeViewsFromMuxJob implements ShouldQueue
 {

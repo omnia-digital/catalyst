@@ -14,7 +14,7 @@ class MigrateTeamLogoToS3 extends Migration
         \App\Models\Team::query()
             ->whereNotNull('photo_url')
             ->get()
-            ->each(function (\App\Models\Team $team) {
+            ->each(function (App\Models\Team $team) {
                 if (\Illuminate\Support\Str::startsWith($team->photo_url, '/storage')) {
                     $team->update(['photo_url' => str_replace('/storage/', '', $team->photo_url)]);
                 }
@@ -28,6 +28,5 @@ class MigrateTeamLogoToS3 extends Migration
      */
     public function down()
     {
-
     }
 }

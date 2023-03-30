@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Policies;
+<?php
+
+namespace Modules\Livestream\Policies;
 
 use Modules\Livestream\Models\Episode;
 use Modules\Livestream\Models\User;

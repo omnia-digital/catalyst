@@ -2,11 +2,11 @@
 
 namespace Modules\Livestream\Http\Livewire\Person;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\Component;
 use Modules\Livestream\Models\Person;
 use Modules\Livestream\Support\Livewire\WithNotification;
 use Modules\Livestream\Support\Livewire\WithSlideOver;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Livewire\Component;
 
 class PersonInfoPanel extends Component
 {
@@ -21,14 +21,14 @@ class PersonInfoPanel extends Component
     public bool $editModalOpen = false;
 
     protected $listeners = [
-        'personSelected'    => 'findPerson',
+        'personSelected' => 'findPerson',
         'person-deselected' => 'resetPerson',
     ];
 
     protected $rules = [
         'state.first_name' => ['required', 'max:254'],
-        'state.last_name'  => ['required', 'max:254'],
-        'state.email'      => ['required', 'email'],
+        'state.last_name' => ['required', 'max:254'],
+        'state.email' => ['required', 'email'],
     ];
 
     public function mount($personId = null)

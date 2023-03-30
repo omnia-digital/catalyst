@@ -1,8 +1,8 @@
 <?php
 
-use Modules\Livestream\Models\Episode;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Livestream\Models\Episode;
 
 class UpdateExpiresAtForOldEpisodes extends Migration
 {
@@ -14,7 +14,7 @@ class UpdateExpiresAtForOldEpisodes extends Migration
     public function up()
     {
         Episode::with('livestreamAccount.team', 'livestreamAccount.team.subscriptions')
-            ->where(fn(Builder $query) => $query->whereNull('expires_at')->orWhere('expires_at', ''))
+            ->where(fn (Builder $query) => $query->whereNull('expires_at')->orWhere('expires_at', ''))
             ->get()
             ->each(function (Episode $episode) {
                 $episodeExpiration = $episode->livestreamAccount->team->sparkPlan()?->options['episode_expiration'];

@@ -2,9 +2,9 @@
 
 namespace Modules\Livestream\Listeners;
 
-use Modules\Livestream\Models\LivestreamAccount;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Modules\Livestream\Models\LivestreamAccount;
 use Spark\Events\SubscriptionCreated;
 
 class EnableStream implements ShouldQueue
@@ -14,7 +14,6 @@ class EnableStream implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param SubscriptionCreated $event
      * @return void
      */
     public function handle(SubscriptionCreated $event)

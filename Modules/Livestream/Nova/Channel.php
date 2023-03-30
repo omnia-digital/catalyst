@@ -1,18 +1,9 @@
 <?php
 
-    namespace Modules\Livestream\Nova;
+namespace Modules\Livestream\Nova;
 
     use Illuminate\Http\Request;
-    use KABBOUCHI\NovaImpersonate\Impersonate;
-    use Laravel\Nova\Fields\BelongsTo;
-    use Laravel\Nova\Fields\BelongsToMany;
-    use Laravel\Nova\Fields\Gravatar;
-    use Laravel\Nova\Fields\HasMany;
-    use Laravel\Nova\Fields\HasOne;
     use Laravel\Nova\Fields\ID;
-    use Laravel\Nova\Fields\Image;
-    use Laravel\Nova\Fields\Password;
-    use Laravel\Nova\Fields\Text;
 
     class Channel extends Resource
     {
@@ -44,7 +35,6 @@
         /**
          * Get the fields displayed by the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function fields(Request $request)
@@ -58,7 +48,6 @@
         /**
          * Get the cards available for the request.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function cards(Request $request)
@@ -69,7 +58,6 @@
         /**
          * Get the filters available for the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function filters(Request $request)
@@ -80,7 +68,6 @@
         /**
          * Get the lenses available for the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function lenses(Request $request)
@@ -91,7 +78,6 @@
         /**
          * Get the actions available for the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function actions(Request $request)

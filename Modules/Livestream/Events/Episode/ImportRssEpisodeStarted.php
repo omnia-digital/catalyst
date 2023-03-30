@@ -2,10 +2,8 @@
 
 namespace Modules\Livestream\Events\Episode;
 
-use Modules\Livestream\Events\Event;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Modules\Livestream\Http\Requests\Notifications\StreamEndNotificationRequest;
+use Modules\Livestream\Events\Event;
 
 class ImportRssEpisodeStarted extends Event
 {
@@ -15,8 +13,6 @@ class ImportRssEpisodeStarted extends Event
 
     /**
      * Create a new event instance.
-     *
-     * @param $episode
      */
     public function __construct($episode)
     {

@@ -1,10 +1,11 @@
 <?php
 
-    namespace Modules\Livestream\Console\Commands;
+namespace Modules\Livestream\Console\Commands;
 
-    use Modules\Livestream\Models\Episode;
-    use Modules\Livestream\Models\LivestreamAccount;
+    use Exception;
     use Illuminate\Console\Command;
+    use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
 
     class ActivateMP4DownloadForAllEpisodes extends Command
     {
@@ -29,23 +30,24 @@
          */
         public function handle()
         {
-            if ($this->confirm("Are you sure you want to activate Mux MP4 support on all mux Episodes?")) {
+            if ($this->confirm('Are you sure you want to activate Mux MP4 support on all mux Episodes?')) {
                 $livestreamAccountId = $this->option('livestreamAccount');
-                $episodeId           = $this->option('episode');
+                $episodeId = $this->option('episode');
 
-                if ( ! empty($episodeId)) {
+                if (! empty($episodeId)) {
                     $episode = Episode::findOrFail($episodeId);
                 }
 
-                if ( ! empty($episode)) {
+                if (! empty($episode)) {
                     $this->activeMp4Episode($episode);
                     $this->info('Finished Updating!');
+
                     return;
-                } else if ( ! empty($livestreamAccountId)) {
+                } elseif (! empty($livestreamAccountId)) {
                     $livestreamAccount = LivestreamAccount::findOrFail($livestreamAccountId);
-                    $episodes          = $livestreamAccount->episodes()->where('mux_asset_id','<>','')->get();
+                    $episodes = $livestreamAccount->episodes()->where('mux_asset_id', '<>', '')->get();
                 } else {
-                    $episodes = Episode::where('mux_asset_id','<>','')->get();
+                    $episodes = Episode::where('mux_asset_id', '<>', '')->get();
                 }
 
                 $this->info('Updating ' . $episodes->count() . ' Episodes');
@@ -54,21 +56,18 @@
                 }
 
                 $this->info('Finished Updating!');
-
             } else {
-                $this->info("Cancelled");
+                $this->info('Cancelled');
             }
         }
 
         /**
-         * @param $episode
-         *
          * @return mixed
          */
         public function activeMp4Episode($episode)
         {
             try {
-                $muxService = new MuxService();
+                $muxService = new MuxService;
                 $this->info('Update Episode: ' . $episode->id);
                 $asset_id = $episode->mux_asset_id;
                 $responseData = $muxService->addAssetMP4Support($asset_id);
@@ -76,7 +75,7 @@
                     $this->info('Not needed. MP4 Support already Standard');
                 }
                 sleep(1); // sleep ensures we don't max out API calls per second
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->error('Error with Episode: ' . $episode->id . ': ' . $e->getMessage());
             }
 

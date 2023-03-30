@@ -1,9 +1,11 @@
-<?php namespace Modules\Livestream\Http\Livewire\Setting;
+<?php
 
-use Modules\Livestream\Models\LivestreamAccount;
-use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+namespace Modules\Livestream\Http\Livewire\Setting;
+
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 
 /**
  * @property LivestreamAccount $livestreamAccount
@@ -21,7 +23,7 @@ class PlayerSetting extends Component
     public ?string $currentBeforeLiveImage = null;
 
     protected array $rules = [
-        'notLiveImage'    => ['nullable', 'image', 'max:2048'],
+        'notLiveImage' => ['nullable', 'image', 'max:2048'],
         'beforeLiveImage' => ['nullable', 'image', 'max:2048'],
     ];
 
@@ -36,8 +38,8 @@ class PlayerSetting extends Component
         $this->validate();
 
         $this->livestreamAccount->update([
-            'not_live_image'    => $this->notLiveImage ? $this->notLiveImage->store('thumbnails', 'players') : $this->currentNotLiveImage,
-            'before_live_image' => $this->beforeLiveImage ? $this->beforeLiveImage->store('thumbnails', 'players') : $this->currentBeforeLiveImage
+            'not_live_image' => $this->notLiveImage ? $this->notLiveImage->store('thumbnails', 'players') : $this->currentNotLiveImage,
+            'before_live_image' => $this->beforeLiveImage ? $this->beforeLiveImage->store('thumbnails', 'players') : $this->currentBeforeLiveImage,
         ]);
 
         $this->emit('saved');

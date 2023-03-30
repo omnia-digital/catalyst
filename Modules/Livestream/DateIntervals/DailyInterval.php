@@ -2,12 +2,10 @@
 
 namespace Modules\Livestream\DateIntervals;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class DailyInterval extends Model
 {
-
     public function checkDate($start_date)
     {
         $start_date = '4 weeks ago today';

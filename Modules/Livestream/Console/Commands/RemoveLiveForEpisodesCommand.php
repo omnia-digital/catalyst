@@ -2,8 +2,8 @@
 
 namespace Modules\Livestream\Console\Commands;
 
-use Modules\Livestream\Models\Episode;
 use Illuminate\Console\Command;
+use Modules\Livestream\Models\Episode;
 
 class RemoveLiveForEpisodesCommand extends Command
 {

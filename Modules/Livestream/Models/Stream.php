@@ -1,7 +1,7 @@
-<?php namespace Modules\Livestream\Models;
+<?php
 
-use Modules\Livestream\Enums\StreamStatus;
-use Modules\Livestream\Services\Mux\MuxLivestream;
+namespace Modules\Livestream\Models;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\DB;
+use Modules\Livestream\Enums\StreamStatus;
+use Modules\Livestream\Services\Mux\MuxLivestream;
 
 class Stream extends Model
 {
@@ -22,7 +24,7 @@ class Stream extends Model
     protected $table = 'livestream_streams';
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     /**
@@ -40,7 +42,7 @@ class Stream extends Model
         'active_episode_id',
         'livestream_account_id',
         'default_playback_id',
-        'is_active'
+        'is_active',
     ];
 
     protected static function booted()
@@ -78,8 +80,8 @@ class Stream extends Model
 
             // Need to set the stream status to idle
             $this->update([
-                'status'            => StreamStatus::IDLE,
-                'active_episode_id' => null
+                'status' => StreamStatus::IDLE,
+                'active_episode_id' => null,
             ]);
 
             // Set the episode is_live_now to false
@@ -123,6 +125,6 @@ class Stream extends Model
 
     public function isDisabled(): bool
     {
-        return !$this->is_active;
+        return ! $this->is_active;
     }
 }

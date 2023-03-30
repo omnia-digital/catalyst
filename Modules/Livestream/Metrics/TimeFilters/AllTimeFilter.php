@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Metrics\TimeFilters;
+<?php
+
+namespace Modules\Livestream\Metrics\TimeFilters;
 
 use Carbon\Carbon;
 

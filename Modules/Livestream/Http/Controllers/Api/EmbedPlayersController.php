@@ -1,8 +1,10 @@
-<?php namespace Modules\Livestream\Http\Controllers\Api;
+<?php
 
+namespace Modules\Livestream\Http\Controllers\Api;
+
+use Illuminate\Pagination\LengthAwarePaginator;
 use Modules\Livestream\Http\Controllers\Controller;
 use Modules\Livestream\Models\Player;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class EmbedPlayersController extends Controller
 {
@@ -11,9 +13,9 @@ class EmbedPlayersController extends Controller
         $episodes = $this->getEpisodes($player);
 
         return view('episode.embed', [
-            'episodes'       => $episodes,
+            'episodes' => $episodes,
             'initialEpisode' => $episodes->first(),
-            'player'         => $player
+            'player' => $player,
         ]);
     }
 
@@ -22,9 +24,9 @@ class EmbedPlayersController extends Controller
         $episodes = $this->getEpisodes($player);
 
         return view('episode.embed-gallery', [
-            'episodes'       => $episodes,
+            'episodes' => $episodes,
             'initialEpisode' => $episodes->first(),
-            'player'         => $player
+            'player' => $player,
         ]);
     }
 

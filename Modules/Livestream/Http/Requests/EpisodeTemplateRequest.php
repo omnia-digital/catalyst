@@ -2,7 +2,7 @@
 
 namespace Modules\Livestream\Http\Requests;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class EpisodeTemplateRequest extends LivestreamRequest
 {
@@ -29,11 +29,10 @@ class EpisodeTemplateRequest extends LivestreamRequest
     public function rules()
     {
         // @TODO [Josh] - need to add functionality to pass back validation errors before I can enable validation again. Right now it is just failing without telling what the reason is, so it's too hard to debug.
-	    return array();
+        return [];
 //        return [
 //        	'template_title' => 'required | min:4',
 //            'episode_title' => 'required | min:5',
 //        ];
     }
-
 }

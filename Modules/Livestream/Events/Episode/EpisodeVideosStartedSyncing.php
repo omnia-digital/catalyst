@@ -11,8 +11,6 @@ class EpisodeVideosStartedSyncing extends Event
 
     /**
      * Create a new event instance.
-     *
-     * @param $episode
      */
     public function __construct(Episode $episode)
     {

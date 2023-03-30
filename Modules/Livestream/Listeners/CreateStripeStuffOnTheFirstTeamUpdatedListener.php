@@ -2,10 +2,10 @@
 
 namespace Modules\Livestream\Listeners;
 
-use Modules\Livestream\Jobs\CreateStripeCustomerJob;
-use Modules\Livestream\Jobs\CreateStripeMeteredSubscriptionJob;
 use Illuminate\Support\Facades\Bus;
 use Laravel\Jetstream\Events\TeamUpdated;
+use Modules\Livestream\Jobs\CreateStripeCustomerJob;
+use Modules\Livestream\Jobs\CreateStripeMeteredSubscriptionJob;
 
 class CreateStripeStuffOnTheFirstTeamUpdatedListener
 {
@@ -18,7 +18,7 @@ class CreateStripeStuffOnTheFirstTeamUpdatedListener
 
         Bus::chain([
             new CreateStripeCustomerJob($event->team),
-            new CreateStripeMeteredSubscriptionJob($event->team)
+            new CreateStripeMeteredSubscriptionJob($event->team),
         ])->dispatch();
     }
 }

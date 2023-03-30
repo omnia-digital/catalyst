@@ -11,8 +11,6 @@ class StreamActive extends MuxEvent
 
     /**
      * Create a new event instance.
-     *
-     * @param $data
      */
     public function __construct($data)
     {

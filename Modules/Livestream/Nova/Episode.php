@@ -1,21 +1,18 @@
 <?php
 
-    namespace Modules\Livestream\Nova;
+namespace Modules\Livestream\Nova;
 
-    use Modules\Livestream\Models\Video;
-    use Modules\Livestream\Nova\Actions\AddAttachmentDownloadCount;
-    use Modules\Livestream\Nova\Actions\ReplaceEpisodeShortcodesAction;
-    use Modules\Livestream\Nova\Filters\EpisodeTeam;
     use Illuminate\Http\Request;
-    use KABBOUCHI\NovaImpersonate\Impersonate;
     use Laravel\Nova\Fields\BelongsTo;
     use Laravel\Nova\Fields\BelongsToMany;
-    use Laravel\Nova\Fields\Gravatar;
     use Laravel\Nova\Fields\HasManyThrough;
     use Laravel\Nova\Fields\ID;
     use Laravel\Nova\Fields\Number;
     use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
+    use Laravel\Nova\Fields\Textarea;
+    use Modules\Livestream\Nova\Actions\AddAttachmentDownloadCount;
+    use Modules\Livestream\Nova\Actions\ReplaceEpisodeShortcodesAction;
+    use Modules\Livestream\Nova\Filters\EpisodeTeam;
 
     class Episode extends Resource
     {
@@ -47,7 +44,6 @@ use Laravel\Nova\Fields\Textarea;
         /**
          * Get the fields displayed by the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function fields(Request $request)
@@ -58,7 +54,7 @@ use Laravel\Nova\Fields\Textarea;
                 Text::make('title'),
 
                 Textarea::make('description'),
-                
+
                 Number::make('Download Count', function () {
                     return $this->attachmentDownloads()->sum('count');
                 })->sortable(),
@@ -67,14 +63,13 @@ use Laravel\Nova\Fields\Textarea;
 
                 HasManyThrough::make('Attachment Downloads', 'attachmentDownloads', Download::class),
 
-                BelongsToMany::make('Series', 'series', Series::class)
+                BelongsToMany::make('Series', 'series', Series::class),
             ];
         }
 
         /**
          * Get the cards available for the request.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function cards(Request $request)
@@ -85,20 +80,18 @@ use Laravel\Nova\Fields\Textarea;
         /**
          * Get the filters available for the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function filters(Request $request)
         {
             return [
-                new EpisodeTeam
+                new EpisodeTeam,
             ];
         }
 
         /**
          * Get the lenses available for the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function lenses(Request $request)
@@ -109,14 +102,13 @@ use Laravel\Nova\Fields\Textarea;
         /**
          * Get the actions available for the resource.
          *
-         * @param  \Illuminate\Http\Request  $request
          * @return array
          */
         public function actions(Request $request)
         {
             return [
                 new ReplaceEpisodeShortcodesAction,
-                new AddAttachmentDownloadCount
+                new AddAttachmentDownloadCount,
             ];
         }
     }

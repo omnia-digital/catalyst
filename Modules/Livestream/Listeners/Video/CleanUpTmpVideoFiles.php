@@ -7,11 +7,9 @@ use Modules\Livestream\Jobs\Videos\CleanUpTmpVideoFiles as CleanUpTmpVideoFiles_
 
 class CleanUpTmpVideoFiles
 {
-
     /**
      * Handle the event.
      *
-     * @param  $event
      * @return void
      */
     public function handle($event)

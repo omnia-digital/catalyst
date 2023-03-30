@@ -2,12 +2,12 @@
 
 namespace Modules\Jobs\Http\Livewire\Layouts;
 
-    use Livewire\Component;
+use Livewire\Component;
 
-    class MainLayout extends Component
+class MainLayout extends Component
+{
+    public function render()
     {
-        public function render()
-        {
-            return view('jobs::livewire.layouts.pages.default-page-layout');
-        }
+        return view('jobs::livewire.layouts.pages.default-page-layout');
     }
+}

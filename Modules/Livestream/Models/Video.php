@@ -1,11 +1,13 @@
-<?php namespace Modules\Livestream\Models;
+<?php
 
-use Modules\Livestream\Registries\VideoSource\Concerns\HasSourceVideo;
-use Modules\Livestream\Support\Livestream\Concerns\HasPlayback;
+namespace Modules\Livestream\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Livestream\Registries\VideoSource\Concerns\HasSourceVideo;
+use Modules\Livestream\Support\Livestream\Concerns\HasPlayback;
 
 class Video extends Model
 {

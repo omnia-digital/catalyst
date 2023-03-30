@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Actions\Livestream;
+<?php
+
+namespace Modules\Livestream\Actions\Livestream;
 
 use Modules\Livestream\Models\Stream;
 use Modules\Livestream\Models\StreamTarget;
@@ -18,14 +20,14 @@ class CreateStreamTargetAction
         );
 
         return $stream->streamTargets()->create([
-            'name'                    => $params['name'],
-            'url'                     => $params['url'],
-            'stream_key'              => $params['stream_key'],
-            'passthrough'             => $params['passthrough'] ?? null,
-            'enabled'                 => true,
-            'status'                  => $muxStreamData->getStatus(),
+            'name' => $params['name'],
+            'url' => $params['url'],
+            'stream_key' => $params['stream_key'],
+            'passthrough' => $params['passthrough'] ?? null,
+            'enabled' => true,
+            'status' => $muxStreamData->getStatus(),
             'mux_simulcast_target_id' => $muxStreamData->getId(),
-            'stream_id'               => $stream->id, // Omnia Stream id to create a foreign key
+            'stream_id' => $stream->id, // Omnia Stream id to create a foreign key
         ]);
     }
 }

@@ -1,6 +1,7 @@
-<?php namespace Modules\Livestream\Models;
+<?php
 
-use Modules\Livestream\Enums\VideoStorageOption;
+namespace Modules\Livestream\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -8,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Modules\Livestream\Enums\VideoStorageOption;
 
 class LivestreamAccount extends Model
 {
@@ -16,8 +18,8 @@ class LivestreamAccount extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'mux_livestream_active'     => 'boolean',
-        'mux_vod_active'            => 'boolean',
+        'mux_livestream_active' => 'boolean',
+        'mux_vod_active' => 'boolean',
         'mux_stream_targets_active' => 'boolean',
     ];
 
@@ -28,7 +30,7 @@ class LivestreamAccount extends Model
 
     public function getNotLiveImageUrlAttribute()
     {
-        if (!$this->not_live_image) {
+        if (! $this->not_live_image) {
             return null;
         }
 
@@ -41,7 +43,7 @@ class LivestreamAccount extends Model
 
     public function getBeforeLiveImageUrlAttribute()
     {
-        if (!$this->before_live_image) {
+        if (! $this->before_live_image) {
             return null;
         }
 
@@ -104,8 +106,6 @@ class LivestreamAccount extends Model
 
     /**
      * Get the default episode template of the given livestream account.
-     *
-     * @return EpisodeTemplate|null
      */
     public function defaultEpisodeTemplate(): ?EpisodeTemplate
     {
@@ -114,8 +114,6 @@ class LivestreamAccount extends Model
 
     /**
      * Check if the livestream account selects auto deletes video option.
-     *
-     * @return bool
      */
     public function isAutoDeletesVideos(): bool
     {

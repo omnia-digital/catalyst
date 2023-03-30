@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Models;
+<?php
+
+namespace Modules\Livestream\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,12 +17,20 @@ class Person extends Model
     protected $fillable = [
         'first_name',
         'last_name',
-        'email'
+        'email',
     ];
 
     protected $dates = [
-        'dob'
+        'dob',
     ];
+
+    public static function findByName(string $firstName, string $lastName): ?self
+    {
+        return self::query()
+            ->where('first_name', $firstName)
+            ->where('last_name', $lastName)
+            ->first();
+    }
 
     public function getPhotoAttribute()
     {
@@ -59,13 +69,5 @@ class Person extends Model
                         ->orWhere('last_name', 'like', $term);
                 });
             });
-    }
-
-    public static function findByName(string $firstName, string $lastName): ?self
-    {
-        return self::query()
-            ->where('first_name', $firstName)
-            ->where('last_name', $lastName)
-            ->first();
     }
 }

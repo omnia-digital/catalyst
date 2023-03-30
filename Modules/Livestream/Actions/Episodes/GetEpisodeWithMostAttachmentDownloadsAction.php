@@ -1,21 +1,19 @@
-<?php namespace Modules\Livestream\Actions\Episodes;
+<?php
 
-use Modules\Livestream\Models\Team;
+namespace Modules\Livestream\Actions\Episodes;
+
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+use Modules\Livestream\Models\Team;
 
 class GetEpisodeWithMostAttachmentDownloadsAction
 {
     /**
-     * @param Carbon $from
-     * @param Carbon $to
-     * @param Team|null $team
      * @return Model
      */
     public function execute(Carbon $from, Carbon $to, bool $expiredOnly = true, ?Team $team = null): Model|null
     {
-        is_null($team) && $team = Auth::user()->currentTeam;
+        is_null($team) && $team = auth()->user()->currentTeam;
 
         // For normal episodes, get all episodes to calculate the attachment downloads count.
         if ($expiredOnly) {

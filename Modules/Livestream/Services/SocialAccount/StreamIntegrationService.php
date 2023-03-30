@@ -1,5 +1,8 @@
-<?php namespace Modules\Livestream\Services\SocialAccount;
+<?php
 
+namespace Modules\Livestream\Services\SocialAccount;
+
+use Exception;
 use Facebook\Facebook;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
@@ -11,8 +14,8 @@ class StreamIntegrationService
     public function __construct()
     {
         $this->fb = new Facebook([
-            'app_id'                => config('services.facebook.app_id'),
-            'app_secret'            => config('services.facebook.app_secret'),
+            'app_id' => config('services.facebook.app_id'),
+            'app_secret' => config('services.facebook.app_secret'),
             'default_graph_version' => 'v' . config('services.facebook.default_graph_version'),
         ]);
     }
@@ -20,9 +23,9 @@ class StreamIntegrationService
     /**
      * Get Live Video Stream Name from Facebook
      *
-     * @param array $params
-     *
+     * @param  array  $params
      * @return ?string
+     *
      * @throws \Facebook\Exceptions\FacebookResponseException
      * @throws \Facebook\Exceptions\FacebookSDKException
      */
@@ -32,7 +35,7 @@ class StreamIntegrationService
 
         $response = $this->createFacebookLiveVideo($params);
 
-        if (!empty($response)) {
+        if (! empty($response)) {
             $streamURL = $response['secure_stream_url'];
             $streamName = trim(substr($streamURL, strpos($streamURL, 'rtmp/')), 'rtmp/');
             Log::info('[FB Live Get Live Video Stream Name] - Finished: Stream Name: ' . $streamName);
@@ -44,9 +47,9 @@ class StreamIntegrationService
     /**
      * Create a Live Video on a Facebook Stream Integration
      *
-     * @param array $params
-     *
+     * @param  array  $params
      * @return array
+     *
      * @throws \Facebook\Exceptions\FacebookResponseException
      * @throws \Facebook\Exceptions\FacebookSDKException
      */
@@ -55,7 +58,7 @@ class StreamIntegrationService
         try {
             if (empty($teamObject)) {
                 if (empty($this->_streamIntegration) || empty($this->_streamIntegration->id)) {
-                    throw new ModelNotFoundException("Stream Integration not found");
+                    throw new ModelNotFoundException('Stream Integration not found');
                 }
                 $teamObject = $this->_streamIntegration->provider_team_object;
             }
@@ -67,8 +70,8 @@ class StreamIntegrationService
         } catch (\Facebook\Exceptions\FacebookSDKException $e) {
             Log::error('Facebook SDK returned an error: ' . $e->getMessage());
             throw $e;
-        } catch (\Exception $e) {
-            Log::error(__CLASS__ . ": " . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error(__CLASS__ . ': ' . $e->getMessage());
             throw $e;
         }
     }
@@ -76,9 +79,9 @@ class StreamIntegrationService
     /**
      * Update a Live Video on a Facebook Stream Integration
      *
-     * @param array $params
-     *
+     * @param  array  $params
      * @return array
+     *
      * @throws \Facebook\Exceptions\FacebookResponseException
      * @throws \Facebook\Exceptions\FacebookSDKException
      */
@@ -87,7 +90,7 @@ class StreamIntegrationService
         try {
             if (empty($teamObject)) {
                 if (empty($this->_streamIntegration) || empty($this->_streamIntegration->id)) {
-                    throw new ModelNotFoundException("Stream Integration not found");
+                    throw new ModelNotFoundException('Stream Integration not found');
                 }
                 $teamObject = $this->_streamIntegration->provider_team_object;
             }
@@ -97,14 +100,14 @@ class StreamIntegrationService
             $message = $e->getMessage();
             Log::error('Graph returned an error: ' . $message);
             // We don't want to throw an error if the facebook video doesn't exist anymore, just in case someone deleted it on facebook
-            if (!str_contains($message, 'does not exist')) {
+            if (! str_contains($message, 'does not exist')) {
                 throw $e;
             }
         } catch (\Facebook\Exceptions\FacebookSDKException $e) {
             Log::error('Facebook SDK returned an error: ' . $e->getMessage());
             throw $e;
-        } catch (\Exception $e) {
-            Log::error(__CLASS__ . ": " . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error(__CLASS__ . ': ' . $e->getMessage());
             throw $e;
         }
     }
@@ -112,9 +115,9 @@ class StreamIntegrationService
     /**
      * Delete a Live Video on a Facebook account
      *
-     * @param array $params
-     *
+     * @param  array  $params
      * @return array
+     *
      * @throws \Facebook\Exceptions\FacebookResponseException
      * @throws \Facebook\Exceptions\FacebookSDKException
      */
@@ -123,7 +126,7 @@ class StreamIntegrationService
         try {
             if (empty($teamObject)) {
                 if (empty($this->_streamIntegration) || empty($this->_streamIntegration->id)) {
-                    throw new ModelNotFoundException("Stream Integration not found");
+                    throw new ModelNotFoundException('Stream Integration not found');
                 }
                 $teamObject = $this->_streamIntegration->provider_team_object;
             }
@@ -133,14 +136,14 @@ class StreamIntegrationService
             $message = $e->getMessage();
             Log::error('Graph returned an error: ' . $message);
             // We don't want to throw an error if the facebook video doesn't exist anymore, just in case someone deleted it on facebook
-            if (!str_contains($message, 'does not exist')) {
+            if (! str_contains($message, 'does not exist')) {
                 throw $e;
             }
         } catch (\Facebook\Exceptions\FacebookSDKException $e) {
             Log::error('Facebook SDK returned an error: ' . $e->getMessage());
             throw $e;
-        } catch (\Exception $e) {
-            Log::error(__CLASS__ . ": " . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error(__CLASS__ . ': ' . $e->getMessage());
             throw $e;
         }
     }

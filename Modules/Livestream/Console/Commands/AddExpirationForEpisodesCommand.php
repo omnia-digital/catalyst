@@ -1,9 +1,11 @@
-<?php namespace Modules\Livestream\Console\Commands;
+<?php
 
-use Modules\Livestream\Models\Episode;
+namespace Modules\Livestream\Console\Commands;
+
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Livestream\Models\Episode;
 
 class AddExpirationForEpisodesCommand extends Command
 {
@@ -16,7 +18,7 @@ class AddExpirationForEpisodesCommand extends Command
         $date = Carbon::parse($this->argument('date'));
 
         Episode::query()
-            ->where(fn(Builder $query) => $query->whereNull('expires_at')->orWhere('expires_at', ''))
+            ->where(fn (Builder $query) => $query->whereNull('expires_at')->orWhere('expires_at', ''))
             ->get()
             ->each(function (Episode $episode) use ($date) {
                 $episode->update(['expires_at' => $date]);

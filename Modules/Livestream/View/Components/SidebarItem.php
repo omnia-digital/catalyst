@@ -11,7 +11,8 @@ class SidebarItem extends Component
         public string $to = '#',
         public ?string $icon = null,
         public bool $isSelected = false
-    ) {}
+    ) {
+    }
 
     /**
      * Get the view / contents that represents the component.

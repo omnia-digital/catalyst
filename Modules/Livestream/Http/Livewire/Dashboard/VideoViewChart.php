@@ -1,14 +1,14 @@
-<?php namespace Modules\Livestream\Http\Livewire\Dashboard;
+<?php
 
-use Modules\Livestream\Metrics\StorageDurationChart;
-use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
-use Modules\Livestream\Metrics\TotalVideoViewsByLivestreamAccountChart;
-use Modules\Livestream\Services\Mux\DataTransferObjects\VideoView;
-use Modules\Livestream\Support\Livewire\WithTimeFilter;
+namespace Modules\Livestream\Http\Livewire\Dashboard;
+
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Collection;
 use Livewire\Component;
+use Modules\Livestream\Metrics\TimeFilters\TimeFilterRegistry;
+use Modules\Livestream\Metrics\TotalVideoViewsByLivestreamAccountChart;
+use Modules\Livestream\Support\Livewire\WithTimeFilter;
 
 /**
  * @property CarbonPeriod $dateRange
@@ -50,9 +50,9 @@ class VideoViewChart extends Component
     public function render()
     {
         return view('dashboard.video-view-chart', [
-            'labels'          => $this->labels,
-            'videoViews'      => $this->toChart($this->data),
-            'totalVideoViews' => (float)$this->total($this->data),
+            'labels' => $this->labels,
+            'videoViews' => $this->toChart($this->data),
+            'totalVideoViews' => (float) $this->total($this->data),
         ]);
     }
 }

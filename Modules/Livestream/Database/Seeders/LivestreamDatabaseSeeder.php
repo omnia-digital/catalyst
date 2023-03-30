@@ -3,8 +3,8 @@
 namespace Modules\Livestream\Database\Seeders;
 
 use Database\Seeders\UserSeeder;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 
 class LivestreamDatabaseSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class LivestreamDatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call([
-            UserSeeder::class
+            UserSeeder::class,
         ]);
     }
 }

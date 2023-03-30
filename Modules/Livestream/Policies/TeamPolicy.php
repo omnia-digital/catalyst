@@ -10,7 +10,7 @@ class TeamPolicy
 {
     use HasDefaultPolicy;
 
-    public function view(User $user, Team $team) : bool
+    public function view(User $user, Team $team): bool
     {
         return $user->belongsToTeam($team);
     }

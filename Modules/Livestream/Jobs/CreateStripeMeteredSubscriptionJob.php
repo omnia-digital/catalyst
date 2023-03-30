@@ -2,12 +2,12 @@
 
 namespace Modules\Livestream\Jobs;
 
-use Modules\Livestream\Models\Team;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Modules\Livestream\Models\Team;
 
 class CreateStripeMeteredSubscriptionJob implements ShouldQueue
 {
@@ -15,7 +15,8 @@ class CreateStripeMeteredSubscriptionJob implements ShouldQueue
 
     public function __construct(
         private Team $team
-    ){}
+    ) {
+    }
 
     public function handle()
     {

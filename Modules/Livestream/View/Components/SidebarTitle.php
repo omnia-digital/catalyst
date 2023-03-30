@@ -9,7 +9,8 @@ class SidebarTitle extends Component
     public function __construct(
         public string $name,
         public ?string $icon = null,
-    ) {}
+    ) {
+    }
 
     /**
      * Get the view / contents that represents the component.

@@ -2,12 +2,11 @@
 
 namespace Modules\Livestream\Http\Livewire\Person;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\Component;
 use Modules\Livestream\Models\person;
 use Modules\Livestream\Models\Team;
 use Modules\Livestream\Support\Livewire\WithNotification;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 
 /**
  * @property array $organizations
@@ -24,17 +23,10 @@ class MovePerson extends Component
 
     public bool $loading = false;
 
-    protected function rules(): array
-    {
-        return [
-            'organization' => ['required']
-        ];
-    }
-
     public function getOrganizationsProperty()
     {
-        return Auth::user()->allTeams()
-            ->where('id', '!=', Auth::user()->currentTeam->id)
+        return auth()->user()->allTeams()
+            ->where('id', '!=', auth()->user()->currentTeam->id)
             ->pluck('name', 'id')
             ->all();
     }
@@ -46,14 +38,14 @@ class MovePerson extends Component
 
         $this->validate();
 
-        if (!($destinationOrganization = Team::find($this->organization))) {
+        if (! ($destinationOrganization = Team::find($this->organization))) {
             $this->error('Cannot find the organization. Please refresh the page and try again!');
             $this->loading = false;
 
             return;
         }
 
-        if (!($destinationLivestreamAccount = $destinationOrganization->livestreamAccount)) {
+        if (! ($destinationLivestreamAccount = $destinationOrganization->livestreamAccount)) {
             $this->error('Cannot find the livestream account. Please refresh the page and try again!');
             $this->loading = false;
 
@@ -68,7 +60,14 @@ class MovePerson extends Component
     public function render()
     {
         return view('person.move', [
-            'organizations' => $this->organizations
+            'organizations' => $this->organizations,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'organization' => ['required'],
+        ];
     }
 }

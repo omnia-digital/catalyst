@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Registries\VideoSource\Concerns;
+<?php
+
+namespace Modules\Livestream\Registries\VideoSource\Concerns;
 
 use Modules\Livestream\Models\Video;
 

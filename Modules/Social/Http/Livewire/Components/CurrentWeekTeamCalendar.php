@@ -3,9 +3,9 @@
 namespace Modules\Social\Http\Livewire\Components;
 
 use App\Models\User;
-use Omnia\LivewireCalendar\LivewireCalendar;
 use Carbon\Carbon;
 use Modules\Social\Support\Livewire\InteractsWithCalendarTeams;
+use Omnia\LivewireCalendar\LivewireCalendar;
 
 class CurrentWeekTeamCalendar extends LivewireCalendar
 {

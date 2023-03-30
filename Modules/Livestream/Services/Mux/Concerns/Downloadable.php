@@ -1,7 +1,10 @@
-<?php namespace Modules\Livestream\Services\Mux\Concerns;
+<?php
 
-use Modules\Livestream\Services\Mux\MuxAsset;
+namespace Modules\Livestream\Services\Mux\Concerns;
+
+use ArrayAccess;
 use Illuminate\Support\Arr;
+use Modules\Livestream\Services\Mux\MuxAsset;
 use MuxPhp\Models\Asset;
 
 trait Downloadable
@@ -9,7 +12,6 @@ trait Downloadable
     /**
      * Check if the asset is downloadable.
      *
-     * @param Asset $asset
      * @return bool
      */
     public function isDownloadable(Asset $asset)
@@ -20,7 +22,6 @@ trait Downloadable
     /**
      * Get download quality file.
      *
-     * @param Asset $asset
      * @return string
      */
     public function downloadQuality(Asset $asset)
@@ -39,7 +40,6 @@ trait Downloadable
     }
 
     /**
-     * @param Asset $asset
      * @return \MuxPhp\Models\PlaybackID[]|null
      */
     public function playbackIds(Asset $asset)
@@ -48,23 +48,16 @@ trait Downloadable
     }
 
     /**
-     * @param Asset $asset
-     * @return array|\ArrayAccess|mixed
+     * @return array|ArrayAccess|mixed
      */
     public function defaultPlaybackId(Asset $asset)
     {
         return Arr::get($this->playbackIds($asset), '0.id');
     }
 
-    /**
-     * @param Asset $asset
-     * @param string|null $name
-     * @param string $playbackId
-     * @return string|null
-     */
     public function downloadLink(Asset $asset, ?string $name = null, string $playbackId = 'default'): ?string
     {
-        if (!$this->isDownloadable($asset)) {
+        if (! $this->isDownloadable($asset)) {
             app(MuxAsset::class)->addAssetMP4Support($asset->getId());
 
             return null;
@@ -73,6 +66,6 @@ trait Downloadable
         $name = is_null($name) ? time() : $name;
         $playbackId = $playbackId === 'default' ? $this->defaultPlaybackId($asset) : $playbackId;
 
-        return config('services.mux.playback_prefix') . $playbackId . '/' . $this->downloadQuality($asset) . config('services.mux.download_suffix') .'?download=' . $name;
+        return config('services.mux.playback_prefix') . $playbackId . '/' . $this->downloadQuality($asset) . config('services.mux.download_suffix') . '?download=' . $name;
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
-    namespace Modules\Livestream\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
-    use Modules\Livestream\Omnia;
     use Exception;
-    use Illuminate\Support\Facades\Auth;
     use Modules\Livestream\Http\Requests\StreamTargetRequest;
+    use Modules\Livestream\Omnia;
     use Modules\Livestream\Repositories\StreamTargetRepository;
     use Modules\Livestream\Stream;
     use Modules\Livestream\StreamTarget;
@@ -15,8 +14,6 @@
      * For non-mux customers, we will continue to use StreamIntegrations the way we always have.
      * However, for Mux customers, we will continue to use StreamIntegrations as an Account-Level integration with FB, YT, etc. to hold the access_keys
      * We will then use Stream Targets as a 1-to-1 object identifier of Simulcast Targets on Mux
-     *
-     * @package App\Http\Controllers
      */
     class StreamTargetController extends LivestreamController
     {
@@ -32,15 +29,16 @@
                 $livestreamAccount = $this->_livestreamAccount;
             }
             $defaultStream = $livestreamAccount->defaultStream;
+
             return $defaultStream->streamTargets;
         }
 
         /**
          * Store a newly created StreamTarget in storage.
          *
-         * @param StreamTargetRequest $request
          *
          * @return mixed
+         *
          * @throws Exception
          */
         public function store(StreamTargetRequest $request)
@@ -49,25 +47,25 @@
             // dependent on livestream plan and check an exception list for accounts that are allowed to add more
             $accountCanAddAnotherStreamTarget = true;
 
-            if (!$accountCanAddAnotherStreamTarget) {
+            if (! $accountCanAddAnotherStreamTarget) {
                 return response([
-                    'message' => 'This account cannot add another Stream Target'
+                    'message' => 'This account cannot add another Stream Target',
                 ], 403);
             }
 
             // Get Stream
             if ($request->has('stream_id')) {
                 $stream_id = $request->get('stream_id');
-                $stream    = Stream::findOrFail($stream_id);
-            } else if (Auth::check()) {
-                $currentTeam = Auth::user()->currentTeam();
-                if ( ! empty($currentTeam) && !empty($currentTeam->livestreamAccount)) {
+                $stream = Stream::findOrFail($stream_id);
+            } elseif (auth()->check()) {
+                $currentTeam = auth()->user()->currentTeam();
+                if (! empty($currentTeam) && ! empty($currentTeam->livestreamAccount)) {
                     $stream = $currentTeam->livestreamAccount->default_stream;
                 }
             }
             if (empty($stream)) {
                 return response([
-                    'message' => 'Could not find Stream. Please make sure you have created one.'
+                    'message' => 'Could not find Stream. Please make sure you have created one.',
                 ], 404);
             }
 
@@ -82,7 +80,6 @@
             $streamTarget = Omnia::interact(StreamTargetRepository::class . '@create', [$params]);
 
             return $streamTarget;
-
         }
 
         /**
@@ -98,7 +95,6 @@
         /**
          * Update the specified resource in storage.
          *
-         * @param StreamTargetRequest $request
          *
          * @return \Illuminate\Http\Response
          */
@@ -106,11 +102,11 @@
         {
             try {
                 return response()->json([
-                    'success' => Omnia::interact(StreamTargetRepository::class . '@update', [$stream_target, $request])
+                    'success' => Omnia::interact(StreamTargetRepository::class . '@update', [$stream_target, $request]),
                 ]);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 return response()->json([
-                    'errors' => $e->getMessage()
+                    'errors' => $e->getMessage(),
                 ]);
             }
         }
@@ -118,9 +114,9 @@
         /**
          * Destroy the resource
          *
-         * @param int $ids
-         *
+         * @param  int  $ids
          * @return \Illuminate\Http\Response
+         *
          * @throws Exception
          */
         public function destroy($ids)

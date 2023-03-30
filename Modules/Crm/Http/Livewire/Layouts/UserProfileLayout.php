@@ -2,12 +2,12 @@
 
 namespace Modules\Crm\Http\Livewire\Layouts;
 
-    use Livewire\Component;
+use Livewire\Component;
 
-    class UserProfileLayout extends Component
+class UserProfileLayout extends Component
+{
+    public function render()
     {
-        public function render()
-        {
-            return view('crm::livewire.layouts.user-profile-layout');
-        }
+        return view('crm::livewire.layouts.user-profile-layout');
     }
+}

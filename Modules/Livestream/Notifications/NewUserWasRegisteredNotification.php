@@ -3,10 +3,9 @@
 namespace Modules\Livestream\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 
 class NewUserWasRegisteredNotification extends Notification implements ShouldQueue
 {
@@ -16,8 +15,6 @@ class NewUserWasRegisteredNotification extends Notification implements ShouldQue
 
     /**
      * Create a new notification instance.
-     *
-     * @param string $message
      */
     public function __construct(string $message)
     {
@@ -36,7 +33,6 @@ class NewUserWasRegisteredNotification extends Notification implements ShouldQue
     }
 
     /**
-     * @param $notifiable
      * @return mixed
      */
     public function toSlack($notifiable)

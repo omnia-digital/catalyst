@@ -2,11 +2,10 @@
 
 namespace Modules\Livestream\Http\Livewire\Team;
 
-use Modules\Livestream\Models\Team;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\Livestream\Models\Team;
 
 class UpdateTeamInformation extends Component
 {
@@ -38,14 +37,13 @@ class UpdateTeamInformation extends Component
     /**
      * Update the team's information.
      *
-     * @param \Laravel\Jetstream\Contracts\UpdatesTeamNames $updater
      * @return void
      */
     public function updateTeamName(UpdatesTeamNames $updater)
     {
         $this->resetErrorBag();
 
-        $updater->update($this->user, $this->team, !is_string($this->logo)
+        $updater->update($this->user, $this->team, ! is_string($this->logo)
             ? array_merge($this->state, ['logo' => $this->logo])
             : $this->state);
 
@@ -64,7 +62,7 @@ class UpdateTeamInformation extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        return auth()->user();
     }
 
     /**

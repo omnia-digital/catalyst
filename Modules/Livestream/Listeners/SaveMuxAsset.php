@@ -1,15 +1,18 @@
-<?php namespace Modules\Livestream\Listeners;
+<?php
 
-use Modules\Livestream\Enums\StreamStatus;
-use Modules\Livestream\Events\VideoAssetReady;
-use Modules\Livestream\Models\Episode;
-use Modules\Livestream\Models\Stream;
-use Modules\Livestream\Services\Mux\Concerns\HasThumbnail;
+namespace Modules\Livestream\Listeners;
+
+use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Modules\Livestream\Enums\StreamStatus;
+use Modules\Livestream\Events\VideoAssetReady;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\Stream;
+use Modules\Livestream\Services\Mux\Concerns\HasThumbnail;
 
 class SaveMuxAsset implements ShouldQueue
 {
@@ -26,13 +29,9 @@ class SaveMuxAsset implements ShouldQueue
             : $this->handleLivestream($event->data);
     }
 
-    /**
-     * @param string $uploadId
-     * @param array $payload
-     */
     private function handleUploadedVideo(string $uploadId, array $payload): void
     {
-        if (!($episode = Episode::findByUploadId($uploadId))) {
+        if (! ($episode = Episode::findByUploadId($uploadId))) {
             Log::error('Cannot find uploaded episode with ID: ' . $uploadId);
 
             return;
@@ -45,7 +44,7 @@ class SaveMuxAsset implements ShouldQueue
         // Update the thumbnail & duration for episode.
         $episode->update([
             'thumbnail' => $trackType === 'audio' ? null : $this->getMuxThumbnail($playbackIds[0]['id']),
-            'duration'  => $durationInSecond ? $durationInSecond * 1000 : null
+            'duration' => $durationInSecond ? $durationInSecond * 1000 : null,
         ]);
 
         $trackType === 'audio'
@@ -54,7 +53,6 @@ class SaveMuxAsset implements ShouldQueue
     }
 
     /**
-     * @param array $payload
      * @throws \MuxPhp\ApiException
      */
     private function handleLivestream(array $payload): void
@@ -65,7 +63,7 @@ class SaveMuxAsset implements ShouldQueue
         $stream = Stream::where('stream_id', $streamId)->first();
 
         if (empty($stream)) {
-            throw new \Exception('Could not find Stream');
+            throw new Exception('Could not find Stream');
         }
 
         $livestreamAccount = $stream->livestreamAccount;
@@ -90,12 +88,12 @@ class SaveMuxAsset implements ShouldQueue
             $episodeTemplate = $livestreamAccount->defaultEpisodeTemplate();
 
             $episode = Episode::createFromTemplate([
-                'title'                 => $episodeTemplate?->template['title'] ?? 'Untitled',
-                'description'           => $episodeTemplate?->template['description'] ?? null,
-                'date_recorded'         => now(config('app.timezone')),
+                'title' => $episodeTemplate?->template['title'] ?? 'Untitled',
+                'description' => $episodeTemplate?->template['description'] ?? null,
+                'date_recorded' => now(config('app.timezone')),
                 'livestream_account_id' => $livestreamAccount->id,
-                'is_live_now'           => true,
-                'thumbnail'             => $episodeTemplate['default_thumbnail'] ?? null
+                'is_live_now' => true,
+                'thumbnail' => $episodeTemplate['default_thumbnail'] ?? null,
             ]);
 
             // Create Video & Playback Ids from Mux data for this Episode
@@ -106,8 +104,8 @@ class SaveMuxAsset implements ShouldQueue
 
             // Set active episode on stream.
             $stream->update([
-                'status'            => StreamStatus::ACTIVE,
-                'active_episode_id' => $episode->id
+                'status' => StreamStatus::ACTIVE,
+                'active_episode_id' => $episode->id,
             ]);
         });
     }

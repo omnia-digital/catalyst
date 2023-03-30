@@ -19,34 +19,34 @@
         <div class="">
             <div class="lg:flex">
                 <ul class="items-center text-gray-400 text-sm lg:inline-flex lg:space-x-4 font-Montserrat">
-                    @if($episode->date_recorded)
+                    @if ($episode->date_recorded)
                         <li class="text-gray-500"><i class="fad fa-calendar-alt mr-1"></i>
                             {{ $episode->date_recorded->format("M j, Y") }}
                         </li>
                     @endif
-                    @if($episode->main_passage)
+                    @if ($episode->main_passage)
                         <li><i class="fad fa-bible lg:mr-1"></i>
                             <span class="hover:underline cursor-pointer text-gray-500">{{ $episode->main_passage }}</span>
                         </li>
                     @endif
-                    @if($episode->mainSpeaker)
+                    @if ($episode->mainSpeaker)
                         <li><i class="fas fa-user lg:mr-1"></i>
                             <span class="hover:underline cursor-pointer text-gray-500">{{ $episode->mainSpeaker->name }}</span>
                         </li>
                     @endif
-                    @if($episode->category)
+                    @if ($episode->category)
                         <li><i class="fad fa-folder-open lg:mr-1"></i>
                             <span class="hover:underline cursor-pointer text-gray-500">{{ $episode->category->name }}</span>
                         </li>
                     @endif
-                    @if($episode->seriesLabels)
+                    @if ($episode->seriesLabels)
                         <li><i class="fad fa-album-collection lg:mr-1"></i>
                             <span class="hover:underline cursor-pointer text-gray-500">{{ $episode->seriesLabels }}</span>
                         </li>
                     @endif
-                    @if(!$public)
+                    @if (!$public)
                         <li>
-                            @if($episode->is_published)
+                            @if ($episode->is_published)
                                 <x-heroicon-s-check-circle class="h-5 w-5 text-green-500"/>
                             @else
                                 <x-heroicon-s-x-circle class="h-5 w-5 text-red-500"/>
@@ -65,9 +65,9 @@
             <h3 class="text-xl font-bold">{{ Str::limit($episode->title, 155) }}</h3>
         </div>
 
-        @if($episode->video?->getPlaybackUrl())
+        @if ($episode->video?->getPlaybackUrl())
             <div class="py-2 w-full">
-                <x-jwplayer-audio audio="{{$episode->video?->getPlaybackUrl()}}"/>
+                <x-jwplayer-audio audio="{{ $episode->video?->getPlaybackUrl() }}"/>
             </div>
         @endif
 
@@ -96,7 +96,7 @@
         @endif
 
         <div>
-            <p class="my-2 flex-1  text-gray-500">{{$episode->description}}</p>
+            <p class="my-2 flex-1  text-gray-500">{{ $episode->description }}</p>
         </div>
     </div>
 </li>

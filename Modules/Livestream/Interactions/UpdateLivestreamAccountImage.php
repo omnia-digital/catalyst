@@ -1,10 +1,11 @@
 <?php
 
-    namespace Modules\Livestream\Interactions;
+namespace Modules\Livestream\Interactions;
 
-    use Intervention\Image\ImageManager;
     use Illuminate\Support\Facades\Storage;
     use Illuminate\Support\Facades\Validator;
+    use Intervention\Image\ImageManager;
+use SplFileInfo;
 
     class UpdateLivestreamAccountImage
     {
@@ -18,7 +19,6 @@
         /**
          * Create a new interaction instance.
          *
-         * @param  ImageManager  $images
          * @return void
          */
         public function __construct(ImageManager $images)
@@ -26,9 +26,6 @@
             $this->images = $images;
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function validator($livestreamAccount, $imageType, array $data)
         {
             return Validator::make($data, [
@@ -36,9 +33,6 @@
             ]);
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function handle($livestreamAccount, $imageType, array $data)
         {
             $file = $data[$imageType];
@@ -70,7 +64,7 @@
         /**
          * Resize an image instance for the given file.
          *
-         * @param  \SplFileInfo  $file
+         * @param  SplFileInfo  $file
          * @return \Intervention\Image\Image
          */
         protected function formatImage($file)

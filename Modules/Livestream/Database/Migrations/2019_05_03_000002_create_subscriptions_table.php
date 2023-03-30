@@ -36,6 +36,5 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-
     }
 }

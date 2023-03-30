@@ -2,10 +2,7 @@
 
 namespace Modules\Livestream\Console\Commands;
 
-use Modules\Livestream\Omnia;
 use Illuminate\Console\Command;
-use Modules\Livestream\LivestreamAccount;
-use Modules\Livestream\Repositories\StreamRepository;
 use Modules\Livestream\Services\MuxService;
 
 class DeleteAllAssetsForMuxLivestream extends Command
@@ -34,10 +31,9 @@ class DeleteAllAssetsForMuxLivestream extends Command
         $id = $this->option('id');
         $errors = $this->option('errors');
 
-        $muxService = new MuxService();
+        $muxService = new MuxService;
         $assets = $muxService->listAssets();
 
         dd($assets);
-
     }
 }

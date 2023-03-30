@@ -3,6 +3,14 @@
 namespace Modules\Livestream\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Livestream\Events\Stream\StreamActive;
+use Modules\Livestream\Events\Stream\StreamConnected;
+use Modules\Livestream\Events\Stream\StreamCreated;
+use Modules\Livestream\Events\Stream\StreamDeleted;
+use Modules\Livestream\Events\Stream\StreamDisconnected;
+use Modules\Livestream\Events\Stream\StreamIdle;
+use Modules\Livestream\Events\Stream\StreamRecording;
+use Modules\Livestream\Events\Stream\StreamUpdated;
 use Modules\Livestream\Events\Video\VideoAssetCreated;
 use Modules\Livestream\Events\Video\VideoAssetDeleted;
 use Modules\Livestream\Events\Video\VideoAssetErrored;
@@ -16,14 +24,6 @@ use Modules\Livestream\Events\Video\VideoAssetStaticDeleted;
 use Modules\Livestream\Events\Video\VideoAssetStaticErrored;
 use Modules\Livestream\Events\Video\VideoAssetStaticPreparing;
 use Modules\Livestream\Events\Video\VideoAssetStaticReady;
-use Modules\Livestream\Events\Stream\StreamActive;
-use Modules\Livestream\Events\Stream\StreamConnected;
-use Modules\Livestream\Events\Stream\StreamCreated;
-use Modules\Livestream\Events\Stream\StreamDeleted;
-use Modules\Livestream\Events\Stream\StreamDisconnected;
-use Modules\Livestream\Events\Stream\StreamIdle;
-use Modules\Livestream\Events\Stream\StreamRecording;
-use Modules\Livestream\Events\Stream\StreamUpdated;
 use Modules\Livestream\Events\Video\VideoAssetUpdated;
 use Modules\Livestream\Events\Video\VideoUploadAssetCreated;
 use Modules\Livestream\Events\Video\VideoUploadCancelled;
@@ -32,32 +32,27 @@ use Modules\Livestream\Events\Video\VideoUploadErrored;
 
 class MuxEventController extends LivestreamController
 {
-
     public function testEvent()
     {
-        $data = json_decode("{\"accessor\":\"\",\"accessor_source\":\"\",\"attempts\":[],\"created_at\":\"2020-03-24T21:37:59.000000Z\",\"data\":{\"active_asset_id\":\"F53qM1uHk4UA01011fe00h9Tufb6InlE7Jc\",\"connected\":true,\"created_at\":1585085671,\"id\":\"RVwmVtSN1Iz102GGFmrDuuKLWTjLX8HzY\",\"new_asset_settings\":{\"playback_policies\":[\"public\"]},\"playback_ids\":[{\"id\":\"adMtNTYQhqXDuuMXV6NgXWOs24Uaqw1u\",\"policy\":\"public\"}],\"recent_asset_ids\":[\"F53qM1uHk4UA01011fe00h9Tufb6InlE7Jc\"],\"reconnect_window\":60,\"recording\":true,\"status\":\"active\",\"stream_key\":\"26ae82bd-19ee-192e-fd53-bb41d10c12e8\"},\"environment\":{\"id\":\"pcg9mg\",\"name\":\"Development\"},\"id\":\"bae68abf-bb91-47e9-b801-b27d430cd93e\",\"object\":{\"id\":\"RVwmVtSN1Iz102GGFmrDuuKLWTjLX8HzY\",\"type\":\"live\"},\"request_id\":\"\",\"type\":\"video.live_stream.active\"}",true);
+        $data = json_decode('{"accessor":"","accessor_source":"","attempts":[],"created_at":"2020-03-24T21:37:59.000000Z","data":{"active_asset_id":"F53qM1uHk4UA01011fe00h9Tufb6InlE7Jc","connected":true,"created_at":1585085671,"id":"RVwmVtSN1Iz102GGFmrDuuKLWTjLX8HzY","new_asset_settings":{"playback_policies":["public"]},"playback_ids":[{"id":"adMtNTYQhqXDuuMXV6NgXWOs24Uaqw1u","policy":"public"}],"recent_asset_ids":["F53qM1uHk4UA01011fe00h9Tufb6InlE7Jc"],"reconnect_window":60,"recording":true,"status":"active","stream_key":"26ae82bd-19ee-192e-fd53-bb41d10c12e8"},"environment":{"id":"pcg9mg","name":"Development"},"id":"bae68abf-bb91-47e9-b801-b27d430cd93e","object":{"id":"RVwmVtSN1Iz102GGFmrDuuKLWTjLX8HzY","type":"live"},"request_id":"","type":"video.live_stream.active"}', true);
 
         event(new StreamActive($data));
-
     }
-
 
     /**
      * Handle an incoming Episode Event by passing it off to the event internally, which can then be handled by an Event listener. This needs to be extremely fast since we may need to handle many
      * requests
      * simlutaneously
-     *
-     * @param Request $request
      */
-	public function handle(Request $request)
-	{
-	    if (!$request->has('type')) {
-	        return;
+    public function handle(Request $request)
+    {
+        if (! $request->has('type')) {
+            return;
         }
 
-	    $event = $request->get('type');
-	    $data = $request->all();
-	    switch($event) {
+        $event = $request->get('type');
+        $data = $request->all();
+        switch($event) {
             //        Asset Events //
             case 'video.asset.created':
                 event(new VideoAssetCreated($data));
@@ -72,7 +67,7 @@ class MuxEventController extends LivestreamController
                 event(new VideoAssetDeleted($data));
                 break;
             case 'video.asset.updated':
-                event (new VideoAssetUpdated($data));
+                event(new VideoAssetUpdated($data));
                 break;
             case 'video.asset.live_stream_completed':
                 event(new VideoAssetLivestreamCompleted($data));
@@ -101,7 +96,6 @@ class MuxEventController extends LivestreamController
             case 'video.asset.master.errored':
                 event(new VideoAssetMasterErrored($data));
                 break;
-
 
             //        Upload Events //
             case 'video.upload.asset_created':
@@ -151,7 +145,7 @@ class MuxEventController extends LivestreamController
             //        video.live_stream.simulcast_target.errored
             //        video.live_stream.simulcast_target.deleted
         }
-            // Sample response
+        // Sample response
 //                {
 //                      "type": "video.asset.ready",
 //                      "request_id": null,
@@ -194,6 +188,6 @@ class MuxEventController extends LivestreamController
 //                      "accessor_source": null,
 //                      "accessor": null
 //                }
-        return;
-	}
+
+    }
 }

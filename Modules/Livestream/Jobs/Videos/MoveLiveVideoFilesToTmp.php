@@ -4,7 +4,6 @@ namespace Modules\Livestream\Jobs\Videos;
 
 use Illuminate\Support\Facades\Log;
 use Modules\Livestream\Events\Video\FinishedMovingLiveVideosToTmp;
-use Modules\Livestream\Events\Video\LiveVideosProcessing;
 use Modules\Livestream\Events\Video\LiveVideosStartedProcessing;
 use Modules\Livestream\Jobs\LivestreamJob;
 use Modules\Livestream\Services\EpisodeService;
@@ -15,8 +14,6 @@ class MoveLiveVideoFilesToTmp extends LivestreamJob
 
     /**
      * Create a new job instance.
-     *
-     * @param EpisodeService $episodeService
      */
     public function __construct(EpisodeService $episodeService)
     {

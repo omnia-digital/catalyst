@@ -4,7 +4,6 @@ namespace Modules\Livestream\Http\Requests;
 
 /**
  * Class ImportRequest
- * @package App\Http\Requests
  */
 class ImportRequest extends LivestreamRequest
 {
@@ -17,5 +16,4 @@ class ImportRequest extends LivestreamRequest
     {
         return true;
     }
-
 }

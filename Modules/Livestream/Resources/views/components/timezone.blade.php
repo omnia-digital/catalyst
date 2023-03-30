@@ -21,5 +21,5 @@
 @if ($diffForHumans !== false)
     <time datetime="{{ $formattedDate->format($format) }}">{{ $formattedDate->diffForHumans() }}</time>
 @else
-    <time datetime="{{ $formattedDate->format($format) }}">{{$formattedDate->format($format) }}</time>
+    <time datetime="{{ $formattedDate->format($format) }}">{{ $formattedDate->format($format) }}</time>
 @endif

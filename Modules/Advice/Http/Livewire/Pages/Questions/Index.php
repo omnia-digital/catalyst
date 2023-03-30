@@ -2,7 +2,7 @@
 
 namespace Modules\Advice\Http\Livewire\Pages\Questions;
 
-use App;
+use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Models\Post;

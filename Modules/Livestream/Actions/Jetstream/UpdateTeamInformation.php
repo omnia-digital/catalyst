@@ -11,9 +11,8 @@ class UpdateTeamInformation implements UpdatesTeamNames
     /**
      * Validate and update the given team's name.
      *
-     * @param mixed $user
-     * @param mixed $team
-     * @param array $input
+     * @param  mixed  $user
+     * @param  mixed  $team
      * @return void
      */
     public function update($user, $team, array $input)
@@ -21,9 +20,9 @@ class UpdateTeamInformation implements UpdatesTeamNames
         Gate::forUser($user)->authorize('update', $team);
 
         Validator::make($input, [
-            'name'  => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
-            'city'  => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
             'state' => ['required', 'string', 'max:255'],
             'logo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateTeamName');
@@ -33,9 +32,9 @@ class UpdateTeamInformation implements UpdatesTeamNames
         }
 
         $team->forceFill([
-            'name'  => $input['name'],
+            'name' => $input['name'],
             'phone' => $input['phone'],
-            'city'  => $input['city'],
+            'city' => $input['city'],
             'state' => $input['state'],
         ])->save();
     }

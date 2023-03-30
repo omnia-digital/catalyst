@@ -2,12 +2,10 @@
 
 namespace Modules\Livestream\DateIntervals;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class DayOfTheMonthInterval extends Model
 {
-
     public function checkDate($start_date)
     {
         $start_date = '4th of june';

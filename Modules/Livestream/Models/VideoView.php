@@ -13,6 +13,6 @@ class VideoView extends Model
 
     protected $casts = [
         'view_start' => 'datetime',
-        'view_end'   => 'datetime',
+        'view_end' => 'datetime',
     ];
 }

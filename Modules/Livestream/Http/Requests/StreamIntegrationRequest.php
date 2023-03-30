@@ -2,8 +2,7 @@
 
 namespace Modules\Livestream\Http\Requests;
 
-use Modules\Livestream\Http\Requests\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class StreamIntegrationRequest extends LivestreamRequest
 {
@@ -14,9 +13,9 @@ class StreamIntegrationRequest extends LivestreamRequest
      */
     public function authorize()
     {
-	    return true;
-//	    $request_team_id = (int)$this->request->all();
-//	    $current_team_id = (int)Auth::user()->currentTeam()->id;
+        return true;
+        //	    $request_team_id = (int)$this->request->all();
+        //	    $current_team_id = (int)Auth::user()->currentTeam()->id;
 //        if ( $request_team_id === $current_team_id) {
 //            return true;
 //        } else {
@@ -32,10 +31,10 @@ class StreamIntegrationRequest extends LivestreamRequest
     public function rules()
     {
         return [
-            'enabled'                   => 'required',
-        	'provider'                  => 'required | string',
-            'provider_team_object.id'   => 'required',
-	        'livestream_account_id'     => 'required | integer'
+            'enabled' => 'required',
+            'provider' => 'required | string',
+            'provider_team_object.id' => 'required',
+            'livestream_account_id' => 'required | integer',
         ];
     }
 }

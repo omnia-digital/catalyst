@@ -2,12 +2,12 @@
 
 namespace Modules\Crm\Http\Livewire\Layouts;
 
-    use Livewire\Component;
+use Livewire\Component;
 
-    class MainLayout extends Component
+class MainLayout extends Component
+{
+    public function render()
     {
-        public function render()
-        {
-            return view('crm::livewire.layouts.main-layout');
-        }
+        return view('crm::livewire.layouts.main-layout');
     }
+}

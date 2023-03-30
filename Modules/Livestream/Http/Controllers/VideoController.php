@@ -1,30 +1,26 @@
 <?php
 
-    namespace Modules\Livestream\Http\Controllers;
+namespace Modules\Livestream\Http\Controllers;
 
-    use Modules\Livestream\Exceptions\MissingParameterException;
-    use Modules\Livestream\Http\Requests\Request;
-    use Modules\Livestream\Omnia;
-    use Modules\Livestream\SocialAccount;
     use Carbon\Carbon;
     use Illuminate\Auth\AuthenticationException;
-    use Illuminate\Database\Eloquent\ModelNotFoundException;
-    use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Config;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Log;
     use Illuminate\Support\Facades\Storage;
+    use Livestream\Livestream;
     use Modules\Livestream\Episode;
+    use Modules\Livestream\Exceptions\MissingParameterException;
     use Modules\Livestream\Http\Requests\LivestreamRequest;
+    use Modules\Livestream\Http\Requests\Request;
     use Modules\Livestream\LivestreamAccount;
+    use Modules\Livestream\Omnia;
     use Modules\Livestream\Repositories\VideoRepository;
     use Modules\Livestream\Services\SocialAccountService;
     use Modules\Livestream\Services\StreamIntegrationService;
-    use Modules\Livestream\Services\StreamTargetService;
-    use Modules\Livestream\StreamIntegration;
+    use Modules\Livestream\SocialAccount;
     use Modules\Livestream\Video;
     use Modules\Livestream\VideoSourceType;
-    use Livestream\Livestream;
     use mysql_xdevapi\Exception;
 
     class VideoController extends LivestreamController
@@ -48,9 +44,7 @@
         /**
          * Create a Video
          *
-         * @param LivestreamRequest $request
          *
-         * @return
          * @throws \Exception
          */
         public function store(LivestreamRequest $request)
@@ -68,13 +62,12 @@
             return $video;
         }
 
-
         /**
          * Schedule a new Facebook Live Video
          *
-         * @param  $request
          *
          * @return \Illuminate\Http\JsonResponse
+         *
          * @throws \Exception
          */
         public function scheduleFacebookLiveVideo($request)
@@ -89,17 +82,17 @@
                     // if we couldn't find a livestream account through the user, then check if it's in the payload
                     if ($request->filled('livestream_account_id')) {
                         $livestreamAccountId = $request->get('livestream_account_id');
-                        $livestreamAccount   = Livestream::getLivestreamAccount($livestreamAccountId);
-                        $team                = $livestreamAccount->team;
-                        $users               = $team->users;
+                        $livestreamAccount = Livestream::getLivestreamAccount($livestreamAccountId);
+                        $team = $livestreamAccount->team;
+                        $users = $team->users;
                         // Check if this user belongs to the team associated with this livestream account
-                        $userBelongsToTeam = $users->contains(Auth::user());
+                        $userBelongsToTeam = $users->contains(auth()->user());
 
-                        if ( ! $userBelongsToTeam) {
+                        if (! $userBelongsToTeam) {
                             throw new AuthenticationException("The authenticated user does not have access to this team's resources");
                         }
                     } else {
-                        throw new LivestreamAccountIdNotFoundException();
+                        throw new LivestreamAccountIdNotFoundException;
                     }
                 } else {
                     $livestreamAccount = $this->_livestreamAccount;
@@ -117,21 +110,21 @@
                         $planned_start_time = $request->get('planned_start_time');
 
                         // If it's numeric, then we will assume it's a timestamp (UTC)
-                        if ( ! is_numeric($planned_start_time)) {
-                            $carbonTime         = new Carbon($planned_start_time, $timezone);
+                        if (! is_numeric($planned_start_time)) {
+                            $carbonTime = new Carbon($planned_start_time, $timezone);
                             $planned_start_time = $carbonTime->setTimezone(config('app.timezone'))->timestamp;
                         }
                     } else {
                         $planned_start_time = now()->addMinutes(15)->timestamp;
                     }
 
-                    if ( ! $request->filled('title')) {
-                        throw new MissingParameterException(['episode_title', 'episode_id'], "Episode Title must be provided if you do not pass in an Episode Id");
+                    if (! $request->filled('title')) {
+                        throw new MissingParameterException(['episode_title', 'episode_id'], 'Episode Title must be provided if you do not pass in an Episode Id');
                     } else {
-                        $episodeData                          = [];
-                        $episodeData['title']                 = $request->get('title');
+                        $episodeData = [];
+                        $episodeData['title'] = $request->get('title');
                         $episodeData['livestream_account_id'] = $livestreamAccount->id;
-                        $episodeData['planned_start_time']    = $planned_start_time;
+                        $episodeData['planned_start_time'] = $planned_start_time;
                         if ($request->filled('description')) {
                             $episodeData['description'] = $request->get('description');
                         }
@@ -139,21 +132,21 @@
 
                         // Setup Video Data from Episode
                         $videoData = [
-                            'title'       => $episode->title,
+                            'title' => $episode->title,
                             'description' => $episode->description,
-                            'episode_id'  => $episode->id,
+                            'episode_id' => $episode->id,
                         ];
                     }
                 } else {
                     // get $planned_start_time from Episode
-                    if ( ! empty($episode->planned_start_time)) {
+                    if (! empty($episode->planned_start_time)) {
                         $planned_start_time = $episode->planned_start_time->timestamp;
-                    } else if ($request->filled('planned_start_time')) {
+                    } elseif ($request->filled('planned_start_time')) {
                         $planned_start_time = $request->get('planned_start_time');
 
                         // If it's numeric, then we will assume it's a timestamp
-                        if ( ! is_numeric($planned_start_time)) {
-                            $carbonTime         = new Carbon($planned_start_time, $timezone);
+                        if (! is_numeric($planned_start_time)) {
+                            $carbonTime = new Carbon($planned_start_time, $timezone);
                             $planned_start_time = $carbonTime->setTimezone(config('app.timezone'))->timestamp;
                         }
 
@@ -165,7 +158,7 @@
 
                     // Setup Video Data from Episode and passed in data
                     $videoData = [
-                        'episode_id' => $episode->id
+                        'episode_id' => $episode->id,
                     ];
                     if ($request->filled('title')) {
                         $videoData['title'] = $request->get('title');
@@ -177,25 +170,25 @@
 
                 // Get Facebook Video Source Type
                 $videoSourceType = VideoSourceType::where('slug', '=', 'facebook')->first();
-                if ( ! empty($videoSourceType)) {
+                if (! empty($videoSourceType)) {
                     $videoData['video_source_type_id'] = $videoSourceType->id;
                 } else {
                     throw new \Exception('Could not find Facebook Video Source Type');
                 }
 
                 // If Facebook pages are passed in request, then we need to create & schedule a video for each page
-                if ( ! $request->filled('facebook_pages')) {
+                if (! $request->filled('facebook_pages')) {
                     throw new Exception('Could not find Facebook Pages to schedule videos on in Request');
                 } else {
                     $request_facebook_pages = $request->get('facebook_pages');
-                    $user                   = Auth::user();
-                    $socialAccounts         = SocialAccount::whereUserId($user->id)->where('provider', '=', 'facebook')->get();
+                    $user = auth()->user();
+                    $socialAccounts = SocialAccount::whereUserId($user->id)->where('provider', '=', 'facebook')->get();
                     //@note this will not work once we have more than one social account per user
                     // for now, we will simply grab the first one
                     $facebookSocialAccount = $socialAccounts->first();
 
                     // Grab all facebook pages that the user has admin access to
-                    $socialAccountService    = new SocialAccountService($facebookSocialAccount);
+                    $socialAccountService = new SocialAccountService($facebookSocialAccount);
                     $all_user_facebook_pages = collect($socialAccountService->getFacebookPages());
 
                     $videos = collect();
@@ -205,10 +198,10 @@
                             return $item['id'] == $fb_page['id'];
                         });
 
-                        if ( ! empty($found_fb_page)) {
+                        if (! empty($found_fb_page)) {
                             $teamObject = [
-                                'id'           => $found_fb_page['id'],
-                                'access_token' => $found_fb_page['access_token']
+                                'id' => $found_fb_page['id'],
+                                'access_token' => $found_fb_page['access_token'],
                             ];
 
                             // create the Omnia Video
@@ -216,19 +209,19 @@
 
                             // Create the Facebook Live Video
                             $params = [
-                                'title'       => $video->title,
+                                'title' => $video->title,
                                 'description' => $video->description,
                                 //                                'planned_start_time' => $planned_start_time, // removed this because it automatically makes a "this page plans to go live" post
                                 //                                'status'             => 'SCHEDULED_UNPUBLISHED' // @TODO [Josh] - this is default for now, we might take it as a parameter in the future
                             ];
 
                             $streamTargetService = new StreamIntegrationService($livestreamAccount);
-                            $fbVideo             = $streamTargetService->createFacebookLiveVideo($params, $teamObject);
+                            $fbVideo = $streamTargetService->createFacebookLiveVideo($params, $teamObject);
 
                             // attach facebook video info to omnia video object
-                            $video->stream_url              = $fbVideo['secure_stream_url'];
+                            $video->stream_url = $fbVideo['secure_stream_url'];
                             $video->video_source_account_id = $teamObject['id']; // account id
-                            $video->video_source_id         = $fbVideo['id']; // video id
+                            $video->video_source_id = $fbVideo['id']; // video id
                             $video->save();
 
                             $videos->push($video);
@@ -242,9 +235,8 @@
 
                 return response()->json([
                     'success' => true,
-                    'episode' => $episode
+                    'episode' => $episode,
                 ]);
-
             } catch (\Exception $e) {
                 DB::rollback();
                 Log::error($e->getMessage());
@@ -255,8 +247,7 @@
         /**
          * Return the most Recent Video for this LivestreamAccount
          *
-         * @param null $livestreamAccountId
-         *
+         * @param  null  $livestreamAccountId
          * @return mixed
          */
         public function mostRecentVideo($livestreamAccountId = null)
@@ -269,7 +260,7 @@
                 $video = LivestreamAccount::findOrFail($livestreamAccountId)->mostRecentVideo();
             }
 
-            if ( ! empty($video)) {
+            if (! empty($video)) {
                 $result = $video;
             }
 
@@ -279,7 +270,6 @@
         /**
          * Download a video from file storage
          *
-         * @param Video $video
          *
          * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
          */
@@ -303,16 +293,15 @@
 //
 //            $request = $client->createPresignedRequest($command, $expiry);
 
-            return redirect($video->download_url .'?download=' . str_slug($video->episode->title));
+            return redirect($video->download_url . '?download=' . str_slug($video->episode->title));
         }
 
         /**
          * Update a Video
          *
-         * @param Request $request
-         * @param Video   $video
          *
          * @return Video
+         *
          * @throws \Facebook\Exceptions\FacebookResponseException
          * @throws \Facebook\Exceptions\FacebookSDKException
          */
@@ -323,7 +312,7 @@
             DB::beginTransaction();
 
             $video->update($params);
-            if ( ! empty($video->video_source_id)) {
+            if (! empty($video->video_source_id)) {
                 $facebookResponse = $this->updateFacebookLiveVideo($video);
             }
 
@@ -335,43 +324,43 @@
         /**
          * Update a Facebook Live Video
          *
-         * @param $video
          *
          * @return null|array $fbVideoResponse array of data from facebook or nul if we couldn't find the team page id
+         *
          * @throws \Facebook\Exceptions\FacebookResponseException
          * @throws \Facebook\Exceptions\FacebookSDKException
          */
         public function updateFacebookLiveVideo($video)
         {
             $params = [
-                'video_id'    => $video->video_source_id,
-                'title'       => $video->title,
+                'video_id' => $video->video_source_id,
+                'title' => $video->title,
                 'description' => $video->description,
             ];
 
-            $user                  = Auth::user();
-            $socialAccounts        = SocialAccount::whereUserId($user->id)->where('provider', '=', 'facebook')->get();
+            $user = auth()->user();
+            $socialAccounts = SocialAccount::whereUserId($user->id)->where('provider', '=', 'facebook')->get();
             $facebookSocialAccount = $socialAccounts->first();
 
             // Grab all facebook pages that the user has admin access to
-            $socialAccountService    = new SocialAccountService($facebookSocialAccount);
+            $socialAccountService = new SocialAccountService($facebookSocialAccount);
             $all_user_facebook_pages = collect($socialAccountService->getFacebookPages());
 
             $fb_page = $video->video_source_account_id;
             // find if fb_page is in user facebook pages
-            if ( ! empty($fb_page)) {
+            if (! empty($fb_page)) {
                 $found_fb_page = $all_user_facebook_pages->first(function ($item, $key) use ($fb_page) {
                     return $item['id'] == $fb_page;
                 });
 
-                if ( ! empty($found_fb_page)) {
+                if (! empty($found_fb_page)) {
                     $teamObject = [
-                        'id'           => $found_fb_page['id'],
-                        'access_token' => $found_fb_page['access_token']
+                        'id' => $found_fb_page['id'],
+                        'access_token' => $found_fb_page['access_token'],
                     ];
 
                     $streamTargetService = new StreamIntegrationService($this->_livestreamAccount);
-                    $fbVideoResponse     = $streamTargetService->updateFacebookLiveVideo($params, $teamObject);
+                    $fbVideoResponse = $streamTargetService->updateFacebookLiveVideo($params, $teamObject);
 
                     return $fbVideoResponse;
                 }
@@ -381,7 +370,6 @@
         /**
          * Delete one or more Videos
          *
-         * @param $ids
          *
          * @return int
          */

@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Registries\VideoSource;
+<?php
+
+namespace Modules\Livestream\Registries\VideoSource;
 
 use Modules\Livestream\Models\Video;
 use Modules\Livestream\Registries\VideoSource\Concerns\BaseVideoSource;
@@ -23,7 +25,7 @@ class MuxVideoSource implements BaseVideoSource
     {
         $defaultPlaybackId = $video->getDefaultPlaybackId()?->playback_id;
 
-        return $defaultPlaybackId ? config('services.mux.playback_prefix') .$defaultPlaybackId . config('services.mux.playback_suffix') : null;
+        return $defaultPlaybackId ? config('services.mux.playback_prefix') . $defaultPlaybackId . config('services.mux.playback_suffix') : null;
     }
 
     public function downloadUrl(Video $video): ?string

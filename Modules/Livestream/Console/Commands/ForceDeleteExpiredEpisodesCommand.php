@@ -1,7 +1,9 @@
-<?php namespace Modules\Livestream\Console\Commands;
+<?php
 
-use Modules\Livestream\Models\Episode;
+namespace Modules\Livestream\Console\Commands;
+
 use Illuminate\Console\Command;
+use Modules\Livestream\Models\Episode;
 
 class ForceDeleteExpiredEpisodesCommand extends Command
 {
@@ -14,6 +16,6 @@ class ForceDeleteExpiredEpisodesCommand extends Command
         Episode::with('video', 'media', 'livestreamAccount')
             ->shouldBeForceDeleted()
             ->get()
-            ->each(fn(Episode $episode) => $episode->purge());
+            ->each(fn (Episode $episode) => $episode->purge());
     }
 }

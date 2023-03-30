@@ -9,7 +9,7 @@
 @endphp
 
 <li {{ $attributes->merge(['class' => $class]) }}>
-    @if($person?->photo)
+    @if ($person?->photo)
         <div class="group block w-1/3 aspect-w-10 aspect-h-2 rounded-l-md bg-gray-100 overflow-hidden relative">
             <img class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none" src="{{ $person->photo }}" alt="{{ $person->name }}">
         </div>

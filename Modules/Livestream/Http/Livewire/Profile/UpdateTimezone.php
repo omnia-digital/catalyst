@@ -1,11 +1,12 @@
-<?php namespace Modules\Livestream\Http\Livewire\Profile;
+<?php
 
-use Modules\Livestream\Models\User;
-use Modules\Livestream\Support\Livewire\WithTimezone;
+namespace Modules\Livestream\Http\Livewire\Profile;
+
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Modules\Livestream\Models\User;
+use Modules\Livestream\Support\Livewire\WithTimezone;
 
 /**
  * @property array $timezones
@@ -22,13 +23,6 @@ class UpdateTimezone extends Component
         $this->timezone = $this->currentUser->timezone;
     }
 
-    protected function rules(): array
-    {
-        return [
-            'timezone' => ['nullable', Rule::in($this->timezones)]
-        ];
-    }
-
     public function updateTimezone()
     {
         $this->validate();
@@ -40,13 +34,20 @@ class UpdateTimezone extends Component
 
     public function getCurrentUserProperty()
     {
-        return Auth::user();
+        return auth()->user();
     }
 
     public function render()
     {
         return view('profile.update-timezone', [
-            'timezones' => $this->timezones
+            'timezones' => $this->timezones,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'timezone' => ['nullable', Rule::in($this->timezones)],
+        ];
     }
 }

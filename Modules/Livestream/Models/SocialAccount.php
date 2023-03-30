@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Models;
+<?php
+
+namespace Modules\Livestream\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,13 +20,8 @@ class SocialAccount extends Model
         'team_token',
         'expires_in',
         'refresh_token',
-        'verified'
+        'verified',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public static function findByProvider(string $provider, int|string $providerUserId)
     {
@@ -32,5 +29,10 @@ class SocialAccount extends Model
             ->where('provider', $provider)
             ->where('provider_user_id', $providerUserId)
             ->first();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

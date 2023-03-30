@@ -2,14 +2,14 @@
 
 namespace Modules\Livestream\Http\Livewire\Setting;
 
-use Modules\Livestream\Enums\VideoStorageOption;
-use Modules\Livestream\Models\Episode;
-use Modules\Livestream\Models\LivestreamAccount;
-use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Modules\Livestream\Enums\VideoStorageOption;
+use Modules\Livestream\Models\Episode;
+use Modules\Livestream\Models\LivestreamAccount;
+use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
 
 /**
  * @property Collection $expiredEpisodes
@@ -24,13 +24,6 @@ class VideoSetting extends Component
     public int $expiredEpisodeCount = 0;
 
     public bool $confirmingVideoDeletion = false;
-
-    protected function rules(): array
-    {
-        return [
-            'videoStorage' => ['required', Rule::in(array_keys(VideoStorageOption::options()))]
-        ];
-    }
 
     public function mount()
     {
@@ -51,7 +44,7 @@ class VideoSetting extends Component
         $this->validate();
 
         // Show the confirmation modal when select auto-delete.
-        if ($this->videoStorage === VideoStorageOption::DELETE_VIDEO && !$this->confirmingVideoDeletion) {
+        if ($this->videoStorage === VideoStorageOption::DELETE_VIDEO && ! $this->confirmingVideoDeletion) {
             $this->confirmingVideoDeletion = true;
 
             return;
@@ -59,11 +52,11 @@ class VideoSetting extends Component
 
         DB::transaction(function () {
             $this->livestreamAccount->update([
-                'video_storage_option' => $this->videoStorage
+                'video_storage_option' => $this->videoStorage,
             ]);
 
             if ($this->videoStorage === VideoStorageOption::DELETE_VIDEO) {
-                $this->expiredEpisodes->each(fn(Episode $episode) => $episode->delete());
+                $this->expiredEpisodes->each(fn (Episode $episode) => $episode->delete());
             }
         });
 
@@ -82,7 +75,14 @@ class VideoSetting extends Component
     public function render()
     {
         return view('setting.video-setting', [
-            'videoStorageOptions' => VideoStorageOption::options()
+            'videoStorageOptions' => VideoStorageOption::options(),
         ])->layout('layouts.setting');
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'videoStorage' => ['required', Rule::in(array_keys(VideoStorageOption::options()))],
+        ];
     }
 }

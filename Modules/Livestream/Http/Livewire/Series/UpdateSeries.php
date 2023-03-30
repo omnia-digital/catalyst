@@ -2,9 +2,9 @@
 
 namespace Modules\Livestream\Http\Livewire\Series;
 
-use Modules\Livestream\Support\Livewire\WithNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Modules\Livestream\Support\Livewire\WithNotification;
 
 class UpdateSeries extends Component
 {
@@ -13,13 +13,6 @@ class UpdateSeries extends Component
     public \App\Models\Series $series;
 
     public bool $deleteSeriesModalOpen = false;
-
-    protected function rules(): array
-    {
-        return [
-            'series.name' => ['required', 'max:254']
-        ];
-    }
 
     public function mount()
     {
@@ -49,5 +42,12 @@ class UpdateSeries extends Component
     public function render()
     {
         return view('series.update-series');
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'series.name' => ['required', 'max:254'],
+        ];
     }
 }

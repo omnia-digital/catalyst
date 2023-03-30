@@ -2,29 +2,20 @@
 
 namespace Modules\Livestream\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Modules\Livestream\Http\Requests\PlaylistRequest;
 use Modules\Livestream\LivestreamAccount;
 use Modules\Livestream\Playlist;
-use Auth;
-use Illuminate\Http\Request;
-use Modules\Livestream\Http\Requests;
-use Modules\Livestream\Http\Controllers\LivestreamController;
 use Modules\Livestream\Services\PlayerService;
-use Modules\Livestream\WowzaMediaServer;
-use Modules\Livestream\WowzaVhost;
-use Modules\Livestream\WowzaPublisher;
-use Modules\Livestream\WowzaVhostHostPort;
-
+use Redirect;
 
 class PlaylistController extends LivestreamController
 {
-
     /**
      * Create a PlaylistController Instance
      */
-    public function __construct ()
+    public function __construct()
     {
-
     }
 
     /**
@@ -44,13 +35,13 @@ class PlaylistController extends LivestreamController
      */
     public function create()
     {
-        $LivestreamAccounts = Auth::user()->LivestreamAccounts;
+        $LivestreamAccounts = auth()->user()->LivestreamAccounts;
 //        $events = collect();
 //        foreach ($LivestreamAccounts as $LivestreamAccount) {
 //            $events->push($LivestreamAccount->events->all());
 //        }
 //        $events = $events->flatten()->lists('title','id');
-        $LivestreamAccounts = $LivestreamAccounts->flatten()->lists('account_name','id');
+        $LivestreamAccounts = $LivestreamAccounts->flatten()->lists('account_name', 'id');
 
         return view('livestream::playlist/create', compact('LivestreamAccounts'));
     }
@@ -58,8 +49,7 @@ class PlaylistController extends LivestreamController
     /**
      * Store a newly created Playlist in storage.
      *
-     * @param PlaylistRequest|Request $request
-     *
+     * @param  PlaylistRequest|Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(PlaylistRequest $request)
@@ -68,31 +58,32 @@ class PlaylistController extends LivestreamController
         $playlist = Playlist::create([
             'name' => $request['playlist_name'],
             'type' => $request['playlist_type'],
-            'account_id' => $request['LivestreamAccount']
+            'account_id' => $request['LivestreamAccount'],
         ]);
 
-        flash()->overlay("Your new Playlist " . $playlist->name . " has been created! <br/> Let's get started and create your first Event!", 'Congratulations!');
+        flash()->overlay('Your new Playlist ' . $playlist->name . " has been created! <br/> Let's get started and create your first Event!", 'Congratulations!');
 
         return redirect()->route('livestream::playlist.edit', $playlist);
     }
 
-	/**
-	 * Display the specified resource.
-	 *
+    /**
+     * Display the specified resource.
+     *
      * @param  Playlist  $playlist
-	 * @return \Illuminate\Http\Response
-	 */
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         $playlist = Playlist::findOrFail($id);
+
         return view('livestream::playlist/profile', compact('$playlist'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param $id
      * @return \Illuminate\Http\Response
+     *
      * @internal param Playlist $playlist
      */
     public function edit($id)
@@ -100,7 +91,7 @@ class PlaylistController extends LivestreamController
 //        $groups = Event::lists('name', 'id');
 
         $playlist = Playlist::findorFail($id);
-        $LivestreamAccounts = Auth::user()->LivestreamAccounts;
+        $LivestreamAccounts = auth()->user()->LivestreamAccounts;
         $events = collect();
         foreach ($LivestreamAccounts as $LivestreamAccount) {
             $events->push($LivestreamAccount->events->all());
@@ -113,9 +104,7 @@ class PlaylistController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param PlaylistRequest|Request $request
-     * @param  Playlist               $playlist
-     *
+     * @param  PlaylistRequest|Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update(PlaylistRequest $request, Playlist $playlist)
@@ -125,7 +114,7 @@ class PlaylistController extends LivestreamController
 
 //        $playlist->sync($request->input('group_list'));
 
-        return \Redirect::back()->with('message','Operation Successful !');
+        return Redirect::back()->with('message', 'Operation Successful !');
     }
 
     /**
@@ -139,60 +128,49 @@ class PlaylistController extends LivestreamController
     }
 
     /**
-     * @param $type
      * @return string
      */
-	public function getPlaylist($LivestreamAccountId, $type = null)
-	{
+    public function getPlaylist($LivestreamAccountId, $type = null)
+    {
         return $this->getLiveVodPlaylist($LivestreamAccountId);
     }
 
-	/**
-	 * Get Live & Vod Playlist
-	 *
-	 * @param $LivestreamAccountId
-	 *
-	 * @return
-	 */
-	public function getLiveVodPlaylist($LivestreamAccountId)
-	{
-		// Get LivestreamAcount
-		$LivestreamAccount = LivestreamAccount::findOrFail($LivestreamAccountId);
+    /**
+     * Get Live & Vod Playlist
+     */
+    public function getLiveVodPlaylist($LivestreamAccountId)
+    {
+        // Get LivestreamAcount
+        $LivestreamAccount = LivestreamAccount::findOrFail($LivestreamAccountId);
 
-		$playerService = new PlayerService();
+        $playerService = new PlayerService;
 
-		return $playerService->getPlayerPlaylist($LivestreamAccount);
-	}
+        return $playerService->getPlayerPlaylist($LivestreamAccount);
+    }
 
-	/**
-	 * Get Vod Playlist
-	 * @param $LivestreamAccountId
-	 *
-	 * @return
-	 */
-	public function getVodPlaylist($LivestreamAccountId)
-	{
-		// Get LivestreamAcount
-		$LivestreamAccount = LivestreamAccount::findOrFail($LivestreamAccountId);
+    /**
+     * Get Vod Playlist
+     */
+    public function getVodPlaylist($LivestreamAccountId)
+    {
+        // Get LivestreamAcount
+        $LivestreamAccount = LivestreamAccount::findOrFail($LivestreamAccountId);
 
-		$playerService = new PlayerService();
-		return $playerService->getLiveAndVodPlaylist($LivestreamAccount);
-	}
+        $playerService = new PlayerService;
 
-	/**
-	 * Get Live Playlist
-	 *
-	 * @param $LivestreamAccountId
-	 *
-	 * @return
-	 */
-	public function getLivePlaylist($LivestreamAccountId)
-	{
-		// Get LivestreamAcount
-		$LivestreamAccount = LivestreamAccount::findOrFail($LivestreamAccountId);
+        return $playerService->getLiveAndVodPlaylist($LivestreamAccount);
+    }
 
-		$playerService = new PlayerService();
-		return $playerService->getLiveAndVodPlaylist($LivestreamAccount);
-	}
+    /**
+     * Get Live Playlist
+     */
+    public function getLivePlaylist($LivestreamAccountId)
+    {
+        // Get LivestreamAcount
+        $LivestreamAccount = LivestreamAccount::findOrFail($LivestreamAccountId);
 
+        $playerService = new PlayerService;
+
+        return $playerService->getLiveAndVodPlaylist($LivestreamAccount);
+    }
 }

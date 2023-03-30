@@ -1,4 +1,6 @@
-<?php namespace Modules\Livestream\Plans\Features;
+<?php
+
+namespace Modules\Livestream\Plans\Features;
 
 class StreamTargetFeature extends Feature
 {
@@ -11,8 +13,6 @@ class StreamTargetFeature extends Feature
 
     /**
      * Count the stream target usage of the current livestream account.
-     *
-     * @return int
      */
     public function usage(): int
     {

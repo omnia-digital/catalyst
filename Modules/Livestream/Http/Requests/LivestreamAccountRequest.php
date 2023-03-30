@@ -2,7 +2,7 @@
 
 namespace Modules\Livestream\Http\Requests;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LivestreamAccountRequest extends LivestreamRequest
 {

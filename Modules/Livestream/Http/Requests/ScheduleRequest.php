@@ -2,7 +2,7 @@
 
 namespace Modules\Livestream\Http\Requests;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleRequest extends LivestreamRequest
 {
@@ -29,8 +29,8 @@ class ScheduleRequest extends LivestreamRequest
     public function rules()
     {
         return [
-//            'account_name' => 'required | min:3',
-//            'account_email'  => 'required | min:3',
+            //            'account_name' => 'required | min:3',
+            //            'account_email'  => 'required | min:3',
         ];
     }
 }

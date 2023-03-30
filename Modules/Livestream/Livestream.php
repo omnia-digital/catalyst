@@ -1,7 +1,11 @@
-<?php namespace Modules\Livestream;
+<?php
 
-use Modules\Livestream\Traits\UsesShortcodes;
+namespace Modules\Livestream;
+
 use Illuminate\Support\Str;
+use InvalidArgumentException;
+use Modules\Livestream\Traits\UsesShortcodes;
+use NumberFormatter;
 
 class Livestream
 {
@@ -14,27 +18,26 @@ class Livestream
     {
         return [
             [
-                'code'        => 'niv',
-                'title'       => 'NIV',
-                'description' => ''
+                'code' => 'niv',
+                'title' => 'NIV',
+                'description' => '',
             ],
             [
-                'code'        => 'esv',
-                'title'       => 'ESV',
-                'description' => ''
+                'code' => 'esv',
+                'title' => 'ESV',
+                'description' => '',
             ],
             [
-                'code'        => 'lbla95',
-                'title'       => 'Spanish (La Biblia de las Americas)',
-                'description' => ''
-            ]
+                'code' => 'lbla95',
+                'title' => 'Spanish (La Biblia de las Americas)',
+                'description' => '',
+            ],
         ];
     }
 
     /**
      * Humanize the given value into a proper name.
      *
-     * @param  $value
      * @return string
      */
     public static function humanize($value)
@@ -47,7 +50,6 @@ class Livestream
     }
 
     /**
-     * @param mixed $number
      * @return mixed|string
      */
     public static function shortenLongNumber(mixed $number)
@@ -69,29 +71,25 @@ class Livestream
     }
 
     /**
-     * @param string $string
-     * @param int $maxFractionDigits
      * @return bool|string
      */
     public static function money(string $string, int $maxFractionDigits = 2)
     {
-        $amount = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
-        $amount->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, $maxFractionDigits);
+        $amount = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
+        $amount->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $maxFractionDigits);
 
         return $amount->format($string);
     }
 
     /**
-     * @param int|float $duration
-     * @param string|null $unit // Only support second and minute.
-     * @return string
+     * @param  string|null  $unit // Only support second and minute.
      */
     public static function formatDuration(int|float $duration, ?string $unit = null): string
     {
         is_null($unit) && $unit = config('metered.price.unit');
 
-        if (!in_array($unit, ['second', 'minute'])) {
-            throw new \InvalidArgumentException('Only support "second" and "minute" for $unit.');
+        if (! in_array($unit, ['second', 'minute'])) {
+            throw new InvalidArgumentException('Only support "second" and "minute" for $unit.');
         }
 
         if ($unit === 'minute') {
@@ -104,7 +102,6 @@ class Livestream
     }
 
     /**
-     * @param string $fullName
      * @return array
      */
     public static function extractFullName(string $fullName)
@@ -123,7 +120,7 @@ class Livestream
             'josht@omnia-app.org',
             'admin@omnia-app.org',
             'phuc@omniadigital.io',
-            'admin@omniadigital.io'
+            'admin@omniadigital.io',
         ];
     }
 }

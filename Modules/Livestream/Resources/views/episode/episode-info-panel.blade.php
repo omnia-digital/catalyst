@@ -27,7 +27,7 @@
                     <div class="py-3 flex space-x-2 text-sm font-medium">
                         <dt class="text-gray-500">Published</dt>
                         <dd class="text-gray-900">
-                            @if($episode->is_published)
+                            @if ($episode->is_published)
                                 <x-heroicon-s-check-circle class="h-5 w-5 text-green-500"/>
                             @else
                                 <x-heroicon-s-x-circle class="h-5 w-5 text-red-500"/>
@@ -39,7 +39,7 @@
                         <dt class="text-gray-500">Views</dt>
                         <dd class="text-gray-900">{{ number_format($episode->views) }}</dd>
                     </div>
-                    
+
                     <div class="py-3 flex justify-between text-sm font-medium">
                         <dt class="text-gray-500">Total Downloads</dt>
                         <dd class="text-gray-900">{{ $episode->attachmentDownloads()->count() }}</dd>
@@ -113,7 +113,7 @@
 
                     <div class="py-3 flex justify-between text-sm font-medium">
                         <dt class="text-gray-500">Category</dt>
-                        <dd class="text-gray-900">{{ $episode->category?->name}}</dd>
+                        <dd class="text-gray-900">{{ $episode->category?->name }}</dd>
                     </div>
                 </div>
 

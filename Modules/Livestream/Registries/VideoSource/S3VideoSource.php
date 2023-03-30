@@ -1,11 +1,11 @@
-<?php namespace Modules\Livestream\Registries\VideoSource;
+<?php
 
-use Modules\Livestream\Models\Video;
-use Modules\Livestream\Registries\VideoSource\Concerns\BaseVideoSource;
-use Modules\Livestream\Services\Mux\Concerns\Downloadable;
-use Modules\Livestream\Services\Mux\MuxAsset;
+namespace Modules\Livestream\Registries\VideoSource;
+
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Modules\Livestream\Models\Video;
+use Modules\Livestream\Registries\VideoSource\Concerns\BaseVideoSource;
 
 class S3VideoSource implements BaseVideoSource
 {
@@ -33,8 +33,8 @@ class S3VideoSource implements BaseVideoSource
         $client = Storage::disk('s3-vod')->getDriver()->getAdapter()->getClient();
 
         $command = $client->getCommand('GetObject', [
-            'Bucket'                     => config('filesystems.disks.s3-vod.bucket'),
-            'Key'                        => $video->full_file_path,
+            'Bucket' => config('filesystems.disks.s3-vod.bucket'),
+            'Key' => $video->full_file_path,
             'ResponseContentDisposition' => 'attachment; filename="' . $this->downloadFilename($video) . '"',
         ]);
 
@@ -51,10 +51,6 @@ class S3VideoSource implements BaseVideoSource
         // TODO: Implement isProcessing() method.
     }
 
-    /**
-     * @param Video $video
-     * @return string
-     */
     private function downloadFilename(Video $video): string
     {
         return $video->episode->livestreamAccount->account_slug

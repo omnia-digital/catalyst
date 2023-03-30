@@ -1,8 +1,9 @@
-<?php namespace Laravel\Spark\Listeners\Tutorials;
+<?php
+
+namespace Laravel\Spark\Listeners\Tutorials;
 
 class FirstTimeLoginTutorial
 {
-
     /**
      * Handle the event.
      *

@@ -3,10 +3,6 @@
 namespace Modules\Livestream\Http\Controllers;
 
 use Modules\Livestream\Models\Media;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
 
 class AttachmentController extends Controller
 {
@@ -14,12 +10,12 @@ class AttachmentController extends Controller
     {
         $download = $media->downloads()->whereDay('created_at', now())->first();
 
-        if(!is_null($download)) {
+        if (! is_null($download)) {
             $download->count++;
             $download->save();
         } else {
             $media->downloads()->create([
-                'count' => 1
+                'count' => 1,
             ]);
         }
 
@@ -30,12 +26,12 @@ class AttachmentController extends Controller
     {
         $download = $media->downloads()->whereDay('created_at', now())->first();
 
-        if(!is_null($download)) {
+        if (! is_null($download)) {
             $download->count++;
             $download->save();
         } else {
             $media->downloads()->create([
-                'count' => 1
+                'count' => 1,
             ]);
         }
 

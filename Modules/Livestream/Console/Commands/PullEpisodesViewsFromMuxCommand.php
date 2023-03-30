@@ -2,10 +2,10 @@
 
 namespace Modules\Livestream\Console\Commands;
 
-use Modules\Livestream\Jobs\PullEpisodeViewsFromMuxJob;
-use Modules\Livestream\Models\Episode;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
+use Modules\Livestream\Jobs\PullEpisodeViewsFromMuxJob;
+use Modules\Livestream\Models\Episode;
 
 class PullEpisodesViewsFromMuxCommand extends Command
 {

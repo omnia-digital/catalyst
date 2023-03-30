@@ -1,6 +1,6 @@
 @push('scripts')
     @auth
-        @if(!\Auth::user()->isImpersonating())
+        @if (!\Auth::user()->isImpersonating())
         <script>
             window.addEventListener('load', function () {
                 gist.identify("{{ \Auth::user()?->id }}", {

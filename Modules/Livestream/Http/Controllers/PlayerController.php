@@ -2,26 +2,16 @@
 
 namespace Modules\Livestream\Http\Controllers;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Foundation\EnvironmentDetector;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use Modules\Livestream\Exceptions\UnsupportedBroswerException;
-use Modules\Livestream\Services\PlayerService;
 use Modules\Livestream\Http\Requests\PlayerRequest;
 use Modules\Livestream\LivestreamAccount;
 use Modules\Livestream\Player;
-use Auth;
-use Illuminate\Http\Request;
-use Modules\Livestream\Http\Requests;
-use Modules\Livestream\Http\Controllers\LivestreamController;
-use Modules\Livestream\Video;
-use Modules\Livestream\WowzaMediaServer;
-use Modules\Livestream\WowzaVhost;
-use Modules\Livestream\WowzaPublisher;
-use Modules\Livestream\WowzaVhostHostPort;
+use Modules\Livestream\Services\PlayerService;
 use Modules\Livestream\Services\StreamService;
-
 
 class PlayerController extends LivestreamController
 {
@@ -38,8 +28,6 @@ class PlayerController extends LivestreamController
         $players = $this->_livestreamAccount->players;
 
 //        $players->load('embedCode');
-
-
 
         return $players;
 
@@ -68,8 +56,7 @@ class PlayerController extends LivestreamController
     /**
      * Store a newly created Player in storage.
      *
-     * @param PlayerRequest|Request $request
-     *
+     * @param  PlayerRequest|Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(PlayerRequest $request)
@@ -80,7 +67,7 @@ class PlayerController extends LivestreamController
 
         return response()->json([
             'success' => true,
-            'data' => $player
+            'data' => $player,
         ]);
 
 //        flash()->overlay("Your new Player " . $player->name . " has been created! <br/> Let's get started and create your first Event!", 'Congratulations!');
@@ -91,7 +78,6 @@ class PlayerController extends LivestreamController
     /**
      * Display the specified resource.
      *
-     * @param  Player  $player
      * @return \Illuminate\Http\Response
      */
     public function show(Player $player)
@@ -106,11 +92,10 @@ class PlayerController extends LivestreamController
             if ($livestreamAccount->mux_livestream_active == true) {
                 // Mux Live stream
                 $streams = $livestreamAccount->streams;
-                if ( ! empty($streams) && $streams->isNotEmpty()) {
-                    $stream      = $streams->first();
+                if (! empty($streams) && $streams->isNotEmpty()) {
+                    $stream = $streams->first();
                     $playbackUrl = $stream->default_playback_url;
                 }
-
             } else {
                 // Wowza Live stream
                 $playbackUrl = $streamService->getLivestreamURL();
@@ -118,10 +103,10 @@ class PlayerController extends LivestreamController
 
             $player->startingVideo = [
                 'playback_url' => $playbackUrl,
-                'image_url'    => $livestreamAccount->before_live_image
+                'image_url' => $livestreamAccount->before_live_image,
             ];
         } else {
-            $player->startingEpisode = $livestreamAccount->episodes()->where('is_published',true)->latest('date_recorded')->with('videos')->first();
+            $player->startingEpisode = $livestreamAccount->episodes()->where('is_published', true)->latest('date_recorded')->with('videos')->first();
         }
 
         return $player;
@@ -130,19 +115,18 @@ class PlayerController extends LivestreamController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Player $player
      * @return \Illuminate\Http\Response
      */
     public function edit(Player $player)
     {
-        $this->_playerService = new PlayerService();
+        $this->_playerService = new PlayerService;
 
         // @TODO [Josh] - I want to be able to decide if that Player uses Live Episodes or not. If a player is going to have live, just add live playlist to that player automatically *user should be able to decide which streams to use (future release)*
 
         // to be able to look at a player and decide what goes on it.
-            // livestream from this stream
-            // these past episodes with filters: Sundays, wednesdays, specific  , specific types of services?? or schedules
-            // maybe create a mysql view to have past episodes
+        // livestream from this stream
+        // these past episodes with filters: Sundays, wednesdays, specific  , specific types of services?? or schedules
+        // maybe create a mysql view to have past episodes
 
         // The only point of playlists that I see is reusability from a player to a podcast/rss feed, also making a live playlist would make it so you could give the feed whatever name you want.
         // playlist should just be a query of episodes if its dynamic
@@ -159,19 +143,18 @@ class PlayerController extends LivestreamController
 //        $events = $events->flatten()->lists('title', 'id');
 //
 //        $LivestreamURL = "rtmp://52.53.215.51:1935/asdf_live/_definst_/flv:1/2.flv";
-        $streamService = new StreamService($this->_livestreamAccount, $player,'all');
+        $streamService = new StreamService($this->_livestreamAccount, $player, 'all');
 //        $Livestreams = $streamService->getDVRLivestreams();
-//	    $Livestreams = $Livestreams->first()->get('all'); // @TODO [Josh] - this is because I don't know how to handle multiple streams right now on the JWPlayer * I will remove this once I can
-	    $recentVideoPlaylist = $this->_playerService->getPlayerPlaylist($this->_livestreamAccount,$streamService);
-	    $LivestreamPlaylist = $this->_playerService->getPlayerPlaylist($this->_livestreamAccount,$streamService);
+        //	    $Livestreams = $Livestreams->first()->get('all'); // @TODO [Josh] - this is because I don't know how to handle multiple streams right now on the JWPlayer * I will remove this once I can
+        $recentVideoPlaylist = $this->_playerService->getPlayerPlaylist($this->_livestreamAccount, $streamService);
+        $LivestreamPlaylist = $this->_playerService->getPlayerPlaylist($this->_livestreamAccount, $streamService);
         $LivestreamAccountId = $this->_livestreamAccount->id;
 //
 //
-//	    $LivestreamPlaylist = $this->_playerService->formatForJWPlayerPlaylist($VodStreams);
+        //	    $LivestreamPlaylist = $this->_playerService->formatForJWPlayerPlaylist($VodStreams);
 //        $mostRecentVideo = $this->_livestreamAccount->mostRecentVideo();
 //        $videos = collect([$mostRecentVideo]);
 //        $recentVideoPlaylist = $this->_playerService->formatForJWPlayerPlaylist($videos);
-
 
         return $player;
 //        return view('livestream::player/edit',compact('player','LivestreamPlaylist','LivestreamAccountId','recentVideoPlaylist'));
@@ -180,9 +163,7 @@ class PlayerController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param PlayerRequest|Request $request
-     * @param  Player               $player
-     *
+     * @param  PlayerRequest|Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update(PlayerRequest $request, Player $player)
@@ -208,37 +189,37 @@ class PlayerController extends LivestreamController
     public function destroy($id)
     {
         $count = Player::destroy($id);
+
         return $count;
 //        return redirect(route("livestream::livestream"));
     }
 
-	/**
-	 * Returns the player view for a Web Page through an iframe
+    /**
+     * Returns the player view for a Web Page through an iframe
      * This is usually called from the embed code on an external website
-	 *
-	 * @param $livestreamAccountId
-	 * @param $playerId
-	 *
-	 * @return View
-	 * @throws \Exception
-	 */
-    public function embedPlayer( $livestreamAccountId, Player $player )
+     *
+     * @param $playerId
+     * @return View
+     *
+     * @throws Exception
+     */
+    public function embedPlayer($livestreamAccountId, Player $player)
     {
-	    try {
-            $this->_playerService = new PlayerService();
+        try {
+            $this->_playerService = new PlayerService;
 
             $errors = collect();
             // this should just be a view with just the player that was requested.
-		    $livestreamAccount = LivestreamAccount::findOrFail( $livestreamAccountId );
+            $livestreamAccount = LivestreamAccount::findOrFail($livestreamAccountId);
 
-		    $streamService  = new StreamService( $livestreamAccount, $player );
-		    $playlist = $this->_playerService->getPlayerPlaylist($livestreamAccount,$streamService);
-
-	    } catch (\Exception $e) {
+            $streamService = new StreamService($livestreamAccount, $player);
+            $playlist = $this->_playerService->getPlayerPlaylist($livestreamAccount, $streamService);
+        } catch (Exception $e) {
             Log::error('Livestream Account: ' . $livestreamAccountId . ' : ' . $e->getMessage());
             $errors->push($e->getMessage(), $e->getCode(), $e);
-	    }
-        return view( 'livestream::player/embed', compact( 'playlist', 'errors' ) );
+        }
+
+        return view('livestream::player/embed', compact('playlist', 'errors'));
     }
 
     /**
@@ -248,14 +229,13 @@ class PlayerController extends LivestreamController
     {
         return response()->json([
             'success' => true,
-            'data' => $player->embed_code
+            'data' => $player->embed_code,
         ]);
     }
 
     /**
      * Show what a website embedded player looks like (used for testing only)
-     * @param $LivestreamAccountId
-     * @param $playerId
+     *
      * @return View
      */
     public function myWebsite($LivestreamAccountId, $playerId)

@@ -1,9 +1,11 @@
-<?php namespace Modules\Livestream\Configuration;
+<?php
 
-use Modules\Livestream\Omnia;
-use Laravel\Cashier\Cashier;
+namespace Modules\Livestream\Configuration;
+
 use Illuminate\Support\Facades\Auth;
+use Laravel\Cashier\Cashier;
 use Laravel\Spark\Contracts\InitialFrontendState;
+use Modules\Livestream\Omnia;
 
 trait ProvidesScriptVariables
 {
@@ -14,7 +16,7 @@ trait ProvidesScriptVariables
      */
     public static function scriptVariables()
     {
-        if ($user = Auth::user()) {
+        if ($user = auth()->user()) {
             if ($user->isBanned()) {
                 return self::getBannedState();
             } else {
@@ -32,10 +34,10 @@ trait ProvidesScriptVariables
      */
     private static function getTranslations()
     {
-        $translationFile = resource_path('lang/'.app()->getLocale().'.json');
+        $translationFile = resource_path('lang/' . app()->getLocale() . '.json');
 
         if (! is_readable($translationFile)) {
-            $translationFile = resource_path('lang/'.app('translator')->getFallback().'.json');
+            $translationFile = resource_path('lang/' . app('translator')->getFallback() . '.json');
         }
 
         return json_decode(file_get_contents($translationFile), true);
@@ -45,6 +47,7 @@ trait ProvidesScriptVariables
     {
         $state = self::getExternalState();
         $state['banned'] = true;
+
         return $state;
     }
 
@@ -60,12 +63,12 @@ trait ProvidesScriptVariables
             'currencySymbol' => Cashier::usesCurrencySymbol(),
             'env' => config('app.env'),
             'roles' => Omnia::roles(),
-            'state' => Omnia::call(InitialFrontendState::class.'@forUser', [Auth::user()]),
+            'state' => Omnia::call(InitialFrontendState::class . '@forUser', [auth()->user()]),
             'stripeKey' => config('services.stripe.key'),
             'teamsPrefix' => Omnia::teamsPrefix(),
             'teamString' => Omnia::teamString(),
             'pluralTeamString' => Omnia::teamsPrefix(),
-            'userId' => Auth::id(),
+            'userId' => auth()->id(),
             'usesApi' => Omnia::usesApi(),
             'usesTeams' => Omnia::usesTeams(),
             'usesStripe' => Omnia::billsUsingStripe(),
@@ -77,8 +80,8 @@ trait ProvidesScriptVariables
             'chargesTeamsPerMember' => Omnia::chargesTeamsPerMember(),
             'onlyTeamPlans' => Omnia::onlyTeamPlans(),
             'teamsIdentifiedByPath' => Omnia::teamsIdentifiedByPath(),
-            'impersonator' => (bool)session('spark:impersonator'),
-            'intercomUserHash' => (Auth::check() ? hash_hmac('sha256', Auth::user()->id, env('INTERCOM_VERIFICATION_SECRET')): null ),
+            'impersonator' => (bool) session('spark:impersonator'),
+            'intercomUserHash' => (auth()->check() ? hash_hmac('sha256', auth()->user()->id, env('INTERCOM_VERIFICATION_SECRET')) : null),
             'appVersion' => Omnia::$version,
             //            'usesBraintree' => Omnia::billsUsingBraintree(),
             //            'braintreeMerchantId' => config('services.braintree.merchant_id'),
@@ -97,11 +100,11 @@ trait ProvidesScriptVariables
         return [
             'env' => config('app.env'),
             'translations' => static::getTranslations() + ['teams.team' => trans('teams.team'), 'teams.member' => trans('teams.member')],
-//            'state' => Omnia::call(InitialFrontendState::class.'@forUser', [Auth::user()]),
+            //            'state' => Omnia::call(InitialFrontendState::class.'@forUser', [Auth::user()]),
             'state' => [
                 'currentTeam' => [],
                 'teams' => [],
-                'user' => []
+                'user' => [],
             ],
             'teamString' => Omnia::teamString(),
         ];

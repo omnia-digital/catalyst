@@ -6,15 +6,10 @@ use Illuminate\Support\Facades\Log;
 use Modules\Livestream\Episode;
 use Modules\Livestream\Events\Episode\EpisodeVideosFinishedSyncing;
 use Modules\Livestream\Events\Episode\EpisodeVideosStartedSyncing;
-use Modules\Livestream\Events\Video\FinishedMovingLiveVideosToTmp;
-use Modules\Livestream\Events\Video\LiveVideosProcessing;
-use Modules\Livestream\Events\Video\LiveVideosStartedProcessing;
 use Modules\Livestream\Jobs\LivestreamJob;
-use Modules\Livestream\Services\EpisodeService;
 
 /**
  * Class SyncEpisodeVideos
- * @package App\Jobs\Episode
  */
 class SyncEpisodeVideos extends LivestreamJob
 {
@@ -22,8 +17,6 @@ class SyncEpisodeVideos extends LivestreamJob
 
     /**
      * Create a new job instance.
-     *
-     * @param Episode $episode
      */
     public function __construct(Episode $episode)
     {

@@ -3,9 +3,9 @@
 namespace Modules\Livestream\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use Modules\Livestream\EpisodeDownload;
 
 class EpisodeDownloadWasCompletedNotification extends Notification implements ShouldQueue
@@ -19,8 +19,6 @@ class EpisodeDownloadWasCompletedNotification extends Notification implements Sh
 
     /**
      * Create a new notification instance.
-     *
-     * @param EpisodeDownload $episodeDownload
      */
     public function __construct(EpisodeDownload $episodeDownload)
     {
@@ -30,7 +28,7 @@ class EpisodeDownloadWasCompletedNotification extends Notification implements Sh
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -41,7 +39,7 @@ class EpisodeDownloadWasCompletedNotification extends Notification implements Sh
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
@@ -59,7 +57,7 @@ class EpisodeDownloadWasCompletedNotification extends Notification implements Sh
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

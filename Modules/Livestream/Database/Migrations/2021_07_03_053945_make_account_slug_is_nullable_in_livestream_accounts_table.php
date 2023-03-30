@@ -26,7 +26,6 @@ class MakeAccountSlugIsNullableInLivestreamAccountsTable extends Migration
     public function down()
     {
         Schema::table('livestream_accounts', function (Blueprint $table) {
-
         });
     }
 }

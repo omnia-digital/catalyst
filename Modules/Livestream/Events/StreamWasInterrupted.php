@@ -1,12 +1,11 @@
-<?php namespace Modules\Livestream\Events;
+<?php
 
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Foundation\Events\Dispatchable;
+namespace Modules\Livestream\Events;
+
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class StreamWasInterrupted
 {
@@ -18,9 +17,6 @@ class StreamWasInterrupted
 
     /**
      * Create a new event instance.
-     *
-     * @param $streamEvent
-     * @param $livestreamAccount
      */
     public function __construct($streamEvent, $livestreamAccount)
     {

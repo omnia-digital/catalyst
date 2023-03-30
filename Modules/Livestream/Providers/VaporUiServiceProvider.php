@@ -2,9 +2,9 @@
 
 namespace Modules\Livestream\Providers;
 
-use Modules\Livestream\Omnia;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Modules\Livestream\Omnia;
 
 class VaporUiServiceProvider extends ServiceProvider
 {
@@ -16,6 +16,16 @@ class VaporUiServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->gate();
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
     }
 
     /**
@@ -31,15 +41,5 @@ class VaporUiServiceProvider extends ServiceProvider
             return true;
             //return in_array(optional($user)->email, Omnia::adminEmails());
         });
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 }

@@ -1,24 +1,21 @@
 <?php
 
-    namespace Modules\Livestream\Repositories;
+namespace Modules\Livestream\Repositories;
 
-    use Modules\Livestream\Omnia;
-    use Carbon\Carbon;
-    use Illuminate\Support\Facades\Auth;
-    use Modules\Livestream\Episode;
     use Livestream\Livestream;
+    use Modules\Livestream\Episode;
+    use Modules\Livestream\Omnia;
 
     class EpisodeRepository
     {
         /**
-         * @param null $timezone
-         * @param null $livestreamAccount
-         * @param null $published if true, filter out unpublished episodes
-         * @param bool $locked
-         *
-         * @param int $show
-         * @param int $currentPage
-         * @param null $query
+         * @param  null  $timezone
+         * @param  null  $livestreamAccount
+         * @param  null  $published if true, filter out unpublished episodes
+         * @param  bool  $locked
+         * @param  int  $show
+         * @param  int  $currentPage
+         * @param  null  $query
          * @return array
          */
         public function all($timezone = null, $livestreamAccount = null, $published = null, $locked = true, $show = 15, $currentPage = 1, $query = null)
@@ -29,7 +26,7 @@
 
 //            $timezone = Omnia::getTimezone($timezone, $livestreamAccount->team);
 
-            $episodes                = collect();
+            $episodes = collect();
 
             $totalEpisode = $livestreamAccount->episodes()->count();
 
@@ -37,18 +34,18 @@
 
             $currentPage = $show >= $totalEpisode ? 1 : $currentPage;
 
-            $sortedEpisodeCollection       = $livestreamAccount->limitEpisodes($show, $offset)
+            $sortedEpisodeCollection = $livestreamAccount->limitEpisodes($show, $offset)
                 ->with('videos');
 
-            if (!empty($query)) {
+            if (! empty($query)) {
                 $sortedEpisodeCollection->where('title', 'LIKE', '%' . $query . '%');
             }
 
             $sortedEpisodeCollection = $sortedEpisodeCollection->get();
 
             $activePlanId = $livestreamAccount->team->currentActivePlan()->id;
-            $user = Auth::user();
-            if (!empty($user) && $user->isSystemAdmin()) {
+            $user = auth()->user();
+            if (! empty($user) && $user->isSystemAdmin()) {
                 $activePlanId = 'livestream-growth';
             }
             if ($activePlanId === 'livestream-free') {
@@ -56,7 +53,7 @@
                 $latestEpisode = $sortedEpisodeCollection->shift();
 
                 // Add Unlocked Episodes
-                if ( ! empty($latestEpisode)) {
+                if (! empty($latestEpisode)) {
                     if ($published) {
                         $unlocked_episodes = ($latestEpisode->is_published ? collect([$latestEpisode]) : collect());
                     } else {
@@ -88,16 +85,14 @@
                 'episodes' => $episodes,
                 'current_page' => $currentPage,
                 'total_page' => ceil($totalEpisode / $show),
-                'total_episodes' => $totalEpisode
+                'total_episodes' => $totalEpisode,
             ];
         }
 
         /**
          * Get One Episode
          *
-         * @param int|Episode $episode
-         *
-         * @return
+         * @param  int|Episode  $episode
          */
         public function get($episode, $timezone = null, $livestreamAccount = null)
         {
@@ -119,17 +114,16 @@
                 unset($video->episode);
             }
 
-            if ( ! empty($episode->livestreamAccount)) {
+            if (! empty($episode->livestreamAccount)) {
                 unset($episode->livestreamAccount);
             }
 
-        return $episode;
-    }
+            return $episode;
+        }
 
     /**
      * Check if user has reach episode limit
      *
-     * @param $livestreamAccount
      * @return bool
      */
     public function hasReachEpisodeLimit($livestreamAccount)
@@ -139,4 +133,4 @@
             ->whereDate('created_at', '>=', now()->subWeek())
             ->exists();
     }
-}
+    }

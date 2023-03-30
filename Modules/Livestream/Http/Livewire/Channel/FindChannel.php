@@ -1,8 +1,10 @@
-<?php namespace Modules\Livestream\Http\Livewire\Channel;
+<?php
 
+namespace Modules\Livestream\Http\Livewire\Channel;
+
+use Livewire\Component;
 use Modules\Livestream\Models\Channel;
 use Modules\Livestream\Support\Livewire\WithCachedRows;
-use Livewire\Component;
 
 class FindChannel extends Component
 {
@@ -17,7 +19,7 @@ class FindChannel extends Component
         return Channel::query()
             ->has('livestreamAccount.episodes') // Only get channels have at least 1 episode.
             ->with(['livestreamAccount.team'])
-            ->where('name', 'LIKE', "%$this->search%");
+            ->where('name', 'LIKE', "%{$this->search}%");
     }
 
     public function getRowsProperty()
@@ -30,7 +32,7 @@ class FindChannel extends Component
     public function render()
     {
         return view('channel.find-channel', [
-            'channels' => $this->search ? $this->rows : collect()
+            'channels' => $this->search ? $this->rows : collect(),
         ]);
     }
 }

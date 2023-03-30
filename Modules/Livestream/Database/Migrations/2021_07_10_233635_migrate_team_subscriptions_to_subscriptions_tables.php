@@ -21,20 +21,20 @@ class MigrateTeamSubscriptionsToSubscriptionsTables extends Migration
 
         foreach ($teamSubscriptions as $teamSubscription) {
             $subscription = Subscription::create([
-                'name'          => $teamSubscription->name,
-                'team_id'       => $teamSubscription->team_id,
+                'name' => $teamSubscription->name,
+                'team_id' => $teamSubscription->team_id,
                 'stripe_status' => $teamSubscription->ends_at ? \Stripe\Subscription::STATUS_CANCELED : \Stripe\Subscription::STATUS_ACTIVE,
-                'stripe_id'     => $teamSubscription->stripe_id,
-                'stripe_plan'   => $teamSubscription->stripe_plan,
-                'quantity'      => $teamSubscription->quantity,
+                'stripe_id' => $teamSubscription->stripe_id,
+                'stripe_plan' => $teamSubscription->stripe_plan,
+                'quantity' => $teamSubscription->quantity,
                 'trial_ends_at' => null,
-                'ends_at'       => $teamSubscription->ends_at
+                'ends_at' => $teamSubscription->ends_at,
             ]);
 
             $subscription->items()->create([
-                'stripe_id'   => $subscription->stripe_id,
+                'stripe_id' => $subscription->stripe_id,
                 'stripe_plan' => $subscription->stripe_plan,
-                'quantity'    => $subscription->quantity
+                'quantity' => $subscription->quantity,
             ]);
         }
     }
@@ -46,6 +46,5 @@ class MigrateTeamSubscriptionsToSubscriptionsTables extends Migration
      */
     public function down()
     {
-
     }
 }
