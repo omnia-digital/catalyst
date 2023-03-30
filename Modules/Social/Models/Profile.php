@@ -119,6 +119,13 @@ use Spatie\Sluggable\HasSlug;
             return $this->is_private == true ? 'private' : 'public';
         }
 
+        protected static function booted()
+        {
+            static::updating(function (self $model) {
+                $model->isDirty('score') &&
+                    $model->score_updated_at = now();
+            });
+        }
 
         public function urlLink() {
             return route('social.profile.show', $this->handle);

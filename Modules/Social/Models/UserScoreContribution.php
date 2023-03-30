@@ -30,7 +30,6 @@ class UserScoreContribution extends Model
     {
         return SlugOptions::create()
                           ->generateSlugsFrom('name')
-                          ->saveSlugsTo('slug')
-                          ->usingSeparator('_');
+                          ->saveSlugsTo('slug');
     }
 }
