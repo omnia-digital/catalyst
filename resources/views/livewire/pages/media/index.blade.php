@@ -27,12 +27,12 @@
                         <label for="perPage" class="text-sm font-medium leading-5 text-gray-700">
                             Per Page
                         </label>
-                
+
                         <div class="w-20">
                             <x-library::input.select class="" wire:model="perPage" id="perPage" :showDefaultOption="false" :options="[10 => '10', 25 => '25', 50 => '50',]" />
                         </div>
                     </div>
-                    
+
                     <div class="ml-auto flex space-x-4">
                         @if ($this->isUsingListLayout())
                             <button type="button" {{ empty($selected) ? 'disabled' : '' }} wire:click="$toggle('showDeleteModal')" class="p-1.5 rounded-md border border-gray-300 text-gray-400 flex items-center space-x-2 {{ empty($selected) ? '' : 'hover:shadow-md text-blue-500 border-blue-400' }} focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
@@ -61,7 +61,7 @@
 
                             <label class="block" for="filter-collection-names">Collection Name</label>
                             <x-library::input.select wire:model="filters.collection" id="filter-collection-names" :options="$this->getCollectionNames()" placeholder="All" :enableDefaultOption="true" />
-                                
+
                         </div>
 
                         <div class="w-1/2 pl-2 space-y-4">
@@ -86,7 +86,7 @@
                                     @if ($this->isUsingGridLayout())
                                         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6  md:grid-cols-4 md:gap-x-4 lg:grid-cols-3 xl:grid-cols-4">
                                             @foreach ($mediaList as $media)
-                                                <x-media.grid-item 
+                                                <x-media.grid-item
                                                     wire:key="media-item-{{ $media->id }}"
                                                     wire:click="selectMedia({{ $media->id }})"
                                                     :media="$media"
@@ -132,7 +132,7 @@
                                                     <td colspan="7">
                                                         @unless ($selectAll)
                                                         <div>
-                                                            <span><strong>{{ $mediaList->count() }}</strong> of {{ $mediaList->total() }} files selected </span> 
+                                                            <span><strong>{{ $mediaList->count() }}</strong> of {{ $mediaList->total() }} files selected </span>
                                                             <a class="ml-6 hover:underline cursor-pointer"  type="button" wire:click="selectAll">Select All?</a>
                                                         </div>
                                                         @else
@@ -155,7 +155,7 @@
                                                         <dl class="font-normal lg:hidden">
                                                             <dt class="sr-only">Attached to</dt>
                                                             <dd class="mt-1 text-dark-text-color">
-                                                                @isset ($media->model)
+                                                                @isset($media->model)
                                                                     {{ class_basename($media->model) }}: {{ $media->model->title }}
                                                                 @else
                                                                     <div>(Unattached)</div>
@@ -169,7 +169,7 @@
                                                         </dl>
                                                     </td>
                                                     <td class="hidden px-3 py-4 text-sm text-dark-text-color lg:table-cell">
-                                                        @isset ($media->model)
+                                                        @isset($media->model)
                                                             {{ class_basename($media->model) }}: {{ $media->model->title }}
                                                         @else
                                                             <div>(Unattached)</div>
@@ -186,7 +186,7 @@
                                             </tbody>
                                         </table>
                                     @endif
-                                    
+
 
                                     <div>
                                         {{ $mediaList->links() }}
@@ -219,14 +219,14 @@
                     <x-jet-secondary-button wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled">
                         {{ __('Cancel') }}
                     </x-jet-secondary-button>
-            
+
                     <x-jet-button class="ml-2" type="submit" wire:loading.attr="disabled">
                         {{ __('Delete') }}
                     </x-jet-button>
                 </x-slot>
             </x-jet-dialog-modal>
         </form>
-        
+
         <!-- Save Media Modal -->
         <form wire:submit.prevent="saveMedia">
             <x-jet-dialog-modal wire:model.defer="showEditModal">
@@ -259,20 +259,20 @@
                     <x-jet-secondary-button wire:click="$set('showEditModal', false)" wire:loading.attr="disabled">
                         {{ __('Cancel') }}
                     </x-jet-secondary-button>
-            
+
                     <x-jet-button class="ml-2" type="submit" wire:loading.attr="disabled">
                         {{ __('Submit') }}
                     </x-jet-button>
                 </x-slot>
             </x-jet-dialog-modal>
         </form>
-        
+
         <!-- Create Media Modal -->
         <form wire:submit.prevent="createMedia">
             <x-jet-dialog-modal wire:model.defer="showCreateModal">
                 <x-slot name="title">Create Media</x-slot>
                 <x-slot name="content">
-                    <div 
+                    <div
                         x-data="{
                             openState: false,
                             showImages: true,
@@ -289,32 +289,32 @@
                                     }
                                 );
                             },
-                    
+
                             setImage(event) {
                                 if (event.detail.id === '{{ $editorId }}') {
                                     this.$wire.call('setImage', event.detail);
                                 }
                             },
-                    
+
                             setImages(event) {
                                 if (event.detail.id === '{{ $editorId }}') {
                                     this.images = event.detail.images
                                 }
                             },
-                    
+
                             removeImage(index) {
                                 this.$wire.call('removeImage', index);
                             },
-                    
+
                         }"
                         x-on:media-manager:file-selected.window="setImage"
                         x-on:media-library:image-set.window="setImages"
                         class="mt-4"
                     >
-                        @if($openState == false)
-                            <button 
-                                x-on:click.prevent.stop="showMediaManager(null, {})" 
-                                type="button" 
+                        @if ($openState == false)
+                            <button
+                                x-on:click.prevent.stop="showMediaManager(null, {})"
+                                type="button"
                                 class="bg-gray-200 rounded-md w-full flex justify-center items-center space-x-2 p-4"
                             >
                                 <i class="fa-solid fa-image w-5 h-5 text-gray-500"></i>
@@ -348,13 +348,13 @@
                             </template>
                         </ul>
                     </div>
-                    
+
                 </x-slot>
                 <x-slot name="footer">
                     <x-jet-secondary-button wire:click="$set('showCreateModal', false)" wire:loading.attr="disabled">
                         {{ __('Cancel') }}
                     </x-jet-secondary-button>
-            
+
                     <x-jet-button class="ml-2" type="submit" wire:loading.attr="disabled">
                         {{ __('Submit') }}
                     </x-jet-button>

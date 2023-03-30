@@ -34,7 +34,6 @@ use Modules\Social\Http\Middleware\GuestAccessMiddleware;
 Route::get('/' . \Platform::getUsersLetter() . '/{profile}', ShowProfile::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.profile.show');
 Route::get('/' . \Platform::getTeamsLetter() . '/{team}', ShowTeam::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.teams.show');
 
-
 Route::name('media.')->prefix('media')->group(function () {
     Route::get('/', MediaIndex::class)->name('index');
 });
