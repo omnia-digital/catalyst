@@ -16,7 +16,7 @@ class UserScoreContribution extends Model
 
     public static function getPointsFor($slug)
     {
-        $slug = Str::snake($slug);
+        $slug = Str::slug($slug);
 
         return self::where('slug', $slug)->first()->points;
     }

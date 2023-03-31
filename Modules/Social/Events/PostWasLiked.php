@@ -12,19 +12,9 @@ class PostWasLiked extends BaseEvent implements ContributesToUserScore
 {
     use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
     public function trackContributionToUserScore()
     {
-        $this->user->profile->score += UserScoreContribution::getPointsFor('Liked User Post');
+        $this->user->profile->score += UserScoreContribution::getPointsFor('Post Was Liked');
         $this->user->profile->save();
     }
 }

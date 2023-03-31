@@ -12,7 +12,7 @@ use Modules\Social\Models\UserScoreContribution;
 
 class LikedUserPost extends BaseEvent implements ContributesToUserScore
 {
-    use SerializesModels, Dispatchable;
+    use SerializesModels;
 
     /**
      * The user instance.

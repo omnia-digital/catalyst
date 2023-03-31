@@ -4,7 +4,9 @@ namespace Modules\Social\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Social\Events\LikedUserPost;
+use Modules\Social\Events\PostWasLiked;
 use Modules\Social\Models\Like;
+use Modules\Social\Models\Post;
 
 use function auth;
 
@@ -93,7 +95,11 @@ trait Likable
                 ['liked' => true]
             );
 
-            LikedUserPost::dispatch(auth()->user());
+            
+            if ($this::class === Post::class) {
+                LikedUserPost::dispatch(auth()->user());
+                PostWasLiked::dispatch($this->user);
+            }
         }
     }
 

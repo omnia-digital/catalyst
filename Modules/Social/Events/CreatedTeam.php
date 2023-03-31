@@ -13,6 +13,13 @@ class CreatedTeam extends BaseEvent implements ContributesToUserScore
     use SerializesModels;
 
     /**
+     * The user instance.
+     *
+     * @param User|Authenticatable
+     */
+    public $user;
+
+    /**
      * Create a new event instance.
      *
      * @return void
