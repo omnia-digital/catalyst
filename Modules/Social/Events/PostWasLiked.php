@@ -4,7 +4,6 @@ namespace Modules\Social\Events;
 
 use App\Contracts\Events\ContributesToUserScore;
 use App\Events\BaseEvent;
-use App\Models\User;
 use Illuminate\Queue\SerializesModels;
 use Modules\Social\Models\UserScoreContribution;
 

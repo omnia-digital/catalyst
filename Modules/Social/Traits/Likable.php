@@ -95,7 +95,6 @@ trait Likable
                 ['liked' => true]
             );
 
-            
             if ($this::class === Post::class) {
                 LikedUserPost::dispatch(auth()->user());
                 PostWasLiked::dispatch($this->user);
