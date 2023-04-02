@@ -35,7 +35,6 @@ Route::name('livestream.')
      ->prefix('livestream')
      ->middleware([\Modules\Social\Http\Middleware\GuestAccessMiddleware::class, 'verified'])
      ->group(function () {
-
          Route::get('/channels/find', FindChannel::class)
               ->name('channels.find');
          Route::get('/channels/{channel:slug}', ChannelDetail::class)
@@ -95,7 +94,7 @@ Route::name('livestream.')
                   Route::get('/playlists/{playlist}', UpdatePlaylist::class)
                        ->name('playlists.update');
 
-                  Route::get('/settings', fn() => redirect()->route('settings.video'))
+                  Route::get('/settings', fn () => redirect()->route('settings.video'))
                        ->name('settings');
                   Route::get('/settings/video', VideoSetting::class)
                        ->name('settings.video');
@@ -117,5 +116,4 @@ Route::name('livestream.')
 
          Route::view('/test-embed-player', 'test');
          //Route::view('/test-embed-playlist', 'test-playlist');
-
      });

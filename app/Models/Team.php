@@ -153,7 +153,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         return $this->name === $this->getDefaultTeamName();
     }
 
-    public function getDefaultTeamName() : string
+    public function getDefaultTeamName(): string
     {
         return $this->owner?->profile?->first_name . Trans::get("'s Team") ?? Trans::get('Default Team');
     }
