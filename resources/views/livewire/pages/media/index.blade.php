@@ -2,10 +2,15 @@
 
 @section('content')
     <div class=" pr-4 sm:pr-6 lg:pr-4">
-        <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg px-4 pl-4 flex items-center bg-primary">
+        <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg px-4 pl-4 flex items-center justify-between bg-primary">
             <div class="flex-1 flex items-center space-x-2 -ml-1">
                 <x-library::icons.icon name="fa-solid fa-images" size="w-8 h-8" color="text-white-text-color"/>
                 <x-library::heading.1 class="py-4 text-3xl hover:cursor-pointer" text-color="text-white-text-color">Media Library</x-library::heading.1>
+            </div>
+            <div>
+                <x-library::button wire:click="$set('showCreateModal', true)">
+                    <span class="whitespace-nowrap">Create Media</span>
+                </x-library::button>
             </div>
         </div>
 
@@ -13,7 +18,7 @@
             <!-- List of Media -->
             <main class="flex-1 overflow-y-auto">
                 <div class="space-y-2">
-                    <div class="flex justify-between gap-3 flex-wrap bg-secondary px-6 py-2 rounded-lg mb-6 border-t border-b border-gray-100 items-center">
+                    <div class="flex justify-between gap-3 flex-wrap bg-secondary px-6 py-2 rounded-lg mb-2 border-t border-b border-gray-100 items-center">
                         <div class="flex justify-start items-center space-x-3">
                             <div class="font-bold">
                                 {{ Trans::get('Filters') }}
@@ -37,16 +42,6 @@
                         </div>
                     </div>
                     <div class="flex items-center">
-                        <div class="flex items-center space-x-2">
-                            <label for="perPage" class="text-sm font-medium leading-5 text-gray-700">
-                                Per Page
-                            </label>
-
-                            <div class="w-20">
-                                <x-library::input.select class="" wire:model="perPage" id="perPage" :showDefaultOption="false" :options="[10 => '10', 25 => '25', 50 => '50',]"/>
-                            </div>
-                        </div>
-
                         <div class="ml-auto flex space-x-4">
                             @if ($this->isUsingListLayout())
                                 <button type="button" {{ empty($selected) ? 'disabled' : '' }} wire:click="$toggle('showDeleteModal')"
@@ -55,21 +50,18 @@
                                     <span class="whitespace-nowrap">Delete Selected</span>
                                 </button>
                             @endif
-                            <x-library::button wire:click="$set('showCreateModal', true)">
-                                <span class="whitespace-nowrap">Create Media</span>
-                            </x-library::button>
                         </div>
                     </div>
-                    <div class="flex justify-between flex-wrap">
                         @forelse ($errors as $error)
+                    <div class="flex justify-between flex-wrap">
                             <div class="mt-1 text-red-500 text-sm">{{ $error }}</div>
+                    </div>
                         @empty
                         @endforelse
-                    </div>
 
                     <!-- Advanced Search -->
                     <div>
-                        <div class=" {{ ($showFilters) ? '' : 'hidden' }} bg-cool-gray-200 p-4 rounded shadow-inner flex relative flex-wrap">
+                        <div class=" {{ ($showFilters) ? '' : 'hidden' }} bg-secondary p-4 rounded flex relative flex-wrap">
                             <div class="w-1/2 pl-2 space-y-4">
                                 <label class="block" for="filter-attached-types">Attached Type</label>
                                 <x-library::input.select wire:model="filters.attached_type" id="filter-attached-types" :options="$this->getAttachedTypes()" placeholder="All"
@@ -94,9 +86,17 @@
                     </div>
 
                     <div class="flex-1 flex items-stretch gap-4">
-
-                        <!-- Media Gallery -->
                         <section class="pb-16 w-full">
+                            <div class="flex items-center space-x-2 mb-4 ml-4">
+                                <label for="perPage" class="text-sm font-medium leading-5 text-gray-700">
+                                    Per Page
+                                </label>
+
+                                <div class="w-20">
+                                    <x-library::input.select class="" wire:model="perPage" id="perPage" :showDefaultOption="false" :options="[10 => '10', 25 => '25', 50 => '50',]"/>
+                                </div>
+                            </div>
+                            <!-- Media Gallery -->
                             @if ($mediaList->count() > 0)
                                 <div>
                                     <div class="-mx-4 sm:-mx-6 md:mx-0">
