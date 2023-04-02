@@ -11,7 +11,7 @@ class TeamCard extends Component
 
     public function mount(Team $team)
     {
-        $this->team = $team;
+        $this->team = $team->load('teamTypes');
     }
 
     public function showTeam()

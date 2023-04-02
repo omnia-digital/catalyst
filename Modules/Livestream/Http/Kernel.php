@@ -3,6 +3,7 @@
 namespace Modules\Livestream\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Modules\Livestream\Http\Middleware\EnsureTeamInfoIsFilled;
 use Modules\Livestream\Http\Middleware\TrackGoalBillingPageMiddleware;
 use Spark\Http\Middleware\VerifyBillableIsSubscribed;
 
@@ -65,7 +66,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \App\Http\Middleware\EnsureEmailIsVerifiedMiddleware::class,
-        'info-filled' => \App\Http\Middleware\EnsureTeamInfoIsFilled::class,
+        'info-filled' => EnsureTeamInfoIsFilled::class,
         'subscribed' => VerifyBillableIsSubscribed::class,
     ];
 }

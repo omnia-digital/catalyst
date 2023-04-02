@@ -20,7 +20,6 @@ class ModuleNavigation extends Component
                 //                    'icon'    => 'fa-regular fa-house-chimney',
                 //                    'icon'    => 'heroicon-o-home',
                 'module' => 'social',
-                'current' => false,
             ],
             [
                 'label' => 'Discover',
@@ -29,7 +28,6 @@ class ModuleNavigation extends Component
                 //                    'icon'    => 'fa-regular fa-earth-americas',
                 //                    'icon'    => 'heroicon-o-globe',
                 'module' => 'social',
-                'current' => false,
             ],
             [
                 'label' => Trans::get('Resources'),
@@ -49,21 +47,18 @@ class ModuleNavigation extends Component
                 'icon' => 'fa-regular fa-users',
                 //                    'icon'    => 'heroicon-o-briefcase',
                 'module' => 'social',
-                'current' => false,
             ],
             [
                 'label' => Trans::get('Map'),
                 'name' => 'social.teams.map',
                 'icon' => 'fa-regular fa-map',
                 'module' => 'social',
-                'current' => false,
             ],
             [
                 'label' => Trans::get('Calendar'),
                 'name' => 'social.teams.calendar',
                 'icon' => 'fa-regular fa-calendar',
                 'module' => 'social',
-                'current' => false,
             ],
             //                [
             //                    'label'   => \Trans::get('Games'),
@@ -77,13 +72,16 @@ class ModuleNavigation extends Component
                 'name' => 'games.feeds',
                 'icon' => 'fa-regular fa-rss',
                 'module' => 'games',
-                'current' => false,
+            ],
+            [
+                'label' => Trans::get('Media Library'),
+                'name' => 'media.index',
+                'icon' => 'fa-regular fa-images',
             ],
             //                [
             //                    'label'   => 'Trending Posts',
             //                    'name'    => 'social.discover',
             //                    'icon'    => 'heroicon-o-collection',
-            //                    'current' => false
             //                ],
             //                [
             //                    'label'   => 'Bookmarks',
@@ -91,7 +89,6 @@ class ModuleNavigation extends Component
             //                    'icon'    => 'fa-regular fa-bookmark',
             ////                    'icon'    => 'heroicon-o-bookmark',
             //                    'module'  => 'social',
-            //                    'current' => false
             //                ],
             //                [
             //                    'label'   => \Trans::get('Companies'),
@@ -99,13 +96,11 @@ class ModuleNavigation extends Component
             //                    'icon'    => 'fa-light fa-building',
             //                    //                    'icon'    => 'heroicon-o-bookmark',
             //                    'module'  => 'social',
-            //                    'current' => false
             //                ],
             //                [
             //                    'label'   => 'Contacts',
             //                    'name'    => 'social.contacts.index',
             //                    'icon'    => 'heroicon-o-users',
-            //                    'current' => false
             //                ],
         ];
     }
