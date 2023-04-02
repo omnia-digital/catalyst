@@ -25,7 +25,6 @@ class Team extends JetstreamTeam
     use Billable;
     use HasPlan;
 
-    const DEFAULT_TEAM_NAME = 'Default Org';
 
     protected $with = [
         'owner',

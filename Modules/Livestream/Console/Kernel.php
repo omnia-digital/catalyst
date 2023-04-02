@@ -24,14 +24,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Episode expiration
-        $schedule->command('episodes:soft-delete')->dailyAt('1:00');
+//        $schedule->command('episodes:soft-delete')->dailyAt('1:00');
 //        $schedule->command('episodes:force-delete')->weekly();
 
         // Stream
 //        $schedule->command('stream:disable')->daily();
 
         // Pull views from Mux
-        $schedule->command('episodes:pull-views')->cron('0 */' . config('omnia.pull_views_per_hours') . ' * * *');
+//        $schedule->command('episodes:pull-views')->cron('0 */' . config('omnia.pull_views_per_hours') . ' * * *');
     }
 
     /**

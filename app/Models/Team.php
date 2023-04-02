@@ -53,6 +53,8 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         HasTeamTags::tags insteadof HasTags;
     }
 
+    const DEFAULT_TEAM_NAME = 'Default Org';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -139,6 +141,21 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     public function getDefaultRoleAttribute($value)
     {
         return config('platform.teams.default_member_role');
+    }
+
+    public function hasInfoIsFilled(): bool
+    {
+        return ! $this->hasDefaultTeamName() && ! empty($this->phone) && ! empty($this->city) && ! empty($this->state);
+    }
+
+    public function hasDefaultTeamName(): bool
+    {
+        return $this->name === $this->getDefaultTeamName();
+    }
+
+    public function getDefaultTeamName() : string
+    {
+        return $this->owner?->profile?->first_name . Trans::get("'s Team") ?? Trans::get('Default Team');
     }
 
     // Relations //
