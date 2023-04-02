@@ -18,12 +18,19 @@
                             <div class="font-bold">
                                 {{ Trans::get('Filters') }}
                             </div>
+
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" hidden>
                                 <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
                                 <span class="sr-only">Search</span>
                             </div>
-                            <x-library::input.text wire:model="filters.search" placeholder="Search Media"/>
+                            <div class="w-full relative">
 
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
+                                </div>
+                                <x-library::input.text type="search" wire:model.debounce.500ms="filters.search" placeholder="Search Media"
+                                                       class="px-4 block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"/>
+                            </div>
                             <a type="button" class="whitespace-nowrap hover:underline cursor-pointer" wire:click="toggleShowFilters">@if ($showFilters)
                                     Hide
                                 @endif Advanced Search...</a>
