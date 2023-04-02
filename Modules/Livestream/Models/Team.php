@@ -25,7 +25,6 @@ class Team extends JetstreamTeam
     use Billable;
     use HasPlan;
 
-
     protected $with = [
         'owner',
     ];
