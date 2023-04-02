@@ -123,6 +123,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public function getHandleAttribute()
     {
         $this->load('profile');
+
         return $this->profile?->handle;
     }
 

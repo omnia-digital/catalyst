@@ -5,7 +5,6 @@ namespace Modules\Social\Http\Livewire;
 use App\Models\Team;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 
 class NewsFeed extends Component
