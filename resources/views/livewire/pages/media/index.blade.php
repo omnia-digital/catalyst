@@ -3,14 +3,29 @@
 @section('content')
     <div class=" pr-4 sm:pr-6 lg:pr-4">
         <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg px-4 pl-4 flex items-center justify-between bg-primary">
-            <div class="flex-1 flex items-center space-x-2 -ml-1">
-                <x-library::icons.icon name="fa-solid fa-images" size="w-8 h-8" color="text-white-text-color"/>
-                <x-library::heading.1 class="py-4 text-3xl hover:cursor-pointer" text-color="text-white-text-color">Media Library</x-library::heading.1>
+            <div class="py-2 pl-2">
+                <div class="flex-1 flex items-center space-x-2 -ml-1">
+                    <x-library::icons.icon name="fa-solid fa-images" size="w-8 h-8" color="text-white-text-color"/>
+                    <x-library::heading.1 class="text-3xl hover:cursor-pointer" text-color="text-white-text-color">Media Library</x-library::heading.1>
+                </div>
+                <div>
+                    <p class="text-white">Manage all of your media across the platform.</p>
+                </div>
             </div>
             <div>
-                <x-library::button wire:click="$set('showCreateModal', true)">
-                    <span class="whitespace-nowrap">Create Media</span>
-                </x-library::button>
+                @if (auth()->user()?->can('create', \App\Models\MediaFile::class))
+                    @auth
+                        <x-library::button wire:click="$set('showCreateModal', true)">
+                            <span class="whitespace-nowrap">{{  \Trans::get('Create Media') }}</span>
+                        </x-library::button>
+                    @else
+                        <x-library::button wire:click="$set('showCreateModal', true)">
+                            <span class="whitespace-nowrap">{{  \Trans::get('Create Media') }}</span>
+                        </x-library::button>
+                        <livewire:authentication-modal/>
+                    @endauth
+                @endif
+
             </div>
         </div>
 
@@ -52,12 +67,12 @@
                             @endif
                         </div>
                     </div>
-                        @forelse ($errors as $error)
-                    <div class="flex justify-between flex-wrap">
+                    @forelse ($errors as $error)
+                        <div class="flex justify-between flex-wrap">
                             <div class="mt-1 text-red-500 text-sm">{{ $error }}</div>
-                    </div>
-                        @empty
-                        @endforelse
+                        </div>
+                    @empty
+                    @endforelse
 
                     <!-- Advanced Search -->
                     <div>
