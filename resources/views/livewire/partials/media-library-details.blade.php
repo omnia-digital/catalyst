@@ -26,7 +26,7 @@
 
                             @isset($media->model)
                                 <a href="{{ $media->model->getUrl() ?? '' }}">
-                                    <span class="font-bold">{{ class_basename($media->model) }}</span>({{  $media->model->id }}): {!!  $this->getModelTitleAttribute($media->model) !!}
+                                    <span class="font-bold">{{ class_basename($media->model) }}</span>({{ $media->model->id }}): {!! $this->getModelTitleAttribute($media->model) !!}
                                 </a>
 
                             @else

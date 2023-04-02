@@ -16,11 +16,11 @@
                 @if (auth()->user()?->can('create', \App\Models\MediaFile::class))
                     @auth
                         <x-library::button wire:click="$set('showCreateModal', true)">
-                            <span class="whitespace-nowrap">{{  \Trans::get('Create Media') }}</span>
+                            <span class="whitespace-nowrap">{{ \Trans::get('Create Media') }}</span>
                         </x-library::button>
                     @else
                         <x-library::button wire:click="$set('showCreateModal', true)">
-                            <span class="whitespace-nowrap">{{  \Trans::get('Create Media') }}</span>
+                            <span class="whitespace-nowrap">{{ \Trans::get('Create Media') }}</span>
                         </x-library::button>
                         <livewire:authentication-modal/>
                     @endauth
@@ -189,7 +189,7 @@
                                                                 <dd class="mt-1 text-dark-text-color">
                                                                     <a href="{{ $media->model->getUrl ?? '' }}">
                                                                     @isset($media->model)
-                                                                        {{ class_basename($media->model) }} ({{  $media->model->id }}): {{ $media->model->title }}
+                                                                        {{ class_basename($media->model) }} ({{ $media->model->id }}): {{ $media->model->title }}
                                                                     @else
                                                                         <div>(Unattached)</div>
                                                                         <div><a href="#">Attach</a></div>
