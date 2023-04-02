@@ -1,6 +1,6 @@
 <div>
     <div wire:loading.delay.flex class="hidden items-center justify-center">
-        <x-heroicon-o-refresh class="w-8 h-8 animate-spin text-gray-400 mb-2" />
+        <x-heroicon-o-refresh class="w-8 h-8 animate-spin text-gray-400 mb-2"/>
         <span class="sr-only">Loading...</span>
     </div>
     @if ($media)
@@ -23,8 +23,12 @@
                     <div class="py-3 flex justify-between text-sm font-medium">
                         <dt class="text-gray-500">Attached to</dt>
                         <dd class="text-gray-900">
+
                             @isset($media->model)
-                                <span class="font-bold">{{ class_basename($media->model) }}</span>: {{ $this->getModelName($media->model) }}
+                                <a href="{{ $media->model->getUrl() ?? '' }}">
+                                    <span class="font-bold">{{ class_basename($media->model) }}</span>({{  $media->model->id }}): {!!  $this->getModelTitleAttribute($media->model) !!}
+                                </a>
+
                             @else
                                 <div>(Unattached)</div>
                                 <div><a href="#">Attach</a></div>

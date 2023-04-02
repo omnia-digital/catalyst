@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire\Partials;
 
+use App\Models\Team;
 use App\Traits\WithSlideOver;
 use Livewire\Component;
+use Modules\Social\Models\Post;
+use Modules\Social\Models\Profile;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\ImageFactory;
@@ -61,9 +64,9 @@ class MediaLibraryDetails extends Component
         $this->reset('media');
     }
 
-    public function getModelName($model)
+    public function getModelTitleAttribute($model)
     {
-        $column = match (class_basename($model)) {
+        $column = match (get_class($model)) {
             Post::class => 'body',
             Team::class => 'name',
             Profile::class => 'handle',

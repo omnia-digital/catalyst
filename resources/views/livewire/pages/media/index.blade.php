@@ -187,12 +187,14 @@
                                                             <dl class="font-normal lg:hidden">
                                                                 <dt class="sr-only">Attached to</dt>
                                                                 <dd class="mt-1 text-dark-text-color">
+                                                                    <a href="{{ $media->model->getUrl ?? '' }}">
                                                                     @isset($media->model)
-                                                                        {{ class_basename($media->model) }}: {{ $media->model->title }}
+                                                                        {{ class_basename($media->model) }} ({{  $media->model->id }}): {{ $media->model->title }}
                                                                     @else
                                                                         <div>(Unattached)</div>
                                                                         <div><a href="#">Attach</a></div>
                                                                     @endisset
+                                                                    </a>
                                                                 </dd>
                                                                 <dt class="sr-only lg:hidden">Collection</dt>
                                                                 <dd class="mt-1 truncate text-dark-text-color lg:hidden">Collection: {{ $media->collection_name }}</dd>
