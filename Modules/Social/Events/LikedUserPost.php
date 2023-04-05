@@ -6,7 +6,6 @@ use App\Contracts\Events\ContributesToUserScore;
 use App\Events\BaseEvent;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Modules\Social\Models\Post;
 use Modules\Social\Models\UserScoreContribution;

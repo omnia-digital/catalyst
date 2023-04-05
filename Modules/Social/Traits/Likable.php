@@ -4,10 +4,7 @@ namespace Modules\Social\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Social\Events\LikedModel;
-use Modules\Social\Events\LikedUserPost;
-use Modules\Social\Events\PostWasLiked;
 use Modules\Social\Models\Like;
-use Modules\Social\Models\Post;
 
 use function auth;
 
