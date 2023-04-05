@@ -3,6 +3,7 @@
 namespace Modules\Social\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Social\Events\LikedModel;
 use Modules\Social\Events\LikedUserPost;
 use Modules\Social\Events\PostWasLiked;
 use Modules\Social\Models\Like;
@@ -96,9 +97,7 @@ trait Likable
             );
 
             
-            if ($this::class === Post::class) {
-                LikedUserPost::dispatch(auth()->user(), $this);
-            }
+            LikedModel::dispatch(auth()->user(), $this);
         }
     }
 
