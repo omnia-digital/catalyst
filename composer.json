@@ -56,7 +56,7 @@
         "pestphp/pest-plugin-laravel": "^1.1",
         "phpsa/filament-dadjokes": "^1.1",
         "phpsa/filament-password-reveal": "^1.1",
-        "pusher/pusher-php-server": "^7.0",
+        "pusher/pusher-php-server": "^7.2",
         "ralphjsmit/laravel-filament-components": "^1.1",
         "sentry/sentry-laravel": "^2.11",
         "shuvroroy/filament-spatie-laravel-backup": "^1.2",

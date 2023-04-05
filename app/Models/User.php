@@ -129,6 +129,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function getNameAttribute()
     {
+        $this->load('profile');
         return $this->profile?->name;
     }
 
@@ -149,6 +150,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function getProfilePhotoUrlAttribute()
     {
+        $this->load('profile');
         return $this->profile->profile_photo_url;
     }
 

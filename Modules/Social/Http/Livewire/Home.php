@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire;
 
+use App\Events\UserRegistered;
 use App\Models\Location;
 use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;
@@ -14,6 +15,20 @@ class Home extends Component
     use WithMap, WithNotification, WithModal, WithGuestAccess;
 
     public $tabs = [];
+
+    public function getListeners()
+    {
+        $userId = auth()->user()->id;
+
+        return [
+            "echo-private:notifications.{$userId},UserRegistered" => 'fireConfettiCannon',
+        ];
+    }
+
+    public function fireConfettiCannon()
+    {
+        $this->emit('confetti');
+    }
 
     public function mount()
     {
@@ -62,6 +77,8 @@ class Home extends Component
 
     public function getNewsRssFeeds()
     {
+        $this->dispatchBrowserEvent('asdfs');
+
         $feeds = collect();
         $feeds->push(['', 'https://rss.app/feeds/YYS8qbgAE8mUDqIZ.xml']);
         $feeds->push(['', 'https://feeds.feedburner.com/ign/all']);
