@@ -31,14 +31,5 @@ class EventServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        Event::listen(function (BaseEvent $event) {
-            if (interface_exists(ContributesToUserScore::class)) {
-                $classInterfaces = class_implements($event);
-                $implementsClass = in_array(ContributesToUserScore::class, $classInterfaces);
-                if ($implementsClass) {
-                    $event->trackContributionToUserScore();
-                }
-            }
-        });
     }
 }
