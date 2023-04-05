@@ -2,7 +2,6 @@
 
 namespace Modules\Social\Http\Livewire;
 
-use App\Events\UserRegistered;
 use App\Models\Location;
 use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;

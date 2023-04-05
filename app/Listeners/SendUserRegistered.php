@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
-use Illuminate\Auth\Events\Verified;
 
 class SendUserRegistered
 {
