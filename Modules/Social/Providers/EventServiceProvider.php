@@ -8,8 +8,12 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use Modules\Billing\Events\NewSubscriptionPayment;
 use Modules\Social\Events\LikedUserPost;
+use Modules\Social\Events\PostWasLiked;
+use Modules\Social\Listeners\TrackContributionToUserScore;
 use Modules\Social\Models\Post;
+use Modules\Social\Models\Profile;
 use Modules\Social\Observers\PostObserver;
+use Modules\Social\Observers\ProfileObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -21,10 +25,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         NewSubscriptionPayment::class => [
         ],
+        ContributesToUserScore::class => [TrackContributionToUserScore::class]
     ];
 
     protected $observers = [
         Post::class => PostObserver::class,
+        Profile::class => ProfileObserver::class,
     ];
 
     /**
@@ -34,10 +40,5 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Event::listen(function ($event) {
-            if (in_array('ContributesToUserScore', class_implements($event)) ) {
-                $event->trackContributionToUserScore();
-            }
-        });
     }
 }

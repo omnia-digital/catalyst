@@ -118,14 +118,6 @@ class Profile extends Model implements HasMedia, Searchable
         return ProfileFactory::new();
     }
 
-    protected static function booted()
-    {
-        static::updating(function (self $model) {
-            $model->isDirty('score') &&
-                $model->score_updated_at = now();
-        });
-    }
-
     /**
      * Get the route key for the model.
      *
