@@ -4,7 +4,7 @@ namespace App\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 
-class InvitingTeamMember extends BaseEvent
+class InvitedTeamMember extends BaseEvent
 {
     use Dispatchable;
 
