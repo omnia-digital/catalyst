@@ -30,6 +30,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI'),
+        'scopes'=> ['email']
+    ],
+
     'google_map' => [
         'api_key' => env('GOOGLE_MAP_API_KEY'),
         'api_backend_key' => env('GOOGLE_MAP_BACKEND_API_KEY'),
@@ -47,4 +54,10 @@ return [
         'return_url' => env('FA_RETURN_URL'),
     ],
 
+    'facebook' => [
+        'client_id' => env('FACEBOOK_APP_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT'),
+        'scopes' => ['public_profile','user_birthday', 'user_link', 'user_friends', 'user_location'],
+    ]
 ];

@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Actions\Fortify\CreateNewUser;
+use App\Omnia;
+use App\Support\Platform\Platform;
 use App\Traits\Team\HasTeams;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -15,6 +18,7 @@ use Laravel\Cashier\Billable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
 use Laravel\Passport\HasApiTokens;
+use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Modules\Billing\Models\Builders\CashierSubscriptionBuilder;
 use Modules\Billing\Traits\WithChargentSubscriptions;
 use Modules\Forms\Models\FormSubmission;
@@ -113,12 +117,40 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return str_ends_with($this->email, '@omniadigital.io') && $this->hasVerifiedEmail();
     }
 
+
+    /**
+     * Create user from user's data of Facebook.
+     */
+    public static function createUserFromFacebook(SocialiteUser $user): User
+    {
+        $socialAccount = SocialAccount::findByProvider('facebook', $user->getId());
+
+        // If we found a social account then just return the attached user.
+        if ($socialAccount) {
+            return $socialAccount->user;
+        }
+
+        // Otherwise, create user + user account.
+        [$firstName, $lastName] = Platform::extractFullName($user->getName());
+
+        $dbUser = (new CreateNewUser)->create([
+            'email' => $user->getEmail(),
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'avatar' => $user->getAvatar(),
+        ], true);
+
+        $dbUser->createSocialAccount($user);
+
+        return $dbUser;
+    }
+
+    //// Attributes ////
+
     public function getIsAdminAttribute()
     {
         return $this->hasRole('super-admin');
     }
-
-        //// Attributes ////
 
     public function getHandleAttribute()
     {

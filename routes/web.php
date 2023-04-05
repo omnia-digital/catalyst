@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthSocialController;
 use App\Http\Controllers\HandleStripeConnectRefreshUrlController;
 use App\Http\Livewire\Pages\Account\Index as AccountIndex;
 use App\Http\Livewire\Pages\Media\Index as MediaIndex;
@@ -27,3 +28,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Stripe Connect
 Route::get('teams/stripe-connect/refresh', HandleStripeConnectRefreshUrlController::class)->name('teams.stripe-connect.refresh');
+
+Route::get('auth/redirect/{provider}', [AuthSocialController::class, 'redirect'])->name('auth.social');
+Route::get('auth/callback/{provider}', [AuthSocialController::class, 'callback'])->name('auth.social.callback');

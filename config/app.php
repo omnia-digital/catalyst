@@ -197,6 +197,11 @@ return [
         App\Providers\TeamLensesServiceProvider::class,
         App\Providers\StripeConnectServiceProvider::class,
         Omniphx\Forrest\Providers\Laravel\ForrestServiceProvider::class,
+
+        /**
+         * Socialite
+         */
+        \SocialiteProviders\Manager\ServiceProvider::class
     ],
 
     /*

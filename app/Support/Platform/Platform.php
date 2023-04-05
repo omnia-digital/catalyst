@@ -212,4 +212,17 @@ class Platform
 
         return __($newWordString);
     }
+
+    /**
+     * @return array
+     */
+    public static function extractFullName(string $fullName)
+    {
+        $name = explode(' ', $fullName);
+
+        $firstName = $name[0];
+        $lastName = count($name) === 1 ? '' : trim(str_replace($firstName, '', $fullName));
+
+        return [$firstName, $lastName];
+    }
 }
