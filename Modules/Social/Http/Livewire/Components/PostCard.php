@@ -21,7 +21,7 @@ class PostCard extends Component
 
     public function loadRelations()
     {
-        $this->post->load(['user', 'team', 'media','repostOriginal', 'tags']);
+        $this->post->load(['user', 'team', 'media', 'repostOriginal', 'tags']);
     }
 
     public function mount(Post $post, $clickable = true, $showPostActions = true)

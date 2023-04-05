@@ -14,11 +14,12 @@ class AuthSocialController extends Controller
 {
     public function redirect(Request $request, $provider)
     {
-        $scopes = config("services.$provider.scopes");
-        $driver = Socialite::driver($provider)->redirectUrl(config("services.$provider.redirect"));
+        $scopes = config("services.{$provider}.scopes");
+        $driver = Socialite::driver($provider)->redirectUrl(config("services.{$provider}.redirect"));
         if ($scopes) {
             $driver->setScopes($scopes);
         }
+
         return $driver->redirect();
     }
 

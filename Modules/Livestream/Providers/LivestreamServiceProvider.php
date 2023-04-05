@@ -2,7 +2,6 @@
 
 namespace Modules\Livestream\Providers;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 

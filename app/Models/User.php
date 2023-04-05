@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Actions\Fortify\CreateNewUser;
-use App\Omnia;
 use App\Support\Platform\Platform;
 use App\Traits\Team\HasTeams;
 use Filament\Models\Contracts\FilamentUser;
@@ -107,17 +106,6 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             })->first();
     }
 
-    public function canAccessFilament(): bool
-    {
-        return true;
-        if ($this->is_admin) {
-            return true;
-        }
-
-        return str_ends_with($this->email, '@omniadigital.io') && $this->hasVerifiedEmail();
-    }
-
-
     /**
      * Create user from user's data of Facebook.
      */
@@ -143,6 +131,16 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         $dbUser->createSocialAccount($user);
 
         return $dbUser;
+    }
+
+    public function canAccessFilament(): bool
+    {
+        return true;
+        if ($this->is_admin) {
+            return true;
+        }
+
+        return str_ends_with($this->email, '@omniadigital.io') && $this->hasVerifiedEmail();
     }
 
     //// Attributes ////
