@@ -22,7 +22,7 @@ class MentionFactory extends Factory
      */
     public function definition()
     {
-        $user = User::all()->random();
+        $user = User::all()->random()->load('profile');
         $post = Post::factory(1)->create([
             'body' => "Hello @{$user->handle}, I mentioned you in a post!",
         ])->first();

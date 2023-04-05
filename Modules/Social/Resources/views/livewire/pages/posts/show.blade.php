@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="text-2xl">
-            {{ ucfirst(strtolower($post->type->name)) }}
+            {{ ucfirst(strtolower($post->type?->name ?? 'Post')) }}
         </div>
     </div>
     <div class="mt-6 max-w-post-card-max-w mx-auto divide-y">

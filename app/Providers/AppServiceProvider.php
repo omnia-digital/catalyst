@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Cashier::ignoreMigrations();
-        //Model::preventLazyLoading(! $this->app->isProduction());
+        Model::preventLazyLoading(app()->isLocal());
     }
 
     /**
