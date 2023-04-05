@@ -20,7 +20,7 @@ trait Bookmarkable
     public function isBookmarkedBy(User|Authenticatable|null $user = null): bool
     {
         is_null($user) && $user = auth()->user();
-
+        $this->load('bookmarks');
         return $this->bookmarks->where('user_id', $user?->id)->isNotEmpty();
     }
 

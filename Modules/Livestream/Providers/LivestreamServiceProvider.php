@@ -29,7 +29,6 @@ class LivestreamServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-        Model::preventLazyLoading(! app()->isProduction() && ! app()->environment('staging'));
     }
 
     /**

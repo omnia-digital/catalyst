@@ -19,11 +19,17 @@ class PostCard extends Component
     public $clickable;
     public $showPostActions = true;
 
+    public function loadRelations()
+    {
+        $this->post->load(['user', 'team', 'media','repostOriginal', 'tags']);
+    }
+
     public function mount(Post $post, $clickable = true, $showPostActions = true)
     {
         $this->post = $post;
         $this->clickable = $clickable;
         $this->showPostActions = $showPostActions;
+        $this->loadRelations();
     }
 
     public function getAuthorProperty()
