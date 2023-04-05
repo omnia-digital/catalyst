@@ -7,7 +7,6 @@ use App\Events\BaseEvent;
 use App\Models\User;
 use Illuminate\Queue\SerializesModels;
 use Modules\Social\Models\Post;
-use Modules\Social\Models\UserScoreContribution;
 
 class LikedModel extends BaseEvent implements ContributesToUserScore
 {
@@ -22,17 +21,17 @@ class LikedModel extends BaseEvent implements ContributesToUserScore
 
     /**
      * The likable instance.
-     * 
+     *
      * @param mixed
      */
     public $model;
 
     /**
      * Match model class to contribution type
-     * 
+     *
      * @param array
      */
-    public $modelClassEvents =[
+    public $modelClassEvents = [
         Post::class => LikedUserPost::class,
     ];
 

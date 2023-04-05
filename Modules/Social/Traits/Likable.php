@@ -93,7 +93,6 @@ trait Likable
                 ['liked' => true]
             );
 
-            
             LikedModel::dispatch(auth()->user(), $this);
         }
     }

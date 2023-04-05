@@ -20,7 +20,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         NewSubscriptionPayment::class => [
         ],
-        ContributesToUserScore::class => [TrackContributionToUserScore::class]
+        ContributesToUserScore::class => [TrackContributionToUserScore::class],
     ];
 
     protected $observers = [

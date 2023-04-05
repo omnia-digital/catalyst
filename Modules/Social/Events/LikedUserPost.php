@@ -23,7 +23,7 @@ class LikedUserPost extends BaseEvent implements ContributesToUserScore
 
     /**
      * The post instance.
-     * 
+     *
      * @param Post
      */
     public $post;
@@ -43,7 +43,7 @@ class LikedUserPost extends BaseEvent implements ContributesToUserScore
     {
         $this->user->profile->score += UserScoreContribution::getPointsFor('Liked User Post');
         $this->user->profile->save();
-        
+
         $this->post->user->profile->score += UserScoreContribution::getPointsFor('Post Was Liked');
         $this->post->user->profile->save();
     }
