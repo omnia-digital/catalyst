@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Modules\Billing\Jobs\SyncChargentSubscriptionStatuses;
+use Modules\Forms\Jobs\SendFormNotificationsJob;
+use Platform;
 
 class Kernel extends ConsoleKernel
 {
@@ -27,6 +29,10 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->job(new SyncChargentSubscriptionStatuses)
             ->dailyAt('22:00');
+
+        $schedule->jon(new SendFormNotificationsJob)
+            ->everyThirtyMinutes()
+            ->when(fn () => Platform::isModuleEnabled('forms'));
 
         $schedule->command('backup:clean')->daily()->at('01:00');
         $schedule->command('backup:run')->daily()->at('02:00');
