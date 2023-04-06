@@ -35,6 +35,7 @@
         "konnco/filament-import": "^1.4",
         "laravel/cashier": "^14.1",
         "laravel/framework": "^9.0.0",
+        "laravel/horizon": "^5.15",
         "laravel/jetstream": "^2.4",
         "laravel/passport": "^11.2",
         "laravel/sanctum": "^2.11",

@@ -2,12 +2,13 @@
 
 namespace Modules\Billing\Events;
 
+use App\Events\BaseEvent;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Queue\SerializesModels;
 use Laravel\Cashier\Subscription;
 
-class TeamMemberSubscriptionCreatedEvent
+class TeamMemberSubscriptionCreatedEvent extends BaseEvent
 {
     use SerializesModels;
 

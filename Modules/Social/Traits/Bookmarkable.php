@@ -21,6 +21,7 @@ trait Bookmarkable
     {
         is_null($user) && $user = auth()->user();
         $this->load('bookmarks');
+
         return $this->bookmarks->where('user_id', $user?->id)->isNotEmpty();
     }
 
