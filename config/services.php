@@ -34,7 +34,7 @@ return [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URI'),
-        'scopes'=> ['email']
+        'scopes' => ['email'],
     ],
 
     'google_map' => [
@@ -58,6 +58,6 @@ return [
         'client_id' => env('FACEBOOK_APP_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT'),
-        'scopes' => ['public_profile','user_birthday', 'user_link', 'user_friends', 'user_location'],
-    ]
+        'scopes' => ['public_profile', 'user_birthday', 'user_link', 'user_friends', 'user_location'],
+    ],
 ];

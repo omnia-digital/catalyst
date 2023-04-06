@@ -6,16 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('social_accounts', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class,'user_id');
+            $table->foreignIdFor(\App\Models\User::class, 'user_id');
             $table->string('provider_user_id');
             $table->string('provider');
             $table->text('avatar')->nullable();
@@ -33,11 +28,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('social_accounts');

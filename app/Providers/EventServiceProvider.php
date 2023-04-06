@@ -28,7 +28,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         SocialiteWasCalled::class => [
             // ... other providers
-            FacebookExtendSocialite::class.'@handle',
+            FacebookExtendSocialite::class . '@handle',
         ],
     ];
 

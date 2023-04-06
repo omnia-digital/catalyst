@@ -202,7 +202,7 @@ return [
         /**
          * Socialite
          */
-        \SocialiteProviders\Manager\ServiceProvider::class
+        \SocialiteProviders\Manager\ServiceProvider::class,
     ],
 
     /*

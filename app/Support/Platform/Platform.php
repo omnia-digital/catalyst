@@ -164,6 +164,19 @@ class Platform
         return $countries;
     }
 
+    /**
+     * @return array
+     */
+    public static function extractFullName(string $fullName)
+    {
+        $name = explode(' ', $fullName);
+
+        $firstName = $name[0];
+        $lastName = count($name) === 1 ? '' : trim(str_replace($firstName, '', $fullName));
+
+        return [$firstName, $lastName];
+    }
+
     public function isModuleEnabled($moduleName)
     {
         $modules = collect(Module::allEnabled());
@@ -211,18 +224,5 @@ class Platform
         $newWordString = rtrim($newWordString);
 
         return __($newWordString);
-    }
-
-    /**
-     * @return array
-     */
-    public static function extractFullName(string $fullName)
-    {
-        $name = explode(' ', $fullName);
-
-        $firstName = $name[0];
-        $lastName = count($name) === 1 ? '' : trim(str_replace($firstName, '', $fullName));
-
-        return [$firstName, $lastName];
     }
 }
