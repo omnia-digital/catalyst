@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new SyncChargentSubscriptionStatuses)
             ->dailyAt('22:00');
 
-        $schedule->jon(new SendFormNotificationsJob)
+        $schedule->job(new SendFormNotificationsJob)
             ->everyThirtyMinutes()
             ->when(fn () => Platform::isModuleEnabled('forms'));
 
