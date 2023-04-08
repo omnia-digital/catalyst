@@ -1,5 +1,8 @@
-<?php namespace Modules\Jobs\Support\Livewire;
+<?php
 
+namespace Modules\Jobs\Support\Livewire;
+
+use Closure;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -10,10 +13,9 @@ trait WithValidationFails
     /**
      * Set action when validation fails.
      *
-     * @param \Closure $closure
      * @return WithValidationFails
      */
-    public function whenFails(\Closure $closure)
+    public function whenFails(Closure $closure)
     {
         $this->whenFails = $closure;
 
@@ -21,9 +23,8 @@ trait WithValidationFails
     }
 
     /**
-     * @param $rules
-     * @param array $messages
-     * @param array $attributes
+     * @param  array  $messages
+     * @param  array  $attributes
      * @return array
      */
     public function validate($rules = null, $messages = [], $attributes = [])
@@ -46,7 +47,6 @@ trait WithValidationFails
     }
 
     /**
-     * @param $validator
      * @throws ValidationException
      */
     private function handleFails($validator)

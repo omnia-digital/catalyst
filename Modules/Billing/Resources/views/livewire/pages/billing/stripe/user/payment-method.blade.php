@@ -1,7 +1,7 @@
 <div>
     <x-library::heading.3>Payment Method</x-library::heading.3>
 
-    @if(!$this->stripeBillable()->hasDefaultPaymentMethod())
+    @if (!$this->stripeBillable()->hasDefaultPaymentMethod())
         <x-library::alert.warning class="shadow my-4">Please add a default payment method.</x-library::alert.warning>
     @endif
 

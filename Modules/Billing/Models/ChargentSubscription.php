@@ -3,8 +3,8 @@
 namespace Modules\Billing\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class ChargentSubscription extends Model
 {
@@ -16,9 +16,9 @@ class ChargentSubscription extends Model
         'starts_at',
         'next_invoice_at',
         'ends_at',
-        'last_transaction_at'
+        'last_transaction_at',
     ];
-    
+
     protected static function newFactory()
     {
         return \Modules\Billing\Database\factories\ChargentSubscriptionFactory::new();
@@ -38,5 +38,4 @@ class ChargentSubscription extends Model
     {
         return $this->status === 'Recurring';
     }
-
 }

@@ -20,7 +20,7 @@ return new class extends Migration
         });
 
         Schema::table('job_positions', function (Blueprint $table) {
-            $table->foreignIdFor(\Modules\Jobs\Models\HoursPerWeek::class,'hours_per_week_id')->index();
+            $table->foreignIdFor(\Modules\Jobs\Models\HoursPerWeek::class, 'hours_per_week_id')->index();
         });
     }
 

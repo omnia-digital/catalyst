@@ -14,9 +14,9 @@ class Show extends Component
         'views',
         'comments',
         'volunteers',
-        'members'
+        'members',
     ];
-  
+
     public function getUserProperty()
     {
         return $this->profile->user;

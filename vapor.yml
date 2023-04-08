@@ -26,6 +26,7 @@ environments:
     database: churchworld-db-staging
     storage: churchworld-staging
     runtime: docker
+    scheduler: false
     memory: 1024
     cli-memory: 512
     cli-timeout: 600

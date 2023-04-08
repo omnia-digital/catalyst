@@ -1,6 +1,5 @@
 <?php
 
-
 use Modules\Billing\Http\Livewire\Pages\Billing\Chargent\User\Subscription as SubscriptionPage;
 use Modules\Billing\Http\Livewire\Pages\Billing\Stripe\User\Billing;
 
@@ -23,5 +22,4 @@ Route::name('billing.')
          Route::get('/subscription', SubscriptionPage::class)
               ->withoutMiddleware('subscribed')
               ->name('chargent-billing'); // chargent billing
-
      });

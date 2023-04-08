@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Team;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Permission;
@@ -14,31 +13,31 @@ class PermissionSeeder extends Seeder
 {
     public function run()
     {
-        $teamPermissions         = [
+        $teamPermissions = [
             'create_team',
             'read_team',
             'update_team',
             'delete_team',
         ];
-        $postPermissions         = [
+        $postPermissions = [
             'create_post',
             'read_post',
             'update_post',
             'delete_post',
         ];
-        $feedPermissions         = [
+        $feedPermissions = [
             'create_feed',
             'read_feed',
             'update_feed',
             'delete_feed',
         ];
-        $awardPermissions        = [
+        $awardPermissions = [
             'create_award',
             'read_award',
             'update_award',
             'delete_award',
         ];
-        $reviewPermissions       = [
+        $reviewPermissions = [
             'create_review',
             'read_review',
             'update_review',
@@ -50,7 +49,7 @@ class PermissionSeeder extends Seeder
             'update_subscription',
             'delete_subscription',
         ];
-        $eventPermissions        = [
+        $eventPermissions = [
             'create_event',
             'read_event',
             'update_event',
@@ -71,51 +70,51 @@ class PermissionSeeder extends Seeder
         //Some Default Team role configuration
         $roles = [
             config('platform.teams.default_owner_role') => [
-                'description' => "There can only be 1 Owner. The owner is the user that has their financial & billing accounts linked to this Team",
+                'description' => 'There can only be 1 Owner. The owner is the user that has their financial & billing accounts linked to this Team',
                 'permissions' => [
                     ...$allPermissions,
-                    'billing'
-                ]
+                    'billing',
+                ],
             ],
             config('platform.teams.default_admin_role') => [
-                'description' => "Admins have access to everything except billing & subscription details.",
+                'description' => 'Admins have access to everything except billing & subscription details.',
                 'permissions' => [
-                    ...$allPermissions
-                ]
+                    ...$allPermissions,
+                ],
             ],
             config('platform.teams.default_moderator_role') => [
-                'description' => "Moderators can also can edit and delete_posts.",
+                'description' => 'Moderators can also can edit and delete_posts.',
                 'permissions' => [
                     'view_posts',
                     'create_posts',
                     'update_posts',
-                    'delete_posts'
-                ]
+                    'delete_posts',
+                ],
             ],
             config('platform.teams.default_editor_role') => [
-                'description' => "Editors can create_and update_posts but never delete_posts.",
+                'description' => 'Editors can create_and update_posts but never delete_posts.',
                 'permissions' => [
                     'view_posts',
                     'create_posts',
                     'update_posts',
-                ]
+                ],
             ],
             config('platform.teams.default_member_role') => [
-                'description' => "Members are a part of your Team and can see content inside the Team.",
+                'description' => 'Members are a part of your Team and can see content inside the Team.',
                 'permissions' => [
                     'view_posts',
-                ]
-            ]
+                ],
+            ],
         ];
 
-        if ( ! empty($usingTeamMemberSubs)) {
+        if (! empty($usingTeamMemberSubs)) {
             $roles = array_merge($roles, [
                 config('platform.teams.default_subscriber_role') => [
                     'description' => "Subscribers can view 'sub-only' content, including posts, chats, events and more. Assigning a new member this role is equivalent to giving a subscription for free.",
                     'permissions' => [
                         'view_posts',
-                    ]
-                ]
+                    ],
+                ],
             ]);
         }
 
@@ -136,6 +135,5 @@ class PermissionSeeder extends Seeder
 
         // add Omnia Admin as super admin
         Artisan::call('shield:super-admin --user=1');
-
     }
 }

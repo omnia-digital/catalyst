@@ -34,10 +34,10 @@ class Game extends IGDBGame
     public function getVideos()
     {
         $videos = collect();
-        if (!$this->videos) {
+        if (! $this->videos) {
             return $videos;
         }
-        foreach($this->videos as $video) {
+        foreach ($this->videos as $video) {
             $videos->push(GameVideo::where('id', $video)->first());
         }
 
@@ -67,6 +67,7 @@ class Game extends IGDBGame
     public function getKeywordsAttribute()
     {
         $tags = $this->tags;
+
         return Keyword::where('');
     }
 }

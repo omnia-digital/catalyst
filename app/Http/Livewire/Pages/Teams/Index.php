@@ -20,7 +20,7 @@ class Index extends Component
     public array $sortLabels = [
         'name' => 'Name',
         'users_count' => 'Users',
-        'start_date' => 'Launch Date'
+        'start_date' => 'Launch Date',
     ];
 
     public string $dateColumn = 'start_date';
@@ -45,9 +45,9 @@ class Index extends Component
         $query = Team::query()
             ->with('location')
             ->withCount('users');
-            
+
         return $this->applyFilters($query)
-            ->when($this->search, fn(Builder $q) => $q->search($this->search));
+            ->when($this->search, fn (Builder $q) => $q->search($this->search));
     }
 
     public function getRowsProperty()

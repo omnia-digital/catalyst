@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use URL;
+use Illuminate\Support\Facades\URL;
 
 class NullMedia
 {
@@ -10,7 +10,8 @@ class NullMedia
 
     public $type;
 
-    public function __construct($type = 'team') {
+    public function __construct($type = 'team')
+    {
         $this->type = $type;
     }
 
@@ -30,7 +31,7 @@ class NullMedia
             case 'profile':
                 return URL::asset('storage/images/profile_default.jpg');
                 break;
-            
+
             default:
                 return URL::asset('storage/images/team_default.jpg');
                 break;

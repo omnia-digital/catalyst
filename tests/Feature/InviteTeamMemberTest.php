@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
-use Laravel\Jetstream\Http\Livewire\TeamMemberManager;
 use Laravel\Jetstream\Mail\TeamInvitation;
 use Livewire\Livewire;
 use Modules\Social\Http\Livewire\Pages\Teams\Admin\ManageTeamMembers;
@@ -22,18 +21,18 @@ class InviteTeamMemberTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-    
+
         $this->actingAs($user = User::factory()->withTeam()->create([
             'email' => 'test@omniadigital.io',
-            'is_admin' => true
+            'is_admin' => true,
         ]));
 
         $profile = new Profile([
-            'first_name'       => 'test first name',
-            'last_name'       => 'test last name',
-            'bio'        => 'test bio',
+            'first_name' => 'test first name',
+            'last_name' => 'test last name',
+            'bio' => 'test bio',
             'remote_url' => 'http://test.url/',
-            'location'   => 'test location',
+            'location' => 'test location',
         ]);
 
         $user->profile()->save($profile);
@@ -41,7 +40,10 @@ class InviteTeamMemberTest extends TestCase
         $this->user = $user;
     }
 
-    public function test_team_members_can_be_invited_to_team()
+    /**
+     * @test
+     */
+    public function team_members_can_be_invited_to_team()
     {
         Mail::fake();
 
@@ -56,7 +58,7 @@ class InviteTeamMemberTest extends TestCase
                         ->set('addTeamMemberForm', [
                             'email' => 'test@example.com',
                             'role' => $role->name,
-                            'message' => 'Please join the team'
+                            'message' => 'Please join the team',
                         ])->call('addTeamMember');
 
         Mail::assertSent(TeamInvitation::class);
@@ -64,7 +66,10 @@ class InviteTeamMemberTest extends TestCase
         $this->assertCount(1, $team->fresh()->teamInvitations);
     }
 
-    public function test_team_member_invitations_can_be_cancelled()
+    /**
+     * @test
+     */
+    public function team_member_invitations_can_be_cancelled()
     {
         $team = $this->user->teams()->first();
 
@@ -78,7 +83,7 @@ class InviteTeamMemberTest extends TestCase
                         ->set('addTeamMemberForm', [
                             'email' => 'test@example.com',
                             'role' => $role->name,
-                            'message' => 'Please join the team'
+                            'message' => 'Please join the team',
                         ])->call('addTeamMember');
 
         $invitationId = $team->fresh()->teamInvitations->first()->id;

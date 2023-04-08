@@ -13,7 +13,7 @@ class HandleStripeConnectRefreshUrlController extends Controller
         /** @var Team $team */
         $team = $request->user()->currentTeam;
 
-        if (!$team) {
+        if (! $team) {
             return route('social.home');
         }
 

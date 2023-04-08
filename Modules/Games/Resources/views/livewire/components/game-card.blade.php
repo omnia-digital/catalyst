@@ -16,9 +16,9 @@
             <div class="flex justify-between items-center">
                 {{ $game->details->first_release_date->format(config('app.default_date_format')) }}
                 <div class="flex justify-end space-x-4">
-                    @if($game->details->platforms)
-                        @foreach($game?->details->platforms as $platform)
-                            @if(\MarcReichel\IGDBLaravel\Models\Platform::find($platform)->platform_logo)
+                    @if ($game->details->platforms)
+                        @foreach ($game?->details->platforms as $platform)
+                            @if (\MarcReichel\IGDBLaravel\Models\Platform::find($platform)->platform_logo)
                                 <img src="{{ \MarcReichel\IGDBLaravel\Models\PlatformLogo::find(\MarcReichel\IGDBLaravel\Models\Platform::find
                         ($platform)?->platform_logo)?->url }}" alt=""
                                          class="w-6 h-6"/>
@@ -30,7 +30,7 @@
                 <br/>
                 {{ $game->details->total_rating_count }}
                 <div class="flex-wrap space-x-1">
-                    @foreach(collect($game->details->keywords)->take(3) as $keyword)
+                    @foreach (collect($game->details->keywords)->take(3) as $keyword)
                         <div>
                             <x-library::tag text-size="xs">{{ \MarcReichel\IGDBLaravel\Models\Keyword::find($keyword)?->name }}</x-library::tag>
                         </div>

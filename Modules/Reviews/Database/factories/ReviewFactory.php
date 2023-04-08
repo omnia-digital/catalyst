@@ -1,8 +1,8 @@
 <?php
+
 namespace Modules\Reviews\Database\factories;
 
 use App\Models\Team;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReviewFactory extends Factory
@@ -21,16 +21,15 @@ class ReviewFactory extends Factory
      */
     public function definition()
     {
-        $team = Team::all()->random();
+        $team = Team::all()->random()->load('users');
 
         return [
-            'user_id'    => $team->users->random()->id,
-            'reviewable_id'    => $team->id,
+            'user_id' => $team->users->random()->id,
+            'reviewable_id' => $team->id,
             'reviewable_type' => $team::class,
-            'body'       => $this->faker->paragraph(4),
+            'body' => $this->faker->paragraph(4),
             'created_at' => now(),
             'updated_at' => now(),
         ];
     }
 }
-

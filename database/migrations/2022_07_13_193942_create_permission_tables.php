@@ -1,20 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Spatie\Permission\PermissionRegistrar;
 
 class CreatePermissionTables extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-
         $tableNames = config('permission.table_names');
         $columnNames = config('permission.column_names');
         $teams = config('permission.teams');
@@ -26,7 +20,7 @@ class CreatePermissionTables extends Migration
             throw new \Exception('Error: team_foreign_key on config/permission.php not loaded. Run [php artisan config:clear] and try again.');
         }
 
-        Schema::hasTable($tableNames['permissions']) ? Schema::rename($tableNames['permissions'], $tableNames['permissions'].'_old') : null;
+        Schema::hasTable($tableNames['permissions']) ? Schema::rename($tableNames['permissions'], $tableNames['permissions'] . '_old') : null;
 
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->bigIncrements('id'); // permission id
@@ -37,7 +31,7 @@ class CreatePermissionTables extends Migration
             $table->unique(['name', 'guard_name']);
         });
 
-        Schema::hasTable($tableNames['roles']) ? Schema::rename($tableNames['roles'], $tableNames['roles'].'_old') : null;
+        Schema::hasTable($tableNames['roles']) ? Schema::rename($tableNames['roles'], $tableNames['roles'] . '_old') : null;
 
         Schema::create($tableNames['roles'], function (Blueprint $table) use ($teams, $columnNames) {
             $table->bigIncrements('id'); // role id
@@ -56,7 +50,7 @@ class CreatePermissionTables extends Migration
             }
         });
 
-        Schema::hasTable($tableNames['model_has_permissions']) ? Schema::rename($tableNames['model_has_permissions'], $tableNames['model_has_permissions'].'_old') : null;
+        Schema::hasTable($tableNames['model_has_permissions']) ? Schema::rename($tableNames['model_has_permissions'], $tableNames['model_has_permissions'] . '_old') : null;
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames, $teams) {
             $table->unsignedBigInteger(PermissionRegistrar::$pivotPermission);
@@ -82,7 +76,7 @@ class CreatePermissionTables extends Migration
             }
         });
 
-        Schema::hasTable($tableNames['model_has_roles']) ? Schema::rename($tableNames['model_has_roles'], $tableNames['model_has_roles'].'_old') : null;
+        Schema::hasTable($tableNames['model_has_roles']) ? Schema::rename($tableNames['model_has_roles'], $tableNames['model_has_roles'] . '_old') : null;
 
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames, $teams) {
             $table->unsignedBigInteger(PermissionRegistrar::$pivotRole);
@@ -108,7 +102,7 @@ class CreatePermissionTables extends Migration
             }
         });
 
-        Schema::hasTable($tableNames['role_has_permissions']) ? Schema::rename($tableNames['role_has_permissions'], $tableNames['role_has_permissions'].'_old') : null;
+        Schema::hasTable($tableNames['role_has_permissions']) ? Schema::rename($tableNames['role_has_permissions'], $tableNames['role_has_permissions'] . '_old') : null;
 
         Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames) {
             $table->unsignedBigInteger(PermissionRegistrar::$pivotPermission);
@@ -132,11 +126,6 @@ class CreatePermissionTables extends Migration
             ->forget(config('permission.cache.key'));
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         $tableNames = config('permission.table_names');

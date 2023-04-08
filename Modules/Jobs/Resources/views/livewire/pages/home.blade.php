@@ -30,7 +30,7 @@
 
                 <div class="bg-white shadow overflow-hidden sm:rounded-md">
                     <ul>
-                        @forelse($jobs as $job)
+                        @forelse ($jobs as $job)
                             <x-job.item
                                     wire:key="latest-job-{{ $job->id }}"
                                     class="{{ $loop->first ? 'border-t border-gray-200' : '' }}"

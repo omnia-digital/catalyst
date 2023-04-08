@@ -4,7 +4,6 @@ namespace Modules\Games\Http\Livewire\Components;
 
 use Livewire\Component;
 use Modules\Games\Actions\Games\GamesAction;
-use Modules\Games\Actions\Games\GetPopularGamesAction;
 
 class PopularGames extends Component
 {
@@ -14,9 +13,10 @@ class PopularGames extends Component
     {
         $this->readyToLoad = true;
     }
+
     public function getPopularGamesProperty()
     {
-        return (new GamesAction())->popular();
+        return (new GamesAction)->popular();
     }
 
     public function render()
@@ -25,5 +25,4 @@ class PopularGames extends Component
             'popularGames' => $this->readyToLoad ? $this->popularGames : collect(),
         ]);
     }
-
 }

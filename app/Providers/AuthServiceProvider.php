@@ -3,11 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Team;
-use App\Policies\BillingSettingsPolicy;
 use App\Policies\ExceptionPolicy;
 use App\Policies\PermissionPolicy;
 use App\Policies\TeamPolicy;
-use App\Settings\BillingSettings;
 use BezhanSalleh\FilamentExceptions\Models\Exception;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;

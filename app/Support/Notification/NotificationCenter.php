@@ -12,11 +12,11 @@ class NotificationCenter
 
     public function __construct($title = null, $subtitle = null)
     {
-        if (!empty($title)) {
+        if (! empty($title)) {
             $this->title($title);
         }
 
-        if (!empty($subtitle)) {
+        if (! empty($subtitle)) {
             $this->subtitle($subtitle);
         }
 
@@ -62,7 +62,7 @@ class NotificationCenter
 
     public function level(string $value): self
     {
-        if (!in_array($value, self::LEVELS)) {
+        if (! in_array($value, self::LEVELS)) {
             $value = 'info';
         }
 

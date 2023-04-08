@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Modules\Forms\Models\Form;
 use Spatie\Permission\Models\Role;
-use Thomasjohnkane\Snooze\Models\ScheduledNotification;
 
 class CreateFormNotificationsTable extends Migration
 {

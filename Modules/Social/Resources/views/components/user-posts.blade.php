@@ -7,11 +7,11 @@
     x-data="{
         activeTab: 'posts',
         tabs: {
-            'posts': 'Posts', 
-            'likes': 'Likes', 
+            'posts': 'Posts',
+            'likes': 'Likes',
             'resources': 'Resources'
         }
-    }" 
+    }"
 >
     <!-- Posts Nav -->
     <div>

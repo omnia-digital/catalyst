@@ -12,7 +12,7 @@ return [
     'settings' => [
         GeneralSettings::class,
         BillingSettings::class,
-        \Modules\Jobs\Settings\JobsSettings::class
+        \Modules\Jobs\Settings\JobsSettings::class,
     ],
 
     /*

@@ -39,6 +39,7 @@ use Spatie\Searchable\SearchResult;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
+use Trans;
 use Wimil\Followers\Traits\CanBeFollowed;
 
 /**
@@ -51,6 +52,8 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     use HasTeamTags, HasTags {
         HasTeamTags::tags insteadof HasTags;
     }
+
+    const DEFAULT_TEAM_NAME = 'Default Org';
 
     /**
      * The attributes that are mass assignable.
@@ -68,17 +71,17 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     ];
 
     protected $dates = [
-        'start_date'
+        'start_date',
     ];
 
     protected $casts = [
-        'stripe_connect_onboarding_completed' => 'boolean'
+        'stripe_connect_onboarding_completed' => 'boolean',
     ];
 
     protected $appends = [
         'profile_photo_url',
         'location_short',
-        'start_date_string'
+        'start_date_string',
     ];
 
     /**
@@ -91,6 +94,12 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+    public static function findByHandle($handle)
+    {
+        return Team::where('handle', $handle)
+                   ->first();
+    }
 
     public function getSlugOptions(): SlugOptions
     {
@@ -107,12 +116,6 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     public function getRouteKeyName()
     {
         return 'handle';
-    }
-
-    public static function findByHandle($handle)
-    {
-        return Team::where('handle', $handle)
-                   ->first();
     }
 
     public function getThumbnailAttribute($value)
@@ -140,6 +143,21 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         return config('platform.teams.default_member_role');
     }
 
+    public function hasInfoIsFilled(): bool
+    {
+        return ! $this->hasDefaultTeamName() && ! empty($this->phone) && ! empty($this->city) && ! empty($this->state);
+    }
+
+    public function hasDefaultTeamName(): bool
+    {
+        return $this->name === $this->getDefaultTeamName();
+    }
+
+    public function getDefaultTeamName(): string
+    {
+        return $this->owner?->profile?->first_name . Trans::get("'s Team") ?? Trans::get('Default Team');
+    }
+
     // Relations //
     public function teamNotifications(): HasMany
     {
@@ -153,8 +171,6 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     /**
      * Get all of the pending user applications for the team.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function teamApplications(): HasMany
     {
@@ -337,7 +353,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
-        return $query->where('name', 'LIKE', "%$search%");
+        return $query->where('name', 'LIKE', "%{$search}%");
     }
 
     public function scopeWithuser(Builder $query, User $user): Builder
@@ -354,7 +370,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function stripeConnectOnboardingCompleted(): bool
     {
-        return (bool)$this->stripe_connect_onboarding_completed;
+        return (bool) $this->stripe_connect_onboarding_completed;
     }
 
     public function subscription(): BelongsTo
@@ -377,7 +393,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     {
         $url = route('social.teams.show', $this);
 
-        return (new SearchResult($this, $this->name, $url))->setType(\Trans::get('Teams'));
+        return (new SearchResult($this, $this->name, $url))->setType(Trans::get('Teams'));
     }
 
     /**

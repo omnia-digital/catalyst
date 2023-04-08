@@ -3,7 +3,6 @@
 namespace Modules\Games\Http\Livewire\Components;
 
 use Livewire\Component;
-use Modules\Games\Models\IGDB\Game;
 
 class GameCard extends Component
 {
@@ -22,7 +21,7 @@ class GameCard extends Component
     public function render()
     {
         return view('games::livewire.components.game-card-steam', [
-            'game' => $this->game
+            'game' => $this->game,
         ]);
     }
 }

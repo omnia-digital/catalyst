@@ -4,7 +4,7 @@
     <div class="mb-3 rounded-b-lg px-4 flex items-center justify-between bg-primary">
         <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Articles') }}</x-library::heading.1>
         <div class="flex items-center">
-            @if(auth()->user()->can('create', \Modules\Social\Models\Post::class))
+            @if (auth()->user()->can('create', \Modules\Social\Models\Post::class))
                 @auth
                     <x-library::button.link
                             href="{{ route('articles.create') }}"
@@ -37,7 +37,7 @@
         </nav>
     </div>
 
-    @if($showMyArticles)
+    @if ($showMyArticles)
         {{-- Drafts/Published    --}}
         <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
             <nav class="flex space-x-8 py-2" aria-label="Global">
@@ -58,7 +58,7 @@
 
     <div class="">
         <div class="masonry sm:masonry-1 md:masonry-2">
-            @forelse($articles as $post)
+            @forelse ($articles as $post)
                 <div class="w-full break-inside mb-3">
                     <div class="">
                         <livewire:social::components.post-card-dynamic :post="$post" :wire:key="'post-card-' . $post->id"/>

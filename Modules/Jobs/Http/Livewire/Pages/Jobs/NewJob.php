@@ -4,15 +4,23 @@ namespace Modules\Jobs\Http\Livewire\Pages\Jobs;
 
 use App\Models\Tag;
 use App\Support\Platform\Platform;
+use Exception;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
+use Laravel\Jetstream\Jetstream;
+use Livewire\Component;
 use Livewire\ComponentConcerns\ValidatesInput;
+use Livewire\WithFileUploads;
 use Modules\Jobs\Actions\Fortify\CreateNewUser;
 use Modules\Jobs\Data\Transaction;
 use Modules\Jobs\Events\JobPositionWasCreated;
 use Modules\Jobs\Models\ApplyType;
 use Modules\Jobs\Models\Coupon;
-use Modules\Jobs\Models\HoursPerWeek;
 use Modules\Jobs\Models\ExperienceLevel;
+use Modules\Jobs\Models\HoursPerWeek;
 use Modules\Jobs\Models\JobPosition;
 use Modules\Jobs\Models\JobPositionAddon;
 use Modules\Jobs\Models\JobPositionLength;
@@ -21,15 +29,6 @@ use Modules\Jobs\Models\ProjectSize;
 use Modules\Jobs\Rules\ValidJobAddons;
 use Modules\Jobs\Rules\ValidTags;
 use Modules\Jobs\Support\Livewire\WithNotification;
-use Modules\Jobs\Support\Livewire\WithValidationFails;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Laravel\Jetstream\Jetstream;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 
 class NewJob extends Component
 {
@@ -66,19 +65,18 @@ class NewJob extends Component
         'name',
         'email',
         'password',
-        'confirm-password'
+        'confirm-password',
     ];
     public $job_length_id;
     public $experience_level_id;
     public $project_size_id;
     public $is_active = false;
-    public $default_description = "The description of the job position will appear here. Write this in the \"JobPosition Description\" box above.";
+    public $default_description = 'The description of the job position will appear here. Write this in the "JobPosition Description" box above.';
 
     public function mount()
     {
         $this->setTeamId();
         $this->price = Platform::getJobSetting('posting_price');
-
     }
 
     public function updated($propertyName)
@@ -93,15 +91,15 @@ class NewJob extends Component
 
     public function updatedCoupon($value)
     {
-        if ( ! empty($value)) {
+        if (! empty($value)) {
             $coupon = Coupon::findByCode($this->coupon);
 
-            if ( ! $coupon || ! $coupon->isValid()) {
+            if (! $coupon || ! $coupon->isValid()) {
                 // Re-calculate the total
                 $this->price = $this->totalPrice;
 
                 $this->validCoupon = null;
-                $this->coupon      = null;
+                $this->coupon = null;
 
                 $this->error('The coupon is invalid or expired.');
 
@@ -167,7 +165,7 @@ class NewJob extends Component
                           ->validate($this->rules());
 
         // Make sure users have their default payment method.
-        if ( ! Auth::user()
+        if (! auth()->user()
                    ->hasDefaultPaymentMethod()) {
             $this->error('You have not setup your default payment method yet. Please setup one!');
 
@@ -205,8 +203,8 @@ class NewJob extends Component
 
             // Charge via user's default payment method
             // Note: Stripe accepts charges in cents
-            if ( ! empty($price) && $price > 0) {
-                $invoice = Auth::user()
+            if (! empty($price) && $price > 0) {
+                $invoice = auth()->user()
                                ->invoiceFor('Publish job: ' . $this->title, $price * 100);
 
                 // Save a transaction into the database
@@ -214,8 +212,7 @@ class NewJob extends Component
                     ->create($this->prepareTransaction($invoice)
                                   ->all());
             }
-
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             DB::rollBack();
 
             report($exception);
@@ -231,49 +228,16 @@ class NewJob extends Component
 
         $this->redirectRoute('jobs.job.show', [
             'team' => $job->company->id,
-            'job'  => $job
+            'job' => $job,
         ]);
-    }
-
-    private function rules()
-    {
-        return [
-            'title'             => 'required|max:254',
-            'description'       => 'required|min:50',
-            'team_id'           => 'required|' . Rule::in(Auth::user()
-                                                              ->allTeams()
-                                                              ->pluck('id')),
-            'apply_type'        => 'required|' . Rule::in(['link', 'email']),
-            'apply_value'       => 'required',
-            'payment_type'      => 'required|' . Rule::in(['hourly', 'fixed']),
-            'budget'            => 'nullable|numeric|min:0',
-            'is_remote'         => 'boolean',
-            'location'          => 'nullable|max:254',
-            'selected_skills'   => ['required', new ValidTags],
-            'selected_addons'   => [new ValidJobAddons],
-            'line1'             => 'required_if:selected_payment_method,new-card|nullable|string|max:254',
-            'city'              => 'required_if:selected_payment_method,new-card|nullable|string|max:254',
-            'country'           => 'required_if:selected_payment_method,new-card|nullable|string|size:2',
-            'postal_code'       => 'required_if:selected_payment_method,new-card|nullable|numeric',
-            'state'             => 'required_if:selected_payment_method,new-card|nullable|string|max:254',
-            'card_holder_name'  => 'required_if:selected_payment_method,new-card|nullable|string|max:254',
-            'payment_method'    => 'required_if:selected_payment_method,new-card|nullable|string|regex:/^pm/',
-            'job_length_id'     => 'required',
-            'hours_per_week_id' => 'required',
-            'project_size_id'   => 'required',
-            'experience_level_id'   => 'required',
-            'is_active'         => 'boolean',
-        ];
     }
 
     /**
      * Add/remove addon.
-     *
-     * @param $addonId
      */
     public function toggleAddon($addonId)
     {
-        if ( ! in_array($addonId, $this->selected_addons)) {
+        if (! in_array($addonId, $this->selected_addons)) {
             array_push($this->selected_addons, $addonId);
         } else {
             $key = array_search($addonId, $this->selected_addons);
@@ -297,12 +261,12 @@ class NewJob extends Component
             'payment_method' => 'required|string|regex:/^pm/',
         ]);
 
-        Auth::user()
+        auth()->user()
             ->updateDefaultPaymentMethod($this->payment_method);
 
         $this->dispatchBrowserEvent('card', [
-            'card_brand'     => Auth::user()->card_brand,
-            'card_last_four' => Auth::user()->card_last_four
+            'card_brand' => auth()->user()->card_brand,
+            'card_last_four' => auth()->user()->card_last_four,
         ]);
 
         $this->success('Your payment method was updated! You can publish your job now.');
@@ -329,6 +293,64 @@ class NewJob extends Component
         return Platform::getJobSetting('posting_price') + $this->addonsPrice;
     }
 
+    public function getJobPositionSkillOptionsProperty()
+    {
+//        return Tag::withType('job_position_skill')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
+
+        return Tag::getWithType('job_position_skill')->pluck('name', 'id');
+    }
+
+    public function render()
+    {
+        return view('jobs::livewire.pages.jobs.new-job', [
+            'companies' => auth()->guest() ? [] : auth()->user()
+                                                                     ->allTeams(),
+            'applyTypes' => ApplyType::pluck('name', 'code'),
+            'paymentTypes' => PaymentType::pluck('name', 'code'),
+            'jobPositionSkillOptions' => $this->jobPositionSkillOptions,
+            'addons' => JobPositionAddon::all(),
+            'intent' => auth()->guest() ? null : auth()->user()
+                                                                       ->createSetupIntent(),
+            'jobLengths' => JobPositionLength::all(),
+            'experienceLevels' => ExperienceLevel::all(),
+            'hoursPerWeek' => HoursPerWeek::pluck('value', 'id'),
+            'projectSizes' => ProjectSize::orderBy('order')
+                                                       ->get()
+                                                       ->toArray(),
+        ]);
+    }
+
+    private function rules()
+    {
+        return [
+            'title' => 'required|max:254',
+            'description' => 'required|min:50',
+            'team_id' => 'required|' . Rule::in(auth()->user()
+                                                              ->allTeams()
+                                                              ->pluck('id')),
+            'apply_type' => 'required|' . Rule::in(['link', 'email']),
+            'apply_value' => 'required',
+            'payment_type' => 'required|' . Rule::in(['hourly', 'fixed']),
+            'budget' => 'nullable|numeric|min:0',
+            'is_remote' => 'boolean',
+            'location' => 'nullable|max:254',
+            'selected_skills' => ['required', new ValidTags],
+            'selected_addons' => [new ValidJobAddons],
+            'line1' => 'required_if:selected_payment_method,new-card|nullable|string|max:254',
+            'city' => 'required_if:selected_payment_method,new-card|nullable|string|max:254',
+            'country' => 'required_if:selected_payment_method,new-card|nullable|string|size:2',
+            'postal_code' => 'required_if:selected_payment_method,new-card|nullable|numeric',
+            'state' => 'required_if:selected_payment_method,new-card|nullable|string|max:254',
+            'card_holder_name' => 'required_if:selected_payment_method,new-card|nullable|string|max:254',
+            'payment_method' => 'required_if:selected_payment_method,new-card|nullable|string|regex:/^pm/',
+            'job_length_id' => 'required',
+            'hours_per_week_id' => 'required',
+            'project_size_id' => 'required',
+            'experience_level_id' => 'required',
+            'is_active' => 'boolean',
+        ];
+    }
+
     /**
      * Switch current team to company value.
      */
@@ -338,7 +360,7 @@ class NewJob extends Component
                          ->find($this->team_id);
 
         if ($team) {
-            return Auth::user()
+            return auth()->user()
                        ->switchTeam($team);
         }
 
@@ -348,24 +370,23 @@ class NewJob extends Component
     /**
      * Prepare transaction to save it into database.
      *
-     * @param $invoice
      *
      * @return Transaction
      */
     private function prepareTransaction($invoice)
     {
-        $payer = Auth::user();
+        $payer = auth()->user();
 
         return new Transaction([
-            'gateway'        => 'Stripe',
-            'description'    => 'Publish job: ' . $this->title,
+            'gateway' => 'Stripe',
+            'description' => 'Publish job: ' . $this->title,
             'transaction_id' => $invoice->asStripeInvoice()->charge,
-            'payer_id'       => $invoice->asStripeInvoice()->customer,
-            'payer_name'     => $invoice->asStripeInvoice()->customer_name ?? $payer->name,
-            'payer_email'    => $invoice->asStripeInvoice()->customer_email ?? $payer->email,
-            'amount'         => (float)($invoice->asStripeInvoice()->amount_paid / 100),
+            'payer_id' => $invoice->asStripeInvoice()->customer,
+            'payer_name' => $invoice->asStripeInvoice()->customer_name ?? $payer->name,
+            'payer_email' => $invoice->asStripeInvoice()->customer_email ?? $payer->email,
+            'amount' => (float) ($invoice->asStripeInvoice()->amount_paid / 100),
             'invoice_number' => $invoice->asStripeInvoice()->id,
-            'user_id'        => Auth::id()
+            'user_id' => auth()->id(),
         ]);
     }
 
@@ -376,7 +397,7 @@ class NewJob extends Component
      */
     private function setTeamId()
     {
-        $this->team_id = Auth::guest() ? null : Auth::user()->currentTeam->id;
+        $this->team_id = auth()->guest() ? null : auth()->user()->currentTeam->id;
     }
 
     /**
@@ -387,7 +408,7 @@ class NewJob extends Component
         if ($this->logo) {
             $filename = $this->logo->store('/logos', $this->logoDisk());
 
-            Auth::user()->currentTeam->update(['logo_path' => $filename]);
+            auth()->user()->currentTeam->update(['logo_path' => $filename]);
         }
     }
 
@@ -399,32 +420,5 @@ class NewJob extends Component
     private function logoDisk()
     {
         return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : 'public';
-    }
-
-    public function getJobPositionSkillOptionsProperty()
-    {
-//        return Tag::withType('job_position_skill')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
-
-        return Tag::getWithType('job_position_skill')->pluck('name','id');
-    }
-
-    public function render()
-    {
-        return view('jobs::livewire.pages.jobs.new-job', [
-            'companies'                  => Auth::guest() ? [] : Auth::user()
-                                                                     ->allTeams(),
-            'applyTypes'                 => ApplyType::pluck('name', 'code'),
-            'paymentTypes'               => PaymentType::pluck('name', 'code'),
-            'jobPositionSkillOptions' => $this->jobPositionSkillOptions,
-            'addons'                     => JobPositionAddon::all(),
-            'intent'                     => Auth::guest() ? null : Auth::user()
-                                                                       ->createSetupIntent(),
-            'jobLengths'                 => JobPositionLength::all(),
-            'experienceLevels'           => ExperienceLevel::all(),
-            'hoursPerWeek'               => HoursPerWeek::pluck('value', 'id'),
-            'projectSizes'               => ProjectSize::orderBy('order')
-                                                       ->get()
-                                                       ->toArray()
-        ]);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Modules\Jobs\Http\Livewire\Pages\Profile;
 
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class BillingAddress extends Component
@@ -18,16 +17,16 @@ class BillingAddress extends Component
     public $country;
 
     protected $rules = [
-        'line1'       => 'required|string',
-        'city'        => 'nullable|string',
-        'country'     => 'nullable|string|size:2',
+        'line1' => 'required|string',
+        'city' => 'nullable|string',
+        'country' => 'nullable|string|size:2',
         'postal_code' => 'nullable|numeric',
-        'state'       => 'nullable|string',
+        'state' => 'nullable|string',
     ];
 
     public function mount()
     {
-        $customer = Auth::user()->asStripeCustomer();
+        $customer = auth()->user()->asStripeCustomer();
 
         if ($customer->address) {
             $this->line1 = $customer->address->line1;
@@ -42,7 +41,7 @@ class BillingAddress extends Component
     {
         $validated = $this->validate();
 
-        Auth::user()->updateStripeCustomer(['address' => $validated]);
+        auth()->user()->updateStripeCustomer(['address' => $validated]);
 
         $this->emit('saved');
     }
