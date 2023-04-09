@@ -17,6 +17,8 @@ class Edit extends Component
 
     public Post $resource;
 
+    public array $tags = [];
+
     public function mount(Post $resource)
     {
         $this->resource = $resource;
@@ -88,6 +90,17 @@ class Edit extends Component
         $this->resource->attachTags($tags, 'post');
     }
 
+    public function getResourceTagsProperty()
+    {
+        // get tags that aren't the resource tag since we don't want the user to edit that one
+        $tagsToRemove = [
+            'Resource'
+        ];
+        return $this->resource->tags->mapWithKeys(function (Tag $tag) {
+            return [$tag->name => ucwords($tag->name)];
+        })->pluck($tagsToRemove)->all();
+    }
+
     public function saveResource($attributes)
     {
         $this->resource->update([
@@ -114,7 +127,9 @@ class Edit extends Component
 
     public function render()
     {
-        return view('resources::livewire.pages.resources.edit');
+        return view('resources::livewire.pages.resources.edit', [
+            'resourceTags' => $this->resourceTags
+        ]);
     }
 
     protected function rules(): array

@@ -25,6 +25,17 @@
                         <x-library::input.text class="!bg-white border-gray-600" wire:model.defer="resource.url"/>
                         <x-library::input.error for="resource.url"/>
                     </div>
+                    {{-- // TODO: this is throwing an error in the JS console for some reason, need tp look into this.--}}
+                    {{--                <div class="mt-6">--}}
+                    {{--                    <div class="flex items-center">--}}
+                    {{--                        <x-library::input.label value="{{ \Trans::get('What is your Team associated with?') }}" /><span class="text-red-600 text-sm ml-1">*</span>--}}
+                    {{--                    </div>--}}
+                    {{--                    <p class="text-neutral-dark">{{ \Trans::get('(you can choose more than one)') }}</p>--}}
+                    {{--                    <x-library::input.selects wire:model="resourceTags" :options="$resourceTags"/>--}}
+                    {{--                </div>--}}
+                    @foreach($resourceTags as $tag)
+                        {{ $tag }}
+                    @endforeach
                     <div class="mt-4">
                         <x-library::input.label value="Body"/>
                         <p class="my-4 italic text-primary">You can even use Markdown to style and format your Resource! Not sure how to use it? Here's the official guide: <a
