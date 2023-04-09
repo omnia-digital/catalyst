@@ -4,7 +4,6 @@ namespace Modules\Jobs\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Jobs\Google\Client;
-use function Modules\Jobs\Providers\config_path;
 
 class GoogleServiceProvider extends ServiceProvider
 {
@@ -27,7 +26,7 @@ class GoogleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../../config/google.php', 'google');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/google.php', 'google');
 
         $this->app->bind('Modules\Jobs\Google\Client', function ($app) {
             return new Client($app['config']['google']);

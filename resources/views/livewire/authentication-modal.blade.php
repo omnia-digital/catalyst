@@ -19,7 +19,7 @@
                     </label>
                 </div>
             </div>
-    
+
             <div class="mt-4">
                 <a href="#" class="text-primary hover:underline" wire:click.prevent="showRegisterModal">Sign up</a>
             </div>
@@ -31,9 +31,9 @@
         <x-slot:title>Register</x-slot:title>
         <x-slot:content>
             @if (\Modules\Forms\Models\Form::getRegistrationForm())
-                <livewire:forms::user-registration-form 
+                <livewire:forms::user-registration-form
                     :form="\Modules\Forms\Models\Form::getRegistrationForm()"
-                    submitText="Sign Up" 
+                    submitText="Sign Up"
                 />
             @else
                 <x-forms.register-default-form/>

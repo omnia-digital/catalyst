@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Team;
 use App\Models\Location;
-use App\Models\User;
+use App\Models\Team;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-use Spatie\Tags\Tag;
 
 class TeamTableSeeder extends Seeder
 {
@@ -18,7 +15,6 @@ class TeamTableSeeder extends Seeder
      */
     public function run()
     {
-
         $teams = Team::factory(10)
                      ->has(Location::factory(1))
                      ->withUsers(1, config('platform.teams.default_owner_role'))
@@ -26,8 +22,8 @@ class TeamTableSeeder extends Seeder
                      ->create();
 
         foreach ($teams as $team) {
-            $team->attachTags(['Curated','Popular','Indie'], 'team');
-            $team->attachTags(['Church','Missionary','Non-Profit Organization'], 'team_type');
+            $team->attachTags(['Curated', 'Popular', 'Indie'], 'team');
+            $team->attachTags(['Church', 'Missionary', 'Non-Profit Organization'], 'team_type');
         }
     }
 }

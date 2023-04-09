@@ -21,12 +21,12 @@
 
                             <x-library::heading.2 class="text-heading-default-color uppercase tracking-wide font-semibold">{{ $title }}</x-library::heading.2>
 
-                            @if($mainImageSrc)
-                                @if($mainUrl)
+                            @if ($mainImageSrc)
+                                @if ($mainUrl)
                                     <a href="{{ $mainUrl }}" target="_blank">
                                         @endif
                                         <img src="{{ $mainImageSrc }}" class="h-12 rounded-full object-cover"/>
-                                        @if($mainUrl)
+                                        @if ($mainUrl)
                                     </a>
                                 @endif
                             @endif

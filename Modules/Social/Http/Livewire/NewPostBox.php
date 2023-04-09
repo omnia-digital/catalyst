@@ -1,10 +1,10 @@
 <?php
 
-    namespace Modules\Social\Http\Livewire;
+namespace Modules\Social\Http\Livewire;
 
     use App\Models\User;
     use Livewire\Component;
-use Modules\Social\Models\Post;
+    use Modules\Social\Models\Post;
 
     class NewPostBox extends Component
     {
@@ -27,21 +27,22 @@ use Modules\Social\Models\Post;
             $this->attachments = $files;
         }
 
-        public function mount($parentPostID = null) {
+        public function mount($parentPostID = null)
+        {
             $this->parentPostID = $parentPostID;
             $this->postTypes = [
                 [
                     'label' => 'General',
                     'icon' => 'heroicon-o-heart',
-                    'selected' => true
+                    'selected' => true,
                 ],
                 [
                     'label' => 'Announcement',
-                    'icon' => 'heroicon-o-heart'
+                    'icon' => 'heroicon-o-heart',
                 ],
                 [
                     'label' => 'Resource',
-                    'icon' => 'heroicon-o-newspaper'
+                    'icon' => 'heroicon-o-newspaper',
                 ],
             ];
             $this->moods = [
@@ -50,35 +51,35 @@ use Modules\Social\Models\Post;
                     'value' => 'excited',
                     'icon' => 'heroicon-o-fire',
                     'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-red-500' ,
+                    'bgColor' => 'bg-red-500',
                 ],
                 [
                     'name' => 'Loved',
                     'value' => 'loved',
                     'icon' => 'heroicon-o-heart',
                     'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-pink-400' ,
+                    'bgColor' => 'bg-pink-400',
                 ],
                 [
                     'name' => 'Happy',
                     'value' => 'happy',
                     'icon' => 'heroicon-o-emoji-happy',
                     'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-green-400' ,
+                    'bgColor' => 'bg-green-400',
                 ],
                 [
                     'name' => 'Sad',
                     'value' => 'sad',
                     'icon' => 'heroicon-o-emoji-sad',
                     'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-yellow-400' ,
+                    'bgColor' => 'bg-yellow-400',
                 ],
                 [
                     'name' => 'Thumbsy',
                     'value' => 'thumbsy',
                     'icon' => 'heroicon-o-thumb-up',
                     'iconColor' => 'text-light-text-color',
-                    'bgColor' => 'bg-secondary' ,
+                    'bgColor' => 'bg-secondary',
                 ],
                 [
                     'name' => 'I feel nothing',
@@ -122,5 +123,4 @@ use Modules\Social\Models\Post;
         {
             return view('social::livewire.components.new-post-box');
         }
-
     }

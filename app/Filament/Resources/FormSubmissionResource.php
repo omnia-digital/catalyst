@@ -7,15 +7,8 @@ use App\Filament\Resources\FormSubmissionResource\Pages\EditFormSubmission;
 use App\Filament\Resources\FormSubmissionResource\Pages\ListFormSubmissions;
 use App\Filament\Resources\FormSubmissionResource\Pages\ViewFormSubmission;
 use Closure;
-use Filament\Forms\Components\BelongsToSelect;
-use Filament\Forms\Components\Builder;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\KeyValue;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -35,16 +28,6 @@ class FormSubmissionResource extends Resource
     protected static ?string $model = \Modules\Forms\Models\FormSubmission::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Forms';
-
-    protected static function getNavigationBadge(): ?string
-    {
-        return static::getEloquentQuery()->get()->count();
-    }
-
-    protected static function getNavigationBadgeColor(): ?string
-    {
-        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
-    }
 
     public static function form(Form $form): Form
     {
@@ -75,9 +58,9 @@ class FormSubmissionResource extends Resource
                             }))
                     ->nullable(),
                 Textarea::make('data')
-                    ->hint("Please write in json format.")
+                    ->hint('Please write in json format.')
                     ->columnSpan(2)
-                    ->afterStateHydrated(function (TextArea $component, $state) { 
+                    ->afterStateHydrated(function (TextArea $component, $state) {
                         return $component->state(json_encode($state, JSON_PRETTY_PRINT));
                     }),
             ]);
@@ -90,8 +73,8 @@ class FormSubmissionResource extends Resource
                 TextColumn::make('form.name'),
                 TextColumn::make('user.profile.first_name')
                     ->label('First name'),
-                    TextColumn::make('user.profile.last_name')
-                    ->label('Last name'),
+                TextColumn::make('user.profile.last_name')
+                ->label('Last name'),
                 TextColumn::make('user.email')
                     ->label('Email'),
                 // TextColumn::make('data')
@@ -100,7 +83,7 @@ class FormSubmissionResource extends Resource
                 TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([
-                Filter::make('name')
+                Filter::make('name'),
             ])
             ->actions([
                 ViewAction::make(),
@@ -108,7 +91,7 @@ class FormSubmissionResource extends Resource
                     EditAction::make(),
                     ReplicateAction::make(),
                     DeleteAction::make(),
-                ])
+                ]),
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),
@@ -129,6 +112,16 @@ class FormSubmissionResource extends Resource
             'view' => ViewFormSubmission::route('/{record}'),
             'edit' => EditFormSubmission::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getEloquentQuery()->get()->count();
+    }
+
+    protected static function getNavigationBadgeColor(): ?string
+    {
+        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 
     protected function getTableRecordUrlUsing(): Closure

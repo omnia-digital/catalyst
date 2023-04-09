@@ -10,7 +10,6 @@ use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use Phuclh\MediaManager\WithMediaManager;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Trans;
 
 class Edit extends Component
@@ -33,14 +32,6 @@ class Edit extends Component
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    protected function rules(): array
-    {
-        return [
-            'post.body'  => ['required'],
-            'post.image' => ['nullable','string'],
-        ];
-    }
-
     public function mount(Post $post)
     {
         $this->post = $post;
@@ -57,7 +48,7 @@ class Edit extends Component
 
         $hashtags = Tag::parseHashTagsFromString($validated['body']);
         $tags = Tag::findOrCreateTags($hashtags, 'post');
-        $this->post->attachTags($tags,'post');
+        $this->post->attachTags($tags, 'post');
 
         $this->post->attachMedia($this->images);
 
@@ -88,14 +79,6 @@ class Edit extends Component
         $this->emitImagesSet();
     }
 
-    private function emitImagesSet(): void
-    {
-        $this->dispatchBrowserEvent('update-post:image-set', [
-            'id'     => $this->editorId,
-            'images' => $this->images
-        ]);
-    }
-
     public function removeImage()
     {
         $this->post->media()->where('id', $this->mediaIdBeingRemoved)->delete();
@@ -124,7 +107,23 @@ class Edit extends Component
     public function render()
     {
         return view('social::livewire.pages.posts.edit', [
-            'postMedia' => $this->postMedia
+            'postMedia' => $this->postMedia,
+        ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'post.body' => ['required'],
+            'post.image' => ['nullable', 'string'],
+        ];
+    }
+
+    private function emitImagesSet(): void
+    {
+        $this->dispatchBrowserEvent('update-post:image-set', [
+            'id' => $this->editorId,
+            'images' => $this->images,
         ]);
     }
 }

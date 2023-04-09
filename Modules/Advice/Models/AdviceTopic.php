@@ -1,13 +1,12 @@
 <?php
 
-    namespace Advice\App\Models;
+namespace Advice\App\Models;
 
-    use Illuminate\Database\Eloquent\Model;
     use Advise\App\Certification;
+    use Illuminate\Database\Eloquent\Model;
 
     class AdviceTopic extends Model
     {
-
         /**
          * The database table used by the model.
          *
@@ -26,7 +25,6 @@
 
         public function certifications()
         {
-            $this->belongsTo(Certification::class,'certification_id');
+            $this->belongsTo(Certification::class, 'certification_id');
         }
-
     }

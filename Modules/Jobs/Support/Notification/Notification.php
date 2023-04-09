@@ -1,4 +1,6 @@
-<?php namespace Modules\Jobs\Support\Notification;
+<?php
+
+namespace Modules\Jobs\Support\Notification;
 
 use Modules\Jobs\Models\User;
 
@@ -23,8 +25,7 @@ class Notification
      */
     public function toAdmin()
     {
-        foreach (User::role('Admin')->get() as $admin)
-        {
+        foreach (User::role('Admin')->get() as $admin) {
             $admin->notify($this->notification);
         }
     }
@@ -36,8 +37,7 @@ class Notification
      */
     public function toContractors()
     {
-        foreach (User::role('Contractor')->get() as $contractor)
-        {
+        foreach (User::role('Contractor')->get() as $contractor) {
             $contractor->notify($this->notification);
         }
     }
@@ -45,13 +45,11 @@ class Notification
     /**
      * Send notification to a group of users.
      *
-     * @param $users
      * @return void
      */
     public function to($users)
     {
-        foreach ($users as $user)
-        {
+        foreach ($users as $user) {
             $user->notify($this->notification);
         }
     }
@@ -66,8 +64,6 @@ class Notification
 
     /**
      * Send notification to a specific email.
-     *
-     * @param string $email
      */
     public function toEmail(string $email)
     {
@@ -78,9 +74,6 @@ class Notification
 
     /**
      * Send to whatever is defined in relation method.
-     *
-     * @param $name
-     * @param $arguments
      */
     public function __call($name, $arguments)
     {

@@ -2,7 +2,6 @@
 
 namespace Modules\Jobs\Http\Livewire\Pages\Teams;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
@@ -38,7 +37,7 @@ class UpdateCompanyForm extends Component
 
     public function getUserProperty()
     {
-        return Auth::user();
+        return auth()->user();
     }
 
     public function render()

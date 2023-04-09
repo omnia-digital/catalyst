@@ -1,9 +1,9 @@
 <?php
 
-    namespace App\Models;
+namespace App\Models;
 
     use Laravel\Jetstream\Membership as JetstreamMembership;
-use Spatie\Permission\Models\Role;
+    use Spatie\Permission\Models\Role;
 
     class Membership extends JetstreamMembership
     {

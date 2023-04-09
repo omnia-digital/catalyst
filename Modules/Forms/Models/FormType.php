@@ -14,16 +14,8 @@ class FormType extends Model
     protected $fillable = [
         'name',
         'slug',
-        'for'
+        'for',
     ];
-
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-                          ->generateSlugsFrom('name')
-                          ->saveSlugsTo('slug')
-                          ->doNotGenerateSlugsOnUpdate();
-    }
 
     public static function forTeams()
     {
@@ -48,6 +40,14 @@ class FormType extends Model
     public static function userRegistrationFormId()
     {
         return self::userRegistrationForm()?->id;
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+                          ->generateSlugsFrom('name')
+                          ->saveSlugsTo('slug')
+                          ->doNotGenerateSlugsOnUpdate();
     }
 
     // Relationships

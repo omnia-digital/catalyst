@@ -1,4 +1,6 @@
-<?php namespace Modules\Jobs\Data;
+<?php
+
+namespace Modules\Jobs\Data;
 
 use Spatie\DataTransferObject\DataTransferObject;
 

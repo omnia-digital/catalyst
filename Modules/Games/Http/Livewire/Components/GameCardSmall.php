@@ -12,8 +12,8 @@ class GameCardSmall extends Component
     public function mount($game_id = null, Game $game = null)
     {
         if ($game_id) {
-            $this->game = Game::find((int)$game_id);
-        } else if($game) {
+            $this->game = Game::find((int) $game_id);
+        } elseif ($game) {
             $this->game = $game;
         }
     }
@@ -21,7 +21,7 @@ class GameCardSmall extends Component
     public function render()
     {
         return view('games::livewire.components.game-card-small', [
-            'game' => $this->game
+            'game' => $this->game,
         ]);
     }
 }

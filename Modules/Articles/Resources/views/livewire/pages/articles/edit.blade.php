@@ -8,7 +8,7 @@
                     Cancel
                 </a>
             </div>
-            <a href="{{route('articles.home')}}">
+            <a href="{{ route('articles.home') }}">
                 <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Edit Article') }}</x-library::heading.1>
             </a>
         </div>

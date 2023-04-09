@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Modules\Billing\Models\SubscriptionType;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +15,7 @@ use Modules\Billing\Models\SubscriptionType;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    $user = $request->user()->makeVisible(['email','name','profile_photo_url'])->append(['name']);
+    $user = $request->user()->makeVisible(['email', 'name', 'profile_photo_url'])->append(['name']);
 
     return [
         'id' => $user->id,

@@ -5,7 +5,7 @@
         </x-slot>
 
         <x-slot name="slogan">
-            <x-library::heading.2 text-color="text-heading-default-color" class="mt-6">{{Trans::get(config('app.slogan', ''))}}</x-library::heading.2>
+            <x-library::heading.2 text-color="text-heading-default-color" class="mt-6">{{ Trans::get(config('app.slogan', '')) }}</x-library::heading.2>
         </x-slot>
 
         <x-library::heading.2 class="text-center mb-2">{{ Trans::get("Let's make it official. Please verify your email") }}</x-library::heading.2>

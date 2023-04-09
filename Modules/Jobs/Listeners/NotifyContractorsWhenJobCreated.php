@@ -2,11 +2,11 @@
 
 namespace Modules\Jobs\Listeners;
 
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 use Modules\Jobs\Events\JobPositionWasCreated;
 use Modules\Jobs\Notifications\JobPositionWasCreatedNotification;
 use Modules\Jobs\Support\Notification\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class NotifyContractorsWhenJobCreated implements ShouldQueue
 {
@@ -15,7 +15,6 @@ class NotifyContractorsWhenJobCreated implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param JobPositionWasCreated $event
      * @return void
      */
     public function handle(JobPositionWasCreated $event)

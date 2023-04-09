@@ -3,14 +3,13 @@
 namespace Modules\Social\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class Profile extends Controller
 {
     public function show()
     {
-        $user = Auth::user();
+        $user = auth()->user();
         $profile = $user->profile;
 
         return Inertia::render('Social/Profile', [

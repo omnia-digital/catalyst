@@ -6,9 +6,8 @@ use App\Models\Team;
 use App\Models\User;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use Trans;
 
 class NewMemberOfMyTeamNotification extends Notification
@@ -29,7 +28,7 @@ class NewMemberOfMyTeamNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -75,7 +74,7 @@ class NewMemberOfMyTeamNotification extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

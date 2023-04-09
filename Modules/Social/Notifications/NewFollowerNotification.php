@@ -8,7 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Modules\Social\Enums\PostType;
+use Trans;
 
 class NewFollowerNotification extends Notification implements ShouldQueue
 {
@@ -16,7 +16,8 @@ class NewFollowerNotification extends Notification implements ShouldQueue
 
     public function __construct(
         private User $follower
-    ){}
+    ) {
+    }
 
     public function via($notifiable): array
     {
@@ -29,12 +30,12 @@ class NewFollowerNotification extends Notification implements ShouldQueue
 
     public function getTitle()
     {
-        return \Trans::get("You have a new follower");
+        return Trans::get('You have a new follower');
     }
 
     public function getMessage()
     {
-        return $this->follower->name . \Trans::get(' followed you');
+        return $this->follower->name . Trans::get(' followed you');
     }
 
     public function getUrl()

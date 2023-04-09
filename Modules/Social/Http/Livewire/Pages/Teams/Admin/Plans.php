@@ -25,16 +25,6 @@ class Plans extends Component
 
     public string $billingPeriod;
 
-    protected function rules(): array
-    {
-        return [
-            'name' => ['required', 'max:254'],
-            'description' => ['nullable'],
-            'price' => ['required', 'numeric'],
-            'billingPeriod' => ['required', Rule::in(array_keys(TeamBillingPeriod::options()))],
-        ];
-    }
-
     public function mount()
     {
         $this->authorize('manageMembership', $this->team);
@@ -64,7 +54,17 @@ class Plans extends Component
     public function render()
     {
         return view('social::livewire.pages.teams.admin.plans', [
-            'plans' => $this->rows
+            'plans' => $this->rows,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'name' => ['required', 'max:254'],
+            'description' => ['nullable'],
+            'price' => ['required', 'numeric'],
+            'billingPeriod' => ['required', Rule::in(array_keys(TeamBillingPeriod::options()))],
+        ];
     }
 }

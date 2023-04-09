@@ -9,7 +9,7 @@
                 </div>
                 <div class="mb-2 sm:ml-3 space-y-1 flex-1">
                     <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-3">
-                        <x-library::heading.1 class="text-2xl sm:text-3xl" text-color="text-white-text-color">{{ $user->name  }}</x-library::heading.1>
+                        <x-library::heading.1 class="text-2xl sm:text-3xl" text-color="text-white-text-color">{{ $user->name }}</x-library::heading.1>
                         <x-library::heading.2 class="font-normal text-lg sm:text-2xl text-white-text-color">{{ '@' .  $user->handle }}</x-library::heading.2>
                     </div>
                     <div class="flex flex-wrap space-x-2 items-center text-secondary text-sm">
@@ -26,7 +26,7 @@
 
                         <p class="text-secondary whitespace-nowrap">Joined about {{ $user->profile->created_at->diffForHumans() }}</p>
 
-                        {{-- @if($user->online_status)
+                        {{-- @if ($user->online_status)
                             <x-dot class="hidden sm:block" />
                             <x-tag name="Online" class="py-0"/>
                         @else

@@ -16,7 +16,7 @@ class Bookmark extends Model
         'order',
         'user_id',
         'bookmarkable_id',
-        'bookmarkable_type'
+        'bookmarkable_type',
     ];
 
     protected static function newFactory()

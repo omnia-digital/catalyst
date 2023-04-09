@@ -2,9 +2,9 @@
 
 namespace Modules\Jobs\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Jobs\Models\Team;
 use Modules\Jobs\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TeamPolicy
 {
@@ -13,7 +13,6 @@ class TeamPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \Modules\Jobs\Models\User  $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -24,8 +23,6 @@ class TeamPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Team  $team
      * @return mixed
      */
     public function view(User $user, Team $team)
@@ -36,7 +33,6 @@ class TeamPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \Modules\Jobs\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -47,8 +43,6 @@ class TeamPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Team  $team
      * @return mixed
      */
     public function update(User $user, Team $team)
@@ -59,8 +53,6 @@ class TeamPolicy
     /**
      * Determine whether the user can add team members.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Team  $team
      * @return mixed
      */
     public function addTeamMember(User $user, Team $team)
@@ -71,8 +63,6 @@ class TeamPolicy
     /**
      * Determine whether the user can update team member permissions.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Team  $team
      * @return mixed
      */
     public function updateTeamMember(User $user, Team $team)
@@ -83,8 +73,6 @@ class TeamPolicy
     /**
      * Determine whether the user can remove team members.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Team  $team
      * @return mixed
      */
     public function removeTeamMember(User $user, Team $team)
@@ -95,12 +83,10 @@ class TeamPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \Modules\Jobs\Models\User  $user
-     * @param  \Modules\Jobs\Models\Team  $team
      * @return mixed
      */
     public function delete(User $user, Team $team)
     {
-        return $user->ownsTeam($team) && !$team->jobs->count() && !$team->isDefaultCompany();
+        return $user->ownsTeam($team) && ! $team->jobs->count() && ! $team->isDefaultCompany();
     }
 }

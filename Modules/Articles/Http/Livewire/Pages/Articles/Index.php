@@ -2,9 +2,9 @@
 
 namespace Modules\Articles\Http\Livewire\Pages\Articles;
 
+use App;
 use App\Support\Platform\WithGuestAccess;
 use App\Traits\Filter\WithSortAndFilters;
-use Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Enums\PostType;
@@ -21,31 +21,31 @@ class Index extends Component
     public $showMyArticles = false;
 
     public array $sortLabels = [
-        'title'           => 'Title',
+        'title' => 'Title',
         'bookmarks_count' => 'Bookmarks',
-        'likes_count'     => 'Likes',
-        'user_id'         => 'User',
-        'published_at'    => 'Published Date'
+        'likes_count' => 'Likes',
+        'user_id' => 'User',
+        'published_at' => 'Published Date',
     ];
 
     public string $dateColumn = 'published_at';
 
     protected $queryString = [
-        'search'
+        'search',
     ];
 
     public function mount()
     {
         $this->orderBy = 'published_at';
 
-        if ( ! \App::environment('production')) {
+        if (! App::environment('production')) {
             $this->useCache = false;
         }
     }
 
     public function loginCheck()
     {
-        if (Platform::isAllowingGuestAccess() && ! Auth::check()) {
+        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('articles.home'));
 
             return;
@@ -80,7 +80,7 @@ class Index extends Component
     public function render()
     {
         return view('articles::livewire.pages.articles.index', [
-            'articles' => $this->rows
+            'articles' => $this->rows,
         ]);
     }
 }

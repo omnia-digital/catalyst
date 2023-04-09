@@ -11,6 +11,6 @@
 |
 */
 
-Route::name('reviews.')->prefix('reviews')->group(function() {
+Route::name('reviews.')->prefix('reviews')->group(function () {
 //    Route::get('/', 'ReviewsController@index');
 });

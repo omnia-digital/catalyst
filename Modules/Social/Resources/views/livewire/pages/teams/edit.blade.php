@@ -94,7 +94,7 @@
                                             <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative bg-secondary border-4 border-dashed border-neutral-dark">
                                                 <img src="{{ $media->temporaryUrl() }}" title="{{ $sampleMediaNames[$key] }}" alt="{{ $sampleMediaNames[$key] }}"
                                                      class="max-w-[152px] max-h-[120px]">
-                                                <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key}})">
+                                                <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key }})">
                                                     <x-heroicon-o-x class="w-6 h-6"/>
                                                 </button>
                                             </div>
@@ -127,7 +127,7 @@
                     </x-jet-confirmation-modal>
                 </div>
 
-                @if(\Platform::isModuleEnabled('games'))
+                @if (\Platform::isModuleEnabled('games'))
                     <x-library::heading.4 class="col-span-2">{{ Trans::get('Feeds') }}</x-library::heading.4>
                     <!-- YouTube Channel -->
                     <div class="flex-col">

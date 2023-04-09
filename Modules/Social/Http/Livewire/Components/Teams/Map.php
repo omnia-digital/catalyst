@@ -7,6 +7,7 @@ use App\Models\Team;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
+use Trans;
 
 class Map extends Component
 {
@@ -14,7 +15,7 @@ class Map extends Component
 
     public string|int|null $placeId = null;
 
-    public $height= '500px';
+    public $height = '500px';
 
     public $places = [];
 
@@ -26,8 +27,8 @@ class Map extends Component
     {
         $team = Team::find($eventId);
 
-        if (!$team || !($location = $team->location()->first()) || !($location->lng) || !($location->lat)) {
-            $this->error(\Trans::get('Cannot find the team or location. Please refresh the page and try again!'));
+        if (! $team || ! ($location = $team->location()->first()) || ! ($location->lng) || ! ($location->lat)) {
+            $this->error(Trans::get('Cannot find the team or location. Please refresh the page and try again!'));
 
             return;
         }
@@ -67,7 +68,7 @@ class Map extends Component
 
     public function getTeamDescriptionHTML(Location $location)
     {
-        $content = "";
+        $content = '';
         $content .= "<h3 class='h3 block'>{$location->model->name}</h2>";
         $content .= "<p>{$location->model->start_date->toFormattedDateString()}</p>";
 

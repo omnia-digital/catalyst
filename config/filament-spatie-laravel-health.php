@@ -2,7 +2,7 @@
 
 return [
 
-	/*
+    /*
     |--------------------------------------------------------------------------
     | Pages
     |--------------------------------------------------------------------------
@@ -12,8 +12,8 @@ return [
     |
     */
 
-	'pages' => [
-		'health' => \App\Filament\Pages\HealthCheckResults::class
+    'pages' => [
+        'health' => \App\Filament\Pages\HealthCheckResults::class,
     ],
 
 ];

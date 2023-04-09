@@ -8,5 +8,4 @@ use ShuvroRoy\FilamentSpatieLaravelBackup\Pages\Backups;
 class ManageBackups extends Backups
 {
     use HasPageShield;
-
 }

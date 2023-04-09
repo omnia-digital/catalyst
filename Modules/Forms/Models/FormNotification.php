@@ -3,8 +3,8 @@
 namespace Modules\Forms\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Role;
 use Thomasjohnkane\Snooze\Models\ScheduledNotification;
 
@@ -14,7 +14,7 @@ class FormNotification extends Model
 
     protected $guarded = [];
     protected $appends = ['send_date_edit'];
-    
+
     // protected static function newFactory()
     // {
     //     return \Modules\Forms\Database\factories\FormNotificationFactory::new();
