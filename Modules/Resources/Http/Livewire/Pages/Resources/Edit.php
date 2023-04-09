@@ -94,8 +94,9 @@ class Edit extends Component
     {
         // get tags that aren't the resource tag since we don't want the user to edit that one
         $tagsToRemove = [
-            'Resource'
+            'Resource',
         ];
+
         return $this->resource->tags->mapWithKeys(function (Tag $tag) {
             return [$tag->name => ucwords($tag->name)];
         })->pluck($tagsToRemove)->all();
@@ -128,7 +129,7 @@ class Edit extends Component
     public function render()
     {
         return view('resources::livewire.pages.resources.edit', [
-            'resourceTags' => $this->resourceTags
+            'resourceTags' => $this->resourceTags,
         ]);
     }
 

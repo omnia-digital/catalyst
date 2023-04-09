@@ -33,7 +33,7 @@
                     {{--                    <p class="text-neutral-dark">{{ \Trans::get('(you can choose more than one)') }}</p>--}}
                     {{--                    <x-library::input.selects wire:model="resourceTags" :options="$resourceTags"/>--}}
                     {{--                </div>--}}
-                    @foreach($resourceTags as $tag)
+                    @foreach ($resourceTags as $tag)
                         {{ $tag }}
                     @endforeach
                     <div class="mt-4">
