@@ -26,6 +26,6 @@ class CreateFeedPostAction
 
     protected function prependOriginalUrl(string $url, string $content): string
     {
-        return "$content \n Source: $url";
+        return "{$content} \n Source: {$url}";
     }
 }

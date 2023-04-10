@@ -3,7 +3,6 @@
 namespace Modules\Feeds\Http\Livewire;
 
 use App\Support\Feed\FeedItem;
-use App\Support\Feed\PolygonFeedItem;
 use Livewire\Component;
 use Vedmant\FeedReader\Facades\FeedReader;
 
