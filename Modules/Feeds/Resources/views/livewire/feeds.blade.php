@@ -21,7 +21,7 @@
 @section('content')
     <div class="space-y-2">
         @foreach ($feeds as $feed)
-            <livewire:games::components.feed-section :type="$feed[0]" :feed-url="$feed[1]"/>
+            <livewire:feeds::feed-section :feed-url="$feed"/>
         @endforeach
     </div>
 @endsection

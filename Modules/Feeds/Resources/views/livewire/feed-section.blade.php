@@ -48,7 +48,7 @@
                         <div class="accordion-body md:py-4 md:px-5">
                             <div class="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4">
                                 @foreach ($feed->get_items(0,4) as $item)
-                                    <a href="{{ $item->get_link() }}" target="_blank">
+                                    <a href="{{ route('feeds.show', app(\Modules\Feeds\Services\FeedManager::class)->encryptFeedPayload($item)) }}">
                                         @if ($item->get_media() && !empty($item->get_media()['url']))
                                             <div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
                                                  style="background-image: url({{ ($item->get_media() && $item->get_media()['url'])? $item->get_media()['url'] : 'https://source.unsplash.com/random?gaming'

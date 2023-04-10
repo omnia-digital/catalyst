@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Games\Http\Livewire\Components;
+namespace Modules\Feeds\Http\Livewire;
 
 use App\Support\Feed\FeedItem;
 use App\Support\Feed\PolygonFeedItem;
@@ -11,14 +11,9 @@ class FeedSection extends Component
 {
     public bool $loaded = false;
     public string $feedUrl;
-    public string $type;
     public bool $showTitle = true;
     public bool $showDescription = true;
     public bool $showLinkToNewsPage = false;
-
-    private array $typeClasses = [
-        'ign' => FeedItem::class,
-    ];
 
     public function ready()
     {
@@ -30,15 +25,12 @@ class FeedSection extends Component
         return $this->getFeed($this->feedUrl);
     }
 
-    public function getFeed($url, $id = null)
+    public function getFeed($url)
     {
         // @TODO [Josh] - add check for class mapping for specific feeds
         $feed = FeedReader::read($url);
-        if ($id === 'polygon') {
-            $feed->set_item_class(PolygonFeedItem::class);
-        } else {
-            $feed->set_item_class(FeedItem::class);
-        }
+
+        $feed->set_item_class(FeedItem::class);
 
         return $feed;
     }
@@ -54,7 +46,7 @@ class FeedSection extends Component
 
     public function render()
     {
-        return view('games::livewire.components.feed-section', [
+        return view('feeds::livewire.feed-section', [
             'feed' => $this->loaded ? $this->feed : null,
         ]);
     }
