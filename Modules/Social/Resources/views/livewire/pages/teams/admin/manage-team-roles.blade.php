@@ -39,7 +39,7 @@
                                                         <li class="text-xs group flex items-center space-x-1" wire:key="permission-{{ $permission->id }}">
                                                             <input type="checkbox" wire:model="selectedPermissions.{{ $role->id }}" value="{{ $permission->id }}">
                                                             <span class="text-ellipsis cursor-default overflow-hidden whitespace-nowrap" x-tooltip="{{ $permission->name }}">{{ $permission->name }}</span>
-                                                        </li> 
+                                                        </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -52,7 +52,7 @@
                                     <div class="mt-4 flex justify-end space-x-2">
                                         @if (!empty($selectedPermissions[$role->id]))
                                             @can('createTeamRole', $team)
-                                                <x-library::button 
+                                                <x-library::button
                                                     x-on:click="if(confirm('Are you sure you want to remove the selected permissions?')) $wire.detachPermissions('{{ $role->id }}')"
                                                     class="text-xs !p-1.5 hover:bg-primary-300">
                                                     <span>Remove Permissions</span>
@@ -60,38 +60,40 @@
                                             @endcan
                                         @endif
                                         @can('createTeamRole', $team)
-                                            <button 
-                                                wire:click="editTeamRole('{{ $role->id }}')"
-                                                type="button" 
-                                                x-tooltip="Edit Role"
-                                                class="border border-gray-300 p-1.5 min-w-[28px] flex items-center justify-center rounded-lg hover:bg-gray-200">
-                                                <x-heroicon-o-pencil class="w-3.5 h-3.5" />
-                                                <span class="sr-only">Edit Role</span>
-                                            </button>
-                                        @endcan
-                                        @can('deleteTeamRole', $team)
-                                            <button 
-                                                wire:click="confirmDeleteTeamRole('{{ $role->id }}')"
-                                                type="button" 
-                                                x-tooltip="Delete Role"
-                                                class="border border-gray-300 p-1.5 min-w-[28px] flex items-center justify-center rounded-lg hover:bg-gray-200">
-                                                <x-heroicon-o-trash class="w-3.5 h-3.5" />
-                                                <span class="sr-only">Delete Role</span>
-                                            </button>
+                                            @if (strtolower($role->name) !== strtolower(config('platform.teams.default_owner_role')))
+                                                <!-- Actions -->
+                                                <div class="flex justify-end space-x-2">
+                                                    <button
+                                                        wire:click="editTeamRole('{{ $role->id }}')"
+                                                        type="button"
+                                                        x-tooltip="Edit Role"
+                                                        class="border border-gray-300 p-1.5 rounded-lg hover:bg-gray-200">
+                                                        <x-heroicon-o-pencil class="w-3.5 h-3.5" />
+                                                        <span class="sr-only">Edit Role</span>
+                                                    </button>
+                                                    <button
+                                                        wire:click="confirmDeleteTeamRole('{{ $role->id }}')"
+                                                        type="button"
+                                                        x-tooltip="Delete Role"
+                                                        class="border border-gray-300 p-1 rounded-lg hover:bg-gray-200">
+                                                        <x-heroicon-o-trash class="w-3.5 h-3.5" />
+                                                        <span class="sr-only">Delete Role</span>
+                                                    </button>
+                                                </div>
+                                            @endif
                                         @endcan
                                     </div>
                                 </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                    @can('createTeamRole', $team)
-                        <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                            <x-library::button class="hover:bg-primary-300" type="submit">Create New Role</x-library::button>
-                        </div>
-                    @endcan
-                </form>
+                        @can('createTeamRole', $team)
+                            <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                                <x-library::button wire:click="createNewRole" class="hover:bg-primary-300" type="submit">Create New Role</x-library::button>
+                            </div>
+                        @endcan</form>
             </div>
-            
+
         </div>
     </div>
     <div>
@@ -111,7 +113,7 @@
                             @foreach ($this->permissions as $permission)
                                 <li class="text-xs group flex items-center space-x-1" wire:key="permission-{{ $permission->id }}">
                                     <span class="text-ellipsis cursor-default overflow-hidden whitespace-nowrap" x-tooltip="{{ $permission->name }}">{{ $permission->name }}</span>
-                                </li> 
+                                </li>
                             @endforeach
                         </ul>
                     </div>

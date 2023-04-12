@@ -26,7 +26,8 @@ class ManageTeamRoles extends Component
             'editingRole.team_id' => 'required|integer',
             'editingRole.name' => 'required|alpha_num',
             'editingRole.type' => 'required|in:' . implode(',', TeamRoleTypes::keys()),
-            'editingRole.description' => 'required|min:4|max:255'
+            'editingRole.description' => 'required|min:4|max:255',
+            'permissionsToAttach' => ['nullable', 'array'],
         ];
     }
 
@@ -50,7 +51,7 @@ class ManageTeamRoles extends Component
     public function saveRole()
     {
         $this->validate();
-        
+
         $this->editingRole->save();
 
         $this->currentlyEditingRole = false;
@@ -79,7 +80,7 @@ class ManageTeamRoles extends Component
     public function deleteTeamRole()
     {
         $this->authorize('deleteTeamRole', $this->team);
-        
+
         $role = Role::find($this->roleIdBeingRemoved);
         $role->permissions()->detach();
         $role->delete();
@@ -119,7 +120,7 @@ class ManageTeamRoles extends Component
 
     public function getRolesProperty()
     {
-        return Role::where('team_id', $this->team->id)->get();
+        return Role::where('team_id', $this->team->id)->with('permissions')->get();
     }
 
     public function getPermissionsProperty()
