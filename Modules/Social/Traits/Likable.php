@@ -3,6 +3,7 @@
 namespace Modules\Social\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Social\Events\LikedModel;
 use Modules\Social\Models\Like;
 
 use function auth;
@@ -91,6 +92,8 @@ trait Likable
                 ['user_id' => auth()->id()],
                 ['liked' => true]
             );
+
+            LikedModel::dispatch(auth()->user(), $this);
         }
     }
 

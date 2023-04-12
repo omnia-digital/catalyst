@@ -2,8 +2,8 @@
 
 namespace App\Support\Platform;
 
-use Lang;
-use Str;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
 
 class Translate
 {

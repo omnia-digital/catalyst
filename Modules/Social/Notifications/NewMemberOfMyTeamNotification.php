@@ -6,7 +6,6 @@ use App\Models\Team;
 use App\Models\User;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Trans;
 
@@ -37,38 +36,7 @@ class NewMemberOfMyTeamNotification extends Notification
             return [];
         }
 
-        return ['broadcast', 'database', 'mail'];
-    }
-
-    public function getTitle()
-    {
-        return $this->getMessage();
-    }
-
-    public function getMessage()
-    {
-        return Trans::get($this->newMember->name . ' has been added to the team, ' . $this->team->name);
-    }
-
-    public function getUrl()
-    {
-        return $this->team->profile() ?? route('notifications');
-    }
-
-    public function getImage()
-    {
-        return $this->newMember->profile_photo_url;
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     */
-    public function toMail(object $notifiable): MailMessage
-    {
-        return (new MailMessage)
-            ->greeting($this->getTitle())
-            ->line($this->getMessage())
-            ->action('View Notifications', $this->getUrl());
+        return ['broadcast', 'database'];
     }
 
     /**
@@ -79,11 +47,13 @@ class NewMemberOfMyTeamNotification extends Notification
      */
     public function toArray($notifiable)
     {
+        $url = $this->team->profile();
+
         return NotificationCenter::make()
             ->icon('heroicon-o-user')
-            ->success($this->getMessage())
-            ->image($this->getImage())
-            ->actionLink($this->getUrl())
+            ->success(Trans::get($this->newMember->name . ' has been added to the team, ' . $this->team->name))
+            ->image($this->newMember->profile_photo_url)
+            ->actionLink($url)
             ->actionText('View')
             ->toArray();
     }

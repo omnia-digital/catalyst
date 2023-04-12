@@ -2,20 +2,20 @@
 
 namespace App\Traits\Tag;
 
-    use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-    trait HasTeamTags
+trait HasTeamTags
+{
+    public function teamTags()
     {
-        public function teamTags()
-        {
-            return $this
-                ->morphToMany(self::getTagClassName(), 'taggable')
-                ->where('type', 'team')
-                ->ordered();
-        }
-
-        public function tags(): MorphToMany
-        {
-            return $this->teamTags();
-        }
+        return $this
+            ->morphToMany(self::getTagClassName(), 'taggable')
+            ->where('type', 'team')
+            ->ordered();
     }
+
+    public function tags(): MorphToMany
+    {
+        return $this->teamTags();
+    }
+}

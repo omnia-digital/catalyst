@@ -19,6 +19,10 @@ class FeedSection extends Component
         'ign' => FeedItem::class,
     ];
 
+    private array $typeClasses = [
+        'ign' => FeedItem::class,
+    ];
+
     public function ready()
     {
         $this->loaded = true;

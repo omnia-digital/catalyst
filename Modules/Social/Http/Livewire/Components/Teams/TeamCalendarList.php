@@ -2,12 +2,12 @@
 
 namespace Modules\Social\Http\Livewire\Components\Teams;
 
-use App;
 use App\Models\Location;
 use App\Models\Team;
 use App\Models\User;
 use App\Traits\Filter\WithSortAndFilters;
 use App\Traits\Team\WithTeamManagement;
+use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Livewire\WithPagination;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;

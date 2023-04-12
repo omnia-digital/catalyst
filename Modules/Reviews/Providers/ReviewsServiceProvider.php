@@ -2,7 +2,7 @@
 
 namespace Modules\Reviews\Providers;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class ReviewsServiceProvider extends ServiceProvider

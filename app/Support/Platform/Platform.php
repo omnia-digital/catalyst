@@ -5,11 +5,11 @@ namespace App\Support\Platform;
 use App\Settings\BillingSettings;
 use App\Settings\GeneralSettings;
 use Carbon\CarbonTimeZone;
-use Lang;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
 use Modules\Jobs\Settings\JobsSettings;
 use NumberFormatter;
 use Nwidart\Modules\Facades\Module;
-use Str;
 use Trans;
 
 class Platform

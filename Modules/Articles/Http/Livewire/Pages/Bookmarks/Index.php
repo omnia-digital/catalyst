@@ -3,7 +3,6 @@
 namespace Modules\Articles\Http\Livewire\Pages\Bookmarks;
 
 use App\Traits\Filter\WithSortAndFilters;
-use Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -41,7 +40,7 @@ class Index extends Component
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-        return Bookmark::where('user_id', '=', Auth::user()->id)->whereHas('bookmarkable', function (Builder $query) {
+        return Bookmark::where('user_id', '=', auth()->user()->id)->whereHas('bookmarkable', function (Builder $query) {
             return $query->scopes(['ofType' => PostType::ARTICLE]);
         })
             ->orderBy($this->orderBy, $this->sortOrder);

@@ -8,8 +8,8 @@ use App\Models\User;
 use Livewire\Component;
 use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
+use Omnia\MediaManager\WithMediaManager;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
-use Phuclh\MediaManager\WithMediaManager;
 use Trans;
 
 class Edit extends Component

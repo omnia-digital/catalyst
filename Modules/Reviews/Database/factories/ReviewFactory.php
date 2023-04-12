@@ -21,7 +21,7 @@ class ReviewFactory extends Factory
      */
     public function definition()
     {
-        $team = Team::all()->random();
+        $team = Team::all()->random()->load('users');
 
         return [
             'user_id' => $team->users->random()->id,

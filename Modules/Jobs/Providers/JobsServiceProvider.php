@@ -4,6 +4,7 @@ namespace Modules\Jobs\Providers;
 
 use Config;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Modules\Jobs\View\Component\Job\Item as JobItem;
 

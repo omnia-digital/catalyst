@@ -2,7 +2,7 @@
 
 namespace Modules\Billing\Providers;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class BillingServiceProvider extends ServiceProvider

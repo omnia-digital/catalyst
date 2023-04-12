@@ -401,7 +401,7 @@
 
                                             <div>
                                                 <x-library::input.label for="card_holder_name" value="Card Holder Name"/>
-                                                <x-library::input.text x-model="cardHolderName" id="card_holder_name" placeholder="Phuc Le"/>
+                                                <x-library::input.text x-model="cardHolderName" id="card_holder_name" placeholder="John Smith"/>
                                                 <x-library::input.error for="card_holder_name"/>
                                             </div>
 

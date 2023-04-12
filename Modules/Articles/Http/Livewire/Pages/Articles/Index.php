@@ -2,9 +2,9 @@
 
 namespace Modules\Articles\Http\Livewire\Pages\Articles;
 
-use App;
 use App\Support\Platform\WithGuestAccess;
 use App\Traits\Filter\WithSortAndFilters;
+use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Enums\PostType;

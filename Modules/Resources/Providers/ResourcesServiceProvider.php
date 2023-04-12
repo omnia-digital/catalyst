@@ -2,7 +2,7 @@
 
 namespace Modules\Resources\Providers;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class ResourcesServiceProvider extends ServiceProvider

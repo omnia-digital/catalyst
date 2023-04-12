@@ -43,6 +43,13 @@ class PostFactory extends Factory
 
     public function asResource(): PostFactory
     {
+        return $this->withType(PostType::RESOURCE)->state([
+            'body' => $this->faker->company(),
+        ]);
+    }
+
+    public function asArticle(): PostFactory
+    {
         return $this->withType(PostType::ARTICLE)->state([
             'title' => $this->faker->company(),
         ]);

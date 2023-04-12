@@ -1,7 +1,7 @@
 {{-- Right Side Nav --}}
 <div class="col-span-12 lg:col-span-4 2xl:col-span-3 flex justify-end items-center mr-4">
     <!-- Search -->
-    <livewire:global-search/>
+    <livewire:partials.global-search/>
     @auth
         {{ \Filament\Facades\Filament::renderHook('user-menu.start') }}
         {{-- Profile & Notifications --}}
@@ -112,6 +112,10 @@
 
                             <x-jet-dropdown-link href="{{ route('resources.drafts') }}">
                                 My Resources
+                            </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('media.index') }}">
+                                Media Library
                             </x-jet-dropdown-link>
 
                             <x-jet-dropdown-link href="{{ route('account') }}">

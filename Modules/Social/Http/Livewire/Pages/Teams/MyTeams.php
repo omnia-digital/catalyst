@@ -2,13 +2,13 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Teams;
 
-use App;
 use App\Models\Team;
 use App\Models\User;
 use App\Support\Platform\Platform;
 use App\Support\Platform\WithGuestAccess;
 use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Livewire\WithPagination;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;

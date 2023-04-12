@@ -39,7 +39,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ReviewsDatabaseSeeder::class);
         $this->call(BillingDatabaseSeeder::class);
         $this->call(FormsDatabaseSeeder::class);
-
         if (DB::connection() instanceof \Illuminate\Database\MySqlConnection) {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
         }

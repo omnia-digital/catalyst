@@ -25,7 +25,7 @@
 {{--                    </x-library::button>--}}
 {{--                @endauth--}}
 {{--            </div>--}}
-            <livewire:teams.create-team-modal/>
+{{--            <livewire:teams.create-team-modal/>--}}
         </div>
     </div>
 @endsection
@@ -35,9 +35,10 @@
         <div>
             <!-- Recommended Teams -->
             <div>
-                {{--                {{ $recommendedTeams }}--}}
+{{--                                {{ $recommendedTeams }}--}}
             </div>
 
+{{--            // @TODO [Josh] - this needs to change to check for whether a Feed exists for the home page--}}
             @if (Platform::isModuleEnabled('games'))
                 <div class="my-4">
                     <x-library::heading.3>{{ Trans::get('Latest Gaming News') }}</x-library::heading.3>

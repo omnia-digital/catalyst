@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Laravel\Jetstream\Events\InvitingTeamMember;
+use Laravel\Jetstream\Events\InvitedTeamMember;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Mail\TeamInvitation;
 use Laravel\Jetstream\Rules\Role;
@@ -26,7 +26,7 @@ class ApplyToTeam
     {
         $this->validate($team, $userID, $role);
 
-        //InvitingTeamMember::dispatch($team, $email, $role);
+        //InvitedTeamMember::dispatch($team, $email, $role);
 
         $application = $team->teamApplications()->create([
             'user_id' => $userID,
