@@ -46,9 +46,9 @@ class MainNavigationMenu extends Component
             ],
             [
                 'label' => Trans::get('News'),
-                'name' => 'games.feeds',
+                'name' => 'feeds.index',
                 'icon' => 'fa-regular fa-rss',
-                'module' => 'games',
+                'module' => 'feeds',
             ],
             //            [
             //                'label'   => 'Games',

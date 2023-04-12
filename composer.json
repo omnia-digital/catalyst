@@ -78,7 +78,8 @@
         "thomasjohnkane/snooze": "^2.2",
         "tightenco/ziggy": "^1.4",
         "vedmant/laravel-feed-reader": "^1.5",
-        "wimil/followers": "^1.0"
+        "wimil/followers": "^1.0",
+      "ext-zlib": "*"
     },
     "require-dev": {
         "arcanedev/laravel-lang": "^10.0",
