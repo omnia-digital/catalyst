@@ -129,26 +129,31 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function getNameAttribute()
     {
+        $this->load('profile');
         return $this->profile?->name;
     }
 
     public function getFirstNameAttribute()
     {
+        $this->load('profile');
         return $this->profile?->first_name;
     }
 
     public function getLastNameAttribute()
     {
+        $this->load('profile');
         return $this->profile?->last_name;
     }
 
     public function getContactIdAttribute()
     {
+        $this->load('profile');
         return $this->profile?->salesforce_contact_id;
     }
 
     public function getProfilePhotoUrlAttribute()
     {
+        $this->load('profile');
         return $this->profile->profile_photo_url;
     }
 

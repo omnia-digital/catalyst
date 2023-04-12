@@ -14,6 +14,7 @@ class ReviewCard extends Component
     public function mount(Review $review)
     {
         $this->review = $review;
+        $this->review->load('user');
     }
 
     public function render()
