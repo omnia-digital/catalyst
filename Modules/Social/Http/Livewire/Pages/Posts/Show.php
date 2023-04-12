@@ -10,6 +10,7 @@ class Show extends Component
 {
     public $post;
     public $recentlyAddedComment;
+
     protected $listeners = ['postAdded' => '$refresh'];
 
     public function postAdded(Post $post)
