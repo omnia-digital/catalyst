@@ -2,8 +2,8 @@
 
 namespace Modules\Advice\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Modules\Social\Models\Post;
 
 class AdviceDatabaseSeeder extends Seeder

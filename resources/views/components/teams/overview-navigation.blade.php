@@ -43,25 +43,25 @@
     <div class="flex-1 flex pr-2 items-center justify-end">
         @can('update', $team)
             @if ($team->applicationsCount() > 0)
-                <a 
+                <a
                     class="flex items-center hover:underline" href="{{ route('social.teams.admin', $team) }}">
                     <p>{{ Trans::get('Pending Applications: ') }}</p>
-                    <span 
+                    <span
                         class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-primary rounded-full hover:no-underline"
                     >{{ $team->applicationsCount() }}</span>
                 </a>
             @endif
 
-            <a 
-                href="{{ route('social.teams.admin', $team) }}" 
+            <a
+                href="{{ route('social.teams.admin', $team) }}"
                 class="bg-neutral rounded-lg px-4 py-2 border border-primary hidden md:block font-bold hover:underline mx-4 whitespace-nowrap"
             >{{ \Trans::get('Admin Panel') }}</a>
         @endcan
 
-        @if(\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
+        @if (\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
             <div>
                 @auth()
-                    @if(!auth()->user()->subscribed("team_$team->id"))
+                    @if (!auth()->user()->subscribed("team_$team->id"))
                         <x-library::button x-data="" x-on:click.prevent="$openModal('subscribe-team')" wire:target="">
                             Subscribe
                         </x-library::button>

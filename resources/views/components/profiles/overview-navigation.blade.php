@@ -1,4 +1,4 @@
-<nav 
+<nav
     {{ $attributes->merge(['class' => 'bg-white shadow']) }}
     x-data="{ open: false }"
 >
@@ -37,12 +37,12 @@
         </div>
       </div>
     </div>
-  
+
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div 
+    <div
       class="sm:hidden" id="mobile-menu"
-      x-cloak 
-      x-show="open" 
+      x-cloak
+      x-show="open"
       x-collapse
     >
       <div class="space-y-1 pt-2 pb-3">

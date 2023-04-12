@@ -13,17 +13,16 @@ return [
             'keep_history_for_days' => 5,
         ],
 
-
         Spatie\Health\ResultStores\CacheHealthResultStore::class => [
             'store' => 'file',
         ],
 
-//        Spatie\Health\ResultStores\JsonFileHealthResultStore::class => [
-//            'disk' => 's3',
-//            'path' => 'health.json',
-//        ],
-//
-//        Spatie\Health\ResultStores\InMemoryHealthResultStore::class,
+        //        Spatie\Health\ResultStores\JsonFileHealthResultStore::class => [
+        //            'disk' => 's3',
+        //            'path' => 'health.json',
+        //        ],
+        //
+        //        Spatie\Health\ResultStores\InMemoryHealthResultStore::class,
 
     ],
 
@@ -58,7 +57,7 @@ return [
         'throttle_notifications_key' => 'health:latestNotificationSentAt:',
 
         'mail' => [
-            'to' => config('app.admin_email','your@example.com'),
+            'to' => config('app.admin_email', 'your@example.com'),
 
             'from' => [
                 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),

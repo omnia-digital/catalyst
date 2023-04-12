@@ -2,7 +2,6 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 
-use App\Enums\Teams\TeamRoleTypes;
 use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
@@ -16,16 +15,28 @@ class ManageTeamRoles extends Component
     public $team;
     public $confirmingDeleteTeamRole = false;
     public $currentlyEditingRole = false;
+    public $currentlyAddingPermission = false;
+    public $roleToAttachPermission = null;
     public $roleIdBeingRemoved = null;
     public Role $editingRole;
     public $selectedPermissions = [];
+    public $permissionsToAttach = [];
 
     public function rules()
     {
         return [
             'editingRole.team_id' => 'required|integer',
-            'editingRole.name' => 'required|alpha_num',
-            'editingRole.type' => 'required|in:' . implode(',', TeamRoleTypes::keys()),
+            'editingRole.description' => 'required|min:4|max:255',
+            'permissionsToAttach' => ['nullable', 'array'],
+            'editingRole.name' => [
+                'required',
+                'alpha_num',
+                function ($attribute, $value, $fail) {
+                    if (strtolower($value) === strtolower(config('platform.teams.default_owner_role'))) {
+                        $fail('You cannot create another role called ' . config('platform.teams.default_owner_role') . '.');
+                    }
+                },
+            ],
             'editingRole.description' => 'required|min:4|max:255',
             'permissionsToAttach' => ['nullable', 'array'],
         ];
@@ -44,7 +55,7 @@ class ManageTeamRoles extends Component
             'team_id' => $this->team->id,
             'name' => '',
             'type' => '',
-            'description' => ''
+            'description' => '',
         ]);
     }
 
@@ -63,7 +74,9 @@ class ManageTeamRoles extends Component
     {
         $this->authorize('createTeamRole', $this->team);
 
-        if ($this->editingRole->getKey()) $this->editingRole = $this->makeBlankRole();
+        if ($this->editingRole->getKey()) {
+            $this->editingRole = $this->makeBlankRole();
+        }
 
         $this->currentlyEditingRole = true;
     }
@@ -94,13 +107,46 @@ class ManageTeamRoles extends Component
     {
         $this->authorize('updateTeamRole', $this->team);
 
-        if ($this->editingRole->isNot($role)) $this->editingRole = $role;
+        if ($this->editingRole->isNot($role)) {
+            $this->editingRole = $role;
+        }
 
         $this->currentlyEditingRole = true;
     }
 
+    public function addPermissions($roleId)
+    {
+        $this->authorize('updateTeamRole', $this->team);
+
+        $this->roleToAttachPermission = Role::find($roleId);
+
+        $this->permissionsToAttach = [];
+
+        $this->currentlyAddingPermission = true;
+    }
+
+    public function attachPermissions()
+    {
+        $this->authorize('updateTeamRole', $this->team);
+
+        $this->roleToAttachPermission->permissions()->attach($this->permissionsToAttach);
+
+        $this->closePermissionsModal();
+    }
+
+    public function closePermissionsModal()
+    {
+        $this->currentlyAddingPermission = false;
+
+        $this->permissionsToAttach = [];
+
+        $this->roleToAttachPermission = null;
+    }
+
     public function detachPermissions($roleId)
     {
+        $this->authorize('updateTeamRole', $this->team);
+
         Role::find($roleId)->permissions()->detach($this->selectedPermissions[$roleId]);
 
         $this->selectedPermissions[$roleId] = [];
@@ -113,11 +159,6 @@ class ManageTeamRoles extends Component
         }
     }
 
-    public function roleTypeOptions()
-    {
-        return TeamRoleTypes::options();
-    }
-
     public function getRolesProperty()
     {
         return Role::where('team_id', $this->team->id)->with('permissions')->get();
@@ -126,6 +167,13 @@ class ManageTeamRoles extends Component
     public function getPermissionsProperty()
     {
         return Permission::get();
+    }
+
+    public function getAvailablePermissionsProperty()
+    {
+        $rolePermissionIds = $this->roleToAttachPermission?->permissions()->pluck('id')->toArray() ?? [];
+
+        return Permission::whereNotIn('id', $rolePermissionIds)->pluck('name', 'id');
     }
 
     public function render()

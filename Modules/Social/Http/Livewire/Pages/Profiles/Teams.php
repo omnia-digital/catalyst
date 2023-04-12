@@ -5,6 +5,7 @@ namespace Modules\Social\Http\Livewire\Pages\Profiles;
 use App\Models\Team;
 use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Models\Profile;
@@ -17,13 +18,13 @@ class Teams extends Component
     public array $sortLabels = [
         'name' => 'Name',
         'users_count' => 'Users',
-        'start_date' => 'Launch Date'
+        'start_date' => 'Launch Date',
     ];
 
     public string $dateColumn = 'start_date';
 
     public $profile;
-        
+
     public function getUserProperty()
     {
         return $this->profile->user;
@@ -35,7 +36,7 @@ class Teams extends Component
 
         $this->orderBy = 'name';
 
-        if (!\App::environment('production')) {
+        if (! App::environment('production')) {
             $this->useCache = false;
         }
     }
@@ -43,11 +44,10 @@ class Teams extends Component
     public function getRowsQueryProperty()
     {
         $query = Team::query()
-            ->where('user_id', $this->user->id)
             ->withUser($this->user)
             ->withCount(['users']);
-            
-        $query = $query->when($this->search, fn(Builder $q) => $q->search($this->search));
+
+        $query = $query->when($this->search, fn (Builder $q) => $q->search($this->search));
         $query = $this->applySorting($query);
 
         return $query;
@@ -64,7 +64,7 @@ class Teams extends Component
     {
         return view('social::livewire.pages.profiles.teams', [
             'teams' => $this->rows,
-            'teamsCount' => $this->rowsQuery->count()
+            'teamsCount' => $this->rowsQuery->count(),
         ]);
     }
 }

@@ -8,7 +8,7 @@ use Livewire\Component;
 class Followers extends Component
 {
     public $team;
-        
+
     public function mount(Team $team)
     {
         $this->team = $team;

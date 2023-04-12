@@ -2,22 +2,10 @@
 
 namespace Modules\Crm\Http\Livewire\Components;
 
-use App\Models\User;
-use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\TextInput;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\CheckboxColumn;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\Layout\Panel;
-use Filament\Tables\Columns\Layout\Split;
-use Filament\Tables\Columns\Layout\Stack;
-use Filament\Tables\Columns\Layout\View;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\Filter;
@@ -37,6 +25,11 @@ class ProfileTable extends Component implements HasTable
     public function create()
     {
         return redirect('/admin/profiles/create');
+    }
+
+    public function isTableSearchable(): bool
+    {
+        return true;
     }
 
     protected function getFormSchema(): array
@@ -99,10 +92,10 @@ class ProfileTable extends Component implements HasTable
     {
         return [
             ViewAction::make()
-                      ->url(fn(Profile $record): string => route('social.profile.show', ['profile' => $record]))
+                      ->url(fn (Profile $record): string => route('social.profile.show', ['profile' => $record]))
                       ->openUrlInNewTab(),
             EditAction::make()
-                      ->url(fn(Profile $record): string => route('social.profile.edit', ['profile' => $record]))
+                      ->url(fn (Profile $record): string => route('social.profile.edit', ['profile' => $record]))
                       ->openUrlInNewTab(),
         ];
     }
@@ -112,10 +105,5 @@ class ProfileTable extends Component implements HasTable
         return [
             DeleteBulkAction::make(),
         ];
-    }
-
-    public function isTableSearchable(): bool
-    {
-        return true;
     }
 }

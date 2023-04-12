@@ -8,7 +8,7 @@
     <div class="xl:grid xl:grid-cols-9 xl:gap-9">
         <div class="xl:col-span-6">
             <div>
-                <img class="rounded-lg w-full object-cover max-h-96 bg-neutral-dark flex-shrink-0" src="{{$resource->main_image}}" alt="{{$resource->title}}">
+                <img class="rounded-lg w-full object-cover max-h-96 bg-neutral-dark flex-shrink-0" src="{{ $resource->main_image }}" alt="{{ $resource->title }}">
             </div>
             <div class="flex mt-6">
                 <x-library::heading.3 class="text-color-dark text-4xl hover:underline font-bold">{{ $resource->title }}</x-library::heading.3>
@@ -22,7 +22,7 @@
             </div>
             @empty(!$resource->tags)
                 <div class="flex justify-start space-x-2">
-                    @foreach($resource->tags as $tag)
+                    @foreach ($resource->tags as $tag)
                         <x-library::tag>{{ $tag }}</x-library::tag>
                     @endforeach
                 </div>
@@ -54,7 +54,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top ' . {{ \Platform::getTeamsWord() }},
+                        title: 'Top ' . {{ \Platform::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Team;
-use Livewire\Component;
 use App\Models\User;
+use Livewire\Component;
 
 class AwardStack extends Component
 {

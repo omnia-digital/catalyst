@@ -51,37 +51,37 @@
                 <div class="col-span-12 2xl:col-span-6">
                     <div class="flex flex-col flex-1 bg-secondary rounded">
                         <div class="h-44 bg-primary"
-                             style="background-image: url({{ $team->mainImage()->getFullUrl() }}); background-size: cover; background-repeat: no-repeat;"
+                             style="background-image: url({{ $team->mainImage()->getFullUrl() ?? config('teams.defaults.cover_photo') }}); background-size: cover; background-repeat: no-repeat;"
                         ></div>
                         <div class="p-4 flex flex-col flex-1">
                             <p class="text-sm flex-1">{{ $team->summary }}</p>
                             <div class="text-xs grid grid-cols-4 grid-rows-4 gap-1 items-center">
-                                @if($team->start_date)
+                                @if ($team->start_date)
                                 <span class="col-span-1 text-gray-400 text-2xs uppercase">Launch Date</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-o-calendar class="w-4 h-4"/>
                                     <span>{{ \Carbon\Carbon::parse($team->start_date)->toFormattedDateString() }}</span>
                                 </div>
                                 @endif
-                                @if($team->end_date)
+                                @if ($team->end_date)
                                 <span class="col-span-1 text-gray-400 text-2xs uppercase">End Date</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-o-calendar class="w-4 h-4"/>
                                     <span>{{ \Carbon\Carbon::parse($team->end_date)->toFormattedDateString() }}</span>
                                 </div>
                                 @endif
-                                    @if($team->location_short)
+                                    @if ($team->location_short)
 
                                     <span class="col-span-1 text-gray-400 text-2xs uppercase">Location:</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-o-location-marker class="w-4 h-4"/>
-                                    <span>{{ $team->location_short ?? "Not Set"}}</span>
+                                    <span>{{ $team->location_short ?? "Not Set" }}</span>
                                 </div>
                                     @endif
                                 <span class="col-span-1 text-gray-400 text-2xs uppercase ">Organizer:</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-s-user-circle class="w-4 h-4"/>
-                                    <span>{{ $team->owner->name }}</span>
+                                    <span>{{ $team?->owner?->name }}</span>
                                 </div>
                             </div>
                             <div class="flex justify-between items-center">
@@ -161,7 +161,7 @@
                 {{--            <div>--}}
                 {{--                <div class="flex justify-between items-center text-base-text-color font-semibold">--}}
                 {{--                    <x-library::heading.3>{{ \Trans::get('Awards') }}</x-library::heading.3>--}}
-                {{--                    @if($team->awards()->count())--}}
+                {{--                    @if ($team->awards()->count())--}}
                 {{--                        <a href="{{ route('social.teams.awards', $team) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}--}}
                 {{--                            <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>--}}
                 {{--                        </a>--}}
@@ -195,7 +195,7 @@
                 <x-library::modal id="add-awards-modal" maxWidth="2xl">
                     <x-slot name="title">{{ \Trans::get('Add Awards') }}</x-slot>
                     <x-slot name="content">
-                        @if($userToAddAwardsTo)
+                        @if ($userToAddAwardsTo)
                             <div class="w-full flex flex-col">
                                 @forelse ($this->getRemainingAwards($userToAddAwardsTo) as $award)
                                     <div class="mr-4 mt-2 flex items-center">
@@ -222,7 +222,7 @@
                         @endif
                     </x-slot>
                     <x-slot name="actions">
-                        @if($userToAddAwardsTo)
+                        @if ($userToAddAwardsTo)
                             <x-library::button wire:click="addAward({{ $userToAddAwardsTo->id }})">{{ Trans::get('Add') }}</x-library::button>
                         @endif
                     </x-slot>

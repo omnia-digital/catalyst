@@ -4,7 +4,6 @@ namespace Modules\Social\Models;
 
 use App\Models\Team;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,16 +37,24 @@ class Post extends Model implements HasMedia, Searchable
         'postable_type',
         'repost_original_id',
         'published_at',
-        'image'
+        'image',
     ];
 
     protected $dates = [
-        'published_at'
-    ];
-
-    protected $appends = [
         'published_at',
     ];
+
+    public static function getTrending($type = 'post')
+    {
+        $trendingPosts = Post::withCount('likes')
+                   ->with('user')
+                   ->when($type, fn ($query) => $query->where('type', $type))
+                   ->whereNotNull('published_at')
+                   ->orderBy('likes_count', 'desc')
+                   ->orderBy('created_at', 'desc');
+
+        return $trendingPosts;
+    }
 
     protected static function booted()
     {
@@ -57,11 +64,16 @@ class Post extends Model implements HasMedia, Searchable
         });
     }
 
+    protected static function newFactory()
+    {
+        return PostFactory::new();
+    }
+
     public function type(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => PostType::tryFrom($value),
-            set: fn($value) => $value?->value
+            get: fn ($value) => PostType::tryFrom($value),
+            set: fn ($value) => $value?->value
         );
     }
 
@@ -70,18 +82,13 @@ class Post extends Model implements HasMedia, Searchable
         return $query->where('type', $type);
     }
 
-    protected static function newFactory()
-    {
-        return PostFactory::new();
-    }
-
     public function getPublishedAtAttribute($value)
     {
-        if (empty($value)) {
-            return $this->created_at;
-        } else {
-            return new Carbon($value);
+        if ($this->type === PostType::ARTICLE) {
+            return is_null($value) ? null : $this->asDateTime($value);
         }
+
+        return $this->created_at;
     }
 
     public function user(): BelongsTo
@@ -108,7 +115,7 @@ class Post extends Model implements HasMedia, Searchable
 
     public function isRepost(): bool
     {
-        return !is_null($this->repost_original_id);
+        return ! is_null($this->repost_original_id);
     }
 
     public function attachMedia(array $mediaUrls): self
@@ -123,7 +130,7 @@ class Post extends Model implements HasMedia, Searchable
 
     public function getUrl(): string
     {
-        if ($this->type === PostType::RESOURCE) {
+        if ($this->type === PostType::ARTICLE) {
             return route('resources.show', $this);
         }
 
@@ -132,7 +139,7 @@ class Post extends Model implements HasMedia, Searchable
 
     public function scopeOnlyResources($query)
     {
-        return $query->where('type', PostType::RESOURCE);
+        return $query->where('type', PostType::ARTICLE);
     }
 
     public function scopeOnlyPosts($query)
@@ -143,16 +150,6 @@ class Post extends Model implements HasMedia, Searchable
     public function isParent(): bool
     {
         return is_null($this->postable_id) && is_null($this->postable_type);
-    }
-
-    public static function getTrending($type = 'post')
-    {
-        $trendingPosts = Post::withCount('likes')
-                   ->with('user')
-                   ->when($type, fn($query) => $query->where('type', $type))
-                   ->orderBy('likes_count', 'desc')
-                   ->orderBy('created_at', 'desc');
-        return $trendingPosts;
     }
 
     public function getSearchResult(): SearchResult

@@ -31,37 +31,6 @@ class CreateReviewModal extends Component implements HasForms
 
     protected $listeners = ['openReviewModal'];
 
-    protected function getFormSchema(): array
-    {
-        return [
-            Textarea::make('body')->required(),
-            Select::make('visibility')
-                ->options([
-                    0 => 'Public', 
-                    1 => 'Friends Only'
-                ])
-                ->default(0)
-                ->disablePlaceholderSelection()
-                ->required(),
-            Select::make('language_id')
-                ->label('Language')
-                ->options(Language::pluck('name', 'id'))
-                ->default(1)
-                ->disablePlaceholderSelection()
-                ->required(),
-            Checkbox::make('commentable')
-                ->default(1)
-                ->label('Allow Comments'),
-            Checkbox::make('received_product_free')
-                ->default(0)
-                ->label('Check this box if you joined for free'),
-            Radio::make('recommend')
-                ->label(Trans::get('Do you recommend this Team?'))
-                ->boolean()
-                ->required()
-        ];        
-    }
-
     public function mount($model)
     {
         $this->model = $model;
@@ -71,7 +40,7 @@ class CreateReviewModal extends Component implements HasForms
     {
         if ($this->model->reviewedBy(auth()->user())) {
             $this->review = $this->model->getCurrentUserReview();
-    
+
             $this->form->fill([
                 'body' => $this->review->body,
                 'visibility' => $this->review->visibility,
@@ -84,27 +53,23 @@ class CreateReviewModal extends Component implements HasForms
             $this->form->fill();
         }
 
-
         $this->dispatchBrowserEvent('review-modal-' . $this->model->id, ['type' => 'open']);
     }
 
     public function createReview()
     {
         if ($this->model->reviewedBy(auth()->user())) {
-            
             $this->review->update(
                 $this->form->getState()
             );
-            
+
             $this->emitTo('reviews::review-card', 'reviewUpdated');
             $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review updated'), 'type' => 'success']);
-
         } else {
-            
             $this->review = $this->model->reviews()->create(
-                array_merge(['user_id' => auth()->id()], $this->form->getState())  
+                array_merge(['user_id' => auth()->id()], $this->form->getState())
             );
-    
+
             $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review created'), 'type' => 'success']);
         }
 
@@ -129,5 +94,36 @@ class CreateReviewModal extends Component implements HasForms
     public function render()
     {
         return view('reviews::livewire.create-review-modal');
+    }
+
+    protected function getFormSchema(): array
+    {
+        return [
+            Textarea::make('body')->required(),
+            Select::make('visibility')
+                ->options([
+                    0 => 'Public',
+                    1 => 'Friends Only',
+                ])
+                ->default(0)
+                ->disablePlaceholderSelection()
+                ->required(),
+            Select::make('language_id')
+                ->label('Language')
+                ->options(Language::pluck('name', 'id'))
+                ->default(1)
+                ->disablePlaceholderSelection()
+                ->required(),
+            Checkbox::make('commentable')
+                ->default(1)
+                ->label('Allow Comments'),
+            Checkbox::make('received_product_free')
+                ->default(0)
+                ->label('Check this box if you joined for free'),
+            Radio::make('recommend')
+                ->label(Trans::get('Do you recommend this Team?'))
+                ->boolean()
+                ->required(),
+        ];
     }
 }

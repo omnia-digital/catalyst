@@ -1,6 +1,6 @@
-<article wire:click.prevent.stop="showPost" class="w-full sm:max-w-post-card-max-w bg-post-card-bg-color pt-4 shadow rounded-lg z-10 border-2 border-transparent {{ $clickable ? '
-cursor-pointer' : ''
-}}">
+<article wire:click.prevent.stop="showPost"
+    class="w-full sm:max-w-post-card-max-w bg-post-card-bg-color pt-4 shadow rounded-lg z-10 border-2 border-transparent {{ $clickable ? 'cursor-pointer' : '' }}"
+>
     <div class="flex justify-between px-5">
         <div class="flex space-x-3">
             <div class="flex-shrink-0">
@@ -16,7 +16,7 @@ cursor-pointer' : ''
                         <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
                         <x-dot/>
                         <a href="{{ $post->getUrl() }}" class="hover:underline">
-                            <time datetime="{{ $post->published_at }}">{{ $post->published_at->diffForHumans(short: true) }}</time>
+                            <time datetime="{{ $post->published_at }}">{{ $post->published_at?->diffForHumans(short: true) }}</time>
                         </a>
                     </div>
                 </div>
@@ -50,9 +50,9 @@ cursor-pointer' : ''
                         </div>
                     </x-library::dropdown.item>
                     @can('update', $post)
-                        <a 
-                            x-data x-on:click.stop="" 
-                            class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color" 
+                        <a
+                            x-data x-on:click.stop=""
+                            class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color"
                             href="{{ route('social.posts.edit', $post->id) }}"
                         >
                             <div class="flex items-center space-x-1">
@@ -83,7 +83,7 @@ cursor-pointer' : ''
         <div class="mt-3 overflow-hidden">
             <div class="grid grid-cols-{{ sizeof($post->media) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($post->media) > 2 ? '2 h-80' : '1' }} gap-px">
                 @foreach ($post->media as $media)
-                    <div class="w-full overflow-hidden @if($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">
+                    <div class="w-full overflow-hidden @if ($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">
                         <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover w-full">
                     </div>
                 @endforeach
@@ -106,7 +106,7 @@ cursor-pointer' : ''
                                        href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}" class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
                                 </div>
                                 <div class="text-base-text-color">
-                                    {{ $post->repostOriginal->published_at->diffForHumans() }}
+                                    {{ $post->repostOriginal->published_at?->diffForHumans() }}
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@ cursor-pointer' : ''
         @endif
     </div>
 
-    @if($showPostActions)
+    @if ($showPostActions)
         <div wire:click.prevent.stop="" class="z-20 px-5">
             <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
         </div>

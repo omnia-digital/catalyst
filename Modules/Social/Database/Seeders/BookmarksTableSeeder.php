@@ -2,9 +2,8 @@
 
 namespace Modules\Social\Database\Seeders;
 
-use Modules\Social\Models\Bookmark;
-use Modules\Social\Models\Post;
 use Illuminate\Database\Seeder;
+use Modules\Social\Models\Bookmark;
 
 class BookmarksTableSeeder extends Seeder
 {

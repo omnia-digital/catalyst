@@ -4,7 +4,6 @@ namespace Modules\Games\Http\Livewire;
 
 use Livewire\Component;
 use Modules\Games\Actions\Games\GamesAction;
-use Modules\Games\Models\IGDB\Game as IGDBGame;
 
 class Home extends Component
 {
@@ -17,7 +16,7 @@ class Home extends Component
 
     public function getAllGamesProperty()
     {
-        return (new GamesAction())->newlyReleased();
+        return (new GamesAction)->newlyReleased();
     }
 
     public function render()

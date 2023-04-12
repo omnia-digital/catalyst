@@ -8,14 +8,11 @@ use App\Contracts\InvitesTeamMembers;
 use App\Models\TeamApplication;
 use App\Models\TeamInvitation;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
-//use Laravel\Jetstream\Role;
 use Modules\Social\Notifications\ApplicationAcceptedToTeamNotification;
 use Modules\Social\Notifications\NewApplicationToTeamNotification;
 use Modules\Social\Notifications\NewMemberOfMyTeamNotification;
@@ -101,7 +98,7 @@ trait WithTeamManagement
 
     public function teamHasApplicationForm()
     {
-        return !is_null($this->team->applicationForm());
+        return ! is_null($this->team->applicationForm());
     }
 
     /**
@@ -188,7 +185,7 @@ trait WithTeamManagement
         foreach ($ownerAndAdmins as $admin) {
             $admin->notify(new NewMemberOfMyTeamNotification($this->team, $user));
         }
-        
+
         $this->success(Trans::get('Team member added!'));
         $this->emit('member_added');
     }
@@ -228,7 +225,6 @@ trait WithTeamManagement
     /**
      * Remove the currently authenticated user from the team.
      *
-     * @param  \Laravel\Jetstream\Contracts\RemovesTeamMembers  $remover
      * @return void
      */
     public function leaveTeam(RemovesTeamMembers $remover)
@@ -261,7 +257,6 @@ trait WithTeamManagement
     /**
      * Remove a team member from the team.
      *
-     * @param  \Laravel\Jetstream\Contracts\RemovesTeamMembers  $remover
      * @return void
      */
     public function removeTeamMember(RemovesTeamMembers $remover)
@@ -300,6 +295,8 @@ trait WithTeamManagement
      */
     public function updateUserRole()
     {
+        Gate::authorize('updateTeamRole', $this->team);
+
         $this->managingRoleFor->roles()->detach($this->managingRoleFor->teamRole($this->team)->id);
         $this->managingRoleFor->roles()->attach($this->currentRole, ['team_id' => $this->team->id]);
 
@@ -325,7 +322,7 @@ trait WithTeamManagement
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        return auth()->user();
     }
 
     /**

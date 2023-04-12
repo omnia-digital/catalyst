@@ -18,7 +18,7 @@
         <x-slot name="title">Share</x-slot>
 
         <x-slot name="content">
-            @if($links)
+            @if ($links)
                 <div class="flex my-4 space-x-4">
                     <!--FACEBOOK ICON-->
                     <a href="{{ $links['facebook'] }}" target="_blank">

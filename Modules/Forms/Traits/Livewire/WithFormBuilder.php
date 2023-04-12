@@ -1,4 +1,6 @@
-<?php namespace Modules\Forms\Traits\Livewire;
+<?php
+
+namespace Modules\Forms\Traits\Livewire;
 
 use App\Models\Team;
 use Closure;
@@ -28,6 +30,33 @@ trait WithFormBuilder
     public $content;
     public $team_id;
     public $form_type_id;
+
+    public function save($teamId = null): void
+    {
+        $form = $this->form->getState();
+
+        $formData = [
+            'name' => $form['name'],
+            'slug' => $form['slug'],
+            'form_type_id' => $form['form_type_id'],
+            'team_id' => $teamId,
+            'content' => $form['content'],
+        ];
+
+        if ($this->formModel) {
+            $this->formModel->update($formData);
+        } else {
+            Form::create($formData);
+        }
+
+        $this->success(Trans::get('Form created successfully'));
+
+        if ($teamId) {
+            $this->redirectRoute('social.teams.admin', Team::find($teamId));
+        } else {
+            $this->redirectRoute('social.home');
+        }
+    }
 
     protected function getFormSchema(): array
     {
@@ -103,45 +132,17 @@ trait WithFormBuilder
                 TextInput::make('label')
                     ->columnSpan(2)
                     ->lazy()
-                    ->afterStateUpdated(function (\Closure $set, $state) {
+                    ->afterStateUpdated(function (Closure $set, $state) {
                         $name = Str::of($state)
                                     ->snake()
-                                    ->lower() . uniqid("_");
+                                    ->lower() . uniqid('_');
                         $set('name', $name);
                     })
                     ->required(),
                 TextInput::make('name')
                     ->hidden()
                     ->required(),
-                
+
             ]);
-    }
-    
-    public function save($teamId = null): void
-    {
-        $form = $this->form->getState();
-
-        $formData = [
-            'name' => $form['name'], 
-            'slug' => $form['slug'], 
-            'form_type_id' => $form['form_type_id'], 
-            'team_id' => $teamId,
-            'content' => $form['content']
-        ];
-
-        if ($this->formModel) {
-            $this->formModel->update($formData);
-        } else {
-            Form::create($formData);
-        }
-
-        $this->success(Trans::get('Form created successfully'));
-
-        if ($teamId) {
-            $this->redirectRoute('social.teams.admin', Team::find($teamId));
-        } else {
-            $this->redirectRoute('social.home');
-        }
-
     }
 }

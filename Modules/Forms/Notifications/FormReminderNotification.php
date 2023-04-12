@@ -5,10 +5,8 @@ namespace Modules\Forms\Notifications;
 use App\Models\Team;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Modules\Forms\Models\Form;
+use Illuminate\Notifications\Notification;
 use Modules\Forms\Models\FormNotification;
 use Trans;
 
@@ -30,7 +28,7 @@ class FormReminderNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -43,7 +41,7 @@ class FormReminderNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
@@ -61,7 +59,7 @@ class FormReminderNotification extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

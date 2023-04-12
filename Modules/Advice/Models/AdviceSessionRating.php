@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdviceSessionRating extends Model
 {
-
     /**
      * The database table used by the model.
      *
@@ -22,13 +21,11 @@ class AdviceSessionRating extends Model
     protected $fillable = [
         'rating',
         'description',
-        'advice_profile_id'
+        'advice_profile_id',
     ];
 
     public function adviceProfile()
     {
         $this->belongsTo(AdviceProfile::class);
     }
-
-
 }

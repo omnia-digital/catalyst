@@ -10,11 +10,13 @@ class QuestionItem extends Component
     public Post $post;
     public $optionsMenuOpen = false;
 
-    public function mount(Post $post) {
+    public function mount(Post $post)
+    {
         $this->post = $post;
     }
 
-    public function getAuthorAttribute() {
+    public function getAuthorAttribute()
+    {
         return $this->post->user;
     }
 

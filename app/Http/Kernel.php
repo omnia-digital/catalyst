@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\EnsureEmailIsVerifiedMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Modules\Livestream\Http\Middleware\EnsureTeamInfoIsFilled;
 
 class Kernel extends HttpKernel
 {
@@ -38,7 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            'team.permission'
+            'team.permission',
         ],
 
         'api' => [
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'team' => \App\Http\Middleware\EnsureHasTeam::class,
         'team.permission' => \App\Http\Middleware\TeamsPermission::class,
         'subscribed' => \Modules\Billing\Http\Middleware\UserSubscriptionCheck::class,
+        'info-filled' => EnsureTeamInfoIsFilled::class,
     ];
 }

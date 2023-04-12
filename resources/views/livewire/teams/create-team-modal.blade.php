@@ -11,7 +11,7 @@
         </div>
         <div class="mt-6">
             <div class="flex items-center">
-                <x-library::input.label value="{{ \Trans::get('What is your Team associated with?') }}" /><span class="text-red-600 text-sm ml-1">*</span>
+                <x-library::input.label value="{{ \Trans::get('What type of Team is this?') }}" /><span class="text-red-600 text-sm ml-1">*</span>
             </div>
             <p class="text-neutral-dark">{{ \Trans::get('(you can choose more than one)') }}</p>
             <x-library::input.selects wire:model="teamTypes" :options="$teamTags"/>
@@ -122,7 +122,7 @@
 {{--                    <div class="mt-3 rounded-lg overflow-hidden">--}}
 {{--                        <div class="grid grid-cols-{{ sizeof($sampleMedia) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($sampleMedia) > 2 ? '2 h-80' : '1' }} gap-px">--}}
 {{--                            @foreach ($sampleMedia as $key => $media)--}}
-{{--                                <div class="w-full overflow-hidden @if($loop->odd && $loop->last) col-span-2 fill-row-span @endif">--}}
+{{--                                <div class="w-full overflow-hidden @if ($loop->odd && $loop->last) col-span-2 fill-row-span @endif">--}}
 {{--                                    <img src="{{ $media->temporaryUrl() }}" title="{{ $sampleMediaNames[$key] }}" alt="{{ $sampleMediaNames[$key] }}" class="object-cover w-full">--}}
 {{--                                </div>--}}
 {{--                            @endforeach--}}

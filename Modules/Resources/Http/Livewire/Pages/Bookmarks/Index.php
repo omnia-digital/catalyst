@@ -23,7 +23,7 @@ class Index extends Component
     public string $dateColumn = 'published_at';
 
     protected $queryString = [
-        'search'
+        'search',
     ];
 
     public function mount()
@@ -40,8 +40,8 @@ class Index extends Component
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-        return Bookmark::where('user_id', '=', \Auth::user()->id)->whereHas('bookmarkable', function(Builder $query) {
-            return $query->scopes(['ofType' => PostType::RESOURCE]);
+        return Bookmark::where('user_id', '=', auth()->user()->id)->whereHas('bookmarkable', function (Builder $query) {
+            return $query->scopes(['ofType' => PostType::ARTICLE]);
         })
             ->orderBy($this->orderBy, $this->sortOrder);
     }
@@ -53,12 +53,10 @@ class Index extends Component
         });
     }
 
-
-
     public function render()
     {
         return view('resources::livewire.pages.bookmarks.index', [
-            'bookmarks' => $this->rows
+            'bookmarks' => $this->rows,
         ]);
     }
 }

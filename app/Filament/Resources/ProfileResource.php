@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProfileResource\Pages\CreateProfile;
 use App\Filament\Resources\ProfileResource\Pages\EditProfile;
 use App\Filament\Resources\ProfileResource\Pages\ManageProfiles;
-use App\Filament\Resources\ProfileResource\RelationManagers;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -18,28 +17,21 @@ use RalphJSmit\Filament\Components\Forms\CreatedAt;
 use RalphJSmit\Filament\Components\Forms\DeletedAt;
 use RalphJSmit\Filament\Components\Forms\Timestamp;
 use RalphJSmit\Filament\Components\Forms\UpdatedAt;
+use Trans;
 
 class ProfileResource extends Resource
 {
     protected static ?string $model = Profile::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'People';
+
     protected $queryString = [
-        'tableColumnSearchQueries'
+        'tableColumnSearchQueries',
     ];
 
     public static function getLabel(): ?string
     {
         return 'Contact';
-    }
-
-    protected static function getNavigationLabel(): string
-    {
-        if (auth()->user()->is_admin) {
-            return 'Contacts (Profiles)';
-        } else {
-            return 'Contacts';
-        }
     }
 
     public static function form(Form $form): Form
@@ -57,14 +49,13 @@ class ProfileResource extends Resource
                                 Forms\Components\TextInput::make('email')->columnSpan(6),
                             ]),
                             Timestamp::make('last_active_at'),
-                            Forms\Components\Select::make('current_team_id')->relationship('currentTeam','name'),
+                            //                            Forms\Components\Select::make('current_team_id')->relationship('currentTeam','name'),
                         ]),
                 CreatedAt::make()->visibleOn('edit'),
                 UpdatedAt::make()->visibleOn('edit'),
                 DeletedAt::make()->visibleOn('edit'),
             ]);
     }
-
 
     public static function table(Table $table): Table
     {
@@ -74,7 +65,7 @@ class ProfileResource extends Resource
                 Filter::make('has_team')->query(function (Builder $query) {
                     // where profile has team
                     $query->whereHas('user.teams');
-                })->label(\Trans::get('Has Team'))->toggle(),
+                })->label(Trans::get('Has Team'))->toggle(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -85,8 +76,6 @@ class ProfileResource extends Resource
             ]);
     }
 
-
-
     public static function getPages(): array
     {
         return [
@@ -94,5 +83,14 @@ class ProfileResource extends Resource
             'create' => CreateProfile::route('/create'),
             'edit' => EditProfile::route('/edit/{record}'),
         ];
+    }
+
+    protected static function getNavigationLabel(): string
+    {
+        if (auth()->user()->is_admin) {
+            return 'Contacts (Profiles)';
+        } else {
+            return 'Contacts';
+        }
     }
 }

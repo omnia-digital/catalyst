@@ -5,7 +5,6 @@ namespace Modules\Social\Http\Livewire\Partials;
 use App\Models\TeamApplication;
 use App\Models\TeamInvitation;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Livewire\Component;
 
@@ -43,7 +42,7 @@ class Applications extends Component
         $invitation->delete();
 
         $this->invitations = $this->invitations->fresh();
-        $this->emit('team_action', "Invitation accepted");
+        $this->emit('team_action', 'Invitation accepted');
     }
 
     /**
@@ -59,7 +58,7 @@ class Applications extends Component
         }
 
         $this->invitations = $this->invitations->fresh();
-        $this->emit('team_action', "Invitation declined");
+        $this->emit('team_action', 'Invitation declined');
     }
 
     /**
@@ -94,7 +93,7 @@ class Applications extends Component
 
     public function getUserProperty()
     {
-        return User::find(Auth::id());
+        return User::find(auth()->id());
     }
 
     public function render()

@@ -30,7 +30,7 @@
                                         </div>
                                     </x-slot:title>
                                     <x-slot name="description" class="space-y-1">
-                                        @foreach($teamPlan['features'] as $feature)
+                                        @foreach ($teamPlan['features'] as $feature)
                                             <div class="flex items-center space-x-2">
                                                 <x-heroicon-s-check-circle class="text-green-500 w-4 h-4"/>
                                                 <p>{{ $feature }}</p>

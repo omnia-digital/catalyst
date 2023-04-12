@@ -2,16 +2,11 @@
 
 namespace App\Providers;
 
-use App\Http\Livewire\MainNavigationMenu;
-use App\Settings\GeneralSettings;
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\HtmlString;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\View\View;
 use Laravel\Cashier\Cashier;
-use Nwidart\Modules\Module;
 use Spatie\Health\Checks\Checks\DatabaseCheck;
 use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
 use Spatie\Health\Health;
@@ -26,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Cashier::ignoreMigrations();
-        //Model::preventLazyLoading(! $this->app->isProduction());
+        Model::preventLazyLoading(app()->isLocal());
     }
 
     /**
@@ -44,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
 //        ]);
 
         Filament::serving(function () {
-            Filament::registerTheme(asset('css/app.css'),);
+            Filament::registerTheme(asset('css/app.css'));
             Filament::registerUserMenuItems([
                 // ...
                 'logout' => UserMenuItem::make()
