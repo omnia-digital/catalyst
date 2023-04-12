@@ -3,9 +3,9 @@
 ])
 
 <a href="{{ route('social.teams.show', $team) }}">
-    <div class="bg-primary border border-neutral-light rounded hover-trigger relative bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat">
+    <div class="bg-secondary border border-neutral-light rounded hover-trigger relative bg-[url('https://source.unsplash.com/random')] bg-cover bg-no-repeat">
         <div class="h-80 rounded"></div>
-        <div class="space-y-2 p-4 bg-primary rounded absolute bottom-0 right-0 left-0">
+        <div class="space-y-2 p-4 bg-secondary rounded absolute bottom-0 right-0 left-0">
             <div class="flex justify-between">
                 <p class="text-dark-text-color font-semibold text-base">{{ $team->name }}</p>
                 <div class="flex items-center">

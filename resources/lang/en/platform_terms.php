@@ -11,5 +11,6 @@ return [
     |
     */
 
-    'team' => 'project|projects',
+    'team' => env('TEAM_TERM'),
+    'company' => env('COMPANY_TERM'),
 ];

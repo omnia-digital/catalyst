@@ -1,14 +1,14 @@
 <div>
-    <div class="bg-primary p7 rounded w-9/12 mx-auto">
+    <div class="bg-secondary p7 rounded w-9/12 mx-auto">
         <div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-light-text-color border border-neutral-light rounded">
             <div x-ref="dnd"
                 class="relative flex flex-col text-light-text-color border border-neutral-light border-dashed rounded cursor-pointer">
                 <input accept="*" type="file" multiple
                     class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
                     @change="addFiles($event)"
-                    @dragover="$refs.dnd.classList.add('border-secondary'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
-                    @dragleave="$refs.dnd.classList.remove('border-secondary'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
-                    @drop="$refs.dnd.classList.remove('border-secondary'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
+                    @dragover="$refs.dnd.classList.add('border-primary'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
+                    @dragleave="$refs.dnd.classList.remove('border-primary'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
+                    @drop="$refs.dnd.classList.remove('border-primary'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
                     title=""
                     x-ref="attachedFiles"
                     wire:model="attached_files" />
@@ -29,8 +29,8 @@
                     <template x-for="(_, index) in Array.from({ length: files.length })">
                         <div class="relative flex flex-col items-center overflow-hidden text-center bg-neutral border rounded cursor-move select-none"
                             style="padding-top: 100%;" @dragstart="dragstart($event)" @dragend="fileDragging = null"
-                            :class="{'border-secondary': fileDragging == index}" draggable="true" :data-index="index">
-                            <button class="absolute top-0 right-0 z-50 p-1 bg-primary rounded-bl focus:outline-none" type="button" @click="remove(index)">
+                            :class="{'border-primary': fileDragging == index}" draggable="true" :data-index="index">
+                            <button class="absolute top-0 right-0 z-50 p-1 bg-secondary rounded-bl focus:outline-none" type="button" @click="remove(index)">
                                 <svg class="w-4 h-4 text-dark-text-color" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -62,7 +62,7 @@
                                 </video>
                             </template>
 
-                            <div class="absolute bottom-0 left-0 right-0 flex flex-col p-2 text-xs bg-primary bg-opacity-50">
+                            <div class="absolute bottom-0 left-0 right-0 flex flex-col p-2 text-xs bg-secondary bg-opacity-50">
                                 <span class="w-full font-bold text-dark-text-color truncate"
                                     x-text="files[index].name">Loading</span>
                                 <span class="text-xs text-dark-text-color" x-text="humanFileSize(files[index].size)">...</span>
@@ -70,7 +70,7 @@
 
                             <div class="absolute inset-0 z-40 transition-colors duration-300" @dragenter="dragenter($event)"
                                 @dragleave="fileDropping = null"
-                                :class="{'bg-secondary-light bg-opacity-80': fileDropping == index && fileDragging != index}">
+                                :class="{'bg-primary-light bg-opacity-80': fileDropping == index && fileDragging != index}">
                             </div>
                         </div>
                     </template>

@@ -2,11 +2,11 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
+use App\Models\Tag;
 use Livewire\Component;
-use Modules\Social\Actions\CreateNewPostAction;
+use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
-use Phuclh\MediaManager\WithMediaManager;
-use Spatie\Tags\Tag;
+use Omnia\MediaManager\WithMediaManager;
 
 class Create extends Component
 {
@@ -20,46 +20,29 @@ class Create extends Component
 
     public ?string $image = null;
 
-    protected function rules(): array
-    {
-        return [
-            'title' => ['required', 'max:255'],
-            'url'   => ['url', 'max:255'],
-            'body'  => ['required', 'max:500'],
-            'image' => ['nullable','string'],
-        ];
-    }
-
     public function addResource()
     {
         $validated = $this->validate();
 
-        $hashtags = $this->pullTags($validated['body']);
+        $hashtags = Tag::parseHashTagsFromString($validated['body']);
 
         $resource = (new CreateNewPostAction)
-            ->type(PostType::RESOURCE)
+            ->type(PostType::ARTICLE)
             ->execute($validated['body'], [
                 'title' => $validated['title'],
-                'url'   => $validated['url'],
-                'image' => $validated['image']
+                'body' => $validated['body'],
+                'url' => $validated['url'],
             ]);
 
-        $tags = $this->getTags($hashtags);
-        $tags = $this->addResourceTag($tags);
-        $resource->attachTags($tags);
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
+        $resource->attachTags($tags, 'post');
+
+        if (isset($validated['image'])) {
+            $resource->attachMedia([$validated['image']]);
+        }
 
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);
-    }
-
-    // Add Resource tag to all resources
-    public function addResourceTag($tags) : array
-    {
-        if (!array_key_exists('resource', $tags)) {
-            $tags[] = 'resource';
-        }
-
-        return $tags;
     }
 
     public function setFeaturedImage(array $image)
@@ -74,29 +57,18 @@ class Create extends Component
         $this->removeFileFromMediaManager();
     }
 
-    public function pullTags($text)
-    {
-        $regexForHashtags = "/\B#([a-z0-9_-]+)/i";
-        $hashtags = array();
-
-        preg_match_all($regexForHashtags, $text, $hashtags);
-
-        return $hashtags[1];
-    }
-
-    public function getTags($hashtags)
-    {
-        $tags = array();
-
-        foreach ($hashtags as $hashtag) {
-            $tags[] = Tag::findOrCreateFromString($hashtag);
-        }
-
-        return $tags;
-    }
-
     public function render()
     {
         return view('resources::livewire.pages.resources.create');
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'title' => ['required', 'max:255'],
+            'url' => ['nullable', 'url', 'max:255'],
+            'body' => ['required', 'min:50'],
+            'image' => ['nullable', 'string'],
+        ];
     }
 }

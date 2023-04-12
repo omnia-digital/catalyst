@@ -3,23 +3,19 @@
 namespace Modules\Jobs\View\Component\Job;
 
 use Illuminate\View\Component;
-use Modules\Jobs\Models\Job;
+use Modules\Jobs\Models\JobPosition;
 
 class Item extends Component
 {
-    public Job $job;
+    public JobPosition $job;
 
-    public $attributes;
-
-    public function __construct($job, $attributes)
+    public function __construct($job)
     {
         $this->job = $job;
-        $this->attributes = $attributes;
-
     }
 
     public function render()
     {
-        return view('components.job.item');
+        return view('jobs::components.job.item');
     }
 }

@@ -22,14 +22,6 @@ class PostEditor extends Component
 
     public bool $openState = false;
 
-    protected function getListeners()
-    {
-        return [
-            'validationFailed:' . $this->editorId => 'handleValidationFailed',
-            'postSaved:' . $this->editorId        => 'handlePostSaved'
-        ];
-    }
-
     public function mount(?string $editorId = null, array $config = [])
     {
         $this->editorId = $editorId ?? uniqid();
@@ -39,9 +31,9 @@ class PostEditor extends Component
     public function submit()
     {
         $this->emitUp('post-editor:submitted', [
-            'id'      => $this->editorId,
+            'id' => $this->editorId,
             'content' => $this->content,
-            'images'  => $this->images
+            'images' => $this->images,
         ]);
     }
 
@@ -73,16 +65,24 @@ class PostEditor extends Component
         $this->emitImagesSet();
     }
 
+    public function render()
+    {
+        return view('social::livewire.components.post-editor');
+    }
+
+    protected function getListeners()
+    {
+        return [
+            'validationFailed:' . $this->editorId => 'handleValidationFailed',
+            'postSaved:' . $this->editorId => 'handlePostSaved',
+        ];
+    }
+
     private function emitImagesSet(): void
     {
         $this->dispatchBrowserEvent('post-editor:image-set', [
-            'id'     => $this->editorId,
-            'images' => $this->images
+            'id' => $this->editorId,
+            'images' => $this->images,
         ]);
-    }
-
-    public function render()
-    {
-        return view('social::livewire.post-editor');
     }
 }

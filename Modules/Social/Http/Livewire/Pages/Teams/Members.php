@@ -2,27 +2,25 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Teams;
 
-use App\Models\Team;
-use App\Traits\WithTeamManagement;
 use Livewire\Component;
+use Modules\Social\Models\Profile;
 
 class Members extends Component
 {
-    use WithTeamManagement;
+    public Profile $profile;
 
-    public $team;
-
-    protected $listeners = [
-        'member_added' => '$refresh',
-    ];
-
-    public function mount(Team $team)
+    public function getUserProperty()
     {
-        $this->team = $team;
+        return $this->profile->user;
+    }
+
+    public function mount(Profile $profile)
+    {
+        $this->profile = $profile->load('user');
     }
 
     public function render()
     {
-        return view('social::livewire.pages.teams.members');
+        return view('social::livewire.pages.profiles.followers');
     }
 }

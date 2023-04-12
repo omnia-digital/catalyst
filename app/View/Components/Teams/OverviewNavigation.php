@@ -3,19 +3,25 @@
 namespace App\View\Components\Teams;
 
 use App\Models\Team;
+use Closure;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
 class OverviewNavigation extends Component
 {
-
     public Team $team;
     public $pageView;
 
     public $nav = [
-        'show' => 'Overview',
-        'members' => 'Members',
-        'followers' => 'Followers'
+        'show' => 'Home',
+        //        'members' => 'People',
+        //        'resources' => 'Resources',
+        //        'advice' => 'Advice',
+        //        'jobs' => 'Jobs',
+        //        'learn' => 'Courses',
+        //        'awards' => 'Awards',
+        //        'about' => 'About',
+        //        'followers' => 'Followers'
     ];
 
     /**
@@ -32,7 +38,7 @@ class OverviewNavigation extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return \Illuminate\Contracts\View\View|Closure|string
      */
     public function render()
     {

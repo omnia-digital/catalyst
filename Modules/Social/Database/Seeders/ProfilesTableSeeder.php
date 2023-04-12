@@ -12,6 +12,5 @@ class ProfilesTableSeeder extends Seeder
         Profile::truncate();
 
         Profile::factory(15)->create();
-
     }
 }

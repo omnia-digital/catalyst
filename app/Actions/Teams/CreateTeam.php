@@ -3,11 +3,13 @@
 namespace App\Actions\Teams;
 
 use App\Models\Team;
+use App\Support\Platform\Platform;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Events\AddingTeam;
 use Laravel\Jetstream\Jetstream;
+use Spatie\Permission\Models\Role;
 
 class CreateTeam implements CreatesTeams
 {
@@ -17,25 +19,53 @@ class CreateTeam implements CreatesTeams
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'start_date' => ['required', 'date'],
-            'summary' => ['required', 'max:280'],
         ])->validateWithBag('createTeam');
 
         AddingTeam::dispatch($user);
 
-        $team = $user->ownedTeams()->create([
+        $team = Team::create([
             'name' => $input['name'],
-            'start_date' => $input['start_date'],
-            'summary' => $input['summary'],
         ]);
 
-        $user->teams()->updateExistingPivot($team->id, ['role' => 'owner']);
+        // Roles
+        // Create an owner and member role for the new team
+        // Assign the Owner role to the user who just created the team
+        $roleOwner = Role::create([
+            'name' => config('platform.teams.default_owner_role'),
+            'team_id' => $team->id,
+        ]);
+        $roleMember = Role::create([
+            'name' => config('platform.teams.default_member_role'),
+            'team_id' => $team->id,
+        ]);
 
-        $team->addMedia($input['bannerImage'])->toMediaCollection('team_banner_images');
-        $team->addMedia($input['mainImage'])->toMediaCollection('team_main_images');
+        $team->users()->attach(
+            $user, ['role_id' => $roleOwner->id]
+        );
 
-        foreach ($input['sampleMedia'] as $media) {
-            $team->addMedia($media)->toMediaCollection('team_sample_images');
+        // Team types
+        if (! empty($input['teamTypes'])) {
+            $team->attachTags($input['teamTypes']);
+        }
+
+        if (! empty($input['bannerImage'])) {
+            $team->addMedia($input['bannerImage'])->toMediaCollection('team_banner_images');
+        }
+        if (! empty($input['mainImage'])) {
+            $team->addMedia($input['mainImage'])->toMediaCollection('team_main_images');
+        }
+        if (! empty($input['profilePhoto'])) {
+            $team->addMedia($input['profilePhoto'])->toMediaCollection('team_profile_photos');
+        }
+
+        if (! empty($input['sampleMedia'])) {
+            foreach ($input['sampleMedia'] as $media) {
+                $team->addMedia($media)->toMediaCollection('team_sample_images');
+            }
+        }
+
+        if (Platform::isUsingTeamMemberSubscriptions()) {
+            (new CreateStripeConnectAccountForTeamAction)->execute($team);
         }
 
         $user->switchTeam($team);

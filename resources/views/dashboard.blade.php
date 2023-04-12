@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-color-dark leading-tight">
+        <x-library::heading.2 class="font-semibold text-xl text-color-dark leading-tight">
             {{ \Trans::get('Dashboard') }}
-        </h2>
+        </x-library::heading.2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-primary overflow-hidden shadow-xl sm:rounded-lg min-h-screen p-8">
-                <h3 class="py-4 text-xl font-bold">Modal</h3>
+            <div class="bg-secondary overflow-hidden shadow-xl sm:rounded-lg min-h-screen p-8">
+                <x-library::heading.3 class="py-4 text-xl font-bold">Modal</x-library::heading.3>
 
                 <button x-data x-on:click.prevent.stop="$openModal('test-modal')" type="button" class="border border-black px-4 py-2">
                     Open Modal
@@ -19,7 +19,7 @@
                     <x-slot name="content">A</x-slot>
                 </x-library::modal>
 
-                <h3 class="py-4 text-xl font-bold">Accordion</h3>
+                <x-library::heading.3 class="py-4 text-xl font-bold">Accordion</x-library::heading.3>
 
                 <x-library::accordion default="1">
                     <x-library::accordion.item id="1">
@@ -33,14 +33,14 @@
                     </x-library::accordion.item>
                 </x-library::accordion>
 
-                <h3 class="py-4 text-xl font-bold">Dropdown</h3>
+                <x-library::heading.3 class="py-4 text-xl font-bold">Dropdown</x-library::heading.3>
 
                 <span class="relative z-0 inline-flex shadow-sm rounded-md">
-                    <button type="button" class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-primary text-sm font-medium text-color-dark hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary">Save changes</button>
+                    <button type="button" class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-secondary text-sm font-medium text-color-dark hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">Save changes</button>
                     <x-library::dropdown>
                         <x-slot name="trigger">
                             <span class="-ml-px relative block">
-                                <button type="button" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-primary text-sm font-medium base-text-color hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
+                                <button type="button" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-secondary text-sm font-medium base-text-color hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
                                     <span class="sr-only">Open options</span>
                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -62,7 +62,7 @@
                 </span>
 
 
-                <h3 class="py-4 text-xl font-bold">Notification</h3>
+                <x-library::heading.3 class="py-4 text-xl font-bold">Notification</x-library::heading.3>
 
                 <x-library::notification/>
 
@@ -99,7 +99,7 @@
                     </button>
                 </form>
 
-                <h3 class="py-4 text-xl font-bold">Tabs</h3>
+                <x-library::heading.3 class="py-4 text-xl font-bold">Tabs</x-library::heading.3>
 
                 <x-library::tab default="2">
                     <x-slot name="items">
@@ -113,7 +113,7 @@
                     </x-slot>
                 </x-library::tab>
 
-                <h3 class="py-4 text-xl font-bold">Tooltip</h3>
+                <x-library::heading.3 class="py-4 text-xl font-bold">Tooltip</x-library::heading.3>
 
                 <div class="flex items-center justify-center gap-2">
                     <button

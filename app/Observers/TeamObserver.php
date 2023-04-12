@@ -2,63 +2,42 @@
 
 namespace App\Observers;
 
-use Modules\Teams\Models\Team;
+use App\Models\Team;
+use Spatie\Permission\Models\Role;
+use Trans;
+
 use function activity;
 
 class TeamObserver
 {
-    /**
-     * Handle the Team "created" event.
-     *
-     * @param  \App\Models\Team  $team
-     * @return void
-     */
     public function created(Team $team)
     {
-        activity()->by($team->owner)->on($team)->log("Team $team->name created");
+//        $ownerRole = Role::create([
+//            'name' => config('platform.teams.default_owner_role'),
+//            'team_id' => $team->id,
+//        ]);
+//        dd($team->owner);
+//
+//        activity()->by($team->owner)->on($team)->log(\Trans::get("Team $team->name created"));
     }
 
-    /**
-     * Handle the Team "updated" event.
-     *
-     * @param  \App\Models\Team  $team
-     * @return void
-     */
     public function updated(Team $team)
     {
-        activity()->by($team->owner)->on($team)->log("Team $team->name updated");
+        activity()->by($team->owner)->on($team)->log(Trans::get("Team {$team->name} updated"));
     }
 
-    /**
-     * Handle the Team "deleted" event.
-     *
-     * @param  \App\Models\Team  $team
-     * @return void
-     */
     public function deleted(Team $team)
     {
-        activity()->by($team->owner)->on($team)->log("Team $team->name deleted");
+        activity()->by($team->owner)->on($team)->log(Trans::get("Team {$team->name} deleted"));
     }
 
-    /**
-     * Handle the Team "restored" event.
-     *
-     * @param  \App\Models\Team  $team
-     * @return void
-     */
     public function restored(Team $team)
     {
-        activity()->by($team->owner)->on($team)->log("Team $team->name restored");
+        activity()->by($team->owner)->on($team)->log(Trans::get("Team {$team->name} restored"));
     }
 
-    /**
-     * Handle the Team "force deleted" event.
-     *
-     * @param  \App\Models\Team  $team
-     * @return void
-     */
     public function forceDeleted(Team $team)
     {
-        activity()->by($team->owner)->on($team)->log("Team $team->name force deleted");
+        activity()->by($team->owner)->on($team)->log(Trans::get("Team {$team->name} force deleted"));
     }
 }

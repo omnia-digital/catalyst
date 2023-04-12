@@ -18,7 +18,7 @@ class Transaction extends Model
         'payer_email',
         'amount',
         'invoice_number',
-        'user_id'
+        'user_id',
     ];
 
     /**

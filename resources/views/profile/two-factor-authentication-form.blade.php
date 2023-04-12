@@ -8,13 +8,13 @@
     </x-slot>
 
     <x-slot name="content">
-        <h3 class="text-lg font-medium text-dark-text-color">
+        <x-library::heading.3 class="text-lg font-medium text-dark-text-color">
             @if ($this->enabled)
                 {{ \Trans::get('You have enabled two factor authentication.') }}
             @else
                 {{ \Trans::get('You have not enabled two factor authentication.') }}
             @endif
-        </h3>
+        </x-library::heading.3>
 
         <div class="mt-3 max-w-xl text-sm text-base-text-color">
             <p>

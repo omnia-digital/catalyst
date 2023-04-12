@@ -1,7 +1,9 @@
 <div class="card">
-    <div class="flex-1 p-6 space-y-1 overflow-y-auto">
-        <div class="flex justify-between items-center">
-            <h3 class="text-base-text-color text-base font-semibold" wire:click="testClick"> {{ Trans::get('teams') }}</h3>
+    <div class="py-3 flex-1 space-y-1 overflow-y-auto">
+        <div class="pl-4 flex justify-between items-center">
+            <x-library::heading.2 class="text-xl font-medium text-gray-900">
+                {{ Trans::get('Teams') }}
+            </x-library::heading.2>
             <div x-data="{show: false, message: ''}"
                 x-cloak
                 x-show="show"
@@ -20,11 +22,11 @@
                 activeTab: 0,
                 tabs: [
                     {
-                        label: 'Invitations',
+                        label: '{{ \Trans::get('Invitations') }}',
                         count: {{ $invitations->count() }}
                     },
                     {
-                        label: 'Requests',
+                        label: '{{ \Trans::get('Requests') }}',
                         count: {{ $applications->count() }}
                     }
                 ]
@@ -37,20 +39,20 @@
             <ul class="flex justify-center items-center my-4">
                 <template x-for="(tab, index) in tabs" :key="index">
                     <li class="flex flex-1 text-sm cursor-pointer py-2 px-6 text-base-text-color border-b-2 justify-center"
-                        :class="activeTab===index ? 'text-black font-bold border-black' : ''" @click="activeTab = index"
+                        :class="activeTab===index ? 'text-base-text-color font-bold border-black' : ''" @click="activeTab = index"
                     >
                         <span x-text="tab.label"></span>
                         <template x-if="tab.count > 0">
-                            <span x-text="tab.count" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full"></span>
+                            <span x-text="tab.count" class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-black rounded-full"></span>
                         </template>
                     </li>
                 </template>
             </ul>
 
-            <div class="bg-primary mx-auto">
+            <div class="bg-secondary mx-auto">
                 <div x-show="activeTab===0">
                     <div class="flex justify-between">
-                        <div class="flex flex-col divide-y space-y-3">
+                        <div class="px-6 flex flex-col divide-y space-y-3">
                             @forelse ($invitations as $invitation)
                                 <div class="py-3 space-y-4">
                                     <div class="flex items-center">
@@ -58,7 +60,7 @@
                                             <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $invitation->user?->profile_photo_url }}" alt="{{ $invitation->user->name }}" />
                                         </div>
                                         <div class="flex-1">
-                                            <h3 class="mb-2 sm:mb-1 text-dark-text-color text-sm font-normal leading-5"><span class="font-bold">{{ $invitation->inviter->name }}</span> wants you to join <span class="font-bold">{{ $invitation->team->name }}</span></h3>
+                                            <x-library::heading.3 class="mb-2 sm:mb-1 text-dark-text-color text-sm font-normal leading-5"><span class="font-bold">{{ $invitation->inviter->name }}</span> wants you to join <span class="font-bold">{{ $invitation->team->name }}</span></x-library::heading.3>
                                         </div>
                                     </div>
                                     @if ($invitation->message)
@@ -85,7 +87,7 @@
                                 </div>
                             @empty
                                 <div>
-                                    <p>There are no pending invitations.</p>
+                                    <p>{{ \Trans::get('There are no pending invitations') }}</p>
                                 </div>
                             @endforelse
                         </div>
@@ -93,15 +95,15 @@
                 </div>
                 <div x-cloak x-show="activeTab===1">
                     <div class="flex justify-between">
-                        <div class="flex flex-col divide-y space-y-3">
+                        <div class="px-6 flex flex-col divide-y space-y-3">
                             @forelse ($applications as $application)
                                 <div>
                                     <div class="flex items-center">
                                         <div class="mr-3 w-10 h-10 rounded-full">
-                                            <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $application->team->owner?->profile_photo_url }}" alt="{{ $application->team->owner->name }}" />
+                                            <img class="w-full h-full overflow-hidden object-cover object-center rounded-full" src="{{ $application->team->owner?->profile_photo_url }}" alt="{{ $application->team->owner?->name }}" />
                                         </div>
                                         <div class="flex-1">
-                                            <h3 class="mb-2 sm:mb-1 text-dark-text-color text-sm font-normal leading-5">You applied to join <span class="font-bold">{{ $application->team->name }}</span></h3>
+                                            <x-library::heading.3 class="mb-2 sm:mb-1 text-dark-text-color text-sm font-normal leading-5">You applied to join <span class="font-bold">{{ $application->team->name }}</span></x-library::heading.3>
                                         </div>
                                     </div>
                                     <div>
@@ -116,7 +118,7 @@
                                 </div>
                             @empty
                                 <div>
-                                    <p>There are no pending applications.</p>
+                                    <p>{{ \Trans::get('There are no pending applications') }}</p>
                                 </div>
                             @endforelse
                         </div>

@@ -20,23 +20,13 @@ class SideMenu extends Component
         if (empty($this->navigation)) {
             $this->navigation = [
                 [
-                    'label'   => 'No Module Navigation Items',
-                    'name'    => 'social.home',
-                    'icon'    => 'heroicon-o-x',
-                    'current' => false
+                    'label' => 'No Module Navigation Items',
+                    'name' => 'social.home',
+                    'icon' => 'heroicon-o-x',
+                    'current' => false,
                 ],
             ];
         }
-    }
-
-    public function openMobileMenu()
-    {
-        $this->isOpen = true;
-    }
-
-    public function closeMobileMenu()
-    {
-        $this->isOpen = false;
     }
 
     public function render()

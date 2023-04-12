@@ -4,6 +4,7 @@ namespace Modules\Social\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Models\Post;
 
 trait Postable
@@ -23,10 +24,14 @@ trait Postable
      */
     public function createPost($data, $userId): Model|Post
     {
-        return $this->posts()->create([
-            'user_id' => $userId,
-            'body' => $data['body'],
-        ]);
+        return
+            (new CreateNewPostAction)
+                ->user($userId)
+                ->execute($data['body'], [
+                    'title' => $data['title'] ?? null,
+                    'url' => $data['url'] ?? null,
+                    'image' => $data['image'] ?? null,
+                ]);
     }
 
     //** Aliases **//

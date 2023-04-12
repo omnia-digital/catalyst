@@ -4,7 +4,7 @@
 ])
 
 @php
-    $class = $selected ? 'ring-2 ring-offset-2 ring-secondary' : 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-secondary';
+    $class = $selected ? 'ring-2 ring-offset-2 ring-primary' : 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-primary';
     $class .= ' col-span-1 flex shadow-sm rounded-md cursor-pointer';
 @endphp
 
@@ -16,15 +16,15 @@
             <div class="absolute top-0 left-0">
                 <div class="flex items-center w-16 h-8 bg-gray-800 py-3 rounded-md text-center opacity-80">
                     <div class="ml-2 w-3 h-3 bg-red-600 rounded-full"></div>
-                    <p class="text-sm ml-1 uppercase text-white font-medium">Live</p>
+                    <p class="text-sm ml-1 uppercase text-white-text-color font-medium">Live</p>
                 </div>
             </div>
         @endif
     </div>
-    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-neutral-light bg-primary rounded-r-md">
+    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-neutral-light bg-secondary rounded-r-md">
         <div class="px-4 py-4 sm:px-6 w-full">
             <div class="flex items-center justify-between">
-                <p class="font-medium text-secondary truncate">
+                <p class="font-medium text-primary truncate">
                     {{ Str::limit($episode->title, 40) }}
                 </p>
                 <div class="ml-2 flex-shrink-0 flex">
@@ -53,7 +53,7 @@
                     <p class="flex items-center space-x-2 text-sm text-base-text-color">
                         <span>Published</span>
                         <span>
-                            @if($episode->is_published)
+                            @if ($episode->is_published)
                                 <x-heroicon-s-check-circle class="h-5 w-5 text-green-500"/>
                             @else
                                 <x-heroicon-s-x-circle class="h-5 w-5 text-red-500"/>

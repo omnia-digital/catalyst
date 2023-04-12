@@ -1,13 +1,19 @@
-@if($post->type == \Modules\Social\Enums\PostType::RESOURCE)
-    <livewire:resources::components.resource-card
+@if ($post->type == \Modules\Social\Enums\PostType::ARTICLE)
+    <livewire:articles::components.article-card
+            :post="$post"
+            :wire:key="'article-card-' . $post->id"
+            :show-post-actions="true"
+    />
+@elseif ($post->type == \Modules\Social\Enums\PostType::RESOURCE)
+    <livewire:resources::components.resource-media-card
             :post="$post"
             :wire:key="'resource-card-' . $post->id"
-            :show-post-actions="true"
+            :show-post-actions="false"
     />
 @else
     <livewire:social::components.post-card wire:key="post-{{ $post->id }}"
                                            :post="$post"
-                                           :show-post-actions="false"
+                                           :show-post-actions="true"
                                            :clickable="$clickable"
 
     />

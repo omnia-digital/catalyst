@@ -2,20 +2,13 @@
 
 namespace App\Actions\Teams;
 
-use App\Models\Team;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Tag;
 
 class GetTeamCategoriesAction
 {
     public function execute(): array
     {
-        return [
-            'New Releases',
-            'Specials',
-            'Indies',
-            'By User Tags',
-            'Upcoming',
-            'Popular Locations',
-        ];
+        return Tag::withType('team')->get()->all();
+//        ->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])
     }
 }

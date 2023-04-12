@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Events\TeamMemberRemoved;
+use Trans;
 
 class RemoveTeamMember implements RemovesTeamMembers
 {
@@ -40,7 +41,7 @@ class RemoveTeamMember implements RemovesTeamMembers
     protected function authorize($user, $team, $teamMember)
     {
         if (! Gate::forUser($user)->check('removeTeamMember', $team) &&
-            $user->id !== $teamMember->id) {
+            $user?->id !== $teamMember?->id) {
             throw new AuthorizationException;
         }
     }
@@ -54,9 +55,9 @@ class RemoveTeamMember implements RemovesTeamMembers
      */
     protected function ensureUserDoesNotOwnTeam($teamMember, $team)
     {
-        if ($teamMember->id === $team->owner->id) {
+        if ($teamMember?->id === $team->owner->id) {
             throw ValidationException::withMessages([
-                'team' => [\Trans::get('You may not leave a team that you created.')],
+                'team' => [Trans::get('You may not leave a team that you created.')],
             ])->errorBag('removeTeamMember');
         }
     }

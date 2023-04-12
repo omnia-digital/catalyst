@@ -5,7 +5,7 @@ namespace Modules\Jobs\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Modules\Jobs\Models\TeamSize;
 
-class TeamSizesTableSeeder extends Seeder
+class ProjectSizesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -3,62 +3,51 @@
 namespace App\Http\Livewire\Pages\Teams;
 
 use App\Actions\Teams\GetTeamCategoriesAction;
-use App\Lenses\Teams\NewReleaseTeamsLens;
 use App\Lenses\WithLenses;
 use App\Models\Team;
+use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithPagination;
-use OmniaDigital\OmniaLibrary\Livewire\WithSorting;
-use Spatie\Tags\Tag;
 
 class Index extends Component
 {
-    use WithSorting, WithPagination, WithLenses;
+    use WithSortAndFilters, WithPagination, WithLenses;
+
+    public $perPage = 25;
+    public $loadMoreCount = 25;
+
+    public array $sortLabels = [
+        'name' => 'Name',
+        'users_count' => 'Users',
+        'start_date' => 'Launch Date',
+    ];
+
+    public string $dateColumn = 'start_date';
 
     public ?string $lens = null;
 
     protected $queryString = [
         'lens',
-        'filters'
+        'filters',
+        'tags',
+        'members',
+        'dateFilter',
     ];
-
-    public array $filters = [
-        'location' => null,
-        'start_date' => null,
-        'members' => [0, 0],
-        'rating' => [],
-        'search' => null,
-        'tags' => []
-    ];
-
-    public function updatedFilters()
-    {
-        $this->resetPage();
-    }
 
     public function mount()
     {
-        $this->defaultSorting('name', 'asc');
-    }
-
-    public function getTagsProperty()
-    {
-        return Tag::all()->mapWithKeys(fn(Tag $tag) => [$tag->name => $tag->name])->all();
+        $this->orderBy = 'name';
     }
 
     public function getRowsQueryProperty()
     {
-        return Team::query()
+        $query = Team::query()
             ->with('location')
-            ->withCount('users as members')
-            ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->whereHas('location', fn(Builder $query) => $query->search($location)))
-            ->when(Arr::get($this->filters, 'start_date'), fn(Builder $query, $date) => $query->whereDate('start_date', $date))
-            ->when(Arr::get($this->filters, 'members'), fn(Builder $query, $members) => $query->havingBetween('members', $members))
-            ->when(Arr::get($this->filters, 'tags'), fn(Builder $query, $tags) => $query->withAnyTags($tags))
-            //->when(Arr::get($this->filters, 'rating'), fn(Builder $query, $rating) => $query->whereIn('rating', $rating))
-            ->when(Arr::get($this->filters, 'search'), fn(Builder $query, $search) => $query->search($search));
+            ->withCount('users');
+
+        return $this->applyFilters($query)
+            ->when($this->search, fn (Builder $q) => $q->search($this->search));
     }
 
     public function getRowsProperty()
@@ -66,7 +55,7 @@ class Index extends Component
         $query = $this->applyLens($this->rowsQuery);
         $query = $this->applySorting($query);
 
-        return $query->paginate(25);
+        return $query->paginate($this->perPage);
     }
 
     public function getCategoriesProperty()
@@ -74,11 +63,21 @@ class Index extends Component
         return (new GetTeamCategoriesAction)->execute();
     }
 
+    public function loadMore()
+    {
+        $this->perPage += $this->loadMoreCount;
+    }
+
+    public function hasMore()
+    {
+        return $this->perPage < $this->rowsQuery->count();
+    }
+
     public function render()
     {
         return view('livewire.pages.teams.index', [
             'teams' => $this->rows,
-            'tags' => $this->tags,
+            'allTags' => $this->allTags,
             'categories' => $this->categories,
         ]);
     }
