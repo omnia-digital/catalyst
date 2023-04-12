@@ -2,8 +2,8 @@
 
 namespace Modules\Feeds\Providers;
 
-use Config;
 use Illuminate\Encryption\Encrypter;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Modules\Feeds\Services\FeedManager;
 
