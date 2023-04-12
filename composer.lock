@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5fd31292aac509f8be5b4df64b1d0a5",
+    "content-hash": "042d6497e73977263e2709da0f9b4bba",
     "packages": [
         {
             "name": "3x1io/filament-themes",
@@ -8543,16 +8543,16 @@
         },
         {
             "name": "omnia-digital/livewire-calendar",
-            "version": "dev-main",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/omnia-digital/livewire-calendar.git",
-                "reference": "65fc777a292894a13a8b19d36b15b31f9e98ce2f"
+                "reference": "f27710e2ec7798fd0f08663e0e0c239d1757d472"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/livewire-calendar/zipball/65fc777a292894a13a8b19d36b15b31f9e98ce2f",
-                "reference": "65fc777a292894a13a8b19d36b15b31f9e98ce2f",
+                "url": "https://api.github.com/repos/omnia-digital/livewire-calendar/zipball/f27710e2ec7798fd0f08663e0e0c239d1757d472",
+                "reference": "f27710e2ec7798fd0f08663e0e0c239d1757d472",
                 "shasum": ""
             },
             "require": {
@@ -8580,19 +8580,7 @@
                     "Omnia\\LivewireCalendar\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Omnia\\LivewireCalendar\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/phpunit"
-                ],
-                "test-coverage": [
-                    "vendor/bin/phpunit --coverage-html coverage"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -8621,9 +8609,10 @@
                 "omnia-digital"
             ],
             "support": {
-                "source": "https://github.com/omnia-digital/livewire-calendar/tree/main"
+                "issues": "https://github.com/omnia-digital/livewire-calendar/issues",
+                "source": "https://github.com/omnia-digital/livewire-calendar/tree/2.2.1"
             },
-            "time": "2023-03-30T03:59:02+00:00"
+            "time": "2023-04-10T17:10:23+00:00"
         },
         {
             "name": "omnia-digital/media-manager",
@@ -21008,7 +20997,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "omnia-digital/library": 20,
-        "omnia-digital/livewire-calendar": 20,
         "omnia-digital/media-manager": 20
     },
     "prefer-stable": true,
