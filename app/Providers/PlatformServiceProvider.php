@@ -16,10 +16,10 @@ class PlatformServiceProvider extends ServiceProvider
     public function register()
     {
         App::bind('platform', function () {
-            return new Platform();
+            return new Platform;
         });
         App::bind('trans', function () {
-            return new Translate();
+            return new Translate;
         });
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Modules\Social\Providers;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+use Modules\Billing\Events\NewSubscriptionPayment;
+use Modules\Social\Listeners\TrackContributionToUserScore;
 use Modules\Social\Models\Post;
+use Modules\Social\Models\Profile;
 use Modules\Social\Observers\PostObserver;
-use Modules\Subscriptions\Events\NewSubscriptionPayment;
+use Modules\Social\Observers\ProfileObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -20,10 +20,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         NewSubscriptionPayment::class => [
         ],
+        ContributesToUserScore::class => [TrackContributionToUserScore::class],
     ];
 
     protected $observers = [
         Post::class => PostObserver::class,
+        Profile::class => ProfileObserver::class,
     ];
 
     /**
@@ -33,6 +35,5 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
     }
 }

@@ -1,10 +1,10 @@
-<div class="bg-primary px-4 py-6 shadow sm:p-6 ">
+<div class="bg-secondary px-4 py-6 shadow sm:p-6 ">
     <article aria-labelledby="{{ 'activity-item-' . $activity['id'] }}">
         <div class="flex justify-beetween items-center">
             <div>
                 <div class="flex space-x-3">
                     <div class="flex-shrink-0">
-                        @if(!is_null($activity['user']['avatar']))
+                        @if (!is_null($activity['user']['avatar']))
                             <img class="h-10 w-10 rounded-full bg-neutral-dark" src="{{ $activity['user']['avatar'] }}" alt="" />
                         @else
                             <x-heroicon-o-check class="h-10 w-10 rounded-full bg-neutral-dark" />

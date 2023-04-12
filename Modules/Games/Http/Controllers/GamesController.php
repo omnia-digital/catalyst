@@ -6,19 +6,18 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
-use MarcReichel\IGDBLaravel\Models\Platform;
-use MarcReichel\IGDBLaravel\Models\Website;
 use Modules\Games\Models\Game;
+use Modules\Games\Models\IGDB\Game;
 
 class GamesController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
      * @return Renderable
      */
     public function index()
     {
-
         // For Multi Query
         // $client = new \GuzzleHttp\Client(['base_uri' => 'https://api-v3.igdb.com/']);
 
@@ -50,6 +49,7 @@ class GamesController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -59,7 +59,7 @@ class GamesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
+     *
      * @return Renderable
      */
     public function store(Request $request)
@@ -69,7 +69,8 @@ class GamesController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($slug)
@@ -86,7 +87,7 @@ class GamesController extends Controller
         //            ])->get('https://api-v3.igdb.com/games')
         //            ->json();
 
-        abort_if(!$game, 404);
+        abort_if(! $game, 404);
 
 //        return view('games::show', [
 //            'game' => $this->formatGameForView($game),
@@ -99,7 +100,8 @@ class GamesController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -109,8 +111,8 @@ class GamesController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function update(Request $request, $id)
@@ -120,7 +122,8 @@ class GamesController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function destroy($id)
@@ -128,12 +131,12 @@ class GamesController extends Controller
         //
     }
 
-
     private function formatGameForView($game)
     {
-        if (!$game || is_int($game)) {
+        if (! $game || is_int($game)) {
             return;
         }
+
         return collect($game)->merge([
             'coverImageUrl' => $game->cover_url,
             'genres' => collect($game['genres'])->pluck('name')->implode(', '),
@@ -141,7 +144,7 @@ class GamesController extends Controller
             'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
             'memberRating' => array_key_exists('rating', $game->toArray()) ? round($game['rating']) : '0',
             'criticRating' => array_key_exists('aggregated_rating', $game->toArray()) ? round($game['aggregated_rating']) : '0',
-            'trailer' => $game->getTrailer() ? 'https://youtube.com/embed/'.$game->trailer['video_id'] : '',
+            'trailer' => $game->getTrailer() ? 'https://youtube.com/embed/' . $game->trailer['video_id'] : '',
             'screenshots' => collect($game['screenshots'])->map(function ($screenshot) {
                 return [
                     'big' => Str::replaceFirst('thumb', 'screenshot_big', $screenshot['url']),
@@ -150,6 +153,7 @@ class GamesController extends Controller
             })->take(9),
             'similarGames' => collect($game['similar_games'])->map(function ($game_id) {
                 $similarGame = Game::where('id', $game_id)->firstOrFail();
+
                 return collect($similarGame)->merge([
                     'coverImageUrl' => $similarGame?->cover_url,
                     'rating' => isset($similarGame['rating']) ? round($similarGame['rating']) : null,

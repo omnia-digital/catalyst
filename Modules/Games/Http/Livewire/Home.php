@@ -3,19 +3,26 @@
 namespace Modules\Games\Http\Livewire;
 
 use Livewire\Component;
-use Modules\Games\Models\Game;
+use Modules\Games\Actions\Games\GamesAction;
 
 class Home extends Component
 {
+    public $readyToLoad = false;
+
+    public function load()
+    {
+        $this->readyToLoad = true;
+    }
+
     public function getAllGamesProperty()
     {
-        return Game::where('first_release_date', '>', now()->subDays(30))->orderBy('follows')->limit(4)->get();
+        return (new GamesAction)->newlyReleased();
     }
 
     public function render()
     {
         return view('games::livewire.home', [
-            'games' => $this->allGames,
+            'games' => $this->readyToLoad ? $this->allGames : collect(),
         ]);
     }
 }

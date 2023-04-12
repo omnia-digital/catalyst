@@ -1,9 +1,9 @@
 <div
-        x-data="{
+    x-data="{
         openState: false,
         showImages: true,
         images: [],
-
+        users: {},
         showMediaManager(file, metadata) {
             this.$wire.emitTo(
                 'media-manager',
@@ -30,17 +30,20 @@
 
         removeImage(index) {
             this.$wire.call('removeImage', index);
-        }
+        },
+
     }"
         x-on:media-manager:file-selected.window="setImage"
         x-on:post-editor:image-set.window="setImages"
-        class="bg-primary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4 max-w-post-card-max-w"
+        class="bg-secondary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4 max-w-post-card-max-w relative"
 >
     <div class="mr-3 flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>
+        @auth
+            <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>
+        @endauth
     </div>
     <div class="flex-1">
-        @if($includeTitle)
+        @if ($includeTitle)
             <div class="">
                 <x-library::input.text label="Title" wire:model.defer="title"/>
                 <x-library::input.error for="title"/>
@@ -49,14 +52,14 @@
 
         <x-library::tiptap
                 wire:model.defer="content"
-                heightClass="{{ $openState == false ?? 'min-h-[80px]'}} m-1 text-lg"
+                heightClass="{{ $openState == false ?? 'min-h-[80px]' }} m-1 text-lg"
                 wordCountType="character"
                 characterLimit="500"
                 :placeholder="$placeholder"
-                class="bg-primary text-lg"
+                class="bg-secondary text-lg"
         >
             <x-slot name="footer">
-                <div class="bg-primary">
+                <div class="bg-secondary">
                     <ul
                             x-show="showImages"
                             x-transition
@@ -79,28 +82,18 @@
                                 </div>
                             </li>
                         </template>
-
-                        {{--                    <li class="relative">--}}
-                        {{--                        <button--}}
-                        {{--                                x-on:click.prevent.stop="showMediaManager(null, {})"--}}
-                        {{--                                type="button"--}}
-                        {{--                                class="relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-2 text-center hover:border-gray-400 focus:outline-none focus:ring-2--}}
-                        {{--                                focus:ring-offset-2 focus:ring-gray-500"--}}
-                        {{--                        >--}}
-                        {{--                            <x-coolicon-plus class="mx-auto h-8 w-8 text-gray-400"/>--}}
-                        {{--                        </button>--}}
-                        {{--                    </li>--}}
                     </ul>
                 </div>
             </x-slot>
         </x-library::tiptap>
         <hr class="text-neutral-light"/>
         <div class="flex justify-between items-center pt-3 pb-2">
-            @if($openState == false)
+            @if ($openState == false)
                 <div class="flex items-center space-x-2 px-4">
                     <button x-on:click.prevent.stop="showMediaManager(null, {})" type="button">
                         <i class="fa-solid fa-image w-5 h-5 text-gray-500"></i>
                     </button>
+{{--                    <x-library::canva-button size="tiny"/>--}}
                 </div>
             @endif
             <div>
@@ -108,7 +101,7 @@
             </div>
 
             <div class="flex justify-end items-center">
-                <x-library::button wire:click="submit" wire:target="submit" class="py-1 px-3 text-base">
+                <x-library::button wire:click="submit" wire:target="submit">
                     {{ $submitButtonText }}
                 </x-library::button>
             </div>

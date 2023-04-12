@@ -8,7 +8,7 @@ module.exports = {
         './vendor/laravel/jetstream/**/*.blade.php',
         './vendor/omnia-digital/library/resources/views/**/*.blade.php',
         './vendor/omnia-digital/library/resources/js/**/*.js',
-        './vendor/phuclh/media-manager/resources/views/**/*.blade.php',
+        './vendor/omnia-digitl/media-manager/resources/views/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './Modules/*/Resources/views/**/*.blade.php',
@@ -62,14 +62,51 @@ module.exports = {
                 'white-text-color': 'var(--white-text-color)',
                 'light-text-color': 'var(--light-text-color)',
                 'dark-text-color': 'var(--dark-text-color)',
-                neutral: 'var(--neutral)',
-                'neutral-light': 'var(--neutral-light)',
-                'neutral-dark': 'var(--neutral-dark)',
-                'neutral-dark\/75': 'var(--neutral-dark-75)',
-                'neutral-hover': 'var(--neutral-hover)',
-                primary: 'var(--primary)',
-                secondary: 'var(--secondary)',
-                tertiary: 'var(--tertiary)',
+                neutral: {
+                    DEFAULT: 'var(--neutral)',
+                    'light': 'var(--neutral-light)',
+                    'dark': 'var(--neutral-dark)',
+                    'hover': 'var(--neutral-hover)',
+                },
+                primary: {
+                    DEFAULT: process.env.PRIMARY_COLOR || 'var(--primary)',
+                    "50": "var(--primary-50)",
+                    "100": "var(--primary-100)",
+                    "200": "var(--primary-200)",
+                    "300": "var(--primary-300)",
+                    "400": "var(--primary-400)",
+                    "500": process.env.PRIMARY_COLOR_500 || process.env.PRIMARY_COLOR || "var(--primary-500)",
+                    "600": "var(--primary-600)",
+                    "700": "var(--primary-700)",
+                    "800": "var(--primary-800)",
+                    "900": "var(--primary-900)"
+                },
+                secondary: {
+                    DEFAULT: process.env.SECONDARY_COLOR || 'var(--secondary)',
+                    "50": "var(--secondary-50)",
+                    "100": "var(--secondary-100)",
+                    "200": "var(--secondary-200)",
+                    "300": "var(--secondary-300)",
+                    "400": "var(--secondary-400)",
+                    "500": "var(--secondary-500)",
+                    "600": "var(--secondary-600)",
+                    "700": "var(--secondary-700)",
+                    "800": "var(--secondary-800)",
+                    "900": "var(--secondary-900)"
+                },
+                tertiary: {
+                    DEFAULT: process.env.TERTIARY_COLOR || 'var(--tertiary)',
+                    "50": "var(--tertiary-50)",
+                    "100": "var(--tertiary-100)",
+                    "200": "var(--tertiary-200)",
+                    "300": "var(--tertiary-300)",
+                    "400": "var(--tertiary-400)",
+                    "500": "var(--tertiary-500)",
+                    "600": "var(--tertiary-600)",
+                    "700": "var(--tertiary-700)",
+                    "800": "var(--tertiary-800)",
+                    "900": "var(--tertiary-900)"
+                  },
                 danger: colors.rose,
                 success: colors.green,
                 warning: colors.yellow,
@@ -99,14 +136,15 @@ module.exports = {
 
     variants: {
         extend: {
-            textOpacity: ['dark']
+            textOpacity: ['dark'],
+            display: ["group-hover"]
         }
     },
 
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
-        require('tailwindcss-multi-theme'),
+        /* require('tailwindcss-multi-theme'), */
         require('@tailwindcss/aspect-ratio'),
         require('tailwind-scrollbar-hide'),
         require('@tailwindcss/line-clamp'),

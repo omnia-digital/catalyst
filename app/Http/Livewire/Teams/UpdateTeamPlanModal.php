@@ -27,23 +27,16 @@ class UpdateTeamPlanModal extends Component
         $this->plan = $this->currentPlan?->stripe_price;
     }
 
-    protected function rules(): array
-    {
-        return [
-            'plan' => ['required', Rule::in(collect($this->teamPlans)->pluck('stripe_id'))]
-        ];
-    }
-
     public function getTeamPlansProperty()
     {
-        return config('team-user-subscription.plans');
+        return config('billing.team_member_subscriptions.plans');
     }
 
     public function updatePlan()
     {
         $this->validate();
 
-        if (!$this->billable->hasDefaultPaymentMethod()) {
+        if (! $this->billable->hasDefaultPaymentMethod()) {
             $this->error('You do not have a default payment method. Please add one!');
 
             return;
@@ -92,7 +85,14 @@ class UpdateTeamPlanModal extends Component
     public function render()
     {
         return view('livewire.teams.update-team-plan-modal', [
-            'teamPlans' => $this->teamPlans
+            'teamPlans' => $this->teamPlans,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'plan' => ['required', Rule::in(collect($this->teamPlans)->pluck('stripe_id'))],
+        ];
     }
 }

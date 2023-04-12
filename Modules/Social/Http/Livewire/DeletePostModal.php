@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
@@ -9,7 +10,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class DeletePostModal extends Component
 {
-    use WithModal, WithNotification;
+    use WithModal, WithNotification, AuthorizesRequests;
 
     public Post $post;
 
@@ -29,6 +30,8 @@ class DeletePostModal extends Component
 
     public function deletePost()
     {
+        $this->authorize('delete', $this->post);
+
         if ($this->post) {
             $this->post->delete();
             $this->success('Post deleted successfully');

@@ -2,6 +2,8 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Bookmarks;
 
+use App\Support\Platform\Platform;
+use App\Support\Platform\WithGuestAccess;
 use App\Traits\Filter\WithSortAndFilters;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -10,7 +12,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class Index extends Component
 {
-    use WithPagination, WithCachedRows, WithSortAndFilters;
+    use WithPagination, WithCachedRows, WithSortAndFilters, WithGuestAccess;
 
     public ?string $search = null;
 
@@ -21,12 +23,12 @@ class Index extends Component
     public string $dateColumn = 'created_at';
 
     protected $queryString = [
-        'search'
+        'search',
     ];
 
     public function mount()
     {
-        $this->orderBy = "created_at";
+        $this->orderBy = 'created_at';
     }
 
     public function getRowsQueryProperty()
@@ -38,7 +40,7 @@ class Index extends Component
 
     public function getRowsQueryWithoutFiltersProperty()
     {
-        return Bookmark::where('user_id', '=', \Auth::user()->id);
+        return Bookmark::where('user_id', '=', auth()->user()?->id);
     }
 
     public function getRowsProperty()
@@ -48,10 +50,17 @@ class Index extends Component
         });
     }
 
+    public function showGuestAccessModal()
+    {
+        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+            $this->showAuthenticationModal(route('social.bookmarks'));
+        }
+    }
+
     public function render()
     {
         return view('social::livewire.pages.bookmarks.index', [
-            'bookmarks' => $this->rows
+            'bookmarks' => $this->rows,
         ]);
     }
 }

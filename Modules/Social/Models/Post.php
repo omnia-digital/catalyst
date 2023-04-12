@@ -4,7 +4,6 @@ namespace Modules\Social\Models;
 
 use App\Models\Team;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,9 +18,11 @@ use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Spatie\Tags\HasTags;
 
-class Post extends Model implements HasMedia
+class Post extends Model implements HasMedia, Searchable
 {
     use HasFactory, Likable, Postable, Attachable, Bookmarkable, InteractsWithMedia, HasTags;
 
@@ -36,16 +37,24 @@ class Post extends Model implements HasMedia
         'postable_type',
         'repost_original_id',
         'published_at',
-        'image'
+        'image',
     ];
 
     protected $dates = [
-        'published_at'
-    ];
-
-    protected $appends = [
         'published_at',
     ];
+
+    public static function getTrending($type = 'post')
+    {
+        $trendingPosts = Post::withCount('likes')
+                   ->with('user')
+                   ->when($type, fn ($query) => $query->where('type', $type))
+                   ->whereNotNull('published_at')
+                   ->orderBy('likes_count', 'desc')
+                   ->orderBy('created_at', 'desc');
+
+        return $trendingPosts;
+    }
 
     protected static function booted()
     {
@@ -55,11 +64,16 @@ class Post extends Model implements HasMedia
         });
     }
 
+    protected static function newFactory()
+    {
+        return PostFactory::new();
+    }
+
     public function type(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => PostType::tryFrom($value),
-            set: fn($value) => $value?->value
+            get: fn ($value) => PostType::tryFrom($value),
+            set: fn ($value) => $value?->value
         );
     }
 
@@ -68,18 +82,13 @@ class Post extends Model implements HasMedia
         return $query->where('type', $type);
     }
 
-    protected static function newFactory()
-    {
-        return PostFactory::new();
-    }
-
     public function getPublishedAtAttribute($value)
     {
-        if (empty($value)) {
-            return $this->created_at;
-        } else {
-            return new Carbon($value);
+        if ($this->type === PostType::ARTICLE) {
+            return is_null($value) ? null : $this->asDateTime($value);
         }
+
+        return $this->created_at;
     }
 
     public function user(): BelongsTo
@@ -106,7 +115,7 @@ class Post extends Model implements HasMedia
 
     public function isRepost(): bool
     {
-        return !is_null($this->repost_original_id);
+        return ! is_null($this->repost_original_id);
     }
 
     public function attachMedia(array $mediaUrls): self
@@ -121,11 +130,21 @@ class Post extends Model implements HasMedia
 
     public function getUrl(): string
     {
-        if ($this->type === PostType::RESOURCE) {
+        if ($this->type === PostType::ARTICLE) {
             return route('resources.show', $this);
         }
 
         return route('social.posts.show', $this);
+    }
+
+    public function scopeOnlyResources($query)
+    {
+        return $query->where('type', PostType::ARTICLE);
+    }
+
+    public function scopeOnlyPosts($query)
+    {
+        return $query->whereNull('type');
     }
 
     public function isParent(): bool
@@ -133,13 +152,10 @@ class Post extends Model implements HasMedia
         return is_null($this->postable_id) && is_null($this->postable_type);
     }
 
-    public static function getTrending($type = 'post')
+    public function getSearchResult(): SearchResult
     {
-        $trendingPosts = Post::withCount('likes')
-                   ->with('user')
-                   ->when($type, fn($query) => $query->where('type', $type))
-                   ->orderBy('likes_count', 'desc')
-                   ->orderBy('created_at', 'desc');
-        return $trendingPosts;
+        $url = route('social.posts.show', $this);
+
+        return (new SearchResult($this, $this->title, $url))->setType($this->type?->value ?? $this->getTable());
     }
 }

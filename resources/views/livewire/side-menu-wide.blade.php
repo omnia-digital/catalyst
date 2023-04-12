@@ -9,18 +9,27 @@
             <div class="flex mb-4">
                 <nav class="space-y-3">
                     @foreach ($navigation as $item)
-                            <a href="{{ route($item['name']) }}"
+                        @if (!empty($item['module']))
+                            @if (\Platform::isModuleEnabled($item['module']))
+                                <a href="{{ Route::has($item['name']) ? route($item['name']) : $item['name'] }}"
+                                   title="{{ $item['label'] }}"
+                                   class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
+                                        {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
+                                   aria-current="page">
+                                    <x-library::icons.icon name="{{ $item['icon'] }}" size="w-6 h-6 mr-1"/>
+                                    <span>{{ $item['label'] }}</span>
+                                </a>
+                            @endif
+                        @else
+                            <a href="{{ Route::has($item['name']) ? route($item['name']) : $item['name'] }}"
                                title="{{ $item['label'] }}"
                                class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
-                           {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
+                                        {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
                                aria-current="page">
-                                <x-dynamic-component
-                                        :component="$item['icon']"
-                                        class="flex-shrink-0 h-6 w-6"
-                                        aria-hidden="true"
-                                />
+                                <x-library::icons.icon name="{{ $item['icon'] }}" size="w-6 h-6 mr-1"/>
                                 <span>{{ $item['label'] }}</span>
                             </a>
+                        @endif
                     @endforeach
                 </nav>
             </div>

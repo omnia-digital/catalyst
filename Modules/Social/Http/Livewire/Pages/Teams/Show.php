@@ -6,6 +6,8 @@ use App\Models\Award;
 use App\Models\Location;
 use App\Models\Team;
 use App\Models\User;
+use App\Support\Platform\Platform;
+use App\Support\Platform\WithGuestAccess;
 use App\Traits\Team\WithTeamManagement;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
@@ -13,7 +15,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Show extends Component
 {
-    use WithTeamManagement, WithMap;
+    use WithTeamManagement, WithMap, WithGuestAccess;
 
     public $team;
 
@@ -22,13 +24,14 @@ class Show extends Component
     public $displayID = null;
 
     public ?User $userToAddAwardsTo;
+    public $applicationsCount = 0;
 
     public $awardsToAdd = [];
 
     public $additionalInfo = [
         'likes',
         'comments',
-        'members'
+        'members',
     ];
 
     public $activity = [
@@ -52,6 +55,13 @@ class Show extends Component
     ];
 
     protected $listeners = ['addUserAwards', 'modal-closed' => 'resetAwardsSelection'];
+
+    public function mount(Team $team)
+    {
+        $this->displayUrl = $team->sampleImages()->first()->getFullUrl();
+        $this->displayID = $team->sampleImages()->first()->id;
+        $this->applicationsCount = $this->team->teamApplications->count();
+    }
 
     public function getPlacesProperty()
     {
@@ -78,7 +88,8 @@ class Show extends Component
         return $this->team->posts()->take(2)->get();
     }
 
-    public function showPost($post) {
+    public function showPost($post)
+    {
         return $this->redirectRoute('social.posts.show', $post['id']);
     }
 
@@ -88,7 +99,6 @@ class Show extends Component
         $this->displayID = $media->id;
     }
 
-    
     public function resetAwardsSelection()
     {
         $this->reset('awardsToAdd');
@@ -103,9 +113,9 @@ class Show extends Component
     public function addAward(User $user)
     {
         $user->awards()->attach($this->awardsToAdd);
-        
+
         $this->dispatchBrowserEvent('notify', ['message' => 'Awards Added', 'type' => 'success']);
-        $this->dispatchBrowserEvent('add-awards-modal',  ['type' => 'close']);
+        $this->dispatchBrowserEvent('add-awards-modal', ['type' => 'close']);
     }
 
     public function getRemainingAwards(User $user)
@@ -113,11 +123,27 @@ class Show extends Component
         return Award::whereNotIn('id', $user->awards()->pluck('awards.id')->toArray())->get();
     }
 
-    public function mount(Team $team)
+    /**
+     * If we decide to allow the team owners to decide if their team is public
+     * or private then we can edit this method to account for that.
+     */
+    public function getIsPublicProperty()
     {
-        $team->owner;
-        $this->displayUrl = $team->sampleImages()->first()->getFullUrl();
-        $this->displayID = $team->sampleImages()->first()->id;
+        return false;
+    }
+
+    public function getIsMemberProperty()
+    {
+        return $this->team->hasUser(auth()->user());
+    }
+
+    public function getCanViewTeamContentProperty()
+    {
+        if (Platform::isAllowingGuestAccess()) {
+            return true;
+        }
+
+        return $this->isPublic || $this->isMember;
     }
 
     public function render()

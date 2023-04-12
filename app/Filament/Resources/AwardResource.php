@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AwardResource\Pages;
-use App\Filament\Resources\AwardResource\RelationManagers;
 use App\Models\Award;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AwardResource extends Resource
 {
@@ -27,7 +24,9 @@ class AwardResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('icon')
                     ->default('heroicon-o-academic-cap')
-                    ->required()
+                    ->required(),
+                Forms\Components\TextInput::make('bg_color')->nullable(),
+                Forms\Components\TextInput::make('text_color')->nullable(),
             ]);
     }
 
@@ -37,6 +36,8 @@ class AwardResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('icon'),
+                Tables\Columns\TextColumn::make('bg_color'),
+                Tables\Columns\TextColumn::make('text_color'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

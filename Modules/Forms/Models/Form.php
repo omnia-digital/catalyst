@@ -11,21 +11,19 @@ class Form extends Model
 {
     use HasFactory, HasSlug;
 
-    protected $fillable = [
-        'name',
-        'slug',
-        'content',
-        'form_template_id',
-        'team_id',
-        'is_used_on_all_teams',
-        'published_at'
-    ];
-
     protected $casts = [
         'content' => 'array',
     ];
 
     protected $guarded = [];
+
+    public static function getRegistrationForm()
+    {
+        return self::query()
+            ->where('form_type_id', FormType::userRegistrationFormId())
+            ->whereNotNull('form_type_id')
+            ->first();
+    }
 
     public function getSlugOptions(): SlugOptions
     {
@@ -35,9 +33,23 @@ class Form extends Model
                           ->doNotGenerateSlugsOnUpdate();
     }
 
+    // Attributes
+
+    public function getIsActiveAttribute()
+    {
+        return ! is_null($this->published_at);
+    }
+
+    // Relationships
+
     public function formTemplate()
     {
         return $this->belongsTo(FormTemplate::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(FormNotification::class);
     }
 
     public function submissions()
@@ -49,5 +61,4 @@ class Form extends Model
     {
         return $this->belongsTo(FormType::class);
     }
-
 }

@@ -4,8 +4,10 @@ namespace App\Http\Livewire\Teams;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Support\Platform\Platform;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Modules\Billing\Events\TeamMemberSubscriptionCreatedEvent;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
@@ -20,21 +22,14 @@ class SubscribeTeamModal extends Component
 
     public ?string $plan = null;
 
-    protected function rules(): array
-    {
-        return [
-            'plan' => ['required', Rule::in(collect($this->teamPlans)->pluck('stripe_id'))]
-        ];
-    }
-
     public function getTeamPlansProperty()
     {
-        return config('team-user-subscription.plans');
+        return config('billing.team_member_subscriptions.plans');
     }
 
     public function subscribeTeam()
     {
-        if (!$this->team->hasStripeConnectAccount()) {
+        if (! $this->team?->hasStripeConnectAccount()) {
             $this->error('This team is not ready to receive subscriptions yet!');
 
             return;
@@ -44,7 +39,7 @@ class SubscribeTeamModal extends Component
 
         $this->billable->createOrGetStripeCustomer();
 
-        if (!$this->billable->hasDefaultPaymentMethod()) {
+        if (! $this->billable->hasDefaultPaymentMethod()) {
             $this->error('You do not have a default payment method. Please add one!');
 
             return;
@@ -56,14 +51,17 @@ class SubscribeTeamModal extends Component
             return;
         }
 
-        $this->billable
+        $subscription = $this->billable
             ->newSubscription('team_' . $this->team->id, $this->plan)
+            ->teamId($this->team->id)
             ->create(subscriptionOptions: [
-                'application_fee_percent' => config('team-user-subscription.application_fee_percent'),
+                'application_fee_percent' => Platform::getAppFee(),
                 'transfer_data' => [
                     'destination' => $this->team->stripe_connect_id,
                 ],
             ]);
+
+        event(new TeamMemberSubscriptionCreatedEvent($subscription, $this->billable, $this->team));
 
         $this->success('Subscribed!');
         $this->closeModal('subscribe-team');
@@ -77,7 +75,14 @@ class SubscribeTeamModal extends Component
     public function render()
     {
         return view('livewire.teams.subscribe-team-modal', [
-            'teamPlans' => $this->teamPlans
+            'teamPlans' => $this->teamPlans,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'plan' => ['required', Rule::in(collect($this->teamPlans)->pluck('stripe_id'))],
+        ];
     }
 }

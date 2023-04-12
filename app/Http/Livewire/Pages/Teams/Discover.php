@@ -8,7 +8,6 @@ use App\Actions\Teams\GetPopularIndiesTeamsAction;
 use App\Actions\Teams\GetPopularUpcomingTeamsAction;
 use App\Actions\Teams\GetTeamCategoriesAction;
 use App\Actions\Teams\GetTrendingTeamsAction;
-use App\Lenses\Teams\NewReleaseTeamsLens;
 use App\Models\Team;
 use App\Support\Feed\FeedItem;
 use App\Support\Feed\PolygonFeedItem;
@@ -18,7 +17,7 @@ use Vedmant\FeedReader\Facades\FeedReader;
 class Discover extends Component
 {
     private array $feedClasses = [
-        'ign'   => FeedItem::class,
+        'ign' => FeedItem::class,
     ];
 
     public function getNewsFeedsProperty()
@@ -60,6 +59,7 @@ class Discover extends Component
         $feeds = collect();
         $feeds->push('https://www.youtube.com/c/gameedged');
         $feeds->push('https://www.youtube.com/user/MrBeast6000');
+
         return $feeds;
     }
 
@@ -67,6 +67,7 @@ class Discover extends Component
     {
         $feeds = collect();
         $feeds->push('https://twitchrss.appspot.com/vod/cohhcarnage');
+
         return $feeds;
     }
 
@@ -79,6 +80,7 @@ class Discover extends Component
         } else {
             $feed->set_item_class(FeedItem::class);
         }
+
         return $feed;
     }
 
@@ -117,6 +119,22 @@ class Discover extends Component
         return (new GetTrendingTeamsAction)->execute();
     }
 
+    public function getTeams($category = null, $limit = 5)
+    {
+        $query = Team::query()
+            ->limit($limit)
+            ->withCount(['likes', 'users as members']);
+
+        if (! empty($category)) {
+            $query->withAnyTags([$category]);
+        }
+
+        $query->orderBy('likes_count', 'DESC')
+              ->get();
+
+        return $query;
+    }
+
     public function render()
     {
         return view('livewire.pages.teams.discover', [
@@ -127,7 +145,7 @@ class Discover extends Component
             'curatedTeams' => $this->curatedTeams,
             'popularIndiesTeams' => $this->popularIndiesTeams,
             'popularUpcomingTeams' => $this->popularUpcomingTeams,
-//            'newsFeeds' => $this->newsFeeds,
+            //            'newsFeeds' => $this->newsFeeds,
             'youtubeFeeds' => $this->youtubeFeeds,
             'twitchFeeds' => $this->twitchFeeds,
         ]);

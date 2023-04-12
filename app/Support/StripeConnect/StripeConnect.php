@@ -25,7 +25,7 @@ class StripeConnect
             ->accounts
             ->create([
                 'type' => 'standard',
-                'email' => $email
+                'email' => $email,
             ]);
     }
 

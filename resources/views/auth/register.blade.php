@@ -5,14 +5,21 @@
         </x-slot>
 
         <x-slot name="slogan">
-            <x-library::heading.2 text-color="text-heading-default-color " class="mt-6">{{Trans::get(config('app.slogan', ''))}}</x-library::heading.2>
+            <x-library::heading.2 text-color="text-heading-default-color " class="mt-6">{{ Trans::get(config('app.slogan', '')) }}</x-library::heading.2>
         </x-slot>
 
-        <x-library::heading.2 class="text-center">{{Trans::get('Create your account')}}</x-library::heading.2>
+        <x-library::heading.2 class="text-center">{{ Trans::get('Create your account') }}</x-library::heading.2>
 
         <x-jet-validation-errors class="mb-4" />
 
-        <x-forms.register-default-form/>
+        @if (\Modules\Forms\Models\Form::getRegistrationForm())
+            <livewire:forms::user-registration-form
+                :form="\Modules\Forms\Models\Form::getRegistrationForm()"
+                submitText="Sign Up"
+            />
+        @else
+            <x-forms.register-default-form/>
+        @endif
 
         <x-slot name="additionalCard">
             <div class="flex items-center justify-center">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Settings\BillingSettings;
+use App\Settings\GeneralSettings;
 
 return [
 
@@ -9,7 +10,9 @@ return [
      * put them (manually) here.
      */
     'settings' => [
-        BillingSettings::class
+        GeneralSettings::class,
+        BillingSettings::class,
+        \Modules\Jobs\Settings\JobsSettings::class,
     ],
 
     /*

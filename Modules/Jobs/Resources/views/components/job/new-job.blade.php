@@ -1,6 +1,6 @@
 <div>
 
-    <x-library::heading.1 class="w-full px-4">Post a Job</x-library::heading.1>
+    <x-library::heading.1 class="w-full px-4">Post a job</x-library::heading.1>
 
     <div class="flex justify-between my-6">
         <div class="w-full md:w-10/12 px-2 md:pr-6">
@@ -23,21 +23,21 @@
 
             <form wire:submit.prevent="{{ Auth::guest() ? 'showRegisterModal' : 'save' }}" action="#" method="POST">
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
-                    <div class="bg-primary py-6 px-4 space-y-6 sm:p-6">
+                    <div class="bg-secondary py-6 px-4 space-y-6 sm:p-6">
                         <div>
-                            <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">New Job</x-library::heading.2>
+                            <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">New JobPosition</x-library::heading.2>
                         </div>
 
                         <div class="grid grid-cols-3 gap-6">
                             <div class="col-span-3 space-y-1 sm:col-span-2">
-                                <x-input.label for="title" value="Job Title"/>
-                                <x-input.text wire:model="title" id="title" placeholder="Job Title"/>
+                                <x-input.label for="title" value="JobPosition Title"/>
+                                <x-input.text wire:model="title" id="title" placeholder="JobPosition Title"/>
                                 <x-input.error for="title"/>
                             </div>
 
                             <div class="col-span-3 space-y-1">
-                                <x-input.label value="Job Description"/>
-                                <x-input.textarea wire:model="description" id="description" placeholder="Job Description"/>
+                                <x-input.label value="JobPosition Description"/>
+                                <x-input.textarea wire:model="description" id="description" placeholder="JobPosition Description"/>
                                 <x-input.error for="description"/>
                             </div>
 
@@ -123,7 +123,7 @@
                             <div class="col-span-3 space-y-1 sm:col-span-2">
                                 <fieldset>
                                     <div class="mb-2">
-                                        <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">Job Addons</x-library::heading.2>
+                                        <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">JobPosition Addons</x-library::heading.2>
                                         <p class="mt-1 text-sm leading-5 text-base-text-color">This information will be displayed publicly so be careful what you share.</p>
                                     </div>
 
@@ -134,10 +134,10 @@
                                                 wire:click="toggleAddon({{ $addon->id }})"
                                                 class="group relative rounded-lg shadow-sm cursor-pointer focus:outline-none focus:shadow-outline-blue">
                                                 <div
-                                                    class="rounded-lg border border-gray-300 bg-primary px-6 py-4 hover:border-gray-400 group-focus:border-secondary sm:flex sm:justify-between sm:space-x-4">
+                                                    class="rounded-lg border border-gray-300 bg-secondary px-6 py-4 hover:border-gray-400 group-focus:border-primary sm:flex sm:justify-between sm:space-x-4">
                                                     <div class="flex items-center space-x-0">
-                                                        <div class="flex-shrink-0 flex items-center hidden">
-                                                            <span class="form-radio text-secondary group-focus:bg-red-500"></span>
+                                                        <div class="flex-shrink-0 flex items-center">
+                                                            <span class="form-radio text-primary group-focus:bg-red-500"></span>
                                                         </div>
                                                         <div class="text-sm leading-5">
                                                             <p class="block font-medium text-dark-text-color">
@@ -151,11 +151,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-2 flex text-sm leading-5 space-x-1 sm:mt-0 sm:block sm:space-x-0 sm:text-right">
-                                                        <div class="font-medium text-dark-text-color">{{ \App\LaraContract::money($addon->price) }}</div>
+                                                        <div class="font-medium text-dark-text-color">{{ \Platform::money($addon->price) }}</div>
                                                     </div>
                                                 </div>
                                                 <div
-                                                    class="{{ in_array($addon->id, $selected_addons) ? 'border-secondary' : 'border-transparent"' }} absolute inset-0 rounded-lg border-2 pointer-events-none"></div>
+                                                    class="{{ in_array($addon->id, $selected_addons) ? 'border-primary' : 'border-transparent"' }} absolute inset-0 rounded-lg border-2 pointer-events-none"></div>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -163,7 +163,7 @@
                                     <x-input.error class="mt-2" for="selected_addons"/>
                                 </fieldset>
 
-                                <p class="font-bold text-lg pt-5">Price: {{ \App\LaraContract::money($price ?? 0) }}</p>
+                                <p class="font-bold text-lg pt-5">Price: {{ \Platform::money($price ?? 0) }}</p>
                             </div>
 
                             <div class="col-span-3 space-y-1 sm:col-span-2">
@@ -269,15 +269,15 @@
                                             <x-library::heading.2 class="text-lg leading-6 font-medium text-dark-text-color">Payment</x-library::heading.2>
                                             <p class="mt-1 text-sm leading-5 text-base-text-color">This information will be displayed publicly so be careful what you share.</p>
                                         </div>
-                                        <div class="mt-2 bg-primary rounded-md -space-y-px">
+                                        <div class="mt-2 bg-secondary rounded-md -space-y-px">
                                             <div
-                                                x-bind:class="{'bg-secondary border-secondary z-10': paymentMethod === 'new-card', 'border-neutral-light': paymentMethod !== 'new-card'}"
+                                                x-bind:class="{'bg-primary border-primary z-10': paymentMethod === 'new-card', 'border-neutral-light': paymentMethod !== 'new-card'}"
                                                 class="relative border rounded-tl-md rounded-tr-md p-4 flex {{ !Auth::user()->hasDefaultPaymentMethod() ? 'border rounded-bl-md rounded-br-md' : '' }}"
                                             >
                                                 <x-input.radio x-model="paymentMethod" value="new-card" id="new-card"/>
                                                 <x-input.label for="new-card" class="ml-3 flex flex-col cursor-pointer">
                                             <span
-                                                x-bind:class="{'text-secondary': paymentMethod === 'new-card', 'text-dark-text-color': paymentMethod !== 'new-card'}"
+                                                x-bind:class="{'text-primary': paymentMethod === 'new-card', 'text-dark-text-color': paymentMethod !== 'new-card'}"
                                                 class="block text-sm leading-5 font-medium"
                                             >
                                                 Add a new card
@@ -287,13 +287,13 @@
 
                                             @if (Auth::user()->hasDefaultPaymentMethod())
                                                 <div
-                                                    x-bind:class="{'bg-secondary border-secondary z-10': paymentMethod === 'previous-card', 'border-neutral-light': paymentMethod !== 'previous-card'}"
+                                                    x-bind:class="{'bg-primary border-primary z-10': paymentMethod === 'previous-card', 'border-neutral-light': paymentMethod !== 'previous-card'}"
                                                     class="relative border rounded-bl-md rounded-br-md p-4 flex"
                                                 >
                                                     <x-input.radio x-model="paymentMethod" value="previous-card" id="previous-card"/>
                                                     <x-input.label for="previous-card" class="ml-3 flex flex-col cursor-pointer">
                                                 <span
-                                                    x-bind:class="{'text-secondary': paymentMethod === 'previous-card', 'text-dark-text-color': paymentMethod !== 'previous-card'}"
+                                                    x-bind:class="{'text-primary': paymentMethod === 'previous-card', 'text-dark-text-color': paymentMethod !== 'previous-card'}"
                                                     class="block text-sm leading-5 font-medium"
                                                 >
                                                     Use {{ ucfirst(Auth::user()->card_brand) }} ending with {{ Auth::user()->card_last_four }}
@@ -334,13 +334,13 @@
 
                                         <div>
                                             <x-input.label for="country" value="Country"/>
-                                            <x-input.select x-model="country" :options="\App\LaraContract::countries()" id="country"/>
+                                            <x-input.select x-model="country" :options="\Platform::countries()" id="country"/>
                                             <x-input.error for="country"/>
                                         </div>
 
                                         <div>
                                             <x-input.label for="card_holder_name" value="Card Holder Name"/>
-                                            <x-input.text x-model="cardHolderName" id="card_holder_name" placeholder="Phuc Le"/>
+                                            <x-input.text x-model="cardHolderName" id="card_holder_name" placeholder="John Smith"/>
                                             <x-input.error for="card_holder_name"/>
                                         </div>
 
@@ -356,7 +356,7 @@
                                             <button
                                                 x-on:click.prevent.stop="confirmCard"
                                                 x-bind:disabled="loading"
-                                                x-bind:class="{'bg-secondary hover:bg-secondary focus:bg-secondary active:bg-secondary': !loading, 'bg-gray-600 cursor-not-allowed': loading}"
+                                                x-bind:class="{'bg-primary hover:bg-primary focus:bg-primary active:bg-primary': !loading, 'bg-gray-600 cursor-not-allowed': loading}"
                                                 class="py-1 px-4 border border-transparent text-sm text-white-text-color font-medium rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out">
                                                 Update payment method
                                             </button>
@@ -381,13 +381,13 @@
                                 </div>
                             @endif
                         </div>
-                        {{--  Preview Job  --}}
+                        {{--  Preview JobPosition  --}}
                         <div class="rounded border-2 mt-10">
                             <x-library::heading.2 class="text-xl text-center font-medium text-dark-text-color py-2">Preview</x-library::heading.2>
                             <p class="text-center font-bold">Here's a preview of how your jobpost will look like</p>
                             <p class="text-center">Don't worry if it's not perfect the first time: your job is fully editable for free after posting it!</p>
 
-                            <div class="bg-primary shadow overflow-hidden sm:rounded-md">
+                            <div class="bg-secondary shadow overflow-hidden sm:rounded-md">
                                 <ul>
                                     <x-job.item-preview
                                         :logoUrl="$logo ? $logo->temporaryUrl() : Auth::user()->currentTeam->logoUrl"
@@ -406,7 +406,7 @@
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <span class="w-full md:w-auto inline-flex rounded-md shadow-sm">
-                        <x-form.button wire:target="save" class="w-full md:w-auto">Publish Job</x-form.button>
+                        <x-form.button wire:target="save" class="w-full md:w-auto">Publish JobPosition</x-form.button>
                     </span>
                     </div>
                 </div>
@@ -421,7 +421,7 @@
         <x-slot name="title">Register an account</x-slot>
         <x-slot name="content">
             <div class="space-y-2">
-                <x-alert.info>Create an account to edit the job later.</x-alert.info>
+                <x-library::alert.info><x-slot:content>Create an account to edit the job later.</x-slot:content></x-library::alert.info>
 
                 <div class="space-y-1">
                     <x-input.label value="Name"/>

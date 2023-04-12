@@ -1,10 +1,10 @@
-<div class="relative" x-data="{ isVisible: true }" @click.away="isVisible = false">
+<div class="relative w-full" x-data="{ isVisible: true }" @click.away="isVisible = false">
     <input
         wire:model.debounce.300ms="search"
         type="text"
-        class="bg-gray-800 text-sm rounded-full focus:outline-none focus:shadow-outline w-64 px-3 pl-8 py-1"
-        placeholder="Search (Press '/' to focus)"
         x-ref="search"
+        class="w-full pl-16 pr-3 py-4 border border-neutral bg-white rounded-md leading-6 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none
+        focus:ring-dark-text-color sm:text-2xl"
         @keydown.window="
             if (event.keyCode === 191) {
                 event.preventDefault();
@@ -16,29 +16,31 @@
         @keydown="isVisible = true"
         @keydown.shift.tab="isVisible = false"
     >
-    <div class="absolute top-0 flex items-center h-full ml-2">
-        <svg class="fill-current text-gray-400 w-4" viewBox="0 0 24 24"><path class="heroicon-ui" d="M16.32 14.9l5.39 5.4a1 1 0 01-1.42 1.4l-5.38-5.38a8 8 0 111.41-1.41zM10 16a6 6 0 100-12 6 6 0 000 12z"/></svg>
+    <div class="absolute top-0 flex items-center h-full ml-6">
+        <svg class="fill-current text-gray-400 w-6" viewBox="0 0 24 24"><path class="heroicon-ui" d="M16.32 14.9l5.39 5.4a1 1 0 01-1.42 1.4l-5.38-5.38a8 8 0 111.41-1.41zM10 16a6 6 0 100-12 6 6 0
+        000 12z"/></svg>
     </div>
 
-    <div wire:loading class="spinner top-0 right-0 mr-4 mt-3" style="position: absolute"></div>
+    <div wire:loading class="top-0 right-0 text-lg items-center absolute mr-4 mt-4"><i class="fa-duotone fa-loader animate-spin"></i> Loading...</div>
 
     @if (strlen($search) >= 2)
-        <div class="absolute z-50 bg-gray-800 text-xs rounded w-64 mt-2" x-show.transition.opacity.duration.200="isVisible">
+        <div class="absolute z-30 bg-white text-md text- rounded-lg shadow mt-2" x-show.transition.opacity.duration.200="isVisible">
+
             @if (count($searchResults) > 0)
                 <ul>
                     @foreach ($searchResults as $game)
-                        <li class="border-b border-gray-700">
+                        <li class="">
                             <a
-                                href="{{ route('games.show', $game['slug']) }}"
-                                class="block hover:bg-gray-700 flex items-center transition ease-in-out duration-150 px-3 py-3"
+                                href="{{ route('games.games.show', $game->details['slug']) }}"
+                                class="block hover:bg-primary hover:text-white-text-color flex items-center transition ease-in-out duration-150 px-3 py-3"
                                 @if ($loop->last) @keydown.tab="isVisible=false" @endif
                             >
-                                @if (isset($game->cover_url))
-                                    <img src="{{ $game->cover_url }}" alt="cover" class="w-10">
+                                @if (!empty($game->details?->getCoverUrl()))
+                                    <img src="{{ $game->details?->getCoverUrl() }}" alt="cover" class="w-10">
                                 @else
                                     <img src="https://via.placeholder.com/264x352" alt="game cover" class="w-10">
                                 @endif
-                                <span class="ml-4">{{ $game['name'] }}</span>
+                                <span class="ml-4">{{ $game->details['name'] }}</span>
                             </a>
                         </li>
                     @endforeach

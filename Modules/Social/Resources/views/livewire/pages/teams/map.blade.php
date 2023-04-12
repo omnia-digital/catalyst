@@ -15,5 +15,6 @@
             @endif
             <x-library::map.mapbox id="team-map" class="min-h-[300px] sm:min-h-[500px] min-w-[100px] w-full z-10 rounded-lg" :places="$places" mapStyle="mapbox://styles/mapbox/dark-v10"/>
         </div>
+        <livewire:social::components.teams.map/>
     </div>
-</div>
+@endsection

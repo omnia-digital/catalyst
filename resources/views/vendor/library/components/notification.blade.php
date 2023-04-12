@@ -39,7 +39,7 @@
             }"
             x-show="show"
             x-transition.duration.500ms
-            class="relative max-w-sm w-full bg-neutral pl-6 pr-4 py-4 border border-black rounded-md shadow-lg pointer-events-auto"
+            class="relative max-w-sm w-full bg-secondary pl-6 pr-4 py-4 border border-neutral rounded-md shadow-lg pointer-events-auto"
         >
             <div class="flex items-start">
                 <!-- Icons -->

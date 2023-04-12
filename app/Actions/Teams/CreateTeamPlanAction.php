@@ -4,6 +4,7 @@ namespace App\Actions\Teams;
 
 use App\Models\Team;
 use App\Support\StripeConnect\StripeConnect;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class CreateTeamPlanAction
@@ -22,8 +23,8 @@ class CreateTeamPlanAction
 
     public function execute(Team $team, string $name, ?string $description = null)
     {
-        if (!$team->hasStripeConnectAccount()) {
-            throw new \Exception('This team does not have a Stripe Connect account!');
+        if (! $team->hasStripeConnectAccount()) {
+            throw new Exception('This team does not have a Stripe Connect account!');
         }
 
         $product = app(StripeConnect::class)->createProduct(
@@ -43,13 +44,13 @@ class CreateTeamPlanAction
             $plan = $team->teamPlans()->create([
                 'name' => $product->name,
                 'description' => $product->description,
-                'stripe_id' => $product->id
+                'stripe_id' => $product->id,
             ]);
 
             $plan->prices()->create([
                 'stripe_id' => $price->id,
                 'amount' => $price->unit_amount_decimal,
-                'billing_period' => $price->recurring->interval
+                'billing_period' => $price->recurring->interval,
             ]);
         });
     }

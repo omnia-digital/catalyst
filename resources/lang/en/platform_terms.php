@@ -12,4 +12,5 @@ return [
     */
 
     'team' => env('TEAM_TERM'),
+    'company' => env('COMPANY_TERM'),
 ];

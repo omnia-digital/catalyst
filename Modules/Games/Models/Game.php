@@ -2,74 +2,34 @@
 
 namespace Modules\Games\Models;
 
-use Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
-use MarcReichel\IGDBLaravel\Enums\Website\Category;
-use MarcReichel\IGDBLaravel\Models\AgeRating;
-use MarcReichel\IGDBLaravel\Models\Cover;
-use MarcReichel\IGDBLaravel\Models\Game as IGDBGame;
-use MarcReichel\IGDBLaravel\Models\GameVideo;
-use MarcReichel\IGDBLaravel\Models\InvolvedCompany;
-use MarcReichel\IGDBLaravel\Models\Keyword;
-use MarcReichel\IGDBLaravel\Models\Website;
+use Modules\Social\Models\Association;
 
-class Game extends IGDBGame
+// This is our own custom game model so we can use relations, but we can get the details from igdb still
+class Game extends Model
 {
     use HasFactory;
 
-    public function getCoverUrl()
-    {
-        $coverUrl = Cover::where('id', $this->cover)->first()?->url;
-        $coverUrl = $coverUrl ? Str::replaceFirst('thumb', 'cover_big', $coverUrl) : null;
+    protected $fillable = [
+        'igdb_id',
+        'name',
+        'slug',
+    ];
 
-        return $coverUrl ?? 'https://via.placeholder.com/264x352';
+    public function getDetailsAttribute()
+    {
+        return $this->igdbDetails;
     }
 
-    public function getInvolvedCompaniesAttribute()
+    public function getIgdbDetailsAttribute()
     {
-        $companies = InvolvedCompany::where('game', $this->id)->get();
-
-        return $companies;
+        return IGDB\Game::where('id', $this->igdb_id)->first();
     }
 
-    public function getVideos()
+    //** Relations **//
+    public function associations()
     {
-        $videos = collect();
-        if (!$this->videos) {
-            return $videos;
-        }
-        foreach($this->videos as $video) {
-            $videos->push(GameVideo::where('id', $video)->first());
-        }
-
-        return $videos;
-    }
-
-    public function getTrailer()
-    {
-        return $this->getVideos()->first() ?? null;
-    }
-
-    public function getWebsitesAttribute()
-    {
-        return Website::where('game', $this->id)->get();
-    }
-
-    public function getRating()
-    {
-        return AgeRating::where('id', $this->rating)->first() ?? null;
-    }
-
-    public function profile()
-    {
-        return route('games.show', $this->slug);
-    }
-
-    public function getKeywordsAttribute()
-    {
-        $tags = $this->tags;
-        return Keyword::where('');
+        return $this->hasMany(Association::class);
     }
 }

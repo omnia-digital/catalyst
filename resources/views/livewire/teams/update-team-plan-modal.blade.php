@@ -1,14 +1,14 @@
 <div>
-    @if($this->currentPlan)
+    @if ($this->currentPlan)
         <x-library::modal id="update-team-plan" maxWidth="4xl">
             <x-slot:title>
                 Update Plan: {{ $team->name }}
             </x-slot:title>
             <x-slot:content>
-                @if(!$this->currentPlan->onGracePeriod())
+                @if (!$this->currentPlan->onGracePeriod())
                     <div class="mb-4">
                         @if (!$this->billable->hasDefaultPaymentMethod())
-                            <x-library::alert.warning>You don't have a default payment method. Please add one <a href="{{ route('social.billing') }}" class="font-medium hover:underline">here</a>.</x-library::alert.warning>
+                            <x-library::alert.warning>You don't have a default payment method. Please add one <a href="{{ route('billing.stripe-billing') }}" class="font-medium hover:underline">here</a>.</x-library::alert.warning>
                         @endif
                     </div>
                     <div>
@@ -19,7 +19,7 @@
                                 @foreach ($teamPlans as $teamPlan)
                                     <x-library::input.radio-card :title="$teamPlan['name']" wire:model="plan" wire:key="team-plan-{{ $teamPlan['stripe_id'] }}" :value="$teamPlan['stripe_id']">
                                         <x-slot name="description" class="space-y-1">
-                                            @foreach($teamPlan['features'] as $feature)
+                                            @foreach ($teamPlan['features'] as $feature)
                                                 <div class="flex items-center space-x-2">
                                                     <x-heroicon-s-check-circle class="text-green-500 w-4 h-4"/>
                                                     <p>{{ $feature }}.</p>
@@ -50,7 +50,7 @@
         </x-library::modal>
 
         <x-library::confirm id="cancel-subscription" submit="cancelSubscription">
-            <x-slot:title>Cancel Subscription</x-slot:title>
+            <x-slot:title>Cancel Subscriptions</x-slot:title>
             <x-slot:content>
                 Are you sure to cancel your subscription?
             </x-slot:content>

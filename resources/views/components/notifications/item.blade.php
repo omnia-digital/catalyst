@@ -27,7 +27,7 @@
                     return;
                 }
 
-                this.$wire.emitParent('notificationRead', '{{ $id }}')
+                this.$wire.emit('notificationRead', '{{ $id }}')
             }
         }"
         x-on:mouseenter.once="markAsRead"
@@ -35,7 +35,7 @@
 >
     <div class="flex space-x-4">
         <div class="flex justify-center items-center h-8 w-8">
-            <x-dynamic-component :component="$icon" class="h-8 w-8 {{ $iconColor }}"/>
+            <x-library::icons.icon :name="$icon" color="{{ $iconColor }}" class="h-8 w-8"/>
         </div>
         <div class="flex-1 min-w-0">
             @if ($image)

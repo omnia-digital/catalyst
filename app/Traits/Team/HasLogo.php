@@ -10,17 +10,16 @@ trait HasLogo
     /**
      * Update the company's logo.
      *
-     * @param  \Illuminate\Http\UploadedFile  $photo
      * @return void
      */
     public function updateLogo(UploadedFile $photo)
     {
         tap($this->logo_path, function ($previous) use ($photo) {
             $this->forceFill([
-                                 'logo_path' => $photo->storePublicly(
-                                     'logos', ['disk' => $this->logoDisk()]
-                                 ),
-                             ])->save();
+                'logo_path' => $photo->storePublicly(
+                    'logos', ['disk' => $this->logoDisk()]
+                ),
+            ])->save();
 
             if ($previous) {
                 Storage::disk($this->logoDisk())->delete($previous);
@@ -38,8 +37,8 @@ trait HasLogo
         Storage::disk($this->logoDisk())->delete($this->logo_path);
 
         $this->forceFill([
-                             'logo_path' => null,
-                         ])->save();
+            'logo_path' => null,
+        ])->save();
     }
 
     /**
@@ -61,7 +60,7 @@ trait HasLogo
      */
     protected function defaultLogoUrl()
     {
-        return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF&size=128';
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF&size=128';
     }
 
     /**
@@ -71,6 +70,6 @@ trait HasLogo
      */
     protected function logoDisk()
     {
-        return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : 'public';
+        return 's3';
     }
 }

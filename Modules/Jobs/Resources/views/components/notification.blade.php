@@ -33,7 +33,7 @@
                         </button>
                     </div>
                 </div>
-                <a x-show="action" :href="action" class="text-center block bg-primary text-base-text-color rounded p-2 mt-2 w-full font-medium hover:text-dark-text-color">Buy More Credits</a>
+                <a x-show="action" :href="action" class="text-center block bg-secondary text-base-text-color rounded p-2 mt-2 w-full font-medium hover:text-dark-text-color">Buy More Credits</a>
             </div>
         </div>
     </div>

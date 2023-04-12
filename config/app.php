@@ -13,18 +13,19 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Platform Framework'),
     'abbr' => env('APP_ABBR', 'APP'),
-    'slogan' => env('APP_SLOGAN', ''),
+    'slogan' => env('APP_SLOGAN', 'Welcome to the community'),
     'theme' => env('APP_THEME', 'default'),
     'theme_light_type' => env('APP_THEME_LIGHT_TYPE', 'light'),
     'logo_path' => env('APP_LOGO'),
     'logo_path_dark' => env('APP_LOGO_DARK'),
+    'admin_email' => env('APP_ADMIN_EMAIL', ''),
 
     'modules' => [
         'social' => [
             'map' => env('SOCIAL_SHOW_MAP', true),
-        ]
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +51,7 @@ return [
     |
     */
 
-    'debug' => (bool)env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -180,7 +181,7 @@ return [
          * Package Service Providers...
          */
         \App\Providers\PlatformServiceProvider::class,
-
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -189,6 +190,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\VaporUiServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,

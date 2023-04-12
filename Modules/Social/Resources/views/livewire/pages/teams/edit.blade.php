@@ -13,18 +13,6 @@
             <x-library::heading.2>{{ Trans::get('Team Admin Panel') }}</x-library::heading.2>
 
             <div class="flex justify-end items-center">
-                <div class="mr-auto"
-                     x-data="{show: false}"
-                     x-show="show"
-                     x-transition:leave.opacity.duration.1500ms
-                     x-init="@this.on('changes_saved', () => {
-                show = true;
-                setTimeout(() => { show = false; }, 3000);
-            })"
-                     style="display: none;"
-                >
-                    <p class="text-sm opa text-green-600">{{ \Trans::get('Team info saved!') }}</p>
-                </div>
                 @if ($errors->any())
                     <div class="mr-auto">
                         <p class="text-sm text-red-600">{{ \Trans::get('This form has errors') }}:</p>
@@ -69,11 +57,11 @@
                         <x-library::input.label value="Uploaded Content"/>
                         <span class="text-red-600 text-sm ml-1">*</span>
                     </div>
-                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">
                         <p class="flex-1 py-2 px-3 text-[1rem] text-base-text-color">Upload images/videos to display in Featured section</p>
                         <label>
                             <input type="file" wire:model="sampleMedia" hidden multiple required/>
-                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">Browse</span>
                         </label>
                     </div>
                     <x-library::input.error for="sampleMedia"/>
@@ -84,7 +72,7 @@
                                 @if ($team->sampleImages()->count())
                                     <div class="flex flex-wrap w-full">
                                         @foreach ($team->sampleImages() as $key => $media)
-                                            <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center bg-primary relative border-4 border-dashed border-neutral-dark">
+                                            <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center bg-secondary relative border-4 border-dashed border-neutral-dark">
                                                 <img src="{{ $media->getFullUrl() }}" title="{{ $media->name }}" alt="{{ $media->name }}" class="max-w-[152px] max-h-[120px]">
                                                 <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="confirmRemoval({{ $media->id }})">
                                                     <x-heroicon-o-x class="w-6 h-6"/>
@@ -103,10 +91,10 @@
                                 <div>
                                     <div class="flex flex-wrap w-full">
                                         @foreach ($sampleMedia as $key => $media)
-                                            <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative bg-primary border-4 border-dashed border-neutral-dark">
+                                            <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative bg-secondary border-4 border-dashed border-neutral-dark">
                                                 <img src="{{ $media->temporaryUrl() }}" title="{{ $sampleMediaNames[$key] }}" alt="{{ $sampleMediaNames[$key] }}"
                                                      class="max-w-[152px] max-h-[120px]">
-                                                <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key}})">
+                                                <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key }})">
                                                     <x-heroicon-o-x class="w-6 h-6"/>
                                                 </button>
                                             </div>
@@ -139,7 +127,7 @@
                     </x-jet-confirmation-modal>
                 </div>
 
-                @if(\Platform::isModuleEnabled('games'))
+                @if (\Platform::isModuleEnabled('games'))
                     <x-library::heading.4 class="col-span-2">{{ Trans::get('Feeds') }}</x-library::heading.4>
                     <!-- YouTube Channel -->
                     <div class="flex-col">
@@ -165,11 +153,11 @@
                         <x-library::input.label value="Banner Image"/>
                         <span class="text-red-600 text-sm ml-1">*</span>
                     </div>
-                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">
                         <input type="text" class="flex-1 border-none" wire:model="bannerImageName" placeholder="Upload file for banner" readonly>
                         <label>
                             <input type="file" wire:model="bannerImage" hidden required/>
-                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">Browse</span>
                         </label>
                     </div>
                     <x-library::input.error for="bannerImage"/>
@@ -197,11 +185,11 @@
                         <x-library::input.label value="{{ Trans::get('Team') }} Profile Photo"/>
                         <span class="text-red-600 text-sm ml-1">*</span>
                     </div>
-                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">
                         <input type="text" class="flex-1 border-none" wire:model="profilePhotoName" placeholder="Upload file for banner" readonly>
                         <label>
                             <input type="file" wire:model="profilePhoto" hidden required/>
-                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">Browse</span>
                         </label>
                     </div>
                     <x-library::input.error for="profilePhoto"/>
@@ -229,11 +217,11 @@
                         <x-library::input.label value="Main Image"/>
                         <span class="text-red-600 text-sm">*</span>
                     </div>
-                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-primary rounded focus:ring-secondary focus:border-secondary text-sm p-2">
+                    <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">
                         <input type="text" class="flex-1 border-none" wire:model="mainImageName" placeholder="Upload file for banner" readonly>
                         <label>
                             <input type="file" wire:model="mainImage" hidden required/>
-                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-secondary hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-secondary">Browse</span>
+                            <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">Browse</span>
                         </label>
                     </div>
                     <x-library::input.error for="mainImage"/>
@@ -267,7 +255,7 @@
                 </div>
                 <div class="flex-col">
                     <x-library::input.label value="Start Date"/>
-                    <x-library::input.date id="startDate" wire:model.defer="team.start_date" placeholder="Team Launch Date"/>
+                    <x-library::input.date id="startDate" wire:model.defer="team.start_date" placeholder="{{ Trans::get('Team Launch Date') }}"/>
                     <x-library::input.error for="startDate"/>
                 </div>
                 <div class="flex-col">
@@ -346,6 +334,13 @@
                     <livewire:social::pages.teams.forms :team="$team"/>
                 </div>
             </div>
+
+            <!-- Subscriptions -->
+            <div x-cloak x-show="activeTab === 5" class="mt-6 pb-12 space-y-6">
+                <div>
+                    <livewire:billing::pages.admin-subscriptions :team="$team"/>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -353,7 +348,7 @@
     <script>
         function setup() {
             return {
-                activeTab: 0,
+                activeTab: 5,
                 tabs: [
                     {
                         id: 0,
@@ -377,6 +372,10 @@
                     {
                         id: 4,
                         title: 'Forms',
+                    },
+                    {
+                        id: 5,
+                        title: 'Subscriptions',
                     },
                 ]
             }

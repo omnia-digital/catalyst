@@ -2,7 +2,7 @@
 
 namespace Modules\Social\Http\Livewire;
 
-use Illuminate\Support\Facades\Auth;
+use App\Support\Platform\WithGuestAccess;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
@@ -13,7 +13,7 @@ use Modules\Social\Support\Livewire\WithPostEditor;
 
 class RepliesModal extends Component
 {
-    use WithPostEditor;
+    use WithPostEditor, WithGuestAccess;
 
     public int $replyCount = 0;
 
@@ -27,7 +27,7 @@ class RepliesModal extends Component
 
     protected $listeners = [
         'postAdded',
-        'post-editor:submitted' => 'saveComment'
+        'post-editor:submitted' => 'saveComment',
     ];
 
     public function postAdded()
@@ -60,7 +60,7 @@ class RepliesModal extends Component
             return $comment;
         });
 
-        $this->post->user->notify(new NewCommentNotification($comment, Auth::user()));
+        $this->post->user->notify(new NewCommentNotification($comment, auth()->user()));
 
         $this->emitPostSaved($data['id']);
         $this->redirectRoute('social.posts.show', $this->post);

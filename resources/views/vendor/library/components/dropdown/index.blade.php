@@ -30,8 +30,25 @@
                 if (this.open) {
                     return this.close()
                 }
-
+                this.checkOnScreen()
                 this.open = true
+            },
+            checkOnScreen() {
+                var left = $refs.panel.left + window.scrollX
+                var top = $refs.panel.top + window.scrollY
+                var panelWidth = $refs.panel.clientWidth
+                var panelHeight = $refs.panel.clientHeight
+                console.log($refs.panel)
+                console.log(window.scrollX)
+                console.log(panelWidth)
+                console.log(panelHeight)
+                var windowWidth = window.screen.availWidth
+                var windowHeight = window.screen.availHeight
+
+                var isVisibleWidth = (left + panelWidth <= windowWidth)
+                var isVisibleHeight = (top + panelHeight <= windowHeight)
+                console.log('Width visible: ' + isVisibleWidth)
+                console.log('Height visible: ' + isVisibleHeight)
             },
             close(focusAfter) {
                 this.open = false

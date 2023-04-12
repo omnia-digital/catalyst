@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Modules\Subscriptions\Models\SubscriptionType;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,30 +14,14 @@ use Modules\Subscriptions\Models\SubscriptionType;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    $user = $request->user()->makeVisible(['email', 'name', 'profile_photo_url'])->append(['name']);
 
-Route::post('subscriptions', function (Request $request) {
-    $user = User::findByEmail($request->email);
-
-    $user->chargentSubscription()->firstOrCreate(
-        ['chargent_order_id' => $request->chargent_order_object_id],
-        [
-        'subscription_type_id' => SubscriptionType::where('slug', $request->subscription_type)->first()->id,
-        'card_type' => $request->card_type,
-        'last_4' => $request->last_4,
-        ]
-    );
-});
-
-Route::post('subscriptions/update', function (Request $request) {
-    $user = User::findByEmail($request->email);
-
-    $user->chargentSubscription()
-        ->where('chargent_order_id', $request->chargent_order_object_id)
-        ->latest()->first()->update([
-            'card_type' => $request->card_type,
-            'last_4' => $request->last_4,
-        ]);
+    return [
+        'id' => $user->id,
+        'email' => $user->email,
+        'name' => $user->name,
+        'avatar' => $user->profile_photo_url,
+        'profile_photo' => $user->profile_photo_url,
+    ];
 });

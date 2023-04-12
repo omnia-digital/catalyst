@@ -4,14 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReviewResource\Pages;
 use App\Filament\Resources\ReviewResource\RelationManagers;
-use App\Models\Review;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ReviewResource extends Resource
 {
@@ -66,7 +63,7 @@ class ReviewResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ReviewsRelationManager::class
+            RelationManagers\ReviewsRelationManager::class,
         ];
     }
 

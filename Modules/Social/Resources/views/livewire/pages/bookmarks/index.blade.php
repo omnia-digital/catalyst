@@ -1,35 +1,39 @@
 @extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
-    <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg pl-4 flex items-center bg-secondary items-center">
+    <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg pl-4 flex items-center bg-primary items-center">
         <div class="flex-1 flex items-center">
-            <x-dynamic-component component="heroicon-o-bookmark"
-                                 class="{{ 'text-primary' }} mr-3 flex-shrink-0 h-8 w-8"
-                                 aria-hidden="true"/>
+            <x-library::icons.icon name="fa-regular fa-bookmark" color="text-secondary" class="h-8 w-8 mr-3"/>
             <x-library::heading.1 class="py-4">Bookmarks</x-library::heading.1>
         </div>
     </div>
 
-    <!-- Filters -->
-    @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
+    <div wire:init="showGuestAccessModal">
+        @auth
+            <!-- Filters -->
+            @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
-    @if(empty($bookmarks))
-        <x-library::heading.2>No Bookmarked Resources</x-library::heading.2>
-    @else
-        <div class="">
-            <ul role="list" class="masonry masonry-2 space-y-4">
-                @foreach($bookmarks as $bookmark)
-                    <li>
-                        <livewire:social::components.post-card :post="$bookmark->bookmarkable()->first()"/>
-                    </li>
-                @endforeach
-            </ul>
+            @if (empty($bookmarks))
+                <x-library::heading.2>No Bookmarked Resources</x-library::heading.2>
+            @else
+                <div class="">
+                    <ul role="list" class="masonry masonry-2 space-y-4">
+                        @foreach ($bookmarks as $bookmark)
+                            <li>
+                                <livewire:social::components.post-card :post="$bookmark->bookmarkable()->first()"/>
+                            </li>
+                        @endforeach
+                    </ul>
 
-            <div class="pb-6">
-                {{ $bookmarks->onEachSide(1)->links() }}
-            </div>
-        </div>
-    @endif
+                    <div class="pb-6">
+                        {{ $bookmarks->onEachSide(1)->links() }}
+                    </div>
+                </div>
+            @endif
+        @endauth
+    </div>
+
+    <livewire:authentication-modal/>
 @endsection
 @push('scripts')
     <script>
@@ -44,7 +48,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top ' . {{ \Trans::get('teams') }},
+                        title: 'Top '.{{ \Platform::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

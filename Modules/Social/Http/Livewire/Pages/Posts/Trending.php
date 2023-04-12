@@ -17,11 +17,11 @@ class Trending extends Component
 
     public function mount($type = null)
     {
-        if (!App::environment('production')) {
+        if (! App::environment('production')) {
             $this->useCache = false;
         }
 
-        if (!empty($type)) {
+        if (! empty($type)) {
             $this->type = $type;
         }
     }
@@ -54,7 +54,7 @@ class Trending extends Component
     {
         return view('social::livewire.pages.posts.trending', [
             'posts' => $this->posts,
-            'profiles' => $this->profiles
+            'profiles' => $this->profiles,
         ]);
     }
 }

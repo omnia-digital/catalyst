@@ -2,7 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
-use Illuminate\Support\Facades\Auth;
+use App\Support\Platform\WithGuestAccess;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
@@ -14,14 +14,14 @@ use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class RepostButton extends Component
 {
-    use WithModal, WithNotification, WithPostEditor;
+    use WithModal, WithNotification, WithPostEditor, WithGuestAccess;
 
     public Post $model;
 
     public ?string $content = null;
 
     protected $listeners = [
-        'post-editor:submitted' => 'createRepost'
+        'post-editor:submitted' => 'createRepost',
     ];
 
     public function showRepostModal()
@@ -46,8 +46,7 @@ class RepostButton extends Component
             return $repost;
         });
 
-
-        $this->model->user->notify(new PostWasRepostedNotification($repost, Auth::user()));
+        $this->model->user->notify(new PostWasRepostedNotification($repost, auth()->user()));
 
         $this->emitPostSaved($data['id']);
         $this->closeModal('repost-modal-' . $this->model->id);

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 use Modules\Social\Models\Profile;
-use Nwidart\Modules\Module;
+use Spatie\Permission\Models\Role;
 
 class UserFactory extends Factory
 {
@@ -59,13 +59,41 @@ class UserFactory extends Factory
             return $this->state([]);
         }
 
+        $team = Team::factory()->create();
+
+        $role = Role::create([
+            'name' => config('platform.teams.default_owner_role'),
+            'team_id' => $team->id,
+        ]);
+
         return $this->hasAttached(
-            Team::factory()
-                ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->profile->name.'\'s ' . \Trans::get('Team')];
-                }), 
-                ['role' => 'owner'],
-                'teams'
+            $team,
+            ['role_id' => $role->id, 'team_id' => $team->id],
+            'teams'
+        );
+    }
+
+    /**
+     * Indicate that the user should have a personal team.
+     *
+     * @param $position
+     * @return $this
+     */
+    public function withExistingTeam()
+    {
+        if (! Features::hasTeamFeatures()) {
+            return $this->state([]);
+        }
+        $team = Team::get()->shuffle()->first();
+
+        $member = config('platform.teams.default_member_role');
+
+        setPermissionsTeamId($team->id);
+
+        return $this->hasAttached(
+            $team,
+            ['role_id' => Role::findOrCreate($member)->id, 'team_id' => $team->id],
+            'teams'
         );
     }
 
@@ -74,17 +102,19 @@ class UserFactory extends Factory
      *
      * @return $this
      */
-    public function withProfile()
+    public function withProfile($fillData = [])
     {
-        if (!class_exists(\Modules\Social\Models\Profile::class)) return;
+        if (! class_exists(\Modules\Social\Models\Profile::class)) {
+            return;
+        }
 
         return $this->has(
             Profile::factory()
-                ->state(function (array $attributes, User $user) {
+                ->state(function (array $attributes, User $user) use ($fillData) {
                     return [
                         'user_id' => $user->id,
-                        'first_name' => $attributes['first_name'],
-                        'last_name' => $attributes['last_name'],
+                        'first_name' => $fillData['first_name'] ?? $attributes['first_name'],
+                        'last_name' => $fillData['last_name'] ?? $attributes['last_name'],
                     ];
                 })
         );

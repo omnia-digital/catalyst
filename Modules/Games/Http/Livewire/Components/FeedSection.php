@@ -4,21 +4,21 @@ namespace Modules\Games\Http\Livewire\Components;
 
 use App\Support\Feed\FeedItem;
 use App\Support\Feed\PolygonFeedItem;
-use Illuminate\Support\Collection;
 use Livewire\Component;
-use Modules\Games\Models\Game;
-use SimplePie\SimplePie;
 use Vedmant\FeedReader\Facades\FeedReader;
 
 class FeedSection extends Component
 {
-    private array $typeClasses = [
-        'ign'   => FeedItem::class,
-    ];
-
     public bool $loaded = false;
     public string $feedUrl;
     public string $type;
+    public bool $showTitle = true;
+    public bool $showDescription = true;
+    public bool $showLinkToNewsPage = false;
+
+    private array $typeClasses = [
+        'ign' => FeedItem::class,
+    ];
 
     public function ready()
     {
@@ -39,7 +39,17 @@ class FeedSection extends Component
         } else {
             $feed->set_item_class(FeedItem::class);
         }
+
         return $feed;
+    }
+
+    public function sanitize($content)
+    {
+        $content = strip_tags($content);
+        $content = html_entity_decode($content);
+//        $content = preg_replace("/&#?[a-z0-9]{2,8};/i","",$content);
+        //        $content = preg_replace('/[^A-Za-z0-9 ]+/', '', $content);
+        return trim($content, ' ');
     }
 
     public function render()
