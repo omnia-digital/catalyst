@@ -15,6 +15,9 @@ class FeedSection extends Component
     public bool $showTitle = true;
     public bool $showDescription = true;
     public bool $showLinkToNewsPage = false;
+    private array $typeClasses = [
+        'ign' => FeedItem::class,
+    ];
 
     private array $typeClasses = [
         'ign' => FeedItem::class,

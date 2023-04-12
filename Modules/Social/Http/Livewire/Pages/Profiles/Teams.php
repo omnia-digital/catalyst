@@ -2,6 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Profiles;
 
+use App;
 use App\Models\Team;
 use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;

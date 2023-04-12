@@ -6,7 +6,6 @@ name: Duster Fix
 on:
     push:
         branches: [ dev ]
-    pull_request:
 
 jobs:
   duster:
