@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Livewire\Livewire;
 use Modules\Social\Http\Livewire\Pages\Profiles\Edit as EditProfile;
 use Modules\Social\Models\Profile;
@@ -22,15 +21,15 @@ class ProfileInformationTest extends TestCase
 
         $this->actingAs($user = User::factory()->withTeam()->create([
             'email' => 'test@omniadigital.io',
-            'is_admin' => true
+            'is_admin' => true,
         ]));
 
         $profile = new Profile([
-            'first_name'       => 'test first name',
-            'last_name'       => 'test last name',
-            'bio'        => 'test bio',
+            'first_name' => 'test first name',
+            'last_name' => 'test last name',
+            'bio' => 'test bio',
             'remote_url' => 'http://test.url/',
-            'location'   => 'test location',
+            'location' => 'test location',
         ]);
 
         $user->profile()->save($profile);
@@ -48,7 +47,6 @@ class ProfileInformationTest extends TestCase
         Livewire::test(EditProfile::class, ['profile' => $this->user->profile])
             ->assertSet('profile.first_name', $this->user->profile->first_name)
             ->assertSet('profile.last_name', $this->user->profile->last_name);
-
     }
 
     /**
