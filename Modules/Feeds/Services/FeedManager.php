@@ -12,11 +12,11 @@ class FeedManager
     ) {
     }
 
-    public function encryptFeedPayload(FeedItem $feed): string
+    public function encryptFeedPayload(FeedItem $feedItem): string
     {
         return $this->encrypter->encrypt(gzcompress(serialize([
-            'url' => $feed->get_permalink(),
-            'content' => $feed->get_description(),
+            'url' => $feedItem->get_permalink(),
+            'content' => $feedItem->get_description(),
         ])));
     }
 

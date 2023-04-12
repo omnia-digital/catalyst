@@ -5,6 +5,7 @@ namespace Modules\Social\Http\Livewire;
 use App\Models\Location;
 use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;
+use Modules\Feeds\Models\FeedSource;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
@@ -62,11 +63,7 @@ class Home extends Component
 
     public function getNewsRssFeeds()
     {
-        $feeds = collect();
-        $feeds->push(['', 'https://rss.app/feeds/YYS8qbgAE8mUDqIZ.xml']);
-        $feeds->push(['', 'https://feeds.feedburner.com/ign/all']);
-        $feeds->push(['', 'https://www.gamedeveloper.com/rss.xml']);
-        $feeds->push(['', 'https://www.gamespot.com/feeds/game-news']);
+        $feeds = FeedSource::first()->get();
 
         return $feeds;
     }

@@ -38,12 +38,11 @@
 {{--                                {{ $recommendedTeams }}--}}
             </div>
 
-{{--            // @TODO [Josh] - this needs to change to check for whether a Feed exists for the home page--}}
-            @if (Platform::isModuleEnabled('games'))
+            @if (Platform::isModuleEnabled('feeds'))
                 <div class="my-4">
-                    <x-library::heading.3>{{ Trans::get('Latest Gaming News') }}</x-library::heading.3>
+                    <x-library::heading.3>{{ Trans::get('Latest News') }}</x-library::heading.3>
                     @foreach ($newsRssFeeds->take(1) as $newsFeed)
-                        <livewire:games::components.feed-section :type="$newsFeed[0]" :feed-url="$newsFeed[1]" :show-description="false" :show-link-to-news-page="true"/>
+                        <livewire:feeds::feed-section :type="$newsFeed[0]" :feed-url="$newsFeed->url" :show-description="false" :show-link-to-news-page="true"/>
                     @endforeach
                 </div>
             @endif
