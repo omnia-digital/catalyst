@@ -1,4 +1,4 @@
-<div 
+<div
     x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
     :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
     role="tabpanel"
@@ -6,15 +6,15 @@
 >
     <x-vertical-tabs.panel-section>
         <x-slot:title>{{ $title }}</x-slot>
-        @isset ($description)
+        @isset($description)
             <x-slot:description>{{ $description }}</x-slot>
         @endisset
         {{ $slot }}
-        @isset ($footer)
+        @isset($footer)
             <x-slot:footer>{{ $footer }}</x-slot>
         @endisset
     </x-vertical-tabs.panel-section>
-    @isset ($additional)
+    @isset($additional)
         {{ $additional }}
     @endisset
 </div>

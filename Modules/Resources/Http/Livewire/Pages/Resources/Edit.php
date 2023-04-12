@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
-use Phuclh\MediaManager\WithMediaManager;
+use Omnia\MediaManager\WithMediaManager;
 
 class Edit extends Component
 {
@@ -17,15 +17,7 @@ class Edit extends Component
 
     public Post $resource;
 
-    protected function rules(): array
-    {
-        return [
-            'resource.title' => ['required', 'max:255'],
-            'resource.url'   => ['nullable', 'url', 'max:255'],
-            'resource.body'  => ['required', 'min:50'],
-            'resource.image' => ['nullable','string'],
-        ];
-    }
+    public array $tags = [];
 
     public function mount(Post $resource)
     {
@@ -43,7 +35,7 @@ class Edit extends Component
 
         $this->saveResource($validated);
 
-        if (!is_null($this->resource->published_at)) {
+        if (! is_null($this->resource->published_at)) {
             $this->resource->published_at = null;
             $this->resource->save();
         }
@@ -58,7 +50,7 @@ class Edit extends Component
 
         $this->redirectRoute('resources.show', $this->resource);
     }
-    
+
     public function publishResource()
     {
         $validated = $this->validate()['resource'];
@@ -73,7 +65,7 @@ class Edit extends Component
         $this->addMentions($validated['body']);
 
         $this->addTags($validated['body']);
-        
+
         if (isset($validated['image'])) {
             $this->resource->attachMedia([$validated['image']]);
         }
@@ -91,11 +83,23 @@ class Edit extends Component
 
     public function addTags($content)
     {
-        $hashtags = Tag::pullTags($content);
+        $hashtags = Tag::parseHashTagsFromString($content);
 
-        $tags = Tag::getTags($hashtags);
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
 
         $this->resource->attachTags($tags, 'post');
+    }
+
+    public function getResourceTagsProperty()
+    {
+        // get tags that aren't the resource tag since we don't want the user to edit that one
+        $tagsToRemove = [
+            'Resource',
+        ];
+
+        return $this->resource->tags->mapWithKeys(function (Tag $tag) {
+            return [$tag->name => ucwords($tag->name)];
+        })->pluck($tagsToRemove)->all();
     }
 
     public function saveResource($attributes)
@@ -104,7 +108,7 @@ class Edit extends Component
             'title' => $attributes['title'],
             'body' => Mention::processMentionContent($attributes['body']),
             'url' => $attributes['url'],
-            'image' => $attributes['image']
+            'image' => $attributes['image'],
         ]);
 
         $this->resource->fresh();
@@ -124,6 +128,18 @@ class Edit extends Component
 
     public function render()
     {
-        return view('resources::livewire.pages.resources.edit');
+        return view('resources::livewire.pages.resources.edit', [
+            'resourceTags' => $this->resourceTags,
+        ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'resource.title' => ['required', 'max:255'],
+            'resource.url' => ['nullable', 'url', 'max:255'],
+            'resource.body' => ['required', 'min:50'],
+            'resource.image' => ['nullable', 'string'],
+        ];
     }
 }

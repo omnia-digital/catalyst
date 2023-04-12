@@ -13,21 +13,27 @@ class PostPolicy
     /**
      * Perform pre-authorization checks.
      *
-     * @param  \App\Models\User  $user
      * @return void|bool
      */
     public function before(User $user)
     {
-        if ($user->is_admin) {
+        if ($user->hasRole('super_admin')) {
             return true;
         }
     }
 
     /**
+     * @return true
+     */
+    public function create(User $user)
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can update the post.
      *
-     * @param \App\Models\User $user
-     * @param \App\Models\Post $post
+     * @param  \App\Models\Post  $post
      * @return mixed
      */
     public function update(User $user, Post $post)
@@ -38,8 +44,7 @@ class PostPolicy
     /**
      * Determine whether the user can delete the post.
      *
-     * @param \App\Models\User $user
-     * @param \App\Models\Post $post
+     * @param  \App\Models\Post  $post
      * @return mixed
      */
     public function delete(User $user, Post $post)

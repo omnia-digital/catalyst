@@ -2,14 +2,14 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Posts;
 
+use App\Models\Tag;
 use App\Models\Team;
 use App\Models\User;
 use Livewire\Component;
 use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
+use Omnia\MediaManager\WithMediaManager;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
-use Phuclh\MediaManager\WithMediaManager;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Trans;
 
 class Edit extends Component
@@ -32,14 +32,6 @@ class Edit extends Component
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    protected function rules(): array
-    {
-        return [
-            'post.body'  => ['required', 'min:50'],
-            'post.image' => ['nullable','string'],
-        ];
-    }
-
     public function mount(Post $post)
     {
         $this->post = $post;
@@ -53,6 +45,10 @@ class Edit extends Component
         $this->post->update([
             'body' => Mention::processMentionContent($validated['body']),
         ]);
+
+        $hashtags = Tag::parseHashTagsFromString($validated['body']);
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
+        $this->post->attachTags($tags, 'post');
 
         $this->post->attachMedia($this->images);
 
@@ -83,14 +79,6 @@ class Edit extends Component
         $this->emitImagesSet();
     }
 
-    private function emitImagesSet(): void
-    {
-        $this->dispatchBrowserEvent('update-post:image-set', [
-            'id'     => $this->editorId,
-            'images' => $this->images
-        ]);
-    }
-
     public function removeImage()
     {
         $this->post->media()->where('id', $this->mediaIdBeingRemoved)->delete();
@@ -98,7 +86,7 @@ class Edit extends Component
         $this->post->fresh();
 
         $this->emit('refreshComponent');
-        
+
         $this->reset('confirmingMediaRemoval', 'mediaIdBeingRemoved');
 
         $this->success(Trans::get('Image removed.'));
@@ -119,7 +107,23 @@ class Edit extends Component
     public function render()
     {
         return view('social::livewire.pages.posts.edit', [
-            'postMedia' => $this->postMedia
+            'postMedia' => $this->postMedia,
+        ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'post.body' => ['required'],
+            'post.image' => ['nullable', 'string'],
+        ];
+    }
+
+    private function emitImagesSet(): void
+    {
+        $this->dispatchBrowserEvent('update-post:image-set', [
+            'id' => $this->editorId,
+            'images' => $this->images,
         ]);
     }
 }

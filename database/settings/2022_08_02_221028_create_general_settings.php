@@ -1,7 +1,6 @@
 <?php
 
 use Spatie\LaravelSettings\Migrations\SettingsMigration;
-use Illuminate\Support\Facades\Schema;
 
 class CreateGeneralSettings extends SettingsMigration
 {

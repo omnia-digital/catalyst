@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
@@ -13,13 +12,13 @@ class NotificationGlobal extends Component
     public function getListeners()
     {
         return [
-            'echo-notification:App.Models.User.' . Auth::id() => 'showAlert',
+            'echo-notification:App.Models.User.' . auth()->id() => 'showAlert',
         ];
     }
 
     public function markAsRead($notificationId)
     {
-        Auth::user()->notifications()->where('id', $notificationId)->first()?->markAsRead();
+        auth()->user()->notifications()->where('id', $notificationId)->first()?->markAsRead();
     }
 
     public function showAlert($notification)

@@ -53,7 +53,7 @@
                     <p class="flex items-center space-x-2 text-sm text-base-text-color">
                         <span>Published</span>
                         <span>
-                            @if($episode->is_published)
+                            @if ($episode->is_published)
                                 <x-heroicon-s-check-circle class="h-5 w-5 text-green-500"/>
                             @else
                                 <x-heroicon-s-x-circle class="h-5 w-5 text-red-500"/>

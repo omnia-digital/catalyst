@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\FormTypeResource\Pages;
 
-use App\Filament\Resources\FormResource;
 use App\Filament\Resources\FormTypeResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;

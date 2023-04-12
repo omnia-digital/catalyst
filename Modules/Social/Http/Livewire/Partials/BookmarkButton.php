@@ -4,7 +4,6 @@ namespace Modules\Social\Http\Livewire\Partials;
 
 use App\Support\Platform\Platform;
 use App\Support\Platform\WithGuestAccess;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use Modules\Social\Notifications\PostWasBookmarkedNotification;
@@ -19,7 +18,7 @@ class BookmarkButton extends Component
 
     public function toggleBookmark()
     {
-        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('social.posts.show', $this->model));
 
             return;
@@ -30,7 +29,7 @@ class BookmarkButton extends Component
         } else {
             $this->model->markAsBookmark();
 
-            $this->model->user->notify(new PostWasBookmarkedNotification($this->model, Auth::user()));
+            $this->model->user->notify(new PostWasBookmarkedNotification($this->model, auth()->user()));
         }
 
         $this->model->refresh();

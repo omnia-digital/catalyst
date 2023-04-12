@@ -8,10 +8,10 @@ use Modules\Social\Models\Post;
 
 class Show extends Component
 {
-    protected $listeners = ['postAdded' => '$refresh'];
-
     public $post;
     public $recentlyAddedComment;
+
+    protected $listeners = ['postAdded' => '$refresh'];
 
     public function postAdded(Post $post)
     {
@@ -22,7 +22,7 @@ class Show extends Component
     {
         $this->post = Post::withoutGlobalScope('parent')->findOrFail($post);
 
-        if ($this->post->type === PostType::RESOURCE) {
+        if ($this->post->type === PostType::ARTICLE) {
             $this->redirectRoute('resources.show', $this->post->id);
 
             return;

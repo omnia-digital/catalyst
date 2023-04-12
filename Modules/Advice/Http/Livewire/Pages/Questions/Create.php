@@ -2,9 +2,8 @@
 
 namespace Modules\Advice\Http\Livewire\Pages\Questions;
 
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Phuclh\MediaManager\WithMediaManager;
+use Omnia\MediaManager\WithMediaManager;
 
 class Create extends Component
 {
@@ -18,24 +17,14 @@ class Create extends Component
 
     public ?string $image = null;
 
-    protected function rules(): array
-    {
-        return [
-            'title' => ['required', 'max:255'],
-            'url'   => ['required', 'url', 'max:255'],
-            'body'  => ['required', 'max:500'],
-            'image' => ['required', 'max:255'],
-        ];
-    }
-
     public function addResource()
     {
         $validated = $this->validate();
 
-        $resource = Auth::user()->posts()->create(
+        $resource = auth()->user()->posts()->create(
             array_merge($validated, [
-                'team_id' => Auth::user()->currentTeam->id,
-                'type'  => 'resource'
+                'team_id' => auth()->user()->currentTeam->id,
+                'type' => 'resource',
             ])
         );
 
@@ -58,5 +47,15 @@ class Create extends Component
     public function render()
     {
         return view('advice::livewire.pages.questions.create');
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'title' => ['required', 'max:255'],
+            'url' => ['required', 'url', 'max:255'],
+            'body' => ['required', 'max:500'],
+            'image' => ['required', 'max:255'],
+        ];
     }
 }

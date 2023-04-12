@@ -17,8 +17,6 @@ class NewSubscriptionPayment
 
     /**
      * Create a new event instance.
-     *
-     * @param ChargentSubscription $subscription
      */
     public function __construct(ChargentSubscription $subscription)
     {

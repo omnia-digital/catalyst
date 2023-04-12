@@ -11,7 +11,8 @@ return [
      */
     'settings' => [
         GeneralSettings::class,
-        BillingSettings::class
+        BillingSettings::class,
+        \Modules\Jobs\Settings\JobsSettings::class,
     ],
 
     /*

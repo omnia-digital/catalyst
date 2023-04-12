@@ -5,7 +5,6 @@ namespace Modules\Games\Http\Livewire\Components;
 use Carbon\Carbon;
 use Livewire\Component;
 use Modules\Games\Actions\Games\GamesAction;
-use Modules\Games\Models\Game;
 
 class MostAnticipated extends Component
 {
@@ -15,9 +14,10 @@ class MostAnticipated extends Component
     {
         $this->readyToLoad = true;
     }
+
     public function getMostAnticipatedProperty()
     {
-        return $this->formatForView((new GamesAction())->mostAnticipated());
+        return $this->formatForView((new GamesAction)->mostAnticipated());
     }
 
     public function render()

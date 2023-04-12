@@ -2,6 +2,7 @@
 
 namespace App\Actions\Teams;
 
+use Closure;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
@@ -9,6 +10,7 @@ use Laravel\Jetstream\Events\AddingTeamMember;
 use Laravel\Jetstream\Events\TeamMemberAdded;
 use Laravel\Jetstream\Jetstream;
 use Spatie\Permission\Models\Role;
+use Trans;
 
 class AddTeamMember implements AddsTeamMembers
 {
@@ -17,8 +19,6 @@ class AddTeamMember implements AddsTeamMembers
      *
      * @param  mixed  $user
      * @param  mixed  $team
-     * @param  string  $email
-     * @param  string|null  $role
      * @return void
      */
     public function add($user, $team, string $email, string $role = null)
@@ -44,8 +44,6 @@ class AddTeamMember implements AddsTeamMembers
      * Validate the add member operation.
      *
      * @param  mixed  $team
-     * @param  string  $email
-     * @param  string|null  $role
      * @return void
      */
     protected function validate($team, string $email, ?string $role)
@@ -54,7 +52,7 @@ class AddTeamMember implements AddsTeamMembers
             'email' => $email,
             'role' => $role,
         ], $this->rules(), [
-            'email.exists' => \Trans::get('We were unable to find a registered user with this email address.'),
+            'email.exists' => Trans::get('We were unable to find a registered user with this email address.'),
         ])->after(
             $this->ensureUserIsNotAlreadyOnTeam($team, $email)
         )->validateWithBag('addTeamMember');
@@ -77,8 +75,7 @@ class AddTeamMember implements AddsTeamMembers
      * Ensure that the user is not already on the team.
      *
      * @param  mixed  $team
-     * @param  string  $email
-     * @return \Closure
+     * @return Closure
      */
     protected function ensureUserIsNotAlreadyOnTeam($team, string $email)
     {
@@ -86,7 +83,7 @@ class AddTeamMember implements AddsTeamMembers
             $validator->errors()->addIf(
                 $team->hasUserWithEmail($email),
                 'email',
-                \Trans::get('This user already belongs to the team.')
+                Trans::get('This user already belongs to the team.')
             );
         };
     }

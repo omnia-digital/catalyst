@@ -2,24 +2,28 @@
 
 namespace Tests\Support\Platform;
 
-use App\Support\Platform\Platform;
 use PHPUnit\Framework\TestCase;
 
 class PlatformTest extends TestCase
 {
-
-    public function testIsModuleEnabled()
+    /**
+     * @test
+     */
+    public function isModuleEnabled()
     {
-
     }
 
-    public function testIsUsingPaymentGateway()
+    /**
+     * @test
+     */
+    public function isUsingPaymentGateway()
     {
-
     }
 
-    public function testIsUsingTeamMemberSubscriptions()
+    /**
+     * @test
+     */
+    public function isUsingTeamMemberSubscriptions()
     {
-
     }
 }

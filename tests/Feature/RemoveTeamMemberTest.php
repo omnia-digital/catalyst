@@ -20,18 +20,18 @@ class RemoveTeamMemberTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-    
+
         $this->actingAs($user = User::factory()->withTeam()->create([
             'email' => 'test@omniadigital.io',
-            'is_admin' => true
+            'is_admin' => true,
         ]));
 
         $profile = new Profile([
-            'first_name'       => 'test first name',
-            'last_name'       => 'test last name',
-            'bio'        => 'test bio',
+            'first_name' => 'test first name',
+            'last_name' => 'test last name',
+            'bio' => 'test bio',
             'remote_url' => 'http://test.url/',
-            'location'   => 'test location',
+            'location' => 'test location',
         ]);
 
         $user->profile()->save($profile);
@@ -41,19 +41,21 @@ class RemoveTeamMemberTest extends TestCase
         $otherUser = User::factory()->create();
 
         $otherUser->profile()->save(new Profile([
-            'first_name'       => 'other user first name',
-            'last_name'       => 'other user last name',
-            'bio'        => 'other user bio',
+            'first_name' => 'other user first name',
+            'last_name' => 'other user last name',
+            'bio' => 'other user bio',
             'remote_url' => 'http://otheruser.url/',
-            'location'   => 'other user location',
+            'location' => 'other user location',
         ]));
 
         $this->otherUser = $otherUser;
     }
 
-    public function test_team_members_can_be_removed_from_teams()
+    /**
+     * @test
+     */
+    public function team_members_can_be_removed_from_teams()
     {
-
         $team = $this->user->teams()->first();
 
         $team->users()->attach(
@@ -67,7 +69,10 @@ class RemoveTeamMemberTest extends TestCase
         $this->assertCount(0, $team->fresh()->members);
     }
 
-    public function test_only_team_owner_can_remove_team_members()
+    /**
+     * @test
+     */
+    public function only_team_owner_can_remove_team_members()
     {
         $team = $this->user->teams()->first();
 

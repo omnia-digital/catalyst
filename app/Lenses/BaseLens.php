@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Builder;
 
 abstract class BaseLens
 {
-    public abstract function handle(Builder $query): Builder;
+    abstract public function handle(Builder $query): Builder;
 }

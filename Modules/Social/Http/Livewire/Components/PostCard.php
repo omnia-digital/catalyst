@@ -4,10 +4,10 @@ namespace Modules\Social\Http\Livewire\Components;
 
 use App\Support\Platform\Platform;
 use App\Support\Platform\WithGuestAccess;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
+
 use function view;
 
 class PostCard extends Component
@@ -19,35 +19,46 @@ class PostCard extends Component
     public $clickable;
     public $showPostActions = true;
 
-    public function mount(Post $post, $clickable = true, $showPostActions = true) {
+    public function loadRelations()
+    {
+        $this->post->load(['user', 'team', 'media', 'repostOriginal', 'tags']);
+    }
+
+    public function mount(Post $post, $clickable = true, $showPostActions = true)
+    {
         $this->post = $post;
         $this->clickable = $clickable;
         $this->showPostActions = $showPostActions;
+        $this->loadRelations();
     }
 
-    public function getAuthorProperty() {
+    public function getAuthorProperty()
+    {
         return $this->post->user;
     }
 
-    public function showPost() {
+    public function showPost()
+    {
         if ($this->clickable) {
             return $this->redirectRoute('social.posts.show', $this->post);
         }
     }
 
-    public function showProfile($handle = null, $team = false) {
+    public function showProfile($handle = null, $team = false)
+    {
         if ($team) {
-            return $this->redirectRoute('social.teams.show',$handle);
+            return $this->redirectRoute('social.teams.show', $handle);
         }
-        if($handle) {
+        if ($handle) {
             return $this->redirectRoute('social.profile.show', $handle);
         }
+
         return $this->redirectRoute('social.profile.show', $this->author->handle);
     }
 
     public function toggleBookmark()
     {
-        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('social.posts.show', $this->post));
 
             return;
@@ -67,7 +78,7 @@ class PostCard extends Component
 
         $this->success('Bookmark the resource successfully!');
     }
-    
+
     /**
      * Confirm delete post.
      *

@@ -12,10 +12,10 @@ use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 class Drafts extends Component
 {
     use WithPagination, WithCachedRows;
-    
+
     public function getRowsQueryProperty()
     {
-        $query = Post::where('type', '=', PostType::RESOURCE)
+        $query = Post::where('type', '=', PostType::ARTICLE)
             ->where('user_id', auth()->id())
             ->whereNull('published_at')
             ->withCount(['bookmarks', 'likes', 'media']);
@@ -37,8 +37,8 @@ class Drafts extends Component
 
     public function render()
     {
-        return view('resources::livewire.pages.resources.drafts',[
-            'resources' => $this->rows
+        return view('resources::livewire.pages.resources.drafts', [
+            'resources' => $this->rows,
         ]);
     }
 }

@@ -24,7 +24,7 @@ class CreateStripeConnectCustomerAction
 
         return $user->stripeConnectCustomers()->create([
             'team_id' => $team->id,
-            'stripe_customer_id' => $stripeCustomer->id
+            'stripe_customer_id' => $stripeCustomer->id,
         ]);
     }
 }

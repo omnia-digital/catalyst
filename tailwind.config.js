@@ -8,7 +8,7 @@ module.exports = {
         './vendor/laravel/jetstream/**/*.blade.php',
         './vendor/omnia-digital/library/resources/views/**/*.blade.php',
         './vendor/omnia-digital/library/resources/js/**/*.js',
-        './vendor/phuclh/media-manager/resources/views/**/*.blade.php',
+        './vendor/omnia-digitl/media-manager/resources/views/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './Modules/*/Resources/views/**/*.blade.php',
@@ -69,20 +69,20 @@ module.exports = {
                     'hover': 'var(--neutral-hover)',
                 },
                 primary: {
-                    DEFAULT: 'var(--primary)',
+                    DEFAULT: process.env.PRIMARY_COLOR || 'var(--primary)',
                     "50": "var(--primary-50)",
                     "100": "var(--primary-100)",
                     "200": "var(--primary-200)",
                     "300": "var(--primary-300)",
                     "400": "var(--primary-400)",
-                    "500": "var(--primary-500)",
+                    "500": process.env.PRIMARY_COLOR_500 || process.env.PRIMARY_COLOR || "var(--primary-500)",
                     "600": "var(--primary-600)",
                     "700": "var(--primary-700)",
                     "800": "var(--primary-800)",
                     "900": "var(--primary-900)"
                 },
                 secondary: {
-                    DEFAULT: 'var(--secondary)',
+                    DEFAULT: process.env.SECONDARY_COLOR || 'var(--secondary)',
                     "50": "var(--secondary-50)",
                     "100": "var(--secondary-100)",
                     "200": "var(--secondary-200)",
@@ -95,7 +95,7 @@ module.exports = {
                     "900": "var(--secondary-900)"
                 },
                 tertiary: {
-                    DEFAULT: 'var(--tertiary)',
+                    DEFAULT: process.env.TERTIARY_COLOR || 'var(--tertiary)',
                     "50": "var(--tertiary-50)",
                     "100": "var(--tertiary-100)",
                     "200": "var(--tertiary-200)",
@@ -136,7 +136,8 @@ module.exports = {
 
     variants: {
         extend: {
-            textOpacity: ['dark']
+            textOpacity: ['dark'],
+            display: ["group-hover"]
         }
     },
 

@@ -11,6 +11,6 @@
 |
 */
 
-Route::name('forms.')->prefix('forms')->group(function() {
+Route::name('forms.')->prefix('forms')->group(function () {
     Route::get('/forms/{form}', \Modules\Forms\Http\Livewire\Form::class)->name('form');
 });

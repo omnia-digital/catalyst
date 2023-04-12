@@ -1,0 +1,112 @@
+name: Pull Request Workflow
+on:
+  pull_request:
+    branches: [ '*' ]
+jobs:
+#  style:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Setup PHP
+#        uses: shivammathur/setup-php@v2
+#        with:
+#          php-version: 8.1
+#          tools: composer:v2
+#          coverage: none
+#
+#      - name: Fix style
+#        uses: docker://oskarstark/php-cs-fixer-ga
+#        with:
+#          args: --config=.php-cs-fixer.php --allow-risky=yes
+#
+#      - name: Extract branch name
+#        shell: bash
+#        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+#        id: extract_branch
+#
+#      - name: Commit changes
+#        uses: stefanzweifel/git-auto-commit-action@v2.3.0
+#        with:
+#          commit_message: Fix styling
+#          branch: ${{ steps.extract_branch.outputs.branch }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#  psalm:
+#    name: psalm
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Check out code
+#        uses: actions/checkout@v2
+#
+#      - name: Setup PHP
+#        uses: shivammathur/setup-php@v2
+#        with:
+#          php-version: '8.1'
+#          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+#          tools: composer:v2
+#          coverage: none
+#
+#      - name: Cache dependencies
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            ~/.composer/cache/files
+#            node_modules
+#          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+#
+#      - name: Run composer require
+#        run: composer require -n --prefer-dist
+#
+#      - name: Run psalm
+#        run: ./vendor/bin/psalm -c psalm.xml
+#  tests:
+#    name: Run tests
+#    if: github.ref != 'refs/heads/main'
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Check out code
+#        uses: actions/checkout@v2
+#      - name: Cache dependencies
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            ~/.composer/cache/files
+#            node_modules
+#          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+#      - name: Set up PHP
+#        uses: shivammathur/setup-php@v2
+#        with:
+#          php-version: '8.1'
+#          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql
+#      - name: Copy environment config file
+#        run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
+#      - name: Run yarn
+#        run: |
+#          yarn --version
+#          yarn && yarn prod
+#      - name: Validate Composer
+#        run: composer validate
+#      - name: Install Composer dependencies
+#        run: |
+#          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_PASSWORD }}"
+#          composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
+#          composer install --prefer-dist --no-interaction --no-suggest
+#      - name: Create database
+#        run: |
+#          sudo /etc/init.d/mysql start
+#          mysql  -u root -proot -e 'CREATE DATABASE IF NOT EXISTS mailcoach_tests;'
+#      - name: Run Tests
+#        run: |
+#          ./vendor/bin/phpunit --version
+#          ./vendor/bin/phpunit --verbose
+#        env:
+#          APP_ENV: testing
+#      - name: Upload artifacts
+#        uses: actions/upload-artifact@v2
+#        if: failure()
+#        with:
+#          name: Logs
+#          path: ./storage/logs
