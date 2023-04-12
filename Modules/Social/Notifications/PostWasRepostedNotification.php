@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
+use Trans;
 
 class PostWasRepostedNotification extends Notification implements ShouldQueue
 {
@@ -45,7 +46,7 @@ class PostWasRepostedNotification extends Notification implements ShouldQueue
 
     public function getMessage()
     {
-        return \Trans::get($this->actionable->name . ' reposted your post');
+        return Trans::get($this->actionable->name . ' reposted your post');
     }
 
     public function getUrl()
