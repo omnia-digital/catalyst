@@ -6,7 +6,6 @@ use App;
 use App\Models\Team;
 use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Social\Models\Profile;
