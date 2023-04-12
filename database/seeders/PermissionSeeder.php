@@ -18,6 +18,7 @@ class PermissionSeeder extends Seeder
             'read_team',
             'update_team',
             'delete_team',
+            'send-team-broadcast',
         ];
         $postPermissions = [
             'create_post',

@@ -11,6 +11,11 @@ class ProfileObserver
         //
     }
 
+    public function updating(Profile $profile)
+    {
+        $profile->isDirty('score') && $profile->score_updated_at = now();
+    }
+
     public function updated(Profile $profile)
     {
         //

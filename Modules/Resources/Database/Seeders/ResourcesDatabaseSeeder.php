@@ -15,7 +15,8 @@ class ResourcesDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory(15)->asResource()->create();
+        Post::factory(10)->asResource()->create();
+        Post::factory(10)->asArticle()->create();
         $this->call(BookmarksTableSeeder::class);
     }
 }

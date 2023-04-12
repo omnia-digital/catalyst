@@ -26,6 +26,8 @@ class ManageTeamRoles extends Component
     {
         return [
             'editingRole.team_id' => 'required|integer',
+            'editingRole.description' => 'required|min:4|max:255',
+            'permissionsToAttach' => ['nullable', 'array'],
             'editingRole.name' => [
                 'required',
                 'alpha_num',
@@ -159,7 +161,12 @@ class ManageTeamRoles extends Component
 
     public function getRolesProperty()
     {
-        return Role::where('team_id', $this->team->id)->get();
+        return Role::where('team_id', $this->team->id)->with('permissions')->get();
+    }
+
+    public function getPermissionsProperty()
+    {
+        return Permission::get();
     }
 
     public function getAvailablePermissionsProperty()

@@ -3,7 +3,7 @@
 namespace App\Actions\Teams;
 
 use App\Contracts\InvitesTeamMembers;
-use App\Events\InvitingTeamMember;
+use App\Events\InvitedTeamMember;
 use App\Models\User;
 use Closure;
 use Illuminate\Support\Facades\Gate;
@@ -32,7 +32,7 @@ class InviteTeamMember implements InvitesTeamMembers
 
         $this->validate($team, $email, $role, $message);
 
-        InvitingTeamMember::dispatch($team, $email, $role, $message);
+        InvitedTeamMember::dispatch($team, $email, $role, $message);
 
         $invitation = $team->teamInvitations()->create([
             'user_id' => optional($user)->id,

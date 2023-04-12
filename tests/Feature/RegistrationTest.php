@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Actions\Fortify\CreateNewUser;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
@@ -49,12 +51,20 @@ class RegistrationTest extends TestCase
             return $this->markTestSkipped('Registration support is not enabled.');
         }
 
-        $response = $this->post('/register', [
-            'name' => 'Test User',
+        $registrationData = [
+            'first_name' => 'Test',
+            'last_name' => 'User',
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+        ];
+
+        event(new Registered($user = (new CreateNewUser)->create($registrationData)));
+
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
         ]);
 
         $this->assertAuthenticated();

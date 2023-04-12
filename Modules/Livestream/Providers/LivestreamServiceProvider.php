@@ -2,7 +2,6 @@
 
 namespace Modules\Livestream\Providers;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,7 +28,6 @@ class LivestreamServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-        Model::preventLazyLoading(! app()->isProduction() && ! app()->environment('staging'));
     }
 
     /**

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
-use Laravel\Jetstream\Events\InvitingTeamMember;
+use Laravel\Jetstream\Events\InvitedTeamMember;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Mail\TeamInvitation;
 use Laravel\Jetstream\Rules\Role;
@@ -28,7 +28,7 @@ class InviteTeamMember implements InvitesTeamMembers
 
         $this->validate($team, $email, $role);
 
-        InvitingTeamMember::dispatch($team, $email, $role);
+        InvitedTeamMember::dispatch($team, $email, $role);
 
         $invitation = $team->teamInvitations()->create([
             'email' => $email,
