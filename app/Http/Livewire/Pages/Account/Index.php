@@ -2,11 +2,9 @@
 
 namespace App\Http\Livewire\Pages\Account;
 
-use Auth;
 use Laravel\Fortify\Contracts\UpdatesUserPasswords;
 use Laravel\Jetstream\ConfirmsPasswords;
 use Livewire\Component;
-use Modules\Social\Models\Profile;
 
 class Index extends Component
 {
@@ -15,26 +13,6 @@ class Index extends Component
     public $email;
 
     public $handle;
-
-    protected function getAccountRules() {
-        return [
-            'email' => [
-                'required', 
-                'string', 
-                'email', 
-                'max:255', 
-                'unique:users,email,'.$this->user->id
-            ],
-            'handle' => [
-                'required', 
-                'string', 
-                'alpha_dash', 
-                'max:40', 
-                'unique:profiles,handle,'.$this->user->id,
-                'unique:teams',
-            ]
-        ];
-    } 
 
     /**
      * The component's state.
@@ -49,7 +27,7 @@ class Index extends Component
 
     /**
      * Update the user's basic account info.
-     * 
+     *
      * @return void
      */
     public function updateAccount()
@@ -73,18 +51,17 @@ class Index extends Component
     /**
      * Update the user's password.
      *
-     * @param  \Laravel\Fortify\Contracts\UpdatesUserPasswords  $updater
      * @return void
      */
     public function updatePassword(UpdatesUserPasswords $updater)
     {
         $this->resetErrorBag();
 
-        $updater->update(Auth::user(), $this->state);
+        $updater->update(auth()->user(), $this->state);
 
         if (request()->hasSession()) {
             request()->session()->put([
-                'password_hash_'.Auth::getDefaultDriver() => Auth::user()->getAuthPassword(),
+                'password_hash_' . auth()->getDefaultDriver() => auth()->user()->getAuthPassword(),
             ]);
         }
 
@@ -110,7 +87,7 @@ class Index extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        return auth()->user();
     }
 
     public function getProfileProperty()
@@ -121,5 +98,26 @@ class Index extends Component
     public function render()
     {
         return view('livewire.pages.account.index');
+    }
+
+    protected function getAccountRules()
+    {
+        return [
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users,email,' . $this->user->id,
+            ],
+            'handle' => [
+                'required',
+                'string',
+                'alpha_dash',
+                'max:40',
+                'unique:profiles,handle,' . $this->user->id,
+                'unique:teams',
+            ],
+        ];
     }
 }

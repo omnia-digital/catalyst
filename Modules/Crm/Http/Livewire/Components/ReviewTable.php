@@ -13,7 +13,6 @@ use Filament\Tables\Contracts\HasTable;
 use Livewire\Component;
 use Modules\Reviews\Models\Review;
 
-
 class ReviewTable extends Component implements HasTable
 {
     use InteractsWithTable;
@@ -21,6 +20,11 @@ class ReviewTable extends Component implements HasTable
     public function render()
     {
         return view('crm::livewire.components.review-table');
+    }
+
+    public function isTableSearchable(): bool
+    {
+        return true;
     }
 
     protected function getTableQuery()
@@ -67,10 +71,5 @@ class ReviewTable extends Component implements HasTable
         return [
             DeleteBulkAction::make(),
         ];
-    }
-
-    public function isTableSearchable(): bool
-    {
-        return true;
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\View\Components\Social\Partials;
 
+use Closure;
 use Illuminate\View\Component;
 use Modules\Social\Models\Post;
 
 class ReplyListItem extends Component
 {
-
     public Post $reply;
 
     /**
@@ -23,7 +23,7 @@ class ReplyListItem extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return \Illuminate\Contracts\View\View|Closure|string
      */
     public function render()
     {

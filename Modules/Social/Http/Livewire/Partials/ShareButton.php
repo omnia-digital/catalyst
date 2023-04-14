@@ -6,6 +6,7 @@ use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
+use Share;
 
 class ShareButton extends Component
 {
@@ -30,7 +31,8 @@ class ShareButton extends Component
 
     public function getLinks()
     {
-        $this->links = \Share::page($this->url)->facebook()->twitter()->linkedin()->whatsapp()->telegram()->reddit()->getRawLinks();
+        $this->links = Share::page($this->url)->facebook()->twitter()->linkedin()->whatsapp()->telegram()->reddit()->getRawLinks();
+
         return $this->links;
     }
 

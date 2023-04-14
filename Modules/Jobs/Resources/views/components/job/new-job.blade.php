@@ -340,7 +340,7 @@
 
                                         <div>
                                             <x-input.label for="card_holder_name" value="Card Holder Name"/>
-                                            <x-input.text x-model="cardHolderName" id="card_holder_name" placeholder="Phuc Le"/>
+                                            <x-input.text x-model="cardHolderName" id="card_holder_name" placeholder="John Smith"/>
                                             <x-input.error for="card_holder_name"/>
                                         </div>
 

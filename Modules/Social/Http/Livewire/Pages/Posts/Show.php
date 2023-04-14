@@ -8,10 +8,10 @@ use Modules\Social\Models\Post;
 
 class Show extends Component
 {
-    protected $listeners = ['postAdded' => '$refresh'];
-
     public $post;
     public $recentlyAddedComment;
+
+    protected $listeners = ['postAdded' => '$refresh'];
 
     public function postAdded(Post $post)
     {

@@ -7,7 +7,7 @@
                 <x-heroicon-o-arrow-left class="h-6"/>
             </a>
         </div>
-        <a href="{{route('jobs.home')}}">
+        <a href="{{ route('jobs.home') }}">
             <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Update Job') }}</x-library::heading.1>
         </a>
     </div>

@@ -2,9 +2,8 @@
 
 namespace Modules\Jobs\Http\Livewire\Pages\Profile;
 
-use Modules\Jobs\Support\Livewire\WithStripe;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Modules\Jobs\Support\Livewire\WithStripe;
 
 class DefaultPaymentMethod extends Component
 {
@@ -13,7 +12,7 @@ class DefaultPaymentMethod extends Component
     public function render()
     {
         return view('profile.default-payment-method', [
-            'intent' => Auth::user()->createSetupIntent(),
+            'intent' => auth()->user()->createSetupIntent(),
         ]);
     }
 }

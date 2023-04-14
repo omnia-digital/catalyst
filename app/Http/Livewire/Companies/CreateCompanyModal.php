@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Companies;
 
 use App\Actions\Companies\CreateCompany;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
@@ -73,30 +72,22 @@ class CreateCompanyModal extends Component
 
     public function getCompanyTagsProperty()
     {
-        return Tag::withType('company_type')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
-    }
-
-    protected function rules(): array
-    {
-        return [
-            'name' => ['required', 'max:254'],
-            'companyTypes' => ['required', 'array'],
-        ];
+        return Tag::withType('company_type')->get()->mapWithKeys(fn (Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
     }
 
     public function create()
     {
         $this->validate();
 
-        $company = (new CreateCompany())->create(Auth::user(), [
+        $company = (new CreateCompany)->create(auth()->user(), [
             'name' => $this->name,
             'companyTypes' => $this->companyTypes,
-//            'start_date' => $this->startDate,
-//            'summary' => $this->summary,
-//            'bannerImage' => $this->bannerImage,
-//            'mainImage' => $this->mainImage,
-//            'profilePhoto' => $this->profilePhoto,
-//            'sampleMedia' => $this->sampleMedia,
+            //            'start_date' => $this->startDate,
+            //            'summary' => $this->summary,
+            //            'bannerImage' => $this->bannerImage,
+            //            'mainImage' => $this->mainImage,
+            //            'profilePhoto' => $this->profilePhoto,
+            //            'sampleMedia' => $this->sampleMedia,
         ]);
 
         $this->closeModal('create-company');
@@ -108,7 +99,15 @@ class CreateCompanyModal extends Component
     public function render()
     {
         return view('livewire.create-company-modal', [
-            'companyTags' => $this->companyTags
+            'companyTags' => $this->companyTags,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'name' => ['required', 'max:254'],
+            'companyTypes' => ['required', 'array'],
+        ];
     }
 }

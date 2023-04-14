@@ -5,7 +5,6 @@ namespace Modules\Advice\Http\Livewire\Pages;
 use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Modules\Jobs\Models\JobPosition;
 use Modules\Jobs\Traits\WithSortAndFilters;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
@@ -29,9 +28,8 @@ class Home extends Component
                            ->latest()
                            ->get();
 
-
-        return view('advice::livewire.pages.questions.index',[
-                    'questions'         => $questions,
+        return view('advice::livewire.pages.questions.index', [
+            'questions' => $questions,
         ]);
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Modules\Jobs\Nova;
 
-use Modules\Jobs\Models\ApplyType;
-use Modules\Jobs\Models\PaymentType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Laravel\Nova\Fields\BelongsTo;
@@ -14,7 +12,8 @@ use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use Modules\Jobs\Models\ApplyType;
+use Modules\Jobs\Models\PaymentType;
 
 class Job extends Resource
 {
@@ -44,7 +43,6 @@ class Job extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function fields(Request $request)
@@ -94,14 +92,13 @@ class Job extends Resource
 
             MorphTo::make('Redeemed Coupon', 'redeemedCoupon')->onlyOnDetail(),
 
-            BelongsToMany::make('JobPositionAddon', 'addons')
+            BelongsToMany::make('JobPositionAddon', 'addons'),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function cards(Request $request)
@@ -112,7 +109,6 @@ class Job extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function filters(Request $request)
@@ -123,7 +119,6 @@ class Job extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function lenses(Request $request)
@@ -134,7 +129,6 @@ class Job extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function actions(Request $request)

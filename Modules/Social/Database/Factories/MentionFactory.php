@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Social\Database\Factories;
 
 use App\Models\User;
@@ -21,7 +22,7 @@ class MentionFactory extends Factory
      */
     public function definition()
     {
-        $user = User::all()->random();
+        $user = User::all()->random()->load('profile');
         $post = Post::factory(1)->create([
             'body' => "Hello @{$user->handle}, I mentioned you in a post!",
         ])->first();
@@ -30,8 +31,7 @@ class MentionFactory extends Factory
             'mentionable_id' => $user->id,
             'mentionable_type' => $user::class,
             'postable_id' => $post->id,
-            'postable_type' => $post::class
+            'postable_type' => $post::class,
         ];
     }
 }
-

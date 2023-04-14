@@ -2,15 +2,12 @@
 
 namespace Modules\Billing\Http\Livewire\Pages\Billing\Chargent\User;
 
-use App\Settings\BillingSettings;
 use App\Support\Platform\Platform;
 use Livewire\Component;
 use Modules\Billing\Actions\Salesforce\CreateContactObjectAction;
 use Modules\Billing\Actions\Salesforce\GetChargentOrderInfoAction;
 use Modules\Billing\Actions\Salesforce\StopRecurringBillingOnChargentOrderAction;
-use Modules\Billing\Actions\Salesforce\StopRecurringPaymentsOnChargentOrderAction;
 use Modules\Billing\Models\FormAssemblyForm;
-use Modules\Social\Http\Livewire\Pages\Subscription\Type;
 
 class Subscription extends Component
 {
@@ -29,14 +26,14 @@ class Subscription extends Component
     public function mount()
     {
         $platformIsUsingChargentPaymentGateway = Platform::isUsingPaymentGateway('chargent');
-        if ( ! $platformIsUsingChargentPaymentGateway || ! config('forrest.credentials.consumerKey')) {
+        if (! $platformIsUsingChargentPaymentGateway || ! config('forrest.credentials.consumerKey')) {
 //            $this->redirect(route('social.home'));
         }
 
         $subscriptionFormSlug = Platform::getBillingSetting('user_subscription_form');
         $changePaymentFormSlug = Platform::getBillingSetting('change_payment_method_form');
 
-        $this->subscriptionForm  = FormAssemblyForm::findBySlug($subscriptionFormSlug);
+        $this->subscriptionForm = FormAssemblyForm::findBySlug($subscriptionFormSlug);
         $this->paymentMethodForm = FormAssemblyForm::findBySlug($changePaymentFormSlug);
 
         (new CreateContactObjectAction)->execute($this->user);
@@ -85,15 +82,16 @@ class Subscription extends Component
 
     public function iFrameURL(FormAssemblyForm $form)
     {
-        $qs         = '?';
+        $qs = '?';
         $attributes = [];
-        $tfaFields  = $form->fields()
+        $tfaFields = $form->fields()
                            ->where('enabled', 1)
                            ->pluck('name', 'tfa_code');
 
         foreach ($tfaFields as $code => $attribute) {
-            if ($attribute === 'chargent_order_id' && !is_null($this->subscription)) {
+            if ($attribute === 'chargent_order_id' && ! is_null($this->subscription)) {
                 $attributes[$code] = $this->subscription?->$attribute;
+
                 continue;
             }
             $attributes[$code] = $this->user->$attribute;
@@ -107,7 +105,7 @@ class Subscription extends Component
     public function render()
     {
         return view('billing::livewire.pages.billing.chargent.user.subscription', [
-            'subscription' => $this->subscription
+            'subscription' => $this->subscription,
         ]);
     }
 }

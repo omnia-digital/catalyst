@@ -6,18 +6,13 @@ use App\Filament\Resources\TeamResource\Pages;
 use App\Filament\Resources\TeamResource\RelationManagers;
 use App\Models\Team;
 use App\Models\User;
-use Ariaieboy\FilamentJalaliDatetime\JalaliDateTimeColumn;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
-use Filament\Forms\Components\MorphToSelect;
-use Filament\Forms\Components\MorphToSelect\Type;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Modules\Games\Models\Game;
+use Trans;
 
 class TeamResource extends Resource
 {
@@ -25,37 +20,9 @@ class TeamResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-globe';
     protected static ?string $navigationGroup = 'Social';
 
-    protected static function getNavigationLabel(): string
-    {
-        return \Trans::get('Teams');
-    }
-
     public static function getGloballySearchableAttributes(): array
     {
         return ['name'];
-    }
-
-    //    public static function getEloquentQuery(): Builder
-    //    {
-    //        if (auth()->user()->is_admin) {
-    //            return parent::getEloquentQuery();
-    //        } else {
-    //            return parent::getEloquentQuery()->whereIn('id', auth()->user()->ownedTeams->pluck('id'));
-    //        }
-    //    }
-
-    protected static function getNavigationBadge(): ?string
-    {
-        return static::getEloquentQuery()
-                     ->get()
-                     ->count();
-    }
-
-    protected static function getNavigationBadgeColor(): ?string
-    {
-        return static::getEloquentQuery()
-                     ->get()
-                     ->count() > 10 ? 'warning' : 'primary';
     }
 
     public static function form(Form $form): Form
@@ -125,10 +92,38 @@ class TeamResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListTeams::route('/'),
+            'index' => Pages\ListTeams::route('/'),
             'create' => Pages\CreateTeam::route('/create'),
-            'view'   => Pages\ViewTeam::route('/{record}'),
-            'edit'   => Pages\EditTeam::route('/{record}/edit'),
+            'view' => Pages\ViewTeam::route('/{record}'),
+            'edit' => Pages\EditTeam::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationLabel(): string
+    {
+        return Trans::get('Teams');
+    }
+
+    //    public static function getEloquentQuery(): Builder
+    //    {
+    //        if (auth()->user()->is_admin) {
+    //            return parent::getEloquentQuery();
+    //        } else {
+    //            return parent::getEloquentQuery()->whereIn('id', auth()->user()->ownedTeams->pluck('id'));
+    //        }
+    //    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getEloquentQuery()
+                     ->get()
+                     ->count();
+    }
+
+    protected static function getNavigationBadgeColor(): ?string
+    {
+        return static::getEloquentQuery()
+                     ->get()
+                     ->count() > 10 ? 'warning' : 'primary';
     }
 }

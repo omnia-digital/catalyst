@@ -12,6 +12,7 @@ class ActivityListItem extends Component
     {
         $this->activity = $activity;
     }
+
     public function render()
     {
         return view('social::livewire.partials.activity-list-item');

@@ -3,6 +3,7 @@
 namespace Modules\Articles\Http\Livewire\Layouts;
 
 use Livewire\Component;
+use Trans;
 
 class ModuleNavigation extends Component
 {
@@ -13,30 +14,30 @@ class ModuleNavigation extends Component
     {
         $this->navigation = [
             [
-                'label'   => 'Discover',
-                'name'    => 'articles.home',
-                'icon'    => 'fa-regular fa-telescope',
+                'label' => 'Discover',
+                'name' => 'articles.home',
+                'icon' => 'fa-regular fa-telescope',
                 //                    'icon'    => 'fa-regular fa-earth-americas',
                 //                    'icon'    => 'heroicon-o-globe',
-                'module'  => 'articles',
-                'current' => false
+                'module' => 'articles',
+                'current' => false,
             ],
             [
-                'label'   => \Trans::get('Media'),
-                'name'    => 'articles.drafts',
-                'icon'    => 'fa-regular fa-photo-film-music',
+                'label' => Trans::get('Media'),
+                'name' => 'articles.drafts',
+                'icon' => 'fa-regular fa-photo-film-music',
                 //                    'icon'    => 'heroicon-o-briefcase',
-                'module'  => 'articles',
-                'current' => false
+                'module' => 'articles',
+                'current' => false,
             ],
             [
-                'label'   => \Trans::get('Articles'),
-                'name'    => 'articles.drafts',
-                'icon'    => 'fa-duotone fa-newspaper',
+                'label' => Trans::get('Articles'),
+                'name' => 'articles.drafts',
+                'icon' => 'fa-duotone fa-newspaper',
                 //                    'icon'    => 'heroicon-o-briefcase',
-                'module'  => 'articles',
-                'current' => false
-            ]
+                'module' => 'articles',
+                'current' => false,
+            ],
         ];
     }
 

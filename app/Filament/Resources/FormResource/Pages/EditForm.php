@@ -16,5 +16,4 @@ class EditForm extends EditRecord
             Actions\DeleteAction::make('delete'),
         ];
     }
-
 }

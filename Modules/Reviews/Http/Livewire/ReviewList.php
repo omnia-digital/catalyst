@@ -36,7 +36,7 @@ class ReviewList extends Component
     public function render()
     {
         return view('reviews::livewire.review-list', [
-            'reviews' => $this->rows
+            'reviews' => $this->rows,
         ]);
     }
 }

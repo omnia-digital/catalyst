@@ -2,9 +2,6 @@
 
 namespace Modules\Games\Listeners;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-
 class SyncIGDBGameWithDb
 {
     /**

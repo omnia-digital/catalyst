@@ -18,7 +18,7 @@ class FindTeams extends Component
             : 'social::components.current-week-team-calendar';
 
         $this->emitTo($component, 'startDateUpdated', [
-            'start_date' => $this->startDate
+            'start_date' => $this->startDate,
         ]);
     }
 

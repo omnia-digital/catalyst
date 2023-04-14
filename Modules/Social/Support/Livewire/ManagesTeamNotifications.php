@@ -3,11 +3,16 @@
 namespace Modules\Social\Support\Livewire;
 
 use App\Rules\CronExpressionValidation;
-use Illuminate\Validation\Rule;
 
 trait ManagesTeamNotifications
 {
     public $newNotification;
+
+    public function addTeamNotification()
+    {
+        $validated = $this->validate($this->notificationRules());
+        $this->team->teamNotifications()->create($validated);
+    }
 
     protected function notificationRules()
     {
@@ -17,10 +22,5 @@ trait ManagesTeamNotifications
             'message' => ['required', 'min:10'],
             'expression' => ['required', new CronExpressionValidation],
         ];
-    }
-    public function addTeamNotification()
-    {
-        $validated = $this->validate($this->notificationRules());
-        $this->team->teamNotifications()->create($validated);
     }
 }

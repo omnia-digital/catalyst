@@ -1,4 +1,6 @@
-<?php namespace Modules\Jobs\Http\Controllers;
+<?php
+
+namespace Modules\Jobs\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +18,6 @@ class DownloadInvoiceController extends Controller
         // ]);
 
         // For that reason, we use Stripe invoices instead.
-        return redirect(Auth::user()->findInvoice($id)->asStripeInvoice()->invoice_pdf);
+        return redirect(auth()->user()->findInvoice($id)->asStripeInvoice()->invoice_pdf);
     }
 }

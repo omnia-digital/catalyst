@@ -2,7 +2,6 @@
 
 namespace Modules\Jobs\Http\Livewire\Pages\Teams;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -16,11 +15,11 @@ class UpdateCompanyLogo extends Component
     public $photo;
 
     protected $rules = [
-        'photo' => ['nullable', 'image', 'max:1024']
+        'photo' => ['nullable', 'image', 'max:1024'],
     ];
 
     protected $listeners = [
-        'logo-removed' => '$refresh'
+        'logo-removed' => '$refresh',
     ];
 
     public function mount($company)
@@ -32,11 +31,12 @@ class UpdateCompanyLogo extends Component
      * Update company logo
      *
      * @return \Illuminate\Http\RedirectResponse|void
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function updateCompanyLogo()
     {
-        Gate::forUser(Auth::user())->authorize('update', $this->company);
+        Gate::forUser(auth()->user())->authorize('update', $this->company);
 
         $this->validate();
 
@@ -45,13 +45,11 @@ class UpdateCompanyLogo extends Component
 
             return redirect()->route('teams.show', $this->company->id);
         }
-
-        return;
     }
 
     public function deleteCompanyLogo()
     {
-        Auth::user()->currentTeam->deleteLogo();
+        auth()->user()->currentTeam->deleteLogo();
 
         $this->emitSelf('logo-removed');
     }

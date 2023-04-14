@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProfileResource\RelationManagers;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -10,6 +9,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Modules\Games\Models\Game;
+use Platform;
 use RalphJSmit\Filament\Components\Forms\Timestamps;
 
 class GameResource extends Resource
@@ -17,14 +17,10 @@ class GameResource extends Resource
     protected static ?string $model = Game::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Games';
-    protected $queryString = [
-        'tableColumnSearchQueries'
-    ];
 
-    protected static function shouldRegisterNavigation(): bool
-    {
-        return \Platform::isModuleEnabled('games') ? true : false;
-    }
+    protected $queryString = [
+        'tableColumnSearchQueries',
+    ];
 
     public static function form(Form $form): Form
     {
@@ -36,7 +32,6 @@ class GameResource extends Resource
                 Timestamps::make(),
             ]);
     }
-
 
     public static function table(Table $table): Table
     {
@@ -72,8 +67,6 @@ class GameResource extends Resource
             ]);
     }
 
-
-
     public static function getPages(): array
     {
         return [
@@ -81,5 +74,10 @@ class GameResource extends Resource
             'create' => GameResource\Pages\CreateGame::route('/create'),
             'edit' => GameResource\Pages\EditGames::route('/edit/{record}'),
         ];
+    }
+
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return Platform::isModuleEnabled('games') ? true : false;
     }
 }

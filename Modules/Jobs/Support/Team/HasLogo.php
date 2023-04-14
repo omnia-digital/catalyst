@@ -1,5 +1,6 @@
-<?php namespace Modules\Jobs\Support\Team;
+<?php
 
+namespace Modules\Jobs\Support\Team;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -9,7 +10,6 @@ trait HasLogo
     /**
      * Update the company's logo.
      *
-     * @param  \Illuminate\Http\UploadedFile  $photo
      * @return void
      */
     public function updateLogo(UploadedFile $photo)
@@ -60,7 +60,7 @@ trait HasLogo
      */
     protected function defaultLogoUrl()
     {
-        return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF&size=128';
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF&size=128';
     }
 
     /**

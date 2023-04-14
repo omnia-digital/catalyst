@@ -27,16 +27,16 @@ class ManageTeamRoles extends Component
         return [
             'editingRole.team_id' => 'required|integer',
             'editingRole.name' => [
-                'required', 
-                'alpha_num', 
+                'required',
+                'alpha_num',
                 function ($attribute, $value, $fail) {
                     if (strtolower($value) === strtolower(config('platform.teams.default_owner_role'))) {
                         $fail('You cannot create another role called ' . config('platform.teams.default_owner_role') . '.');
                     }
-                }
+                },
             ],
             'editingRole.description' => 'required|min:4|max:255',
-            'permissionsToAttach' => ['nullable', 'array']
+            'permissionsToAttach' => ['nullable', 'array'],
         ];
     }
 
@@ -53,14 +53,14 @@ class ManageTeamRoles extends Component
             'team_id' => $this->team->id,
             'name' => '',
             'type' => '',
-            'description' => ''
+            'description' => '',
         ]);
     }
 
     public function saveRole()
     {
         $this->validate();
-        
+
         $this->editingRole->save();
 
         $this->currentlyEditingRole = false;
@@ -72,7 +72,9 @@ class ManageTeamRoles extends Component
     {
         $this->authorize('createTeamRole', $this->team);
 
-        if ($this->editingRole->getKey()) $this->editingRole = $this->makeBlankRole();
+        if ($this->editingRole->getKey()) {
+            $this->editingRole = $this->makeBlankRole();
+        }
 
         $this->currentlyEditingRole = true;
     }
@@ -89,7 +91,7 @@ class ManageTeamRoles extends Component
     public function deleteTeamRole()
     {
         $this->authorize('deleteTeamRole', $this->team);
-        
+
         $role = Role::find($this->roleIdBeingRemoved);
         $role->permissions()->detach();
         $role->delete();
@@ -103,7 +105,9 @@ class ManageTeamRoles extends Component
     {
         $this->authorize('updateTeamRole', $this->team);
 
-        if ($this->editingRole->isNot($role)) $this->editingRole = $role;
+        if ($this->editingRole->isNot($role)) {
+            $this->editingRole = $role;
+        }
 
         $this->currentlyEditingRole = true;
     }
@@ -119,11 +123,10 @@ class ManageTeamRoles extends Component
         $this->currentlyAddingPermission = true;
     }
 
-    
     public function attachPermissions()
     {
         $this->authorize('updateTeamRole', $this->team);
-        
+
         $this->roleToAttachPermission->permissions()->attach($this->permissionsToAttach);
 
         $this->closePermissionsModal();
@@ -153,7 +156,7 @@ class ManageTeamRoles extends Component
             $this->selectedPermissions[$role->id] = [];
         }
     }
-    
+
     public function getRolesProperty()
     {
         return Role::where('team_id', $this->team->id)->get();

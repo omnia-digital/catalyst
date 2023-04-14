@@ -5,10 +5,10 @@ namespace Database\Factories;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 use Modules\Social\Models\Profile;
 use Spatie\Permission\Models\Role;
+use Trans;
 
 class RoleFactory extends Factory
 {
@@ -35,16 +35,16 @@ class RoleFactory extends Factory
 
         $teamOwnerRole = Role::create([
             'name' => config('platform.teams.default_owner_role'),
-            'team'
+            'team',
         ]);
 
         return $this->hasAttached(
             Team::factory()
                 ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->profile->name.'\'s ' . \Trans::get('Team')];
+                    return ['name' => $user->profile->name . '\'s ' . Trans::get('Team')];
                 }),
-                ['role_id' => $teamOwnerRole->id],
-                'teams'
+            ['role_id' => $teamOwnerRole->id],
+            'teams'
         );
     }
 
@@ -55,7 +55,9 @@ class RoleFactory extends Factory
      */
     public function withProfile()
     {
-        if (!class_exists(\Modules\Social\Models\Profile::class)) return;
+        if (! class_exists(\Modules\Social\Models\Profile::class)) {
+            return;
+        }
 
         return $this->has(
             Profile::factory()

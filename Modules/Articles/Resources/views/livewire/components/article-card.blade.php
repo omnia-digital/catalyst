@@ -30,7 +30,7 @@
                 <div class="flex lg:flex-shrink-0">
                     @if ($post->tags)
                         <div class="flex justify-start space-x-2 mr-2">
-                            @foreach($post->tags as $tag)
+                            @foreach ($post->tags as $tag)
                                 <x-tag :name="$tag->name"/>
                             @endforeach
                         </div>
@@ -64,7 +64,7 @@
                 {!! strip_tags($post->body) !!}
             </div>
 
-            @if($post->image)
+            @if ($post->image)
                 <div class="block w-full aspect-w-10 aspect-h-3 overflow-hidden">
                     <img src="{{ $post->image }}" alt="{{ $post->title }}" class="object-cover">
                 </div>
@@ -74,7 +74,7 @@
 {{--                <div class="mt-3 overflow-hidden">--}}
 {{--                    <div class="grid grid-cols-{{ sizeof($post->media) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($post->media) > 2 ? '2 h-80' : '1' }} gap-px">--}}
 {{--                        @foreach ($post->media as $media)--}}
-{{--                            <div class="w-full overflow-hidden @if($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">--}}
+{{--                            <div class="w-full overflow-hidden @if ($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">--}}
 {{--                                <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover w-full">--}}
 {{--                            </div>--}}
 {{--                        @endforeach--}}
@@ -85,7 +85,9 @@
     </div>
 
     <!-- Social Actions -->
-    <div class="z-20 w-full px-5">
-        <livewire:social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
-    </div>
+    @if ($showPostActions)
+        <div class="z-20 w-full px-5">
+            <livewire:social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
+        </div>
+    @endif
 </article>

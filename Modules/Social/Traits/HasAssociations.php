@@ -1,11 +1,12 @@
 <?php
+
 namespace Modules\Social\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Modules\Social\Models\Association;
 
-trait HasAssociations {
-
+trait HasAssociations
+{
     /**
      * @return MorphToMany
      */

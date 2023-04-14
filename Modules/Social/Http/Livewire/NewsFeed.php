@@ -13,12 +13,12 @@ class NewsFeed extends Component
 
     public $perPage = 6;
 
+    public Team|null $team = null;
+
     protected $listeners = [
         'postSaved',
-        'postDeleted' => '$refresh'
+        'postDeleted' => '$refresh',
     ];
-
-    public Team|null $team = null;
 
     public function postSaved()
     {
@@ -38,9 +38,10 @@ class NewsFeed extends Component
     public function getRowsQueryProperty()
     {
         if ($this->team) {
-            return $this->team->postsWithinTeam()->with(['user', 'user.profile', 'media'])->orderBy('published_at', 'desc');
+            return $this->team->postsWithinTeam()->with(['user', 'user.profile', 'media', 'tags', 'bookmarks'])->orderBy('published_at', 'desc');
         }
-        return Post::where('type','!=','resource')->with(['user', 'user.profile', 'media'])->orderByDesc('published_at')->orderByDesc('created_at');
+
+        return Post::whereNotNull('published_at')->with(['user', 'user.profile', 'media', 'tags', 'bookmarks'])->orderByDesc('published_at')->orderByDesc('created_at');
     }
 
     public function getRowsProperty()
@@ -51,7 +52,7 @@ class NewsFeed extends Component
     public function render()
     {
         return view('social::livewire.partials.news-feed', [
-            'feed' => $this->rows
+            'feed' => $this->rows,
         ]);
     }
 }

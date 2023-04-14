@@ -10,15 +10,15 @@
                     <x-heroicon-o-arrow-left class="h-6"/>
                 </a>
             </div>
-            <a href="{{route('articles.home')}}">
+            <a href="{{ route('articles.home') }}">
                 <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Articles') }}</x-library::heading.1>
             </a>
         </div>
         <div class="w-full">
             <div class="col-span-4 card">
-                @if($article->image)
+                @if ($article->image)
                     <div>
-                        <img class="rounded-lg rounded-b w-full object-cover max-h-96 bg-neutral-dark flex-shrink-0" src="{{$article->image}}" alt="{{$article->title}}">
+                        <img class="rounded-lg rounded-b w-full object-cover max-h-96 bg-neutral-dark flex-shrink-0" src="{{ $article->image }}" alt="{{ $article->title }}">
                     </div>
                 @endif
                 <div class="px-6">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="flex ml-2 space-x-2">
                             <p>by</p>
-                            <a href="{{ route('social.profile.show', $article->user->handle) }}" class="hover:underline block text-base-text-color">{{  $article->user->name }}</a>
+                            <a href="{{ route('social.profile.show', $article->user->handle) }}" class="hover:underline block text-base-text-color">{{ $article->user->name }}</a>
                         </div>
                         @can('update', $article)
                             <div class="ml-auto flex justify-end items-center">
@@ -52,7 +52,7 @@
 
                     @empty(!$article->tags)
                         <div class="flex justify-start space-x-2">
-                            @foreach($article->tags as $tag)
+                            @foreach ($article->tags as $tag)
                                 <x-tag :name="$tag->name" bg-color="neutral-dark" text-color="white"/>
                             @endforeach
                         </div>
@@ -62,7 +62,7 @@
                         {!! $article->body !!}
                     </div>
 
-                    @if($article->url)
+                    @if ($article->url)
                         <a href="{{ $article->url }}" target="_blank" class="bg-primary hover:shadow-lg rounded-lg px-4 py-2 text-xl text-white-text-color inline-flex items-center space-x-2">
                             <p class="text-white-text-color">Go to URL</p>
                             <x-heroicon-o-arrow-right class="h-6 w-6"/>

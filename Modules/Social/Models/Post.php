@@ -4,7 +4,6 @@ namespace Modules\Social\Models;
 
 use App\Models\Team;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,12 +37,24 @@ class Post extends Model implements HasMedia, Searchable
         'postable_type',
         'repost_original_id',
         'published_at',
-        'image'
+        'image',
     ];
 
     protected $dates = [
-        'published_at'
+        'published_at',
     ];
+
+    public static function getTrending($type = 'post')
+    {
+        $trendingPosts = Post::withCount('likes')
+                   ->with('user')
+                   ->when($type, fn ($query) => $query->where('type', $type))
+                   ->whereNotNull('published_at')
+                   ->orderBy('likes_count', 'desc')
+                   ->orderBy('created_at', 'desc');
+
+        return $trendingPosts;
+    }
 
     protected static function booted()
     {
@@ -53,22 +64,22 @@ class Post extends Model implements HasMedia, Searchable
         });
     }
 
+    protected static function newFactory()
+    {
+        return PostFactory::new();
+    }
+
     public function type(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => PostType::tryFrom($value),
-            set: fn($value) => $value?->value
+            get: fn ($value) => PostType::tryFrom($value),
+            set: fn ($value) => $value?->value
         );
     }
 
     public function scopeOfType($query, $type)
     {
         return $query->where('type', $type);
-    }
-
-    protected static function newFactory()
-    {
-        return PostFactory::new();
     }
 
     public function getPublishedAtAttribute($value)
@@ -104,7 +115,7 @@ class Post extends Model implements HasMedia, Searchable
 
     public function isRepost(): bool
     {
-        return !is_null($this->repost_original_id);
+        return ! is_null($this->repost_original_id);
     }
 
     public function attachMedia(array $mediaUrls): self
@@ -139,18 +150,6 @@ class Post extends Model implements HasMedia, Searchable
     public function isParent(): bool
     {
         return is_null($this->postable_id) && is_null($this->postable_type);
-    }
-
-    public static function getTrending($type = 'post')
-    {
-        $trendingPosts = Post::withCount('likes')
-                   ->with('user')
-                   ->when($type, fn($query) => $query->where('type', $type))
-                   ->whereNotNull('published_at')
-                   ->orderBy('likes_count', 'desc')
-                   ->orderBy('created_at', 'desc');
-
-        return $trendingPosts;
     }
 
     public function getSearchResult(): SearchResult

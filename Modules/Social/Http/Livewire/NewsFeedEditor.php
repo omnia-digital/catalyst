@@ -5,7 +5,6 @@ namespace Modules\Social\Http\Livewire;
 use App\Models\Team;
 use App\Support\Platform\Platform;
 use App\Support\Platform\WithGuestAccess;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
@@ -22,15 +21,15 @@ class NewsFeedEditor extends Component
     public string $submitButtonText = 'Post';
     public string $placeholder = "What\'s on your mind?";
 
-    protected $listeners = [
-        'post-editor:submitted' => 'createPost'
-    ];
-
     public Team|null $team = null;
+
+    protected $listeners = [
+        'post-editor:submitted' => 'createPost',
+    ];
 
     public function createPost($data)
     {
-        if (Platform::isAllowingGuestAccess() && !Auth::check()) {
+        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal();
 
             return;
@@ -42,11 +41,11 @@ class NewsFeedEditor extends Component
 
         DB::transaction(function () use ($data) {
             $options = [];
-            if (!empty($this->team)) {
+            if (! empty($this->team)) {
                 $options['team_id'] = $this->team->id;
             }
             $post = (new CreateNewPostAction);
-            if (!empty($this->postType)) {
+            if (! empty($this->postType)) {
                 $post->type($this->postType);
             }
             $post = $post->execute($data['content'], $options);
