@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RolePolicy
@@ -75,7 +75,6 @@ class RolePolicy
     /**
      * Determine whether the user can bulk delete.
      *
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function deleteAny(User $user)
@@ -86,8 +85,6 @@ class RolePolicy
     /**
      * Determine whether the user can permanently delete.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function forceDelete(User $user, Role $role)
@@ -98,7 +95,6 @@ class RolePolicy
     /**
      * Determine whether the user can permanently bulk delete.
      *
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function forceDeleteAny(User $user)
@@ -109,8 +105,6 @@ class RolePolicy
     /**
      * Determine whether the user can restore.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restore(User $user, Role $role)
@@ -121,7 +115,6 @@ class RolePolicy
     /**
      * Determine whether the user can bulk restore.
      *
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restoreAny(User $user)
@@ -132,8 +125,6 @@ class RolePolicy
     /**
      * Determine whether the user can replicate.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function replicate(User $user, Role $role)
@@ -144,12 +135,10 @@ class RolePolicy
     /**
      * Determine whether the user can reorder.
      *
-     * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function reorder(User $user)
     {
         return $user->can('{{ Reorder }}');
     }
-
 }
