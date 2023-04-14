@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Forms\Policies;
+namespace Modules\Feeds\Policies;
 
 use App\Models\User;
-use Modules\Forms\Models\FormSubmission;
+use Modules\Feeds\Models\FeedSource;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FormSubmissionPolicy
+class FeedSourcePolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class FormSubmissionPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view_any_form::submission');
+        return $user->can('view_any_feed::source');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormSubmission  $formSubmission
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, FormSubmission $formSubmission)
+    public function view(User $user, FeedSource $feedSource)
     {
-        return $user->can('view_form::submission');
+        return $user->can('view_feed::source');
     }
 
     /**
@@ -41,31 +41,31 @@ class FormSubmissionPolicy
      */
     public function create(User $user)
     {
-        return $user->can('create_form::submission');
+        return $user->can('create_feed::source');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormSubmission  $formSubmission
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, FormSubmission $formSubmission)
+    public function update(User $user, FeedSource $feedSource)
     {
-        return $user->can('update_form::submission');
+        return $user->can('update_feed::source');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormSubmission  $formSubmission
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, FormSubmission $formSubmission)
+    public function delete(User $user, FeedSource $feedSource)
     {
-        return $user->can('delete_form::submission');
+        return $user->can('delete_feed::source');
     }
 
     /**
@@ -76,19 +76,19 @@ class FormSubmissionPolicy
      */
     public function deleteAny(User $user)
     {
-        return $user->can('delete_any_form::submission');
+        return $user->can('delete_any_feed::source');
     }
 
     /**
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormSubmission  $formSubmission
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, FormSubmission $formSubmission)
+    public function forceDelete(User $user, FeedSource $feedSource)
     {
-        return $user->can('force_delete_form::submission');
+        return $user->can('force_delete_feed::source');
     }
 
     /**
@@ -99,19 +99,19 @@ class FormSubmissionPolicy
      */
     public function forceDeleteAny(User $user)
     {
-        return $user->can('force_delete_any_form::submission');
+        return $user->can('force_delete_any_feed::source');
     }
 
     /**
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormSubmission  $formSubmission
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, FormSubmission $formSubmission)
+    public function restore(User $user, FeedSource $feedSource)
     {
-        return $user->can('restore_form::submission');
+        return $user->can('restore_feed::source');
     }
 
     /**
@@ -122,19 +122,19 @@ class FormSubmissionPolicy
      */
     public function restoreAny(User $user)
     {
-        return $user->can('restore_any_form::submission');
+        return $user->can('restore_any_feed::source');
     }
 
     /**
      * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
-     * @param  \Modules\Forms\Models\FormSubmission  $formSubmission
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user, FormSubmission $formSubmission)
+    public function replicate(User $user, FeedSource $feedSource)
     {
-        return $user->can('replicate_form::submission');
+        return $user->can('replicate_feed::source');
     }
 
     /**
@@ -145,7 +145,7 @@ class FormSubmissionPolicy
      */
     public function reorder(User $user)
     {
-        return $user->can('reorder_form::submission');
+        return $user->can('reorder_feed::source');
     }
 
 }
