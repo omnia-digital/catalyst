@@ -49,7 +49,7 @@
         "mhmiton/laravel-modules-livewire": "^1.3",
         "nwidart/laravel-modules": "^9.0",
         "omnia-digital/library": "dev-main",
-        "omnia-digital/livewire-calendar": "dev-main",
+        "omnia-digital/livewire-calendar": "^2.2",
         "omnia-digital/media-manager": "dev-main",
         "omniphx/forrest": "2.*",
         "owenvoke/blade-fontawesome": "^2.0",
@@ -78,7 +78,8 @@
         "thomasjohnkane/snooze": "^2.2",
         "tightenco/ziggy": "^1.4",
         "vedmant/laravel-feed-reader": "^1.5",
-        "wimil/followers": "^1.0"
+        "wimil/followers": "^1.0",
+      "ext-zlib": "*"
     },
     "require-dev": {
         "arcanedev/laravel-lang": "^10.0",
@@ -104,10 +105,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/omnia-digital/media-manager"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/omnia-digital/livewire-calendar"
         },
         {
             "type": "composer",

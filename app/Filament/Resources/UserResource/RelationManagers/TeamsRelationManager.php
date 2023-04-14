@@ -7,12 +7,19 @@ use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Support\Str;
+use Trans;
 
 class TeamsRelationManager extends RelationManager
 {
     protected static string $relationship = 'teams';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getTitle(): string
+    {
+        return Trans::get(Str::headline(static::getPluralModelLabel()));
+    }
 
     public static function form(Form $form): Form
     {
@@ -47,5 +54,10 @@ class TeamsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    protected static function getRecordLabel(): ?string
+    {
+        return Trans::get('Team');
     }
 }

@@ -113,7 +113,7 @@
         <div class="block col-span-6 md:col-span-3 xl:col-span-5 lg:mr-4 xl:mr-0">
             <!-- User Posts -->
             <x-social::user-posts
-                :posts="$this->user->posts()->onlyPosts()->get()"
+                :posts="$this->user->posts()->onlyPosts()->get()->sortByDesc('created_at')"
                 :likes="$this->user->likes"
                 :resources="$this->user->posts()->onlyResources()->get()"
             />

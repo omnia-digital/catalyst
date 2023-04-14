@@ -1,15 +1,15 @@
 {
     "Advice": true,
     "Articles": true,
-    "Social": true,
-    "Projects": true,
-    "Resources": true,
-    "Jobs": true,
-    "Games": true,
-    "Reviews": true,
     "Crm": true,
     "Billing": true,
+    "Feeds": true,
     "Forms": true,
-    "Livestream": false,
-    "Article": true
+    "Games": true,
+    "Jobs": true,
+    "Livestream": true,
+    "Projects": true,
+    "Resources": true,
+    "Reviews": true,
+    "Social": true,
 }

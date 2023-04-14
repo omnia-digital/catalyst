@@ -34,7 +34,8 @@
                         @endif
                     </a>
                 @endforeach
-                @can('update', $team)
+                @can('send-team-broadcast', $team)
+                    <a href="#" x-data @click.prevent.stop="$openModal('notify-team-modal')" title="Send a message to the entire community">{{ \Trans::get('Notify Team') }}</a>
                     <a href="{{ route('social.teams.admin', $team) }}" class="md:hidden hover:bg-neutral block w-full px-4 py-2 text-left text-sm">{{ \Trans::get('Admin Panel') }}</a>
                 @endcan
             </x-library::dropdown>
@@ -53,9 +54,16 @@
             @endif
 
             <a
-                href="{{ route('social.teams.admin', $team) }}"
-                class="bg-neutral rounded-lg px-4 py-2 border border-primary hidden md:block font-bold hover:underline mx-4 whitespace-nowrap"
-            >{{ \Trans::get('Admin Panel') }}</a>
+                href="#"
+                x-data
+                @click.prevent.stop="$openModal('notify-team-modal')"
+                title="Send a message to the entire community"
+                class="py-4 mx-[10px] hidden md:flex items-center"
+            >{{ \Trans::get('Notify Team') }}</a>
+            <a href="{{ route('social.teams.admin', $team) }}" class="bg-neutral rounded-lg px-4 py-2 border border-secondary hidden md:block font-bold hover:underline mx-4
+            whitespace-nowrap">{{
+            \Trans::get('Admin Panel')
+            }}</a>
         @endcan
 
         @if (\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
@@ -85,6 +93,21 @@
         @auth
             <livewire:teams.subscribe-team-modal :team="$team"/>
             <livewire:teams.update-team-plan-modal :team="$team"/>
+            @can('update-team', $team)
+                <x-library::modal id="notify-team-modal" maxWidth="4xl">
+                    <x-slot:title>
+                        {{ \Trans::get('Send a message to the team') }}
+                    </x-slot:title>
+                    <x-slot:content>
+                        <x-library::input.textarea></x-library::input.textarea>
+                    </x-slot:content>
+                    <x-slot:actions>
+                        <x-library::button wire:click.prevent="sendNotification" wire:target="sendNotification">
+                            Send
+                        </x-library::button>
+                    </x-slot:actions>
+                </x-library::modal>
+            @endcan
         @endauth
     </div>
 
