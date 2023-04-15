@@ -64,6 +64,7 @@ class CreateNewPostAction
             'team_id' => $options['team_id'] ?? null,
             'title' => $options['title'] ?? null,
             'url' => $options['url'] ?? null,
+            'published_at' => $options['published_at'] ?? null,
             'postable_id' => $this->postable?->id ?? $options['postable_id'] ?? null,
             'postable_type' => $this->postable ? get_class($this->postable) : ($options['postable_type'] ?? null),
             'repost_original_id' => $this->repost?->id,

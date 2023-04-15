@@ -16,8 +16,28 @@ class FeedManager
     {
         return $this->encrypter->encrypt(gzcompress(serialize([
             'url' => $feedItem->get_permalink(),
+            'title' => $feedItem->get_title(),
+            'published_at' => $feedItem->get_date(),
+            'author' => $feedItem->get_author(),
             'content' => $feedItem->get_description(),
+            'imageUrl' => $this->getDefaultItemImage($feedItem)
         ])));
+    }
+
+    public function getDefaultItemImage($item)
+    {
+        $image = ($item->get_media() && $item->get_media()['url']) ? $item->get_media()['url'] : null;
+        if (empty($image)) {
+            $image = ($item->get_thumbnail() && $item->get_thumbnail()['url']) ? $item->get_thumbnail()['url'] : null;
+            if (empty($image)) {
+
+                $image = $this->searchForImageInContent($item->get_content());
+                if ( ! empty($image)) {
+                    return $image;
+                }
+            }
+        }
+        return $image ?? null;
     }
 
     public function decryptFeedPayload(string $url): array

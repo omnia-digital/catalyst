@@ -51,58 +51,32 @@
                             </div>
                         </h2>
                     @endif
-                    <div class="">
-                        <div class="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mt-4">
-                            @foreach ($feed->get_items(0,4) as $item)
-                                {{-- @if (!empty($item->get_thumbnail()) || !empty($item->get_media())) --}}
-                                <a href="{{ route('feeds.show', app(\Modules\Feeds\Services\FeedManager::class)->encryptFeedPayload($item)) }}" target="_blank">
-                                    @if ($item->get_media() && !empty($item->get_media()['url']))
-                                        <div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
-                                             style="background-image: url({{ ($item->get_media() && $item->get_media()['url'])? $item->get_media()['url'] : 'https://source.unsplash.com/random'
-                                  }}); background-size: cover;
-                                 background-repeat: no-repeat;"
-                                        >
-                                            @else
-                                                <div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
-                                                     style="background-image: url({{ ($item->get_thumbnail() && $item->get_thumbnail()['url'])? $item->get_thumbnail()['url'] : 'https://source.unsplash.com/random'
-                          }}); background-size: cover;
-                         background-repeat: no-repeat;"
-                                                >
-                                                    @endif
-                                                    <div class="h-80 rounded"></div>
-                                                    <div class="space-y-2 p-4 bg-secondary rounded absolute bottom-0 right-0 left-0">
-                                                        <div class="flex justify-between">
-                                                            <p class="text-heading-default-color font-semibold text-base">{!! $this->sanitize($item->get_title()) !!}</p>
-                                                        </div>
-                                                        <div class="flex items-center text-base-text-color">
-                                                            @empty($item->get_authors())
-                                                            @else
-                                                                @foreach ($item->get_authors() as $author)
-                                                                    by {{ $author->get_name() }}
-                                                                @endforeach
-                                                            @endif
-                                                        </div>
-                                                        <p class="text-light-text-color text-xs line-clamp-3 h-0 transition-all delay-75 duration-300 group-hover:h-13">{{ $this->sanitize
-                                                        ($item->get_description()) }}</p>
-                                                    </div>
-                                                </div>
-                                </a>
-                                {{-- @else
-                                    <a href="{{ $item->get_link() }}" target="_blank">
-                                        <p class="text-heading-default-color font-semibold text-base">{{ $item->get_title() }}</p>
+                    <div class="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 mt-4">
+                        @foreach ($feed->get_items(0,4) as $item)
+                            <a href="{{ route('feeds.show', app(\Modules\Feeds\Services\FeedManager::class)->encryptFeedPayload($item)) }}">
+                                <div class="w-full bg-secondary border border-neutral-light rounded group relative bg-black hover:cursor-pointer hover:ring-1 hover:ring-black"
+                                     style="background-image: url({{ $this->getDefaultItemImage($item) }}); background-size: cover; background-repeat: no-repeat;">
+                                    <div class="h-80 rounded"></div>
+                                    <div class="space-y-2 p-4 bg-secondary rounded absolute bottom-0 right-0 left-0">
+                                        <div class="flex justify-between">
+                                            <p class="text-heading-default-color font-semibold text-base">{!! $this->sanitize($item->get_title()) !!}</p>
+                                        </div>
                                         <div class="flex items-center text-base-text-color">
                                             @empty($item->get_authors())
                                             @else
                                                 @foreach ($item->get_authors() as $author)
-                                                    by {{ $author->get_name() }}
+                                                    @if(!empty($author->name ?? $author->email ?? null))
+                                                        by {{ $author->name ?? $author->email }}
+                                                    @endif
                                                 @endforeach
                                             @endif
                                         </div>
-                                    </a>
-
-                                @endif --}}
-                            @endforeach
-                        </div>
+                                        <p class="text-light-text-color text-xs line-clamp-3 h-0 transition-all delay-75 duration-300 group-hover:h-13">{{ $this->sanitize($item->get_description())
+                                        }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
