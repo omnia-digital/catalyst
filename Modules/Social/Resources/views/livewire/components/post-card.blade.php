@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <div class="w-full mt-1 px-5">
+    <div class="w-full mt-1 px-5 overflow-hidden ">
         {!! $post->body !!}
     </div>
 
