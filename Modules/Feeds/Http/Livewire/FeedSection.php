@@ -4,6 +4,7 @@ namespace Modules\Feeds\Http\Livewire;
 
 use App\Support\Feed\FeedItem;
 use Livewire\Component;
+use Modules\Feeds\Services\FeedManager;
 use Vedmant\FeedReader\Facades\FeedReader;
 
 class FeedSection extends Component
@@ -32,37 +33,6 @@ class FeedSection extends Component
         $feed->set_item_class(FeedItem::class);
 
         return $feed;
-    }
-
-    public function getDefaultItemImage($item)
-    {
-        $image = ($item->get_media() && $item->get_media()['url']) ? $item->get_media()['url'] : null;
-        if (empty($image)) {
-            $image = ($item->get_thumbnail() && $item->get_thumbnail()['url']) ? $item->get_thumbnail()['url'] : null;
-            if (empty($image)) {
-
-                $image = $this->searchForImageInContent($item->get_content());
-                if ( ! empty($image)) {
-                    return $image;
-                }
-            }
-        }
-        return $image ?? null;
-    }
-
-    /**
-     * Search for the first <img/> tag in the content and return the src attribute
-     *
-     * @param $body
-     *
-     * @return mixed|null
-     */
-    public function searchForImageInContent($body)
-    {
-        $matches = [];
-        preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $body, $matches);
-        // return first image
-        return $matches['src'] ?? null;
     }
 
     public function sanitize($content)

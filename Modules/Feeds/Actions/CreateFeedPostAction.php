@@ -23,9 +23,6 @@ class CreateFeedPostAction
         if (empty($user)) {
             $user = User::findByFullName(fullName: $author);
         }
-        if (empty($user)) {
-            $user = User::findByFirstName(firstName: $author);
-        }
         // should we create a user account for the feed? The problem is FeedSources like YouTube will look like YouTube Posted it.
 
         // I do think we should try to grab the first image if we don't have an image set already and use that as the image for the article.
@@ -45,7 +42,7 @@ class CreateFeedPostAction
             }
             $post->type($postType);
 
-            $post->execute($content, $options);
+            $post = $post->execute($content, $options);
 
             return FeedPost::create([
                 'feed_id' => app(FeedManager::class)->uniqueFeedId($url),
