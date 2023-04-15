@@ -16,14 +16,18 @@ class ShowFeedController extends Controller
 
         // Check if we already created a post for the feed url yet
         if ($feedPost = FeedPost::where('feed_id', $uniqueFeedId)->first()) {
-            return redirect()->route('social.posts.show', $feedPost->post);
+            return redirect()->route('articles.show', $feedPost->post);
         }
 
         $feedPost = (new CreateFeedPostAction)->execute(
             url: $payload['url'],
+            title: $payload['title'],
+            author: $payload['author'],
+            published_at: $payload['published_at'],
             content: $payload['content'],
+            imageUrl: $payload['imageUrl'],
         );
 
-        return redirect()->route('social.posts.show', $feedPost->post);
+        return redirect()->route('articles.show', $feedPost->post);
     }
 }

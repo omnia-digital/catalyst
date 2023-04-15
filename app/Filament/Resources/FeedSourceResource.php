@@ -36,6 +36,9 @@ class FeedSourceResource extends Resource
                     ->options(FeedSourceType::options())
                     ->required()
                     ->rules([Rule::in(array_keys(FeedSourceType::options()))]),
+
+                Forms\Components\SpatieMediaLibraryFileUpload::make('default_feed_image'),
+                Forms\Components\SpatieMediaLibraryFileUpload::make('default_item_image'),
             ]);
     }
 
