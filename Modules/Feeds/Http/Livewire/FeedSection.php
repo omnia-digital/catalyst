@@ -4,7 +4,6 @@ namespace Modules\Feeds\Http\Livewire;
 
 use App\Support\Feed\FeedItem;
 use Livewire\Component;
-use Modules\Feeds\Services\FeedManager;
 use Vedmant\FeedReader\Facades\FeedReader;
 
 class FeedSection extends Component
