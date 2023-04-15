@@ -5,10 +5,11 @@ namespace Modules\Feeds\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Feeds\Enums\FeedSourceType;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
 class FeedSource extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;

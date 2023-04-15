@@ -92,7 +92,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public static function findByFullName($firstName = '', $lastName = '', $fullName = '')
     {
-        if (!empty($fullName) && empty($firstName) && empty($lastName)) {
+        if (! empty($fullName) && empty($firstName) && empty($lastName)) {
             $names = explode(' ', $fullName);
             $firstName = $names[0] ?? '';
             $lastName = $names[1] ?? '';

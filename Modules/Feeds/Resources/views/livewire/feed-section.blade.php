@@ -65,7 +65,7 @@
                                             @empty($item->get_authors())
                                             @else
                                                 @foreach ($item->get_authors() as $author)
-                                                    @if(!empty($author->name ?? $author->email ?? null))
+                                                    @if (!empty($author->name ?? $author->email ?? null))
                                                         by {{ $author->name ?? $author->email }}
                                                     @endif
                                                 @endforeach

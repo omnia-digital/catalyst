@@ -37,7 +37,7 @@ class CreateFeedPostAction
             ];
             $post = (new CreateNewPostAction);
 
-            if (!empty($user)) {
+            if (! empty($user)) {
                 $post->user($user);
             }
             $post->type($postType);
