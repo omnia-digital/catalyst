@@ -20,7 +20,7 @@ class FeedManager
             'published_at' => $feedItem->get_date(),
             'author' => $feedItem->get_author(),
             'content' => $feedItem->get_description(),
-            'imageUrl' => $this->getDefaultItemImage($feedItem)
+            'imageUrl' => $this->getDefaultItemImage($feedItem),
         ])));
     }
 
@@ -30,13 +30,13 @@ class FeedManager
         if (empty($image)) {
             $image = ($item->get_thumbnail() && $item->get_thumbnail()['url']) ? $item->get_thumbnail()['url'] : null;
             if (empty($image)) {
-
                 $image = $this->searchForImageInContent($item->get_content());
-                if ( ! empty($image)) {
+                if (! empty($image)) {
                     return $image;
                 }
             }
         }
+
         return $image ?? null;
     }
 
