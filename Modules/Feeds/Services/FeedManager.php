@@ -12,38 +12,25 @@ class FeedManager
     ) {
     }
 
-    public function encryptFeedPayload(FeedItem $feedItem): string
-    {
-        return $this->encrypter->encrypt(gzcompress(serialize([
-            'url' => $feedItem->get_permalink(),
-            'title' => $feedItem->get_title(),
-            'published_at' => $feedItem->get_date(),
-            'author' => $feedItem->get_author(),
-            'content' => $feedItem->get_description(),
-            'imageUrl' => self::getDefaultItemImage($feedItem)
-        ])));
-    }
-
     public static function getDefaultItemImage(FeedItem $item)
     {
         $image = ($item->get_media() && $item->get_media()['url']) ? $item->get_media()['url'] : null;
         if (empty($image)) {
             $image = ($item->get_thumbnail() && $item->get_thumbnail()['url']) ? $item->get_thumbnail()['url'] : null;
             if (empty($image)) {
-
                 $image = self::searchForImageInContent($item->get_content());
-                if ( ! empty($image)) {
+                if (! empty($image)) {
                     return $image;
                 }
             }
         }
+
         return $image ?? null;
     }
 
     /**
      * Search for the first <img/> tag in the content and return the src attribute
      *
-     * @param $body
      *
      * @return mixed|null
      */
@@ -53,6 +40,18 @@ class FeedManager
         preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $body, $matches);
         // return first image
         return $matches['src'] ?? null;
+    }
+
+    public function encryptFeedPayload(FeedItem $feedItem): string
+    {
+        return $this->encrypter->encrypt(gzcompress(serialize([
+            'url' => $feedItem->get_permalink(),
+            'title' => $feedItem->get_title(),
+            'published_at' => $feedItem->get_date(),
+            'author' => $feedItem->get_author(),
+            'content' => $feedItem->get_description(),
+            'imageUrl' => self::getDefaultItemImage($feedItem),
+        ])));
     }
 
     public function decryptFeedPayload(string $url): array
