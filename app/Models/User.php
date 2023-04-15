@@ -90,6 +90,19 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     protected $appends = [
     ];
 
+    public static function findByFullName($firstName = '', $lastName = '', $fullName = '')
+    {
+        if (!empty($fullName) && empty($firstName) && empty($lastName)) {
+            $names = explode(' ', $fullName);
+            $firstName = $names[0] ?? '';
+            $lastName = $names[1] ?? '';
+        }
+
+        return User::where('first_name', $firstName)
+            ->where('last_name', $lastName)
+            ->first();
+    }
+
     public static function findByEmail($email)
     {
         return User::where('email', $email)->first();
