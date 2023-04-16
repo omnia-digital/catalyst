@@ -14,7 +14,11 @@ class AwardResource extends Resource
 {
     protected static ?string $model = Award::class;
     protected static ?string $navigationIcon = 'heroicon-o-badge-check';
-    protected static ?string $navigationGroup = 'Social';
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return \Trans::get('Teams');
+    }
 
     public static function form(Form $form): Form
     {
