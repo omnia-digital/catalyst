@@ -20,25 +20,25 @@ class UserScoreContributionResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-                TextInput::make('name')
-                         ->required()
-                         ->maxLength(255),
-                TextInput::make('slug')
-                         ->required(),
-                TextInput::make('points')
-                         ->integer()
-                         ->minValue(0)
-                         ->required(),
-            ]);
+            TextInput::make('name')
+                     ->required()
+                     ->maxLength(255),
+            TextInput::make('slug')
+                     ->required(),
+            TextInput::make('points')
+                     ->integer()
+                     ->minValue(0)
+                     ->required(),
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table->columns([
-                TextColumn::make('name'),
-                TextColumn::make('slug'),
-                TextColumn::make('points'),
-            ])
+            TextColumn::make('name'),
+            TextColumn::make('slug'),
+            TextColumn::make('points'),
+        ])
                      ->filters([//
                      ])
                      ->actions([
@@ -58,9 +58,9 @@ class UserScoreContributionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListUserScoreContributions::route('/'),
+            'index' => Pages\ListUserScoreContributions::route('/'),
             'create' => Pages\CreateUserScoreContribution::route('/create'),
-            'edit'   => Pages\EditUserScoreContribution::route('/{record}/edit'),
+            'edit' => Pages\EditUserScoreContribution::route('/{record}/edit'),
         ];
     }
 }

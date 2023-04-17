@@ -11,6 +11,7 @@ use Laravel\Cashier\Cashier;
 use Spatie\Health\Checks\Checks\DatabaseCheck;
 use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
 use Spatie\Health\Health;
+use Trans;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -49,31 +50,31 @@ class AppServiceProvider extends ServiceProvider
             //            ]);
             Filament::registerNavigationGroups([
                 NavigationGroup::make()
-                               ->label(\Trans::get('Settings'))
+                               ->label(Trans::get('Settings'))
                                ->icon('heroicon-s-cog')
                                ->collapsed(),
                 NavigationGroup::make()
-                               ->label(\Trans::get('Billing'))
+                               ->label(Trans::get('Billing'))
                                ->icon('heroicon-o-credit-card')
                                ->collapsed(),
                 NavigationGroup::make()
-                               ->label(\Trans::get('People'))
+                               ->label(Trans::get('People'))
                                ->icon('heroicon-s-users')
                                ->collapsed(),
                 NavigationGroup::make()
-                               ->label(\Trans::get('Teams'))
+                               ->label(Trans::get('Teams'))
                                ->icon('fas-users')
                                ->collapsed(),
                 NavigationGroup::make()
-                               ->label(\Trans::get('Forms'))
+                               ->label(Trans::get('Forms'))
                                ->icon('fab-wpforms')
                                ->collapsed(),
                 NavigationGroup::make()
-                               ->label(\Trans::get('Feeds'))
+                               ->label(Trans::get('Feeds'))
                                ->icon('fad-rss')
                                ->collapsed(),
                 NavigationGroup::make()
-                               ->label(\Trans::get('Games'))
+                               ->label(Trans::get('Games'))
                                ->icon('fad-gamepad-modern')
                                ->collapsed(),
 

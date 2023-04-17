@@ -9,16 +9,12 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Trans;
 
 class AwardResource extends Resource
 {
     protected static ?string $model = Award::class;
     protected static ?string $navigationIcon = 'heroicon-o-badge-check';
-
-    protected static function getNavigationGroup(): ?string
-    {
-        return \Trans::get('Teams');
-    }
 
     public static function form(Form $form): Form
     {
@@ -72,5 +68,10 @@ class AwardResource extends Resource
             'create' => Pages\CreateAward::route('/create'),
             'edit' => Pages\EditAward::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return Trans::get('Teams');
     }
 }
