@@ -1,4 +1,4 @@
-name: Test and Deploy
+name: Test
 on:
   workflow_run:
     workflows: [ "Duster Fix" ]
@@ -88,53 +88,4 @@ jobs:
       #          ./vendor/bin/pest --verbose
       #        env:
       #          APP_ENV: testing
-  deploy:
-    name: Deploy to Vapor
-    runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.merged && github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main' }}
-    needs: tests
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.2
-          tools: composer:v2
-          coverage: none
-      - name: Register Font-Awesome Key
-        run: |
-          npm config set "@fortawesome:registry" https://npm.fontawesome.com/
-          npm config set "//npm.fontawesome.com/:_authToken" ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
-      - name: Validate Composer
-        run: composer validate
-      - name: Install Composer dependencies
-        run: |
-          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
-          composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
-          composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
-          composer install --prefer-dist --no-interaction --no-suggest
-      - name: Require Vapor CLI
-        run: composer global require laravel/vapor-cli
-      - name: Deploy Environment
-        env:
-          VAPOR_ENV: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
-          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
-        run: vapor deploy ${{ env.VAPOR_ENV }}
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: Logs
-          path: ./storage/logs
-      - name: Sentry Release
-        uses: getsentry/action-release@v1
-        if: github.ref == 'refs/heads/main'
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-        with:
-          environment:
-            production
 
