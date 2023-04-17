@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Settings\GeneralSettings;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
@@ -23,6 +24,8 @@ class ManageGeneralSettings extends SettingsPage
         return [
             TextInput::make('site_name')
                      ->required(),
+            SpatieMediaLibraryFileUpload::make('site_header_logo')->collection('logos')->disk('public'),
+            SpatieMediaLibraryFileUpload::make('site_login_logo')->collection('logos')->disk('public'),
             TextInput::make('teams_apply_button_text')
                      ->required(),
             Toggle::make('allow_guest_access')

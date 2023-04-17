@@ -42,9 +42,9 @@ class ModuleNavigation extends Component
                 'module' => 'articles',
             ],
             [
-                'label' => Trans::get('My Teams'),
+                'label' => Trans::get('Teams'),
                 'name' => 'social.teams.my-teams',
-                'icon' => 'fa-regular fa-users',
+                'icon' => 'fa-solid fa-users',
                 //                    'icon'    => 'heroicon-o-briefcase',
                 'module' => 'social',
             ],

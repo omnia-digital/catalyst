@@ -29,8 +29,8 @@ class MainNavigationMenu extends Component
             [
                 'label' => Trans::get('Teams'),
                 'name' => 'social.home',
-                'icon' => 'fa-duotone fa-globe',
-                'module' => 'social',
+                'icon' => 'fa-solid fa-users',
+                'module' => 'teams',
             ],
             [
                 'label' => Trans::get('Resources'),
@@ -70,9 +70,9 @@ class MainNavigationMenu extends Component
                 'module' => 'advice',
             ],
             [
-                'label' => 'CRM',
+                'label' => Trans::get('CRM'),
                 'name' => 'filament.pages.dashboard',
-                'icon' => 'heroicon-o-users',
+                'icon' => 'fa-duotone fa-rectangle-list',
                 'module' => 'crm',
             ],
             //            [

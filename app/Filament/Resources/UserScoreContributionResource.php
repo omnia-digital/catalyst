@@ -14,48 +14,44 @@ use Modules\Social\Models\UserScoreContribution;
 class UserScoreContributionResource extends Resource
 {
     protected static ?string $model = UserScoreContribution::class;
-
+    protected static ?string $navigationGroup = 'Settings';
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('slug')
-                    ->required(),
-                TextInput::make('points')
-                    ->integer()
-                    ->minValue(0)
-                    ->required(),
-            ]);
+        return $form->schema([
+            TextInput::make('name')
+                     ->required()
+                     ->maxLength(255),
+            TextInput::make('slug')
+                     ->required(),
+            TextInput::make('points')
+                     ->integer()
+                     ->minValue(0)
+                     ->required(),
+        ]);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('slug'),
-                TextColumn::make('points'),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
+        return $table->columns([
+            TextColumn::make('name'),
+            TextColumn::make('slug'),
+            TextColumn::make('points'),
+        ])
+                     ->filters([//
+                     ])
+                     ->actions([
+                         Tables\Actions\EditAction::make(),
+                     ])
+                     ->bulkActions([
+                         Tables\Actions\DeleteBulkAction::make(),
+                     ]);
     }
 
     public static function getRelations(): array
     {
-        return [
-            //
+        return [//
         ];
     }
 

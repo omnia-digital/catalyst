@@ -18,7 +18,6 @@ class TeamResource extends Resource
 {
     protected static ?string $model = Team::class;
     protected static ?string $navigationIcon = 'heroicon-o-globe';
-    protected static ?string $navigationGroup = 'Social';
 
     public static function getGloballySearchableAttributes(): array
     {
@@ -97,6 +96,11 @@ class TeamResource extends Resource
             'view' => Pages\ViewTeam::route('/{record}'),
             'edit' => Pages\EditTeam::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return Trans::get('Teams');
     }
 
     protected static function getNavigationLabel(): string

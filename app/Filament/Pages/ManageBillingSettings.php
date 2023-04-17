@@ -20,7 +20,7 @@ class ManageBillingSettings extends SettingsPage
     protected static ?string $title = 'Billing Settings';
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
     protected static string $settings = BillingSettings::class;
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Billing';
     protected static ?int $navigationSort = -90;
 
     protected function getHeaderWidgets(): array

@@ -9,12 +9,12 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Trans;
 
 class ReviewResource extends Resource
 {
     protected static ?string $model = \Modules\Reviews\Models\Review::class;
     protected static ?string $navigationIcon = 'heroicon-o-star';
-    protected static ?string $navigationGroup = 'Social';
 
     public static function form(Form $form): Form
     {
@@ -75,5 +75,10 @@ class ReviewResource extends Resource
             'view' => Pages\ViewReview::route('/{record}'),
             'edit' => Pages\EditReview::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return Trans::get('Teams');
     }
 }
