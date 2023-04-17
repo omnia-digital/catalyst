@@ -18,8 +18,10 @@ class TeamResource extends Resource
 {
     protected static ?string $model = Team::class;
     protected static ?string $navigationIcon = 'heroicon-o-globe';
-    protected static ?string $navigationGroup = 'Social';
-
+    protected static function getNavigationGroup(): ?string
+    {
+        return \Trans::get('Teams');
+    }
     public static function getGloballySearchableAttributes(): array
     {
         return ['name'];

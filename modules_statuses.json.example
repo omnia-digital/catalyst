@@ -12,4 +12,5 @@
     "Resources": true,
     "Reviews": true,
     "Social": true,
+    "Teams": true
 }

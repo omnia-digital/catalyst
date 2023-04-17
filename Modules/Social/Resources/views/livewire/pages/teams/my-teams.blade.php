@@ -3,7 +3,7 @@
 @section('content')
     <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg px-4 pl-4 flex items-center bg-primary">
         <div class="flex-1 flex items-center space-x-2 -ml-1">
-            <x-library::icons.icon name="fa-regular fa-users" size="w-8 h-8" color="text-white-text-color"/>
+            <x-library::icons.icon name="fa-solid fa-users" size="w-8 h-8" color="text-white-text-color"/>
             <x-library::heading.1 class="py-4 text-3xl hover:cursor-pointer" text-color="text-white-text-color">{{ Trans::get('Teams') }}</x-library::heading.1>
             <span class="bg-gray-400 text-xs rounded-full ml-2 w-5 h-5 flex items-center justify-center">{{ $teamsCount }}</span>
         </div>

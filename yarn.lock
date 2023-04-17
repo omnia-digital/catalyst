@@ -944,6 +944,11 @@
   resolved "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
+"@fortawesome/fontawesome-pro@^6.4.0":
+  version "6.4.0"
+  resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-pro/-/6.4.0/fontawesome-pro-6.4.0.tgz#4c4849f01981764c2be36bbe2c1b55d85dce22c5"
+  integrity sha512-VtoAOuV0KAjdO979RHGko5krp3UsKMnXH1SaHnQvlz4PcgErcsk5ZPugoMhc3sW5lkrRl8NnaGwkGzB3gzVSxQ==
+
 "@headlessui/vue@^1.4.1":
   version "1.7.4"
   resolved "https://registry.npmjs.org/@headlessui/vue/-/vue-1.7.4.tgz"

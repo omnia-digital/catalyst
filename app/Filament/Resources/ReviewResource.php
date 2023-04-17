@@ -14,8 +14,10 @@ class ReviewResource extends Resource
 {
     protected static ?string $model = \Modules\Reviews\Models\Review::class;
     protected static ?string $navigationIcon = 'heroicon-o-star';
-    protected static ?string $navigationGroup = 'Social';
-
+    protected static function getNavigationGroup(): ?string
+    {
+        return \Trans::get('Teams');
+    }
     public static function form(Form $form): Form
     {
         return $form
