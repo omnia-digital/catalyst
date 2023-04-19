@@ -21,14 +21,14 @@ class UserScoreContributionResource extends Resource
     {
         return $form->schema([
             TextInput::make('name')
-                     ->required()
-                     ->maxLength(255),
+                ->required()
+                ->maxLength(255),
             TextInput::make('slug')
-                     ->required(),
+                ->required(),
             TextInput::make('points')
-                     ->integer()
-                     ->minValue(0)
-                     ->required(),
+                ->integer()
+                ->minValue(0)
+                ->required(),
         ]);
     }
 
@@ -39,14 +39,14 @@ class UserScoreContributionResource extends Resource
             TextColumn::make('slug'),
             TextColumn::make('points'),
         ])
-                     ->filters([//
-                     ])
-                     ->actions([
-                         Tables\Actions\EditAction::make(),
-                     ])
-                     ->bulkActions([
-                         Tables\Actions\DeleteBulkAction::make(),
-                     ]);
+            ->filters([//
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getRelations(): array

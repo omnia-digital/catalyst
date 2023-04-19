@@ -93,7 +93,7 @@ class StreamTargetRepository
             foreach ($ids as $id) {
                 try {
                     $this->delete($id);
-                } catch(Exception $e) {
+                } catch (Exception $e) {
                     // @TODO [Josh] -  return an array of errors so we know which ones failed
                 }
             }

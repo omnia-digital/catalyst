@@ -63,9 +63,9 @@ class UpdateTeamMemberRoleTest extends TestCase
         );
 
         Livewire::test(ManageTeamMembers::class, ['team' => $team])
-                        ->set('managingRoleFor', $this->otherUser)
-                        ->set('currentRole', Role::findOrCreate('member')->id)
-                        ->call('updateUserRole');
+            ->set('managingRoleFor', $this->otherUser)
+            ->set('currentRole', Role::findOrCreate('member')->id)
+            ->call('updateUserRole');
 
         $this->assertTrue($this->otherUser->fresh()->hasTeamRole(
             $team->fresh(), 'member'
@@ -86,9 +86,9 @@ class UpdateTeamMemberRoleTest extends TestCase
         $this->actingAs($this->otherUser);
 
         Livewire::test(ManageTeamMembers::class, ['team' => $team])
-                        ->set('managingRoleFor', $this->otherUser)
-                        ->set('currentRole', Role::findOrCreate('member')->id)
-                        ->call('updateUserRole');
+            ->set('managingRoleFor', $this->otherUser)
+            ->set('currentRole', Role::findOrCreate('member')->id)
+            ->call('updateUserRole');
 
         $this->assertTrue($this->otherUser->fresh()->hasTeamRole(
             $team->fresh(), 'admin'

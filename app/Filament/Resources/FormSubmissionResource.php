@@ -74,7 +74,7 @@ class FormSubmissionResource extends Resource
                 TextColumn::make('user.profile.first_name')
                     ->label('First name'),
                 TextColumn::make('user.profile.last_name')
-                ->label('Last name'),
+                    ->label('Last name'),
                 TextColumn::make('user.email')
                     ->label('Email'),
                 // TextColumn::make('data')

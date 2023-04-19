@@ -162,11 +162,11 @@ class NewJob extends Component
                 $this->emit('validation-fails', $validator->errors());
             }
         })
-                          ->validate($this->rules());
+            ->validate($this->rules());
 
         // Make sure users have their default payment method.
         if (! auth()->user()
-                   ->hasDefaultPaymentMethod()) {
+            ->hasDefaultPaymentMethod()) {
             $this->error('You have not setup your default payment method yet. Please setup one!');
 
             return;
@@ -205,12 +205,12 @@ class NewJob extends Component
             // Note: Stripe accepts charges in cents
             if (! empty($price) && $price > 0) {
                 $invoice = auth()->user()
-                               ->invoiceFor('Publish job: ' . $this->title, $price * 100);
+                    ->invoiceFor('Publish job: ' . $this->title, $price * 100);
 
                 // Save a transaction into the database
                 $job->transactions()
                     ->create($this->prepareTransaction($invoice)
-                                  ->all());
+                        ->all());
             }
         } catch (Exception $exception) {
             DB::rollBack();
@@ -280,7 +280,7 @@ class NewJob extends Component
     public function getAddonsPriceProperty()
     {
         return JobPositionAddon::whereIn('id', $this->selected_addons)
-                               ->sum('price');
+            ->sum('price');
     }
 
     /**
@@ -304,19 +304,19 @@ class NewJob extends Component
     {
         return view('jobs::livewire.pages.jobs.new-job', [
             'companies' => auth()->guest() ? [] : auth()->user()
-                                                                     ->allTeams(),
+                ->allTeams(),
             'applyTypes' => ApplyType::pluck('name', 'code'),
             'paymentTypes' => PaymentType::pluck('name', 'code'),
             'jobPositionSkillOptions' => $this->jobPositionSkillOptions,
             'addons' => JobPositionAddon::all(),
             'intent' => auth()->guest() ? null : auth()->user()
-                                                                       ->createSetupIntent(),
+                ->createSetupIntent(),
             'jobLengths' => JobPositionLength::all(),
             'experienceLevels' => ExperienceLevel::all(),
             'hoursPerWeek' => HoursPerWeek::pluck('value', 'id'),
             'projectSizes' => ProjectSize::orderBy('order')
-                                                       ->get()
-                                                       ->toArray(),
+                ->get()
+                ->toArray(),
         ]);
     }
 
@@ -326,8 +326,8 @@ class NewJob extends Component
             'title' => 'required|max:254',
             'description' => 'required|min:50',
             'team_id' => 'required|' . Rule::in(auth()->user()
-                                                              ->allTeams()
-                                                              ->pluck('id')),
+                ->allTeams()
+                ->pluck('id')),
             'apply_type' => 'required|' . Rule::in(['link', 'email']),
             'apply_value' => 'required',
             'payment_type' => 'required|' . Rule::in(['hourly', 'fixed']),
@@ -357,11 +357,11 @@ class NewJob extends Component
     private function switchTeam()
     {
         $team = Jetstream::newTeamModel()
-                         ->find($this->team_id);
+            ->find($this->team_id);
 
         if ($team) {
             return auth()->user()
-                       ->switchTeam($team);
+                ->switchTeam($team);
         }
 
         $this->error('notify', 'Cannot find the company.');

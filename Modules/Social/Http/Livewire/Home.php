@@ -40,23 +40,23 @@ class Home extends Component
     public function getPlacesProperty()
     {
         $places = Location::query()
-                          ->hasCoordinates()
-                          ->with('model')
-                          ->get()
-                          ->map(function (Location $location) {
-                              return [
-                                  'id' => $location->id,
-                                  'name' => $location->model->name,
-                                  'lat' => $location->lat,
-                                  'lng' => $location->lng,
-                                  'address' => $location->address,
-                                  'address_line_2' => $location->address_line_2,
-                                  'city' => $location->city,
-                                  'state' => $location->state,
-                                  'postal_code' => $location->postal_code,
-                                  'country' => $location->country,
-                              ];
-                          });
+            ->hasCoordinates()
+            ->with('model')
+            ->get()
+            ->map(function (Location $location) {
+                return [
+                    'id' => $location->id,
+                    'name' => $location->model->name,
+                    'lat' => $location->lat,
+                    'lng' => $location->lng,
+                    'address' => $location->address,
+                    'address_line_2' => $location->address_line_2,
+                    'city' => $location->city,
+                    'state' => $location->state,
+                    'postal_code' => $location->postal_code,
+                    'country' => $location->country,
+                ];
+            });
 
         return $places->all();
     }

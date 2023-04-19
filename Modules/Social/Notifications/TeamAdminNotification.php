@@ -44,10 +44,10 @@ class TeamAdminNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject(Trans::get('You have a new message from the team: ' . $this->team->name))
-                    ->line(Trans::get('You have a new message from the team: ' . $this->team->name))
-                    ->line($this->message)
-                    ->action('View Team', $this->team->profile());
+            ->subject(Trans::get('You have a new message from the team: ' . $this->team->name))
+            ->line(Trans::get('You have a new message from the team: ' . $this->team->name))
+            ->line($this->message)
+            ->action('View Team', $this->team->profile());
     }
 
     /**

@@ -35,9 +35,9 @@ return new class extends Migration
 
         Schema::table('job_positions', function (Blueprint $table) {
             $table
-            ->string('hours_per_week')
-            ->after('location')
-            ->nullable();
+                ->string('hours_per_week')
+                ->after('location')
+                ->nullable();
             $table->dropColumn('hours_per_week_id');
         });
     }

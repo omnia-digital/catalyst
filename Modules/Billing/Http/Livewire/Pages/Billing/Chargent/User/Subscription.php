@@ -71,8 +71,8 @@ class Subscription extends Component
     public function getSubscriptionProperty()
     {
         return $this->user->chargentSubscription()
-                          ->latest()
-                          ->first();
+            ->latest()
+            ->first();
     }
 
     public function getUserProperty()
@@ -85,8 +85,8 @@ class Subscription extends Component
         $qs = '?';
         $attributes = [];
         $tfaFields = $form->fields()
-                           ->where('enabled', 1)
-                           ->pluck('name', 'tfa_code');
+            ->where('enabled', 1)
+            ->pluck('name', 'tfa_code');
 
         foreach ($tfaFields as $code => $attribute) {
             if ($attribute === 'chargent_order_id' && ! is_null($this->subscription)) {

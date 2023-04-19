@@ -35,12 +35,12 @@ class FormTypeResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                        ->label('Name')
-                        ->lazy()
-                        ->afterStateUpdated(function (Closure $set, $state) {
-                            $set('slug', Str::slug($state));
-                        })
-                        ->required(),
+                    ->label('Name')
+                    ->lazy()
+                    ->afterStateUpdated(function (Closure $set, $state) {
+                        $set('slug', Str::slug($state));
+                    })
+                    ->required(),
                 TextInput::make('slug')
                     ->label('Slug')
                     ->required(),

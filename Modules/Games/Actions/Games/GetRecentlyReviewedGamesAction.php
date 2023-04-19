@@ -12,12 +12,12 @@ class GetRecentlyReviewedGamesAction
     public function execute(int $limit = 5): Collection
     {
         $before = Carbon::now()
-                         ->subMonths(2)->timestamp;
+            ->subMonths(2)->timestamp;
         $current = Carbon::now()->timestamp;
 
         $recentlyReviewedUnformatted = Game::where('first_release_date', '>', $before)
-                                           ->where('first_release_date', '<', $current)
-                                           ->get();
+            ->where('first_release_date', '<', $current)
+            ->get();
         //         $recentlyReviewedUnformatted = Http::withHeaders(config('services.igdb'))
         //            ->withOptions([
         //                'body' => "

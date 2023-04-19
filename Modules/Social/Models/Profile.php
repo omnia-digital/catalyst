@@ -79,9 +79,9 @@ class Profile extends Model implements HasMedia, Searchable
         return Profile::query()->orderByDesc('followers_count');
 
         $trending = Profile::withCount('followers')
-                            ->with('user')
-                            ->orderBy('followers_count', 'desc')
-                            ->orderBy('created_at', 'desc');
+            ->with('user')
+            ->orderBy('followers_count', 'desc')
+            ->orderBy('created_at', 'desc');
 
         return $trending;
     }
@@ -90,26 +90,26 @@ class Profile extends Model implements HasMedia, Searchable
     {
         return [
             ImageColumn::make('profile_photo_url')
-                       ->label('Photo'),
+                ->label('Photo'),
             TextColumn::make('first_name')->sortable()->searchable(),
             TextColumn::make('last_name')->sortable()->searchable(),
             IconColumn::make('user.is_admin')
-                      ->label('Admin')
-                      ->boolean()->sortable(),
+                ->label('Admin')
+                ->boolean()->sortable(),
             TextColumn::make('user.id')->label('User ID')->sortable()->searchable(),
             TextColumn::make('user.email')
-                      ->label('Email')->sortable()->searchable(),
+                ->label('Email')->sortable()->searchable(),
             TextColumn::make('user.stripe_id')
-                      ->label('Stripe')
-                      ->sortable()
-                      ->searchable()
-                      ->url(function (Profile $record): string {
-                          return "https://dashboard.stripe.com/customers/{$record->user?->stripe_id}";
-                      }, true),
+                ->label('Stripe')
+                ->sortable()
+                ->searchable()
+                ->url(function (Profile $record): string {
+                    return "https://dashboard.stripe.com/customers/{$record->user?->stripe_id}";
+                }, true),
             TextColumn::make('created_at')
-                      ->dateTime()->sortable()->searchable(),
+                ->dateTime()->sortable()->searchable(),
             TextColumn::make('updated_at')
-                      ->dateTime()->sortable()->searchable(),
+                ->dateTime()->sortable()->searchable(),
         ];
     }
 
@@ -136,9 +136,9 @@ class Profile extends Model implements HasMedia, Searchable
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-                          ->generateSlugsFrom('name')
-                          ->saveSlugsTo('handle')
-                          ->doNotGenerateSlugsOnUpdate();
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('handle')
+            ->doNotGenerateSlugsOnUpdate();
     }
 
     public function fields()

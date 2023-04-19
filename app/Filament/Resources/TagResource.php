@@ -34,14 +34,14 @@ class TagResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('type')
-                  ->maxLength(255),
+                    ->maxLength(255),
                 Forms\Components\KeyValue::make('name')
                     ->keyLabel('Language Code')
                     ->valueLabel('Name')
                     ->required(),
                 Forms\Components\KeyValue::make('slug')
-                     ->keyLabel('Language Code')
-                     ->valueLabel('Name')
+                    ->keyLabel('Language Code')
+                    ->valueLabel('Name')
                     ->required(),
             ]);
     }

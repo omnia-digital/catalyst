@@ -25,8 +25,8 @@ class Home extends Component
     public function render()
     {
         $questions = Post::with(['company', 'tags', 'addons'])
-                           ->latest()
-                           ->get();
+            ->latest()
+            ->get();
 
         return view('advice::livewire.pages.questions.index', [
             'questions' => $questions,

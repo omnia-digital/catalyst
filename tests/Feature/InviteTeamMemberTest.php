@@ -55,11 +55,11 @@ class InviteTeamMemberTest extends TestCase
         ]);
 
         $component = Livewire::test(ManageTeamMembers::class, ['team' => $team])
-                        ->set('addTeamMemberForm', [
-                            'email' => 'test@example.com',
-                            'role' => $role->name,
-                            'message' => 'Please join the team',
-                        ])->call('addTeamMember');
+            ->set('addTeamMemberForm', [
+                'email' => 'test@example.com',
+                'role' => $role->name,
+                'message' => 'Please join the team',
+            ])->call('addTeamMember');
 
         Mail::assertSent(TeamInvitation::class);
 
@@ -80,11 +80,11 @@ class InviteTeamMemberTest extends TestCase
 
         // Add the team member...
         $component = Livewire::test(ManageTeamMembers::class, ['team' => $team])
-                        ->set('addTeamMemberForm', [
-                            'email' => 'test@example.com',
-                            'role' => $role->name,
-                            'message' => 'Please join the team',
-                        ])->call('addTeamMember');
+            ->set('addTeamMemberForm', [
+                'email' => 'test@example.com',
+                'role' => $role->name,
+                'message' => 'Please join the team',
+            ])->call('addTeamMember');
 
         $invitationId = $team->fresh()->teamInvitations->first()->id;
 

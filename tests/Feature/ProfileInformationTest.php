@@ -59,9 +59,9 @@ class ProfileInformationTest extends TestCase
         $profile = $this->user->profile;
 
         $component = Livewire::test(EditProfile::class, ['profile' => $profile])
-                ->set('profile.first_name', 'New First Name')
-                ->set('profile.last_name', 'New Last Name')
-                ->call('saveChanges');
+            ->set('profile.first_name', 'New First Name')
+            ->set('profile.last_name', 'New Last Name')
+            ->call('saveChanges');
 
         $profile = $this->user->fresh()->profile;
 

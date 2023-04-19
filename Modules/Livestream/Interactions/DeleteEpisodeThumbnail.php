@@ -24,7 +24,7 @@ class DeleteEpisodeThumbnail
             $episode->forceFill([
                 'thumbnail' => '',
             ])->save();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             throw new Exception('Could not delete Episode Thumbnail: ' . $e->getMessage());
         }
     }

@@ -16,10 +16,10 @@ class TeamTableSeeder extends Seeder
     public function run()
     {
         $teams = Team::factory(10)
-                     ->has(Location::factory(1))
-                     ->withUsers(1, config('platform.teams.default_owner_role'))
-                     ->withUsers(2, config('platform.teams.default_member_role'))
-                     ->create();
+            ->has(Location::factory(1))
+            ->withUsers(1, config('platform.teams.default_owner_role'))
+            ->withUsers(2, config('platform.teams.default_member_role'))
+            ->create();
 
         foreach ($teams as $team) {
             $team->attachTags(['Curated', 'Popular', 'Indie'], 'team');

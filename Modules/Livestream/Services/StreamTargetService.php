@@ -107,7 +107,7 @@ class StreamTargetService extends Service
                 } else {
                     Log::info('[FB Live] - Deleted Stream Target');
                 }
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 if ($e->getCode() !== 404) { // 404 means streamTarget doesn't exist, which we will ignore
                     Log::error('[FB Live] - Failed to Delete Stream Target: Status Code: ' . $e->getCode());
                     throw $e;
@@ -154,7 +154,7 @@ class StreamTargetService extends Service
             Log::info('[FB Live] - FINISHED - FB Live Stream Target Created Successfully');
 
             return response()->json($response);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $response = [
                 'success' => 'false',
                 'error' => $e->getMessage(),

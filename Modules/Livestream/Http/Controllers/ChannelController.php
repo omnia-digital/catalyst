@@ -96,7 +96,7 @@ class ChannelController extends LivestreamController
             if (empty($bible['code'])) {
                 $bible['code'] = 'niv';
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             if (empty($identifier)) {
                 $identifier = '';
             }
@@ -109,7 +109,7 @@ class ChannelController extends LivestreamController
             if (empty($bible['code'])) {
                 $bible['code'] = 'niv';
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Log::error('Livestream Account: ' . $identifier . ' : ' . $e->getMessage());
             $errors->push($e->getMessage());
         }

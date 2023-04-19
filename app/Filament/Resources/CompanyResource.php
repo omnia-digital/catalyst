@@ -40,38 +40,38 @@ class CompanyResource extends Resource
     {
         return $table->columns([
             TextColumn::make('id')
-                      ->sortable()
-                      ->searchable(),
+                ->sortable()
+                ->searchable(),
             TextColumn::make('name')
-                      ->sortable()
-                      ->searchable(),
+                ->sortable()
+                ->searchable(),
             TextColumn::make('email')
-                      ->sortable()
-                      ->searchable(),
+                ->sortable()
+                ->searchable(),
             TextColumn::make('website')
-                      ->sortable()
-                      ->searchable(),
+                ->sortable()
+                ->searchable(),
             TextColumn::make('about')
-                      ->sortable()
-                      ->searchable(),
+                ->sortable()
+                ->searchable(),
             TextColumn::make('created_at')
-                      ->sortable()
-                      ->searchable(),
+                ->sortable()
+                ->searchable(),
             TextColumn::make('updated_at')
-                      ->sortable()
-                      ->searchable(),
+                ->sortable()
+                ->searchable(),
             TextColumn::make('deleted_at')
-                      ->sortable()
-                      ->searchable(),
+                ->sortable()
+                ->searchable(),
         ])
-                     ->filters([])
-                     ->actions([
-                         Tables\Actions\EditAction::make(),
-                         Tables\Actions\DeleteAction::make(),
-                     ])
-                     ->bulkActions([
-                         Tables\Actions\DeleteBulkAction::make(),
-                     ]);
+            ->filters([])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getPages(): array

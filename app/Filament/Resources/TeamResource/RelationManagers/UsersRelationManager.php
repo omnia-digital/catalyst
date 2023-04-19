@@ -20,8 +20,8 @@ class UsersRelationManager extends RelationManager
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
-                                          ->required()
-                                          ->maxLength(255),
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 

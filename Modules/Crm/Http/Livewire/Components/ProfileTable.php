@@ -79,12 +79,12 @@ class ProfileTable extends Component implements HasTable
     {
         return [
             Filter::make('has_team')
-                  ->query(function (Builder $query) {
-                      // where profile has team
-                      $query->whereHas('user.teams');
-                  })
-                  ->label('Has Team')
-                  ->toggle(),
+                ->query(function (Builder $query) {
+                    // where profile has team
+                    $query->whereHas('user.teams');
+                })
+                ->label('Has Team')
+                ->toggle(),
         ];
     }
 
@@ -92,11 +92,11 @@ class ProfileTable extends Component implements HasTable
     {
         return [
             ViewAction::make()
-                      ->url(fn (Profile $record): string => route('social.profile.show', ['profile' => $record]))
-                      ->openUrlInNewTab(),
+                ->url(fn (Profile $record): string => route('social.profile.show', ['profile' => $record]))
+                ->openUrlInNewTab(),
             EditAction::make()
-                      ->url(fn (Profile $record): string => route('social.profile.edit', ['profile' => $record]))
-                      ->openUrlInNewTab(),
+                ->url(fn (Profile $record): string => route('social.profile.edit', ['profile' => $record]))
+                ->openUrlInNewTab(),
         ];
     }
 

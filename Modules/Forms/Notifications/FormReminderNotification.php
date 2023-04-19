@@ -47,13 +47,13 @@ class FormReminderNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Reminder: ' . Trans::get($this->formNotification->name))
-                    ->greeting(Trans::get($this->formNotification->name))
-                    ->line(Trans::get($this->formNotification->message))
-                    ->line('Team: ' . $this->team->name)
-                    ->line('Form: ' . $this->formNotification->form->name)
-                    ->action('Go to Team Page', route('social.teams.show', $this->team))
-                    ->line('Thank you!');
+            ->subject('Reminder: ' . Trans::get($this->formNotification->name))
+            ->greeting(Trans::get($this->formNotification->name))
+            ->line(Trans::get($this->formNotification->message))
+            ->line('Team: ' . $this->team->name)
+            ->line('Form: ' . $this->formNotification->form->name)
+            ->action('Go to Team Page', route('social.teams.show', $this->team))
+            ->line('Thank you!');
     }
 
     /**

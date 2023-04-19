@@ -22,7 +22,7 @@ class NotifySupportTeamSubscribed
             ];
 
 //        Omnia::interact(SendSupportEmail::class, [$emailData, 'auth.emails.team-subscribed']);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return;
         }
     }

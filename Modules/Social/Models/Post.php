@@ -47,11 +47,11 @@ class Post extends Model implements HasMedia, Searchable
     public static function getTrending($type = 'post')
     {
         $trendingPosts = Post::withCount('likes')
-                   ->with('user')
-                   ->when($type, fn ($query) => $query->where('type', $type))
-                   ->whereNotNull('published_at')
-                   ->orderBy('likes_count', 'desc')
-                   ->orderBy('created_at', 'desc');
+            ->with('user')
+            ->when($type, fn ($query) => $query->where('type', $type))
+            ->whereNotNull('published_at')
+            ->orderBy('likes_count', 'desc')
+            ->orderBy('created_at', 'desc');
 
         return $trendingPosts;
     }

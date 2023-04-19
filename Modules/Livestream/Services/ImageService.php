@@ -225,7 +225,7 @@ class ImageService
             if ($file_exists === true) {
                 $deletedFiles = $this->_source_disk->delete($image->full_file_path);
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $deletedFiles = false;
             Log::error('Unable to Delete Image files: ' . $e->getMessage());
         }

@@ -90,9 +90,9 @@ class FormResource extends Resource
                         ->schema([
                             self::getFieldNameInput(),
                             KeyValue::make('options')
-                                    ->addButtonLabel('Add option')
-                                    ->keyLabel('Value')
-                                    ->valueLabel('Label'),
+                                ->addButtonLabel('Add option')
+                                ->keyLabel('Value')
+                                ->valueLabel('Label'),
                             Checkbox::make('is_required'),
                             TextInput::make('helper_text'),
                             TextInput::make('hint'),
@@ -181,9 +181,9 @@ class FormResource extends Resource
                     ->lazy()
                     ->afterStateUpdated(function (Closure $set, $state) {
                         $name = Str::of($state)
-                                    ->snake()
-                                    ->replace(['-'], '_')
-                                    ->lower();
+                            ->snake()
+                            ->replace(['-'], '_')
+                            ->lower();
                         $set('name', $name);
                     })
                     ->required(),

@@ -29,16 +29,16 @@ class TeamResource extends Resource
         return $form->schema([
             Forms\Components\DateTimePicker::make('start_date'),
             Forms\Components\Textarea::make('summary')
-                                     ->maxLength(65535),
+                ->maxLength(65535),
             Forms\Components\Textarea::make('content')
-                                     ->maxLength(65535)
-                                     ->required(),
+                ->maxLength(65535)
+                ->required(),
             Forms\Components\TextInput::make('location')
-                                      ->maxLength(255),
+                ->maxLength(255),
             Forms\Components\TextInput::make('rating'),
             Forms\Components\TextInput::make('languages')
-                                      ->required()
-                                      ->maxLength(255),
+                ->required()
+                ->maxLength(255),
         ]);
     }
 
@@ -47,36 +47,36 @@ class TeamResource extends Resource
         return $table->columns([
 
             Tables\Columns\TextColumn::make('id')
-                                     ->sortable()
-                                     ->searchable(),
+                ->sortable()
+                ->searchable(),
             Tables\Columns\TextColumn::make('name')
-                                     ->sortable()
-                                     ->searchable(),
+                ->sortable()
+                ->searchable(),
             Tables\Columns\TextColumn::make('handle')
-                                     ->sortable()
-                                     ->searchable(),
+                ->sortable()
+                ->searchable(),
             Tables\Columns\TextColumn::make('members_count')
-                                     ->label('Members')
-                                     ->counts('members')
-                                     ->sortable()
-                                     ->searchable(),
+                ->label('Members')
+                ->counts('members')
+                ->sortable()
+                ->searchable(),
             Tables\Columns\TextColumn::make('name')
-                                     ->sortable()
-                                     ->searchable(),
+                ->sortable()
+                ->searchable(),
             Tables\Columns\TextColumn::make('start_date')
-                                     ->date(config('app.default_date_format')),
+                ->date(config('app.default_date_format')),
             Tables\Columns\TextColumn::make('created_at')
-                                     ->date(config('app.default_date_format')),
+                ->date(config('app.default_date_format')),
         ])
-                     ->filters([//
-                     ])
-                     ->actions([
-                         Tables\Actions\ViewAction::make('view'),
-                         Tables\Actions\EditAction::make('edit'),
-                     ])
-                     ->bulkActions([
-                         Tables\Actions\DeleteBulkAction::make(),
-                     ]);
+            ->filters([//
+            ])
+            ->actions([
+                Tables\Actions\ViewAction::make('view'),
+                Tables\Actions\EditAction::make('edit'),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getRelations(): array
@@ -120,14 +120,14 @@ class TeamResource extends Resource
     protected static function getNavigationBadge(): ?string
     {
         return static::getEloquentQuery()
-                     ->get()
-                     ->count();
+            ->get()
+            ->count();
     }
 
     protected static function getNavigationBadgeColor(): ?string
     {
         return static::getEloquentQuery()
-                     ->get()
-                     ->count() > 10 ? 'warning' : 'primary';
+            ->get()
+            ->count() > 10 ? 'warning' : 'primary';
     }
 }

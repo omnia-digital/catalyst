@@ -33,25 +33,25 @@ class UserResource extends Resource
     {
         return $form->schema([
             Forms\Components\Fieldset::make('Profile')
-                                     ->relationship('profile')
-                                     ->visibleOn(['edit', 'view'])
-                                     ->schema([
-                                         Forms\Components\Grid::make(12)
-                                                              ->schema([
-                                                                  Forms\Components\TextInput::make('first_name')
-                                                                                          ->columnSpan(6)
-                                                                                          ->required()
-                                                                                          ->maxLength(255),
-                                                                  Forms\Components\TextInput::make('last_name')
-                                                                                          ->columnSpan(6)
-                                                                                          ->required()
-                                                                                          ->maxLength(255),
-                                                              ]),
-                                     ]),
+                ->relationship('profile')
+                ->visibleOn(['edit', 'view'])
+                ->schema([
+                    Forms\Components\Grid::make(12)
+                        ->schema([
+                            Forms\Components\TextInput::make('first_name')
+                                ->columnSpan(6)
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('last_name')
+                                ->columnSpan(6)
+                                ->required()
+                                ->maxLength(255),
+                        ]),
+                ]),
             TextInput::make('email')
-                     ->email()
-                     ->required()
-                     ->maxLength(255),
+                ->email()
+                ->required()
+                ->maxLength(255),
             DateTimePicker::make('email_verified_at'),
             //            TextInput::make('password')
             //                     ->password()
@@ -70,11 +70,11 @@ class UserResource extends Resource
             //            TextInput::make('2fa_backup_codes'),
             //            DateTimePicker::make('2fa_setup_at'),
             TextInput::make('language')
-                     ->maxLength(255),
+                ->maxLength(255),
             Forms\Components\Select::make('Current Team')
-                                   ->relationship('currentTeam', 'name'),
+                ->relationship('currentTeam', 'name'),
             TextInput::make('profile_photo_path')
-                     ->maxLength(2048),
+                ->maxLength(2048),
             DateTimePicker::make('last_active_at'),
             DateTimePicker::make('delete_after'),
         ]);
@@ -89,7 +89,7 @@ class UserResource extends Resource
             TextColumn::make('profile.last_name')->label('Last Name'),
             TextColumn::make('email'),
             TextColumn::make('email_verified_at')
-                      ->dateTime(config('app.default_datetime_format')),
+                ->dateTime(config('app.default_datetime_format')),
             //                TextColumn::make('two_factor_secret'),
             //                TextColumn::make('two_factor_recovery_codes'),
             TextColumn::make('status'),
@@ -102,28 +102,28 @@ class UserResource extends Resource
             TextColumn::make('current_team.name'),
             //                TextColumn::make('profile_photo_path'),
             TextColumn::make('last_active_at')
-                      ->dateTime(config('app.default_datetime_format')),
+                ->dateTime(config('app.default_datetime_format')),
             //                TextColumn::make('delete_after')
             //                    ->dateTime(),
             //                TextColumn::make('deleted_at')
             //                    ->dateTime(),
             TextColumn::make('created_at')
-                      ->dateTime(config('app.default_datetime_format')),
+                ->dateTime(config('app.default_datetime_format')),
             //                TextColumn::make('updated_at')
             //                    ->dateTime(),
 
         ])
-                     ->filters([
+            ->filters([
 
-                     ])
-                     ->actions([
-                         Impersonate::make('impersonate'),
-                         ViewAction::make(),
-                         EditAction::make(),
-                     ])
-                     ->bulkActions([
-                         DeleteBulkAction::make(),
-                     ]);
+            ])
+            ->actions([
+                Impersonate::make('impersonate'),
+                ViewAction::make(),
+                EditAction::make(),
+            ])
+            ->bulkActions([
+                DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getRelations(): array
@@ -155,15 +155,15 @@ class UserResource extends Resource
     protected static function getNavigationBadge(): ?string
     {
         return static::getEloquentQuery()
-                     ->get()
-                     ->count();
+            ->get()
+            ->count();
     }
 
     protected static function getNavigationBadgeColor(): ?string
     {
         return static::getEloquentQuery()
-                     ->get()
-                     ->count() > 10 ? 'warning' : 'primary';
+            ->get()
+            ->count() > 10 ? 'warning' : 'primary';
     }
 
     protected function getTableRecordUrlUsing(): Closure

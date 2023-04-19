@@ -56,13 +56,13 @@ class Index extends Component
     public function getRowsQueryProperty()
     {
         $query = Post::where('type', '=', PostType::RESOURCE)
-                     ->withCount(['bookmarks', 'likes', 'media']);
+            ->withCount(['bookmarks', 'likes', 'media']);
 
         $query = $this->applyFilters($query);
 
         $query->where(function ($q) {
             $q->where('title', 'like', "%{$this->search}%")
-              ->orWhere('body', 'like', "%{$this->search}%");
+                ->orWhere('body', 'like', "%{$this->search}%");
         });
 
         $query = $this->applySorting($query);

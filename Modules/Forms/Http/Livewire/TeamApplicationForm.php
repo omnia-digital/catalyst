@@ -31,9 +31,9 @@ class TeamApplicationForm extends LivewireForm
         $this->applyToTeam();
 
         $application = TeamApplication::query()
-                            ->where('user_id', $this->user->id)
-                            ->where('team_id', $this->team_id)
-                            ->first();
+            ->where('user_id', $this->user->id)
+            ->where('team_id', $this->team_id)
+            ->first();
 
         $formSubmission = FormSubmission::create([
             'form_id' => $this->formModel->id,

@@ -46,9 +46,9 @@ class ReviewTable extends Component implements HasTable
             BooleanColumn::make('recommend'),
             BooleanColumn::make('commentable'),
             JalaliDateTimeColumn::make('created_at')
-                      ->dateTime(),
+                ->dateTime(),
             TextColumn::make('updated_at')
-                      ->dateTime(),
+                ->dateTime(),
         ];
     }
 
