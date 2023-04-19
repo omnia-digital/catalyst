@@ -3,6 +3,7 @@
 namespace Modules\Social\Notifications;
 
 use App\Models\User;
+use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,9 +11,8 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Trans;
 
-class NewFollowerNotification extends Notification implements ShouldQueue
+class NewFollowerNotification extends BaseNotification
 {
-    use Queueable;
 
     public function __construct(
         private User $follower
@@ -25,7 +25,7 @@ class NewFollowerNotification extends Notification implements ShouldQueue
             return [];
         }
 
-        return ['broadcast', 'database', 'mail'];
+        return static::getChannels();
     }
 
     public function getTitle()

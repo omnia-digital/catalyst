@@ -3,6 +3,7 @@
 namespace Modules\Social\Notifications;
 
 use App\Models\User;
+use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,10 +14,8 @@ use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Trans;
 
-class PostWasRepostedNotification extends Notification implements ShouldQueue
+class PostWasRepostedNotification extends BaseNotification
 {
-    use Queueable;
-
     public function __construct(
         private Post $post,
         private User $actionable
@@ -29,7 +28,7 @@ class PostWasRepostedNotification extends Notification implements ShouldQueue
             return [];
         }
 
-        return ['broadcast', 'database', 'mail'];
+        return static::getChannels();
     }
 
     public function getTitle()
