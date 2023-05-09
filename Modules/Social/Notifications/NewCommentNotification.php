@@ -3,19 +3,16 @@
 namespace Modules\Social\Notifications;
 
 use App\Models\User;
+use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 
-class NewCommentNotification extends Notification implements ShouldQueue
+class NewCommentNotification extends BaseNotification
 {
-    use Queueable;
-
     public function __construct(
         private Post $post,
         private User $actionable
@@ -28,7 +25,7 @@ class NewCommentNotification extends Notification implements ShouldQueue
             return [];
         }
 
-        return ['broadcast', 'database', 'mail'];
+        return static::getChannels();
     }
 
     public function getTitle()

@@ -4,16 +4,13 @@ namespace Modules\Social\Notifications;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Trans;
 
-class NewApplicationToTeamNotification extends Notification implements ShouldQueue
+class NewApplicationToTeamNotification extends BaseNotification
 {
-    use Queueable;
-
     /**
      * Create a new notification instance.
      *
@@ -23,17 +20,6 @@ class NewApplicationToTeamNotification extends Notification implements ShouldQue
         private Team $team,
         private User $applicant
     ) {
-    }
-
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return ['broadcast', 'database'];
     }
 
     /**
