@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05be712c78ad7ac273a440e4ca38113a",
+    "content-hash": "8dad67f177048e85862c1cfc838d5df9",
     "packages": [
         {
             "name": "3x1io/filament-themes",
@@ -6766,6 +6766,62 @@
             },
             "abandoned": true,
             "time": "2018-11-22T07:55:51+00:00"
+        },
+        {
+            "name": "liran-co/laravel-notification-subscriptions",
+            "version": "v1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liran-co/laravel-notification-subscriptions.git",
+                "reference": "53acab03b31303e4ec7485bb36d611f29e474f8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/liran-co/laravel-notification-subscriptions/zipball/53acab03b31303e4ec7485bb36d611f29e474f8c",
+                "reference": "53acab03b31303e4ec7485bb36d611f29e474f8c",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.2.5|^8.0|^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LiranCo\\NotificationSubscriptions\\NotificationSubscriptionsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LiranCo\\NotificationSubscriptions\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Liran Cohen",
+                    "email": "l@liran.co"
+                }
+            ],
+            "description": "Notification subscription management.",
+            "homepage": "https://github.com/liran-co/laravel-notification-subscriptions",
+            "keywords": [
+                "laravel",
+                "notification",
+                "notifications",
+                "subscription",
+                "subscriptions"
+            ],
+            "support": {
+                "issues": "https://github.com/liran-co/laravel-notification-subscriptions/issues",
+                "source": "https://github.com/liran-co/laravel-notification-subscriptions/tree/v1.7"
+            },
+            "time": "2023-02-16T17:13:37+00:00"
         },
         {
             "name": "livewire/livewire",

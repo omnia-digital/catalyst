@@ -3,15 +3,15 @@
 namespace Modules\Social\Notifications;
 
 use App\Models\Team;
+use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Trans;
 
-class TeamAdminNotification extends Notification
+class TeamAdminNotification extends BaseNotification
 {
-    use Queueable;
 
     /**
      * Create a new notification instance.
@@ -22,17 +22,6 @@ class TeamAdminNotification extends Notification
         private Team $team,
         private $message
     ) {
-    }
-
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return ['mail', 'broadcast', 'database'];
     }
 
     /**

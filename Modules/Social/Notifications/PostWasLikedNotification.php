@@ -3,6 +3,7 @@
 namespace Modules\Social\Notifications;
 
 use App\Models\User;
+use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,9 +14,8 @@ use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Trans;
 
-class PostWasLikedNotification extends Notification implements ShouldQueue
+class PostWasLikedNotification extends BaseNotification
 {
-    use Queueable;
 
     public function __construct(
         private Post $post,
@@ -29,7 +29,7 @@ class PostWasLikedNotification extends Notification implements ShouldQueue
             return [];
         }
 
-        return ['broadcast', 'database'];
+        return static::getChannels();
     }
 
     public function getTitle()
