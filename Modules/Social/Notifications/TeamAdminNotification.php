@@ -5,14 +5,12 @@ namespace Modules\Social\Notifications;
 use App\Models\Team;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Trans;
 
 class TeamAdminNotification extends BaseNotification
 {
-
     /**
      * Create a new notification instance.
      *

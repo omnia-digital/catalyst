@@ -14,17 +14,6 @@ abstract class BaseNotification extends Notification implements ShouldQueue
     public static string $description = '';
     public static array $channels = ['mail', 'database', 'broadcast', 'sms'];
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return static::getChannels();
-    }
-
     public static function getLabel()
     {
         if (static::$label) {
@@ -44,6 +33,17 @@ abstract class BaseNotification extends Notification implements ShouldQueue
         if (static::$channels) {
             return static::$channels;
         }
+    }
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return static::getChannels();
     }
 
     /**

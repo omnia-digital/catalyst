@@ -25,13 +25,13 @@ class NotificationManager extends Component
             NewApplicationToTeamNotification::class,
             NewCommentNotification::class,
             NewFollowerNotification::class,
-            NewMemberOfMyTeamNotification::class
+            NewMemberOfMyTeamNotification::class,
         ];
     }
 
     public function getChannelLabel($channel)
     {
-        return match($channel) {
+        return match ($channel) {
             'mail' => 'Email',
             'database' => 'In-App',
             'broadcast' => 'Push',

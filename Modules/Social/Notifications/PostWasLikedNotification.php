@@ -5,8 +5,6 @@ namespace Modules\Social\Notifications;
 use App\Models\User;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
@@ -16,7 +14,6 @@ use Trans;
 
 class PostWasLikedNotification extends BaseNotification
 {
-
     public function __construct(
         private Post $post,
         private User $actionable

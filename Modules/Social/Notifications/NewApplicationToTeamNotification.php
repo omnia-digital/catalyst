@@ -6,8 +6,6 @@ use App\Models\Team;
 use App\Models\User;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Trans;
 

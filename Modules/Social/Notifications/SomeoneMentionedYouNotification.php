@@ -5,8 +5,6 @@ namespace Modules\Social\Notifications;
 use App\Models\Team;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 use Modules\Social\Enums\PostType;

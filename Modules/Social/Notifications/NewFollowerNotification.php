@@ -5,15 +5,12 @@ namespace Modules\Social\Notifications;
 use App\Models\User;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Trans;
 
 class NewFollowerNotification extends BaseNotification
 {
-
     public function __construct(
         private User $follower
     ) {

@@ -78,7 +78,7 @@
             </x-vertical-tabs.panel>
             <x-vertical-tabs.panel>
                 <x-slot:title>{{ Trans::get('Notification Settings') }}</x-slot:title>
-                <x-slot:description>{{ Trans::get('Change your notification settings.')}}</x-slot:description>
+                <x-slot:description>{{ Trans::get('Change your notification settings.') }}</x-slot:description>
 
                 <x-slot:footer>
                     <x-jet-action-message class="mr-3 text-success-600" on="account_saved">
