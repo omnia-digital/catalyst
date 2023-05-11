@@ -33,6 +33,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "illuminate/support": "^9.19",
         "jorenvanhocht/laravel-share": "^4.2",
+        "joshbrw/laravel-module-installer": "^2.0",
         "konnco/filament-import": "^1.4",
         "laravel/cashier": "^14.1",
         "laravel/framework": "^9.0.0",
@@ -50,7 +51,6 @@
         "marcreichel/igdb-laravel": "^3.6",
         "mhmiton/laravel-modules-livewire": "^1.3",
         "nwidart/laravel-modules": "^9.0",
-        "omnia-digital/catalyst-advice-module": "*",
         "omnia-digital/library": "dev-main",
         "omnia-digital/livewire-calendar": "^2.2",
         "omnia-digital/media-manager": "dev-main",
@@ -112,10 +112,6 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-advice"
         }
     ],
     "autoload": {
@@ -167,7 +163,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "joshbrw/laravel-module-installer": true
         }
     },
     "minimum-stability": "dev",
