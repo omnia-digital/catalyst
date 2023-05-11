@@ -50,6 +50,7 @@
         "marcreichel/igdb-laravel": "^3.6",
         "mhmiton/laravel-modules-livewire": "^1.3",
         "nwidart/laravel-modules": "^9.0",
+        "omnia-digital/catalyst-advice-module": "*",
         "omnia-digital/library": "dev-main",
         "omnia-digital/livewire-calendar": "^2.2",
         "omnia-digital/media-manager": "dev-main",
@@ -111,6 +112,10 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "path",
+            "url": "../modules/catalyst-advice"
         }
     ],
     "autoload": {

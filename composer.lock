@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8dad67f177048e85862c1cfc838d5df9",
+    "content-hash": "26084e42c2fb3309b3c712e104e47b63",
     "packages": [
         {
             "name": "3x1io/filament-themes",
@@ -8495,6 +8495,83 @@
                 }
             ],
             "time": "2023-04-09T08:34:27+00:00"
+        },
+        {
+            "name": "omnia-digital/catalyst-advice-module",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../modules/catalyst-advice",
+                "reference": "ace8f6d2f6dcb16e457c119a67502b31991ac1b2"
+            },
+            "require": {
+                "filament/filament": "^2.0",
+                "illuminate/contracts": "^9.0|^10.0",
+                "php": "^8.0|^8.1|^8.2",
+                "spatie/laravel-package-tools": "^1.13.5"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^6.0",
+                "orchestra/testbench": "^7.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "pestphp/pest-plugin-livewire": "^1.0",
+                "pestphp/pest-plugin-parallel": "^0.3",
+                "phpunit/phpunit": "^9.5",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "laravel-module",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OmniaDigital\\Catalyst\\Advice\\AdviceServiceProvider"
+                    ],
+                    "aliases": {
+                        "Advice": "OmniaDigital\\Catalyst\\Advice\\Facades\\Advice"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OmniaDigital\\Catalyst\\Advice\\": "src",
+                    "OmniaDigital\\Catalyst\\Advice\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "OmniaDigital\\Catalyst\\Advice\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test:pest": [
+                    "vendor/bin/pest --parallel"
+                ],
+                "test": [
+                    "@test:pest",
+                    "@test:phpstan"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Torres",
+                    "email": "josht@omniadigital.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Advice module for Catalyst Framework",
+            "homepage": "https://github.com/omnia-digital/catalyst-advice-module",
+            "keywords": [
+                "Omnia Digital",
+                "catalyst-advice",
+                "forum",
+                "laravel"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "omnia-digital/library",
