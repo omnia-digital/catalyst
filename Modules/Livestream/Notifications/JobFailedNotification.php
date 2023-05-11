@@ -54,14 +54,14 @@ class JobFailedNotification extends Notification
             ->content('Queued job failed: ' . $this->event['job'])
             ->attachment(function ($attachment) use ($event_id, $event_name) {
                 $attachment->title($this->event['exception']['message'])
-                           ->fields([
-                               'ID' => $event_id,
-                               'Name' => $event_name,
-                               'File' => $this->event['exception']['file'],
-                               'Line' => $this->event['exception']['line'],
-                               'Server' => env('APP_ENV'),
-                               'Queue' => $this->event['queue'],
-                           ]);
+                    ->fields([
+                        'ID' => $event_id,
+                        'Name' => $event_name,
+                        'File' => $this->event['exception']['file'],
+                        'Line' => $this->event['exception']['line'],
+                        'Server' => env('APP_ENV'),
+                        'Queue' => $this->event['queue'],
+                    ]);
             });
     }
 

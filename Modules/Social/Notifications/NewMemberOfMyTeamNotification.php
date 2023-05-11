@@ -4,15 +4,13 @@ namespace Modules\Social\Notifications;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Trans;
 
-class NewMemberOfMyTeamNotification extends Notification
+class NewMemberOfMyTeamNotification extends BaseNotification
 {
-    use Queueable;
-
     /**
      * Create a new notification instance.
      *
@@ -36,7 +34,7 @@ class NewMemberOfMyTeamNotification extends Notification
             return [];
         }
 
-        return ['broadcast', 'database'];
+        return static::getChannels();
     }
 
     /**

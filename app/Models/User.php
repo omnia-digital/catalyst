@@ -15,6 +15,7 @@ use Laravel\Cashier\Billable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
 use Laravel\Passport\HasApiTokens;
+use LiranCo\NotificationSubscriptions\Traits\HasNotificationSubscriptions;
 use Modules\Billing\Models\Builders\CashierSubscriptionBuilder;
 use Modules\Billing\Traits\WithChargentSubscriptions;
 use Modules\Forms\Models\FormSubmission;
@@ -47,6 +48,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         HasRoles,
         HasJobs,
         HasTransactions,
+        HasNotificationSubscriptions,
         SnoozeNotifiable;
     use HasTeams, JetstreamHasTeams {
         HasTeams::teams insteadof JetstreamHasTeams;

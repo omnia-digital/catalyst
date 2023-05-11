@@ -67,9 +67,9 @@ class Coupon extends Model
     public function isRedeemedFor($model, ?int $id = null)
     {
         return RedeemedCoupon::query()
-                             ->where('model_type', $model instanceof Model ? get_class($model) : $model)
-                             ->where('model_id', $model instanceof Model ? $model->getKey() : $id)
-                             ->exists();
+            ->where('model_type', $model instanceof Model ? get_class($model) : $model)
+            ->where('model_id', $model instanceof Model ? $model->getKey() : $id)
+            ->exists();
     }
 
     /**

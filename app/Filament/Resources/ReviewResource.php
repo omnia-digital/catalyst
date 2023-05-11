@@ -21,7 +21,7 @@ class ReviewResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
-                      ->relationship('user', 'name'),
+                    ->relationship('user', 'name'),
                 Forms\Components\TextInput::make('reviewable_type')
                     ->required(),
                 Forms\Components\TextInput::make('reviewable_id')

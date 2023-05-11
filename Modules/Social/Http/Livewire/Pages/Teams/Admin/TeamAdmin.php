@@ -108,9 +108,9 @@ class TeamAdmin extends Component
     public function getTeamTagsProperty()
     {
         return Tag::withType('team_type')
-                  ->get()
-                  ->mapWithKeys(fn (Tag $tag) => [$tag->name => ucwords($tag->name)])
-                  ->all();
+            ->get()
+            ->mapWithKeys(fn (Tag $tag) => [$tag->name => ucwords($tag->name)])
+            ->all();
     }
 
     public function saveChanges()
@@ -124,41 +124,41 @@ class TeamAdmin extends Component
         }
 
         $this->removeAddress && $this->team->location()
-                                           ->delete();
+            ->delete();
 
         if (! empty($this->newAddress)) {
             $this->team->location()
-                       ->updateOrCreate(['model_id' => $this->team->id, 'model_type' => Team::class], $this->newAddress);
+                ->updateOrCreate(['model_id' => $this->team->id, 'model_type' => Team::class], $this->newAddress);
         }
 
         if (! is_null($this->bannerImage) && $this->team->bannerImage()
-                                                         ->count()) {
+            ->count()) {
             $this->team->bannerImage()
-                       ->delete();
+                ->delete();
         }
         $this->bannerImage && $this->team->addMedia($this->bannerImage)
-                                         ->toMediaCollection('team_banner_images');
+            ->toMediaCollection('team_banner_images');
 
         if ($this->mainImage && $this->team->mainImage()
-                                           ->count()) {
+            ->count()) {
             $this->team->mainImage()
-                       ->delete();
+                ->delete();
         }
         $this->mainImage && $this->team->addMedia($this->mainImage)
-                                       ->toMediaCollection('team_main_images');
+            ->toMediaCollection('team_main_images');
 
         if ($this->profilePhoto && $this->team->profilePhoto()
-                                              ->count()) {
+            ->count()) {
             $this->team->profilePhoto()
-                       ->delete();
+                ->delete();
         }
         $this->profilePhoto && $this->team->addMedia($this->profilePhoto)
-                                          ->toMediaCollection('team_profile_photos');
+            ->toMediaCollection('team_profile_photos');
 
         if (count($this->sampleMedia)) {
             foreach ($this->sampleMedia as $media) {
                 $this->team->addMedia($media)
-                           ->toMediaCollection('team_sample_images');
+                    ->toMediaCollection('team_sample_images');
             }
         }
 

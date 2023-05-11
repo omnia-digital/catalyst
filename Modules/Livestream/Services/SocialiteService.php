@@ -23,8 +23,8 @@ class SocialiteService extends Service
     {
         // Try to find SocialAccount
         $socialAccount = SocialAccount::whereProvider($provider)
-                                ->whereProviderUserId($socialiteUser->getId())
-                                ->first();
+            ->whereProviderUserId($socialiteUser->getId())
+            ->first();
 
         // @TODO [Josh] - we need to keep in mind that this could also be coming from a mobile app eventually, so we need to figure out how we are going to deal with that
         // @TODO [Josh] - I could have these urls as default and then check if the client passed a url, then use that as the redirect instead

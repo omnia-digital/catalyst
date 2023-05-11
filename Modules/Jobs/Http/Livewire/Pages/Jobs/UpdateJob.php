@@ -44,7 +44,7 @@ class UpdateJob extends Component
 
         $this->job = $job;
         $this->selected_skills = $job->skills->pluck('id')
-                                         ->all();
+            ->all();
     }
 
     /**
@@ -60,7 +60,7 @@ class UpdateJob extends Component
         $this->job->save();
 
         $this->job->skills()
-                  ->sync($this->selected_skills);
+            ->sync($this->selected_skills);
 
         $this->success('Update the job successfully!');
 
@@ -73,14 +73,14 @@ class UpdateJob extends Component
     public function getJobPositionSkillOptionsProperty()
     {
         return \App\Models\Tag::getWithType('job_position_skill')
-                              ->pluck('name', 'id');
+            ->pluck('name', 'id');
     }
 
     public function render()
     {
         return view('jobs::livewire.pages.jobs.update-job', [
             'companies' => auth()->user()
-                                              ->allTeams(),
+                ->allTeams(),
             'applyTypes' => ApplyType::pluck('name', 'code'),
             'paymentTypes' => PaymentType::pluck('name', 'code'),
             'currentJobPositionSkills' => $this->job->skills->pluck('name', 'id'),
@@ -89,8 +89,8 @@ class UpdateJob extends Component
             'hoursPerWeek' => HoursPerWeek::pluck('value', 'id'),
             'experienceLevels' => ExperienceLevel::all(),
             'projectSizes' => ProjectSize::orderBy('order')
-                                                     ->get()
-                                                     ->toArray(),
+                ->get()
+                ->toArray(),
         ]);
     }
 }

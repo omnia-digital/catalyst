@@ -60,7 +60,7 @@ class LivestreamAccountController extends LivestreamController
             ];
             $LivestreamAccount_data = array_merge($request, $LivestreamAccount_data);
             $livestreamAccount = Omnia::interact(LivestreamAccountRepository::class . '@create', [$user, $LivestreamAccount_data]);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             throw new \Exception('Failed to Create Livestream Account: ' . $e->getMessage());
         }

@@ -42,7 +42,7 @@ trait ManagesAvailablePlans
     {
         $plans = collect();
 
-        switch($module) {
+        switch ($module) {
             case 'livestream':
 //                $plans->push('livestream-metered');
                 break;

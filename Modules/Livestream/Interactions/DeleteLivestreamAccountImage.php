@@ -24,7 +24,7 @@ class DeleteLivestreamAccountImage
             $livestreamAccount->forceFill([
                 $imageType => '',
             ])->save();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             throw new Exception('Could not delete Livestream Account Image:' . $imageType . ': ' . $e->getMessage());
         }
     }

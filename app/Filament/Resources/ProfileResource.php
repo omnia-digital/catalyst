@@ -41,16 +41,16 @@ class ProfileResource extends Resource
                 Forms\Components\TextInput::make('first_name'),
                 Forms\Components\TextInput::make('last_name'),
                 Forms\Components\Fieldset::make('User')
-                        ->relationship('user')->visibleOn('edit')
-                        ->schema([
-                            Forms\Components\Grid::make(12)->schema([
-                                Forms\Components\TextInput::make('id')->disabled()->columnSpan(3),
-                                Forms\Components\Toggle::make('is_admin')->disabled(auth()->user()->is_admin)->columnSpan(3),
-                                Forms\Components\TextInput::make('email')->columnSpan(6),
-                            ]),
-                            Timestamp::make('last_active_at'),
-                            //                            Forms\Components\Select::make('current_team_id')->relationship('currentTeam','name'),
+                    ->relationship('user')->visibleOn('edit')
+                    ->schema([
+                        Forms\Components\Grid::make(12)->schema([
+                            Forms\Components\TextInput::make('id')->disabled()->columnSpan(3),
+                            Forms\Components\Toggle::make('is_admin')->disabled(auth()->user()->is_admin)->columnSpan(3),
+                            Forms\Components\TextInput::make('email')->columnSpan(6),
                         ]),
+                        Timestamp::make('last_active_at'),
+                        //                            Forms\Components\Select::make('current_team_id')->relationship('currentTeam','name'),
+                    ]),
                 CreatedAt::make()->visibleOn('edit'),
                 UpdatedAt::make()->visibleOn('edit'),
                 DeletedAt::make()->visibleOn('edit'),

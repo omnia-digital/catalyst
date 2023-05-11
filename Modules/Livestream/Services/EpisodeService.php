@@ -335,7 +335,7 @@ class EpisodeService extends LivestreamService
                 } else {
                     $result = Omnia::interact(VideoRepository::class . '@removeFromEpisode', [$video]);
                 }
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 $errorMsg = 'Couldn\'t Delete Video: ' . $e->getMessage();
             }
             if ($result === false || ! empty($errorMsg)) {

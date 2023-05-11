@@ -97,7 +97,7 @@ class PlayerService extends Service
             Log::info(__FUNCTION__ . '[END]');
 
             return $playlistItems;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $msg = 'Could not get Live Playlist' . $e->getMessage();
             Log::error($msg);
             throw $e;
@@ -125,7 +125,7 @@ class PlayerService extends Service
             }
 
             return $this->getPlayerPlaylistItems($episodesForPlaylist, $streamingProtocol);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $msg = 'Could not get VOD Playlist' . $e->getMessage();
             Log::error($msg);
             throw $e;

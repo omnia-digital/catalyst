@@ -24,7 +24,7 @@ class DeleteEpisodeTemplateThumbnail
             $episodeTemplate->forceFill([
                 'default_thumbnail' => '',
             ])->save();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             throw new Exception('Could not delete Episode Template Thumbnail: ' . $e->getMessage());
         }
     }

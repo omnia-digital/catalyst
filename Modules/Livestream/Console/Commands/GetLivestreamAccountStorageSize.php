@@ -45,7 +45,7 @@ class GetLivestreamAccountStorageSize extends Command
             echo $result;
 
             return $result;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             throw new Exception('Couldn\'t Post Livestream Stats: ' . $e->getMessage(), $e->getCode(), $e);
         }
     }

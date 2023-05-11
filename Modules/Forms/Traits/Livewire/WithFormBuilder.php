@@ -62,8 +62,8 @@ trait WithFormBuilder
     {
         return [
             TextInput::make('name')
-                    ->label('Name')
-                    ->required(true),
+                ->label('Name')
+                ->required(true),
             Select::make('form_type_id')
                 ->label('Form Type')
                 ->options(FormType::forTeams()->pluck('name', 'id')->toArray()),
@@ -96,9 +96,9 @@ trait WithFormBuilder
                         ->schema([
                             $this->getFieldNameInput(),
                             KeyValue::make('options')
-                                    ->addButtonLabel('Add option')
-                                    ->keyLabel('Value')
-                                    ->valueLabel('Label'),
+                                ->addButtonLabel('Add option')
+                                ->keyLabel('Value')
+                                ->valueLabel('Label'),
                             Checkbox::make('is_required'),
                         ]),
                     Block::make('checkbox')
@@ -134,8 +134,8 @@ trait WithFormBuilder
                     ->lazy()
                     ->afterStateUpdated(function (Closure $set, $state) {
                         $name = Str::of($state)
-                                    ->snake()
-                                    ->lower() . uniqid('_');
+                            ->snake()
+                            ->lower() . uniqid('_');
                         $set('name', $name);
                     })
                     ->required(),

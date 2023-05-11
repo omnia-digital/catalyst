@@ -10,7 +10,7 @@ on:
 jobs:
   duster:
     runs-on: ubuntu-latest
-
+    if: github.repository == 'omnia-digital/platform-framework'
     permissions:
       contents: write
 

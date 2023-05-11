@@ -12,7 +12,7 @@ class MyJobs extends Component
             ->jobs()
             ->latest()
             ->get()
-        ->sortByDesc(['is_active', 'created_at']);
+            ->sortByDesc(['is_active', 'created_at']);
 
         return view('jobs::livewire.pages.jobs.my-jobs', [
             'jobs' => $jobs,

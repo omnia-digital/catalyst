@@ -50,33 +50,33 @@ class AppServiceProvider extends ServiceProvider
             //            ]);
             Filament::registerNavigationGroups([
                 NavigationGroup::make()
-                               ->label(Trans::get('Settings'))
-                               ->icon('heroicon-s-cog')
-                               ->collapsed(),
+                    ->label(Trans::get('Settings'))
+                    ->icon('heroicon-s-cog')
+                    ->collapsed(),
                 NavigationGroup::make()
-                               ->label(Trans::get('Billing'))
-                               ->icon('heroicon-o-credit-card')
-                               ->collapsed(),
+                    ->label(Trans::get('Billing'))
+                    ->icon('heroicon-o-credit-card')
+                    ->collapsed(),
                 NavigationGroup::make()
-                               ->label(Trans::get('People'))
-                               ->icon('heroicon-s-users')
-                               ->collapsed(),
+                    ->label(Trans::get('People'))
+                    ->icon('heroicon-s-users')
+                    ->collapsed(),
                 NavigationGroup::make()
-                               ->label(Trans::get('Teams'))
-                               ->icon('fas-users')
-                               ->collapsed(),
+                    ->label(Trans::get('Teams'))
+                    ->icon('fas-users')
+                    ->collapsed(),
                 NavigationGroup::make()
-                               ->label(Trans::get('Forms'))
-                               ->icon('fab-wpforms')
-                               ->collapsed(),
+                    ->label(Trans::get('Forms'))
+                    ->icon('fab-wpforms')
+                    ->collapsed(),
                 NavigationGroup::make()
-                               ->label(Trans::get('Feeds'))
-                               ->icon('fad-rss')
-                               ->collapsed(),
+                    ->label(Trans::get('Feeds'))
+                    ->icon('fad-rss')
+                    ->collapsed(),
                 NavigationGroup::make()
-                               ->label(Trans::get('Games'))
-                               ->icon('fad-gamepad-modern')
-                               ->collapsed(),
+                    ->label(Trans::get('Games'))
+                    ->icon('fad-gamepad-modern')
+                    ->collapsed(),
 
             ]);
         });

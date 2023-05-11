@@ -1,5 +1,12 @@
 <p align="center"><a href="https://omniadigital.io" target="_blank"><h1>Platform Framework</h1></a></p>
 
+## License
+
+Catalyst is free to be used by anyone for any purpose as long as what you create does not focus on Religious groups or the Video Game industry and is subject to lawful action if breached. Those are the only two industries that are restricted. 
+If you would like to contribute to one of those industries, we have an existing platform for each.
+- ChurchWorld (https://churchworld.io)
+- Hatchet (https://hatchetapp.io)
+
 ## Passport
 php artisan passport:keys
 
@@ -40,6 +47,3 @@ This Platform Framework is only to be used to better humanity and the world and 
 
 If you discover a security vulnerability within the Platform Framework, please send an e-mail to Omnia Digital via [info@omniadigital.io](mailto:info@omniadigital.io). All security vulnerabilities will be promptly addressed.
 
-## License
-
-This Platform Framework is only to be used by officially licensed individuals and organizations and is subject to lawful action if breached.

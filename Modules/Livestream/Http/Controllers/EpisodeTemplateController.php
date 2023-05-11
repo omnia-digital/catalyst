@@ -144,7 +144,7 @@ class EpisodeTemplateController extends LivestreamController
                     //		    ] );
                 }
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
 //            $data = ['errors' => $e->getMessage()];
             throw $e;
         }

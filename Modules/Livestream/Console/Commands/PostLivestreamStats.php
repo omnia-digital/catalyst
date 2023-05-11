@@ -36,7 +36,7 @@ class PostLivestreamStats extends Command
             $statService = new StreamStatService;
             $statService->postStandardStats();
             //		    dispatch( new PostStatsToService( $statService ) );
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             throw new Exception('Couldn\'t Post Livestream Stats: ' . $e->getMessage(), $e->getCode(), $e);
         }
         echo "Posted without Errors. :) \n";

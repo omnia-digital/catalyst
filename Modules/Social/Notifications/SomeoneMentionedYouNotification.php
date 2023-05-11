@@ -3,19 +3,16 @@
 namespace Modules\Social\Notifications;
 
 use App\Models\Team;
+use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Mention;
 use Trans;
 
-class SomeoneMentionedYouNotification extends Notification implements ShouldQueue
+class SomeoneMentionedYouNotification extends BaseNotification
 {
-    use Queueable;
-
     /**
      * Create a new notification instance.
      *
@@ -38,7 +35,7 @@ class SomeoneMentionedYouNotification extends Notification implements ShouldQueu
             return [];
         }
 
-        return ['broadcast', 'database'];
+        return static::getChannels();
     }
 
     /**

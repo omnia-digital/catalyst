@@ -41,15 +41,15 @@ class UserTable extends Component implements HasTable
             TextColumn::make('current_team_id'),
             TextColumn::make('profile_photo_path'),
             TextColumn::make('last_active_at')
-                      ->dateTime(),
+                ->dateTime(),
             TextColumn::make('delete_after')
-                      ->dateTime(),
+                ->dateTime(),
             TextColumn::make('deleted_at')
-                      ->dateTime(),
+                ->dateTime(),
             TextColumn::make('created_at')
-                      ->dateTime(),
+                ->dateTime(),
             TextColumn::make('updated_at')
-                      ->dateTime(),
+                ->dateTime(),
         ];
     }
 

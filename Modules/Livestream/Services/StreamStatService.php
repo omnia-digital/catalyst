@@ -30,7 +30,7 @@ class StreamStatService extends StatService
             Log::info('Livestream Storage Stats Posted to Analytics Service');
             //			$this->postBandwidthStats();
             //			Log::info( 'Livestream Bandwith Stats Posted to Analytics Service' );
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $msg = 'Error posting Stats: ' . $e->getMessage();
             Log::info($msg);
             throw new Exception($msg);
@@ -95,7 +95,7 @@ class StreamStatService extends StatService
             Log::info('Finished retrieving Latest Stats');
 
             return $statCollection;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $msg = 'Error retrieving Latest Stats: ' . $e->getMessage();
             Log::info($msg);
             throw new Exception($msg, $e->getCode(), $e);
@@ -138,7 +138,7 @@ class StreamStatService extends StatService
                     $db->delete('delete from ' . $table . ' where logid = ' . $row->logid);
                 }
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $db->rollback();
             Log::info('Failed to retrieve Events from Wowza: ' . $e->getMessage());
             throw new Exception($e->getMessage());
@@ -180,7 +180,7 @@ class StreamStatService extends StatService
             Log::info('Starting to retrieving Publish Events');
 
             return $publishEvents;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $msg = 'Error retrieving Latest Stats: ' . $e->getMessage();
             Log::info($msg);
             throw new Exception($msg);

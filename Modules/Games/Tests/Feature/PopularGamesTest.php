@@ -17,12 +17,12 @@ class PopularGamesTest extends TestCase
         ]);
 
         Livewire::test(PopularGames::class)
-          ->assertSet('popularGames', [])
-          ->call('loadPopularGames')
-          ->assertSee('Fake Final Fantasy VII Remake')
-          ->assertSee('Doom Eternal')
-          ->assertSee('PC, PS4, XONE, Switch, Stadia')
-          ->assertSee('Animal Crossing: New Horizons');
+            ->assertSet('popularGames', [])
+            ->call('loadPopularGames')
+            ->assertSee('Fake Final Fantasy VII Remake')
+            ->assertSee('Doom Eternal')
+            ->assertSee('PC, PS4, XONE, Switch, Stadia')
+            ->assertSee('Animal Crossing: New Horizons');
     }
 
     private function fakePopularGames()

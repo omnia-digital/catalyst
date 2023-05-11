@@ -1,17 +1,18 @@
-id: 44297
-name: ChurchWorld
+id: 46693
+name: Catalyst
 environments:
   production:
-    domain: app.churchworld.io
-    database: churchworld-db-prod
-    storage: churchworld-prod
+    domain: demo.catalyst.omniadigital.io
+    database: catalyst-db-prod
+    storage: catalyst-prod
+    scheduler: false
     runtime: docker
     memory: 1024
     cli-memory: 512
-    cli-timeout: 600
-    concurrency: 50
-    queue-concurrency: 5
-    gateway-version: 2
+    cli-timeout: 60
+    concurrency: 1
+    queue-concurrency: 1
+    gateway-version: 1
     build:
       - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
       - 'php artisan event:cache'
@@ -22,16 +23,16 @@ environments:
       - default
       - mail
   staging:
-    domain: staging.churchworld.io
-    database: churchworld-db-staging
-    storage: churchworld-staging
+    domain: demo-staging.catalyst.omniadigital.io
+    database: catalyst-db-staging
+    storage: catalyst-staging
     runtime: docker
     scheduler: false
     memory: 1024
     cli-memory: 512
-    cli-timeout: 600
-    concurrency: 10
-    queue-concurrency: 2
+    cli-timeout: 60
+    concurrency: 1
+    queue-concurrency: 1
     gateway-version: 2
     build:
       - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install'

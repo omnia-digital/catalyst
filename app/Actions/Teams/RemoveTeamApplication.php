@@ -22,7 +22,7 @@ class RemoveTeamApplication
     public function remove($team, $userID)
     {
         $application = $team->teamApplications()
-                        ->where('user_id', $userID)->first();
+            ->where('user_id', $userID)->first();
 
         if (! is_null($application)) {
             $application->delete();

@@ -38,7 +38,7 @@ class GamesAction
     public function newlyReleased()
     {
         $igdbGames = IGDBGame::where('first_release_date', '>', now()->subDays(30))
-                             ->get();
+            ->get();
         $games = $this->syncIgdbGames($igdbGames);
 
         return $games;
@@ -50,9 +50,9 @@ class GamesAction
         $current = Carbon::now()->timestamp;
 
         $comingSoonUnformatted = IGDBGame::where('first_release_date', '>', $current)
-                                     ->where('first_release_date', '<', $current + (60 * 60 * 24 * 7))
+            ->where('first_release_date', '<', $current + (60 * 60 * 24 * 7))
             ->limit(30)
-                                     ->get();
+            ->get();
 
         //        $comingSoonUnformatted = Http::withHeaders(config('services.igdb'))
         //            ->withOptions([
@@ -91,15 +91,15 @@ class GamesAction
     public function mostAnticipated()
     {
         return $this->popular()
-                    ->take(5);
+            ->take(5);
 
         $current = Carbon::now()->timestamp;
         $afterFourMonths = Carbon::now()
-                                 ->addMonths(4)->timestamp;
+            ->addMonths(4)->timestamp;
 
         $mostAnticipatedUnformatted = Game::where('first_release_date', '>', $current)
-                                          ->where('first_release_date', '<', $afterFourMonths)
-                                          ->get();
+            ->where('first_release_date', '<', $afterFourMonths)
+            ->get();
 
         //        $mostAnticipatedUnformatted = Http::withHeaders(config('services.igdb'))
         //            ->withOptions([

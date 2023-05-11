@@ -130,7 +130,7 @@ class Discover extends Component
         }
 
         $query->orderBy('likes_count', 'DESC')
-              ->get();
+            ->get();
 
         return $query;
     }

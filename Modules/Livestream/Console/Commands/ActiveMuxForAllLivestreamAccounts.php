@@ -47,7 +47,7 @@ class ActiveMuxForAllLivestreamAccounts extends Command
                         if (empty($stream)) {
                             throw new Exception('Could not find new Stream after creating');
                         }
-                    } catch(Exception $e) {
+                    } catch (Exception $e) {
                         $this->error('Error when creating a Stream for LivestreamAccount: ' . $livestream_account->id . ' | Error: ' . $e->getMessage());
                     }
                 }

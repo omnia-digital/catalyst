@@ -52,7 +52,7 @@ class MuxEventController extends LivestreamController
 
         $event = $request->get('type');
         $data = $request->all();
-        switch($event) {
+        switch ($event) {
             //        Asset Events //
             case 'video.asset.created':
                 event(new VideoAssetCreated($data));
