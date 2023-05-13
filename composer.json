@@ -39,7 +39,7 @@
         "laravel/horizon": "^5.15",
         "laravel/jetstream": "^2.4",
         "laravel/passport": "^11.2",
-        "laravel/sanctum": "^2.11",
+        "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.5",
         "laravel/vapor-cli": "^1.54",
         "laravel/vapor-core": "^2.28",
@@ -69,6 +69,7 @@
         "spatie/laravel-analytics": "^4.1",
         "spatie/laravel-backup": "^8.1",
         "spatie/laravel-data": "^3.4",
+        "spatie/laravel-mailcoach": "^6.20",
         "spatie/laravel-medialibrary": "^10.0.0",
         "spatie/laravel-permission": "^5.7",
         "spatie/laravel-searchable": "^1.11",
@@ -102,20 +103,20 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/omnia-digital/library"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/omnia-digital/media-manager"
-        },
-        {
             "type": "composer",
             "url": "https://nova.laravel.com"
         },
         {
             "type": "path",
             "url": "../modules/catalyst-advice"
+        },
+        {
+            "type": "composer",
+            "url": "https://satis.spatie.be"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:omnia-digital/laravel-mailcoach.git"
         }
     ],
     "autoload": {
@@ -147,7 +148,8 @@
             "@php artisan view:clear",
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "@php artisan ide-helper:generate",
-            "@php artisan ide-helper:meta"
+            "@php artisan ide-helper:meta",
+            "@php artisan vendor:publish --tag mailcoach-assets --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -167,7 +169,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "joshbrw/laravel-module-installer": true
         }
     },
     "minimum-stability": "dev",
