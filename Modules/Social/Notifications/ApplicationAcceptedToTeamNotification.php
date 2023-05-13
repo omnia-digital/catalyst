@@ -4,16 +4,14 @@ namespace Modules\Social\Notifications;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Trans;
 
-class ApplicationAcceptedToTeamNotification extends Notification implements ShouldQueue
+class ApplicationAcceptedToTeamNotification extends BaseNotification
 {
-    use Queueable;
+    public static string $label = 'Application Accepted';
+    public static string $description = 'This is a notification when your application to a team has been accepted.';
 
     /**
      * Create a new notification instance.
@@ -27,20 +25,9 @@ class ApplicationAcceptedToTeamNotification extends Notification implements Shou
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param mixed $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return ['broadcast', 'database'];
-    }
-
-    /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

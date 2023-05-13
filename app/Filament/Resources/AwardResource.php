@@ -3,21 +3,18 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AwardResource\Pages;
-use App\Filament\Resources\AwardResource\RelationManagers;
 use App\Models\Award;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Trans;
 
 class AwardResource extends Resource
 {
     protected static ?string $model = Award::class;
     protected static ?string $navigationIcon = 'heroicon-o-badge-check';
-    protected static ?string $navigationGroup = 'Social';
 
     public static function form(Form $form): Form
     {
@@ -29,7 +26,7 @@ class AwardResource extends Resource
                     ->default('heroicon-o-academic-cap')
                     ->required(),
                 Forms\Components\TextInput::make('bg_color')->nullable(),
-                Forms\Components\TextInput::make('text_color')->nullable()
+                Forms\Components\TextInput::make('text_color')->nullable(),
             ]);
     }
 
@@ -71,5 +68,10 @@ class AwardResource extends Resource
             'create' => Pages\CreateAward::route('/create'),
             'edit' => Pages\EditAward::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return Trans::get('Teams');
     }
 }

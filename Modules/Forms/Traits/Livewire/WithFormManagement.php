@@ -1,7 +1,9 @@
-<?php namespace Modules\Forms\Traits\Livewire;
+<?php
 
+namespace Modules\Forms\Traits\Livewire;
 
 use Modules\Forms\Models\Form;
+use Modules\Forms\Models\FormNotification;
 
 /**
  * Add form management functions to livewire component
@@ -10,7 +12,10 @@ trait WithFormManagement
 {
     public $confirmingFormRemoval = false;
     public $formIdBeingRemoved = null;
-    
+
+    public $confirmingFormNotificationRemoval = false;
+    public $formNotificationIdBeingRemoved = null;
+
     public $confirmingPublishform = false;
     public $formIdBeingPublished = null;
     public $newStatus = '';
@@ -34,7 +39,7 @@ trait WithFormManagement
             $this->emit('formSavedAsDraft');
         } else {
             $form->update(['published_at' => now()]);
-    
+
             $this->emit('formPublished');
         }
 
@@ -43,7 +48,6 @@ trait WithFormManagement
         $this->formIdBeingPublished = null;
 
         $this->newStatus = '';
-        
     }
 
     public function confirmFormRemoval($formId)
@@ -62,5 +66,23 @@ trait WithFormManagement
         $this->formIdBeingRemoved = null;
 
         $this->emit('formRemoved');
+    }
+
+    public function confirmFormNotificationRemoval($formNotificationId)
+    {
+        $this->confirmingFormNotificationRemoval = true;
+
+        $this->formNotificationIdBeingRemoved = $formNotificationId;
+    }
+
+    public function removeFormNotification()
+    {
+        FormNotification::find($this->formNotificationIdBeingRemoved)->delete();
+
+        $this->confirmingFormNotificationRemoval = false;
+
+        $this->formNotificationIdBeingRemoved = null;
+
+        $this->emit('formNotificationRemoved');
     }
 }

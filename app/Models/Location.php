@@ -17,7 +17,7 @@ class Location extends Model
     public function name(): Attribute
     {
         return new Attribute(
-            get: fn($value, $attributes) => $attributes['city'] . ', ' . $attributes['state'] . ', ' . $attributes['country']
+            get: fn ($value, $attributes) => $attributes['city'] . ', ' . $attributes['state'] . ', ' . $attributes['country']
         );
     }
 
@@ -29,10 +29,10 @@ class Location extends Model
                 $address .= $attributes['address'];
 
                 if ($attributes['address_line_2']) {
-                    $address .= " " . $attributes['address_line_2'];
+                    $address .= ' ' . $attributes['address_line_2'];
                 }
 
-                $address .= ", " . $attributes['city'] . ', ' . $attributes['state'] . ', ' . $attributes['postal_code'] . " " . $attributes['country'];
+                $address .= ', ' . $attributes['city'] . ', ' . $attributes['state'] . ', ' . $attributes['postal_code'] . ' ' . $attributes['country'];
 
                 return $address;
             }
@@ -42,12 +42,12 @@ class Location extends Model
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         return $query->where(function (Builder $query) use ($search) {
-            $query->where('address', 'LIKE', "%$search%")
-                ->orWhere('address_line_2', 'LIKE', "%$search%")
-                ->orWhere('city', 'LIKE', "%$search%")
-                ->orWhere('state', 'LIKE', "%$search%")
-                ->orWhere('postal_code', 'LIKE', "%$search%")
-                ->orWhere('country', 'LIKE', "%$search%");
+            $query->where('address', 'LIKE', "%{$search}%")
+                ->orWhere('address_line_2', 'LIKE', "%{$search}%")
+                ->orWhere('city', 'LIKE', "%{$search}%")
+                ->orWhere('state', 'LIKE', "%{$search}%")
+                ->orWhere('postal_code', 'LIKE', "%{$search}%")
+                ->orWhere('country', 'LIKE', "%{$search}%");
         });
     }
 

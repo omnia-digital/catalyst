@@ -4,15 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TagResource\Pages;
 use App\Filament\Resources\TagResource\RelationManagers\TaggableRelationManager;
-use App\Filament\Resources\TagResource\RelationManagers\TeamsRelationManager;
-use Ariaieboy\FilamentJalaliDatetime\JalaliDateTimeColumn;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Spatie\Tags\Tag;
 
 class TagResource extends Resource
 {
@@ -28,19 +24,9 @@ class TagResource extends Resource
 
     public static function registerNavigationItems(): void
     {
-        if (auth()->user()->is_admin) {
+        if (auth()->user()->hasRole('super_admin')) {
             parent::registerNavigationItems();
         }
-    }
-
-    protected static function getNavigationBadge(): ?string
-    {
-        return static::getEloquentQuery()->get()->count();
-    }
-
-    protected static function getNavigationBadgeColor(): ?string
-    {
-        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 
     public static function form(Form $form): Form
@@ -48,14 +34,14 @@ class TagResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('type')
-                  ->maxLength(255),
+                    ->maxLength(255),
                 Forms\Components\KeyValue::make('name')
                     ->keyLabel('Language Code')
                     ->valueLabel('Name')
                     ->required(),
                 Forms\Components\KeyValue::make('slug')
-                     ->keyLabel('Language Code')
-                     ->valueLabel('Name')
+                    ->keyLabel('Language Code')
+                    ->valueLabel('Name')
                     ->required(),
             ]);
     }
@@ -84,7 +70,7 @@ class TagResource extends Resource
     public static function getRelations(): array
     {
         return [
-//            TaggableRelationManager::class,
+            //            TaggableRelationManager::class,
         ];
     }
 
@@ -96,5 +82,15 @@ class TagResource extends Resource
             'view' => Pages\ViewTag::route('/{record}'),
             'edit' => Pages\EditTag::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getEloquentQuery()->get()->count();
+    }
+
+    protected static function getNavigationBadgeColor(): ?string
+    {
+        return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 }

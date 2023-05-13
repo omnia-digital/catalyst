@@ -26,19 +26,6 @@ class Edit extends Component
 
     public $profileTypes = [];
 
-    protected function rules(): array
-    {
-        return [
-            'profile.first_name' => ['required', 'max:254'],
-            'profile.last_name' => ['required', 'max:254'],
-            'profile.bio' => ['max:280'],
-            'profile.website' => ['max:280'],
-            'profile.birth_date' => ['required', 'date'],
-            'country' => ['required', Rule::in(Country::select('code_3')->pluck('code_3')->toArray())],
-            'profileTypes' => ['required', 'array']
-        ];
-    }
-
     public function updatedBannerImage()
     {
         $this->validate([
@@ -64,34 +51,34 @@ class Edit extends Component
 
     public function getProfileTagsProperty()
     {
-        return Tag::withType('profile_type')->get()->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
+        return Tag::withType('profile_type')->get()->mapWithKeys(fn (Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
     }
 
     public function mount(Profile $profile)
     {
         $this->authorize('update-profile', $profile);
         $this->profile = $profile->load('user');
-        $this->country = $profile->country;
+        $this->country = $profile->country ?? array_keys($this->countriesArray())[0];
     }
-    
+
     public function saveChanges()
     {
         $this->validate();
-        
+
         $this->profile->country = $this->country;
         $this->profile->save();
 
-        if (!empty($this->profileTypes)) {
+        if (! empty($this->profileTypes)) {
             $this->profile->attachTags($this->profileTypes, 'profile_type');
         }
 
-        if(!is_null($this->bannerImage) && $this->profile->bannerImage()->count()) {
+        if (! is_null($this->bannerImage) && $this->profile->bannerImage()->count()) {
             $this->profile->bannerImage()->delete();
         }
         $this->bannerImage &&
             $this->profile->addMedia($this->bannerImage)->toMediaCollection('profile_banner_images');
 
-        if($this->photo && $this->profile->photo()->count()) {
+        if ($this->photo && $this->profile->photo()->count()) {
             $this->profile->photo()->delete();
         }
         $this->photo &&
@@ -109,11 +96,29 @@ class Edit extends Component
         $this->profile->refresh();
     }
 
+    public function countriesArray()
+    {
+        return Country::orderBy('name')->pluck('name', 'code_3')->toArray();
+    }
+
     public function render()
     {
         return view('social::livewire.pages.profiles.edit', [
-            'countries'  => Country::orderBy('name')->pluck('name', 'code_3')->toArray(),
+            'countries' => $this->countriesArray(),
             'profileTags' => $this->profileTags,
         ]);
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'profile.first_name' => ['required', 'max:254'],
+            'profile.last_name' => ['required', 'max:254'],
+            'profile.bio' => ['max:280'],
+            'profile.website' => ['max:280'],
+            'profile.birth_date' => ['required', 'date'],
+            'country' => ['required', Rule::in(Country::select('code_3')->pluck('code_3')->toArray())],
+            'profileTypes' => ['nullable', 'array'],
+        ];
     }
 }

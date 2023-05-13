@@ -6,7 +6,6 @@ use App\Models\Award;
 use App\Models\Location;
 use App\Models\Team;
 use App\Models\User;
-use App\Settings\BillingSettings;
 use App\Support\Platform\Platform;
 use App\Support\Platform\WithGuestAccess;
 use App\Traits\Team\WithTeamManagement;
@@ -59,7 +58,6 @@ class Show extends Component
 
     public function mount(Team $team)
     {
-        $team->owner;
         $this->displayUrl = $team->sampleImages()->first()->getFullUrl();
         $this->displayID = $team->sampleImages()->first()->id;
         $this->applicationsCount = $this->team->teamApplications->count();
@@ -90,7 +88,8 @@ class Show extends Component
         return $this->team->posts()->take(2)->get();
     }
 
-    public function showPost($post) {
+    public function showPost($post)
+    {
         return $this->redirectRoute('social.posts.show', $post['id']);
     }
 
@@ -99,7 +98,6 @@ class Show extends Component
         $this->displayUrl = $media->getFullUrl();
         $this->displayID = $media->id;
     }
-
 
     public function resetAwardsSelection()
     {
@@ -117,7 +115,7 @@ class Show extends Component
         $user->awards()->attach($this->awardsToAdd);
 
         $this->dispatchBrowserEvent('notify', ['message' => 'Awards Added', 'type' => 'success']);
-        $this->dispatchBrowserEvent('add-awards-modal',  ['type' => 'close']);
+        $this->dispatchBrowserEvent('add-awards-modal', ['type' => 'close']);
     }
 
     public function getRemainingAwards(User $user)

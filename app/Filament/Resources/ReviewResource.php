@@ -4,27 +4,24 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReviewResource\Pages;
 use App\Filament\Resources\ReviewResource\RelationManagers;
-use App\Models\Review;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Trans;
 
 class ReviewResource extends Resource
 {
     protected static ?string $model = \Modules\Reviews\Models\Review::class;
     protected static ?string $navigationIcon = 'heroicon-o-star';
-    protected static ?string $navigationGroup = 'Social';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
-                      ->relationship('user', 'name'),
+                    ->relationship('user', 'name'),
                 Forms\Components\TextInput::make('reviewable_type')
                     ->required(),
                 Forms\Components\TextInput::make('reviewable_id')
@@ -66,7 +63,7 @@ class ReviewResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ReviewsRelationManager::class
+            RelationManagers\ReviewsRelationManager::class,
         ];
     }
 
@@ -78,5 +75,10 @@ class ReviewResource extends Resource
             'view' => Pages\ViewReview::route('/{record}'),
             'edit' => Pages\EditReview::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return Trans::get('Teams');
     }
 }

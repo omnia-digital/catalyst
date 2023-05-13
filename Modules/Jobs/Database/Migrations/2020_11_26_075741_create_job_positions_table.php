@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobPositionsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -26,15 +26,13 @@ class CreateJobPositionsTable extends Migration
             $table->decimal('budget', 14, 2)->nullable();
             $table->boolean('is_remote')->nullable();
             $table->string('location')->nullable();
-            $table->unsignedBigInteger('hours_per_week_id')->index();
-            $table->unsignedBigInteger('project_size_id')->index();
             $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
 
-        Schema::create('job_tag', function (Blueprint $table) {
+        Schema::create('job_position_tags', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('job_id')->index();
+            $table->unsignedBigInteger('job_position_id')->index();
             $table->unsignedBigInteger('tag_id')->index();
         });
     }
@@ -47,6 +45,6 @@ class CreateJobPositionsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('job_positions');
-        Schema::dropIfExists('job_tag');
+        Schema::dropIfExists('job_position_tags');
     }
-}
+};

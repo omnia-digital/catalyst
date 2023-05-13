@@ -1,13 +1,13 @@
 <?php
 
-    namespace Modules\Social\Http\Livewire\Layouts;
+namespace Modules\Social\Http\Livewire\Layouts;
 
-    use Livewire\Component;
+use Livewire\Component;
 
-    class UserProfileLayout extends Component
+class UserProfileLayout extends Component
+{
+    public function render()
     {
-        public function render()
-        {
-            return view('social::livewire.layouts.user-profile-layout');
-        }
+        return view('social::livewire.layouts.user-profile-layout');
     }
+}

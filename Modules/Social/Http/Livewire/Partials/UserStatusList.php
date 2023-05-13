@@ -4,7 +4,6 @@ namespace Modules\Social\Http\Livewire\Partials;
 
 use App\Models\Team;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class UserStatusList extends Component
@@ -20,7 +19,7 @@ class UserStatusList extends Component
     {
         return $query
             ->whereHas('teams', function ($query) use ($team) {
-                $query->where('team_user.team_id', $team->id);
+                $query->where('model_has_roles.team_id', $team->id);
             });
     }
 
@@ -31,7 +30,7 @@ class UserStatusList extends Component
             ->withCount(['followers'])
             ->distinct();
 
-        if($this->team) {
+        if ($this->team) {
             $query = $this->forTeam($query, $this->team);
         }
 

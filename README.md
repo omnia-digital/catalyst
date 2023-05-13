@@ -1,4 +1,11 @@
-<p align="center"><a href="https://omniadigital.io" target="_blank"><h1>Platform Framework</h1></a></p>
+<p align="center"><a href="https://omniadigital.io" target="_blank"><h1>Catalyst - The Community Platform Framework</h1></a></p>
+
+## License
+
+Catalyst is free to be used by anyone for any purpose as long as what you create does not focus on Religious groups or the Video Game industry and is subject to lawful action if breached. Those are the only two industries that are restricted. 
+If you would like to contribute to one of those industries, we have an existing platform for each.
+- ChurchWorld (https://churchworld.io)
+- Hatchet (https://hatchetapp.io)
 
 ## Passport
 php artisan passport:keys
@@ -10,17 +17,11 @@ php artisan passport:keys
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p> -->
 
-## About Platform Framework
+## About Catalyst
 
-The Platform Framework is a web application framework designed to make it easy to spin up new platforms with minimal effort. There are many modules included and many more to come including:
+Catalyst is a web application framework designed to make it easy to spin up new platforms with minimal effort.
 
-- Community (Social Network)
-- Subscriptions (take User subscriptions, Team subscriptions, or allow your Teams to take their own subscriptions from users for sub-only content. Multiple Payment processors including Stripe and Chargent.)
-- Forms (customizable forms you can create and send to users to collect data and view within the platform)
-- Admin (admin panel to manage your platform)
-- Much more
-
-## Platform Framework Sponsors
+## Catalyst Sponsors
 
 We would like to extend our thanks to the following sponsors for funding Platform Framework development. If you are interested in becoming a sponsor, please contact us at [Omnia Digital](https://omniadigital.io).
 
@@ -40,6 +41,3 @@ This Platform Framework is only to be used to better humanity and the world and 
 
 If you discover a security vulnerability within the Platform Framework, please send an e-mail to Omnia Digital via [info@omniadigital.io](mailto:info@omniadigital.io). All security vulnerabilities will be promptly addressed.
 
-## License
-
-This Platform Framework is only to be used by officially licensed individuals and organizations and is subject to lawful action if breached.

@@ -1,5 +1,5 @@
-<div class="popular-games text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 border-b border-gray-800 pb-16">
-    @forelse ($popularGames as $game)
+<div wire:init="load" class="popular-games text-sm grid gap-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 border-b border-gray-800 pb-16">
+    @forelse ($popularGames->take(5) as $game)
         <livewire:games::components.game-card :game="$game" />
     @empty
         @foreach (range(1, 12) as $game)

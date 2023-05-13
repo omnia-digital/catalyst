@@ -17,10 +17,10 @@ class MobileToolbarMenu extends Component
         if (empty($this->navigation)) {
             $this->navigation = [
                 [
-                    'label'   => 'No Module Navigation Items',
-                    'name'    => 'social.home',
-                    'icon'    => 'heroicon-o-x',
-                    'current' => false
+                    'label' => 'No Module Navigation Items',
+                    'name' => 'social.home',
+                    'icon' => 'heroicon-o-x',
+                    'current' => false,
                 ],
             ];
         }

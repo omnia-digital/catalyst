@@ -2,8 +2,6 @@
 
 namespace Modules\Billing\Listeners;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Modules\Billing\Events\TeamMemberSubscriptionCreatedEvent;
 use Modules\Billing\Notifications\TeamMemberSubscriptionCreatedNotification;
 
@@ -18,7 +16,7 @@ class NotifyTeamOwnerNewSubscriptionCreated
     public function handle($event)
     {
         $event->team->owner->notify(
-            new TeamMemberSubscriptionCreatedNotification()
+            new TeamMemberSubscriptionCreatedNotification
         );
     }
 }

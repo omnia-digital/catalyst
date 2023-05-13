@@ -24,13 +24,13 @@ trait Postable
      */
     public function createPost($data, $userId): Model|Post
     {
-        return 
+        return
             (new CreateNewPostAction)
                 ->user($userId)
                 ->execute($data['body'], [
                     'title' => $data['title'] ?? null,
-                    'url'   => $data['url'] ?? null,
-                    'image' => $data['image'] ?? null
+                    'url' => $data['url'] ?? null,
+                    'image' => $data['image'] ?? null,
                 ]);
     }
 

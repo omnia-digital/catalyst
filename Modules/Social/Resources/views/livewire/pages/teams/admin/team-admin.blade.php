@@ -60,10 +60,7 @@
                 <!-- Featured Content / Sample Media -->
                 <div>
                     <x-library::heading.4>{{ Trans::get('Featured Content') }}</x-library::heading.4>
-                    <p>{{ Trans::get('The content on this page will show up in the Featured Content section of your Team home page. You can use this feature as a perk of getting exclusive content
-                by being a member of your
-                Team.')
-                }}</p>
+                    <p>{{ Trans::get('The content on this page will show up in the Featured Content section of your Team home page. You can use this feature as a perk of getting exclusive content by being a member of your Team.') }}</p>
                 </div>
                 <div class="space-y-6">
                     <div>
@@ -99,7 +96,7 @@
                                                     <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center relative bg-secondary border-4 border-dashed border-neutral-dark">
                                                         <img src="{{ $media->temporaryUrl() }}" title="{{ $sampleMediaNames[$key] }}" alt="{{ $sampleMediaNames[$key] }}"
                                                              class="max-w-[152px] max-h-[120px]">
-                                                        <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key}})">
+                                                        <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key }})">
                                                             <x-heroicon-o-x class="w-6 h-6"/>
                                                         </button>
                                                     </div>
@@ -141,7 +138,7 @@
                         </div>
                     </div>
 
-                    @if(\Platform::isModuleEnabled('games'))
+                    @if (\Platform::isModuleEnabled('games'))
                         <div class="space-y-4">
                             <div class="space-y-2">
                                 <x-library::heading.2 class="col-span-2">{{ Trans::get('Feeds') }}</x-library::heading.2>
@@ -173,14 +170,14 @@
             </div>
 
             <!-- Profile Info -->
-            <div x-show="activeTab === 1" class="mt-6 grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+            <div x-cloak x-show="activeTab === 1" class="mt-6 grid sm:grid-cols-1 md:grid-cols-2 gap-6">
                 {{-- Home & Profile Media --}}
                 <div class="space-y-6">
                     <!-- Details -->
                     <div class="space-y-4">
                         <x-library::heading.2>{{ Trans::get('Details') }}</x-library::heading.2>
                         <div class="flex-col">
-                            <x-library::input.label value="{{Trans::get('Name')}}" class="inline"/>
+                            <x-library::input.label value="{{ Trans::get('Name') }}" class="inline"/>
                             <span class="text-red-600 text-sm">*</span>
                             <x-library::input.text id="name" wire:model.defer="team.name" required/>
                             <x-library::input.error for="team.name"/>
@@ -202,18 +199,18 @@
                         </div>
                         <div>
                             <div class="flex items-center">
-                                <x-library::input.label value="{{ \Trans::get('What is your Team associated with?') }}" class="inline" />
+                                <x-library::input.label value="{{ \Trans::get('What type of Team is this?') }}" class="inline" />
                                 <span class="text-neutral-dark ml-1">{{ \Trans::get('(you can choose more than one)') }}</span>
                                 <span class="text-red-600 text-sm">*</span>
                             </div>
                             <x-library::input.selects wire:model="teamTypes" :options="$teamTags" hidden />
                             <div>
-                                <p>Current Tags:</p>
+                                <p>{{ \Trans::get('Current Team Types') }}:</p>
                                 <div class="flex items-center space-x-3 mt-1">
                                     @foreach ($team->teamTypes as $tag)
                                         <div class="relative">
                                             <x-tag bgColor="neutral-dark" textColor="white" class="text-lg px-4" :name="$tag->name" />
-                                            <button 
+                                            <button
                                                 wire:click="removeTag('{{ $tag->name }}')"
                                                 class="absolute -top-2 -right-2 p-1 rounded-full bg-white"
                                             >
@@ -395,7 +392,7 @@
                 </div>
             </div>
 
-            @if(\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
+            @if (\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
                 <!-- Subscriptions -->
                 <div x-cloak x-show="activeTab === 4" class="mt-6 pb-12 space-y-6">
                     <div>
@@ -419,12 +416,10 @@
                     {
                         id: 1,
                         title: 'Profile',
-                        /* component: 'social::pages.teams.partials.edit-team-basic' */
                     },
                     {
                         id: 2,
-                        title: 'Team Members',
-                        // component: 'social::pages.teams.members'
+                        title: 'Members',
                     },
                     {
                         id: 3,

@@ -1,6 +1,5 @@
 <?php
 
-
 use Modules\Billing\Http\Livewire\Pages\Billing\Chargent\User\Subscription as SubscriptionPage;
 use Modules\Billing\Http\Livewire\Pages\Billing\Stripe\User\Billing;
 
@@ -16,12 +15,11 @@ use Modules\Billing\Http\Livewire\Pages\Billing\Stripe\User\Billing;
 */
 
 Route::name('billing.')
-     ->prefix('billing')
-     ->group(function () {
-         Route::get('billing', Billing::class)
-              ->name('stripe-billing'); // stripe billing page
-         Route::get('/subscription', SubscriptionPage::class)
-              ->withoutMiddleware('subscribed')
-              ->name('chargent-billing'); // chargent billing
-
-     });
+    ->prefix('billing')
+    ->group(function () {
+        Route::get('billing', Billing::class)
+            ->name('stripe-billing'); // stripe billing page
+        Route::get('/subscription', SubscriptionPage::class)
+            ->withoutMiddleware('subscribed')
+            ->name('chargent-billing'); // chargent billing
+    });

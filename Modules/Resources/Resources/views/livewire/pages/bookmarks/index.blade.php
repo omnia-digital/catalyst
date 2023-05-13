@@ -15,12 +15,12 @@
     <!-- Filters -->
     @include('livewire.partials.filters', ['skipFilters' => ['location', 'members', 'tags']])
 
-    @if(empty($bookmarks))
+    @if (empty($bookmarks))
         <x-library::heading.2>No Bookmarked Resources</x-library::heading.2>
     @else
         <div class="">
             <ul role="list" class="grid grid-cols-1 gap-6">
-                @foreach($bookmarks as $bookmark)
+                @foreach ($bookmarks as $bookmark)
                     <li>
                         <livewire:resources::components.resource-card
                                 :post="$bookmark->bookmarkable()->first()"/>
@@ -47,7 +47,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top ' . {{ \Trans::get('teams') }},
+                        title: 'Top ' . {{ \Platform::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

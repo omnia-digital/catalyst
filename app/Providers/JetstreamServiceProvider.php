@@ -10,9 +10,11 @@ use App\Actions\Teams\InviteTeamMember;
 use App\Actions\Teams\RemoveTeamMember;
 use App\Actions\Teams\UpdateTeamName;
 use App\Contracts\InvitesTeamMembers;
+use App\Models\Membership;
 use App\Settings\BillingSettings;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
+use Trans;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -34,6 +36,8 @@ class JetstreamServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configurePermissions();
+
+        Jetstream::useMembershipModel(Membership::class);
 
         Jetstream::createTeamsUsing(CreateTeam::class);
         Jetstream::updateTeamNamesUsing(UpdateTeamName::class);
@@ -58,25 +62,25 @@ class JetstreamServiceProvider extends ServiceProvider
 //            $usingTeamMemberSubs = (new BillingSettings())?->team_member_subscriptions;
 //        }
 
-        $postPermissions         = [
+        $postPermissions = [
             'post-create',
             'post-read',
             'post-update',
             'post-delete',
         ];
-        $feedPermissions         = [
+        $feedPermissions = [
             'feed-create',
             'feed-read',
             'feed-update',
             'feed-delete',
         ];
-        $awardPermissions        = [
+        $awardPermissions = [
             'award-create',
             'award-read',
             'award-update',
             'award-delete',
         ];
-        $reviewPermissions       = [
+        $reviewPermissions = [
             'review-create',
             'review-read',
             'review-update',
@@ -88,7 +92,7 @@ class JetstreamServiceProvider extends ServiceProvider
             'sub-update',
             'sub-delete',
         ];
-        $eventPermissions        = [
+        $eventPermissions = [
             'event-create',
             'event-read',
             'event-update',
@@ -105,7 +109,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
         array_push($allPermissions, ...$subscriptionPermissions);
 
-        $memberRoleDescription = "Members are a part of your Team and can see content inside the Team";
+        $memberRoleDescription = 'Members are a part of your Team and can see content inside the Team';
         //        if ($usingTeamMemberSubs) {
         //            $memberRoleDescription .= " (excluding 'sub-only' content)";
         //        }
@@ -118,13 +122,13 @@ class JetstreamServiceProvider extends ServiceProvider
             'review-create',
             'review-read',
         ])
-                 ->description(\Trans::get($memberRoleDescription));
+            ->description(Trans::get($memberRoleDescription));
 
-        if ( ! empty($usingTeamMemberSubs)) {
+        if (! empty($usingTeamMemberSubs)) {
             Jetstream::role('subscriber', 'Subscriber', [
                 'feed-read',
             ])
-                     ->description(\Trans::get("Subscribers can view 'sub-only' content, including posts, chats, events and more. Assigning a new member this role is equivalent to giving a subscription for free."));
+                ->description(Trans::get("Subscribers can view 'sub-only' content, including posts, chats, events and more. Assigning a new member this role is equivalent to giving a subscription for free."));
         }
 
         Jetstream::role('moderator', 'Moderator', [
@@ -133,18 +137,17 @@ class JetstreamServiceProvider extends ServiceProvider
             'post-edit',
             'create',
         ])
-                 ->description(\Trans::get("Moderators can also can edit and delete posts."));
+            ->description(Trans::get('Moderators can also can edit and delete posts.'));
 
         Jetstream::role('admin', 'Administrator', [
-            ...$allPermissions
+            ...$allPermissions,
         ])
-                 ->description(\Trans::get("Admins have access to everything except billing & subscription details."));
+            ->description(Trans::get('Admins have access to everything except billing & subscription details.'));
 
         Jetstream::role('owner', 'Owner', [
             ...$allPermissions,
-            'billing'
+            'billing',
         ])
-                 ->description(\Trans::get("There can only be 1 Owner. The owner is the user that has their financial & billing accounts linked to this Team"));
-
+            ->description(Trans::get('There can only be 1 Owner. The owner is the user that has their financial & billing accounts linked to this Team'));
     }
 }

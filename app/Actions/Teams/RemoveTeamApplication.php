@@ -3,16 +3,12 @@
 namespace App\Actions\Teams;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Mail;
+use Closure;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Laravel\Jetstream\Contracts\InvitesTeamMembers;
-use Laravel\Jetstream\Events\InvitingTeamMember;
 use Laravel\Jetstream\Jetstream;
-use Laravel\Jetstream\Mail\TeamInvitation;
 use Laravel\Jetstream\Rules\Role;
+use Trans;
 
 class RemoveTeamApplication
 {
@@ -26,7 +22,7 @@ class RemoveTeamApplication
     public function remove($team, $userID)
     {
         $application = $team->teamApplications()
-                        ->where('user_id', $userID)->first();
+            ->where('user_id', $userID)->first();
 
         if (! is_null($application)) {
             $application->delete();
@@ -38,7 +34,6 @@ class RemoveTeamApplication
      *
      * @param  mixed  $team
      * @param  int  $userID
-     * @param  string|null  $role
      * @return void
      */
     protected function validate($team, string $userID, ?string $role)
@@ -47,7 +42,7 @@ class RemoveTeamApplication
             'user_id' => $userID,
             'role' => $role,
         ], $this->rules($team), [
-            'user_id.unique' => \Trans::get('You have already applied to this team.'),
+            'user_id.unique' => Trans::get('You have already applied to this team.'),
         ])->after(
             $this->ensureUserIsNotAlreadyOnTeam($team, $userID)
         )->validateWithBag('addTeamMember');
@@ -75,8 +70,7 @@ class RemoveTeamApplication
      * Ensure that the user is not already on the team.
      *
      * @param  mixed  $team
-     * @param  string  $userID
-     * @return \Closure
+     * @return Closure
      */
     protected function ensureUserIsNotAlreadyOnTeam($team, string $userID)
     {
@@ -86,7 +80,7 @@ class RemoveTeamApplication
             $validator->errors()->addIf(
                 $team->hasUser($user),
                 'user_id',
-                \Trans::get('This user already belongs to the team.')
+                Trans::get('This user already belongs to the team.')
             );
         };
     }

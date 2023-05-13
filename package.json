@@ -34,6 +34,8 @@
     "dependencies": {
         "@alpinejs/collapse": "^3.9.0",
         "@alpinejs/focus": "^3.10.2",
+        "@alpinejs/intersect": "^3.10.5",
+        "@fortawesome/fontawesome-pro": "^6.4.0",
         "@headlessui/vue": "^1.4.1",
         "@heroicons/vue": "^1.0.5",
         "@ryangjchandler/alpine-clipboard": "^2.2.0",
@@ -48,6 +50,7 @@
         "sass-loader": "^12.3.0",
         "tailwind-scrollbar-hide": "^1.1.7",
         "tippy.js": "^6.3.7",
-        "tw-elements": "^1.0.0-alpha12"
+        "tw-elements": "^1.0.0-alpha12",
+        "yarn": "^1.22.19"
     }
 }

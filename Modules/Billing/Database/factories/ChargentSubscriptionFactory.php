@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Billing\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,4 +25,3 @@ class ChargentSubscriptionFactory extends Factory
         ];
     }
 }
-

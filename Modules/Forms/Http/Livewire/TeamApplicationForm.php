@@ -12,28 +12,28 @@ use Modules\Forms\Models\FormSubmission;
 class TeamApplicationForm extends LivewireForm
 {
     use WithTeamManagement;
-    
+
     public Team $team;
 
     public ?Form $applicationForm;
 
-    public function mount(Form $form, int $team_id = null, $submitText = "Submit")
-    {   
+    public function mount(Form $form, int $team_id = null, $submitText = 'Submit')
+    {
         $this->team = Team::find($team_id);
 
         parent::mount($form, $team_id, $submitText);
-        
+
         $this->applicationForm = $form;
     }
-    
+
     public function processFormSubmission($formData)
     {
         $this->applyToTeam();
 
         $application = TeamApplication::query()
-                            ->where('user_id', $this->user->id)
-                            ->where('team_id', $this->team_id)
-                            ->first();
+            ->where('user_id', $this->user->id)
+            ->where('team_id', $this->team_id)
+            ->first();
 
         $formSubmission = FormSubmission::create([
             'form_id' => $this->formModel->id,
@@ -43,7 +43,6 @@ class TeamApplicationForm extends LivewireForm
         ]);
 
         $application->update(['form_submission_id' => $formSubmission->id]);
-
     }
 
     public function afterSubmission()

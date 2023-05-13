@@ -9,6 +9,8 @@ class RedeemedCoupon extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'coupon_id',
         'code',
@@ -16,14 +18,12 @@ class RedeemedCoupon extends Model
         'original_price',
         'discount_amount',
         'after_discount_price',
-        'redeemed_at'
+        'redeemed_at',
     ];
 
     protected $casts = [
-        'redeemed_at' => 'datetime'
+        'redeemed_at' => 'datetime',
     ];
-
-    public $timestamps = false;
 
     public function model()
     {

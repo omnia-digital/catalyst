@@ -11,6 +11,8 @@
 |
 */
 
-Route::name('crm.')->prefix('crm')->group(function() {
-    //Route::get('/', 'CrmController@index');
+Route::name('crm.')->prefix('crm')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('', \Modules\Crm\Http\Livewire\Pages\People\Index::class)->name('home');
+    Route::get('people', \Modules\Crm\Http\Livewire\Pages\People\Index::class)->name('people');
+    Route::get('reviews', \Modules\Crm\Http\Livewire\Pages\Reviews\Index::class)->name('reviews');
 });
