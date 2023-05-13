@@ -102,14 +102,6 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/omnia-digital/library"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/omnia-digital/media-manager"
-        },
-        {
             "type": "composer",
             "url": "https://nova.laravel.com"
         },
