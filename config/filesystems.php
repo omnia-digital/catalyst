@@ -53,6 +53,18 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        's3-public' => [
+            'driver' => 's3',
+            'key' => env('AWS_PUBLIC_ACCESS_KEY_ID'),
+            'secret' => env('AWS_PUBLIC_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_PUBLIC_DEFAULT_REGION'),
+            'bucket' => env('AWS_PUBLIC_BUCKET'),
+            'url' => env('AWS_PUBLIC_URL'),
+            'endpoint' => env('AWS_PUBLIC_ENDPOINT'),
+            'visibility' => 'public',
+            'use_path_style_endpoint' => env('AWS_PUBLIC_USE_PATH_STYLE_ENDPOINT', false),
+        ],
+
         's3_backup' => [
             'driver' => 's3',
             'key' => env('BACKUP_AWS_ACCESS_KEY_ID'),

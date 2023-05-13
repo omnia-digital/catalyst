@@ -6,6 +6,7 @@ use Filament\Facades\Filament;
 use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\UserMenuItem;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Cashier\Cashier;
 use Spatie\Health\Checks\Checks\DatabaseCheck;
@@ -39,6 +40,11 @@ class AppServiceProvider extends ServiceProvider
         //            UsedDiskSpaceCheck::new(),
         //            DatabaseCheck::new()
         //        ]);
+
+        // Mailcoach UI Auth
+//        Gate::define('viewMailcoach', function ($user = null) {
+//            return optional($user)->is_admin;
+//        });
 
         Filament::serving(function () {
             Filament::registerTheme(asset('css/app.css'));
