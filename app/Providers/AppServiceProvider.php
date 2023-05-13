@@ -42,9 +42,9 @@ class AppServiceProvider extends ServiceProvider
         //        ]);
 
         // Mailcoach UI Auth
-        Gate::define('viewMailcoach', function ($user = null) {
-            return optional($user)->admin;
-        });
+//        Gate::define('viewMailcoach', function ($user = null) {
+//            return optional($user)->is_admin;
+//        });
 
         Filament::serving(function () {
             Filament::registerTheme(asset('css/app.css'));
