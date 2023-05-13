@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Platform Framework'),
+    'name' => env('APP_NAME', 'Catalyst'),
     'abbr' => env('APP_ABBR', 'APP'),
     'slogan' => env('APP_SLOGAN', 'Welcome to the community'),
     'theme' => env('APP_THEME', 'default'),
