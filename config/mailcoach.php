@@ -227,14 +227,14 @@ return [
         /*
          * This disk will be used to store files regarding importing subscribers.
          */
-        'import_subscribers_disk' => 'public',
+        'import_subscribers_disk' => env('local') ? 'public' : 's3-public',
     ],
 
     'transactional' => [
         /*
          * The default mailer used by Mailcoach for transactional mails.
          */
-        'mailer' => null,
+        'mailer' => 'sendgrid',
 
         /*
          * Replacers are classes that can make replacements in the body of transactional mails.
@@ -276,6 +276,14 @@ return [
         'actions' => [
             'calculate_statistics' => \Spatie\Mailcoach\Domain\Shared\Actions\CalculateStatisticsAction::class,
         ],
+    ],
+
+    'unlayer' => [
+        'disk_name' => env('local') ? 'public' : 's3-public',
+    ],
+
+    'mailcoach-editor' => [
+        'disk_name' => env('local') ? 'public' : 's3-public',
     ],
 
     /*

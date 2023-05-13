@@ -69,7 +69,7 @@
         "spatie/laravel-analytics": "^4.1",
         "spatie/laravel-backup": "^8.1",
         "spatie/laravel-data": "^3.4",
-        "spatie/laravel-mailcoach": "^6.0",
+        "spatie/laravel-mailcoach": "^6.20",
         "spatie/laravel-medialibrary": "^10.0.0",
         "spatie/laravel-permission": "^5.7",
         "spatie/laravel-searchable": "^1.11",
@@ -113,6 +113,10 @@
         {
             "type": "composer",
             "url": "https://satis.spatie.be"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:omnia-digital/laravel-mailcoach.git"
         }
     ],
     "autoload": {
@@ -165,7 +169,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "joshbrw/laravel-module-installer": true
         }
     },
     "minimum-stability": "dev",

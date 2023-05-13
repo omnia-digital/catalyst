@@ -203,10 +203,42 @@ return [
                 'balanceCooldown' => 3,
             ],
         ],
+        'mailcoach-general' => [
+            'connection' => 'mailcoach-redis',
+            'queue' => ['mailcoach-schedule', 'mailcoach', 'mailcoach-feedback', 'send-mail', 'send-automation-mail'],
+            'balance' => 'auto',
+            'processes' => 10,
+            'tries' => 2,
+            'timeout' => 60 * 60,
+        ],
+        'mailcoach-heavy' => [
+            'connection' => 'mailcoach-redis',
+            'queue' => ['send-campaign'],
+            'balance' => 'auto',
+            'processes' => 3,
+            'tries' => 1,
+            'timeout' => 60 * 60,
+        ],
 
         'local' => [
             'supervisor-1' => [
                 'maxProcesses' => 3,
+            ],
+            'mailcoach-general' => [
+                'connection' => 'mailcoach-redis',
+                'queue' => ['mailcoach-schedule', 'mailcoach', 'mailcoach-feedback', 'send-mail', 'send-automation-mail'],
+                'balance' => 'auto',
+                'processes' => 10,
+                'tries' => 2,
+                'timeout' => 60 * 60,
+            ],
+            'mailcoach-heavy' => [
+                'connection' => 'mailcoach-redis',
+                'queue' => ['send-campaign'],
+                'balance' => 'auto',
+                'processes' => 3,
+                'tries' => 1,
+                'timeout' => 60 * 60,
             ],
         ],
     ],

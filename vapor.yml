@@ -22,6 +22,12 @@ environments:
     queues:
       - default
       - mail
+      - mailcoach-schedule
+      - mailcoach
+      - mailcoach-feedback
+      - send-mail
+      - send-campaign
+      - send-automation-mail
   staging:
     domain: demo-staging.catalyst.omniadigital.io
     database: catalyst-db-staging
@@ -43,3 +49,9 @@ environments:
     queues:
       - default
       - mail
+      - mailcoach-schedule
+      - mailcoach
+      - mailcoach-feedback
+      - send-mail
+      - send-campaign
+      - send-automation-mail
