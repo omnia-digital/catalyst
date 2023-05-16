@@ -110,6 +110,10 @@
             "url": "https://github.com/omnia-digital/media-manager"
         },
         {
+            "type": "vcs",
+            "url": "https://github.com/omnia-digital/catalyst-livestream-module"
+        },
+        {
             "type": "composer",
             "url": "https://nova.laravel.com"
         }
