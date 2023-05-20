@@ -3,6 +3,7 @@
 namespace Modules\Social\Http\Livewire;
 
 use App\Models\Location;
+use App\Support\Platform\Platform;
 use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;
 use Modules\Feeds\Models\FeedSource;
@@ -63,9 +64,7 @@ class Home extends Component
 
     public function getNewsRssFeeds()
     {
-        $feeds = FeedSource::first()->get();
-
-        return $feeds;
+        return Platform::isModuleEnabled('Feeds') ? FeedSource::first()->get() : [];
     }
 
     public function render()
