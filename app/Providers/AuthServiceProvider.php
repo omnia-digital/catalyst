@@ -8,6 +8,7 @@ use App\Policies\PermissionPolicy;
 use App\Policies\TeamPolicy;
 use BezhanSalleh\FilamentExceptions\Models\Exception;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 use Laravel\Passport\Passport;
 use Modules\Forms\Models\FormType;
 use Modules\Forms\Policies\FormTypePolicy;
@@ -29,6 +30,15 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Password::defaults(function () {
+            return Password::min(8)
+                ->mixedCase()
+                ->letters()
+                ->numbers()
+                ->symbols()
+                ->uncompromised();
+        });
+
         $this->registerPolicies();
 
         Passport::hashClientSecrets();

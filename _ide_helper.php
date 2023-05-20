@@ -19137,8 +19137,7 @@
          */ 
         public static function isModuleEnabled($moduleName)
         {
-                        /** @var \App\Support\Platform\Platform $instance */
-                        return $instance->isModuleEnabled($moduleName);
+                        return \App\Support\Platform\Platform::isModuleEnabled($moduleName);
         }
                     /**
          * 

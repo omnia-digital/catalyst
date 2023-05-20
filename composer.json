@@ -111,12 +111,12 @@
             "url": "../modules/catalyst-advice"
         },
         {
-            "type": "composer",
-            "url": "https://satis.spatie.be"
-        },
-        {
             "type": "vcs",
             "url": "git@github.com:omnia-digital/laravel-mailcoach.git"
+        },
+        {
+            "type": "composer",
+            "url": "https://satis.spatie.be"
         }
     ],
     "autoload": {
