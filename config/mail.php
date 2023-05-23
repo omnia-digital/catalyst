@@ -45,6 +45,13 @@ return [
             'auth_mode' => null,
         ],
 
+        'sendgrid' => [
+            'transport' => 'sendgrid',
+            // Throttling for 10 mails / second
+            'timespan_in_seconds' => 1,
+            'mails_per_timespan' => 10,
+        ],
+
         'ses' => [
             'transport' => 'ses',
         ],

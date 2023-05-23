@@ -164,7 +164,7 @@ class Platform
         return $countries;
     }
 
-    public function isModuleEnabled($moduleName)
+    public static function isModuleEnabled($moduleName)
     {
         $modules = collect(Module::allEnabled());
 

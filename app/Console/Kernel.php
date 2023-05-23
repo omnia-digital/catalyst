@@ -36,6 +36,22 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('backup:clean')->daily()->at('01:00');
         $schedule->command('backup:run')->daily()->at('02:00');
+
+        // Mailcoach
+        $schedule->command('mailcoach:send-automation-mails')->everyMinute();
+        $schedule->command('mailcoach:send-scheduled-campaigns')->everyMinute();
+        $schedule->command('mailcoach:send-campaign-mails')->everyMinute();
+
+        $schedule->command('mailcoach:run-automation-triggers')->everyMinute();
+        $schedule->command('mailcoach:run-automation-actions')->everyMinute();
+
+        $schedule->command('mailcoach:calculate-statistics')->everyMinute();
+        $schedule->command('mailcoach:calculate-automation-mail-statistics')->everyMinute();
+        $schedule->command('mailcoach:send-campaign-summary-mail')->hourly();
+        $schedule->command('mailcoach:cleanup-processed-feedback')->hourly();
+        $schedule->command('mailcoach:send-email-list-summary-mail')->mondays()->at('9:00');
+        $schedule->command('mailcoach:delete-old-unconfirmed-subscribers')->daily();
+
     }
 
     /**

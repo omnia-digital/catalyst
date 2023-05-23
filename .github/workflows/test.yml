@@ -77,7 +77,8 @@ jobs:
 #          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
 #          composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
 #          composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
-#          composer install --prefer-dist --no-interaction
+#          composer config "http-basic.satis.spatie.be" "${{ secrets.MAILCOACH_EMAIL }}" "${{ secrets.MAILCOACH_KEY }}"
+      #          composer install --prefer-dist --no-interaction
 #      - name: Run yarn
 #        run: |
 #          yarn --version
