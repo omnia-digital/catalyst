@@ -118,7 +118,7 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/omnia-digital/catalyst-advice-module"
+            "url": "git@github.com:omnia-digital/catalyst-advice-module.git"
         },
         {
             "type": "composer",
