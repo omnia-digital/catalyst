@@ -3,6 +3,11 @@
 namespace Tests\Feature\Admin;
 
 use App\Actions\Teams\CreateTeam;
+use App\Filament\Resources\AwardResource\Pages\ListAwards;
+use App\Filament\Resources\Shield\RoleResource\Pages\ListRoles;
+use App\Filament\Resources\TagResource\Pages\ListTag;
+use App\Filament\Resources\TeamResource\Pages\ListTeams;
+use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Models\Award;
 use App\Models\Location;
 use App\Models\Role;
@@ -66,7 +71,7 @@ class AdminTest extends TestCase
         $this->actingAs($this->user);
         //$users = User::factory(10)->withProfile()->create();
 
-        Livewire::test(UserResource\Pages\ListUsers::class)
+        Livewire::test(ListUsers::class)
             ->assertSuccessful();
     }
 
@@ -83,7 +88,7 @@ class AdminTest extends TestCase
             ->withUsers(2, config('platform.teams.default_member_role'))
             ->create();
 
-        Livewire::test(RoleResource\Pages\ListRoles::class)
+        Livewire::test(ListRoles::class)
             ->assertSuccessful();
     }
 
@@ -96,7 +101,7 @@ class AdminTest extends TestCase
 
         $tags = Tag::factory(10)->create();
 
-        Livewire::test(TagResource\Pages\ListTag::class)
+        Livewire::test(ListTag::class)
             ->assertSuccessful();
     }
 
@@ -109,7 +114,7 @@ class AdminTest extends TestCase
 
         $awards = Award::factory(10)->create();
 
-        Livewire::test(AwardResource\Pages\ListAwards::class)
+        Livewire::test(ListAwards::class)
             ->assertSuccessful();
     }
 
@@ -127,7 +132,7 @@ class AdminTest extends TestCase
             ->withUsers(2, config('platform.teams.default_member_role'))
             ->create();
 
-        Livewire::test(TeamResource\Pages\ListTeams::class)
+        Livewire::test(ListTeams::class)
             ->assertSuccessful();
     }
 }
