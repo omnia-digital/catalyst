@@ -107,10 +107,6 @@
             "url": "https://nova.laravel.com"
         },
         {
-            "type": "path",
-            "url": "../modules/catalyst-advice"
-        },
-        {
             "type": "vcs",
             "url": "git@github.com:omnia-digital/laravel-mailcoach.git"
         },
