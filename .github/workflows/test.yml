@@ -16,28 +16,43 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+
       - name: Checkout private repo
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: omnia-digital/library
           ref: main
-      - name: Cache dependencies
+
+      - name: Cache Composer dependencies
+        id: cache-composer
         uses: actions/cache@v3
         with:
           path: |
             ~/.composer/cache/files
             vendor
-            node_modules
           key: composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             composer-
+
+      - name: Cache Yarn dependencies
+        id: cache-yarn
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-
+
       # - name: Setup SSH Keys and known_hosts
       #   env:
       #       SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       #   run: |
       #       ssh-agent -a $SSH_AUTH_SOCK > /dev/null
       #       ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -60,7 +75,6 @@ jobs:
 
       - name: Setup Laravel Application
         run: |
-          cp .env.example .env
           php artisan key:generate
 
       - name: Directory Permissions
