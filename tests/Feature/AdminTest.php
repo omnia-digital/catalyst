@@ -2,12 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Actions\Teams\CreateTeam;
 use App\Filament\Resources\AwardResource;
 use App\Filament\Resources\TagResource;
 use App\Filament\Resources\TeamResource;
 use App\Filament\Resources\UserResource;
 use App\Models\Award;
 use App\Models\Location;
+use App\Models\Role;
 use App\Models\Tag;
 use App\Models\Team;
 use App\Models\User;
@@ -31,8 +33,10 @@ class AdminTest extends TestCase
 
         $this->user = User::factory()->create([
             'email' => 'test@omniadigital.io',
-            'is_admin' => true,
         ]);
+
+        Role::create(['name' => 'super-admin']);
+        $this->user->assignRole('super-admin');
 
         $profile = new Profile([
             'first_name' => 'test first name',
@@ -40,6 +44,10 @@ class AdminTest extends TestCase
             'bio' => 'test bio',
             'remote_url' => 'http://test.url/',
             'location' => 'test location',
+        ]);
+
+        (new CreateTeam())->create($this->user, [
+            'name' => 'test admin team',
         ]);
 
         $this->user->profile()->save($profile);
@@ -115,6 +123,7 @@ class AdminTest extends TestCase
      */
     public function can_render_team_resource_page()
     {
+        // @TODO [Josh] - not passing
         $this->actingAs($this->user);
 
         $teams = Team::factory(10)
