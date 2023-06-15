@@ -23,7 +23,7 @@ jobs:
           repository: omnia-digital/library
           ref: main
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.composer/cache/files
