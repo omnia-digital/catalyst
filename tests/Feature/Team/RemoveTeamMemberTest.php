@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Team;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,7 +10,7 @@ use Modules\Social\Models\Profile;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class UpdateTeamMemberRoleTest extends TestCase
+class RemoveTeamMemberTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -54,7 +54,7 @@ class UpdateTeamMemberRoleTest extends TestCase
     /**
      * @test
      */
-    public function team_member_roles_can_be_updated()
+    public function team_members_can_be_removed_from_teams()
     {
         $team = $this->user->teams()->first();
 
@@ -63,19 +63,16 @@ class UpdateTeamMemberRoleTest extends TestCase
         );
 
         Livewire::test(ManageTeamMembers::class, ['team' => $team])
-            ->set('managingRoleFor', $this->otherUser)
-            ->set('currentRole', Role::findOrCreate('member')->id)
-            ->call('updateUserRole');
+            ->set('teamMemberIdBeingRemoved', $this->otherUser->id)
+            ->call('removeTeamMember');
 
-        $this->assertTrue($this->otherUser->fresh()->hasTeamRole(
-            $team->fresh(), 'member'
-        ));
+        $this->assertCount(0, $team->fresh()->members);
     }
 
     /**
      * @test
      */
-    public function only_team_owner_can_update_team_member_roles()
+    public function only_team_owner_can_remove_team_members()
     {
         $team = $this->user->teams()->first();
 
@@ -86,12 +83,8 @@ class UpdateTeamMemberRoleTest extends TestCase
         $this->actingAs($this->otherUser);
 
         Livewire::test(ManageTeamMembers::class, ['team' => $team])
-            ->set('managingRoleFor', $this->otherUser)
-            ->set('currentRole', Role::findOrCreate('member')->id)
-            ->call('updateUserRole');
-
-        $this->assertTrue($this->otherUser->fresh()->hasTeamRole(
-            $team->fresh(), 'admin'
-        ));
+            ->set('teamMemberIdBeingRemoved', $this->user->id)
+            ->call('removeTeamMember')
+            ->assertStatus(403);
     }
 }

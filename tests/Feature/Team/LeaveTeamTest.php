@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Team;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,12 +10,11 @@ use Modules\Social\Models\Profile;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class RemoveTeamMemberTest extends TestCase
+class LeaveTeamTest extends TestCase
 {
     use RefreshDatabase;
 
     public $user;
-    public $otherUser;
 
     protected function setUp(): void
     {
@@ -37,8 +36,18 @@ class RemoveTeamMemberTest extends TestCase
         $user->profile()->save($profile);
 
         $this->user = $user;
+    }
 
-        $otherUser = User::factory()->create();
+    /**
+     * @test
+     */
+    public function users_can_leave_teams()
+    {
+        $team = $this->user->teams()->first();
+
+        $team->users()->attach(
+            $otherUser = User::factory()->create(), ['role_id' => Role::findOrCreate('admin')->id]
+        );
 
         $otherUser->profile()->save(new Profile([
             'first_name' => 'other user first name',
@@ -48,43 +57,26 @@ class RemoveTeamMemberTest extends TestCase
             'location' => 'other user location',
         ]));
 
-        $this->otherUser = $otherUser;
+        $this->actingAs($otherUser);
+
+        Livewire::test(ManageTeamMembers::class, ['team' => $team])
+            ->call('leaveTeam');
+
+        $this->assertCount(1, $team->fresh()->users);
     }
 
     /**
      * @test
      */
-    public function team_members_can_be_removed_from_teams()
+    public function team_owners_cant_leave_their_own_team()
     {
         $team = $this->user->teams()->first();
 
-        $team->users()->attach(
-            $this->otherUser, ['role_id' => Role::findOrCreate('admin')->id]
-        );
-
         Livewire::test(ManageTeamMembers::class, ['team' => $team])
-            ->set('teamMemberIdBeingRemoved', $this->otherUser->id)
-            ->call('removeTeamMember');
+            ->call('leaveTeam')
+            ->assertHasErrors(['team']);
 
-        $this->assertCount(0, $team->fresh()->members);
-    }
-
-    /**
-     * @test
-     */
-    public function only_team_owner_can_remove_team_members()
-    {
-        $team = $this->user->teams()->first();
-
-        $team->users()->attach(
-            $this->otherUser, ['role_id' => Role::findOrCreate('admin')->id]
-        );
-
-        $this->actingAs($this->otherUser);
-
-        Livewire::test(ManageTeamMembers::class, ['team' => $team])
-            ->set('teamMemberIdBeingRemoved', $this->user->id)
-            ->call('removeTeamMember')
-            ->assertStatus(403);
+        $this->assertNotNull($team->fresh());
+        $this->assertEquals($this->user->id, $team->owner->id);
     }
 }

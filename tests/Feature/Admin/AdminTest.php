@@ -1,19 +1,14 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Admin;
 
 use App\Actions\Teams\CreateTeam;
-use App\Filament\Resources\AwardResource;
-use App\Filament\Resources\TagResource;
-use App\Filament\Resources\TeamResource;
-use App\Filament\Resources\UserResource;
 use App\Models\Award;
 use App\Models\Location;
 use App\Models\Role;
 use App\Models\Tag;
 use App\Models\Team;
 use App\Models\User;
-use BezhanSalleh\FilamentShield\Resources\RoleResource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Modules\Social\Models\Profile;

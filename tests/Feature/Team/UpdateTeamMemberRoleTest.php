@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Team;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,11 +10,12 @@ use Modules\Social\Models\Profile;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class LeaveTeamTest extends TestCase
+class UpdateTeamMemberRoleTest extends TestCase
 {
     use RefreshDatabase;
 
     public $user;
+    public $otherUser;
 
     protected function setUp(): void
     {
@@ -36,18 +37,8 @@ class LeaveTeamTest extends TestCase
         $user->profile()->save($profile);
 
         $this->user = $user;
-    }
 
-    /**
-     * @test
-     */
-    public function users_can_leave_teams()
-    {
-        $team = $this->user->teams()->first();
-
-        $team->users()->attach(
-            $otherUser = User::factory()->create(), ['role_id' => Role::findOrCreate('admin')->id]
-        );
+        $otherUser = User::factory()->create();
 
         $otherUser->profile()->save(new Profile([
             'first_name' => 'other user first name',
@@ -57,26 +48,50 @@ class LeaveTeamTest extends TestCase
             'location' => 'other user location',
         ]));
 
-        $this->actingAs($otherUser);
-
-        Livewire::test(ManageTeamMembers::class, ['team' => $team])
-            ->call('leaveTeam');
-
-        $this->assertCount(1, $team->fresh()->users);
+        $this->otherUser = $otherUser;
     }
 
     /**
      * @test
      */
-    public function team_owners_cant_leave_their_own_team()
+    public function team_member_roles_can_be_updated()
     {
         $team = $this->user->teams()->first();
 
-        Livewire::test(ManageTeamMembers::class, ['team' => $team])
-            ->call('leaveTeam')
-            ->assertHasErrors(['team']);
+        $team->users()->attach(
+            $this->otherUser, ['role_id' => Role::findOrCreate('admin')->id]
+        );
 
-        $this->assertNotNull($team->fresh());
-        $this->assertEquals($this->user->id, $team->owner->id);
+        Livewire::test(ManageTeamMembers::class, ['team' => $team])
+            ->set('managingRoleFor', $this->otherUser)
+            ->set('currentRole', Role::findOrCreate('member')->id)
+            ->call('updateUserRole');
+
+        $this->assertTrue($this->otherUser->fresh()->hasTeamRole(
+            $team->fresh(), 'member'
+        ));
+    }
+
+    /**
+     * @test
+     */
+    public function only_team_owner_can_update_team_member_roles()
+    {
+        $team = $this->user->teams()->first();
+
+        $team->users()->attach(
+            $this->otherUser, ['role_id' => Role::findOrCreate('admin')->id]
+        );
+
+        $this->actingAs($this->otherUser);
+
+        Livewire::test(ManageTeamMembers::class, ['team' => $team])
+            ->set('managingRoleFor', $this->otherUser)
+            ->set('currentRole', Role::findOrCreate('member')->id)
+            ->call('updateUserRole');
+
+        $this->assertTrue($this->otherUser->fresh()->hasTeamRole(
+            $team->fresh(), 'admin'
+        ));
     }
 }
