@@ -28,6 +28,7 @@ use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
 use Modules\Social\Traits\HasHandle;
+use Notification;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasRoles;
@@ -132,6 +133,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public function getIsAdminAttribute()
     {
         return $this->hasRole('super-admin');
+    }
+
+    /// Routes ///
+    /**
+     * Route notifications for the Vonage channel.
+     */
+    public function routeNotificationForVonage(Notification $notification): string
+    {
+        return $this->phone;
     }
 
         //// Attributes ////
