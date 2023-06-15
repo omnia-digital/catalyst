@@ -60,7 +60,7 @@ return [
          * Here you can define the maximum run time of the job. If the job hasn't fully sent your campaign, it
          * will redispatch itself.
          */
-        'send_campaign_maximum_job_runtime_in_seconds' => 60  * 10,
+        'send_campaign_maximum_job_runtime_in_seconds' => 60 * 10,
 
         /*
          * You can customize some of the behavior of this package by using our own custom action.
@@ -123,7 +123,7 @@ return [
          * Here you can define the maximum run time of the job. If the job hasn't fully sent your automation mails, it
          * will redispatch itself.
          */
-        'send_automation_mails_maximum_job_runtime_in_seconds' => 60  * 10,
+        'send_automation_mails_maximum_job_runtime_in_seconds' => 60 * 10,
 
         /*
          * Here you can configure which automation mail template editor Mailcoach uses.
@@ -190,7 +190,7 @@ return [
              * \Spatie\Mailcoach\Domain\Automation\Support\Conditions\Condition
              * interface.
              */
-            'conditions' => []
+            'conditions' => [],
         ],
 
         'perform_on_queue' => [
@@ -303,7 +303,6 @@ return [
      */
     'queue_connection' => '',
 
-
     /*
      * Unauthorized users will get redirected to this route.
      */
@@ -332,7 +331,6 @@ return [
             'auth:api',
         ],
     ],
-
 
     'models' => [
         /*

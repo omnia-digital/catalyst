@@ -46,7 +46,7 @@ class AdminTest extends TestCase
             'location' => 'test location',
         ]);
 
-        (new CreateTeam())->create($this->user, [
+        (new CreateTeam)->create($this->user, [
             'name' => 'test admin team',
         ]);
 
