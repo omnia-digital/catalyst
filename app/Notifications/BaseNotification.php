@@ -68,7 +68,7 @@ abstract class BaseNotification extends Notification implements ShouldQueue
             ->toArray();
     }
 
-    public function toMail($notifiable)
+    public function toMail(object $notifiable)
     {
         $url = route('notifications');
 
