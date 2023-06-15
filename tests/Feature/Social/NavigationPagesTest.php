@@ -65,12 +65,12 @@ class NavigationPagesTest extends TestCase
     /**
      * @test
      */
-    public function load_news_page()
-    {
-        $response = $this->get('/games/feeds');
-
-        $response->assertStatus(200);
-    }
+//    public function load_news_page()
+//    {
+//        $response = $this->get('/fee/feeds');
+//
+//        $response->assertStatus(200);
+//    } // @TODO [Josh] - move this to the feeds module
 
     /**
      * @test
