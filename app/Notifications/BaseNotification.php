@@ -2,8 +2,10 @@
 
 namespace App\Notifications;
 
+use App\Support\Notification\NotificationCenter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 abstract class BaseNotification extends Notification implements ShouldQueue
@@ -53,4 +55,47 @@ abstract class BaseNotification extends Notification implements ShouldQueue
     {
         return ['sms'];
     }
+
+    public function toArray($notifiable)
+    {
+        $url = route('notifications');
+
+        return NotificationCenter::make()
+            ->icon('heroicon-o-user-group')
+            ->success('Success!')
+            ->actionLink($url)
+            ->actionText('View Notifications')
+            ->toArray();
+    }
+
+    public function toMail(object $notifiable)
+    {
+        $url = route('notifications');
+
+        return (new MailMessage)
+            ->greeting('Hello!')
+            ->line('You have a new Notification!')
+            ->action('View Notifications', $url);
+    }
+
+    public function toSms($notifiable)
+    {
+        return $this->toArray();
+//        $url = route('notifications');
+//
+//        return ()
+//            ->greeting('Hello!')
+//            ->line('You have a new Notification!')
+//            ->action('View Notifications', $url);
+    }
+
+    /**
+     * Get the Vonage / SMS representation of the notification.
+     */
+//    public function toVonage(object $notifiable): VonageMessage
+//    {
+//        return (new VonageMessage)
+//            ->clientReference((string) $notifiable->id)
+//            ->content('Your SMS message content');
+//    }
 }

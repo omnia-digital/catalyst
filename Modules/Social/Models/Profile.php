@@ -144,7 +144,7 @@ class Profile extends Model implements HasMedia, Searchable
     public function fields()
     {
         return [
-            ['Phone', '(123) 123-1234'], // $this->phone
+            ['Phone', $this->user->phone],
             ['Email', $this->user->email],
             ['Title', 'Senior Front-End Developer'],
             ['Team', 'Product Development'],

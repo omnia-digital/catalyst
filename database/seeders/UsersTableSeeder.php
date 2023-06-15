@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -11,14 +12,17 @@ class UsersTableSeeder extends Seeder
     {
         User::truncate();
 
-        User::factory(1)->withProfile([
+        $adminUser = User::factory(1)->withProfile([
             'first_name' => 'Omnia',
             'last_name' => 'Admin',
         ])->withTeam()->create([
             'email' => 'admin@omniadigital.io',
             'password' => bcrypt('testing'),
-            'is_admin' => true,
         ]);
+
+        Role::create(['name' => 'super-admin']);
+
+        $adminUser->first()->assignRole('super-admin');
 
         User::factory(1)->withProfile([
             'first_name' => 'Team',
