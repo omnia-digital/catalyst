@@ -80,22 +80,22 @@ abstract class BaseNotification extends Notification implements ShouldQueue
 
     public function toSms($notifiable)
     {
-        $this->toVonage($notifiable);
-        $url = route('notifications');
-
-        return (new Smsmess)
-            ->greeting('Hello!')
-            ->line('You have a new Notification!')
-            ->action('View Notifications', $url);
+        return $this->toArray();
+//        $url = route('notifications');
+//
+//        return ()
+//            ->greeting('Hello!')
+//            ->line('You have a new Notification!')
+//            ->action('View Notifications', $url);
     }
 
     /**
      * Get the Vonage / SMS representation of the notification.
      */
-    public function toVonage(object $notifiable): VonageMessage
-    {
-        return (new VonageMessage)
-            ->clientReference((string) $notifiable->id)
-            ->content('Your SMS message content');
-    }
+//    public function toVonage(object $notifiable): VonageMessage
+//    {
+//        return (new VonageMessage)
+//            ->clientReference((string) $notifiable->id)
+//            ->content('Your SMS message content');
+//    }
 }
