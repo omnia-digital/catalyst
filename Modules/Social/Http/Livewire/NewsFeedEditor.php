@@ -48,6 +48,7 @@ class NewsFeedEditor extends Component
             if (! empty($this->postType)) {
                 $post->type($this->postType);
             }
+            $options['published_at'] = now();
             $post = $post->execute($data['content'], $options);
             $post->attachMedia($data['images'] ?? []);
         });
