@@ -64,7 +64,7 @@ class Home extends Component
 
     public function getNewsRssFeeds()
     {
-        return Platform::isModuleEnabled('Feeds') ? FeedSource::first()->get() : [];
+        return Platform::isModuleEnabled('Feeds') ? FeedSource::first()->get() : collect();
     }
 
     public function render()
