@@ -84,7 +84,7 @@
                 </div>
             @endif
             <div class="text-light-text-color h-0 group-hover:h-min p-1 text-xs rounded line-clamp-4 ">
-                {{ $post->body }}
+                {!! $post->body !!} posted by {{ $post->user->name }}
             </div>
         </div>
     @endif

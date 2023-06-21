@@ -8,7 +8,7 @@
     <livewire:resources::components.resource-media-card
             :post="$post"
             :wire:key="'resource-card-' . $post->id"
-            :show-post-actions="false"
+            :show-details="true"
     />
 @else
     <livewire:social::components.post-card wire:key="post-{{ $post->id }}"
