@@ -14,6 +14,13 @@ class TeamPolicy
 {
     use HandlesAuthorization;
 
+    public function apply(User $user, Team $team)
+    {
+        if (! Platform::isUsingUserSubscriptions()) {
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      *
