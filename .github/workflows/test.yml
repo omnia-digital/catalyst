@@ -87,7 +87,9 @@ jobs:
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
-        run: php artisan migrate --force
+        run: |
+          php artisan migrate --force
+          php artisan module:migrate --force
 
       - name: Run yarn
         run: |
