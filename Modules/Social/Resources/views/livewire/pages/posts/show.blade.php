@@ -14,7 +14,6 @@
         </div>
     </div>
     <div class="mt-6 max-w-post-card-max-w mx-auto divide-y">
-        <h2 class="text-xl">{!! $post->body !!}</h2>
         <livewire:social::components.post-card-dynamic wire:key="post-{{ $post->id }}" :post="$post" :clickable="false"/>
 
 {{--        @if ($post->type == \Modules\Social\Enums\PostType::RESOURCE)--}}

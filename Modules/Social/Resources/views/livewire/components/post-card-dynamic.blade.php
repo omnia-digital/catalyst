@@ -4,11 +4,12 @@
             :wire:key="'article-card-' . $post->id"
             :show-post-actions="true"
     />
-@elseif ($post->type == \Modules\Social\Enums\PostType::RESOURCE)
+@elseif ($post->type == \Modules\Social\Enums\PostType::RESOURCE && Route::is('resources.home'))
     <livewire:resources::components.resource-media-card
             :post="$post"
             :wire:key="'resource-card-' . $post->id"
-            :show-details="true"
+            :show-post-actions="false"
+            :show-details="false"
     />
 @else
     <livewire:social::components.post-card wire:key="post-{{ $post->id }}"
