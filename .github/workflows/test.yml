@@ -17,12 +17,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Checkout private repo
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: omnia-digital/library
-          ref: main
+      - name: Add Omnia Library Token
+        run: echo '${{ secrets.GITHUB_TOKEN }}' > '$GITHUB_WORKSPACE/auth.json
 
       - name: Cache Composer dependencies
         id: cache-composer
@@ -58,6 +54,7 @@ jobs:
         with:
           php-version: '8.2'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql
+#          coverage: none
 
       - name: Copy environment config file
         run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
