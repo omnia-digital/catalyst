@@ -83,36 +83,26 @@ jobs:
           mkdir -p database
           touch database/database.sqlite
 
-      - name: Execute tests via Pest
+      - name: Run migrations
         env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+        run: php artisan migrate --force
+
+      - name: Run yarn
+        run: |
+          yarn --version
+          yarn && yarn dev
+
+      - name: Run Tests
+        env:
+          APP_ENV: testing
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
           SF_CONSUMER_KEY: "${{ secrets.SF_CONSUMER_KEY }}"
           SF_CONSUMER_SECRET: "${{ secrets.SF_CONSUMER_SECRET }}"
           SF_USERNAME: "${{ secrets.SF_USERNAME }}"
           SF_PASSWORD: "${{ secrets.SF_PASSWORD }}"
-        run: vendor/bin/pest
-
-      #      - name: Run migrations
-      #        env:
-      #          DB_CONNECTION: sqlite
-      #          DB_DATABASE: database/database.sqlite
-      #        run: php artisan migrate
-      #      - name: Install Composer dependencies
-      #        run: |
-      #          composer config "http-basic.nova.laravel.com" "${{ secrets.NOVA_USERNAME }}" "${{ secrets.NOVA_LICENSE_KEY }}"
-      #          composer config "http-basic.spark.laravel.com" "${{ secrets.SPARK_USERNAME }}" "${{ secrets.SPARK_API_TOKEN }}"
-      #          composer config "github-oauth.github.com" "${{ secrets.GH_ACTIONS_TOKEN }}"
-      #          composer config "http-basic.satis.spatie.be" "${{ secrets.MAILCOACH_EMAIL }}" "${{ secrets.MAILCOACH_KEY }}"
-      #          composer install --prefer-dist --no-interaction
-      #      - name: Run yarn
-      #        run: |
-      #          yarn --version
-      #          yarn && yarn dev
-      #      - name: Run Tests
-      #        run: |
-      #          ./vendor/bin/pest --version
-      #          ./vendor/bin/pest --verbose
-      #        env:
-      #          APP_ENV: testing
-
+        run: |
+          ./vendor/bin/pest --version
+          ./vendor/bin/pest --verbose --coverage --coverage-clover=coverage.xml
