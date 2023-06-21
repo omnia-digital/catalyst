@@ -356,11 +356,12 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         return $query->where('name', 'LIKE', "%{$search}%");
     }
 
-    public function scopeWithuser(Builder $query, User $user): Builder
+    public function scopeWithUser(Builder $query, User $user): Builder
     {
-        return $query->leftJoin('model_has_roles', 'teams.id', '=', 'model_has_roles.team_id')
-            ->where('model_has_roles.model_id', $user->id)
-            ->where('model_has_roles.model_type', User::class);
+        return $query->whereHas('users', function ($query) use ($user) {
+            $query->where('model_has_roles.model_id', $user->id)
+                ->where('model_has_roles.model_type', User::class);
+        });
     }
 
     public function hasStripeConnectAccount(): bool
