@@ -26,7 +26,7 @@
                 @if (auth()->user()->is($review->user))
                     <div>
                         <button
-                                wire:click.prevent="$emitTo('reviews::create-review-modal', 'openReviewModal')"
+                                wire:click.prevent="$dispatch('openReviewModal)->to('reviews::create-review-modal)"
                                 class="text-light-text-color hover:text-base-text-color"
                         >
                             <x-heroicon-o-pencil class="w-4 h-4"/>

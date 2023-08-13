@@ -52,7 +52,7 @@
         @endif
     </div>
 
-    <form wire:submit.prevent="callMountedAction">
+    <form wire:submit="callMountedAction">
         @php
             $action = $this->getMountedAction();
         @endphp

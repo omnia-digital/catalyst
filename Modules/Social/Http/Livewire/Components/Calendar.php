@@ -28,7 +28,7 @@ class Calendar extends LivewireCalendar
 
     public function onEventClick($eventId)
     {
-        $this->emitTo('social::components.teams.team-calendar-list', 'teamSelected', $eventId);
+        $this->dispatch('teamSelected', eventId: $eventId)->to('social::components.teams.team-calendar-list')
     }
 
     public function getUserProperty()

@@ -163,7 +163,7 @@ class TeamAdmin extends Component
         }
 
         $this->success(Trans::get('Team Information Saved'));
-        $this->emit('changes_saved');
+        $this->dispatch('changes_saved');
 
         $this->team->refresh();
 

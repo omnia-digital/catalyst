@@ -29,7 +29,7 @@ class UpdateTimezone extends Component
 
         $this->currentUser->update(['timezone' => $this->timezone]);
 
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     public function getCurrentUserProperty()

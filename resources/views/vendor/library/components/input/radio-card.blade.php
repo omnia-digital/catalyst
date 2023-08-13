@@ -6,7 +6,7 @@
 
 <label
         x-data="{
-            selectedItem: @entangle($attributes->wire('model')),
+            selectedItem: @entangle($attributes->wire('model')).live,
             currentItem: '{{ $value }}',
             isActive: false,
             setActive() {

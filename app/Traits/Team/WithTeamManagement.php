@@ -93,7 +93,7 @@ trait WithTeamManagement
 
         $this->team->owner->notify(new NewApplicationToTeamNotification($this->team, $this->user));
         $this->success(Trans::get('Application Submitted to Team'));
-        $this->emit('applied_to_team');
+        $this->dispatch('applied_to_team');
     }
 
     public function teamHasApplicationForm()
@@ -114,7 +114,7 @@ trait WithTeamManagement
         $this->team = $this->team->fresh();
 
         $this->success(Trans::get('Application Removed'));
-        $this->emit('application_removed');
+        $this->dispatch('application_removed');
     }
 
     /**
@@ -152,7 +152,7 @@ trait WithTeamManagement
         $this->team = $this->team->fresh();
 
         $this->success(Trans::get('Team info saved!'));
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     /**
@@ -187,7 +187,7 @@ trait WithTeamManagement
         }
 
         $this->success(Trans::get('Team member added!'));
-        $this->emit('member_added');
+        $this->dispatch('member_added');
     }
 
     /**

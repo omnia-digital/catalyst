@@ -17,10 +17,10 @@ class MapGoogle extends Component
 
     public function updatedFilters($value, $key)
     {
-        //$this->dispatchBrowserEvent('refresh-map', $this->rows);
+        //$this->dispatch('refresh-map', $this->rows);
 
         if ($key === 'country' && $value !== 'All') {
-            $this->dispatchBrowserEvent('focus-to-country', strtoupper($value));
+            $this->dispatch('focus-to-country', value: strtoupper($value));
         }
     }
 
@@ -28,7 +28,7 @@ class MapGoogle extends Component
     {
         $this->selectedCategoryId = $id;
 
-        $this->dispatchBrowserEvent('refresh-map', $this->rows);
+        $this->dispatch('refresh-map', rows: $this->rows);
     }
 
     public function getCategoriesProperty()

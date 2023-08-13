@@ -9,7 +9,7 @@ trait WithModal
      */
     public function closeModal(string $modalId)
     {
-        $this->dispatchBrowserEvent($modalId, ['type' => 'hide']);
+        $this->dispatch($modalId, type: 'hide');
     }
 
     /**
@@ -17,6 +17,6 @@ trait WithModal
      */
     public function showModal(string $modalId)
     {
-        $this->dispatchBrowserEvent($modalId, ['type' => 'show']);
+        $this->dispatch($modalId, type: 'show');
     }
 }

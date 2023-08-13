@@ -38,7 +38,7 @@ class Map extends Component
 
     public function showPlaceDetail($placeId)
     {
-        $this->emitTo('social::components.teams.team-calendar-list', 'teamSelected', $placeId);
+        $this->dispatch('teamSelected', placeId: $placeId)->to('social::components.teams.team-calendar-list');
     }
 
     public function getPlacesProperty()

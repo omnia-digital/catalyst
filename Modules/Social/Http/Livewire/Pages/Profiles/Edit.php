@@ -84,7 +84,7 @@ class Edit extends Component
         $this->photo &&
             $this->profile->addMedia($this->photo)->toMediaCollection('profile_photos');
 
-        $this->emit('changes_saved');
+        $this->dispatch('changes_saved');
 
         $this->profile->refresh();
         $this->reset('bannerImage', 'bannerImageName', 'photo', 'photoName');

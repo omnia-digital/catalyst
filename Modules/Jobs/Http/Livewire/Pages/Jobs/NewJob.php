@@ -139,7 +139,7 @@ class NewJob extends Component
         resolve(StatefulGuard::class)->login($user);
 
         // Emit an event to Navigation component to reload the user information.
-        $this->emitTo('navigation', 'LoggedIn');
+        $this->dispatch('LoggedIn')->to('navigation');
 
         // Set the current team is default company.
         $this->setTeamId();
@@ -158,7 +158,7 @@ class NewJob extends Component
         $validated = $this->withValidator(function (Validator $validator) {
             if ($validator->fails()) {
                 $this->alertInvalidInput();
-                $this->emit('validation-fails', $validator->errors());
+                $this->dispatch('validation-fails', errors: $validator->errors());
             }
         })
             ->validate($this->rules());
@@ -263,7 +263,7 @@ class NewJob extends Component
         auth()->user()
             ->updateDefaultPaymentMethod($this->payment_method);
 
-        $this->dispatchBrowserEvent('card', [
+        $this->dispatch('card', [
             'card_brand' => auth()->user()->card_brand,
             'card_last_four' => auth()->user()->card_last_four,
         ]);

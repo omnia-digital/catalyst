@@ -26,7 +26,7 @@
             </x-slot>
             @unless (in_array('date', $skipFilters))
                 <x-library::dropdown.item class="bg-secondary relative border-none">
-                    <x-library::input.date wire:model="dateFilter" class="pl-8 text-xs" placeholder="Launch Date"/>
+                    <x-library::input.date wire:model.live="dateFilter" class="pl-8 text-xs" placeholder="Launch Date"/>
                     <div class="absolute top-0 flex items-center h-full ml-3">
                         <x-heroicon-o-calendar class="w-4 text-dark-text-color" />
                     </div>
@@ -37,7 +37,7 @@
             @endunless
             @unless (in_array('has_attachment', $skipFilters))
                 <x-library::dropdown.item class="bg-secondary border-none flex items-center">
-                    <x-library::input.toggle wire:model="filters.has_attachment"/>
+                    <x-library::input.toggle wire:model.live="filters.has_attachment"/>
                     <div class="text-xs text-base-text-color ml-2">Has Media</div>
                 </x-library::dropdown.item>
             @endunless

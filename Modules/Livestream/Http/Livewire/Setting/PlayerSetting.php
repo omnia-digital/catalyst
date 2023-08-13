@@ -42,7 +42,7 @@ class PlayerSetting extends Component
             'before_live_image' => $this->beforeLiveImage ? $this->beforeLiveImage->store('thumbnails', 'players') : $this->currentBeforeLiveImage,
         ]);
 
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     public function render()

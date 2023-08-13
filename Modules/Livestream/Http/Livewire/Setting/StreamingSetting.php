@@ -43,7 +43,7 @@ class StreamingSetting extends Component
             (new CreateMuxStreamAction)->execute($this->livestreamAccount->team);
         }
 
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     public function render()

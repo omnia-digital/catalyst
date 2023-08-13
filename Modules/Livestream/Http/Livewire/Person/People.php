@@ -52,7 +52,8 @@ class People extends Component
 
         $this->selectedPerson = $person;
 
-        $this->emitTo('person.person-info-panel', 'personSelected', $person);
+        $this->dispatch('personSelected', person: $person)->to('person.person-info-panel');
+
     }
 
     public function deselectPerson()

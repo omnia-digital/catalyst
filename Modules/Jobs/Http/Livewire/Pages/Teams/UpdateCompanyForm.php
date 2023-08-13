@@ -32,7 +32,7 @@ class UpdateCompanyForm extends Component
 
         $this->company->update(['about' => $this->state['about'] ?? null]);
 
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     public function getUserProperty()

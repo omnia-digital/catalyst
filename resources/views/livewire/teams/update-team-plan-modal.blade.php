@@ -17,7 +17,7 @@
 
                             <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
                                 @foreach ($teamPlans as $teamPlan)
-                                    <x-library::input.radio-card :title="$teamPlan['name']" wire:model="plan" wire:key="team-plan-{{ $teamPlan['stripe_id'] }}" :value="$teamPlan['stripe_id']">
+                                    <x-library::input.radio-card :title="$teamPlan['name']" wire:model.live="plan" wire:key="team-plan-{{ $teamPlan['stripe_id'] }}" :value="$teamPlan['stripe_id']">
                                         <x-slot name="description" class="space-y-1">
                                             @foreach ($teamPlan['features'] as $feature)
                                                 <div class="flex items-center space-x-2">

@@ -29,14 +29,14 @@
 
             this.selectedValues.push(value);
 
-            $dispatch('input', this.selectedValues)
+            $dispatch('input', {values: this.selectedValues})
         },
 
         removeItem: function(value, $dispatch) {
             let index = this.selectedValues.indexOf(value);
             this.selectedValues.splice(index, 1);
 
-            $dispatch('input', this.selectedValues)
+            $dispatch('input', {values: this.selectedValues})
         }
     }"
     x-init="function() {

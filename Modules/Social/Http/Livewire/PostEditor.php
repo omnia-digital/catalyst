@@ -80,9 +80,9 @@ class PostEditor extends Component
 
     private function emitImagesSet(): void
     {
-        $this->dispatchBrowserEvent('post-editor:image-set', [
-            'id' => $this->editorId,
-            'images' => $this->images,
-        ]);
+        $this->dispatch('post-editor:image-set',
+            id: $this->editorId,
+            images: $this->images
+        );
     }
 }

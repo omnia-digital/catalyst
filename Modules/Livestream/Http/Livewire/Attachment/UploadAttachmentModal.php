@@ -57,10 +57,11 @@ class UploadAttachmentModal extends Component
         $this->isUpload ? $this->upload() : $this->saveStaticUrl();
 
         $this->reset('name', 'attachment', 'url');
-        $this->emit('clearUploadInput');
+        $this->dispatch('clearUploadInput');
         $this->success('Upload attachment successfully');
         $this->hideUploadAttachmentModal();
-        $this->emitTo('episode.episode-info-panel', 'attachmentUploaded');
+        $this->dispatch('attachmentUploaded')->to('episode.episode-info-panel');
+
     }
 
     public function render()

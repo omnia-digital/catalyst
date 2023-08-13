@@ -24,16 +24,12 @@ trait WithPostEditor
 
     public function emitPostValidated(Validator $validator)
     {
-        $this->emitTo(
-            'social::post-editor',
-            'validationFailed',
-            $validator->errors()
-        );
+        $this->dispatch('validationFailed', errors: $validator->errors())->to('social::post-editor')
     }
 
     public function emitPostSaved(string $editorId)
     {
-        $this->emitTo('social::post-editor', 'postSaved:' . $editorId);
-        $this->emitTo('social::news-feed', 'postSaved');
+        $this->dispatch('postSaved:' . $editorId)->to('social::post-editor');
+        $this->dispatch('postSaved')->to('social::news-feed');
     }
 }

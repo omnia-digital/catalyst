@@ -38,13 +38,13 @@
             </div>
             @unless (in_array('location', $skipFilters))
                 <div class="sm:min-w-[110px]">
-                    <x-library::input.text wire:model.debounce.450ms="filters.location" placeholder="{{ Trans::get('Location') }}"/>
+                    <x-library::input.text wire:model.live.debounce.450ms="filters.location" placeholder="{{ Trans::get('Location') }}"/>
                 </div>
             @endunless
 
             @unless (in_array('date', $skipFilters))
                 <div class="sm:min-w-[110px]  relative">
-                    <x-library::input.date class="pl-8" wire:model="dateFilter"
+                    <x-library::input.date class="pl-8" wire:model.live="dateFilter"
                                            placeholder="{{ ($this->dateColumn === 'created_at' || $this->dateColumn === 'published_at') ? Trans::get('Date Created') : Trans::get('Launch Date') }}"/>
                     <div class="absolute top-0 flex items-center h-full ml-3">
                         <x-heroicon-o-calendar class="w-4 text-dark-text-color"/>
@@ -56,7 +56,7 @@
                 @auth
                     <div class="flex items-center space-x-2">
                         <x-library::input.label for="my_teams" color="text-base-text-color">{{ Trans::get('My Teams Only') }}</x-library::input.label>
-                        <x-library::input.checkbox wire:model="filters.my_teams" name="my_teams"/>
+                        <x-library::input.checkbox wire:model.live="filters.my_teams" name="my_teams"/>
                     </div>
                 @endauth
             @endunless
@@ -65,7 +65,7 @@
 
         @unless (in_array('tags', $skipFilters))
             <div class="min-w-[135px]">
-                <x-library::input.selects wire:model="tags" :options="$this->allTags" placeholder="Search by Tags"/>
+                <x-library::input.selects wire:model.live="tags" :options="$this->allTags" placeholder="Search by Tags"/>
             </div>
         @endunless
 
@@ -73,14 +73,14 @@
             <div class="flex items-center w-full mb-2">
                 <x-library::input.label value="Members" class="mr-8 text-neutral-dark"/>
                 <x-library::input.range-slider
-                        wire:model="members"
+                        wire:model.live="members"
                         :min="0" :max="100" :step="1" :decimals="0"/>
             </div>
         @endunless
         {{-- <div>
             <div class="mt-2 grid grid-cols-3 gap-3 sm:grid-cols-5">
                 @for ($i = 1; $i <= 5; $i++)
-                    <x-library::input.checkbox-card wire:model="filters.rating" wire:key="rating-{{ $i }}" :value="$i">
+                    <x-library::input.checkbox-card wire:model.live="filters.rating" wire:key="rating-{{ $i }}" :value="$i">
                         <div class="flex items-center space-x-1">
                             <span>{{ $i }}</span>
                             <x-heroicon-o-star class="w-4 h-4"/>
@@ -91,7 +91,7 @@
         </div> --}}
         @unless (in_array('has_attachment', $skipFilters))
             <div class="w-full py-2 md:w-1/2 flex items-center justify-end space-x-2">
-                <x-library::input.toggle wire:model="filters.has_attachment"/>
+                <x-library::input.toggle wire:model.live="filters.has_attachment"/>
                 <div class="text-sm text-base-text-color">Has Media</div>
             </div>
         @endunless

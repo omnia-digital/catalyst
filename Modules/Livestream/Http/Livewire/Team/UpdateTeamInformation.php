@@ -51,8 +51,8 @@ class UpdateTeamInformation extends Component
             return redirect()->route('teams.show', $this->team);
         }
 
-        $this->emit('saved');
-        $this->emit('refresh-navigation-menu');
+        $this->dispatch('saved');
+        $this->dispatch('refresh-navigation-menu');
     }
 
     /**

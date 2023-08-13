@@ -19,7 +19,7 @@
         </div>
 
         <!-- Delete Team Confirmation Modal -->
-        <x-jet-confirmation-modal wire:model="confirmingTeamDeletion">
+        <x-jet-confirmation-modal wire:model.live="confirmingTeamDeletion">
             <x-slot name="title">
                 {{ \Trans::get('Delete Team') }}
             </x-slot>

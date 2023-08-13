@@ -42,7 +42,7 @@ class Applications extends Component
         $invitation->delete();
 
         $this->invitations = $this->invitations->fresh();
-        $this->emit('team_action', 'Invitation accepted');
+        $this->dispatch('team_action', 'Invitation accepted');
     }
 
     /**
@@ -58,7 +58,7 @@ class Applications extends Component
         }
 
         $this->invitations = $this->invitations->fresh();
-        $this->emit('team_action', 'Invitation declined');
+        $this->dispatch('team_action', 'Invitation declined');
     }
 
     /**
@@ -73,7 +73,7 @@ class Applications extends Component
         }
 
         $this->applications = $this->applications->fresh();
-        $this->emit('team_action', 'Application removed');
+        $this->dispatch('team_action', 'Application removed');
     }
 
     public function invitationsCount()
@@ -88,7 +88,7 @@ class Applications extends Component
 
 //    public function testClick()
 //    {
-//        $this->emit('team_action', "Invitation declined");
+//        $this->dispatch('team_action', "Invitation declined");
 //    }
 
     public function getUserProperty()

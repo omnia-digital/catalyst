@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\HandleStripeConnectRefreshUrlController;
-use App\Http\Livewire\Pages\Account\Index as AccountIndex;
-use App\Http\Livewire\Pages\Media\Index as MediaIndex;
-use App\Http\Livewire\UserNotifications;
+use App\Livewire\Pages\Account\Index as AccountIndex;
+use App\Livewire\Pages\Media\Index as MediaIndex;
+use App\Livewire\UserNotifications;
 use Illuminate\Support\Facades\Route;
 
 Route::get('r/{url?}', function ($url) {

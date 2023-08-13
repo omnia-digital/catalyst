@@ -69,7 +69,8 @@ class Episodes extends Component
 
         $this->selectedEpisode = $episode;
 
-        $this->emitTo('episode.episode-info-panel', 'episodeSelected', $episode);
+        $this->dispatch('episodeSelected', episode: $episode)->to('episode.episode-info-panel');
+
     }
 
     public function toggleMassAttachmentUpload()
@@ -116,7 +117,7 @@ class Episodes extends Component
             array_push($this->selectedIDs, $id);
         }
 
-        $this->emitTo('episode.multi-select-panel', 'updateSelectedEpisodes', $this->selectedIDs);
+        $this->dispatch('updateSelectedEpisodes', selectedIds: $this->selectedIDs)->to('episode.multi-select-panel');
     }
 
     public function multiDeselect($id)

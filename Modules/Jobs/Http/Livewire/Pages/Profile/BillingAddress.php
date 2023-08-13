@@ -43,7 +43,7 @@ class BillingAddress extends Component
 
         auth()->user()->updateStripeCustomer(['address' => $validated]);
 
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     public function render()

@@ -9,7 +9,7 @@ trait WithNotification
      */
     public function success(string $message, ?string $actionUrl = null)
     {
-        $this->dispatchBrowserEvent('notify', [
+        $this->dispatch('notify', [
             'message' => $message,
             'type' => 'success',
             'action' => $actionUrl,
@@ -21,7 +21,7 @@ trait WithNotification
      */
     public function error(string $message, ?string $actionUrl = null)
     {
-        $this->dispatchBrowserEvent('notify', [
+        $this->dispatch('notify', [
             'message' => $message,
             'type' => 'error',
             'action' => $actionUrl,

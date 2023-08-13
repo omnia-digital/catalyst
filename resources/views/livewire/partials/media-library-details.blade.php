@@ -76,8 +76,8 @@
     @endif
     @once
         <!-- Delete Modal -->
-        <form wire:submit.prevent="deleteMedia">
-            <x-jet-dialog-modal wire:model.defer="showDeleteMediaModal">
+        <form wire:submit="deleteMedia">
+            <x-jet-dialog-modal wire:model="showDeleteMediaModal">
                 <x-slot name="title">Delete Media</x-slot>
                 <x-slot name="content">
                     <div>Are you sure you? This action is irreversible.</div>

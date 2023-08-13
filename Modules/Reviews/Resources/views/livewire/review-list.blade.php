@@ -3,7 +3,7 @@
         <x-library::heading.3 class="text-base-text-color font-semibold">{{ \Trans::get('Reviews') }} <span class="text-gray-400">({{ $model->reviews()->count() }})</span></x-library::heading.3>
         @can('add-review', $model)
             <a href="#"
-            wire:click.prevent="$emitTo('reviews::create-review-modal', 'openReviewModal')"
+            wire:click.prevent="$dispatch('openReviewModal)->to('reviews::create-review-modal)"
             class="text-dark-text-color hover:underline hover:text-primary"
             >
                 {{ \Trans::get('Add Review') }}

@@ -44,7 +44,7 @@
 
         methods: {
             close() {
-                this.$emit('close')
+                this.$dispatch('close')
             },
         }
     })

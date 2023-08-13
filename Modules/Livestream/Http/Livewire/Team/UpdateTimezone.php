@@ -28,7 +28,7 @@ class UpdateTimezone extends Component
 
         $this->currentTeam->update(['timezone' => $this->timezone]);
 
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     public function getCurrentTeamProperty()

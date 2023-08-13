@@ -60,7 +60,7 @@ class VideoSetting extends Component
             }
         });
 
-        $this->emit('saved');
+        $this->dispatch('saved');
         $this->reset('confirmingVideoDeletion');
     }
 

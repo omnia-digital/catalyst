@@ -108,7 +108,7 @@
 
         <div class="flex items-center justify-between flex-1">
 {{--            <x-filament::layouts.app.topbar.breadcrumbs :breadcrumbs="$breadcrumbs" />--}}
-            <livewire:main-nav-left :navigation="\App\Http\Livewire\MainNavigationMenu::getDefaultNavItems()" />
+            <livewire:main-nav-left :navigation="\App\Livewire\MainNavigationMenu::getDefaultNavItems()" />
             <livewire:main-nav-right />
 
 {{--            @livewire('filament.core.global-search')--}}

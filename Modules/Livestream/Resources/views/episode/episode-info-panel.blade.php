@@ -143,7 +143,7 @@
                         <button
                                 type="button"
                                 x-data
-                                x-on:click="$wire.emitTo('attachment.upload-attachment-modal', 'uploadAttachmentShow')"
+                                x-on:click="$dispatch('uploadAttachmentShow')->to('attachment.upload-attachment-modal')"
                         >
                             <x-heroicon-s-plus class="w-6 h-6 text-blue-500 hover:text-blue-700"/>
                         </button>

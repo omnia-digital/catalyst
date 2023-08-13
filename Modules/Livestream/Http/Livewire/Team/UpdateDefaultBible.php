@@ -26,7 +26,7 @@ class UpdateDefaultBible extends Component
 
         $this->currentTeam->update(['default_bible' => $this->defaultBible]);
 
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     public function getBibleOptionsProperty()

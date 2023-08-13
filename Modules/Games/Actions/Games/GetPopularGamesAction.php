@@ -23,7 +23,7 @@ class GetPopularGamesAction
         return collect($popularGames)->filter(function ($game) {
             return $game['rating'];
         })->each(function ($game) {
-            $this->emit('gameWithRatingAdded', [
+            $this->dispatch('gameWithRatingAdded', [
                 'coverImageUrl' => $game['coverImageUrl'],
                 'slug' => $game['slug'],
                 'rating' => $game['rating'] / 100,

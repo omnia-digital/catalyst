@@ -53,7 +53,7 @@ class CreateReviewModal extends Component implements HasForms
             $this->form->fill();
         }
 
-        $this->dispatchBrowserEvent('review-modal-' . $this->model->id, ['type' => 'open']);
+        $this->dispatch('review-modal-' . $this->model->id, type: 'open');
     }
 
     public function createReview()
@@ -63,17 +63,17 @@ class CreateReviewModal extends Component implements HasForms
                 $this->form->getState()
             );
 
-            $this->emitTo('reviews::review-card', 'reviewUpdated');
-            $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review updated'), 'type' => 'success']);
+            $this->dispatch('reviewUpdated')->to('reviews::review-card');
+            $this->dispatch('notify', message: Trans::get('Review updated'), type: 'success');
         } else {
             $this->review = $this->model->reviews()->create(
                 array_merge(['user_id' => auth()->id()], $this->form->getState())
             );
 
-            $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review created'), 'type' => 'success']);
+            $this->dispatch('notify', message: Trans::get('Review created'), type: 'success');
         }
 
-        $this->emit('updateReviews', $this->review);
+        $this->dispatch('updateReviews', review: $this->review);
         $this->closeModal('review-modal-' . $this->model->id);
         $this->reset('body', 'visibility', 'language_id', 'commentable', 'received_product_free', 'recommend');
     }
@@ -83,9 +83,9 @@ class CreateReviewModal extends Component implements HasForms
         if ($this->model->reviewedBy(auth()->user())) {
             $this->review->delete();
 
-            $this->dispatchBrowserEvent('notify', ['message' => Trans::get('Review removed'), 'type' => 'success']);
+            $this->dispatch('notify', message: Trans::get('Review removed'), type: 'success');
 
-            $this->emit('updateReviews');
+            $this->dispatch('updateReviews');
             $this->closeModal('review-modal-' . $this->model->id);
             $this->reset('body', 'visibility', 'language_id', 'commentable', 'received_product_free', 'recommend');
         }

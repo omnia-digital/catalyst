@@ -2,7 +2,7 @@
     <div
             x-data="{
                 show: false,
-                search: @entangle('search')
+                search: @entangle('search').live
             }"
             x-init="() => {
                 $watch('search', value => {

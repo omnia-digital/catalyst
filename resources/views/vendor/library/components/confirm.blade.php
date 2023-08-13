@@ -37,7 +37,7 @@
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             class="flex mx-auto transition-all transform bg-white dark:bg-mirage-900 rounded-lg shadow-xl max-h-full sm:w-full px-4 sm:px-6 pt-4 sm:pt-6 sm:max-w-lg"
         >
-            <form wire:submit.prevent="{{ $submit }}" class="max-h-full flex-1 overflow-y-auto flex flex-col sm:flex-row">
+            <form wire:submit="{{ $submit }}" class="max-h-full flex-1 overflow-y-auto flex flex-col sm:flex-row">
                 <div class="absolute top-0 right-0 pt-4 pr-4">
                     <button x-on:click="show = false" type="button" class="text-gray-400 bg-white rounded-md dark:bg-mirage-900 dark:text-white focus:outline-none" aria-label="Close">
                         <span class="sr-only">Close</span>

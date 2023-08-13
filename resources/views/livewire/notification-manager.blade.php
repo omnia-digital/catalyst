@@ -15,7 +15,7 @@
                                         <x-library::input.label value="{{ $this->getChannelLabel($channel) }}" for="{{ $channel }}"/>
                                         <x-library::input.toggle
                                                 id="{{ $channel }}"
-                                                wire:model.defer="subscriptions.{{ $notification }}.{{ $channel }}"
+                                                wire:model="subscriptions.{{ $notification }}.{{ $channel }}"
                                                 trueBackgroundColor="bg-primary"
                                         />
                                     </div>

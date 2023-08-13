@@ -36,7 +36,7 @@ class DeletePostModal extends Component
             $this->post->delete();
             $this->success('Post deleted successfully');
 
-            $this->emit('postDeleted');
+            $this->dispatch('postDeleted');
         }
 
         $this->confirmingDeletePost = false;

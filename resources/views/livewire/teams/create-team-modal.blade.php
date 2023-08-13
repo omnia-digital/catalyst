@@ -6,7 +6,7 @@
             <div class="flex items-center">
                 <x-library::input.label value="{{ \Trans::get('Name') }}" /><span class="text-red-600 text-sm ml-1">*</span>
             </div>
-            <x-library::input.text wire:model.defer="name" class="bg-secondary" placeholder="{{ \Trans::get('Enter your Team Name') }}" required/>
+            <x-library::input.text wire:model="name" class="bg-secondary" placeholder="{{ \Trans::get('Enter your Team Name') }}" required/>
             <x-library::input.error for="name"/>
         </div>
         <div class="mt-6">
@@ -14,7 +14,7 @@
                 <x-library::input.label value="{{ \Trans::get('What type of Team is this?') }}" /><span class="text-red-600 text-sm ml-1">*</span>
             </div>
             <p class="text-neutral-dark">{{ \Trans::get('(you can choose more than one)') }}</p>
-            <x-library::input.selects wire:model="teamTypes" :options="$teamTags"/>
+            <x-library::input.selects wire:model.live="teamTypes" :options="$teamTags"/>
         </div>
 {{--        <div class="mt-6">--}}
 {{--            // @TODO [Josh] - we can allow the user to choose a resource within the platform like a User, Game, Post, etc.--}}
@@ -24,20 +24,20 @@
 {{--                <x-library::input.label value="{{ \Trans::get('Team Focus') }}" /><span class="text-red-600 text-sm ml-1">*</span>--}}
 {{--            </div>--}}
 {{--            <p class="text-neutral-dark">{{ \Trans::get('Do you want this Team to be focused on something?') }}</p>--}}
-{{--            <x-library::input.selects wire:model="teamFocus" :options="$teamFocuses" max="1"/>--}}
+{{--            <x-library::input.selects wire:model.live="teamFocus" :options="$teamFocuses" max="1"/>--}}
 {{--        </div>--}}
 {{--        <div class="mt-6">--}}
 {{--            <div class="flex items-center">--}}
 {{--                <x-library::input.label value="{{ \Trans::get('Start Date (can be changed later)') }}"/><span class="text-red-600 text-sm ml-1">*</span>--}}
 {{--            </div>--}}
-{{--            <x-library::input.date wire:model.defer="startDate" placeholder="{{ \Trans::get('Team Launch Date') }}"/>--}}
+{{--            <x-library::input.date wire:model="startDate" placeholder="{{ \Trans::get('Team Launch Date') }}"/>--}}
 {{--            <x-library::input.error for="startDate"/>--}}
 {{--        </div>--}}
 {{--        <div class="mt-6">--}}
 {{--            <div class="flex items-center">--}}
 {{--                <x-library::input.label value="{{ \Trans::get('Summary') }}"/><span class="text-red-600 text-sm ml-1">*</span>--}}
 {{--            </div>--}}
-{{--            <x-library::input.textarea wire:model.defer="summary" maxlength="280" placeholder="{{ \Trans::get('Summary') }}" />--}}
+{{--            <x-library::input.textarea wire:model="summary" maxlength="280" placeholder="{{ \Trans::get('Summary') }}" />--}}
 {{--            <x-library::input.error for="summary"/>--}}
 {{--        </div>--}}
 {{--        <div class="mt-6">--}}
@@ -47,9 +47,9 @@
 {{--                <x-library::input.label value="{{ \Trans::get('Banner Image') }}" /><span class="text-red-600 text-sm ml-1">*</span>--}}
 {{--            </div>--}}
 {{--            <div class="flex justify-between items-center relative min-w-0 w-full border-neutral placeholder-neutral-dark bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">--}}
-{{--                <input type="text" class="flex-1 border-none" wire:model="bannerImageName" placeholder="{{ \Trans::get('Upload file for banner') }}" readonly>--}}
+{{--                <input type="text" class="flex-1 border-none" wire:model.live="bannerImageName" placeholder="{{ \Trans::get('Upload file for banner') }}" readonly>--}}
 {{--                <label>--}}
-{{--                    <input type="file" wire:model="bannerImage" hidden required />--}}
+{{--                    <input type="file" wire:model.live="bannerImage" hidden required />--}}
 {{--                    <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-secondary bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">{{ \Trans::get('Browse') }}</span>--}}
 {{--                </label>--}}
 {{--            </div>--}}
@@ -68,9 +68,9 @@
 {{--                    <x-library::input.label value="{{ Trans::get('Team') }} Profile Photo" />--}}
 {{--                </div>--}}
 {{--                <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">--}}
-{{--                    <input type="text" class="flex-1 border-none" wire:model="profilePhotoName" placeholder="Upload file for profile photo" readonly>--}}
+{{--                    <input type="text" class="flex-1 border-none" wire:model.live="profilePhotoName" placeholder="Upload file for profile photo" readonly>--}}
 {{--                    <label>--}}
-{{--                        <input type="file" wire:model="profilePhoto" hidden />--}}
+{{--                        <input type="file" wire:model.live="profilePhoto" hidden />--}}
 {{--                        <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white-text-color bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">Browse</span>--}}
 {{--                    </label>--}}
 {{--                </div>--}}
@@ -89,9 +89,9 @@
 {{--                <x-library::input.label value="{{ \Trans::get('Main Image') }}" /><span class="text-red-600 text-sm ml-1">*</span>--}}
 {{--            </div>--}}
 {{--            <div class="flex justify-between items-center relative min-w-0 w-full border-neutral placeholder-neutral-dark bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">--}}
-{{--                <input type="text" class="flex-1 border-none" wire:model="mainImageName" placeholder="{{ \Trans::get('Upload file for banner') }}" readonly>--}}
+{{--                <input type="text" class="flex-1 border-none" wire:model.live="mainImageName" placeholder="{{ \Trans::get('Upload file for banner') }}" readonly>--}}
 {{--                <label>--}}
-{{--                    <input type="file" wire:model="mainImage" hidden required />--}}
+{{--                    <input type="file" wire:model.live="mainImage" hidden required />--}}
 {{--                    <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-secondary bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">{{ \Trans::get('Browse') }}</span>--}}
 {{--                </label>--}}
 {{--            </div>--}}
@@ -111,7 +111,7 @@
 {{--            <div class="flex justify-between items-center relative min-w-0 w-full border-neutral placeholder-neutral-dark bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">--}}
 {{--                <p class="flex-1 py-2 px-3 text-[1rem] text-base-text-color">{{ \Trans::get('Upload multiple images to show off your team') }}</p>--}}
 {{--                <label>--}}
-{{--                    <input type="file" wire:model="sampleMedia" hidden multiple required />--}}
+{{--                    <input type="file" wire:model.live="sampleMedia" hidden multiple required />--}}
 {{--                    <span class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-secondary bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-light focus:ring-primary">{{ \Trans::get('Browse') }}</span>--}}
 {{--                </label>--}}
 {{--            </div>--}}

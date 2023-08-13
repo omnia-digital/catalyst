@@ -314,14 +314,11 @@
                             images: [],
                             users: {},
                             showMediaManager(file, metadata) {
-                                this.$wire.emitTo(
-                                    'media-manager',
-                                    'media-manager:show',
-                                    {
+                                $dispatch('media-manager:show', {
                                         id: '{{ $editorId }}',
                                         file: file,
                                         metadata: metadata
-                                    }
+                                    })->to('media-manager')
                                 );
                             },
 

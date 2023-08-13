@@ -62,7 +62,7 @@ class MassAttachmentUploadPanel extends Component
         }
 
         $this->reset('massAttachments');
-        $this->emit('clearUploadInput');
+        $this->dispatch('clearUploadInput');
         $this->success('Uploaded attachments successfully');
     }
 

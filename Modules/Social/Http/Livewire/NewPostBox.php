@@ -110,7 +110,7 @@ class NewPostBox extends Component
         }
 
         $this->postSent = true;
-        $this->emit('postAdded', $post);
+        $this->dispatch('postAdded', post: $post);
         $this->reset(['body']);
     }
 

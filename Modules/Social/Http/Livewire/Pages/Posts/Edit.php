@@ -85,7 +85,7 @@ class Edit extends Component
 
         $this->post->fresh();
 
-        $this->emit('refreshComponent');
+        $this->dispatch('refreshComponent');
 
         $this->reset('confirmingMediaRemoval', 'mediaIdBeingRemoved');
 
@@ -121,9 +121,9 @@ class Edit extends Component
 
     private function emitImagesSet(): void
     {
-        $this->dispatchBrowserEvent('update-post:image-set', [
-            'id' => $this->editorId,
-            'images' => $this->images,
-        ]);
+        $this->dispatch('update-post:image-set',
+            id: $this->editorId,
+            images: $this->images
+        );
     }
 }

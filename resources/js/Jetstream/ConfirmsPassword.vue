@@ -80,7 +80,7 @@
             startConfirmingPassword() {
                 axios.get(route('password.confirmation')).then(response => {
                     if (response.data.confirmed) {
-                        this.$emit('confirmed');
+                        this.$dispatch('confirmed');
                     } else {
                         this.confirmingPassword = true;
 
@@ -97,7 +97,7 @@
                 }).then(() => {
                     this.form.processing = false;
                     this.closeModal()
-                    this.$nextTick(() => this.$emit('confirmed'));
+                    this.$nextTick(() => this.$dispatch('confirmed'));
                 }).catch(error => {
                     this.form.processing = false;
                     this.form.error = error.response.data.errors.password[0];

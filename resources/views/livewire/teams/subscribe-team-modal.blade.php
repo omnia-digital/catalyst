@@ -19,7 +19,7 @@
                     @else
                         <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
                             @foreach ($teamPlans as $teamPlan)
-                                <x-library::input.radio-card wire:model="plan" wire:key="team-plan-{{ $teamPlan['stripe_id'] }}" :value="$teamPlan['stripe_id']">
+                                <x-library::input.radio-card wire:model.live="plan" wire:key="team-plan-{{ $teamPlan['stripe_id'] }}" :value="$teamPlan['stripe_id']">
                                     <x-slot:title>
                                         <div class="flex items-center justify-between">
                                             <p>{{ $teamPlan['name'] }}</p>

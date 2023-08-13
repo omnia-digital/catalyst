@@ -6,11 +6,11 @@ trait WithSlideUp
 {
     public function showSlideUp()
     {
-        $this->dispatchBrowserEvent('show-slide-up');
+        $this->dispatch('show-slide-up');
     }
 
     public function hideSlideUp()
     {
-        $this->dispatchBrowserEvent('hide-slide-up');
+        $this->dispatch('hide-slide-up');
     }
 }

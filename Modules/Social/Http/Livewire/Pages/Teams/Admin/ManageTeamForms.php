@@ -117,7 +117,7 @@ class ManageTeamForms extends Component
 
         $this->closeModal('form-notification-modal');
 
-        $this->emit('notificationSaved');
+        $this->dispatch('notificationSaved');
     }
 
     public function scheduleNotification(FormNotification $formNotification)

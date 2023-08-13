@@ -86,7 +86,7 @@ class PostCard extends Component
      */
     public function confirmDeletePost()
     {
-        $this->emitTo('social::delete-post-modal', 'openDeletePostModal', $this->post->id);
+        $this->dispatch('openDeletePostModal', postId: $this->post->id)->to('social::delete-post-modal');
     }
 
     public function render()

@@ -40,7 +40,7 @@ class GetRecentlyReviewedGamesAction
                 return $game['rating'];
             })
             ->each(function ($game) {
-                $this->emit('reviewGameWithRatingAdded', [
+                $this->dispatch('reviewGameWithRatingAdded', [
                     'slug' => 'review_' . $game['slug'],
                     'rating' => $game['rating'] / 100,
                 ]);
