@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Livewire\Pages\Companies\Index as AllCompanies;
-use App\Http\Livewire\Pages\Teams\Discover as DiscoverTeams;
-use App\Http\Livewire\Pages\Teams\Index as AllTeams;
+use App\Livewire\Pages\Companies\Index as AllCompanies;
+use App\Livewire\Pages\Teams\Discover as DiscoverTeams;
+use App\Livewire\Pages\Teams\Index as AllTeams;
 use Illuminate\Support\Facades\Route;
 use Modules\Social\Http\Livewire\Home;
 use Modules\Social\Http\Livewire\Pages\Bookmarks\Index;

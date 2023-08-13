@@ -24,7 +24,7 @@ trait WithPostEditor
 
     public function emitPostValidated(Validator $validator)
     {
-        $this->dispatch('validationFailed', errors: $validator->errors())->to('social::post-editor')
+        $this->dispatch('validationFailed', errors: $validator->errors())->to('social::post-editor');
     }
 
     public function emitPostSaved(string $editorId)

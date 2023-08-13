@@ -88,7 +88,7 @@ class TeamCalendarList extends Component
     {
         $this->selectTeam($teamId);
 
-        $this->dispatch('select-event', team: $this->team]);
+        $this->dispatch('select-event', team: $this->team);
     }
 
     public function moreInfo()

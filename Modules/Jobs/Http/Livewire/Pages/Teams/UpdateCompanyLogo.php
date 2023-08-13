@@ -51,7 +51,7 @@ class UpdateCompanyLogo extends Component
     {
         auth()->user()->currentTeam->deleteLogo();
 
-        $this->dispatch('logo-removed')->self;
+        $this->dispatch('logo-removed')->self();
     }
 
     public function render()
