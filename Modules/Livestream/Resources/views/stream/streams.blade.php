@@ -42,7 +42,7 @@
                                             @if ($stream->isActive())
                                                 <x-heroicon-o-check class="w-5 h-5 text-green-500"/>
                                             @else
-                                                <x-heroicon-o-x class="w-5 h-5 text-red-500"/>
+                                                <x-library::icons.icon name="x-mark" class="w-5 h-5 text-red-500"/>
                                             @endif
                                         </x-table.cell>
                                         <x-table.cell class="text-right font-medium flex-1 items-center space-x-2">

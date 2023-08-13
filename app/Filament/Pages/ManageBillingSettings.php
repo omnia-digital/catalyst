@@ -30,7 +30,7 @@ class ManageBillingSettings extends SettingsPage
         ];
     }
 
-    protected function getHeaderWidgetsColumns(): int|array
+    public function getHeaderWidgetsColumns(): int|array
     {
         return 3;
     }

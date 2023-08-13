@@ -84,7 +84,7 @@ class NewPostBox extends Component
             [
                 'name' => 'I feel nothing',
                 'value' => null,
-                'icon' => 'heroicon-o-x',
+                'icon' => 'x-mark',
                 'iconColor' => 'text-light-text-color',
                 'bgColor' => 'bg-transparent',
             ],

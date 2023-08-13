@@ -73,13 +73,13 @@
                                             <button type="button"
                                                 wire:click="addTeamMember({{ $invitation->id }})"
                                                 class="flex items-center text-sm px-6 rounded-md font-semibold hover:underline">
-                                                <x-heroicon-o-check class="w-4 h-4 mr-2" />
+                                                <x-library::icons.icon name="check" class="w-4 h-4 mr-2" />
                                                 Accept
                                             </button>
                                             <button type="button"
                                                 wire:click="cancelTeamInvitation({{ $invitation->id }})"
                                                 class="flex items-center text-sm px-6 rounded-md font-semibold hover:underline">
-                                                <x-heroicon-o-x class="w-4 h-4 mr-2" />
+                                                <x-library::icons.icon name="x-mark" class="w-4 h-4 mr-2" />
                                                 Decline
                                             </button>
                                         </div>

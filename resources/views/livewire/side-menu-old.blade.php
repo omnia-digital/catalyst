@@ -13,7 +13,7 @@
                             wire:click="closeMobileMenu"
                         >
                             <span class="sr-only">Close sidebar</span>
-                            <x-heroicon-o-x class="text-white-text-color"/>
+                            <x-library::icons.icon name="x-mark" class="text-white-text-color"/>
                         </button>
                     </div>
                     <div class="flex-shrink-0 flex items-center px-4">

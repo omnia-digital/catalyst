@@ -31,6 +31,7 @@ use Modules\Social\Traits\HasAssociations;
 use Modules\Social\Traits\HasHandle;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
+use Overtrue\LaravelFollow\Traits\Followable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Models\Role;
@@ -40,14 +41,13 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
 use Trans;
-use Wimil\Followers\Traits\CanBeFollowed;
 
 /**
  * Teams are just Teams
  */
 class Team extends JetstreamTeam implements HasMedia, Searchable
 {
-    use HasFactory, Notifiable, Likable, Postable, CanBeFollowed, Awardable, Reviewable, HasProfilePhoto, HasSlug, HasHandle, HasLocation, HasTeamTypeTags, InteractsWithMedia, HasAssociations, HasJobs;
+    use HasFactory, Notifiable, Likable, Postable, Followable, Awardable, Reviewable, HasProfilePhoto, HasSlug, HasHandle, HasLocation, HasTeamTypeTags, InteractsWithMedia, HasAssociations, HasJobs;
 
     use HasTeamTags, HasTags {
         HasTeamTags::tags insteadof HasTags;

@@ -10,7 +10,7 @@
                     class="absolute -right-2 -top-2 p-1 inline-flex items-center text-sm rounded-full group hover:bg-tertiary whitespace-nowrap bg-neutral-hover hover:underline"
                     wire:click="removeApplication"
                 >
-                    <x-heroicon-o-x class="w-4 h-4 text-black group-hover:text-white" />
+                    <x-library::icons.icon name="x-mark" class="w-4 h-4 text-black group-hover:text-white" />
                     <span class="sr-only">{{ \Trans::get('Remove Application') }}</span>
                 </button>
             </div>

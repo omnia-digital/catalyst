@@ -68,7 +68,6 @@
     --h5-color: var(--heading-default-color);
 }
 
-@use '../../vendor/filament/forms/dist/module.esm.css';
 
 
 @layer utilities {

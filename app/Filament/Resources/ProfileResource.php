@@ -6,9 +6,9 @@ use App\Filament\Resources\ProfileResource\Pages\CreateProfile;
 use App\Filament\Resources\ProfileResource\Pages\EditProfile;
 use App\Filament\Resources\ProfileResource\Pages\ManageProfiles;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
@@ -85,7 +85,7 @@ class ProfileResource extends Resource
         ];
     }
 
-    protected static function getNavigationLabel(): string
+    public static function getNavigationLabel(): string
     {
         if (auth()->user()->is_admin) {
             return 'Contacts (Profiles)';

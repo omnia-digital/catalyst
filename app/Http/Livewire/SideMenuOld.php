@@ -28,13 +28,13 @@ class SideMenuOld extends Component
             [
                 'label' => 'Messages',
                 'name' => 'messages',
-                'icon' => 'heroicon-o-mail',
+                'icon' => 'heroicon-o-envelope',
                 'current' => false,
             ],
             [
                 'label' => 'Teams',
                 'name' => 'social.teams.home',
-                'icon' => 'heroicon-o-collection',
+                'icon' => 'heroicon-o-rectangle-stack',
                 'current' => false,
             ],
             [
@@ -52,7 +52,7 @@ class SideMenuOld extends Component
             [
                 'label' => 'Marketplace',
                 'name' => 'marketplace',
-                'icon' => 'heroicon-o-office-building',
+                'icon' => 'heroicon-o-building-office',
                 'current' => false,
             ],
         ];

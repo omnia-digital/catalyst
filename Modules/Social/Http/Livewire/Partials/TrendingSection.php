@@ -44,9 +44,9 @@ class TrendingSection extends Component
 
     public function getRowsProperty()
     {
-        return $this->cache(function () {
+//        return $this->cache(function () {
             return $this->rowsQuery->paginate(5);
-        });
+//        });
     }
 
     public function render()

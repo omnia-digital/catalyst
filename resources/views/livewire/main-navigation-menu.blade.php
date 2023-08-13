@@ -27,8 +27,8 @@
             <div class="flex w-full justify-between h-full items-center pl-4">
                 <div class="w-full grid grid-cols-12 gap-4">
                     <!-- Main nav header -->
-                    <livewire:main-nav-left :navigation="$navigation"/>
-                    <livewire:main-nav-right/>
+{{--                    <livewire:main-nav-left :navigation="$navigation"/>--}}
+{{--                    <livewire:main-nav-right/>--}}
                 </div>
             </div>
         </div>

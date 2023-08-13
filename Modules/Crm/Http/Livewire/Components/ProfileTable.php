@@ -3,6 +3,7 @@
 namespace Modules\Crm\Http\Livewire\Components;
 
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Contracts\TranslatableContentDriver;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
@@ -105,5 +106,10 @@ class ProfileTable extends Component implements HasTable
         return [
             DeleteBulkAction::make(),
         ];
+    }
+
+    public function makeFilamentTranslatableContentDriver(): ?TranslatableContentDriver
+    {
+        // TODO: Implement makeFilamentTranslatableContentDriver() method.
     }
 }

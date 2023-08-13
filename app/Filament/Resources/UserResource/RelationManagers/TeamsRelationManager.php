@@ -3,10 +3,11 @@
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Trans;
 
@@ -16,12 +17,12 @@ class TeamsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    public static function getTitle(): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return Trans::get(Str::headline(static::getPluralModelLabel()));
     }
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -31,7 +32,7 @@ class TeamsRelationManager extends RelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

@@ -39,7 +39,7 @@
             class="absolute top-1 right-0 -mr-14 p-1 pt-0"
         >
             <button x-on:click="show = false" type="button" class="h-12 w-12 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white">
-                <x-heroicon-o-x class="h-6 w-6 text-white"/>
+                <x-library::icons.icon name="x-mark" class="h-6 w-6 text-white"/>
                 <span class="sr-only">Close sidebar</span>
             </button>
         </div>

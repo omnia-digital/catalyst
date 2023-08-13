@@ -23,7 +23,7 @@
                                'group text-center
                                text-base-text-color py-3' }}">
                 <div class="text-xs font-medium text-center py-0 leading-2">
-                    <x-library::icons.icon name="heroicon-o-menu" size="w-8 h-8" class="text-light-text-color
+                    <x-library::icons.icon name="o-menu" size="w-8 h-8" class="text-light-text-color
                         group-hover:text-light-text-color inline text-center"/>
                     <br/>
                     <span class="text-light-text-color group-hover:text-light-text-color text-center inline"
@@ -50,7 +50,7 @@
                             @click="open = false"
                     >
                         <span class="sr-only">Close sidebar</span>
-                        <x-heroicon-o-x class="h-6 w-6 text-white-text-color"/>
+                        <x-library::icons.icon name="x-mark" class="h-6 w-6 text-white-text-color"/>
                     </button>
                 </div>
                 <div class="flex-1 h-0 overflow-y-auto">

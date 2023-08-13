@@ -164,7 +164,7 @@
                                                         <x-heroicon-o-download class="w-5 h-5 font-medium text-indigo-600 hover:text-indigo-500"/>
                                                     </button>
                                                     <button type="button" wire:click="showDeleteAttachmentModal('{{ $attachment->uuid }}')">
-                                                        <x-heroicon-o-x class="w-5 h-5 font-medium text-red-600 hover:text-red-500"/>
+                                                        <x-library::icons.icon name="x-mark" class="w-5 h-5 font-medium text-red-600 hover:text-red-500"/>
                                                     </button>
                                                 </div>
                                             </div>
@@ -183,7 +183,7 @@
                                                         <x-heroicon-o-external-link class="w-5 h-5 font-medium text-indigo-600 hover:text-indigo-500"/>
                                                     </a>
                                                     <button type="button" wire:click="showDeleteAttachmentModal('{{ $staticAttachment->uuid }}')">
-                                                        <x-heroicon-o-x class="w-5 h-5 font-medium text-red-600 hover:text-red-500"/>
+                                                        <x-library::icons.icon name="x-mark" class="w-5 h-5 font-medium text-red-600 hover:text-red-500"/>
                                                     </button>
                                                 </div>
                                             </div>

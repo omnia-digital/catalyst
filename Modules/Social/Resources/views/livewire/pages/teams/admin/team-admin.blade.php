@@ -77,7 +77,7 @@
                                                     <div class="w-40 h-32 mr-2 mt-2 flex justify-center items-center bg-secondary relative border-4 border-dashed border-neutral-dark">
                                                         <img src="{{ $media->getFullUrl() }}" title="{{ $media->name }}" alt="{{ $media->name }}" class="max-w-[152px] max-h-[120px]">
                                                         <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="confirmRemoval({{ $media->id }})">
-                                                            <x-heroicon-o-x class="w-6 h-6"/>
+                                                            <x-library::icons.icon name="x-mark" class="w-6 h-6"/>
                                                         </button>
                                                     </div>
                                                 @endforeach
@@ -97,7 +97,7 @@
                                                         <img src="{{ $media->temporaryUrl() }}" title="{{ $sampleMediaNames[$key] }}" alt="{{ $sampleMediaNames[$key] }}"
                                                              class="max-w-[152px] max-h-[120px]">
                                                         <button type="button" class="p-2 bg-neutral-dark/75 absolute top-0 right-0 hover:bg-neutral-dark" wire:click="removeNewMedia({{ $key }})">
-                                                            <x-heroicon-o-x class="w-6 h-6"/>
+                                                            <x-library::icons.icon name="x-mark" class="w-6 h-6"/>
                                                         </button>
                                                     </div>
                                                 @endforeach
@@ -214,7 +214,7 @@
                                                 wire:click="removeTag('{{ $tag->name }}')"
                                                 class="absolute -top-2 -right-2 p-1 rounded-full bg-white"
                                             >
-                                                <x-library::icons.icon name="heroicon-o-x" color="text-danger-600" class="h-3 w-3"/>
+                                                <x-library::icons.icon name="x-mark" color="text-danger-600" class="h-3 w-3"/>
                                             </button>
                                         </div>
                                     @endforeach

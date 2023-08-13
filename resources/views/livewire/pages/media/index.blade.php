@@ -373,7 +373,7 @@
                                                 type="button"
                                                 class="absolute -top-2 -right-2 z-10 bg-red-100 rounded-full p-1 inline-flex items-center justify-center hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500"
                                         >
-                                            <x-heroicon-o-x class="w-5 h-5 text-red-500 hover:text-red-400"/>
+                                            <x-library::icons.icon name="x-mark" class="w-5 h-5 text-red-500 hover:text-red-400"/>
                                         </button>
 
                                         <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden">

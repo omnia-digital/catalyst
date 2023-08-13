@@ -3,6 +3,7 @@
 namespace Modules\Crm\Http\Livewire\Components;
 
 use Ariaieboy\FilamentJalaliDatetime\JalaliDateTimeColumn;
+use Filament\Support\Contracts\TranslatableContentDriver;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
@@ -71,5 +72,10 @@ class ReviewTable extends Component implements HasTable
         return [
             DeleteBulkAction::make(),
         ];
+    }
+
+    public function makeFilamentTranslatableContentDriver(): ?TranslatableContentDriver
+    {
+        // TODO: Implement makeFilamentTranslatableContentDriver() method.
     }
 }

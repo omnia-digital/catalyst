@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Team\HasTeams;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -29,11 +30,12 @@ use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
 use Modules\Social\Traits\HasHandle;
+use Overtrue\LaravelFollow\Traits\Followable;
+use Overtrue\LaravelFollow\Traits\Follower;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasRoles;
 use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable;
-use Wimil\Followers\Traits\Followable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
@@ -43,6 +45,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         SoftDeletes,
         HasFactory,
         HasBookmarks,
+        Follower,
         Followable,
         Awardable,
         HasHandle,
@@ -120,7 +123,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             })->first();
     }
 
-    public function canAccessFilament(): bool
+    public function canAccessPanel(Panel $panel): bool
     {
         return true;
         if ($this->is_admin) {

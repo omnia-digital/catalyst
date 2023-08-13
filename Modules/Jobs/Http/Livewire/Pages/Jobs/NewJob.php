@@ -12,7 +12,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 use Laravel\Jetstream\Jetstream;
 use Livewire\Component;
-use Livewire\ComponentConcerns\ValidatesInput;
 use Livewire\WithFileUploads;
 use Modules\Jobs\Actions\Fortify\CreateNewUser;
 use Modules\Jobs\Data\Transaction;
@@ -32,7 +31,7 @@ use Modules\Jobs\Support\Livewire\WithNotification;
 
 class NewJob extends Component
 {
-    use WithNotification, WithFileUploads, ValidatesInput;
+    use WithNotification, WithFileUploads;
 
     public $title;
     public $description;

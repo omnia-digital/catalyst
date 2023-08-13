@@ -9,9 +9,9 @@ use App\Filament\Resources\FormSubmissionResource\Pages\ViewFormSubmission;
 use Closure;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -114,12 +114,12 @@ class FormSubmissionResource extends Resource
         ];
     }
 
-    protected static function getNavigationBadge(): ?string
+    public static function getNavigationBadge(): ?string
     {
         return static::getEloquentQuery()->get()->count();
     }
 
-    protected static function getNavigationBadgeColor(): ?string
+    public static function getNavigationBadgeColor(): ?string
     {
         return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }

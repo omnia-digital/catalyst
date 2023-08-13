@@ -16,7 +16,7 @@
                         @click="open = false"
                     >
                         <span class="sr-only">Close sidebar</span>
-                        <x-heroicon-o-x class="h-6 w-6 text-white-text-color"/>
+                        <x-library::icons.icon name="x-mark" class="h-6 w-6 text-white-text-color"/>
                     </button>
                 </div>
                 <div class="flex-shrink-0 flex items-center px-4">

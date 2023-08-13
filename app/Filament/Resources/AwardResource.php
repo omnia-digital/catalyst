@@ -5,16 +5,16 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AwardResource\Pages;
 use App\Models\Award;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Trans;
 
 class AwardResource extends Resource
 {
     protected static ?string $model = Award::class;
-    protected static ?string $navigationIcon = 'heroicon-o-badge-check';
+    protected static ?string $navigationIcon = 'heroicon-o-check-badge';
 
     public static function form(Form $form): Form
     {
@@ -70,7 +70,7 @@ class AwardResource extends Resource
         ];
     }
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return Trans::get('Teams');
     }

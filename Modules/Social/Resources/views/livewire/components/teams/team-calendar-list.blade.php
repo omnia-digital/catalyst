@@ -68,7 +68,7 @@
 		                    'text-light-text-color hover:text-primary active:text-primary focus:text-primary'
                             ])>
                             <span class="sr-only" x-text="'Close Details'"></span>
-                            <span><x-heroicon-o-x class="h-6 w-6" /></span>
+                            <span><x-library::icons.icon name="x-mark" class="h-6 w-6" /></span>
                         </a>
                 </div>
             </div>

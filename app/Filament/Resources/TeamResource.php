@@ -7,9 +7,9 @@ use App\Filament\Resources\TeamResource\RelationManagers;
 use App\Models\Team;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Trans;
@@ -17,7 +17,7 @@ use Trans;
 class TeamResource extends Resource
 {
     protected static ?string $model = Team::class;
-    protected static ?string $navigationIcon = 'heroicon-o-globe';
+    protected static ?string $navigationIcon = 'heroicon-o-globe-americas';
 
     public static function getGloballySearchableAttributes(): array
     {
@@ -98,12 +98,12 @@ class TeamResource extends Resource
         ];
     }
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return Trans::get('Teams');
     }
 
-    protected static function getNavigationLabel(): string
+    public static function getNavigationLabel(): string
     {
         return Trans::get('Teams');
     }
@@ -117,14 +117,14 @@ class TeamResource extends Resource
     //        }
     //    }
 
-    protected static function getNavigationBadge(): ?string
+    public static function getNavigationBadge(): ?string
     {
         return static::getEloquentQuery()
             ->get()
             ->count();
     }
 
-    protected static function getNavigationBadgeColor(): ?string
+    public static function getNavigationBadgeColor(): ?string
     {
         return static::getEloquentQuery()
             ->get()

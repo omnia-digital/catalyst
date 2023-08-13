@@ -13,7 +13,7 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        @livewireStyles
+        @filamentStyles
         @libraryStyles
 
         @stack('styles')
@@ -39,8 +39,8 @@
         @stack('modals')
         @stack('scripts')
 
-        <x-impersonate::banner/>
-        @livewireScripts
+{{--        <x-impersonate::banner/>--}}
+        @filamentScripts
         @livewireCalendarScripts
 
         @env ('local')

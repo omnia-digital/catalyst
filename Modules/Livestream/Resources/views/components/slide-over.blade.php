@@ -58,7 +58,8 @@
                                     class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                 >
                                     <span class="sr-only">Close panel</span>
-                                    <x-heroicon-o-x class="h-6 w-6"/>
+
+                                    <x-library::icons.icon name="x-mark" class="h-6 w-6"/>
                                 </button>
                             </div>
                         </div>

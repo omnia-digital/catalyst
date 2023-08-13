@@ -75,7 +75,7 @@
                                                 wire:click="confirmFormNotificationRemoval('{{ $notification->id }}')"
                                                 class="absolute -top-2 -right-2 p-1 rounded-full bg-white group hover:bg-primary"
                                             >
-                                                <x-library::icons.icon name="heroicon-o-x" color="text-primary-600 group-hover:text-white" class="h-3 w-3"/>
+                                                <x-library::icons.icon name="x-mark" color="text-primary-600 group-hover:text-white" class="h-3 w-3"/>
                                             </button>
                                         </div>
                                     @endforeach

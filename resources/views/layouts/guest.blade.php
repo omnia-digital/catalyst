@@ -13,7 +13,7 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        @livewireStyles
+        @filamentStyles
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
@@ -22,6 +22,6 @@
         <div class="font-sans text-dark-text-color antialiased">
             {{ $slot }}
         </div>
-        @livewireScripts
+        @filamentScripts
     </body>
 </html>

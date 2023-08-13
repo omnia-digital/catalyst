@@ -22,7 +22,7 @@ class SideMenu extends Component
                 [
                     'label' => 'No Module Navigation Items',
                     'name' => 'social.home',
-                    'icon' => 'heroicon-o-x',
+                    'icon' => 'x-mark',
                     'current' => false,
                 ],
             ];
