@@ -18,13 +18,13 @@
                     <div class="col-span-4 sm:col-span-2">
                         <x-library::input.label value="Email" class="inline"/>
                         <span class="text-red-600 text-sm">*</span>
-                        <x-library::input.text id="email" wire:model="email" required/>
+                        <x-library::input.text id="email" wire:model.live="email" required/>
                         <x-library::input.error for="email"/>
                     </div>
                     <div class="col-span-4 sm:col-span-2">
                         <x-library::input.label value="Username" class="inline"/>
                         <span class="text-red-600 text-sm">*</span>
-                        <x-library::input.text id="handle" wire:model="handle" required/>
+                        <x-library::input.text id="handle" wire:model.live="handle" required/>
                         <x-library::input.error for="handle"/>
                     </div>
                 </div>
@@ -45,20 +45,20 @@
                         <div class="mt-6 grid grid-cols-4 gap-6">
                             <div class="col-span-4">
                                 <x-jet-label for="current_password" value="{{ \Trans::get('Current Password') }}"/>
-                                <x-jet-input id="current_password" type="password" class="mt-1 block w-full" wire:model="state.current_password"
+                                <x-jet-input id="current_password" type="password" class="mt-1 block w-full" wire:model.live="state.current_password"
                                              autocomplete="current-password"/>
                                 <x-jet-input-error for="current_password" class="mt-2"/>
                             </div>
 
                             <div class="col-span-4">
                                 <x-jet-label for="password" value="{{ \Trans::get('New Password') }}"/>
-                                <x-jet-input id="password" type="password" class="mt-1 block w-full" wire:model="state.password" autocomplete="new-password"/>
+                                <x-jet-input id="password" type="password" class="mt-1 block w-full" wire:model.live="state.password" autocomplete="new-password"/>
                                 <x-jet-input-error for="password" class="mt-2"/>
                             </div>
 
                             <div class="col-span-4">
                                 <x-jet-label for="password_confirmation" value="{{ \Trans::get('Confirm Password') }}"/>
-                                <x-jet-input id="password_confirmation" type="password" class="mt-1 block w-full" wire:model="state.password_confirmation"
+                                <x-jet-input id="password_confirmation" type="password" class="mt-1 block w-full" wire:model.live="state.password_confirmation"
                                              autocomplete="new-password"/>
                                 <x-jet-input-error for="password_confirmation" class="mt-2"/>
                             </div>

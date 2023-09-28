@@ -48,7 +48,7 @@
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
                                 </div>
-                                <x-library::input.text type="search" wire:model.debounce.500ms="filters.search" placeholder="Search Media"
+                                <x-library::input.text type="search" wire:model.live.debounce.500ms="filters.search" placeholder="Search Media"
                                                        class="px-4 block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"/>
                             </div>
                             <a type="button" class="whitespace-nowrap hover:underline cursor-pointer" wire:click="toggleShowFilters">@if ($showFilters)
@@ -79,21 +79,21 @@
                         <div class=" {{ ($showFilters) ? '' : 'hidden' }} bg-secondary p-4 rounded flex relative flex-wrap">
                             <div class="w-1/2 pl-2 space-y-4">
                                 <label class="block" for="filter-attached-types">Attached Type</label>
-                                <x-library::input.select wire:model="filters.attached_type" id="filter-attached-types" :options="$this->getAttachedTypes()" placeholder="All"
+                                <x-library::input.select wire:model.live="filters.attached_type" id="filter-attached-types" :options="$this->getAttachedTypes()" placeholder="All"
                                                          :enableDefaultOption="true"/>
 
                                 <label class="block" for="filter-collection-names">Collection Name</label>
-                                <x-library::input.select wire:model="filters.collection" id="filter-collection-names" :options="$this->getCollectionNames()" placeholder="All"
+                                <x-library::input.select wire:model.live="filters.collection" id="filter-collection-names" :options="$this->getCollectionNames()" placeholder="All"
                                                          :enableDefaultOption="true"/>
 
                             </div>
 
                             <div class="w-1/2 pl-2 space-y-4">
                                 <label class="block" for="filter-date-min">Minimum Date</label>
-                                <x-library::input.date wire:model="filters.date_min" id="filter-date-min"/>
+                                <x-library::input.date wire:model.live="filters.date_min" id="filter-date-min"/>
 
                                 <label class="block" for="filter-date-max">Maximum Date</label>
-                                <x-library::input.date wire:model="filters.date_max" id="filter-date-max"/>
+                                <x-library::input.date wire:model.live="filters.date_max" id="filter-date-max"/>
 
                             </div>
                             <a type="button" wire:click="resetFilters" class="ml-auto p-4 hover:underline cursor-pointer">Reset Filters</a>
@@ -108,7 +108,7 @@
                                 </label>
 
                                 <div class="w-20">
-                                    <x-library::input.select class="" wire:model="perPage" id="perPage" :showDefaultOption="false" :options="[10 => '10', 25 => '25', 50 => '50',]"/>
+                                    <x-library::input.select class="" wire:model.live="perPage" id="perPage" :showDefaultOption="false" :options="[10 => '10', 25 => '25', 50 => '50',]"/>
                                 </div>
                             </div>
                             <!-- Media Gallery -->
@@ -132,7 +132,7 @@
                                                 <tr>
                                                     <th scope="col"
                                                         class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-black sm:pl-6">
-                                                        <x-library::input.checkbox wire:model="selectPage"/>
+                                                        <x-library::input.checkbox wire:model.live="selectPage"/>
                                                     </th>
                                                     <th scope="col" class="relative py-3.5 pl-3 pr-4">
                                                         <span class="sr-only">Preview</span>
@@ -176,7 +176,7 @@
                                                 @foreach ($mediaList as $media)
                                                     <tr>
                                                         <td class="py-3.5 pl-4 pr-3 sm:pl-6">
-                                                            <x-library::input.checkbox wire:model="selected" value="{{ $media->id }}"/>
+                                                            <x-library::input.checkbox wire:model.live="selected" value="{{ $media->id }}"/>
                                                         </td>
                                                         <td class="relative py-3.5 pl-3 pr-4">
                                                             <x-attachment-icon for="{{ $media->mime_type }}"/>
@@ -244,8 +244,8 @@
             </main>
 
             <!-- Delete Modal -->
-            <form wire:submit.prevent="deleteSelected">
-                <x-jet-dialog-modal wire:model.defer="showDeleteModal">
+            <form wire:submit="deleteSelected">
+                <x-jet-dialog-modal wire:model="showDeleteModal">
                     <x-slot name="title">Delete Media</x-slot>
                     <x-slot name="content">
                         <div>Are you sure you? This action is irreversible.</div>
@@ -263,8 +263,8 @@
             </form>
 
             <!-- Save Media Modal -->
-            <form wire:submit.prevent="saveMedia">
-                <x-jet-dialog-modal wire:model.defer="showEditModal">
+            <form wire:submit="saveMedia">
+                <x-jet-dialog-modal wire:model="showEditModal">
                     <x-slot name="title">Edit Media</x-slot>
                     <x-slot name="content">
                         <div>
@@ -276,17 +276,17 @@
                         </div>
                         <div class="mt-4">
                             <x-library::input.label value="Name"/>
-                            <x-library::input.text id="editingMedia.name" wire:model.defer="editingMedia.name" placeholder="Name"/>
+                            <x-library::input.text id="editingMedia.name" wire:model="editingMedia.name" placeholder="Name"/>
                             <x-jet-input-error for="editingMedia.name" class="mt-2"/>
                         </div>
                         <div class="mt-4">
                             <x-library::input.label value="Attached to Type"/>
-                            <x-library::input.select class="" wire:model="editingMedia.model_type" id="editingMedia.model_type" :showDefaultOption="false" :options="$availableModelTypes"/>
+                            <x-library::input.select class="" wire:model.live="editingMedia.model_type" id="editingMedia.model_type" :showDefaultOption="false" :options="$availableModelTypes"/>
                             <x-jet-input-error for="editingMedia.model_type" class="mt-2"/>
                         </div>
                         <div class="mt-4">
                             <x-library::input.label value="Attached to"/>
-                            <x-library::input.select class="" wire:model="editingMedia.model_id" id="editingMedia.model_id" :showDefaultOption="false" :options="$this->availableModelIds"/>
+                            <x-library::input.select class="" wire:model.live="editingMedia.model_id" id="editingMedia.model_id" :showDefaultOption="false" :options="$this->availableModelIds"/>
                             <x-jet-input-error for="editingMedia.model_id" class="mt-2"/>
                         </div>
                     </x-slot>
@@ -303,8 +303,8 @@
             </form>
 
             <!-- Create Media Modal -->
-            <form wire:submit.prevent="createMedia">
-                <x-jet-dialog-modal wire:model.defer="showCreateModal">
+            <form wire:submit="createMedia">
+                <x-jet-dialog-modal wire:model="showCreateModal">
                     <x-slot name="title">Create Media</x-slot>
                     <x-slot name="content">
                         <div

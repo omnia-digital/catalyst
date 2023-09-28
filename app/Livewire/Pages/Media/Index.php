@@ -145,7 +145,7 @@ class Index extends Component
 
         $this->selectedMedia = $media;
 
-        $this->emitTo('partials.media-library-details', 'mediaSelected', $media);
+        $this->dispatch('mediaSelected', $media)->to('partials.media-library-details');
     }
 
     public function deselectMedia()
@@ -228,9 +228,9 @@ class Index extends Component
 
     private function emitImagesSet(): void
     {
-        $this->dispatchBrowserEvent('media-library:image-set', [
-            'id' => $this->editorId,
-            'images' => $this->images,
-        ]);
+        $this->dispatch('media-library:image-set',
+            id: $this->editorId,
+            images: $this->images,
+        );
     }
 }

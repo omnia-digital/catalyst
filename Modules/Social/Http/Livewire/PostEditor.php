@@ -30,11 +30,11 @@ class PostEditor extends Component
 
     public function submit()
     {
-        $this->emitUp('post-editor:submitted', [
-            'id' => $this->editorId,
-            'content' => $this->content,
-            'images' => $this->images,
-        ]);
+        $this->dispatch('post-editor:submitted',
+            id: $this->editorId,
+            content: $this->content,
+            images: $this->images
+        );
     }
 
     public function handleValidationFailed($errorBag)

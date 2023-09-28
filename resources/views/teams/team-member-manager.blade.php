@@ -23,7 +23,7 @@
                     <!-- Member Email -->
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="email" value="{{ \Trans::get('Email') }}" />
-                        <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model="addTeamMemberForm.email" />
+                        <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.live="addTeamMemberForm.email" />
                         <x-jet-input-error for="email" class="mt-2" />
                     </div>
 
@@ -63,7 +63,7 @@
                     <!-- Invitation Message -->
                     {{-- <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="message" value="{{ \Trans::get('Message') }}" />
-                        <x-jet-input id="message" type="text" class="mt-1 block w-full" wire:model="addTeamMemberForm.message" />
+                        <x-jet-input id="message" type="text" class="mt-1 block w-full" wire:model.live="addTeamMemberForm.message" />
                         <x-jet-input-error for="message" class="mt-2" />
                     </div> --}}
                 </x-slot>

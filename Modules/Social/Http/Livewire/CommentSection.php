@@ -63,7 +63,7 @@ class CommentSection extends Component
         $this->post->user->notify(new NewCommentNotification($comment, auth()->user()));
 
         $this->loadComments();
-        $this->emitPostSaved($data['id']);
+        $this->dispatch('post-saved', $data['id']);
     }
 
     public function render()

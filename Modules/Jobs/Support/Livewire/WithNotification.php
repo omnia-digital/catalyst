@@ -9,11 +9,11 @@ trait WithNotification
      */
     public function success(string $message, ?string $actionUrl = null)
     {
-        $this->dispatch('notify', [
-            'message' => $message,
-            'type' => 'success',
-            'action' => $actionUrl,
-        ]);
+        $this->dispatch('notify',
+            message: $message,
+            type: 'success',
+            action: $actionUrl
+        );
     }
 
     /**

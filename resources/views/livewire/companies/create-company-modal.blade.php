@@ -6,7 +6,7 @@
             <div class="flex items-center">
                 <x-library::input.label value="{{ \Trans::get('Name') }}" /><span class="text-red-600 text-sm ml-1">*</span>
             </div>
-            <x-library::input.text wire:model="name" class="bg-secondary" placeholder="{{ \Trans::get('Enter your Company Name') }}" required/>
+            <x-library::input.text wire:model.live="name" class="bg-secondary" placeholder="{{ \Trans::get('Enter your Company Name') }}" required/>
             <x-library::input.error for="name"/>
         </div>
         <div class="mt-6">
@@ -30,14 +30,14 @@
 {{--            <div class="flex items-center">--}}
 {{--                <x-library::input.label value="{{ \Trans::get('Start Date (can be changed later)') }}"/><span class="text-red-600 text-sm ml-1">*</span>--}}
 {{--            </div>--}}
-{{--            <x-library::input.date wire:model="startDate" placeholder="{{ \Trans::get('Company Launch Date') }}"/>--}}
+{{--            <x-library::input.date wire:model.live="startDate" placeholder="{{ \Trans::get('Company Launch Date') }}"/>--}}
 {{--            <x-library::input.error for="startDate"/>--}}
 {{--        </div>--}}
 {{--        <div class="mt-6">--}}
 {{--            <div class="flex items-center">--}}
 {{--                <x-library::input.label value="{{ \Trans::get('Summary') }}"/><span class="text-red-600 text-sm ml-1">*</span>--}}
 {{--            </div>--}}
-{{--            <x-library::input.textarea wire:model="summary" maxlength="280" placeholder="{{ \Trans::get('Summary') }}" />--}}
+{{--            <x-library::input.textarea wire:model.live="summary" maxlength="280" placeholder="{{ \Trans::get('Summary') }}" />--}}
 {{--            <x-library::input.error for="summary"/>--}}
 {{--        </div>--}}
 {{--        <div class="mt-6">--}}

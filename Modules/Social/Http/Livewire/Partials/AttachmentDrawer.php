@@ -36,7 +36,7 @@ class AttachmentDrawer extends Component
             );
         }
 
-        $this->emitUp('filesAdded', $this->attachments);
+        $this->dispatch('filesAdded', attachments: $this->attachments);
     }
 
     public function render()

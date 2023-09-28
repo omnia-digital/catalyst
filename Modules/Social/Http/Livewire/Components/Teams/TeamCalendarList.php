@@ -98,7 +98,7 @@ class TeamCalendarList extends Component
 
     public function toggleMapCalendar($tab)
     {
-        $this->emitUp('toggle_map_calendar', $tab, $this->places);
+        $this->dispatch('toggle_map_calendar', tab: $tab, places: $this->places);
     }
 
     public function mount($classes = '')
