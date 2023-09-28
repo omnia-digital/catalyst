@@ -7,6 +7,8 @@ use Trans;
 
 class MainNavigationMenu extends Component
 {
+    public $navigation = [];
+
     /**
      * The component's listeners.
      *

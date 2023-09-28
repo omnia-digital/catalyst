@@ -134,7 +134,7 @@ class StreamIntegrationService extends Service
             $message = $e->getMessage();
             Log::error('Graph returned an error: ' . $message);
             // We don't want to throw an error if the facebook video doesn't exist anymore, just in case someone deleted it on facebook
-            if (! str_contains($message, 'does not exist')) {
+            if (!empty($message) && ! str_contains($message, 'does not exist')) {
                 throw $e;
             }
         } catch (\Facebook\Exceptions\FacebookSDKException $e) {
@@ -175,7 +175,7 @@ class StreamIntegrationService extends Service
             $message = $e->getMessage();
             Log::error('Graph returned an error: ' . $message);
             // We don't want to throw an error if the facebook video doesn't exist anymore, just in case someone deleted it on facebook
-            if (! str_contains($message, 'does not exist')) {
+            if (!empty($message) && ! str_contains($message, 'does not exist')) {
                 throw $e;
             }
         } catch (\Facebook\Exceptions\FacebookSDKException $e) {

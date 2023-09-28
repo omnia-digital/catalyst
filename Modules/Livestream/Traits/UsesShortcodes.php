@@ -12,7 +12,7 @@ trait UsesShortcodes
      */
     public static function replaceShortcodesInString(&$string, $team = null)
     {
-        if (! str_contains($string, '[')) {
+        if (!empty($string) && ! str_contains($string, '[')) {
             return $string;
         }
 
@@ -48,7 +48,7 @@ trait UsesShortcodes
      */
     public static function replaceShortcodesInStringUsingGivenTimestamp(&$string, $time, $team = null)
     {
-        if (! str_contains($string, '[')) {
+        if (!empty($string) && ! str_contains($string, '[')) {
             return $string;
         }
 
