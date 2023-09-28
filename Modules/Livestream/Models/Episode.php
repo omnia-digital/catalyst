@@ -78,13 +78,10 @@ class Episode extends Model implements HasMedia
     protected $casts = [
         'is_published' => 'boolean',
         'is_live_now' => 'boolean',
-    ];
-
-    protected $dates = [
-        'date_recorded',
-        'planned_start_time',
-        'expires_at',
-        'last_viewed_at',
+        'date_recorded' => 'datetime',
+        'planned_start_time' => 'datetime',
+        'expires_at' => 'datetime',
+        'last_viewed_at' => 'datetime',
     ];
 
     protected $dispatchesEvents = [

@@ -39,11 +39,8 @@ class JobPosition extends Model
     protected $casts = [
         'is_remote' => 'boolean',
         'is_active' => 'boolean',
-    ];
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     protected $table = 'job_positions';

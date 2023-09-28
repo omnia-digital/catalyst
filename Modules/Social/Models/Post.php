@@ -40,8 +40,8 @@ class Post extends Model implements HasMedia, Searchable
         'image',
     ];
 
-    protected $dates = [
-        'published_at',
+    protected $casts = [
+        'published_at' => 'datetime',
     ];
 
     public static function getTrending($type = 'post')

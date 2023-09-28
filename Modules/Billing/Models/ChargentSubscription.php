@@ -12,11 +12,11 @@ class ChargentSubscription extends Model
 
     protected $guarded = [];
 
-    protected $dates = [
-        'starts_at',
-        'next_invoice_at',
-        'ends_at',
-        'last_transaction_at',
+    protected $casts = [
+        'starts_at' => 'datetime',
+        'next_invoice_at' => 'datetime',
+        'ends_at' => 'datetime',
+        'last_transaction_at' => 'datetime',
     ];
 
     protected static function newFactory()

@@ -70,12 +70,9 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         'stripe_connect_onboarding_completed',
     ];
 
-    protected $dates = [
-        'start_date',
-    ];
-
     protected $casts = [
         'stripe_connect_onboarding_completed' => 'boolean',
+        'start_date' => 'datetime',
     ];
 
     protected $appends = [

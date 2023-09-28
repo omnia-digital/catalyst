@@ -37,6 +37,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:clean')->daily()->at('01:00');
         $schedule->command('backup:run')->daily()->at('02:00');
 
+        // Redis
+        $schedule->command('cache:prune-stale-tags')->hourly();
+
         // Mailcoach
 //        $schedule->command('mailcoach:send-automation-mails')->everyMinute();
 //        $schedule->command('mailcoach:send-scheduled-campaigns')->everyMinute();

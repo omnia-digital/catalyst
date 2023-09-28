@@ -20,8 +20,8 @@ class Person extends Model
         'email',
     ];
 
-    protected $dates = [
-        'dob',
+    protected $casts = [
+        'dob' => 'datetime',
     ];
 
     public static function findByName(string $firstName, string $lastName): ?self

@@ -66,7 +66,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     use Billable, WithChargentSubscriptions;
 
-    protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
+    protected $casts = [
+        'deleted_at' => 'datetime',
+        'email_verified_at' => 'datetime',
+        '2fa_setup_at' => 'datetime',
+    ];
 
     protected $fillable = [
         'first_name',
@@ -98,7 +102,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public static function findByFullName($firstName = '', $lastName = '', $fullName = '')
     {
-        if (! empty($fullName) && empty($firstName) && empty($lastName)) {
+        if (!empty($fullName) && empty($firstName) && empty($lastName)) {
             $names = explode(' ', $fullName);
             $firstName = $names[0] ?? '';
             $lastName = $names[1] ?? '';
@@ -139,6 +143,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /// Routes ///
+
     /**
      * Route notifications for the Vonage channel.
      */
@@ -147,7 +152,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return $this->phone;
     }
 
-        //// Attributes ////
+    //// Attributes ////
 
     public function getHandleAttribute()
     {
@@ -216,7 +221,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function profile()
     {
-        if (! class_exists(Profile::class)) {
+        if (!class_exists(Profile::class)) {
             return;
         }
 
@@ -225,7 +230,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function posts()
     {
-        if (! class_exists(Post::class)) {
+        if (!class_exists(Post::class)) {
             return;
         }
 
@@ -234,7 +239,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function reviews()
     {
-        if (! class_exists(Review::class)) {
+        if (!class_exists(Review::class)) {
             return;
         }
 
@@ -243,7 +248,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function likes()
     {
-        if (! class_exists(Like::class)) {
+        if (!class_exists(Like::class)) {
             return;
         }
 
@@ -286,8 +291,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     /**
      * Begin creating a new subscription.
      *
-     * @param  string  $name
-     * @param  string|string[]  $prices
+     * @param string $name
+     * @param string|string[] $prices
      * @return \Laravel\Cashier\SubscriptionBuilder
      */
     public function newSubscription($name, $prices = [])

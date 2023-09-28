@@ -35,9 +35,9 @@ class Profile extends Model implements HasMedia, Searchable
 
     public $incrementing = false;
 
-    protected $dates = [
-        'deleted_at',
-        'last_fetched_at',
+    protected $casts = [
+        'deleted_at' => 'datetime',
+        'last_fetched_at' => 'datetime',
     ];
 
     protected $casts = [

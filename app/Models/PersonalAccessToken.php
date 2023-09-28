@@ -76,17 +76,6 @@ class PersonalAccessToken extends Model
         'updated_at' => 'timestamp',
     ];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'last_used_at',
-        'created_at',
-        'updated_at',
-    ];
-
     // Scopes...
 
     // Functions ...
