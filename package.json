@@ -1,13 +1,14 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "dev": "vite",
+        "build": "vite build",
+        "development": "vite",
+        "watch": "vite watch",
+        "watch-poll": "vite watch -- --watch-options-poll=1000",
+        "hot": "vite watch --hot",
+        "prod": "vite run production",
+        "production": "vite --production"
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.10.0",
@@ -44,6 +45,7 @@
         "dotenv": "^16.0.2",
         "laravel-echo": "^1.11.7",
         "laravel-mix-merge-manifest": "^2.0.0",
+        "laravel-vite-plugin": "^0.8.1",
         "postcss-nesting": "^10.1.3",
         "pusher-js": "^7.1.1-beta",
         "resolve-url-loader": "^4.0.0",
@@ -51,6 +53,7 @@
         "tailwind-scrollbar-hide": "^1.1.7",
         "tippy.js": "^6.3.7",
         "tw-elements": "^1.0.0-alpha12",
+        "vite": "^4.4.9",
         "yarn": "^1.22.19"
     }
 }
