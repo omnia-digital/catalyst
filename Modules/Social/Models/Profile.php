@@ -38,9 +38,6 @@ class Profile extends Model implements HasMedia, Searchable
     protected $casts = [
         'deleted_at' => 'datetime',
         'last_fetched_at' => 'datetime',
-    ];
-
-    protected $casts = [
         'birth_date' => 'datetime:Y-m-d',
     ];
 
