@@ -48,7 +48,7 @@
         "marcreichel/igdb-laravel": "^3.6",
         "mhmiton/laravel-modules-livewire": "^2",
         "nwidart/laravel-modules": "^9.0",
-        "omnia-digital/library": "^2.0",
+        "omnia-digital/library": "dev-main",
         "omnia-digital/livewire-calendar": "^3.0",
         "omnia-digital/media-manager": "dev-main",
         "omniphx/forrest": "*",
