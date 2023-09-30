@@ -142,7 +142,6 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
         if ($this->is_admin) {
             return true;
         }
