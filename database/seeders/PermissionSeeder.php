@@ -106,6 +106,11 @@ class PermissionSeeder extends Seeder
                     'view_posts',
                 ],
             ],
+//            config('platform.teams.default_panel_role') => [
+//                'description' => 'Panel Users can access the panel.',
+//                'permissions' => [
+//                ],
+//            ], // this is only needed for shield currently, but we are already creating it in the user seeder
         ];
 
         if (! empty($usingTeamMemberSubs)) {

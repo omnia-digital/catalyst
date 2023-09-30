@@ -4,7 +4,7 @@ return [
     'shield_resource' => [
         'should_register_navigation' => true,
         'slug' => 'shield/roles',
-        'permission_slug' => 'shield/permissions',
+//        'permission_slug' => 'shield/permissions',
         'navigation_sort' => -1,
         'navigation_badge' => true,
         'navigation_group' => true,
@@ -23,9 +23,9 @@ return [
         'intercept_gate' => 'before', // after
     ],
 
-    'filament_user' => [
+    'panel_user' => [
         'enabled' => true,
-        'name' => 'filament_user',
+        'name' => 'panel_user',
     ],
 
     'permission_prefixes' => [
@@ -67,14 +67,20 @@ return [
         ],
 
         'widgets' => [
-            'AccountWidget',
-            'FilamentInfoWidget',
+            'AccountWidget', 'FilamentInfoWidget',
         ],
 
         'resources' => [],
     ],
 
+    'discovery' => [
+        'discover_all_resources' => false,
+        'discover_all_widgets' => false,
+        'discover_all_pages' => false,
+    ],
+
     'register_role_policy' => [
         'enabled' => true,
     ],
+
 ];
