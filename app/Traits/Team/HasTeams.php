@@ -107,6 +107,8 @@ trait HasTeams
             return;
         }
 
+        $team->load('users');
+
         $roleId = $team->users->where('id', $this->id)->first()?->membership->role_id;
         $role = Role::find($roleId);
 
