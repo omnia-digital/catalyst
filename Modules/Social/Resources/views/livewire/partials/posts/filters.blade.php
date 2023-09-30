@@ -17,11 +17,11 @@
                 @endforeach
             </x-library::dropdown.index>
             @if ($sortOrder === 'asc')
-                <x-heroicon-o-arrow-narrow-up
+                <x-heroicon-o-arrow-up
                         class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-primary"
                         wire:click.prevent="toggleSortOrder()"/>
             @else
-                <x-heroicon-o-arrow-narrow-down
+                <x-heroicon-o-arrow-down
                         class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-primary"
                         wire:click.prevent="toggleSortOrder()"/>
             @endif
@@ -30,7 +30,7 @@
             <div class="filters flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
                 <div class="w-full relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color"
+                        <x-library::icons.icon name="fa-duotone fa-magnifying-glass" class="h-5 w-5 text-light-text-color dark:text-light-text-color"
                                              aria-hidden="true"/>
                     </div>
                     <x-library::input.text type="search" wire:model.debounce.500ms="search" placeholder="Search..."

@@ -16,7 +16,7 @@
         <label for="search" class="sr-only">{{ Trans::get('Search ' . config('app.name')) }}</label>
         <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color"
+                <x-library::icons.icon name="fa-duotone fa-magnifying-glass" class="h-5 w-5 text-light-text-color dark:text-light-text-color"
                                      aria-hidden="true"/>
             </div>
             <input x-model.debounce.500ms="search"

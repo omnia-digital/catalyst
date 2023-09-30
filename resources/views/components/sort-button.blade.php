@@ -17,7 +17,7 @@
         @if ($selected && !$sortDesc)
             <x-heroicon-s-arrow-narrow-up class="w-3 text-dark-text-color" wire:click.prevent="$toggle('sortDesc')"/>
         @else
-            <x-heroicon-s-arrow-narrow-down class="w-3 text-dark-text-color" wire:click.prevent="$toggle('sortDesc')"/>
+            <x-heroicon-s-arrow-down class="w-3 text-dark-text-color" wire:click.prevent="$toggle('sortDesc')"/>
         @endif
     </span>
 </a>
