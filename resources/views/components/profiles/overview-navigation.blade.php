@@ -34,7 +34,7 @@
                         class="inline-flex items-center justify-center rounded-md p-2 text-light-text-color hover:bg-neutral-light hover:text-light-text-color focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
                         aria-controls="mobile-menu" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
-                    <x-heroicon-o-menu x-show="!open" class="h-6 w-6"/>
+                    <x-library::icons.icon name="fa-light fa-bars" x-show="!open" class="h-6 w-6"/>
                     <x-library::icons.icon name="x-mark" x-cloak x-show="open" class="h-6 w-6"/>
                 </button>
             </div>

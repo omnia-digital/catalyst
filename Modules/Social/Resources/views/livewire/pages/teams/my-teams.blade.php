@@ -1,5 +1,5 @@
 @php use App\Models\Team; @endphp
-@extends('social::livewire.layouts.pages.full-page-layout')
+@extends('social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
     <div>

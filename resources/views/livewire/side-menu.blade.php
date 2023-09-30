@@ -97,7 +97,7 @@
                     @click="open = true"
             >
                 <span class="sr-only">Open sidebar</span>
-                <x-heroicon-o-menu class="h-6 w-6"/>
+                <x-library::icons.icon name="fa-light fa-bars" class="h-6 w-6"/>
             </button>
             <!-- Sub-App header -->
             <slot name="header"></slot>

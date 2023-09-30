@@ -87,7 +87,7 @@
     <div x-cloak x-show="activeTab === 'resources'">
         <div class="mt-4 space-y-4">
             @forelse ($resources as $resource)
-                <livewire:social::components.post-card-dynamic :post="$resource"/>
+                <livewire:social::components.post-card-dynamic :post="$resource->load('user')"/>
             @empty
                 <div class="bg-white p-4">
                     <p class="text-dark-text-color">{{ Trans::get('No resources to show. Check back later!') }}</p>

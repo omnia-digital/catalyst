@@ -138,7 +138,7 @@
                             class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-700 hover:bg-white focus:outline-none focus:bg-white focus:text-gray-700 transition duration-150 ease-in-out"
                     >
                         <span class="sr-only">Open menu</span>
-                        <x-heroicon-o-menu
+                        <x-library::icons.icon name="fa-light fa-bars"
                                 x-bind:class="{ 'hidden': open, 'block': !open }"
                                 class="h-6 w-6 hidden"
                                 aria-hidden="true"

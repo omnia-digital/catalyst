@@ -75,7 +75,7 @@
 
                                     <span class="col-span-1 text-gray-400 text-2xs uppercase">Location:</span>
                                     <div class="col-span-3 flex items-center space-x-2">
-                                        <x-heroicon-o-location-marker class="w-4 h-4"/>
+                                        <x-library::icons.icon name="fa-light fa-location-dot" class="w-4 h-4"/>
                                         <span>{{ $team->location_short ?? "Not Set" }}</span>
                                     </div>
                                 @endif

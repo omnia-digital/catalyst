@@ -94,7 +94,7 @@
                         </div>
                         <div class="flex items-center text-base-text-color">
                             @isset($item->location)
-                                <x-heroicon-o-location-marker class="h-4 w-4 mr-2"/>
+                                <x-library::icons.icon name="fa-light fa-location-dot" class="h-4 w-4 mr-2"/>
                                 <span class="text-dark-text-color text-xs">{{ $item->location }}</span>
                             @endisset
                         </div>
@@ -124,7 +124,7 @@
                         <span class="flex-1 text-sm" x-text="details.start_date_string"></span>
                     </div>
                     <div x-show="details.location_short" class="flex items-center space-x-2">
-                        <x-heroicon-o-location-marker class="w-4 h-4"/>
+                        <x-library::icons.icon name="fa-light fa-location-dot" class="w-4 h-4"/>
                         <span class="flex-1 text-sm" x-text="details.location_short"></span>
                     </div>
                     <div class="flex items-center space-x-2 ">

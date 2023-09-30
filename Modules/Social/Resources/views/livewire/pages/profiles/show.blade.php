@@ -117,7 +117,7 @@
             <!-- User Posts -->
             <x-social::user-posts
                     :posts="$this->user->posts()->onlyPosts()->get()->sortByDesc('created_at')"
-                    :likes="$this->user->likes"
+                    :likes="$this->user->likes->load(['likable','likable.user'])"
                     :resources="$this->user->posts()->onlyResources()->get()"
             />
         </div>

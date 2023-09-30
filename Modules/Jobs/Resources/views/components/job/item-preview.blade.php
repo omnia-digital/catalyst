@@ -38,7 +38,7 @@
                                     {{ $companyName }}
                                 </div>
                                 <div class="mr-6 flex items-center text-sm leading-5 text-gray-500 sm:mt-0">
-                                    <x-heroicon-o-location-marker id="location"
+                                    <x-library::icons.icon name="fa-light fa-location-dot" id="location"
                                                                   class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
                                     {{ $location }} {{ $isRemote ? '(Remote)' : '' }}
                                 </div>

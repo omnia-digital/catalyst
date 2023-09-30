@@ -7,7 +7,7 @@
                 class="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 md:hidden"
         >
             <span class="sr-only">Open sidebar</span>
-            <x-heroicon-o-menu-alt-2 class="h-6 w-6"/>
+            <x-library::icons.icon name="fa-light fa-bars"-alt-2 class="h-6 w-6"/>
         </button>
         <div class="flex-1 flex justify-between px-4 sm:px-6">
             <div class="flex-1 flex">

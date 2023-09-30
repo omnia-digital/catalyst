@@ -27,7 +27,7 @@
                         {{ $job->company->name }}
                     </div>
                     <div class="mr-6 flex items-center text-sm leading-5 text-gray-500 sm:mt-0">
-                        <x-heroicon-o-location-marker id="location" class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
+                        <x-library::icons.icon name="fa-light fa-location-dot" id="location" class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
                         {{ $job->location }} {{ $job->is_remote ? '(Remote)' : '' }}
                     </div>
                     <div class="flex items-center text-sm leading-5 text-gray-500 sm:mt-0">

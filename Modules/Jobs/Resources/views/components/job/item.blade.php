@@ -31,7 +31,7 @@
                                 </div>
                                 @if (!empty($job->location) || !empty($job->is_remote))
                                     <div class="mr-6 flex items-center text-sm leading-5 text-base-text-color sm:mt-0">
-                                        <x-heroicon-o-location-marker id="location"
+                                        <x-library::icons.icon name="fa-light fa-location-dot" id="location"
                                                                       class="flex-shrink-0 mr-1.5 h-5 w-5 text-light-text-color "/>
                                         {{ $job->location }} {{ $job->is_remote ? '(Remote)' : '' }}
                                     </div>
