@@ -80,15 +80,16 @@
 
 
 @push('scripts')
+
     <script>
-        document.addEventListener('alpine:init', () => {
+        document.addEventListener('livewire:init', () => {
             Alpine.data('post_edit_media_manager', () => ({
                 openState: false,
                 showImages: true,
                 images: [],
                 users: {},
                 showMediaManager(file, metadata) {
-                    $dispatchTo('media-manager','media-manager:show',
+                    Livewire.dispatchTo('media-manager','media-manager:show',
                         {
                             id: '{{ $editorId }}',
                             file: file,
