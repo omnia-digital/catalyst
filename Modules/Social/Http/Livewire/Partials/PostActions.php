@@ -34,6 +34,8 @@ class PostActions extends Component
 
     public function render()
     {
-        return view('social::livewire.partials.post-actions');
+        return view('social::livewire.partials.post-actions', [
+            'show' => $this->show,
+        ]);
     }
 }

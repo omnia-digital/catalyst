@@ -1,4 +1,4 @@
-<div wire:model.live="$show" class="w-full py-4 flex text-light-text-color justify-between">
+<div wire:model.live="show" class="w-full py-4 flex text-light-text-color justify-between">
     @if ($showCommentButton && $post->isParent())
         <livewire:social::replies-modal :post="$post" wire:key="replies-post-{{ $post->id }}" :show="$show"/>
     @endif
