@@ -54,8 +54,8 @@ class FeedSourceResource extends Resource
                     ->searchable()
                     ->copyable(),
 
-                TextColumn::make('type')
-                    ->enum(FeedSourceType::options())
+                Tables\Columns\SelectColumn::make('type')
+                    ->options(FeedSourceType::options())
                     ->sortable()
                     ->searchable(),
             ])
