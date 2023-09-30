@@ -20,9 +20,9 @@ class CompanyResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'People';
 
-    protected $queryString = [
-        'tableColumnSearchQueries',
-    ];
+//    protected $queryString = [
+//        'tableColumnSearchQueries',
+//    ];
 
     public static function form(Form $form): Form
     {
@@ -32,7 +32,7 @@ class CompanyResource extends Resource
             Forms\Components\TextInput::make('email'),
             Forms\Components\TextInput::make('website'),
             Forms\Components\TextInput::make('about'),
-            Timestamps::make(),
+            ...Timestamps::make(),
         ]);
     }
 

@@ -44,8 +44,8 @@
 
 @stack('modals')
 @stack('scripts')
+<x-impersonate::banner/>
 
-{{--        <x-impersonate::banner/>--}}
 @filamentScripts
 @livewireCalendarScripts
 @livewireScriptConfig

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReviewResource\Pages;
 use App\Filament\Resources\ReviewResource\RelationManagers;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -22,7 +23,9 @@ class ReviewResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name'),
+                    ->relationship(name: 'user')
+                    ->getOptionLabelFromRecordUsing(fn (User $record) => $record->name)
+                    ->searchable(['first_name', 'last_name']),
                 Forms\Components\TextInput::make('reviewable_type')
                     ->required(),
                 Forms\Components\TextInput::make('reviewable_id')

@@ -3,9 +3,8 @@
 namespace Modules\Feeds\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 use Modules\Feeds\Models\FeedSource;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FeedSourcePolicy
 {
@@ -14,9 +13,10 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->can('view_any_feed::source');
     }
@@ -24,9 +24,11 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
+     * @return bool
      */
-    public function view(User $user, FeedSource $feedSource)
+    public function view(User $user, FeedSource $feedSource): bool
     {
         return $user->can('view_feed::source');
     }
@@ -34,9 +36,10 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->can('create_feed::source');
     }
@@ -44,9 +47,11 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
+     * @return bool
      */
-    public function update(User $user, FeedSource $feedSource)
+    public function update(User $user, FeedSource $feedSource): bool
     {
         return $user->can('update_feed::source');
     }
@@ -54,9 +59,11 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
+     * @return bool
      */
-    public function delete(User $user, FeedSource $feedSource)
+    public function delete(User $user, FeedSource $feedSource): bool
     {
         return $user->can('delete_feed::source');
     }
@@ -64,9 +71,10 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can bulk delete.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function deleteAny(User $user)
+    public function deleteAny(User $user): bool
     {
         return $user->can('delete_any_feed::source');
     }
@@ -74,9 +82,11 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can permanently delete.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
+     * @return bool
      */
-    public function forceDelete(User $user, FeedSource $feedSource)
+    public function forceDelete(User $user, FeedSource $feedSource): bool
     {
         return $user->can('force_delete_feed::source');
     }
@@ -84,9 +94,10 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can permanently bulk delete.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function forceDeleteAny(User $user)
+    public function forceDeleteAny(User $user): bool
     {
         return $user->can('force_delete_any_feed::source');
     }
@@ -94,9 +105,11 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can restore.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
+     * @return bool
      */
-    public function restore(User $user, FeedSource $feedSource)
+    public function restore(User $user, FeedSource $feedSource): bool
     {
         return $user->can('restore_feed::source');
     }
@@ -104,9 +117,10 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can bulk restore.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function restoreAny(User $user)
+    public function restoreAny(User $user): bool
     {
         return $user->can('restore_any_feed::source');
     }
@@ -114,9 +128,11 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can replicate.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Modules\Feeds\Models\FeedSource  $feedSource
+     * @return bool
      */
-    public function replicate(User $user, FeedSource $feedSource)
+    public function replicate(User $user, FeedSource $feedSource): bool
     {
         return $user->can('replicate_feed::source');
     }
@@ -124,10 +140,12 @@ class FeedSourcePolicy
     /**
      * Determine whether the user can reorder.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function reorder(User $user)
+    public function reorder(User $user): bool
     {
         return $user->can('reorder_feed::source');
     }
+
 }

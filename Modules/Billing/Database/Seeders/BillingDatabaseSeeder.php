@@ -26,19 +26,19 @@ class BillingDatabaseSeeder extends Seeder
         SubscriptionType::firstOrCreate([
             'name' => 'Basic',
             'slug' => 'basic',
-            'amount' => 19,
+            'amount' => 1900, // amount is in cents
         ]);
 
         SubscriptionType::firstOrCreate([
             'name' => 'Plus',
             'slug' => 'plus',
-            'amount' => 29,
+            'amount' => 2900,
         ]);
 
         SubscriptionType::firstOrCreate([
             'name' => 'Pro',
             'slug' => 'pro',
-            'amount' => 99,
+            'amount' => 9900,
         ]);
 
         // @TODO [Josh] - setup a way to pull in the form assembly form ids from the env file

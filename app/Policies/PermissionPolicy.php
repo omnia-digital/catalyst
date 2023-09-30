@@ -3,9 +3,8 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PermissionPolicy
 {
@@ -14,9 +13,10 @@ class PermissionPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->can('view_any_shield::permission');
     }
@@ -24,9 +24,11 @@ class PermissionPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
+     * @return bool
      */
-    public function view(User $user, Permission $permission)
+    public function view(User $user, Permission $permission): bool
     {
         return $user->can('view_shield::permission');
     }
@@ -34,9 +36,10 @@ class PermissionPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->can('create_shield::permission');
     }
@@ -44,9 +47,11 @@ class PermissionPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
+     * @return bool
      */
-    public function update(User $user, Permission $permission)
+    public function update(User $user, Permission $permission): bool
     {
         return $user->can('update_shield::permission');
     }
@@ -54,9 +59,11 @@ class PermissionPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
+     * @return bool
      */
-    public function delete(User $user, Permission $permission)
+    public function delete(User $user, Permission $permission): bool
     {
         return $user->can('delete_shield::permission');
     }
@@ -64,9 +71,10 @@ class PermissionPolicy
     /**
      * Determine whether the user can bulk delete.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function deleteAny(User $user)
+    public function deleteAny(User $user): bool
     {
         return $user->can('delete_any_shield::permission');
     }
@@ -74,9 +82,11 @@ class PermissionPolicy
     /**
      * Determine whether the user can permanently delete.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
+     * @return bool
      */
-    public function forceDelete(User $user, Permission $permission)
+    public function forceDelete(User $user, Permission $permission): bool
     {
         return $user->can('{{ ForceDelete }}');
     }
@@ -84,9 +94,10 @@ class PermissionPolicy
     /**
      * Determine whether the user can permanently bulk delete.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function forceDeleteAny(User $user)
+    public function forceDeleteAny(User $user): bool
     {
         return $user->can('{{ ForceDeleteAny }}');
     }
@@ -94,9 +105,11 @@ class PermissionPolicy
     /**
      * Determine whether the user can restore.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
+     * @return bool
      */
-    public function restore(User $user, Permission $permission)
+    public function restore(User $user, Permission $permission): bool
     {
         return $user->can('{{ Restore }}');
     }
@@ -104,9 +117,10 @@ class PermissionPolicy
     /**
      * Determine whether the user can bulk restore.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function restoreAny(User $user)
+    public function restoreAny(User $user): bool
     {
         return $user->can('{{ RestoreAny }}');
     }
@@ -114,9 +128,11 @@ class PermissionPolicy
     /**
      * Determine whether the user can replicate.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
+     * @return bool
      */
-    public function replicate(User $user, Permission $permission)
+    public function replicate(User $user, Permission $permission): bool
     {
         return $user->can('{{ Replicate }}');
     }
@@ -124,10 +140,12 @@ class PermissionPolicy
     /**
      * Determine whether the user can reorder.
      *
-     * @return Response|bool
+     * @param  \App\Models\User  $user
+     * @return bool
      */
-    public function reorder(User $user)
+    public function reorder(User $user): bool
     {
         return $user->can('{{ Reorder }}');
     }
+
 }
