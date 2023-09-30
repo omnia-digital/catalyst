@@ -150,7 +150,7 @@
                 images: [],
                 users: {},
                 showMediaManager(file, metadata) {
-                    $dispatchTo('media-manager', 'media-manager:show',
+                    Livewire.dispatchTo('media-manager', 'media-manager:show',
                         {
                             id: '{{ $editorId }}',
                             file: file,

@@ -27,7 +27,7 @@
                     return;
                 }
 
-                this.$wire.emit('notificationRead', '{{ $id }}')
+                this.$wire.dispatch('notificationRead', '{{ $id }}')
             }
         }"
         x-on:mouseenter.once="markAsRead"

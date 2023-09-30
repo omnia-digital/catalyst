@@ -27,7 +27,7 @@
             closeModal: function() {
                 this.open = false;
 
-                Livewire?.emit('modal-closed', '{{ $id }}');
+                Livewire?.dispatch('modal-closed', '{{ $id }}');
                 $dispatch('modal-closed', '{{ $id }}');
             },
         }"

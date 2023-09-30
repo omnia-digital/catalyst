@@ -12,7 +12,7 @@
             },
             selectEvent(event) {
                 this.showDetail = true;
-                $wire.emit('select_event', event.id);
+                $wire.dispatch('select_event', event.id);
                 $wire.selectTeam(event.id)
 
                 this.populateData(event);

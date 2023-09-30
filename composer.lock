@@ -8181,12 +8181,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/omnia-digital/library.git",
-                "reference": "7e7a29153cb37f28393618b4b382f82bf856b5e4"
+                "reference": "ed8001a4c22570fa27cae1ecb769209bfa4b72e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/7e7a29153cb37f28393618b4b382f82bf856b5e4",
-                "reference": "7e7a29153cb37f28393618b4b382f82bf856b5e4",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/ed8001a4c22570fa27cae1ecb769209bfa4b72e4",
+                "reference": "ed8001a4c22570fa27cae1ecb769209bfa4b72e4",
                 "shasum": ""
             },
             "require": {
@@ -8255,7 +8255,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-30T21:18:55+00:00"
+            "time": "2023-09-30T22:33:09+00:00"
         },
         {
             "name": "omnia-digital/livewire-calendar",

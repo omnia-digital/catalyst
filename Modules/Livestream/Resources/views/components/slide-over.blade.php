@@ -18,7 +18,7 @@
 
             this.show = false;
 
-            this.$wire.emit('{{ $eventSlideOverClosed }}')
+            this.$wire.dispatch('{{ $eventSlideOverClosed }}')
         }
     }"
         x-show="show"

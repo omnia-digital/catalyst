@@ -72,7 +72,7 @@ class Post extends Model implements HasMedia, Searchable
     public function type(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => PostType::tryFrom($value),
+            get: fn($value) => $value ? PostType::tryFrom($value): null,
             set: fn($value) => $value?->value
         );
     }
