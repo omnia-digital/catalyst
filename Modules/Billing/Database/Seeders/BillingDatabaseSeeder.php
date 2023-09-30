@@ -21,24 +21,27 @@ class BillingDatabaseSeeder extends Seeder
 
         SubscriptionType::query()->delete();
 
+        /// @TODO [Josh] - add a way to pull in default subscription types from the env file, separated by comma
+
         SubscriptionType::firstOrCreate([
-            'name' => 'CfaN EA Member',
-            'slug' => 'cfan-ea-member',
-            'amount' => 2500,
+            'name' => 'Basic',
+            'slug' => 'basic',
+            'amount' => 19,
         ]);
 
         SubscriptionType::firstOrCreate([
-            'name' => 'Associate Evangelist',
-            'slug' => 'associate-evangelist',
-            'amount' => 3000,
+            'name' => 'Plus',
+            'slug' => 'plus',
+            'amount' => 29,
         ]);
 
         SubscriptionType::firstOrCreate([
-            'name' => 'Co-Evangelist',
-            'slug' => 'co-evangelist',
-            'amount' => 3500,
+            'name' => 'Pro',
+            'slug' => 'pro',
+            'amount' => 99,
         ]);
 
+        // @TODO [Josh] - setup a way to pull in the form assembly form ids from the env file
         $subscriptionForm = FormAssemblyForm::firstOrCreate([
             'name' => 'User Subscriptions',
             'fa_form_id' => '5011856',
