@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af1c9e09e9285dacc27f26cf61b79b4c",
+    "content-hash": "c593754002cbcdc246e72f395971d0a4",
     "packages": [
         {
             "name": "ariaieboy/filament-jalali-datetime",
@@ -8177,16 +8177,16 @@
         },
         {
             "name": "omnia-digital/library",
-            "version": "2.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/omnia-digital/library.git",
-                "reference": "6064826f21a446cbd2673d875885c8f23ccce22b"
+                "reference": "7e7a29153cb37f28393618b4b382f82bf856b5e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/library/zipball/6064826f21a446cbd2673d875885c8f23ccce22b",
-                "reference": "6064826f21a446cbd2673d875885c8f23ccce22b",
+                "url": "https://api.github.com/repos/omnia-digital/library/zipball/7e7a29153cb37f28393618b4b382f82bf856b5e4",
+                "reference": "7e7a29153cb37f28393618b4b382f82bf856b5e4",
                 "shasum": ""
             },
             "require": {
@@ -8204,6 +8204,7 @@
                 "phpunit/phpunit": "^9.5||^10.0",
                 "spatie/laravel-ray": "^1.26"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -8246,7 +8247,7 @@
             ],
             "support": {
                 "issues": "https://github.com/omnia-digital/library/issues",
-                "source": "https://github.com/omnia-digital/library/tree/2.0"
+                "source": "https://github.com/omnia-digital/library/tree/main"
             },
             "funding": [
                 {
@@ -8254,7 +8255,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-30T20:46:01+00:00"
+            "time": "2023-09-30T21:18:55+00:00"
         },
         {
             "name": "omnia-digital/livewire-calendar",
@@ -21046,6 +21047,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "omnia-digital/library": 20,
         "omnia-digital/media-manager": 20
     },
     "prefer-stable": true,

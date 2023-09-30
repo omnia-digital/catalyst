@@ -1,36 +1,4 @@
-<div x-data="{
-        openState: false,
-        showImages: true,
-        images: [],
-        users: {},
-        showMediaManager(file, metadata) {
-            $dispatch('media-manager:show',
-                {
-                    id: '{{ $editorId }}',
-                    file: file,
-                    metadata: metadata
-                }
-                )->to('media-manager')
-            );
-        },
-
-        setImage(event) {
-            if (event.detail.id === '{{ $editorId }}') {
-                this.$wire.call('setImage', event.detail);
-            }
-        },
-
-        setImages(event) {
-            if (event.detail.id === '{{ $editorId }}') {
-                this.images = event.detail.images
-            }
-        },
-
-        removeImage(index) {
-            this.$wire.call('removeImage', index);
-        },
-
-    }"
+<div x-data="post_edit_media_manager"
      x-on:media-manager:file-selected.window="setImage"
      x-on:post-editor:image-set.window="setImages"
      class="bg-secondary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4 max-w-post-card-max-w relative">
@@ -108,3 +76,43 @@
         </div>
     </div>
 </div>
+
+
+
+@push('scripts')
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('post_edit_media_manager', () => ({
+                openState: false,
+                showImages: true,
+                images: [],
+                users: {},
+                showMediaManager(file, metadata) {
+                    $dispatchTo('media-manager','media-manager:show',
+                        {
+                            id: '{{ $editorId }}',
+                            file: file,
+                            metadata: metadata
+                        }
+                    );
+                },
+
+                setImage(event) {
+                    if (event.detail.id === '{{ $editorId }}') {
+                        this.$wire.call('setImage', event.detail);
+                    }
+                },
+
+                setImages(event) {
+                    if (event.detail.id === '{{ $editorId }}') {
+                        this.images = event.detail.images
+                    }
+                },
+
+                removeImage(index) {
+                    this.$wire.call('removeImage', index);
+                },
+            }));
+        });
+    </script>
+@endpush

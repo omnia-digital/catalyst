@@ -9,38 +9,7 @@
         <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Edit Post') }}</x-library::heading.1>
     </div>
     <div
-            x-data="{
-            openState: false,
-            showImages: true,
-            images: [],
-            users: {},
-            showMediaManager(file, metadata) {
-                $dispatch('media-manager:show',
-                    {
-                        id: '{{ $editorId }}',
-                        file: file,
-                        metadata: metadata
-                    })->to('media-manager')
-                );
-            },
-
-            setImage(event) {
-                if (event.detail.id === '{{ $editorId }}') {
-                    this.$wire.call('setImage', event.detail);
-                }
-            },
-
-            setImages(event) {
-                if (event.detail.id === '{{ $editorId }}') {
-                    this.images = event.detail.images
-                }
-            },
-
-            removeTemporaryImage(index) {
-                this.$wire.call('removeTemporaryImage', index);
-            },
-
-        }"
+            x-data="post_edit_media_manager"
             x-on:media-manager:file-selected.window="setImage"
             x-on:update-post:image-set.window="setImages"
             class="w-full"
@@ -117,8 +86,8 @@
                                             class="absolute z-10 rounded-lg w-full h-full flex justify-center items-center bg-gray-500/75"
                                     >
                                         <x-library::icons.icon name="fa-light fa-arrows-rotate"
-                                                class="animate-spin w-8 h-8 absolute top-1/2 right-1/2 -mr-4 -mt-4"
-                                                role="status"/>
+                                                               class="animate-spin w-8 h-8 absolute top-1/2 right-1/2 -mr-4 -mt-4"
+                                                               role="status"/>
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                     <div class="relative">
@@ -171,3 +140,41 @@
         </x-slot>
     </x-confirmation-modal>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('post_edit_media_manager', () => ({
+                openState: false,
+                showImages: true,
+                images: [],
+                users: {},
+                showMediaManager(file, metadata) {
+                    $dispatchTo('media-manager', 'media-manager:show',
+                        {
+                            id: '{{ $editorId }}',
+                            file: file,
+                            metadata: metadata
+                        }
+                    );
+                },
+
+                setImage(event) {
+                    if (event.detail.id === '{{ $editorId }}') {
+                        this.$wire.call('setImage', event.detail);
+                    }
+                },
+
+                setImages(event) {
+                    if (event.detail.id === '{{ $editorId }}') {
+                        this.images = event.detail.images
+                    }
+                },
+
+                removeTemporaryImage(index) {
+                    this.$wire.call('removeTemporaryImage', index);
+                },
+            }));
+        });
+    </script>
+@endpush
