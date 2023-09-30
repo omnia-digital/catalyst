@@ -59,7 +59,7 @@ class PostWasRepostedNotification extends BaseNotification
     public function toArray($notifiable): array
     {
         return NotificationCenter::make()
-            ->icon('heroicon-o-refresh')
+            ->icon('fa-light fa-arrows-rotate"')
             ->success($this->getMessage())
             ->subtitle($this->getSubTitle())
             ->image($this->getImage())

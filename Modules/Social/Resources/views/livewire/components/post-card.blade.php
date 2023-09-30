@@ -48,7 +48,7 @@
                                 id="menu-0-button" aria-expanded="false"
                                 aria-haspopup="true">
                             <span class="sr-only">Open options</span>
-                            <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
+                            <x-library::icons.icon name="fa-solid fa-ellipsis" class="h-5 w-5"/>
                         </button>
                     </x-slot>
                     <x-library::dropdown.item wire:click.prevent.stop="toggleBookmark">
@@ -64,7 +64,7 @@
                                 href="{{ route('social.posts.edit', $post->id) }}"
                         >
                             <div class="flex items-center space-x-1">
-                                <x-heroicon-o-pencil-alt class="h-6 w-6" aria-hidden="true"/>
+                                <x-library::icons.icon name="fa-light fa-pencil" class="h-6 w-6" aria-hidden="true"/>
                                 <span>Edit</span>
                             </div>
                         </a>

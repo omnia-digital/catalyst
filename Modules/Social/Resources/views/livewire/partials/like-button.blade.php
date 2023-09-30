@@ -3,9 +3,9 @@
         <button class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color"
                 wire:click.prevent.stop="like">
             @if ($model->isLiked)
-                <x-heroicon-s-thumb-up :class="'h-6 w-6 ' . $btnStyles" aria-hidden="true"/>
+                <x-library::icons.icon name="fas-thumb-up" :class="'h-6 w-6 ' . $btnStyles" aria-hidden="true"/>
             @else
-                <x-heroicon-o-thumb-up :class="'h-6 w-6 ' . $btnStyles" aria-hidden="true"/>
+                <x-library::icons.icon name="fas-thumb-up" :class="'h-6 w-6 ' . $btnStyles" aria-hidden="true"/>
             @endif
             @unless ($hideCount)
                 <span class="font-medium text-dark-text-color">{{ $model->likesCount() > 0 ? $model->likesCount() : '' }}</span>
@@ -18,9 +18,9 @@
             <button class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color"
                     wire:click.prevent.stop="dislike">
                 @if ($model->isDisliked)
-                    <x-heroicon-s-thumb-down :class="'h-6 w-6 ' . $btnStyles" aria-hidden="true"/>
+                    <x-library::icons.icon name="fas-thumb-down" :class="'h-6 w-6 ' . $btnStyles" aria-hidden="true"/>
                 @else
-                    <x-heroicon-o-thumb-down :class="'h-6 w-6 ' . $btnStyles" aria-hidden="true"/>
+                    <x-library::icons.icon name="fas-thumb-down" :class="'h-6 w-6 ' . $btnStyles" aria-hidden="true"/>
                 @endif
                 @unless ($hideCount)
                     <span class="font-medium text-dark-text-color">{{ $model->dislikesCount() > 0 ? $model->dislikesCount() : '' }}</span>

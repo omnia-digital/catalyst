@@ -4,6 +4,7 @@ namespace Modules\Social\Http\Livewire;
 
 use App\Support\Platform\WithGuestAccess;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
@@ -25,17 +26,13 @@ class RepliesModal extends Component
 
     public ?string $content = null;
 
-    protected $listeners = [
-        'postAdded',
-        'post-editor:submitted' => 'saveComment',
-    ];
-
-    public function postAdded()
+    #[On('postAdded')]
+    public function postAdded(): void
     {
         $this->replyCount = $this->post->comments()->count();
     }
 
-    public function mount($post, $show = false, $type = null)
+    public function mount($post, $show = false, $type = null): void
     {
         $this->post = $post;
         $this->replyCount = $post->comments()->count();
@@ -43,26 +40,30 @@ class RepliesModal extends Component
         $this->type = $type;
     }
 
-    public function saveComment($data)
+    /**
+     * @throws \Throwable
+     */
+    #[On('post-editor:submitted')]
+    public function saveComment($editorId, $content, $images): void
     {
-        $this->content = strip_tags($data['content']);
+        $this->content = strip_tags($content);
 
         $this->validatePostEditor();
 
-        $comment = DB::transaction(function () use ($data) {
+        $comment = DB::transaction(function () use ($content, $images) {
             $comment = (new CreateNewPostAction)
                 ->asComment($this->post)
                 ->type($this->type)
-                ->execute($data['content']);
+                ->execute($content);
 
-            $comment->attachMedia($data['images'] ?? []);
+            $comment->attachMedia($images ?? []);
 
             return $comment;
         });
 
         $this->post->user->notify(new NewCommentNotification($comment, auth()->user()));
 
-        $this->emitPostSaved($data['id']);
+        $this->emitPostSaved($editorId);
         $this->redirectRoute('social.posts.show', $this->post);
     }
 

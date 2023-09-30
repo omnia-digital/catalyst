@@ -1,6 +1,6 @@
 <div>
     <div wire:loading.delay.flex class="hidden items-center justify-center">
-        <x-heroicon-o-refresh class="w-8 h-8 animate-spin text-gray-400 mb-2"/>
+        <x-library::icons.icon name="fa-light fa-arrows-rotate" class="w-8 h-8 animate-spin text-gray-400 mb-2"/>
         <span class="sr-only">Loading...</span>
     </div>
     @if ($media)

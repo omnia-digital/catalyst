@@ -45,7 +45,7 @@
                                     wire:target="removeFeaturedImage, setFeaturedImage"
                                     class="absolute z-10 rounded-lg w-full h-full flex justify-center items-center bg-gray-500/75"
                             >
-                                <x-heroicon-o-refresh
+                                <x-library::icons.icon name="fa-light fa-arrows-rotate"
                                         class="animate-spin w-8 h-8 absolute top-1/2 right-1/2 -mr-4 -mt-4"
                                         role="status"/>
                                 <span class="sr-only">Loading...</span>

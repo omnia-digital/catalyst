@@ -31,9 +31,7 @@ class PostEditor extends Component
     public function submit()
     {
         $this->dispatch('post-editor:submitted',
-            id: $this->editorId,
-            content: $this->content,
-            images: $this->images
+            editorId: $this->editorId, content: $this->content, images: $this->images
         );
     }
 

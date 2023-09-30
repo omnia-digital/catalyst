@@ -13,24 +13,24 @@ class NewsFeed extends Component
 
     public $perPage = 6;
 
-    public Team|null $team = null;
+    public ?Team $team = null;
 
     protected $listeners = [
-        'postSaved',
         'postDeleted' => '$refresh',
     ];
 
-    public function postSaved()
+    #[On('postSaved')]
+    public function postSaved(): void
     {
         $this->resetPage();
     }
 
-    public function loadMore()
+    public function loadMore(): void
     {
         $this->perPage += 6;
     }
 
-    public function hasMore()
+    public function hasMore(): bool
     {
         return $this->perPage < $this->rowsQuery->count();
     }
@@ -43,7 +43,7 @@ class NewsFeed extends Component
                 'user.profile',
                 'media',
                 'tags',
-                'bookmarks'
+                'bookmarks',
             ])->orderBy('published_at', 'desc');
         }
 
@@ -52,7 +52,7 @@ class NewsFeed extends Component
             'user.profile',
             'media',
             'tags',
-            'bookmarks'
+            'bookmarks',
         ])->orderByDesc('published_at')->orderByDesc('created_at');
     }
 

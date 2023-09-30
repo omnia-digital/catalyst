@@ -48,7 +48,7 @@
         "marcreichel/igdb-laravel": "^3.6",
         "mhmiton/laravel-modules-livewire": "^2",
         "nwidart/laravel-modules": "^9.0",
-        "omnia-digital/library": "dev-main",
+        "omnia-digital/library": "^2.0",
         "omnia-digital/livewire-calendar": "^3.0",
         "omnia-digital/media-manager": "dev-main",
         "omniphx/forrest": "*",
@@ -138,7 +138,8 @@
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:meta",
-            "@php artisan vendor:publish --tag mailcoach-assets --force"
+            "@php artisan vendor:publish --tag mailcoach-assets --force",
+            "@php artisan icons:cache"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

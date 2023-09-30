@@ -16,7 +16,7 @@
             <div class="flex items-start">
                 @if ($review->recommend)
                     <div class="mr-2 bg-blue-600 p-1 rounded-full flex items-center justify-center">
-                        <x-heroicon-s-thumb-up class="w-8 h-8 text-blue-400"/>
+                        <x-library::icons.icon name="fas-thumb-up" class="w-8 h-8 text-blue-400"/>
                     </div>
                     <div class="flex-1">
                         <p class="uppercase text-lg font-bold">Recommended</p>
