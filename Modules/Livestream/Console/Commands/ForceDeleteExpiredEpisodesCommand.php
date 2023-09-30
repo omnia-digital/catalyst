@@ -16,6 +16,6 @@ class ForceDeleteExpiredEpisodesCommand extends Command
         Episode::with('video', 'media', 'livestreamAccount')
             ->shouldBeForceDeleted()
             ->get()
-            ->each(fn (Episode $episode) => $episode->purge());
+            ->each(fn(Episode $episode) => $episode->purge());
     }
 }

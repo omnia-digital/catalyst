@@ -17,7 +17,10 @@ class Location extends Model
     public function name(): Attribute
     {
         return new Attribute(
-            get: fn ($value, $attributes) => $attributes['city'] . ', ' . $attributes['state'] . ', ' . $attributes['country']
+            get: fn(
+                $value,
+                $attributes
+            ) => $attributes['city'] . ', ' . $attributes['state'] . ', ' . $attributes['country']
         );
     }
 

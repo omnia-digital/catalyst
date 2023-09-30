@@ -47,7 +47,7 @@ class MassAttachmentUploadPanel extends Component
             // Check if the episode has a file name with the same title
             $sameNameExists = $episode->media()->where('name', 'like', $fileName)->exists();
 
-            if (! $sameExtensionExists || ! $sameNameExists) {
+            if (!$sameExtensionExists || !$sameNameExists) {
                 // If not, add that attachment
                 $mediaItem = $episode->addMediaFromUrl($attachment->temporaryUrl())
                     ->usingName($title)
@@ -77,11 +77,6 @@ class MassAttachmentUploadPanel extends Component
         $this->getReport();
 
         $this->viewReport = true;
-    }
-
-    public function closeReport()
-    {
-        $this->viewReport = false;
     }
 
     public function getReport()
@@ -119,6 +114,11 @@ class MassAttachmentUploadPanel extends Component
                 ->cc('info@omniadigital.io')
                 ->subject('Upload Report ' . now()->toFormattedDateString());
         });
+    }
+
+    public function closeReport()
+    {
+        $this->viewReport = false;
     }
 
     public function render()

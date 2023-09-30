@@ -3,14 +3,14 @@
 ])
 
 <div
-    x-data
-    x-init="function() {
+        x-data
+        x-init="function() {
         tippy('#{{ $trigger }}', {
             content: '{{ $slot }}',
 {{--            animation: 'scale',--}}
         });
     }"
-    {{ $attributes }}
+        {{ $attributes }}
 >
 </div>
 

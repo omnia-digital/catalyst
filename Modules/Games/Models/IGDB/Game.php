@@ -31,10 +31,15 @@ class Game extends IGDBGame
         return $companies;
     }
 
+    public function getTrailer()
+    {
+        return $this->getVideos()->first() ?? null;
+    }
+
     public function getVideos()
     {
         $videos = collect();
-        if (! $this->videos) {
+        if (!$this->videos) {
             return $videos;
         }
         foreach ($this->videos as $video) {
@@ -42,11 +47,6 @@ class Game extends IGDBGame
         }
 
         return $videos;
-    }
-
-    public function getTrailer()
-    {
-        return $this->getVideos()->first() ?? null;
     }
 
     public function getWebsitesAttribute()

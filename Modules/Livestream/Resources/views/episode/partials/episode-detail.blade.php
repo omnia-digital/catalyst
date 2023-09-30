@@ -1,3 +1,4 @@
+@php use App\Models\Episode; @endphp
 <div>
     <!-- Sidebar -->
     <aside class="hidden w-96 h-full bg-white p-8 border-l border-gray-200 overflow-y-auto lg:block">
@@ -6,23 +7,26 @@
         @elseif (!$multiSelectMode)
             @livewire('episode.episode-info-panel', ['episodeId' => $selectedEpisode])
         @else
-            <x-multi-select-panel :episodes="\App\Models\Episode::whereIn('id', $selectedIDs)->get()" :episodesCount="sizeof($selectedIDs)" />
+            <x-multi-select-panel :episodes="Episode::whereIn('id', $selectedIDs)->get()"
+                                  :episodesCount="sizeof($selectedIDs)"/>
         @endif
     </aside>
 
     <!-- Slide over - Only for mobile -->
     <div class="lg:hidden">
-        <x-slide-over eventSlideOverClosed="episode-deselected" :show="!empty($selectedEpisode)" disableCloseOnClickAway>
+        <x-slide-over eventSlideOverClosed="episode-deselected" :show="!empty($selectedEpisode)"
+                      disableCloseOnClickAway>
             @livewire('episode.episode-info-panel', ['episodeId' => $selectedEpisode])
         </x-slide-over>
         <x-slide-up :show="$multiSelectMode">
             <x-slot name="title">Selected Episodes ({{ sizeof($selectedIDs) }})</x-slot>
             <div class="p-4 pb-0">
                 <ul class="h-28 overflow-y-auto">
-                    @foreach (\App\Models\Episode::whereIn('id', $selectedIDs)->get() as $key => $episode)
+                    @foreach (Episode::whereIn('id', $selectedIDs)->get() as $key => $episode)
                         <li class="flex justify-between items-center hover:text-red-500">
                             <span>{{ $episode->title }}</span>
-                            <x-heroicon-s-x wire:click="multiDeselect('{{ $episode->id }}')" class="w-4 h-4 flex-shrink-0 text-gray-400 hover:text-red-600 cursor-pointer" />
+                            <x-heroicon-s-x wire:click="multiDeselect('{{ $episode->id }}')"
+                                            class="w-4 h-4 flex-shrink-0 text-gray-400 hover:text-red-600 cursor-pointer"/>
                         </li>
                     @endforeach
                 </ul>
@@ -47,7 +51,9 @@
 
     @push('styles')
         <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
-        <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css" rel="stylesheet">
+        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+              rel="stylesheet">
+        <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css"
+              rel="stylesheet">
     @endpush
 @endonce

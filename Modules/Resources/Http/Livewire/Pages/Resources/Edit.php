@@ -35,7 +35,7 @@ class Edit extends Component
 
         $this->saveResource($validated);
 
-        if (! is_null($this->resource->published_at)) {
+        if (!is_null($this->resource->published_at)) {
             $this->resource->published_at = null;
             $this->resource->save();
         }
@@ -49,6 +49,35 @@ class Edit extends Component
         }
 
         $this->redirectRoute('resources.show', $this->resource);
+    }
+
+    public function saveResource($attributes)
+    {
+        $this->resource->update([
+            'title' => $attributes['title'],
+            'body' => Mention::processMentionContent($attributes['body']),
+            'url' => $attributes['url'],
+            'image' => $attributes['image'],
+        ]);
+
+        $this->resource->fresh();
+    }
+
+    public function addMentions($content)
+    {
+        [$userMentions, $teamMentions] = Mention::getAllMentions($content);
+
+        Mention::createManyFromHandles($userMentions, User::class, $this->resource);
+        Mention::createManyFromHandles($teamMentions, Team::class, $this->resource);
+    }
+
+    public function addTags($content)
+    {
+        $hashtags = Tag::parseHashTagsFromString($content);
+
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
+
+        $this->resource->attachTags($tags, 'post');
     }
 
     public function publishResource()
@@ -73,23 +102,6 @@ class Edit extends Component
         $this->redirectRoute('resources.show', $this->resource);
     }
 
-    public function addMentions($content)
-    {
-        [$userMentions, $teamMentions] = Mention::getAllMentions($content);
-
-        Mention::createManyFromHandles($userMentions, User::class, $this->resource);
-        Mention::createManyFromHandles($teamMentions, Team::class, $this->resource);
-    }
-
-    public function addTags($content)
-    {
-        $hashtags = Tag::parseHashTagsFromString($content);
-
-        $tags = Tag::findOrCreateTags($hashtags, 'post');
-
-        $this->resource->attachTags($tags, 'post');
-    }
-
     public function getResourceTagsProperty()
     {
         // get tags that aren't the resource tag since we don't want the user to edit that one
@@ -100,18 +112,6 @@ class Edit extends Component
         return $this->resource->tags->mapWithKeys(function (Tag $tag) {
             return [$tag->name => ucwords($tag->name)];
         })->pluck($tagsToRemove)->all();
-    }
-
-    public function saveResource($attributes)
-    {
-        $this->resource->update([
-            'title' => $attributes['title'],
-            'body' => Mention::processMentionContent($attributes['body']),
-            'url' => $attributes['url'],
-            'image' => $attributes['image'],
-        ]);
-
-        $this->resource->fresh();
     }
 
     public function setFeaturedImage(array $image)

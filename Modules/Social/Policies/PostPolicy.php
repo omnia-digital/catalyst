@@ -33,7 +33,7 @@ class PostPolicy
     /**
      * Determine whether the user can update the post.
      *
-     * @param  \App\Models\Post  $post
+     * @param \App\Models\Post $post
      * @return mixed
      */
     public function update(User $user, Post $post)
@@ -44,7 +44,7 @@ class PostPolicy
     /**
      * Determine whether the user can delete the post.
      *
-     * @param  \App\Models\Post  $post
+     * @param \App\Models\Post $post
      * @return mixed
      */
     public function delete(User $user, Post $post)

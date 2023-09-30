@@ -125,6 +125,6 @@ class Stream extends Model
 
     public function isDisabled(): bool
     {
-        return ! $this->is_active;
+        return !$this->is_active;
     }
 }

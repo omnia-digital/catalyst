@@ -70,7 +70,7 @@ class GamesController extends Controller
     /**
      * Show the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Renderable
      */
     public function show($slug)
@@ -87,7 +87,7 @@ class GamesController extends Controller
         //            ])->get('https://api-v3.igdb.com/games')
         //            ->json();
 
-        abort_if(! $game, 404);
+        abort_if(!$game, 404);
 
 //        return view('games::show', [
 //            'game' => $this->formatGameForView($game),
@@ -101,7 +101,7 @@ class GamesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Renderable
      */
     public function edit($id)
@@ -112,7 +112,7 @@ class GamesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Renderable
      */
     public function update(Request $request, $id)
@@ -123,7 +123,7 @@ class GamesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Renderable
      */
     public function destroy($id)
@@ -133,7 +133,7 @@ class GamesController extends Controller
 
     private function formatGameForView($game)
     {
-        if (! $game || is_int($game)) {
+        if (!$game || is_int($game)) {
             return;
         }
 
@@ -143,7 +143,8 @@ class GamesController extends Controller
             'involvedCompanies' => $game->involved_companies,
             'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
             'memberRating' => array_key_exists('rating', $game->toArray()) ? round($game['rating']) : '0',
-            'criticRating' => array_key_exists('aggregated_rating', $game->toArray()) ? round($game['aggregated_rating']) : '0',
+            'criticRating' => array_key_exists('aggregated_rating',
+                $game->toArray()) ? round($game['aggregated_rating']) : '0',
             'trailer' => $game->getTrailer() ? 'https://youtube.com/embed/' . $game->trailer['video_id'] : '',
             'screenshots' => collect($game['screenshots'])->map(function ($screenshot) {
                 return [

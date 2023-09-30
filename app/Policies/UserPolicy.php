@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
@@ -24,7 +25,7 @@ class UserPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function viewAny(User $user)
     {
@@ -34,7 +35,7 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function view(User $user)
     {
@@ -44,7 +45,7 @@ class UserPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function create(User $user)
     {
@@ -54,7 +55,7 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function update(User $user)
     {
@@ -64,7 +65,7 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function delete(User $user)
     {
@@ -74,7 +75,7 @@ class UserPolicy
     /**
      * Determine whether the user can bulk delete.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function deleteAny(User $user)
     {
@@ -84,7 +85,7 @@ class UserPolicy
     /**
      * Determine whether the user can permanently delete.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function forceDelete(User $user)
     {
@@ -94,7 +95,7 @@ class UserPolicy
     /**
      * Determine whether the user can permanently bulk delete.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function forceDeleteAny(User $user)
     {
@@ -104,7 +105,7 @@ class UserPolicy
     /**
      * Determine whether the user can restore.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function restore(User $user)
     {
@@ -114,7 +115,7 @@ class UserPolicy
     /**
      * Determine whether the user can bulk restore.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function restoreAny(User $user)
     {
@@ -124,7 +125,7 @@ class UserPolicy
     /**
      * Determine whether the user can bulk restore.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function replicate(User $user)
     {
@@ -134,7 +135,7 @@ class UserPolicy
     /**
      * Determine whether the user can reorder.
      *
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response|bool
      */
     public function reorder(User $user)
     {

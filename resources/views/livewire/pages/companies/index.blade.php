@@ -1,3 +1,4 @@
+@php use App\Models\Company; @endphp
 @extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
@@ -5,11 +6,12 @@
         <a href="{{ route('social.companies.home', []) }}">
             <div class="flex-1 flex items-center space-x-2 -ml-1">
                 <x-library::icons.icon name="fa-regular fa-users" size="w-8 h-8" color="text-white-text-color"/>
-                <x-library::heading.1 class="py-4" text-color="text-white-text-color">{{ $lens ? Trans::get('Companies') : Trans::get('Companies') }}
+                <x-library::heading.1 class="py-4"
+                                      text-color="text-white-text-color">{{ $lens ? Trans::get('Companies') : Trans::get('Companies') }}
                 </x-library::heading.1>
             </div>
         </a>
-        @can('create', \App\Models\Company::class)
+        @can('create', Company::class)
             <x-library::button.index x-data=""
                                      x-on:click.prevent="$openModal('create-company')"
                                      bg-color="primary"
@@ -25,7 +27,9 @@
         @if (count($categories))
             <div class="flex justify-between space-x-2 pt-4 mb-4">
                 @foreach ($categories as $category)
-                    <x-library::button.link :href="route('social.companies.home', ['lens' => str($category['slug'])->slug()->value()])" class="w-full h-16 {{ str($lens) == str($category['slug'])->slug()
+                    <x-library::button.link
+                            :href="route('social.companies.home', ['lens' => str($category['slug'])->slug()->value()])"
+                            class="w-full h-16 {{ str($lens) == str($category['slug'])->slug()
                 ->value() ? 'border-primary text-base-text-color' : 'text-base-text-color' }}">
                         {{ $category['name'] }}
                     </x-library::button.link>
@@ -82,6 +86,6 @@
                 <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No Companies Found') }}</p>
             @endforelse
         </div>
-            <livewire:companies.create-company-modal/>
+        <livewire:companies.create-company-modal/>
     </div>
 @endsection

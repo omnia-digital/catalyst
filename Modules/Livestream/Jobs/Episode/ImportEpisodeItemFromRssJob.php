@@ -41,9 +41,15 @@ class ImportEpisodeItemFromRssJob implements ShouldQueue
         DB::transaction(function () {
             // If episode exists, don't create anymore, just upload the video for that episode.
             // Otherwise, create new episode and then upload video.
-            if (! $this->episode) {
+            if (!$this->episode) {
                 $this->episode = (new CreateNewEpisode)->execute(
-                    collect($this->episodeData)->only(['title', 'date_recorded', 'description', 'main_passage', 'main_speaker_id'])->all(),
+                    collect($this->episodeData)->only([
+                        'title',
+                        'date_recorded',
+                        'description',
+                        'main_passage',
+                        'main_speaker_id'
+                    ])->all(),
                     $this->livestreamAccount
                 );
             }
@@ -64,15 +70,12 @@ class ImportEpisodeItemFromRssJob implements ShouldQueue
         });
     }
 
-    private function saveAttachments(): void
+    private function saveCategory(): void
     {
-        // Do not duplicate attachments.
-        if ($this->episode->media()->exists()) {
-            return;
-        }
+        if ($this->episodeData['category']) {
+            $category = Category::firstOrCreate(['name' => $this->episodeData['category']]);
 
-        foreach ($this->episodeData['attachments'] ?? [] as $url) {
-            $this->episode->addMediaFromUrl($url)->toMediaCollection();
+            $this->episode->update(['category_id' => $category->id]);
         }
     }
 
@@ -85,12 +88,15 @@ class ImportEpisodeItemFromRssJob implements ShouldQueue
         $this->episode->series()->sync($series->id);
     }
 
-    private function saveCategory(): void
+    private function saveAttachments(): void
     {
-        if ($this->episodeData['category']) {
-            $category = Category::firstOrCreate(['name' => $this->episodeData['category']]);
+        // Do not duplicate attachments.
+        if ($this->episode->media()->exists()) {
+            return;
+        }
 
-            $this->episode->update(['category_id' => $category->id]);
+        foreach ($this->episodeData['attachments'] ?? [] as $url) {
+            $this->episode->addMediaFromUrl($url)->toMediaCollection();
         }
     }
 }

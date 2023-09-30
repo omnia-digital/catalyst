@@ -16,7 +16,7 @@
                 this.selectedItem = this.currentItem;
             }
         }"
-            x-init="() => {
+        x-init="() => {
             setActive();
 
             $watch('selectedItem', () => setActive());
@@ -45,5 +45,6 @@
         </div>
     </div>
     <x-heroicon-s-check-circle x-show="isActive" class="h-5 w-5 text-blue-600" style="display: none"/>
-    <div x-bind:class="{'border border-blue-500': isActive, 'border-2 border-transparent': !isActive}" class="absolute -inset-px rounded-lg border-2 pointer-events-none" aria-hidden="true"></div>
+    <div x-bind:class="{'border border-blue-500': isActive, 'border-2 border-transparent': !isActive}"
+         class="absolute -inset-px rounded-lg border-2 pointer-events-none" aria-hidden="true"></div>
 </label>

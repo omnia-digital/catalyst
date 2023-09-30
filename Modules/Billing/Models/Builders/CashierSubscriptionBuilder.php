@@ -2,8 +2,10 @@
 
 namespace Modules\Billing\Models\Builders;
 
+use Laravel\Cashier\Subscription;
 use Laravel\Cashier\SubscriptionBuilder;
 use Stripe\Subscription as StripeSubscription;
+use Stripe\SubscriptionItem;
 
 class CashierSubscriptionBuilder extends SubscriptionBuilder
 {
@@ -19,7 +21,7 @@ class CashierSubscriptionBuilder extends SubscriptionBuilder
     /**
      * Create the Eloquent Subscription.
      *
-     * @return \Laravel\Cashier\Subscription
+     * @return Subscription
      */
     protected function createSubscription(StripeSubscription $stripeSubscription)
     {
@@ -27,11 +29,11 @@ class CashierSubscriptionBuilder extends SubscriptionBuilder
             return $subscription;
         }
 
-        /** @var \Stripe\SubscriptionItem $firstItem */
+        /** @var SubscriptionItem $firstItem */
         $firstItem = $stripeSubscription->items->first();
         $isSinglePrice = $stripeSubscription->items->count() === 1;
 
-        /** @var \Laravel\Cashier\Subscription $subscription */
+        /** @var Subscription $subscription */
         $subscription = $this->owner->subscriptions()->create([
             'team_id' => $this->teamId,
             'name' => $this->name,
@@ -39,11 +41,11 @@ class CashierSubscriptionBuilder extends SubscriptionBuilder
             'stripe_status' => $stripeSubscription->status,
             'stripe_price' => $isSinglePrice ? $firstItem->price->id : null,
             'quantity' => $isSinglePrice ? ($firstItem->quantity ?? null) : null,
-            'trial_ends_at' => ! $this->skipTrial ? $this->trialExpires : null,
+            'trial_ends_at' => !$this->skipTrial ? $this->trialExpires : null,
             'ends_at' => null,
         ]);
 
-        /** @var \Stripe\SubscriptionItem $item */
+        /** @var SubscriptionItem $item */
         foreach ($stripeSubscription->items as $item) {
             $subscription->items()->create([
                 'stripe_id' => $item->id,

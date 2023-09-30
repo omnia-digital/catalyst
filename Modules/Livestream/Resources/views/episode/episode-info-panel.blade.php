@@ -18,7 +18,8 @@
                             <h2 class="text-lg font-medium text-gray-900">{{ $episode->title }}</h2>
                             <p class="text-sm font-medium text-gray-500">{{ $episode->formattedDuration }}</p>
                         </div>
-                        <button wire:click="showEditModal" type="button" class="ml-4 bg-white rounded-full h-8 w-8 flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button wire:click="showEditModal" type="button"
+                                class="ml-4 bg-white rounded-full h-8 w-8 flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <x-heroicon-s-pencil class="h-5 w-5"/>
                             <span class="sr-only">Add description</span>
                         </button>
@@ -126,10 +127,12 @@
 
                     <div class="py-3 flex justify-between text-sm font-medium">
                         <dt class="text-gray-500">Video Source Type</dt>
-                        <dd class="text-gray-900">{{ $episode->video?->videoSource()->name() }} ({{ $episode->video?->video_source_type_id }})</dd>
+                        <dd class="text-gray-900">{{ $episode->video?->videoSource()->name() }}
+                            ({{ $episode->video?->video_source_type_id }})
+                        </dd>
                     </div>
 
-                    @if (\Auth::user()->isAdmin() || \Auth::user()->isImpersonating())
+                    @if (Auth::user()->isAdmin() || Auth::user()->isImpersonating())
                         <div class="py-3 flex justify-between text-sm font-medium">
                             <dt class="text-gray-500">Video Source ID</dt>
                             <dd class="text-gray-900">{{ $episode->video?->video_source_id }}</dd>
@@ -161,10 +164,13 @@
                                             <div class="ml-4 flex-shrink-0">
                                                 <div class="flex items-center space-x-2">
                                                     <button wire:click.prevent="downloadAttachment('{{ $attachment->uuid }}')">
-                                                        <x-heroicon-o-download class="w-5 h-5 font-medium text-indigo-600 hover:text-indigo-500"/>
+                                                        <x-heroicon-o-download
+                                                                class="w-5 h-5 font-medium text-indigo-600 hover:text-indigo-500"/>
                                                     </button>
-                                                    <button type="button" wire:click="showDeleteAttachmentModal('{{ $attachment->uuid }}')">
-                                                        <x-library::icons.icon name="x-mark" class="w-5 h-5 font-medium text-red-600 hover:text-red-500"/>
+                                                    <button type="button"
+                                                            wire:click="showDeleteAttachmentModal('{{ $attachment->uuid }}')">
+                                                        <x-library::icons.icon name="x-mark"
+                                                                               class="w-5 h-5 font-medium text-red-600 hover:text-red-500"/>
                                                     </button>
                                                 </div>
                                             </div>
@@ -180,10 +186,13 @@
                                             <div class="ml-4 flex-shrink-0">
                                                 <div class="flex items-center space-x-2">
                                                     <a href="{{ $staticAttachment->getStaticUrl() }}" target="_blank">
-                                                        <x-heroicon-o-external-link class="w-5 h-5 font-medium text-indigo-600 hover:text-indigo-500"/>
+                                                        <x-heroicon-o-external-link
+                                                                class="w-5 h-5 font-medium text-indigo-600 hover:text-indigo-500"/>
                                                     </a>
-                                                    <button type="button" wire:click="showDeleteAttachmentModal('{{ $staticAttachment->uuid }}')">
-                                                        <x-library::icons.icon name="x-mark" class="w-5 h-5 font-medium text-red-600 hover:text-red-500"/>
+                                                    <button type="button"
+                                                            wire:click="showDeleteAttachmentModal('{{ $staticAttachment->uuid }}')">
+                                                        <x-library::icons.icon name="x-mark"
+                                                                               class="w-5 h-5 font-medium text-red-600 hover:text-red-500"/>
                                                     </button>
                                                 </div>
                                             </div>
@@ -193,7 +202,8 @@
                             </dd>
                         </dl>
 
-                        <x-confirm id="confirm-delete-attachment" submit="deleteAttachment('{{ $deletingAttachment }}')">
+                        <x-confirm id="confirm-delete-attachment"
+                                   submit="deleteAttachment('{{ $deletingAttachment }}')">
                             <x-slot name="title">Delete Attachment</x-slot>
                         </x-confirm>
                     @endif
@@ -201,7 +211,8 @@
 
                 @if ($episode->video)
                     <div>
-                        <x-form.button wire:click="downloadEpisode" wire:target="downloadEpisode" loading loadingText="Downloading...">
+                        <x-form.button wire:click="downloadEpisode" wire:target="downloadEpisode" loading
+                                       loadingText="Downloading...">
                             Download
                         </x-form.button>
                     </div>
@@ -209,8 +220,8 @@
 
                 <h3 class="text-red-600 font-bold">Danger Zone</h3>
                 <div class="grid grid-cols-2 gap-2">
-                    <livewire:episode.move-episode :episode="$episode" wire:key="move-episode-{{ now() }}" />
-                    <livewire:episode.delete-episode :episode="$episode" wire:key="delete-episode-{{ now() }}" />
+                    <livewire:episode.move-episode :episode="$episode" wire:key="move-episode-{{ now() }}"/>
+                    <livewire:episode.delete-episode :episode="$episode" wire:key="delete-episode-{{ now() }}"/>
                 </div>
             </div>
 

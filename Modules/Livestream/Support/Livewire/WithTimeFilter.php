@@ -14,21 +14,16 @@ trait WithTimeFilter
         $this->selectedTime = session()->get($this->getTimeFilterSessionKey(), $this->selectedTime);
     }
 
+    private function getTimeFilterSessionKey(): string
+    {
+        return 'timeFilter' . get_class($this);
+    }
+
     public function selectTime(string $time)
     {
         $this->selectedTime = $time;
 
         session()->put($this->getTimeFilterSessionKey(), $this->selectedTime);
-    }
-
-    public function labelFormat()
-    {
-        return match ($this->selectedTime) {
-            'today' => 'H:i',
-            '7-days', '30-days', 'last-month', 'this-month' => 'D, d M',
-            '6-months', 'this-year', 'all-time' => 'M Y',
-            'default' => 'Y-m-d'
-        };
     }
 
     public function getTimeFiltersProperty()
@@ -52,8 +47,13 @@ trait WithTimeFilter
         return $labels ?? [];
     }
 
-    private function getTimeFilterSessionKey(): string
+    public function labelFormat()
     {
-        return 'timeFilter' . get_class($this);
+        return match ($this->selectedTime) {
+            'today' => 'H:i',
+            '7-days', '30-days', 'last-month', 'this-month' => 'D, d M',
+            '6-months', 'this-year', 'all-time' => 'M Y',
+            'default' => 'Y-m-d'
+        };
     }
 }

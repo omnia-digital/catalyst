@@ -64,7 +64,8 @@ class UpdateTemplate extends Component
                 'title' => $this->title,
                 'description' => $this->description,
             ],
-            'default_thumbnail' => $this->thumbnail ? $this->thumbnail->store('thumbnails', 'episode-templates') : $this->episodeTemplate->default_thumbnail,
+            'default_thumbnail' => $this->thumbnail ? $this->thumbnail->store('thumbnails',
+                'episode-templates') : $this->episodeTemplate->default_thumbnail,
         ]);
 
         $this->episodeTemplate->series()->sync($this->selectedSeries);

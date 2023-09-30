@@ -20,13 +20,14 @@
             </div>
         @endif
 
-        <ul role="list" class="grid grid-cols-{{ $player->layoutSetting('columns') }} gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8">
+        <ul role="list"
+            class="grid grid-cols-{{ $player->layoutSetting('columns') }} gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8">
             @foreach ($episodes as $episode)
                 @if ($episode->id !== $currentEpisode->id)
                     <x-episode.grid-item
-                        wire:key="episode-{{ $episode->id }}"
-                        wire:click="selectEpisode({{ $episode->id }})"
-                        :episode="$episode"
+                            wire:key="episode-{{ $episode->id }}"
+                            wire:click="selectEpisode({{ $episode->id }})"
+                            :episode="$episode"
                     />
                 @endif
             @endforeach

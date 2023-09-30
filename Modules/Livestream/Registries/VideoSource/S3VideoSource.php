@@ -41,6 +41,15 @@ class S3VideoSource implements BaseVideoSource
         return $client->createPresignedRequest($command, '+240 minutes')->getUri();
     }
 
+    private function downloadFilename(Video $video): string
+    {
+        return $video->episode->livestreamAccount->account_slug
+            . '_' . $video->episode->id . '_'
+            . $video->id . '_'
+            . Carbon::now()->timestamp . '.'
+            . $video->file_type;
+    }
+
     public function delete(Video $video): void
     {
         // TODO: Implement delete() method.
@@ -49,14 +58,5 @@ class S3VideoSource implements BaseVideoSource
     public function isProcessing(Video $video): bool
     {
         // TODO: Implement isProcessing() method.
-    }
-
-    private function downloadFilename(Video $video): string
-    {
-        return $video->episode->livestreamAccount->account_slug
-            . '_' . $video->episode->id . '_'
-            . $video->id . '_'
-            . Carbon::now()->timestamp . '.'
-            . $video->file_type;
     }
 }

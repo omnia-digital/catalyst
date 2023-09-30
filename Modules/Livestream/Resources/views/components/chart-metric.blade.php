@@ -7,7 +7,7 @@
 ])
 
 <div
-    x-data="{
+        x-data="{
             showDataset: localStorage.getItem('{{ $name }}') === null ? true : localStorage.getItem('{{ $name }}') === 'true',
 
             toggleChart() {
@@ -18,8 +18,8 @@
                 $dispatch('toggle-chart', '{{ $name }}')
             }
         }"
-    x-on:click="toggleChart"
-    {{ $attributes->merge(['class' => 'px-8 py-4 w-1/2 lg:w-auto hover:border-t-4 hover:border-blue-500 cursor-pointer']) }}
+        x-on:click="toggleChart"
+        {{ $attributes->merge(['class' => 'px-8 py-4 w-1/2 lg:w-auto hover:border-t-4 hover:border-blue-500 cursor-pointer']) }}
 >
     <div class="flex items-center text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400 whitespace-nowrap">
         <span>{{ $name }}</span>

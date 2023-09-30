@@ -4,6 +4,7 @@ namespace Modules\Social\Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
 
 class MentionFactory extends Factory
@@ -13,7 +14,7 @@ class MentionFactory extends Factory
      *
      * @var string
      */
-    protected $model = \Modules\Social\Models\Mention::class;
+    protected $model = Mention::class;
 
     /**
      * Define the model's default state.

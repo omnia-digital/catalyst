@@ -59,6 +59,13 @@ class ManageTeamRoles extends Component
         ]);
     }
 
+    public function resetSelectedPermissions()
+    {
+        foreach ($this->roles as $role) {
+            $this->selectedPermissions[$role->id] = [];
+        }
+    }
+
     public function saveRole()
     {
         $this->validate();
@@ -150,13 +157,6 @@ class ManageTeamRoles extends Component
         Role::find($roleId)->permissions()->detach($this->selectedPermissions[$roleId]);
 
         $this->selectedPermissions[$roleId] = [];
-    }
-
-    public function resetSelectedPermissions()
-    {
-        foreach ($this->roles as $role) {
-            $this->selectedPermissions[$role->id] = [];
-        }
     }
 
     public function getRolesProperty()

@@ -16,6 +16,11 @@ use Spatie\Permission\Models\Permission;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    /**
+     * The model to policy mappings for the application.
+     *
+     * @var array<class-string, class-string>
+     */
     protected $policies = [
         Team::class => TeamPolicy::class,
         FormType::class => FormTypePolicy::class,
@@ -28,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Password::defaults(function () {
             return Password::min(8)

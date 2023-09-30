@@ -25,12 +25,14 @@
     <x-library::modal id="comment-modal-{{ $post->id }}" maxWidth="4xl" hideCancelButton>
         <x-slot name="title">Comment</x-slot>
         <x-slot name="content">
-            <livewire:social::components.post-card wire:key="post-comment-for-{{ $post->id }}" :post="$post" :clickable="false" :showPostActions="false" />
+            <livewire:social::components.post-card wire:key="post-comment-for-{{ $post->id }}" :post="$post"
+                                                   :clickable="false" :showPostActions="false"/>
             <section aria-labelledby="activity-title" class="mt-4 xl:mt-6">
                 <div>
                     <div class="divide-y divide-neutral-light">
                         <div>
-                            <livewire:social::post-editor wire:key="comment-editor-{{ $post->id }}" editorId="comment-editor-{{ $post->id }}"/>
+                            <livewire:social::post-editor wire:key="comment-editor-{{ $post->id }}"
+                                                          editorId="comment-editor-{{ $post->id }}"/>
                         </div>
                     </div>
                 </div>

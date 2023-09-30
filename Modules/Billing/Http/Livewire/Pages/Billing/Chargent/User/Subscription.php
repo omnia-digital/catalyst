@@ -26,7 +26,7 @@ class Subscription extends Component
     public function mount()
     {
         $platformIsUsingChargentPaymentGateway = Platform::isUsingPaymentGateway('chargent');
-        if (! $platformIsUsingChargentPaymentGateway || ! config('forrest.credentials.consumerKey')) {
+        if (!$platformIsUsingChargentPaymentGateway || !config('forrest.credentials.consumerKey')) {
 //            $this->redirect(route('social.home'));
         }
 
@@ -89,7 +89,7 @@ class Subscription extends Component
             ->pluck('name', 'tfa_code');
 
         foreach ($tfaFields as $code => $attribute) {
-            if ($attribute === 'chargent_order_id' && ! is_null($this->subscription)) {
+            if ($attribute === 'chargent_order_id' && !is_null($this->subscription)) {
                 $attributes[$code] = $this->subscription?->$attribute;
 
                 continue;

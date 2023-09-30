@@ -6,6 +6,13 @@ use Illuminate\Validation\Validator;
 
 trait WithPostEditor
 {
+    public function validatePostEditor(array $rules = ['required'], string $property = 'content'): array
+    {
+        return $this->withPostEditorEvent()->validate([
+            $property => $rules,
+        ]);
+    }
+
     public function withPostEditorEvent(): self
     {
         return $this->withValidator(function (Validator $validator) {
@@ -13,13 +20,6 @@ trait WithPostEditor
                 $this->emitPostValidated($validator);
             });
         });
-    }
-
-    public function validatePostEditor(array $rules = ['required'], string $property = 'content'): array
-    {
-        return $this->withPostEditorEvent()->validate([
-            $property => $rules,
-        ]);
     }
 
     public function emitPostValidated(Validator $validator)

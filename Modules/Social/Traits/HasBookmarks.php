@@ -7,14 +7,6 @@ use Modules\Social\Models\Bookmark;
 
 trait HasBookmarks
 {
-    /**
-     * Get the bookmarks that User has created
-     */
-    public function bookmarks(): MorphMany
-    {
-        return $this->morphMany(Bookmark::class, 'bookmarkable');
-    }
-
     public function createBookmark($model, $modelId, $order = null, $userId = null, $teamId = null)
     {
         return $this->bookmarks()->create([
@@ -23,5 +15,13 @@ trait HasBookmarks
             'bookmarkable_type' => $model,
             'bookmarkable_id' => $modelId,
         ]);
+    }
+
+    /**
+     * Get the bookmarks that User has created
+     */
+    public function bookmarks(): MorphMany
+    {
+        return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 }

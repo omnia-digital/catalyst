@@ -33,7 +33,7 @@ class Edit extends Component
 
         $this->saveArticle($validated);
 
-        if (! is_null($this->article->published_at)) {
+        if (!is_null($this->article->published_at)) {
             $this->article->published_at = null;
             $this->article->save();
         }
@@ -47,6 +47,35 @@ class Edit extends Component
         }
 
         $this->redirectRoute('articles.show', $this->article);
+    }
+
+    public function saveArticle($attributes)
+    {
+        $this->article->update([
+            'title' => $attributes['title'],
+            'body' => Mention::processMentionContent($attributes['body']),
+            'url' => $attributes['url'],
+            'image' => $attributes['image'],
+        ]);
+
+        $this->article->fresh();
+    }
+
+    public function addMentions($content)
+    {
+        [$userMentions, $teamMentions] = Mention::getAllMentions($content);
+
+        Mention::createManyFromHandles($userMentions, User::class, $this->article);
+        Mention::createManyFromHandles($teamMentions, Team::class, $this->article);
+    }
+
+    public function addTags($content)
+    {
+        $hashtags = Tag::parseHashTagsFromString($content);
+
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
+
+        $this->article->attachTags($tags, 'post');
     }
 
     public function publishArticle()
@@ -69,35 +98,6 @@ class Edit extends Component
         }
 
         $this->redirectRoute('articles.show', $this->article);
-    }
-
-    public function addMentions($content)
-    {
-        [$userMentions, $teamMentions] = Mention::getAllMentions($content);
-
-        Mention::createManyFromHandles($userMentions, User::class, $this->article);
-        Mention::createManyFromHandles($teamMentions, Team::class, $this->article);
-    }
-
-    public function addTags($content)
-    {
-        $hashtags = Tag::parseHashTagsFromString($content);
-
-        $tags = Tag::findOrCreateTags($hashtags, 'post');
-
-        $this->article->attachTags($tags, 'post');
-    }
-
-    public function saveArticle($attributes)
-    {
-        $this->article->update([
-            'title' => $attributes['title'],
-            'body' => Mention::processMentionContent($attributes['body']),
-            'url' => $attributes['url'],
-            'image' => $attributes['image'],
-        ]);
-
-        $this->article->fresh();
     }
 
     public function setFeaturedImage(array $image)

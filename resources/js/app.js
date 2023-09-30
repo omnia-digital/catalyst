@@ -1,16 +1,14 @@
-require('./bootstrap');
+import './bootstrap';
 import 'tw-elements';
 
-import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import {Alpine, Livewire} from '../../vendor/livewire/livewire/dist/livewire.esm';
 import Clipboard from "@ryangjchandler/alpine-clipboard";
 import Tooltip from "@ryangjchandler/alpine-tooltip";
-import trap from '@alpinejs/trap'
 
 Alpine.plugin(Tooltip);
-Alpine.plugin(Clipboard)
-Alpine.plugin(trap)
+Alpine.plugin(Clipboard);
 
-Livewire.start()
+Livewire.start();
 
-window.Vapor = require('laravel-vapor');
+// window.Vapor = require('laravel-vapor');
 

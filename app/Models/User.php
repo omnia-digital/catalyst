@@ -14,6 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Notification;
 use Laravel\Cashier\Billable;
+use Laravel\Cashier\SubscriptionBuilder;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
 use Laravel\Passport\HasApiTokens;
@@ -79,6 +80,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'password',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
     protected $hidden = [
         //            'email',
         'password',
@@ -97,6 +103,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         //            'updated_at'
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
     protected $appends = [
     ];
 
@@ -293,7 +304,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
      *
      * @param string $name
      * @param string|string[] $prices
-     * @return \Laravel\Cashier\SubscriptionBuilder
+     * @return SubscriptionBuilder
      */
     public function newSubscription($name, $prices = [])
     {

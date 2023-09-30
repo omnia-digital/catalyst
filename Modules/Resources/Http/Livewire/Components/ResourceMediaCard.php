@@ -3,7 +3,6 @@
 namespace Modules\Resources\Http\Livewire\Components;
 
 use Modules\Social\Http\Livewire\Components\PostCard;
-
 use function view;
 
 class ResourceMediaCard extends PostCard

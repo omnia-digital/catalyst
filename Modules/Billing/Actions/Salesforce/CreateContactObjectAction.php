@@ -9,11 +9,11 @@ use Omniphx\Forrest\Providers\Laravel\Facades\Forrest;
 class CreateContactObjectAction
 {
     /**
-     * @param  User|Authenticatable  $user
+     * @param User|Authenticatable $user
      */
     public function execute(User $user)
     {
-        if ($user->contact_id || ! config('forrest.credentials.consumerKey')) {
+        if ($user->contact_id || !config('forrest.credentials.consumerKey')) {
             return;
         }
 

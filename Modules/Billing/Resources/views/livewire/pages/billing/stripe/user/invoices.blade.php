@@ -34,7 +34,8 @@
                             {{ $invoice->date()->format('Y-m-d') }}
                         </x-library::table.cell>
                         <x-library::table.cell class="text-right">
-                            <a href="{{ $invoice->hosted_invoice_url }}" target="_blank" class="group inline-flex space-x-2 truncate text-sm underline hover:text-gray-600">
+                            <a href="{{ $invoice->hosted_invoice_url }}" target="_blank"
+                               class="group inline-flex space-x-2 truncate text-sm underline hover:text-gray-600">
                                 View Invoice
                             </a>
                         </x-library::table.cell>

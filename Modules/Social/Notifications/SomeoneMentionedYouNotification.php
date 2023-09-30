@@ -5,7 +5,6 @@ namespace Modules\Social\Notifications;
 use App\Models\Team;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Mention;
@@ -26,7 +25,7 @@ class SomeoneMentionedYouNotification extends BaseNotification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -41,7 +40,7 @@ class SomeoneMentionedYouNotification extends BaseNotification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)

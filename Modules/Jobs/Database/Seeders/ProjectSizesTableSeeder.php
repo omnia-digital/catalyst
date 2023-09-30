@@ -15,9 +15,17 @@ class ProjectSizesTableSeeder extends Seeder
     public function run()
     {
         $teamSizes = [
-            ['title' => 'Large',  'description' => 'Longer term or complex initiatives (ex. design and build a full website)', 'order' => 0],
+            [
+                'title' => 'Large',
+                'description' => 'Longer term or complex initiatives (ex. design and build a full website)',
+                'order' => 0
+            ],
             ['title' => 'Medium', 'description' => 'Well-defined teams (ex. a landing page)', 'order' => 1],
-            ['title' => 'Small',  'description' => 'Quick and Straightforward tasks (ex. update text and images on a webpage)', 'order' => 2],
+            [
+                'title' => 'Small',
+                'description' => 'Quick and Straightforward tasks (ex. update text and images on a webpage)',
+                'order' => 2
+            ],
         ];
 
         foreach ($teamSizes as $teamSize) {

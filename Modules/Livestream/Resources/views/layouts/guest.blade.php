@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        @include('components.external.gtag-head')
+<head>
+    @include('components.external.gtag-head')
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Omnia Church Apps') }}</title>
+    <title>{{ config('app.name', 'Omnia Church Apps') }}</title>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-        @stack('styles')
+    @stack('styles')
 
-        @livewireStyles
+    @livewireStyles
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        @include('components.external.gist')
-        <script src="https://kit.fontawesome.com/61862e0cef.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="font-sans antialiased">
-        @include('components.external.gtag-body')
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    @include('components.external.gist')
+    <script src="https://kit.fontawesome.com/61862e0cef.js" crossorigin="anonymous"></script>
+</head>
+<body class="font-sans antialiased">
+@include('components.external.gtag-body')
 
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
-        </div>
+<div class="font-sans text-gray-900 antialiased">
+    {{ $slot }}
+</div>
 
-        @stack('scripts')
+@stack('scripts')
 
-        @livewireScripts
-    </body>
+@livewireScripts
+</body>
 </html>

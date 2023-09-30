@@ -24,20 +24,23 @@
                                 @forelse ($players as $player)
                                     <x-table.row :loop="$loop" wire:key="{{ $player->id }}">
                                         <x-table.cell class="font-medium text-gray-900">
-                                            <a href="{{ route('players.show', $player) }}" class="text-blue-600 hover:text-blue-900">
+                                            <a href="{{ route('players.show', $player) }}"
+                                               class="text-blue-600 hover:text-blue-900">
                                                 {{ $player->name }}
                                             </a>
                                         </x-table.cell>
                                         <x-table.cell class="text-gray-500">
                                             @if ($player->notLiveImageUrl)
-                                                <img class="h-10 w-10 rounded-full" src="{{ $player->notLiveImageUrl }}" alt="Not Live Image">
+                                                <img class="h-10 w-10 rounded-full" src="{{ $player->notLiveImageUrl }}"
+                                                     alt="Not Live Image">
                                             @else
                                                 <p>No Image</p>
                                             @endif
                                         </x-table.cell>
                                         <x-table.cell class="text-gray-500">
                                             @if ($player->beforeLiveImageUrl)
-                                                <img class="h-10 w-10 rounded-full text-center justify-center" src="{{ $player->beforeLiveImageUrl }}" alt="Before Live Image">
+                                                <img class="h-10 w-10 rounded-full text-center justify-center"
+                                                     src="{{ $player->beforeLiveImageUrl }}" alt="Before Live Image">
                                             @else
                                                 <p>No Image</p>
                                             @endif
@@ -46,7 +49,7 @@
                                             <x-timezone :for="$player->created_at" diffForHumans/>
                                         </x-table.cell>
                                         <x-table.cell
-                                            x-data="{
+                                                x-data="{
                                                 text: 'Copy Embed Code',
 
                                                 copy() {
@@ -56,9 +59,10 @@
                                                     setTimeout(() => { this.text = 'Copy Embed Code' }, 2000);
                                                 }
                                             }"
-                                            class="text-right font-medium"
+                                                class="text-right font-medium"
                                         >
-                                            <a x-on:click.prevent="copy" x-text="text" href="#" class="text-indigo-600 hover:text-indigo-900"></a>
+                                            <a x-on:click.prevent="copy" x-text="text" href="#"
+                                               class="text-indigo-600 hover:text-indigo-900"></a>
                                             <pre style="display: none;">
                                                 <code x-ref="embed-code-{{ $player->id }}">
                                                     {{ '<div id="omnia-app-player"></div>' . '<script src="' . url('js/scripts.js') . '" data-embed="' . route('players.embed', $player) . '"></script>' }}
@@ -69,8 +73,10 @@
                                 @empty
                                     <x-table.empty>
                                         <div class="text-center">
-                                            <p class="text-center text-gray-600 text-base my-4">No player matched the given criteria.</p>
-                                            <x-form.button wire:click="$toggle('createPlayerModalOpen')" secondary size="py-1 px-4">
+                                            <p class="text-center text-gray-600 text-base my-4">No player matched the
+                                                given criteria.</p>
+                                            <x-form.button wire:click="$toggle('createPlayerModalOpen')" secondary
+                                                           size="py-1 px-4">
                                                 Create Player
                                             </x-form.button>
                                         </div>
@@ -85,35 +91,35 @@
         </div>
     </div>
 
-    <x-jet-dialog-modal wire:model="createPlayerModalOpen">
+    <x-dialog-modal wire:model.live="createPlayerModalOpen">
         <x-slot name="title">Create Player</x-slot>
         <x-slot name="content">
             <div>
                 <x-input.label value="Name" required/>
-                <x-input.text id="name" wire:model.defer="name" placeholder="{{ __('Name') }}"/>
-                <x-jet-input-error for="name" class="mt-2"/>
+                <x-input.text id="name" wire:model="name" placeholder="{{ __('Name') }}"/>
+                <x-input-error for="name" class="mt-2"/>
             </div>
             <div class="mt-4">
                 <x-input.label value="Not Live Image"/>
-                <x-input.filepond id="not-live-image" wire:model.defer="notLiveImage"/>
-                <x-jet-input-error for="notLiveImage" class="mt-2"/>
+                <x-input.filepond id="not-live-image" wire:model="notLiveImage"/>
+                <x-input-error for="notLiveImage" class="mt-2"/>
             </div>
             <div class="mt-4">
                 <x-input.label value="Before Live Image"/>
-                <x-input.filepond id="before-live-image" wire:model.defer="beforeLiveImage"/>
-                <x-jet-input-error for="beforeLiveImage" class="mt-2"/>
+                <x-input.filepond id="before-live-image" wire:model="beforeLiveImage"/>
+                <x-input-error for="beforeLiveImage" class="mt-2"/>
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('createPlayerModalOpen')" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$toggle('createPlayerModalOpen')" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
-            </x-jet-secondary-button>
+            </x-secondary-button>
 
-            <x-jet-button class="ml-2" wire:click="createPlayer" wire:loading.attr="disabled">
+            <x-button class="ml-2" wire:click="createPlayer" wire:loading.attr="disabled">
                 {{ __('Create Player') }}
-            </x-jet-button>
+            </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     @once
         @push('scripts')
@@ -123,7 +129,8 @@
 
         @push('styles')
             <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-            <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+            <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+                  rel="stylesheet">
         @endpush
     @endonce
 </div>

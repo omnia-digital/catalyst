@@ -12,7 +12,9 @@
             >
                 <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>
                 All Resources</a>
-            <a href="{{ route('resources.drafts') }}" class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium" aria-current="page">
+            <a href="{{ route('resources.drafts') }}"
+               class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
+               aria-current="page">
                 <x-library::icons.icon name="fa-duotone fa-newspaper" size="w-5 h-5" class="pr-2"/>
                 My Resources</a>
         </nav>
@@ -20,7 +22,8 @@
 
     <div class="bg-neutral px-6 py-1 border-t border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
         <nav class="flex space-x-8 py-2" aria-label="Global">
-            <a href="{{ route('resources.drafts') }}" class="bg-white text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
+            <a href="{{ route('resources.drafts') }}"
+               class="bg-white text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
                aria-current="page">
                 <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>
                 Drafts</a>

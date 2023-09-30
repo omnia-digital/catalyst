@@ -87,6 +87,6 @@ class TeamPolicy
      */
     public function delete(User $user, Team $team)
     {
-        return $user->ownsTeam($team) && ! $team->jobs->count() && ! $team->isDefaultCompany();
+        return $user->ownsTeam($team) && !$team->jobs->count() && !$team->isDefaultCompany();
     }
 }

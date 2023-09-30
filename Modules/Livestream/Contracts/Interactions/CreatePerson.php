@@ -2,21 +2,25 @@
 
 namespace People\App\Contracts\Interactions;
 
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Validation\Validator;
+use Laravel\Spark\Http\Requests\Auth\RegisterRequest;
+
 interface CreatePerson
 {
     /**
      * Get a validator instance for the request.
      *
-     * @param  \Laravel\Spark\Http\Requests\Auth\RegisterRequest  $request
-     * @return \Illuminate\Validation\Validator
+     * @param RegisterRequest $request
+     * @return Validator
      */
     public function validator($request);
 
     /**
      * Create a new user instance in the database.
      *
-     * @param  \Laravel\Spark\Http\Requests\Auth\RegisterRequest  $request
-     * @return \Illuminate\Contracts\Auth\Authenticatable
+     * @param RegisterRequest $request
+     * @return Authenticatable
      */
     public function handle($request);
 }

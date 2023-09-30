@@ -1,3 +1,4 @@
+@php use Modules\Social\Models\Post; @endphp
 @extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
@@ -5,18 +6,18 @@
         <div class="mb-3 rounded-b-lg px-4 flex items-center justify-between bg-primary">
             <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Resources') }}</x-library::heading.1>
             <div class="flex items-center">
-                @if (auth()->user()?->can('create', \Modules\Social\Models\Post::class))
+                @if (auth()->user()?->can('create', Post::class))
                     @auth
                         <x-library::button
                                 class="py-2 w-full h-10"
                                 wire:click="$toggle('showPostEditor')"
-                        >{{ \Trans::get('Add New Resource') }}</x-library::button>
+                        >{{ Trans::get('Add New Resource') }}</x-library::button>
                         <livewire:resources::pages.resources.create/>
                     @else
                         <x-library::button
                                 class="py-2 w-full h-10"
                                 wire:click="$toggle('showPostEditor')"
-                        >{{ \Trans::get('Add New Resource') }}</x-library::button>
+                        >{{ Trans::get('Add New Resource') }}</x-library::button>
                         <livewire:authentication-modal/>
                     @endauth
                 @endif
@@ -25,14 +26,17 @@
 
         @if ($showPostEditor)
             <div class="my-4 mx-auto max-w-post-card-max-w">
-                <x-library::heading.2 class="mb-2">{{ \Trans::get('Add New Resource') }}</x-library::heading.2>
-                <livewire:social::news-feed-editor :postType="\Modules\Social\Enums\PostType::RESOURCE" submitButtonText="Add Resource" placeholder="What do you want to call this resource?"/>
+                <x-library::heading.2 class="mb-2">{{ Trans::get('Add New Resource') }}</x-library::heading.2>
+                <livewire:social::news-feed-editor :postType="\Modules\Social\Enums\PostType::RESOURCE"
+                                                   submitButtonText="Add Resource"
+                                                   placeholder="What do you want to call this resource?"/>
             </div>
         @endif
 
         <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
             <nav class="flex space-x-8 py-2" aria-label="Global">
-                <a href="{{ route('resources.home') }}" class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
+                <a href="{{ route('resources.home') }}"
+                   class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
                    aria-current="page">
                     <x-library::icons.icon name="fa-regular fa-photo-film-music" size="w-5 h-5" class="pr-2"/>
                     All Resources</a>
@@ -47,7 +51,8 @@
             {{-- Drafts/Published    --}}
             <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
                 <nav class="flex space-x-8 py-2" aria-label="Global">
-                    <a href="{{ route('resources.drafts') }}" class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
+                    <a href="{{ route('resources.drafts') }}"
+                       class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
                        aria-current="page">
                         <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>
                         Drafts</a>
@@ -67,7 +72,8 @@
                 @forelse ($resources as $post)
                     <div class="w-full break-inside">
                         <div class="">
-                            <livewire:social::components.post-card-dynamic :post="$post" :wire:key="'post-card-' . $post->id"/>
+                            <livewire:social::components.post-card-dynamic :post="$post"
+                                                                           :wire:key="'post-card-' . $post->id"/>
                             {{--                        <livewire:resources::components.resource-card--}}
                             {{--                                as="li"--}}
                             {{--                                :post="$resource"--}}
@@ -98,7 +104,7 @@
                         },
                         {
                             id: 1,
-                            title: 'Top '.{{ \Platform::getTeamsWordUpper() }},
+                            title: 'Top '.{{ Platform::getTeamsWordUpper() }},
                             component: 'social.top-teams'
                         },
                         {

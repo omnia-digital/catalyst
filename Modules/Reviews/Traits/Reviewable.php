@@ -7,17 +7,17 @@ use Modules\Reviews\Models\Review;
 
 trait Reviewable
 {
+    public function reviewedBy(User $user)
+    {
+        return $this->reviews()->where('user_id', $user->id)->exists();
+    }
+
     /**
      * Get the model's reviews
      */
     public function reviews()
     {
         return $this->morphMany(Review::class, 'reviewable');
-    }
-
-    public function reviewedBy(User $user)
-    {
-        return $this->reviews()->where('user_id', $user->id)->exists();
     }
 
     public function getCurrentUserReview()

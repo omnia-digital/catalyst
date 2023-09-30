@@ -6,9 +6,9 @@
             </h2>
 
             @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                <x-jet-dropdown-link href="{{ route('teams.create') }}">
+                <x-dropdown-link href="{{ route('teams.create') }}">
                     {{ __('Create New Organization') }}
-                </x-jet-dropdown-link>
+                </x-dropdown-link>
             @endcan
         </div>
     </x-slot>
@@ -19,16 +19,16 @@
 
             @livewire('teams.team-member-manager', ['team' => $team])
 
-            <x-jet-section-border/>
+            <x-section-border/>
 
             @livewire('team.update-timezone')
 
-            <x-jet-section-border/>
+            <x-section-border/>
 
             @livewire('team.update-default-bible')
 
             @if (Gate::check('delete', $team) && ! $team->personal_team)
-                <x-jet-section-border/>
+                <x-section-border/>
 
                 <div class="mt-10 sm:mt-0">
                     @livewire('teams.delete-team-form', ['team' => $team])

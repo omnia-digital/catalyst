@@ -134,8 +134,8 @@ trait WithFormBuilder
                     ->lazy()
                     ->afterStateUpdated(function (Closure $set, $state) {
                         $name = Str::of($state)
-                            ->snake()
-                            ->lower() . uniqid('_');
+                                ->snake()
+                                ->lower() . uniqid('_');
                         $set('name', $name);
                     })
                     ->required(),

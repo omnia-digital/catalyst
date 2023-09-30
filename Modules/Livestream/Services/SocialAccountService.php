@@ -3,6 +3,10 @@
 namespace Modules\Livestream\Services;
 
 use Exception;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+use Facebook\Facebook;
+use Facebook\FacebookResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use Modules\Livestream\SocialAccount;
@@ -15,11 +19,11 @@ class SocialAccountService extends Service
     /**
      * StreamService constructor.
      *
-     * @param  StreamIntegration  $streamIntegration
+     * @param StreamIntegration $streamIntegration
      */
     public function __construct(SocialAccount $socialAccount = null)
     {
-        if (! empty($socialAccount)) {
+        if (!empty($socialAccount)) {
             $this->_socialAccount = $socialAccount;
         }
     }
@@ -27,11 +31,11 @@ class SocialAccountService extends Service
     /**
      * Create a Live Video on a Facebook Stream Integration
      *
-     * @param  array  $params
-     * @return \Facebook\FacebookResponse
+     * @param array $params
+     * @return FacebookResponse
      *
-     * @throws \Facebook\Exceptions\FacebookResponseException
-     * @throws \Facebook\Exceptions\FacebookSDKException
+     * @throws FacebookResponseException
+     * @throws FacebookSDKException
      */
     public function getFacebookPages($params = [])
     {
@@ -39,22 +43,22 @@ class SocialAccountService extends Service
             if (empty($this->_socialAccount) || empty($this->_socialAccount->id)) {
                 throw new ModelNotFoundException('Social Account not found');
             }
-            $fb = new \Facebook\Facebook([
+            $fb = new Facebook([
                 'app_id' => env('FACEBOOK_APP_ID'),
                 'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
                 'default_graph_version' => 'v' . env('FACEBOOK_API_VERSION'),
             ]);
-            if (! empty($params['access_token'])) {
+            if (!empty($params['access_token'])) {
                 $access_token = $params['access_token'];
             } else {
                 $access_token = $this->_socialAccount->token;
             }
 
             return $fb->get('me/accounts?access_token=' . $access_token)->getDecodedBody()['data'];
-        } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+        } catch (FacebookResponseException $e) {
             Log::error('Graph returned an error: ' . $e->getMessage());
             throw $e;
-        } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+        } catch (FacebookSDKException $e) {
             Log::error('Facebook SDK returned an error: ' . $e->getMessage());
             throw $e;
         } catch (Exception $e) {

@@ -7,6 +7,8 @@ use App\Traits\Coupon\HasCoupon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\Jobs\Enums\JobAddons;
 use Modules\Jobs\Support\Transaction\HasTransaction;
 use Spatie\Sluggable\HasSlug;
@@ -67,6 +69,11 @@ class JobPosition extends Model
             ->saveSlugsTo('slug');
     }
 
+    public function skills()
+    {
+        return $this->skillsTags();
+    }
+
     public function skillsTags()
     {
         return $this
@@ -75,13 +82,8 @@ class JobPosition extends Model
             ->ordered();
     }
 
-    public function skills()
-    {
-        return $this->skillsTags();
-    }
-
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function company()
     {
@@ -89,7 +91,7 @@ class JobPosition extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function client()
     {
@@ -104,13 +106,13 @@ class JobPosition extends Model
     /**
      * Get featured jobs
      *
-     * @param  null  $inDays
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @param null $inDays
+     * @return BelongsToMany
      */
     public function scopeFeatured($query, $inDays = null)
     {
-        return $query->whereHas('addons', fn ($query) => $query->where('code', JobAddons::FEATURED_JOB))
-            ->when($inDays, fn ($query) => $query->whereDate('created_at', '>=', now()->subDays($inDays)));
+        return $query->whereHas('addons', fn($query) => $query->where('code', JobAddons::FEATURED_JOB))
+            ->when($inDays, fn($query) => $query->whereDate('created_at', '>=', now()->subDays($inDays)));
     }
 
     /**

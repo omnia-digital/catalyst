@@ -1,11 +1,15 @@
 <?php
 
+use App\Models\Team;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Forms\Models\Form;
+use Modules\Forms\Models\FormTemplate;
+use Modules\Forms\Models\FormType;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -34,9 +38,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->json('content');
-            $table->foreignIdFor(\Modules\Forms\Models\FormTemplate::class, 'form_template_id')->index()->nullable();
-            $table->foreignIdFor(\Modules\Forms\Models\FormType::class, 'form_type_id')->index()->nullable();
-            $table->foreignIdFor(\App\Models\Team::class, 'team_id')->index()->nullable();
+            $table->foreignIdFor(FormTemplate::class, 'form_template_id')->index()->nullable();
+            $table->foreignIdFor(FormType::class, 'form_type_id')->index()->nullable();
+            $table->foreignIdFor(Team::class, 'team_id')->index()->nullable();
             $table->boolean('is_used_on_all_teams')->default(false);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
@@ -44,9 +48,9 @@ return new class extends Migration
 
         Schema::create('form_submissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\Modules\Forms\Models\Form::class, 'form_id')->index();
-            $table->foreignIdFor(\App\Models\User::class, 'user_id')->index();
-            $table->foreignIdFor(\App\Models\Team::class, 'team_id')->index()->nullable();
+            $table->foreignIdFor(Form::class, 'form_id')->index();
+            $table->foreignIdFor(User::class, 'user_id')->index();
+            $table->foreignIdFor(Team::class, 'team_id')->index()->nullable();
             $table->json('data');
             $table->timestamps();
         });

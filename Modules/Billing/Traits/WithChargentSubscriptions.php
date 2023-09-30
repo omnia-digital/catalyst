@@ -8,7 +8,7 @@ trait WithChargentSubscriptions
 {
     public function chargentSubscription()
     {
-        if (! class_exists(ChargentSubscription::class)) {
+        if (!class_exists(ChargentSubscription::class)) {
             return;
         }
 

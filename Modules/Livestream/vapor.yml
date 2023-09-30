@@ -1,42 +1,42 @@
 id: 22562
 name: omnia-livestream
 environments:
-    production:
-        domain: app.omnia.church
-        database: omnia-db-prod
-        storage: omnia-main-prod
-        runtime: docker
-        memory: 1024
-        timeout: 30
-        cli-memory: 512
-        cli-timeout: 600
-        concurrency: 100
-        queue-concurrency: 5
-        gateway-version: 2
-#        warm: 1
-        build:
-            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
-            - 'php artisan event:cache'
-            - 'yarn --frozen-lockfile && yarn run prod && yarn run omnia-script && rm -rf node_modules'
-        deploy:
-            - 'php artisan migrate --force'
-        queues:
-            - default
-            - mail
-    staging:
-        domain: staging.omnia.church
-        database: omnia-db-staging
-        storage: omnia-stage-main
-        runtime: docker
-        memory: 1024
-        cli-memory: 512
-        cli-timeout: 600
-        concurrency: 15
-        queue-concurrency: 2
-        gateway-version: 2
-        build:
-            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
-            - 'php artisan event:cache'
-            - 'yarn --frozen-lockfile && yarn run dev && yarn run omnia-script && rm -rf node_modules'
+  production:
+    domain: app.omnia.church
+    database: omnia-db-prod
+    storage: omnia-main-prod
+    runtime: docker
+    memory: 1024
+    timeout: 30
+    cli-memory: 512
+    cli-timeout: 600
+    concurrency: 100
+    queue-concurrency: 5
+    gateway-version: 2
+    #        warm: 1
+    build:
+      - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
+      - 'php artisan event:cache'
+      - 'yarn --frozen-lockfile && yarn run prod && yarn run omnia-script && rm -rf node_modules'
+    deploy:
+      - 'php artisan migrate --force'
+    queues:
+      - default
+      - mail
+  staging:
+    domain: staging.omnia.church
+    database: omnia-db-staging
+    storage: omnia-stage-main
+    runtime: docker
+    memory: 1024
+    cli-memory: 512
+    cli-timeout: 600
+    concurrency: 15
+    queue-concurrency: 2
+    gateway-version: 2
+    build:
+      - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
+      - 'php artisan event:cache'
+      - 'yarn --frozen-lockfile && yarn run dev && yarn run omnia-script && rm -rf node_modules'
 #        deploy:
 #            - 'php artisan migrate --force'

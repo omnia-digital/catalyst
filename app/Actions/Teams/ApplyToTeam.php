@@ -4,12 +4,10 @@ namespace App\Actions\Teams;
 
 use App\Models\User;
 use Closure;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Jetstream\Events\InvitedTeamMember;
 use Laravel\Jetstream\Jetstream;
-use Laravel\Jetstream\Mail\TeamInvitation;
 use Laravel\Jetstream\Rules\Role;
 use Trans;
 
@@ -18,8 +16,8 @@ class ApplyToTeam
     /**
      * Apply to a team.
      *
-     * @param  mixed  $team
-     * @param  int  $userID
+     * @param mixed $team
+     * @param int $userID
      * @return void
      */
     public function apply($team, $userID, string $role = null)
@@ -39,8 +37,8 @@ class ApplyToTeam
     /**
      * Validate the invite member operation.
      *
-     * @param  mixed  $team
-     * @param  int  $userID
+     * @param mixed $team
+     * @param int $userID
      * @return void
      */
     protected function validate($team, string $userID, ?string $role)
@@ -58,25 +56,28 @@ class ApplyToTeam
     /**
      * Get the validation rules for applying user.
      *
-     * @param  mixed  $team
+     * @param mixed $team
      * @return array
      */
     protected function rules($team)
     {
         return array_filter([
-            'user_id' => ['required', Rule::unique('team_applications')->where(function ($query) use ($team) {
-                $query->where('team_id', $team->id);
-            })],
+            'user_id' => [
+                'required',
+                Rule::unique('team_applications')->where(function ($query) use ($team) {
+                    $query->where('team_id', $team->id);
+                })
+            ],
             'role' => Jetstream::hasRoles()
-                            ? ['required', 'string', new Role]
-                            : null,
+                ? ['required', 'string', new Role]
+                : null,
         ]);
     }
 
     /**
      * Ensure that the user is not already on the team.
      *
-     * @param  mixed  $team
+     * @param mixed $team
      * @return Closure
      */
     protected function ensureUserIsNotAlreadyOnTeam($team, string $userID)

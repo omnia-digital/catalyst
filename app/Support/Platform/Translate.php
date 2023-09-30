@@ -14,7 +14,7 @@ class Translate
         $newWordString = '';
         foreach ($wordsInString as $originalWord) {
             $checkForPeriod = explode('.', $originalWord);
-            if (! empty($checkForPeriod[1])) {
+            if (!empty($checkForPeriod[1])) {
                 $originalWord = $checkForPeriod[0];
                 $period = $checkForPeriod[1];
             }
@@ -40,7 +40,7 @@ class Translate
             }
 
             $newWordString .= $newWord;
-            if (! empty($period)) {
+            if (!empty($period)) {
                 $newWordString .= $period;
             }
             $newWordString .= ' ';

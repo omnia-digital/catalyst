@@ -5,26 +5,33 @@
     <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
         <div class="flex items-center pr-3">
             <span class="mr-3 font-bold">Sort By</span>
-            <x-library::dropdown.index :position="'left'" class="z-10 p-2 rounded-md bg-neutral" :dropdownClasses="'bg-secondary border-none shadow-md'">
+            <x-library::dropdown.index :position="'left'" class="z-10 p-2 rounded-md bg-neutral"
+                                       :dropdownClasses="'bg-secondary border-none shadow-md'">
                 <x-slot:trigger class=" hover:cursor-pointer text-base-text-color hover:text-primary">
                     {{ $sortLabels[$orderBy] }}
                     <i class="fa-solid fa-caret-down ml-1"></i>
                     </x-slot>
                     @foreach ($sortLabels as $key => $item)
-                        <x-library::dropdown.item class="bg-secondary border-none" wire:click.prevent="sortBy('{{ $key }}')">{{ $item }}</x-library::dropdown.item>
+                        <x-library::dropdown.item class="bg-secondary border-none"
+                                                  wire:click.prevent="sortBy('{{ $key }}')">{{ $item }}</x-library::dropdown.item>
                 @endforeach
             </x-library::dropdown.index>
             @if ($sortOrder === 'asc')
-                <x-heroicon-o-arrow-narrow-up class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-primary" wire:click.prevent="toggleSortOrder()"/>
+                <x-heroicon-o-arrow-narrow-up
+                        class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-primary"
+                        wire:click.prevent="toggleSortOrder()"/>
             @else
-                <x-heroicon-o-arrow-narrow-down class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-primary" wire:click.prevent="toggleSortOrder()"/>
+                <x-heroicon-o-arrow-narrow-down
+                        class="w-4 ml-2 hover:cursor-pointer text-base-text-color hover:text-primary"
+                        wire:click.prevent="toggleSortOrder()"/>
             @endif
         </div>
         <div class="flex-1 min-w-0 bg-secondary p-2 rounded-lg">
             <div class="filters flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
                 <div class="w-full relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
+                        <x-heroicon-o-search class="h-5 w-5 text-light-text-color dark:text-light-text-color"
+                                             aria-hidden="true"/>
                     </div>
                     <livewire:partials.search-component/>
                 </div>
@@ -38,7 +45,8 @@
             </div>
             @unless (in_array('location', $skipFilters))
                 <div class="sm:min-w-[110px]">
-                    <x-library::input.text wire:model.live.debounce.450ms="filters.location" placeholder="{{ Trans::get('Location') }}"/>
+                    <x-library::input.text wire:model.live.debounce.450ms="filters.location"
+                                           placeholder="{{ Trans::get('Location') }}"/>
                 </div>
             @endunless
 
@@ -55,7 +63,8 @@
             @unless (in_array('my_teams', $skipFilters))
                 @auth
                     <div class="flex items-center space-x-2">
-                        <x-library::input.label for="my_teams" color="text-base-text-color">{{ Trans::get('My Teams Only') }}</x-library::input.label>
+                        <x-library::input.label for="my_teams"
+                                                color="text-base-text-color">{{ Trans::get('My Teams Only') }}</x-library::input.label>
                         <x-library::input.checkbox wire:model.live="filters.my_teams" name="my_teams"/>
                     </div>
                 @endauth
@@ -65,7 +74,8 @@
 
         @unless (in_array('tags', $skipFilters))
             <div class="min-w-[135px]">
-                <x-library::input.selects wire:model.live="tags" :options="$this->allTags" placeholder="Search by Tags"/>
+                <x-library::input.selects wire:model.live="tags" :options="$this->allTags"
+                                          placeholder="Search by Tags"/>
             </div>
         @endunless
 

@@ -21,7 +21,8 @@
             </div>
         @else
             <div class="group pointer-events-none w-full rounded-xl overflow-hidden aspect-w-10 aspect-h-2 relative">
-                <img class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none" src="{{ $episode->thumbnail }}" alt="{{ $episode->title }}">
+                <img class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none"
+                     src="{{ $episode->thumbnail }}" alt="{{ $episode->title }}">
 
                 @if ($episode->isLive())
                     <div class="absolute top-0 left-0">
@@ -101,7 +102,8 @@
                     <ul class="ml-3 flex items-center space-x-3">
                         @foreach ($episode->media->sortBy('mime_type') as $attachment)
                             <li class="items-center">
-                                <a href="{{ route('attachments.download', $attachment->id) }}" download="{{ $attachment->name }}" target="_blank">
+                                <a href="{{ route('attachments.download', $attachment->id) }}"
+                                   download="{{ $attachment->name }}" target="_blank">
                                     <x-attachment-icon :for="$attachment->mime_type"/>
                                 </a>
                             </li>

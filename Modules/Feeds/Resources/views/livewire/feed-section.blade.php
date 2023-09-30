@@ -1,3 +1,4 @@
+@php use Modules\Feeds\Services\FeedManager; @endphp
 <div wire:init="ready">
     @if ($loaded)
         <div class="space-y-2">
@@ -13,7 +14,8 @@
                                                 @if ($feed->get_image_link())
                                                     <a href="{{ $feed->get_image_link() }}" target="_blank">
                                                         @endif
-                                                        <img src="{{ $feed->get_image_url() }}" class="h-12 rounded-full object-cover"/>
+                                                        <img src="{{ $feed->get_image_url() }}"
+                                                             class="h-12 rounded-full object-cover"/>
                                                         @if ($feed->get_image_link())
                                                     </a>
                                                 @endif
@@ -21,8 +23,10 @@
 
                                             @if ($showDescription)
                                                 <div>
-                                                    <a href="{{ $feed->get_link() }}" target="_blank" class="flex items-center text-neutral-dark space-x-2 hover:underline">
-                                                        <x-library::heading.2 class="text-heading-default-color uppercase tracking-wide font-semibold">{!! $this->sanitize($feed->get_title())
+                                                    <a href="{{ $feed->get_link() }}" target="_blank"
+                                                       class="flex items-center text-neutral-dark space-x-2 hover:underline">
+                                                        <x-library::heading.2
+                                                                class="text-heading-default-color uppercase tracking-wide font-semibold">{!! $this->sanitize($feed->get_title())
                                                          !!}</x-library::heading.2>
                                                     </a>
                                                     <p>{{ $feed->get_description() }}</p>
@@ -53,7 +57,7 @@
                     @endif
                     <div class="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 mt-4">
                         @foreach ($feed->get_items(0,4) as $item)
-                            @empty(\Modules\Feeds\Services\FeedManager::getDefaultItemImage($item))
+                            @empty(FeedManager::getDefaultItemImage($item))
                                 <div>
                                     <a href="{{ $item->get_link() }}" target="_blank">
                                         <div class="w-full bg-secondary border border-neutral-light rounded group relative hover:cursor-pointer hover:ring-1 hover:ring-black">
@@ -80,7 +84,7 @@
                             @else
                                 <a href="{{ $item->get_link() }}" target="_blank">
                                     <div class="w-full bg-secondary border border-neutral-light rounded group relative hover:cursor-pointer hover:ring-1 hover:ring-black"
-                                         style="background-image: url({{ \Modules\Feeds\Services\FeedManager::getDefaultItemImage($item) }}); background-size: cover; background-repeat: no-repeat;">
+                                         style="background-image: url({{ FeedManager::getDefaultItemImage($item) }}); background-size: cover; background-repeat: no-repeat;">
                                         <div class="h-80 rounded"></div>
                                         <div class="space-y-2 p-4 bg-secondary rounded absolute bottom-0 right-0 left-0">
                                             <div class="flex justify-between">

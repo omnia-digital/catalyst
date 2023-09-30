@@ -4,15 +4,6 @@ namespace Modules\Livestream\Services;
 
 class DefaultApiCorsProfile
 {
-    public function allowCredentialsToString(): string
-    {
-        if (config('cors.default_profile.allow_credentials')) {
-            return 'true';
-        } else {
-            return 'false';
-        }
-    }
-
     public function addCorsHeaders($response)
     {
         $response->headers->set('Access-Control-Allow-Origin', $this->allowedOriginsToString());
@@ -20,6 +11,15 @@ class DefaultApiCorsProfile
         $response->headers->set('Access-Control-Expose-Headers', $this->toString($this->exposeHeaders()));
 
         return $response;
+    }
+
+    public function allowCredentialsToString(): string
+    {
+        if (config('cors.default_profile.allow_credentials')) {
+            return 'true';
+        } else {
+            return 'false';
+        }
     }
 
     public function addPreflightHeaders($response)

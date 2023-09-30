@@ -4,6 +4,7 @@ namespace Modules\Livestream\Services\Mux;
 
 use GuzzleHttp\Client;
 use MuxPhp\Api\LiveStreamsApi;
+use MuxPhp\ApiException;
 use MuxPhp\Configuration;
 use MuxPhp\Models\CreateAssetRequest;
 use MuxPhp\Models\CreateLiveStreamRequest;
@@ -24,7 +25,7 @@ class MuxLivestream
     /**
      * Create a livestream.
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function createLivestreamRequest(): ?LiveStream
     {
@@ -46,9 +47,9 @@ class MuxLivestream
     }
 
     /**
-     * @param  null  $passthrough
+     * @param null $passthrough
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function createSimulcastTarget($streamId, $url, $streamKey, $passthrough = null): ?SimulcastTarget
     {
@@ -62,7 +63,7 @@ class MuxLivestream
     }
 
     /**
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function deleteSimulcastTargets($streamId, $simulcastTargetId): void
     {
@@ -74,7 +75,7 @@ class MuxLivestream
      *
      * @return object|null
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function finishLivestreamRequest($streamId)
     {

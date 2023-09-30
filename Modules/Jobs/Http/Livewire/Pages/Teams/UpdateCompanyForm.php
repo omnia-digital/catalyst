@@ -14,7 +14,7 @@ class UpdateCompanyForm extends Component
     /**
      * Mount the component.
      *
-     * @param  mixed  $company
+     * @param mixed $company
      * @return void
      */
     public function mount($company)

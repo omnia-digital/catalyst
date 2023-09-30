@@ -5,8 +5,8 @@
 ])
 
 <label
-    for="{{ $for ?: \Illuminate\Support\Str::kebab($value ?? '') }}"
-    {{ $attributes->merge(['class' => 'block mb-1 font-medium']) }}
+        for="{{ $for ?: \Illuminate\Support\Str::kebab($value ?? '') }}"
+        {{ $attributes->merge(['class' => 'block mb-1 font-medium']) }}
 >
     {{ $value ?? $slot ?? null }}
 

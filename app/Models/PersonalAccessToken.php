@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property string $token
  * @property string $abilities
- * @property int    $last_used_at
- * @property int    $created_at
- * @property int    $updated_at
+ * @property int $last_used_at
+ * @property int $created_at
+ * @property int $updated_at
  */
 class PersonalAccessToken extends Model
 {

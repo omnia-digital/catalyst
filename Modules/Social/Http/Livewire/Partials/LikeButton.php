@@ -34,7 +34,7 @@ class LikeButton extends Component
 
     public function like()
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Platform::isAllowingGuestAccess() && !auth()->check()) {
             $this->showAuthenticationModal(route('social.posts.show', $this->model));
 
             return;

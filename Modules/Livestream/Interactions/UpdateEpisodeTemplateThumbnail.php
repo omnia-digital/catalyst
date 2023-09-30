@@ -4,6 +4,7 @@ namespace Modules\Livestream\Interactions;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 use SplFileInfo;
 
@@ -64,11 +65,11 @@ class UpdateEpisodeTemplateThumbnail
     /**
      * Resize an image instance for the given file.
      *
-     * @param  SplFileInfo  $file
-     * @return \Intervention\Image\Image
+     * @param SplFileInfo $file
+     * @return Image
      */
     protected function formatImage($file)
     {
-        return (string) $this->images->make($file->path())->fit(1920, 1080)->encode();
+        return (string)$this->images->make($file->path())->fit(1920, 1080)->encode();
     }
 }

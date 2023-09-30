@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Partials;
 
+use Illuminate\View\View;
 use Livewire\Component;
 
 class ProfileBadge extends Component
@@ -24,7 +25,7 @@ class ProfileBadge extends Component
     /**
      * Render the component.
      */
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         return view('livewire.partials.profile-badge');
     }

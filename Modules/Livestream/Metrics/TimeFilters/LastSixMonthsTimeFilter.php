@@ -11,24 +11,24 @@ class LastSixMonthsTimeFilter extends TimeFilter
         return 'Last 6 Months';
     }
 
-    public function from(): Carbon
-    {
-        return now()->subMonths(6)->startOfMonth()->startOfDay();
-    }
-
-    public function to(): Carbon
-    {
-        return now()->endOfDay();
-    }
-
     public function previousFrom(): Carbon
     {
         return $this->from()->subMonths(6)->startOfMonth()->startOfDay();
     }
 
+    public function from(): Carbon
+    {
+        return now()->subMonths(6)->startOfMonth()->startOfDay();
+    }
+
     public function previousTo(): Carbon
     {
         return $this->to()->subMonths(6)->endOfMonth()->endOfDay();
+    }
+
+    public function to(): Carbon
+    {
+        return now()->endOfDay();
     }
 
     public function step(): string

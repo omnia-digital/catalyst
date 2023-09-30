@@ -7,19 +7,15 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
-use Filament\Tables;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Table;
 use STS\FilamentImpersonate\Impersonate;
 
 class UserResource extends Resource
@@ -168,6 +164,6 @@ class UserResource extends Resource
 
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn (Model $record): string => route('users.edit', ['record' => $record]);
+        return fn(Model $record): string => route('users.edit', ['record' => $record]);
     }
 }

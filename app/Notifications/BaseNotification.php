@@ -30,6 +30,17 @@ abstract class BaseNotification extends Notification implements ShouldQueue
         }
     }
 
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param mixed $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return static::getChannels();
+    }
+
     public static function getChannels()
     {
         if (static::$channels) {
@@ -38,34 +49,11 @@ abstract class BaseNotification extends Notification implements ShouldQueue
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return static::getChannels();
-    }
-
-    /**
      * @return string[]
      */
     public function getOptInSubscriptions(): array
     {
         return ['sms'];
-    }
-
-    public function toArray($notifiable)
-    {
-        $url = route('notifications');
-
-        return NotificationCenter::make()
-            ->icon('heroicon-o-user-group')
-            ->success('Success!')
-            ->actionLink($url)
-            ->actionText('View Notifications')
-            ->toArray();
     }
 
     public function toMail(object $notifiable)
@@ -87,6 +75,18 @@ abstract class BaseNotification extends Notification implements ShouldQueue
 //            ->greeting('Hello!')
 //            ->line('You have a new Notification!')
 //            ->action('View Notifications', $url);
+    }
+
+    public function toArray($notifiable)
+    {
+        $url = route('notifications');
+
+        return NotificationCenter::make()
+            ->icon('heroicon-o-user-group')
+            ->success('Success!')
+            ->actionLink($url)
+            ->actionText('View Notifications')
+            ->toArray();
     }
 
     /**

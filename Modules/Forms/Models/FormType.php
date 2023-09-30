@@ -22,24 +22,24 @@ class FormType extends Model
         return self::where('for', 'teams')->get();
     }
 
-    public static function teamApplicationForm()
-    {
-        return self::where('slug', 'team-member-application-form')->first();
-    }
-
     public static function teamApplicationFormId()
     {
         return self::teamApplicationForm()?->id;
     }
 
-    public static function userRegistrationForm()
+    public static function teamApplicationForm()
     {
-        return self::where('slug', 'registration')->first();
+        return self::where('slug', 'team-member-application-form')->first();
     }
 
     public static function userRegistrationFormId()
     {
         return self::userRegistrationForm()?->id;
+    }
+
+    public static function userRegistrationForm()
+    {
+        return self::where('slug', 'registration')->first();
     }
 
     public function getSlugOptions(): SlugOptions

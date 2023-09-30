@@ -16,7 +16,7 @@ class PolygonFeedItem extends FeedItem
     {
         $return = $this->get_item_tags(SIMPLEPIE_NAMESPACE_ATOM_10, 'content');
 
-        if (! isset($this->data['content'])) {
+        if (!isset($this->data['content'])) {
             if ($return = $this->get_item_tags(SIMPLEPIE_NAMESPACE_ATOM_10, 'content')) {
                 $this->data['content'] = html_entity_decode($return[0]['data']);
             } else {

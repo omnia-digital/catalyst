@@ -23,15 +23,7 @@ class MuxAsset
     }
 
     /**
-     * @throws \MuxPhp\ApiException
-     */
-    public function getAsset(string $muxAssetId): AssetResponse
-    {
-        return $this->assetsApi->getAsset($muxAssetId);
-    }
-
-    /**
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function deleteAsset(string $muxAssetId): void
     {
@@ -45,26 +37,18 @@ class MuxAsset
     }
 
     /**
-     * Get Mux Asset Api instance.
-     */
-    public function getInstance(): AssetsApi
-    {
-        return $this->assetsApi;
-    }
-
-    /**
      *  Update Mp4 support on an asset.
      *
      * @return Asset|null
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function addAssetMP4Support(string $assetId, string $supportType = 'standard')
     {
         $asset = $this->assetsApi->getAsset($assetId)->getData();
         $mp4Support = $asset->getMp4Support();
 
-        if (! empty($mp4Support) && $mp4Support === 'standard') {
+        if (!empty($mp4Support) && $mp4Support === 'standard') {
             return null;
         }
 
@@ -80,6 +64,14 @@ class MuxAsset
         return $assetResponse->getData();
     }
 
+    /**
+     * @throws ApiException
+     */
+    public function getAsset(string $muxAssetId): AssetResponse
+    {
+        return $this->assetsApi->getAsset($muxAssetId);
+    }
+
     public function createFromUrl(string $url, array $options = []): Asset
     {
         $options = array_merge(['mp4_support' => 'standard'], $options);
@@ -90,6 +82,14 @@ class MuxAsset
         ]));
 
         return $this->getInstance()->createAsset($createAssetRequest)->getData();
+    }
+
+    /**
+     * Get Mux Asset Api instance.
+     */
+    public function getInstance(): AssetsApi
+    {
+        return $this->assetsApi;
     }
 
     public function __call(string $name, array $arguments)

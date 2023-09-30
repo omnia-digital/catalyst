@@ -2,7 +2,9 @@
 
 namespace Modules\Livestream\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\DB;
 use Laravel\Spark\Repositories\LivestreamAccountRepository;
@@ -19,7 +21,7 @@ class LivestreamAccountController extends LivestreamController
     /**
      * Return all livestream accounts
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(Request $request)
     {
@@ -32,10 +34,10 @@ class LivestreamAccountController extends LivestreamController
     /**
      * Store a newly created Account in storage.
      *
-     * @param  Request|LivestreamAccountRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param Request|LivestreamAccountRequest $request
+     * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function store(LivestreamAccountRequest $request)
     {
@@ -46,23 +48,24 @@ class LivestreamAccountController extends LivestreamController
             // Check to make sure that this Account doesn't already have a LivestreamAccount
             // @TODO [Josh] - this check should be moved to the validation in the account request class
             if ($this->_livestreamAccount !== null) {
-                throw new \Exception('This Account already has a Livestream Account');
+                throw new Exception('This Account already has a Livestream Account');
             }
             $user = auth()->user();
             $request = $request->all();
 //            $vhost = WowzaVhost::find(1); // @TODO [Josh] - need to figure out how to find the correct one, this is currently hard coded
 //            $wowzaMediaServer = WowzaMediaServer::find(2);
 
-            $admin_email = (! empty($request['admin_email'])) ? $request['admin_email'] : $this->_user->email;
+            $admin_email = (!empty($request['admin_email'])) ? $request['admin_email'] : $this->_user->email;
             $LivestreamAccount_data = [
                 'admin_email' => $admin_email,
                 'team_id' => $user->currentTeam()->id,
             ];
             $LivestreamAccount_data = array_merge($request, $LivestreamAccount_data);
-            $livestreamAccount = Omnia::interact(LivestreamAccountRepository::class . '@create', [$user, $LivestreamAccount_data]);
-        } catch (\Exception $e) {
+            $livestreamAccount = Omnia::interact(LivestreamAccountRepository::class . '@create',
+                [$user, $LivestreamAccount_data]);
+        } catch (Exception $e) {
             DB::rollBack();
-            throw new \Exception('Failed to Create Livestream Account: ' . $e->getMessage());
+            throw new Exception('Failed to Create Livestream Account: ' . $e->getMessage());
         }
 
         DB::commit();
@@ -91,8 +94,8 @@ class LivestreamAccountController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param  LivestreamAccountRequest|Request  $request
-     * @return \Illuminate\Http\Response
+     * @param LivestreamAccountRequest|Request $request
+     * @return Response
      */
     public function update(LivestreamAccountRequest $request, LivestreamAccount $livestreamAccount)
     {
@@ -118,8 +121,8 @@ class LivestreamAccountController extends LivestreamController
     /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function destroy($id)
     {

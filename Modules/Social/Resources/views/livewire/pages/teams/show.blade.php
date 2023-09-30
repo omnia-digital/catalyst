@@ -1,3 +1,4 @@
+@php use Carbon\Carbon; @endphp
 @extends('social::livewire.layouts.pages.team-profile-layout')
 
 
@@ -34,7 +35,7 @@
                     <div class="card p-1 col-span-12">
                         <div class="py-28 px-12 flex flex-col justify-center items-center text-center">
                             <x-heroicon-o-lock-closed class="w-20 h-20"/>
-                            <p class="text-lg">{{ \Trans::get('You must be a member of this Team to view content and participate in discussions.') }}</p>
+                            <p class="text-lg">{{ Trans::get('You must be a member of this Team to view content and participate in discussions.') }}</p>
                             <div class="my-2">
                                 <x-teams.apply-button :team="$team"/>
                             </div>
@@ -57,27 +58,27 @@
                             <p class="text-sm flex-1">{{ $team->summary }}</p>
                             <div class="text-xs grid grid-cols-4 grid-rows-4 gap-1 items-center">
                                 @if ($team->start_date)
-                                <span class="col-span-1 text-gray-400 text-2xs uppercase">Launch Date</span>
-                                <div class="col-span-3 flex items-center space-x-2">
-                                    <x-heroicon-o-calendar class="w-4 h-4"/>
-                                    <span>{{ \Carbon\Carbon::parse($team->start_date)->toFormattedDateString() }}</span>
-                                </div>
+                                    <span class="col-span-1 text-gray-400 text-2xs uppercase">Launch Date</span>
+                                    <div class="col-span-3 flex items-center space-x-2">
+                                        <x-heroicon-o-calendar class="w-4 h-4"/>
+                                        <span>{{ Carbon::parse($team->start_date)->toFormattedDateString() }}</span>
+                                    </div>
                                 @endif
                                 @if ($team->end_date)
-                                <span class="col-span-1 text-gray-400 text-2xs uppercase">End Date</span>
-                                <div class="col-span-3 flex items-center space-x-2">
-                                    <x-heroicon-o-calendar class="w-4 h-4"/>
-                                    <span>{{ \Carbon\Carbon::parse($team->end_date)->toFormattedDateString() }}</span>
-                                </div>
+                                    <span class="col-span-1 text-gray-400 text-2xs uppercase">End Date</span>
+                                    <div class="col-span-3 flex items-center space-x-2">
+                                        <x-heroicon-o-calendar class="w-4 h-4"/>
+                                        <span>{{ Carbon::parse($team->end_date)->toFormattedDateString() }}</span>
+                                    </div>
                                 @endif
-                                    @if ($team->location_short)
+                                @if ($team->location_short)
 
                                     <span class="col-span-1 text-gray-400 text-2xs uppercase">Location:</span>
-                                <div class="col-span-3 flex items-center space-x-2">
-                                    <x-heroicon-o-location-marker class="w-4 h-4"/>
-                                    <span>{{ $team->location_short ?? "Not Set" }}</span>
-                                </div>
-                                    @endif
+                                    <div class="col-span-3 flex items-center space-x-2">
+                                        <x-heroicon-o-location-marker class="w-4 h-4"/>
+                                        <span>{{ $team->location_short ?? "Not Set" }}</span>
+                                    </div>
+                                @endif
                                 <span class="col-span-1 text-gray-400 text-2xs uppercase ">Organizer:</span>
                                 <div class="col-span-3 flex items-center space-x-2">
                                     <x-heroicon-s-user-circle class="w-4 h-4"/>
@@ -122,15 +123,16 @@
 
                 @if ($team->content)
                     <div class="card p-4 col-span-12">
-                        <x-library::heading.3>{{ \Trans::get('About') }}</x-library::heading.3>
+                        <x-library::heading.3>{{ Trans::get('About') }}</x-library::heading.3>
                         <div x-data="{readMore: false, longText: @js(strlen($team->content) > 410)}"
                              class="relative">
-                            <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden" :class="(longText && readMore) ? 'h-full max-h-96' : 'max-h-24'">{!! $team->content !!}</p>
+                            <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden"
+                               :class="(longText && readMore) ? 'h-full max-h-96' : 'max-h-24'">{!! $team->content !!}</p>
                             <div x-show="longText && !readMore"
                                  class="bg-gradient-to-t from-white to-transparent absolute bottom-1 left-4 right-2 pt-8">
                                 <a class="block w-full text-right"
                                    href="#"
-                                   @click.prevent="readMore = !readMore">{{ \Trans::get('Read More') }}</a>
+                                   @click.prevent="readMore = !readMore">{{ Trans::get('Read More') }}</a>
                             </div>
                         </div>
                     </div>
@@ -150,7 +152,7 @@
                 <!-- Team Languages -->
                 @if ($team->languages)
                     <div class="card col-span-6 p-4">
-                        <x-library::heading.3>{{ \Trans::get('Languages') }}</x-library::heading.3>
+                        <x-library::heading.3>{{ Trans::get('Languages') }}</x-library::heading.3>
                         <div class="mt-2">
                             <p class="text-dark-text-color">{{ $team->languages }}</p>
                         </div>
@@ -193,21 +195,24 @@
         @if ($this->canViewTeamContent)
             <div>
                 <x-library::modal id="add-awards-modal" maxWidth="2xl">
-                    <x-slot name="title">{{ \Trans::get('Add Awards') }}</x-slot>
+                    <x-slot name="title">{{ Trans::get('Add Awards') }}</x-slot>
                     <x-slot name="content">
                         @if ($userToAddAwardsTo)
                             <div class="w-full flex flex-col">
                                 @forelse ($this->getRemainingAwards($userToAddAwardsTo) as $award)
                                     <div class="mr-4 mt-2 flex items-center">
-                                        <input type="checkbox" wire:model.defer="awardsToAdd" value="{{ $award->id }}" class="mr-2" name="award-item-{{ $award->id }}" id="award-item-{{ $award->id }}">
-                                        <label for="award-item-{{ $award->id }}" class="bg-secondary p-2 flex flex-1 items-center">
+                                        <input type="checkbox" wire:model="awardsToAdd" value="{{ $award->id }}"
+                                               class="mr-2" name="award-item-{{ $award->id }}"
+                                               id="award-item-{{ $award->id }}">
+                                        <label for="award-item-{{ $award->id }}"
+                                               class="bg-secondary p-2 flex flex-1 items-center">
                                             <x-library::icons.icon :name="$award->icon" class="h-4 w-4 mr-4"/>
                                             <p>{{ ucfirst($award->name) }}</p>
                                         </label>
                                     </div>
                                 @empty
                                     <div class="w-full px-4 py-2 text-sm bg-white p-2 flex items-center">
-                                        <p>{{ \Trans::get('No other awards are available') }}</p>
+                                        <p>{{ Trans::get('No other awards are available') }}</p>
                                     </div>
                                 @endforelse
 
@@ -223,7 +228,8 @@
                     </x-slot>
                     <x-slot name="actions">
                         @if ($userToAddAwardsTo)
-                            <x-library::button wire:click="addAward({{ $userToAddAwardsTo->id }})">{{ Trans::get('Add') }}</x-library::button>
+                            <x-library::button
+                                    wire:click="addAward({{ $userToAddAwardsTo->id }})">{{ Trans::get('Add') }}</x-library::button>
                         @endif
                     </x-slot>
                 </x-library::modal>

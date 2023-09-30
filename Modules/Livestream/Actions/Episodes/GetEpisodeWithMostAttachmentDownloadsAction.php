@@ -17,9 +17,11 @@ class GetEpisodeWithMostAttachmentDownloadsAction
 
         // For normal episodes, get all episodes to calculate the attachment downloads count.
         if ($expiredOnly) {
-            $episode = $team->livestreamAccount->episodes()->expired()->whereTotalAttachmentDownloadsInDateRange($from, $to)->orderBy('attachment_downloads_sum_count', 'desc')->first();
+            $episode = $team->livestreamAccount->episodes()->expired()->whereTotalAttachmentDownloadsInDateRange($from,
+                $to)->orderBy('attachment_downloads_sum_count', 'desc')->first();
         } else {
-            $episode = $team->livestreamAccount->episodes()->whereTotalAttachmentDownloadsInDateRange($from, $to)->orderBy('attachment_downloads_sum_count', 'desc')->first();
+            $episode = $team->livestreamAccount->episodes()->whereTotalAttachmentDownloadsInDateRange($from,
+                $to)->orderBy('attachment_downloads_sum_count', 'desc')->first();
         }
 
         return $episode;

@@ -24,7 +24,7 @@ class VideoSourceRegistry
      */
     public function get($name): BaseVideoSource
     {
-        if (! array_key_exists($name, $this->videos)) {
+        if (!array_key_exists($name, $this->videos)) {
             throw new InvalidVideoSourceException('Invalid video source: ' . $name);
         }
 

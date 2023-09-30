@@ -23,7 +23,7 @@ class AttachmentDrawer extends Component
         foreach ($validatedFiles['attached_files'] as $file) {
             $path = $file->store('post-attachments');
 
-            if (! $path) {
+            if (!$path) {
                 // throw some error
             }
 

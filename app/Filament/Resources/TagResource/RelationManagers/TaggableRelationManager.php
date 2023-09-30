@@ -5,8 +5,8 @@ namespace App\Filament\Resources\TagResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 
 class TaggableRelationManager extends RelationManager
 {

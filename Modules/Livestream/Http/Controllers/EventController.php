@@ -3,7 +3,7 @@
 namespace Modules\Livestream\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 use Modules\Livestream\Event;
 use Modules\Livestream\Http\Requests\EventRequest;
 use Modules\Livestream\LivestreamAccount;
@@ -21,7 +21,7 @@ class EventController extends LivestreamController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -31,27 +31,10 @@ class EventController extends LivestreamController
     }
 
     /**
-     * Show the form for creating a new Event.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $LivestreamAccounts = auth()->user()->LivestreamAccounts;
-
-//        foreach ($LivestreamAccounts as $LivestreamAccount) {
-//            $items = $LivestreamAccount->LivestreamApplications;
-//        }
-        $LivestreamAccounts = $LivestreamAccounts->lists('account_name', 'id');
-//        $LivestreamApplications = collect($items)->lists('title', 'id');
-        return view('livestream::event/create', compact('LivestreamAccounts', 'LivestreamApplications'));
-    }
-
-    /**
      * Store a newly created Account in storage.
      *
-     * @param  EventRequest|Request  $request
-     * @return \Illuminate\Http\Response
+     * @param EventRequest|Request $request
+     * @return Response
      */
     public function store(EventRequest $request)
     {
@@ -122,9 +105,26 @@ class EventController extends LivestreamController
     }
 
     /**
+     * Show the form for creating a new Event.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        $LivestreamAccounts = auth()->user()->LivestreamAccounts;
+
+//        foreach ($LivestreamAccounts as $LivestreamAccount) {
+//            $items = $LivestreamAccount->LivestreamApplications;
+//        }
+        $LivestreamAccounts = $LivestreamAccounts->lists('account_name', 'id');
+//        $LivestreamApplications = collect($items)->lists('title', 'id');
+        return view('livestream::event/create', compact('LivestreamAccounts', 'LivestreamApplications'));
+    }
+
+    /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Account $account)
     {
@@ -134,8 +134,8 @@ class EventController extends LivestreamController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Account  $Account
-     * @return \Illuminate\Http\Response
+     * @param Account $Account
+     * @return Response
      */
     public function edit(Account $account)
     {
@@ -147,8 +147,8 @@ class EventController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param  AccountRequest|Request  $request
-     * @return \Illuminate\Http\Response
+     * @param AccountRequest|Request $request
+     * @return Response
      */
     public function update(AccountRequest $request, Account $Account)
     {
@@ -162,8 +162,8 @@ class EventController extends LivestreamController
     /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function destroy($id)
     {

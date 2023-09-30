@@ -1,3 +1,4 @@
+@php use Filament\Facades\Filament; @endphp
 @props([
     'modals' => null,
     'widgetData' => [],
@@ -21,31 +22,31 @@
             </x-filament::header>
         @endif
 
-        {{ \Filament\Facades\Filament::renderHook('page.header-widgets.start') }}
+        {{ Filament::renderHook('page.header-widgets.start') }}
 
         @if ($headerWidgets = $this->getVisibleHeaderWidgets())
             <x-filament::widgets
-                :widgets="$headerWidgets"
-                :columns="$this->getHeaderWidgetsColumns()"
-                :data="$widgetData"
+                    :widgets="$headerWidgets"
+                    :columns="$this->getHeaderWidgetsColumns()"
+                    :data="$widgetData"
             />
         @endif
 
-        {{ \Filament\Facades\Filament::renderHook('page.header-widgets.end') }}
+        {{ Filament::renderHook('page.header-widgets.end') }}
 
         {{ $slot }}
 
-        {{ \Filament\Facades\Filament::renderHook('page.footer-widgets.start') }}
+        {{ Filament::renderHook('page.footer-widgets.start') }}
 
         @if ($footerWidgets = $this->getVisibleFooterWidgets())
             <x-filament::widgets
-                :widgets="$footerWidgets"
-                :columns="$this->getFooterWidgetsColumns()"
-                :data="$widgetData"
+                    :widgets="$footerWidgets"
+                    :columns="$this->getFooterWidgetsColumns()"
+                    :data="$widgetData"
             />
         @endif
 
-        {{ \Filament\Facades\Filament::renderHook('page.footer-widgets.end') }}
+        {{ Filament::renderHook('page.footer-widgets.end') }}
 
         @if ($footer = $this->getFooter())
             {{ $footer }}
@@ -58,14 +59,14 @@
         @endphp
 
         <x-filament::modal
-            id="page-action"
-            :wire:key="$action ? $this->id . '.actions.' . $action->getName() . '.modal' : null"
-            :visible="filled($action)"
-            :width="$action?->getModalWidth()"
-            :slide-over="$action?->isModalSlideOver()"
-            display-classes="block"
-            x-init="this.livewire = $wire.__instance"
-            x-on:modal-closed.stop="if ('mountedAction' in this.livewire?.serverMemo.data) this.livewire.set('mountedAction', null)"
+                id="page-action"
+                :wire:key="$action ? $this->id . '.actions.' . $action->getName() . '.modal' : null"
+                :visible="filled($action)"
+                :width="$action?->getModalWidth()"
+                :slide-over="$action?->isModalSlideOver()"
+                display-classes="block"
+                x-init="this.livewire = $wire.__instance"
+                x-on:modal-closed.stop="if ('mountedAction' in this.livewire?.serverMemo.data) this.livewire.set('mountedAction', null)"
         >
             @if ($action)
                 @if ($action->isModalCentered())

@@ -11,6 +11,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\View\View;
 use Livewire\Component;
 use Modules\Social\Models\Profile;
 
@@ -18,7 +19,7 @@ class ProfileTable extends Component implements HasTable
 {
     use InteractsWithTable;
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         return view('crm::livewire.components.profile-table');
     }
@@ -31,6 +32,11 @@ class ProfileTable extends Component implements HasTable
     public function isTableSearchable(): bool
     {
         return true;
+    }
+
+    public function makeFilamentTranslatableContentDriver(): ?TranslatableContentDriver
+    {
+        // TODO: Implement makeFilamentTranslatableContentDriver() method.
     }
 
     protected function getFormSchema(): array
@@ -66,15 +72,15 @@ class ProfileTable extends Component implements HasTable
         return $profiles;
     }
 
-    protected function getTableColumns(): array
-    {
-        return Profile::getTableColumns();
-    }
-
     //    protected function getTableRecordUrlUsing()
     //    {
     //        return fn (Profile $record): string => route('social.profile.show', ['profile' => $record]);
     //    }
+
+    protected function getTableColumns(): array
+    {
+        return Profile::getTableColumns();
+    }
 
     protected function getTableFilters(): array
     {
@@ -93,10 +99,10 @@ class ProfileTable extends Component implements HasTable
     {
         return [
             ViewAction::make()
-                ->url(fn (Profile $record): string => route('social.profile.show', ['profile' => $record]))
+                ->url(fn(Profile $record): string => route('social.profile.show', ['profile' => $record]))
                 ->openUrlInNewTab(),
             EditAction::make()
-                ->url(fn (Profile $record): string => route('social.profile.edit', ['profile' => $record]))
+                ->url(fn(Profile $record): string => route('social.profile.edit', ['profile' => $record]))
                 ->openUrlInNewTab(),
         ];
     }
@@ -106,10 +112,5 @@ class ProfileTable extends Component implements HasTable
         return [
             DeleteBulkAction::make(),
         ];
-    }
-
-    public function makeFilamentTranslatableContentDriver(): ?TranslatableContentDriver
-    {
-        // TODO: Implement makeFilamentTranslatableContentDriver() method.
     }
 }

@@ -23,16 +23,16 @@ class ManageBillingSettings extends SettingsPage
     protected static ?string $navigationGroup = 'Billing';
     protected static ?int $navigationSort = -90;
 
+    public function getHeaderWidgetsColumns(): int|array
+    {
+        return 3;
+    }
+
     protected function getHeaderWidgets(): array
     {
         return [
             AdminUserStatsOverview::class,
         ];
-    }
-
-    public function getHeaderWidgetsColumns(): int|array
-    {
-        return 3;
     }
 
     protected function getFormSchema(): array

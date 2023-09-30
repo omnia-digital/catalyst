@@ -15,8 +15,8 @@ class RemoveTeamApplication
     /**
      * Remove application for a user from the team.
      *
-     * @param  mixed  $team
-     * @param  int  $userID
+     * @param mixed $team
+     * @param int $userID
      * @return void
      */
     public function remove($team, $userID)
@@ -24,7 +24,7 @@ class RemoveTeamApplication
         $application = $team->teamApplications()
             ->where('user_id', $userID)->first();
 
-        if (! is_null($application)) {
+        if (!is_null($application)) {
             $application->delete();
         }
     }
@@ -32,8 +32,8 @@ class RemoveTeamApplication
     /**
      * Validate the invite member operation.
      *
-     * @param  mixed  $team
-     * @param  int  $userID
+     * @param mixed $team
+     * @param int $userID
      * @return void
      */
     protected function validate($team, string $userID, ?string $role)
@@ -51,25 +51,28 @@ class RemoveTeamApplication
     /**
      * Get the validation rules for applying user.
      *
-     * @param  mixed  $team
+     * @param mixed $team
      * @return array
      */
     protected function rules($team)
     {
         return array_filter([
-            'user_id' => ['required', Rule::unique('team_applications')->where(function ($query) use ($team) {
-                $query->where('team_id', $team->id);
-            })],
+            'user_id' => [
+                'required',
+                Rule::unique('team_applications')->where(function ($query) use ($team) {
+                    $query->where('team_id', $team->id);
+                })
+            ],
             'role' => Jetstream::hasRoles()
-                            ? ['required', 'string', new Role]
-                            : null,
+                ? ['required', 'string', new Role]
+                : null,
         ]);
     }
 
     /**
      * Ensure that the user is not already on the team.
      *
-     * @param  mixed  $team
+     * @param mixed $team
      * @return Closure
      */
     protected function ensureUserIsNotAlreadyOnTeam($team, string $userID)

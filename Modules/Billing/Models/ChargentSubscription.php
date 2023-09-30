@@ -5,6 +5,7 @@ namespace Modules\Billing\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Billing\Database\factories\ChargentSubscriptionFactory;
 
 class ChargentSubscription extends Model
 {
@@ -21,7 +22,7 @@ class ChargentSubscription extends Model
 
     protected static function newFactory()
     {
-        return \Modules\Billing\Database\factories\ChargentSubscriptionFactory::new();
+        return ChargentSubscriptionFactory::new();
     }
 
     public function user()

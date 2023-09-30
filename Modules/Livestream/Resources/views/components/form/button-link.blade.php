@@ -11,8 +11,8 @@
 @endphp
 
 <a
-    href="{{ $to }}"
-    {{ $attributes->merge(['class' => $class]) }}
+        href="{{ $to }}"
+        {{ $attributes->merge(['class' => $class]) }}
 >
     {{ $slot }}
 </a>

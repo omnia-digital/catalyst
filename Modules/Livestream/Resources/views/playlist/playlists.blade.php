@@ -22,7 +22,8 @@
                                 @forelse ($playlists as $playlist)
                                     <x-table.row :loop="$loop" wire:key="playlist-{{ $playlist->id }}">
                                         <x-table.cell class="font-medium text-gray-900">
-                                            <a href="{{ route('playlists.update', $playlist) }}" class="text-blue-600 hover:text-blue-900">
+                                            <a href="{{ route('playlists.update', $playlist) }}"
+                                               class="text-blue-600 hover:text-blue-900">
                                                 {{ $playlist->name }}
                                             </a>
                                         </x-table.cell>
@@ -30,7 +31,7 @@
                                             <x-timezone :for="$playlist->created_at" diffForHumans/>
                                         </x-table.cell>
                                         <x-table.cell
-                                            x-data="{
+                                                x-data="{
                                                 text: 'Copy Embed Code',
 
                                                 copy() {
@@ -40,9 +41,10 @@
                                                     setTimeout(() => { this.text = 'Copy Embed Code' }, 2000);
                                                 }
                                             }"
-                                            class="text-right font-medium"
+                                                class="text-right font-medium"
                                         >
-                                            <a x-on:click.prevent="copy" x-text="text" href="#" class="text-indigo-600 hover:text-indigo-900"></a>
+                                            <a x-on:click.prevent="copy" x-text="text" href="#"
+                                               class="text-indigo-600 hover:text-indigo-900"></a>
                                             <pre style="display: none;">
                                                 <code x-ref="embed-code-{{ $playlist->id }}">
                                                     {{ '<div id="omnia-playlist"></div>' . '<script src="' . url('js/playlist.js') . '" data-embed="' . route('playlists.embed', $playlist) . '"></script>' }}
@@ -53,8 +55,10 @@
                                 @empty
                                     <x-table.empty>
                                         <div class="text-center">
-                                            <p class="text-center text-gray-600 text-base my-4">No playlists matched the given criteria.</p>
-                                            <x-form.button-link wire:click.prevent="$toggle('createPlaylistModalOpen')" secondary>
+                                            <p class="text-center text-gray-600 text-base my-4">No playlists matched the
+                                                given criteria.</p>
+                                            <x-form.button-link wire:click.prevent="$toggle('createPlaylistModalOpen')"
+                                                                secondary>
                                                 Create Playlist
                                             </x-form.button-link>
                                         </div>
@@ -69,23 +73,23 @@
         </div>
     </div>
 
-    <x-jet-dialog-modal wire:model="createPlaylistModalOpen">
+    <x-dialog-modal wire:model.live="createPlaylistModalOpen">
         <x-slot name="title">Create Playlist</x-slot>
         <x-slot name="content">
             <div>
                 <x-input.label value="Name" required/>
-                <x-input.text id="name" wire:model.defer="name" placeholder="{{ __('Name') }}"/>
-                <x-jet-input-error for="name" class="mt-2"/>
+                <x-input.text id="name" wire:model="name" placeholder="{{ __('Name') }}"/>
+                <x-input-error for="name" class="mt-2"/>
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('createPlaylistModalOpen')" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$toggle('createPlaylistModalOpen')" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
-            </x-jet-secondary-button>
+            </x-secondary-button>
 
-            <x-jet-button class="ml-2" wire:click="createPlaylist" wire:loading.attr="disabled">
+            <x-button class="ml-2" wire:click="createPlaylist" wire:loading.attr="disabled">
                 {{ __('Create Playlist') }}
-            </x-jet-button>
+            </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 </div>

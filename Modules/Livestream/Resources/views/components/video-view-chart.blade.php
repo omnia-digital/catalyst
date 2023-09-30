@@ -4,8 +4,8 @@
 ])
 
 <canvas
-    wire:key="{{ time() }}"
-    x-data="{
+        wire:key="{{ time() }}"
+        x-data="{
         chart: null,
 
         datasets: JSON.parse('{{ json_encode($datasets) }}'),
@@ -61,7 +61,7 @@
             this.chart.update();
         }
     }"
-    x-init="() => {
+        x-init="() => {
         chart = new Chart($el, {
             type: 'line',
             data: {
@@ -117,9 +117,9 @@
 
         Object.keys(datasets).forEach(label => toggleDataset(label));
     }"
-    x-on:toggle-chart.window="toggleDataset($event.detail)"
-    class="mt-4 pb-4 cursor-pointer"
-    height="130"
+        x-on:toggle-chart.window="toggleDataset($event.detail)"
+        class="mt-4 pb-4 cursor-pointer"
+        height="130"
 >
 </canvas>
 

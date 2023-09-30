@@ -1,13 +1,13 @@
 {
-    "name": "Forms",
-    "alias": "forms",
-    "description": "",
-    "keywords": [],
-    "priority": 0,
-    "providers": [
-        "Modules\\Forms\\Providers\\FormsServiceProvider"
-    ],
-    "aliases": {},
-    "files": [],
-    "requires": []
+  "name": "Forms",
+  "alias": "forms",
+  "description": "",
+  "keywords": [],
+  "priority": 0,
+  "providers": [
+    "Modules\\Forms\\Providers\\FormsServiceProvider"
+  ],
+  "aliases": {},
+  "files": [],
+  "requires": []
 }

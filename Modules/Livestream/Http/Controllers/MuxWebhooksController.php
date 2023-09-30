@@ -16,11 +16,11 @@ class MuxWebhooksController extends Controller
 {
     public function __invoke(Request $request)
     {
-        if (config('services.mux.signing_secret') && ! $this->verifySignature($request)) {
+        if (config('services.mux.signing_secret') && !$this->verifySignature($request)) {
             abort(401, 'Signature Invalid');
         }
 
-        if (! ($event = $request->get('type'))) {
+        if (!($event = $request->get('type'))) {
             return;
         }
 

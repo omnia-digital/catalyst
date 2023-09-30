@@ -47,7 +47,9 @@ class Form extends Component implements HasForms
 
         foreach ($formData as $formDataKey => $value) {
             // Search Form Model fields for the field that matches the form data
-            $formFieldKeyFound = $formModelFields->search(function ($formModelField, $formModelFieldKey) use ($formDataKey) {
+            $formFieldKeyFound = $formModelFields->search(function ($formModelField, $formModelFieldKey) use (
+                $formDataKey
+            ) {
                 if ($formModelField['data']['name'] === $formDataKey) {
                     return true;
                 }

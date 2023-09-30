@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Modules\Advice\Database\Seeders\AdviceDatabaseSeeder;
+//use Modules\Advice\Database\Seeders\AdviceDatabaseSeeder;
 use Modules\Billing\Database\Seeders\BillingDatabaseSeeder;
 use Modules\Forms\Database\Seeders\FormsDatabaseSeeder;
 use Modules\Resources\Database\Seeders\ResourcesDatabaseSeeder;
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AwardsTableSeeder::class);
         $this->call(SocialDatabaseSeeder::class);
         $this->call(ResourcesDatabaseSeeder::class);
-        $this->call(AdviceDatabaseSeeder::class);
+//        $this->call(AdviceDatabaseSeeder::class);
         $this->call(NotificationTableSeeder::class);
         $this->call(LanguageTableSeeder::class);
         $this->call(ReviewsDatabaseSeeder::class);

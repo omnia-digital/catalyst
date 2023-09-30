@@ -8,8 +8,8 @@ use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
 class PermissionResource extends Resource implements HasShieldPermissions
@@ -62,7 +62,7 @@ class PermissionResource extends Resource implements HasShieldPermissions
             ->columns([
                 Tables\Columns\BadgeColumn::make('name')
                     ->label(__('filament-shield::filament-shield.column.name'))
-                    ->formatStateUsing(fn ($state): string => Str::headline($state))
+                    ->formatStateUsing(fn($state): string => Str::headline($state))
                     ->colors(['primary'])
                     ->searchable(),
                 Tables\Columns\BadgeColumn::make('guard_name')
@@ -104,11 +104,6 @@ class PermissionResource extends Resource implements HasShieldPermissions
         ];
     }
 
-    public static function getModel(): string
-    {
-        return Utils::getPermissionModel();
-    }
-
     public static function getModelLabel(): string
     {
         return __('filament-shield::filament-shield.resource.label.permission');
@@ -121,7 +116,7 @@ class PermissionResource extends Resource implements HasShieldPermissions
 
     public static function getSlug(): string
     {
-        return (string) config('filament-shield.shield_resource.permission_slug');
+        return (string)config('filament-shield.shield_resource.permission_slug');
     }
 
     public static function canGloballySearch(): bool
@@ -161,5 +156,10 @@ class PermissionResource extends Resource implements HasShieldPermissions
         return Utils::isResourceNavigationBadgeEnabled()
             ? static::getModel()::count()
             : null;
+    }
+
+    public static function getModel(): string
+    {
+        return Utils::getPermissionModel();
     }
 }

@@ -47,13 +47,14 @@ class SermonBrowserWPPluginAdapter
             foreach ($enclosures as $enclosure) {
                 $videoUrls->push($enclosure->link);
             }
-            if (! empty($params['livestream_account_id'])) {
+            if (!empty($params['livestream_account_id'])) {
                 $episode->livestream_account_id = $params['livestream_account_id'];
             } else {
                 throw new Exception(' We do not know which Livestream Account to import into. Please provide a livestream_account_id.');
             }
             $videoProcessorQueueName = config('livestream_queue.queue-names.videoProcessor-low');
-            $job = (new importRemoteMP4FilesToVodAndCreateEpisodes($episode, $videoUrls))->onQueue($videoProcessorQueueName);
+            $job = (new importRemoteMP4FilesToVodAndCreateEpisodes($episode,
+                $videoUrls))->onQueue($videoProcessorQueueName);
             dispatch($job);
             event(new importRSSEpisodeAddedToQueue($this->episode, $this->_livestreamAccount));
             Log::info('Import Remote Episode from RSS Job added to queue: "' . $videoProcessorQueueName);

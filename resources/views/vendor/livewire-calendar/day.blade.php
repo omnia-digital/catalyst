@@ -1,22 +1,21 @@
-
 <div
-    ondragenter="onLivewireCalendarEventDragEnter(event, '{{ $componentId }}', '{{ $day }}', '{{ $dragAndDropClasses }}');"
-    ondragleave="onLivewireCalendarEventDragLeave(event, '{{ $componentId }}', '{{ $day }}', '{{ $dragAndDropClasses }}');"
-    ondragover="onLivewireCalendarEventDragOver(event);"
-    ondrop="onLivewireCalendarEventDrop(event, '{{ $componentId }}', '{{ $day }}', {{ $day->year }}, {{ $day->month }}, {{ $day->day }}, '{{ $dragAndDropClasses }}');"
-    class="flex-1 h-40 lg:h-48 border border-gray-200 -mt-px -ml-px min-w-[40px]"
-    {{-- style="min-width: 10rem;" --}}>
+        ondragenter="onLivewireCalendarEventDragEnter(event, '{{ $componentId }}', '{{ $day }}', '{{ $dragAndDropClasses }}');"
+        ondragleave="onLivewireCalendarEventDragLeave(event, '{{ $componentId }}', '{{ $day }}', '{{ $dragAndDropClasses }}');"
+        ondragover="onLivewireCalendarEventDragOver(event);"
+        ondrop="onLivewireCalendarEventDrop(event, '{{ $componentId }}', '{{ $day }}', {{ $day->year }}, {{ $day->month }}, {{ $day->day }}, '{{ $dragAndDropClasses }}');"
+        class="flex-1 h-40 lg:h-48 border border-gray-200 -mt-px -ml-px min-w-[40px]"
+        {{-- style="min-width: 10rem;" --}}>
 
     {{-- Wrapper for Drag and Drop --}}
     <div
-        class="w-full h-full"
-        id="{{ $componentId }}-{{ $day }}">
+            class="w-full h-full"
+            id="{{ $componentId }}-{{ $day }}">
 
         <div
-            @if($dayClickEnabled)
-                wire:click="onDayClick({{ $day->year }}, {{ $day->month }}, {{ $day->day }})"
-            @endif
-            class="w-full h-full py-px lg:p-2 {{ $dayInMonth ? $isToday ? 'bg-yellow-100' : ' bg-white ' : 'bg-gray-100' }} flex flex-col">
+                @if($dayClickEnabled)
+                    wire:click="onDayClick({{ $day->year }}, {{ $day->month }}, {{ $day->day }})"
+                @endif
+                class="w-full h-full py-px lg:p-2 {{ $dayInMonth ? $isToday ? 'bg-yellow-100' : ' bg-white ' : 'bg-gray-100' }} flex flex-col">
 
             {{-- Number of Day --}}
             <div class="flex items-center justify-center lg:justify-start">
@@ -35,10 +34,10 @@
                 <div class="grid grid-cols-1 grid-flow-row gap-2">
                     @foreach($events as $event)
                         <div
-                            @if($dragAndDropEnabled)
-                                draggable="true"
-                            @endif
-                            ondragstart="onLivewireCalendarEventDragStart(event, '{{ $event['id'] }}')">
+                                @if($dragAndDropEnabled)
+                                    draggable="true"
+                                @endif
+                                ondragstart="onLivewireCalendarEventDragStart(event, '{{ $event['id'] }}')">
                             @include($eventView, [
                                 'event' => $event,
                                 'extra' => $extra

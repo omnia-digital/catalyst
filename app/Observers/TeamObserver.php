@@ -3,9 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Team;
-use Spatie\Permission\Models\Role;
 use Trans;
-
 use function activity;
 
 class TeamObserver

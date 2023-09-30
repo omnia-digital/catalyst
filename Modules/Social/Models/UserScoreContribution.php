@@ -5,6 +5,7 @@ namespace Modules\Social\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Modules\Social\Database\factories\UserScoreContributionFactory;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -23,7 +24,7 @@ class UserScoreContribution extends Model
 
     protected static function newFactory()
     {
-        return \Modules\Social\Database\factories\UserScoreContributionFactory::new();
+        return UserScoreContributionFactory::new();
     }
 
     public function getSlugOptions(): SlugOptions

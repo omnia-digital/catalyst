@@ -1,3 +1,4 @@
+@php use App\Enums\Teams\TeamBillingPeriod; @endphp
 @extends('social::livewire.layouts.pages.team-profile-layout')
 
 @section('content')
@@ -35,36 +36,39 @@
 
                 <div>
                     <x-library::input.label value="Name"/>
-                    <x-library::input.text id="name" wire:model.defer="name" placeholder="Name"/>
+                    <x-library::input.text id="name" wire:model="name" placeholder="Name"/>
                     <x-library::input.error for="name"/>
                 </div>
 
                 <div>
                     <x-library::input.label value="Description"/>
-                    <x-library::input.textarea id="description" wire:model.defer="description" placeholder="Description"/>
+                    <x-library::input.textarea id="description" wire:model="description"
+                                               placeholder="Description"/>
                     <x-library::input.error for="description"/>
                 </div>
 
                 <div>
                     <x-library::input.label value="Price"/>
-                    <x-library::input.text type="number" id="price" wire:model.defer="price" placeholder="Price"/>
+                    <x-library::input.text type="number" id="price" wire:model="price" placeholder="Price"/>
                     <x-library::input.error for="price"/>
                 </div>
 
-{{--                <div>--}}
-{{--                    <x-library::input.label value="Recurring"/>--}}
-{{--                    <x-library::input.toggle />--}}
-{{--                    <x-library::input.label value="One time"/>--}}
-{{--                </div>--}}
+                {{--                <div>--}}
+                {{--                    <x-library::input.label value="Recurring"/>--}}
+                {{--                    <x-library::input.toggle />--}}
+                {{--                    <x-library::input.label value="One time"/>--}}
+                {{--                </div>--}}
 
                 <div>
                     <x-library::input.label value="Billing Period"/>
-                    <x-library::input.select id="billing-period" wire:model.defer="billingPeriod" :options="\App\Enums\Teams\TeamBillingPeriod::options()"/>
+                    <x-library::input.select id="billing-period" wire:model="billingPeriod"
+                                             :options="TeamBillingPeriod::options()"/>
                     <x-library::input.error for="billingPeriod"/>
                 </div>
 
                 <div class="text-right">
-                    <x-library::button wire:click.prevent="addNewPlan" wire:target="addNewPlan">Add New Plan</x-library::button>
+                    <x-library::button wire:click.prevent="addNewPlan" wire:target="addNewPlan">Add New Plan
+                    </x-library::button>
                 </div>
             </div>
         </div>

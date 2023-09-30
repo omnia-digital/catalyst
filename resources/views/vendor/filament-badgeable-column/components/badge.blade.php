@@ -4,7 +4,7 @@
 @endphp
 
 @if (! $isHidden())
-<span
+    <span
     @class([
         'filament-badgeable-badge px-2 inline-flex  text-xs font-medium',
         'text-primary-800 bg-primary/20 dark:text-primary-400' => $color === 'primary',
@@ -17,6 +17,6 @@
         'rounded py-1' => ! $isPill,
         'rounded-full py-0.5' => $isPill,
     ])
-    {!! $hasHexColor() ? "style=\"background-color:" . $color . ";\"" : null !!}
+            {!! $hasHexColor() ? "style=\"background-color:" . $color . ";\"" : null !!}
 >{{ $getLabel() }}</span>
 @endif

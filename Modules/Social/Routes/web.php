@@ -30,8 +30,12 @@ use Modules\Social\Http\Livewire\Pages\Teams\Show as ShowTeam;
 use Modules\Social\Http\Middleware\GuestAccessMiddleware;
 
 // Shorten URLs
-Route::get('/' . \Platform::getUsersLetter() . '/{profile}', ShowProfile::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.profile.show');
-Route::get('/' . \Platform::getTeamsLetter() . '/{team}', ShowTeam::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.teams.show');
+Route::get('/' . Platform::getUsersLetter() . '/{profile}',
+    ShowProfile::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.profile.show');
+Route::get('/' . Platform::getTeamsLetter() . '/{team}', ShowTeam::class)->middleware([
+    GuestAccessMiddleware::class,
+    'verified'
+])->name('social.teams.show');
 
 Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
     // the way twitter works is
@@ -50,14 +54,17 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('{profile}/media', ProfileMedia::class)->name('media');
         Route::get('{profile}/followers', ProfileFollowers::class)->name('followers');
         Route::get('{profile}/awards', ProfileAwards::class)->name('awards');
-        Route::get('{profile}/' . \Platform::getTeamsWord(), ProfileTeams::class)->name('teams');
+        Route::get('{profile}/' . Platform::getTeamsWord(), ProfileTeams::class)->name('teams');
     });
 
-    Route::name('teams.')->prefix(\Platform::getTeamsWord())->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
+    Route::name('teams.')->prefix(Platform::getTeamsWord())->middleware([
+        GuestAccessMiddleware::class,
+        'verified'
+    ])->group(function () {
         Route::get('/discover', DiscoverTeams::class)->name('discover');
         Route::get('/calendar', TeamMapCalendar::class)->name('calendar');
         Route::get('/map', TeamMap::class)->name('map');
-        Route::get('/my-' . \Platform::getTeamsWord(), MyTeams::class)->name('my-teams');
+        Route::get('/my-' . Platform::getTeamsWord(), MyTeams::class)->name('my-teams');
         Route::get('{team}', ShowTeam::class)->name('show.full-url');
         Route::get('{team}/admin', EditTeam::class)->name('admin');
         Route::get('{team}/admin/forms/create', TeamFormBuilder::class)->name('admin.forms.create');
@@ -76,7 +83,10 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
         Route::get('/', AllTeams::class)->name('home');
     });
 
-    Route::name('companies.')->prefix(\Trans::get('companies'))->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
+    Route::name('companies.')->prefix(Trans::get('companies'))->middleware([
+        GuestAccessMiddleware::class,
+        'verified'
+    ])->group(function () {
         Route::get('/', AllCompanies::class)->name('home');
     });
 

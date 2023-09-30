@@ -2,7 +2,9 @@
 
 namespace Modules\Livestream\Traits;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 trait ResetsPasswords
 {
@@ -13,8 +15,8 @@ trait ResetsPasswords
      *
      * If no token is present, display the link request form.
      *
-     * @param  string|null  $token
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param string|null $token
+     * @return Factory|View
      */
     public function showResetForm(Request $request, $token = null)
     {

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Modules\Livestream\Exceptions\TransVideoException;
 use Modules\Livestream\LivestreamAccount;
 use Modules\Livestream\Repositories\EpisodeTemplateRepository;
+use Psr\Http\Message\ResponseInterface;
 
 class StreamTargetService extends Service
 {
@@ -23,13 +24,16 @@ class StreamTargetService extends Service
     /**
      * StreamService constructor.
      *
-     * @param  string  $streamTargetType
+     * @param string $streamTargetType
      */
-    public function __construct(LivestreamAccount $LivestreamAccount, $streamName = null, $streamTargetType = 'facebook')
-    {
+    public function __construct(
+        LivestreamAccount $LivestreamAccount,
+        $streamName = null,
+        $streamTargetType = 'facebook'
+    ) {
         $this->_livestreamAccount = $LivestreamAccount;
         $this->_team = $LivestreamAccount->team;
-        if (! empty($streamName)) {
+        if (!empty($streamName)) {
             $this->_streamName = $this->_livestreamAccount->id . '/' . config('livestream.livestream_episode_auto_record_stream_name');
         } else {
             $this->_streamName = $streamName;
@@ -59,13 +63,13 @@ class StreamTargetService extends Service
             Log::info('[Stream Target] - ' . $message);
             throw new TransVideoException($message);
         } elseif ($this->_team->onPlan('livestream-standard')
-                    || $this->_team->onPlan('livestream-standard-yr')
-                    || $this->_team->onPlan('livestream-premium')
-                    || $this->_team->onPlan('livestream-premium-yr')
-                    || $this->_team->onPlan('livestream-starter')
-                    || $this->_team->onPlan('livestream-starter-yr')
-                    || $this->_team->onPlan('livestream-growth')
-                    || $this->_team->onPlan('livestream-growth-yr')
+            || $this->_team->onPlan('livestream-standard-yr')
+            || $this->_team->onPlan('livestream-premium')
+            || $this->_team->onPlan('livestream-premium-yr')
+            || $this->_team->onPlan('livestream-starter')
+            || $this->_team->onPlan('livestream-starter-yr')
+            || $this->_team->onPlan('livestream-growth')
+            || $this->_team->onPlan('livestream-growth-yr')
         ) { // @TODO [Josh] - should be like "if ($this->_team->can('stream-target-facebook'))"
             $stream_integrations = $this->_livestreamAccount->stream_integrations;
             if ($stream_integrations->isNotEmpty()) {
@@ -119,7 +123,7 @@ class StreamTargetService extends Service
             $episodeTemplateRepository = new EpisodeTemplateRepository($this->_livestreamAccount);
             $epsiodeTemplate = $episodeTemplateRepository->current();
 
-            if (! empty($episodeTemplate)) {
+            if (!empty($episodeTemplate)) {
                 $params = [
                     'title' => $epsiodeTemplate->title,
                     'description' => $epsiodeTemplate->description,
@@ -168,20 +172,21 @@ class StreamTargetService extends Service
     /**
      * @return string
      */
-    public function getStreamTargetList()
+    public function deleteStreamTarget()
     {
-        Log::info('[Stream Target INDEX] - Started');
-        $response = $this->_httpClient->get();
-        Log::info('[Stream Target INDEX] - Finished');
+        Log::info('[Stream Target DELETE] - Started');
+        $response = $this->_httpClient->delete(self::WOWZA_URL . '/' . $this->_streamTargetType . '-' . str_replace('/',
+                '-', $this->_streamName));
+        Log::info('[Stream Target DELETE] - Finished');
 
-        return $response->getReasonPhrase();
+        return $response->getStatusCode();
     }
 
     /**
      * Create Stream Target on Wowza Server
      *
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createStreamTarget($target_options)
     {
@@ -210,12 +215,12 @@ class StreamTargetService extends Service
     /**
      * @return string
      */
-    public function deleteStreamTarget()
+    public function getStreamTargetList()
     {
-        Log::info('[Stream Target DELETE] - Started');
-        $response = $this->_httpClient->delete(self::WOWZA_URL . '/' . $this->_streamTargetType . '-' . str_replace('/', '-', $this->_streamName));
-        Log::info('[Stream Target DELETE] - Finished');
+        Log::info('[Stream Target INDEX] - Started');
+        $response = $this->_httpClient->get();
+        Log::info('[Stream Target INDEX] - Finished');
 
-        return $response->getStatusCode();
+        return $response->getReasonPhrase();
     }
 }

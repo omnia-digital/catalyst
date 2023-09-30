@@ -4,13 +4,13 @@ namespace Modules\Social\Http\Livewire\Pages\Teams\Admin;
 
 use App\Models\Tag;
 use App\Models\Team;
-use App\Support\Platform\Platform;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Social\Support\Livewire\ManagesTeamNotifications;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
+use Platform;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Trans;
 
@@ -109,7 +109,7 @@ class TeamAdmin extends Component
     {
         return Tag::withType('team_type')
             ->get()
-            ->mapWithKeys(fn (Tag $tag) => [$tag->name => ucwords($tag->name)])
+            ->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])
             ->all();
     }
 
@@ -119,20 +119,20 @@ class TeamAdmin extends Component
 
         $this->team->save();
 
-        if (! empty($this->teamTypes)) {
+        if (!empty($this->teamTypes)) {
             $this->team->attachTags($this->teamTypes, 'team_type');
         }
 
         $this->removeAddress && $this->team->location()
             ->delete();
 
-        if (! empty($this->newAddress)) {
+        if (!empty($this->newAddress)) {
             $this->team->location()
                 ->updateOrCreate(['model_id' => $this->team->id, 'model_type' => Team::class], $this->newAddress);
         }
 
-        if (! is_null($this->bannerImage) && $this->team->bannerImage()
-            ->count()) {
+        if (!is_null($this->bannerImage) && $this->team->bannerImage()
+                ->count()) {
             $this->team->bannerImage()
                 ->delete();
         }
@@ -140,7 +140,7 @@ class TeamAdmin extends Component
             ->toMediaCollection('team_banner_images');
 
         if ($this->mainImage && $this->team->mainImage()
-            ->count()) {
+                ->count()) {
             $this->team->mainImage()
                 ->delete();
         }
@@ -148,7 +148,7 @@ class TeamAdmin extends Component
             ->toMediaCollection('team_main_images');
 
         if ($this->profilePhoto && $this->team->profilePhoto()
-            ->count()) {
+                ->count()) {
             $this->team->profilePhoto()
                 ->delete();
         }
@@ -167,7 +167,8 @@ class TeamAdmin extends Component
 
         $this->team->refresh();
 
-        $this->reset('newAddress', 'removeAddress', 'bannerImage', 'bannerImageName', 'profilePhoto', 'profilePhotoName', 'mainImage', 'mainImageName', 'sampleMedia', 'sampleMediaNames');
+        $this->reset('newAddress', 'removeAddress', 'bannerImage', 'bannerImageName', 'profilePhoto',
+            'profilePhotoName', 'mainImage', 'mainImageName', 'sampleMedia', 'sampleMediaNames');
     }
 
     public function removeTag(string $tagName)
@@ -243,7 +244,7 @@ class TeamAdmin extends Component
         //     $rules['team.start_date'] = ['date'];
         // }
 
-        if (\Platform::isModuleEnabled('games')) {
+        if (Platform::isModuleEnabled('games')) {
             $rules['team.youtube_channel_id'] = ['max:65500'];
             $rules['team.twitch_channel_id'] = ['max:65500'];
         }

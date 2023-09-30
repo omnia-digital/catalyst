@@ -15,14 +15,14 @@ class UpdateEpisodeDuration implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  VideoAssetCreated  $event
+     * @param VideoAssetCreated $event
      * @return void
      */
     public function handle($event)
     {
         $episode = Episode::where('mux_asset_id', $event->data['object']['id'])->first();
 
-        if (! $episode) {
+        if (!$episode) {
             Log::info('Cannot find the episode to update duration. Will update in the command job.');
 
             return;

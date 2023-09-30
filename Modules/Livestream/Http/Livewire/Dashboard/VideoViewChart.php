@@ -19,23 +19,6 @@ class VideoViewChart extends Component
 {
     use WithTimeFilter;
 
-    public function toChart(Collection $items): array
-    {
-        /** @var Carbon $date */
-        foreach ($this->dateRange as $date) {
-            $chartData[] = $items->filter(function ($item) use ($date) {
-                return Carbon::parse($item->viewStart)->format($this->labelFormat()) === $date->format($this->labelFormat());
-            })->count();
-        }
-
-        return $chartData ?? [];
-    }
-
-    public function total(Collection $items)
-    {
-        return $items->count();
-    }
-
     public function getDataProperty()
     {
         return TotalVideoViewsByLivestreamAccountChart::make($this->selectedTime);
@@ -52,7 +35,24 @@ class VideoViewChart extends Component
         return view('dashboard.video-view-chart', [
             'labels' => $this->labels,
             'videoViews' => $this->toChart($this->data),
-            'totalVideoViews' => (float) $this->total($this->data),
+            'totalVideoViews' => (float)$this->total($this->data),
         ]);
+    }
+
+    public function toChart(Collection $items): array
+    {
+        /** @var Carbon $date */
+        foreach ($this->dateRange as $date) {
+            $chartData[] = $items->filter(function ($item) use ($date) {
+                return Carbon::parse($item->viewStart)->format($this->labelFormat()) === $date->format($this->labelFormat());
+            })->count();
+        }
+
+        return $chartData ?? [];
+    }
+
+    public function total(Collection $items)
+    {
+        return $items->count();
     }
 }

@@ -15,8 +15,8 @@ use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -25,6 +25,7 @@ use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Modules\Forms\Http\Livewire\UserRegistrationForm;
@@ -123,6 +124,29 @@ class FormResource extends Resource
         ]);
     }
 
+    protected static function getFieldNameInput(): Grid
+    {
+        // This is not a Filament-specific method, simply saves on repetition
+        // between our builder blocks.
+        return Grid::make()
+            ->schema([
+                TextInput::make('label')
+                    ->lazy()
+                    ->afterStateUpdated(function (Set $set, $state) {
+                        $name = Str::of($state)
+                            ->snake()
+                            ->replace(['-'], '_')
+                            ->lower();
+                        $set('name', $name);
+                    })
+                    ->required(),
+                TextInput::make('name')
+                    ->label('Field Slug')
+                    ->required(),
+
+            ]);
+    }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -171,31 +195,8 @@ class FormResource extends Resource
         return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 
-    protected static function getFieldNameInput(): Grid
-    {
-        // This is not a Filament-specific method, simply saves on repetition
-        // between our builder blocks.
-        return Grid::make()
-            ->schema([
-                TextInput::make('label')
-                    ->lazy()
-                    ->afterStateUpdated(function (\Filament\Forms\Set $set, $state) {
-                        $name = Str::of($state)
-                            ->snake()
-                            ->replace(['-'], '_')
-                            ->lower();
-                        $set('name', $name);
-                    })
-                    ->required(),
-                TextInput::make('name')
-                    ->label('Field Slug')
-                    ->required(),
-
-            ]);
-    }
-
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn (Model $record): string => route('forms.edit', ['record' => $record]);
+        return fn(Model $record): string => route('forms.edit', ['record' => $record]);
     }
 }

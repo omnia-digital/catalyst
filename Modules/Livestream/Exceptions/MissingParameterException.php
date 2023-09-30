@@ -9,12 +9,17 @@ class MissingParameterException extends OmniaRuntimeException
     /**
      * MissingParameterException constructor.
      *
-     * @param  string|array  $parameter
-     * @param  string  $message
-     * @param  int  $code
+     * @param string|array $parameter
+     * @param string $message
+     * @param int $code
      */
-    public function __construct($parameter, $message = '', Collection $context = null, $code = 500, Exception $previous = null)
-    {
+    public function __construct(
+        $parameter,
+        $message = '',
+        Collection $context = null,
+        $code = 500,
+        Exception $previous = null
+    ) {
         $parameterString = '';
         $parameterPlural = '';
 

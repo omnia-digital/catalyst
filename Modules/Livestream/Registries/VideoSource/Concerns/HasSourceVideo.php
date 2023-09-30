@@ -15,6 +15,11 @@ trait HasSourceVideo
         });
     }
 
+    public function videoSource(): BaseVideoSource
+    {
+        return app(VideoSourceRegistry::class)->get($this->video_source_type_id);
+    }
+
     /**
      * Get the download url of video source.
      */
@@ -42,10 +47,5 @@ trait HasSourceVideo
     {
         /** @var Video $this */
         return $this->videoSource()->isProcessing($this);
-    }
-
-    public function videoSource(): BaseVideoSource
-    {
-        return app(VideoSourceRegistry::class)->get($this->video_source_type_id);
     }
 }

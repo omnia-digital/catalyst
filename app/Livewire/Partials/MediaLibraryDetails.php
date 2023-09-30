@@ -29,6 +29,19 @@ class MediaLibraryDetails extends Component
         $this->findMedia($mediaId);
     }
 
+    public function findMedia($mediaId)
+    {
+        // Don't do anything when user select same media.
+        if ($mediaId === $this->media?->id) {
+            return;
+        }
+
+        $this->media = Media::find($mediaId);
+
+        // Dispatch event for open the over-slide on mobile
+        $this->showSlideOver();
+    }
+
     public function deleteMedia()
     {
         if (is_null($this->media)) {
@@ -44,19 +57,6 @@ class MediaLibraryDetails extends Component
         $this->dispatch('refreshMedia');
 
         $this->success('Media deleted');
-    }
-
-    public function findMedia($mediaId)
-    {
-        // Don't do anything when user select same media.
-        if ($mediaId === $this->media?->id) {
-            return;
-        }
-
-        $this->media = Media::find($mediaId);
-
-        // Dispatch event for open the over-slide on mobile
-        $this->showSlideOver();
     }
 
     public function resetMedia()

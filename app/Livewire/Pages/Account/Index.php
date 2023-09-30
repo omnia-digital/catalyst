@@ -48,6 +48,27 @@ class Index extends Component
         $this->dispatch('account_saved');
     }
 
+    protected function getAccountRules()
+    {
+        return [
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users,email,' . $this->user->id,
+            ],
+            'handle' => [
+                'required',
+                'string',
+                'alpha_dash',
+                'max:40',
+                'unique:profiles,handle,' . $this->user->id,
+                'unique:teams',
+            ],
+        ];
+    }
+
     /**
      * Update the user's password.
      *
@@ -98,26 +119,5 @@ class Index extends Component
     public function render()
     {
         return view('livewire.pages.account.index');
-    }
-
-    protected function getAccountRules()
-    {
-        return [
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                'unique:users,email,' . $this->user->id,
-            ],
-            'handle' => [
-                'required',
-                'string',
-                'alpha_dash',
-                'max:40',
-                'unique:profiles,handle,' . $this->user->id,
-                'unique:teams',
-            ],
-        ];
     }
 }

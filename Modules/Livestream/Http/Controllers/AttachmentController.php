@@ -10,7 +10,7 @@ class AttachmentController extends Controller
     {
         $download = $media->downloads()->whereDay('created_at', now())->first();
 
-        if (! is_null($download)) {
+        if (!is_null($download)) {
             $download->count++;
             $download->save();
         } else {
@@ -26,7 +26,7 @@ class AttachmentController extends Controller
     {
         $download = $media->downloads()->whereDay('created_at', now())->first();
 
-        if (! is_null($download)) {
+        if (!is_null($download)) {
             $download->count++;
             $download->save();
         } else {

@@ -51,7 +51,8 @@ class Series extends Component
     {
         return [
             'name' => [
-                'required', 'max:254',
+                'required',
+                'max:254',
                 Rule::unique('series')->where(function ($query) {
                     return $query->where('livestream_account_id', $this->livestreamAccount->id);
                 }),

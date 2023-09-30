@@ -7,19 +7,20 @@
                 @forelse ($this->userList as $user)
                     <li class="flex items-center py-2 space-x-3">
                         <div class="flex-shrink-0">
-                            <img class="h-10 w-10 rounded-full" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
+                            <img class="h-10 w-10 rounded-full" src="{{ $user->profile_photo_url }}"
+                                 alt="{{ $user->name }}"/>
                         </div>
                         <div class="min-w-0 flex-1">
                             <p class="hover:underline text-sm font-medium text-gray-900">
                                 <a href="{{ $user->url() }}">{{ $user->name }}</a>
                             </p>
-{{--                                <p class="text-sm text-gray-500">--}}
-{{--                                    <a href="{{ $user->url() }}">{{ '@' . $user->handle }}</a>--}}
-{{--                                </p>--}}
+                            {{--                                <p class="text-sm text-gray-500">--}}
+                            {{--                                    <a href="{{ $user->url() }}">{{ '@' . $user->handle }}</a>--}}
+                            {{--                                </p>--}}
                         </div>
                         <div class="lg:hidden xl:block flex-shrink-0">
-                            <livewire:award-stack :user="$user" :team="$team" wire:key="award-stack-{{ $user->id }}" />
-{{--                                <livewire:social::partials.follow-button :model="$user"/>--}}
+                            <livewire:award-stack :user="$user" :team="$team" wire:key="award-stack-{{ $user->id }}"/>
+                            {{--                                <livewire:social::partials.follow-button :model="$user"/>--}}
                         </div>
                     </li>
                 @empty

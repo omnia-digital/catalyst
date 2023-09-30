@@ -1,3 +1,4 @@
+@php use Modules\Social\Enums\PostType; @endphp
 @extends('resources::livewire.layouts.main-layout')
 
 
@@ -9,6 +10,7 @@
                 @yield('content')
             </div>
         </div>
-        <x-sidebar-column class="mt-4 hidden sm:block col-span-4 2xl:col-span-3" type="{{ \Modules\Social\Enums\PostType::ARTICLE->value }}"/>
+        <x-sidebar-column class="mt-4 hidden sm:block col-span-4 2xl:col-span-3"
+                          type="{{ PostType::ARTICLE->value }}"/>
     </div>
 @endsection

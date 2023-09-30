@@ -2,8 +2,9 @@
 
 namespace Modules\Livestream\Services;
 
-use GuzzleHttp\Client;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 use Modules\Livestream\SocialAccount;
@@ -43,7 +44,7 @@ class SocialiteService extends Service
                 // Check if user exists using email, if so, log them in automatically
                 $user = User::where('email', '=', $socialiteUser->getEmail())->first();
 
-                if (! empty($user)) {
+                if (!empty($user)) {
                     $userExists = true;
                 } else {
                     $userExists = false;
@@ -65,31 +66,6 @@ class SocialiteService extends Service
     }
 
     /**
-     * Login Social Account that has a user linked and Redirect
-     *
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function loginSocialAccount(SocialAccount $socialAccount)
-    {
-        if (empty($socialAccount->user)) {
-            throw new Exception('Social Account doesn\'t have a linked user; Cannot Login');
-        } else {
-            auth()->login($socialAccount->user);
-
-            return redirect(config('app.full_app_url'));
-        }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function redirectToSocialRegisterForm($token)
-    {
-        return redirect(config('app.full_app_url') . 'oauth/callback/' . $token);
-    }
-
-    /**
      * Create Social Account and attach to User
      *
      *
@@ -103,7 +79,7 @@ class SocialiteService extends Service
         ];
         unset($providerUser['id']);
         foreach ($providerUser as $attribute => $value) {
-            if (! empty($value)) {
+            if (!empty($value)) {
                 $socialAccountData[$attribute] = $value;
             }
         }
@@ -125,8 +101,12 @@ class SocialiteService extends Service
      *
      * @return array
      */
-    private function buildSocialInfo(SocialiteUserContract $socialiteUser, $provider, Request $request, $userExists = false)
-    {
+    private function buildSocialInfo(
+        SocialiteUserContract $socialiteUser,
+        $provider,
+        Request $request,
+        $userExists = false
+    ) {
         return [
             'code' => $request->code,
             'state' => $request->state,
@@ -134,5 +114,30 @@ class SocialiteService extends Service
             'provider' => $provider,
             'user_exists' => $userExists,
         ];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function redirectToSocialRegisterForm($token)
+    {
+        return redirect(config('app.full_app_url') . 'oauth/callback/' . $token);
+    }
+
+    /**
+     * Login Social Account that has a user linked and Redirect
+     *
+     *
+     * @return RedirectResponse|Redirector
+     */
+    public function loginSocialAccount(SocialAccount $socialAccount)
+    {
+        if (empty($socialAccount->user)) {
+            throw new Exception('Social Account doesn\'t have a linked user; Cannot Login');
+        } else {
+            auth()->login($socialAccount->user);
+
+            return redirect(config('app.full_app_url'));
+        }
     }
 }

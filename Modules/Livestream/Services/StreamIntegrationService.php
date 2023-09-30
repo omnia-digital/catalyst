@@ -3,6 +3,10 @@
 namespace Modules\Livestream\Services;
 
 use Exception;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+use Facebook\Facebook;
+use Facebook\FacebookResponse;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
@@ -19,13 +23,13 @@ class StreamIntegrationService extends Service
     /**
      * StreamService constructor.
      *
-     * @param  StreamIntegration  $streamIntegration
+     * @param StreamIntegration $streamIntegration
      */
     public function __construct(LivestreamAccount $LivestreamAccount, StreamIntegration $streamIntegration = null)
     {
         $this->_livestreamAccount = $LivestreamAccount;
         $this->_team = $LivestreamAccount->team;
-        if (! empty($streamIntegration)) {
+        if (!empty($streamIntegration)) {
             $this->_streamIntegration = $streamIntegration;
         }
 
@@ -49,17 +53,17 @@ class StreamIntegrationService extends Service
     /**
      * Get Live Video Stream Name from Facebook
      *
-     * @param  array  $params
+     * @param array $params
      * @return string
      *
-     * @throws \Facebook\Exceptions\FacebookResponseException
-     * @throws \Facebook\Exceptions\FacebookSDKException
+     * @throws FacebookResponseException
+     * @throws FacebookSDKException
      */
     public function getFacebookLiveVideoStreamName($params = [])
     {
         Log::info('[FB Live Get Live Video Stream Name] - Started');
         $response = $this->createFacebookLiveVideo($params);
-        if (! empty($response)) {
+        if (!empty($response)) {
             $streamURL = $response['secure_stream_url'];
             $streamName = trim(substr($streamURL, strpos($streamURL, 'rtmp/')), 'rtmp/');
             Log::info('[FB Live Get Live Video Stream Name] - Finished: Stream Name: ' . $streamName);
@@ -71,16 +75,16 @@ class StreamIntegrationService extends Service
     /**
      * Create a Live Video on a Facebook Stream Integration
      *
-     * @param  array  $params
-     * @return \Facebook\FacebookResponse
+     * @param array $params
+     * @return FacebookResponse
      *
-     * @throws \Facebook\Exceptions\FacebookResponseException
-     * @throws \Facebook\Exceptions\FacebookSDKException
+     * @throws FacebookResponseException
+     * @throws FacebookSDKException
      */
     public function createFacebookLiveVideo($params = [], $teamObject = null)
     {
         try {
-            $fb = new \Facebook\Facebook([
+            $fb = new Facebook([
                 'app_id' => env('FACEBOOK_APP_ID'),
                 'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
                 'default_graph_version' => 'v' . env('FACEBOOK_API_VERSION'),
@@ -92,11 +96,12 @@ class StreamIntegrationService extends Service
                 $teamObject = $this->_streamIntegration->provider_team_object;
             }
 
-            return $fb->post($teamObject['id'] . '/live_videos', $params, $teamObject['access_token'])->getDecodedBody();
-        } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+            return $fb->post($teamObject['id'] . '/live_videos', $params,
+                $teamObject['access_token'])->getDecodedBody();
+        } catch (FacebookResponseException $e) {
             Log::error('Graph returned an error: ' . $e->getMessage());
             throw $e;
-        } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+        } catch (FacebookSDKException $e) {
             Log::error('Facebook SDK returned an error: ' . $e->getMessage());
             throw $e;
         } catch (Exception $e) {
@@ -108,16 +113,16 @@ class StreamIntegrationService extends Service
     /**
      * Update a Live Video on a Facebook Stream Integration
      *
-     * @param  array  $params
-     * @return \Facebook\FacebookResponse
+     * @param array $params
+     * @return FacebookResponse
      *
-     * @throws \Facebook\Exceptions\FacebookResponseException
-     * @throws \Facebook\Exceptions\FacebookSDKException
+     * @throws FacebookResponseException
+     * @throws FacebookSDKException
      */
     public function updateFacebookLiveVideo($params = [], $teamObject = null)
     {
         try {
-            $fb = new \Facebook\Facebook([
+            $fb = new Facebook([
                 'app_id' => env('FACEBOOK_APP_ID'),
                 'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
                 'default_graph_version' => 'v' . env('FACEBOOK_API_VERSION'),
@@ -130,14 +135,14 @@ class StreamIntegrationService extends Service
             }
 
             return $fb->post($params['video_id'], $params, $teamObject['access_token'])->getDecodedBody();
-        } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+        } catch (FacebookResponseException $e) {
             $message = $e->getMessage();
             Log::error('Graph returned an error: ' . $message);
             // We don't want to throw an error if the facebook video doesn't exist anymore, just in case someone deleted it on facebook
-            if (!empty($message) && ! str_contains($message, 'does not exist')) {
+            if (!empty($message) && !str_contains($message, 'does not exist')) {
                 throw $e;
             }
-        } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+        } catch (FacebookSDKException $e) {
             Log::error('Facebook SDK returned an error: ' . $e->getMessage());
             throw $e;
         } catch (Exception $e) {
@@ -149,16 +154,16 @@ class StreamIntegrationService extends Service
     /**
      * Delete a Live Video on a Facebook account
      *
-     * @param  array  $params
-     * @return \Facebook\FacebookResponse
+     * @param array $params
+     * @return FacebookResponse
      *
-     * @throws \Facebook\Exceptions\FacebookResponseException
-     * @throws \Facebook\Exceptions\FacebookSDKException
+     * @throws FacebookResponseException
+     * @throws FacebookSDKException
      */
     public function deleteFacebookLiveVideo($params = [], $teamObject = null)
     {
         try {
-            $fb = new \Facebook\Facebook([
+            $fb = new Facebook([
                 'app_id' => env('FACEBOOK_APP_ID'),
                 'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
                 'default_graph_version' => 'v' . env('FACEBOOK_API_VERSION'),
@@ -171,14 +176,14 @@ class StreamIntegrationService extends Service
             }
 
             return $fb->delete($params['video_id'], $params, $teamObject['access_token'])->getDecodedBody();
-        } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+        } catch (FacebookResponseException $e) {
             $message = $e->getMessage();
             Log::error('Graph returned an error: ' . $message);
             // We don't want to throw an error if the facebook video doesn't exist anymore, just in case someone deleted it on facebook
-            if (!empty($message) && ! str_contains($message, 'does not exist')) {
+            if (!empty($message) && !str_contains($message, 'does not exist')) {
                 throw $e;
             }
-        } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+        } catch (FacebookSDKException $e) {
             Log::error('Facebook SDK returned an error: ' . $e->getMessage());
             throw $e;
         } catch (Exception $e) {

@@ -29,7 +29,7 @@ class NewsFeedEditor extends Component
 
     public function createPost($data)
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Platform::isAllowingGuestAccess() && !auth()->check()) {
             $this->showAuthenticationModal();
 
             return;
@@ -41,11 +41,11 @@ class NewsFeedEditor extends Component
 
         DB::transaction(function () use ($data) {
             $options = [];
-            if (! empty($this->team)) {
+            if (!empty($this->team)) {
                 $options['team_id'] = $this->team->id;
             }
             $post = (new CreateNewPostAction);
-            if (! empty($this->postType)) {
+            if (!empty($this->postType)) {
                 $post->type($this->postType);
             }
             $options['published_at'] = now();

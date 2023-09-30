@@ -12,25 +12,11 @@ use Spark\Http\Controllers\WebhookController as SparkWebhookController;
 class StripeWebhooksController extends SparkWebhookController
 {
     /**
-     * Check for Omnia Metered Plan
-     *
-     * @return bool
-     */
-    public function containsOmniaMeteredPlan($payload)
-    {
-        if ($payload['data']['object']['plan']['id'] = 'omnia-metered') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Handle When an Invoice is Created. This is here to pause the invoice,
      * add monthly items (metered billing), then resume invoice payment
      *
      *
-     * @return Response|\Illuminate\Http\Response
+     * @return Response|Response
      */
     public function handleInvoiceCreated(array $payload)
     {
@@ -42,6 +28,37 @@ class StripeWebhooksController extends SparkWebhookController
         }
 
         return $this->teamInvoiceCreated($customer, $payload);
+    }
+
+    /**
+     * Handle a successful invoice payment from a Stripe subscription.
+     */
+    protected function teamInvoiceCreated(Team $team, array $payload): Response
+    {
+        try {
+            $invoiceData = $payload['data']['object'];
+
+            // get apps/modules that this team is using
+            // get items that have metered billing and their stats
+            // calculate prices for each apps
+            // itemize prices for each app
+            $invoiceId = (!empty($invoiceData['id']) ? $invoiceData['id'] : null);
+
+            // Add Metered Billing Items
+            foreach ($invoiceData['lines']['data'] as $invoiceLineItem) {
+                if (!empty($invoiceLineItem['plan']) && $invoiceLineItem['plan']['id'] === 'omnia-metered') {
+                    $subscriptionId = (!empty($invoiceLineItem['id']) ? $invoiceLineItem['id'] : null);
+
+                    dispatch(new AddMeteredBillingInvoiceItemsJob($team, $invoiceId, $subscriptionId));
+                }
+            }
+
+            return new Response('Webhook Handled', 200);
+        } catch (Exception $e) {
+            Log::error($msg = 'Failed to handle webhook due to error: ' . $e->getMessage());
+
+            return new Response($msg, 500);
+        }
     }
 
     /**
@@ -61,6 +78,20 @@ class StripeWebhooksController extends SparkWebhookController
     }
 
     /**
+     * Check for Omnia Metered Plan
+     *
+     * @return bool
+     */
+    public function containsOmniaMeteredPlan($payload)
+    {
+        if ($payload['data']['object']['plan']['id'] = 'omnia-metered') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Subscription Deleted
      *
      *
@@ -74,36 +105,5 @@ class StripeWebhooksController extends SparkWebhookController
         }
 
         return parent::handleCustomerSubscriptionDeleted($payload);
-    }
-
-    /**
-     * Handle a successful invoice payment from a Stripe subscription.
-     */
-    protected function teamInvoiceCreated(Team $team, array $payload): Response
-    {
-        try {
-            $invoiceData = $payload['data']['object'];
-
-            // get apps/modules that this team is using
-            // get items that have metered billing and their stats
-            // calculate prices for each apps
-            // itemize prices for each app
-            $invoiceId = (! empty($invoiceData['id']) ? $invoiceData['id'] : null);
-
-            // Add Metered Billing Items
-            foreach ($invoiceData['lines']['data'] as $invoiceLineItem) {
-                if (! empty($invoiceLineItem['plan']) && $invoiceLineItem['plan']['id'] === 'omnia-metered') {
-                    $subscriptionId = (! empty($invoiceLineItem['id']) ? $invoiceLineItem['id'] : null);
-
-                    dispatch(new AddMeteredBillingInvoiceItemsJob($team, $invoiceId, $subscriptionId));
-                }
-            }
-
-            return new Response('Webhook Handled', 200);
-        } catch (Exception $e) {
-            Log::error($msg = 'Failed to handle webhook due to error: ' . $e->getMessage());
-
-            return new Response($msg, 500);
-        }
     }
 }

@@ -3,7 +3,7 @@
 namespace Modules\Livestream\Http\Controllers;
 
 use Exception;
-use GuzzleHttp\Psr7\Stream;
+use Illuminate\Http\Response;
 use Modules\Livestream\Http\Requests\StreamIntegrationRequest;
 use Modules\Livestream\StreamIntegration;
 
@@ -16,8 +16,8 @@ class StreamIntegrationController extends LivestreamController
      * Return all current Stream Integratiosn for given or current livestreamAccont
      * (*a user cannot have a stream integration at this time*)
      *
-     * @param  null  $team_id
-     * @return \Illuminate\Http\Response
+     * @param null $team_id
+     * @return Response
      */
     public function index($livestreamAccount = null)
     {
@@ -38,27 +38,19 @@ class StreamIntegrationController extends LivestreamController
     }
 
     /**
-     * Show the form for creating a new streamIntegration.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
      * Store a newly created StreamIntegration in storage.
      *
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      *
      * @throws Exception
      */
     public function store(StreamIntegrationRequest $request)
     {
-        $streamIntegration = StreamIntegration::where('livestream_account_id', '=', $request->livestream_account_id)->where('provider', '=', $request->provider)->get();
+        $streamIntegration = StreamIntegration::where('livestream_account_id', '=',
+            $request->livestream_account_id)->where('provider', '=', $request->provider)->get();
         // need to check if this stream integration already exists
-        if (! empty($streamIntegration) && $streamIntegration->isNotEmpty()) {
+        if (!empty($streamIntegration) && $streamIntegration->isNotEmpty()) {
             return $this->update($request, $streamIntegration->first()->id);
         } else {
             $request = $request->all();
@@ -74,28 +66,10 @@ class StreamIntegrationController extends LivestreamController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(StreamIntegrationRequest $request, $id)
     {
@@ -117,10 +91,37 @@ class StreamIntegrationController extends LivestreamController
     }
 
     /**
+     * Show the form for creating a new streamIntegration.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+    }
+
+    /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      *
      * @throws Exception
      */

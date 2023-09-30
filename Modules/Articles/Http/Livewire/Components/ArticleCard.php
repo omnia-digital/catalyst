@@ -3,7 +3,6 @@
 namespace Modules\Articles\Http\Livewire\Components;
 
 use Modules\Social\Http\Livewire\Components\PostCard;
-
 use function view;
 
 class ArticleCard extends PostCard

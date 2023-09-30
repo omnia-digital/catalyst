@@ -7,7 +7,6 @@ use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
-
 use function view;
 
 class PostCard extends Component
@@ -19,17 +18,17 @@ class PostCard extends Component
     public $clickable;
     public $showPostActions = true;
 
-    public function loadRelations()
-    {
-        $this->post->load(['user', 'team', 'media', 'repostOriginal', 'tags']);
-    }
-
     public function mount(Post $post, $clickable = true, $showPostActions = true)
     {
         $this->post = $post;
         $this->clickable = $clickable;
         $this->showPostActions = $showPostActions;
         $this->loadRelations();
+    }
+
+    public function loadRelations()
+    {
+        $this->post->load(['user', 'team', 'media', 'repostOriginal', 'tags']);
     }
 
     public function getAuthorProperty()
@@ -58,7 +57,7 @@ class PostCard extends Component
 
     public function toggleBookmark()
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Platform::isAllowingGuestAccess() && !auth()->check()) {
             $this->showAuthenticationModal(route('social.posts.show', $this->post));
 
             return;

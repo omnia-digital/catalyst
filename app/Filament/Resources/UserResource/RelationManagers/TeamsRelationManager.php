@@ -5,8 +5,8 @@ namespace App\Filament\Resources\UserResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Trans;
@@ -20,6 +20,11 @@ class TeamsRelationManager extends RelationManager
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return Trans::get(Str::headline(static::getPluralModelLabel()));
+    }
+
+    protected static function getRecordLabel(): ?string
+    {
+        return Trans::get('Team');
     }
 
     public function form(Form $form): Form
@@ -39,7 +44,8 @@ class TeamsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('handle')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('roles.name')->sortable()->searchable(), // @TODO [Josh] - change this to be only the role that this user has in this team
+                Tables\Columns\TextColumn::make('roles.name')->sortable()->searchable(),
+                // @TODO [Josh] - change this to be only the role that this user has in this team
                 Tables\Columns\TextColumn::make('members_count')->label('Members')->counts('members')->sortable()->searchable(),
             ])
             ->filters([
@@ -55,10 +61,5 @@ class TeamsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }
-
-    protected static function getRecordLabel(): ?string
-    {
-        return Trans::get('Team');
     }
 }

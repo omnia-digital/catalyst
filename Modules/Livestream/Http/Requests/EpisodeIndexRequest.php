@@ -2,8 +2,6 @@
 
 namespace Modules\Livestream\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
-
 class EpisodeIndexRequest extends LivestreamRequest
 {
     /**

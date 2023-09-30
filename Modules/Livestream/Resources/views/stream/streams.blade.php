@@ -47,7 +47,7 @@
                                         </x-table.cell>
                                         <x-table.cell class="text-right font-medium flex-1 items-center space-x-2">
                                             <x-form.button-link
-                                                x-data="{
+                                                    x-data="{
                                                     text: 'Copy Stream Key',
 
                                                     streamKey: '{{ $stream->stream_key }}',
@@ -59,10 +59,12 @@
                                                         setTimeout(() => { this.text = 'Copy Stream Key' }, 2000);
                                                     }
                                                 }"
-                                                x-on:click.prevent="copy" x-text="text">
+                                                    x-on:click.prevent="copy" x-text="text">
                                             </x-form.button-link>
 
-                                            <x-form.button-link wire:click="openResetStreamKeyModal('{{ $stream->stream_id }}')" secondary>
+                                            <x-form.button-link
+                                                    wire:click="openResetStreamKeyModal('{{ $stream->stream_id }}')"
+                                                    secondary>
                                                 Reset Stream Key
                                             </x-form.button-link>
                                         </x-table.cell>
@@ -70,7 +72,8 @@
                                 @empty
                                     <x-table.empty>
                                         <div class="text-center">
-                                            <p class="text-center text-gray-600 text-base my-4">We could not find your stream key. Please contact our support team.</p>
+                                            <p class="text-center text-gray-600 text-base my-4">We could not find your
+                                                stream key. Please contact our support team.</p>
                                         </div>
                                     </x-table.empty>
                                 @endforelse
@@ -83,7 +86,7 @@
         </div>
     </div>
 
-    <x-jet-confirmation-modal wire:model="resetStreamKeyModelOpen">
+    <x-confirmation-modal wire:model.live="resetStreamKeyModelOpen">
         <x-slot name="title">Reset Stream Key</x-slot>
 
         <x-slot name="content">
@@ -91,13 +94,13 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('resetStreamKeyModelOpen')" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$toggle('resetStreamKeyModelOpen')" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
-            </x-jet-secondary-button>
+            </x-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="resetStreamKey" wire:loading.attr="disabled">
+            <x-danger-button class="ml-2" wire:click="resetStreamKey" wire:loading.attr="disabled">
                 {{ __('Reset Stream Key') }}
-            </x-jet-danger-button>
+            </x-danger-button>
         </x-slot>
-    </x-jet-confirmation-modal>
+    </x-confirmation-modal>
 </div>

@@ -47,7 +47,7 @@ class Index extends Component
             ->withCount('users');
 
         return $this->applyFilters($query)
-            ->when($this->search, fn (Builder $q) => $q->search($this->search));
+            ->when($this->search, fn(Builder $q) => $q->search($this->search));
     }
 
     public function getRowsProperty()

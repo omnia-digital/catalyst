@@ -17,8 +17,15 @@ class PostActions extends Component
     public bool $showShareButton = true;
     public bool $showBookmarkButton = false;
 
-    public function mount(Post $post, $show = false, $showCommentButton = true, $showLikeButton = true, $showRepostButton = true, $showShareButton = true, $showBookmarkButton = false)
-    {
+    public function mount(
+        Post $post,
+        $show = false,
+        $showCommentButton = true,
+        $showLikeButton = true,
+        $showRepostButton = true,
+        $showShareButton = true,
+        $showBookmarkButton = false
+    ) {
         $this->post = $post;
         $this->show = $show;
         $this->showCommentButton = $showCommentButton;

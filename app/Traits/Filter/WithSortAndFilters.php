@@ -74,7 +74,7 @@ trait WithSortAndFilters
 
     public function getAllTagsProperty()
     {
-        return Tag::all()->mapWithKeys(fn (Tag $tag) => [$tag->name => $tag->name])->all();
+        return Tag::all()->mapWithKeys(fn(Tag $tag) => [$tag->name => $tag->name])->all();
     }
 
     public function applySorting(Builder $query): Builder
@@ -87,17 +87,19 @@ trait WithSortAndFilters
         $table = $query->first()?->getTable();
 
         return $query
-            ->when($this->filters['has_attachment'], fn (Builder $q) => $q->having('media_count', '>=', 1))
+            ->when($this->filters['has_attachment'], fn(Builder $q) => $q->having('media_count', '>=', 1))
             // location filter
-            ->when(Arr::get($this->filters, 'location'), fn (Builder $query, $location) => $query->whereHas('location', fn (Builder $query) => $query->search($location)))
+            ->when(Arr::get($this->filters, 'location'), fn(Builder $query, $location) => $query->whereHas('location',
+                fn(Builder $query) => $query->search($location)))
             // date filter
-            ->when($this->dateFilter, fn (Builder $query, $date) => $query->whereDate($table . '.' . $this->dateColumn, $date))
+            ->when($this->dateFilter,
+                fn(Builder $query, $date) => $query->whereDate($table . '.' . $this->dateColumn, $date))
             // members filter
-            ->when(max($this->members) > 0, fn (Builder $query) => $query->havingBetween('users_count', $this->members))
+            ->when(max($this->members) > 0, fn(Builder $query) => $query->havingBetween('users_count', $this->members))
             // tags
-            ->when(! empty($this->tags), fn (Builder $query) => $query->withAnyTags($this->tags))
+            ->when(!empty($this->tags), fn(Builder $query) => $query->withAnyTags($this->tags))
             // my_teams
-            ->when(Arr::get($this->filters, 'my_teams'), fn (Builder $query) => $query->withUser(auth()->user()));
+            ->when(Arr::get($this->filters, 'my_teams'), fn(Builder $query) => $query->withUser(auth()->user()));
         //->when(Arr::get($this->filters, 'rating'), fn(Builder $query, $rating) => $query->whereIn('rating', $rating))
     }
 }

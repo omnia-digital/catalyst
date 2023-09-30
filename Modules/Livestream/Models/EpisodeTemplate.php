@@ -30,7 +30,7 @@ class EpisodeTemplate extends Model
 
     public function getDefaultThumbnailUrlAttribute()
     {
-        if (! $this->default_thumbnail) {
+        if (!$this->default_thumbnail) {
             return null;
         }
 

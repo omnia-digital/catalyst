@@ -1,6 +1,6 @@
 <div>
     <div
-        x-data="{
+            x-data="{
             open: true,
 
             initialSideMenu: null,
@@ -57,7 +57,7 @@
                 addMarkers(contacts);
             }
         }"
-        x-init="function() {
+            x-init="function() {
             this.resize();
 
             $watch('open', value => {
@@ -71,22 +71,26 @@
                 }
             })
         }"
-        x-on:refresh-map.window="reloadMarker($event.detail)"
-        x-on:show-modal.window="showDetail = true; populateData($event.detail)"
-        x-on:focus-to-country.window="focusToCountry($event.detail)"
-        @keydown.window.escape="open = !open;" class="overflow-hidden relative bg-neutral"
+            x-on:refresh-map.window="reloadMarker($event.detail)"
+            x-on:show-modal.window="showDetail = true; populateData($event.detail)"
+            x-on:focus-to-country.window="focusToCountry($event.detail)"
+            @keydown.window.escape="open = !open;" class="overflow-hidden relative bg-neutral"
     >
         <div class="h-12 text-sm bg-secondary flex items-center justify-between">
             <div class="px-4 flex items-center space-x-4">
-                <button role="button" class="flex items-center"><span class="font-semibold mr-2">Sort:</span> By Date <x-heroicon-o-arrow-sm-down class="w-4 h-4" /></button>
-                <button role="button" class="flex items-center"><x-heroicon-o-filter class="w-4 h-4" /><span class="ml-2 font-semibold">Filter (2)</span></button>
+                <button role="button" class="flex items-center"><span class="font-semibold mr-2">Sort:</span> By Date
+                    <x-heroicon-o-arrow-sm-down class="w-4 h-4"/>
+                </button>
+                <button role="button" class="flex items-center">
+                    <x-heroicon-o-filter class="w-4 h-4"/>
+                    <span class="ml-2 font-semibold">Filter (2)</span></button>
             </div>
             <div class="px-4 flex items-center space-x-4">
                 <button role="button">
-                    <x-heroicon-o-map class="w-6 h-6" />
+                    <x-heroicon-o-map class="w-6 h-6"/>
                 </button>
                 <button role="button">
-                    <x-heroicon-o-calendar class="w-6 h-6" />
+                    <x-heroicon-o-calendar class="w-6 h-6"/>
                 </button>
             </div>
         </div>
@@ -130,7 +134,7 @@
                             <div class="w-full max-w-xs mx-auto mb-5">
                                 <div>
                                     <label for="country" class="block text-sm font-medium text-dark-text-color">Country</label>
-                                    <select wire:model="filters.country" id="country" name="country" class="mt-1 block w-full pl-3 pr-10 py-2 text-base-text-color border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md">
+                                    <select wire:model.live="filters.country" id="country" name="country" class="mt-1 block w-full pl-3 pr-10 py-2 text-base-text-color border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md">
                                         <option selected>All</option>
 
                                         @foreach ($countries as $country)
@@ -224,7 +228,8 @@
 
 @push('scripts')
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_map.api_key') }}&callback=initMap&libraries=&v=weekly" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_map.api_key') }}&callback=initMap&libraries=&v=weekly"
+            defer></script>
 
     <script>
         let map;

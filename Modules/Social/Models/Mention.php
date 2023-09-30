@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Modules\Social\Database\Factories\MentionFactory;
 use Modules\Social\Notifications\SomeoneMentionedYouNotification;
 
 class Mention extends Model
@@ -32,20 +33,29 @@ class Mention extends Model
                 'postable_id' => $post->id,
             ])->exists();
 
-            ! $mentionAlreadyExists &&
-                Mention::create([
-                    'mentionable_type' => $type,
-                    'mentionable_id' => $type::findByHandle($handle)->id,
-                    'postable_type' => $post::class,
-                    'postable_id' => $post->id,
-                ]);
+            !$mentionAlreadyExists &&
+            Mention::create([
+                'mentionable_type' => $type,
+                'mentionable_id' => $type::findByHandle($handle)->id,
+                'postable_type' => $post::class,
+                'postable_id' => $post->id,
+            ]);
         }
+    }
+
+    public static function processMentionContent($content)
+    {
+        $content = self::replaceUserMentions($content);
+
+        $content = self::replaceTeamMentions($content);
+
+        return $content;
     }
 
     /**
      * Replace user mentions in body with links to the user profile
      *
-     * @param  string  $content
+     * @param string $content
      * @return string
      */
     public static function replaceUserMentions($content)
@@ -57,7 +67,8 @@ class Mention extends Model
                     return $matches[0];
                 }
 
-                return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.profile.show', $matches[1]) . "'>" . $matches[0] . '</a>';
+                return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.profile.show',
+                        $matches[1]) . "'>" . $matches[0] . '</a>';
             },
             $content
         );
@@ -66,7 +77,7 @@ class Mention extends Model
     /**
      * Replace team mentions in body with links to the user profile
      *
-     * @param  string  $content
+     * @param string $content
      * @return string
      */
     public static function replaceTeamMentions($content)
@@ -78,19 +89,11 @@ class Mention extends Model
                     return $matches[0];
                 }
 
-                return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.teams.show', $matches[1]) . "'>" . $matches[0] . '</a>';
+                return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.teams.show',
+                        $matches[1]) . "'>" . $matches[0] . '</a>';
             },
             $content
         );
-    }
-
-    public static function processMentionContent($content)
-    {
-        $content = self::replaceUserMentions($content);
-
-        $content = self::replaceTeamMentions($content);
-
-        return $content;
     }
 
     public static function getAllMentions($content)
@@ -121,7 +124,7 @@ class Mention extends Model
 
     protected static function newFactory()
     {
-        return \Modules\Social\Database\Factories\MentionFactory::new();
+        return MentionFactory::new();
     }
 
     /**

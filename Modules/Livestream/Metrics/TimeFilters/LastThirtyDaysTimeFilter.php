@@ -11,24 +11,24 @@ class LastThirtyDaysTimeFilter extends TimeFilter
         return 'Last 30 Days';
     }
 
-    public function from(): Carbon
-    {
-        return now()->subDays(30)->startOfDay();
-    }
-
-    public function to(): Carbon
-    {
-        return now()->endOfDay();
-    }
-
     public function previousFrom(): Carbon
     {
         return $this->from()->subDays(30)->startOfDay();
     }
 
+    public function from(): Carbon
+    {
+        return now()->subDays(30)->startOfDay();
+    }
+
     public function previousTo(): Carbon
     {
         return $this->to()->subDays(30)->endOfDay();
+    }
+
+    public function to(): Carbon
+    {
+        return now()->endOfDay();
     }
 
     public function step(): string

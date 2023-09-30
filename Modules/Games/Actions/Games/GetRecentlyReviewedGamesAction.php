@@ -4,7 +4,6 @@ namespace Modules\Games\Actions\Games;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use MarcReichel\IGDBLaravel\Models\Cover;
 use Modules\Games\Models\Game;
 
 class GetRecentlyReviewedGamesAction

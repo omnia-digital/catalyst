@@ -26,7 +26,7 @@ class NotifyStreamEnded
         Log::info(__CLASS__ . '-[STARTED]');
 
         $notificationRequest = $event->notificationRequest;
-        if (! empty($notificationRequest->LivestreamAccountId)) {
+        if (!empty($notificationRequest->LivestreamAccountId)) {
             $livestreamAccount = LivestreamAccount::find($notificationRequest->LivestreamAccountId);
         }
 

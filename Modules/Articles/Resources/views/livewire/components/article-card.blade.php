@@ -1,6 +1,6 @@
 <article
-    wire:click.prevent.stop="showPost"
-    class="pt-4 shadow-sm rounded-lg cursor-pointer border-2 z-10 bg-secondary {{ $clickable ? 'cursor-pointer' : '' }}"
+        wire:click.prevent.stop="showPost"
+        class="pt-4 shadow-sm rounded-lg cursor-pointer border-2 z-10 bg-secondary {{ $clickable ? 'cursor-pointer' : '' }}"
 >
     <!-- Content -->
     <div class="w-full">
@@ -14,14 +14,16 @@
                         </h4>
                         <div class="flex content-center space-x-1 items-center text-post-card-body-color">
                             <p>by</p>
-                            <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}"
+                            <a wire:click.prevent.stop="showProfile"
+                               href="{{ route('social.profile.show', $post->user->handle) }}"
                                class="hover:underline block font-bold text-post-card-title-color">{{ $post->user->name }}</a>
                             <x-dot/>
                             <a href="{{ $post->getUrl() }}" class="hover:underline">
                                 <time datetime="{{ $post->published_at }}">{{ $post->published_at?->diffForHumans(short: true) }}</time>
                             </a>
                             @empty(!$post->is_verified)
-                                <x-heroicon-o-check-circle class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
+                                <x-heroicon-o-check-circle
+                                        class="flex-shrink-0 w-6 h-6 inline-block  text-green-700 text-xs font-medium rounded-full"/>
                             @endempty
                         </div>
                     </div>
@@ -38,7 +40,9 @@
                     <div class="relative z-1 inline-block text-left">
                         <x-library::dropdown>
                             <x-slot name="trigger" x-on:click.stop="">
-                                <button type="button" class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
+                                <button type="button"
+                                        class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600"
+                                        id="menu-0-button" aria-expanded="false" aria-haspopup="true">
                                     <span class="sr-only">Open options</span>
                                     <x-heroicon-s-dots-horizontal class="h-5 w-5"/>
                                 </button>
@@ -48,9 +52,9 @@
                             </x-library::dropdown.item>
                             @can('update', $post)
                                 <a
-                                    x-data x-on:click.stop=""
-                                    class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color"
-                                    href="{{ route('articles.edit', $post->id) }}"
+                                        x-data x-on:click.stop=""
+                                        class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color"
+                                        href="{{ route('articles.edit', $post->id) }}"
                                 >
                                     Edit
                                 </a>
@@ -70,17 +74,17 @@
                 </div>
             @endif
 
-{{--            @if ($post->media ?? null)--}}
-{{--                <div class="mt-3 overflow-hidden">--}}
-{{--                    <div class="grid grid-cols-{{ sizeof($post->media) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($post->media) > 2 ? '2 h-80' : '1' }} gap-px">--}}
-{{--                        @foreach ($post->media as $media)--}}
-{{--                            <div class="w-full overflow-hidden @if ($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">--}}
-{{--                                <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover w-full">--}}
-{{--                            </div>--}}
-{{--                        @endforeach--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            @endif--}}
+            {{--            @if ($post->media ?? null)--}}
+            {{--                <div class="mt-3 overflow-hidden">--}}
+            {{--                    <div class="grid grid-cols-{{ sizeof($post->media) > 1 ? '2' : '1' }} grid-rows-{{ sizeof($post->media) > 2 ? '2 h-80' : '1' }} gap-px">--}}
+            {{--                        @foreach ($post->media as $media)--}}
+            {{--                            <div class="w-full overflow-hidden @if ($loop->first && sizeof($post->media) == 3) row-span-2 fill-row-span @endif">--}}
+            {{--                                <img src="{{ $media->getUrl() }}" alt="{{ $post->title }}" class="object-cover w-full">--}}
+            {{--                            </div>--}}
+            {{--                        @endforeach--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--            @endif--}}
         </div>
     </div>
 

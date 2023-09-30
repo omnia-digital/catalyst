@@ -22,7 +22,7 @@ class Show extends Component
             $this->authorize('update', $this->resource);
         }
 
-        if (! empty($this->resource) && $this->resource->type !== PostType::ARTICLE) {
+        if (!empty($this->resource) && $this->resource->type !== PostType::ARTICLE) {
             $this->redirectRoute('social.posts.show', $this->resource);
         }
     }

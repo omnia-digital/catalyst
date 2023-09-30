@@ -27,18 +27,19 @@
             <div class="flex w-full justify-between h-full items-center pl-4">
                 <div class="w-full grid grid-cols-12 gap-4">
                     <!-- Main nav header -->
-{{--                    <livewire:main-nav-left :navigation="$navigation"/>--}}
-{{--                    <livewire:main-nav-right/>--}}
+                    {{--                    <livewire:main-nav-left :navigation="$navigation"/>--}}
+                    {{--                    <livewire:main-nav-right/>--}}
                 </div>
             </div>
         </div>
     </div>
     <!-- Mobile Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-secondary max-h-full-minus-[56px] overflow-y-scroll scrollbar-hide">
+    <div :class="{'block': open, 'hidden': ! open}"
+         class="hidden sm:hidden bg-secondary max-h-full-minus-[56px] overflow-y-scroll scrollbar-hide">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ \Trans::get('Dashboard') }}
-            </x-jet-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                {{ Trans::get('Dashboard') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -47,7 +48,8 @@
                 <div class="flex items-center px-4">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <div class="shrink-0 mr-3">
-                            <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>
+                            <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
+                                 alt="{{ Auth::user()->name }}"/>
                         </div>
                     @endif
 
@@ -59,25 +61,26 @@
 
                 <div class="mt-3 space-y-1">
                     <!-- Account Management -->
-                    <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                        {{ \Trans::get('Profile') }}
-                    </x-jet-responsive-nav-link>
+                    <x-responsive-nav-link href="{{ route('profile.show') }}"
+                                           :active="request()->routeIs('profile.show')">
+                        {{ Trans::get('Profile') }}
+                    </x-responsive-nav-link>
 
                     {{--                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
-                    {{--                    <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">--}}
+                    {{--                    <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">--}}
                     {{--                        {{ \Trans::get('API Tokens') }}--}}
-                    {{--                    </x-jet-responsive-nav-link>--}}
+                    {{--                    </x-responsive-nav-link>--}}
                     {{--                @endif--}}
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <x-jet-responsive-nav-link href="{{ route('logout') }}"
-                                                   onclick="event.preventDefault();
+                        <x-responsive-nav-link href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                            {{ \Trans::get('Log Out') }}
-                        </x-jet-responsive-nav-link>
+                            {{ Trans::get('Log Out') }}
+                        </x-responsive-nav-link>
                     </form>
 
                     <!-- Team Management -->
@@ -89,14 +92,15 @@
                         {{--                    </div>--}}
 
                         <!-- Team Settings -->
-                        <x-jet-responsive-nav-link href="{{ route('social.teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
-                            {{ \Trans::get('Team Settings') }}
-                        </x-jet-responsive-nav-link>
+                        <x-responsive-nav-link href="{{ route('social.teams.show', Auth::user()->currentTeam->id) }}"
+                                               :active="request()->routeIs('teams.show')">
+                            {{ Trans::get('Team Settings') }}
+                        </x-responsive-nav-link>
 
                         {{--                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
-                        {{--                        <x-jet-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">--}}
+                        {{--                        <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">--}}
                         {{--                            {{ \Trans::get('Create New Team') }}--}}
-                        {{--                        </x-jet-responsive-nav-link>--}}
+                        {{--                        </x-responsive-nav-link>--}}
                         {{--                    @endcan--}}
 
                         @if (Auth::user()->hasMultipleTeams())
@@ -104,11 +108,11 @@
 
                             <!-- Team Switcher -->
                             <div class="block px-4 py-2 text-xs text-light-text-color">
-                                {{ \Trans::get('Switch Teams') }}
+                                {{ Trans::get('Switch Teams') }}
                             </div>
 
                             @foreach (Auth::user()->teams as $team)
-                                <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link"/>
+                                <x-switchable-team :team="$team" component="responsive-nav-link"/>
                             @endforeach
                         @endif
                     @endif

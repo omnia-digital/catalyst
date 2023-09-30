@@ -72,7 +72,8 @@ class CreateTeamModal extends Component
 
     public function getTeamTagsProperty()
     {
-        return Tag::withType('team_type')->get()->mapWithKeys(fn (Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
+        return Tag::withType('team_type')->get()->mapWithKeys(fn(Tag $tag
+        ) => [$tag->name => ucwords($tag->name)])->all();
     }
 
     public function create()

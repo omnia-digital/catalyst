@@ -11,24 +11,24 @@ class AllTimeFilter extends TimeFilter
         return 'All Time';
     }
 
-    public function from(): Carbon
-    {
-        return now()->subYears(5)->startOfYear()->startOfDay();
-    }
-
-    public function to(): Carbon
-    {
-        return now()->endOfDay();
-    }
-
     public function previousFrom(): Carbon
     {
         return $this->from();
     }
 
+    public function from(): Carbon
+    {
+        return now()->subYears(5)->startOfYear()->startOfDay();
+    }
+
     public function previousTo(): Carbon
     {
         return $this->to();
+    }
+
+    public function to(): Carbon
+    {
+        return now()->endOfDay();
     }
 
     public function step(): string

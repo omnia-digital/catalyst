@@ -6,9 +6,9 @@ use App\Filament\Resources\UserScoreLevelResource\Pages;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Modules\Social\Models\UserScoreLevel;
 
 class UserScoreLevelResource extends Resource

@@ -6,12 +6,13 @@ use App\Filament\Resources\FormSubmissionResource\Pages\CreateFormSubmission;
 use App\Filament\Resources\FormSubmissionResource\Pages\EditFormSubmission;
 use App\Filament\Resources\FormSubmissionResource\Pages\ListFormSubmissions;
 use App\Filament\Resources\FormSubmissionResource\Pages\ViewFormSubmission;
+use App\Models\Team;
+use App\Models\User;
 use Closure;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -20,12 +21,14 @@ use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Forms\Models\FormSubmission;
 
 class FormSubmissionResource extends Resource
 {
     protected static ?string $label = 'Form Submissions';
-    protected static ?string $model = \Modules\Forms\Models\FormSubmission::class;
+    protected static ?string $model = FormSubmission::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Forms';
 
@@ -44,7 +47,7 @@ class FormSubmissionResource extends Resource
                 Select::make('user_id')
                     ->label('User')
                     ->options(
-                        \App\Models\User::get()
+                        User::get()
                             ->mapWithKeys(function ($item, $key) {
                                 return [$item['id'] => $item['id'] . ' - ' . $item['name']];
                             }))
@@ -52,7 +55,7 @@ class FormSubmissionResource extends Resource
                 Select::make('team_id')
                     ->label('Team')
                     ->options(
-                        \App\Models\Team::get()
+                        Team::get()
                             ->mapWithKeys(function ($item, $key) {
                                 return [$item['id'] => $item['id'] . ' - ' . $item['name']];
                             }))
@@ -126,6 +129,6 @@ class FormSubmissionResource extends Resource
 
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn (Model $record): string => route('form_submissions.edit', ['record' => $record]);
+        return fn(Model $record): string => route('form_submissions.edit', ['record' => $record]);
     }
 }

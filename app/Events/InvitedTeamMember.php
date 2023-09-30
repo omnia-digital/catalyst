@@ -39,10 +39,10 @@ class InvitedTeamMember extends BaseEvent
     /**
      * Create a new event instance.
      *
-     * @param  mixed  $team
-     * @param  mixed  $email
-     * @param  mixed  $role
-     * @param  mixed  $message
+     * @param mixed $team
+     * @param mixed $email
+     * @param mixed $role
+     * @param mixed $message
      * @return void
      */
     public function __construct($team, $email, $role, $message)

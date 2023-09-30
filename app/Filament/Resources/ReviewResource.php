@@ -7,13 +7,14 @@ use App\Filament\Resources\ReviewResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
+use Modules\Reviews\Models\Review;
 use Trans;
 
 class ReviewResource extends Resource
 {
-    protected static ?string $model = \Modules\Reviews\Models\Review::class;
+    protected static ?string $model = Review::class;
     protected static ?string $navigationIcon = 'heroicon-o-star';
 
     public static function form(Form $form): Form

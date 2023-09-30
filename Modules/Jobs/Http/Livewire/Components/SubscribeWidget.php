@@ -33,7 +33,8 @@ class SubscribeWidget extends Component
               ]
             }';
 
-        $response = Http::withToken(config('app.sendgrid_key'))->withBody($json_data, 'application/json')->put(config('app.sendgrid_url'));
+        $response = Http::withToken(config('app.sendgrid_key'))->withBody($json_data,
+            'application/json')->put(config('app.sendgrid_url'));
         //202 Accepted
         if ($response->status() == 202) {
             $subscribe->execute($this->email, [

@@ -14,6 +14,7 @@ use Modules\Livestream\Episode;
 use Modules\Livestream\EpisodeDownload;
 use Modules\Livestream\Events\EpisodeDownload\EpisodeDownloadIsReady;
 use Modules\Livestream\Notifications\EpisodeDownloadWasFailedNotification;
+use MuxPhp\ApiException;
 use Throwable;
 use ZipArchive;
 
@@ -45,7 +46,7 @@ class DownloadEpisodes implements ShouldQueue
      *
      * @return void
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      * @throws Exception
      */
     public function handle()
@@ -67,24 +68,9 @@ class DownloadEpisodes implements ShouldQueue
     }
 
     /**
-     * Handle a job failure.
-     *
-     * @return void
-     */
-    public function failed(Throwable $exception)
-    {
-        $this->episodeDownload->update([
-            'status' => EpisodeDownloadStatus::FAILED,
-            'failed_reason' => $exception->getMessage(),
-        ]);
-
-        $this->episodeDownload->user->notify(new EpisodeDownloadWasFailedNotification($this->episodeDownload));
-    }
-
-    /**
      * Download all episodes from Mux.
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     private function downloadEpisodes($episodes)
     {
@@ -94,11 +80,11 @@ class DownloadEpisodes implements ShouldQueue
             $asset = $episode->asMuxAsset();
 
             // Do nothing if asset is not found or this asset does not supports mp4.
-            if (! $asset || ! $asset->isDownloadable()) {
+            if (!$asset || !$asset->isDownloadable()) {
                 return;
             }
 
-            if (! ($playbackId = $asset->defaultPlaybackId())) {
+            if (!($playbackId = $asset->defaultPlaybackId())) {
                 return null;
             }
 
@@ -125,7 +111,7 @@ class DownloadEpisodes implements ShouldQueue
         $folderPath = $rootFolderPath . '/' . $this->episodeDownload->code;
         $files = glob($folderPath . '/*');
 
-        if (! count($files)) {
+        if (!count($files)) {
             throw new Exception('Cannot find any files to zip');
         }
 
@@ -139,5 +125,20 @@ class DownloadEpisodes implements ShouldQueue
         $zip->close();
 
         return basename($rootFolderPath) . '/' . $this->episodeDownload->code . '/' . $filename;
+    }
+
+    /**
+     * Handle a job failure.
+     *
+     * @return void
+     */
+    public function failed(Throwable $exception)
+    {
+        $this->episodeDownload->update([
+            'status' => EpisodeDownloadStatus::FAILED,
+            'failed_reason' => $exception->getMessage(),
+        ]);
+
+        $this->episodeDownload->user->notify(new EpisodeDownloadWasFailedNotification($this->episodeDownload));
     }
 }

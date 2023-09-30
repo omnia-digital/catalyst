@@ -17,7 +17,7 @@ class StreamStartNotificationRequest extends WowzaNotificationRequest
         foreach ($request as $key => $value) {
             Log::debug($key . ': ' . $value);
         }
-        $this->streamName = (! empty($request['streamName']) ? $request['streamName'] : '');
+        $this->streamName = (!empty($request['streamName']) ? $request['streamName'] : '');
 
         return $request;
     }
@@ -53,7 +53,7 @@ class StreamStartNotificationRequest extends WowzaNotificationRequest
     public function validateAll()
     {
         // These should all be true. If false, throw an error
-        $attributes['Trans Video'] = ! $this->isTranscodedVideo();
+        $attributes['Trans Video'] = !$this->isTranscodedVideo();
 
         $failedAttributes = collect();
         // If any of these returned false, kick back on that one
@@ -66,7 +66,7 @@ class StreamStartNotificationRequest extends WowzaNotificationRequest
             $response = new Response;
             $msgCollection = collect();
             $msgCollection->put('failures', $failedAttributes);
-            (! empty($failedAttributes) ? $msgCollection->prepend($this->streamName, 'object') : null);
+            (!empty($failedAttributes) ? $msgCollection->prepend($this->streamName, 'object') : null);
 
             $response->setContent($msgCollection);
             throw new ValidationException($this->getValidatorInstance(), $response);

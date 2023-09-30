@@ -1,8 +1,11 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* Themes */
 /*@import url('./themes/dark.css');*/
+[x-cloak] {
+    display: none;
+}
 
 :root {
     --base-text-color: #050505;
@@ -69,30 +72,32 @@
 }
 
 
-
 @layer utilities {
-        .masonry-1 {
-            column-gap: 1em;
-            column-count: 1;
-        }
-        .masonry-2 {
-            column-gap: 1em;
-            column-count: 2;
-        }
-        .masonry-3 {
-            column-gap: 1em;
-            column-count: 3;
-        }
-        .break-inside {
-            break-inside: avoid;
-        }
+    .masonry-1 {
+        column-gap: 1em;
+        column-count: 1;
+    }
+
+    .masonry-2 {
+        column-gap: 1em;
+        column-count: 2;
+    }
+
+    .masonry-3 {
+        column-gap: 1em;
+        column-count: 3;
+    }
+
+    .break-inside {
+        break-inside: avoid;
+    }
 }
 
 p, a, body, h1, h2, h3, h4, h5, h6 {
     @apply text-base-text-color;
 }
 
-p,a, body  {
+p, a, body {
     @apply text-base;
 }
 
@@ -100,22 +105,27 @@ h3 a, h4 a, h5 a, h6 a {
     @apply hover:underline;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
     @apply text-dark-text-color;
     @apply font-bold;
 }
+
 h1 {
     @apply text-2xl;
 }
+
 h2 {
     @apply text-xl;
 }
+
 h3 {
     @apply text-lg;
 }
+
 h4 {
     @apply text-base;
 }
+
 h5 {
     @apply text-sm;
 }
@@ -123,11 +133,14 @@ h5 {
 .sub-app-header {
     @apply px-4 py-2
 }
+
 .sub-app-sub-header {
     @apply py-2
 }
 
-[x-cloak] { display: none !important; }
+[x-cloak] {
+    display: none !important;
+}
 
 .card {
     @apply pt-1 bg-secondary shadow rounded-lg;

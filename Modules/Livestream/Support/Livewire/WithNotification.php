@@ -17,6 +17,14 @@ trait WithNotification
     }
 
     /**
+     * Show a friendly message to let user knows at least a field is input wrong.
+     */
+    public function alertInvalidInput(?string $message = null)
+    {
+        $this->error($message ?? 'Please make sure all fields are input correctly.');
+    }
+
+    /**
      * Show error notification.
      */
     public function error(string $message, ?array $action = null)
@@ -26,14 +34,6 @@ trait WithNotification
             'type' => 'error',
             'action' => $action,
         ]);
-    }
-
-    /**
-     * Show a friendly message to let user knows at least a field is input wrong.
-     */
-    public function alertInvalidInput(?string $message = null)
-    {
-        $this->error($message ?? 'Please make sure all fields are input correctly.');
     }
 
     /**

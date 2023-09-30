@@ -3,7 +3,6 @@
 namespace Modules\Social\Http\Livewire\Components;
 
 use Modules\Social\Models\Post;
-
 use function view;
 
 class PostCardDynamic extends PostCard

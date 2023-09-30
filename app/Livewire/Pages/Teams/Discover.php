@@ -125,7 +125,7 @@ class Discover extends Component
             ->limit($limit)
             ->withCount(['likes', 'users as members']);
 
-        if (! empty($category)) {
+        if (!empty($category)) {
             $query->withAnyTags([$category]);
         }
 

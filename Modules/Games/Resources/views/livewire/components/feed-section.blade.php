@@ -12,17 +12,20 @@
                                             @if ($feed->get_image_url())
                                                 @if ($feed->get_image_link())
                                                     <a href="{{ $feed->get_image_link() }}" target="_blank">
-                                                @endif
-                                                    <img src="{{ $feed->get_image_url() }}" class="h-12 rounded-full object-cover"/>
-                                                @if ($feed->get_image_link())
+                                                        @endif
+                                                        <img src="{{ $feed->get_image_url() }}"
+                                                             class="h-12 rounded-full object-cover"/>
+                                                        @if ($feed->get_image_link())
                                                     </a>
                                                 @endif
                                             @endif
 
                                             @if ($showDescription)
                                                 <div>
-                                                    <a href="{{ $feed->get_link() }}" target="_blank" class="flex items-center text-neutral-dark space-x-2 hover:underline">
-                                                        <x-library::heading.2 class="text-heading-default-color uppercase tracking-wide font-semibold">{!! $this->sanitize($feed->get_title())
+                                                    <a href="{{ $feed->get_link() }}" target="_blank"
+                                                       class="flex items-center text-neutral-dark space-x-2 hover:underline">
+                                                        <x-library::heading.2
+                                                                class="text-heading-default-color uppercase tracking-wide font-semibold">{!! $this->sanitize($feed->get_title())
                                                          !!}</x-library::heading.2>
                                                     </a>
                                                     <p>{{ $feed->get_description() }}</p>
@@ -30,24 +33,25 @@
                                             @endif
 
 
-                                    </div>
-                                    {{--                                <div class="inline-flex items-center text-md">--}}
-                                    {{--                                    <button type="button" class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-white-text-color text-sm tracking-wide font-medium hover:opacity-75">--}}
-                                    {{--                                        <span>Follow</span>--}}
-                                    {{--                                    </button>--}}
-                                    {{--                                </div>--}}
-
-                                    @if ($showLinkToNewsPage)
-                                        <div>
-                                            <a href="{{ route('games.feeds') }}" target="_self" class="flex items-center text-neutral-dark space-x-2 hover:underline">
-                                                <p class="text-heading-default-color uppercase tracking-wide font-semibold">{{ Trans::get('See more News') }}</p>
-                                            </a>
                                         </div>
-                                    @endif
+                                        {{--                                <div class="inline-flex items-center text-md">--}}
+                                        {{--                                    <button type="button" class="inline-flex items-center px-4 py-2 rounded-full bg-primary text-white-text-color text-sm tracking-wide font-medium hover:opacity-75">--}}
+                                        {{--                                        <span>Follow</span>--}}
+                                        {{--                                    </button>--}}
+                                        {{--                                </div>--}}
+
+                                        @if ($showLinkToNewsPage)
+                                            <div>
+                                                <a href="{{ route('games.feeds') }}" target="_self"
+                                                   class="flex items-center text-neutral-dark space-x-2 hover:underline">
+                                                    <p class="text-heading-default-color uppercase tracking-wide font-semibold">{{ Trans::get('See more News') }}</p>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </h2>
+                        </h2>
                     @endif
                     <div class="">
                         <div class="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mt-4">

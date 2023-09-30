@@ -4,12 +4,12 @@
             <div class="w-full items-center text-center md:text-left md:pr-5">
                 <p class="text-sm text-gray-400">Are you a contractor?</p>
                 <p class="">Get instant emails of all new contracts</p>
-{{--                <div class="mr-5 mb-2 xl:mb-0">--}}
-{{--                    <x-input.select :options="$frequencies" wire:model.defer="frequency"/>--}}
-{{--                </div>--}}
+                {{--                <div class="mr-5 mb-2 xl:mb-0">--}}
+                {{--                    <x-input.select :options="$frequencies" wire:model="frequency"/>--}}
+                {{--                </div>--}}
             </div>
             <div class="w-full mb-2 flex-grow xl:mb-0 items-center">
-                <x-library::input.text wire:model.defer="email" name="email" placeholder="Your Email"/>
+                <x-library::input.text wire:model="email" name="email" placeholder="Your Email"/>
                 <x-library::input.error for="email"/>
             </div>
             <div class="items-center flex justify-end md:pl-4">

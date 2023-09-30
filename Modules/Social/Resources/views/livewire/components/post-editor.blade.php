@@ -1,5 +1,4 @@
-<div
-    x-data="{
+<div x-data="{
         openState: false,
         showImages: true,
         images: [],
@@ -32,25 +31,25 @@
         },
 
     }"
-        x-on:media-manager:file-selected.window="setImage"
-        x-on:post-editor:image-set.window="setImages"
-        class="bg-secondary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4 max-w-post-card-max-w relative"
->
+     x-on:media-manager:file-selected.window="setImage"
+     x-on:post-editor:image-set.window="setImages"
+     class="bg-secondary p-2 pl-3 pr-5 rounded-lg flex justify-start pt-4 max-w-post-card-max-w relative">
     <div class="mr-3 flex-shrink-0">
         @auth
-            <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>
+            <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}"
+                 alt="{{ Auth::user()->name }}"/>
         @endauth
     </div>
     <div class="flex-1">
         @if ($includeTitle)
             <div class="">
-                <x-library::input.text label="Title" wire:model.defer="title"/>
+                <x-library::input.text label="Title" wire:model="title"/>
                 <x-library::input.error for="title"/>
             </div>
         @endif
 
         <x-library::tiptap
-                wire:model.defer="content"
+                wire:model="content"
                 heightClass="{{ $openState == false ?? 'min-h-[80px]' }} m-1 text-lg"
                 wordCountType="character"
                 characterLimit="500"
@@ -73,11 +72,13 @@
                                         type="button"
                                         class="absolute -top-2 -right-2 z-10 bg-red-100 rounded-full p-1 inline-flex items-center justify-center hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500"
                                 >
-                                    <x-library::icons.icon name="x-mark" class="w-5 h-5 text-red-500 hover:text-red-400"/>
+                                    <x-library::icons.icon name="x-mark"
+                                                           class="w-5 h-5 text-red-500 hover:text-red-400"/>
                                 </button>
 
                                 <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden">
-                                    <img x-bind:src="image" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
+                                    <img x-bind:src="image" alt=""
+                                         class="group-hover:opacity-75 object-cover pointer-events-none">
                                 </div>
                             </li>
                         </template>
@@ -92,7 +93,7 @@
                     <button x-on:click.prevent.stop="showMediaManager(null, {})" type="button">
                         <i class="fa-solid fa-image w-5 h-5 text-gray-500"></i>
                     </button>
-{{--                    <x-library::canva-button size="tiny"/>--}}
+                    {{--                    <x-library::canva-button size="tiny"/>--}}
                 </div>
             @endif
             <div>

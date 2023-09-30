@@ -17,14 +17,6 @@ use Modules\Livestream\Metrics\TimeFilters\TodayTimeFilter;
 class MetricTimeFilterServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
-     * Register services.
-     */
-    public function register()
-    {
-        $this->app->singleton(TimeFilterRegistry::class);
-    }
-
-    /**
      * Boot services.
      */
     public function boot()
@@ -38,6 +30,14 @@ class MetricTimeFilterServiceProvider extends ServiceProvider implements Deferra
             ->register('this-month', new ThisMonthTimeFilter)
             ->register('this-year', new ThisYearTimeFilter)
             ->register('all-time', new AllTimeFilter);
+    }
+
+    /**
+     * Register services.
+     */
+    public function register()
+    {
+        $this->app->singleton(TimeFilterRegistry::class);
     }
 
     /**

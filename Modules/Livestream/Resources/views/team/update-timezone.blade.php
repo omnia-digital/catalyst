@@ -1,4 +1,4 @@
-<x-jet-form-section submit="updateTimezone">
+<x-form-section submit="updateTimezone">
     <x-slot name="title">
         {{ __('Update Timezone') }}
     </x-slot>
@@ -10,18 +10,18 @@
     <x-slot name="form">
         <div class="col-span-6 sm:col-span-4">
             <x-input.label value="Timezone" required/>
-            <x-input.select id="timezone" wire:model.defer="timezone" :options="$timezones"/>
-            <x-jet-input-error for="timezone" class="mt-2" />
+            <x-input.select id="timezone" wire:model="timezone" :options="$timezones"/>
+            <x-input-error for="timezone" class="mt-2"/>
         </div>
     </x-slot>
 
     <x-slot name="actions">
-        <x-jet-action-message class="mr-3" on="saved">
+        <x-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
-        </x-jet-action-message>
+        </x-action-message>
 
-        <x-jet-button>
+        <x-button>
             {{ __('Save') }}
-        </x-jet-button>
+        </x-button>
     </x-slot>
-</x-jet-form-section>
+</x-form-section>

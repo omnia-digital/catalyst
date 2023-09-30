@@ -21,19 +21,14 @@ class Platform
         return (new GeneralSettings)->{$setting} === true;
     }
 
-    public static function getGeneralSetting($setting)
-    {
-        return (new GeneralSettings)->{$setting};
-    }
-
     public static function applyButtonText()
     {
         return Trans::get(self::getGeneralSetting('teams_apply_button_text') ?? 'Apply');
     }
 
-    public static function getTeamsWord()
+    public static function getGeneralSetting($setting)
     {
-        return Trans::get('teams');
+        return (new GeneralSettings)->{$setting};
     }
 
     public static function getTeamsWordUpper()
@@ -41,14 +36,14 @@ class Platform
         return ucfirst(self::getTeamsWord());
     }
 
+    public static function getTeamsWord()
+    {
+        return Trans::get('teams');
+    }
+
     public static function getTeamsLetter()
     {
         return lcfirst(substr(self::getTeamsWord(), 0, 1));
-    }
-
-    public static function getUsersWord()
-    {
-        return Trans::get('users');
     }
 
     public static function getUsersLetter()
@@ -56,17 +51,12 @@ class Platform
         return lcfirst(substr(self::getUsersWord(), 0, 1));
     }
 
+    public static function getUsersWord()
+    {
+        return Trans::get('users');
+    }
+
     //Billing Settings //
-
-    public static function hasBillingSettingEnabled($setting)
-    {
-        return (new BillingSettings)?->{$setting} === true;
-    }
-
-    public static function getBillingSetting($setting)
-    {
-        return (new BillingSettings)?->{$setting};
-    }
 
     public static function getJobSetting($setting)
     {
@@ -78,9 +68,19 @@ class Platform
         return self::getBillingSetting('application_fee_percent') ?? config('billing.team_member_subscriptions.application_fee_percent');
     }
 
+    public static function getBillingSetting($setting)
+    {
+        return (new BillingSettings)?->{$setting};
+    }
+
     public static function isUsingUserSubscriptions()
     {
         return self::hasBillingSettingEnabled('user_subscriptions');
+    }
+
+    public static function hasBillingSettingEnabled($setting)
+    {
+        return (new BillingSettings)?->{$setting} === true;
     }
 
     public static function isUsingTeamSubscriptions()
@@ -93,14 +93,14 @@ class Platform
         return self::hasBillingSettingEnabled('team_member_subscriptions');
     }
 
-    public static function isUsingPaymentGateway($gateway): bool
-    {
-        return (new BillingSettings)->payment_gateway == $gateway;
-    }
-
     public static function isUsingStripe(): bool
     {
         return self::isUsingPaymentGateway('stripe');
+    }
+
+    public static function isUsingPaymentGateway($gateway): bool
+    {
+        return (new BillingSettings)->payment_gateway == $gateway;
     }
 
     public static function isUsingChargent(): bool

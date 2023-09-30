@@ -2,8 +2,6 @@
 
 namespace Modules\Livestream\Configuration;
 
-use Exception;
-
 trait ManagesBillingProviders
 {
 //    /**

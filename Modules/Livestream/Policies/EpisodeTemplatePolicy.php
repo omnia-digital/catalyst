@@ -10,14 +10,14 @@ class EpisodeTemplatePolicy
 {
     use HasDefaultPolicy;
 
-    public function view(User $user, EpisodeTemplate $episodeTemplate)
-    {
-        return $user->currentTeam->livestreamAccount->id === $episodeTemplate->livestream_account_id;
-    }
-
     public function update(User $user, EpisodeTemplate $episodeTemplate)
     {
         return $this->view($user, $episodeTemplate);
+    }
+
+    public function view(User $user, EpisodeTemplate $episodeTemplate)
+    {
+        return $user->currentTeam->livestreamAccount->id === $episodeTemplate->livestream_account_id;
     }
 
     public function delete(User $user, EpisodeTemplate $episodeTemplate)

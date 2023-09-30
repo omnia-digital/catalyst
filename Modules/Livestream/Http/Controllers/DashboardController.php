@@ -2,12 +2,13 @@
 
 namespace Modules\Livestream\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use Modules\Livestream\Dashboard;
 use Modules\Livestream\Http\Requests\DashboardRequest;
 use Modules\Livestream\Services\PlayerService;
-use Modules\Livestream\Services\StreamService;
 use Modules\Livestream\Video;
 
 class DashboardController extends LivestreamController
@@ -23,7 +24,7 @@ class DashboardController extends LivestreamController
     /**
      * Display the dashboard
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -33,7 +34,7 @@ class DashboardController extends LivestreamController
     /**
      * Show the Main Dashboard for the Livestream module
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function mainDashboard()
     {
@@ -52,7 +53,7 @@ class DashboardController extends LivestreamController
 //        } else {
         $isLivestreaming = false;
         $mostRecentVideo = $this->_livestreamAccount->mostRecentVideo();
-        if (! empty($mostRecentVideo)) {
+        if (!empty($mostRecentVideo)) {
             $videos = collect([$mostRecentVideo]);
         }
 //        }
@@ -66,13 +67,14 @@ class DashboardController extends LivestreamController
         $plan_type = 'free';
         //	    $plan_type = Auth::user()->sparkPlan('free');
 
-        return view('livestream::dashboard/index', compact('LivestreamAccountId', 'recentVideoPlaylist', 'episodeTemplate', 'isLivestreaming', 'plan_type'));
+        return view('livestream::dashboard/index',
+            compact('LivestreamAccountId', 'recentVideoPlaylist', 'episodeTemplate', 'isLivestreaming', 'plan_type'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -81,8 +83,8 @@ class DashboardController extends LivestreamController
     /**
      * Store a newly created Dashboard in storage.
      *
-     * @param  DashboardRequest|Request  $request
-     * @return \Illuminate\Http\Response
+     * @param DashboardRequest|Request $request
+     * @return Response
      */
     public function store(DashboardRequest $request)
     {
@@ -91,7 +93,7 @@ class DashboardController extends LivestreamController
     /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Dashboard $dashboard)
     {
@@ -101,7 +103,7 @@ class DashboardController extends LivestreamController
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Dashboard $dashboard)
     {
@@ -111,8 +113,8 @@ class DashboardController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param  DashboardRequest|Request  $request
-     * @return \Illuminate\Http\Response
+     * @param DashboardRequest|Request $request
+     * @return Response
      */
     public function update(DashboardRequest $request, Dashboard $dashboard)
     {
@@ -122,8 +124,8 @@ class DashboardController extends LivestreamController
     /**
      * Remove the Dashboard and associated files from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function destroy($id)
     {

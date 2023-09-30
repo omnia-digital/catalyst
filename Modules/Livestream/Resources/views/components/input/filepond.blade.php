@@ -8,13 +8,13 @@
 @php $defaultImageName = $defaultImageName ?: basename($defaultImage ?? '') @endphp
 
 <div
-    wire:ignore
-    x-data="{
+        wire:ignore
+        x-data="{
         filepond: null,
 
         defaultImage: '{{ $defaultImage }}'
     }"
-    x-init="
+        x-init="
         FilePond.registerPlugin(FilePondPluginFilePoster);
         FilePond.registerPlugin(FilePondPluginImagePreview);
 
@@ -69,7 +69,9 @@
 
     @push('styles')
         <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
-        <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css" rel="stylesheet">
+        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+              rel="stylesheet">
+        <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css"
+              rel="stylesheet">
     @endpush
 @endonce

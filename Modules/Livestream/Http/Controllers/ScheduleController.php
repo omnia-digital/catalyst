@@ -3,6 +3,7 @@
 namespace Modules\Livestream\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 use Modules\Livestream\EpisodeTemplate;
 use Modules\Livestream\Http\Requests\ScheduleRequest;
@@ -14,7 +15,7 @@ class ScheduleController extends LivestreamController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -42,24 +43,10 @@ class ScheduleController extends LivestreamController
     }
 
     /**
-     * Show the form for creating a new schedule
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $availableHours = ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' => '05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12'];
-        $availableMinutes = ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];
-        $LivestreamAccount = $this->_livestreamAccount;
-
-        return view('livestream::schedule/create', compact('availableHours', 'availableMinutes', 'LivestreamAccount'));
-    }
-
-    /**
      * Store a newly created Schedule in storage.
      *
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(ScheduleRequest $request)
     {
@@ -80,9 +67,36 @@ class ScheduleController extends LivestreamController
     }
 
     /**
+     * Show the form for creating a new schedule
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        $availableHours = [
+            '01' => '01',
+            '02' => '02',
+            '03' => '03',
+            '04' => '04',
+            '05' => '05',
+            '06' => '06',
+            '07' => '07',
+            '08' => '08',
+            '09' => '09',
+            '10' => '10',
+            '11' => '11',
+            '12' => '12'
+        ];
+        $availableMinutes = ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];
+        $LivestreamAccount = $this->_livestreamAccount;
+
+        return view('livestream::schedule/create', compact('availableHours', 'availableMinutes', 'LivestreamAccount'));
+    }
+
+    /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Schedule $schedule)
     {
@@ -92,11 +106,24 @@ class ScheduleController extends LivestreamController
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Schedule $schedule)
     {
-        $availableHours = ['01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' => '05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', '10' => '10', '11' => '11', '12' => '12'];
+        $availableHours = [
+            '01' => '01',
+            '02' => '02',
+            '03' => '03',
+            '04' => '04',
+            '05' => '05',
+            '06' => '06',
+            '07' => '07',
+            '08' => '08',
+            '09' => '09',
+            '10' => '10',
+            '11' => '11',
+            '12' => '12'
+        ];
         $availableMinutes = ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];
 
         return view('livestream::schedule.edit', compact('schedule', 'availableHours', 'availableMinutes'));
@@ -105,7 +132,7 @@ class ScheduleController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(ScheduleRequest $request, Schedule $schedule)
     {
@@ -127,8 +154,8 @@ class ScheduleController extends LivestreamController
     /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function destroy(Schedule $schedule)
     {

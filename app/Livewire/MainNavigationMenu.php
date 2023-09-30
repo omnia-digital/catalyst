@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\View\View;
 use Livewire\Component;
 use Trans;
 
@@ -17,6 +18,11 @@ class MainNavigationMenu extends Component
     protected $listeners = [
         'refresh-navigation-menu' => '$refresh',
     ];
+
+    public function mount()
+    {
+        $this->navigation = self::getDefaultNavItems();
+    }
 
     public static function getDefaultNavItems()
     {
@@ -101,15 +107,10 @@ class MainNavigationMenu extends Component
         ];
     }
 
-    public function mount()
-    {
-        $this->navigation = self::getDefaultNavItems();
-    }
-
     /**
      * Render the component.
      */
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         return view('livewire.main-navigation-menu');
     }

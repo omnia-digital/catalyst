@@ -1,14 +1,14 @@
 {
-    "name": "Social",
-    "alias": "social",
-    "description": "",
-    "keywords": [],
-    "priority": 0,
-    "providers": [
-        "Modules\\Social\\Providers\\SocialServiceProvider",
-        "Modules\\Social\\Providers\\EventServiceProvider"
-    ],
-    "aliases": {},
-    "files": [],
-    "requires": []
+  "name": "Social",
+  "alias": "social",
+  "description": "",
+  "keywords": [],
+  "priority": 0,
+  "providers": [
+    "Modules\\Social\\Providers\\SocialServiceProvider",
+    "Modules\\Social\\Providers\\EventServiceProvider"
+  ],
+  "aliases": {},
+  "files": [],
+  "requires": []
 }

@@ -3,7 +3,7 @@
 ])
 
 <div
-    x-data="{
+        x-data="{
         id: '{{ $id }}',
         get expanded() {
             return this.active === this.id
@@ -12,8 +12,8 @@
             this.active = value ? this.id : null
         },
     }"
-    role="region"
-    {{ $attributes->merge(['class' => 'border border-black rounded-md shadow']) }}
+        role="region"
+        {{ $attributes->merge(['class' => 'border border-black rounded-md shadow']) }}
 >
     <h2>
         <button

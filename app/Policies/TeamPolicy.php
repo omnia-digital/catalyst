@@ -16,7 +16,7 @@ class TeamPolicy
 
     public function apply(User $user, Team $team)
     {
-        if (! Platform::isUsingUserSubscriptions()) {
+        if (!Platform::isUsingUserSubscriptions()) {
             return true;
         }
     }
@@ -26,31 +26,27 @@ class TeamPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->can('view_any_team');
     }
 
     /**
      * Determine whether the user can view the model.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Team $team)
+    public function view(User $user, Team $team): bool
     {
         return $user->can('view_team');
     }
 
     /**
      * Determine whether the user can create models.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
 //        return $user->can('create_team');
 
-        if (! Platform::isUsingUserSubscriptions()) {
+        if (!Platform::isUsingUserSubscriptions()) {
             return true;
         }
 
@@ -63,10 +59,8 @@ class TeamPolicy
 
     /**
      * Determine whether the user can update the model.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Team $team)
+    public function update(User $user, Team $team): bool
     {
 //        return $user->can('update_team');
 
@@ -83,10 +77,8 @@ class TeamPolicy
 
     /**
      * Determine whether the user can add team members.
-     *
-     * @return mixed
      */
-    public function addTeamMember(User $user, Team $team)
+    public function addTeamMember(User $user, Team $team): bool
     {
         if ($user->ownsTeam($team)) {
             return true;
@@ -101,10 +93,8 @@ class TeamPolicy
 
     /**
      * Determine whether the user can update team member permissions.
-     *
-     * @return mixed
      */
-    public function updateTeamMember(User $user, Team $team)
+    public function updateTeamMember(User $user, Team $team): bool
     {
         return $user->ownsTeam($team);
     }
@@ -139,10 +129,8 @@ class TeamPolicy
 
     /**
      * Determine whether the user can remove team members.
-     *
-     * @return mixed
      */
-    public function removeTeamMember(User $user, Team $team)
+    public function removeTeamMember(User $user, Team $team): bool
     {
         if ($user->ownsTeam($team)) {
             return true;
@@ -165,7 +153,7 @@ class TeamPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Team $team)
+    public function delete(User $user, Team $team): bool
     {
         return $user->ownsTeam($team);
 //        return $user->can('delete_team');

@@ -6,7 +6,6 @@ use App\Models\Team;
 use App\Models\User;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Illuminate\Notifications\Notification;
 use Trans;
 
 class NewApplicationToTeamNotification extends BaseNotification
@@ -25,7 +24,7 @@ class NewApplicationToTeamNotification extends BaseNotification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      */
     public function toArray($notifiable): array
     {

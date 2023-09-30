@@ -115,7 +115,7 @@ class Show extends Component
         $user->awards()->attach($this->awardsToAdd);
 
         $this->dispatch('notify', message: 'Awards Added', type: 'success');
-        $this->dispatch('add-awards-modal',  type: 'close');
+        $this->dispatch('add-awards-modal', type: 'close');
     }
 
     public function getRemainingAwards(User $user)

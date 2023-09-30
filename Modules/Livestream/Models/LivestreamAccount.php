@@ -28,9 +28,14 @@ class LivestreamAccount extends Model
         return $this->streams()->exists();
     }
 
+    public function streams(): HasMany
+    {
+        return $this->hasMany(Stream::class);
+    }
+
     public function getNotLiveImageUrlAttribute()
     {
-        if (! $this->not_live_image) {
+        if (!$this->not_live_image) {
             return null;
         }
 
@@ -43,7 +48,7 @@ class LivestreamAccount extends Model
 
     public function getBeforeLiveImageUrlAttribute()
     {
-        if (! $this->before_live_image) {
+        if (!$this->before_live_image) {
             return null;
         }
 
@@ -59,11 +64,6 @@ class LivestreamAccount extends Model
         return $this->streams()->first();
     }
 
-    public function episodes(): HasMany
-    {
-        return $this->hasMany(Episode::class);
-    }
-
     public function episodeTemplates(): HasMany
     {
         return $this->hasMany(EpisodeTemplate::class);
@@ -77,11 +77,6 @@ class LivestreamAccount extends Model
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
-    }
-
-    public function streams(): HasMany
-    {
-        return $this->hasMany(Stream::class);
     }
 
     public function channels(): HasMany
@@ -123,5 +118,10 @@ class LivestreamAccount extends Model
     public function hasEpisodes(): bool
     {
         return $this->episodes()->exists();
+    }
+
+    public function episodes(): HasMany
+    {
+        return $this->hasMany(Episode::class);
     }
 }

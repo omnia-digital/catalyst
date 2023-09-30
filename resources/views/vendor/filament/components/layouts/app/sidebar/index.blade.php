@@ -1,3 +1,5 @@
+@php use Filament\Navigation\NavigationGroup; @endphp
+@php use Filament\Facades\Filament; @endphp
 <aside
         x-data="{}"
         @if (config('filament.layout.sidebar.is_collapsible_on_desktop'))
@@ -37,8 +39,10 @@
                         x-transition:enter-start="opacity-0"
                         x-transition:enter-end="opacity-100"
                 >
-                    <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20.25 7.5L16 12L20.25 16.5M3.75 12H12M3.75 17.25H16M3.75 6.75H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.25 7.5L16 12L20.25 16.5M3.75 12H12M3.75 17.25H16M3.75 6.75H16"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
             @endif
@@ -51,7 +55,7 @@
                         'lg:ml-3' => config('filament.layout.sidebar.is_collapsible_on_desktop') && (config('filament.layout.sidebar.collapsed_width') !== 0),
                     ])
             >
-                <x-filament::brand />
+                <x-filament::brand/>
             </a>
         </div>
 
@@ -66,23 +70,25 @@
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100"
             >
-                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
                 </svg>
             </button>
         @endif
     </header>
 
     <nav class="flex-1 py-6 overflow-x-hidden overflow-y-auto filament-sidebar-nav">
-        <x-filament::layouts.app.sidebar.start />
-        {{ \Filament\Facades\Filament::renderHook('sidebar.start') }}
+        <x-filament::layouts.app.sidebar.start/>
+        {{ Filament::renderHook('sidebar.start') }}
 
         @php
-            $navigation = \Filament\Facades\Filament::getNavigation();
+            $navigation = Filament::getNavigation();
 
             $collapsedNavigationGroupLabels = collect($navigation)
-                ->filter(fn (\Filament\Navigation\NavigationGroup $group): bool => $group->isCollapsed())
-                ->map(fn (\Filament\Navigation\NavigationGroup $group): string => $group->getLabel())
+                ->filter(fn (NavigationGroup $group): bool => $group->isCollapsed())
+                ->map(fn (NavigationGroup $group): string => $group->getLabel())
                 ->values();
         @endphp
 
@@ -112,9 +118,9 @@
             @endforeach
         </ul>
 
-        <x-filament::layouts.app.sidebar.end />
-        {{ \Filament\Facades\Filament::renderHook('sidebar.end') }}
+        <x-filament::layouts.app.sidebar.end/>
+        {{ Filament::renderHook('sidebar.end') }}
     </nav>
 
-    <x-filament::layouts.app.sidebar.footer />
+    <x-filament::layouts.app.sidebar.footer/>
 </aside>

@@ -4,8 +4,8 @@
 ])
 
 <div
-    wire:ignore
-    x-data="{
+        wire:ignore
+        x-data="{
         stripe: null,
 
         cardElement: null,
@@ -56,14 +56,14 @@
             }
         }
     }"
-    x-init="function() {
+        x-init="function() {
         this.stripe = Stripe('{{ $stripeKey }}');
 
         this.cardElement = this.stripe.elements().create('card');
 
         this.cardElement.mount('#card_element');
     }"
-    {{ $attributes }}
+        {{ $attributes }}
 >
     <div>
         <x-input.label for="card_holder_name" value="Card Holder Name"/>
@@ -79,9 +79,9 @@
 
     <div class="py-2 flex justify-end">
         <x-form.button
-            x-on:click.prevent="confirmCard"
-            x-bind:disabled="loading"
-            x-bind:class="{'bg-gray-600 cursor-not-allowed': loading}"
+                x-on:click.prevent="confirmCard"
+                x-bind:disabled="loading"
+                x-bind:class="{'bg-gray-600 cursor-not-allowed': loading}"
         >
             Save
         </x-form.button>

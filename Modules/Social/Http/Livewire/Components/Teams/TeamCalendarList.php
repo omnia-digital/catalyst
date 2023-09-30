@@ -79,16 +79,16 @@ class TeamCalendarList extends Component
         return $places->all();
     }
 
-    public function selectTeam($teamID)
-    {
-        $this->team = Team::find($teamID);
-    }
-
     public function handleTeamSelected($teamId)
     {
         $this->selectTeam($teamId);
 
         $this->dispatch('select-event', team: $this->team);
+    }
+
+    public function selectTeam($teamID)
+    {
+        $this->team = Team::find($teamID);
     }
 
     public function moreInfo()
@@ -106,7 +106,7 @@ class TeamCalendarList extends Component
         $this->classes = $classes;
         $this->orderBy = 'name';
 
-        if (! App::environment('production')) {
+        if (!App::environment('production')) {
             $this->useCache = false;
         }
     }

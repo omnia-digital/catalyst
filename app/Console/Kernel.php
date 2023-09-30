@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
         $schedule->job(new SyncChargentSubscriptionStatuses)
@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->job(new SendFormNotificationsJob)
             ->everyThirtyMinutes()
-            ->when(fn () => Platform::isModuleEnabled('forms'));
+            ->when(fn() => Platform::isModuleEnabled('forms'));
 
         $schedule->command('backup:clean')->daily()->at('01:00');
         $schedule->command('backup:run')->daily()->at('02:00');
@@ -58,10 +58,8 @@ class Kernel extends ConsoleKernel
 
     /**
      * Register the commands for the application.
-     *
-     * @return void
      */
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__ . '/Commands');
 

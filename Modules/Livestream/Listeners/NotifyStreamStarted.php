@@ -14,7 +14,7 @@ class NotifyStreamStarted
     {
         $stream = Stream::where('stream_id', $event->data['data']['id'])->first();
 
-        if (! $stream) {
+        if (!$stream) {
             throw new Exception('Could not find stream with Stream ID: ' . $event['data']['id']);
         }
 
@@ -26,6 +26,6 @@ class NotifyStreamStarted
             . ', ' . $livestreamAccount->team->id
             . ', ' . $stream->stream_id . ')';
 
-        User::admin()->get()->each(fn (User $user) => $user->notify(new LivestreamNotification($message)));
+        User::admin()->get()->each(fn(User $user) => $user->notify(new LivestreamNotification($message)));
     }
 }

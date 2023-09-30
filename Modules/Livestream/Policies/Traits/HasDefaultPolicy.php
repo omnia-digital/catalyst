@@ -9,16 +9,16 @@ trait HasDefaultPolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user, $ability)
+    {
+        return $this->adminBypass($user);
+    }
+
     public function adminBypass(User $user)
     {
         if ($user->isAdmin()) {
             return true;
         }
-    }
-
-    public function before(User $user, $ability)
-    {
-        return $this->adminBypass($user);
     }
 
     public function create()
@@ -36,14 +36,14 @@ trait HasDefaultPolicy
         return true;
     }
 
-    public function delete()
-    {
-        return true;
-    }
-
     public function destroy()
     {
         return $this->delete();
+    }
+
+    public function delete()
+    {
+        return true;
     }
 
     public function restore()

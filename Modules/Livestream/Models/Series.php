@@ -19,11 +19,6 @@ class Series extends Model
         //        'episode_views'
     ];
 
-    public function episodes(): BelongsToMany
-    {
-        return $this->belongsToMany(Episode::class, 'livestream_episode_series');
-    }
-
     public function episodeTemplates(): BelongsToMany
     {
         return $this->belongsToMany(EpisodeTemplate::class, 'livestream_episode_template_series');
@@ -44,10 +39,17 @@ class Series extends Model
         return $this->episodes()->withCount('videoViews')->get()->sum('video_views_count');
     }
 
+    public function episodes(): BelongsToMany
+    {
+        return $this->belongsToMany(Episode::class, 'livestream_episode_series');
+    }
+
     public function getTotalEpisodeViewsByDateRange($from, $to)
     {
-        return $this->episodes()->withCount(['videoViews' => function ($query) use ($from, $to) {
-            $query->whereBetween('video_views.created_at', [$from, $to]);
-        }])->get()->sum('video_views_count');
+        return $this->episodes()->withCount([
+            'videoViews' => function ($query) use ($from, $to) {
+                $query->whereBetween('video_views.created_at', [$from, $to]);
+            }
+        ])->get()->sum('video_views_count');
     }
 }

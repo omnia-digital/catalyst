@@ -49,7 +49,7 @@
             <div class="p-6 space-y-4">
                 <div>
                     <x-library::tiptap
-                            wire:model.defer="post.body"
+                            wire:model="post.body"
                             heightClass="m-1 text-lg"
                             wordCountType="character"
                             characterLimit="500"
@@ -151,23 +151,23 @@
     </div>
     <livewire:media-manager/>
     <!-- Remove Media Confirmation Modal -->
-    <x-jet-confirmation-modal wire:model="confirmingMediaRemoval">
+    <x-confirmation-modal wire:model.live="confirmingMediaRemoval">
         <x-slot name="title">
-            {{ \Trans::get('Remove Media') }}
+            {{ Trans::get('Remove Media') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ \Trans::get('Are you sure you would like to remove this image? This cannot be undone.') }}
+            {{ Trans::get('Are you sure you would like to remove this image? This cannot be undone.') }}
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('confirmingMediaRemoval')" wire:loading.attr="disabled">
-                {{ \Trans::get('Cancel') }}
-            </x-jet-secondary-button>
+            <x-secondary-button wire:click="$toggle('confirmingMediaRemoval')" wire:loading.attr="disabled">
+                {{ Trans::get('Cancel') }}
+            </x-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="removeImage" wire:loading.attr="disabled">
-                {{ \Trans::get('Remove') }}
-            </x-jet-danger-button>
+            <x-danger-button class="ml-2" wire:click="removeImage" wire:loading.attr="disabled">
+                {{ Trans::get('Remove') }}
+            </x-danger-button>
         </x-slot>
-    </x-jet-confirmation-modal>
+    </x-confirmation-modal>
 @endsection

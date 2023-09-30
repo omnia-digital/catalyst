@@ -28,6 +28,11 @@ class ReviewTable extends Component implements HasTable
         return true;
     }
 
+    public function makeFilamentTranslatableContentDriver(): ?TranslatableContentDriver
+    {
+        // TODO: Implement makeFilamentTranslatableContentDriver() method.
+    }
+
     protected function getTableQuery()
     {
         return Review::query();
@@ -72,10 +77,5 @@ class ReviewTable extends Component implements HasTable
         return [
             DeleteBulkAction::make(),
         ];
-    }
-
-    public function makeFilamentTranslatableContentDriver(): ?TranslatableContentDriver
-    {
-        // TODO: Implement makeFilamentTranslatableContentDriver() method.
     }
 }

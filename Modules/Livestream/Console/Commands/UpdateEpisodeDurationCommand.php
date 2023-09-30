@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Modules\Livestream\Episode;
 use Modules\Livestream\Services\MuxService;
+use MuxPhp\ApiException;
 
 class UpdateEpisodeDurationCommand extends Command
 {
@@ -39,7 +40,7 @@ class UpdateEpisodeDurationCommand extends Command
      *
      * @return void
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function handle()
     {

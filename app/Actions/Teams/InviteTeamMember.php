@@ -18,8 +18,8 @@ class InviteTeamMember implements InvitesTeamMembers
     /**
      * Invite a new team member to the given team.
      *
-     * @param  mixed  $inviter
-     * @param  mixed  $team
+     * @param mixed $inviter
+     * @param mixed $team
      * @return void
      */
     public function invite($inviter, $team, string $email, string $role = null, string $message = '')
@@ -48,7 +48,7 @@ class InviteTeamMember implements InvitesTeamMembers
     /**
      * Validate the invite member operation.
      *
-     * @param  mixed  $team
+     * @param mixed $team
      * @return void
      */
     protected function validate($team, string $email, ?string $role, string $message)
@@ -67,15 +67,19 @@ class InviteTeamMember implements InvitesTeamMembers
     /**
      * Get the validation rules for inviting a team member.
      *
-     * @param  mixed  $team
+     * @param mixed $team
      * @return array
      */
     protected function rules($team)
     {
         return array_filter([
-            'email' => ['required', 'email', Rule::unique('team_invitations')->where(function ($query) use ($team) {
-                $query->where('team_id', $team->id);
-            })],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('team_invitations')->where(function ($query) use ($team) {
+                    $query->where('team_id', $team->id);
+                })
+            ],
             'role' => ['required', 'string'],
             'message' => ['max:255'],
         ]);
@@ -84,7 +88,7 @@ class InviteTeamMember implements InvitesTeamMembers
     /**
      * Ensure that the user is not already on the team.
      *
-     * @param  mixed  $team
+     * @param mixed $team
      * @return Closure
      */
     protected function ensureUserIsNotAlreadyOnTeam($team, string $email)

@@ -2,7 +2,6 @@
 
 namespace Modules\Livestream\Events\Stream;
 
-use Modules\Livestream\Events\Event;
 use Modules\Livestream\Events\Video\MuxEvent;
 
 class StreamDisconnected extends MuxEvent

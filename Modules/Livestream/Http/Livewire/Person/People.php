@@ -41,11 +41,6 @@ class People extends Component
         $this->selectPerson($person->id);
     }
 
-    public function updatedFilters()
-    {
-        $this->resetPage();
-    }
-
     public function selectPerson($person)
     {
         $this->useCachedRows();
@@ -54,6 +49,11 @@ class People extends Component
 
         $this->dispatch('personSelected', person: $person)->to('person.person-info-panel');
 
+    }
+
+    public function updatedFilters()
+    {
+        $this->resetPage();
     }
 
     public function deselectPerson()
@@ -92,9 +92,9 @@ class People extends Component
         $query = clone $this->rowsQueryWithoutFilters;
 
         return $query
-            ->when(! empty($this->search), fn ($query) => $query->search($this->search))
-            ->when($this->orderBy === 'first_name', fn ($query) => $query->orderBy('first_name', 'asc'))
-            ->when($this->orderBy === 'created_at', fn ($query) => $query->orderBy('created_at', 'asc'));
+            ->when(!empty($this->search), fn($query) => $query->search($this->search))
+            ->when($this->orderBy === 'first_name', fn($query) => $query->orderBy('first_name', 'asc'))
+            ->when($this->orderBy === 'created_at', fn($query) => $query->orderBy('created_at', 'asc'));
     }
 
     public function getRowsQueryWithoutFiltersProperty()

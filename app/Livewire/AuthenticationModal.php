@@ -60,17 +60,6 @@ class AuthenticationModal extends Component
         $this->openModal('authentication-modal');
     }
 
-    public function login()
-    {
-        $this->validate();
-
-        $this->guard()->attempt(
-            ['email' => $this->email, 'password' => $this->password], $this->remember
-        );
-
-        $this->redirect($this->redirectAfterLogin);
-    }
-
     public function register()
     {
         $this->validate();
@@ -87,6 +76,30 @@ class AuthenticationModal extends Component
         $this->guard()->login($user);
 
         $this->redirect($this->redirectAfterLogin);
+    }
+
+    protected function createProfile(User $user)
+    {
+        $user->profile()->create([
+            'first_name' => $this->firstName,
+            'last_name' => $this->lastName,
+        ]);
+    }
+
+    public function login()
+    {
+        $this->validate();
+
+        $this->guard()->attempt(
+            ['email' => $this->email, 'password' => $this->password], $this->remember
+        );
+
+        $this->redirect($this->redirectAfterLogin);
+    }
+
+    protected function guard()
+    {
+        return auth()->guard();
     }
 
     public function render()
@@ -109,18 +122,5 @@ class AuthenticationModal extends Component
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', new Password, 'confirmed'],
         ];
-    }
-
-    protected function createProfile(User $user)
-    {
-        $user->profile()->create([
-            'first_name' => $this->firstName,
-            'last_name' => $this->lastName,
-        ]);
-    }
-
-    protected function guard()
-    {
-        return auth()->guard();
     }
 }

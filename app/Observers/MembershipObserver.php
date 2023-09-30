@@ -11,7 +11,7 @@ class MembershipObserver
     {
         // if there is no role given
         if (empty($membership->role_id)) {
-            if (! empty($membership->team_id)) {
+            if (!empty($membership->team_id)) {
                 setPermissionsTeamId($membership->team_id);
             }
 

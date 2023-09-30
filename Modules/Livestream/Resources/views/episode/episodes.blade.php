@@ -27,11 +27,13 @@
                                 </button>
                             </div>
                             <div class="mr-6 bg-gray-100 p-0.5 rounded-lg flex items-center sm:hidden">
-                                <button wire:click="switchLayout('list')" type="button" class="p-1.5 rounded-md text-gray-400 {{ $this->isUsingListLayout() ? 'bg-white' : 'hover:bg-white' }} hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                                <button wire:click="switchLayout('list')" type="button"
+                                        class="p-1.5 rounded-md text-gray-400 {{ $this->isUsingListLayout() ? 'bg-white' : 'hover:bg-white' }} hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                                     <x-heroicon-s-view-list class="h-5 w-5"/>
                                     <span class="sr-only">Use list view</span>
                                 </button>
-                                <button wire:click="switchLayout('grid')" type="button" class="ml-0.5 {{ $this->isUsingGridLayout() ? 'bg-white' : 'hover:bg-white' }} p-1.5 rounded-md shadow-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                                <button wire:click="switchLayout('grid')" type="button"
+                                        class="ml-0.5 {{ $this->isUsingGridLayout() ? 'bg-white' : 'hover:bg-white' }} p-1.5 rounded-md shadow-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                                     <x-heroicon-s-view-grid class="h-5 w-5"/>
                                     <span class="sr-only">Use grid view</span>
                                 </button>
@@ -39,7 +41,8 @@
                             <!-- Sort By menu for mobile -->
                             <div class="flex-1 sm:hidden">
                                 <label for="sort-by" class="sr-only">Sort By</label>
-                                <select wire:model="orderBy" id="sort-by" name="tabs" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                                <select wire:model.live="orderBy" id="sort-by" name="tabs"
+                                        class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                                     <option value="date_recorded">Recently Added</option>
                                     <option value="views">Most Viewed</option>
                                 </select>
@@ -59,7 +62,8 @@
                                 </nav>
                                 <div class="hidden ml-6 bg-gray-100 p-0.5 rounded-lg items-center sm:flex">
                                     @if (auth()->user()->email === 'admin@omniadigital.io')
-                                        <button title="Mass Upload" wire:click="toggleMassAttachmentUpload" type="button"
+                                        <button title="Mass Upload" wire:click="toggleMassAttachmentUpload"
+                                                type="button"
                                                 class="p-1.5 rounded-md {{ $massAttachmentUpload ? 'bg-white text-blue-500' : 'hover:bg-white text-gray-400' }} hover:shadow-sm">
                                             <x-heroicon-s-upload class="h-5 w-5"/>
                                             <span class="sr-only">Mass Attachment Upload</span>
@@ -89,14 +93,15 @@
                         <section class="mt-8 pb-16" aria-labelledby="gallery-heading">
                             @if ($episodes->count() > 0)
                                 @if ($this->isUsingGridLayout())
-                                    <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6  md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 xl:gap-x-8">
+                                    <ul role="list"
+                                        class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6  md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 xl:gap-x-8">
                                         @foreach ($episodes as $episode)
                                             <x-episode.grid-item
-                                                wire:key="episode-{{ $episode->id }}"
-                                                wire:click="selectEpisode({{ $episode->id }})"
-                                                :class="in_array($episode->id, $selectedIDs) ? 'ring-1 ring-offset-4 ring-blue-500' : ''"
-                                                :episode="$episode"
-                                                :selected="$episode->id === $selectedEpisode"
+                                                    wire:key="episode-{{ $episode->id }}"
+                                                    wire:click="selectEpisode({{ $episode->id }})"
+                                                    :class="in_array($episode->id, $selectedIDs) ? 'ring-1 ring-offset-4 ring-blue-500' : ''"
+                                                    :episode="$episode"
+                                                    :selected="$episode->id === $selectedEpisode"
                                             />
                                         @endforeach
                                     </ul>
