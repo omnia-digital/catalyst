@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProfilesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,10 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->nullable();
+            $table->string('profile_photo_path', 2048)->nullable();
             $table->string('handle')->nullable()->index();
-            $table->string('name')->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
             $table->text('bio')->nullable();
             $table->string('website')->nullable();
             $table->boolean('is_private')->default(false);
@@ -43,4 +45,4 @@ class CreateProfilesTable extends Migration
     {
         Schema::dropIfExists('profiles');
     }
-}
+};

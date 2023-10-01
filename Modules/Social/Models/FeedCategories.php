@@ -3,10 +3,11 @@
 namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Sushi\Sushi;
 
 class FeedCategories extends Model
 {
-    use \Sushi\Sushi;
+    use Sushi;
 
     protected $rows = [
         [
@@ -16,8 +17,8 @@ class FeedCategories extends Model
         ],
         [
             'id' => 1,
-            'name' => 'top-projects',
-            'label' => 'Top Projects',
+            'name' => 'top-teams',
+            'label' => 'Top Teams',
         ],
         [
             'id' => 2,

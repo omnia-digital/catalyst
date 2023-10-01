@@ -6,4 +6,5 @@ module.exports = {
             '@': path.resolve('resources/js'),
         },
     },
+    target: 'es2020'
 };

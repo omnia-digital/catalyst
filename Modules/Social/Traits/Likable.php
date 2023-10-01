@@ -3,19 +3,13 @@
 namespace Modules\Social\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Social\Events\LikedModel;
 use Modules\Social\Models\Like;
+
 use function auth;
 
 trait Likable
 {
-    /**
-     * Get the model's likes
-     */
-    public function likes(): MorphMany
-    {
-        return $this->morphMany(Like::class, 'likable');
-    }
-
     /**
      * Check if the current model is liked by the user that is logged in
      */
@@ -25,11 +19,20 @@ trait Likable
     }
 
     /**
+     * Get the model's likes
+     */
+    public function likes(): MorphMany
+    {
+        return $this->morphMany(Like::class, 'likable');
+    }
+
+    /**
      * Check if the current model was previously liked by the user that is logged in
      */
     public function getWasLikedAttribute(): bool
     {
-        return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked', true)->whereNotNull('deleted_at')->count();
+        return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked',
+            true)->whereNotNull('deleted_at')->count();
     }
 
     /**
@@ -45,7 +48,16 @@ trait Likable
      */
     public function getWasDislikedAttribute(): bool
     {
-        return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked', false)->whereNotNull('deleted_at')->count();
+        return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked',
+            false)->whereNotNull('deleted_at')->count();
+    }
+
+    /**
+     * Check if the current model was previously liked or diliked by the user that is logged in
+     */
+    public function getWasLikedOrDislikedAttribute(): bool
+    {
+        return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->whereNotNull('deleted_at')->count();
     }
 
     /**
@@ -72,17 +84,18 @@ trait Likable
         if ($this->isLiked) {
             // If the current model is liked by the user then remove the like
             $this->likes()->where('user_id', auth()->id())->where('liked', true)->delete();
-
-        } else if ($this->wasLiked) {
+        } elseif ($this->wasLikedOrDisliked) {
             // Else if the current model was previously liked by the user then restore the like
-            $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked', true)->restore();
-
+            $this->likes()->withTrashed()->where('user_id', auth()->id())->restore();
+            $this->likes()->withTrashed()->where('user_id', auth()->id())->update(['liked' => true]);
         } else {
             // Else if the current model was never liked by the user, then create/update the like
             $this->likes()->updateOrCreate(
                 ['user_id' => auth()->id()],
                 ['liked' => true]
             );
+
+            LikedModel::dispatch(auth()->user(), $this);
         }
     }
 
@@ -94,11 +107,10 @@ trait Likable
         if ($this->isDisliked) {
             // If the current model is disliked by the user then remove the like
             $this->likes()->where('user_id', auth()->id())->where('liked', false)->delete();
-
-        } else if ($this->wasDisliked) {
+        } elseif ($this->wasLikedOrDisliked) {
             // Else if the current model was previously disliked by the user then restore the like
-            $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked', false)->restore();
-
+            $this->likes()->withTrashed()->where('user_id', auth()->id())->restore();
+            $this->likes()->withTrashed()->where('user_id', auth()->id())->update(['liked' => false]);
         } else {
             // Else if the current model was never disliked by the user, then create/update the like
             $this->likes()->updateOrCreate(

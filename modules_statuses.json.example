@@ -1,0 +1,16 @@
+{
+    "Advice": true,
+    "Articles": true,
+    "Crm": true,
+    "Billing": true,
+    "Feeds": true,
+    "Forms": true,
+    "Games": true,
+    "Jobs": true,
+    "Livestream": true,
+    "Projects": true,
+    "Resources": true,
+    "Reviews": true,
+    "Social": true,
+    "Teams": true
+}

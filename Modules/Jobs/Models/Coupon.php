@@ -4,6 +4,7 @@ namespace Modules\Jobs\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Coupon extends Model
@@ -14,31 +15,30 @@ class Coupon extends Model
     const FIXED = 'fixed';
 
     protected $casts = [
-        'expires_at' => 'datetime'
+        'expires_at' => 'datetime',
     ];
-
-    protected static function booted()
-    {
-        static::creating(fn(self $coupon) => $coupon->code = $coupon->code ?: Str::random());
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function redeems()
-    {
-        return $this->hasMany(RedeemedCoupon::class);
-    }
 
     /**
      * Find a coupon by its code.
      *
-     * @param string $code
      * @return Coupon
      */
     public static function findByCode(string $code)
     {
         return self::where('code', $code)->first();
+    }
+
+    protected static function booted()
+    {
+        static::creating(fn (self $coupon) => $coupon->code = $coupon->code ?: Str::random());
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function redeems()
+    {
+        return $this->hasMany(RedeemedCoupon::class);
     }
 
     /**
@@ -48,7 +48,7 @@ class Coupon extends Model
      */
     public function isValid()
     {
-        if (!$this->expires_at) {
+        if (! $this->expires_at) {
             return true;
         }
 
@@ -62,22 +62,20 @@ class Coupon extends Model
     /**
      * Check if a coupon is used for a specific model.
      *
-     * @param string|Model $model
-     * @param int|null $id
+     * @param  string|Model  $model
      * @return bool
      */
     public function isRedeemedFor($model, ?int $id = null)
     {
         return RedeemedCoupon::query()
-                             ->where('model_type', $model instanceof Model ? get_class($model) : $model)
-                             ->where('model_id', $model instanceof Model ? $model->getKey() : $id)
-                             ->exists();
+            ->where('model_type', $model instanceof Model ? get_class($model) : $model)
+            ->where('model_id', $model instanceof Model ? $model->getKey() : $id)
+            ->exists();
     }
 
     /**
      * Calculate the price after discount.
      *
-     * @param $originalPrice
      * @return float|int|mixed
      */
     public function afterDiscount($originalPrice)
@@ -88,7 +86,6 @@ class Coupon extends Model
     /**
      * Calculate the discount amount.
      *
-     * @param $originalPrice
      * @return float|int|mixed
      */
     public function discountAmount($originalPrice)

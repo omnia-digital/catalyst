@@ -7,17 +7,35 @@ use Modules\Social\Models\Post;
 
 class PostActions extends Component
 {
-    public $post;
+    public Post $post;
 
-    public $show;
+    public bool $show;
 
-    public function mount(Post $post, $show = false) {
+    public bool $showCommentButton = true;
+    public bool $showLikeButton = true;
+    public bool $showRepostButton = true;
+    public bool $showShareButton = true;
+    public bool $showBookmarkButton = false;
+
+    public function mount(
+        Post $post,
+        $show = false,
+        $showCommentButton = true,
+        $showLikeButton = true,
+        $showRepostButton = true,
+        $showShareButton = true,
+        $showBookmarkButton = false
+    ) {
         $this->post = $post;
         $this->show = $show;
+        $this->showCommentButton = $showCommentButton;
+        $this->showBookmarkButton = $showBookmarkButton;
     }
 
     public function render()
     {
-        return view('social::livewire.partials.post-actions');
+        return view('social::livewire.partials.post-actions', [
+            'show' => $this->show,
+        ]);
     }
 }

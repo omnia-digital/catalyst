@@ -14,10 +14,13 @@ class PostEditor extends Component
 
     public array $images = [];
 
-    protected $listeners = [
-        'validationFailed' => 'handleValidationFailed',
-        'postSaved'        => 'handlePostSaved'
-    ];
+    public string $placeholder = "What\'s on your mind?";
+
+    public string $submitButtonText = 'Post';
+
+    public bool $includeTitle = false;
+
+    public bool $openState = false;
 
     public function mount(?string $editorId = null, array $config = [])
     {
@@ -27,11 +30,9 @@ class PostEditor extends Component
 
     public function submit()
     {
-        $this->emitUp('post-editor:submitted', [
-            'id'      => $this->editorId,
-            'content' => $this->content,
-            'images'  => $this->images
-        ]);
+        $this->dispatch('post-editor:submitted',
+            editorId: $this->editorId, content: $this->content, images: $this->images
+        );
     }
 
     public function handleValidationFailed($errorBag)
@@ -62,16 +63,24 @@ class PostEditor extends Component
         $this->emitImagesSet();
     }
 
-    private function emitImagesSet(): void
-    {
-        $this->dispatchBrowserEvent('post-editor:image-set', [
-            'id'     => $this->editorId,
-            'images' => $this->images
-        ]);
-    }
-
     public function render()
     {
-        return view('social::livewire.post-editor');
+        return view('social::livewire.components.post-editor');
+    }
+
+    protected function getListeners()
+    {
+        return [
+            'validationFailed:' . $this->editorId => 'handleValidationFailed',
+            'postSaved:' . $this->editorId => 'handlePostSaved',
+        ];
+    }
+
+    private function emitImagesSet(): void
+    {
+        $this->dispatch('post-editor:image-set',
+            id: $this->editorId,
+            images: $this->images
+        );
     }
 }

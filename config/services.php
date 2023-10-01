@@ -18,6 +18,7 @@ return [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        'scheme' => 'https',
     ],
 
     'postmark' => [
@@ -31,8 +32,20 @@ return [
     ],
 
     'google_map' => [
-        'api_key'         => env('GOOGLE_MAP_API_KEY'),
+        'api_key' => env('GOOGLE_MAP_API_KEY'),
         'api_backend_key' => env('GOOGLE_MAP_BACKEND_API_KEY'),
-    ]
+    ],
+
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+    ],
+
+    'form_assembly' => [
+        'subscription_form_id' => env('FA_SUBSCRIPTION_FORM_ID'),
+        'client_id' => env('FA_CLIENT_ID'),
+        'client_secret' => env('FA_CLIENT_SECRET'),
+        'return_url' => env('FA_RETURN_URL'),
+    ],
 
 ];

@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <x-layouts.partials.gtags/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Platform') }}</title>
+    <title>{{ config('app.name', 'Platform') }}</title>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <x-layouts.partials.fonts/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+    <!-- Styles -->
+    {{--        <link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @filamentStyles
+    @libraryStyles
 
-        @livewireStyles
-        @libraryStyles
+    @stack('styles')
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        @stack('styles')
+    <!-- Styles -->
+    @livewireStyles
+    <!-- Scripts -->
+    {{--        <script src="{{ mix('js/app.js') }}" defer></script>--}}
+    <x-layouts.partials.fontawesome/>
+</head>
+<body class="{{ config('app.theme') }} h-full bg-neutral font-sans antialiased">
+<x-banner/>
 
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
-    </head>
-    <body class="h-full bg-neutral font-sans antialiased">
+<!-- App Navigation -->
+<livewire:main-navigation-menu/>
 
-        <!-- App Navigation -->
-        <livewire:main-navigation-menu/>
+<main class="pb-20 lg:pb-4 pt-14">
+    {{ $slot }}
+</main>
 
-        <main class="">
-            {{ $slot }}
-        </main>
+<x-library::notification/>
 
-        @libraryScripts
+@libraryScripts
 
-        @stack('modals')
-        @stack('scripts')
+@stack('modals')
+@stack('scripts')
+<x-impersonate::banner/>
 
-        @livewireScripts
+@filamentScripts
+@livewireCalendarScripts
+@livewireScriptConfig
 
-        @env ('local')
-            <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>
-        @endenv
-    </body>
+</body>
 </html>

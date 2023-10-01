@@ -3,22 +3,32 @@
 namespace Modules\Social\Http\Livewire\Pages\Posts;
 
 use Livewire\Component;
+use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 
 class Show extends Component
 {
-    protected $listeners = ['postAdded' => '$refresh'];
-
     public $post;
     public $recentlyAddedComment;
 
-    public function postAdded(Post $post) {
+    protected $listeners = ['postAdded' => '$refresh'];
+
+    public function postAdded(Post $post)
+    {
         $this->recentlyAddedComment = $post;
     }
 
-    public function mount(Post $post)
+    public function mount($post)
     {
-        $this->post = $post->load('comments');
+        $this->post = Post::withoutGlobalScope('parent')->findOrFail($post);
+
+        if ($this->post->type === PostType::ARTICLE) {
+            $this->redirectRoute('resources.show', $this->post->id);
+
+            return;
+        }
+
+        $this->post = $this->post->load('comments');
     }
 
     public function render()

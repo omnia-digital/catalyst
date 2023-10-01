@@ -2,17 +2,20 @@
 
 namespace Modules\Social\Http\Livewire;
 
+use App\Support\Platform\Platform;
+use App\Support\Platform\WithGuestAccess;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use Modules\Social\Actions\CreateNewPostAction;
+use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
+use Modules\Social\Notifications\NewCommentNotification;
 use Modules\Social\Support\Livewire\WithPostEditor;
 
 class CommentSection extends Component
 {
-    use WithPostEditor;
+    use WithPostEditor, WithGuestAccess;
 
     public Post $post;
 
@@ -23,7 +26,7 @@ class CommentSection extends Component
     public ?string $content = null;
 
     protected $listeners = [
-        'post-editor:submitted' => 'saveComment'
+        'post-editor:submitted' => 'saveComment',
     ];
 
     public function mount(Post $post, $type = null)
@@ -36,21 +39,36 @@ class CommentSection extends Component
 
     public function saveComment($data)
     {
+        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+            $this->showAuthenticationModal(route('social.posts.show', $this->post));
+
+            return;
+        }
+
         $this->content = strip_tags($data['content']);
 
         $this->validatePostEditor();
 
-        DB::transaction(function () use ($data) {
+        $comment = DB::transaction(function () use ($data) {
             $comment = (new CreateNewPostAction)
                 ->asComment($this->post)
                 ->type($this->type)
                 ->execute($data['content']);
 
             $comment->attachMedia($data['images'] ?? []);
+
+            return $comment;
         });
 
+        $this->post->user->notify(new NewCommentNotification($comment, auth()->user()));
+
         $this->loadComments();
-        $this->emitPostSaved();
+        $this->dispatch('post-saved', $data['id']);
+    }
+
+    public function render()
+    {
+        return view('social::livewire.partials.comment-section');
     }
 
     private function loadComments(): void
@@ -58,10 +76,5 @@ class CommentSection extends Component
         $this->comments = $this->post->comments()
             ->latest()
             ->get();
-    }
-
-    public function render()
-    {
-        return view('social::livewire.comment-section');
     }
 }

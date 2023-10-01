@@ -2,11 +2,13 @@
     <div>
         <div class="flex space-x-3">
             <div class="flex-shrink-0">
-                <img class="h-10 w-10 rounded-full" src="{{ $reply->user->profile_photo_url }}" alt="{{ $reply->user->name }}" />
+                <img class="h-10 w-10 rounded-full" src="{{ $reply->user->profile_photo_url }}"
+                     alt="{{ $reply->user->name }}"/>
             </div>
             <div class="min-w-0 flex-1">
                 <p class="text-sm font-medium text-dark-text-color">
-                    <a href="{{ route('user.profile', $reply->user->handle) }}" class="hover:underline">{{ $reply->user->name }}</a>
+                    <a href="{{ route('user.profile', $reply->user->handle) }}"
+                       class="hover:underline">{{ $reply->user->name }}</a>
                 </p>
                 <p class="text-sm text-base-text-color">
                     <a href="#" class="hover:underline">

@@ -2,10 +2,11 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
+use App\Models\Tag;
 use Livewire\Component;
-use Modules\Social\Actions\CreateNewPostAction;
+use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
-use Phuclh\MediaManager\WithMediaManager;
+use Omnia\MediaManager\WithMediaManager;
 
 class Create extends Component
 {
@@ -19,26 +20,26 @@ class Create extends Component
 
     public ?string $image = null;
 
-    protected function rules(): array
-    {
-        return [
-            'title' => ['required', 'max:255'],
-            'url'   => ['url', 'max:255'],
-            'body'  => ['required', 'max:500'],
-        ];
-    }
-
     public function addResource()
     {
         $validated = $this->validate();
 
+        $hashtags = Tag::parseHashTagsFromString($validated['body']);
+
         $resource = (new CreateNewPostAction)
-            ->type(PostType::RESOURCE)
+            ->type(PostType::ARTICLE)
             ->execute($validated['body'], [
                 'title' => $validated['title'],
-                'url'   => $validated['url'],
-                'image' => $validated['image']
+                'body' => $validated['body'],
+                'url' => $validated['url'],
             ]);
+
+        $tags = Tag::findOrCreateTags($hashtags, 'post');
+        $resource->attachTags($tags, 'post');
+
+        if (isset($validated['image'])) {
+            $resource->attachMedia([$validated['image']]);
+        }
 
         $this->reset('title', 'url', 'body', 'image');
         $this->redirectRoute('resources.home', $resource);
@@ -59,5 +60,15 @@ class Create extends Component
     public function render()
     {
         return view('resources::livewire.pages.resources.create');
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'title' => ['required', 'max:255'],
+            'url' => ['nullable', 'url', 'max:255'],
+            'body' => ['required', 'min:50'],
+            'image' => ['nullable', 'string'],
+        ];
     }
 }

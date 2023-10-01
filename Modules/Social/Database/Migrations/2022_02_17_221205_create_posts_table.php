@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +16,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class, 'user_id')->index();
+            $table->foreignIdFor(User::class, 'user_id')->index();
             $table->unsignedBigInteger('team_id')->nullable()->index();
             $table->string('title')->nullable();
             $table->string('url')->nullable();
@@ -23,7 +24,8 @@ class CreatePostsTable extends Migration
             $table->string('type')->nullable();
             $table->string('image')->nullable();
             $table->nullableMorphs('postable');
-            $table->timestamp('published_at')->nullable()->default(now());
+            $table->unsignedBigInteger('repost_original_id')->index()->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }
@@ -37,4 +39,4 @@ class CreatePostsTable extends Migration
     {
         Schema::dropIfExists('posts');
     }
-}
+};

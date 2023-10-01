@@ -1,58 +1,51 @@
+# For more information: https://laravel.com/docs/sail
 version: '3'
 services:
-  app:
+  laravel.test:
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
     build:
-      context: .
+      context: ./docker/8.2
       dockerfile: Dockerfile
-    image: indiegamedev
+      args:
+        WWWGROUP: '${WWWGROUP}'
+        XDEBUG: '${XDEBUG}'
+        XDEBUG_PORT: '${XDEBUG_PORT}'
+    image: sail-8.2/app
     ports:
-      - 8082:80
+      - '${APP_PORT:-80}:80'
+    environment:
+      WWWUSER: '${WWWUSER}'
+      LARAVEL_SAIL: 1
+      PHP_IDE_CONFIG: serverName=Docker
     volumes:
-      - .:/srv/app
-    links:
+      - '.:/var/www/html'
+    networks:
+      - sail
+    depends_on:
       - mysql
-      - redis
-      - mailhog
-    environment:
-      DB_HOST: mysql
-      DB_DATABASE: indiegamedev
-      DB_USERNAME: app
-      DB_PASSWORD: password
-    networks:
-      - app-net
-
   mysql:
-    image: mysql:5.7
+    platform: linux/x86_64
+    image: 'mysql:8.0'
     ports:
-      - 13306:3306
-    volumes:
-      - app-db-data:/var/lib/mysql
+      - '${FORWARD_DB_PORT:-3306}:3306'
     environment:
-      MYSQL_DATABASE: indiegamedev
-      MYSQL_USER: app
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - 'sailmysql:/var/lib/mysql'
     networks:
-      - app-net
-
-  redis:
-    image: redis:5.0.8-alpine
-    ports:
-      - 16379:6379
-    networks:
-      - app-net
-
-  mailhog:
-    image: mailhog/mailhog
-    ports:
-      - 8026:8025
-    networks:
-      - app-net
-  composer: { image: composer/composer, volumes: ['./:/srv/app/', '~/.ssh/:/root/.ssh'], tty: true, working_dir: /srv/app/, command: 'composer install' }
-
+      - sail
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+      retries: 3
+      timeout: 5s
 networks:
-  app-net:
+  sail:
     driver: bridge
-
 volumes:
-  app-db-data: {}
+  sailmysql:
+    driver: local

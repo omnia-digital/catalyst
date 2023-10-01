@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateLikesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +16,7 @@ class CreateLikesTable extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class, 'user_id');
+            $table->foreignIdFor(User::class, 'user_id');
             $table->unsignedBigInteger('likable_id');
             $table->string('likable_type');
             $table->boolean('liked');
@@ -33,4 +34,4 @@ class CreateLikesTable extends Migration
     {
         Schema::dropIfExists('likes');
     }
-}
+};

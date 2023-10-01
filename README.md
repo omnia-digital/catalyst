@@ -1,65 +1,43 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://omniadigital.io" target="_blank"><img src="https://content.app-sources.com/s/91507677463936751/uploads/Logos/catalyst-logo-1070605.svg" width="400" alt="Catalyst Logo"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p align="center"><a href="https://omniadigital.io" target="_blank"><h1>Catalyst - The Community Platform Framework</h1></a></p>
 
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![Catalyst social image](https://github.com/omnia-digital/catalyst/assets/5092957/ddf67169-cec4-4e7e-ad49-814194532834)
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Catalyst is free to be used by anyone for any industry as long as it does now breach our Code of Conduct or other terms.
+If you would like to contribute to one of our existing platforms, here is the list below:
+- ChurchWorld (https://churchworld.io)
+- Hatchet (https://hatchetapp.io)
+
+## About Catalyst
+
+Catalyst is a web application framework designed to make it easy to spin up new platforms with minimal effort.
+Our website is created using [Omnia Sites](https://omnia.church/sites)
+
+## Catalyst Sponsors
+
+Thank you so much to the our sponsors for funding Catalyst development. If you are interested in becoming a sponsor, please contact us at [Omnia Digital](https://omniadigital.io).
+
+### Premium Partners
+
+- **[Omnia Digital](https://omniadigital.io)**
+- **[CfAN](https://cfan.org)**
+
+## Highlighted Platforms
+- [ChurchWorld](https://churchworld.io)
+- [Hatchet](https://hatchetapp.io)
+
+## Contributing
+
+Thank you for considering contributing to the Catalyst framework!
+
+## Code of Conduct
+
+Catalyst is only to be used to better humanity and the world and cannot be used for anything aimed at a negative result. If it is deemed by the creators of this Catalyst that is the case, we will revoke your license and may pursue lawful action.
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within the Catalyst, please send an e-mail to Omnia Digital via [info@omniadigital.io](mailto:info@omniadigital.io). All security vulnerabilities will be promptly addressed.
+

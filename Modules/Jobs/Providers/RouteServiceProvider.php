@@ -2,8 +2,9 @@
 
 namespace Modules\Jobs\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use Modules\Jobs\Models\JobPosition;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,25 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
+        Route::bind('job-position', function ($id) {
+            return JobPosition::withoutGlobalScopes()->findOrFail($id);
+        });
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapApiRoutes()
+    {
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->moduleNamespace)
+            ->group(module_path('Jobs', '/Routes/api.php'));
     }
 
     /**
@@ -53,17 +73,14 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
+     * Configure the rate limiters for the application.
      *
      * @return void
      */
-    protected function mapApiRoutes()
+    protected function configureRateLimiting()
     {
-        Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path('Jobs', '/Routes/api.php'));
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        });
     }
 }

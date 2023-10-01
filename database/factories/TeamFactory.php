@@ -5,7 +5,11 @@ namespace Database\Factories;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Spatie\Permission\Models\Role;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Team>
+ */
 class TeamFactory extends Factory
 {
     /**
@@ -18,14 +22,34 @@ class TeamFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'name' => $this->faker->unique()->company(),
-            'user_id' => User::factory(),
-            'personal_team' => true,
+            'content' => implode(' ', $this->faker->paragraphs(7)),
+            'summary' => $this->faker->paragraph(),
+            'start_date' => $this->faker->date(),
         ];
+    }
+
+    public function withUsers($amount = 1, $roleName = 'Member')
+    {
+        return $this->hasAttached(User::factory($amount)->withProfile(), function (Team $team) use ($roleName) {
+            $role = Role::where('name', $roleName)->where('team_id', $team->id)->first();
+            setPermissionsTeamId($team->id);
+
+            if (is_null($role)) {
+                $role = Role::create([
+                    'name' => $roleName,
+                    'team_id' => $team->id,
+                ]);
+            }
+
+            return [
+                'role_id' => $role->id,
+            ];
+        });
     }
 }

@@ -4,10 +4,13 @@ namespace Modules\Jobs\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RedeemedCoupon extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
 
     protected $fillable = [
         'coupon_id',
@@ -16,14 +19,12 @@ class RedeemedCoupon extends Model
         'original_price',
         'discount_amount',
         'after_discount_price',
-        'redeemed_at'
+        'redeemed_at',
     ];
 
     protected $casts = [
-        'redeemed_at' => 'datetime'
+        'redeemed_at' => 'datetime',
     ];
-
-    public $timestamps = false;
 
     public function model()
     {
@@ -31,7 +32,7 @@ class RedeemedCoupon extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function coupon()
     {

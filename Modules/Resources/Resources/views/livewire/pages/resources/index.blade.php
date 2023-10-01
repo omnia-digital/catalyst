@@ -1,82 +1,131 @@
-@extends('resources::livewire.layouts.main-layout')
+@php use Modules\Social\Models\Post; @endphp
+@extends('social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
-    <div class="xl:grid xl:grid-cols-9 xl:gap-9">
-        <div class="xl:col-span-6">
-            <div class="mb-2 flex justify-between items-center">
-                <div class="flex-1 flex items-center">
-                    <h1 class="py-2 text-3xl">Resources</h1>
-                </div>
-
-                <x-library::button x-data="" class="py-2 w-60 h-10" x-on:click.prevent="$openModal('add-resource-modal')">
-                    Add Resource
-                </x-library::button>
-                <livewire:resources::pages.resources.create/>
-            </div>
-
-            <!-- Filters -->
-            @include('livewire.partials.filters')
-
-            <div class="">
-                <ul role="list" class="space-y-4">
-                    @foreach($resources as $resource)
-                        <li>
-                            <livewire:resources::components.resource-card
-                                    as="li"
-                                    :post="$resource"/>
-                        </li>
-                    @endforeach
-                </ul>
-
-                <div class="pb-6">
-                    {{ $resources->onEachSide(1)->links() }}
-                </div>
+    <div class="mr-4">
+        <div class="mb-3 rounded-b-lg px-4 flex items-center justify-between bg-primary">
+            <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Resources') }}</x-library::heading.1>
+            <div class="flex items-center">
+                @if (auth()->user()?->can('create', Post::class))
+                    @auth
+                        <x-library::button
+                                class="py-2 w-full h-10"
+                                wire:click="$toggle('showPostEditor')"
+                        >{{ Trans::get('Add New Resource') }}</x-library::button>
+                        <livewire:resources::pages.resources.create/>
+                    @else
+                        <x-library::button
+                                class="py-2 w-full h-10"
+                                wire:click="$toggle('showPostEditor')"
+                        >{{ Trans::get('Add New Resource') }}</x-library::button>
+                        <livewire:authentication-modal/>
+                    @endauth
+                @endif
             </div>
         </div>
 
-        <aside class="hidden xl:block xl:col-span-3">
-            <div class="sticky h-screen overflow-y-scroll scrollbar-hide top-4 space-y-4 pb-36 bg-primary shadow rounded-lg">
-                <livewire:social::partials.trending-section title="Top Resources" type="resource"/>
-                <livewire:social::partials.who-to-follow-section/>
-                <livewire:social::partials.applications/>
+        @if ($showPostEditor)
+            <div class="my-4 mx-auto max-w-post-card-max-w">
+                <x-library::heading.2 class="mb-2">{{ Trans::get('Add New Resource') }}</x-library::heading.2>
+                <livewire:social::news-feed-editor :postType="\Modules\Social\Enums\PostType::RESOURCE"
+                                                   submitButtonText="Add Resource"
+                                                   placeholder="What do you want to call this resource?"/>
             </div>
-        </aside>
+        @endif
+
+        <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
+            <nav class="flex space-x-8 py-2" aria-label="Global">
+                <a href="{{ route('resources.home') }}"
+                   class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
+                   aria-current="page">
+                    <x-library::icons.icon name="fa-regular fa-photo-film-music" size="w-5 h-5" class="pr-2"/>
+                    All Resources</a>
+                <a href="{{ route('resources.drafts') }}" class="text-base-text-color hover:bg-neutral hover:text-base-text-color inline-flex items-center rounded-md py-2 px-3
+            font-medium">
+                    <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>
+                    My Resources</a>
+            </nav>
+        </div>
+
+        @if ($showMyResources)
+            {{-- Drafts/Published    --}}
+            <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
+                <nav class="flex space-x-8 py-2" aria-label="Global">
+                    <a href="{{ route('resources.drafts') }}"
+                       class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
+                       aria-current="page">
+                        <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>
+                        Drafts</a>
+                    <a href="{{ route('resources.published') }}" class="text-base-text-color hover:bg-neutral hover:text-base-text-color inline-flex items-center rounded-md py-2 px-3
+            font-medium">
+                        <x-library::icons.icon name="fa-duotone fa-newspaper" size="w-5 h-5" class="pr-2"/>
+                        Published</a>
+                </nav>
+            </div>
+        @endif
+
+        <!-- Filters -->
+        @include('livewire.partials.filters', ['skipFilters' => ['members', 'location', 'tags']])
+
+        <div class="">
+            <div class="grid sm:grid-cols-2 xl:grid-cols-4">
+                @forelse ($resources as $post)
+                    <div class="w-full break-inside">
+                        <div class="">
+                            <livewire:social::components.post-card-dynamic :post="$post"
+                                                                           :wire:key="'post-card-' . $post->id"/>
+                            {{--                        <livewire:resources::components.resource-card--}}
+                            {{--                                as="li"--}}
+                            {{--                                :post="$resource"--}}
+                            {{--                                :wire:key="'resource-card-' . $resource->id"--}}
+                            {{--                        />--}}
+                        </div>
+                    </div>
+                @empty
+                    <p class="p-4 bg-secondary rounded-md text-base-text-color">No resources to show</p>
+                @endforelse
+            </div>
+
+            <div class="pb-6">
+                {{ $resources->onEachSide(1)->links() }}
+            </div>
+        </div>
     </div>
-@endsection
-@push('scripts')
-    <script>
-        function setup() {
-            return {
-                activeTab: 0,
-                tabs: [
-                    {
-                        id: 0,
-                        title: 'My Feed',
-                        component: 'social.posts'
-                    },
-                    {
-                        id: 1,
-                        title: 'Top Projects',
-                        component: 'social.top-projects'
-                    },
-                    {
-                        id: 2,
-                        title: 'Newest',
-                        component: 'social.newest'
-                    },
-                    {
-                        id: 3,
-                        title: 'Favorites',
-                        component: 'social.favorites'
-                    },
-                    {
-                        id: 4,
-                        title: 'Undiscovered',
-                        component: 'social.undiscovered'
-                    },
-                ],
-                notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white bg-black rounded-full">3</span>',
+    @push('scripts')
+        <script>
+            function setup() {
+                return {
+                    activeTab: 0,
+                    tabs: [
+                        {
+                            id: 0,
+                            title: 'My Feed',
+                            component: 'social.posts'
+                        },
+                        {
+                            id: 1,
+                            title: 'Top '.{{ Platform::getTeamsWordUpper() }},
+                            component: 'social.top-teams'
+                        },
+                        {
+                            id: 2,
+                            title: 'Newest',
+                            component: 'social.newest'
+                        },
+                        {
+                            id: 3,
+                            title: 'Favorites',
+                            component: 'social.favorites'
+                        },
+                        {
+                            id: 4,
+                            title: 'Undiscovered',
+                            component: 'social.undiscovered'
+                        },
+                    ],
+                    notifications: '<span class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-black rounded-full">3</span>',
+                }
             }
-        }
-    </script>
-@endpush
+        </script>
+    @endpush
+@endsection

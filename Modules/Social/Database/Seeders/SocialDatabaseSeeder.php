@@ -2,8 +2,8 @@
 
 namespace Modules\Social\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 
 class SocialDatabaseSeeder extends Seeder
 {
@@ -18,5 +18,7 @@ class SocialDatabaseSeeder extends Seeder
 
         $this->call(PostsTableSeeder::class);
         $this->call(BookmarksTableSeeder::class);
+        $this->call(MentionsTableSeeder::class);
+        $this->call(UserScoreContributionTableSeeder::class);
     }
 }

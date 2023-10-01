@@ -4,36 +4,44 @@ namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
-use Nwidart\Modules\Module;
+use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //Model::preventLazyLoading(! $this->app->isProduction());
-
-        Module::macro('isModuleEnabled', function ($moduleName) {
-            if (Module::collections()->has($moduleName)) {
-                $module = Module::find($moduleName);
-                return $module->isStatus(1);
-            }
-
-            return false;
-        });
+        Cashier::ignoreMigrations();
+        Model::preventLazyLoading(app()->isLocal());
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //
+        //Cashier::calculateTaxes();
+
+        //        Health::checks([
+        //            UsedDiskSpaceCheck::new(),
+        //            DatabaseCheck::new()
+        //        ]);
+
+        // Mailcoach UI Auth
+        //        Gate::define('viewMailcoach', function ($user = null) {
+        //            return optional($user)->is_admin;
+        //        });
+
+        //                Filament::serving(function () {
+        //        //            Filament::registerTheme(asset('css/app.css'));
+        //                                Filament::registerUserMenuItems([
+        //                                    // ...
+        //                                    'logout' => UserMenuItem::make()
+        //                                                            ->label('Log out')
+        //                                                            ->url(route('logout')),
+        //                                ]);
+        //                });
     }
 }

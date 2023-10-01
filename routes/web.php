@@ -1,58 +1,29 @@
 <?php
 
-    use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HandleStripeConnectRefreshUrlController;
+use App\Livewire\Pages\Account\Index as AccountIndex;
+use App\Livewire\Pages\Media\Index as MediaIndex;
+use App\Livewire\UserNotifications;
+use Illuminate\Support\Facades\Route;
 
-    /*
-    |--------------------------------------------------------------------------
-    | Web Routes
-    |--------------------------------------------------------------------------
-    |
-    | Here is where you can register web routes for your application. These
-    | routes are loaded by the RouteServiceProvider within a group which
-    | contains the "web" middleware group. Now create something great!
-    |
-    */
+Route::get('r/{url?}', function ($url) {
+    return redirect($url);
+})->where('url', '.*');
 
-    Route::get('/', function () {
-        return redirect()->route('social.home');
-    });
-
-    Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
-    Route::name('projects.')->prefix('projects')->middleware(['auth','verified'])->group(function () {
-        Route::get('/', App\Http\Livewire\Teams::class)->name('home');
+    Route::get('notifications', UserNotifications::class)->name('notifications');
+    Route::get('account', AccountIndex::class)->name('account');
+    Route::name('media.')->prefix('media')->group(function () {
+        Route::get('/', MediaIndex::class)->name('index');
     });
+});
 
-    Route::middleware(['auth', 'verified'])->group(function() {
+// Stripe Connect
+Route::get('teams/stripe-connect/refresh', HandleStripeConnectRefreshUrlController::class)->name('teams.stripe-connect.refresh');
 
-        Route::get('/messages', function () {
-            return "Messages";
-        })->name('messages');
-
-        Route::get('/contacts', function () {
-            return "Contacts";
-        })->name('contacts');
-
-        Route::get('/notifications', function () {
-            return "Notifications";
-        })->name('notifications');
-
-        Route::get('/groups', function () {
-            return "Groups";
-        })->name('groups');
-
-        Route::get('/favorites', function () {
-            return "Favorites";
-        })->name('favorites');
-
-        Route::get('/learn', function () {
-            return "Learn";
-        })->name('learn');
-
-        Route::get('/marketplace', function () {
-            return "Marketplace";
-        })->name('marketplace');
-    });
-
+Route::get('/', function () {
+    return redirect()->route('social.home');
+});

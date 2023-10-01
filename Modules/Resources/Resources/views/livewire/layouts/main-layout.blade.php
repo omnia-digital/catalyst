@@ -1,11 +1,25 @@
 <div>
-    <livewire:resources::layouts.module-navigation/>
+    <div class="flex bg-neutral">
+        <!-- SideMenu -->
+        <livewire:resources::layouts.module-navigation class=""/>
 
-    <div class="min-h-screen md:ml-24 md:pt-8 md:pr-6 md:pl-6 bg-neutral">
-        <!-- Page content -->
-        <div class="mx-auto">
-            @yield('content')
+        <!-- Main Content -->
+        <div class="lg:pl-64 w-full flex flex-col">
+            <div>
+                <div class="min-h-screen">
+                    <!-- Page content -->
+                    <div class="flex-1">
+                        @hasSection('full-width-header')
+                            <div class="">
+                                @yield('full-width-header')
+                            </div>
+                        @endif
+                        <div>
+                            @yield('page-layout')
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-

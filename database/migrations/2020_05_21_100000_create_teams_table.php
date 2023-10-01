@@ -4,31 +4,29 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeamsTable extends Migration
+return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index();
             $table->string('name');
-            $table->boolean('personal_team');
+            $table->string('handle')->nullable()->index();
+            $table->string('profile_photo_path', 2048)->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
+            $table->timestamp('published_at')->nullable();
+            $table->text('summary')->nullable();
+            $table->text('content')->nullable();
+            $table->string('location')->nullable();
+            $table->integer('rating')->nullable();
+            $table->string('languages')->default('English');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('teams');
     }
-}
+};
