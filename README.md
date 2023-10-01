@@ -20,7 +20,12 @@ Thank you so much to the our sponsors for funding Catalyst development. If you a
 
 ### Premium Partners
 
+- **[Omnia Digital](https://omniadigital.io)**
 - **[CfAN](https://cfan.org)**
+
+## Highlighted Platforms
+- [ChurchWorld](https://churchworld.io)
+- [Hatchet](https://hatchetapp.io)
 
 ## Contributing
 
