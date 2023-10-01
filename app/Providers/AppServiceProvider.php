@@ -2,19 +2,14 @@
 
 namespace App\Providers;
 
-use Filament\Facades\Filament;
-use Filament\Navigation\NavigationGroup;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Cashier\Cashier;
-use Trans;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -24,8 +19,6 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -37,18 +30,18 @@ class AppServiceProvider extends ServiceProvider
         //        ]);
 
         // Mailcoach UI Auth
-//        Gate::define('viewMailcoach', function ($user = null) {
-//            return optional($user)->is_admin;
-//        });
+        //        Gate::define('viewMailcoach', function ($user = null) {
+        //            return optional($user)->is_admin;
+        //        });
 
-//        Filament::serving(function () {
-//            Filament::registerTheme(asset('css/app.css'));
-//            //            Filament::registerUserMenuItems([
-//            //                // ...
-//            //                'logout' => UserMenuItem::make()
-//            //                                        ->label('Log out')
-//            //                                        ->url(route('logout')),
-//            //            ]);
-//        });
+        //                Filament::serving(function () {
+        //        //            Filament::registerTheme(asset('css/app.css'));
+        //                                Filament::registerUserMenuItems([
+        //                                    // ...
+        //                                    'logout' => UserMenuItem::make()
+        //                                                            ->label('Log out')
+        //                                                            ->url(route('logout')),
+        //                                ]);
+        //                });
     }
 }

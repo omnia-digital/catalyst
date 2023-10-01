@@ -37,9 +37,9 @@ class AdminPanelProvider extends PanelProvider
 //            ->pages([
 //                Dashboard::class,
 //            ])
-//            ->plugins([
-//                FilamentShieldPlugin::make()
-//            ])
+            ->plugins([
+                FilamentShieldPlugin::make(),
+            ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
@@ -59,35 +59,35 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ]);
-//            ->navigationGroups([
-//                NavigationGroup::make()
-//                    ->label(Trans::get('Settings'))
-//                    ->icon('heroicon-s-cog')
-//                    ->collapsed(),
-//                NavigationGroup::make()
-//                    ->label(Trans::get('Billing'))
-//                    ->icon('heroicon-o-credit-card')
-//                    ->collapsed(),
-//                NavigationGroup::make()
-//                    ->label(Trans::get('People'))
-////                    ->icon('heroicon-s-users')
-//                    ->collapsed(),
-//                NavigationGroup::make()
-//                    ->label(Trans::get('Teams'))
-//                    ->icon('fas-users')
-//                    ->collapsed(),
-//                NavigationGroup::make()
-//                    ->label(Trans::get('Forms'))
-//                    ->icon('fab-wpforms')
-//                    ->collapsed(),
-//                NavigationGroup::make()
-//                    ->label(Trans::get('Feeds'))
-//                    ->icon('fad-rss')
-//                    ->collapsed(),
-//                NavigationGroup::make()
-//                    ->label(Trans::get('Games'))
-//                    ->icon('fad-gamepad-modern')
-//                    ->collapsed()
-//            ]);
+        //            ->navigationGroups([
+        //                NavigationGroup::make()
+        //                    ->label(Trans::get('Settings'))
+        //                    ->icon('heroicon-s-cog')
+        //                    ->collapsed(),
+        //                NavigationGroup::make()
+        //                    ->label(Trans::get('Billing'))
+        //                    ->icon('heroicon-o-credit-card')
+        //                    ->collapsed(),
+        //                NavigationGroup::make()
+        //                    ->label(Trans::get('People'))
+        ////                    ->icon('heroicon-s-users')
+        //                    ->collapsed(),
+        //                NavigationGroup::make()
+        //                    ->label(Trans::get('Teams'))
+        //                    ->icon('fas-users')
+        //                    ->collapsed(),
+        //                NavigationGroup::make()
+        //                    ->label(Trans::get('Forms'))
+        //                    ->icon('fab-wpforms')
+        //                    ->collapsed(),
+        //                NavigationGroup::make()
+        //                    ->label(Trans::get('Feeds'))
+        //                    ->icon('fad-rss')
+        //                    ->collapsed(),
+        //                NavigationGroup::make()
+        //                    ->label(Trans::get('Games'))
+        //                    ->icon('fad-gamepad-modern')
+        //                    ->collapsed()
+        //            ]);
     }
 }
