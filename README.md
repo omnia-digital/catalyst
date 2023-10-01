@@ -8,13 +8,10 @@ If you would like to contribute to one of our existing platforms, here is the li
 - ChurchWorld (https://churchworld.io)
 - Hatchet (https://hatchetapp.io)
 
-## Passport
-php artisan passport:keys
-
-
 ## About Catalyst
 
 Catalyst is a web application framework designed to make it easy to spin up new platforms with minimal effort.
+Our website is created using [Omnia Sites](https://omnia.church/sites)
 
 ## Catalyst Sponsors
 
