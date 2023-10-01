@@ -51,7 +51,7 @@ class Edit extends Component
 
     public function getProfileTagsProperty()
     {
-        return Tag::withType('profile_type')->get()->mapWithKeys(fn(Tag $tag
+        return Tag::withType('profile_type')->get()->mapWithKeys(fn (Tag $tag
         ) => [$tag->name => ucwords($tag->name)])->all();
     }
 
@@ -74,11 +74,11 @@ class Edit extends Component
         $this->profile->country = $this->country;
         $this->profile->save();
 
-        if (!empty($this->profileTypes)) {
+        if (! empty($this->profileTypes)) {
             $this->profile->attachTags($this->profileTypes, 'profile_type');
         }
 
-        if (!is_null($this->bannerImage) && $this->profile->bannerImage()->count()) {
+        if (! is_null($this->bannerImage) && $this->profile->bannerImage()->count()) {
             $this->profile->bannerImage()->delete();
         }
         $this->bannerImage &&

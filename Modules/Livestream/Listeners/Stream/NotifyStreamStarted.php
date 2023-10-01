@@ -32,7 +32,7 @@ class NotifyStreamStarted
             $message .= 'Could not find stream';
         } else {
             $livestream_account = $stream->livestreamAccount;
-            if (!empty($livestream_account)) {
+            if (! empty($livestream_account)) {
                 $message .= $livestream_account->team->name . ' (' . $livestream_account->id . ', ' . $livestream_account->team->id . ', ' . $stream->stream_id . ')';
             } else {
                 $message .= $stream->stream_id . ': livestream account not found';

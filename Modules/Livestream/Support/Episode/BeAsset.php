@@ -17,7 +17,7 @@ trait BeAsset
     {
         $mux = (new MuxService)->getAssetApi();
 
-        if (!$this->mux_asset_id) {
+        if (! $this->mux_asset_id) {
             return null;
         }
 

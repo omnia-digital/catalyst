@@ -23,13 +23,13 @@ class StreamIntegrationService extends Service
     /**
      * StreamService constructor.
      *
-     * @param StreamIntegration $streamIntegration
+     * @param  StreamIntegration  $streamIntegration
      */
     public function __construct(LivestreamAccount $LivestreamAccount, StreamIntegration $streamIntegration = null)
     {
         $this->_livestreamAccount = $LivestreamAccount;
         $this->_team = $LivestreamAccount->team;
-        if (!empty($streamIntegration)) {
+        if (! empty($streamIntegration)) {
             $this->_streamIntegration = $streamIntegration;
         }
 
@@ -53,7 +53,7 @@ class StreamIntegrationService extends Service
     /**
      * Get Live Video Stream Name from Facebook
      *
-     * @param array $params
+     * @param  array  $params
      * @return string
      *
      * @throws FacebookResponseException
@@ -63,7 +63,7 @@ class StreamIntegrationService extends Service
     {
         Log::info('[FB Live Get Live Video Stream Name] - Started');
         $response = $this->createFacebookLiveVideo($params);
-        if (!empty($response)) {
+        if (! empty($response)) {
             $streamURL = $response['secure_stream_url'];
             $streamName = trim(substr($streamURL, strpos($streamURL, 'rtmp/')), 'rtmp/');
             Log::info('[FB Live Get Live Video Stream Name] - Finished: Stream Name: ' . $streamName);
@@ -75,7 +75,7 @@ class StreamIntegrationService extends Service
     /**
      * Create a Live Video on a Facebook Stream Integration
      *
-     * @param array $params
+     * @param  array  $params
      * @return FacebookResponse
      *
      * @throws FacebookResponseException
@@ -113,7 +113,7 @@ class StreamIntegrationService extends Service
     /**
      * Update a Live Video on a Facebook Stream Integration
      *
-     * @param array $params
+     * @param  array  $params
      * @return FacebookResponse
      *
      * @throws FacebookResponseException
@@ -139,7 +139,7 @@ class StreamIntegrationService extends Service
             $message = $e->getMessage();
             Log::error('Graph returned an error: ' . $message);
             // We don't want to throw an error if the facebook video doesn't exist anymore, just in case someone deleted it on facebook
-            if (!empty($message) && !str_contains($message, 'does not exist')) {
+            if (! empty($message) && ! str_contains($message, 'does not exist')) {
                 throw $e;
             }
         } catch (FacebookSDKException $e) {
@@ -154,7 +154,7 @@ class StreamIntegrationService extends Service
     /**
      * Delete a Live Video on a Facebook account
      *
-     * @param array $params
+     * @param  array  $params
      * @return FacebookResponse
      *
      * @throws FacebookResponseException
@@ -180,7 +180,7 @@ class StreamIntegrationService extends Service
             $message = $e->getMessage();
             Log::error('Graph returned an error: ' . $message);
             // We don't want to throw an error if the facebook video doesn't exist anymore, just in case someone deleted it on facebook
-            if (!empty($message) && !str_contains($message, 'does not exist')) {
+            if (! empty($message) && ! str_contains($message, 'does not exist')) {
                 throw $e;
             }
         } catch (FacebookSDKException $e) {

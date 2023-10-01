@@ -34,7 +34,7 @@ Route::get('/' . Platform::getUsersLetter() . '/{profile}',
     ShowProfile::class)->middleware([GuestAccessMiddleware::class, 'verified'])->name('social.profile.show');
 Route::get('/' . Platform::getTeamsLetter() . '/{team}', ShowTeam::class)->middleware([
     GuestAccessMiddleware::class,
-    'verified'
+    'verified',
 ])->name('social.teams.show');
 
 Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
@@ -59,7 +59,7 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
 
     Route::name('teams.')->prefix(Platform::getTeamsWord())->middleware([
         GuestAccessMiddleware::class,
-        'verified'
+        'verified',
     ])->group(function () {
         Route::get('/discover', DiscoverTeams::class)->name('discover');
         Route::get('/calendar', TeamMapCalendar::class)->name('calendar');
@@ -85,7 +85,7 @@ Route::name('social.')->prefix('social')->middleware([GuestAccessMiddleware::cla
 
     Route::name('companies.')->prefix(Trans::get('companies'))->middleware([
         GuestAccessMiddleware::class,
-        'verified'
+        'verified',
     ])->group(function () {
         Route::get('/', AllCompanies::class)->name('home');
     });

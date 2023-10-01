@@ -15,7 +15,7 @@ trait ResetsPasswords
      *
      * If no token is present, display the link request form.
      *
-     * @param string|null $token
+     * @param  string|null  $token
      * @return Factory|View
      */
     public function showResetForm(Request $request, $token = null)

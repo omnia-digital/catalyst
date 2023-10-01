@@ -33,7 +33,7 @@ class Mention extends Model
                 'postable_id' => $post->id,
             ])->exists();
 
-            !$mentionAlreadyExists &&
+            ! $mentionAlreadyExists &&
             Mention::create([
                 'mentionable_type' => $type,
                 'mentionable_id' => $type::findByHandle($handle)->id,
@@ -55,7 +55,7 @@ class Mention extends Model
     /**
      * Replace user mentions in body with links to the user profile
      *
-     * @param string $content
+     * @param  string  $content
      * @return string
      */
     public static function replaceUserMentions($content)
@@ -68,7 +68,7 @@ class Mention extends Model
                 }
 
                 return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.profile.show',
-                        $matches[1]) . "'>" . $matches[0] . '</a>';
+                    $matches[1]) . "'>" . $matches[0] . '</a>';
             },
             $content
         );
@@ -77,7 +77,7 @@ class Mention extends Model
     /**
      * Replace team mentions in body with links to the user profile
      *
-     * @param string $content
+     * @param  string  $content
      * @return string
      */
     public static function replaceTeamMentions($content)
@@ -90,7 +90,7 @@ class Mention extends Model
                 }
 
                 return "<a x-data x-on:click.stop='' class='hover:underline hover:text-secondary' href='" . route('social.teams.show',
-                        $matches[1]) . "'>" . $matches[0] . '</a>';
+                    $matches[1]) . "'>" . $matches[0] . '</a>';
             },
             $content
         );

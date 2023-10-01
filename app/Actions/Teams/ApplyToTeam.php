@@ -16,8 +16,8 @@ class ApplyToTeam
     /**
      * Apply to a team.
      *
-     * @param mixed $team
-     * @param int $userID
+     * @param  mixed  $team
+     * @param  int  $userID
      * @return void
      */
     public function apply($team, $userID, string $role = null)
@@ -37,8 +37,8 @@ class ApplyToTeam
     /**
      * Validate the invite member operation.
      *
-     * @param mixed $team
-     * @param int $userID
+     * @param  mixed  $team
+     * @param  int  $userID
      * @return void
      */
     protected function validate($team, string $userID, ?string $role)
@@ -56,7 +56,7 @@ class ApplyToTeam
     /**
      * Get the validation rules for applying user.
      *
-     * @param mixed $team
+     * @param  mixed  $team
      * @return array
      */
     protected function rules($team)
@@ -66,7 +66,7 @@ class ApplyToTeam
                 'required',
                 Rule::unique('team_applications')->where(function ($query) use ($team) {
                     $query->where('team_id', $team->id);
-                })
+                }),
             ],
             'role' => Jetstream::hasRoles()
                 ? ['required', 'string', new Role]
@@ -77,7 +77,7 @@ class ApplyToTeam
     /**
      * Ensure that the user is not already on the team.
      *
-     * @param mixed $team
+     * @param  mixed  $team
      * @return Closure
      */
     protected function ensureUserIsNotAlreadyOnTeam($team, string $userID)

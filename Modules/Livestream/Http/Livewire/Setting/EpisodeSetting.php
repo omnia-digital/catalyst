@@ -22,7 +22,7 @@ class EpisodeSetting extends Component
         $this->team
             ->livestreamAccount
             ->episodes
-            ->each(fn(Episode $episode) => dispatch(new DeleteEpisodeJob($episode)));
+            ->each(fn (Episode $episode) => dispatch(new DeleteEpisodeJob($episode)));
 
         $this->reset('confirmingEpisodesDeletion');
         $this->success('Deleting episodes in the background.');

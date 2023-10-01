@@ -27,18 +27,18 @@ trait Sluggable
     /**
      * Sets a single slug attribute value.
      *
-     * @param string $slugAttribute Attribute to populate with the slug.
-     * @param mixed $sourceAttributes Attribute(s) to generate the slug from.
+     * @param  string  $slugAttribute Attribute to populate with the slug.
+     * @param  mixed  $sourceAttributes Attribute(s) to generate the slug from.
      *                                 Supports dotted notation for relations.
-     * @param int $maxLength Maximum length for the slug not including the counter.
+     * @param  int  $maxLength Maximum length for the slug not including the counter.
      * @return string The generated value.
      *
      * @throws Exception
      */
     public function setSluggedValue($slugAttribute, $sourceAttributes, $maxLength = 240)
     {
-        if (!isset($this->{$slugAttribute}) || !strlen($this->{$slugAttribute})) {
-            if (!is_array($sourceAttributes)) {
+        if (! isset($this->{$slugAttribute}) || ! strlen($this->{$slugAttribute})) {
+            if (! is_array($sourceAttributes)) {
                 $sourceAttributes = [$sourceAttributes];
             }
 

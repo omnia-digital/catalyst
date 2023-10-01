@@ -17,7 +17,7 @@ interface PersonRepository
     /**
      * Get the person with the given ID.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Authenticatable|null
      */
     public function find($id);
@@ -25,8 +25,8 @@ interface PersonRepository
     /**
      * Perform a basic person search by name or e-mail address.
      *
-     * @param string $query
-     * @param Authenticatable|null $excludePerson
+     * @param  string  $query
+     * @param  Authenticatable|null  $excludePerson
      * @return Collection
      */
     public function search($query, $excludePerson = null);
@@ -41,7 +41,7 @@ interface PersonRepository
     /**
      * Update the billing address information with the given data.
      *
-     * @param Authenticatable $person
+     * @param  Authenticatable  $person
      * @return void
      */
     public function updateBillingAddress($person, array $data);
@@ -49,8 +49,8 @@ interface PersonRepository
     /**
      * Update the European VAT ID number for the given person.
      *
-     * @param Authenticatable $person
-     * @param string $vatId
+     * @param  Authenticatable  $person
+     * @param  string  $vatId
      * @return void
      */
     public function updateVatId($person, $vatId);

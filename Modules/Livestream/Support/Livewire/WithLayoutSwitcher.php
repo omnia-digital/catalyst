@@ -11,11 +11,6 @@ trait WithLayoutSwitcher
         $this->layoutSwitcher = session()->get($this->layoutSwitcherSessionKey(), $this->layoutSwitcher);
     }
 
-    protected function layoutSwitcherSessionKey(): string
-    {
-        return 'layout-switcher';
-    }
-
     public function switchLayout(string $value)
     {
         session()->put($this->layoutSwitcherSessionKey(), $value);
@@ -31,5 +26,10 @@ trait WithLayoutSwitcher
     public function isUsingListLayout(): bool
     {
         return $this->layoutSwitcher === 'list';
+    }
+
+    protected function layoutSwitcherSessionKey(): string
+    {
+        return 'layout-switcher';
     }
 }

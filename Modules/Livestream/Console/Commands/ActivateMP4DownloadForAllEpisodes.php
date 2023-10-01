@@ -34,16 +34,16 @@ class ActivateMP4DownloadForAllEpisodes extends Command
             $livestreamAccountId = $this->option('livestreamAccount');
             $episodeId = $this->option('episode');
 
-            if (!empty($episodeId)) {
+            if (! empty($episodeId)) {
                 $episode = Episode::findOrFail($episodeId);
             }
 
-            if (!empty($episode)) {
+            if (! empty($episode)) {
                 $this->activeMp4Episode($episode);
                 $this->info('Finished Updating!');
 
                 return;
-            } elseif (!empty($livestreamAccountId)) {
+            } elseif (! empty($livestreamAccountId)) {
                 $livestreamAccount = LivestreamAccount::findOrFail($livestreamAccountId);
                 $episodes = $livestreamAccount->episodes()->where('mux_asset_id', '<>', '')->get();
             } else {

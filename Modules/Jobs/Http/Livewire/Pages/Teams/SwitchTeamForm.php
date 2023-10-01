@@ -18,7 +18,7 @@ class SwitchTeamForm extends Component
     {
         $company = Jetstream::newTeamModel()->findOrFail($this->company);
 
-        if (!auth()->user()->switchTeam($company)) {
+        if (! auth()->user()->switchTeam($company)) {
             abort(403);
         }
 

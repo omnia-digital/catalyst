@@ -69,10 +69,10 @@ class EpisodeService extends LivestreamService
     public function __construct($livestreamAccount = null, $liveStorageName = null, $vodStorageName = null)
     {
         $this->_livestreamAccount = Livestream::getLivestreamAccount($livestreamAccount);
-        if (!empty($liveStorageName)) {
+        if (! empty($liveStorageName)) {
             $this->_liveStorageName = $liveStorageName;
         }
-        if (!empty($vodStorageName)) {
+        if (! empty($vodStorageName)) {
             $this->_vodStorageName = $vodStorageName;
         }
     }
@@ -85,7 +85,7 @@ class EpisodeService extends LivestreamService
         if (is_numeric($realStreamName)) {
             // then find the episode by the id and set to "currently streaming",
             $episode = Episode::find($realStreamName);
-            if (!empty($episode)) {
+            if (! empty($episode)) {
                 Log::info('Episode found with id: ' . $episode->id);
             } else {
                 // If episode is not found by this id, we will create a new one with the title as the streamName
@@ -94,7 +94,7 @@ class EpisodeService extends LivestreamService
                 $episodeData['title'] = $realStreamName;
             }
 
-            // If it is equal to the auto stream name, attempt to create the episode using an Auto Schedule
+        // If it is equal to the auto stream name, attempt to create the episode using an Auto Schedule
         } else {
             if ($realStreamName === $episodeAutoStreamName) {
                 // Find Schedules for this LivestreamAccount
@@ -103,7 +103,7 @@ class EpisodeService extends LivestreamService
                 $possibleSchedules = collect();
 
                 // Check each schedule to see which ones fit the current Date and Time
-                if (!$schedules->isEmpty()) {
+                if (! $schedules->isEmpty()) {
                     foreach ($schedules as $schedule) {
                         if ($schedule->isWithinScheduleTime($current_date)) {
                             $possibleSchedules->push($schedule);
@@ -111,7 +111,7 @@ class EpisodeService extends LivestreamService
                     }
                 }
                 // If there were any matched Schedules
-                if (!$possibleSchedules->isEmpty()) {
+                if (! $possibleSchedules->isEmpty()) {
                     // create from Schedule Template Data
                     // @TODO [Josh] - for now I am just going to grab the first possible schedule
                     $scheduleForEpisode = $possibleSchedules->first();
@@ -162,7 +162,7 @@ class EpisodeService extends LivestreamService
         }
 
         if (empty($this->_liveStorage)) {
-            if (!empty($this->_liveStorageName)) {
+            if (! empty($this->_liveStorageName)) {
                 $this->_liveStorage = Storage::disk($this->_liveStorageName);
             }
 
@@ -209,10 +209,10 @@ class EpisodeService extends LivestreamService
             $this->successFullyMovedToVodTmpFiles = [];
 
             if (empty($this->_vodStorage) || empty($this->_liveStorage)) {
-                if (empty($this->_vodStorage) && !empty($this->_vodStorageName)) {
+                if (empty($this->_vodStorage) && ! empty($this->_vodStorageName)) {
                     $this->_vodStorage = Storage::disk($this->_vodStorageName);
                 }
-                if (empty($this->_liveStorage) && !empty($this->_liveStorageName)) {
+                if (empty($this->_liveStorage) && ! empty($this->_liveStorageName)) {
                     $this->_liveStorage = Storage::disk($this->_liveStorageName);
                 }
                 if (empty($this->_vodStorage) || empty($this->_liveStorage)) {
@@ -248,7 +248,7 @@ class EpisodeService extends LivestreamService
 
             // Move Trans files
             // @TODO [Josh] - I need to have this as a progress bar in the episode detail screen so the user can see the progress of their videos
-            if (!empty($this->video->transTempFilesArray)) {
+            if (! empty($this->video->transTempFilesArray)) {
                 $videoProcessorQueueName = config('livestream_queue.queue-names.videoProcessor-low');
                 $job = (new MoveLiveTmpTransVideoFilesToVod($this))->onQueue($videoProcessorQueueName);
                 dispatch($job);
@@ -311,7 +311,7 @@ class EpisodeService extends LivestreamService
      */
     public function cleanUpTmpVideoFiles()
     {
-        if (!empty($this->successFullyMovedToVodTmpFiles)) {
+        if (! empty($this->successFullyMovedToVodTmpFiles)) {
             foreach ($this->successFullyMovedToVodTmpFiles as $tmpFilePath) {
                 $this->_liveStorage->delete($tmpFilePath);
             }
@@ -337,9 +337,9 @@ class EpisodeService extends LivestreamService
             } catch (Exception $e) {
                 $errorMsg = 'Couldn\'t Delete Video: ' . $e->getMessage();
             }
-            if ($result === false || !empty($errorMsg)) {
+            if ($result === false || ! empty($errorMsg)) {
                 $message = 'Failed to Delete Videos, cannot delete Episode';
-                if (!empty($errorMsg)) {
+                if (! empty($errorMsg)) {
                     $message .= ': ' . $errorMsg;
                 }
                 Log::error($message);
@@ -347,7 +347,7 @@ class EpisodeService extends LivestreamService
         }
 
         // Delete on Mux if active
-        if (!empty($episode->mux_asset_id)) {
+        if (! empty($episode->mux_asset_id)) {
             $muxService = new MuxService;
             $success = $muxService->deleteAsset($episode->mux_asset_id);
         }
@@ -382,7 +382,7 @@ class EpisodeService extends LivestreamService
     /**
      * Create Rss Feed of Episodes
      *
-     * @param null $livestreamAccount
+     * @param  null  $livestreamAccount
      * @return mixed|string|Feed
      */
     public function createRssFeed($livestreamAccount = null)
@@ -426,7 +426,7 @@ class EpisodeService extends LivestreamService
             }
         }
 
-        $feed = (string)$feed;
+        $feed = (string) $feed;
         // Replace a couple items to make the feed more compliant
         $feed = str_replace(
             '<?xml version="1.0" encoding="UTF-8"?>',
@@ -451,7 +451,7 @@ class EpisodeService extends LivestreamService
     /**
      * Remove a thumbnail from an Episode
      *
-     * @param bool $deleteImage
+     * @param  bool  $deleteImage
      */
     public function removeThumbnail($episode, $deleteImage = false)
     {
@@ -542,10 +542,10 @@ class EpisodeService extends LivestreamService
      */
     public function __wakeup()
     {
-        if (!empty($this->_liveStorageName)) {
+        if (! empty($this->_liveStorageName)) {
             $this->_liveStorage = Storage::disk($this->_liveStorageName);
         }
-        if (!empty($this->_vodStorageName)) {
+        if (! empty($this->_vodStorageName)) {
             $this->_vodStorage = Storage::disk($this->_vodStorageName);
         }
 

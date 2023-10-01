@@ -47,14 +47,6 @@ class PostEditor extends Component
         $this->emitImagesSet();
     }
 
-    private function emitImagesSet(): void
-    {
-        $this->dispatch('post-editor:image-set',
-            id: $this->editorId,
-            images: $this->images
-        );
-    }
-
     public function setImage($image)
     {
         array_push($this->images, $image['url']);
@@ -82,5 +74,13 @@ class PostEditor extends Component
             'validationFailed:' . $this->editorId => 'handleValidationFailed',
             'postSaved:' . $this->editorId => 'handlePostSaved',
         ];
+    }
+
+    private function emitImagesSet(): void
+    {
+        $this->dispatch('post-editor:image-set',
+            id: $this->editorId,
+            images: $this->images
+        );
     }
 }

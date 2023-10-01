@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Shield;
 
+use App\Filament\Resources\Shield\RoleResource\Pages;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Facades\FilamentShield;
-use App\Filament\Resources\Shield\RoleResource\Pages;
 use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action as FormAction;
@@ -329,7 +329,6 @@ class RoleResource extends Resource implements HasShieldPermissions
         }
 
         return collect(FilamentShield::getResources())->sortKeys()->reduce(function ($entities, $entity) {
-
             $entities[] = Forms\Components\Section::make(FilamentShield::getLocalizedResourceLabel($entity['fqcn']))
                 ->description(fn () => new HtmlString('<span style="word-break: break-word;">' . Utils::showModelPath($entity['fqcn']) . '</span>'))
                 ->compact()
@@ -397,9 +396,7 @@ class RoleResource extends Resource implements HasShieldPermissions
 
     public static function setPermissionStateForRecordPermissions(Component $component, string $operation, array $permissions, ?Model $record): void
     {
-
         if (in_array($operation, ['edit', 'view'])) {
-
             if (blank($record)) {
                 return;
             }
@@ -478,6 +475,17 @@ class RoleResource extends Resource implements HasShieldPermissions
             ->toArray();
     }
 
+    public static function bulkToggleableAction(FormAction $action, Component $component, $livewire, Forms\Set $set, bool $resetState = false): void
+    {
+        $action
+            ->livewireClickHandlerEnabled(true)
+            ->action(function () use ($component, $livewire, $set, $resetState) {
+                /** @phpstan-ignore-next-line */
+                $component->state($resetState ? [] : array_keys($component->getOptions()));
+                static::toggleSelectAllViaEntities($livewire, $set);
+            });
+    }
+
     protected static function getCustomEntities(): ?Collection
     {
         $resourcePermissions = collect();
@@ -493,16 +501,5 @@ class RoleResource extends Resource implements HasShieldPermissions
             ->values();
 
         return static::$permissionsCollection->whereNotIn('name', $entitiesPermissions)->pluck('name');
-    }
-
-    public static function bulkToggleableAction(FormAction $action, Component $component, $livewire, Forms\Set $set, bool $resetState = false): void
-    {
-        $action
-            ->livewireClickHandlerEnabled(true)
-            ->action(function () use ($component, $livewire, $set, $resetState) {
-                /** @phpstan-ignore-next-line */
-                $component->state($resetState ? [] : array_keys($component->getOptions()));
-                static::toggleSelectAllViaEntities($livewire, $set);
-            });
     }
 }

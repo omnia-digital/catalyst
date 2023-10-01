@@ -129,6 +129,6 @@ class FormSubmissionResource extends Resource
 
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn(Model $record): string => route('form_submissions.edit', ['record' => $record]);
+        return fn (Model $record): string => route('form_submissions.edit', ['record' => $record]);
     }
 }

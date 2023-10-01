@@ -25,7 +25,7 @@ class StreamIntegrationService
     /**
      * Get Live Video Stream Name from Facebook
      *
-     * @param array $params
+     * @param  array  $params
      * @return ?string
      *
      * @throws FacebookResponseException
@@ -37,7 +37,7 @@ class StreamIntegrationService
 
         $response = $this->createFacebookLiveVideo($params);
 
-        if (!empty($response)) {
+        if (! empty($response)) {
             $streamURL = $response['secure_stream_url'];
             $streamName = trim(substr($streamURL, strpos($streamURL, 'rtmp/')), 'rtmp/');
             Log::info('[FB Live Get Live Video Stream Name] - Finished: Stream Name: ' . $streamName);
@@ -49,7 +49,7 @@ class StreamIntegrationService
     /**
      * Create a Live Video on a Facebook Stream Integration
      *
-     * @param array $params
+     * @param  array  $params
      * @return array
      *
      * @throws FacebookResponseException
@@ -82,7 +82,7 @@ class StreamIntegrationService
     /**
      * Update a Live Video on a Facebook Stream Integration
      *
-     * @param array $params
+     * @param  array  $params
      * @return array
      *
      * @throws FacebookResponseException
@@ -103,7 +103,7 @@ class StreamIntegrationService
             $message = $e->getMessage();
             Log::error('Graph returned an error: ' . $message);
             // We don't want to throw an error if the facebook video doesn't exist anymore, just in case someone deleted it on facebook
-            if (!empty($message) && !str_contains($message, 'does not exist')) {
+            if (! empty($message) && ! str_contains($message, 'does not exist')) {
                 throw $e;
             }
         } catch (FacebookSDKException $e) {
@@ -118,7 +118,7 @@ class StreamIntegrationService
     /**
      * Delete a Live Video on a Facebook account
      *
-     * @param array $params
+     * @param  array  $params
      * @return array
      *
      * @throws FacebookResponseException
@@ -139,7 +139,7 @@ class StreamIntegrationService
             $message = $e->getMessage();
             Log::error('Graph returned an error: ' . $message);
             // We don't want to throw an error if the facebook video doesn't exist anymore, just in case someone deleted it on facebook
-            if (!empty($message) && !str_contains($message, 'does not exist')) {
+            if (! empty($message) && ! str_contains($message, 'does not exist')) {
                 throw $e;
             }
         } catch (FacebookSDKException $e) {

@@ -18,7 +18,7 @@ class AddExpirationForEpisodesCommand extends Command
         $date = Carbon::parse($this->argument('date'));
 
         Episode::query()
-            ->where(fn(Builder $query) => $query->whereNull('expires_at')->orWhere('expires_at', ''))
+            ->where(fn (Builder $query) => $query->whereNull('expires_at')->orWhere('expires_at', ''))
             ->get()
             ->each(function (Episode $episode) use ($date) {
                 $episode->update(['expires_at' => $date]);

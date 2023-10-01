@@ -32,8 +32,8 @@ class TeamMap extends Component
         $places = Location::query()
             ->hasCoordinates()
             ->with('model')
-            ->when($this->startDate, fn(Builder $query) => $query->whereHas('model',
-                fn(Builder $query) => $query->whereDate('start_date', $this->startDate)))
+            ->when($this->startDate, fn (Builder $query) => $query->whereHas('model',
+                fn (Builder $query) => $query->whereDate('start_date', $this->startDate)))
             ->get()
             ->map(function (Location $location) {
                 return [

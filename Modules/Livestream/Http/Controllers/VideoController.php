@@ -90,7 +90,7 @@ class VideoController extends LivestreamController
                     // Check if this user belongs to the team associated with this livestream account
                     $userBelongsToTeam = $users->contains(auth()->user());
 
-                    if (!$userBelongsToTeam) {
+                    if (! $userBelongsToTeam) {
                         throw new AuthenticationException("The authenticated user does not have access to this team's resources");
                     }
                 } else {
@@ -112,7 +112,7 @@ class VideoController extends LivestreamController
                     $planned_start_time = $request->get('planned_start_time');
 
                     // If it's numeric, then we will assume it's a timestamp (UTC)
-                    if (!is_numeric($planned_start_time)) {
+                    if (! is_numeric($planned_start_time)) {
                         $carbonTime = new Carbon($planned_start_time, $timezone);
                         $planned_start_time = $carbonTime->setTimezone(config('app.timezone'))->timestamp;
                     }
@@ -120,7 +120,7 @@ class VideoController extends LivestreamController
                     $planned_start_time = now()->addMinutes(15)->timestamp;
                 }
 
-                if (!$request->filled('title')) {
+                if (! $request->filled('title')) {
                     throw new MissingParameterException(['episode_title', 'episode_id'],
                         'Episode Title must be provided if you do not pass in an Episode Id');
                 } else {
@@ -142,13 +142,13 @@ class VideoController extends LivestreamController
                 }
             } else {
                 // get $planned_start_time from Episode
-                if (!empty($episode->planned_start_time)) {
+                if (! empty($episode->planned_start_time)) {
                     $planned_start_time = $episode->planned_start_time->timestamp;
                 } elseif ($request->filled('planned_start_time')) {
                     $planned_start_time = $request->get('planned_start_time');
 
                     // If it's numeric, then we will assume it's a timestamp
-                    if (!is_numeric($planned_start_time)) {
+                    if (! is_numeric($planned_start_time)) {
                         $carbonTime = new Carbon($planned_start_time, $timezone);
                         $planned_start_time = $carbonTime->setTimezone(config('app.timezone'))->timestamp;
                     }
@@ -173,14 +173,14 @@ class VideoController extends LivestreamController
 
             // Get Facebook Video Source Type
             $videoSourceType = VideoSourceType::where('slug', '=', 'facebook')->first();
-            if (!empty($videoSourceType)) {
+            if (! empty($videoSourceType)) {
                 $videoData['video_source_type_id'] = $videoSourceType->id;
             } else {
                 throw new \Exception('Could not find Facebook Video Source Type');
             }
 
             // If Facebook pages are passed in request, then we need to create & schedule a video for each page
-            if (!$request->filled('facebook_pages')) {
+            if (! $request->filled('facebook_pages')) {
                 throw new Exception('Could not find Facebook Pages to schedule videos on in Request');
             } else {
                 $request_facebook_pages = $request->get('facebook_pages');
@@ -201,7 +201,7 @@ class VideoController extends LivestreamController
                         return $item['id'] == $fb_page['id'];
                     });
 
-                    if (!empty($found_fb_page)) {
+                    if (! empty($found_fb_page)) {
                         $teamObject = [
                             'id' => $found_fb_page['id'],
                             'access_token' => $found_fb_page['access_token'],
@@ -250,20 +250,20 @@ class VideoController extends LivestreamController
     /**
      * Return the most Recent Video for this LivestreamAccount
      *
-     * @param null $livestreamAccountId
+     * @param  null  $livestreamAccountId
      * @return mixed
      */
     public function mostRecentVideo($livestreamAccountId = null)
     {
         $result = false;
 
-        if (empty($livestreamAccountId) && !empty($this->_livestreamAccount)) {
+        if (empty($livestreamAccountId) && ! empty($this->_livestreamAccount)) {
             $video = $this->_livestreamAccount->mostRecentVideo();
         } else {
             $video = LivestreamAccount::findOrFail($livestreamAccountId)->mostRecentVideo();
         }
 
-        if (!empty($video)) {
+        if (! empty($video)) {
             $result = $video;
         }
 
@@ -315,7 +315,7 @@ class VideoController extends LivestreamController
         DB::beginTransaction();
 
         $video->update($params);
-        if (!empty($video->video_source_id)) {
+        if (! empty($video->video_source_id)) {
             $facebookResponse = $this->updateFacebookLiveVideo($video);
         }
 
@@ -351,12 +351,12 @@ class VideoController extends LivestreamController
 
         $fb_page = $video->video_source_account_id;
         // find if fb_page is in user facebook pages
-        if (!empty($fb_page)) {
+        if (! empty($fb_page)) {
             $found_fb_page = $all_user_facebook_pages->first(function ($item, $key) use ($fb_page) {
                 return $item['id'] == $fb_page;
             });
 
-            if (!empty($found_fb_page)) {
+            if (! empty($found_fb_page)) {
                 $teamObject = [
                     'id' => $found_fb_page['id'],
                     'access_token' => $found_fb_page['access_token'],

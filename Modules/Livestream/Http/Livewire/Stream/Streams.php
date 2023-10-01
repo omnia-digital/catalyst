@@ -31,7 +31,7 @@ class Streams extends Component
     {
         $stream = Stream::where('stream_id', $this->streamId)->first();
 
-        if (!$stream) {
+        if (! $stream) {
             $this->error('Cannot find the Stream ID: ' . $this->streamId);
 
             return;
@@ -41,7 +41,7 @@ class Streams extends Component
 
         $newStreamKey = app(MuxLivestream::class)->instance()->resetStreamKey($this->streamId);
 
-        if (!isset($newStreamKey['data']['stream_key'])) {
+        if (! isset($newStreamKey['data']['stream_key'])) {
             $this->error('Cannot get the new stream key.');
 
             return;

@@ -31,6 +31,20 @@ class StripeWebhooksController extends SparkWebhookController
     }
 
     /**
+     * Check for Omnia Metered Plan
+     *
+     * @return bool
+     */
+    public function containsOmniaMeteredPlan($payload)
+    {
+        if ($payload['data']['object']['plan']['id'] = 'omnia-metered') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Handle a successful invoice payment from a Stripe subscription.
      */
     protected function teamInvoiceCreated(Team $team, array $payload): Response
@@ -42,12 +56,12 @@ class StripeWebhooksController extends SparkWebhookController
             // get items that have metered billing and their stats
             // calculate prices for each apps
             // itemize prices for each app
-            $invoiceId = (!empty($invoiceData['id']) ? $invoiceData['id'] : null);
+            $invoiceId = (! empty($invoiceData['id']) ? $invoiceData['id'] : null);
 
             // Add Metered Billing Items
             foreach ($invoiceData['lines']['data'] as $invoiceLineItem) {
-                if (!empty($invoiceLineItem['plan']) && $invoiceLineItem['plan']['id'] === 'omnia-metered') {
-                    $subscriptionId = (!empty($invoiceLineItem['id']) ? $invoiceLineItem['id'] : null);
+                if (! empty($invoiceLineItem['plan']) && $invoiceLineItem['plan']['id'] === 'omnia-metered') {
+                    $subscriptionId = (! empty($invoiceLineItem['id']) ? $invoiceLineItem['id'] : null);
 
                     dispatch(new AddMeteredBillingInvoiceItemsJob($team, $invoiceId, $subscriptionId));
                 }
@@ -75,20 +89,6 @@ class StripeWebhooksController extends SparkWebhookController
         }
 
         return parent::handleCustomerSubscriptionUpdated($payload);
-    }
-
-    /**
-     * Check for Omnia Metered Plan
-     *
-     * @return bool
-     */
-    public function containsOmniaMeteredPlan($payload)
-    {
-        if ($payload['data']['object']['plan']['id'] = 'omnia-metered') {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**

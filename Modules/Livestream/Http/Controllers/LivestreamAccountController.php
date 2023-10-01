@@ -34,7 +34,7 @@ class LivestreamAccountController extends LivestreamController
     /**
      * Store a newly created Account in storage.
      *
-     * @param Request|LivestreamAccountRequest $request
+     * @param  Request|LivestreamAccountRequest  $request
      * @return Response
      *
      * @throws Exception
@@ -55,7 +55,7 @@ class LivestreamAccountController extends LivestreamController
 //            $vhost = WowzaVhost::find(1); // @TODO [Josh] - need to figure out how to find the correct one, this is currently hard coded
 //            $wowzaMediaServer = WowzaMediaServer::find(2);
 
-            $admin_email = (!empty($request['admin_email'])) ? $request['admin_email'] : $this->_user->email;
+            $admin_email = (! empty($request['admin_email'])) ? $request['admin_email'] : $this->_user->email;
             $LivestreamAccount_data = [
                 'admin_email' => $admin_email,
                 'team_id' => $user->currentTeam()->id,
@@ -94,7 +94,7 @@ class LivestreamAccountController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param LivestreamAccountRequest|Request $request
+     * @param  LivestreamAccountRequest|Request  $request
      * @return Response
      */
     public function update(LivestreamAccountRequest $request, LivestreamAccount $livestreamAccount)
@@ -121,7 +121,7 @@ class LivestreamAccountController extends LivestreamController
     /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Response
      */
     public function destroy($id)

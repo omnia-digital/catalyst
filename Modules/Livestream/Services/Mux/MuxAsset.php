@@ -48,7 +48,7 @@ class MuxAsset
         $asset = $this->assetsApi->getAsset($assetId)->getData();
         $mp4Support = $asset->getMp4Support();
 
-        if (!empty($mp4Support) && $mp4Support === 'standard') {
+        if (! empty($mp4Support) && $mp4Support === 'standard') {
             return null;
         }
 

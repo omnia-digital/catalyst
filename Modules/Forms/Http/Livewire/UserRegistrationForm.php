@@ -72,7 +72,7 @@ class UserRegistrationForm extends LivewireForm
 
     public function processFormSubmission($formData)
     {
-        $registrationData = array_map(fn($item): string => $item['data'], $formData);
+        $registrationData = array_map(fn ($item): string => $item['data'], $formData);
 
         event(new Registered($user = (new CreateNewUser)->create($registrationData)));
         auth()->login($user);

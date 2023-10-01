@@ -24,7 +24,7 @@ class AddAttachmentDownloadCount extends Action
         foreach ($models as $episode) {
             $oldMedia = OldAnalytics::where('name', 'like',
                 '%' . implode('%', explode('-', $episode->title)) . '%')->first();
-            !is_null($oldMedia) && $episode->downloads()->create([
+            ! is_null($oldMedia) && $episode->downloads()->create([
                 'count' => $oldMedia->count,
                 'created_at' => Carbon::parse('December 01 2021'),
                 'updated_at' => Carbon::parse('December 01 2021'),
@@ -33,7 +33,7 @@ class AddAttachmentDownloadCount extends Action
             foreach ($episode->media as $attachment) {
                 $oldAttachment = OldAnalytics::where('name', 'like',
                     '%' . implode('%', explode('-', $attachment->file_name)) . '%')->first();
-                !is_null($oldAttachment) && $attachment->downloads()->create([
+                ! is_null($oldAttachment) && $attachment->downloads()->create([
                     'count' => $oldAttachment->count,
                     'created_at' => Carbon::parse('December 01 2021'),
                     'updated_at' => Carbon::parse('December 01 2021'),

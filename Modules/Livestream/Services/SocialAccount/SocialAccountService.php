@@ -17,7 +17,7 @@ class SocialAccountService
 
     public function __construct(SocialAccount $socialAccount = null)
     {
-        if (!empty($socialAccount)) {
+        if (! empty($socialAccount)) {
             $this->_socialAccount = $socialAccount;
         }
     }
@@ -25,7 +25,7 @@ class SocialAccountService
     /**
      * Create a Live Video on a Facebook Stream Integration
      *
-     * @param array $params
+     * @param  array  $params
      * @return FacebookResponse
      *
      * @throws FacebookResponseException
@@ -42,7 +42,7 @@ class SocialAccountService
                 'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
                 'default_graph_version' => 'v' . env('FACEBOOK_API_VERSION'),
             ]);
-            if (!empty($params['access_token'])) {
+            if (! empty($params['access_token'])) {
                 $access_token = $params['access_token'];
             } else {
                 $access_token = $this->_socialAccount->token;

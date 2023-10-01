@@ -72,7 +72,7 @@ class CreateCompanyModal extends Component
 
     public function getCompanyTagsProperty()
     {
-        return Tag::withType('company_type')->get()->mapWithKeys(fn(Tag $tag
+        return Tag::withType('company_type')->get()->mapWithKeys(fn (Tag $tag
         ) => [$tag->name => ucwords($tag->name)])->all();
     }
 

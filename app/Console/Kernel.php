@@ -21,8 +21,6 @@ class Kernel extends ConsoleKernel
 
     /**
      * Define the application's command schedule.
-     *
-     * @return void
      */
     protected function schedule(Schedule $schedule): void
     {
@@ -32,7 +30,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->job(new SendFormNotificationsJob)
             ->everyThirtyMinutes()
-            ->when(fn() => Platform::isModuleEnabled('forms'));
+            ->when(fn () => Platform::isModuleEnabled('forms'));
 
         $schedule->command('backup:clean')->daily()->at('01:00');
         $schedule->command('backup:run')->daily()->at('02:00');

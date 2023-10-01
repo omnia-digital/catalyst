@@ -65,7 +65,6 @@ class Episodes extends Component
         $this->selectedEpisode = $episode;
 
         $this->dispatch('episodeSelected', episode: $episode)->to('episode.episode-info-panel');
-
     }
 
     public function multiSelect($id)
@@ -148,14 +147,14 @@ class Episodes extends Component
         $query = clone $this->rowsQueryWithoutFilters;
 
         return $query
-            ->when($this->orderBy === 'date_recorded', fn($query) => $query->orderBy('date_recorded', 'desc'))
-            ->when($this->orderBy === 'views', fn($query) => $query->orderBy('video_views_count', 'desc'))
+            ->when($this->orderBy === 'date_recorded', fn ($query) => $query->orderBy('date_recorded', 'desc'))
+            ->when($this->orderBy === 'views', fn ($query) => $query->orderBy('video_views_count', 'desc'))
             ->when(Arr::get($this->filters, 'speaker'),
-                fn($query, $speakerId) => $query->where('main_speaker_id', $speakerId))
+                fn ($query, $speakerId) => $query->where('main_speaker_id', $speakerId))
             ->when(Arr::get($this->filters, 'date_recorded'),
-                fn($query, $dateRecorded) => $query->whereDate('date_recorded', Carbon::parse($dateRecorded)))
-            ->when(Arr::get($this->filters, 'has_attachment'), fn($query) => $query->has('media'))
-            ->when(!empty($this->search), fn($query) => $query->where('title', 'LIKE', "%{$this->search}%"));
+                fn ($query, $dateRecorded) => $query->whereDate('date_recorded', Carbon::parse($dateRecorded)))
+            ->when(Arr::get($this->filters, 'has_attachment'), fn ($query) => $query->has('media'))
+            ->when(! empty($this->search), fn ($query) => $query->where('title', 'LIKE', "%{$this->search}%"));
     }
 
     public function getRowsQueryWithoutFiltersProperty()

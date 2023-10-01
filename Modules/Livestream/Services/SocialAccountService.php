@@ -19,11 +19,11 @@ class SocialAccountService extends Service
     /**
      * StreamService constructor.
      *
-     * @param StreamIntegration $streamIntegration
+     * @param  StreamIntegration  $streamIntegration
      */
     public function __construct(SocialAccount $socialAccount = null)
     {
-        if (!empty($socialAccount)) {
+        if (! empty($socialAccount)) {
             $this->_socialAccount = $socialAccount;
         }
     }
@@ -31,7 +31,7 @@ class SocialAccountService extends Service
     /**
      * Create a Live Video on a Facebook Stream Integration
      *
-     * @param array $params
+     * @param  array  $params
      * @return FacebookResponse
      *
      * @throws FacebookResponseException
@@ -48,7 +48,7 @@ class SocialAccountService extends Service
                 'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
                 'default_graph_version' => 'v' . env('FACEBOOK_API_VERSION'),
             ]);
-            if (!empty($params['access_token'])) {
+            if (! empty($params['access_token'])) {
                 $access_token = $params['access_token'];
             } else {
                 $access_token = $this->_socialAccount->token;

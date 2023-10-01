@@ -12,7 +12,7 @@ trait Downloadable
 {
     public function downloadLink(Asset $asset, ?string $name = null, string $playbackId = 'default'): ?string
     {
-        if (!$this->isDownloadable($asset)) {
+        if (! $this->isDownloadable($asset)) {
             app(MuxAsset::class)->addAssetMP4Support($asset->getId());
 
             return null;

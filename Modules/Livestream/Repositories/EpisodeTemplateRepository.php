@@ -14,7 +14,7 @@ class EpisodeTemplateRepository
     /**
      * Get the Current Episode Template to be used for this livestreamAccount
      *
-     * @param null $livestreamAccount
+     * @param  null  $livestreamAccount
      */
     public function current($livestreamAccount = null)
     {

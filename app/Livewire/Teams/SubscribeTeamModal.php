@@ -29,7 +29,7 @@ class SubscribeTeamModal extends Component
 
     public function subscribeTeam()
     {
-        if (!$this->team?->hasStripeConnectAccount()) {
+        if (! $this->team?->hasStripeConnectAccount()) {
             $this->error('This team is not ready to receive subscriptions yet!');
 
             return;
@@ -39,7 +39,7 @@ class SubscribeTeamModal extends Component
 
         $this->billable->createOrGetStripeCustomer();
 
-        if (!$this->billable->hasDefaultPaymentMethod()) {
+        if (! $this->billable->hasDefaultPaymentMethod()) {
             $this->error('You do not have a default payment method. Please add one!');
 
             return;

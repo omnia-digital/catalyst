@@ -56,7 +56,7 @@ class RenewSslCert extends Command
 
             // copy to Wowza server
             Log::info('Copy new certificate to Wowza server');
-            if (!empty($newCertFilePath)) {
+            if (! empty($newCertFilePath)) {
                 $wowza_cert_dir_path = env('WOWZA_SSL_CERT_DIR');
                 $certFileName = 'omnia-cert-' . date('Ymd-hms') . '.crt';
                 $wowza = Storage::disk('wowza');

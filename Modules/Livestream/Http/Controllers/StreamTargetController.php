@@ -48,7 +48,7 @@ class StreamTargetController extends LivestreamController
         // dependent on livestream plan and check an exception list for accounts that are allowed to add more
         $accountCanAddAnotherStreamTarget = true;
 
-        if (!$accountCanAddAnotherStreamTarget) {
+        if (! $accountCanAddAnotherStreamTarget) {
             return response([
                 'message' => 'This account cannot add another Stream Target',
             ], 403);
@@ -60,7 +60,7 @@ class StreamTargetController extends LivestreamController
             $stream = Stream::findOrFail($stream_id);
         } elseif (auth()->check()) {
             $currentTeam = auth()->user()->currentTeam();
-            if (!empty($currentTeam) && !empty($currentTeam->livestreamAccount)) {
+            if (! empty($currentTeam) && ! empty($currentTeam->livestreamAccount)) {
                 $stream = $currentTeam->livestreamAccount->default_stream;
             }
         }
@@ -115,7 +115,7 @@ class StreamTargetController extends LivestreamController
     /**
      * Destroy the resource
      *
-     * @param int $ids
+     * @param  int  $ids
      * @return Response
      *
      * @throws Exception

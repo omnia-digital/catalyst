@@ -18,11 +18,11 @@ class TrendingSection extends Component
 
     public function mount($type = null)
     {
-        if (!App::environment('production')) {
+        if (! App::environment('production')) {
             $this->useCache = false;
         }
 
-        if (!empty($type)) {
+        if (! empty($type)) {
             $this->type = $type;
         }
     }

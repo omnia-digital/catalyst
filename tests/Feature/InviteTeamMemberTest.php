@@ -22,7 +22,7 @@ test('team members can be invited to team', function () {
 
     expect($user->currentTeam->fresh()->teamInvitations)->toHaveCount(1);
 })->skip(function () {
-    return !Features::sendsTeamInvitations();
+    return ! Features::sendsTeamInvitations();
 }, 'Team invitations not enabled.');
 
 test('team member invitations can be cancelled', function () {
@@ -44,5 +44,5 @@ test('team member invitations can be cancelled', function () {
 
     expect($user->currentTeam->fresh()->teamInvitations)->toHaveCount(0);
 })->skip(function () {
-    return !Features::sendsTeamInvitations();
+    return ! Features::sendsTeamInvitations();
 }, 'Team invitations not enabled.');

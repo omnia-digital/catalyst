@@ -47,7 +47,7 @@ class MuxEventController extends LivestreamController
      */
     public function handle(Request $request)
     {
-        if (!$request->has('type')) {
+        if (! $request->has('type')) {
             return;
         }
 

@@ -104,7 +104,7 @@ class ManageTeamForms extends Component
             'editingNotification.role_id' => [
                 'required',
                 Rule::exists(config('permission.table_names.roles'), 'id')
-                    ->where(fn($q) => $q->where('team_id', $this->team->id)),
+                    ->where(fn ($q) => $q->where('team_id', $this->team->id)),
             ],
             'editingNotification.name' => ['required', 'string'],
             'editingNotification.message' => ['nullable', 'string'],

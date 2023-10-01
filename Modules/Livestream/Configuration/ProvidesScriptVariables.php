@@ -45,9 +45,9 @@ trait ProvidesScriptVariables
         return [
             'env' => config('app.env'),
             'translations' => static::getTranslations() + [
-                    'teams.team' => trans('teams.team'),
-                    'teams.member' => trans('teams.member')
-                ],
+                'teams.team' => trans('teams.team'),
+                'teams.member' => trans('teams.member'),
+            ],
             //            'state' => Omnia::call(InitialFrontendState::class.'@forUser', [Auth::user()]),
             'state' => [
                 'currentTeam' => [],
@@ -67,7 +67,7 @@ trait ProvidesScriptVariables
     {
         $translationFile = resource_path('lang/' . app()->getLocale() . '.json');
 
-        if (!is_readable($translationFile)) {
+        if (! is_readable($translationFile)) {
             $translationFile = resource_path('lang/' . app('translator')->getFallback() . '.json');
         }
 
@@ -78,9 +78,9 @@ trait ProvidesScriptVariables
     {
         return [
             'translations' => static::getTranslations() + [
-                    'teams.team' => trans('teams.team'),
-                    'teams.member' => trans('teams.member')
-                ],
+                'teams.team' => trans('teams.team'),
+                'teams.member' => trans('teams.member'),
+            ],
             'cardUpFront' => Omnia::needsCardUpFront(),
             'collectsBillingAddress' => Omnia::collectsBillingAddress(),
             'collectsEuropeanVat' => Omnia::collectsEuropeanVat(),
@@ -106,7 +106,7 @@ trait ProvidesScriptVariables
             'chargesTeamsPerMember' => Omnia::chargesTeamsPerMember(),
             'onlyTeamPlans' => Omnia::onlyTeamPlans(),
             'teamsIdentifiedByPath' => Omnia::teamsIdentifiedByPath(),
-            'impersonator' => (bool)session('spark:impersonator'),
+            'impersonator' => (bool) session('spark:impersonator'),
             'intercomUserHash' => (auth()->check() ? hash_hmac('sha256', auth()->user()->id,
                 env('INTERCOM_VERIFICATION_SECRET')) : null),
             'appVersion' => Omnia::$version,

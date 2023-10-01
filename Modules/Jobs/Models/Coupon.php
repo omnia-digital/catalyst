@@ -30,7 +30,7 @@ class Coupon extends Model
 
     protected static function booted()
     {
-        static::creating(fn(self $coupon) => $coupon->code = $coupon->code ?: Str::random());
+        static::creating(fn (self $coupon) => $coupon->code = $coupon->code ?: Str::random());
     }
 
     /**
@@ -48,7 +48,7 @@ class Coupon extends Model
      */
     public function isValid()
     {
-        if (!$this->expires_at) {
+        if (! $this->expires_at) {
             return true;
         }
 
@@ -62,7 +62,7 @@ class Coupon extends Model
     /**
      * Check if a coupon is used for a specific model.
      *
-     * @param string|Model $model
+     * @param  string|Model  $model
      * @return bool
      */
     public function isRedeemedFor($model, ?int $id = null)

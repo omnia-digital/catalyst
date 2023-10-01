@@ -17,14 +17,14 @@ class SubscriptionService extends Service
     /**
      * Retrieve Plans from data, then Subscribe Billbable entity to given plans
      *
-     * @param Billable $billable Can be any billable entity such as Team or User
+     * @param  Billable  $billable Can be any billable entity such as Team or User
      * @return Collection
      */
     public function subscribeToPlans(Collection $plans, $billable, array $data)
     {
         if (is_array($plans)) {
             $plans = collect($plans);
-        } elseif (!$plans instanceof Collection) {
+        } elseif (! $plans instanceof Collection) {
             throw new Exception('$data parameter must be a Request, array or Collection');
         }
         $response = collect();
@@ -52,7 +52,7 @@ class SubscriptionService extends Service
     /**
      * Subscribe billable entity to Plan
      *
-     * @param Billable $billable
+     * @param  Billable  $billable
      * @return mixed
      */
     public function subscribeToPlan($billable, Plan $plan, array $data)
@@ -65,10 +65,10 @@ class SubscriptionService extends Service
 
         return Omnia::interact(
             $subscribeInteraction, [
-            $billable,
-            $plan,
-            false,
-            $data,
-        ]);
+                $billable,
+                $plan,
+                false,
+                $data,
+            ]);
     }
 }

@@ -10,7 +10,7 @@ trait HasTeams
 {
     public function currentTeam()
     {
-        if (!$this->teams()->exists()) {
+        if (! $this->teams()->exists()) {
             return false;
         }
 
@@ -56,12 +56,12 @@ trait HasTeams
 
     public function isMemberOfATeam(): bool
     {
-        return (bool)($this->teams()->count() > 0);
+        return (bool) ($this->teams()->count() > 0);
     }
 
     public function hasMultipleTeams(): bool
     {
-        return (bool)($this->teams()->count() > 1);
+        return (bool) ($this->teams()->count() > 1);
     }
 
     public function hasTeamRole($team, string $role)
@@ -98,12 +98,12 @@ trait HasTeams
     /**
      * Get the role that the user has on the team.
      *
-     * @param mixed $team
+     * @param  mixed  $team
      * @return Role|null
      */
     public function teamRole($team)
     {
-        if (!$this->belongsToTeam($team)) {
+        if (! $this->belongsToTeam($team)) {
             return;
         }
 

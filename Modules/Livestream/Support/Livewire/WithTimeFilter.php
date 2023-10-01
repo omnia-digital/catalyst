@@ -14,11 +14,6 @@ trait WithTimeFilter
         $this->selectedTime = session()->get($this->getTimeFilterSessionKey(), $this->selectedTime);
     }
 
-    private function getTimeFilterSessionKey(): string
-    {
-        return 'timeFilter' . get_class($this);
-    }
-
     public function selectTime(string $time)
     {
         $this->selectedTime = $time;
@@ -55,5 +50,10 @@ trait WithTimeFilter
             '6-months', 'this-year', 'all-time' => 'M Y',
             'default' => 'Y-m-d'
         };
+    }
+
+    private function getTimeFilterSessionKey(): string
+    {
+        return 'timeFilter' . get_class($this);
     }
 }

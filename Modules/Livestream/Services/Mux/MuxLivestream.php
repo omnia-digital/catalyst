@@ -47,7 +47,7 @@ class MuxLivestream
     }
 
     /**
-     * @param null $passthrough
+     * @param  null  $passthrough
      *
      * @throws ApiException
      */

@@ -124,29 +124,6 @@ class FormResource extends Resource
         ]);
     }
 
-    protected static function getFieldNameInput(): Grid
-    {
-        // This is not a Filament-specific method, simply saves on repetition
-        // between our builder blocks.
-        return Grid::make()
-            ->schema([
-                TextInput::make('label')
-                    ->lazy()
-                    ->afterStateUpdated(function (Set $set, $state) {
-                        $name = Str::of($state)
-                            ->snake()
-                            ->replace(['-'], '_')
-                            ->lower();
-                        $set('name', $name);
-                    })
-                    ->required(),
-                TextInput::make('name')
-                    ->label('Field Slug')
-                    ->required(),
-
-            ]);
-    }
-
     public static function table(Table $table): Table
     {
         return $table
@@ -195,8 +172,31 @@ class FormResource extends Resource
         return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 
+    protected static function getFieldNameInput(): Grid
+    {
+        // This is not a Filament-specific method, simply saves on repetition
+        // between our builder blocks.
+        return Grid::make()
+            ->schema([
+                TextInput::make('label')
+                    ->lazy()
+                    ->afterStateUpdated(function (Set $set, $state) {
+                        $name = Str::of($state)
+                            ->snake()
+                            ->replace(['-'], '_')
+                            ->lower();
+                        $set('name', $name);
+                    })
+                    ->required(),
+                TextInput::make('name')
+                    ->label('Field Slug')
+                    ->required(),
+
+            ]);
+    }
+
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn(Model $record): string => route('forms.edit', ['record' => $record]);
+        return fn (Model $record): string => route('forms.edit', ['record' => $record]);
     }
 }

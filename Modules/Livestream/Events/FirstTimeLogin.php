@@ -16,7 +16,7 @@ class FirstTimeLogin
     /**
      * Create a new event instance.
      *
-     * @param Authenticatable $user
+     * @param  Authenticatable  $user
      * @return void
      */
     public function __construct($user)

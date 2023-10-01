@@ -52,7 +52,7 @@ class Index extends Component
 
     public function showGuestAccessModal()
     {
-        if (Platform::isAllowingGuestAccess() && !auth()->check()) {
+        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('social.bookmarks'));
         }
     }

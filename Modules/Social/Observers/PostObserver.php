@@ -20,7 +20,7 @@ class PostObserver
             $post->attachTags(['resource']);
         }
 
-            $post->published_at ?? now();
+        $post->published_at ?? now();
 
         $post->save();
     }

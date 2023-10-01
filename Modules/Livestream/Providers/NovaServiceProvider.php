@@ -43,19 +43,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     }
 
     /**
-     * Register the Nova routes.
-     *
-     * @return void
-     */
-    protected function routes()
-    {
-        Nova::routes()
-            ->withAuthenticationRoutes()
-            ->withPasswordResetRoutes()
-            ->register();
-    }
-
-    /**
      * Register any application services.
      *
      * @return void
@@ -67,6 +54,19 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 app('sentry')->captureException($exception);
             }
         });
+    }
+
+    /**
+     * Register the Nova routes.
+     *
+     * @return void
+     */
+    protected function routes()
+    {
+        Nova::routes()
+            ->withAuthenticationRoutes()
+            ->withPasswordResetRoutes()
+            ->register();
     }
 
     /**

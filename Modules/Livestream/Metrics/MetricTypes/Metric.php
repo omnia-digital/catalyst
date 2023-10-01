@@ -43,6 +43,15 @@ abstract class Metric
     }
 
     /**
+     * Determine for how many minutes the metric should be cached.
+     *
+     * @return  DateTimeInterface|DateInterval|float|int|null|void
+     */
+    public function cacheFor()
+    {
+    }
+
+    /**
      * @return Collection|mixed
      */
     protected function resolve(Carbon $from, Carbon $to, string $timeFilter)
@@ -62,15 +71,6 @@ abstract class Metric
         }
 
         return $resolver();
-    }
-
-    /**
-     * Determine for how many minutes the metric should be cached.
-     *
-     * @return  DateTimeInterface|DateInterval|float|int|null|void
-     */
-    public function cacheFor()
-    {
     }
 
     /**

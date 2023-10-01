@@ -7,8 +7,8 @@ use App\Models\User;
 use App\Support\Platform\Platform;
 use App\Traits\Policies\HasDefaultPolicy;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Response;
 use Modules\Billing\Models\SubscriptionType;
-use Response;
 use Trans;
 
 class TeamPolicy

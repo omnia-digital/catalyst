@@ -24,7 +24,7 @@ class NewMemberOfMyTeamNotification extends BaseNotification
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -39,7 +39,7 @@ class NewMemberOfMyTeamNotification extends BaseNotification
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

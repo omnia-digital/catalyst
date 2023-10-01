@@ -53,7 +53,7 @@ class DashboardController extends LivestreamController
 //        } else {
         $isLivestreaming = false;
         $mostRecentVideo = $this->_livestreamAccount->mostRecentVideo();
-        if (!empty($mostRecentVideo)) {
+        if (! empty($mostRecentVideo)) {
             $videos = collect([$mostRecentVideo]);
         }
 //        }
@@ -83,7 +83,7 @@ class DashboardController extends LivestreamController
     /**
      * Store a newly created Dashboard in storage.
      *
-     * @param DashboardRequest|Request $request
+     * @param  DashboardRequest|Request  $request
      * @return Response
      */
     public function store(DashboardRequest $request)
@@ -113,7 +113,7 @@ class DashboardController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param DashboardRequest|Request $request
+     * @param  DashboardRequest|Request  $request
      * @return Response
      */
     public function update(DashboardRequest $request, Dashboard $dashboard)
@@ -124,7 +124,7 @@ class DashboardController extends LivestreamController
     /**
      * Remove the Dashboard and associated files from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Response
      */
     public function destroy($id)

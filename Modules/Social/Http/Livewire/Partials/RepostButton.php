@@ -11,6 +11,7 @@ use Modules\Social\Notifications\PostWasRepostedNotification;
 use Modules\Social\Support\Livewire\WithPostEditor;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
+use Throwable;
 
 class RepostButton extends Component
 {
@@ -26,7 +27,7 @@ class RepostButton extends Component
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     #[On('post-editor:submitted')]
     public function createRepost($data): void

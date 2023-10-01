@@ -28,16 +28,6 @@ trait HasLogo
     }
 
     /**
-     * Get the disk that logo should be stored on.
-     *
-     * @return string
-     */
-    protected function logoDisk()
-    {
-        return 's3';
-    }
-
-    /**
      * Delete the company's logo.
      *
      * @return void
@@ -61,6 +51,16 @@ trait HasLogo
         return $this->logo_path
             ? Storage::disk($this->logoDisk())->url($this->logo_path)
             : $this->defaultLogoUrl();
+    }
+
+    /**
+     * Get the disk that logo should be stored on.
+     *
+     * @return string
+     */
+    protected function logoDisk()
+    {
+        return 's3';
     }
 
     /**

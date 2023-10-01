@@ -106,7 +106,7 @@ class TeamCalendarList extends Component
         $this->classes = $classes;
         $this->orderBy = 'name';
 
-        if (!App::environment('production')) {
+        if (! App::environment('production')) {
             $this->useCache = false;
         }
     }

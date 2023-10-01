@@ -78,14 +78,6 @@ class AuthenticationModal extends Component
         $this->redirect($this->redirectAfterLogin);
     }
 
-    protected function createProfile(User $user)
-    {
-        $user->profile()->create([
-            'first_name' => $this->firstName,
-            'last_name' => $this->lastName,
-        ]);
-    }
-
     public function login()
     {
         $this->validate();
@@ -97,14 +89,22 @@ class AuthenticationModal extends Component
         $this->redirect($this->redirectAfterLogin);
     }
 
-    protected function guard()
-    {
-        return auth()->guard();
-    }
-
     public function render()
     {
         return view('livewire.authentication-modal');
+    }
+
+    protected function createProfile(User $user)
+    {
+        $user->profile()->create([
+            'first_name' => $this->firstName,
+            'last_name' => $this->lastName,
+        ]);
+    }
+
+    protected function guard()
+    {
+        return auth()->guard();
     }
 
     protected function rules(): array

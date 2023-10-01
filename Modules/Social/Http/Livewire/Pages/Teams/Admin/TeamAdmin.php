@@ -109,7 +109,7 @@ class TeamAdmin extends Component
     {
         return Tag::withType('team_type')
             ->get()
-            ->mapWithKeys(fn(Tag $tag) => [$tag->name => ucwords($tag->name)])
+            ->mapWithKeys(fn (Tag $tag) => [$tag->name => ucwords($tag->name)])
             ->all();
     }
 
@@ -119,19 +119,19 @@ class TeamAdmin extends Component
 
         $this->team->save();
 
-        if (!empty($this->teamTypes)) {
+        if (! empty($this->teamTypes)) {
             $this->team->attachTags($this->teamTypes, 'team_type');
         }
 
         $this->removeAddress && $this->team->location()
             ->delete();
 
-        if (!empty($this->newAddress)) {
+        if (! empty($this->newAddress)) {
             $this->team->location()
                 ->updateOrCreate(['model_id' => $this->team->id, 'model_type' => Team::class], $this->newAddress);
         }
 
-        if (!is_null($this->bannerImage) && $this->team->bannerImage()
+        if (! is_null($this->bannerImage) && $this->team->bannerImage()
                 ->count()) {
             $this->team->bannerImage()
                 ->delete();

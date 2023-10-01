@@ -24,7 +24,7 @@ class StreamWasInterruptedNotification extends Notification implements ShouldQue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -35,7 +35,7 @@ class StreamWasInterruptedNotification extends Notification implements ShouldQue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return MailMessage
      */
     public function toMail($notifiable)

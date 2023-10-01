@@ -16,19 +16,19 @@ class EnsureEmailIsVerifiedMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param Request $request
-     * @param string|null $redirectToRoute
+     * @param  Request  $request
+     * @param  string|null  $redirectToRoute
      * @return Response|RedirectResponse|null
      */
     public function handle($request, Closure $next, $redirectToRoute = null)
     {
-        if (Platform::isAllowingGuestAccess() && !$request->user()) {
+        if (Platform::isAllowingGuestAccess() && ! $request->user()) {
             return $next($request);
         }
 
-        if (!$request->user() ||
+        if (! $request->user() ||
             ($request->user() instanceof MustVerifyEmail &&
-                !$request->user()->hasVerifiedEmail())) {
+                ! $request->user()->hasVerifiedEmail())) {
             return $request->expectsJson()
                 ? abort(403, 'Your email address is not verified.')
                 : Redirect::guest(URL::route($redirectToRoute ?: 'verification.notice'));

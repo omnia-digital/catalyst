@@ -47,7 +47,7 @@ class MassAttachmentUploadPanel extends Component
             // Check if the episode has a file name with the same title
             $sameNameExists = $episode->media()->where('name', 'like', $fileName)->exists();
 
-            if (!$sameExtensionExists || !$sameNameExists) {
+            if (! $sameExtensionExists || ! $sameNameExists) {
                 // If not, add that attachment
                 $mediaItem = $episode->addMediaFromUrl($attachment->temporaryUrl())
                     ->usingName($title)

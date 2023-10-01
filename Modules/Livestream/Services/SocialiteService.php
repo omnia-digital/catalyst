@@ -44,7 +44,7 @@ class SocialiteService extends Service
                 // Check if user exists using email, if so, log them in automatically
                 $user = User::where('email', '=', $socialiteUser->getEmail())->first();
 
-                if (!empty($user)) {
+                if (! empty($user)) {
                     $userExists = true;
                 } else {
                     $userExists = false;
@@ -79,7 +79,7 @@ class SocialiteService extends Service
         ];
         unset($providerUser['id']);
         foreach ($providerUser as $attribute => $value) {
-            if (!empty($value)) {
+            if (! empty($value)) {
                 $socialAccountData[$attribute] = $value;
             }
         }
@@ -93,27 +93,6 @@ class SocialiteService extends Service
         $socialAccount->save();
 
         return $socialAccount;
-    }
-
-    /**
-     * Buid Social Info Object
-     *
-     *
-     * @return array
-     */
-    private function buildSocialInfo(
-        SocialiteUserContract $socialiteUser,
-        $provider,
-        Request $request,
-        $userExists = false
-    ) {
-        return [
-            'code' => $request->code,
-            'state' => $request->state,
-            'user' => json_encode($socialiteUser, JSON_FORCE_OBJECT),
-            'provider' => $provider,
-            'user_exists' => $userExists,
-        ];
     }
 
     /**
@@ -139,5 +118,26 @@ class SocialiteService extends Service
 
             return redirect(config('app.full_app_url'));
         }
+    }
+
+    /**
+     * Buid Social Info Object
+     *
+     *
+     * @return array
+     */
+    private function buildSocialInfo(
+        SocialiteUserContract $socialiteUser,
+        $provider,
+        Request $request,
+        $userExists = false
+    ) {
+        return [
+            'code' => $request->code,
+            'state' => $request->state,
+            'user' => json_encode($socialiteUser, JSON_FORCE_OBJECT),
+            'provider' => $provider,
+            'user_exists' => $userExists,
+        ];
     }
 }

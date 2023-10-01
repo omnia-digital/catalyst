@@ -68,6 +68,21 @@ class DownloadEpisodes implements ShouldQueue
     }
 
     /**
+     * Handle a job failure.
+     *
+     * @return void
+     */
+    public function failed(Throwable $exception)
+    {
+        $this->episodeDownload->update([
+            'status' => EpisodeDownloadStatus::FAILED,
+            'failed_reason' => $exception->getMessage(),
+        ]);
+
+        $this->episodeDownload->user->notify(new EpisodeDownloadWasFailedNotification($this->episodeDownload));
+    }
+
+    /**
      * Download all episodes from Mux.
      *
      * @throws ApiException
@@ -80,11 +95,11 @@ class DownloadEpisodes implements ShouldQueue
             $asset = $episode->asMuxAsset();
 
             // Do nothing if asset is not found or this asset does not supports mp4.
-            if (!$asset || !$asset->isDownloadable()) {
+            if (! $asset || ! $asset->isDownloadable()) {
                 return;
             }
 
-            if (!($playbackId = $asset->defaultPlaybackId())) {
+            if (! ($playbackId = $asset->defaultPlaybackId())) {
                 return null;
             }
 
@@ -111,7 +126,7 @@ class DownloadEpisodes implements ShouldQueue
         $folderPath = $rootFolderPath . '/' . $this->episodeDownload->code;
         $files = glob($folderPath . '/*');
 
-        if (!count($files)) {
+        if (! count($files)) {
             throw new Exception('Cannot find any files to zip');
         }
 
@@ -125,20 +140,5 @@ class DownloadEpisodes implements ShouldQueue
         $zip->close();
 
         return basename($rootFolderPath) . '/' . $this->episodeDownload->code . '/' . $filename;
-    }
-
-    /**
-     * Handle a job failure.
-     *
-     * @return void
-     */
-    public function failed(Throwable $exception)
-    {
-        $this->episodeDownload->update([
-            'status' => EpisodeDownloadStatus::FAILED,
-            'failed_reason' => $exception->getMessage(),
-        ]);
-
-        $this->episodeDownload->user->notify(new EpisodeDownloadWasFailedNotification($this->episodeDownload));
     }
 }

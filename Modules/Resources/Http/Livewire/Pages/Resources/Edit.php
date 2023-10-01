@@ -35,7 +35,7 @@ class Edit extends Component
 
         $this->saveResource($validated);
 
-        if (!is_null($this->resource->published_at)) {
+        if (! is_null($this->resource->published_at)) {
             $this->resource->published_at = null;
             $this->resource->save();
         }

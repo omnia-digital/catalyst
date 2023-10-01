@@ -65,11 +65,11 @@ class UpdateEpisodeTemplateThumbnail
     /**
      * Resize an image instance for the given file.
      *
-     * @param SplFileInfo $file
+     * @param  SplFileInfo  $file
      * @return Image
      */
     protected function formatImage($file)
     {
-        return (string)$this->images->make($file->path())->fit(1920, 1080)->encode();
+        return (string) $this->images->make($file->path())->fit(1920, 1080)->encode();
     }
 }

@@ -66,7 +66,7 @@ class AddMeteredBillingInvoiceItemsJob implements ShouldQueue
         // Storage cost is always a sum of normal storage cost + deleted episode storage cost.
         $encodingCost = round($encodingSeconds * $this->getMeteredPrice('encoding'), 2);
         $storageCost = round($storageSeconds * $this->getMeteredPrice('storage'),
-                2) + $extraInvoiceItems->sum('amount');
+            2) + $extraInvoiceItems->sum('amount');
         $deliveredCost = round($deliveredSeconds * $this->getMeteredPrice('delivered'), 2);
 
         Log::info('Encoding: ' . $encodingCost);

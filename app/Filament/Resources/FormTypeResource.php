@@ -108,6 +108,6 @@ class FormTypeResource extends Resource
 
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn(Model $record): string => route('form_types.edit', ['record' => $record]);
+        return fn (Model $record): string => route('form_types.edit', ['record' => $record]);
     }
 }

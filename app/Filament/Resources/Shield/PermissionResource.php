@@ -62,7 +62,7 @@ class PermissionResource extends Resource implements HasShieldPermissions
             ->columns([
                 Tables\Columns\BadgeColumn::make('name')
                     ->label(__('filament-shield::filament-shield.column.name'))
-                    ->formatStateUsing(fn($state): string => Str::headline($state))
+                    ->formatStateUsing(fn ($state): string => Str::headline($state))
                     ->colors(['primary'])
                     ->searchable(),
                 Tables\Columns\BadgeColumn::make('guard_name')
@@ -116,7 +116,7 @@ class PermissionResource extends Resource implements HasShieldPermissions
 
     public static function getSlug(): string
     {
-        return (string)config('filament-shield.shield_resource.permission_slug');
+        return (string) config('filament-shield.shield_resource.permission_slug');
     }
 
     public static function canGloballySearch(): bool

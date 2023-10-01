@@ -16,7 +16,7 @@ trait ManagesModelOptions
     /**
      * Set the person model class name.
      *
-     * @param string $personModel
+     * @param  string  $personModel
      * @return void
      */
     public static function usePersonModel($personModel)

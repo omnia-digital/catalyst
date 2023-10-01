@@ -58,7 +58,7 @@ class ImportEpisodesFromRssAction
             return auth()->user()->currentTeam->livestreamAccount;
         }
 
-        if (!($livestreamAccount = LivestreamAccount::find($livestreamAccount))) {
+        if (! ($livestreamAccount = LivestreamAccount::find($livestreamAccount))) {
             throw new Exception('Cannot find the livestream account');
         }
 
@@ -68,15 +68,15 @@ class ImportEpisodesFromRssAction
     private function prepareEpisodeData(SimpleXMLElement $item): array
     {
         return [
-            'title' => (string)$item->title,
-            'date_recorded' => Carbon::parse((string)$item->pubDate),
-            'description' => (string)$item->description,
-            'main_passage' => (string)$item->passage,
-            'main_speaker_id' => (string)$this->findSpeaker($item)?->id,
-            'media_url' => (string)$item->guid,
+            'title' => (string) $item->title,
+            'date_recorded' => Carbon::parse((string) $item->pubDate),
+            'description' => (string) $item->description,
+            'main_passage' => (string) $item->passage,
+            'main_speaker_id' => (string) $this->findSpeaker($item)?->id,
+            'media_url' => (string) $item->guid,
             'attachments' => $this->getAttachments($item),
-            'series' => (string)$item->series,
-            'category' => (string)$item->category,
+            'series' => (string) $item->series,
+            'category' => (string) $item->category,
         ];
     }
 
@@ -84,7 +84,7 @@ class ImportEpisodesFromRssAction
     {
         $itunes = $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
 
-        $author = explode(' ', (string)$itunes->author);
+        $author = explode(' ', (string) $itunes->author);
         $firstName = $author[0];
         $lastName = $author[1] ?? $firstName;
 
@@ -96,7 +96,7 @@ class ImportEpisodesFromRssAction
 
     private function getAttachments(SimpleXMLElement $item): array
     {
-        $attachments = (array)$item->attachments->attachment;
+        $attachments = (array) $item->attachments->attachment;
         unset($attachments[0]);
 
         return $attachments;
@@ -112,7 +112,7 @@ class ImportEpisodesFromRssAction
 
     private function checkDuplicate(?Episode $episode): bool
     {
-        if (!$episode) {
+        if (! $episode) {
             return false;
         }
 

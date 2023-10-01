@@ -68,7 +68,7 @@ class Player extends Model
             return $this->not_live_image;
         }
 
-        if (!empty($this->not_live_image)) {
+        if (! empty($this->not_live_image)) {
             return Storage::disk('players')->url($this->not_live_image);
         }
 
@@ -87,7 +87,7 @@ class Player extends Model
             return $this->before_live_image;
         }
 
-        if (!empty($this->before_live_image)) {
+        if (! empty($this->before_live_image)) {
             return Storage::disk('players')->url($this->before_live_image);
         }
 

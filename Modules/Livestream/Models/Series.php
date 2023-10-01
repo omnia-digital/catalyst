@@ -49,7 +49,7 @@ class Series extends Model
         return $this->episodes()->withCount([
             'videoViews' => function ($query) use ($from, $to) {
                 $query->whereBetween('video_views.created_at', [$from, $to]);
-            }
+            },
         ])->get()->sum('video_views_count');
     }
 }

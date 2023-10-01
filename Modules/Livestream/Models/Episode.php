@@ -98,11 +98,11 @@ class Episode extends Model implements HasMedia
      */
     public static function createFromTemplate(array $episodeData): Episode
     {
-        if (!empty($episodeData['title'])) {
+        if (! empty($episodeData['title'])) {
             Omnia::replaceShortcodesInString($episodeData['title']);
         }
 
-        if (!empty($episodeData['description'])) {
+        if (! empty($episodeData['description'])) {
             Omnia::replaceShortcodesInString($episodeData['description']);
         }
 
@@ -142,7 +142,7 @@ class Episode extends Model implements HasMedia
      */
     public function getFormattedDurationAttribute()
     {
-        if (!$this->duration) {
+        if (! $this->duration) {
             return;
         }
 
@@ -163,7 +163,7 @@ class Episode extends Model implements HasMedia
 
     public function setMainSpeakerIdAttribute($value)
     {
-        $this->attributes['main_speaker_id'] = empty($value) ? null : (int)$value;
+        $this->attributes['main_speaker_id'] = empty($value) ? null : (int) $value;
     }
 
     public function setCategoryIdAttribute($value)
@@ -209,7 +209,7 @@ class Episode extends Model implements HasMedia
     {
         return $query->whereHas(
             'livestreamAccount',
-            fn(Builder $query) => $query->where('video_storage_option', VideoStorageOption::DELETE_VIDEO)
+            fn (Builder $query) => $query->where('video_storage_option', VideoStorageOption::DELETE_VIDEO)
         );
     }
 
@@ -262,7 +262,7 @@ class Episode extends Model implements HasMedia
         return $query->withSum([
             'attachmentDownloads' => function ($query) use ($from, $to) {
                 return $query->whereBetween('downloads.created_at', [$from, $to]);
-            }
+            },
         ], 'count');
     }
 
@@ -271,7 +271,7 @@ class Episode extends Model implements HasMedia
         return $query->withCount([
             'videoViews' => function ($query) use ($from, $to) {
                 $query->whereBetween('video_views.created_at', [$from, $to]);
-            }
+            },
         ]);
     }
 
@@ -307,7 +307,7 @@ class Episode extends Model implements HasMedia
 
         // Create playback ids.
         $video->playbackIds()->createMany(
-            collect($playbackIds)->map(fn(array $playbackId) => [
+            collect($playbackIds)->map(fn (array $playbackId) => [
                 'playback_id' => $playbackId['id'],
                 'policy' => $playbackId['policy'],
             ])
@@ -335,7 +335,7 @@ class Episode extends Model implements HasMedia
 
         // Create playback ids.
         $audio->playbackIds()->createMany(
-            collect($playbackIds)->map(fn(array $playbackId) => [
+            collect($playbackIds)->map(fn (array $playbackId) => [
                 'playback_id' => $playbackId['id'],
                 'policy' => $playbackId['policy'],
             ])
@@ -346,7 +346,7 @@ class Episode extends Model implements HasMedia
 
     public function toPlayer(?Player $player = null): array
     {
-        if (!($video = $this->video)) {
+        if (! ($video = $this->video)) {
             return [];
         }
 
@@ -364,7 +364,7 @@ class Episode extends Model implements HasMedia
 
     public function getPlayerThumbnail(Player $player): string
     {
-        if (!$this->isLive() && $player->notLiveImageUrl) {
+        if (! $this->isLive() && $player->notLiveImageUrl) {
             return $player->notLiveImageUrl;
         }
 
@@ -377,7 +377,7 @@ class Episode extends Model implements HasMedia
 
     public function isLive(): bool
     {
-        return (bool)$this->is_live_now;
+        return (bool) $this->is_live_now;
     }
 
     public function getStartDatetimeAttribute($value)

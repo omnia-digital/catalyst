@@ -32,7 +32,7 @@ class StreamTargets extends Component
 
         $stream = $this->livestreamAccount->defaultStream();
 
-        if (!$stream) {
+        if (! $stream) {
             $this->error('Could not find Stream. Please make sure you have created one.');
 
             return;

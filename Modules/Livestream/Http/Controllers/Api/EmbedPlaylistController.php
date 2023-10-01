@@ -29,18 +29,18 @@ class EmbedPlaylistController extends Controller
                 'media',
                 'staticMedia',
                 'tags',
-                'category'
+                'category',
             ])
             ->withCount(['videoViews'])
             ->where('livestream_account_id', $playlist->livestream_account_id)
             ->when(Arr::get($data, 'search'),
-                fn(Builder $query, $search) => $query->where('title', 'LIKE', "%{$search}%"))
+                fn (Builder $query, $search) => $query->where('title', 'LIKE', "%{$search}%"))
             ->when(Arr::get($data, 'speaker'),
-                fn(Builder $query, $speaker) => $query->where('main_speaker_id', $speaker))
-            ->when(Arr::get($data, 'series'), fn(Builder $query, $series) => $query->whereHas('series',
-                fn(Builder $query) => $query->where('series_id', $series)))
-            ->when(Arr::get($data, 'topics'), fn(Builder $query, $topics) => $query->whereHas('tags',
-                fn(Builder $query) => $query->where('tag_id', $topics)->where('type', 'topic')))
+                fn (Builder $query, $speaker) => $query->where('main_speaker_id', $speaker))
+            ->when(Arr::get($data, 'series'), fn (Builder $query, $series) => $query->whereHas('series',
+                fn (Builder $query) => $query->where('series_id', $series)))
+            ->when(Arr::get($data, 'topics'), fn (Builder $query, $topics) => $query->whereHas('tags',
+                fn (Builder $query) => $query->where('tag_id', $topics)->where('type', 'topic')))
             ->latest('date_recorded')
             ->paginate($playlist->per_page);
 

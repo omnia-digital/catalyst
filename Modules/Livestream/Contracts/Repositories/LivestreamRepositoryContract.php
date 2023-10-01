@@ -11,7 +11,7 @@ interface LivestreamRepositoryContract extends RepositoryContract
     /**
      * Get the LivestreamAccount with the given ID.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Authenticatable|null
      */
     public function find($id);
@@ -19,8 +19,8 @@ interface LivestreamRepositoryContract extends RepositoryContract
     /**
      * Perform a basic LivestreamAccount search by name or e-mail address.
      *
-     * @param string $query
-     * @param Authenticatable|null $excludeLivestreamAccount
+     * @param  string  $query
+     * @param  Authenticatable|null  $excludeLivestreamAccount
      * @return Collection
      */
     public function search($query, $excludeLivestreamAccount = null);

@@ -85,7 +85,7 @@ class ScheduleController extends LivestreamController
             '09' => '09',
             '10' => '10',
             '11' => '11',
-            '12' => '12'
+            '12' => '12',
         ];
         $availableMinutes = ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];
         $LivestreamAccount = $this->_livestreamAccount;
@@ -122,7 +122,7 @@ class ScheduleController extends LivestreamController
             '09' => '09',
             '10' => '10',
             '11' => '11',
-            '12' => '12'
+            '12' => '12',
         ];
         $availableMinutes = ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];
 
@@ -154,7 +154,7 @@ class ScheduleController extends LivestreamController
     /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Response
      */
     public function destroy(Schedule $schedule)

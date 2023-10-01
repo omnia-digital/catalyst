@@ -47,24 +47,6 @@ class GamesServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register config.
-     *
-     * @return void
-     */
-    protected function registerConfig()
-    {
-        $this->publishes([
-            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
-        ], 'config');
-        $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
-        );
-        $this->mergeConfigFrom(
-            module_path($this->moduleName, '/Config/igdb.php'), $this->moduleNameLower
-        );
-    }
-
-    /**
      * Register views.
      *
      * @return void
@@ -82,6 +64,34 @@ class GamesServiceProvider extends ServiceProvider
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [];
+    }
+
+    /**
+     * Register config.
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->publishes([
+            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
+        ], 'config');
+        $this->mergeConfigFrom(
+            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+        );
+        $this->mergeConfigFrom(
+            module_path($this->moduleName, '/Config/igdb.php'), $this->moduleNameLower
+        );
+    }
+
     private function getPublishableViewPaths(): array
     {
         $paths = [];
@@ -92,15 +102,5 @@ class GamesServiceProvider extends ServiceProvider
         }
 
         return $paths;
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [];
     }
 }

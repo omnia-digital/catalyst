@@ -11,8 +11,8 @@ use Modules\Livestream\Omnia;
 trait ManagesAvailablePlans
 {
     /**
-     * @param int|string $id Searches by the Id of the plan
-     * @param bool $teamPlans get Team Plans or user Plans
+     * @param  int|string  $id Searches by the Id of the plan
+     * @param  bool  $teamPlans get Team Plans or user Plans
      * @return Plan
      *
      * @throws Exception
@@ -55,7 +55,7 @@ trait ManagesAvailablePlans
     /**
      * Retrieve All Plans
      *
-     * @param bool $hidden Hides Plans by defualt that have attribute 'hidden' = true
+     * @param  bool  $hidden Hides Plans by defualt that have attribute 'hidden' = true
      * @return Collection|static
      */
     public static function allPlans($hidden = false)
@@ -206,13 +206,13 @@ trait ManagesAvailablePlans
     }
 
     /**
-     * @param string $planName Name of the plan that is shown to the user
-     * @param string $planId Billing id of plan used by Stripe/Braintree, etc.
-     * @param int $price Price of the plan
-     * @param Collection $features These are items that will be shown to users
-     * @param Collection $attributes These are application-level limitations and calculations used for each plan
-     * @param bool $makeYearPlan Whether or not to create the Year Plan as well
-     * @param int|string $yearMultiplier The amount of months to charge for on the Year Plan (this is a discount
+     * @param  string  $planName Name of the plan that is shown to the user
+     * @param  string  $planId Billing id of plan used by Stripe/Braintree, etc.
+     * @param  int  $price Price of the plan
+     * @param  Collection  $features These are items that will be shown to users
+     * @param  Collection  $attributes These are application-level limitations and calculations used for each plan
+     * @param  bool  $makeYearPlan Whether or not to create the Year Plan as well
+     * @param  int|string  $yearMultiplier The amount of months to charge for on the Year Plan (this is a discount
      *                                      given to encourage users/teams to upgrade to yearly plans)
      */
     private static function _createPlan(
@@ -238,7 +238,7 @@ trait ManagesAvailablePlans
             $plan->attributes($attributes->all());
         }
         // Team Members
-        if (!empty($attributes->has('max-team-members'))) {
+        if (! empty($attributes->has('max-team-members'))) {
             $plan->maxTeamMembers($attributes->get('max-team-members'));
         }
 
@@ -249,14 +249,14 @@ trait ManagesAvailablePlans
 
         if ($makeYearPlan === true) {
             $yrPlan = Spark::teamPlan($planName, $planId . '-yr');
-            if (!is_null($yearMultiplier)) {
+            if (! is_null($yearMultiplier)) {
                 $yrPlan->price($price * $yearMultiplier);
-            } elseif (!is_null($yearPrice)) {
+            } elseif (! is_null($yearPrice)) {
                 $yrPlan->price($yearPrice);
             }
             $yrPlan->yearly();
             // Team Members
-            if (!empty($maxTeamMembers)) {
+            if (! empty($maxTeamMembers)) {
                 $yrPlan->maxTeamMembers($attributes->get('max-team-members'));
             }
             // Features

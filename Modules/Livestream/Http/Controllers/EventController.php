@@ -33,7 +33,7 @@ class EventController extends LivestreamController
     /**
      * Store a newly created Account in storage.
      *
-     * @param EventRequest|Request $request
+     * @param  EventRequest|Request  $request
      * @return Response
      */
     public function store(EventRequest $request)
@@ -134,7 +134,7 @@ class EventController extends LivestreamController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Account $Account
+     * @param  Account  $Account
      * @return Response
      */
     public function edit(Account $account)
@@ -147,7 +147,7 @@ class EventController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param AccountRequest|Request $request
+     * @param  AccountRequest|Request  $request
      * @return Response
      */
     public function update(AccountRequest $request, Account $Account)
@@ -162,7 +162,7 @@ class EventController extends LivestreamController
     /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Response
      */
     public function destroy($id)

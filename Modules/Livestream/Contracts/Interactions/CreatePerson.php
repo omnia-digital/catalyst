@@ -11,7 +11,7 @@ interface CreatePerson
     /**
      * Get a validator instance for the request.
      *
-     * @param RegisterRequest $request
+     * @param  RegisterRequest  $request
      * @return Validator
      */
     public function validator($request);
@@ -19,7 +19,7 @@ interface CreatePerson
     /**
      * Create a new user instance in the database.
      *
-     * @param RegisterRequest $request
+     * @param  RegisterRequest  $request
      * @return Authenticatable
      */
     public function handle($request);

@@ -106,13 +106,13 @@ class JobPosition extends Model
     /**
      * Get featured jobs
      *
-     * @param null $inDays
+     * @param  null  $inDays
      * @return BelongsToMany
      */
     public function scopeFeatured($query, $inDays = null)
     {
-        return $query->whereHas('addons', fn($query) => $query->where('code', JobAddons::FEATURED_JOB))
-            ->when($inDays, fn($query) => $query->whereDate('created_at', '>=', now()->subDays($inDays)));
+        return $query->whereHas('addons', fn ($query) => $query->where('code', JobAddons::FEATURED_JOB))
+            ->when($inDays, fn ($query) => $query->whereDate('created_at', '>=', now()->subDays($inDays)));
     }
 
     /**

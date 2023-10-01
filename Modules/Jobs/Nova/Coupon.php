@@ -80,23 +80,23 @@ class Coupon extends Resource
             NovaDependencyContainer::make([
                 Number::make('Percent', 'discount')
                     ->rules('required', 'min:0', 'max:100', 'numeric')
-                    ->displayUsing(fn($value) => $value . '%'),
+                    ->displayUsing(fn ($value) => $value . '%'),
             ])->dependsOn('type', static::$model::PERCENT),
 
             NovaDependencyContainer::make([
                 Currency::make('Amount', 'discount')
                     ->rules('required', 'numeric')
-                    ->displayUsing(fn($value) => LaraContract::money($value)),
+                    ->displayUsing(fn ($value) => LaraContract::money($value)),
             ])->dependsOn('type', static::$model::FIXED),
 
             Text::make('Discount')
-                ->displayUsing(fn($value
+                ->displayUsing(fn ($value
                 ) => $this->type === static::$model::PERCENT ? $value . '%' : LaraContract::money($value))
                 ->onlyOnIndex(),
 
             DateTime::make('Expires At')->sortable(),
 
-            Text::make('Redeems', fn() => $this->redeems->count())->sortable(),
+            Text::make('Redeems', fn () => $this->redeems->count())->sortable(),
 
             HasMany::make('Redeems', 'redeems', RedeemedCoupon::class),
         ];

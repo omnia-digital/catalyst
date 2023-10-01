@@ -26,7 +26,7 @@ class AuthSocialController extends Controller
 
         // A Facebook account can be registered without an email,
         // so we need to redirect them to registration form to force user to fill them email
-        if (is_null($user->getEmail()) && !$socialAccount) {
+        if (is_null($user->getEmail()) && ! $socialAccount) {
             [$firstName, $lastName] = Omnia::extractFullName($user->getName());
 
             /// Put user data from social provider to session,

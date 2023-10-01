@@ -18,7 +18,6 @@ class FindTeams extends Component
             : 'social::components.current-week-team-calendar';
 
         $this->dispatch('startDateUpdated', start_date: $this->startDate)->to($component);
-
     }
 
     public function render()

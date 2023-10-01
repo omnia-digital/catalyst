@@ -9,9 +9,9 @@ class MissingParameterException extends OmniaRuntimeException
     /**
      * MissingParameterException constructor.
      *
-     * @param string|array $parameter
-     * @param string $message
-     * @param int $code
+     * @param  string|array  $parameter
+     * @param  string  $message
+     * @param  int  $code
      */
     public function __construct(
         $parameter,

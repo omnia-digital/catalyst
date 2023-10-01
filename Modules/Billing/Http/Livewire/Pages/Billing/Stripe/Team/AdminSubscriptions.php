@@ -24,7 +24,7 @@ class AdminSubscriptions extends Component
 
     public function updateOnboardingProcessCompleted()
     {
-        if (!$this->team->hasStripeConnectAccount()) {
+        if (! $this->team->hasStripeConnectAccount()) {
             return;
         }
 
@@ -40,7 +40,7 @@ class AdminSubscriptions extends Component
 
     public function connectStripe()
     {
-        if (!$this->team->hasStripeConnectAccount()) {
+        if (! $this->team->hasStripeConnectAccount()) {
             (new CreateStripeConnectAccountForTeamAction)->execute($this->team);
 
             $this->team->refresh();

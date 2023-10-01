@@ -16,16 +16,16 @@ trait HasPlan
         /** @var Feature $featureClass */
         $featureClass = app($feature);
 
-        if (!$featureClass instanceof Feature) {
+        if (! $featureClass instanceof Feature) {
             throw new Exception("{$feature} must be an instance of " . Feature::class . ' abstract class.');
         }
 
         $plan = $this->sparkPlan();
 
         // If billable doesn't have plan, probably he is on the trial.
-        if (!$plan) {
+        if (! $plan) {
             // This feature doesn't allow trial plan to use it.
-            if (!$featureClass->isAvailableOnTrial) {
+            if (! $featureClass->isAvailableOnTrial) {
                 return true;
             }
 
@@ -33,7 +33,7 @@ trait HasPlan
             // If not, always return false. Otherwise, check if billable reach the limit of trial plan.
             $maxResourcesOnTrial = $featureClass->maxResourcesOnTrial;
 
-            return !is_null($maxResourcesOnTrial) && $featureClass->usage() >= $maxResourcesOnTrial;
+            return ! is_null($maxResourcesOnTrial) && $featureClass->usage() >= $maxResourcesOnTrial;
         }
 
         return $featureClass->usage() >= $plan->options[$feature] ?? 0;
@@ -47,7 +47,7 @@ trait HasPlan
         $plan = $this->sparkPlan();
 
         // Free plan
-        if (!$plan) {
+        if (! $plan) {
             return 0;
         }
 

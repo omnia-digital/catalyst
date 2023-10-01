@@ -16,7 +16,7 @@ class EnsureTeamInfoIsFilled
     {
         $team = $request->user()->currentTeam;
 
-        if (!$team->hasInfoIsFilled()) {
+        if (! $team->hasInfoIsFilled()) {
             return redirect()->route('teams.show', [
                 'team' => $team,
                 'alert' => true,

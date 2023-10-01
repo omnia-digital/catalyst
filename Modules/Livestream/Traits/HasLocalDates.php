@@ -32,17 +32,17 @@ trait HasLocalDates
                 $livestreamAccount = Livestream::getLivestreamAccount();
             }
 
-            if (!empty($livestreamAccount)) {
+            if (! empty($livestreamAccount)) {
                 $team = $livestreamAccount->team;
             }
         }
 
-        if (!empty($team)) {
+        if (! empty($team)) {
             $timezone = Omnia::getTimezone(null, $team);
 
             foreach ($this->getDates() as $dateField) {
                 $date = new Carbon($this->{$dateField});
-                (!empty($timezone) ? $date->setTimezone($timezone) : null);
+                (! empty($timezone) ? $date->setTimezone($timezone) : null);
                 $data[$dateField] = $date->toDateTimeString();
             }
         }

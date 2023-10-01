@@ -32,7 +32,7 @@ class SaveMuxAsset implements ShouldQueue
 
     private function handleUploadedVideo(string $uploadId, array $payload): void
     {
-        if (!($episode = Episode::findByUploadId($uploadId))) {
+        if (! ($episode = Episode::findByUploadId($uploadId))) {
             Log::error('Cannot find uploaded episode with ID: ' . $uploadId);
 
             return;

@@ -16,7 +16,7 @@ class UpdateEpisodeInfo
     {
         $video = Video::where('video_source_id', $event->data['object']['id'])->first();
 
-        if (!$video) {
+        if (! $video) {
             throw new Exception('Could not find video with Mux Asset ID: ' . $event->data['object']['id']);
         }
 

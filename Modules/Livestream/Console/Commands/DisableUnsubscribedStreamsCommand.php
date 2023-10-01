@@ -19,7 +19,7 @@ class DisableUnsubscribedStreamsCommand extends Command
             ->get()
             ->each(function (Stream $stream) {
                 $billable = $stream->livestreamAccount->team;
-                if (!$billable->subscribed() && !$billable->onTrial()) {
+                if (! $billable->subscribed() && ! $billable->onTrial()) {
                     dispatch(new DisableStreamJob($stream));
 
                     $this->info('Disabling stream ' . $stream->id);

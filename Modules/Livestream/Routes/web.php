@@ -95,7 +95,7 @@ Route::name('livestream.')
                 Route::get('/playlists/{playlist}', UpdatePlaylist::class)
                     ->name('playlists.update');
 
-                Route::get('/settings', fn() => redirect()->route('settings.video'))
+                Route::get('/settings', fn () => redirect()->route('settings.video'))
                     ->name('settings');
                 Route::get('/settings/video', VideoSetting::class)
                     ->name('settings.video');

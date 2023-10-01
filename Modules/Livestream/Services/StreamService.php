@@ -26,13 +26,13 @@ class StreamService extends Service
     /**
      * StreamService constructor.
      *
-     * @param null $streamType
+     * @param  null  $streamType
      */
     public function __construct(LivestreamAccount $livestreamAccount, $player = null, $streamType = null)
     {
         $this->_livestreamAccount = $livestreamAccount;
         $this->_player = $player;
-        if (!is_null($streamType)) {
+        if (! is_null($streamType)) {
             $this->_streamType = $streamType;
         }
     }
@@ -40,7 +40,7 @@ class StreamService extends Service
     /**
      * Check if there are any live instances currently streaming for this account
      *
-     * @param LivestreamAccount $livestreamAccount
+     * @param  LivestreamAccount  $livestreamAccount
      * @return bool
      *
      * @throws Exception
@@ -64,13 +64,13 @@ class StreamService extends Service
             }
             $muxStream = $muxService->getLivestream($stream->stream_id);
 
-            if (!empty($muxStream)) {
+            if (! empty($muxStream)) {
                 $status = $muxStream->getStatus();
                 $stream->status = $status;
                 $stream->save();
             }
 
-            if (!empty($stream) && $stream->status == 'active') {
+            if (! empty($stream) && $stream->status == 'active') {
                 return true;
             } else {
                 return false;
@@ -141,9 +141,9 @@ class StreamService extends Service
         $instanceCollection = collect();
         try {
             // only grab live instances every second
-            if (!empty($this->_lastInstanceGrabTime)
+            if (! empty($this->_lastInstanceGrabTime)
                 && (now()->diffInSeconds($this->_lastInstanceGrabTime) < 3)
-                && !empty($this->_live_instances)) {
+                && ! empty($this->_live_instances)) {
                 return $this->_live_instances;
             }
             $this->_lastInstanceGrabTime = now();
@@ -173,7 +173,7 @@ class StreamService extends Service
 
             if ($resultXML !== false) {
                 $result = simplexml_load_string($resultXML);
-                if (!empty($result->InstanceList)) {
+                if (! empty($result->InstanceList)) {
                     foreach ($result->InstanceList as $key => $instance) {
                         $instanceCollection->push($instance);
                     }
@@ -194,7 +194,7 @@ class StreamService extends Service
     /**
      * Get Account Id based on if one is passed in. Get current Livestream Account Id if one is not passed in.
      *
-     * @param null $accountId
+     * @param  null  $accountId
      * @return mixed|null
      *
      * @throws Exception
@@ -203,7 +203,7 @@ class StreamService extends Service
     {
         Log::info('[START] - ' . __FUNCTION__);
         if (is_null($accountId)) {
-            if (!empty($this->_livestreamAccount)) {
+            if (! empty($this->_livestreamAccount)) {
                 $accountId = $this->_livestreamAccount->id;
             } else {
                 throw new Exception('Account Id not provided, and unable Current Livestream Account id');
@@ -219,7 +219,7 @@ class StreamService extends Service
     /**
      * Checks if given instance from Wowza Server is for given Account. Defaults to current account if null
      *
-     * @param null|int $accountId
+     * @param  null|int  $accountId
      * @return bool
      *
      * @throws Exception
@@ -228,7 +228,7 @@ class StreamService extends Service
     {
         $accountId = $this->getAccountId($accountId);
 
-        if ((int)$instance->Name === $accountId) {
+        if ((int) $instance->Name === $accountId) {
             $result = true;
         } else {
             $result = false;
@@ -243,7 +243,7 @@ class StreamService extends Service
      * Get The URL strings from current Livestreams based on streaming protocol and put in a collection
      * eg. Smil URL(/live/1/ngrp:1/auto_all/jwplayer.smil)
      *
-     * @param null|string $streamingProtocol rtmp or hls or null. If null, assume we want http/hls.
+     * @param  null|string  $streamingProtocol rtmp or hls or null. If null, assume we want http/hls.
      * @return Collection
      *
      * @throws Exception
@@ -260,7 +260,7 @@ class StreamService extends Service
             if ($accountLiveInstances->isNotEmpty()) {
                 $livestreamURL = $this->_getHttpSingleUrl();
             }
-        } elseif (!empty($this->_livestreamAccount) && !empty($this->_livestreamAccount->cdn_playback_url)) {
+        } elseif (! empty($this->_livestreamAccount) && ! empty($this->_livestreamAccount->cdn_playback_url)) {
             // Check if this livestreamAccount has a CDN playback URL and use that as the Livestream URL if they do
             $livestreamURL = $this->_livestreamAccount->cdn_playback_url;
         } else {
@@ -285,48 +285,6 @@ class StreamService extends Service
         }
 
         return $livestreamURL;
-    }
-
-    /**
-     * Get Live URL for single stream without group
-     *
-     * @return string
-     * example: https://597f40af4ba7f.streamlock.net:1940/live/33/33/auto/jwplayer.m3u8?DVR
-     * example: https://d3v4to64un7d7c.cloudfront.net:443/live/4/4/auto/jwplayer.m3u8
-     */
-    protected function _getHttpSingleUrl()
-    {
-        return $this->_getBaseWowzaLiveURL() . '/' . $this->_livestreamAccount->id . '/auto/' . $this->_getLiveUrlSuffix();
-    }
-
-    /**
-     * Get Base Wowza Live URL
-     *
-     * @return string
-     */
-    private function _getBaseWowzaLiveURL()
-    {
-        $url = 'http';
-
-        if (env('WOWZA_PLAYBACK_SSL')) {
-            $url .= 's';
-        }
-
-        $url .= '://' . env('WOWZA_PLAYBACK_DOMAIN') . ':' . env('WOWZA_PLAYBACK_PORT') . '/live/' . $this->_livestreamAccount->id;
-
-        return $url;
-    }
-
-    private function _getLiveUrlSuffix($vendor = 'jwplayer')
-    {
-        $suffix = '';
-        if ($vendor === 'jwplayer') {
-            $suffix .= 'jwplayer';
-        }
-
-        $suffix .= '.m3u8';
-
-        return $suffix;
     }
 
     //https://597f40af4ba7f.streamlock.net:1940/live/33/ngrp:33/auto_all/jwplayer.m3u8?DVR
@@ -377,11 +335,11 @@ class StreamService extends Service
     public function getStreamGroupsFromInstance(SimpleXMLElement $instance)
     {
         $LivestreamGroups = collect();
-        if (!empty($instance->StreamGroups)) {
+        if (! empty($instance->StreamGroups)) {
             $streamGroups = $instance->StreamGroups;
             foreach ($streamGroups as $streamGroup) {
                 foreach ($streamGroup as $streamGroupName) {
-                    $LivestreamGroups->push((string)$streamGroupName->GroupName);
+                    $LivestreamGroups->push((string) $streamGroupName->GroupName);
                 }
             }
         }
@@ -390,31 +348,9 @@ class StreamService extends Service
     }
 
     /**
-     * @return string
-     */
-    protected function _getRtmpGroupUrl($livestreamGroup)
-    {
-        return $this->getBaseWowzaLiveURLFromGroup($livestreamGroup) . '.smil' . $this->_getDVRSuffix();
-    }
-
-    private function _getDVRSuffix()
-    {
-        // added DVR so these accounts have DVR. This eventually needs to change to not include Free accounts.
-        return '?DVR';
-    }
-
-    /**
-     * @return string
-     */
-    protected function _getHttpGroupUrl($livestreamGroup)
-    {
-        return $this->_getBaseWowzaLiveURL() . '/ngrp:' . $livestreamGroup . '/' . $this->_getLiveUrlSuffix() . $this->_getDVRSuffix();
-    }
-
-    /**
      * Get DVR Manifest Links for Current Live Streams
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return array|string
      */
     public function getDVRLivestreams()
@@ -464,7 +400,7 @@ class StreamService extends Service
      * @TODO [Josh] - eventually need to figure out a way to only play streams that are associated with this player/playlist combo
      * for now we are going to play any stream that is live stream for this LivestreamAcount
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Collection | bool    Empty Collection if there are no live streams, collection with livestreams, or false on error
      *
      * @throws Exception
@@ -489,7 +425,7 @@ class StreamService extends Service
         }
 
         foreach ($accountInstances as $accountInstance) {
-            if (!empty($accountInstance->StreamGroups)) {
+            if (! empty($accountInstance->StreamGroups)) {
                 //			        $incomingStreams = $accountInstance->InstanceList->IncomingStreams;
                 $streamGroups = $accountInstance->StreamGroups;
                 // this separates separate streams coming in
@@ -505,17 +441,17 @@ class StreamService extends Service
                             case 'all':
                                 // this group has all the streams
                                 foreach ($transGroup->Members->string as $source) {
-                                    $allVideoSources->push((string)$source);
+                                    $allVideoSources->push((string) $source);
                                 }
                                 break;
                             case 'audio':
                                 foreach ($transGroup->Members->string as $source) {
-                                    $audioSources->push((string)$source);
+                                    $audioSources->push((string) $source);
                                 }
                                 break;
                             case 'mobile':
                                 foreach ($transGroup->Members->string as $source) {
-                                    $mobileVideoSources->push((string)$source);
+                                    $mobileVideoSources->push((string) $source);
                                 }
                                 break;
                         }
@@ -525,25 +461,25 @@ class StreamService extends Service
 
                     // Add the desired trans streams based on the StreamType
                     if ($this->_streamType === 'all') {
-                        if (!$allVideoSources->isEmpty()) {
+                        if (! $allVideoSources->isEmpty()) {
                             $streamCollection->put('all', $allVideoSources);
                             // Only add these two if they exist
-                            (!$audioSources->isEmpty() ? $streamCollection->put('audio', $audioSources) : null);
-                            (!$mobileVideoSources->isEmpty() ? $streamCollection->put('mobile',
+                            (! $audioSources->isEmpty() ? $streamCollection->put('audio', $audioSources) : null);
+                            (! $mobileVideoSources->isEmpty() ? $streamCollection->put('mobile',
                                 $mobileVideoSources) : null);
                         } else {
                             throw new Exception('Sorry, we couldn\'t find any live streams currently running');
                         }
                     }
                     if ($this->_streamType === 'audio') {
-                        if (!$audioSources->isEmpty()) {
+                        if (! $audioSources->isEmpty()) {
                             $streamCollection->put('audio', $audioSources);
                         } else {
                             throw new Exception('Sorry, we couldn\'t find any audio-only live streams currently running');
                         }
                     }
                     if ($this->_streamType === 'mobile') {
-                        if (!$mobileVideoSources->isEmpty()) {
+                        if (! $mobileVideoSources->isEmpty()) {
                             $streamCollection->put('mobile', $mobileVideoSources);
                         } else {
                             throw new Exception('Sorry, we couldn\'t find any mobile live streams currently running');
@@ -565,6 +501,70 @@ class StreamService extends Service
         //	            $currentLivestreams = $formattedPlaylist;
         //	        }
         return $currentLivestreams;
+    }
+
+    /**
+     * Get Live URL for single stream without group
+     *
+     * @return string
+     * example: https://597f40af4ba7f.streamlock.net:1940/live/33/33/auto/jwplayer.m3u8?DVR
+     * example: https://d3v4to64un7d7c.cloudfront.net:443/live/4/4/auto/jwplayer.m3u8
+     */
+    protected function _getHttpSingleUrl()
+    {
+        return $this->_getBaseWowzaLiveURL() . '/' . $this->_livestreamAccount->id . '/auto/' . $this->_getLiveUrlSuffix();
+    }
+
+    /**
+     * @return string
+     */
+    protected function _getRtmpGroupUrl($livestreamGroup)
+    {
+        return $this->getBaseWowzaLiveURLFromGroup($livestreamGroup) . '.smil' . $this->_getDVRSuffix();
+    }
+
+    /**
+     * @return string
+     */
+    protected function _getHttpGroupUrl($livestreamGroup)
+    {
+        return $this->_getBaseWowzaLiveURL() . '/ngrp:' . $livestreamGroup . '/' . $this->_getLiveUrlSuffix() . $this->_getDVRSuffix();
+    }
+
+    /**
+     * Get Base Wowza Live URL
+     *
+     * @return string
+     */
+    private function _getBaseWowzaLiveURL()
+    {
+        $url = 'http';
+
+        if (env('WOWZA_PLAYBACK_SSL')) {
+            $url .= 's';
+        }
+
+        $url .= '://' . env('WOWZA_PLAYBACK_DOMAIN') . ':' . env('WOWZA_PLAYBACK_PORT') . '/live/' . $this->_livestreamAccount->id;
+
+        return $url;
+    }
+
+    private function _getLiveUrlSuffix($vendor = 'jwplayer')
+    {
+        $suffix = '';
+        if ($vendor === 'jwplayer') {
+            $suffix .= 'jwplayer';
+        }
+
+        $suffix .= '.m3u8';
+
+        return $suffix;
+    }
+
+    private function _getDVRSuffix()
+    {
+        // added DVR so these accounts have DVR. This eventually needs to change to not include Free accounts.
+        return '?DVR';
     }
     //
     //

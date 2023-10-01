@@ -99,7 +99,7 @@ trait WithTeamManagement
 
     public function teamHasApplicationForm()
     {
-        return !is_null($this->team->applicationForm());
+        return ! is_null($this->team->applicationForm());
     }
 
     /**
@@ -159,7 +159,7 @@ trait WithTeamManagement
     /**
      * Add a new team member to a team with their userID.
      *
-     * @param string $userID
+     * @param  string  $userID
      * @return void
      */
     public function addTeamMemberUsingID($userID)
@@ -194,12 +194,12 @@ trait WithTeamManagement
     /**
      * Deny a pending team member's application.
      *
-     * @param int $applicationId
+     * @param  int  $applicationId
      * @return void
      */
     public function denyTeamApplication($applicationId)
     {
-        if (!empty($applicationId)) {
+        if (! empty($applicationId)) {
             TeamApplication::find($applicationId)->delete();
         }
 
@@ -210,12 +210,12 @@ trait WithTeamManagement
     /**
      * Cancel a pending team member invitation.
      *
-     * @param int $invitationId
+     * @param  int  $invitationId
      * @return void
      */
     public function cancelTeamInvitation($invitationId)
     {
-        if (!empty($invitationId)) {
+        if (! empty($invitationId)) {
             TeamInvitation::find($invitationId)->delete();
         }
 
@@ -245,7 +245,7 @@ trait WithTeamManagement
     /**
      * Confirm that the given team member should be removed.
      *
-     * @param int $userId
+     * @param  int  $userId
      * @return void
      */
     public function confirmTeamMemberRemoval($userId)
@@ -279,7 +279,7 @@ trait WithTeamManagement
     /**
      * Allow the given user's role to be managed.
      *
-     * @param int $userId
+     * @param  int  $userId
      * @return void
      */
     public function manageRole($userId)

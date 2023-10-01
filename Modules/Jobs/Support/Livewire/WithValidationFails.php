@@ -23,8 +23,8 @@ trait WithValidationFails
     }
 
     /**
-     * @param array $messages
-     * @param array $attributes
+     * @param  array  $messages
+     * @param  array  $attributes
      * @return array
      */
     public function validate($rules = null, $messages = [], $attributes = [])

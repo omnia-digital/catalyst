@@ -26,8 +26,8 @@ class DurationsChart extends Component
         return view('dashboard.durations-chart', [
             'labels' => $this->labels,
             'storageDurations' => $this->toChart($this->storageDurations),
-            'totalStorageDurations' => (float)$this->total($this->storageDurations),
-            'totalPreviousStorageDurations' => (float)$this->total(StorageDurationChart::previous()->make($this->selectedTime)),
+            'totalStorageDurations' => (float) $this->total($this->storageDurations),
+            'totalPreviousStorageDurations' => (float) $this->total(StorageDurationChart::previous()->make($this->selectedTime)),
         ]);
     }
 
@@ -48,6 +48,6 @@ class DurationsChart extends Component
 
     public function total($items)
     {
-        return $items->sum(fn($item) => $item['value']);
+        return $items->sum(fn ($item) => $item['value']);
     }
 }

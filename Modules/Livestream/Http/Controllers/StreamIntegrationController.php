@@ -16,7 +16,7 @@ class StreamIntegrationController extends LivestreamController
      * Return all current Stream Integratiosn for given or current livestreamAccont
      * (*a user cannot have a stream integration at this time*)
      *
-     * @param null $team_id
+     * @param  null  $team_id
      * @return Response
      */
     public function index($livestreamAccount = null)
@@ -50,7 +50,7 @@ class StreamIntegrationController extends LivestreamController
         $streamIntegration = StreamIntegration::where('livestream_account_id', '=',
             $request->livestream_account_id)->where('provider', '=', $request->provider)->get();
         // need to check if this stream integration already exists
-        if (!empty($streamIntegration) && $streamIntegration->isNotEmpty()) {
+        if (! empty($streamIntegration) && $streamIntegration->isNotEmpty()) {
             return $this->update($request, $streamIntegration->first()->id);
         } else {
             $request = $request->all();
@@ -120,7 +120,7 @@ class StreamIntegrationController extends LivestreamController
     /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Response
      *
      * @throws Exception

@@ -19,7 +19,7 @@ trait HasCoupon
     {
         $coupon = $coupon instanceof Coupon ? $coupon : Coupon::findByCode($coupon);
 
-        if (!$coupon) {
+        if (! $coupon) {
             throw new LogicException('Coupon is not found');
         }
 

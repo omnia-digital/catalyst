@@ -35,7 +35,7 @@ class LivestreamAccount extends Model
 
     public function getNotLiveImageUrlAttribute()
     {
-        if (!$this->not_live_image) {
+        if (! $this->not_live_image) {
             return null;
         }
 
@@ -48,7 +48,7 @@ class LivestreamAccount extends Model
 
     public function getBeforeLiveImageUrlAttribute()
     {
-        if (!$this->before_live_image) {
+        if (! $this->before_live_image) {
             return null;
         }
 

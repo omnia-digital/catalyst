@@ -12,10 +12,10 @@ trait UsesTimezones
      */
     public static function getTimezone($timezone = null, $team = null)
     {
-        if (!empty($timezone)) {
+        if (! empty($timezone)) {
             return $timezone;
         } else {
-            return !empty($team) ? $team->timezone : config('app.timezone');
+            return ! empty($team) ? $team->timezone : config('app.timezone');
         }
     }
 }

@@ -19,8 +19,8 @@ class LivestreamAccountRepository implements LivestreamRepositoryContract
     /**
      * Perform a basic LivestreamAccount search by name or e-mail address.
      *
-     * @param string $query
-     * @param Authenticatable|null $excludeLivestreamAccount
+     * @param  string  $query
+     * @param  Authenticatable|null  $excludeLivestreamAccount
      * @return Collection
      */
     public function search($query, $excludeLivestreamAccount = null)

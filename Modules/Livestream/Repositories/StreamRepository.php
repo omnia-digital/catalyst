@@ -14,8 +14,8 @@ class StreamRepository
     /**
      * Perform a basic Stream search.
      *
-     * @param string $query
-     * @param Authenticatable|null $excludeStream
+     * @param  string  $query
+     * @param  Authenticatable|null  $excludeStream
      * @return Collection
      */
     public function search($query, $excludeStream = null)

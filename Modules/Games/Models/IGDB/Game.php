@@ -39,7 +39,7 @@ class Game extends IGDBGame
     public function getVideos()
     {
         $videos = collect();
-        if (!$this->videos) {
+        if (! $this->videos) {
             return $videos;
         }
         foreach ($this->videos as $video) {

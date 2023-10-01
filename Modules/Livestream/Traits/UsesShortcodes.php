@@ -9,16 +9,16 @@ trait UsesShortcodes
     /**
      * Replace Shortcode in a string with the shortcodes value
      *
-     * @param null $team
+     * @param  null  $team
      * @return mixed
      */
     public static function replaceShortcodesInString(&$string, $team = null)
     {
-        if (!empty($string) && !str_contains($string, '[')) {
+        if (! empty($string) && ! str_contains($string, '[')) {
             return $string;
         }
 
-        if (!$team && $user = auth()->user()) {
+        if (! $team && $user = auth()->user()) {
             $team = $user->currentTeam;
         }
 
@@ -74,16 +74,16 @@ trait UsesShortcodes
     /**
      * Replace Shortcode in a string with the shortcodes value
      *
-     * @param null $team
+     * @param  null  $team
      * @return mixed
      */
     public static function replaceShortcodesInStringUsingGivenTimestamp(&$string, $time, $team = null)
     {
-        if (!empty($string) && !str_contains($string, '[')) {
+        if (! empty($string) && ! str_contains($string, '[')) {
             return $string;
         }
 
-        if (!$team && $user = auth()->user()) {
+        if (! $team && $user = auth()->user()) {
             $team = $user->currentTeam;
         }
 

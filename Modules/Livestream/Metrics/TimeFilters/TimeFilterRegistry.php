@@ -17,7 +17,7 @@ class TimeFilterRegistry
 
     public function get(string $name): TimeFilter
     {
-        if (!array_key_exists($name, $this->timeFilters)) {
+        if (! array_key_exists($name, $this->timeFilters)) {
             throw new InvalidArgumentException('Invalid time filter: ' . $name);
         }
 

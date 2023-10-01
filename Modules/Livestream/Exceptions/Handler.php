@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
      * Report or log an exception.
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param Exception $e
+     * @param  Exception  $e
      * @return void
      *
      * @throws Exception
@@ -76,8 +76,8 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param Request $request
-     * @param Exception $e
+     * @param  Request  $request
+     * @param  Exception  $e
      * @return Response
      */
     public function render($request, Throwable $e)

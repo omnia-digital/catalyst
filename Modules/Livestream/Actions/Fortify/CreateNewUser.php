@@ -62,6 +62,18 @@ class CreateNewUser implements CreatesNewUsers
         });
     }
 
+    /**
+     * @return false|Model
+     */
+    protected function createTeam(User $user)
+    {
+        return $user->ownedTeams()->save(Team::forceCreate([
+            'user_id' => $user->id,
+            'name' => Team::DEFAULT_TEAM_NAME,
+            'personal_team' => true,
+        ]));
+    }
+
     private function rules(bool $viaSocial): array
     {
         if ($viaSocial) {
@@ -75,17 +87,5 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ];
-    }
-
-    /**
-     * @return false|Model
-     */
-    protected function createTeam(User $user)
-    {
-        return $user->ownedTeams()->save(Team::forceCreate([
-            'user_id' => $user->id,
-            'name' => Team::DEFAULT_TEAM_NAME,
-            'personal_team' => true,
-        ]));
     }
 }

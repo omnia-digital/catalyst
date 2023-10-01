@@ -30,11 +30,11 @@ class StreamController extends LivestreamController
     {
         parent::__construct($request);
         $params = $request->all();
-        if ((!empty($params['account']) || !empty($params['livestreamAccount'])) && !empty($params['player'])) {
-            $streamType = !empty($params['streamType']) ? $params['streamType'] : null;
-            if (!empty($params['livestreamAccount'])) {
+        if ((! empty($params['account']) || ! empty($params['livestreamAccount'])) && ! empty($params['player'])) {
+            $streamType = ! empty($params['streamType']) ? $params['streamType'] : null;
+            if (! empty($params['livestreamAccount'])) {
                 $this->_livestreamAccount = LivestreamAccount::findOrFail($params['livestreamAccount']);
-            } elseif (!empty($params['account'])) {
+            } elseif (! empty($params['account'])) {
                 $this->_livestreamAccount = LivestreamAccount::findOrFail($params['account']); // @NOTE - keeping this for now for backwards compatibility
             }
             $this->_streamService = new StreamService($this->_livestreamAccount, Player::findOrFail($params['player']),
@@ -91,7 +91,7 @@ class StreamController extends LivestreamController
     /**
      * Destroy streams by id(s)
      *
-     * @param Stream $stream
+     * @param  Stream  $stream
      * @return JsonResponse success on destroy
      */
     public function destroy(LivestreamRequest $request, $ids)
@@ -135,7 +135,7 @@ class StreamController extends LivestreamController
         $playbackUrl = '';
         $imageUrl = '';
 
-        if (!empty($livestreamAccount->id)) {
+        if (! empty($livestreamAccount->id)) {
             $this->_livestreamAccount = $livestreamAccount;
         }
 
@@ -146,7 +146,7 @@ class StreamController extends LivestreamController
                 // Mux Live stream
                 // @note we are currently just pulling the first stream for this account, eventually we will need to take in which stream the request is looking for
                 $streams = $this->_livestreamAccount->streams;
-                if (!empty($streams) && $streams->isNotEmpty()) {
+                if (! empty($streams) && $streams->isNotEmpty()) {
                     $stream = $streams->first();
                     $playbackUrl = $stream->default_playback_url;
                 }
@@ -160,7 +160,7 @@ class StreamController extends LivestreamController
             $imageUrl = $this->_livestreamAccount->before_live_image;
         }
 
-        if (!empty($playbackUrl)) {
+        if (! empty($playbackUrl)) {
             $response = [
                 'playback_url' => $playbackUrl,
                 'image_url' => $imageUrl,
@@ -190,7 +190,7 @@ class StreamController extends LivestreamController
      */
     public function stopStream(Request $request)
     {
-        if (!Omnia::developer($request->user()->email)) {
+        if (! Omnia::developer($request->user()->email)) {
             abort(403);
         }
 
@@ -232,7 +232,7 @@ class StreamController extends LivestreamController
         $muxStream = (new MuxService)->getLiveApi();
         $newStreamKey = $muxStream->resetStreamKey($request->stream_id);
 
-        if (!isset($newStreamKey['data']['stream_key'])) {
+        if (! isset($newStreamKey['data']['stream_key'])) {
             return response()->json([
                 'success' => false,
                 'message' => 'Cannot get the new stream key.',

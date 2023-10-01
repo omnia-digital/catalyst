@@ -26,7 +26,7 @@ class JobFailedNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -37,13 +37,13 @@ class JobFailedNotification extends Notification
     /**
      * Get the Slack representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return SlackMessage
      */
     public function toSlack($notifiable)
     {
-        $event_id = (!empty($this->event['id']) ? $this->event['id'] : null);
-        $event_name = (!empty($this->event['name']) ? $this->event['name'] : null);
+        $event_id = (! empty($this->event['id']) ? $this->event['id'] : null);
+        $event_name = (! empty($this->event['name']) ? $this->event['name'] : null);
         Log::info('Sent slack notification for job #' . $event_id . ' for ' . $event_name);
 
         return (new SlackMessage)
@@ -68,7 +68,7 @@ class JobFailedNotification extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

@@ -23,7 +23,7 @@ class CreateTeamPlanAction
 
     public function execute(Team $team, string $name, ?string $description = null)
     {
-        if (!$team->hasStripeConnectAccount()) {
+        if (! $team->hasStripeConnectAccount()) {
             throw new Exception('This team does not have a Stripe Connect account!');
         }
 

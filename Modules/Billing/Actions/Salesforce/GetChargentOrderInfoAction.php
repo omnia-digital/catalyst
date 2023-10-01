@@ -10,7 +10,7 @@ class GetChargentOrderInfoAction
 {
     public function execute(ChargentSubscription $subscription)
     {
-        if (!$subscription?->chargent_order_id || !config('forrest.credentials.consumerKey')) {
+        if (! $subscription?->chargent_order_id || ! config('forrest.credentials.consumerKey')) {
             return null;
         }
 

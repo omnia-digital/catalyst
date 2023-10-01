@@ -57,7 +57,7 @@ class ChannelController extends LivestreamController
      * Show a channel for a specific Team
      * Return all the Channel Settings for a specific Team
      *
-     * @param int|string $identifier LivestreamAccountId or slug
+     * @param  int|string  $identifier LivestreamAccountId or slug
      * @return array
      */
     public function show($identifier)
@@ -77,7 +77,7 @@ class ChannelController extends LivestreamController
                 if (empty($livestreamAccount)) {
                     // Check for Team slug
                     $team = Team::where('team_slug', $identifier)->first();
-                    if (!empty($team)) {
+                    if (! empty($team)) {
                         $livestreamAccount = $team->livestreamAccount;
                     } else {
                         throw new ChannelNotFoundException;

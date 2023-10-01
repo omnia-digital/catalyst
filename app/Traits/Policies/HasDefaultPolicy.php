@@ -4,15 +4,12 @@ namespace App\Traits\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use JetBrains\PhpStorm\Pure;
 
 trait HasDefaultPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * @param User $user
-     * @param $ability
      * @return bool|void|null
      */
     public function before(User $user, $ability)

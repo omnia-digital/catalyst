@@ -10,7 +10,7 @@ class NotifyTeamOwnerNewSubscriptionCreated
     /**
      * Handle the event.
      *
-     * @param TeamMemberSubscriptionCreatedEvent $event
+     * @param  TeamMemberSubscriptionCreatedEvent  $event
      * @return void
      */
     public function handle($event)

@@ -19,11 +19,6 @@ class MainNavigationMenu extends Component
         'refresh-navigation-menu' => '$refresh',
     ];
 
-    public function mount()
-    {
-        $this->navigation = self::getDefaultNavItems();
-    }
-
     public static function getDefaultNavItems()
     {
         return [
@@ -65,24 +60,24 @@ class MainNavigationMenu extends Component
             //                'module'  => 'games',
             //                'current' => false
             //            ],
-//            [
-//                'label' => Trans::get('Jobs'),
-//                'name' => 'jobs.home',
-//                'icon' => 'heroicon-o-briefcase',
-//                'module' => 'jobs',
-//            ],
-//            [
-//                'label' => 'Advice',
-//                'name' => 'advice.home',
-//                'icon' => 'fa-duotone fa-comments-question',
-//                'module' => 'advice',
-//            ],
-//            [
-//                'label' => Trans::get('CRM'),
-//                'name' => 'filament.pages.dashboard',
-//                'icon' => 'fa-duotone fa-rectangle-list',
-//                'module' => 'crm',
-//            ],
+            //            [
+            //                'label' => Trans::get('Jobs'),
+            //                'name' => 'jobs.home',
+            //                'icon' => 'heroicon-o-briefcase',
+            //                'module' => 'jobs',
+            //            ],
+            //            [
+            //                'label' => 'Advice',
+            //                'name' => 'advice.home',
+            //                'icon' => 'fa-duotone fa-comments-question',
+            //                'module' => 'advice',
+            //            ],
+            //            [
+            //                'label' => Trans::get('CRM'),
+            //                'name' => 'filament.pages.dashboard',
+            //                'icon' => 'fa-duotone fa-rectangle-list',
+            //                'module' => 'crm',
+            //            ],
             //            [
             //                'label'   => 'Learn',
             //                'name'    => 'advice.home',
@@ -105,6 +100,11 @@ class MainNavigationMenu extends Component
                 'module' => 'livestream',
             ],
         ];
+    }
+
+    public function mount()
+    {
+        $this->navigation = self::getDefaultNavItems();
     }
 
     /**

@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         $panelUserRole = Utils::getRoleModel()::firstOrCreate([
             'name' => 'panel_user',
-            'guard_name' => 'web'
+            'guard_name' => 'web',
         ]);
         User::truncate();
 

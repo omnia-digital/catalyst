@@ -19,7 +19,7 @@ class Media extends SpatieMedia
 
     public function getStaticUrl(): ?string
     {
-        if (!$this->isStatic()) {
+        if (! $this->isStatic()) {
             return null;
         }
 
@@ -28,6 +28,6 @@ class Media extends SpatieMedia
 
     public function isStatic(): bool
     {
-        return (bool)$this->is_static;
+        return (bool) $this->is_static;
     }
 }

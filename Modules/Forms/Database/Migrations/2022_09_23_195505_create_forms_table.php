@@ -9,7 +9,8 @@ use Modules\Forms\Models\Form;
 use Modules\Forms\Models\FormTemplate;
 use Modules\Forms\Models\FormType;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *

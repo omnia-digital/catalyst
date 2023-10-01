@@ -30,22 +30,22 @@ abstract class BaseNotification extends Notification implements ShouldQueue
         }
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param mixed $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return static::getChannels();
-    }
-
     public static function getChannels()
     {
         if (static::$channels) {
             return static::$channels;
         }
+    }
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return static::getChannels();
     }
 
     /**

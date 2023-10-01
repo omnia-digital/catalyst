@@ -12,6 +12,7 @@ use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Support\Livewire\WithPostEditor;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
+use Throwable;
 
 class NewsFeedEditor extends Component
 {
@@ -25,7 +26,7 @@ class NewsFeedEditor extends Component
     public ?Team $team = null;
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     #[On('post-editor:submitted')]
     public function createPost($editorId, $content, $images): void

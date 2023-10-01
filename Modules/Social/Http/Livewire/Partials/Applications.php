@@ -23,7 +23,7 @@ class Applications extends Component
     /**
      * Accept Invitation and add the current user to a team.
      *
-     * @param string $invitationID
+     * @param  string  $invitationID
      * @return void
      */
     public function addTeamMember($invitationID)
@@ -48,12 +48,12 @@ class Applications extends Component
     /**
      * Cancel a pending team member invitation.
      *
-     * @param int $invitationID
+     * @param  int  $invitationID
      * @return void
      */
     public function cancelTeamInvitation($invitationID)
     {
-        if (!empty($invitationID)) {
+        if (! empty($invitationID)) {
             TeamInvitation::find($invitationID)->delete();
         }
 
@@ -68,7 +68,7 @@ class Applications extends Component
      */
     public function removeApplication($applicationID)
     {
-        if (!empty($applicationID)) {
+        if (! empty($applicationID)) {
             TeamApplication::find($applicationID)->delete();
         }
 

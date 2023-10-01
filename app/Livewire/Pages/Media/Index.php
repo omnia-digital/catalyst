@@ -59,7 +59,7 @@ class Index extends Component
     {
         $this->useCachedRows();
 
-        $this->showFilters = !$this->showFilters;
+        $this->showFilters = ! $this->showFilters;
     }
 
     public function resetFilters()
@@ -119,14 +119,6 @@ class Index extends Component
         $this->resetPage();
 
         $this->success('Media added successfully');
-    }
-
-    private function emitImagesSet(): void
-    {
-        $this->dispatch('media-library:image-set',
-            id: $this->editorId,
-            images: $this->images,
-        );
     }
 
     public function saveMedia()
@@ -193,9 +185,9 @@ class Index extends Component
                 return $q->where('user_id', auth()->id());
             })
             ->when($this->filters['date_min'],
-                fn($query, $date) => $query->where('created_at', '>=', Carbon::parse($date)))
+                fn ($query, $date) => $query->where('created_at', '>=', Carbon::parse($date)))
             ->when($this->filters['date_max'],
-                fn($query, $date) => $query->where('created_at', '<=', Carbon::parse($date)))
+                fn ($query, $date) => $query->where('created_at', '<=', Carbon::parse($date)))
             ->when($this->filters['search'], function ($query, $search) {
                 return $query
                     ->whereHasMorph('model', '*', function ($query, $type) use ($search) {
@@ -232,10 +224,18 @@ class Index extends Component
             'editingMedia.name' => ['nullable', 'max:254'],
             'editingMedia.model_type' => [
                 'string',
-                'in:' . collect($this->availableModelTypes)->map(fn($type, $key) => $key)->implode(',')
+                'in:' . collect($this->availableModelTypes)->map(fn ($type, $key) => $key)->implode(','),
             ],
             'editingMedia.model_id' => ['integer'],
             'editingMedia.collection_name' => ['string'],
         ];
+    }
+
+    private function emitImagesSet(): void
+    {
+        $this->dispatch('media-library:image-set',
+            id: $this->editorId,
+            images: $this->images,
+        );
     }
 }

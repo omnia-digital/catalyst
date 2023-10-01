@@ -11,6 +11,7 @@ use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use Modules\Social\Notifications\NewCommentNotification;
 use Modules\Social\Support\Livewire\WithPostEditor;
+use Throwable;
 
 class RepliesModal extends Component
 {
@@ -41,7 +42,7 @@ class RepliesModal extends Component
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     #[On('post-editor:submitted')]
     public function saveComment($editorId, $content, $images): void

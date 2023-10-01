@@ -56,7 +56,7 @@ class RedeemedCoupon extends Resource
 
             TextCopy::make('Code')->sortable(),
 
-            Text::make('Type', 'type', fn($value) => ucfirst($value))->sortable(),
+            Text::make('Type', 'type', fn ($value) => ucfirst($value))->sortable(),
 
             Currency::make('Original Price')->sortable(),
 

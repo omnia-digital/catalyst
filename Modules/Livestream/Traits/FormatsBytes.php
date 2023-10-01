@@ -7,14 +7,14 @@ trait FormatsBytes
     /**
      * Format bytes to kb, mb, gb, tb
      *
-     * @param int $size
-     * @param int $precision
+     * @param  int  $size
+     * @param  int  $precision
      * @return int
      */
     public static function formatBytes($size, $precision = 2)
     {
         if ($size > 0) {
-            $size = (int)$size;
+            $size = (int) $size;
             $base = log($size) / log(1024);
             $suffixes = [' bytes', ' KB', ' MB', ' GB', ' TB'];
 

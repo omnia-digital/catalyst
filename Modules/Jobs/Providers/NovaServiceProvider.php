@@ -47,24 +47,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     }
 
     /**
-     * Set timezone for the application.
-     */
-    private function setUserTimezone(): void
-    {
-        Nova::userTimezone(function () {
-            return 'UTC';
-        });
-    }
-
-    /**
-     * Set locate for the application.
-     */
-    private function setLocale(): void
-    {
-        App::setLocale(config('app.locale'));
-    }
-
-    /**
      * Get the tools that should be listed in the Nova sidebar.
      *
      * @return array
@@ -79,6 +61,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     }
 
     /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
      * Register the Nova routes.
      *
      * @return void
@@ -89,16 +81,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ->withAuthenticationRoutes()
             ->withPasswordResetRoutes()
             ->register();
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 
     /**
@@ -135,5 +117,23 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function dashboards()
     {
         return [];
+    }
+
+    /**
+     * Set timezone for the application.
+     */
+    private function setUserTimezone(): void
+    {
+        Nova::userTimezone(function () {
+            return 'UTC';
+        });
+    }
+
+    /**
+     * Set locate for the application.
+     */
+    private function setLocale(): void
+    {
+        App::setLocale(config('app.locale'));
     }
 }

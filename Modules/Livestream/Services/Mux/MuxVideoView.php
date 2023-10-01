@@ -42,11 +42,11 @@ class MuxVideoView
         $videoViews = [];
         $filters = [];
 
-        if (!is_null($livestreamAccountId)) {
+        if (! is_null($livestreamAccountId)) {
             array_push($filters, 'sub_property_id:' . $livestreamAccountId);
         }
 
-        if (!is_null($muxAssetId)) {
+        if (! is_null($muxAssetId)) {
             array_push($filters, 'asset_id:' . $muxAssetId);
         }
 
@@ -67,7 +67,7 @@ class MuxVideoView
 
             $videoViews = array_merge($videoViews, $result['data']);
             $page = $page + 1;
-        } while (!empty($result['data']));
+        } while (! empty($result['data']));
 
         return collect(array_map(function (AbridgedVideoView $item) {
             $videoView = new VideoView;

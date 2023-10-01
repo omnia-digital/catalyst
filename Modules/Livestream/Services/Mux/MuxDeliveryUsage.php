@@ -34,7 +34,7 @@ class MuxDeliveryUsage
     /**
      * Get all delivery usage data.
      *
-     * @param array $timeframe See the options format at https://docs.mux.com/reference#delivery-usage
+     * @param  array  $timeframe See the options format at https://docs.mux.com/reference#delivery-usage
      *
      * @throws ApiException
      */
@@ -50,12 +50,12 @@ class MuxDeliveryUsage
             );
 
             $result = $result->merge(
-                collect($deliveryUsage['data'])->map(fn(DeliveryReport $deliveryReport
-                ) => (array)$deliveryReport->jsonSerialize())
+                collect($deliveryUsage['data'])->map(fn (DeliveryReport $deliveryReport
+                ) => (array) $deliveryReport->jsonSerialize())
             );
 
             $page = $page + 1;
-        } while (!empty($deliveryUsage['data']));
+        } while (! empty($deliveryUsage['data']));
 
         return $result;
     }
@@ -72,7 +72,7 @@ class MuxDeliveryUsage
     }
 
     /**
-     * @param array $timeframe See the options format at https://docs.mux.com/reference#delivery-usage
+     * @param  array  $timeframe See the options format at https://docs.mux.com/reference#delivery-usage
      *
      * @throws ApiException
      */

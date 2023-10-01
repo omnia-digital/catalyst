@@ -9,7 +9,7 @@ use Modules\Livestream\Omnia;
 trait ManagesAvailableAddons
 {
     /**
-     * @param int|string $id Searches by the Title of the Addon
+     * @param  int|string  $id Searches by the Title of the Addon
      * @return Plan
      *
      * @throws Exception

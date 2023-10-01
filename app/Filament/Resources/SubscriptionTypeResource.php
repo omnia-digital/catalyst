@@ -27,7 +27,7 @@ class SubscriptionTypeResource extends Resource
                     ->minValue('500')
                     ->label('Amount (in cents)')
                     ->helperText('Please write the amount in cents. For example: For $55.25, write 5525.')
-                    ->mask(fn(Forms\Components\TextInput\Mask $mask) => $mask
+                    ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask
                         ->numeric()
                         ->integer()
                     ),

@@ -12,7 +12,7 @@ class GameCardSmall extends Component
     public function mount($game_id = null, Game $game = null)
     {
         if ($game_id) {
-            $this->game = Game::find((int)$game_id);
+            $this->game = Game::find((int) $game_id);
         } elseif ($game) {
             $this->game = $game;
         }

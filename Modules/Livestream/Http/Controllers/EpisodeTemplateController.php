@@ -29,7 +29,7 @@ class EpisodeTemplateController extends LivestreamController
      */
     public function index()
     {
-        if (!empty($this->_livestreamAccount)) {
+        if (! empty($this->_livestreamAccount)) {
             $episodeTemplates = $this->_livestreamAccount->episodeTemplates;
             $episodeTemplates->load('LivestreamAccount');
         } else {
@@ -50,7 +50,7 @@ class EpisodeTemplateController extends LivestreamController
         $request = $request->all();
         $episode = new Episode;
 
-        if (!empty($request['episode'])) {
+        if (! empty($request['episode'])) {
             $episode->fill($request['episode']);
         }
         $episodeTemplate = EpisodeTemplate::create([
@@ -117,7 +117,7 @@ class EpisodeTemplateController extends LivestreamController
     /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return int
      *
      * @throws Exception
@@ -134,7 +134,7 @@ class EpisodeTemplateController extends LivestreamController
                     flash('Episode deleted: ' . $count);
 
                     return $count;
-                    //		    return redirect('/livestream');
+                //		    return redirect('/livestream');
                 } else {
                     //	        throw new Exception("You must assign another Episode Template as the <b>Default</b> before you can delete this one");
                     throw new Exception('You must assign another Episode Template as the <b>Default</b> before you can delete this one');
@@ -159,7 +159,7 @@ class EpisodeTemplateController extends LivestreamController
      */
     public function changeDefaultEpisodeTemplate($id)
     {
-        $this->_livestreamAccount->default_episode_template_id = (int)$id;
+        $this->_livestreamAccount->default_episode_template_id = (int) $id;
         $this->_livestreamAccount->save();
 
         $response = [

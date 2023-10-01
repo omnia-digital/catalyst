@@ -39,7 +39,7 @@ class StreamIntegration extends Model
 
     public function setEnabledAttribute($value)
     {
-        $this->attributes['enabled'] = (int)$value;
+        $this->attributes['enabled'] = (int) $value;
     }
 
     /**

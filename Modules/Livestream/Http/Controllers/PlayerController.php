@@ -37,7 +37,7 @@ class PlayerController extends LivestreamController
     /**
      * Store a newly created Player in storage.
      *
-     * @param PlayerRequest|Request $request
+     * @param  PlayerRequest|Request  $request
      * @return Response
      */
     public function store(PlayerRequest $request)
@@ -92,7 +92,7 @@ class PlayerController extends LivestreamController
             if ($livestreamAccount->mux_livestream_active == true) {
                 // Mux Live stream
                 $streams = $livestreamAccount->streams;
-                if (!empty($streams) && $streams->isNotEmpty()) {
+                if (! empty($streams) && $streams->isNotEmpty()) {
                     $stream = $streams->first();
                     $playbackUrl = $stream->default_playback_url;
                 }
@@ -164,7 +164,7 @@ class PlayerController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param PlayerRequest|Request $request
+     * @param  PlayerRequest|Request  $request
      * @return Response
      */
     public function update(PlayerRequest $request, Player $player)
@@ -184,7 +184,7 @@ class PlayerController extends LivestreamController
     /**
      * Remove the Player
      *
-     * @param int $id
+     * @param  int  $id
      * @return Response
      */
     public function destroy($id)

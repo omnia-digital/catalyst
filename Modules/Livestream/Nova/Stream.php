@@ -74,8 +74,8 @@ class Stream extends Resource
     public function actions(Request $request)
     {
         return [
-            (new EnableStream)->canRun(fn() => true),
-            (new DisableStream)->canRun(fn() => true),
+            (new EnableStream)->canRun(fn () => true),
+            (new DisableStream)->canRun(fn () => true),
         ];
     }
 }

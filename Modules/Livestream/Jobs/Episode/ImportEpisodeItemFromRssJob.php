@@ -41,14 +41,14 @@ class ImportEpisodeItemFromRssJob implements ShouldQueue
         DB::transaction(function () {
             // If episode exists, don't create anymore, just upload the video for that episode.
             // Otherwise, create new episode and then upload video.
-            if (!$this->episode) {
+            if (! $this->episode) {
                 $this->episode = (new CreateNewEpisode)->execute(
                     collect($this->episodeData)->only([
                         'title',
                         'date_recorded',
                         'description',
                         'main_passage',
-                        'main_speaker_id'
+                        'main_speaker_id',
                     ])->all(),
                     $this->livestreamAccount
                 );

@@ -57,7 +57,7 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag)
     {
-        return !$tag->jobs->count();
+        return ! $tag->jobs->count();
     }
 
     /**

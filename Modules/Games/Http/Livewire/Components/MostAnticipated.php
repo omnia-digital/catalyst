@@ -20,6 +20,13 @@ class MostAnticipated extends Component
         return $this->formatForView((new GamesAction)->mostAnticipated());
     }
 
+    public function render()
+    {
+        return view('games::livewire.components.most-anticipated', [
+            'mostAnticipated' => $this->readyToLoad ? $this->mostAnticipated : collect(),
+        ]);
+    }
+
     private function formatForView($games)
     {
         return collect($games)->map(function ($game) {
@@ -28,12 +35,5 @@ class MostAnticipated extends Component
                 'releaseDate' => Carbon::parse($game['first_release_date'])->format('M d, Y'),
             ]);
         })->toArray();
-    }
-
-    public function render()
-    {
-        return view('games::livewire.components.most-anticipated', [
-            'mostAnticipated' => $this->readyToLoad ? $this->mostAnticipated : collect(),
-        ]);
     }
 }

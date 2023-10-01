@@ -137,7 +137,7 @@ class EpisodeInfoPanel extends Component
     {
         $this->authorize('download', $this->episode);
 
-        if (!($url = $this->episode->video->getDownloadUrl())) {
+        if (! ($url = $this->episode->video->getDownloadUrl())) {
             $this->error('Converting file to be able to be downloaded. The time this process takes depends on the length of the video. If the video is over 1 hour long, please check back in a few hours.');
 
             return;
@@ -155,7 +155,7 @@ class EpisodeInfoPanel extends Component
     {
         $media = Media::findByUuid($mediaUuid);
 
-        if (!$media) {
+        if (! $media) {
             $this->error('Cannot find the attachment object.');
 
             return;
@@ -166,7 +166,7 @@ class EpisodeInfoPanel extends Component
                 ->getDriver()
                 ->readStream('/' . $media->id . '/' . $media->file_name);
 
-            return Response::stream(fn() => fpassthru($file), 200, [
+            return Response::stream(fn () => fpassthru($file), 200, [
                 'Content-Type' => $media->mime_type,
                 'Content-Disposition' => 'attachment; filename="' . $media->name . '"',
                 'Content-Length' => $media->size,
@@ -186,7 +186,7 @@ class EpisodeInfoPanel extends Component
     {
         $media = Media::findByUuid($mediaUuid);
 
-        if (!$media) {
+        if (! $media) {
             $this->error('Cannot find the attachment object.');
 
             return;

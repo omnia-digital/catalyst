@@ -9,8 +9,8 @@ use Modules\Livestream\Omnia;
 trait ManagesAvailableBundles
 {
     /**
-     * @param int|string $id Searches by the Id of the plan
-     * @param bool $teamPlans
+     * @param  int|string  $id Searches by the Id of the plan
+     * @param  bool  $teamPlans
      * @return Plan
      *
      * @throws Exception

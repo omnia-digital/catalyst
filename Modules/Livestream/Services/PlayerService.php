@@ -17,8 +17,8 @@ class PlayerService extends Service
     /**
      * Create a Correctly Formatted Playlist with current Live and Vod streams
      *
-     * @param StreamService $streamService
-     * @param string $type
+     * @param  StreamService  $streamService
+     * @param  string  $type
      * @return string
      */
     public function getPlayerPlaylist(
@@ -49,16 +49,8 @@ class PlayerService extends Service
         return $playlist;
     }
 
-    private function _addLivePlaylistItemsToPlaylist(&$playlist, $LivestreamAccount, $streamService, $streamingProtocol)
-    {
-        $livePlaylistItems = $this->getLivePlaylistItems($LivestreamAccount, $streamService, $streamingProtocol);
-        foreach ($livePlaylistItems as $item) {
-            $playlist->push($item);
-        }
-    }
-
     /**
-     * @param null $streamingProtocol
+     * @param  null  $streamingProtocol
      * @return string
      *
      * @throws Exception
@@ -149,11 +141,47 @@ class PlayerService extends Service
     }
 
     /**
+     * @param  null  $streamingProtocol
+     * @return Collection collection of item objects that go in the Player Playlist array
+     *
+     * @throws Exception
+     */
+    public function getVodPlaylistItems($livestream_account, $streamingProtocol = null)
+    {
+        try {
+            $allEpisodesForAccount = $livestream_account->episodes()->get()->reverse(); // reverse to put most recent episode first
+
+            $activePlanId = $livestream_account->team->currentActivePlan()->id;
+
+            if ($activePlanId === 'livestream-free') {
+                $unlocked_episodes = $allEpisodesForAccount->take(1);
+                $episodesForPlaylist = $unlocked_episodes;
+            } else {
+                $episodesForPlaylist = $allEpisodesForAccount;
+            }
+
+            return $this->getPlayerPlaylistItems($episodesForPlaylist, $streamingProtocol);
+        } catch (Exception $e) {
+            $msg = 'Could not get VOD Playlist' . $e->getMessage();
+            Log::error($msg);
+            throw $e;
+        }
+    }
+
+    private function _addLivePlaylistItemsToPlaylist(&$playlist, $LivestreamAccount, $streamService, $streamingProtocol)
+    {
+        $livePlaylistItems = $this->getLivePlaylistItems($LivestreamAccount, $streamService, $streamingProtocol);
+        foreach ($livePlaylistItems as $item) {
+            $playlist->push($item);
+        }
+    }
+
+    /**
      * Get Player Playlist Item(s) from one Episode
      * Returns a collection with one or more player playlist items
      *
-     * @param null $streamingProtocol
-     * @param bool $includeTransVideos
+     * @param  null  $streamingProtocol
+     * @param  bool  $includeTransVideos
      * @return Collection
      */
     private function _getPlayerPlaylistItemsFromEpisode($episode, $streamingProtocol, $includeTransVideos)
@@ -186,9 +214,9 @@ class PlayerService extends Service
      * Get Player Playlist Item(s) from one Video
      * Returns a collection with one or more player playlist items
      *
-     * @param null $title
-     * @param string $streamingProtocol
-     * @param bool $includeTransVideos
+     * @param  null  $title
+     * @param  string  $streamingProtocol
+     * @param  bool  $includeTransVideos
      * @return Collection
      */
     private function _getPlayerPlaylistItemsFromVideo($video, $title, $streamingProtocol, $includeTransVideos = true)
@@ -200,7 +228,7 @@ class PlayerService extends Service
 
         $playlistItems = collect();
         $playlistItems->put('title',
-            (!empty($title) ? $title : $video->title . ((!empty($episode)) ? ' - ' . $this->formatTitleDate($episode->date_recorded) : '')));
+            (! empty($title) ? $title : $video->title . ((! empty($episode)) ? ' - ' . $this->formatTitleDate($episode->date_recorded) : '')));
 
         // if $streamProtocol is null, assume we want both RTMP and HTTP
         if (is_null($streamingProtocol)) {
@@ -212,7 +240,7 @@ class PlayerService extends Service
         $playlistItemSources->push($this->_getSourceFromVideo($base_url, $video, $streamingProtocol));
 
         // Trans Videos
-        if ($includeTransVideos === true & !$video->transVideos->isEmpty()) {
+        if ($includeTransVideos === true & ! $video->transVideos->isEmpty()) {
             foreach ($video->transVideos as $transVideo) {
                 $transSourceObject = $this->_getSourceFromTransVideo($base_url, $transVideo, $video,
                     $streamingProtocol);
@@ -240,7 +268,7 @@ class PlayerService extends Service
 
         // Label
         $sourceObject->put('label',
-            $videoObject->title . (!empty($videoObject->episode) ? ' - ' . $this->formatTitleDate($videoObject->episode->date_recorded) : ''));
+            $videoObject->title . (! empty($videoObject->episode) ? ' - ' . $this->formatTitleDate($videoObject->episode->date_recorded) : ''));
 
         // File
         $file_url = '';
@@ -252,7 +280,7 @@ class PlayerService extends Service
 
         // Image
         $imageUrl = '';
-        if (!empty($thumbnail_url)) {
+        if (! empty($thumbnail_url)) {
             $imageUrl = 'http';
             $imageUrl = $this->_getUrlProtocolFromStreamingProtocol($imageUrl);
             $imageUrl .= '://' . $thumbnail_url;
@@ -296,8 +324,8 @@ class PlayerService extends Service
     /**
      * Format a Collection of string objects for the JWPlayer Playlist
      *
-     * @param null $videoName
-     * @param null $streamingProtocol
+     * @param  null  $videoName
+     * @param  null  $streamingProtocol
      * @return Collection
      *
      * @internal param bool $includeTransVideos
@@ -306,7 +334,7 @@ class PlayerService extends Service
     {
         $playlistItem = collect();
         if (is_string($stringPath)) {
-            if (!is_null($videoName)) {
+            if (! is_null($videoName)) {
                 $playlistItem->put('title', $videoName);
             }
             $file = collect();
@@ -322,34 +350,6 @@ class PlayerService extends Service
         $vodPlaylistItems = $this->getVodPlaylistItems($LivestreamAccount, $streamingProtocol);
         foreach ($vodPlaylistItems as $item) {
             $playlist->push($item);
-        }
-    }
-
-    /**
-     * @param null $streamingProtocol
-     * @return Collection collection of item objects that go in the Player Playlist array
-     *
-     * @throws Exception
-     */
-    public function getVodPlaylistItems($livestream_account, $streamingProtocol = null)
-    {
-        try {
-            $allEpisodesForAccount = $livestream_account->episodes()->get()->reverse(); // reverse to put most recent episode first
-
-            $activePlanId = $livestream_account->team->currentActivePlan()->id;
-
-            if ($activePlanId === 'livestream-free') {
-                $unlocked_episodes = $allEpisodesForAccount->take(1);
-                $episodesForPlaylist = $unlocked_episodes;
-            } else {
-                $episodesForPlaylist = $allEpisodesForAccount;
-            }
-
-            return $this->getPlayerPlaylistItems($episodesForPlaylist, $streamingProtocol);
-        } catch (Exception $e) {
-            $msg = 'Could not get VOD Playlist' . $e->getMessage();
-            Log::error($msg);
-            throw $e;
         }
     }
 }

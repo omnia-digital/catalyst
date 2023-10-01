@@ -35,7 +35,7 @@ class VideoViewChart extends Component
         return view('dashboard.video-view-chart', [
             'labels' => $this->labels,
             'videoViews' => $this->toChart($this->data),
-            'totalVideoViews' => (float)$this->total($this->data),
+            'totalVideoViews' => (float) $this->total($this->data),
         ]);
     }
 

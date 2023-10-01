@@ -51,8 +51,8 @@ class ImageService
     /**
      * ImageService constructor.
      *
-     * @param null $source_disk
-     * @param null $cache_disk
+     * @param  null  $source_disk
+     * @param  null  $cache_disk
      */
     public function __construct($source_disk = null, $cache_disk = null)
     {
@@ -85,20 +85,6 @@ class ImageService
     }
 
     /**
-     * @return Server
-     */
-    private function _initializeServer($source_disk, $cache_disk)
-    {
-        return ServerFactory::create([
-            'response' => new LaravelResponseFactory(app('request')),
-            'source' => $source_disk->getDriver(),
-            'cache' => $cache_disk->getDriver(),
-            'cache_path_prefix' => '.cache',
-            'base_url' => 'images',
-        ]);
-    }
-
-    /**
      * Create an Image Object and save the image file
      * I want to handle if just the $imageData is passed, or if all of the data is passed
      *
@@ -113,7 +99,7 @@ class ImageService
                 $imageData = collect($imageData);
             } elseif (is_string($imageData) || empty($imageData)) {
                 $imageData = collect();
-            } elseif (!$imageData instanceof Collection) {
+            } elseif (! $imageData instanceof Collection) {
                 throw new Exception('Image Data must be an array or Collection');
             }
 
@@ -129,8 +115,8 @@ class ImageService
             }
 
             if ($imageFile instanceof File || $imageFile instanceof UploadedFile) {
-                if (!$imageData->has('full_file_name')
-                    && (!$imageData->has('file_name') && !$imageData->has('file_type'))) {
+                if (! $imageData->has('full_file_name')
+                    && (! $imageData->has('file_name') && ! $imageData->has('file_type'))) {
                     $imageData->put('full_file_name', $this->generateFullFileName($imageFile));
                 }
             }
@@ -177,14 +163,14 @@ class ImageService
     }
 
     /**
-     * @param File $file
+     * @param  File  $file
      * @return string
      *
      * @throws Exception
      */
     public function generateFullFileName($file)
     {
-        if (!$file instanceof UploadedFile && !$file instanceof File) {
+        if (! $file instanceof UploadedFile && ! $file instanceof File) {
             throw new Exception(__FUNCTION__ . ': File must be an instance of File or Uploaded File');
         }
 
@@ -253,6 +239,20 @@ class ImageService
     }
 
     /**
+     * @return Server
+     */
+    private function _initializeServer($source_disk, $cache_disk)
+    {
+        return ServerFactory::create([
+            'response' => new LaravelResponseFactory(app('request')),
+            'source' => $source_disk->getDriver(),
+            'cache' => $cache_disk->getDriver(),
+            'cache_path_prefix' => '.cache',
+            'base_url' => 'images',
+        ]);
+    }
+
+    /**
      * Serialization
      */
     public function __sleep()
@@ -270,10 +270,10 @@ class ImageService
      */
     public function __wakeup()
     {
-        if (!empty($this->_source_disk_name)) {
+        if (! empty($this->_source_disk_name)) {
             $this->_source_disk = Storage::disk($this->_source_disk_name);
         }
-        if (!empty($this->_cache_disk_name)) {
+        if (! empty($this->_cache_disk_name)) {
             $this->_cache_disk = Storage::disk($this->_cache_disk_name);
         }
         $this->_server = $this->_initializeServer($this->_source_disk, $this->_cache_disk);

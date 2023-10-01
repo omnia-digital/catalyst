@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Jetstream;
 
-class CreateCompany// implements CreatesCompanies
+class CreateCompany // implements CreatesCompanies
 {
 //    public function create($user, array $input): Company
 //    {

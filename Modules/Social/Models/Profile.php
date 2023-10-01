@@ -236,12 +236,12 @@ class Profile extends Model implements HasMedia, Searchable
      */
     public function getMostPostLikes()
     {
-        if (!empty($this->user)) {
+        if (! empty($this->user)) {
             $type = 'post';
 
             return Post::where('user_id', $this->user->id)
                 ->withCount('post.likes')
-                ->when($type, fn($query) => $query->where('type', $this->type))
+                ->when($type, fn ($query) => $query->where('type', $this->type))
                 ->orderBy('likes_count', 'desc');
         }
     }
@@ -323,7 +323,6 @@ class Profile extends Model implements HasMedia, Searchable
     /**
      * Advice
      */
-
     public function getSearchResult(): SearchResult
     {
         $url = $this->urlLink();

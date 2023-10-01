@@ -22,7 +22,7 @@ class Apply extends Component
 
         $this->team = $team;
 
-        if (!$this->teamHasApplicationForm()) {
+        if (! $this->teamHasApplicationForm()) {
             $this->applyToTeam();
 
             $this->redirectRoute('social.teams.show', $this->team);

@@ -36,7 +36,7 @@ class UpdateTeamPlanModal extends Component
     {
         $this->validate();
 
-        if (!$this->billable->hasDefaultPaymentMethod()) {
+        if (! $this->billable->hasDefaultPaymentMethod()) {
             $this->error('You do not have a default payment method. Please add one!');
 
             return;

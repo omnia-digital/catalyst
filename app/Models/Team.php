@@ -142,7 +142,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function hasInfoIsFilled(): bool
     {
-        return !$this->hasDefaultTeamName() && !empty($this->phone) && !empty($this->city) && !empty($this->state);
+        return ! $this->hasDefaultTeamName() && ! empty($this->phone) && ! empty($this->city) && ! empty($this->state);
     }
 
     public function hasDefaultTeamName(): bool
@@ -363,12 +363,12 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function hasStripeConnectAccount(): bool
     {
-        return !empty($this->stripe_connect_id);
+        return ! empty($this->stripe_connect_id);
     }
 
     public function stripeConnectOnboardingCompleted(): bool
     {
-        return (bool)$this->stripe_connect_onboarding_completed;
+        return (bool) $this->stripe_connect_onboarding_completed;
     }
 
     public function subscription(): BelongsTo

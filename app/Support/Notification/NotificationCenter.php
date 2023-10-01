@@ -12,11 +12,11 @@ class NotificationCenter
 
     public function __construct($title = null, $subtitle = null)
     {
-        if (!empty($title)) {
+        if (! empty($title)) {
             $this->title($title);
         }
 
-        if (!empty($subtitle)) {
+        if (! empty($subtitle)) {
             $this->subtitle($subtitle);
         }
 
@@ -25,6 +25,11 @@ class NotificationCenter
             ->showCancel()
             ->playSound()
             ->createdAt(now());
+    }
+
+    public static function make(...$arguments): self
+    {
+        return new static(...$arguments);
     }
 
     public function title(string $value): NotificationCenter
@@ -69,11 +74,6 @@ class NotificationCenter
         return $this;
     }
 
-    public static function make(...$arguments): self
-    {
-        return new static(...$arguments);
-    }
-
     public function actionLink(string $value): self
     {
         $this->notification['action_link'] = $value;
@@ -97,7 +97,7 @@ class NotificationCenter
 
     public function level(string $value): self
     {
-        if (!in_array($value, self::LEVELS)) {
+        if (! in_array($value, self::LEVELS)) {
             $value = 'info';
         }
 

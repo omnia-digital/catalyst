@@ -15,7 +15,7 @@ class GamesAction
 //                                 ->limit(15)
 //                                 ->get();
         $igdbGames = IGDBGame::fuzzySearch(
-        // fields to search in
+            // fields to search in
             [
                 'name',
                 //                'involved_companies.company.name', // you can search for nested values as well

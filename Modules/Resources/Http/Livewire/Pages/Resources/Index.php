@@ -11,6 +11,7 @@ use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 use Platform;
+
 use function view;
 
 class Index extends Component
@@ -38,14 +39,14 @@ class Index extends Component
     {
         $this->orderBy = 'published_at';
 
-        if (!App::environment('production')) {
+        if (! App::environment('production')) {
             $this->useCache = false;
         }
     }
 
     public function loginCheck()
     {
-        if (Platform::isAllowingGuestAccess() && !auth()->check()) {
+        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('resources.home'));
 
             return;

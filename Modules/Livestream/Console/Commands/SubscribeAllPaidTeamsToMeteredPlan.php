@@ -52,13 +52,13 @@ class SubscribeAllPaidTeamsToMeteredPlan extends Command
                 $meteredPlan = $subscriptions->first(function ($subscription) {
                     return $subscription->stripe_plan === 'omnia-metered';
                 });
-                if (!empty($meteredPlan)) {
+                if (! empty($meteredPlan)) {
                     continue; // skip it if it already has omnia-metered
                 } else {
                     $paidSubscription = $subscriptions->first(function ($subscription) {
                         return Omnia::getPlanById($subscription->stripe_plan, true)->price > 0;
                     });
-                    if (!empty($paidSubscription)) {
+                    if (! empty($paidSubscription)) {
                         $teamsToSubscribe->push($team);
                     }
                 }

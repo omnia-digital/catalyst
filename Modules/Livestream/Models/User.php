@@ -174,7 +174,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Route notifications for the Slack channel.
      *
-     * @param Notification $notification
+     * @param  Notification  $notification
      * @return string
      */
     public function routeNotificationForSlack($notification)

@@ -27,7 +27,7 @@ class StatService extends LivestreamService
     /**
      * Runs and extraction request on the analytics service
      *
-     * @param string $eventCollection
+     * @param  string  $eventCollection
      */
     protected function _extraction($eventCollection, Collection $parameters)
     {

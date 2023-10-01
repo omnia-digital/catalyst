@@ -15,8 +15,8 @@ class StreamTargetRepository
     /**
      * Perform a basic Stream Target search.
      *
-     * @param string $query
-     * @param Authenticatable|null $excludeStreamTarget
+     * @param  string  $query
+     * @param  Authenticatable|null  $excludeStreamTarget
      * @return Collection
      */
     public function search($query, $excludeStreamTarget = null)
@@ -114,7 +114,7 @@ class StreamTargetRepository
         if (is_numeric($stream_target)) {
             $stream_target = StreamTarget::findOrFail($stream_target);
         }
-        if (!($stream_target instanceof StreamTarget)) {
+        if (! ($stream_target instanceof StreamTarget)) {
             throw new Exception('Could not find Stream Target to delete it');
         }
 

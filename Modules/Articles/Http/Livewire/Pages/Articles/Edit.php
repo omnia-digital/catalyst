@@ -33,7 +33,7 @@ class Edit extends Component
 
         $this->saveArticle($validated);
 
-        if (!is_null($this->article->published_at)) {
+        if (! is_null($this->article->published_at)) {
             $this->article->published_at = null;
             $this->article->save();
         }

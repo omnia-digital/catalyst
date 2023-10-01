@@ -21,7 +21,7 @@ class ConvertImageToDefaultType implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param ImageService $imageService
+     * @param  ImageService  $imageService
      */
     public function __construct($image_id, ImageService $imageService = null)
     {

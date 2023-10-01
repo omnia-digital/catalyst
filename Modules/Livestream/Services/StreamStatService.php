@@ -37,7 +37,7 @@ class StreamStatService extends StatService
     }
 
     /**
-     * @param null $livestream_account_id
+     * @param  null  $livestream_account_id
      */
     public function postStorageStats($livestream_account_id = null)
     {
@@ -46,13 +46,13 @@ class StreamStatService extends StatService
         $storage = Storage::disk(config('livestream.default_vod_disk'));
         $livestream_video_storage_events = collect();
         $totalStorageSize = 0;
-        if (!is_null($livestream_account_id)) {
+        if (! is_null($livestream_account_id)) {
             // Get total size for only the given directory/account
             Artisan::call('livestream-get-storage-size', ['livestream_account_id' => $livestream_account_id],
                 $totalStorageSize);
             $livestream_video_storage_events->push([
-                'livestream_video_storage_events' => (float)$livestream_account_id,
-                'total_size' => (float)$totalStorageSize,
+                'livestream_video_storage_events' => (float) $livestream_account_id,
+                'total_size' => (float) $totalStorageSize,
             ]);
         } else {
             // Get sizes for all directories/accounts
@@ -61,8 +61,8 @@ class StreamStatService extends StatService
                 Artisan::call('livestream-get-storage-size', ['livestream_account_id' => $accountDirectory],
                     $totalStorageSize);
                 $livestream_video_storage_events->push([
-                    'account_id' => (int)$accountDirectory,
-                    'total_size' => (float)$totalStorageSize,
+                    'account_id' => (int) $accountDirectory,
+                    'total_size' => (float) $totalStorageSize,
                 ]);
             }
         }
@@ -85,8 +85,8 @@ class StreamStatService extends StatService
     /**
      * Get Latest Stats for Livestream Account by Type, or Get all Types by default
      *
-     * @param null $livestream_account_id
-     * @param string $type storage, playback_live, playback_vod, stream_live
+     * @param  null  $livestream_account_id
+     * @param  string  $type storage, playback_live, playback_vod, stream_live
      * @return Collection
      *
      * @throws Exception
@@ -96,7 +96,7 @@ class StreamStatService extends StatService
         Log::info('Starting to retrieve Latest Stats by type: ' . $type);
 
         try {
-            if (!empty($livestream_account_id) && auth()->user()) {
+            if (! empty($livestream_account_id) && auth()->user()) {
                 $livestream_account_id = auth()->user()->currentTeam()->LivestreamAccount->id;
             }
 
@@ -117,22 +117,22 @@ class StreamStatService extends StatService
                     //					$statCollection->put('playback_vod', $this->getVodPlaybackBandwidthEvents($livestream_account_id));
                     break;
                 case 'storage':
-                    if (!empty($video_storage = $this->getVideoStorageEvents($livestream_account_id))) {
+                    if (! empty($video_storage = $this->getVideoStorageEvents($livestream_account_id))) {
                         $statCollection->put('video_storage', $video_storage);
                     }
                     break;
                 case 'playback_live':
-                    if (!empty($playback_live = $this->getLivestreamBandwidthEvents($livestream_account_id))) {
+                    if (! empty($playback_live = $this->getLivestreamBandwidthEvents($livestream_account_id))) {
                         $statCollection->put('playback_live', $playback_live);
                     }
                     break;
                 case 'playback_vod':
-                    if (!empty($playback_vod = $this->getLivestreamBandwidthEvents($livestream_account_id))) {
+                    if (! empty($playback_vod = $this->getLivestreamBandwidthEvents($livestream_account_id))) {
                         $statCollection->put('playback_vod', $playback_vod);
                     }
                     break;
                 case 'stream_live':
-                    if (!empty($stream_live = $this->getLivestreamBandwidthEvents($livestream_account_id))) {
+                    if (! empty($stream_live = $this->getLivestreamBandwidthEvents($livestream_account_id))) {
                         $statCollection->put('stream_live', $stream_live);
                     }
                     break;
@@ -309,9 +309,9 @@ class StreamStatService extends StatService
     }
 
     /**
-     * @param string $event_type
-     * @param null $app_name
-     * @param bool $deleteRecords if true deletes the records that it pulls from the DB
+     * @param  string  $event_type
+     * @param  null  $app_name
+     * @param  bool  $deleteRecords if true deletes the records that it pulls from the DB
      * @return array
      *
      * @throws Exception
@@ -334,8 +334,8 @@ class StreamStatService extends StatService
                 $datetime = new Carbon($dataRow->date . ' ' . $dataRow->time, $dataRow->tz);
                 $publishEvents[] = [
                     'event_type' => $dataRow->xevent,
-                    'account_id' => (int)$dataRow->xappinst,
-                    'data_usage' => (int)$dataRow->csstreambytes,
+                    'account_id' => (int) $dataRow->xappinst,
+                    'data_usage' => (int) $dataRow->csstreambytes,
                     'timestamp' => $datetime->timestamp,
                 ];
             }
@@ -350,10 +350,10 @@ class StreamStatService extends StatService
     }
 
     /**
-     * @param null $event_type
-     * @param null $livestream_account_id
-     * @param null $app_name
-     * @param bool $deleteRecords if true deletes the records that it pulls from the DB
+     * @param  null  $event_type
+     * @param  null  $livestream_account_id
+     * @param  null  $app_name
+     * @param  bool  $deleteRecords if true deletes the records that it pulls from the DB
      *
      * @throws Exception
      *
@@ -374,13 +374,13 @@ class StreamStatService extends StatService
             $query = 'select * from ' . $table . " where xcategory = 'stream' and xctx NOT LIKE '%trans%'";
 
             // Check for event type
-            (!is_null($event_type)) ? $query .= " and xevent = '{$event_type}'" : '';
+            (! is_null($event_type)) ? $query .= " and xevent = '{$event_type}'" : '';
 
             // Check for livestream account id
-            (!is_null($livestream_account_id)) ? $query .= " and xappinst = {$livestream_account_id}" : '';
+            (! is_null($livestream_account_id)) ? $query .= " and xappinst = {$livestream_account_id}" : '';
 
             // Check for app name
-            (!is_null($app_name)) ? $query .= " and xapp like '%{$app_name}%'" : '';
+            (! is_null($app_name)) ? $query .= " and xapp like '%{$app_name}%'" : '';
 
             $eventData = $db->select($query);
 
@@ -402,9 +402,9 @@ class StreamStatService extends StatService
     }
 
     /**
-     * @param string $event_type
-     * @param null $app_type either live or vod
-     * @param bool $deleteRecords if true deletes the records that it pulls from the DB
+     * @param  string  $event_type
+     * @param  null  $app_type either live or vod
+     * @param  bool  $deleteRecords if true deletes the records that it pulls from the DB
      * @return array
      *
      * @internal param null $app_name usually either live or vods3
@@ -423,8 +423,8 @@ class StreamStatService extends StatService
             $datetime = new Carbon($dataRow->date . ' ' . $dataRow->time, $dataRow->tz);
             $playbackEvents[] = [
                 'event_type' => $dataRow->xevent,
-                'account_id' => (int)$dataRow->xappinst,
-                'data_usage' => (int)$dataRow->scstreambytes,
+                'account_id' => (int) $dataRow->xappinst,
+                'data_usage' => (int) $dataRow->scstreambytes,
                 'timestamp' => $datetime->timestamp,
                 'view_type' => $app_type,
             ];

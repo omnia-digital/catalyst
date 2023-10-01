@@ -9,13 +9,13 @@ use Modules\Livestream\Omnia;
 class EpisodeRepository
 {
     /**
-     * @param null $timezone
-     * @param null $livestreamAccount
-     * @param null $published if true, filter out unpublished episodes
-     * @param bool $locked
-     * @param int $show
-     * @param int $currentPage
-     * @param null $query
+     * @param  null  $timezone
+     * @param  null  $livestreamAccount
+     * @param  null  $published if true, filter out unpublished episodes
+     * @param  bool  $locked
+     * @param  int  $show
+     * @param  int  $currentPage
+     * @param  null  $query
      * @return array
      */
     public function all(
@@ -44,7 +44,7 @@ class EpisodeRepository
         $sortedEpisodeCollection = $livestreamAccount->limitEpisodes($show, $offset)
             ->with('videos');
 
-        if (!empty($query)) {
+        if (! empty($query)) {
             $sortedEpisodeCollection->where('title', 'LIKE', '%' . $query . '%');
         }
 
@@ -52,7 +52,7 @@ class EpisodeRepository
 
         $activePlanId = $livestreamAccount->team->currentActivePlan()->id;
         $user = auth()->user();
-        if (!empty($user) && $user->isSystemAdmin()) {
+        if (! empty($user) && $user->isSystemAdmin()) {
             $activePlanId = 'livestream-growth';
         }
         if ($activePlanId === 'livestream-free') {
@@ -60,7 +60,7 @@ class EpisodeRepository
             $latestEpisode = $sortedEpisodeCollection->shift();
 
             // Add Unlocked Episodes
-            if (!empty($latestEpisode)) {
+            if (! empty($latestEpisode)) {
                 if ($published) {
                     $unlocked_episodes = ($latestEpisode->is_published ? collect([$latestEpisode]) : collect());
                 } else {
@@ -99,7 +99,7 @@ class EpisodeRepository
     /**
      * Get One Episode
      *
-     * @param int|Episode $episode
+     * @param  int|Episode  $episode
      */
     public function get($episode, $timezone = null, $livestreamAccount = null)
     {
@@ -121,7 +121,7 @@ class EpisodeRepository
             unset($video->episode);
         }
 
-        if (!empty($episode->livestreamAccount)) {
+        if (! empty($episode->livestreamAccount)) {
             unset($episode->livestreamAccount);
         }
 

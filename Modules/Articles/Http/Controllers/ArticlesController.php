@@ -41,7 +41,7 @@ class ArticlesController extends Controller
     /**
      * Show the specified article.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -52,7 +52,7 @@ class ArticlesController extends Controller
     /**
      * Show the form for editing the specified article.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -63,7 +63,7 @@ class ArticlesController extends Controller
     /**
      * Update the specified article in storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Renderable
      */
     public function update(Request $request, $id)
@@ -74,7 +74,7 @@ class ArticlesController extends Controller
     /**
      * Remove the specified article from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Renderable
      */
     public function destroy($id)

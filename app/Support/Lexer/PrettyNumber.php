@@ -6,7 +6,7 @@ class PrettyNumber
 {
     public static function convert($number)
     {
-        if (!is_int($number)) {
+        if (! is_int($number)) {
             return $number;
         }
 

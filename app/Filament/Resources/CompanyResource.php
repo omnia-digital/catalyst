@@ -27,7 +27,7 @@ class CompanyResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-//            Forms\Components\TextInput::make('id'),
+            //            Forms\Components\TextInput::make('id'),
             Forms\Components\TextInput::make('name'),
             Forms\Components\TextInput::make('email'),
             Forms\Components\TextInput::make('website'),

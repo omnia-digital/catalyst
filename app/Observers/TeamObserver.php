@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Team;
 use Trans;
+
 use function activity;
 
 class TeamObserver

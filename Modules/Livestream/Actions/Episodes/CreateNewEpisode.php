@@ -14,7 +14,7 @@ class CreateNewEpisode
         $episodeTemplate = $livestreamAccount->episodeTemplate?->template ?? [];
 
         // Validate data since the old version's database has invalid data in episode template
-        if (!($episodeTemplate['main_speaker_id'] ?? null)) {
+        if (! ($episodeTemplate['main_speaker_id'] ?? null)) {
             unset($episodeTemplate['main_speaker_id']);
         }
 

@@ -18,13 +18,13 @@ class ProjectSizesTableSeeder extends Seeder
             [
                 'title' => 'Large',
                 'description' => 'Longer term or complex initiatives (ex. design and build a full website)',
-                'order' => 0
+                'order' => 0,
             ],
             ['title' => 'Medium', 'description' => 'Well-defined teams (ex. a landing page)', 'order' => 1],
             [
                 'title' => 'Small',
                 'description' => 'Quick and Straightforward tasks (ex. update text and images on a webpage)',
-                'order' => 2
+                'order' => 2,
             ],
         ];
 

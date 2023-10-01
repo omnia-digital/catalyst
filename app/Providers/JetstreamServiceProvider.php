@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-
 use App\Actions\Teams\AddTeamMember;
 use App\Actions\Teams\CreateTeam;
 use App\Actions\Teams\DeleteTeam;
@@ -117,7 +116,7 @@ class JetstreamServiceProvider extends ServiceProvider
         ])
             ->description(Trans::get($memberRoleDescription));
 
-        if (!empty($usingTeamMemberSubs)) {
+        if (! empty($usingTeamMemberSubs)) {
             Jetstream::role('subscriber', 'Subscriber', [
                 'feed-read',
             ])

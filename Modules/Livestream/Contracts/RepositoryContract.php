@@ -10,7 +10,7 @@ interface RepositoryContract
     /**
      * Get the resource with the given ID.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Authenticatable|null
      */
     public function find($id);
@@ -18,8 +18,8 @@ interface RepositoryContract
     /**
      * Perform a basic resource search by name or e-mail address.
      *
-     * @param string $query
-     * @param Authenticatable|null $excludeResource
+     * @param  string  $query
+     * @param  Authenticatable|null  $excludeResource
      * @return Collection
      */
     public function search($query, $excludeResource = null);

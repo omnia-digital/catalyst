@@ -61,18 +61,6 @@ class Notification
     }
 
     /**
-     * Send to whatever is defined in relation method.
-     */
-    public function __call($name, $arguments)
-    {
-        $relation = lcfirst(
-            str_replace('to', '', $name)
-        );
-
-        $this->to([$arguments[0]->$relation]);
-    }
-
-    /**
      * Send notification to a group of users.
      *
      * @return void
@@ -82,5 +70,17 @@ class Notification
         foreach ($users as $user) {
             $user->notify($this->notification);
         }
+    }
+
+    /**
+     * Send to whatever is defined in relation method.
+     */
+    public function __call($name, $arguments)
+    {
+        $relation = lcfirst(
+            str_replace('to', '', $name)
+        );
+
+        $this->to([$arguments[0]->$relation]);
     }
 }

@@ -66,7 +66,7 @@ class EpisodeController extends LivestreamController
     {
         $timezone = null;
         $livestreamAccount = null;
-        if (!empty($request->timezone)) {
+        if (! empty($request->timezone)) {
             $timezone = $request->timezone;
         }
 
@@ -89,14 +89,14 @@ class EpisodeController extends LivestreamController
     {
         $timezone = null;
         $livestreamAccount = null;
-        if (!empty($request->timezone)) {
+        if (! empty($request->timezone)) {
             $timezone = $request->timezone;
         }
 
         if ($request->has('livestream_account_id')) {
             $livestreamAccount = Livestream::getLivestreamAccount($request->get('livestream_account_id'));
         } else {
-            if (!empty($this->_livestreamAccount)) {
+            if (! empty($this->_livestreamAccount)) {
                 $livestreamAccount = $this->_livestreamAccount;
             } else {
                 throw new LivestreamAccountIdNotFoundException;
@@ -133,7 +133,7 @@ class EpisodeController extends LivestreamController
     /**
      * Store a newly created Episode in storage.
      *
-     * @param EpisodeRequest|Request $request
+     * @param  EpisodeRequest|Request  $request
      * @return JsonResponse
      */
     public function store(EpisodeEditRequest $request)
@@ -151,7 +151,7 @@ class EpisodeController extends LivestreamController
         // Date Recorded
         if ($request->filled('date_recorded')) {
             $date_recorded = $request->get('date_recorded');
-            if (!is_numeric($date_recorded)) {
+            if (! is_numeric($date_recorded)) {
                 $carbonTime = new Carbon($date_recorded, $timezone);
                 $date_recorded = $carbonTime->setTimezone(config('app.timezone'));
             }
@@ -163,7 +163,7 @@ class EpisodeController extends LivestreamController
         if ($request->filled('planned_start_time')) {
             $planned_start_time = $request->get('planned_start_time');
             // If it's numeric, then we will assume it's a timestamp (UTC)
-            if (!is_numeric($planned_start_time)) {
+            if (! is_numeric($planned_start_time)) {
                 $carbonTime = new Carbon($planned_start_time, $timezone);
                 $planned_start_time = $carbonTime->setTimezone(config('app.timezone'))->timestamp;
             }
@@ -178,7 +178,7 @@ class EpisodeController extends LivestreamController
         // Create Episode
         $episode = Episode::create($params);
 
-        if (!empty($episode->mux_asset_id)) {
+        if (! empty($episode->mux_asset_id)) {
             $video = Omnia::interact(VideoRepository::class . '@create', [$episode]);
         }
 
@@ -208,7 +208,7 @@ class EpisodeController extends LivestreamController
         // Date Recorded
         if ($request->filled('date_recorded')) {
             $date_recorded = $request->get('date_recorded');
-            if (!is_numeric($date_recorded)) {
+            if (! is_numeric($date_recorded)) {
                 $carbonTime = new Carbon($date_recorded, $timezone);
                 $date_recorded = $carbonTime->setTimezone(config('app.timezone'));
             }
@@ -261,7 +261,7 @@ class EpisodeController extends LivestreamController
             $planned_start_time = $request->get('planned_start_time');
 
             // If it's numeric, then we will assume it's a timestamp (UTC)
-            if (!is_numeric($planned_start_time)) {
+            if (! is_numeric($planned_start_time)) {
                 $carbonTime = new Carbon($planned_start_time, $timezone);
                 $planned_start_time = $carbonTime->setTimezone(config('app.timezone'))->timestamp;
             }
@@ -332,7 +332,7 @@ class EpisodeController extends LivestreamController
     /**
      * Remove the Episode and move associated video files from storage.
      *
-     * @param bool $deleteVideos
+     * @param  bool  $deleteVideos
      * @return Response
      */
     public function destroy(Episode $episode, $deleteVideos = true)
@@ -460,7 +460,7 @@ class EpisodeController extends LivestreamController
     /**
      * Update the thumbnail on given Episode
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return mixed
      */
     public function storeThumbnail(LivestreamRequest $request, Episode $episode)
@@ -510,7 +510,7 @@ class EpisodeController extends LivestreamController
     /**
      * Save the episode with upload video.
      *
-     * @param EpisodeEditRequest $request
+     * @param  EpisodeEditRequest  $request
      * @return JsonResponse
      */
     public function saveEpisode(Request $request)
@@ -537,21 +537,21 @@ class EpisodeController extends LivestreamController
             ->where('mux_asset_id', $request->mux_asset_id)
             ->first();
 
-        if (!$episode) {
+        if (! $episode) {
             abort(403, 'You do not have permission to download this episode');
         }
 
         $asset = $episode->asMuxAsset();
 
         // Do nothing if asset is not found or this asset does not supports mp4.
-        if (!$asset || !$asset->isDownloadable()) {
+        if (! $asset || ! $asset->isDownloadable()) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Cannot find asset for this episode or it does not support MP4.',
             ], 404);
         }
 
-        if (!($playbackId = $asset->defaultPlaybackId())) {
+        if (! ($playbackId = $asset->defaultPlaybackId())) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Cannot find default playback id.',

@@ -32,7 +32,7 @@ class PlaylistController extends LivestreamController
     /**
      * Store a newly created Playlist in storage.
      *
-     * @param PlaylistRequest|Request $request
+     * @param  PlaylistRequest|Request  $request
      * @return Response
      */
     public function store(PlaylistRequest $request)
@@ -71,7 +71,7 @@ class PlaylistController extends LivestreamController
     /**
      * Display the specified resource.
      *
-     * @param Playlist $playlist
+     * @param  Playlist  $playlist
      * @return Response
      */
     public function show($id)
@@ -106,7 +106,7 @@ class PlaylistController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param PlaylistRequest|Request $request
+     * @param  PlaylistRequest|Request  $request
      * @return Response
      */
     public function update(PlaylistRequest $request, Playlist $playlist)
@@ -122,7 +122,7 @@ class PlaylistController extends LivestreamController
     /**
      * Remove the LivestreamAccount and associated files from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Response
      */
     public function destroy($id)

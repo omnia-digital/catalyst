@@ -24,7 +24,7 @@ class StreamTargetService extends Service
     /**
      * StreamService constructor.
      *
-     * @param string $streamTargetType
+     * @param  string  $streamTargetType
      */
     public function __construct(
         LivestreamAccount $LivestreamAccount,
@@ -33,7 +33,7 @@ class StreamTargetService extends Service
     ) {
         $this->_livestreamAccount = $LivestreamAccount;
         $this->_team = $LivestreamAccount->team;
-        if (!empty($streamName)) {
+        if (! empty($streamName)) {
             $this->_streamName = $this->_livestreamAccount->id . '/' . config('livestream.livestream_episode_auto_record_stream_name');
         } else {
             $this->_streamName = $streamName;
@@ -123,7 +123,7 @@ class StreamTargetService extends Service
             $episodeTemplateRepository = new EpisodeTemplateRepository($this->_livestreamAccount);
             $epsiodeTemplate = $episodeTemplateRepository->current();
 
-            if (!empty($episodeTemplate)) {
+            if (! empty($episodeTemplate)) {
                 $params = [
                     'title' => $epsiodeTemplate->title,
                     'description' => $epsiodeTemplate->description,
@@ -176,7 +176,7 @@ class StreamTargetService extends Service
     {
         Log::info('[Stream Target DELETE] - Started');
         $response = $this->_httpClient->delete(self::WOWZA_URL . '/' . $this->_streamTargetType . '-' . str_replace('/',
-                '-', $this->_streamName));
+            '-', $this->_streamName));
         Log::info('[Stream Target DELETE] - Finished');
 
         return $response->getStatusCode();

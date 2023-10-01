@@ -33,6 +33,5 @@ class DeleteAllAssetsForMuxLivestream extends Command
 
         $muxService = new MuxService;
         $assets = $muxService->listAssets();
-
     }
 }
