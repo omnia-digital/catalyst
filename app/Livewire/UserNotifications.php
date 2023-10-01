@@ -11,11 +11,11 @@ class UserNotifications extends Component
     public function getListeners()
     {
         return [
-            'notificationRead' => 'markAsRead',
             'echo-notification:App.Models.User.' . auth()->id() => '$refresh',
         ];
     }
 
+    #[On('notificationRead')]
     public function markAsRead($notificationId)
     {
         auth()->user()->notifications()->where('id', $notificationId)->first()?->markAsRead();

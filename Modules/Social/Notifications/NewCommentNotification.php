@@ -58,7 +58,7 @@ class NewCommentNotification extends BaseNotification
     public function toArray($notifiable): array
     {
         return NotificationCenter::make()
-            ->icon('heroicon-o-chat-alt')
+            ->icon('heroicon-s-chat-bubble-oval-left')
             ->success($this->getMessage())
             ->subtitle($this->getSubTitle())
             ->image($this->getImage())
