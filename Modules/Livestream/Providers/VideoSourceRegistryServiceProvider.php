@@ -11,14 +11,6 @@ use Modules\Livestream\Registries\VideoSource\VideoSourceRegistry;
 class VideoSourceRegistryServiceProvider extends ServiceProvider
 {
     /**
-     * Register services.
-     */
-    public function register()
-    {
-        $this->app->singleton(VideoSourceRegistry::class);
-    }
-
-    /**
      * Bootstrap services.
      */
     public function boot()
@@ -27,5 +19,13 @@ class VideoSourceRegistryServiceProvider extends ServiceProvider
             ->register(3, new MuxVideoSource)
             ->register(6, new S3VideoSource)
             ->register(7, new FromUrlSource);
+    }
+
+    /**
+     * Register services.
+     */
+    public function register()
+    {
+        $this->app->singleton(VideoSourceRegistry::class);
     }
 }

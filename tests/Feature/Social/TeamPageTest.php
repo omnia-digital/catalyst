@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Social;
 
-use App\Http\Livewire\Teams\CreateTeamModal;
+use App\Livewire\Teams\CreateTeamModal;
 use App\Models\Location;
 use App\Models\Tag;
 use App\Models\Team;

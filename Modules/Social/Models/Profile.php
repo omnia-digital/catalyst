@@ -35,12 +35,9 @@ class Profile extends Model implements HasMedia, Searchable
 
     public $incrementing = false;
 
-    protected $dates = [
-        'deleted_at',
-        'last_fetched_at',
-    ];
-
     protected $casts = [
+        'deleted_at' => 'datetime',
+        'last_fetched_at' => 'datetime',
         'birth_date' => 'datetime:Y-m-d',
     ];
 
@@ -160,19 +157,9 @@ class Profile extends Model implements HasMedia, Searchable
         return $this->is_private == true ? 'private' : 'public';
     }
 
-    public function urlLink()
-    {
-        return route('social.profile.show', $this->handle);
-    }
-
     public function bannerImage()
     {
         return $this->getMedia('profile_banner_images')->first() ?? (new NullMedia('profile'));
-    }
-
-    public function photo()
-    {
-        return optional($this->getMedia('profile_photos')->first());
     }
 
     /**
@@ -185,14 +172,19 @@ class Profile extends Model implements HasMedia, Searchable
         return $this->photo()->getFullUrl() ?? $this->defaultProfilePhotoUrl();
     }
 
-    public function countryFlag()
+    public function photo()
     {
-        return Country::select('flag')->where('code_3', $this->country)->pluck('flag')->first();
+        return optional($this->getMedia('profile_photos')->first());
     }
 
     public function displayCountry()
     {
         return $this->countryFlag() . ' ' . strtoupper($this->country);
+    }
+
+    public function countryFlag()
+    {
+        return Country::select('flag')->where('code_3', $this->country)->pluck('flag')->first();
     }
 
     public function getAwardsAttribute()
@@ -244,12 +236,12 @@ class Profile extends Model implements HasMedia, Searchable
      */
     public function getMostPostLikes()
     {
-        if (! empty($this->user)) {
+        if (!empty($this->user)) {
             $type = 'post';
 
             return Post::where('user_id', $this->user->id)
                 ->withCount('post.likes')
-                ->when($type, fn ($query) => $query->where('type', $this->type))
+                ->when($type, fn($query) => $query->where('type', $this->type))
                 ->orderBy('likes_count', 'desc');
         }
     }
@@ -320,10 +312,6 @@ class Profile extends Model implements HasMedia, Searchable
     }
 
     /**
-     * Advice
-     */
-
-    /**
      * Credibility Rating for Advice
      *
      * @return void
@@ -332,10 +320,19 @@ class Profile extends Model implements HasMedia, Searchable
     {
     }
 
+    /**
+     * Advice
+     */
+
     public function getSearchResult(): SearchResult
     {
         $url = $this->urlLink();
 
         return new SearchResult($this, $this->name, $url);
+    }
+
+    public function urlLink()
+    {
+        return route('social.profile.show', $this->handle);
     }
 }

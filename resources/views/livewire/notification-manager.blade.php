@@ -12,10 +12,11 @@
                             <div>
                                 @foreach ($notification::getChannels() as $channel)
                                     <div class="flex justify-between">
-                                        <x-library::input.label value="{{ $this->getChannelLabel($channel) }}" for="{{ $channel }}"/>
+                                        <x-library::input.label value="{{ $this->getChannelLabel($channel) }}"
+                                                                for="{{ $channel }}"/>
                                         <x-library::input.toggle
                                                 id="{{ $channel }}"
-                                                wire:model.defer="subscriptions.{{ $notification }}.{{ $channel }}"
+                                                wire:model.live="subscriptions.{{ $notification }}.{{ $channel }}"
                                                 trueBackgroundColor="bg-primary"
                                         />
                                     </div>

@@ -10,7 +10,8 @@
 
 <li {{ $attributes->merge(['class' => $class]) }}>
     <div class="group block w-1/3 aspect-w-10 aspect-h-2 rounded-l-md bg-neutral overflow-hidden relative">
-        <img class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none" src="{{ $episode->thumbnail }}" alt="{{ $episode->title }}">
+        <img class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none"
+             src="{{ $episode->thumbnail }}" alt="{{ $episode->title }}">
 
         @if ($episode->isLive())
             <div class="absolute top-0 left-0">

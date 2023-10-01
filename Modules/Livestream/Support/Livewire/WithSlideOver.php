@@ -6,11 +6,11 @@ trait WithSlideOver
 {
     public function showSlideOver()
     {
-        $this->dispatchBrowserEvent('show-slide-over');
+        $this->dispatch('show-slide-over');
     }
 
     public function hideSlideOver()
     {
-        $this->dispatchBrowserEvent('hide-slide-over');
+        $this->dispatch('hide-slide-over');
     }
 }

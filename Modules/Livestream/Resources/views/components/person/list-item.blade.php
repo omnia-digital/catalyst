@@ -11,7 +11,8 @@
 <li {{ $attributes->merge(['class' => $class]) }}>
     @if ($person?->photo)
         <div class="group block w-1/3 aspect-w-10 aspect-h-2 rounded-l-md bg-gray-100 overflow-hidden relative">
-            <img class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none" src="{{ $person->photo }}" alt="{{ $person->name }}">
+            <img class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none"
+                 src="{{ $person->photo }}" alt="{{ $person->name }}">
         </div>
     @endif
     <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md">

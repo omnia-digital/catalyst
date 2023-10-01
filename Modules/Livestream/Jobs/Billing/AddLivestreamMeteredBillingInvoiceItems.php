@@ -19,7 +19,7 @@ class AddLivestreamMeteredBillingInvoiceItems extends LivestreamJob
     /**
      * Create a new job instance.
      *
-     * @param  Episode  $episode
+     * @param Episode $episode
      */
     public function __construct($team, $invoiceId, $subscriptionId)
     {

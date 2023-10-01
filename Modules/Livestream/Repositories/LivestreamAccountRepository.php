@@ -2,6 +2,8 @@
 
 namespace Modules\Livestream\Repositories;
 
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Config;
 use Laravel\Spark\Spark;
 use Modules\Livestream\Contracts\Repositories\LivestreamRepositoryContract;
@@ -17,9 +19,9 @@ class LivestreamAccountRepository implements LivestreamRepositoryContract
     /**
      * Perform a basic LivestreamAccount search by name or e-mail address.
      *
-     * @param  string  $query
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $excludeLivestreamAccount
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param string $query
+     * @param Authenticatable|null $excludeLivestreamAccount
+     * @return Collection
      */
     public function search($query, $excludeLivestreamAccount = null)
     {

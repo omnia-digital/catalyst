@@ -1,3 +1,4 @@
+@php use Modules\Jobs\Models\JobPosition; @endphp
 @extends('jobs::livewire.layouts.pages.default-page-layout')
 
 @section('content')
@@ -6,22 +7,24 @@
             <div class="flex items-center">
 
                 <a href="{{ route('jobs.home') }}">
-                    <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('My Jobs') }}</x-library::heading.1>
+                    <x-library::heading.1
+                            class="py-4 hover:cursor-pointer">{{ Trans::get('My Jobs') }}</x-library::heading.1>
                 </a>
             </div>
             <div class="flex items-center">
-                @if (auth()->user()->can('create', \Modules\Jobs\Models\JobPosition::class))
+                @if (auth()->user()->can('create', JobPosition::class))
                     @auth
                         <x-library::button.link
                                 href="{{ route('jobs.job.create') }}"
                                 class="py-2 w-full h-10"
-                        >{{ \Trans::get('+ Create Job') }}</x-library::button.link>
+                        >{{ Trans::get('+ Create Job') }}</x-library::button.link>
                         <livewire:resources::pages.resources.create/>
                     @else
                         <x-library::button
                                 class="py-2 w-full h-10"
                                 wire:click="loginCheck"
-                        >+ New Resource</x-library::button>
+                        >+ New Resource
+                        </x-library::button>
                         <livewire:authentication-modal/>
                     @endauth
                 @endif
@@ -41,7 +44,8 @@
                     @empty
                         <li class="p-20 text-center">
                             <p class="mb-4 text-lg text-gray-600">You don't have any jobs.</p>
-                            <a href="{{ route('jobs.job.create') }}" class="rounded shadow py-2 px-4 bg-primary text-white hover:bg-primary hover:shadow-2xl transition duration-200">
+                            <a href="{{ route('jobs.job.create') }}"
+                               class="rounded shadow py-2 px-4 bg-primary text-white hover:bg-primary hover:shadow-2xl transition duration-200">
                                 Create your first job
                             </a>
                         </li>

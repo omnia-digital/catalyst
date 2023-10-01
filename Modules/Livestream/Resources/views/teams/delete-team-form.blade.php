@@ -1,4 +1,4 @@
-<x-jet-action-section>
+<x-action-section>
     <x-slot name="title">
         {{ __('Delete Organization') }}
     </x-slot>
@@ -10,7 +10,10 @@
     <x-slot name="content">
         @if (($team->subscribed() && !$team->subscription()->onGracePeriod()) || $team->hasUnpaidExtraInvoiceItems() || $team->livestreamAccount->hasEpisodes())
             <p class="text-red-500 text-sm font-semibold">
-                You cannot delete this team unless you <a href="/billing" class="underline hover:text-red-400">cancel the current plan</a>, <a href="{{ route('settings.episode') }}" class="underline hover:text-red-400">delete all episodes</a>, and pay off all the open invoices.
+                You cannot delete this team unless you <a href="/billing" class="underline hover:text-red-400">cancel
+                    the current plan</a>, <a href="{{ route('settings.episode') }}"
+                                             class="underline hover:text-red-400">delete all episodes</a>, and pay off
+                all the open invoices.
             </p>
         @else
             <div class="max-w-xl text-sm text-gray-600">
@@ -18,13 +21,13 @@
             </div>
 
             <div class="mt-5">
-                <x-jet-danger-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
+                <x-danger-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
                     {{ __('Delete Organization') }}
-                </x-jet-danger-button>
+                </x-danger-button>
             </div>
 
             <!-- Delete Team Confirmation Modal -->
-            <x-jet-confirmation-modal wire:model="confirmingTeamDeletion">
+            <x-confirmation-modal wire:model.live="confirmingTeamDeletion">
                 <x-slot name="title">
                     {{ __('Delete Organization') }}
                 </x-slot>
@@ -35,15 +38,15 @@
                 </x-slot>
 
                 <x-slot name="footer">
-                    <x-jet-secondary-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
+                    <x-secondary-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
                         {{ __('Cancel') }}
-                    </x-jet-secondary-button>
+                    </x-secondary-button>
 
-                    <x-jet-danger-button class="ml-2" wire:click="deleteTeam" wire:loading.attr="disabled">
+                    <x-danger-button class="ml-2" wire:click="deleteTeam" wire:loading.attr="disabled">
                         {{ __('Delete Organization') }}
-                    </x-jet-danger-button>
+                    </x-danger-button>
                 </x-slot>
-            </x-jet-confirmation-modal>
+            </x-confirmation-modal>
         @endif
     </x-slot>
-</x-jet-action-section>
+</x-action-section>

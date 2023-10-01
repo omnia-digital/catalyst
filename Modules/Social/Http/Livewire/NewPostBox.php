@@ -84,7 +84,7 @@ class NewPostBox extends Component
             [
                 'name' => 'I feel nothing',
                 'value' => null,
-                'icon' => 'heroicon-o-x',
+                'icon' => 'x-mark',
                 'iconColor' => 'text-light-text-color',
                 'bgColor' => 'bg-transparent',
             ],
@@ -110,7 +110,7 @@ class NewPostBox extends Component
         }
 
         $this->postSent = true;
-        $this->emit('postAdded', $post);
+        $this->dispatch('postAdded', post: $post);
         $this->reset(['body']);
     }
 

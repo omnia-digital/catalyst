@@ -3,6 +3,8 @@
 namespace Modules\Livestream\Repositories;
 
 use Exception;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Collection;
 use Modules\Livestream\Http\Requests\Request;
 use Modules\Livestream\Services\MuxService;
 use Modules\Livestream\Stream;
@@ -13,9 +15,9 @@ class StreamTargetRepository
     /**
      * Perform a basic Stream Target search.
      *
-     * @param  string  $query
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $excludeStreamTarget
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param string $query
+     * @param Authenticatable|null $excludeStreamTarget
+     * @return Collection
      */
     public function search($query, $excludeStreamTarget = null)
     {
@@ -112,14 +114,15 @@ class StreamTargetRepository
         if (is_numeric($stream_target)) {
             $stream_target = StreamTarget::findOrFail($stream_target);
         }
-        if (! ($stream_target instanceof StreamTarget)) {
+        if (!($stream_target instanceof StreamTarget)) {
             throw new Exception('Could not find Stream Target to delete it');
         }
 
         // Delete from Mux
         // @TODO [Josh] - change to destroy on mux (if it exists) it could have already been deleted if disabled already
         $mux_service = new MuxService;
-        $muxStreamData = $mux_service->deleteSimulcastTargets($stream_target->stream->stream_id, $stream_target->mux_simulcast_target_id);
+        $muxStreamData = $mux_service->deleteSimulcastTargets($stream_target->stream->stream_id,
+            $stream_target->mux_simulcast_target_id);
 
         // @TODO [Josh] - change so it only deletes on Omnia if successfully deleted from Mux
         return $stream_target->delete();

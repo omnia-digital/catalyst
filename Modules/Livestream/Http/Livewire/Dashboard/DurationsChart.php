@@ -16,6 +16,21 @@ class DurationsChart extends Component
 {
     use WithTimeFilter;
 
+    public function getStorageDurationsProperty()
+    {
+        return StorageDurationChart::make($this->selectedTime);
+    }
+
+    public function render()
+    {
+        return view('dashboard.durations-chart', [
+            'labels' => $this->labels,
+            'storageDurations' => $this->toChart($this->storageDurations),
+            'totalStorageDurations' => (float)$this->total($this->storageDurations),
+            'totalPreviousStorageDurations' => (float)$this->total(StorageDurationChart::previous()->make($this->selectedTime)),
+        ]);
+    }
+
     public function toChart($items): array
     {
         /** @var Carbon $date */
@@ -33,21 +48,6 @@ class DurationsChart extends Component
 
     public function total($items)
     {
-        return $items->sum(fn ($item) => $item['value']);
-    }
-
-    public function getStorageDurationsProperty()
-    {
-        return StorageDurationChart::make($this->selectedTime);
-    }
-
-    public function render()
-    {
-        return view('dashboard.durations-chart', [
-            'labels' => $this->labels,
-            'storageDurations' => $this->toChart($this->storageDurations),
-            'totalStorageDurations' => (float) $this->total($this->storageDurations),
-            'totalPreviousStorageDurations' => (float) $this->total(StorageDurationChart::previous()->make($this->selectedTime)),
-        ]);
+        return $items->sum(fn($item) => $item['value']);
     }
 }

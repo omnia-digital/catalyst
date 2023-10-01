@@ -2,7 +2,7 @@
     <div class="fixed bottom-0 bg-white z-[70] w-full px-4">
         <div class="flex justify-around">
             @foreach (collect($navigation)->take(4) as $item)
-                @if (\Platform::isModuleEnabled($item['module']))
+                @if (Platform::isModuleEnabled($item['module']))
                     <a href="{{ route($item['name']) }}"
                        class="{{ request()->routeIs($item['name']) ? 'text-primary' : 'text-light-text-color hover:text-white-text-color' }} {{
                                'group text-center
@@ -23,7 +23,7 @@
                                'group text-center
                                text-base-text-color py-3' }}">
                 <div class="text-xs font-medium text-center py-0 leading-2">
-                    <x-library::icons.icon name="heroicon-o-menu" size="w-8 h-8" class="text-light-text-color
+                    <x-library::icons.icon name="o-menu" size="w-8 h-8" class="text-light-text-color
                         group-hover:text-light-text-color inline text-center"/>
                     <br/>
                     <span class="text-light-text-color group-hover:text-light-text-color text-center inline"
@@ -50,7 +50,7 @@
                             @click="open = false"
                     >
                         <span class="sr-only">Close sidebar</span>
-                        <x-heroicon-o-x class="h-6 w-6 text-white-text-color"/>
+                        <x-library::icons.icon name="x-mark" class="h-6 w-6 text-white-text-color"/>
                     </button>
                 </div>
                 <div class="flex-1 h-0 overflow-y-auto">
@@ -60,9 +60,9 @@
                             @if (!empty($item['module']))
                                 @if (Module::isEnabled($item['module']))
                                     <a href="{{ Route::has($item['name']) ? route($item['name']) : $item['name'] }}"
-                                    class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
+                                       class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}
                                             {{ 'w-full py-2 group flex justify-left items-center text-xl space-x-2 font-medium' }}"
-                                    aria-current="page">
+                                       aria-current="page">
                                         <x-library::icons.icon name="{{ $item['icon'] }}" size="w-6 h-6 mr-1"/>
                                         <span>{{ $item['label'] }}</span>
                                     </a>

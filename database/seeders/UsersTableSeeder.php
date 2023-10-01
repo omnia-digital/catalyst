@@ -4,12 +4,17 @@ namespace Database\Seeders;
 
 use App\Models\Role;
 use App\Models\User;
+use BezhanSalleh\FilamentShield\Support\Utils;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
     public function run()
     {
+        $panelUserRole = Utils::getRoleModel()::firstOrCreate([
+            'name' => 'panel_user',
+            'guard_name' => 'web'
+        ]);
         User::truncate();
 
         $adminUser = User::factory(1)->withProfile([

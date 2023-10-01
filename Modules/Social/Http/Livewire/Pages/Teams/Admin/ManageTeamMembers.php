@@ -35,7 +35,8 @@ class ManageTeamMembers extends Component
             'roleName' => [
                 'required',
                 'string',
-                Rule::unique(config('permission.table_names.roles'), 'name')->where(fn ($q) => $q->where('team_id', $this->team->id)),
+                Rule::unique(config('permission.table_names.roles'), 'name')->where(fn($q) => $q->where('team_id',
+                    $this->team->id)),
             ],
         ]);
 

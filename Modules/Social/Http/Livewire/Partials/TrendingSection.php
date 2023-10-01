@@ -18,11 +18,11 @@ class TrendingSection extends Component
 
     public function mount($type = null)
     {
-        if (! App::environment('production')) {
+        if (!App::environment('production')) {
             $this->useCache = false;
         }
 
-        if (! empty($type)) {
+        if (!empty($type)) {
             $this->type = $type;
         }
     }
@@ -44,9 +44,9 @@ class TrendingSection extends Component
 
     public function getRowsProperty()
     {
-        return $this->cache(function () {
-            return $this->rowsQuery->paginate(5);
-        });
+//        return $this->cache(function () {
+        return $this->rowsQuery->paginate(5);
+//        });
     }
 
     public function render()

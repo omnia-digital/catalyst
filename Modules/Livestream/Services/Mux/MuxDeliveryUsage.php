@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
 use Modules\Livestream\Models\LivestreamAccount;
 use MuxPhp\Api\DeliveryUsageApi;
+use MuxPhp\ApiException;
 use MuxPhp\Configuration;
 use MuxPhp\Models\DeliveryReport;
 
@@ -20,11 +21,22 @@ class MuxDeliveryUsage
     }
 
     /**
+     * @throws ApiException
+     */
+    public function getDeliveryUsageForStats(): Collection
+    {
+        return $this->getDeliveryUsage([
+            Carbon::now()->subDays(90)->timestamp, // Get data in 90 days.
+            time(),
+        ]);
+    }
+
+    /**
      * Get all delivery usage data.
      *
-     * @param  array  $timeframe See the options format at https://docs.mux.com/reference#delivery-usage
+     * @param array $timeframe See the options format at https://docs.mux.com/reference#delivery-usage
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function getDeliveryUsage(array $timeframe = []): Collection
     {
@@ -38,30 +50,31 @@ class MuxDeliveryUsage
             );
 
             $result = $result->merge(
-                collect($deliveryUsage['data'])->map(fn (DeliveryReport $deliveryReport) => (array) $deliveryReport->jsonSerialize())
+                collect($deliveryUsage['data'])->map(fn(DeliveryReport $deliveryReport
+                ) => (array)$deliveryReport->jsonSerialize())
             );
 
             $page = $page + 1;
-        } while (! empty($deliveryUsage['data']));
+        } while (!empty($deliveryUsage['data']));
 
         return $result;
     }
 
     /**
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
-    public function getDeliveryUsageForStats(): Collection
+    public function getDeliveryUsageForInvoice(LivestreamAccount $livestreamAccount): Collection
     {
-        return $this->getDeliveryUsage([
-            Carbon::now()->subDays(90)->timestamp, // Get data in 90 days.
-            time(),
+        return $this->getDeliveryUsageByAccount($livestreamAccount, [
+            Carbon::now()->subDays(30)->timestamp, // Get data in 30 days.
+            Carbon::now()->subHours(13)->timestamp,
         ]);
     }
 
     /**
-     * @param  array  $timeframe See the options format at https://docs.mux.com/reference#delivery-usage
+     * @param array $timeframe See the options format at https://docs.mux.com/reference#delivery-usage
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function getDeliveryUsageByAccount(LivestreamAccount $livestreamAccount, array $timeframe = []): Collection
     {
@@ -86,16 +99,5 @@ class MuxDeliveryUsage
         // Finally, merge $hasNoStreamIdUsages and $hasStreamIdUsages
         // to get all the delivery usages of the given account.
         return $hasNoStreamIdUsages->merge($hasStreamIdUsages);
-    }
-
-    /**
-     * @throws \MuxPhp\ApiException
-     */
-    public function getDeliveryUsageForInvoice(LivestreamAccount $livestreamAccount): Collection
-    {
-        return $this->getDeliveryUsageByAccount($livestreamAccount, [
-            Carbon::now()->subDays(30)->timestamp, // Get data in 30 days.
-            Carbon::now()->subHours(13)->timestamp,
-        ]);
     }
 }

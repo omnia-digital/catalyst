@@ -2,6 +2,8 @@
 
 namespace Modules\Jobs\Http\Livewire\Pages\Teams;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -30,9 +32,9 @@ class UpdateCompanyLogo extends Component
     /**
      * Update company logo
      *
-     * @return \Illuminate\Http\RedirectResponse|void
+     * @return RedirectResponse|void
      *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function updateCompanyLogo()
     {
@@ -51,7 +53,7 @@ class UpdateCompanyLogo extends Component
     {
         auth()->user()->currentTeam->deleteLogo();
 
-        $this->emitSelf('logo-removed');
+        $this->dispatch('logo-removed')->self();
     }
 
     public function render()

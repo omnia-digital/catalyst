@@ -2,21 +2,23 @@
 
 namespace Modules\Livestream\Traits;
 
+use Illuminate\Support\Collection;
+
 trait UsesShortcodes
 {
     /**
      * Replace Shortcode in a string with the shortcodes value
      *
-     * @param  null  $team
+     * @param null $team
      * @return mixed
      */
     public static function replaceShortcodesInString(&$string, $team = null)
     {
-        if (! str_contains($string, '[')) {
+        if (!empty($string) && !str_contains($string, '[')) {
             return $string;
         }
 
-        if (! $team && $user = auth()->user()) {
+        if (!$team && $user = auth()->user()) {
             $team = $user->currentTeam;
         }
 
@@ -27,41 +29,9 @@ trait UsesShortcodes
         preg_match_all('@\[([^<>&/\[\]\x00-\x20=]++)@', $string, $matches);
         $stringShortcodes = collect($matches[1]);
 
-        $shortcodesToReplace = self::getTimeShortcodesAndValues($time)->filter(function ($value, $key) use ($stringShortcodes) {
-            return $stringShortcodes->contains($key);
-        });
-
-        if ($shortcodesToReplace->isNotEmpty()) {
-            foreach ($shortcodesToReplace as $shortcode => $value) {
-                $string = str_replace('[' . $shortcode . ']', $value, $string);
-            }
-        }
-
-        return $string;
-    }
-
-    /**
-     * Replace Shortcode in a string with the shortcodes value
-     *
-     * @param  null  $team
-     * @return mixed
-     */
-    public static function replaceShortcodesInStringUsingGivenTimestamp(&$string, $time, $team = null)
-    {
-        if (! str_contains($string, '[')) {
-            return $string;
-        }
-
-        if (! $team && $user = auth()->user()) {
-            $team = $user->currentTeam;
-        }
-
-        // Find all shortcodes in string
-        $matches = [];
-        preg_match_all('@\[([^<>&/\[\]\x00-\x20=]++)@', $string, $matches);
-        $stringShortcodes = collect($matches[1]);
-
-        $shortcodesToReplace = self::getTimeShortcodesAndValues($time)->filter(function ($value, $key) use ($stringShortcodes) {
+        $shortcodesToReplace = self::getTimeShortcodesAndValues($time)->filter(function ($value, $key) use (
+            $stringShortcodes
+        ) {
             return $stringShortcodes->contains($key);
         });
 
@@ -77,7 +47,7 @@ trait UsesShortcodes
     /**
      * Get List of Shortcodes and their values
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public static function getTimeShortcodesAndValues($time = null)
     {
@@ -99,5 +69,41 @@ trait UsesShortcodes
             'year_short' => date('y', $time->timestamp),
             'timezone' => date('T', $time->timestamp),
         ]);
+    }
+
+    /**
+     * Replace Shortcode in a string with the shortcodes value
+     *
+     * @param null $team
+     * @return mixed
+     */
+    public static function replaceShortcodesInStringUsingGivenTimestamp(&$string, $time, $team = null)
+    {
+        if (!empty($string) && !str_contains($string, '[')) {
+            return $string;
+        }
+
+        if (!$team && $user = auth()->user()) {
+            $team = $user->currentTeam;
+        }
+
+        // Find all shortcodes in string
+        $matches = [];
+        preg_match_all('@\[([^<>&/\[\]\x00-\x20=]++)@', $string, $matches);
+        $stringShortcodes = collect($matches[1]);
+
+        $shortcodesToReplace = self::getTimeShortcodesAndValues($time)->filter(function ($value, $key) use (
+            $stringShortcodes
+        ) {
+            return $stringShortcodes->contains($key);
+        });
+
+        if ($shortcodesToReplace->isNotEmpty()) {
+            foreach ($shortcodesToReplace as $shortcode => $value) {
+                $string = str_replace('[' . $shortcode . ']', $value, $string);
+            }
+        }
+
+        return $string;
     }
 }

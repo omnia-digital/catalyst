@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Actions\Jetstream\DeleteUser;
+
 use App\Actions\Teams\AddTeamMember;
 use App\Actions\Teams\CreateTeam;
 use App\Actions\Teams\DeleteTeam;
@@ -11,7 +11,6 @@ use App\Actions\Teams\RemoveTeamMember;
 use App\Actions\Teams\UpdateTeamName;
 use App\Contracts\InvitesTeamMembers;
 use App\Models\Membership;
-use App\Settings\BillingSettings;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 use Trans;
@@ -20,20 +19,16 @@ class JetstreamServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->configurePermissions();
 
@@ -51,10 +46,8 @@ class JetstreamServiceProvider extends ServiceProvider
 
     /**
      * Configure the roles and permissions that are available within the application.
-     *
-     * @return void
      */
-    protected function configurePermissions()
+    protected function configurePermissions(): void
     {
         Jetstream::defaultApiTokenPermissions([]);
 
@@ -124,7 +117,7 @@ class JetstreamServiceProvider extends ServiceProvider
         ])
             ->description(Trans::get($memberRoleDescription));
 
-        if (! empty($usingTeamMemberSubs)) {
+        if (!empty($usingTeamMemberSubs)) {
             Jetstream::role('subscriber', 'Subscriber', [
                 'feed-read',
             ])

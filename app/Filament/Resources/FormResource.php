@@ -14,9 +14,9 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -25,6 +25,7 @@ use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Modules\Forms\Http\Livewire\UserRegistrationForm;
@@ -69,7 +70,7 @@ class FormResource extends Resource
                 ->blocks([
                     Block::make('text')
                         ->label('Text input')
-                        ->icon('heroicon-o-annotation')
+                        ->icon('heroicon-o-chat-bubble-bottom-center-text')
                         ->schema([
                             self::getFieldNameInput(),
                             Checkbox::make('is_required'),
@@ -86,7 +87,7 @@ class FormResource extends Resource
                             TextInput::make('hint'),
                         ]),
                     Block::make('select')
-                        ->icon('heroicon-o-selector')
+                        ->icon('heroicon-o-chevron-up-down')
                         ->schema([
                             self::getFieldNameInput(),
                             KeyValue::make('options')
@@ -106,7 +107,7 @@ class FormResource extends Resource
                             TextInput::make('hint'),
                         ]),
                     Block::make('file')
-                        ->icon('heroicon-o-photograph')
+                        ->icon('heroicon-o-photo')
                         ->schema([
                             self::getFieldNameInput(),
                             Grid::make()
@@ -121,6 +122,29 @@ class FormResource extends Resource
                 ->createItemButtonLabel('Add Form Element')
                 ->disableLabel(),
         ]);
+    }
+
+    protected static function getFieldNameInput(): Grid
+    {
+        // This is not a Filament-specific method, simply saves on repetition
+        // between our builder blocks.
+        return Grid::make()
+            ->schema([
+                TextInput::make('label')
+                    ->lazy()
+                    ->afterStateUpdated(function (Set $set, $state) {
+                        $name = Str::of($state)
+                            ->snake()
+                            ->replace(['-'], '_')
+                            ->lower();
+                        $set('name', $name);
+                    })
+                    ->required(),
+                TextInput::make('name')
+                    ->label('Field Slug')
+                    ->required(),
+
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -161,41 +185,18 @@ class FormResource extends Resource
         ];
     }
 
-    protected static function getNavigationBadge(): ?string
+    public static function getNavigationBadge(): ?string
     {
         return static::getEloquentQuery()->get()->count();
     }
 
-    protected static function getNavigationBadgeColor(): ?string
+    public static function getNavigationBadgeColor(): ?string
     {
         return static::getEloquentQuery()->get()->count() > 10 ? 'warning' : 'primary';
     }
 
-    protected static function getFieldNameInput(): Grid
-    {
-        // This is not a Filament-specific method, simply saves on repetition
-        // between our builder blocks.
-        return Grid::make()
-            ->schema([
-                TextInput::make('label')
-                    ->lazy()
-                    ->afterStateUpdated(function (Closure $set, $state) {
-                        $name = Str::of($state)
-                            ->snake()
-                            ->replace(['-'], '_')
-                            ->lower();
-                        $set('name', $name);
-                    })
-                    ->required(),
-                TextInput::make('name')
-                    ->label('Field Slug')
-                    ->required(),
-
-            ]);
-    }
-
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn (Model $record): string => route('forms.edit', ['record' => $record]);
+        return fn(Model $record): string => route('forms.edit', ['record' => $record]);
     }
 }

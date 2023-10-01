@@ -70,6 +70,14 @@ class Edit extends Component
         $this->emitImagesSet();
     }
 
+    private function emitImagesSet(): void
+    {
+        $this->dispatch('update-post:image-set',
+            id: $this->editorId,
+            images: $this->images
+        );
+    }
+
     public function removeTemporaryImage($index)
     {
         if (isset($this->images[$index])) {
@@ -85,7 +93,7 @@ class Edit extends Component
 
         $this->post->fresh();
 
-        $this->emit('refreshComponent');
+        $this->dispatch('refreshComponent');
 
         $this->reset('confirmingMediaRemoval', 'mediaIdBeingRemoved');
 
@@ -117,13 +125,5 @@ class Edit extends Component
             'post.body' => ['required'],
             'post.image' => ['nullable', 'string'],
         ];
-    }
-
-    private function emitImagesSet(): void
-    {
-        $this->dispatchBrowserEvent('update-post:image-set', [
-            'id' => $this->editorId,
-            'images' => $this->images,
-        ]);
     }
 }

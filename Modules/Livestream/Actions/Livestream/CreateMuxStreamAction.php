@@ -7,6 +7,7 @@ use Modules\Livestream\Models\Stream;
 use Modules\Livestream\Models\Team;
 use Modules\Livestream\Services\Mux\MuxLivestream;
 use Modules\Livestream\Support\Livestream\WithLivestreamAccount;
+use MuxPhp\ApiException;
 
 class CreateMuxStreamAction
 {
@@ -15,7 +16,7 @@ class CreateMuxStreamAction
     /**
      * Create mux stream of a team.
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function execute(?Team $team = null): Stream
     {

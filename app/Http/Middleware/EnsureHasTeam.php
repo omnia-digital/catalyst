@@ -9,7 +9,7 @@ class EnsureHasTeam
 {
     public function handle(Request $request, Closure $next)
     {
-        if (! auth()->user()->isMemberOfATeam()) {
+        if (!auth()->user()->isMemberOfATeam()) {
             return redirect()->route('social.home');
         }
         $this->ensureUserHasCurrentTeamSet();

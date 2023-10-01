@@ -34,7 +34,8 @@ class MuxEventController extends LivestreamController
 {
     public function testEvent()
     {
-        $data = json_decode('{"accessor":"","accessor_source":"","attempts":[],"created_at":"2020-03-24T21:37:59.000000Z","data":{"active_asset_id":"F53qM1uHk4UA01011fe00h9Tufb6InlE7Jc","connected":true,"created_at":1585085671,"id":"RVwmVtSN1Iz102GGFmrDuuKLWTjLX8HzY","new_asset_settings":{"playback_policies":["public"]},"playback_ids":[{"id":"adMtNTYQhqXDuuMXV6NgXWOs24Uaqw1u","policy":"public"}],"recent_asset_ids":["F53qM1uHk4UA01011fe00h9Tufb6InlE7Jc"],"reconnect_window":60,"recording":true,"status":"active","stream_key":"26ae82bd-19ee-192e-fd53-bb41d10c12e8"},"environment":{"id":"pcg9mg","name":"Development"},"id":"bae68abf-bb91-47e9-b801-b27d430cd93e","object":{"id":"RVwmVtSN1Iz102GGFmrDuuKLWTjLX8HzY","type":"live"},"request_id":"","type":"video.live_stream.active"}', true);
+        $data = json_decode('{"accessor":"","accessor_source":"","attempts":[],"created_at":"2020-03-24T21:37:59.000000Z","data":{"active_asset_id":"F53qM1uHk4UA01011fe00h9Tufb6InlE7Jc","connected":true,"created_at":1585085671,"id":"RVwmVtSN1Iz102GGFmrDuuKLWTjLX8HzY","new_asset_settings":{"playback_policies":["public"]},"playback_ids":[{"id":"adMtNTYQhqXDuuMXV6NgXWOs24Uaqw1u","policy":"public"}],"recent_asset_ids":["F53qM1uHk4UA01011fe00h9Tufb6InlE7Jc"],"reconnect_window":60,"recording":true,"status":"active","stream_key":"26ae82bd-19ee-192e-fd53-bb41d10c12e8"},"environment":{"id":"pcg9mg","name":"Development"},"id":"bae68abf-bb91-47e9-b801-b27d430cd93e","object":{"id":"RVwmVtSN1Iz102GGFmrDuuKLWTjLX8HzY","type":"live"},"request_id":"","type":"video.live_stream.active"}',
+            true);
 
         event(new StreamActive($data));
     }
@@ -46,7 +47,7 @@ class MuxEventController extends LivestreamController
      */
     public function handle(Request $request)
     {
-        if (! $request->has('type')) {
+        if (!$request->has('type')) {
             return;
         }
 

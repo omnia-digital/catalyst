@@ -3,6 +3,7 @@
 namespace Modules\Livestream\Http\Controllers;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Livestream\Livestream;
@@ -14,6 +15,7 @@ use Modules\Livestream\Repositories\StreamRepository;
 use Modules\Livestream\Services\MuxService;
 use Modules\Livestream\Services\StreamService;
 use Modules\Livestream\Stream;
+use MuxPhp\ApiException;
 
 class StreamController extends LivestreamController
 {
@@ -28,14 +30,15 @@ class StreamController extends LivestreamController
     {
         parent::__construct($request);
         $params = $request->all();
-        if ((! empty($params['account']) || ! empty($params['livestreamAccount'])) && ! empty($params['player'])) {
-            $streamType = ! empty($params['streamType']) ? $params['streamType'] : null;
-            if (! empty($params['livestreamAccount'])) {
+        if ((!empty($params['account']) || !empty($params['livestreamAccount'])) && !empty($params['player'])) {
+            $streamType = !empty($params['streamType']) ? $params['streamType'] : null;
+            if (!empty($params['livestreamAccount'])) {
                 $this->_livestreamAccount = LivestreamAccount::findOrFail($params['livestreamAccount']);
-            } elseif (! empty($params['account'])) {
+            } elseif (!empty($params['account'])) {
                 $this->_livestreamAccount = LivestreamAccount::findOrFail($params['account']); // @NOTE - keeping this for now for backwards compatibility
             }
-            $this->_streamService = new StreamService($this->_livestreamAccount, Player::findOrFail($params['player']), $streamType);
+            $this->_streamService = new StreamService($this->_livestreamAccount, Player::findOrFail($params['player']),
+                $streamType);
         } else {
             $this->_streamService = $streamService;
         }
@@ -86,23 +89,10 @@ class StreamController extends LivestreamController
     }
 
     /**
-     * Update a stream
-     *
-     *
-     * @return Stream
-     */
-    public function update(LivestreamRequest $request, Stream $stream)
-    {
-        $stream->update($request->all());
-
-        return $stream;
-    }
-
-    /**
      * Destroy streams by id(s)
      *
-     * @param  Stream  $stream
-     * @return \Illuminate\Http\JsonResponse success on destroy
+     * @param Stream $stream
+     * @return JsonResponse success on destroy
      */
     public function destroy(LivestreamRequest $request, $ids)
     {
@@ -132,23 +122,10 @@ class StreamController extends LivestreamController
     }
 
     /**
-     * Return whether or not a given LivestreamAccount is Currently Streaming
-     *
-     *
-     * @return mixed
-     *
-     * @throws Exception
-     */
-    public function isCurrentlyStreaming(Request $request, LivestreamAccount $livestreamAccount)
-    {
-        return response()->json($livestreamAccount->is_live_now);
-    }
-
-    /**
      * Get the current livestream for given livestream account (or logged in one)
      *
      *
-     * @return \Illuminate\Http\JsonResponse | false   Collection Object with
+     * @return JsonResponse | false   Collection Object with
      *
      * @throws Exception
      */
@@ -158,7 +135,7 @@ class StreamController extends LivestreamController
         $playbackUrl = '';
         $imageUrl = '';
 
-        if (! empty($livestreamAccount->id)) {
+        if (!empty($livestreamAccount->id)) {
             $this->_livestreamAccount = $livestreamAccount;
         }
 
@@ -169,7 +146,7 @@ class StreamController extends LivestreamController
                 // Mux Live stream
                 // @note we are currently just pulling the first stream for this account, eventually we will need to take in which stream the request is looking for
                 $streams = $this->_livestreamAccount->streams;
-                if (! empty($streams) && $streams->isNotEmpty()) {
+                if (!empty($streams) && $streams->isNotEmpty()) {
                     $stream = $streams->first();
                     $playbackUrl = $stream->default_playback_url;
                 }
@@ -183,7 +160,7 @@ class StreamController extends LivestreamController
             $imageUrl = $this->_livestreamAccount->before_live_image;
         }
 
-        if (! empty($playbackUrl)) {
+        if (!empty($playbackUrl)) {
             $response = [
                 'playback_url' => $playbackUrl,
                 'image_url' => $imageUrl,
@@ -194,13 +171,26 @@ class StreamController extends LivestreamController
     }
 
     /**
+     * Return whether or not a given LivestreamAccount is Currently Streaming
+     *
+     *
+     * @return mixed
+     *
+     * @throws Exception
+     */
+    public function isCurrentlyStreaming(Request $request, LivestreamAccount $livestreamAccount)
+    {
+        return response()->json($livestreamAccount->is_live_now);
+    }
+
+    /**
      * Admin stops stream.
      *
      * @throws Exception
      */
     public function stopStream(Request $request)
     {
-        if (! Omnia::developer($request->user()->email)) {
+        if (!Omnia::developer($request->user()->email)) {
             abort(403);
         }
 
@@ -233,7 +223,7 @@ class StreamController extends LivestreamController
      *
      * @return mixed
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function resetStreamKey(Request $request)
     {
@@ -242,7 +232,7 @@ class StreamController extends LivestreamController
         $muxStream = (new MuxService)->getLiveApi();
         $newStreamKey = $muxStream->resetStreamKey($request->stream_id);
 
-        if (! isset($newStreamKey['data']['stream_key'])) {
+        if (!isset($newStreamKey['data']['stream_key'])) {
             return response()->json([
                 'success' => false,
                 'message' => 'Cannot get the new stream key.',
@@ -254,5 +244,18 @@ class StreamController extends LivestreamController
         ]);
 
         return $newStreamKey['data']['stream_key'];
+    }
+
+    /**
+     * Update a stream
+     *
+     *
+     * @return Stream
+     */
+    public function update(LivestreamRequest $request, Stream $stream)
+    {
+        $stream->update($request->all());
+
+        return $stream;
     }
 }

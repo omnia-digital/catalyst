@@ -4,7 +4,6 @@ namespace Modules\Social\Http\Livewire\Pages\Art;
 
 use Livewire\Component;
 use Modules\Social\Models\Post;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Index extends Component
 {

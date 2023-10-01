@@ -1,8 +1,9 @@
+@php use Modules\Jobs\Enums\JobAddons; @endphp
 @props(['job'])
 
 @php
     $class = 'col-span-1 rounded-lg shadow ';
-    $class .= $job->hasAddon(\Modules\Jobs\Enums\JobAddons::HIGHLIGHT_JOB) ? 'bg-yellow-50' : 'bg-white';
+    $class .= $job->hasAddon(JobAddons::HIGHLIGHT_JOB) ? 'bg-yellow-50' : 'bg-white';
 @endphp
 
 <li {{ $attributes->merge(['class' => $class]) }}>
@@ -23,7 +24,7 @@
                 </p>
 
                 <p class="flex items-center mt-1 text-gray-500 text-sm leading-5 truncate">
-                    <x-heroicon-o-location-marker id="location" class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
+                    <x-library::icons.icon name="fa-light fa-location-dot" id="location" class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
 
                     @if ($job->location)
                         <span class="mr-2">{{ $job->location }}</span>
@@ -35,13 +36,16 @@
                 </p>
 
                 <p class="flex items-center mt-1 text-gray-500 text-sm leading-5 truncate">
-                    <x-heroicon-o-credit-card id="payment-type-budget" class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
-                    {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . \Platform::money($job->budget) : '' }}
+                    <x-heroicon-o-credit-card id="payment-type-budget"
+                                              class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
+                    {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . Platform::money($job->budget) : '' }}
                 </p>
 
-                <x-tooltip wire:key="{{ $job->id . time() }}" trigger="posted-on-{{ $job->id }}">{{ $job->created_at->format('Y-m-d') }}</x-tooltip>
+                <x-tooltip wire:key="{{ $job->id . time() }}"
+                           trigger="posted-on-{{ $job->id }}">{{ $job->created_at->format('Y-m-d') }}</x-tooltip>
                 <p class="flex items-center mt-1 text-gray-500 text-sm leading-5 truncate">
-                    <x-heroicon-o-calendar id="posted-on-{{ $job->id }}" class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
+                    <x-heroicon-o-calendar id="posted-on-{{ $job->id }}"
+                                           class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
                     Posted {{ $job->created_at->diffForHumans() }}
                 </p>
             </div>
@@ -58,7 +62,8 @@
             {{--                </a>--}}
             {{--            </div>--}}
             <div class="-ml-px w-0 flex-1 flex">
-                <a href="{{ route('jobs.show', ['team' => $job->company, 'job' => $job]) }}" class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 transition ease-in-out duration-150">
+                <a href="{{ route('jobs.show', ['team' => $job->company, 'job' => $job]) }}"
+                   class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 transition ease-in-out duration-150">
                     <x-heroicon-s-cursor-click class="w-5 h-5 text-gray-400"/>
                     <span class="ml-3">Apply</span>
                 </a>

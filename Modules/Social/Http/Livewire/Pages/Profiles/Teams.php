@@ -36,7 +36,7 @@ class Teams extends Component
 
         $this->orderBy = 'name';
 
-        if (! App::environment('production')) {
+        if (!App::environment('production')) {
             $this->useCache = false;
         }
     }
@@ -47,7 +47,7 @@ class Teams extends Component
             ->withUser($this->user)
             ->withCount(['users']);
 
-        $query = $query->when($this->search, fn (Builder $q) => $q->search($this->search));
+        $query = $query->when($this->search, fn(Builder $q) => $q->search($this->search));
         $query = $this->applySorting($query);
 
         return $query;

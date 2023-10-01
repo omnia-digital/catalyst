@@ -4,6 +4,7 @@ namespace Modules\Reviews\Database\factories;
 
 use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Reviews\Models\Review;
 
 class ReviewFactory extends Factory
 {
@@ -12,7 +13,7 @@ class ReviewFactory extends Factory
      *
      * @var string
      */
-    protected $model = \Modules\Reviews\Models\Review::class;
+    protected $model = Review::class;
 
     /**
      * Define the model's default state.

@@ -62,16 +62,16 @@ class Home extends Component
         return $places->all();
     }
 
-    public function getNewsRssFeeds()
-    {
-        return Platform::isModuleEnabled('Feeds') ? FeedSource::first()->get() : collect();
-    }
-
     public function render()
     {
         return view('social::livewire.pages.home', [
             'places' => $this->places,
             'newsRssFeeds' => $this->getNewsRssFeeds(),
         ]);
+    }
+
+    public function getNewsRssFeeds()
+    {
+        return Platform::isModuleEnabled('Feeds') ? FeedSource::first()->get() : collect();
     }
 }

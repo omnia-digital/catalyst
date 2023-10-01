@@ -43,7 +43,7 @@ class UpdateTeamInformation extends Component
     {
         $this->resetErrorBag();
 
-        $updater->update($this->user, $this->team, ! is_string($this->logo)
+        $updater->update($this->user, $this->team, !is_string($this->logo)
             ? array_merge($this->state, ['logo' => $this->logo])
             : $this->state);
 
@@ -51,8 +51,8 @@ class UpdateTeamInformation extends Component
             return redirect()->route('teams.show', $this->team);
         }
 
-        $this->emit('saved');
-        $this->emit('refresh-navigation-menu');
+        $this->dispatch('saved');
+        $this->dispatch('refresh-navigation-menu');
     }
 
     /**

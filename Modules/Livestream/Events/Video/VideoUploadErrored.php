@@ -2,8 +2,6 @@
 
 namespace Modules\Livestream\Events\Video;
 
-use Modules\Livestream\Events\Event;
-
 class VideoUploadErrored extends MuxEvent
 {
     public $data;

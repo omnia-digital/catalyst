@@ -15,7 +15,7 @@ class UserSubscriptionCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (! Platform::isUsingUserSubscriptions()) {
+        if (!Platform::isUsingUserSubscriptions()) {
             return $next($request);
         }
 

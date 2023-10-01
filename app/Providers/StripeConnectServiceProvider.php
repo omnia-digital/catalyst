@@ -11,7 +11,8 @@ class StripeConnectServiceProvider extends ServiceProvider
     {
         if (env('STRIPE_KEY')) {
             $this->app->singleton(StripeConnect::class, function () {
-                return new StripeConnect(secret: config('services.stripe.secret'), refreshUrl: route('teams.stripe-connect.refresh'));
+                return new StripeConnect(secret: config('services.stripe.secret'),
+                    refreshUrl: route('teams.stripe-connect.refresh'));
             });
         }
     }

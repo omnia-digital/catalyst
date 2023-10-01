@@ -2,8 +2,6 @@
 
 namespace Modules\Livestream\Events\Video;
 
-use Modules\Livestream\Events\Event;
-
 class VideoAssetStaticReady extends MuxEvent
 {
     public $data;

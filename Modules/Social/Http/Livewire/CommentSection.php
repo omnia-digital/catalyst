@@ -37,9 +37,16 @@ class CommentSection extends Component
         $this->loadComments();
     }
 
+    private function loadComments(): void
+    {
+        $this->comments = $this->post->comments()
+            ->latest()
+            ->get();
+    }
+
     public function saveComment($data)
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Platform::isAllowingGuestAccess() && !auth()->check()) {
             $this->showAuthenticationModal(route('social.posts.show', $this->post));
 
             return;
@@ -63,18 +70,11 @@ class CommentSection extends Component
         $this->post->user->notify(new NewCommentNotification($comment, auth()->user()));
 
         $this->loadComments();
-        $this->emitPostSaved($data['id']);
+        $this->dispatch('post-saved', $data['id']);
     }
 
     public function render()
     {
         return view('social::livewire.partials.comment-section');
-    }
-
-    private function loadComments(): void
-    {
-        $this->comments = $this->post->comments()
-            ->latest()
-            ->get();
     }
 }

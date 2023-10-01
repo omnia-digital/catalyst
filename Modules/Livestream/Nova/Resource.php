@@ -2,6 +2,7 @@
 
 namespace Modules\Livestream\Nova;
 
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource as NovaResource;
 use Titasgailius\SearchRelations\SearchesRelations;
@@ -13,8 +14,8 @@ abstract class Resource extends NovaResource
     /**
      * Build an "index" query for the given resource.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
@@ -24,7 +25,7 @@ abstract class Resource extends NovaResource
     /**
      * Build a Scout search query for the given resource.
      *
-     * @param  \Laravel\Scout\Builder  $query
+     * @param \Laravel\Scout\Builder $query
      * @return \Laravel\Scout\Builder
      */
     public static function scoutQuery(NovaRequest $request, $query)
@@ -35,8 +36,8 @@ abstract class Resource extends NovaResource
     /**
      * Build a "detail" query for the given resource.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public static function detailQuery(NovaRequest $request, $query)
     {
@@ -48,8 +49,8 @@ abstract class Resource extends NovaResource
      *
      * This query determines which instances of the model may be attached to other resources.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public static function relatableQuery(NovaRequest $request, $query)
     {

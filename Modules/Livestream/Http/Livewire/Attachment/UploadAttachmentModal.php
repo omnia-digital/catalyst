@@ -34,14 +34,19 @@ class UploadAttachmentModal extends Component
         $this->validate($this->uploadRules());
     }
 
+    private function uploadRules(): array
+    {
+        return [
+            'attachment' => [
+                'mimes:' . implode(',', config('media-library.allowed_file_types')),
+                'max:' . config('media-library.max_file_size'),
+            ],
+        ];
+    }
+
     public function showUploadAttachmentModal()
     {
         $this->uploadAttachmentModalOpen = true;
-    }
-
-    public function hideUploadAttachmentModal()
-    {
-        $this->uploadAttachmentModalOpen = false;
     }
 
     public function submit()
@@ -57,15 +62,11 @@ class UploadAttachmentModal extends Component
         $this->isUpload ? $this->upload() : $this->saveStaticUrl();
 
         $this->reset('name', 'attachment', 'url');
-        $this->emit('clearUploadInput');
+        $this->dispatch('clearUploadInput');
         $this->success('Upload attachment successfully');
         $this->hideUploadAttachmentModal();
-        $this->emitTo('episode.episode-info-panel', 'attachmentUploaded');
-    }
+        $this->dispatch('attachmentUploaded')->to('episode.episode-info-panel');
 
-    public function render()
-    {
-        return view('attachment.upload-attachment-modal');
     }
 
     private function upload(): void
@@ -83,13 +84,13 @@ class UploadAttachmentModal extends Component
         $this->episode->saveStaticUrl($this->url, $this->name, $mimeType);
     }
 
-    private function uploadRules(): array
+    public function hideUploadAttachmentModal()
     {
-        return [
-            'attachment' => [
-                'mimes:' . implode(',', config('media-library.allowed_file_types')),
-                'max:' . config('media-library.max_file_size'),
-            ],
-        ];
+        $this->uploadAttachmentModalOpen = false;
+    }
+
+    public function render()
+    {
+        return view('attachment.upload-attachment-modal');
     }
 }

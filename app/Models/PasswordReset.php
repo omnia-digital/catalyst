@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property string $email
  * @property string $token
- * @property int    $created_at
+ * @property int $created_at
  */
 class PasswordReset extends Model
 {
@@ -61,15 +61,7 @@ class PasswordReset extends Model
         'email' => 'string',
         'token' => 'string',
         'created_at' => 'timestamp',
-    ];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'created_at',
     ];
 
     // Scopes...

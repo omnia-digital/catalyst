@@ -2,6 +2,7 @@
 
 namespace Modules\Livestream\Http\Livewire\Profile;
 
+use Illuminate\View\View;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -54,9 +55,9 @@ class UpdateProfileInformationForm extends Component
             return redirect()->route('profile.show');
         }
 
-        $this->emit('saved');
+        $this->dispatch('saved');
 
-        $this->emit('refresh-navigation-menu');
+        $this->dispatch('refresh-navigation-menu');
     }
 
     /**
@@ -68,7 +69,7 @@ class UpdateProfileInformationForm extends Component
     {
         auth()->user()->deleteProfilePhoto();
 
-        $this->emit('refresh-navigation-menu');
+        $this->dispatch('refresh-navigation-menu');
     }
 
     /**
@@ -84,7 +85,7 @@ class UpdateProfileInformationForm extends Component
     /**
      * Render the component.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function render()
     {

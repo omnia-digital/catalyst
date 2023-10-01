@@ -31,6 +31,7 @@ use Modules\Social\Traits\HasAssociations;
 use Modules\Social\Traits\HasHandle;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
+use Overtrue\LaravelFollow\Traits\Followable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Models\Role;
@@ -40,14 +41,13 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
 use Trans;
-use Wimil\Followers\Traits\CanBeFollowed;
 
 /**
  * Teams are just Teams
  */
 class Team extends JetstreamTeam implements HasMedia, Searchable
 {
-    use HasFactory, Notifiable, Likable, Postable, CanBeFollowed, Awardable, Reviewable, HasProfilePhoto, HasSlug, HasHandle, HasLocation, HasTeamTypeTags, InteractsWithMedia, HasAssociations, HasJobs;
+    use HasFactory, Notifiable, Likable, Postable, Followable, Awardable, Reviewable, HasProfilePhoto, HasSlug, HasHandle, HasLocation, HasTeamTypeTags, InteractsWithMedia, HasAssociations, HasJobs;
 
     use HasTeamTags, HasTags {
         HasTeamTags::tags insteadof HasTags;
@@ -58,7 +58,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     /**
      * The attributes that are mass assignable.
      *
-     * @var string[]
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
@@ -70,12 +70,9 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         'stripe_connect_onboarding_completed',
     ];
 
-    protected $dates = [
-        'start_date',
-    ];
-
     protected $casts = [
         'stripe_connect_onboarding_completed' => 'boolean',
+        'start_date' => 'datetime',
     ];
 
     protected $appends = [
@@ -87,7 +84,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     /**
      * The event map for the model.
      *
-     * @var array
+     * @var array<string, class-string>
      */
     protected $dispatchesEvents = [
         'created' => TeamCreated::class,
@@ -145,7 +142,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function hasInfoIsFilled(): bool
     {
-        return ! $this->hasDefaultTeamName() && ! empty($this->phone) && ! empty($this->city) && ! empty($this->state);
+        return !$this->hasDefaultTeamName() && !empty($this->phone) && !empty($this->city) && !empty($this->state);
     }
 
     public function hasDefaultTeamName(): bool
@@ -167,14 +164,6 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     public function postsWithinTeam()
     {
         return $this->hasMany(Post::class);
-    }
-
-    /**
-     * Get all of the pending user applications for the team.
-     */
-    public function teamApplications(): HasMany
-    {
-        return $this->hasMany(TeamApplication::class);
     }
 
     public function resources(): HasMany
@@ -206,14 +195,6 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
             ->first());
     }
 
-    public function profilePhoto()
-    {
-        return optional($this->getMedia('team_profile_photos')
-            ->first());
-    }
-
-    // Attributes //
-
     /**
      * Get the URL to the team's profile photo.
      *
@@ -224,6 +205,14 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         return $this->profilePhoto()
             ->getFullUrl() ?? $this->defaultProfilePhotoUrl();
     }
+
+    public function profilePhoto()
+    {
+        return optional($this->getMedia('team_profile_photos')
+            ->first());
+    }
+
+    // Attributes //
 
     public function sampleImages()
     {
@@ -246,17 +235,23 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
         return null;
     }
 
-    public function forms(): HasMany
-    {
-        return $this->hasMany(Form::class);
-    }
-
     public function applicationForm()
     {
         return $this->forms()
             ->where('form_type_id', FormType::teamApplicationFormId())
             ->whereNotNull('form_type_id')
             ->whereNotNull('published_at')
+            ->first();
+    }
+
+    public function forms(): HasMany
+    {
+        return $this->hasMany(Form::class);
+    }
+
+    public function getOwnerAttribute()
+    {
+        return $this->owners()
             ->first();
     }
 
@@ -278,23 +273,12 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
             })->limit(1);
     }
 
-    public function getOwnerAttribute()
-    {
-        return $this->owners()
-            ->first();
-    }
-
     public function users()
     {
         return $this->morphedByMany(User::class, 'model', 'model_has_roles')
             ->withPivot('role_id')
             ->withTimestamps()
             ->as('membership');
-    }
-
-    public function roles(): HasMany
-    {
-        return $this->hasMany(Role::class);
     }
 
     public function members(): BelongsToMany
@@ -305,19 +289,24 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
             ->wherePivotNotIn('role_id', [$roleId]);
     }
 
+    public function getRoleByName($roleName)
+    {
+        return $this->roles()
+            ->where('name', $roleName)
+            ->first();
+    }
+
+    public function roles(): HasMany
+    {
+        return $this->hasMany(Role::class);
+    }
+
     public function admins()
     {
         $roleId = $this->getRoleByName(config('platform.teams.default_admin_role'))->id;
 
         return $this->users()
             ->wherePivotIn('role_id', [$roleId]);
-    }
-
-    public function getRoleByName($roleName)
-    {
-        return $this->roles()
-            ->where('name', $roleName)
-            ->first();
     }
 
     public function allUsers()
@@ -329,6 +318,14 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
     {
         return $this->teamApplications()
             ->count();
+    }
+
+    /**
+     * Get all of the pending user applications for the team.
+     */
+    public function teamApplications(): HasMany
+    {
+        return $this->hasMany(TeamApplication::class);
     }
 
     public function hasUserWithEmail(string $email)
@@ -366,12 +363,12 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
 
     public function hasStripeConnectAccount(): bool
     {
-        return ! empty($this->stripe_connect_id);
+        return !empty($this->stripe_connect_id);
     }
 
     public function stripeConnectOnboardingCompleted(): bool
     {
-        return (bool) $this->stripe_connect_onboarding_completed;
+        return (bool)$this->stripe_connect_onboarding_completed;
     }
 
     public function subscription(): BelongsTo
@@ -401,7 +398,7 @@ class Team extends JetstreamTeam implements HasMedia, Searchable
      * Jobs
      */
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function jobs()
     {

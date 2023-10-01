@@ -13,9 +13,11 @@ class GetTotalAttachmentDownloadsAction
 
         // For normal episodes, get all episodes to calculate the attachment downloads count.
         if ($expiredOnly) {
-            $downloadCount = $team->livestreamAccount->episodes()->expired()->whereTotalAttachmentDownloadsInDateRange($from, $to)->get()->sum('attachment_downloads_sum_count');
+            $downloadCount = $team->livestreamAccount->episodes()->expired()->whereTotalAttachmentDownloadsInDateRange($from,
+                $to)->get()->sum('attachment_downloads_sum_count');
         } else {
-            $downloadCount = $team->livestreamAccount->episodes()->whereTotalAttachmentDownloadsInDateRange($from, $to)->get()->sum('attachment_downloads_sum_count');
+            $downloadCount = $team->livestreamAccount->episodes()->whereTotalAttachmentDownloadsInDateRange($from,
+                $to)->get()->sum('attachment_downloads_sum_count');
         }
 
         return $downloadCount;

@@ -10,7 +10,7 @@ class EditGames extends EditRecord
 {
     protected static string $resource = GameResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),

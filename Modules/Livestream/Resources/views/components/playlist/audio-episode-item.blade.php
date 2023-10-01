@@ -77,8 +77,9 @@
                 <ul class="ml-3 flex items-center space-x-3">
                     @foreach ($episode->media->sortBy('mime_type') as $attachment)
                         <li class="items-center">
-                            <a href="{{ route('attachments.download', $attachment->id) }}" download="{{ $attachment->name }}" target="_blank">
-{{--                                {{ $attachment->name }}--}}
+                            <a href="{{ route('attachments.download', $attachment->id) }}"
+                               download="{{ $attachment->name }}" target="_blank">
+                                {{--                                {{ $attachment->name }}--}}
                                 <x-attachment-icon :for="$attachment->mime_type"/>
                             </a>
                         </li>

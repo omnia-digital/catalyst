@@ -62,14 +62,39 @@ class EpisodeInfoPanel extends Component
         }
     }
 
+    public function findEpisode($episodeId)
+    {
+        // Don't do anything when user select same episode.
+        if ($episodeId === $this->episode?->id) {
+            return;
+        }
+
+        $this->episode = Episode::withCount('videoViews')->find($episodeId);
+        $this->selectedSeries = $this->episode->series()->pluck('series_id')->all();
+
+        // Fill data for the edit form,
+        // we don't want to use the data from model binding
+        // because it will show title as empty when user delete title in the edit form.
+        $this->state = $this->episode?->only([
+            'title',
+            'description',
+            'date_recorded',
+            'is_published',
+            'main_speaker_id',
+            'main_passage',
+            'other_passages',
+            'category_id',
+        ]) ?? [];
+
+        $this->topics = $this->episode->tagsWithType('topic')->implode('name', ',');
+
+        // Dispatch event for open the over-slide on mobile
+        $this->showSlideOver();
+    }
+
     public function showEditModal()
     {
         $this->editModalOpen = true;
-    }
-
-    public function hideEditModal()
-    {
-        $this->editModalOpen = false;
     }
 
     public function showDeleteAttachmentModal($mediaUuid)
@@ -103,47 +128,22 @@ class EpisodeInfoPanel extends Component
         $this->hideEditModal();
     }
 
+    public function hideEditModal()
+    {
+        $this->editModalOpen = false;
+    }
+
     public function downloadEpisode()
     {
         $this->authorize('download', $this->episode);
 
-        if (! ($url = $this->episode->video->getDownloadUrl())) {
+        if (!($url = $this->episode->video->getDownloadUrl())) {
             $this->error('Converting file to be able to be downloaded. The time this process takes depends on the length of the video. If the video is over 1 hour long, please check back in a few hours.');
 
             return;
         }
 
         $this->redirect($url);
-    }
-
-    public function findEpisode($episodeId)
-    {
-        // Don't do anything when user select same episode.
-        if ($episodeId === $this->episode?->id) {
-            return;
-        }
-
-        $this->episode = Episode::withCount('videoViews')->find($episodeId);
-        $this->selectedSeries = $this->episode->series()->pluck('series_id')->all();
-
-        // Fill data for the edit form,
-        // we don't want to use the data from model binding
-        // because it will show title as empty when user delete title in the edit form.
-        $this->state = $this->episode?->only([
-            'title',
-            'description',
-            'date_recorded',
-            'is_published',
-            'main_speaker_id',
-            'main_passage',
-            'other_passages',
-            'category_id',
-        ]) ?? [];
-
-        $this->topics = $this->episode->tagsWithType('topic')->implode('name', ',');
-
-        // Dispatch event for open the over-slide on mobile
-        $this->showSlideOver();
     }
 
     public function resetEpisode()
@@ -155,7 +155,7 @@ class EpisodeInfoPanel extends Component
     {
         $media = Media::findByUuid($mediaUuid);
 
-        if (! $media) {
+        if (!$media) {
             $this->error('Cannot find the attachment object.');
 
             return;
@@ -166,7 +166,7 @@ class EpisodeInfoPanel extends Component
                 ->getDriver()
                 ->readStream('/' . $media->id . '/' . $media->file_name);
 
-            return Response::stream(fn () => fpassthru($file), 200, [
+            return Response::stream(fn() => fpassthru($file), 200, [
                 'Content-Type' => $media->mime_type,
                 'Content-Disposition' => 'attachment; filename="' . $media->name . '"',
                 'Content-Length' => $media->size,
@@ -186,7 +186,7 @@ class EpisodeInfoPanel extends Component
     {
         $media = Media::findByUuid($mediaUuid);
 
-        if (! $media) {
+        if (!$media) {
             $this->error('Cannot find the attachment object.');
 
             return;

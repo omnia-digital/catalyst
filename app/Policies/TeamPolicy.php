@@ -4,51 +4,48 @@ namespace App\Policies;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Support\Platform\Platform;
+use App\Traits\Policies\HasDefaultPolicy;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Support\Facades\Response;
 use Modules\Billing\Models\SubscriptionType;
-use Platform;
+use Response;
 use Trans;
 
 class TeamPolicy
 {
-    use HandlesAuthorization;
+    use HandlesAuthorization, HasDefaultPolicy;
 
-    public function apply(User $user, Team $team)
+    public function apply(User $user, Team $team): bool
     {
         if (! Platform::isUsingUserSubscriptions()) {
             return true;
+        } else {
+            return false;
         }
     }
 
     /**
      * Determine whether the user can view any models.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->can('view_any_team');
     }
 
     /**
      * Determine whether the user can view the model.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Team $team)
+    public function view(User $user, Team $team): bool
     {
         return $user->can('view_team');
     }
 
     /**
      * Determine whether the user can create models.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-//        return $user->can('create_team');
+        //        return $user->can('create_team');
 
         if (! Platform::isUsingUserSubscriptions()) {
             return true;
@@ -63,12 +60,10 @@ class TeamPolicy
 
     /**
      * Determine whether the user can update the model.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Team $team)
+    public function update(User $user, Team $team): bool
     {
-//        return $user->can('update_team');
+        //        return $user->can('update_team');
 
         if ($user->ownsTeam($team)) {
             return true;
@@ -79,14 +74,14 @@ class TeamPolicy
                 return true;
             }
         }
+
+        return false;
     }
 
     /**
      * Determine whether the user can add team members.
-     *
-     * @return mixed
      */
-    public function addTeamMember(User $user, Team $team)
+    public function addTeamMember(User $user, Team $team): bool
     {
         if ($user->ownsTeam($team)) {
             return true;
@@ -101,10 +96,8 @@ class TeamPolicy
 
     /**
      * Determine whether the user can update team member permissions.
-     *
-     * @return mixed
      */
-    public function updateTeamMember(User $user, Team $team)
+    public function updateTeamMember(User $user, Team $team): bool
     {
         return $user->ownsTeam($team);
     }
@@ -139,10 +132,8 @@ class TeamPolicy
 
     /**
      * Determine whether the user can remove team members.
-     *
-     * @return mixed
      */
-    public function removeTeamMember(User $user, Team $team)
+    public function removeTeamMember(User $user, Team $team): bool
     {
         if ($user->ownsTeam($team)) {
             return true;
@@ -162,81 +153,65 @@ class TeamPolicy
 
     /**
      * Determine whether the user can delete the model.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Team $team)
+    public function delete(User $user, Team $team): bool
     {
         return $user->ownsTeam($team);
-//        return $user->can('delete_team');
+        //        return $user->can('delete_team');
     }
 
     /**
      * Determine whether the user can bulk delete.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function deleteAny(User $user)
+    public function deleteAny(User $user): bool
     {
         return $user->can('delete_any_team');
     }
 
     /**
      * Determine whether the user can permanently delete.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Team $team)
+    public function forceDelete(User $user, Team $team): bool
     {
         return $user->can('force_delete_team');
     }
 
     /**
      * Determine whether the user can permanently bulk delete.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDeleteAny(User $user)
+    public function forceDeleteAny(User $user): bool
     {
         return $user->can('force_delete_any_team');
     }
 
     /**
      * Determine whether the user can restore.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Team $team)
+    public function restore(User $user, Team $team): bool
     {
         return $user->can('restore_team');
     }
 
     /**
      * Determine whether the user can bulk restore.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restoreAny(User $user)
+    public function restoreAny(User $user): bool
     {
         return $user->can('restore_any_team');
     }
 
     /**
      * Determine whether the user can replicate.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user, Team $team)
+    public function replicate(User $user, Team $team): bool
     {
         return $user->can('replicate_team');
     }
 
     /**
      * Determine whether the user can reorder.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function reorder(User $user)
+    public function reorder(User $user): bool
     {
         return $user->can('reorder_team');
     }

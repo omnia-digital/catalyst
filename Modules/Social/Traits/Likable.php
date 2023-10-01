@@ -5,11 +5,18 @@ namespace Modules\Social\Traits;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Social\Events\LikedModel;
 use Modules\Social\Models\Like;
-
 use function auth;
 
 trait Likable
 {
+    /**
+     * Check if the current model is liked by the user that is logged in
+     */
+    public function getIsLikedAttribute(): bool
+    {
+        return (bool)$this->likes()->where('user_id', auth()->id())->where('liked', true)->count();
+    }
+
     /**
      * Get the model's likes
      */
@@ -19,19 +26,12 @@ trait Likable
     }
 
     /**
-     * Check if the current model is liked by the user that is logged in
-     */
-    public function getIsLikedAttribute(): bool
-    {
-        return (bool) $this->likes()->where('user_id', auth()->id())->where('liked', true)->count();
-    }
-
-    /**
      * Check if the current model was previously liked by the user that is logged in
      */
     public function getWasLikedAttribute(): bool
     {
-        return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked', true)->whereNotNull('deleted_at')->count();
+        return (bool)$this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked',
+            true)->whereNotNull('deleted_at')->count();
     }
 
     /**
@@ -39,7 +39,7 @@ trait Likable
      */
     public function getIsDislikedAttribute(): bool
     {
-        return (bool) $this->likes()->where('user_id', auth()->id())->where('liked', false)->count();
+        return (bool)$this->likes()->where('user_id', auth()->id())->where('liked', false)->count();
     }
 
     /**
@@ -47,7 +47,8 @@ trait Likable
      */
     public function getWasDislikedAttribute(): bool
     {
-        return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked', false)->whereNotNull('deleted_at')->count();
+        return (bool)$this->likes()->withTrashed()->where('user_id', auth()->id())->where('liked',
+            false)->whereNotNull('deleted_at')->count();
     }
 
     /**
@@ -55,7 +56,7 @@ trait Likable
      */
     public function getWasLikedOrDislikedAttribute(): bool
     {
-        return (bool) $this->likes()->withTrashed()->where('user_id', auth()->id())->whereNotNull('deleted_at')->count();
+        return (bool)$this->likes()->withTrashed()->where('user_id', auth()->id())->whereNotNull('deleted_at')->count();
     }
 
     /**

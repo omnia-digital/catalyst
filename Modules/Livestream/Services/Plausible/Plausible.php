@@ -31,11 +31,6 @@ class Plausible
             ->throw();
     }
 
-    protected function apiUrl(string $path): string
-    {
-        return 'https://plausible.io' . Str::start($path, '/');
-    }
-
     protected function defaultEventData(): array
     {
         return [
@@ -43,5 +38,10 @@ class Plausible
             'url' => request()->fullUrl(),
             'referrer' => request()->headers->get('referer'),
         ];
+    }
+
+    protected function apiUrl(string $path): string
+    {
+        return 'https://plausible.io' . Str::start($path, '/');
     }
 }

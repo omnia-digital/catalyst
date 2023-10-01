@@ -40,15 +40,15 @@ class Post extends Model implements HasMedia, Searchable
         'image',
     ];
 
-    protected $dates = [
-        'published_at',
+    protected $casts = [
+        'published_at' => 'datetime',
     ];
 
     public static function getTrending($type = 'post')
     {
         $trendingPosts = Post::withCount('likes')
             ->with('user')
-            ->when($type, fn ($query) => $query->where('type', $type))
+            ->when($type, fn($query) => $query->where('type', $type))
             ->whereNotNull('published_at')
             ->orderBy('likes_count', 'desc')
             ->orderBy('created_at', 'desc');
@@ -72,8 +72,8 @@ class Post extends Model implements HasMedia, Searchable
     public function type(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => PostType::tryFrom($value),
-            set: fn ($value) => $value?->value
+            get: fn($value) => $value ? PostType::tryFrom($value): null,
+            set: fn($value) => $value?->value
         );
     }
 
@@ -115,7 +115,7 @@ class Post extends Model implements HasMedia, Searchable
 
     public function isRepost(): bool
     {
-        return ! is_null($this->repost_original_id);
+        return !is_null($this->repost_original_id);
     }
 
     public function attachMedia(array $mediaUrls): self

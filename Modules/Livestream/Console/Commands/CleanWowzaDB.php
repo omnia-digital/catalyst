@@ -30,8 +30,8 @@ class CleanWowzaDB extends Command
     public function handle()
     {
         DB::connection('wowzadb')->table('accesslog')->where([
-            ['xevent',  '!=',   'unpublish'],
-            ['xevent',  '!=',   'stop'],
+            ['xevent', '!=', 'unpublish'],
+            ['xevent', '!=', 'stop'],
         ])->delete();
         DB::connection('wowzadb')->table('accesslog')->where([
             ['xsname', 'like', '%trans%'],

@@ -10,6 +10,14 @@ use Modules\Social\Models\Post;
 trait Postable
 {
     /**
+     * Alias for posts()
+     */
+    public function comments(): MorphMany
+    {
+        return $this->posts();
+    }
+
+    /**
      * Get the posts for the current model
      */
     public function posts(): MorphMany
@@ -17,6 +25,16 @@ trait Postable
         // @NOTE - we have to remove the 'parent' globalscope in order to retrieve comments
         return $this->morphMany(Post::class, 'postable')
             ->withoutGlobalScope('parent');
+    }
+
+    //** Aliases **//
+
+    /**
+     * Alias for createPost()
+     */
+    public function createComment($data, $userId): Model|Post
+    {
+        return $this->createPost($data, $userId);
     }
 
     /**
@@ -32,22 +50,5 @@ trait Postable
                     'url' => $data['url'] ?? null,
                     'image' => $data['image'] ?? null,
                 ]);
-    }
-
-    //** Aliases **//
-    /**
-     * Alias for posts()
-     */
-    public function comments(): MorphMany
-    {
-        return $this->posts();
-    }
-
-    /**
-     * Alias for createPost()
-     */
-    public function createComment($data, $userId): Model|Post
-    {
-        return $this->createPost($data, $userId);
     }
 }

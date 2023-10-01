@@ -6,6 +6,7 @@ use App\Models\Team;
 use App\Support\Platform\Platform;
 use App\Support\Platform\WithGuestAccess;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
@@ -14,20 +15,20 @@ use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class NewsFeedEditor extends Component
 {
-    use WithPostEditor, WithNotification, WithGuestAccess;
+    use WithGuestAccess, WithNotification, WithPostEditor;
 
     public ?string $content = null;
     public ?PostType $postType;
     public string $submitButtonText = 'Post';
     public string $placeholder = "What\'s on your mind?";
 
-    public Team|null $team = null;
+    public ?Team $team = null;
 
-    protected $listeners = [
-        'post-editor:submitted' => 'createPost',
-    ];
-
-    public function createPost($data)
+    /**
+     * @throws \Throwable
+     */
+    #[On('post-editor:submitted')]
+    public function createPost($editorId, $content, $images): void
     {
         if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal();
@@ -35,11 +36,11 @@ class NewsFeedEditor extends Component
             return;
         }
 
-        $this->content = strip_tags($data['content']);
+        $this->content = strip_tags($content);
 
         $this->validatePostEditor();
 
-        DB::transaction(function () use ($data) {
+        DB::transaction(function () use ($content, $images) {
             $options = [];
             if (! empty($this->team)) {
                 $options['team_id'] = $this->team->id;
@@ -49,11 +50,11 @@ class NewsFeedEditor extends Component
                 $post->type($this->postType);
             }
             $options['published_at'] = now();
-            $post = $post->execute($data['content'], $options);
-            $post->attachMedia($data['images'] ?? []);
+            $post = $post->execute($content, $options);
+            $post->attachMedia($images ?? []);
         });
 
-        $this->emitPostSaved($data['id']);
+        $this->emitPostSaved($editorId);
         $this->success('Post is created successfully!');
     }
 

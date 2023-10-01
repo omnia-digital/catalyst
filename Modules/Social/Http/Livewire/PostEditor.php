@@ -30,11 +30,9 @@ class PostEditor extends Component
 
     public function submit()
     {
-        $this->emitUp('post-editor:submitted', [
-            'id' => $this->editorId,
-            'content' => $this->content,
-            'images' => $this->images,
-        ]);
+        $this->dispatch('post-editor:submitted',
+            editorId: $this->editorId, content: $this->content, images: $this->images
+        );
     }
 
     public function handleValidationFailed($errorBag)
@@ -47,6 +45,14 @@ class PostEditor extends Component
         $this->reset('content', 'images');
 
         $this->emitImagesSet();
+    }
+
+    private function emitImagesSet(): void
+    {
+        $this->dispatch('post-editor:image-set',
+            id: $this->editorId,
+            images: $this->images
+        );
     }
 
     public function setImage($image)
@@ -76,13 +82,5 @@ class PostEditor extends Component
             'validationFailed:' . $this->editorId => 'handleValidationFailed',
             'postSaved:' . $this->editorId => 'handlePostSaved',
         ];
-    }
-
-    private function emitImagesSet(): void
-    {
-        $this->dispatchBrowserEvent('post-editor:image-set', [
-            'id' => $this->editorId,
-            'images' => $this->images,
-        ]);
     }
 }

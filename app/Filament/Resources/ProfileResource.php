@@ -6,11 +6,11 @@ use App\Filament\Resources\ProfileResource\Pages\CreateProfile;
 use App\Filament\Resources\ProfileResource\Pages\EditProfile;
 use App\Filament\Resources\ProfileResource\Pages\ManageProfiles;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Social\Models\Profile;
 use RalphJSmit\Filament\Components\Forms\CreatedAt;
@@ -28,11 +28,6 @@ class ProfileResource extends Resource
     protected $queryString = [
         'tableColumnSearchQueries',
     ];
-
-    public static function getLabel(): ?string
-    {
-        return 'Contact';
-    }
 
     public static function form(Form $form): Form
     {
@@ -83,14 +78,5 @@ class ProfileResource extends Resource
             'create' => CreateProfile::route('/create'),
             'edit' => EditProfile::route('/edit/{record}'),
         ];
-    }
-
-    protected static function getNavigationLabel(): string
-    {
-        if (auth()->user()->is_admin) {
-            return 'Contacts (Profiles)';
-        } else {
-            return 'Contacts';
-        }
     }
 }

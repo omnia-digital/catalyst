@@ -7,7 +7,8 @@
                         <div>
                             <h2 class="text-lg font-medium text-gray-900">{{ $person->name }}</h2>
                         </div>
-                        <button wire:click="showEditModal" type="button" class="ml-4 bg-white rounded-full h-8 w-8 flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button wire:click="showEditModal" type="button"
+                                class="ml-4 bg-white rounded-full h-8 w-8 flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <x-heroicon-s-pencil class="h-5 w-5"/>
                             <span class="sr-only">Add description</span>
                         </button>
@@ -29,7 +30,7 @@
 
                 <h3 class="text-red-600 font-bold">Danger Zone</h3>
                 <div class="grid grid-cols-1 gap-2">
-{{--                    <livewire:person.move-person :person="$person"/>--}}
+                    {{--                    <livewire:person.move-person :person="$person"/>--}}
                     <livewire:person.delete-person :person="$person"/>
                 </div>
             </div>

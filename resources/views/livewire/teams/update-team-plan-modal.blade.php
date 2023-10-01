@@ -8,7 +8,10 @@
                 @if (!$this->currentPlan->onGracePeriod())
                     <div class="mb-4">
                         @if (!$this->billable->hasDefaultPaymentMethod())
-                            <x-library::alert.warning>You don't have a default payment method. Please add one <a href="{{ route('billing.stripe-billing') }}" class="font-medium hover:underline">here</a>.</x-library::alert.warning>
+                            <x-library::alert.warning>You don't have a default payment method. Please add one <a
+                                        href="{{ route('billing.stripe-billing') }}"
+                                        class="font-medium hover:underline">here</a>.
+                            </x-library::alert.warning>
                         @endif
                     </div>
                     <div>
@@ -17,7 +20,9 @@
 
                             <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
                                 @foreach ($teamPlans as $teamPlan)
-                                    <x-library::input.radio-card :title="$teamPlan['name']" wire:model="plan" wire:key="team-plan-{{ $teamPlan['stripe_id'] }}" :value="$teamPlan['stripe_id']">
+                                    <x-library::input.radio-card :title="$teamPlan['name']" wire:model.live="plan"
+                                                                 wire:key="team-plan-{{ $teamPlan['stripe_id'] }}"
+                                                                 :value="$teamPlan['stripe_id']">
                                         <x-slot name="description" class="space-y-1">
                                             @foreach ($teamPlan['features'] as $feature)
                                                 <div class="flex items-center space-x-2">
@@ -33,12 +38,14 @@
                         <x-library::input.error for="plan" class="mt-1"/>
                     </div>
                     <div class="mt-4">
-                        <p>Or <a href="#" x-data x-on:click.prevent="$openModal('cancel-subscription')" class="text-danger-500 hover:text-danger-800">cancel your plan</a>.</p>
+                        <p>Or <a href="#" x-data x-on:click.prevent="$openModal('cancel-subscription')"
+                                 class="text-danger-500 hover:text-danger-800">cancel your plan</a>.</p>
                     </div>
                 @else
                     <p>
                         <span>Your subscription will be ended on {{ $this->currentPlan->ends_at->format('F jS, Y') }}.</span>
-                        <a href="#" wire:click.prevent="resumeSubscription" class="text-success-600 hover:text-success-800">Resume your subscription</a>?
+                        <a href="#" wire:click.prevent="resumeSubscription"
+                           class="text-success-600 hover:text-success-800">Resume your subscription</a>?
                     </p>
                 @endif
             </x-slot:content>

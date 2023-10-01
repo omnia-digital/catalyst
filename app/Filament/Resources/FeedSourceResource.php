@@ -4,11 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\FeedSourceResource\Pages;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Illuminate\Validation\Rule;
 use Modules\Feeds\Enums\FeedSourceType;
 use Modules\Feeds\Models\FeedSource;
@@ -54,8 +54,8 @@ class FeedSourceResource extends Resource
                     ->searchable()
                     ->copyable(),
 
-                TextColumn::make('type')
-                    ->enum(FeedSourceType::options())
+                Tables\Columns\SelectColumn::make('type')
+                    ->options(FeedSourceType::options())
                     ->sortable()
                     ->searchable(),
             ])

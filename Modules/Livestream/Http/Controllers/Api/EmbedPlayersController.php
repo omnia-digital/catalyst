@@ -19,17 +19,6 @@ class EmbedPlayersController extends Controller
         ]);
     }
 
-    public function loadGallery(Player $player)
-    {
-        $episodes = $this->getEpisodes($player);
-
-        return view('episode.embed-gallery', [
-            'episodes' => $episodes,
-            'initialEpisode' => $episodes->first(),
-            'player' => $player,
-        ]);
-    }
-
     protected function getEpisodes(Player $player): LengthAwarePaginator
     {
         return $player->livestreamAccount
@@ -39,5 +28,16 @@ class EmbedPlayersController extends Controller
             ->published()
             ->orderBy('date_recorded', 'desc')
             ->paginate($player->layoutSetting('video_per_page'));
+    }
+
+    public function loadGallery(Player $player)
+    {
+        $episodes = $this->getEpisodes($player);
+
+        return view('episode.embed-gallery', [
+            'episodes' => $episodes,
+            'initialEpisode' => $episodes->first(),
+            'player' => $player,
+        ]);
     }
 }

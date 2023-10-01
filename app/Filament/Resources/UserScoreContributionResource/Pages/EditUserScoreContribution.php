@@ -10,7 +10,7 @@ class EditUserScoreContribution extends EditRecord
 {
     protected static string $resource = UserScoreContributionResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),

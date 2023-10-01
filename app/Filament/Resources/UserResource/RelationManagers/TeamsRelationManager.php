@@ -3,10 +3,11 @@
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Trans;
 
@@ -16,12 +17,17 @@ class TeamsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    public static function getTitle(): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return Trans::get(Str::headline(static::getPluralModelLabel()));
     }
 
-    public static function form(Form $form): Form
+    protected static function getRecordLabel(): ?string
+    {
+        return Trans::get('Team');
+    }
+
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -31,14 +37,15 @@ class TeamsRelationManager extends RelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('handle')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('roles.name')->sortable()->searchable(), // @TODO [Josh] - change this to be only the role that this user has in this team
+                Tables\Columns\TextColumn::make('roles.name')->sortable()->searchable(),
+                // @TODO [Josh] - change this to be only the role that this user has in this team
                 Tables\Columns\TextColumn::make('members_count')->label('Members')->counts('members')->sortable()->searchable(),
             ])
             ->filters([
@@ -54,10 +61,5 @@ class TeamsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }
-
-    protected static function getRecordLabel(): ?string
-    {
-        return Trans::get('Team');
     }
 }

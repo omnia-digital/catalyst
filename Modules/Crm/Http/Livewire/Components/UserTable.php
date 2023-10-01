@@ -3,6 +3,7 @@
 namespace Modules\Crm\Http\Livewire\Components;
 
 use App\Models\User;
+use Filament\Support\Contracts\TranslatableContentDriver;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
@@ -23,6 +24,11 @@ class UserTable extends Component implements HasTable
     public function isTableSearchable(): bool
     {
         return true;
+    }
+
+    public function makeFilamentTranslatableContentDriver(): ?TranslatableContentDriver
+    {
+        // TODO: Implement makeFilamentTranslatableContentDriver() method.
     }
 
     protected function getTableQuery()

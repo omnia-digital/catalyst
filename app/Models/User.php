@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Traits\Team\HasTeams;
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,6 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Notification;
 use Laravel\Cashier\Billable;
+use Laravel\Cashier\SubscriptionBuilder;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasTeams as JetstreamHasTeams;
 use Laravel\Passport\HasApiTokens;
@@ -29,28 +32,33 @@ use Modules\Social\Models\Profile;
 use Modules\Social\Traits\Awardable;
 use Modules\Social\Traits\HasBookmarks;
 use Modules\Social\Traits\HasHandle;
+use Overtrue\LaravelFollow\Traits\Followable;
+use Overtrue\LaravelFollow\Traits\Follower;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasRoles;
 use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable;
-use Wimil\Followers\Traits\Followable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
-    use HasApiTokens,
-        TwoFactorAuthenticatable,
-        Notifiable,
-        SoftDeletes,
-        HasFactory,
-        HasBookmarks,
+    use Awardable,
         Followable,
-        Awardable,
+        Follower,
+        HasApiTokens,
+        HasBookmarks,
+        HasFactory,
         HasHandle,
-        HasRoles,
         HasJobs,
-        HasTransactions,
         HasNotificationSubscriptions,
-        SnoozeNotifiable;
+        HasPanelShield,
+        HasRoles,
+        HasTransactions,
+        Notifiable,
+        SnoozeNotifiable,
+        SoftDeletes,
+        TwoFactorAuthenticatable;
+    use Billable, WithChargentSubscriptions;
+
     use HasTeams, JetstreamHasTeams {
         HasTeams::teams insteadof JetstreamHasTeams;
         HasTeams::hasTeamRole insteadof JetstreamHasTeams;
@@ -61,9 +69,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         HasTeams::teamRole insteadof JetstreamHasTeams;
     }
 
-    use Billable, WithChargentSubscriptions;
-
-    protected $dates = ['deleted_at', 'email_verified_at', '2fa_setup_at'];
+    protected $casts = [
+        'deleted_at' => 'datetime',
+        'email_verified_at' => 'datetime',
+        '2fa_setup_at' => 'datetime',
+    ];
 
     protected $fillable = [
         'first_name',
@@ -72,6 +82,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'password',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
     protected $hidden = [
         //            'email',
         'password',
@@ -90,6 +105,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         //            'updated_at'
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
     protected $appends = [
     ];
 
@@ -120,9 +140,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             })->first();
     }
 
-    public function canAccessFilament(): bool
+    public function canAccessPanel(Panel $panel): bool
     {
-        return true;
         if ($this->is_admin) {
             return true;
         }
@@ -136,6 +155,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /// Routes ///
+
     /**
      * Route notifications for the Vonage channel.
      */
@@ -144,7 +164,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return $this->phone;
     }
 
-        //// Attributes ////
+    //// Attributes ////
 
     public function getHandleAttribute()
     {
@@ -285,7 +305,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
      *
      * @param  string  $name
      * @param  string|string[]  $prices
-     * @return \Laravel\Cashier\SubscriptionBuilder
+     * @return SubscriptionBuilder
      */
     public function newSubscription($name, $prices = [])
     {

@@ -10,7 +10,7 @@ class ViewTag extends ViewRecord
 {
     protected static string $resource = TagResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),

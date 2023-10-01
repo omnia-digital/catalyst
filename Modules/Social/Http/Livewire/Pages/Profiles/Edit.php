@@ -51,7 +51,8 @@ class Edit extends Component
 
     public function getProfileTagsProperty()
     {
-        return Tag::withType('profile_type')->get()->mapWithKeys(fn (Tag $tag) => [$tag->name => ucwords($tag->name)])->all();
+        return Tag::withType('profile_type')->get()->mapWithKeys(fn(Tag $tag
+        ) => [$tag->name => ucwords($tag->name)])->all();
     }
 
     public function mount(Profile $profile)
@@ -61,6 +62,11 @@ class Edit extends Component
         $this->country = $profile->country ?? array_keys($this->countriesArray())[0];
     }
 
+    public function countriesArray()
+    {
+        return Country::orderBy('name')->pluck('name', 'code_3')->toArray();
+    }
+
     public function saveChanges()
     {
         $this->validate();
@@ -68,23 +74,23 @@ class Edit extends Component
         $this->profile->country = $this->country;
         $this->profile->save();
 
-        if (! empty($this->profileTypes)) {
+        if (!empty($this->profileTypes)) {
             $this->profile->attachTags($this->profileTypes, 'profile_type');
         }
 
-        if (! is_null($this->bannerImage) && $this->profile->bannerImage()->count()) {
+        if (!is_null($this->bannerImage) && $this->profile->bannerImage()->count()) {
             $this->profile->bannerImage()->delete();
         }
         $this->bannerImage &&
-            $this->profile->addMedia($this->bannerImage)->toMediaCollection('profile_banner_images');
+        $this->profile->addMedia($this->bannerImage)->toMediaCollection('profile_banner_images');
 
         if ($this->photo && $this->profile->photo()->count()) {
             $this->profile->photo()->delete();
         }
         $this->photo &&
-            $this->profile->addMedia($this->photo)->toMediaCollection('profile_photos');
+        $this->profile->addMedia($this->photo)->toMediaCollection('profile_photos');
 
-        $this->emit('changes_saved');
+        $this->dispatch('changes_saved');
 
         $this->profile->refresh();
         $this->reset('bannerImage', 'bannerImageName', 'photo', 'photoName');
@@ -94,11 +100,6 @@ class Edit extends Component
     {
         $this->profile->detachTag(Tag::findFromString($tagName, 'profile_type'));
         $this->profile->refresh();
-    }
-
-    public function countriesArray()
-    {
-        return Country::orderBy('name')->pluck('name', 'code_3')->toArray();
     }
 
     public function render()

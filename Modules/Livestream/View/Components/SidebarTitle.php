@@ -3,6 +3,7 @@
 namespace Modules\Livestream\View\Components;
 
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 class SidebarTitle extends Component
 {
@@ -15,7 +16,7 @@ class SidebarTitle extends Component
     /**
      * Get the view / contents that represents the component.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function render()
     {

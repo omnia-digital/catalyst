@@ -1,13 +1,13 @@
 {
-    "name": "Livestream",
-    "alias": "livestream",
-    "description": "",
-    "keywords": [],
-    "priority": 0,
-    "providers": [
-        "Modules\\Livestream\\Providers\\LivestreamServiceProvider"
-    ],
-    "aliases": {},
-    "files": [],
-    "requires": []
+  "name": "Livestream",
+  "alias": "livestream",
+  "description": "",
+  "keywords": [],
+  "priority": 0,
+  "providers": [
+    "Modules\\Livestream\\Providers\\LivestreamServiceProvider"
+  ],
+  "aliases": {},
+  "files": [],
+  "requires": []
 }

@@ -1,15 +1,14 @@
 require('./bootstrap');
 
-import Alpine from 'alpinejs'
+// import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import Clipboard from "@ryangjchandler/alpine-clipboard"
 import trap from '@alpinejs/trap'
-import focus from '@alpinejs/focus'
 
 Alpine.plugin(Clipboard)
 Alpine.plugin(trap)
-Alpine.plugin(focus)
 
-window.Alpine = Alpine
-window.Alpine.start()
+// window.Alpine = Alpine
+// window.Alpine.start()
+Livewire.start();
 
 window.Vapor = require('laravel-vapor');

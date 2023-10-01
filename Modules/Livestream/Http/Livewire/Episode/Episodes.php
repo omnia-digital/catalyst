@@ -52,11 +52,6 @@ class Episodes extends Component
         $this->selectEpisode($episode->id);
     }
 
-    public function updatedFilters()
-    {
-        $this->resetPage();
-    }
-
     public function selectEpisode($episode)
     {
         if ($this->multiSelectMode) {
@@ -69,7 +64,31 @@ class Episodes extends Component
 
         $this->selectedEpisode = $episode;
 
-        $this->emitTo('episode.episode-info-panel', 'episodeSelected', $episode);
+        $this->dispatch('episodeSelected', episode: $episode)->to('episode.episode-info-panel');
+
+    }
+
+    public function multiSelect($id)
+    {
+        if (in_array($id, $this->selectedIDs)) {
+            $this->multiDeselect($id);
+        } else {
+            array_push($this->selectedIDs, $id);
+        }
+
+        $this->dispatch('updateSelectedEpisodes', selectedIds: $this->selectedIDs)->to('episode.multi-select-panel');
+    }
+
+    public function multiDeselect($id)
+    {
+        if (($key = array_search($id, $this->selectedIDs)) !== false) {
+            unset($this->selectedIDs[$key]);
+        }
+    }
+
+    public function updatedFilters()
+    {
+        $this->resetPage();
     }
 
     public function toggleMassAttachmentUpload()
@@ -82,6 +101,12 @@ class Episodes extends Component
 
         $this->turnOffMultiSelect();
         $this->massAttachmentUpload = true;
+    }
+
+    public function turnOffMultiSelect()
+    {
+        $this->multiSelectMode = false;
+        $this->selectedIDs = [];
     }
 
     public function toggleMultiSelect()
@@ -100,30 +125,6 @@ class Episodes extends Component
         $this->deselectEpisode();
         $this->multiSelectMode = true;
         $this->showSlideUp();
-    }
-
-    public function turnOffMultiSelect()
-    {
-        $this->multiSelectMode = false;
-        $this->selectedIDs = [];
-    }
-
-    public function multiSelect($id)
-    {
-        if (in_array($id, $this->selectedIDs)) {
-            $this->multiDeselect($id);
-        } else {
-            array_push($this->selectedIDs, $id);
-        }
-
-        $this->emitTo('episode.multi-select-panel', 'updateSelectedEpisodes', $this->selectedIDs);
-    }
-
-    public function multiDeselect($id)
-    {
-        if (($key = array_search($id, $this->selectedIDs)) !== false) {
-            unset($this->selectedIDs[$key]);
-        }
     }
 
     public function deselectEpisode()
@@ -147,12 +148,14 @@ class Episodes extends Component
         $query = clone $this->rowsQueryWithoutFilters;
 
         return $query
-            ->when($this->orderBy === 'date_recorded', fn ($query) => $query->orderBy('date_recorded', 'desc'))
-            ->when($this->orderBy === 'views', fn ($query) => $query->orderBy('video_views_count', 'desc'))
-            ->when(Arr::get($this->filters, 'speaker'), fn ($query, $speakerId) => $query->where('main_speaker_id', $speakerId))
-            ->when(Arr::get($this->filters, 'date_recorded'), fn ($query, $dateRecorded) => $query->whereDate('date_recorded', Carbon::parse($dateRecorded)))
-            ->when(Arr::get($this->filters, 'has_attachment'), fn ($query) => $query->has('media'))
-            ->when(! empty($this->search), fn ($query) => $query->where('title', 'LIKE', "%{$this->search}%"));
+            ->when($this->orderBy === 'date_recorded', fn($query) => $query->orderBy('date_recorded', 'desc'))
+            ->when($this->orderBy === 'views', fn($query) => $query->orderBy('video_views_count', 'desc'))
+            ->when(Arr::get($this->filters, 'speaker'),
+                fn($query, $speakerId) => $query->where('main_speaker_id', $speakerId))
+            ->when(Arr::get($this->filters, 'date_recorded'),
+                fn($query, $dateRecorded) => $query->whereDate('date_recorded', Carbon::parse($dateRecorded)))
+            ->when(Arr::get($this->filters, 'has_attachment'), fn($query) => $query->has('media'))
+            ->when(!empty($this->search), fn($query) => $query->where('title', 'LIKE', "%{$this->search}%"));
     }
 
     public function getRowsQueryWithoutFiltersProperty()

@@ -11,7 +11,8 @@
 
                     <div class="mt-2 space-y-2">
                         @foreach ($comments as $comment)
-                            <livewire:social::components.post-card wire:key="comment-{{ $comment->id }}" :post="$comment"/>
+                            <livewire:social::components.post-card wire:key="comment-{{ $comment->id }}"
+                                                                   :post="$comment"/>
                         @endforeach
                     </div>
                 </div>

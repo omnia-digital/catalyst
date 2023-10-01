@@ -78,13 +78,10 @@ class Episode extends Model implements HasMedia
     protected $casts = [
         'is_published' => 'boolean',
         'is_live_now' => 'boolean',
-    ];
-
-    protected $dates = [
-        'date_recorded',
-        'planned_start_time',
-        'expires_at',
-        'last_viewed_at',
+        'date_recorded' => 'datetime',
+        'planned_start_time' => 'datetime',
+        'expires_at' => 'datetime',
+        'last_viewed_at' => 'datetime',
     ];
 
     protected $dispatchesEvents = [
@@ -101,20 +98,15 @@ class Episode extends Model implements HasMedia
      */
     public static function createFromTemplate(array $episodeData): Episode
     {
-        if (! empty($episodeData['title'])) {
+        if (!empty($episodeData['title'])) {
             Omnia::replaceShortcodesInString($episodeData['title']);
         }
 
-        if (! empty($episodeData['description'])) {
+        if (!empty($episodeData['description'])) {
             Omnia::replaceShortcodesInString($episodeData['description']);
         }
 
         return Episode::create($episodeData);
-    }
-
-    public function isLive(): bool
-    {
-        return (bool) $this->is_live_now;
     }
 
     public function getThumbnailAttribute($value)
@@ -142,19 +134,6 @@ class Episode extends Model implements HasMedia
         return Storage::disk('episodes')->url($value);
     }
 
-    public function getPlayerThumbnail(Player $player): string
-    {
-        if (! $this->isLive() && $player->notLiveImageUrl) {
-            return $player->notLiveImageUrl;
-        }
-
-        if ($this->isLive() && $player->beforeLiveImageUrl) {
-            return $player->beforeLiveImageUrl;
-        }
-
-        return $this->thumbnail;
-    }
-
     /**
      * Convert duration to HH:MM:SS format.
      *
@@ -163,7 +142,7 @@ class Episode extends Model implements HasMedia
      */
     public function getFormattedDurationAttribute()
     {
-        if (! $this->duration) {
+        if (!$this->duration) {
             return;
         }
 
@@ -184,7 +163,7 @@ class Episode extends Model implements HasMedia
 
     public function setMainSpeakerIdAttribute($value)
     {
-        $this->attributes['main_speaker_id'] = empty($value) ? null : (int) $value;
+        $this->attributes['main_speaker_id'] = empty($value) ? null : (int)$value;
     }
 
     public function setCategoryIdAttribute($value)
@@ -230,7 +209,7 @@ class Episode extends Model implements HasMedia
     {
         return $query->whereHas(
             'livestreamAccount',
-            fn (Builder $query) => $query->where('video_storage_option', VideoStorageOption::DELETE_VIDEO)
+            fn(Builder $query) => $query->where('video_storage_option', VideoStorageOption::DELETE_VIDEO)
         );
     }
 
@@ -238,7 +217,8 @@ class Episode extends Model implements HasMedia
     {
         return $query
             ->onlyTrashed()
-            ->whereDate($this->getDeletedAtColumn(), '<=', now()->subDays(config('omnia.video_storage.soft_delete_lasts', 5)));
+            ->whereDate($this->getDeletedAtColumn(), '<=',
+                now()->subDays(config('omnia.video_storage.soft_delete_lasts', 5)));
     }
 
     public function scopeShouldPullViewsFromMux(Builder $query): Builder
@@ -253,19 +233,9 @@ class Episode extends Model implements HasMedia
         return $this->belongsTo(Person::class, 'main_speaker_id');
     }
 
-    public function video(): HasOne
-    {
-        return $this->hasOne(Video::class);
-    }
-
     public function livestreamAccount(): BelongsTo
     {
         return $this->belongsTo(LivestreamAccount::class);
-    }
-
-    public function series(): BelongsToMany
-    {
-        return $this->belongsToMany(Series::class, 'livestream_episode_series');
     }
 
     public function speakers()
@@ -289,16 +259,20 @@ class Episode extends Model implements HasMedia
 
     public function scopeWhereTotalAttachmentDownloadsInDateRange($query, $from, $to)
     {
-        return $query->withSum(['attachmentDownloads' => function ($query) use ($from, $to) {
-            return $query->whereBetween('downloads.created_at', [$from, $to]);
-        }], 'count');
+        return $query->withSum([
+            'attachmentDownloads' => function ($query) use ($from, $to) {
+                return $query->whereBetween('downloads.created_at', [$from, $to]);
+            }
+        ], 'count');
     }
 
     public function scopeWhereVideoViewsInDateRange($query, $from, $to)
     {
-        return $query->withCount(['videoViews' => function ($query) use ($from, $to) {
-            $query->whereBetween('video_views.created_at', [$from, $to]);
-        }]);
+        return $query->withCount([
+            'videoViews' => function ($query) use ($from, $to) {
+                $query->whereBetween('video_views.created_at', [$from, $to]);
+            }
+        ]);
     }
 
     /**
@@ -315,6 +289,11 @@ class Episode extends Model implements HasMedia
         });
     }
 
+    public function series(): BelongsToMany
+    {
+        return $this->belongsToMany(Series::class, 'livestream_episode_series');
+    }
+
     /**
      * Create video + playback ids for the give episode.
      */
@@ -328,7 +307,7 @@ class Episode extends Model implements HasMedia
 
         // Create playback ids.
         $video->playbackIds()->createMany(
-            collect($playbackIds)->map(fn (array $playbackId) => [
+            collect($playbackIds)->map(fn(array $playbackId) => [
                 'playback_id' => $playbackId['id'],
                 'policy' => $playbackId['policy'],
             ])
@@ -338,6 +317,11 @@ class Episode extends Model implements HasMedia
         app(MuxAsset::class)->addAssetMP4Support($muxVideoSourceId);
 
         return $video;
+    }
+
+    public function video(): HasOne
+    {
+        return $this->hasOne(Video::class);
     }
 
     public function createMuxAudio(string $muxAudioSourceId, array $playbackIds): Video
@@ -351,7 +335,7 @@ class Episode extends Model implements HasMedia
 
         // Create playback ids.
         $audio->playbackIds()->createMany(
-            collect($playbackIds)->map(fn (array $playbackId) => [
+            collect($playbackIds)->map(fn(array $playbackId) => [
                 'playback_id' => $playbackId['id'],
                 'policy' => $playbackId['policy'],
             ])
@@ -362,7 +346,7 @@ class Episode extends Model implements HasMedia
 
     public function toPlayer(?Player $player = null): array
     {
-        if (! ($video = $this->video)) {
+        if (!($video = $this->video)) {
             return [];
         }
 
@@ -378,14 +362,32 @@ class Episode extends Model implements HasMedia
         ];
     }
 
-    public function getTimezone()
+    public function getPlayerThumbnail(Player $player): string
     {
-        return $this->livestreamAccount->team->timezone;
+        if (!$this->isLive() && $player->notLiveImageUrl) {
+            return $player->notLiveImageUrl;
+        }
+
+        if ($this->isLive() && $player->beforeLiveImageUrl) {
+            return $player->beforeLiveImageUrl;
+        }
+
+        return $this->thumbnail;
+    }
+
+    public function isLive(): bool
+    {
+        return (bool)$this->is_live_now;
     }
 
     public function getStartDatetimeAttribute($value)
     {
         return Carbon::parse($value)->setTimezone($this->getTimezone());
+    }
+
+    public function getTimezone()
+    {
+        return $this->livestreamAccount->team->timezone;
     }
 
     public function getCreatedAtAttribute($value)

@@ -46,7 +46,7 @@ class SermonNetAdapter
             foreach ($enclosures as $enclosure) {
                 $videoUrls = collect($enclosure->link);
             }
-            if (! empty($this->_livestreamAccount)) {
+            if (!empty($this->_livestreamAccount)) {
                 $episode->livestream_account_id = $this->_livestreamAccount->id;
             }
             $this->episode = $episode;

@@ -4,7 +4,6 @@ namespace Modules\Livestream\Console\Commands;
 
 use Exception;
 use Illuminate\Console\Command;
-use Modules\Livestream\Jobs\Stats\PostStatsToService;
 use Modules\Livestream\Services\StreamStatService;
 
 class PostLivestreamStats extends Command

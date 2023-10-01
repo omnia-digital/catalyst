@@ -3,6 +3,8 @@
 namespace Modules\Livestream\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class StreamIntegration extends Model
 {
@@ -37,7 +39,7 @@ class StreamIntegration extends Model
 
     public function setEnabledAttribute($value)
     {
-        $this->attributes['enabled'] = (int) $value;
+        $this->attributes['enabled'] = (int)$value;
     }
 
     /**
@@ -57,7 +59,7 @@ class StreamIntegration extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function LivestreamAccount()
     {
@@ -67,7 +69,7 @@ class StreamIntegration extends Model
     /**
      * Stream Integrations are assigned to One Team
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     * @return HasManyThrough
      */
     public function team()
     {
@@ -77,7 +79,7 @@ class StreamIntegration extends Model
     /**
      * Stream Integrations can have one Episode Template
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function episodeTemplate()
     {

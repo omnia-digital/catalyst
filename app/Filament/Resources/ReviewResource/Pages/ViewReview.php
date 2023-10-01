@@ -10,7 +10,7 @@ class ViewReview extends ViewRecord
 {
     protected static string $resource = ReviewResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),

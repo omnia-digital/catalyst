@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Modules\Reviews\Database\factories\ReviewFactory;
 use Modules\Social\Traits\Likable;
 use Modules\Social\Traits\Postable;
 
@@ -25,7 +26,7 @@ class Review extends Model
 
     protected static function newFactory()
     {
-        return \Modules\Reviews\Database\factories\ReviewFactory::new();
+        return ReviewFactory::new();
     }
 
     public function user(): BelongsTo

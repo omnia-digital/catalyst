@@ -20,7 +20,7 @@ class TweetJob implements ShouldQueue
     {
         $status = $event->job->company->name . ' is hiring ' . $event->job->title . ' in ' . $event->job->location . "\n";
         $status .= route('jobs.show', ['team' => $event->job->company, 'job' => $event->job]) . "\n";
-        $status .= implode(' ', $event->job->tags->pluck('name')->map(fn ($tag) => '#' . $tag)->all());
+        $status .= implode(' ', $event->job->tags->pluck('name')->map(fn($tag) => '#' . $tag)->all());
 
         Twitter::postTweet(['status' => $status]);
     }

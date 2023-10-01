@@ -5,7 +5,7 @@
 ])
 
 <div
-    x-data="{
+        x-data="{
         player: null,
 
         episode: {{ Js::from($episode) }},
@@ -60,7 +60,7 @@
             });
         }
     }"
-    x-init="() => {
+        x-init="() => {
         setupPlayer('{{ $id }}');
         setupPlayListener(episode);
 
@@ -80,7 +80,7 @@
             }
         });
     }"
-    wire:key="player-script-{{ time() }}-{{ $id }}"
+        wire:key="player-script-{{ time() }}-{{ $id }}"
 >
 </div>
 

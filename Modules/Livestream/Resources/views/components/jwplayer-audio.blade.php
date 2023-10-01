@@ -4,7 +4,7 @@
 ])
 
 <div
-    x-data="{
+        x-data="{
         player: null,
 
         setupPlayer(id) {
@@ -29,10 +29,10 @@
             });
         }
     }"
-    x-init="() => {
+        x-init="() => {
         setupPlayer('{{ $id }}');
     }"
-    wire:key="player-audio-script-{{ time() }}-{{ $id }}"
+        wire:key="player-audio-script-{{ time() }}-{{ $id }}"
 >
 </div>
 

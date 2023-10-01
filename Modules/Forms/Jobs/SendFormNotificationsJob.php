@@ -36,7 +36,7 @@ class SendFormNotificationsJob implements ShouldQueue
         collect($this->whereMidnight())->each(function ($date, $tz) {
             FormNotification::whereDate('send_date', $date)
                 ->where('timezone', $tz)
-                ->each(fn ($formNotification) => $this->send($formNotification));
+                ->each(fn($formNotification) => $this->send($formNotification));
         });
     }
 

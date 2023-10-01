@@ -6,7 +6,7 @@ trait WithGuestAccess
 {
     public function showAuthenticationModal(?string $redirect = null)
     {
-        $this->emitTo('authentication-modal', 'showAuthenticationModal', ['redirect' => $redirect]);
+        $this->dispatch('showAuthenticationModal', redirect: $redirect)->to('authentication-modal');
     }
 
     public function redirectToAuthenticationPage()

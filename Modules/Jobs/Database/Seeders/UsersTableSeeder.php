@@ -3,6 +3,7 @@
 namespace Modules\Jobs\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Modules\Jobs\Models\Team;
 use Modules\Jobs\Models\User;
 
@@ -18,7 +19,7 @@ class UsersTableSeeder extends Seeder
         $admin = User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@test.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('secret'),
+            'password' => Hash::make('secret'),
         ])->assignRole('Admin');
 
         $admin->ownedTeams()->save(Team::forceCreate([
@@ -31,7 +32,7 @@ class UsersTableSeeder extends Seeder
 
         $contractor = User::factory()->create([
             'name' => 'Contractor',
-            'password' => \Illuminate\Support\Facades\Hash::make('secret'),
+            'password' => Hash::make('secret'),
         ])->assignRole('Contractor');
 
         $contractor->ownedTeams()->save(Team::forceCreate([
@@ -44,7 +45,7 @@ class UsersTableSeeder extends Seeder
 
         $client = User::factory()->create([
             'name' => 'Client',
-            'password' => \Illuminate\Support\Facades\Hash::make('secret'),
+            'password' => Hash::make('secret'),
         ])->assignRole('Client');
 
         $client->ownedTeams()->save(Team::forceCreate([

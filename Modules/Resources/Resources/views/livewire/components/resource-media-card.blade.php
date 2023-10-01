@@ -15,16 +15,20 @@
                         <div class="flex justify-end px-5">
                             <div class="flex items-center space-x-3">
                                 <div class="flex-shrink-0">
-                                    <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}" alt="{{ $post->user->name }}"/>
+                                    <img class="h-10 w-10 rounded-full" src="{{ $post->user?->profile_photo_url }}"
+                                         alt="{{ $post->user->name }}"/>
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <div class="min-w-0">
                                         <div class="font leading-5">
-                                            <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}"
+                                            <a wire:click.prevent.stop="showProfile"
+                                               href="{{ route('social.profile.show', $post->user->handle) }}"
                                                class="hover:underline block font-bold text-post-card-title-color">{{ $post->user->name }}</a>
                                         </div>
                                         <div class="flex content-center space-x-1 items-center text-post-card-body-color">
-                                            <a wire:click.prevent.stop="showProfile" href="{{ route('social.profile.show', $post->user->handle) }}" class="">{{ '@'. $post->user->handle }}</a>
+                                            <a wire:click.prevent.stop="showProfile"
+                                               href="{{ route('social.profile.show', $post->user->handle) }}"
+                                               class="">{{ '@'. $post->user->handle }}</a>
                                             <x-dot/>
                                             <a href="{{ $post->getUrl() }}" class="hover:underline">
                                                 <time datetime="{{ $post->published_at }}">{{ $post->published_at?->diffForHumans(short: true) }}</time>
@@ -37,18 +41,23 @@
                                 @if (!is_null($post->team_id))
                                     <div class="hidden xl:flex items-center space-x-2 h-7">
                                         <div class="flex-shrink-0">
-                                            <img class="h-7 w-7 rounded-full" src="{{ $post->team?->profile_photo_url }}" alt="{{ $post->team->name }}"/>
+                                            <img class="h-7 w-7 rounded-full"
+                                                 src="{{ $post->team?->profile_photo_url }}"
+                                                 alt="{{ $post->team->name }}"/>
                                         </div>
                                         <div class="text-post-card-body-color text-xs font-semibold mr-3">
                                             <a wire:click.prevent.stop="showProfile('{{ $post->team->handle }}', true)"
-                                               href="{{ route('social.teams.show', $post->team->handle) }}" class="hover:underline">{{ $post->team->name }}</a>
+                                               href="{{ route('social.teams.show', $post->team->handle) }}"
+                                               class="hover:underline">{{ $post->team->name }}</a>
                                         </div>
                                     </div>
                                 @endif
                                 <div class="relative z-1 inline-block text-left items-center">
                                     <x-library::dropdown>
                                         <x-slot name="trigger" x-on:click.stop="">
-                                            <button type="button" class="-m-2 p-2 rounded-full flex items-center text-post-card-title-color hover:text-light-text-color" id="menu-0-button"
+                                            <button type="button"
+                                                    class="-m-2 p-2 rounded-full flex items-center text-post-card-title-color hover:text-light-text-color"
+                                                    id="menu-0-button"
                                                     aria-expanded="false"
                                                     aria-haspopup="true">
                                                 <span class="sr-only">Open options</span>
@@ -74,7 +83,9 @@
                                             </a>
                                         @endcan
                                         @can('delete', $post)
-                                            <livewire:social::delete-post-dropdown-item :post="$post" wire:key="delete-post-dropdown-item{{ $post->id }}" :show="true"/>
+                                            <livewire:social::delete-post-dropdown-item :post="$post"
+                                                                                        wire:key="delete-post-dropdown-item{{ $post->id }}"
+                                                                                        :show="true"/>
                                         @endcan
                                     </x-library::dropdown>
                                 </div>

@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="flex items-center text-base-text-color">
-                <x-heroicon-o-location-marker class="h-5 w-5 mr-2"/>
+                <x-library::icons.icon name="fa-light fa-location-dot" class="h-5 w-5 mr-2"/>
                 <span class="text-dark-text-color text-xs">{{ $team->location?->name ?? 'Not set' }}</span>
             </div>
             <p class="text-light-text-color text-xs line-clamp-3 hover-slide-up">{{ $team->summary }}</p>

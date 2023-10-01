@@ -15,6 +15,11 @@ class BillingSettingsPolicy
         return $this->isSuperAdmin($user);
     }
 
+    private function isSuperAdmin(User $user)
+    {
+        return $user->hasRole('super-admin');
+    }
+
     public function view(User $user, BillingSettings $billingSettings)
     {
         return $this->isSuperAdmin($user);
@@ -43,10 +48,5 @@ class BillingSettingsPolicy
     public function forceDelete(User $user, BillingSettings $billingSettings)
     {
         return $this->isSuperAdmin($user);
-    }
-
-    private function isSuperAdmin(User $user)
-    {
-        return $user->hasRole('super-admin');
     }
 }

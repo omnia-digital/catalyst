@@ -23,13 +23,14 @@ trait WithValidationFails
     }
 
     /**
-     * @param  array  $messages
-     * @param  array  $attributes
+     * @param array $messages
+     * @param array $attributes
      * @return array
      */
     public function validate($rules = null, $messages = [], $attributes = [])
     {
-        [$rules, $messages, $attributes] = $this->providedOrGlobalRulesMessagesAndAttributes($rules, $messages, $attributes);
+        [$rules, $messages, $attributes] = $this->providedOrGlobalRulesMessagesAndAttributes($rules, $messages,
+            $attributes);
 
         $data = $this->prepareForValidation($this->getDataForValidation($rules));
 

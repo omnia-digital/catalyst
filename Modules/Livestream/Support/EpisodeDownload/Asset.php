@@ -5,6 +5,7 @@ namespace Modules\Livestream\Support\EpisodeDownload;
 use ArrayAccess;
 use Illuminate\Support\Arr;
 use MuxPhp\Models\Asset as MuxAsset;
+use MuxPhp\Models\PlaybackID;
 
 class Asset
 {
@@ -29,6 +30,32 @@ class Asset
     }
 
     /**
+     * @return string
+     */
+    public function downloadLink(string $playbackId = 'default')
+    {
+        $playbackId = $playbackId === 'default' ? $this->defaultPlaybackId() : $playbackId;
+
+        return config('services.mux.playback_prefix') . $playbackId . '/' . $this->downloadQuality() . '.mp4';
+    }
+
+    /**
+     * @return array|ArrayAccess|mixed
+     */
+    public function defaultPlaybackId()
+    {
+        return Arr::get($this->playbackIds(), '0.id');
+    }
+
+    /**
+     * @return PlaybackID[]|null
+     */
+    public function playbackIds()
+    {
+        return $this->asset->getPlaybackIds();
+    }
+
+    /**
      * Get download quality file.
      *
      * @return string
@@ -46,31 +73,5 @@ class Asset
         }
 
         return 'low';
-    }
-
-    /**
-     * @return \MuxPhp\Models\PlaybackID[]|null
-     */
-    public function playbackIds()
-    {
-        return $this->asset->getPlaybackIds();
-    }
-
-    /**
-     * @return array|ArrayAccess|mixed
-     */
-    public function defaultPlaybackId()
-    {
-        return Arr::get($this->playbackIds(), '0.id');
-    }
-
-    /**
-     * @return string
-     */
-    public function downloadLink(string $playbackId = 'default')
-    {
-        $playbackId = $playbackId === 'default' ? $this->defaultPlaybackId() : $playbackId;
-
-        return config('services.mux.playback_prefix') . $playbackId . '/' . $this->downloadQuality() . '.mp4';
     }
 }

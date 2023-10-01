@@ -16,7 +16,7 @@ class EditPermission extends EditRecord
 
     public Collection $permissions;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),
@@ -26,7 +26,7 @@ class EditPermission extends EditRecord
     protected function mutateFormDataBeforeSave(array $data): array
     {
         $this->permissions = collect($data)->filter(function ($permission, $key) {
-            return ! in_array($key, ['name', 'guard_name', 'select_all']) && Str::contains($key, '_');
+            return !in_array($key, ['name', 'guard_name', 'select_all']) && Str::contains($key, '_');
         })->keys();
 
         return Arr::only($data, ['name', 'guard_name']);

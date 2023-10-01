@@ -6,7 +6,9 @@
         <x-slot:content>
             <div class="mb-4">
                 @if (!$this->billable->hasDefaultPaymentMethod())
-                    <x-library::alert.warning>You don't have a default payment method. Please add one <a href="{{ route('billing.stripe-billing') }}" class="font-medium hover:underline">here</a>.
+                    <x-library::alert.warning>You don't have a default payment method. Please add one <a
+                                href="{{ route('billing.stripe-billing') }}"
+                                class="font-medium hover:underline">here</a>.
                     </x-library::alert.warning>
                 @endif
             </div>
@@ -19,7 +21,9 @@
                     @else
                         <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
                             @foreach ($teamPlans as $teamPlan)
-                                <x-library::input.radio-card wire:model="plan" wire:key="team-plan-{{ $teamPlan['stripe_id'] }}" :value="$teamPlan['stripe_id']">
+                                <x-library::input.radio-card wire:model.live="plan"
+                                                             wire:key="team-plan-{{ $teamPlan['stripe_id'] }}"
+                                                             :value="$teamPlan['stripe_id']">
                                     <x-slot:title>
                                         <div class="flex items-center justify-between">
                                             <p>{{ $teamPlan['name'] }}</p>
@@ -44,11 +48,13 @@
                 </fieldset>
                 <x-library::input.error for="plan" class="mt-1"/>
             </div>
-            <p class="py-1 text-sm text-neutral-dark">Your username ({{ Auth::user()->handle }}) and member status may be publicly visible and shared by the {{ Trans::get('Team') }} with 3rd parties
+            <p class="py-1 text-sm text-neutral-dark">Your username ({{ Auth::user()->handle }}) and member status may
+                be publicly visible and shared by the {{ Trans::get('Team') }} with 3rd parties
                 (to
                 provide
                 perks).</p>
-            <p class="py-1 text-sm text-neutral-dark">Recurring payment. Cancel anytime. {{ Trans::get('Team Owner') }} may update perks.</p>
+            <p class="py-1 text-sm text-neutral-dark">Recurring payment. Cancel anytime. {{ Trans::get('Team Owner') }}
+                may update perks.</p>
 
         </x-slot:content>
         <x-slot:actions>

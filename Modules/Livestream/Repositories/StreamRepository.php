@@ -2,6 +2,8 @@
 
 namespace Modules\Livestream\Repositories;
 
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Collection;
 use Modules\Livestream\LivestreamAccount;
 use Modules\Livestream\PlaybackId;
 use Modules\Livestream\Services\MuxService;
@@ -12,9 +14,9 @@ class StreamRepository
     /**
      * Perform a basic Stream search.
      *
-     * @param  string  $query
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $excludeStream
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param string $query
+     * @param Authenticatable|null $excludeStream
+     * @return Collection
      */
     public function search($query, $excludeStream = null)
     {

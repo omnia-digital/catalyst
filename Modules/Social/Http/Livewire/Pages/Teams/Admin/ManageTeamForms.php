@@ -47,9 +47,30 @@ class ManageTeamForms extends Component
         $this->editingNotification = $this->makeBlankNotification();
     }
 
+    public function makeBlankNotification($formId = null)
+    {
+        return [
+            'form_id' => $formId,
+            'role_id' => Role::first()?->id,
+            'name' => 'New Form Notification',
+            'send_date_edit' => now(),
+            'timezone' => 'UTC',
+        ];
+    }
+
     public function onLoad()
     {
         $this->loadForms();
+    }
+
+    public function loadForms()
+    {
+        $platformForms = Form::whereNull('team_id')->get();
+
+        $teamForms = Form::where('team_id', $this->team->id)->get();
+
+        $this->platformForms = $platformForms;
+        $this->teamForms = $teamForms;
     }
 
     public function getUserProperty()
@@ -63,17 +84,6 @@ class ManageTeamForms extends Component
         foreach ($users as $user) {
             $user->notify(new FormReminderNotification($this->team, $formNotification));
         }
-    }
-
-    public function makeBlankNotification($formId = null)
-    {
-        return [
-            'form_id' => $formId,
-            'role_id' => Role::first()?->id,
-            'name' => 'New Form Notification',
-            'send_date_edit' => now(),
-            'timezone' => 'UTC',
-        ];
     }
 
     public function createFormNotification($formId)
@@ -94,7 +104,7 @@ class ManageTeamForms extends Component
             'editingNotification.role_id' => [
                 'required',
                 Rule::exists(config('permission.table_names.roles'), 'id')
-                    ->where(fn ($q) => $q->where('team_id', $this->team->id)),
+                    ->where(fn($q) => $q->where('team_id', $this->team->id)),
             ],
             'editingNotification.name' => ['required', 'string'],
             'editingNotification.message' => ['nullable', 'string'],
@@ -117,7 +127,7 @@ class ManageTeamForms extends Component
 
         $this->closeModal('form-notification-modal');
 
-        $this->emit('notificationSaved');
+        $this->dispatch('notificationSaved');
     }
 
     public function scheduleNotification(FormNotification $formNotification)
@@ -141,16 +151,6 @@ class ManageTeamForms extends Component
     public function getRoles()
     {
         return Arr::pluck(Jetstream::$roles, 'name', 'key');
-    }
-
-    public function loadForms()
-    {
-        $platformForms = Form::whereNull('team_id')->get();
-
-        $teamForms = Form::where('team_id', $this->team->id)->get();
-
-        $this->platformForms = $platformForms;
-        $this->teamForms = $teamForms;
     }
 
     public function render()

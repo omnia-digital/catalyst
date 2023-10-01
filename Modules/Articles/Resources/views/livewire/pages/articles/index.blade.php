@@ -1,39 +1,43 @@
+@php use Modules\Social\Models\Post; @endphp
 @extends('social::livewire.layouts.pages.sidebar-page-layout')
 
 @section('content')
     <div class="mb-3 rounded-b-lg px-4 flex items-center justify-between bg-primary">
         <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Articles') }}</x-library::heading.1>
         <div class="flex items-center">
-            @if (auth()->user()->can('create', \Modules\Social\Models\Post::class))
+            @if (auth()->user()->can('create', Post::class))
                 @auth
                     <x-library::button.link
                             href="{{ route('articles.create') }}"
                             class="py-2 w-full h-10"
-                    >{{ \Trans::get('Add Article') }}</x-library::button.link>
+                    >{{ Trans::get('Add Article') }}</x-library::button.link>
                     <livewire:articles::pages.articles.create/>
                 @else
                     <x-library::button
                             class="py-2 w-full h-10"
                             wire:click="loginCheck"
-                    >{{ \Trans::get('Add Article') }}</x-library::button>
+                    >{{ Trans::get('Add Article') }}</x-library::button>
                     <livewire:authentication-modal/>
                 @endauth
             @endif
         </div>
     </div>
 
-{{--    <div class="mx-auto max-w-post-card-max-w">--}}
-{{--        <livewire:social::news-feed-editor/>--}}
-{{--    </div>--}}
+    {{--    <div class="mx-auto max-w-post-card-max-w">--}}
+    {{--        <livewire:social::news-feed-editor/>--}}
+    {{--    </div>--}}
 
     <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
         <nav class="flex space-x-8 py-2" aria-label="Global">
-            <a href="{{ route('articles.home') }}" class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
+            <a href="{{ route('articles.home') }}"
+               class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
                aria-current="page">
-                <x-library::icons.icon name="fa-regular fa-photo-film-music" size="w-5 h-5" class="pr-2"/>All Articles</a>
+                <x-library::icons.icon name="fa-regular fa-photo-film-music" size="w-5 h-5" class="pr-2"/>
+                All Articles</a>
             <a href="{{ route('articles.drafts') }}" class="text-base-text-color hover:bg-neutral hover:text-base-text-color inline-flex items-center rounded-md py-2 px-3
             font-medium">
-                <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>My Articles</a>
+                <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>
+                My Articles</a>
         </nav>
     </div>
 
@@ -41,7 +45,8 @@
         {{-- Drafts/Published    --}}
         <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
             <nav class="flex space-x-8 py-2" aria-label="Global">
-                <a href="{{ route('articles.drafts') }}" class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
+                <a href="{{ route('articles.drafts') }}"
+                   class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
                    aria-current="page">
                     <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>
                     Drafts</a>
@@ -61,12 +66,13 @@
             @forelse ($articles as $post)
                 <div class="w-full break-inside mb-3">
                     <div class="">
-                        <livewire:social::components.post-card-dynamic :post="$post" :wire:key="'post-card-' . $post->id"/>
-{{--                        <livewire:articles::components.article-card--}}
-{{--                                as="li"--}}
-{{--                                :post="$article"--}}
-{{--                                :wire:key="'article-card-' . $article->id"--}}
-{{--                        />--}}
+                        <livewire:social::components.post-card-dynamic :post="$post"
+                                                                       :wire:key="'post-card-' . $post->id"/>
+                        {{--                        <livewire:articles::components.article-card--}}
+                        {{--                                as="li"--}}
+                        {{--                                :post="$article"--}}
+                        {{--                                :wire:key="'article-card-' . $article->id"--}}
+                        {{--                        />--}}
                     </div>
                 </div>
             @empty
@@ -91,7 +97,7 @@
                         },
                         {
                             id: 1,
-                            title: 'Top '.{{ \Platform::getTeamsWordUpper() }},
+                            title: 'Top '.{{ Platform::getTeamsWordUpper() }},
                             component: 'social.top-teams'
                         },
                         {

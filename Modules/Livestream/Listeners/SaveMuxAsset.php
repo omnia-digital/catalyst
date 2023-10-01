@@ -13,6 +13,7 @@ use Modules\Livestream\Events\VideoAssetReady;
 use Modules\Livestream\Models\Episode;
 use Modules\Livestream\Models\Stream;
 use Modules\Livestream\Services\Mux\Concerns\HasThumbnail;
+use MuxPhp\ApiException;
 
 class SaveMuxAsset implements ShouldQueue
 {
@@ -31,7 +32,7 @@ class SaveMuxAsset implements ShouldQueue
 
     private function handleUploadedVideo(string $uploadId, array $payload): void
     {
-        if (! ($episode = Episode::findByUploadId($uploadId))) {
+        if (!($episode = Episode::findByUploadId($uploadId))) {
             Log::error('Cannot find uploaded episode with ID: ' . $uploadId);
 
             return;
@@ -53,7 +54,7 @@ class SaveMuxAsset implements ShouldQueue
     }
 
     /**
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     private function handleLivestream(array $payload): void
     {

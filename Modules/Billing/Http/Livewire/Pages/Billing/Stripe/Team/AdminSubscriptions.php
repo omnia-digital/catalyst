@@ -22,25 +22,9 @@ class AdminSubscriptions extends Component
         $this->updateOnboardingProcessCompleted();
     }
 
-    public function connectStripe()
-    {
-        if (! $this->team->hasStripeConnectAccount()) {
-            (new CreateStripeConnectAccountForTeamAction)->execute($this->team);
-
-            $this->team->refresh();
-        }
-
-        $accountLink = app(StripeConnect::class)->createAccountLink(
-            accountStripeId: $this->team->stripe_connect_id,
-            returnUrl: route('social.teams.admin', $this->team)
-        );
-
-        $this->redirect($accountLink->url);
-    }
-
     public function updateOnboardingProcessCompleted()
     {
-        if (! $this->team->hasStripeConnectAccount()) {
+        if (!$this->team->hasStripeConnectAccount()) {
             return;
         }
 
@@ -52,6 +36,22 @@ class AdminSubscriptions extends Component
         $account = app(StripeConnect::class)->getAccount($this->team->stripe_connect_id);
 
         $this->team->update(['stripe_connect_onboarding_completed' => $account->details_submitted]);
+    }
+
+    public function connectStripe()
+    {
+        if (!$this->team->hasStripeConnectAccount()) {
+            (new CreateStripeConnectAccountForTeamAction)->execute($this->team);
+
+            $this->team->refresh();
+        }
+
+        $accountLink = app(StripeConnect::class)->createAccountLink(
+            accountStripeId: $this->team->stripe_connect_id,
+            returnUrl: route('social.teams.admin', $this->team)
+        );
+
+        $this->redirect($accountLink->url);
     }
 
     public function getRowsQueryProperty()

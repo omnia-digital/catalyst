@@ -6,14 +6,14 @@
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 {{ $icon }}
             </div>
-    @endif
+            @endif
 
-    @php
-        $class = 'form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 pl-10';
-        $class = isset($icon) ? $class : str_replace('pl-10', '', $class);
-    @endphp
+            @php
+                $class = 'form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 pl-10';
+                $class = isset($icon) ? $class : str_replace('pl-10', '', $class);
+            @endphp
             <input {!! $attributes->merge(['class' => $class]) !!} {{ $disabled ? 'disabled' : '' }}>
-    @if (isset($icon))
+            @if (isset($icon))
         </div>
     @endif
 </div>

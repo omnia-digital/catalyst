@@ -65,7 +65,8 @@ class AddMeteredBillingInvoiceItemsJob implements ShouldQueue
         // Calculate the cost based on duration (seconds) and metered price.
         // Storage cost is always a sum of normal storage cost + deleted episode storage cost.
         $encodingCost = round($encodingSeconds * $this->getMeteredPrice('encoding'), 2);
-        $storageCost = round($storageSeconds * $this->getMeteredPrice('storage'), 2) + $extraInvoiceItems->sum('amount');
+        $storageCost = round($storageSeconds * $this->getMeteredPrice('storage'),
+                2) + $extraInvoiceItems->sum('amount');
         $deliveredCost = round($deliveredSeconds * $this->getMeteredPrice('delivered'), 2);
 
         Log::info('Encoding: ' . $encodingCost);
@@ -89,25 +90,6 @@ class AddMeteredBillingInvoiceItemsJob implements ShouldQueue
         return $invoiceItem;
     }
 
-    private function createStripeInvoiceItem(string $customerId, float $amount, string $description, ?string $invoiceId = null)
-    {
-        // Invoice item information.
-        $params = [
-            'customer' => $customerId,
-            'amount' => round($amount, 2) * 100,
-            'description' => $description,
-            'currency' => 'usd',
-        ];
-
-        // If the Invoice Id exists, add it as the invoice to add these items to
-        empty($invoiceId) || $params['invoice'] = $invoiceId;
-
-        // Add Invoice Item
-        Stripe::setApiKey(config('services.stripe.secret'));
-
-        return InvoiceItem::create($params);
-    }
-
     /**
      * Get the extra invoice items of the current month.
      */
@@ -126,5 +108,28 @@ class AddMeteredBillingInvoiceItemsJob implements ShouldQueue
         return config('metered.price.unit') === 'minute'
             ? $this->team->meteredPrice($metered) / 60
             : $this->team->meteredPrice($metered);
+    }
+
+    private function createStripeInvoiceItem(
+        string $customerId,
+        float $amount,
+        string $description,
+        ?string $invoiceId = null
+    ) {
+        // Invoice item information.
+        $params = [
+            'customer' => $customerId,
+            'amount' => round($amount, 2) * 100,
+            'description' => $description,
+            'currency' => 'usd',
+        ];
+
+        // If the Invoice Id exists, add it as the invoice to add these items to
+        empty($invoiceId) || $params['invoice'] = $invoiceId;
+
+        // Add Invoice Item
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        return InvoiceItem::create($params);
     }
 }

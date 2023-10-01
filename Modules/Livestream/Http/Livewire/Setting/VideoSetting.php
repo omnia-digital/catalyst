@@ -44,7 +44,7 @@ class VideoSetting extends Component
         $this->validate();
 
         // Show the confirmation modal when select auto-delete.
-        if ($this->videoStorage === VideoStorageOption::DELETE_VIDEO && ! $this->confirmingVideoDeletion) {
+        if ($this->videoStorage === VideoStorageOption::DELETE_VIDEO && !$this->confirmingVideoDeletion) {
             $this->confirmingVideoDeletion = true;
 
             return;
@@ -56,11 +56,11 @@ class VideoSetting extends Component
             ]);
 
             if ($this->videoStorage === VideoStorageOption::DELETE_VIDEO) {
-                $this->expiredEpisodes->each(fn (Episode $episode) => $episode->delete());
+                $this->expiredEpisodes->each(fn(Episode $episode) => $episode->delete());
             }
         });
 
-        $this->emit('saved');
+        $this->dispatch('saved');
         $this->reset('confirmingVideoDeletion');
     }
 

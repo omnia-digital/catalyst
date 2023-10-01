@@ -4,10 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubscriptionTypeResource\Pages;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Modules\Billing\Models\SubscriptionType;
 
 class SubscriptionTypeResource extends Resource
@@ -27,7 +27,7 @@ class SubscriptionTypeResource extends Resource
                     ->minValue('500')
                     ->label('Amount (in cents)')
                     ->helperText('Please write the amount in cents. For example: For $55.25, write 5525.')
-                    ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask
+                    ->mask(fn(Forms\Components\TextInput\Mask $mask) => $mask
                         ->numeric()
                         ->integer()
                     ),

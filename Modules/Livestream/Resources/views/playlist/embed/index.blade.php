@@ -12,7 +12,7 @@
                         <div class="mt-3 sm:mt-2">
                             {{--                            <div class="sm:hidden">--}}
                             {{--                                <label for="sort-by" class="sr-only">Sort By</label>--}}
-                            {{--                                <select wire:model="orderBy" id="sort-by" name="tabs" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">--}}
+                            {{--                                <select wire:model.live="orderBy" id="sort-by" name="tabs" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">--}}
                             {{--                                    <option value="date_recorded">Recently Added</option>--}}
                             {{--                                    <option value="views">Most Viewed</option>--}}
                             {{--                                </select>--}}
@@ -37,15 +37,17 @@
                             @if ($episodes->count() > 0)
                                 <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6">
                                     @foreach ($episodes as $episode)
-                                            @if (empty($episode?->video) || $episode?->video?->isAudio())
-                                                <x-playlist.audio-episode-item wire:key="episode-{{ $episode->id }}" :episode="$episode" :first="$loop->first && $episodes->currentPage() === 1"/>
-                                            @else
-                                                <x-episode.list-item
-                                                        wire:key="episode-{{ $episode->id }}"
-                                                        :episode="$episode"
-                                                        first="{{ $loop->first }}"
-                                                />
-                                            @endif
+                                        @if (empty($episode?->video) || $episode?->video?->isAudio())
+                                            <x-playlist.audio-episode-item wire:key="episode-{{ $episode->id }}"
+                                                                           :episode="$episode"
+                                                                           :first="$loop->first && $episodes->currentPage() === 1"/>
+                                        @else
+                                            <x-episode.list-item
+                                                    wire:key="episode-{{ $episode->id }}"
+                                                    :episode="$episode"
+                                                    first="{{ $loop->first }}"
+                                            />
+                                        @endif
                                     @endforeach
                                 </ul>
                             @else

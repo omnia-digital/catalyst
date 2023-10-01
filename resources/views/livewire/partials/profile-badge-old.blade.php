@@ -3,14 +3,15 @@
         <x-library::dropdown>
             <x-slot name="trigger">
                 <div type="button"
-                        class="group w-full bg-gray-200 border border-neutral-hover px-5 flex rounded-md py-4 text-sm text-left font-medium text-gray-700
+                     class="group w-full bg-gray-200 border border-neutral-hover px-5 flex rounded-md py-4 text-sm text-left font-medium text-gray-700
                         hover:bg-gray-300 hover:cursor-pointer focus:outline-none focus:ring-2
                         focus:ring-offset-2
                         focus:ring-offset-gray-100 focus:ring-purple-500"
-                        id="options-menu-button" aria-expanded="false" aria-haspopup="true">
+                     id="options-menu-button" aria-expanded="false" aria-haspopup="true">
                     <div class="flex w-full justify-between items-center">
                         <div class="flex min-w-0 items-center justify-between space-x-3">
-                            <img class="w-20 h-20 bg-gray-300 rounded-full flex-shrink-0" src="{{ Auth::user()->profile_photo_url }}" alt="">
+                            <img class="w-20 h-20 bg-gray-300 rounded-full flex-shrink-0"
+                                 src="{{ Auth::user()->profile_photo_url }}" alt="">
                             <div class="min-w-0">
                                 <div class="">
                                     <p class="text-gray-900 text-md font-medium truncate">{{ Auth::user()->name }}</p>
@@ -40,18 +41,18 @@
                     <span class="sr-only">Open user menu</span>
                 </div>
             </x-slot>
-            <x-jet-responsive-nav-link href="{{ route('social.profile.show', ['profile'=> Auth::user()->profile]) }}">
+            <x-responsive-nav-link href="{{ route('social.profile.show', ['profile'=> Auth::user()->profile]) }}">
                 My Profile
-            </x-jet-responsive-nav-link>
+            </x-responsive-nav-link>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <x-jet-responsive-nav-link
-                    href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
+                <x-responsive-nav-link
+                        href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
                     this.closest('form').submit();"
                 >
-                    {{ \Trans::get('Log Out') }}
-                </x-jet-responsive-nav-link>
+                    {{ Trans::get('Log Out') }}
+                </x-responsive-nav-link>
             </form>
         </x-library::dropdown>
     </div>

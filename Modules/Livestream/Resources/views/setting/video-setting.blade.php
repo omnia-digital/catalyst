@@ -1,18 +1,22 @@
+@php use App\Enums\VideoStorageOption; @endphp
 <x-form.section submit="saveVideoStorageOption">
     <x-slot name="form">
         <div class="col-span-6">
             <x-input.label value="Video Storage"/>
-            <x-input.select id="video-storage" wire:model="videoStorage" :options="$videoStorageOptions"/>
-            <x-jet-input-error for="videoStorage" class="mt-2"/>
+            <x-input.select id="video-storage" wire:model.live="videoStorage" :options="$videoStorageOptions"/>
+            <x-input-error for="videoStorage" class="mt-2"/>
         </div>
 
-        @if ($videoStorage === \App\Enums\VideoStorageOption::DELETE_VIDEO && $expiredEpisodeCount > 0)
+        @if ($videoStorage === VideoStorageOption::DELETE_VIDEO && $expiredEpisodeCount > 0)
             <div class="col-span-6">
-                <x-alert.danger>You have {{ $expiredEpisodeCount }} expired {{ Str::plural('episodes', $expiredEpisodeCount) }}. They will be deleted when you press Save button.</x-alert.danger>
+                <x-alert.danger>You have {{ $expiredEpisodeCount }}
+                    expired {{ Str::plural('episodes', $expiredEpisodeCount) }}. They will be deleted when you press
+                    Save button.
+                </x-alert.danger>
             </div>
         @endif
 
-        <x-jet-confirmation-modal wire:model="confirmingVideoDeletion">
+        <x-confirmation-modal wire:model.live="confirmingVideoDeletion">
             <x-slot name="title">
                 {{ __('Turn On Auto-Delete') }}
             </x-slot>
@@ -22,24 +26,24 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-jet-secondary-button wire:click="$toggle('confirmingVideoDeletion')" wire:loading.attr="disabled">
+                <x-secondary-button wire:click="$toggle('confirmingVideoDeletion')" wire:loading.attr="disabled">
                     {{ __('Nevermind') }}
-                </x-jet-secondary-button>
+                </x-secondary-button>
 
-                <x-jet-danger-button class="ml-2" wire:click="saveVideoStorageOption" wire:loading.attr="disabled">
+                <x-danger-button class="ml-2" wire:click="saveVideoStorageOption" wire:loading.attr="disabled">
                     {{ __('Yes, Turn On Auto-Delete') }}
-                </x-jet-danger-button>
+                </x-danger-button>
             </x-slot>
-        </x-jet-confirmation-modal>
+        </x-confirmation-modal>
     </x-slot>
 
     <x-slot name="actions">
-        <x-jet-action-message class="mr-3" on="saved">
+        <x-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
-        </x-jet-action-message>
+        </x-action-message>
 
-        <x-jet-button>
+        <x-button>
             {{ __('Save') }}
-        </x-jet-button>
+        </x-button>
     </x-slot>
 </x-form.section>

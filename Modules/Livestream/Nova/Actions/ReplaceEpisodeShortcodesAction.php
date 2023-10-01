@@ -25,7 +25,8 @@ class ReplaceEpisodeShortcodesAction extends Action
             $description = $episode->description;
 
             $episode->title = Omnia::replaceShortcodesInStringUsingGivenTimestamp($title, $episode->created_at);
-            $episode->description = Omnia::replaceShortcodesInStringUsingGivenTimestamp($description, $episode->created_at);
+            $episode->description = Omnia::replaceShortcodesInStringUsingGivenTimestamp($description,
+                $episode->created_at);
             $episode->save();
         }
     }

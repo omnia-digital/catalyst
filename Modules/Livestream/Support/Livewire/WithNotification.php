@@ -9,21 +9,9 @@ trait WithNotification
      */
     public function success(string $message, ?array $action = null)
     {
-        $this->dispatchBrowserEvent('notify', [
+        $this->dispatch('notify', [
             'message' => $message,
             'type' => 'success',
-            'action' => $action,
-        ]);
-    }
-
-    /**
-     * Show error notification.
-     */
-    public function error(string $message, ?array $action = null)
-    {
-        $this->dispatchBrowserEvent('notify', [
-            'message' => $message,
-            'type' => 'error',
             'action' => $action,
         ]);
     }
@@ -37,10 +25,22 @@ trait WithNotification
     }
 
     /**
+     * Show error notification.
+     */
+    public function error(string $message, ?array $action = null)
+    {
+        $this->dispatch('notify', [
+            'message' => $message,
+            'type' => 'error',
+            'action' => $action,
+        ]);
+    }
+
+    /**
      * Show the modal to call users upgrade their plan.
      */
     public function upgradePlan(?string $title = null, ?string $description = null)
     {
-        $this->dispatchBrowserEvent('upgrade-plan', compact('title', 'description'));
+        $this->dispatch('upgrade-plan', title: $title, description: $description);
     }
 }

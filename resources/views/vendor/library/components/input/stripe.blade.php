@@ -7,7 +7,7 @@
 ])
 
 <div
-    x-data="{
+        x-data="{
         stripe: null,
 
         cardElement: null,
@@ -71,14 +71,14 @@
             }
         }
     }"
-    x-init="function() {
+        x-init="function() {
         this.stripe = Stripe('{{ $stripeKey }}');
 
         this.cardElement = this.stripe.elements().create('card');
 
         this.cardElement.mount('#card_element');
     }"
-    {{ $attributes }}
+        {{ $attributes }}
 >
     <div>
         <x-library::input.label for="card_holder_name" value="Card Holder Name"/>
@@ -95,10 +95,10 @@
 
     <div class="py-2 flex justify-end">
         <button
-            x-on:click.prevent="confirmCard"
-            x-bind:disabled="loading"
-            x-bind:class="{'bg-gray-600 cursor-not-allowed': loading, 'bg-gray-800 hover:bg-gray-500 active:bg-gray-600': !loading}"
-            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"
+                x-on:click.prevent="confirmCard"
+                x-bind:disabled="loading"
+                x-bind:class="{'bg-gray-600 cursor-not-allowed': loading, 'bg-gray-800 hover:bg-gray-500 active:bg-gray-600': !loading}"
+                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"
         >
             Save
         </button>

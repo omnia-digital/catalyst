@@ -26,7 +26,8 @@
                                             {{ $channel->name }}
                                         </x-table.cell>
                                         <x-table.cell class="text-gray-500">
-                                            <a href="{{ route('players.show', $channel->player) }}" class="text-indigo-600 hover:text-indigo-900">
+                                            <a href="{{ route('players.show', $channel->player) }}"
+                                               class="text-indigo-600 hover:text-indigo-900">
                                                 {{ $channel->player->name }}
                                             </a>
                                         </x-table.cell>
@@ -34,10 +35,12 @@
                                             <x-timezone :for="$channel->created_at" diffForHumans/>
                                         </x-table.cell>
                                         <x-table.cell class="text-right font-medium flex-1 items-center space-x-2">
-                                            <x-form.button-link :to="route('channels.show', $channel)" target="_blank" size="p-2" secondary>
+                                            <x-form.button-link :to="route('channels.show', $channel)" target="_blank"
+                                                                size="p-2" secondary>
                                                 <x-heroicon-o-eye class="w-4 h-4"/>
                                             </x-form.button-link>
-                                            <x-form.button-link :to="route('channels.update', $channel)" size="p-2" secondary>
+                                            <x-form.button-link :to="route('channels.update', $channel)" size="p-2"
+                                                                secondary>
                                                 <x-heroicon-o-pencil class="w-4 h-4"/>
                                             </x-form.button-link>
                                         </x-table.cell>
@@ -45,8 +48,10 @@
                                 @empty
                                     <x-table.empty>
                                         <div class="text-center">
-                                            <p class="text-center text-gray-600 text-base my-4">No channel matched the given criteria.</p>
-                                            <x-form.button wire:click="$toggle('createChannelModalOpen')" secondary size="py-1 px-4">
+                                            <p class="text-center text-gray-600 text-base my-4">No channel matched the
+                                                given criteria.</p>
+                                            <x-form.button wire:click="$toggle('createChannelModalOpen')" secondary
+                                                           size="py-1 px-4">
                                                 Create Channel
                                             </x-form.button>
                                         </div>
@@ -61,28 +66,28 @@
         </div>
     </div>
 
-    <x-jet-dialog-modal wire:model="createChannelModalOpen">
+    <x-dialog-modal wire:model.live="createChannelModalOpen">
         <x-slot name="title">Create Channel</x-slot>
         <x-slot name="content">
             <div>
                 <x-input.label value="Name" required/>
-                <x-input.text id="name" wire:model.defer="name" placeholder="{{ __('Name') }}"/>
-                <x-jet-input-error for="name" class="mt-2"/>
+                <x-input.text id="name" wire:model="name" placeholder="{{ __('Name') }}"/>
+                <x-input-error for="name" class="mt-2"/>
             </div>
             <div class="mt-4">
                 <x-input.label value="Player" required/>
-                <x-input.select id="player" wire:model.defer="player" :options="$players"/>
-                <x-jet-input-error for="player" class="mt-2"/>
+                <x-input.select id="player" wire:model="player" :options="$players"/>
+                <x-input-error for="player" class="mt-2"/>
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('createChannelModalOpen')" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$toggle('createChannelModalOpen')" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
-            </x-jet-secondary-button>
+            </x-secondary-button>
 
-            <x-jet-button class="ml-2" wire:click="createChannel" wire:loading.attr="disabled">
+            <x-button class="ml-2" wire:click="createChannel" wire:loading.attr="disabled">
                 {{ __('Create Channel') }}
-            </x-jet-button>
+            </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 </div>

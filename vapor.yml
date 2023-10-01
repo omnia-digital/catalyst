@@ -22,9 +22,9 @@ environments:
     queues:
       - default
       - mail
-      - mailcoach-schedule
-      - mailcoach
-      - mailcoach-feedback
+#      - mailcoach-schedule
+#      - mailcoach
+#      - mailcoach-feedback
       - send-mail
       - send-campaign
       - send-automation-mail
@@ -49,9 +49,9 @@ environments:
     queues:
       - default
       - mail
-      - mailcoach-schedule
-      - mailcoach
-      - mailcoach-feedback
+#      - mailcoach-schedule
+#      - mailcoach
+#      - mailcoach-feedback
       - send-mail
       - send-campaign
       - send-automation-mail

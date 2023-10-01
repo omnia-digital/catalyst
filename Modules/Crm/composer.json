@@ -1,23 +1,22 @@
 {
-    "name": "omnia-digital/crm",
-    "description": "",
-    "authors": [
-        {
-            "name": "Joshua Torres",
-            "email": "josht@omniadigital.io"
-        }
-    ],
-    "extra": {
-        "laravel": {
-            "providers": [],
-            "aliases": {
-
-            }
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "Modules\\Crm\\": ""
-        }
+  "name": "omnia-digital/crm",
+  "description": "",
+  "authors": [
+    {
+      "name": "Joshua Torres",
+      "email": "josht@omniadigital.io"
     }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [],
+      "aliases": {
+      }
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Modules\\Crm\\": ""
+    }
+  }
 }

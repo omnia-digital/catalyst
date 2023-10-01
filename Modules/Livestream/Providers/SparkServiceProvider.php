@@ -4,7 +4,6 @@ namespace Modules\Livestream\Providers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Validation\ValidationException;
 use Modules\Livestream\Models\Team;
 use Spark\Plan;
 use Spark\Spark;
@@ -31,7 +30,7 @@ class SparkServiceProvider extends ServiceProvider
         // Verify that the current user owns the team
         Spark::billable(Team::class)->authorize(function (Team $billable, Request $request) {
             return $request->user() &&
-                   $request->user()->belongsToTeam($billable);
+                $request->user()->belongsToTeam($billable);
 //                   $request->user()->id == $billable->user_id;
         });
 

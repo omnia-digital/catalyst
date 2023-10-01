@@ -1,7 +1,8 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-            <x-panel-header click="$toggle('createStreamTargetModalOpen')" title="Stream Target" icon="heroicon-o-plus"/>
+            <x-panel-header click="$toggle('createStreamTargetModalOpen')" title="Stream Target"
+                            icon="heroicon-o-plus"/>
 
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -26,7 +27,8 @@
                                             {{ $streamTarget->name }}
                                         </x-table.cell>
                                         <x-table.cell class="text-gray-500">
-                                            <a href="{{ $streamTarget->url }}" class="text-indigo-600 hover:text-indigo-900">
+                                            <a href="{{ $streamTarget->url }}"
+                                               class="text-indigo-600 hover:text-indigo-900">
                                                 {{ $streamTarget->url }}
                                             </a>
                                         </x-table.cell>
@@ -34,7 +36,8 @@
                                             {{ $streamTarget->stream_key }}
                                         </x-table.cell>
                                         <x-table.cell class="text-right font-medium flex-1 items-center space-x-2">
-                                            <x-form.button-link :to="route('stream-targets.update', $streamTarget)" size="p-2" secondary>
+                                            <x-form.button-link :to="route('stream-targets.update', $streamTarget)"
+                                                                size="p-2" secondary>
                                                 <x-heroicon-o-pencil class="w-4 h-4"/>
                                             </x-form.button-link>
                                         </x-table.cell>
@@ -42,8 +45,10 @@
                                 @empty
                                     <x-table.empty>
                                         <div class="text-center">
-                                            <p class="text-center text-gray-600 text-base my-4">No stream targets matched the given criteria.</p>
-                                            <x-form.button wire:click="$toggle('createStreamTargetModalOpen')" secondary size="py-1 px-4">
+                                            <p class="text-center text-gray-600 text-base my-4">No stream targets
+                                                matched the given criteria.</p>
+                                            <x-form.button wire:click="$toggle('createStreamTargetModalOpen')" secondary
+                                                           size="py-1 px-4">
                                                 Create Stream Target
                                             </x-form.button>
                                         </div>
@@ -58,35 +63,36 @@
         </div>
     </div>
 
-    <x-jet-dialog-modal wire:model="createStreamTargetModalOpen">
+    <x-dialog-modal wire:model.live="createStreamTargetModalOpen">
         <x-slot name="title">Create Stream Target</x-slot>
         <x-slot name="content">
             <div>
                 <x-input.label value="Name" required/>
-                <x-input.text id="name" wire:model.defer="streamTarget.name" placeholder="{{ __('Facebook') }}"/>
-                <x-jet-input-error for="streamTarget.name" class="mt-2"/>
+                <x-input.text id="name" wire:model="streamTarget.name" placeholder="{{ __('Facebook') }}"/>
+                <x-input-error for="streamTarget.name" class="mt-2"/>
             </div>
             <div class="mt-4">
                 <x-input.label value="URL" required/>
-                <x-input.text id="url" wire:model.defer="streamTarget.url" placeholder="{{ __('URL') }}"/>
-                <x-jet-input-error for="streamTarget.url" class="mt-2"/>
+                <x-input.text id="url" wire:model="streamTarget.url" placeholder="{{ __('URL') }}"/>
+                <x-input-error for="streamTarget.url" class="mt-2"/>
             </div>
             <div class="mt-4">
                 <x-input.label value="Stream Key" required/>
-                <x-input.text id="stream-key" wire:model.defer="streamTarget.stream_key" placeholder="{{ __('Stream Key') }}"/>
-                <x-jet-input-error for="streamTarget.stream_ke" class="mt-2"/>
+                <x-input.text id="stream-key" wire:model="streamTarget.stream_key"
+                              placeholder="{{ __('Stream Key') }}"/>
+                <x-input-error for="streamTarget.stream_ke" class="mt-2"/>
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('createStreamTargetModalOpen')" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$toggle('createStreamTargetModalOpen')" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
-            </x-jet-secondary-button>
+            </x-secondary-button>
 
-            <x-jet-button class="ml-2" wire:click="createStreamTarget" wire:loading.attr="disabled">
+            <x-button class="ml-2" wire:click="createStreamTarget" wire:loading.attr="disabled">
                 {{ __('Create Stream Target') }}
-            </x-jet-button>
+            </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     <x-upgrade-plan-modal/>
 </div>

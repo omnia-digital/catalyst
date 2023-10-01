@@ -7,6 +7,7 @@ use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Modules\Jobs\Models\JobPositionAddon;
 use Sixlive\TextCopy\TextCopy;
 
 class JobAddon extends Resource
@@ -16,7 +17,7 @@ class JobAddon extends Resource
      *
      * @var string
      */
-    public static $model = \Modules\Jobs\Models\JobPositionAddon::class;
+    public static $model = JobPositionAddon::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.

@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use Modules\Livestream\Enums\EpisodeDownloadStatus;
 use Modules\Livestream\EpisodeDownload;
+use MuxPhp\ApiException;
 
 class DeleteExpiredEpisodeDownloadsCommand extends Command
 {
@@ -38,7 +39,7 @@ class DeleteExpiredEpisodeDownloadsCommand extends Command
      *
      * @return void
      *
-     * @throws \MuxPhp\ApiException
+     * @throws ApiException
      */
     public function handle()
     {

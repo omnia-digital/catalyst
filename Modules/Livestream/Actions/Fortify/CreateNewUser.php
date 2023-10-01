@@ -2,9 +2,11 @@
 
 namespace Modules\Livestream\Actions\Fortify;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 use Modules\Livestream\Models\Person;
@@ -20,7 +22,7 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @return \App\Models\User
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function create(array $input, bool $viaSocial = false, bool $validation = true)
     {
@@ -60,18 +62,6 @@ class CreateNewUser implements CreatesNewUsers
         });
     }
 
-    /**
-     * @return false|\Illuminate\Database\Eloquent\Model
-     */
-    protected function createTeam(User $user)
-    {
-        return $user->ownedTeams()->save(Team::forceCreate([
-            'user_id' => $user->id,
-            'name' => Team::DEFAULT_TEAM_NAME,
-            'personal_team' => true,
-        ]));
-    }
-
     private function rules(bool $viaSocial): array
     {
         if ($viaSocial) {
@@ -85,5 +75,17 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ];
+    }
+
+    /**
+     * @return false|Model
+     */
+    protected function createTeam(User $user)
+    {
+        return $user->ownedTeams()->save(Team::forceCreate([
+            'user_id' => $user->id,
+            'name' => Team::DEFAULT_TEAM_NAME,
+            'personal_team' => true,
+        ]));
     }
 }

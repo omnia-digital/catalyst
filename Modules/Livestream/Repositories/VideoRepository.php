@@ -34,17 +34,12 @@ class VideoRepository
     /**
      * Perform a basic LivestreamAccount search by name or e-mail address.
      *
-     * @param  string  $query
-     * @param  Authenticatable|null  $excludeLivestreamAccount
+     * @param string $query
+     * @param Authenticatable|null $excludeLivestreamAccount
      * @return Collection
      */
     public function search($query, $excludeLivestreamAccount = null)
     {
-    }
-
-    public function find($id)
-    {
-        return Spark::LivestreamAccount()->with('owner', 'users')->where('id', $id)->first();
     }
 
     public function forUser($user)
@@ -55,9 +50,9 @@ class VideoRepository
     public function create(Episode $episode, array $videoData = [])
     {
         // Mux Asset
-        if (! empty($episode->mux_asset_id)) {
+        if (!empty($episode->mux_asset_id)) {
             $mux_asset_id = $episode->mux_asset_id;
-        } elseif (! empty($videoData['mux_asset_id'])) {
+        } elseif (!empty($videoData['mux_asset_id'])) {
             $mux_asset_id = $videoData['mux_asset_id'];
         }
 
@@ -109,7 +104,7 @@ class VideoRepository
     public function destroy($ids)
     {
         if (is_numeric($ids)) {
-            $ids = [(int) $ids];
+            $ids = [(int)$ids];
         } elseif (is_object($ids)) {
             $ids = $ids->toArray();
         }
@@ -122,7 +117,7 @@ class VideoRepository
                 continue;
             }
 
-            if (! empty($video->video_source_id)) {
+            if (!empty($video->video_source_id)) {
                 try {
                     $facebookResponse = $this->deleteFacebookLiveVideo($video);
                 } catch (Exception $e) {
@@ -148,7 +143,12 @@ class VideoRepository
             $result = Video::destroy($id);
         }
 
-        return (bool) $result;
+        return (bool)$result;
+    }
+
+    public function find($id)
+    {
+        return Spark::LivestreamAccount()->with('owner', 'users')->where('id', $id)->first();
     }
 
     /**
@@ -176,12 +176,12 @@ class VideoRepository
 
         $fb_page = $video->video_source_account_id;
         // find if fb_page is in user facebook pages
-        if (! empty($fb_page)) {
+        if (!empty($fb_page)) {
             $found_fb_page = $all_user_facebook_pages->first(function ($item, $key) use ($fb_page) {
                 return $item['id'] == $fb_page;
             });
 
-            if (! empty($found_fb_page)) {
+            if (!empty($found_fb_page)) {
                 $teamObject = [
                     'id' => $found_fb_page['id'],
                     'access_token' => $found_fb_page['access_token'],

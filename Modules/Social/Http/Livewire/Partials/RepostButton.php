@@ -14,22 +14,22 @@ use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 class RepostButton extends Component
 {
-    use WithModal, WithNotification, WithPostEditor, WithGuestAccess;
+    use WithGuestAccess, WithModal, WithNotification, WithPostEditor;
 
     public Post $model;
 
     public ?string $content = null;
 
-    protected $listeners = [
-        'post-editor:submitted' => 'createRepost',
-    ];
-
-    public function showRepostModal()
+    public function showRepostModal(): void
     {
         $this->openModal('repost-modal-' . $this->model->id);
     }
 
-    public function createRepost($data)
+    /**
+     * @throws \Throwable
+     */
+    #[On('post-editor:submitted')]
+    public function createRepost($data): void
     {
         $this->content = strip_tags($data['content']);
 

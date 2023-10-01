@@ -8,11 +8,6 @@ use Modules\Games\Models\IGDB\Game as IGDBGame;
 
 class GamesAction
 {
-    public function query()
-    {
-        // allow us to pass in a custom query to igdb
-    }
-
     public function search($search = '')
     {
         $igdbGames = IGDBGame::search($search)->limit(15)->get();
@@ -20,7 +15,7 @@ class GamesAction
 //                                 ->limit(15)
 //                                 ->get();
         $igdbGames = IGDBGame::fuzzySearch(
-            // fields to search in
+        // fields to search in
             [
                 'name',
                 //                'involved_companies.company.name', // you can search for nested values as well
@@ -33,6 +28,19 @@ class GamesAction
         $games = $this->syncIgdbGames($igdbGames);
 
         return $games;
+    }
+
+    public function syncIgdbGames($igdbGames)
+    {
+        return $igdbGames->map(function ($game) {
+            return Game::firstOrCreate([
+                'igdb_id' => $game['id'],
+            ], [
+                'igdb_id' => $game['id'],
+                'name' => $game['name'],
+                'slug' => $game['slug'],
+            ]);
+        });
     }
 
     public function newlyReleased()
@@ -75,6 +83,11 @@ class GamesAction
         return $games;
     }
 
+    public function recentlyReviewed()
+    {
+        return $this->popular();
+    }
+
     public function popular($limit = 10)
     {
         $igdbGames = (new GetPopularGamesAction)->execute($limit);
@@ -83,9 +96,28 @@ class GamesAction
         return $games;
     }
 
-    public function recentlyReviewed()
+    public function execute($query)
     {
-        return $this->popular();
+        // create something where we pull in games from IGDB and sync them with our database before returning the Game object from our database
+        // this will allow us to only sync the games with our database that we need
+
+        // or we could do pulls automatically from IGDB and sync them with our database on a schedule, plus the webhooks
+
+        // the question is, where do we do the query: on IGDB or in our database?
+        // and once we do the query, should we sync  it with our db?
+        // what's the advantage of doing it in our db?
+        // we can do joins and stuff with teams.
+        // we can also create a reference to other external dbs if we need for a specific game.
+        // so I think creating the game id our db is right
+        // once we do a query in IGDB, we should create/update the igdb_id in our db game object
+        Game::query();
+    }
+
+    // We need to call this whenever we retrieve games from igdb so we can sync them with our database and return our own Game object.
+
+    public function query()
+    {
+        // allow us to pass in a custom query to igdb
     }
 
     public function mostAnticipated()
@@ -116,36 +148,5 @@ class GamesAction
 
         //        $this->mostAnticipated = $this->formatForView($mostAnticipatedUnformatted);
         $this->mostAnticipated = $mostAnticipatedUnformatted;
-    }
-
-    // We need to call this whenever we retrieve games from igdb so we can sync them with our database and return our own Game object.
-    public function syncIgdbGames($igdbGames)
-    {
-        return $igdbGames->map(function ($game) {
-            return Game::firstOrCreate([
-                'igdb_id' => $game['id'],
-            ], [
-                'igdb_id' => $game['id'],
-                'name' => $game['name'],
-                'slug' => $game['slug'],
-            ]);
-        });
-    }
-
-    public function execute($query)
-    {
-        // create something where we pull in games from IGDB and sync them with our database before returning the Game object from our database
-        // this will allow us to only sync the games with our database that we need
-
-        // or we could do pulls automatically from IGDB and sync them with our database on a schedule, plus the webhooks
-
-        // the question is, where do we do the query: on IGDB or in our database?
-        // and once we do the query, should we sync  it with our db?
-        // what's the advantage of doing it in our db?
-        // we can do joins and stuff with teams.
-        // we can also create a reference to other external dbs if we need for a specific game.
-        // so I think creating the game id our db is right
-        // once we do a query in IGDB, we should create/update the igdb_id in our db game object
-        Game::query();
     }
 }

@@ -38,14 +38,14 @@ class MoveEpisode extends Component
 
         $this->validate();
 
-        if (! ($destinationOrganization = Team::find($this->organization))) {
+        if (!($destinationOrganization = Team::find($this->organization))) {
             $this->error('Cannot find the organization. Please refresh the page and try again!');
             $this->loading = false;
 
             return;
         }
 
-        if (! ($destinationLivestreamAccount = $destinationOrganization->livestreamAccount)) {
+        if (!($destinationLivestreamAccount = $destinationOrganization->livestreamAccount)) {
             $this->error('Cannot find the livestream account. Please refresh the page and try again!');
             $this->loading = false;
 

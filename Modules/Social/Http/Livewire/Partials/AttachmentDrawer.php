@@ -23,7 +23,7 @@ class AttachmentDrawer extends Component
         foreach ($validatedFiles['attached_files'] as $file) {
             $path = $file->store('post-attachments');
 
-            if (! $path) {
+            if (!$path) {
                 // throw some error
             }
 
@@ -36,7 +36,7 @@ class AttachmentDrawer extends Component
             );
         }
 
-        $this->emitUp('filesAdded', $this->attachments);
+        $this->dispatch('filesAdded', attachments: $this->attachments);
     }
 
     public function render()

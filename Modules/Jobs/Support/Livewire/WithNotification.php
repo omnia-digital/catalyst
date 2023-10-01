@@ -9,23 +9,11 @@ trait WithNotification
      */
     public function success(string $message, ?string $actionUrl = null)
     {
-        $this->dispatchBrowserEvent('notify', [
-            'message' => $message,
-            'type' => 'success',
-            'action' => $actionUrl,
-        ]);
-    }
-
-    /**
-     * Show error notification.
-     */
-    public function error(string $message, ?string $actionUrl = null)
-    {
-        $this->dispatchBrowserEvent('notify', [
-            'message' => $message,
-            'type' => 'error',
-            'action' => $actionUrl,
-        ]);
+        $this->dispatch('notify',
+            message: $message,
+            type: 'success',
+            action: $actionUrl
+        );
     }
 
     /**
@@ -34,5 +22,17 @@ trait WithNotification
     public function alertInvalidInput(?string $message = null)
     {
         $this->error($message ?? 'Please make sure all fields are input correctly.');
+    }
+
+    /**
+     * Show error notification.
+     */
+    public function error(string $message, ?string $actionUrl = null)
+    {
+        $this->dispatch('notify', [
+            'message' => $message,
+            'type' => 'error',
+            'action' => $actionUrl,
+        ]);
     }
 }

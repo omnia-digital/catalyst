@@ -44,21 +44,21 @@ class CreateTeam implements CreatesTeams
         );
 
         // Team types
-        if (! empty($input['teamTypes'])) {
+        if (!empty($input['teamTypes'])) {
             $team->attachTags($input['teamTypes']);
         }
 
-        if (! empty($input['bannerImage'])) {
+        if (!empty($input['bannerImage'])) {
             $team->addMedia($input['bannerImage'])->toMediaCollection('team_banner_images');
         }
-        if (! empty($input['mainImage'])) {
+        if (!empty($input['mainImage'])) {
             $team->addMedia($input['mainImage'])->toMediaCollection('team_main_images');
         }
-        if (! empty($input['profilePhoto'])) {
+        if (!empty($input['profilePhoto'])) {
             $team->addMedia($input['profilePhoto'])->toMediaCollection('team_profile_photos');
         }
 
-        if (! empty($input['sampleMedia'])) {
+        if (!empty($input['sampleMedia'])) {
             foreach ($input['sampleMedia'] as $media) {
                 $team->addMedia($media)->toMediaCollection('team_sample_images');
             }

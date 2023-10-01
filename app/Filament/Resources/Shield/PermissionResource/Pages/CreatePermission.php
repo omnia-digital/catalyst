@@ -3,11 +3,8 @@
 namespace App\Filament\Resources\Shield\PermissionResource\Pages;
 
 use App\Filament\Resources\Shield\PermissionResource;
-use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Resources\Pages\CreateRecord;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class CreatePermission extends CreateRecord
 {

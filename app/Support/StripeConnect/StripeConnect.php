@@ -4,11 +4,7 @@ namespace App\Support\StripeConnect;
 
 use Stripe\Account;
 use Stripe\AccountLink;
-use Stripe\Customer;
-use Stripe\Price;
-use Stripe\Product;
 use Stripe\StripeClient;
-use Stripe\Subscription;
 
 class StripeConnect
 {

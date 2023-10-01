@@ -26,13 +26,6 @@ class CreateNewPostAction
 
     protected ?Team $team = null;
 
-    public function user(User|Authenticatable $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function asComment(Model $parent): self
     {
         $this->postable = $parent;
@@ -80,5 +73,12 @@ class CreateNewPostAction
         Mention::createManyFromHandles($teamMentions, Team::class, $post);
 
         return $post;
+    }
+
+    public function user(User|Authenticatable $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

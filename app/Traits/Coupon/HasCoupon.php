@@ -3,20 +3,13 @@
 namespace App\Traits\Coupon;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use LogicException;
 use Modules\Jobs\Models\Coupon;
 use Modules\Jobs\Models\RedeemedCoupon;
 
 trait HasCoupon
 {
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
-     */
-    public function redeemedCoupon()
-    {
-        return $this->morphOne(RedeemedCoupon::class, 'model');
-    }
-
     /**
      * Redeem a coupon.
      *
@@ -26,7 +19,7 @@ trait HasCoupon
     {
         $coupon = $coupon instanceof Coupon ? $coupon : Coupon::findByCode($coupon);
 
-        if (! $coupon) {
+        if (!$coupon) {
             throw new LogicException('Coupon is not found');
         }
 
@@ -39,5 +32,13 @@ trait HasCoupon
             'after_discount_price' => $coupon->afterDiscount($originalPrice),
             'redeemed_at' => now(),
         ]);
+    }
+
+    /**
+     * @return MorphOne
+     */
+    public function redeemedCoupon()
+    {
+        return $this->morphOne(RedeemedCoupon::class, 'model');
     }
 }

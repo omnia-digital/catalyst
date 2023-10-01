@@ -15,14 +15,6 @@ class UserStatusList extends Component
         return User::query();
     }
 
-    public function forTeam($query, Team $team)
-    {
-        return $query
-            ->whereHas('teams', function ($query) use ($team) {
-                $query->where('model_has_roles.team_id', $team->id);
-            });
-    }
-
     public function getUserListProperty()
     {
         $query = $this
@@ -35,6 +27,14 @@ class UserStatusList extends Component
         }
 
         return $query->get();
+    }
+
+    public function forTeam($query, Team $team)
+    {
+        return $query
+            ->whereHas('teams', function ($query) use ($team) {
+                $query->where('model_has_roles.team_id', $team->id);
+            });
     }
 
     public function render()

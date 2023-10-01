@@ -2,6 +2,8 @@
 
 namespace Modules\Livestream\Repositories;
 
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Config;
 use Modules\Livestream\Contracts\Repositories\LivestreamRepositoryContract;
 use Modules\Livestream\EpisodeTemplate;
@@ -16,9 +18,9 @@ class PlaybackIdRepository implements LivestreamRepositoryContract
     /**
      * Perform a basic Stream search.
      *
-     * @param  string  $query
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $excludeStream
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param string $query
+     * @param Authenticatable|null $excludeStream
+     * @return Collection
      */
     public function search($query, $excludeStream = null)
     {

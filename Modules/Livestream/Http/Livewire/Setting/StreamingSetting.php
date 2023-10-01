@@ -39,11 +39,11 @@ class StreamingSetting extends Component
 
         $this->livestreamAccount->update($validated['streaming']);
 
-        if ($this->streaming['mux_livestream_active'] && ! $this->livestreamAccount->hasDefaultStream()) {
+        if ($this->streaming['mux_livestream_active'] && !$this->livestreamAccount->hasDefaultStream()) {
             (new CreateMuxStreamAction)->execute($this->livestreamAccount->team);
         }
 
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     public function render()

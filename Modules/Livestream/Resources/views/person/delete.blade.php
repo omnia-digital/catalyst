@@ -1,7 +1,7 @@
 <div>
     <x-form.button wire:click.prevent="$set('deletePersonModalOpen', true)" secondary danger>Delete</x-form.button>
 
-    <x-jet-confirmation-modal wire:model="deletePersonModalOpen">
+    <x-confirmation-modal wire:model.live="deletePersonModalOpen">
         <x-slot name="title">
             {{ __('Delete Person') }}
         </x-slot>
@@ -11,13 +11,13 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$set('deletePersonModalOpen', false)" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$set('deletePersonModalOpen', false)" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
-            </x-jet-secondary-button>
+            </x-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="deletePerson" wire:loading.attr="disabled">
+            <x-danger-button class="ml-2" wire:click="deletePerson" wire:loading.attr="disabled">
                 {{ __('Delete Person') }}
-            </x-jet-danger-button>
+            </x-danger-button>
         </x-slot>
-    </x-jet-confirmation-modal>
+    </x-confirmation-modal>
 </div>

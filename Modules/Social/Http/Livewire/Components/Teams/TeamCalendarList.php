@@ -79,16 +79,16 @@ class TeamCalendarList extends Component
         return $places->all();
     }
 
-    public function selectTeam($teamID)
-    {
-        $this->team = Team::find($teamID);
-    }
-
     public function handleTeamSelected($teamId)
     {
         $this->selectTeam($teamId);
 
-        $this->dispatchBrowserEvent('select-event', ['team' => $this->team]);
+        $this->dispatch('select-event', team: $this->team);
+    }
+
+    public function selectTeam($teamID)
+    {
+        $this->team = Team::find($teamID);
     }
 
     public function moreInfo()
@@ -98,7 +98,7 @@ class TeamCalendarList extends Component
 
     public function toggleMapCalendar($tab)
     {
-        $this->emitUp('toggle_map_calendar', $tab, $this->places);
+        $this->dispatch('toggle_map_calendar', tab: $tab, places: $this->places);
     }
 
     public function mount($classes = '')
@@ -106,7 +106,7 @@ class TeamCalendarList extends Component
         $this->classes = $classes;
         $this->orderBy = 'name';
 
-        if (! App::environment('production')) {
+        if (!App::environment('production')) {
             $this->useCache = false;
         }
     }

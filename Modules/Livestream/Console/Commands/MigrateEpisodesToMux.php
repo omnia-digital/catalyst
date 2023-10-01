@@ -39,17 +39,17 @@ class MigrateEpisodesToMux extends Command
     {
         if ($this->confirm('Are you sure you want to migrate all Episodes to Mux from S3?')) {
             $episodeId = $this->option('episode');
-            if (! empty($episode)) {
+            if (!empty($episode)) {
                 $episode = Episode::findOrFail($episodeId);
             }
 
             $videoId = $this->option('video');
-            if (empty($episode) && ! empty($videoId)) {
+            if (empty($episode) && !empty($videoId)) {
                 $video = Video::findOrFail($videoId);
                 $episode = $video->episode;
             }
 
-            if (! empty($episode)) {
+            if (!empty($episode)) {
                 $this->migrateEpisode($episode);
 
                 return;
@@ -57,14 +57,14 @@ class MigrateEpisodesToMux extends Command
 
             // Get Episodes from Livestream Account or use all Episodes
             $livestreamAccount = $this->option('livestreamAccount');
-            if (! empty($livestreamAccount)) {
+            if (!empty($livestreamAccount)) {
                 $livestreamAccount = LivestreamAccount::findOrFail($livestreamAccount);
                 $episodes = $livestreamAccount->episodes;
             } else {
 //                    $episodes = Episode::all();
             }
 
-            if (! empty($episodes)) {
+            if (!empty($episodes)) {
                 foreach ($episodes as $episode) {
                     $this->migrateEpisode($episode);
                 }
@@ -83,7 +83,7 @@ class MigrateEpisodesToMux extends Command
     {
         $this->info("Episode: {$episode->id}");
         // check if the episodes videos are on mux already
-        if (! empty($episode->mux_asset_id)) {
+        if (!empty($episode->mux_asset_id)) {
             // if so, return
             return;
         }
@@ -100,14 +100,14 @@ class MigrateEpisodesToMux extends Command
             $this->info("Video: {$video->id}");
 
             // check if video source type is mux
-            if (! empty($video->videoSourceType) && $video->videoSourceType->slug === 'mux') {
+            if (!empty($video->videoSourceType) && $video->videoSourceType->slug === 'mux') {
                 // if it is skip to the next one
                 continue;
             }
             $url = $video->download_url;
 
             $this->info("Url: {$url}");
-            if (empty($url) || ! strpos($url, '.mp4')) {
+            if (empty($url) || !strpos($url, '.mp4')) {
                 $this->error('Url is not working...');
 
                 continue;
@@ -118,7 +118,7 @@ class MigrateEpisodesToMux extends Command
             // create asset on mux
             $data = [
                 'input' => [
-                    'url' => (string) $url,
+                    'url' => (string)$url,
                 ],
                 'playback_policy' => 'public',
                 'mp4_support' => 'standard',
@@ -128,7 +128,7 @@ class MigrateEpisodesToMux extends Command
                 $muxService = new MuxService;
                 $muxAsset = $muxService->createAsset($data);
 
-                if (! empty($muxAsset)) {
+                if (!empty($muxAsset)) {
                     // save Mux asset id to episode
                     $episode->mux_asset_id = $muxAsset->getId();
                     $episode->save();

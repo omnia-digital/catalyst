@@ -12,7 +12,6 @@ use Modules\Livestream\Events\EpisodeViewedEvent;
 use Modules\Livestream\Listeners\CreateEssentialStuffForTeam;
 use Modules\Livestream\Listeners\CreateStripeStuffOnTheFirstTeamUpdatedListener;
 use Modules\Livestream\Listeners\EnableStream;
-use Modules\Livestream\Listeners\TrackEpisodeCreatedGoalListener;
 use Modules\Livestream\Listeners\TrackSubscriptionCancelledGoalListener;
 use Modules\Livestream\Listeners\TrackUserSubscribedGoalListener;
 use Modules\Livestream\Listeners\UpdateLastViewedAtListener;

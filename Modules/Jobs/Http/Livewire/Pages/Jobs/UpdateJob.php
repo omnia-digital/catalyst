@@ -2,6 +2,7 @@
 
 namespace Modules\Jobs\Http\Livewire\Pages\Jobs;
 
+use App\Models\Tag;
 use Livewire\Component;
 use Modules\Jobs\Models\ApplyType;
 use Modules\Jobs\Models\ExperienceLevel;
@@ -72,7 +73,7 @@ class UpdateJob extends Component
 
     public function getJobPositionSkillOptionsProperty()
     {
-        return \App\Models\Tag::getWithType('job_position_skill')
+        return Tag::getWithType('job_position_skill')
             ->pluck('name', 'id');
     }
 

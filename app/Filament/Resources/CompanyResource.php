@@ -7,11 +7,11 @@ use App\Filament\Resources\CompanyResource\Pages\EditCompany;
 use App\Filament\Resources\CompanyResource\Pages\ManageCompanies;
 use App\Models\Company;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use RalphJSmit\Filament\Components\Forms\Timestamps;
 
 class CompanyResource extends Resource
@@ -20,19 +20,19 @@ class CompanyResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'People';
 
-    protected $queryString = [
-        'tableColumnSearchQueries',
-    ];
+//    protected $queryString = [
+//        'tableColumnSearchQueries',
+//    ];
 
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make('id'),
+//            Forms\Components\TextInput::make('id'),
             Forms\Components\TextInput::make('name'),
             Forms\Components\TextInput::make('email'),
             Forms\Components\TextInput::make('website'),
             Forms\Components\TextInput::make('about'),
-            Timestamps::make(),
+            ...Timestamps::make(),
         ]);
     }
 

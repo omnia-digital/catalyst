@@ -147,7 +147,6 @@ module.exports = {
         /* require('tailwindcss-multi-theme'), */
         require('@tailwindcss/aspect-ratio'),
         require('tailwind-scrollbar-hide'),
-        require('@tailwindcss/line-clamp'),
         require('tw-elements/dist/plugin'),
         plugin(function({ matchUtilities, theme }) {
             matchUtilities(

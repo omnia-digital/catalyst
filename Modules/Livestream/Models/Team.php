@@ -73,20 +73,16 @@ class Team extends JetstreamTeam
         return $this->hasOne(LivestreamAccount::class);
     }
 
-    public function extraInvoiceItems(): HasMany
-    {
-        return $this->hasMany(ExtraInvoiceItem::class);
-    }
-
-    // People associated with this team
     public function people(): BelongsToMany
     {
         return $this->belongsToMany(Person::class, 'team_person');
     }
 
+    // People associated with this team
+
     public function getLogoAttribute()
     {
-        if (! $this->photo_url) {
+        if (!$this->photo_url) {
             return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
         }
 
@@ -97,14 +93,24 @@ class Team extends JetstreamTeam
         return Storage::disk($this->logoDisk())->url($this->photo_url);
     }
 
-    public function hasDefaultTeamName(): bool
+    /**
+     * Get the disk that logo should be stored on.
+     *
+     * @return string
+     */
+    protected function logoDisk()
     {
-        return $this->name === self::DEFAULT_TEAM_NAME;
+        return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : config('jetstream.profile_photo_disk', 'public');
     }
 
     public function hasInfoIsFilled(): bool
     {
-        return ! $this->hasDefaultTeamName() && ! empty($this->phone) && ! empty($this->city) && ! empty($this->state);
+        return !$this->hasDefaultTeamName() && !empty($this->phone) && !empty($this->city) && !empty($this->state);
+    }
+
+    public function hasDefaultTeamName(): bool
+    {
+        return $this->name === self::DEFAULT_TEAM_NAME;
     }
 
     /**
@@ -146,6 +152,11 @@ class Team extends JetstreamTeam
         return $this->extraInvoiceItems()->unpaid()->exists();
     }
 
+    public function extraInvoiceItems(): HasMany
+    {
+        return $this->hasMany(ExtraInvoiceItem::class);
+    }
+
     /**
      * Purge all of the team's resources.
      *
@@ -163,7 +174,7 @@ class Team extends JetstreamTeam
         $this->users()->detach();
 
         // Disable and delete streams.
-        $this->livestreamAccount->streams->each(fn (Stream $stream) => $stream->delete());
+        $this->livestreamAccount->streams->each(fn(Stream $stream) => $stream->delete());
 
         // Delete episode templates.
         $this->livestreamAccount->episodeTemplates()->delete();
@@ -181,15 +192,5 @@ class Team extends JetstreamTeam
         $this->livestreamAccount->delete();
 
         $this->delete();
-    }
-
-    /**
-     * Get the disk that logo should be stored on.
-     *
-     * @return string
-     */
-    protected function logoDisk()
-    {
-        return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : config('jetstream.profile_photo_disk', 'public');
     }
 }

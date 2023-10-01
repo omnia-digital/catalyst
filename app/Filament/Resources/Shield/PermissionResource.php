@@ -6,10 +6,10 @@ use App\Filament\Resources\Shield\PermissionResource\Pages;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
 class PermissionResource extends Resource implements HasShieldPermissions
@@ -62,7 +62,7 @@ class PermissionResource extends Resource implements HasShieldPermissions
             ->columns([
                 Tables\Columns\BadgeColumn::make('name')
                     ->label(__('filament-shield::filament-shield.column.name'))
-                    ->formatStateUsing(fn ($state): string => Str::headline($state))
+                    ->formatStateUsing(fn($state): string => Str::headline($state))
                     ->colors(['primary'])
                     ->searchable(),
                 Tables\Columns\BadgeColumn::make('guard_name')
@@ -104,11 +104,6 @@ class PermissionResource extends Resource implements HasShieldPermissions
         ];
     }
 
-    public static function getModel(): string
-    {
-        return Utils::getPermissionModel();
-    }
-
     public static function getModelLabel(): string
     {
         return __('filament-shield::filament-shield.resource.label.permission');
@@ -121,7 +116,7 @@ class PermissionResource extends Resource implements HasShieldPermissions
 
     public static function getSlug(): string
     {
-        return (string) config('filament-shield.shield_resource.permission_slug');
+        return (string)config('filament-shield.shield_resource.permission_slug');
     }
 
     public static function canGloballySearch(): bool
@@ -129,37 +124,42 @@ class PermissionResource extends Resource implements HasShieldPermissions
         return Utils::isResourceGloballySearchable() && count(static::getGloballySearchableAttributes()) && static::canViewAny();
     }
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return Utils::isResourceNavigationRegistered();
     }
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return Utils::isResourceNavigationGroupEnabled()
             ? __('filament-shield::filament-shield.nav.group')
             : '';
     }
 
-    protected static function getNavigationLabel(): string
+    public static function getNavigationLabel(): string
     {
         return __('filament-shield::filament-shield.nav.permission.label');
     }
 
-    protected static function getNavigationIcon(): string
+    public static function getNavigationIcon(): ?string
     {
         return __('filament-shield::filament-shield.nav.permission.icon');
     }
 
-    protected static function getNavigationSort(): ?int
+    public static function getNavigationSort(): ?int
     {
         return 2;
     }
 
-    protected static function getNavigationBadge(): ?string
+    public static function getNavigationBadge(): ?string
     {
         return Utils::isResourceNavigationBadgeEnabled()
             ? static::getModel()::count()
             : null;
+    }
+
+    public static function getModel(): string
+    {
+        return Utils::getPermissionModel();
     }
 }

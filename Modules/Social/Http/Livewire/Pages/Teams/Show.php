@@ -106,7 +106,7 @@ class Show extends Component
 
     public function addUserAwards($userID)
     {
-        $this->dispatchBrowserEvent('add-awards-modal', ['type' => 'open']);
+        $this->dispatch('add-awards-modal', type: 'open');
         $this->userToAddAwardsTo = User::find($userID);
     }
 
@@ -114,8 +114,8 @@ class Show extends Component
     {
         $user->awards()->attach($this->awardsToAdd);
 
-        $this->dispatchBrowserEvent('notify', ['message' => 'Awards Added', 'type' => 'success']);
-        $this->dispatchBrowserEvent('add-awards-modal', ['type' => 'close']);
+        $this->dispatch('notify', message: 'Awards Added', type: 'success');
+        $this->dispatch('add-awards-modal', type: 'close');
     }
 
     public function getRemainingAwards(User $user)

@@ -37,7 +37,7 @@ class Form extends Model
 
     public function getIsActiveAttribute()
     {
-        return ! is_null($this->published_at);
+        return !is_null($this->published_at);
     }
 
     // Relationships

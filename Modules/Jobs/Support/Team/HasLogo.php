@@ -28,6 +28,16 @@ trait HasLogo
     }
 
     /**
+     * Get the disk that logo should be stored on.
+     *
+     * @return string
+     */
+    protected function logoDisk()
+    {
+        return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : 'public';
+    }
+
+    /**
      * Delete the company's logo.
      *
      * @return void
@@ -61,15 +71,5 @@ trait HasLogo
     protected function defaultLogoUrl()
     {
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF&size=128';
-    }
-
-    /**
-     * Get the disk that logo should be stored on.
-     *
-     * @return string
-     */
-    protected function logoDisk()
-    {
-        return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : 'public';
     }
 }

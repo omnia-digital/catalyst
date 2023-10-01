@@ -17,9 +17,9 @@ class CreateNewUser implements CreatesNewUsers
     /**
      * Create a newly registered user.
      *
-     * @return \App\Models\User
+     * @param array<string, string> $input
      */
-    public function create(array $input)
+    public function create(array $input): User
     {
         Validator::make($input, [
             'first_name' => ['required', 'string', 'max:255'],
@@ -41,19 +41,6 @@ class CreateNewUser implements CreatesNewUsers
     }
 
     /**
-     * Create a personal team for the user.
-     *
-     * @return void
-     */
-    protected function createTeam(User $user)
-    {
-        $user->ownedTeams()->save(Team::forceCreate([
-            'user_id' => $user->id,
-            'name' => explode(' ', $user->name, 2)[0] . "'s Team",
-        ]));
-    }
-
-    /**
      * Create a profile for the user.
      *
      * @return void
@@ -64,5 +51,16 @@ class CreateNewUser implements CreatesNewUsers
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
         ]);
+    }
+
+    /**
+     * Create a personal team for the user.
+     */
+    protected function createTeam(User $user): void
+    {
+        $user->ownedTeams()->save(Team::forceCreate([
+            'user_id' => $user->id,
+            'name' => explode(' ', $user->name, 2)[0] . "'s Team",
+        ]));
     }
 }

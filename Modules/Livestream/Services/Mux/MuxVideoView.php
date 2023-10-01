@@ -21,24 +21,32 @@ class MuxVideoView
         $this->videoViewsApi = new VideoViewsApi($client, $configuration);
     }
 
-    public function getTotalViews(LivestreamAccount|int|null $livestreamAccount = null, Episode|string|null $episodeOrMuxAssetId = null, ?Carbon $from = null, ?Carbon $to = null): int
-    {
+    public function getTotalViews(
+        LivestreamAccount|int|null $livestreamAccount = null,
+        Episode|string|null $episodeOrMuxAssetId = null,
+        ?Carbon $from = null,
+        ?Carbon $to = null
+    ): int {
         return $this->getViews($livestreamAccount, $episodeOrMuxAssetId, $from, $to)->count();
     }
 
-    public function getViews(LivestreamAccount|int|null $livestreamAccount = null, Episode|string|null $episodeOrMuxAssetId = null, ?Carbon $from = null, ?Carbon $to = null): Collection
-    {
+    public function getViews(
+        LivestreamAccount|int|null $livestreamAccount = null,
+        Episode|string|null $episodeOrMuxAssetId = null,
+        ?Carbon $from = null,
+        ?Carbon $to = null
+    ): Collection {
         $livestreamAccountId = $livestreamAccount instanceof LivestreamAccount ? $livestreamAccount->id : $livestreamAccount;
         $muxAssetId = $episodeOrMuxAssetId instanceof Episode ? $episodeOrMuxAssetId->video?->video_source_id : $episodeOrMuxAssetId;
         $page = 1;
         $videoViews = [];
         $filters = [];
 
-        if (! is_null($livestreamAccountId)) {
+        if (!is_null($livestreamAccountId)) {
             array_push($filters, 'sub_property_id:' . $livestreamAccountId);
         }
 
-        if (! is_null($muxAssetId)) {
+        if (!is_null($muxAssetId)) {
             array_push($filters, 'asset_id:' . $muxAssetId);
         }
 
@@ -59,7 +67,7 @@ class MuxVideoView
 
             $videoViews = array_merge($videoViews, $result['data']);
             $page = $page + 1;
-        } while (! empty($result['data']));
+        } while (!empty($result['data']));
 
         return collect(array_map(function (AbridgedVideoView $item) {
             $videoView = new VideoView;

@@ -5,16 +5,19 @@
             <div class="px-4 sm:px-0">
                 <div class="sm:hidden">
                     <label for="question-tabs" class="sr-only">Select a tab</label>
-                    <select id="question-tabs" class="block w-full rounded-md border-gray-300 text-base-text-color font-medium text-dark-text-color shadow-sm focus:border-rose-500 focus:ring-rose-500">
-{{--                        <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">{{ tab.name }}</option>--}}
+                    <select id="question-tabs"
+                            class="block w-full rounded-md border-gray-300 text-base-text-color font-medium text-dark-text-color shadow-sm focus:border-rose-500 focus:ring-rose-500">
+                        {{--                        <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">{{ tab.name }}</option>--}}
                     </select>
                 </div>
                 <div class="hidden sm:block">
                     <nav class="relative z-0 rounded-lg shadow flex divide-x divide-neutral-light" aria-label="Tabs">
-                        <a v-for="(tab, tabIdx) in tabs" :key="tab.name" :href="tab.href" :aria-current="tab.current ? 'page' : undefined"
+                        <a v-for="(tab, tabIdx) in tabs" :key="tab.name" :href="tab.href"
+                           :aria-current="tab.current ? 'page' : undefined"
                            :class="[tab.current ? 'text-dark-text-color' : 'text-base-text-color hover:text-dark-text-color', tabIdx === 0 ? 'rounded-l-lg' : '', tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '', 'group relative min-w-0 flex-1 overflow-hidden bg-secondary py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10']">
-{{--                            <span>{{ tab.name }}</span>--}}
-                            <span aria-hidden="true" :class="[tab.current ? 'bg-rose-500' : 'bg-transparent', 'absolute inset-x-0 bottom-0 h-0.5']"/>
+                            {{--                            <span>{{ tab.name }}</span>--}}
+                            <span aria-hidden="true"
+                                  :class="[tab.current ? 'bg-rose-500' : 'bg-transparent', 'absolute inset-x-0 bottom-0 h-0.5']"/>
                         </a>
                     </nav>
                 </div>
@@ -35,26 +38,30 @@
                 <section aria-labelledby="who-to-follow-heading">
                     <div class="bg-secondary rounded-lg shadow">
                         <div class="p-6">
-                            <x-library::heading.2 id="who-to-follow-heading" class="text-base-text-color font-medium text-dark-text-color">
+                            <x-library::heading.2 id="who-to-follow-heading"
+                                                  class="text-base-text-color font-medium text-dark-text-color">
                                 Who to follow
                             </x-library::heading.2>
                             <div class="mt-6 flow-root">
                                 <ul role="list" class="-my-4 divide-y divide-neutral-light">
-                                    <li v-for="user in whoToFollow" :key="user.profile.handle" class="flex items-center py-4 space-x-3">
+                                    <li v-for="user in whoToFollow" :key="user.profile.handle"
+                                        class="flex items-center py-4 space-x-3">
                                         <div class="flex-shrink-0">
                                             <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt=""/>
                                         </div>
                                         <div class="min-w-0 flex-1">
                                             <p class="text-sm font-medium text-dark-text-color">
-{{--                                                <a :href="user.href">{{ user.name }}</a>--}}
+                                                {{--                                                <a :href="user.href">{{ user.name }}</a>--}}
                                             </p>
                                             <p class="text-sm text-base-text-color">
-{{--                                                <a :href="user.href">{{ '@' + user.profile.handle }}</a>--}}
+                                                {{--                                                <a :href="user.href">{{ '@' + user.profile.handle }}</a>--}}
                                             </p>
                                         </div>
                                         <div class="flex-shrink-0">
-                                            <button type="button" class="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100">
-                                                <PlusSmIcon class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" aria-hidden="true"/>
+                                            <button type="button"
+                                                    class="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100">
+                                                <PlusSmIcon class="-ml-1 mr-0.5 h-5 w-5 text-rose-400"
+                                                            aria-hidden="true"/>
                                                 <span>
                                                       Follow
                                                     </span>
@@ -64,7 +71,8 @@
                                 </ul>
                             </div>
                             <div class="mt-6">
-                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-secondary hover:bg-gray-50">
+                                <a href="#"
+                                   class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-secondary hover:bg-gray-50">
                                     View all
                                 </a>
                             </div>
@@ -74,20 +82,23 @@
                 <section aria-labelledby="trending-heading">
                     <div class="bg-secondary rounded-lg shadow">
                         <div class="p-6">
-                            <x-library::heading.2 id="trending-heading" class="text-base-text-color font-medium text-dark-text-color">
+                            <x-library::heading.2 id="trending-heading"
+                                                  class="text-base-text-color font-medium text-dark-text-color">
                                 Trending
                             </x-library::heading.2>
                             <div class="mt-6 flow-root">
                                 <ul role="list" class="-my-4 divide-y divide-neutral-light">
                                     <li v-for="post in trendingPosts" :key="post.id" class="flex py-4 space-x-3">
                                         <div class="flex-shrink-0">
-                                            <img class="h-8 w-8 rounded-full" :src="post.user.imageUrl" :alt="post.user.name"/>
+                                            <img class="h-8 w-8 rounded-full" :src="post.user.imageUrl"
+                                                 :alt="post.user.name"/>
                                         </div>
                                         <div class="min-w-0 flex-1">
-{{--                                            <p class="text-sm text-dark-text-color">{{ post.body }}</p>--}}
+                                            {{--                                            <p class="text-sm text-dark-text-color">{{ post.body }}</p>--}}
                                             <div class="mt-2 flex">
                                                     <span class="inline-flex items-center text-sm">
-                                                      <button type="button" class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color">
+                                                      <button type="button"
+                                                              class="inline-flex space-x-2 text-light-text-color hover:text-base-text-color">
                                                         <ChatAltIcon class="h-5 w-5" aria-hidden="true"/>
 {{--                                                        <span class="font-medium text-dark-text-color">{{ post.comments }}</span>--}}
                                                       </button>
@@ -98,7 +109,8 @@
                                 </ul>
                             </div>
                             <div class="mt-6">
-                                <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-secondary hover:bg-gray-50">
+                                <a href="#"
+                                   class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-dark-text-color bg-secondary hover:bg-gray-50">
                                     View all
                                 </a>
                             </div>

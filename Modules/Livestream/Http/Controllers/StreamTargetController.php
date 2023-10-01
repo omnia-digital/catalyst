@@ -3,6 +3,7 @@
 namespace Modules\Livestream\Http\Controllers;
 
 use Exception;
+use Illuminate\Http\Response;
 use Modules\Livestream\Http\Requests\StreamTargetRequest;
 use Modules\Livestream\Omnia;
 use Modules\Livestream\Repositories\StreamTargetRepository;
@@ -21,7 +22,7 @@ class StreamTargetController extends LivestreamController
      * Return all current Stream Targets for given or current livestreamAccont
      * (*a user cannot have a stream integration at this time*)
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index($livestreamAccount = null)
     {
@@ -47,7 +48,7 @@ class StreamTargetController extends LivestreamController
         // dependent on livestream plan and check an exception list for accounts that are allowed to add more
         $accountCanAddAnotherStreamTarget = true;
 
-        if (! $accountCanAddAnotherStreamTarget) {
+        if (!$accountCanAddAnotherStreamTarget) {
             return response([
                 'message' => 'This account cannot add another Stream Target',
             ], 403);
@@ -59,7 +60,7 @@ class StreamTargetController extends LivestreamController
             $stream = Stream::findOrFail($stream_id);
         } elseif (auth()->check()) {
             $currentTeam = auth()->user()->currentTeam();
-            if (! empty($currentTeam) && ! empty($currentTeam->livestreamAccount)) {
+            if (!empty($currentTeam) && !empty($currentTeam->livestreamAccount)) {
                 $stream = $currentTeam->livestreamAccount->default_stream;
             }
         }
@@ -85,7 +86,7 @@ class StreamTargetController extends LivestreamController
     /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -96,7 +97,7 @@ class StreamTargetController extends LivestreamController
      * Update the specified resource in storage.
      *
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(StreamTargetRequest $request, StreamTarget $stream_target)
     {
@@ -114,8 +115,8 @@ class StreamTargetController extends LivestreamController
     /**
      * Destroy the resource
      *
-     * @param  int  $ids
-     * @return \Illuminate\Http\Response
+     * @param int $ids
+     * @return Response
      *
      * @throws Exception
      */

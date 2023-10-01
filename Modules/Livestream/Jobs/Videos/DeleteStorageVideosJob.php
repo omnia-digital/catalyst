@@ -35,7 +35,7 @@ class DeleteStorageVideosJob implements ShouldQueue
                 continue;
             }
 
-            if (! empty($video->video_source_id)) {
+            if (!empty($video->video_source_id)) {
                 try {
                     $this->deleteFacebookLiveVideo($video);
                 } catch (Exception $e) {
@@ -90,12 +90,12 @@ class DeleteStorageVideosJob implements ShouldQueue
 
         $fb_page = $video->video_source_account_id;
         // find if fb_page is in user facebook pages
-        if (! empty($fb_page)) {
+        if (!empty($fb_page)) {
             $found_fb_page = $all_user_facebook_pages->first(function ($item, $key) use ($fb_page) {
                 return $item['id'] == $fb_page;
             });
 
-            if (! empty($found_fb_page)) {
+            if (!empty($found_fb_page)) {
                 $teamObject = [
                     'id' => $found_fb_page['id'],
                     'access_token' => $found_fb_page['access_token'],

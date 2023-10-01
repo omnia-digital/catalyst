@@ -43,28 +43,6 @@ class PersonInfoPanel extends Component
         }
     }
 
-    public function showEditModal()
-    {
-        $this->editModalOpen = true;
-    }
-
-    public function hideEditModal()
-    {
-        $this->editModalOpen = false;
-    }
-
-    public function updatePerson()
-    {
-        $this->authorize('update', $this->person);
-
-        $this->validate();
-
-        $this->person->update($this->state);
-
-        $this->success('Update person successfully!');
-        $this->hideEditModal();
-    }
-
     public function findPerson($personId)
     {
         // Don't do anything when user select same person.
@@ -81,6 +59,28 @@ class PersonInfoPanel extends Component
 
         // Dispatch event for open the over-slide on mobile
         $this->showSlideOver();
+    }
+
+    public function showEditModal()
+    {
+        $this->editModalOpen = true;
+    }
+
+    public function updatePerson()
+    {
+        $this->authorize('update', $this->person);
+
+        $this->validate();
+
+        $this->person->update($this->state);
+
+        $this->success('Update person successfully!');
+        $this->hideEditModal();
+    }
+
+    public function hideEditModal()
+    {
+        $this->editModalOpen = false;
     }
 
     public function resetPerson()

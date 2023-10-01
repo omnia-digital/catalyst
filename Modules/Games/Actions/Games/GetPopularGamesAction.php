@@ -13,7 +13,8 @@ class GetPopularGamesAction
         $before = Carbon::now()->subMonths(2)->timestamp;
         $after = Carbon::now()->addMonths(2)->timestamp;
 
-        $popularGamesUnformatted = IGDBGame::where('first_release_date', '>', $before)->where('first_release_date', '<', $after)->get();
+        $popularGamesUnformatted = IGDBGame::where('first_release_date', '>', $before)->where('first_release_date', '<',
+            $after)->get();
 
 //        $popularGames = $popularGamesUnformatted;
         return $popularGamesUnformatted;
@@ -23,7 +24,7 @@ class GetPopularGamesAction
         return collect($popularGames)->filter(function ($game) {
             return $game['rating'];
         })->each(function ($game) {
-            $this->emit('gameWithRatingAdded', [
+            $this->dispatch('gameWithRatingAdded', [
                 'coverImageUrl' => $game['coverImageUrl'],
                 'slug' => $game['slug'],
                 'rating' => $game['rating'] / 100,

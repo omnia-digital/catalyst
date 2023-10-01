@@ -13,7 +13,8 @@ class GetTotalNumberOfEpisodesAction
 
         // For normal episodes, get the total number of episodes count.
         if ($expiredOnly) {
-            $numberOfEpisodes = $team->livestreamAccount->episodes()->expired()->whereBetween('created_at', [$from, $to])->count();
+            $numberOfEpisodes = $team->livestreamAccount->episodes()->expired()->whereBetween('created_at',
+                [$from, $to])->count();
         } else {
             $numberOfEpisodes = $team->livestreamAccount->episodes()->whereBetween('created_at', [$from, $to])->count();
         }

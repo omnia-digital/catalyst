@@ -7,9 +7,9 @@
 <li {{ $attributes->merge(['class' => 'relative']) }}>
     <div class="{{ $selected ? 'ring-2 ring-offset-2 ring-blue-500' : 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-blue-500' }} group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden cursor-pointer relative">
         <img
-            src="{{ $episode->thumbnail }}"
-            alt="{{ $episode->title }}"
-            class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none"
+                src="{{ $episode->thumbnail }}"
+                alt="{{ $episode->title }}"
+                class="{{ $selected ? '' : 'group-hover:opacity-75' }} object-cover pointer-events-none"
         >
 
         @if ($episode->isLive())

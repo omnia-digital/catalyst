@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Lab404\Impersonate\Services\ImpersonateManager;
@@ -79,9 +80,28 @@ class User extends Authenticatable implements MustVerifyEmail
         return $dbUser;
     }
 
-    public function isAdmin(): bool
+    public function createSocialAccount(SocialiteUser $user): SocialAccount
     {
-        return in_array($this->email, Omnia::adminEmails());
+        [$firstName, $lastName] = Omnia::extractFullName($user->getName());
+
+        return $this->socialAccount()->create([
+            'provider_user_id' => $user->getId(),
+            'provider' => 'facebook',
+            'avatar' => $user->getAvatar(),
+            'nickname' => $user->getNickname(),
+            'email' => $this->email,
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'gender' => null,
+            'token' => $user->token,
+            'expires_in' => $user->expiresIn,
+            'refresh_token' => $user->refreshToken,
+        ]);
+    }
+
+    public function socialAccount(): HasOne
+    {
+        return $this->hasOne(SocialAccount::class);
     }
 
     public function scopeAdmin(Builder $query)
@@ -92,6 +112,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function canImpersonate(): bool
     {
         return $this->isAdmin();
+    }
+
+    public function isAdmin(): bool
+    {
+        return in_array($this->email, Omnia::adminEmails());
     }
 
     public function isImpersonating(): bool
@@ -108,11 +133,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class);
-    }
-
-    public function socialAccount(): HasOne
-    {
-        return $this->hasOne(SocialAccount::class);
     }
 
     public function livestreamAccounts(): HasManyThrough
@@ -154,30 +174,11 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Route notifications for the Slack channel.
      *
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param Notification $notification
      * @return string
      */
     public function routeNotificationForSlack($notification)
     {
         return $this->slack_webhook_url;
-    }
-
-    public function createSocialAccount(SocialiteUser $user): SocialAccount
-    {
-        [$firstName, $lastName] = Omnia::extractFullName($user->getName());
-
-        return $this->socialAccount()->create([
-            'provider_user_id' => $user->getId(),
-            'provider' => 'facebook',
-            'avatar' => $user->getAvatar(),
-            'nickname' => $user->getNickname(),
-            'email' => $this->email,
-            'first_name' => $firstName,
-            'last_name' => $lastName,
-            'gender' => null,
-            'token' => $user->token,
-            'expires_in' => $user->expiresIn,
-            'refresh_token' => $user->refreshToken,
-        ]);
     }
 }

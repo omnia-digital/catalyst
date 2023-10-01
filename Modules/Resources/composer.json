@@ -1,17 +1,16 @@
 {
-    "name": "omniadigital/resources",
-    "description": "",
-    "extra": {
-        "laravel": {
-            "providers": [],
-            "aliases": {
-
-            }
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "Modules\\Resources\\": ""
-        }
+  "name": "omniadigital/resources",
+  "description": "",
+  "extra": {
+    "laravel": {
+      "providers": [],
+      "aliases": {
+      }
     }
+  },
+  "autoload": {
+    "psr-4": {
+      "Modules\\Resources\\": ""
+    }
+  }
 }

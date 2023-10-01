@@ -18,7 +18,7 @@ class CreateNewUser implements CreatesNewUsers
     /**
      * Create a newly registered user.
      *
-     * @return \Modules\Jobs\Models\User
+     * @return User
      */
     public function create(array $input)
     {
@@ -38,7 +38,8 @@ class CreateNewUser implements CreatesNewUsers
           ]
         }';
 
-        $response = Http::withToken(config('app.sendgrid_key'))->withBody($json_data, 'application/json')->put(config('app.sendgrid_url'));
+        $response = Http::withToken(config('app.sendgrid_key'))->withBody($json_data,
+            'application/json')->put(config('app.sendgrid_url'));
         //202 Accepted
         if ($response->status() == 202) {
             return DB::transaction(function () use ($input) {
@@ -55,6 +56,14 @@ class CreateNewUser implements CreatesNewUsers
     }
 
     /**
+     * Assign role to user.
+     */
+    protected function assignRole(User $user, string $role)
+    {
+        $user->assignRole($role);
+    }
+
+    /**
      * Create a personal company for the user.
      *
      * @return void
@@ -66,13 +75,5 @@ class CreateNewUser implements CreatesNewUsers
             'name' => explode(' ', $user->name, 2)[0] . "'s Company",
             'personal_team' => true,
         ]));
-    }
-
-    /**
-     * Assign role to user.
-     */
-    protected function assignRole(User $user, string $role)
-    {
-        $user->assignRole($role);
     }
 }

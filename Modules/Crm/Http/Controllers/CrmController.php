@@ -41,7 +41,7 @@ class CrmController extends Controller
     /**
      * Show the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Renderable
      */
     public function show($id)
@@ -52,7 +52,7 @@ class CrmController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Renderable
      */
     public function edit($id)
@@ -63,7 +63,7 @@ class CrmController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Renderable
      */
     public function update(Request $request, $id)
@@ -74,7 +74,7 @@ class CrmController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Renderable
      */
     public function destroy($id)

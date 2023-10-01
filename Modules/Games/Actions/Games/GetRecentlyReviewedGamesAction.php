@@ -4,7 +4,6 @@ namespace Modules\Games\Actions\Games;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use MarcReichel\IGDBLaravel\Models\Cover;
 use Modules\Games\Models\Game;
 
 class GetRecentlyReviewedGamesAction
@@ -40,7 +39,7 @@ class GetRecentlyReviewedGamesAction
                 return $game['rating'];
             })
             ->each(function ($game) {
-                $this->emit('reviewGameWithRatingAdded', [
+                $this->dispatch('reviewGameWithRatingAdded', [
                     'slug' => 'review_' . $game['slug'],
                     'rating' => $game['rating'] / 100,
                 ]);

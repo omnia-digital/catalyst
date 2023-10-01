@@ -10,13 +10,13 @@
 
         @if ($this->team->livestreamAccount->hasEpisodes())
             <div class="mt-5">
-                <x-jet-danger-button wire:click="$toggle('confirmingEpisodesDeletion')" wire:loading.attr="disabled">
+                <x-danger-button wire:click="$toggle('confirmingEpisodesDeletion')" wire:loading.attr="disabled">
                     {{ __('Delete All Episodes') }}
-                </x-jet-danger-button>
+                </x-danger-button>
             </div>
         @endif
 
-        <x-jet-confirmation-modal wire:model="confirmingEpisodesDeletion">
+        <x-confirmation-modal wire:model.live="confirmingEpisodesDeletion">
             <x-slot name="title">
                 {{ __('Delete All Episodes') }}
             </x-slot>
@@ -26,14 +26,14 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-jet-secondary-button wire:click="$toggle('confirmingEpisodesDeletion')" wire:loading.attr="disabled">
+                <x-secondary-button wire:click="$toggle('confirmingEpisodesDeletion')" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
-                </x-jet-secondary-button>
+                </x-secondary-button>
 
-                <x-jet-danger-button class="ml-2" wire:click="deleteAllEpisodes" wire:loading.attr="disabled">
+                <x-danger-button class="ml-2" wire:click="deleteAllEpisodes" wire:loading.attr="disabled">
                     {{ __('Delete All Episodes') }}
-                </x-jet-danger-button>
+                </x-danger-button>
             </x-slot>
-        </x-jet-confirmation-modal>
+        </x-confirmation-modal>
     </x-slot>
 </x-action-section>

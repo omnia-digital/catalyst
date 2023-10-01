@@ -20,7 +20,7 @@ class importRemoteMP4FilesToVodAndCreateEpisodes extends LivestreamJob
     /**
      * Create a new job instance.
      *
-     * @param  null|string  $vodStorageName
+     * @param null|string $vodStorageName
      */
     public function __construct(Episode $episode, Collection $videoUrls, $vodStorageName = null)
     {

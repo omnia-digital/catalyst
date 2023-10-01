@@ -6,6 +6,13 @@ use Illuminate\Validation\Validator;
 
 trait WithPostEditor
 {
+    public function validatePostEditor(array $rules = ['required'], string $property = 'content'): array
+    {
+        return $this->withPostEditorEvent()->validate([
+            $property => $rules,
+        ]);
+    }
+
     public function withPostEditorEvent(): self
     {
         return $this->withValidator(function (Validator $validator) {
@@ -15,25 +22,14 @@ trait WithPostEditor
         });
     }
 
-    public function validatePostEditor(array $rules = ['required'], string $property = 'content'): array
-    {
-        return $this->withPostEditorEvent()->validate([
-            $property => $rules,
-        ]);
-    }
-
     public function emitPostValidated(Validator $validator)
     {
-        $this->emitTo(
-            'social::post-editor',
-            'validationFailed',
-            $validator->errors()
-        );
+        $this->dispatch('validationFailed', errors: $validator->errors())->to('social::post-editor');
     }
 
     public function emitPostSaved(string $editorId)
     {
-        $this->emitTo('social::post-editor', 'postSaved:' . $editorId);
-        $this->emitTo('social::news-feed', 'postSaved');
+        $this->dispatch('postSaved:' . $editorId)->to('social::post-editor');
+        $this->dispatch('postSaved')->to('social::news-feed');
     }
 }

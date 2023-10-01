@@ -71,14 +71,29 @@ return [
             'after_commit' => false,
         ],
 
-        'mailcoach-redis' => [
-            'driver' => 'redis',
-            'connection' => 'default',
-            'queue' => env('REDIS_QUEUE', 'default'),
-            'retry_after' => 11 * 60,
-            'block_for' => null,
-        ],
+//        'mailcoach-redis' => [
+//            'driver' => 'redis',
+//            'connection' => 'default',
+//            'queue' => env('REDIS_QUEUE', 'default'),
+//            'retry_after' => 11 * 60,
+//            'block_for' => null,
+//        ],
+    ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Job Batching
+    |--------------------------------------------------------------------------
+    |
+    | The following options configure the database and table that store job
+    | batching information. These options can be updated to any database
+    | connection and table which has been defined by your application.
+    |
+    */
+
+    'batching' => [
+        'database' => env('DB_CONNECTION', 'mysql'),
+        'table' => 'job_batches',
     ],
 
     /*

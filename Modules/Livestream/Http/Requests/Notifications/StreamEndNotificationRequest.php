@@ -22,8 +22,8 @@ class StreamEndNotificationRequest extends VideoS3SNSNotificationRequest
         // These should all be true. If false, throw an error
 //            $attributes['Incorrect Topic'] = $this->isCorrectTopic($correctTopic);
         $attributes['File Doesn\'t Exist'] = $this->checkIfFileExistsOn($storage);
-        $attributes['Trans Video'] = ! $this->isTranscodedVideo();
-        $attributes['Video Empty'] = ! $this->isVideoEmpty();
+        $attributes['Trans Video'] = !$this->isTranscodedVideo();
+        $attributes['Video Empty'] = !$this->isVideoEmpty();
 
         $failedAttributes = collect();
         // If any of these returned false, kick back on that one
@@ -32,11 +32,11 @@ class StreamEndNotificationRequest extends VideoS3SNSNotificationRequest
                 $failedAttributes->push($rule);
             }
         }
-        if (! $failedAttributes->isEmpty()) {
+        if (!$failedAttributes->isEmpty()) {
             $response = new Response;
             $msgCollection = collect();
             $msgCollection->put('failures', $failedAttributes);
-            (! empty($failedAttributes) ? $msgCollection->prepend($this->fullFilePath, 'object') : null);
+            (!empty($failedAttributes) ? $msgCollection->prepend($this->fullFilePath, 'object') : null);
 
             $response->setContent($msgCollection);
             throw new ValidationException($this->getValidatorInstance(), $response);

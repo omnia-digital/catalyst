@@ -27,7 +27,7 @@ class ApplicationAcceptedToTeamNotification extends BaseNotification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)

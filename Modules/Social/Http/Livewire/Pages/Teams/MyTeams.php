@@ -30,7 +30,7 @@ class MyTeams extends Component
 
     public function mount()
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Platform::isAllowingGuestAccess() && !auth()->check()) {
             $this->redirectToAuthenticationPage();
 
             return;
@@ -38,7 +38,7 @@ class MyTeams extends Component
 
         $this->orderBy = 'name';
 
-        if (! App::environment('production')) {
+        if (!App::environment('production')) {
             $this->useCache = false;
         }
     }
@@ -49,7 +49,7 @@ class MyTeams extends Component
             ->withCount(['users']);
 
         $query = $this->applyFilters($query)
-            ->when($this->search, fn (Builder $q) => $q->search($this->search));
+            ->when($this->search, fn(Builder $q) => $q->search($this->search));
         $query = $this->applySorting($query);
 
         return $query;

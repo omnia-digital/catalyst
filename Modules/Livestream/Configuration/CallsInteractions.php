@@ -2,8 +2,6 @@
 
 namespace Modules\Livestream\Configuration;
 
-use Closure;
-use Illuminate\Support\Str;
 use Laravel\Spark\Contracts\Interactions\CheckPlanEligibility;
 use Laravel\Spark\Contracts\Interactions\CheckTeamPlanEligibility;
 

@@ -36,11 +36,11 @@ trait WithFormManagement
         if ($form->isActive) {
             $form->update(['published_at' => null]);
 
-            $this->emit('formSavedAsDraft');
+            $this->dispatch('formSavedAsDraft');
         } else {
             $form->update(['published_at' => now()]);
 
-            $this->emit('formPublished');
+            $this->dispatch('formPublished');
         }
 
         $this->confirmingPublishform = false;
@@ -65,7 +65,7 @@ trait WithFormManagement
 
         $this->formIdBeingRemoved = null;
 
-        $this->emit('formRemoved');
+        $this->dispatch('formRemoved');
     }
 
     public function confirmFormNotificationRemoval($formNotificationId)
@@ -83,6 +83,6 @@ trait WithFormManagement
 
         $this->formNotificationIdBeingRemoved = null;
 
-        $this->emit('formNotificationRemoved');
+        $this->dispatch('formNotificationRemoved');
     }
 }

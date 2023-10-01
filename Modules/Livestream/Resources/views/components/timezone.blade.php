@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Carbon; @endphp
 @props([
     'for',
     'timezone' => null,
@@ -15,7 +16,7 @@
         $timezone = Auth::user()->timezone ?? Auth::user()->currentTeam->timezone ?? config('app.timezone');
     }
 
-    $formattedDate = \Illuminate\Support\Carbon::parse($for)->setTimezone($timezone);
+    $formattedDate = Carbon::parse($for)->setTimezone($timezone);
 @endphp
 
 @if ($diffForHumans !== false)

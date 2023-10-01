@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Modules\Jobs\Models\ApplyType;
+use Modules\Jobs\Models\JobPosition;
 use Modules\Jobs\Models\PaymentType;
 
 class Job extends Resource
@@ -22,7 +23,7 @@ class Job extends Resource
      *
      * @var string
      */
-    public static $model = \Modules\Jobs\Models\JobPosition::class;
+    public static $model = JobPosition::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.

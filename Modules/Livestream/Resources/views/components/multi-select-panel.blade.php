@@ -10,7 +10,8 @@
         @foreach ($episodes as $key => $episode)
             <li class="flex justify-between items-center">
                 <span>{{ $episode->title }}</span>
-                <x-heroicon-s-x wire:click="multiDeselect('{{ $episode->id }}')" class="w-6 h-6 flex-shrink-0 text-gray-400 hover:text-red-600 cursor-pointer" />
+                <x-heroicon-s-x wire:click="multiDeselect('{{ $episode->id }}')"
+                                class="w-6 h-6 flex-shrink-0 text-gray-400 hover:text-red-600 cursor-pointer"/>
             </li>
         @endforeach
     </ul>

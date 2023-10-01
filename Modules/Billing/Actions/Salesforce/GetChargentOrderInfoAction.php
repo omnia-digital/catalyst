@@ -10,7 +10,7 @@ class GetChargentOrderInfoAction
 {
     public function execute(ChargentSubscription $subscription)
     {
-        if (! $subscription?->chargent_order_id || ! config('forrest.credentials.consumerKey')) {
+        if (!$subscription?->chargent_order_id || !config('forrest.credentials.consumerKey')) {
             return null;
         }
 
@@ -30,8 +30,8 @@ class GetChargentOrderInfoAction
             'next_invoice_at' => Carbon::parse($chargentOrder['records'][0]['ChargentOrders__Next_Transaction_Date__c']),
             'starts_at' => Carbon::parse($chargentOrder['records'][0]['ChargentOrders__Payment_Start_Date__c']),
             'ends_at' => $chargentOrder['records'][0]['ChargentOrders__Payment_End_Date__c']
-                                        ? Carbon::parse($chargentOrder['records'][0]['ChargentOrders__Payment_End_Date__c'])
-                                        : null,
+                ? Carbon::parse($chargentOrder['records'][0]['ChargentOrders__Payment_End_Date__c'])
+                : null,
             'status' => $chargentOrder['records'][0]['ChargentOrders__Payment_Status__c'],
         ]);
     }

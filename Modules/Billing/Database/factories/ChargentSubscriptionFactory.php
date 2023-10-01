@@ -3,6 +3,7 @@
 namespace Modules\Billing\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Billing\Models\ChargentSubscription;
 
 class ChargentSubscriptionFactory extends Factory
 {
@@ -11,7 +12,7 @@ class ChargentSubscriptionFactory extends Factory
      *
      * @var string
      */
-    protected $model = \Modules\Billing\Models\ChargentSubscription::class;
+    protected $model = ChargentSubscription::class;
 
     /**
      * Define the model's default state.

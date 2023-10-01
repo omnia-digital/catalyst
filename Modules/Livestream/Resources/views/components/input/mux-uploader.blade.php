@@ -3,8 +3,8 @@
 ])
 
 <div
-    wire:ignore
-    x-data="{
+        wire:ignore
+        x-data="{
         filepond: null,
 
         uploadUrl: null,
@@ -17,7 +17,7 @@
 
         baseUrl: '{{ Str::finish(config('app.url'), '/') . 'episodes/' }}'
     }"
-    x-init="
+        x-init="
         FilePond.registerPlugin(FilePondPluginImagePreview);
 
         filepond = FilePond.create($refs['{{ $id }}']);
@@ -79,6 +79,7 @@
 
     @push('styles')
         <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+              rel="stylesheet">
     @endpush
 @endonce

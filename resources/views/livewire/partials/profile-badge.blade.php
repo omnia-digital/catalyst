@@ -5,13 +5,14 @@
         <div class="w-full justify-between items-center">
             @auth
                 <div class="w-full min-w-0 items-center justify-between space-y-2">
-                    <img class="w-24 h-24 bg-gray-300 rounded-full flex-shrink-0" src="{{ $user->profile_photo_url }}" alt="">
+                    <img class="w-24 h-24 bg-gray-300 rounded-full flex-shrink-0" src="{{ $user->profile_photo_url }}"
+                         alt="">
                     <div class="space-y-2">
                         <div class="">
                             <p class="text-heading-default-color text-lg font-medium truncate">{{ $user->name }}</p>
                             <p class="-mt-1 text-heading-default-color text-md truncate">{{ '@'.$user?->handle }}</p>
                         </div>
-                        @if (\Platform::isUsingUserSubscriptions() && \Platform::isSubscriptionShownInNavigation())
+                        @if (Platform::isUsingUserSubscriptions() && Platform::isSubscriptionShownInNavigation())
                             <div class="flex mt-1">
                                 <div class="bg-neutral-dark flex items-center rounded-lg p-1">
                                     <div class="grow-0 text-white text-xs rounded-md p-1">

@@ -36,7 +36,8 @@ class Players extends Component
         auth()->user()->currentTeam->livestreamAccount->players()->create([
             'name' => $this->name,
             'not_live_image' => $this->notLiveImage ? $this->notLiveImage->store('thumbnails', 'players') : null,
-            'before_live_image' => $this->beforeLiveImage ? $this->beforeLiveImage->store('thumbnails', 'players') : null,
+            'before_live_image' => $this->beforeLiveImage ? $this->beforeLiveImage->store('thumbnails',
+                'players') : null,
         ]);
 
         $this->reset('name', 'createPlayerModalOpen');

@@ -50,7 +50,9 @@ class StorageDurationChart extends Chart
         });
 
         // Then, we need to get the durations that not sum from extra invoice items.
-        $notSumDurations = $extraInvoiceDurationInSeconds->map(function (ExtraInvoiceItem $extraInvoiceItem) use ($sumTwoDurations) {
+        $notSumDurations = $extraInvoiceDurationInSeconds->map(function (ExtraInvoiceItem $extraInvoiceItem) use (
+            $sumTwoDurations
+        ) {
             $alreadySum = $sumTwoDurations->where('date', $extraInvoiceItem['date'])->first();
 
             return $alreadySum ? null : [

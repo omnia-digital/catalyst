@@ -11,7 +11,7 @@
 
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt
-                        x-data="{
+                            x-data="{
                             isCopied: false,
 
                             copy() {
@@ -22,18 +22,18 @@
                                 setTimeout(() => { this.isCopied = false }, 2000);
                             }
                         }"
-                        class="text-sm font-medium text-gray-500 flex items-center"
+                            class="text-sm font-medium text-gray-500 flex items-center"
                     >
                         <span>[{{ $shortcode->shortcode() }}]</span>
                         <div>
                             <x-heroicon-o-clipboard
-                                x-on:click="copy"
-                                x-show="!isCopied"
-                                class="w-5 h-5 ml-1 cursor-pointer"/>
+                                    x-on:click="copy"
+                                    x-show="!isCopied"
+                                    class="w-5 h-5 ml-1 cursor-pointer"/>
 
                             <x-heroicon-o-check
-                                x-show="isCopied"
-                                class="w-5 h-5 ml-1 text-green-500"/>
+                                    x-show="isCopied"
+                                    class="w-5 h-5 ml-1 text-green-500"/>
                         </div>
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">

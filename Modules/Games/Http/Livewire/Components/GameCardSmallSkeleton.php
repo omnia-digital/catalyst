@@ -2,6 +2,7 @@
 
 namespace Modules\Games\Http\Livewire\Components;
 
+use Illuminate\View\View;
 use Livewire\Component;
 
 class GameCardSmallSkeleton extends Component
@@ -18,7 +19,7 @@ class GameCardSmallSkeleton extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\View\View|string
+     * @return View|string
      */
     public function render()
     {

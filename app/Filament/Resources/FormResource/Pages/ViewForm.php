@@ -10,7 +10,7 @@ class ViewForm extends ViewRecord
 {
     protected static string $resource = FormResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),

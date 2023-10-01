@@ -4,6 +4,7 @@ namespace Modules\Jobs\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RedeemedCoupon extends Model
 {
@@ -31,7 +32,7 @@ class RedeemedCoupon extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function coupon()
     {

@@ -14,12 +14,14 @@
                                         rounded-none
                                         transition
                                         focus:outline-none
-                                      " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ $title }}" aria-expanded="false"
+                                      " type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapse-{{ $title }}" aria-expanded="false"
                         aria-controls="flush-collapse-{{ $title }}">
                     <div>
                         <div class="flex items-center space-x-6">
 
-                            <x-library::heading.2 class="text-heading-default-color uppercase tracking-wide font-semibold">{{ $title }}</x-library::heading.2>
+                            <x-library::heading.2
+                                    class="text-heading-default-color uppercase tracking-wide font-semibold">{{ $title }}</x-library::heading.2>
 
                             @if ($mainImageSrc)
                                 @if ($mainUrl)
@@ -41,7 +43,8 @@
                     </div>
                 </button>
             </h2>
-            <div id="flush-collapse-{{ $title }}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{{ $title }}"
+            <div id="flush-collapse-{{ $title }}" class="accordion-collapse collapse"
+                 aria-labelledby="flush-heading-{{ $title }}"
                  data-bs-parent="#accordion-{{ $title }}">
                 <div class="accordion-body md:py-4 md:px-5">
                     {{ $slot }}

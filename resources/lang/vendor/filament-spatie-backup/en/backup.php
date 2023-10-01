@@ -60,7 +60,7 @@ return [
 			],
 
 			'navigation' => [
-				'group' => 'Settings',
+				'group' => 'Backup',
 				'label' => 'Backups',
 			],
 		],

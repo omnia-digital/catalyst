@@ -4,6 +4,7 @@ namespace App\View\Components\Profiles;
 
 use App\Models\User;
 use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
@@ -32,7 +33,7 @@ class OverviewNavigation extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|Closure|string
+     * @return View|Closure|string
      */
     public function render()
     {

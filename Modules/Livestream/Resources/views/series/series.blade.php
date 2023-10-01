@@ -20,7 +20,8 @@
                                 @forelse ($series as $seriesItem)
                                     <x-table.row :loop="$loop" wire:key="series-{{ $seriesItem->id }}">
                                         <x-table.cell class="font-medium text-gray-900">
-                                            <a href="{{ route('series.update', $seriesItem) }}" class="text-blue-600 hover:text-blue-900">
+                                            <a href="{{ route('series.update', $seriesItem) }}"
+                                               class="text-blue-600 hover:text-blue-900">
                                                 {{ $seriesItem->name }}
                                             </a>
                                         </x-table.cell>
@@ -34,8 +35,10 @@
                                 @empty
                                     <x-table.empty>
                                         <div class="text-center">
-                                            <p class="text-center text-gray-600 text-base my-4">No series matched the given criteria.</p>
-                                            <x-form.button-link wire:click.prevent="$toggle('createSeriesModalOpen')" secondary>
+                                            <p class="text-center text-gray-600 text-base my-4">No series matched the
+                                                given criteria.</p>
+                                            <x-form.button-link wire:click.prevent="$toggle('createSeriesModalOpen')"
+                                                                secondary>
                                                 Create Series
                                             </x-form.button-link>
                                         </div>
@@ -50,23 +53,23 @@
         </div>
     </div>
 
-    <x-jet-dialog-modal wire:model="createSeriesModalOpen">
+    <x-dialog-modal wire:model.live="createSeriesModalOpen">
         <x-slot name="title">Create Series</x-slot>
         <x-slot name="content">
             <div>
                 <x-input.label value="Name" required/>
-                <x-input.text id="name" wire:model.defer="name" placeholder="{{ __('Name') }}"/>
-                <x-jet-input-error for="name" class="mt-2"/>
+                <x-input.text id="name" wire:model="name" placeholder="{{ __('Name') }}"/>
+                <x-input-error for="name" class="mt-2"/>
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('createSeriesModalOpen')" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$toggle('createSeriesModalOpen')" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
-            </x-jet-secondary-button>
+            </x-secondary-button>
 
-            <x-jet-button class="ml-2" wire:click="createSeries" wire:loading.attr="disabled">
+            <x-button class="ml-2" wire:click="createSeries" wire:loading.attr="disabled">
                 {{ __('Create Series') }}
-            </x-jet-button>
+            </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 </div>

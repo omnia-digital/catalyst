@@ -2,6 +2,8 @@
 
 namespace Modules\Livestream\Configuration;
 
+use Illuminate\Contracts\Auth\Authenticatable;
+
 trait ManagesModelOptions
 {
     /**
@@ -14,7 +16,7 @@ trait ManagesModelOptions
     /**
      * Set the person model class name.
      *
-     * @param  string  $personModel
+     * @param string $personModel
      * @return void
      */
     public static function usePersonModel($personModel)
@@ -35,7 +37,7 @@ trait ManagesModelOptions
     /**
      * Get a new person model instance.
      *
-     * @return \Illuminate\Contracts\Auth\Authenticatable
+     * @return Authenticatable
      */
     public static function person()
     {

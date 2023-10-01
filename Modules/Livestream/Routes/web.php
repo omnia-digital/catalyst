@@ -27,13 +27,14 @@ use Modules\Livestream\Http\Livewire\Setting\VideoSetting;
 use Modules\Livestream\Http\Livewire\Stream\Streams;
 use Modules\Livestream\Http\Livewire\Stream\StreamTargets;
 use Modules\Livestream\Http\Livewire\Stream\UpdateStreamTarget;
+use Modules\Social\Http\Middleware\GuestAccessMiddleware;
 
 //Route::get('/', function () {
 //    return redirect()->route('dashboard');
 //});
 Route::name('livestream.')
     ->prefix('livestream')
-    ->middleware([\Modules\Social\Http\Middleware\GuestAccessMiddleware::class, 'verified'])
+    ->middleware([GuestAccessMiddleware::class, 'verified'])
     ->group(function () {
         Route::get('/channels/find', FindChannel::class)
             ->name('channels.find');
@@ -94,7 +95,7 @@ Route::name('livestream.')
                 Route::get('/playlists/{playlist}', UpdatePlaylist::class)
                     ->name('playlists.update');
 
-                Route::get('/settings', fn () => redirect()->route('settings.video'))
+                Route::get('/settings', fn() => redirect()->route('settings.video'))
                     ->name('settings');
                 Route::get('/settings/video', VideoSetting::class)
                     ->name('settings.video');

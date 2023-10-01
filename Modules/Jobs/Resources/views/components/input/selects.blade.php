@@ -6,10 +6,10 @@
 ])
 
 <div
-    x-on:input.stop
-    wire:ignore
-    {{ $attributes->whereStartsWith('wire:') }}
-    x-data="{
+        x-on:input.stop
+        wire:ignore
+        {{ $attributes->whereStartsWith('wire:') }}
+        x-data="{
         items: JSON.parse('{{ json_encode($options) }}'),
 
         rawItems: JSON.parse('{{ json_encode($options) }}'),
@@ -29,17 +29,17 @@
 
             this.selectedValues.push(value);
 
-            $dispatch('input', this.selectedValues)
+            $dispatch('input', {values: this.selectedValues})
         },
 
         removeItem: function(value, $dispatch) {
             let index = this.selectedValues.indexOf(value);
             this.selectedValues.splice(index, 1);
 
-            $dispatch('input', this.selectedValues)
+            $dispatch('input', {values: this.selectedValues})
         }
     }"
-    x-init="function() {
+        x-init="function() {
         $watch('search', value => {
             if (value.length > 0) {
                 let items = {};
@@ -64,21 +64,21 @@
         </template>
     </div>
     <div
-        x-on:click.away="open = false"
-        class="relative"
+            x-on:click.away="open = false"
+            class="relative"
     >
         <input
-            wire:input.stop
-            x-model="search"
-            x-on:focus="open = true"
-            x-bind:class="{'rounded-b-none': open === true, '': open === false }"
-            {{ $attributes->merge(['class' => 'form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 focus:outline-none '])->except('wire:model') }}
-            autocomplete="off"/>
+                wire:input.stop
+                x-model="search"
+                x-on:focus="open = true"
+                x-bind:class="{'rounded-b-none': open === true, '': open === false }"
+                {{ $attributes->merge(['class' => 'form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 focus:outline-none '])->except('wire:model') }}
+                autocomplete="off"/>
         <ul
-            wire:ignore
-            x-show="open"
-            class="absolute bg-white px-1 top-0 mt-9 rounded-b-md border border-gray-300 w-full z-50 overflow-scroll max-h-40 shadow-lg"
-            style="display: none"
+                wire:ignore
+                x-show="open"
+                class="absolute bg-white px-1 top-0 mt-9 rounded-b-md border border-gray-300 w-full z-50 overflow-scroll max-h-40 shadow-lg"
+                style="display: none"
         >
             <template x-for="[value, label] in Object.entries(items)" :key="value">
                 <li x-show="!selectedValues.includes(value)" class="hover:bg-light-blue-200 p-2 text-sm">

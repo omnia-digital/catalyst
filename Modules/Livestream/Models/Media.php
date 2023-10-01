@@ -17,17 +17,17 @@ class Media extends SpatieMedia
         });
     }
 
-    public function isStatic(): bool
-    {
-        return (bool) $this->is_static;
-    }
-
     public function getStaticUrl(): ?string
     {
-        if (! $this->isStatic()) {
+        if (!$this->isStatic()) {
             return null;
         }
 
         return $this->file_name;
+    }
+
+    public function isStatic(): bool
+    {
+        return (bool)$this->is_static;
     }
 }

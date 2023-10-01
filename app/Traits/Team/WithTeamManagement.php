@@ -23,6 +23,7 @@ use Trans;
 trait WithTeamManagement
 {
     use WithNotification;
+
     /**
      * Indicates if a user's role is currently being managed.
      *
@@ -93,12 +94,12 @@ trait WithTeamManagement
 
         $this->team->owner->notify(new NewApplicationToTeamNotification($this->team, $this->user));
         $this->success(Trans::get('Application Submitted to Team'));
-        $this->emit('applied_to_team');
+        $this->dispatch('applied_to_team');
     }
 
     public function teamHasApplicationForm()
     {
-        return ! is_null($this->team->applicationForm());
+        return !is_null($this->team->applicationForm());
     }
 
     /**
@@ -114,7 +115,7 @@ trait WithTeamManagement
         $this->team = $this->team->fresh();
 
         $this->success(Trans::get('Application Removed'));
-        $this->emit('application_removed');
+        $this->dispatch('application_removed');
     }
 
     /**
@@ -152,13 +153,13 @@ trait WithTeamManagement
         $this->team = $this->team->fresh();
 
         $this->success(Trans::get('Team info saved!'));
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     /**
      * Add a new team member to a team with their userID.
      *
-     * @param  string  $userID
+     * @param string $userID
      * @return void
      */
     public function addTeamMemberUsingID($userID)
@@ -187,18 +188,18 @@ trait WithTeamManagement
         }
 
         $this->success(Trans::get('Team member added!'));
-        $this->emit('member_added');
+        $this->dispatch('member_added');
     }
 
     /**
      * Deny a pending team member's application.
      *
-     * @param  int  $applicationId
+     * @param int $applicationId
      * @return void
      */
     public function denyTeamApplication($applicationId)
     {
-        if (! empty($applicationId)) {
+        if (!empty($applicationId)) {
             TeamApplication::find($applicationId)->delete();
         }
 
@@ -209,12 +210,12 @@ trait WithTeamManagement
     /**
      * Cancel a pending team member invitation.
      *
-     * @param  int  $invitationId
+     * @param int $invitationId
      * @return void
      */
     public function cancelTeamInvitation($invitationId)
     {
-        if (! empty($invitationId)) {
+        if (!empty($invitationId)) {
             TeamInvitation::find($invitationId)->delete();
         }
 
@@ -244,7 +245,7 @@ trait WithTeamManagement
     /**
      * Confirm that the given team member should be removed.
      *
-     * @param  int  $userId
+     * @param int $userId
      * @return void
      */
     public function confirmTeamMemberRemoval($userId)
@@ -278,7 +279,7 @@ trait WithTeamManagement
     /**
      * Allow the given user's role to be managed.
      *
-     * @param  int  $userId
+     * @param int $userId
      * @return void
      */
     public function manageRole($userId)

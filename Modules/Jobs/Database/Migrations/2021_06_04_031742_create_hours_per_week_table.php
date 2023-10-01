@@ -3,9 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Jobs\Models\HoursPerWeek;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -20,7 +20,7 @@ return new class extends Migration
         });
 
         Schema::table('job_positions', function (Blueprint $table) {
-            $table->foreignIdFor(\Modules\Jobs\Models\HoursPerWeek::class, 'hours_per_week_id')->index();
+            $table->foreignIdFor(HoursPerWeek::class, 'hours_per_week_id')->index();
         });
     }
 

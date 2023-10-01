@@ -12,7 +12,7 @@ class Livestream
     use UsesShortcodes;
 
     /**
-     * @return \string[][]
+     * @return string[][]
      */
     public static function bibleOptions(): array
     {
@@ -82,13 +82,13 @@ class Livestream
     }
 
     /**
-     * @param  string|null  $unit // Only support second and minute.
+     * @param string|null $unit // Only support second and minute.
      */
     public static function formatDuration(int|float $duration, ?string $unit = null): string
     {
         is_null($unit) && $unit = config('metered.price.unit');
 
-        if (! in_array($unit, ['second', 'minute'])) {
+        if (!in_array($unit, ['second', 'minute'])) {
             throw new InvalidArgumentException('Only support "second" and "minute" for $unit.');
         }
 

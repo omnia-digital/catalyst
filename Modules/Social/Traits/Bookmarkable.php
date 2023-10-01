@@ -9,14 +9,6 @@ use Modules\Social\Models\Bookmark;
 
 trait Bookmarkable
 {
-    /**
-     * Get the bookmarks that all Users have created for this model
-     */
-    public function bookmarks(): MorphMany
-    {
-        return $this->morphMany(Bookmark::class, 'bookmarkable');
-    }
-
     public function isBookmarkedBy(User|Authenticatable|null $user = null): bool
     {
         is_null($user) && $user = auth()->user();
@@ -33,6 +25,14 @@ trait Bookmarkable
         ]);
 
         return $this;
+    }
+
+    /**
+     * Get the bookmarks that all Users have created for this model
+     */
+    public function bookmarks(): MorphMany
+    {
+        return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
     public function removeBookmark(): self

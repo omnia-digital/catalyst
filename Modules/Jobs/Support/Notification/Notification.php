@@ -43,18 +43,6 @@ class Notification
     }
 
     /**
-     * Send notification to a group of users.
-     *
-     * @return void
-     */
-    public function to($users)
-    {
-        foreach ($users as $user) {
-            $user->notify($this->notification);
-        }
-    }
-
-    /**
      * Send notification to the current user.
      */
     public function toCurrent()
@@ -82,5 +70,17 @@ class Notification
         );
 
         $this->to([$arguments[0]->$relation]);
+    }
+
+    /**
+     * Send notification to a group of users.
+     *
+     * @return void
+     */
+    public function to($users)
+    {
+        foreach ($users as $user) {
+            $user->notify($this->notification);
+        }
     }
 }

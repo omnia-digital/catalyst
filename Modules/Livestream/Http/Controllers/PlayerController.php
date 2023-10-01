@@ -4,7 +4,7 @@ namespace Modules\Livestream\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Modules\Livestream\Http\Requests\PlayerRequest;
@@ -20,7 +20,7 @@ class PlayerController extends LivestreamController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -35,29 +35,10 @@ class PlayerController extends LivestreamController
     }
 
     /**
-     * Show the form for creating a new player
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-//        $LivestreamAccounts = Auth::user()->LivestreamAccounts;
-//        $events = collect();
-//        foreach ($LivestreamAccounts as $LivestreamAccount) {
-//            $events->push($LivestreamAccount->events->all());
-//        }
-//        $events = $events->flatten()->lists('title','id');
-        // @TODO [Josh] - The lists method on the Collection, query builder and Eloquent query builder objects has been renamed to pluck. The method signature remains the same.
-//        $LivestreamAccounts = $LivestreamAccounts->flatten()->pluck('account_name','id');
-
-        return view('livestream::player/create');
-    }
-
-    /**
      * Store a newly created Player in storage.
      *
-     * @param  PlayerRequest|Request  $request
-     * @return \Illuminate\Http\Response
+     * @param PlayerRequest|Request $request
+     * @return Response
      */
     public function store(PlayerRequest $request)
     {
@@ -76,9 +57,28 @@ class PlayerController extends LivestreamController
     }
 
     /**
+     * Show the form for creating a new player
+     *
+     * @return Response
+     */
+    public function create()
+    {
+//        $LivestreamAccounts = Auth::user()->LivestreamAccounts;
+//        $events = collect();
+//        foreach ($LivestreamAccounts as $LivestreamAccount) {
+//            $events->push($LivestreamAccount->events->all());
+//        }
+//        $events = $events->flatten()->lists('title','id');
+        // @TODO [Josh] - The lists method on the Collection, query builder and Eloquent query builder objects has been renamed to pluck. The method signature remains the same.
+//        $LivestreamAccounts = $LivestreamAccounts->flatten()->pluck('account_name','id');
+
+        return view('livestream::player/create');
+    }
+
+    /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Player $player)
     {
@@ -92,7 +92,7 @@ class PlayerController extends LivestreamController
             if ($livestreamAccount->mux_livestream_active == true) {
                 // Mux Live stream
                 $streams = $livestreamAccount->streams;
-                if (! empty($streams) && $streams->isNotEmpty()) {
+                if (!empty($streams) && $streams->isNotEmpty()) {
                     $stream = $streams->first();
                     $playbackUrl = $stream->default_playback_url;
                 }
@@ -106,7 +106,8 @@ class PlayerController extends LivestreamController
                 'image_url' => $livestreamAccount->before_live_image,
             ];
         } else {
-            $player->startingEpisode = $livestreamAccount->episodes()->where('is_published', true)->latest('date_recorded')->with('videos')->first();
+            $player->startingEpisode = $livestreamAccount->episodes()->where('is_published',
+                true)->latest('date_recorded')->with('videos')->first();
         }
 
         return $player;
@@ -115,7 +116,7 @@ class PlayerController extends LivestreamController
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Player $player)
     {
@@ -163,8 +164,8 @@ class PlayerController extends LivestreamController
     /**
      * Update the specified resource in storage.
      *
-     * @param  PlayerRequest|Request  $request
-     * @return \Illuminate\Http\Response
+     * @param PlayerRequest|Request $request
+     * @return Response
      */
     public function update(PlayerRequest $request, Player $player)
     {
@@ -183,8 +184,8 @@ class PlayerController extends LivestreamController
     /**
      * Remove the Player
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function destroy($id)
     {

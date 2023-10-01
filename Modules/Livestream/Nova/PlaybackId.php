@@ -31,7 +31,9 @@ class PlaybackId extends Resource
      * @var array
      */
     public static $search = [
-        'playback_id', 'playbackable_id', 'playbackable_type',
+        'playback_id',
+        'playbackable_id',
+        'playbackable_type',
     ];
 
     /**

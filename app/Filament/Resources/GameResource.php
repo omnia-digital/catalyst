@@ -3,11 +3,11 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Modules\Games\Models\Game;
 use Platform;
 use RalphJSmit\Filament\Components\Forms\Timestamps;
@@ -76,7 +76,7 @@ class GameResource extends Resource
         ];
     }
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return Platform::isModuleEnabled('games') ? true : false;
     }

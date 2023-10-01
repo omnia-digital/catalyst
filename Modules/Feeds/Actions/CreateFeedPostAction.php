@@ -11,8 +11,14 @@ use Modules\Social\Enums\PostType;
 
 class CreateFeedPostAction
 {
-    public function execute(string $url, string $content, string $title, string $author, string $published_at, string $imageUrl): FeedPost
-    {
+    public function execute(
+        string $url,
+        string $content,
+        string $title,
+        string $author,
+        string $published_at,
+        string $imageUrl
+    ): FeedPost {
         // check if it's an article type of feed, choose which type of post to create here
         // For now, let's just assume every new feed item is an article
         $postType = PostType::ARTICLE;
@@ -37,7 +43,7 @@ class CreateFeedPostAction
             ];
             $post = (new CreateNewPostAction);
 
-            if (! empty($user)) {
+            if (!empty($user)) {
                 $post->user($user);
             }
             $post->type($postType);

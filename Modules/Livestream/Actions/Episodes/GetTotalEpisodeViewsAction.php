@@ -13,9 +13,11 @@ class GetTotalEpisodeViewsAction
 
         // For normal episodes, get all episodes to calculate the attachment downloads count.
         if ($expiredOnly) {
-            $views = $team->livestreamAccount->episodes()->expired()->whereVideoViewsInDateRange($from, $to)->get()->sum('video_views_count');
+            $views = $team->livestreamAccount->episodes()->expired()->whereVideoViewsInDateRange($from,
+                $to)->get()->sum('video_views_count');
         } else {
-            $views = $team->livestreamAccount->episodes()->whereVideoViewsInDateRange($from, $to)->get()->sum('video_views_count');
+            $views = $team->livestreamAccount->episodes()->whereVideoViewsInDateRange($from,
+                $to)->get()->sum('video_views_count');
         }
 
         return $views;

@@ -12,7 +12,9 @@
             >
                 <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>
                 All Articles</a>
-            <a href="{{ route('articles.drafts') }}" class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium" aria-current="page">
+            <a href="{{ route('articles.drafts') }}"
+               class="bg-neutral text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
+               aria-current="page">
                 <x-library::icons.icon name="fa-duotone fa-newspaper" size="w-5 h-5" class="pr-2"/>
                 My Articles</a>
         </nav>
@@ -22,10 +24,12 @@
         <nav class="flex space-x-8 py-2" aria-label="Global">
             <a href="{{ route('articles.drafts') }}" class="text-base-text-color hover:bg-white hover:text-base-text-color inline-flex items-center rounded-md py-2 px-3
             font-medium"
-               >
+            >
                 <x-library::icons.icon name="fa-regular fa-pen-to-square" size="w-5 h-5" class="pr-2"/>
                 Drafts</a>
-            <a href="{{ route('articles.published') }}" class="bg-white text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium" aria-current="page">
+            <a href="{{ route('articles.published') }}"
+               class="bg-white text-base-text-color inline-flex items-center rounded-md py-2 px-3 font-medium"
+               aria-current="page">
                 <x-library::icons.icon name="fa-duotone fa-newspaper" size="w-5 h-5" class="pr-2"/>
                 Published</a>
         </nav>

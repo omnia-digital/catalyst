@@ -14,7 +14,7 @@ trait ManagesAppDetails
     /**
      * Set the e-mail address of the System Admin User.
      *
-     * @param  string  $email
+     * @param string $email
      * @return void
      */
     public static function systemAdminUser($email)
@@ -25,7 +25,7 @@ trait ManagesAppDetails
     /**
      * Determine if the given e-mail address belongs to a developer.
      *
-     * @param  string  $email
+     * @param string $email
      * @return bool
      */
     public static function isSystemAdmin($email)

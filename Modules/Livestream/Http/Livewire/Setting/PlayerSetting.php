@@ -38,11 +38,13 @@ class PlayerSetting extends Component
         $this->validate();
 
         $this->livestreamAccount->update([
-            'not_live_image' => $this->notLiveImage ? $this->notLiveImage->store('thumbnails', 'players') : $this->currentNotLiveImage,
-            'before_live_image' => $this->beforeLiveImage ? $this->beforeLiveImage->store('thumbnails', 'players') : $this->currentBeforeLiveImage,
+            'not_live_image' => $this->notLiveImage ? $this->notLiveImage->store('thumbnails',
+                'players') : $this->currentNotLiveImage,
+            'before_live_image' => $this->beforeLiveImage ? $this->beforeLiveImage->store('thumbnails',
+                'players') : $this->currentBeforeLiveImage,
         ]);
 
-        $this->emit('saved');
+        $this->dispatch('saved');
     }
 
     public function render()

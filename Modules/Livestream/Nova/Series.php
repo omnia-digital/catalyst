@@ -30,7 +30,8 @@ class Series extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name',
+        'id',
+        'name',
     ];
 
     public static $group = 'Livestream';

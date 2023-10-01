@@ -20,7 +20,7 @@ class EpisodeImportService extends EpisodeService
 
     public function __construct(EpisodeImportRequest $request)
     {
-        if (! empty($request->livestream_account_id)) {
+        if (!empty($request->livestream_account_id)) {
             $livestream_account_id = $request->livestream_account_id;
         } else {
             $livestream_account_id = null;
@@ -31,7 +31,7 @@ class EpisodeImportService extends EpisodeService
         $this->_import_type = $request->import_type;
         $this->_params = $request->toArray();
 
-        if (! empty($this->_livestreamAccount)) {
+        if (!empty($this->_livestreamAccount)) {
             $this->_params['livestream_account_id'] = $this->_livestreamAccount->id;
         }
     }
