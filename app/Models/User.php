@@ -41,22 +41,24 @@ use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
-    use HasApiTokens,
-        TwoFactorAuthenticatable,
-        Notifiable,
-        SoftDeletes,
-        HasFactory,
-        HasBookmarks,
-        Follower,
+    use Awardable,
         Followable,
-        Awardable,
+        Follower,
+        HasApiTokens,
+        HasBookmarks,
+        HasFactory,
         HasHandle,
-        HasRoles,
         HasJobs,
-        HasTransactions,
         HasNotificationSubscriptions,
         HasPanelShield,
-        SnoozeNotifiable;
+        HasRoles,
+        HasTransactions,
+        Notifiable,
+        SnoozeNotifiable,
+        SoftDeletes,
+        TwoFactorAuthenticatable;
+    use Billable, WithChargentSubscriptions;
+
     use HasTeams, JetstreamHasTeams {
         HasTeams::teams insteadof JetstreamHasTeams;
         HasTeams::hasTeamRole insteadof JetstreamHasTeams;
@@ -66,8 +68,6 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         HasTeams::currentTeam insteadof JetstreamHasTeams;
         HasTeams::teamRole insteadof JetstreamHasTeams;
     }
-
-    use Billable, WithChargentSubscriptions;
 
     protected $casts = [
         'deleted_at' => 'datetime',
@@ -115,7 +115,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public static function findByFullName($firstName = '', $lastName = '', $fullName = '')
     {
-        if (!empty($fullName) && empty($firstName) && empty($lastName)) {
+        if (! empty($fullName) && empty($firstName) && empty($lastName)) {
             $names = explode(' ', $fullName);
             $firstName = $names[0] ?? '';
             $lastName = $names[1] ?? '';
@@ -233,7 +233,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function profile()
     {
-        if (!class_exists(Profile::class)) {
+        if (! class_exists(Profile::class)) {
             return;
         }
 
@@ -242,7 +242,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function posts()
     {
-        if (!class_exists(Post::class)) {
+        if (! class_exists(Post::class)) {
             return;
         }
 
@@ -251,7 +251,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function reviews()
     {
-        if (!class_exists(Review::class)) {
+        if (! class_exists(Review::class)) {
             return;
         }
 
@@ -260,7 +260,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function likes()
     {
-        if (!class_exists(Like::class)) {
+        if (! class_exists(Like::class)) {
             return;
         }
 
@@ -303,8 +303,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     /**
      * Begin creating a new subscription.
      *
-     * @param string $name
-     * @param string|string[] $prices
+     * @param  string  $name
+     * @param  string|string[]  $prices
      * @return SubscriptionBuilder
      */
     public function newSubscription($name, $prices = [])

@@ -4,23 +4,12 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Award;
+use App\Traits\Policies\HasDefaultPolicy;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AwardPolicy
 {
-    use HandlesAuthorization;
-
-    /**
-     * Perform pre-authorization checks.
-     *
-     * @return void|bool
-     */
-    public function before(User $user)
-    {
-        if ($user->is_admin) {
-            return true;
-        }
-    }
+    use HandlesAuthorization, HasDefaultPolicy;
 
     /**
      * Determine whether the user can view any models.

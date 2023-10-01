@@ -1,42 +1,53 @@
 <?php
 
-namespace Modules\Livestream\Policies\Traits;
+namespace App\Traits\Policies;
 
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Modules\Livestream\Models\User;
+use JetBrains\PhpStorm\Pure;
 
 trait HasDefaultPolicy
 {
     use HandlesAuthorization;
 
+    /**
+     * @param User $user
+     * @param $ability
+     * @return bool|void|null
+     */
     public function before(User $user, $ability)
     {
         return $this->adminBypass($user);
     }
 
+    /**
+     * Perform pre-authorization checks.
+     *
+     * @return void|bool
+     */
     public function adminBypass(User $user)
     {
-        if ($user->isAdmin()) {
+        if ($user->is_admin) {
             return true;
         }
     }
 
-    public function create()
+    public function create(): true
     {
         return true;
     }
 
-    public function view()
+    public function view(): true
     {
         return true;
     }
 
-    public function viewAny()
+    public function viewAny(): true
     {
         return true;
     }
 
-    public function destroy()
+    public function destroy(): bool
     {
         return $this->delete();
     }
