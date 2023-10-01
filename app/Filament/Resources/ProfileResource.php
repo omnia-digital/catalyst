@@ -29,11 +29,6 @@ class ProfileResource extends Resource
         'tableColumnSearchQueries',
     ];
 
-    public static function getLabel(): ?string
-    {
-        return 'Contact';
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -83,14 +78,5 @@ class ProfileResource extends Resource
             'create' => CreateProfile::route('/create'),
             'edit' => EditProfile::route('/edit/{record}'),
         ];
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        if (auth()->user()->is_admin) {
-            return 'Contacts (Profiles)';
-        } else {
-            return 'Contacts';
-        }
     }
 }
