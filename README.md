@@ -2,6 +2,8 @@
 
 <p align="center"><a href="https://omniadigital.io" target="_blank"><h1>Catalyst - The Community Platform Framework</h1></a></p>
 
+![Catalyst social image](https://github.com/omnia-digital/catalyst/assets/5092957/ddf67169-cec4-4e7e-ad49-814194532834)
+
 ## License
 
 Catalyst is free to be used by anyone for any industry as long as it does now breach our Code of Conduct or other terms.
@@ -20,11 +22,16 @@ Thank you so much to the our sponsors for funding Catalyst development. If you a
 
 ### Premium Partners
 
+- **[Omnia Digital](https://omniadigital.io)**
 - **[CfAN](https://cfan.org)**
+
+## Highlighted Platforms
+- [ChurchWorld](https://churchworld.io)
+- [Hatchet](https://hatchetapp.io)
 
 ## Contributing
 
-Thank you for considering contributing to the Catalyst framework! We are considering allowing a subscription tier where you can contribute your own Pull Requests so let us know if you're interested.
+Thank you for considering contributing to the Catalyst framework!
 
 ## Code of Conduct
 
