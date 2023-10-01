@@ -29,7 +29,7 @@ Thank you so much to the our sponsors for funding Catalyst development. If you a
 
 ## Contributing
 
-Thank you for considering contributing to the Catalyst framework! We are considering allowing a subscription tier where you can contribute your own Pull Requests so let us know if you're interested.
+Thank you for considering contributing to the Catalyst framework!
 
 ## Code of Conduct
 
