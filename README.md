@@ -2,6 +2,8 @@
 
 <p align="center"><a href="https://omniadigital.io" target="_blank"><h1>Catalyst - The Community Platform Framework</h1></a></p>
 
+![Catalyst social image](https://github.com/omnia-digital/catalyst/assets/5092957/ddf67169-cec4-4e7e-ad49-814194532834)
+
 ## License
 
 Catalyst is free to be used by anyone for any industry as long as it does now breach our Code of Conduct or other terms.
