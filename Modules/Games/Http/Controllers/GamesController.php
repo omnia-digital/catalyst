@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
 use Modules\Games\Models\Game;
-use Modules\Games\Models\IGDB\Game;
 
 class GamesController extends Controller
 {
@@ -43,7 +42,6 @@ class GamesController extends Controller
         // ]);
 
         // $body = $response->getBody();
-        // dd(json_decode($body));
         return view('games::livewire.home');
     }
 
