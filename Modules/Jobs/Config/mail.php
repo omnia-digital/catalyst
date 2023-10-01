@@ -58,10 +58,10 @@ return [
 
         'sendgrid' => [
             'sendgrid_key' => env('SENDGRID_KEY',
-                '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'),
-            'sendgrid_url' => env('SENDGRID_URL', 'https://api.sendgrid.com/v3/marketing/contacts'),
-            'sendgrid_subscriber_list_id' => env('SENDGRID_SUBSCRIBER_LIST_ID', 'fe45cb85-626d-40ca-a10f-f6ca7ff6bbeb'),
-            'sendgrid_company_list_id' => env('SENDGRID_COMPANY_LIST_ID', '8f009eb3-d521-4d20-ab3a-674ab80a34e2'),
+                ''),
+            'sendgrid_url' => env('SENDGRID_URL', ''),
+            'sendgrid_subscriber_list_id' => env('SENDGRID_SUBSCRIBER_LIST_ID', ''),
+            'sendgrid_company_list_id' => env('SENDGRID_COMPANY_LIST_ID', ''),
         ],
 
         'sendmail' => [
