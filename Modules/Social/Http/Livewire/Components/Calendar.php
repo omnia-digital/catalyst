@@ -11,6 +11,7 @@ class Calendar extends LivewireCalendar
 {
     use InteractsWithCalendarTeams;
 
+    public $id = 'calendar';
     public $selectedID;
 
     protected $listeners = ['select_event' => 'goToMonth'];

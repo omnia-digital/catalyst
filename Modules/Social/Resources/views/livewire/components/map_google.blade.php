@@ -82,7 +82,7 @@
                     <x-heroicon-o-arrow-sm-down class="w-4 h-4"/>
                 </button>
                 <button role="button" class="flex items-center">
-                    <x-heroicon-o-filter class="w-4 h-4"/>
+                    <x-library::icons.icon name="fa-regular fa-filter" class="w-4 h-4"/>
                     <span class="ml-2 font-semibold">Filter (2)</span></button>
             </div>
             <div class="px-4 flex items-center space-x-4">

@@ -4,7 +4,7 @@
 @section('content')
     <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg pl-4 flex items-center bg-primary">
         <div class="flex-1 flex items-center">
-            {{--            <x-library::icons.icon name="heroicon-o-collection" color="text-secondary" class="h-8 w-8 mr-3"/>--}}
+            {{--            <x-library::icons.icon name="fa-solid fa-rectangle-history" color="text-secondary" class="h-8 w-8 mr-3"/>--}}
             <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Trending') }}</x-library::heading.1>
         </div>
     </div>

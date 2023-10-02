@@ -7,14 +7,20 @@ use App\Models\Team;
 use App\Models\User;
 use App\Traits\Filter\WithSortAndFilters;
 use App\Traits\Team\WithTeamManagement;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\App;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class TeamCalendarList extends Component
 {
-    use WithPagination, WithCachedRows, WithSortAndFilters, WithTeamManagement;
+    use WithCachedRows, WithPagination, WithSortAndFilters, WithTeamManagement;
 
     public array $sortLabels = [
         'name' => 'Name',
@@ -28,11 +34,17 @@ class TeamCalendarList extends Component
 
     public ?string $classes = '';
 
-    protected $listeners = [
-        'teamSelected' => 'handleTeamSelected',
-    ];
+    public function mount($classes = ''): void
+    {
+        $this->classes = $classes;
+        $this->orderBy = 'name';
 
-    public function getRowsQueryProperty()
+        if (! App::environment('production')) {
+            $this->useCache = false;
+        }
+    }
+
+    public function getRowsQueryProperty(): Builder
     {
         $query = Team::query()
             ->withCount(['users']);
@@ -79,39 +91,30 @@ class TeamCalendarList extends Component
         return $places->all();
     }
 
-    public function handleTeamSelected($teamId)
+    #[On('teamSelected')]
+    public function handleTeamSelected($teamId): void
     {
         $this->selectTeam($teamId);
 
         $this->dispatch('select-event', team: $this->team);
     }
 
-    public function selectTeam($teamID)
+    public function selectTeam($teamID): void
     {
         $this->team = Team::find($teamID);
     }
 
-    public function moreInfo()
+    public function moreInfo(): RedirectResponse
     {
         return redirect()->route('social.teams.show', $this->team);
     }
 
-    public function toggleMapCalendar($tab)
+    public function toggleMapCalendar($tab): void
     {
         $this->dispatch('toggle_map_calendar', tab: $tab, places: $this->places);
     }
 
-    public function mount($classes = '')
-    {
-        $this->classes = $classes;
-        $this->orderBy = 'name';
-
-        if (! App::environment('production')) {
-            $this->useCache = false;
-        }
-    }
-
-    public function render()
+    public function render(): View|\Illuminate\Foundation\Application|Factory|Application
     {
         return view('social::livewire.components.teams.team-calendar-list', [
             'teams' => $this->rows,

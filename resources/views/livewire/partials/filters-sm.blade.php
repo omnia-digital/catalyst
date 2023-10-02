@@ -28,7 +28,7 @@
         <x-library::dropdown.index :position="'right'" class="z-10 py-2 rounded-md bg-neutral"
                                    :dropdownClasses="'bg-secondary border-none shadow-md sm:w-48'">
             <x-slot:trigger class="flex items-center hover:cursor-pointer text-base-text-color hover:text-primary">
-                <x-heroicon-o-filter class="w-4 h-4"/>
+                <x-library::icons.icon name="fa-regular fa-filter" class="w-4 h-4"/>
                 <span class="ml-2 font-semibold">Filter {{ $filterCount ? "({$filterCount})" : '' }}</span>
                 </x-slot>
                 @unless (in_array('date', $skipFilters))

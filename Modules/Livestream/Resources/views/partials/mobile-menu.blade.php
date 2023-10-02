@@ -80,7 +80,7 @@
                                         :isSelected="request()->routeIs('players')"/>
                     <x-mobile-menu-item name="Channels" :to="route('channels')" icon="heroicon-o-desktop-computer"
                                         :isSelected="request()->routeIs('channels')"/>
-                    <x-mobile-menu-item name="Playlists" :to="route('playlists')" icon="heroicon-o-collection"
+                    <x-mobile-menu-item name="Playlists" :to="route('playlists')" icon="fa-solid fa-rectangle-history"
                                         :isSelected="in_array(request()->route()->getName(), ['playlists', 'playlists.update'])"/>
 
                 </div>

@@ -81,7 +81,7 @@ class ModuleNavigation extends Component
             //                [
             //                    'label'   => 'Trending Posts',
             //                    'name'    => 'social.discover',
-            //                    'icon'    => 'heroicon-o-collection',
+            //                    'icon'    => 'fa-solid fa-rectangle-history',
             //                ],
             //                [
             //                    'label'   => 'Bookmarks',

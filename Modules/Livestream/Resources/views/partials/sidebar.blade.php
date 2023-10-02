@@ -33,7 +33,7 @@
                             :isSelected="in_array(request()->route()->getName(), ['players', 'players.show'])"/>
             <x-sidebar-item name="Channels" :to="route('channels')" icon="heroicon-o-desktop-computer"
                             :isSelected="in_array(request()->route()->getName(), ['channels', 'channels.show', 'channels.update'])"/>
-            <x-sidebar-item name="Playlists" :to="route('playlists')" icon="heroicon-o-collection"
+            <x-sidebar-item name="Playlists" :to="route('playlists')" icon="fa-solid fa-rectangle-history"
                             :isSelected="in_array(request()->route()->getName(), ['playlists', 'playlists.update'])"/>
         </div>
     </div>
