@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Livestream\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Livestream\Traits\Downloadable;

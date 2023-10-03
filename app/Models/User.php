@@ -34,7 +34,6 @@ use Modules\Social\Traits\HasBookmarks;
 use Modules\Social\Traits\HasHandle;
 use Overtrue\LaravelFollow\Traits\Followable;
 use Overtrue\LaravelFollow\Traits\Follower;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasRoles;
 use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable;
