@@ -54,8 +54,8 @@
         "mhmiton/laravel-modules-livewire": "^2",
         "nwidart/laravel-modules": "^9.0",
         "omnia-digital/catalyst-core-plugin": "*",
-        "omnia-digital/catalyst-social-plugin": "*",
-        "omnia-digital/library": "dev-main",
+        "omnia-digital/catalyst-forms-plugin": "*",
+        "omnia-digital/library": "*",
         "omnia-digital/livewire-calendar": "^3.0",
         "omnia-digital/media-manager": "dev-main",
         "omniphx/forrest": "*",
@@ -119,7 +119,7 @@
         },
         {
             "type": "path",
-            "url": "../modules/catalyst-social-plugin"
+            "url": "../modules/catalyst-forms-plugin"
         }
     ],
     "autoload": {
