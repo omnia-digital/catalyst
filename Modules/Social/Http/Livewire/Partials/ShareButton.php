@@ -2,7 +2,7 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
-use App\Support\Platform\WithGuestAccess;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;

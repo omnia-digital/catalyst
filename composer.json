@@ -53,6 +53,8 @@
         "marcreichel/igdb-laravel": "^3.6",
         "mhmiton/laravel-modules-livewire": "^2",
         "nwidart/laravel-modules": "^9.0",
+        "omnia-digital/catalyst-core-plugin": "*",
+        "omnia-digital/catalyst-social-plugin": "*",
         "omnia-digital/library": "dev-main",
         "omnia-digital/livewire-calendar": "^3.0",
         "omnia-digital/media-manager": "dev-main",
@@ -110,6 +112,14 @@
         {
             "type": "composer",
             "url": "https://satis.spatie.be"
+        },
+        {
+            "type": "path",
+            "url": "../modules/catalyst-core-plugin"
+        },
+        {
+            "type": "path",
+            "url": "../modules/catalyst-social-plugin"
         }
     ],
     "autoload": {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Support\Platform\Platform;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
 use Closure;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -22,7 +22,7 @@ class EnsureEmailIsVerifiedMiddleware
      */
     public function handle($request, Closure $next, $redirectToRoute = null)
     {
-        if (Platform::isAllowingGuestAccess() && ! $request->user()) {
+        if (Catalyst::isAllowingGuestAccess() && ! $request->user()) {
             return $next($request);
         }
 

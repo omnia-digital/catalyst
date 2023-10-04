@@ -7,7 +7,7 @@ use App\Models\Location;
 use App\Models\Tag;
 use App\Models\Team;
 use App\Models\User;
-use App\Support\Platform\Platform;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -61,7 +61,7 @@ class TeamPageTest extends TestCase
      */
     public function load_teams_page()
     {
-        $response = $this->get('/social/' . Platform::getTeamsWord());
+        $response = $this->get('/social/' . Catalyst::getTeamsWord());
 
         $response->assertStatus(200);
     }
@@ -76,7 +76,7 @@ class TeamPageTest extends TestCase
             ->withUsers(1, config('platform.teams.default_owner_role'))
             ->create();
 
-        $response = $this->get('/' . Platform::getTeamsLetter() . '/' . $team->handle);
+        $response = $this->get('/' . Catalyst::getTeamsLetter() . '/' . $team->handle);
 
         $response->assertStatus(200);
     }
@@ -103,7 +103,7 @@ class TeamPageTest extends TestCase
     {
         $team = $this->user->teams()->first();
 
-        $response = $this->get('/social/' . Platform::getTeamsWord() . '/' . $team->handle . '/admin');
+        $response = $this->get('/social/' . Catalyst::getTeamsWord() . '/' . $team->handle . '/admin');
 
         $response->assertStatus(200);
     }
@@ -121,7 +121,7 @@ class TeamPageTest extends TestCase
 
         $this->actingAs($this->otherUser);
 
-        $response = $this->get('/social/' . Platform::getTeamsWord() . '/' . $team->handle . '/admin');
+        $response = $this->get('/social/' . Catalyst::getTeamsWord() . '/' . $team->handle . '/admin');
 
         $response->assertStatus(403);
     }

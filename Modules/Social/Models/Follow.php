@@ -3,7 +3,7 @@
 namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class Follow extends Model
 {
@@ -35,7 +35,7 @@ class Follow extends Model
     {
         $actorName = $this->actor->handle;
 
-        return "{$actorName} " . Trans::get('notification.startedFollowingYou');
+        return "{$actorName} " . Translate::get('notification.startedFollowingYou');
     }
 
     public function toHtml()
@@ -43,6 +43,6 @@ class Follow extends Model
         $actorName = $this->actor->handle;
         $actorUrl = $this->actor->url();
 
-        return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . Trans::get('notification.startedFollowingYou');
+        return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . Translate::get('notification.startedFollowingYou');
     }
 }

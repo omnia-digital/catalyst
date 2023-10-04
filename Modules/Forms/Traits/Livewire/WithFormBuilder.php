@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
 use Modules\Forms\Models\Form;
 use Modules\Forms\Models\FormType;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 /**
  * Add form builder to livewire component
@@ -49,7 +49,7 @@ trait WithFormBuilder
             Form::create($formData);
         }
 
-        $this->success(Trans::get('Form created successfully'));
+        $this->success(Translate::get('Form created successfully'));
 
         if ($teamId) {
             $this->redirectRoute('social.teams.admin', Team::find($teamId));

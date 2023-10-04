@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Laravel\Jetstream\Features;
 use Modules\Social\Models\Profile;
 use Spatie\Permission\Models\Role;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class RoleFactory extends Factory
 {
@@ -41,7 +41,7 @@ class RoleFactory extends Factory
         return $this->hasAttached(
             Team::factory()
                 ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->profile->name . '\'s ' . Trans::get('Team')];
+                    return ['name' => $user->profile->name . '\'s ' . Translate::get('Team')];
                 }),
             ['role_id' => $teamOwnerRole->id],
             'teams'

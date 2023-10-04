@@ -6,7 +6,7 @@ use App\Models\Team;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Notifications\Messages\MailMessage;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class TeamAdminNotification extends BaseNotification
 {
@@ -30,8 +30,8 @@ class TeamAdminNotification extends BaseNotification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(Trans::get('You have a new message from the team: ' . $this->team->name))
-            ->line(Trans::get('You have a new message from the team: ' . $this->team->name))
+            ->subject(Translate::get('You have a new message from the team: ' . $this->team->name))
+            ->line(Translate::get('You have a new message from the team: ' . $this->team->name))
             ->line($this->message)
             ->action('View Team', $this->team->profile());
     }
@@ -48,7 +48,7 @@ class TeamAdminNotification extends BaseNotification
 
         return NotificationCenter::make()
             ->icon('heroicon-o-user-group')
-            ->info(Trans::get('You have a new message from the team: ' . $this->team->name))
+            ->info(Translate::get('You have a new message from the team: ' . $this->team->name))
             ->image($this->team->profile_photo_url)
             ->subtitle($this->message)
             ->actionLink($url)

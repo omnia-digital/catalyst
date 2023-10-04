@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->job(new SendFormNotificationsJob)
             ->everyThirtyMinutes()
-            ->when(fn () => Platform::isModuleEnabled('forms'));
+            ->when(fn () => Catalyst::isModuleEnabled('forms'));
 
         $schedule->command('backup:clean')->daily()->at('01:00');
         $schedule->command('backup:run')->daily()->at('02:00');

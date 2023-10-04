@@ -19,10 +19,10 @@
             <!-- Profile Awards -->
             <div class="block">
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <p class="text-sm">{{ Trans::get('Awards') }}</p>
+                    <p class="text-sm">{{ Translate::get('Awards') }}</p>
                     @if ($this->user->awards()->count())
                         <a href="{{ route('social.profile.awards', $profile) }}"
-                           class="text-xs flex items-center">{{ Trans::get('See all') }}
+                           class="text-xs flex items-center">{{ Translate::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                         </a>
                     @endif
@@ -32,7 +32,7 @@
                         <x-awards-banner class="flex-1" :award="$award"/>
                     @empty
                         <div class="bg-white p-4 flex-1">
-                            <p class="text-dark-text-color">{{ Trans::get('No awards to show.') }}</p>
+                            <p class="text-dark-text-color">{{ Translate::get('No awards to show.') }}</p>
                         </div>
                     @endforelse
                 </div>
@@ -41,9 +41,9 @@
             {{-- Skills --}}
             {{--            <div class="hidden sm:block">--}}
             {{--                <div class="flex justify-between items-center text-base-text-color font-semibold">--}}
-            {{--                    <p class="text-sm">{{ \Trans::get('Skills') }}</p>--}}
+            {{--                    <p class="text-sm">{{ \Translate::get('Skills') }}</p>--}}
             {{--                    @if ($this->user->awards()->count())--}}
-            {{--                        <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}--}}
+            {{--                        <a href="{{ route('social.profile.awards', $profile) }}" class="text-xs flex items-center">{{ \Translate::get('See all') }}--}}
             {{--                            <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>--}}
             {{--                        </a>--}}
             {{--                    @endif--}}
@@ -53,7 +53,7 @@
             {{--                        <x-awards-banner class="flex-1" :award="$award"/>--}}
             {{--                    @empty--}}
             {{--                        <div class="bg-white p-4 flex-1">--}}
-            {{--                            <p class="text-dark-text-color">{{ \Trans::get('No awards to show.') }}</p>--}}
+            {{--                            <p class="text-dark-text-color">{{ \Translate::get('No awards to show.') }}</p>--}}
             {{--                        </div>--}}
             {{--                    @endforelse--}}
             {{--                </div>--}}
@@ -62,10 +62,10 @@
             {{-- Teams --}}
             <div class="block xl:hidden">
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <p class="text-sm">{{ Platform::getTeamsWordUpper() }}</p>
+                    <p class="text-sm">{{ Catalyst::getTeamsWordUpper() }}</p>
                     @if ($this->user->teams()->count())
                         <a href="{{ route('social.profile.teams', $profile) }}"
-                           class="text-xs flex items-center">{{ Trans::get('See all') }}
+                           class="text-xs flex items-center">{{ Translate::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                         </a>
                     @endif
@@ -80,7 +80,7 @@
                         </div>
                     @else
                         <div class="bg-white p-4 flex-1">
-                            <p class="text-dark-text-color">{{ Trans::get('No teams to show.') }}</p>
+                            <p class="text-dark-text-color">{{ Translate::get('No teams to show.') }}</p>
                         </div>
                     @endif
                 </div>
@@ -125,10 +125,10 @@
             {{-- Teams --}}
             <div>
                 <div class="flex justify-between items-center text-base-text-color font-semibold">
-                    <p class="text-sm">{{ Platform::getTeamsWordUpper() }}</p>
+                    <p class="text-sm">{{ Catalyst::getTeamsWordUpper() }}</p>
                     @if ($this->user->teams()->count())
                         <a href="{{ route('social.profile.teams', $profile) }}"
-                           class="text-xs flex items-center">{{ Trans::get('See all') }}
+                           class="text-xs flex items-center">{{ Translate::get('See all') }}
                             <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>
                         </a>
                     @endif
@@ -143,7 +143,7 @@
                         </div>
                     @else
                         <div class="bg-white p-4 flex-1">
-                            <p class="text-dark-text-color">{{ Trans::get('No teams to show.') }}</p>
+                            <p class="text-dark-text-color">{{ Translate::get('No teams to show.') }}</p>
                         </div>
                     @endif
                 </div>

@@ -1,6 +1,6 @@
 <section aria-labelledby="people-heading" class="card pb-6">
     <div class="px-6 py-3">
-        <x-library::heading.3>{{ Trans::get('People') }}</x-library::heading.3>
+        <x-library::heading.3>{{ Translate::get('People') }}</x-library::heading.3>
 
         <div class="mt-6 flow-root">
             <ul role="list" class="-my-4">
@@ -27,7 +27,7 @@
                     <li class="flex items-center py-4 space-x-3">
                         <div class="min-w-0 flex-1">
                             <p class="text-sm font-medium text-gray-900">
-                                {{ Trans::get('No one to follow') }}
+                                {{ Translate::get('No one to follow') }}
                             </p>
                         </div>
                     </li>

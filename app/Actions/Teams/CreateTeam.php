@@ -3,7 +3,7 @@
 namespace App\Actions\Teams;
 
 use App\Models\Team;
-use App\Support\Platform\Platform;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\CreatesTeams;
@@ -64,7 +64,7 @@ class CreateTeam implements CreatesTeams
             }
         }
 
-        if (Platform::isUsingTeamMemberSubscriptions()) {
+        if (Catalyst::isUsingTeamMemberSubscriptions()) {
             (new CreateStripeConnectAccountForTeamAction)->execute($team);
         }
 

@@ -38,7 +38,7 @@
                 <p class="flex items-center mt-1 text-gray-500 text-sm leading-5 truncate">
                     <x-heroicon-o-credit-card id="payment-type-budget"
                                               class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
-                    {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . Platform::money($job->budget) : '' }}
+                    {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . Catalyst::money($job->budget) : '' }}
                 </p>
 
                 <x-tooltip wire:key="{{ $job->id . time() }}"

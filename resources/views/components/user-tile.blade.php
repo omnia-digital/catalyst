@@ -32,7 +32,7 @@
                                 <x-library::dropdown.item
                                         class="cursor-pointer text-sm text-red-500 hover:bg-dark-text-color"
                                         wire:click="$toggle('confirmingLeavingTeam')">
-                                    {{ Trans::get('Leave Team') }}
+                                    {{ Translate::get('Leave Team') }}
                                 </x-library::dropdown.item>
 
                                 <!-- Remove Team Member -->
@@ -40,7 +40,7 @@
                                 <x-library::dropdown.item
                                         class="cursor-pointer text-sm text-red-500 hover:bg-dark-text-color"
                                         wire:click="confirmTeamMemberRemoval('{{ $user->id }}')">
-                                    {{ Trans::get('Remove Member') }}
+                                    {{ Translate::get('Remove Member') }}
                                 </x-library::dropdown.item>
                             @endif
                         </x-library::dropdown>

@@ -2,8 +2,8 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
-use App\Support\Platform\Platform;
-use App\Support\Platform\WithGuestAccess;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use Livewire\Component;
 use Modules\Social\Models\Post;
 use Modules\Social\Notifications\PostWasBookmarkedNotification;
@@ -18,7 +18,7 @@ class BookmarkButton extends Component
 
     public function toggleBookmark()
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Catalyst::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('social.posts.show', $this->model));
 
             return;

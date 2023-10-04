@@ -5,7 +5,7 @@
                 <div class="px-4 sm:px-0">
                     <h3 class="text-lg font-medium leading-6 text-gray-900">Roles</h3>
                     <p class="mt-1 text-sm text-gray-600">This is where you can manage the roles for
-                        your {{ Trans::get('team') }} members</p>
+                        your {{ Translate::get('team') }} members</p>
                 </div>
             </div>
             <div class="mt-5 md:col-span-2 md:mt-0">
@@ -128,7 +128,7 @@
                 <div class="px-4 sm:px-0">
                     <h3 class="text-lg font-medium leading-6 text-gray-900">Permissions</h3>
                     <p class="mt-1 text-sm text-gray-600">This is where you can view the available permissions for
-                        your {{ Trans::get('team') }} roles</p>
+                        your {{ Translate::get('team') }} roles</p>
                 </div>
             </div>
             <div class="mt-5 md:col-span-2 md:mt-0">
@@ -159,20 +159,20 @@
         <!-- Delete Role Confirmation Modal -->
         <x-confirmation-modal wire:model.live="confirmingDeleteTeamRole">
             <x-slot name="title">
-                {{ Trans::get('Delete Role') }}
+                {{ Translate::get('Delete Role') }}
             </x-slot>
 
             <x-slot name="content">
-                <p>{{ Trans::get('Are you sure you would like to delete this role?') }}</p>
+                <p>{{ Translate::get('Are you sure you would like to delete this role?') }}</p>
             </x-slot>
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="$set('confirmingDeleteTeamRole', false)" wire:loading.attr="disabled">
-                    {{ Trans::get('Cancel') }}
+                    {{ Translate::get('Cancel') }}
                 </x-secondary-button>
 
                 <x-danger-button class="ml-2" wire:click="deleteTeamRole" wire:loading.attr="disabled">
-                    {{ Trans::get('Delete') }}
+                    {{ Translate::get('Delete') }}
                 </x-danger-button>
             </x-slot>
         </x-confirmation-modal>
@@ -180,7 +180,7 @@
         <!-- Role Edit Modal -->
         <x-dialog-modal wire:model.live="currentlyEditingRole">
             <x-slot name="title">
-                {{ Trans::get('Edit Role') }}
+                {{ Translate::get('Edit Role') }}
             </x-slot>
 
             <x-slot name="content">
@@ -201,11 +201,11 @@
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="$set('currentlyEditingRole', false)" wire:loading.attr="disabled">
-                    {{ Trans::get('Cancel') }}
+                    {{ Translate::get('Cancel') }}
                 </x-secondary-button>
 
                 <x-button class="ml-2" wire:click="saveRole" wire:loading.attr="disabled">
-                    {{ Trans::get('Save') }}
+                    {{ Translate::get('Save') }}
                 </x-button>
             </x-slot>
         </x-dialog-modal>
@@ -213,7 +213,7 @@
         <!-- Add Permission Modal -->
         <x-dialog-modal wire:model.live="currentlyAddingPermission">
             <x-slot name="title">
-                {{ Trans::get('Attach Permissions to "' . ucfirst($roleToAttachPermission?->name) . '"') }}
+                {{ Translate::get('Attach Permissions to "' . ucfirst($roleToAttachPermission?->name) . '"') }}
             </x-slot>
 
             <x-slot name="content">
@@ -230,11 +230,11 @@
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="closePermissionsModal" wire:loading.attr="disabled">
-                    {{ Trans::get('Cancel') }}
+                    {{ Translate::get('Cancel') }}
                 </x-secondary-button>
 
                 <x-button class="ml-2" wire:click="attachPermissions" wire:loading.attr="disabled">
-                    {{ Trans::get('Save') }}
+                    {{ Translate::get('Save') }}
                 </x-button>
             </x-slot>
         </x-dialog-modal>

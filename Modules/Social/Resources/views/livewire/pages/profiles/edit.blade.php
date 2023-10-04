@@ -89,7 +89,7 @@
                 </div>
                 <div class="col-span-4 md:col-span-2">
                     <x-library::input.label value="Date of Birth" class="inline"/>
-                    <span class="text-neutral-dark ml-1">{{ Trans::get('(This will not be visible to the public)') }}</span>
+                    <span class="text-neutral-dark ml-1">{{ Translate::get('(This will not be visible to the public)') }}</span>
                     <span class="text-red-600 text-sm">*</span>
                     <x-library::input.date format="Y-m-d" id="birth_date" wire:model="profile.birth_date"/>
                     <x-library::input.error for="profile.birth_date"/>
@@ -108,9 +108,9 @@
                 </div>
                 <div class="col-span-4">
                     <div class="flex items-center">
-                        <x-library::input.label value="{{ Trans::get('What type of profile is this?') }}"
+                        <x-library::input.label value="{{ Translate::get('What type of profile is this?') }}"
                                                 class="inline"/>
-                        <span class="text-neutral-dark ml-1">{{ Trans::get('(you can choose more than one)') }}</span>
+                        <span class="text-neutral-dark ml-1">{{ Translate::get('(you can choose more than one)') }}</span>
                         <span class="text-red-600 text-sm">*</span>
                     </div>
                     <x-library::input.selects

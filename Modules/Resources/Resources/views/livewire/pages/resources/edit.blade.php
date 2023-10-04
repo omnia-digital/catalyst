@@ -10,7 +10,7 @@
             </div>
             <a href="{{ route('resources.home') }}">
                 <x-library::heading.1
-                        class="py-4 hover:cursor-pointer">{{ Trans::get('Edit Resource') }}</x-library::heading.1>
+                        class="py-4 hover:cursor-pointer">{{ Translate::get('Edit Resource') }}</x-library::heading.1>
             </a>
         </div>
         <div class="w-full">
@@ -29,9 +29,9 @@
                     {{-- // TODO: this is throwing an error in the JS console for some reason, need tp look into this.--}}
                     {{--                <div class="mt-6">--}}
                     {{--                    <div class="flex items-center">--}}
-                    {{--                        <x-library::input.label value="{{ \Trans::get('What is your Team associated with?') }}" /><span class="text-red-600 text-sm ml-1">*</span>--}}
+                    {{--                        <x-library::input.label value="{{ \Translate::get('What is your Team associated with?') }}" /><span class="text-red-600 text-sm ml-1">*</span>--}}
                     {{--                    </div>--}}
-                    {{--                    <p class="text-neutral-dark">{{ \Trans::get('(you can choose more than one)') }}</p>--}}
+                    {{--                    <p class="text-neutral-dark">{{ \Translate::get('(you can choose more than one)') }}</p>--}}
                     {{--                    <x-library::input.selects wire:model.live="resourceTags" :options="$resourceTags"/>--}}
                     {{--                </div>--}}
                     @foreach ($resourceTags as $tag)

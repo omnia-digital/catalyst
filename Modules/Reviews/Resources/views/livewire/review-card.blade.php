@@ -7,8 +7,8 @@
         </div>
         <div class="flex-1 space-y-1">
             <p class="text-dark-text-color font-semibold text-sm">{{ $review->user->name }}</p>
-            <p class="text-2xs text-light-text-color">{{ $review->user->teams()->count() . Str::plural(Trans::get(" team"), $review->user->teams()->count()) }}</p>
-            <p class="text-2xs text-light-text-color">{{ $review->user->reviews()->count() . Str::plural(Trans::get(" review"), $review->user->reviews()->count()) }}</p>
+            <p class="text-2xs text-light-text-color">{{ $review->user->teams()->count() . Str::plural(Translate::get(" team"), $review->user->teams()->count()) }}</p>
+            <p class="text-2xs text-light-text-color">{{ $review->user->reviews()->count() . Str::plural(Translate::get(" review"), $review->user->reviews()->count()) }}</p>
         </div>
     </div>
     <div class="col-span-2 space-y-2">
@@ -34,7 +34,7 @@
                                 class="text-light-text-color hover:text-base-text-color"
                         >
                             <x-heroicon-o-pencil class="w-4 h-4"/>
-                            <span class="sr-only">{{ Trans::get('Edit Review') }}</span>
+                            <span class="sr-only">{{ Translate::get('Edit Review') }}</span>
                         </button>
                     </div>
                 @endif
@@ -44,7 +44,7 @@
             <p class="mt-2 text-light-text-color text-xs">{{ $review->body }}</p>
         </div>
         <div class="mt-4">
-            <p class="text-light-text-color text-xs">{{ Trans::get($review->likesCount() . ' ' . Str::plural('person', $review->likesCount()) . ' found this review helpful') }}</p>
+            <p class="text-light-text-color text-xs">{{ Translate::get($review->likesCount() . ' ' . Str::plural('person', $review->likesCount()) . ' found this review helpful') }}</p>
             <div class="flex space-x-1 mt-3">
                 <p class="text-light-text-color text-xs">Helpful</p>
                 <livewire:social::partials.like-button

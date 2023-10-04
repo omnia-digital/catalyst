@@ -5,7 +5,7 @@
         </x-slot>
 
         <div class="mb-4 text-sm text-base-text-color">
-            {{ Trans::get('This is a secure area of the application. Please confirm your password before continuing.') }}
+            {{ Translate::get('This is a secure area of the application. Please confirm your password before continuing.') }}
         </div>
 
         <x-validation-errors class="mb-4"/>
@@ -14,14 +14,14 @@
             @csrf
 
             <div>
-                <x-label for="password" value="{{ Trans::get('Password') }}"/>
+                <x-label for="password" value="{{ Translate::get('Password') }}"/>
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
                          autocomplete="current-password" autofocus/>
             </div>
 
             <div class="flex justify-end mt-4">
                 <x-button class="ml-4">
-                    {{ Trans::get('Confirm') }}
+                    {{ Translate::get('Confirm') }}
                 </x-button>
             </div>
         </form>

@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use Illuminate\View\View;
 use Livewire\Component;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class MainNavigationMenu extends Component
 {
@@ -23,32 +23,32 @@ class MainNavigationMenu extends Component
     {
         return [
             [
-                'label' => Trans::get('Home'),
+                'label' => Translate::get('Home'),
                 'name' => 'social.home',
                 'icon' => 'fa-duotone fa-house',
                 //                'icon'    => 'heroicon-o-home',
                 'module' => 'social',
             ],
             [
-                'label' => Trans::get('Teams'),
+                'label' => Translate::get('Teams'),
                 'name' => 'social.home',
                 'icon' => 'fa-solid fa-users',
                 'module' => 'teams',
             ],
             [
-                'label' => Trans::get('Resources'),
+                'label' => Translate::get('Resources'),
                 'name' => 'resources.home',
                 'icon' => 'fa-regular fa-photo-film-music',
                 'module' => 'resources',
             ],
             [
-                'label' => Trans::get('Articles'),
+                'label' => Translate::get('Articles'),
                 'name' => 'articles.home',
                 'icon' => 'fa-duotone fa-newspaper',
                 'module' => 'articles',
             ],
             [
-                'label' => Trans::get('News'),
+                'label' => Translate::get('News'),
                 'name' => 'feeds.index',
                 'icon' => 'fa-regular fa-rss',
                 'module' => 'feeds',
@@ -61,7 +61,7 @@ class MainNavigationMenu extends Component
             //                'current' => false
             //            ],
             //            [
-            //                'label' => Trans::get('Jobs'),
+            //                'label' => Translate::get('Jobs'),
             //                'name' => 'jobs.home',
             //                'icon' => 'heroicon-o-briefcase',
             //                'module' => 'jobs',
@@ -73,7 +73,7 @@ class MainNavigationMenu extends Component
             //                'module' => 'advice',
             //            ],
             //            [
-            //                'label' => Trans::get('CRM'),
+            //                'label' => Translate::get('CRM'),
             //                'name' => 'filament.pages.dashboard',
             //                'icon' => 'fa-duotone fa-rectangle-list',
             //                'module' => 'crm',

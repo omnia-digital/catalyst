@@ -42,7 +42,7 @@
                                 <div class="w-60">
                                     <!-- Current Team -->
                                     <div class="block px-4 py-2 text-xs text-light-text-color">
-                                        {{ Trans::get('Current Team') }}
+                                        {{ Translate::get('Current Team') }}
                                     </div>
                                     <x-dropdown-link
                                             href="{{ route('social.teams.show', auth()->user()->currentTeam->handle) }}">
@@ -51,7 +51,7 @@
 
                                     {{--                                                                            @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
                                     {{--                                                                                <x-dropdown-link href="{{ route('teams.create') }}">--}}
-                                    {{--                                                                                    {{ \Trans::get('Create New Team') }}--}}
+                                    {{--                                                                                    {{ \Translate::get('Create New Team') }}--}}
                                     {{--                                                                                </x-dropdown-link>--}}
                                     {{--                                                                            @endcan--}}
 
@@ -60,7 +60,7 @@
 
                                         <!-- Team Switcher -->
                                         <div class="block px-4 py-2 text-xs text-light-text-color">
-                                            {{ Trans::get('Switch Teams') }}
+                                            {{ Translate::get('Switch Teams') }}
                                         </div>
 
                                         @foreach (auth()->user()->teams as $team)
@@ -110,7 +110,7 @@
 
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-light-text-color">
-                                {{ Trans::get('Manage Account') }}
+                                {{ Translate::get('Manage Account') }}
                             </div>
 
                             <x-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
@@ -126,23 +126,23 @@
                             </x-dropdown-link>
 
                             <x-dropdown-link href="{{ route('account') }}">
-                                {{ Trans::get('Account') }}
+                                {{ Translate::get('Account') }}
                             </x-dropdown-link>
                             {{ Filament::renderHook('user-menu.account.after') }}
 
-                            @if (\App\Support\Platform\Platform::isUsingStripe())
+                            @if (\OmniaDigital\CatalystCore\Facades\Catalyst::isUsingStripe())
                                 <x-dropdown-link href="{{ route('billing.stripe-billing') }}">
-                                    {{ Trans::get('Billing') }}
+                                    {{ Translate::get('Billing') }}
                                 </x-dropdown-link>
-                            @elseif (\App\Support\Platform\Platform::isUsingChargent() && \App\Support\Platform\Platform::isUsingUserSubscriptions())
+                            @elseif (\OmniaDigital\CatalystCore\Facades\Catalyst::isUsingChargent() && \OmniaDigital\CatalystCore\Facades\Catalyst::isUsingUserSubscriptions())
                                 <x-dropdown-link href="{{ route('billing.chargent-billing') }}">
-                                    {{ Trans::get('Billing') }}
+                                    {{ Translate::get('Billing') }}
                                 </x-dropdown-link>
                             @endif
 
                             {{--                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
                             {{--                                    <x-dropdown-link href="{{ route('api-tokens.index') }}">--}}
-                            {{--                                        {{ \Trans::get('API Tokens') }}--}}
+                            {{--                                        {{ \Translate::get('API Tokens') }}--}}
                             {{--                                    </x-dropdown-link>--}}
                             {{--                                @endif--}}
 
@@ -155,7 +155,7 @@
                                 <x-dropdown-link href="{{ route('logout') }}"
                                                  onclick="event.preventDefault();
                                                                             this.closest('form').submit();">
-                                    {{ Trans::get('Log Out') }}
+                                    {{ Translate::get('Log Out') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
@@ -195,10 +195,10 @@
 
             <x-slot name="content">
                 <x-dropdown-link href="{{ route('register') }}">
-                    {{ Trans::get('Register') }}
+                    {{ Translate::get('Register') }}
                 </x-dropdown-link>
                 <x-dropdown-link href="{{ route('login') }}">
-                    {{ Trans::get('Login') }}
+                    {{ Translate::get('Login') }}
                 </x-dropdown-link>
             </x-slot>
         </x-dropdown>

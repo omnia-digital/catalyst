@@ -5,7 +5,7 @@ namespace Modules\Social\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class Like extends Model
 {
@@ -34,7 +34,7 @@ class Like extends Model
     public function toText($type = 'post')
     {
         $actorName = $this->actor->handle;
-        $msg = $type == 'post' ? Trans::get('notification.likedPhoto') : Trans::get('notification.likedComment');
+        $msg = $type == 'post' ? Translate::get('notification.likedPhoto') : Translate::get('notification.likedComment');
 
         return "{$actorName} " . $msg;
     }
@@ -43,7 +43,7 @@ class Like extends Model
     {
         $actorName = $this->actor->handle;
         $actorUrl = $this->actor->url();
-        $msg = $type == 'post' ? Trans::get('notification.likedPhoto') : Trans::get('notification.likedComment');
+        $msg = $type == 'post' ? Translate::get('notification.likedPhoto') : Translate::get('notification.likedComment');
 
         return "<a href='{$actorUrl}' class='profile-link'>{$actorName}</a> " . $msg;
     }

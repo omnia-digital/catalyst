@@ -10,7 +10,7 @@
                 <nav class="space-y-3">
                     @foreach ($navigation as $item)
                         @if (!empty($item['module']))
-                            @if (Platform::isModuleEnabled($item['module']))
+                            @if (Catalyst::isModuleEnabled($item['module']))
                                 <a href="{{ Route::has($item['name']) ? route($item['name']) : $item['name'] }}"
                                    title="{{ $item['label'] }}"
                                    class="{{ request()->routeIs($item['name']) ? 'font-semibold text-base-text-color' : 'text-light-text-color hover:text-dark-text-color' }}

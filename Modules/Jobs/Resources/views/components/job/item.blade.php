@@ -39,7 +39,7 @@
                                 <div class="flex items-center text-sm leading-5 text-base-text-color sm:mt-0">
                                     <x-heroicon-o-credit-card id="payment-type-budget"
                                                               class="flex-shrink-0 mr-1.5 h-5 w-5 text-light-text-color"/>
-                                    {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . Platform::money($job->budget) : '' }}
+                                    {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . Catalyst::money($job->budget) : '' }}
                                 </div>
                             </div>
                         </div>
@@ -73,11 +73,11 @@
                     @if ($job->is_active)
                         <span class="text-success-600 flex items-center "><x-library::icons.icon
                                     name="fa-solid fa-circle" size="w-3 h-3" class="mr-2"/> {{
-                        Trans::get('Active') }}</span>
+                        Translate::get('Active') }}</span>
                     @else
                         <span class="text-danger-600 flex items-center"><x-library::icons.icon name="fa-solid fa-circle"
                                                                                                size="w-3 h-3"
-                                                                                               class="mr-2"/> {{  Trans::get
+                                                                                               class="mr-2"/> {{  Translate::get
                         ('Inactive') }}</span>
                     @endif
                 </div>

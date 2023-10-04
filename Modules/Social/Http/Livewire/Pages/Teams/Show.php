@@ -6,8 +6,8 @@ use App\Models\Award;
 use App\Models\Location;
 use App\Models\Team;
 use App\Models\User;
-use App\Support\Platform\Platform;
-use App\Support\Platform\WithGuestAccess;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use App\Traits\Team\WithTeamManagement;
 use Livewire\Component;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
@@ -139,7 +139,7 @@ class Show extends Component
 
     public function getCanViewTeamContentProperty()
     {
-        if (Platform::isAllowingGuestAccess()) {
+        if (Catalyst::isAllowingGuestAccess()) {
             return true;
         }
 

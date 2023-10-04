@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
-            <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Jobs') }}</x-library::heading.1>
+            <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Translate::get('Jobs') }}</x-library::heading.1>
         </div>
         @include('jobs::livewire.components.filters', ['skipFilters' => ['has_attachment', 'members']])
 
@@ -37,7 +37,7 @@
                                     :job="$job"/>
                         @empty
                             <li class="p-20 text-lg text-gray-600 text-center">
-                                {{ Trans::get('Looking for help? Post a job and you can start getting applicants today.') }}
+                                {{ Translate::get('Looking for help? Post a job and you can start getting applicants today.') }}
                                 <p>
                                     <a href="{{ route('jobs.job.create') }}"
                                        class="my-2 inline-flex items-center px-4 py-2 border border-transparent leading-6 font-medium rounded-md text-white bg-red-600 hover:text-white-600 hover:bg-red-500

@@ -10,7 +10,7 @@ use Modules\Social\Models\Mention;
 use Modules\Social\Models\Post;
 use Omnia\MediaManager\WithMediaManager;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class Edit extends Component
 {
@@ -89,7 +89,7 @@ class Edit extends Component
 
         $this->reset('confirmingMediaRemoval', 'mediaIdBeingRemoved');
 
-        $this->success(Trans::get('Image removed.'));
+        $this->success(Translate::get('Image removed.'));
     }
 
     public function confirmMediaRemoval($mediaId)

@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 use Laravel\Jetstream\Events\InvitedTeamMember;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Rules\Role;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class ApplyToTeam
 {
@@ -47,7 +47,7 @@ class ApplyToTeam
             'user_id' => $userID,
             'role' => $role,
         ], $this->rules($team), [
-            'user_id.unique' => Trans::get('You have already applied to this team.'),
+            'user_id.unique' => Translate::get('You have already applied to this team.'),
         ])->after(
             $this->ensureUserIsNotAlreadyOnTeam($team, $userID)
         )->validateWithBag('addTeamMember');
@@ -88,7 +88,7 @@ class ApplyToTeam
             $validator->errors()->addIf(
                 $team->hasUser($user),
                 'user_id',
-                Trans::get('This user already belongs to the team.')
+                Translate::get('This user already belongs to the team.')
             );
         };
     }

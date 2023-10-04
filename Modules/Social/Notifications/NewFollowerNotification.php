@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
 use Illuminate\Notifications\Messages\MailMessage;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class NewFollowerNotification extends BaseNotification
 {
@@ -37,12 +37,12 @@ class NewFollowerNotification extends BaseNotification
 
     public function getTitle()
     {
-        return Trans::get('You have a new follower');
+        return Translate::get('You have a new follower');
     }
 
     public function getMessage()
     {
-        return $this->follower->name . Trans::get(' followed you');
+        return $this->follower->name . Translate::get(' followed you');
     }
 
     public function getUrl()

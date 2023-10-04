@@ -9,11 +9,11 @@
                 </a>
             </div>
             <a href="{{ route('jobs.home') }}">
-                <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Jobs') }}</x-library::heading.1>
+                <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Translate::get('Jobs') }}</x-library::heading.1>
             </a>
         </div>
         <x-library::heading.1 text-color="text-color"
-                              class="ml-4 pt-2 pb-1 hover:cursor-pointer">{{ Trans::get('Post a Job') }}</x-library::heading.1>
+                              class="ml-4 pt-2 pb-1 hover:cursor-pointer">{{ Translate::get('Post a Job') }}</x-library::heading.1>
 
 
         <div class="flex justify-between my-6">
@@ -75,10 +75,10 @@
                                                               id="job_position_skills"
                                                               :options="$jobPositionSkillOptions"
                                                               max="5"
-                                                              :placeholder="Trans::get('Type to search for a skill.')"/>
+                                                              :placeholder="Translate::get('Type to search for a skill.')"/>
                                     <x-library::input.error for="selected_skills"/>
                                     <x-library::input.help
-                                            :value="Trans::get('Adding skills helps you reach workers with the skills that you need. Maximum is 5. ')"/>
+                                            :value="Translate::get('Adding skills helps you reach workers with the skills that you need. Maximum is 5. ')"/>
                                     {{--                                    <div>--}}
                                     {{--                                        <div class="flex items-center space-x-3 mt-1">--}}
                                     {{--                                            @foreach ($job->skills as $tag)--}}
@@ -102,7 +102,7 @@
                                                              id="apply-type"/>
                                     <x-library::input.error for="apply_type"/>
                                     <x-library::input.help
-                                            :value="Trans::get('Choose how you want people to apply.')"/>
+                                            :value="Translate::get('Choose how you want people to apply.')"/>
                                 </div>
 
                                 <div class="col-span-3 space-y-1 sm:col-span-2">
@@ -110,7 +110,7 @@
                                     <x-library::input.select wire:model="hours_per_week_id"
                                                              :options="$hoursPerWeek" id="hours-per-week-id"/>
                                     <x-library::input.error for="hours_per_week_id"/>
-                                    <x-library::input.help :value="Trans::get('Choose the hours per week you need.')"/>
+                                    <x-library::input.help :value="Translate::get('Choose the hours per week you need.')"/>
                                 </div>
 
                                 <div class="col-span-3 space-y-1 sm:col-span-2">
@@ -236,7 +236,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="mt-2 flex text-sm leading-5 space-x-1 sm:mt-0 sm:block sm:space-x-0 sm:text-right">
-                                                            <div class="font-medium text-gray-900">{{ Platform::money($addon->price) }}</div>
+                                                            <div class="font-medium text-gray-900">{{ Catalyst::money($addon->price) }}</div>
                                                         </div>
                                                     </div>
                                                     <div
@@ -249,7 +249,7 @@
                                     </fieldset>
 
                                     @if (!empty($price))
-                                        <p class="font-bold text-lg pt-5">Price: {{ Platform::money($price ?? 0) }}</p>
+                                        <p class="font-bold text-lg pt-5">Price: {{ Catalyst::money($price ?? 0) }}</p>
                                     @endif
                                 </div>
 
@@ -434,7 +434,7 @@
                                             <div>
                                                 <x-library::input.label for="country" value="Country"/>
                                                 <x-library::input.select x-model="country"
-                                                                         :options="Platform::countries()"
+                                                                         :options="Catalyst::countries()"
                                                                          id="country"/>
                                                 <x-library::input.error for="country"/>
                                             </div>
@@ -514,7 +514,7 @@
                         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <span class="w-full md:w-auto inline-flex rounded-md shadow-sm">
                         <x-library::button wire:click="save"
-                                           class="w-full md:w-auto">{{ Trans::get('Publish Job') }}</x-library::button>
+                                           class="w-full md:w-auto">{{ Translate::get('Publish Job') }}</x-library::button>
                     </span>
                         </div>
                     </div>

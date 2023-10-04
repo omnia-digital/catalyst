@@ -2,7 +2,7 @@
     <div class="py-3 flex-1 space-y-1 overflow-y-auto">
         <div class="pl-4 flex justify-between items-center">
             <x-library::heading.2 class="text-xl font-medium text-gray-900">
-                {{ Trans::get('Teams') }}
+                {{ Translate::get('Teams') }}
             </x-library::heading.2>
             <div x-data="{show: false, message: ''}"
                  x-cloak
@@ -22,11 +22,11 @@
                 activeTab: 0,
                 tabs: [
                     {
-                        label: '{{ Trans::get('Invitations') }}',
+                        label: '{{ Translate::get('Invitations') }}',
                         count: {{ $invitations->count() }}
                     },
                     {
-                        label: '{{ Trans::get('Requests') }}',
+                        label: '{{ Translate::get('Requests') }}',
                         count: {{ $applications->count() }}
                     }
                 ]
@@ -95,7 +95,7 @@
                                 </div>
                             @empty
                                 <div>
-                                    <p>{{ Trans::get('There are no pending invitations') }}</p>
+                                    <p>{{ Translate::get('There are no pending invitations') }}</p>
                                 </div>
                             @endforelse
                         </div>
@@ -132,7 +132,7 @@
                                 </div>
                             @empty
                                 <div>
-                                    <p>{{ Trans::get('There are no pending applications') }}</p>
+                                    <p>{{ Translate::get('There are no pending applications') }}</p>
                                 </div>
                             @endforelse
                         </div>

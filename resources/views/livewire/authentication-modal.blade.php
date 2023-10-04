@@ -16,7 +16,7 @@
                 <div class="mt-6">
                     <label for="remember_me" class="flex items-center">
                         <x-checkbox id="remember_me" wire:model.live="remember"/>
-                        <span class="ml-2 text-sm text-base-text-color">{{ Trans::get('Remember me') }}</span>
+                        <span class="ml-2 text-sm text-base-text-color">{{ Translate::get('Remember me') }}</span>
                     </label>
                 </div>
             </div>

@@ -1,16 +1,16 @@
 <x-form-section submit="updateTeamName">
     <x-slot name="title">
-        {{ Trans::get('Team Name') }}
+        {{ Translate::get('Team Name') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ Trans::get('The team\'s name and owner information.') }}
+        {{ Translate::get('The team\'s name and owner information.') }}
     </x-slot>
 
     <x-slot name="form">
         <!-- Team Owner Information -->
         <div class="col-span-6">
-            <x-label value="{{ Trans::get('Team Owner') }}"/>
+            <x-label value="{{ Translate::get('Team Owner') }}"/>
 
             <div class="flex items-center mt-2">
                 <img class="w-12 h-12 rounded-full object-cover" src="{{ $team->owner->profile_photo_url }}"
@@ -25,7 +25,7 @@
 
         <!-- Team Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ Trans::get('Team Name') }}"/>
+            <x-label for="name" value="{{ Translate::get('Team Name') }}"/>
 
             <x-input id="name"
                      type="text"
@@ -40,11 +40,11 @@
     @if (Gate::check('update', $team))
         <x-slot name="actions">
             <x-action-message class="mr-3" on="saved">
-                {{ Trans::get('Saved.') }}
+                {{ Translate::get('Saved.') }}
             </x-action-message>
 
             <x-button>
-                {{ Trans::get('Save') }}
+                {{ Translate::get('Save') }}
             </x-button>
         </x-slot>
     @endif

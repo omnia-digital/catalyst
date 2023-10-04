@@ -38,7 +38,7 @@
          class="hidden sm:hidden bg-secondary max-h-full-minus-[56px] overflow-y-scroll scrollbar-hide">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ Trans::get('Dashboard') }}
+                {{ Translate::get('Dashboard') }}
             </x-responsive-nav-link>
         </div>
 
@@ -63,12 +63,12 @@
                     <!-- Account Management -->
                     <x-responsive-nav-link href="{{ route('profile.show') }}"
                                            :active="request()->routeIs('profile.show')">
-                        {{ Trans::get('Profile') }}
+                        {{ Translate::get('Profile') }}
                     </x-responsive-nav-link>
 
                     {{--                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())--}}
                     {{--                    <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">--}}
-                    {{--                        {{ \Trans::get('API Tokens') }}--}}
+                    {{--                        {{ \Translate::get('API Tokens') }}--}}
                     {{--                    </x-responsive-nav-link>--}}
                     {{--                @endif--}}
 
@@ -79,7 +79,7 @@
                         <x-responsive-nav-link href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                            {{ Trans::get('Log Out') }}
+                            {{ Translate::get('Log Out') }}
                         </x-responsive-nav-link>
                     </form>
 
@@ -88,18 +88,18 @@
                         <div class="border-t border-neutral-light"></div>
 
                         {{--                    <div class="block px-4 py-2 text-xs text-light-text-color">--}}
-                        {{--                        {{ \Trans::get('Manage Team') }}--}}
+                        {{--                        {{ \Translate::get('Manage Team') }}--}}
                         {{--                    </div>--}}
 
                         <!-- Team Settings -->
                         <x-responsive-nav-link href="{{ route('social.teams.show', Auth::user()->currentTeam->id) }}"
                                                :active="request()->routeIs('teams.show')">
-                            {{ Trans::get('Team Settings') }}
+                            {{ Translate::get('Team Settings') }}
                         </x-responsive-nav-link>
 
                         {{--                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
                         {{--                        <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">--}}
-                        {{--                            {{ \Trans::get('Create New Team') }}--}}
+                        {{--                            {{ \Translate::get('Create New Team') }}--}}
                         {{--                        </x-responsive-nav-link>--}}
                         {{--                    @endcan--}}
 
@@ -108,7 +108,7 @@
 
                             <!-- Team Switcher -->
                             <div class="block px-4 py-2 text-xs text-light-text-color">
-                                {{ Trans::get('Switch Teams') }}
+                                {{ Translate::get('Switch Teams') }}
                             </div>
 
                             @foreach (Auth::user()->teams as $team)

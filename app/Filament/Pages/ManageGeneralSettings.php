@@ -29,7 +29,7 @@ class ManageGeneralSettings extends SettingsPage
             TextInput::make('teams_apply_button_text')
                 ->required(),
             Toggle::make('allow_guest_access')
-                ->label('Allow Guest Access to Platform?')
+                ->label('Allow Guest Access to Catalyst?')
                 ->inline(false),
             Toggle::make('should_show_login_on_guest_access')
                 ->label('Show Login Modal/Page on Guest Access?')

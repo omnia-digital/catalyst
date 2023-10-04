@@ -4,7 +4,7 @@
     <div>
         <x-teams.partials.header :team="$team"/>
         <div class="p-8">
-            <x-library::heading.2>{{ Trans::get('Team Admin Panel: Form Builder') }}</x-library::heading.2>
+            <x-library::heading.2>{{ Translate::get('Team Admin Panel: Form Builder') }}</x-library::heading.2>
         </div>
 
         <form wire:submit.prevent="save({{ $this->team->id }})" class="filament p-8 space-y-8 ">

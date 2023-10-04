@@ -12,7 +12,7 @@
             </div>
             <a href="{{ route('articles.home') }}">
                 <x-library::heading.1
-                        class="py-4 hover:cursor-pointer">{{ Trans::get('Articles') }}</x-library::heading.1>
+                        class="py-4 hover:cursor-pointer">{{ Translate::get('Articles') }}</x-library::heading.1>
             </a>
         </div>
         <div class="w-full">
@@ -89,7 +89,7 @@
             @if ($article->isParent())
                 <div class="py-4 justify-center w-full xl:w-3/4 2xl:1/2 m-auto max-w-post-card-max-w">
                     <div class="max-w-post-card-max-w">
-                        <x-library::heading.3>{{ Trans::get('Discussion') }}</x-library::heading.3>
+                        <x-library::heading.3>{{ Translate::get('Discussion') }}</x-library::heading.3>
                         <livewire:social::comment-section :post="$article"
                                                           :type="\Modules\Social\Enums\PostType::ARTICLE"/>
                     </div>
@@ -113,7 +113,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top '.{{ Platform::getTeamsWordUpper() }},
+                        title: 'Top '.{{ Catalyst::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

@@ -55,7 +55,7 @@
                 <livewire:social::components.post-card-dynamic :post="$post"/>
             @empty
                 <div class="bg-white p-4">
-                    <p class="text-dark-text-color">{{ Trans::get('No posts to show.') }}</p>
+                    <p class="text-dark-text-color">{{ Translate::get('No posts to show.') }}</p>
                 </div>
             @endforelse
         </div>
@@ -72,13 +72,13 @@
                         </div>
                         <p class="text-dark-text-color">
                             <strong>{{ $this->user?->name }}</strong> liked
-                            <strong>{{ $like->likable?->user?->name }}</strong>'s {{ Trans::get(strtolower(class_basename($like->likable::class))) }}
+                            <strong>{{ $like->likable?->user?->name }}</strong>'s {{ Translate::get(strtolower(class_basename($like->likable::class))) }}
                         </p>
                     </div>
                 </div>
             @empty
                 <div class="bg-white p-4">
-                    <p class="text-dark-text-color">{{ Trans::get('No likes to show. Check back later!') }}</p>
+                    <p class="text-dark-text-color">{{ Translate::get('No likes to show. Check back later!') }}</p>
                 </div>
             @endforelse
         </div>
@@ -90,7 +90,7 @@
                 <livewire:social::components.post-card-dynamic :post="$resource->load('user')"/>
             @empty
                 <div class="bg-white p-4">
-                    <p class="text-dark-text-color">{{ Trans::get('No resources to show. Check back later!') }}</p>
+                    <p class="text-dark-text-color">{{ Translate::get('No resources to show. Check back later!') }}</p>
                 </div>
             @endforelse
         </div>

@@ -6,7 +6,7 @@
 
         <!-- Page Heading -->
         <div class="flex p-4 sticky items-center justify-between">
-            <x-library::heading.2>{{ Trans::get('Team Admin Panel') }}</x-library::heading.2>
+            <x-library::heading.2>{{ Translate::get('Team Admin Panel') }}</x-library::heading.2>
 
             <div class="flex justify-end items-center">
                 <div class="mr-auto"
@@ -22,17 +22,17 @@
                 </div>
                 @if ($errors->any())
                     <div class="mr-auto">
-                        <p class="text-sm text-red-600">{{ Trans::get('This form has errors') }}:</p>
+                        <p class="text-sm text-red-600">{{ Translate::get('This form has errors') }}:</p>
                         @foreach ($errors->all() as $error)
                             <p class="text-sm text-red-600">{{ $error }}</p>
                         @endforeach
                     </div>
                 @endif
                 <div class="mr-4"><a href="{{ $team->profile() }}"
-                                     class="hover:underline">{{ Trans::get('Cancel') }}</a></div>
+                                     class="hover:underline">{{ Translate::get('Cancel') }}</a></div>
                 <x-library::button.index
                         wire:click.prevent="saveChanges"
-                >{{ Trans::get('Save Changes') }}</x-library::button.index>
+                >{{ Translate::get('Save Changes') }}</x-library::button.index>
             </div>
         </div>
 
@@ -60,13 +60,13 @@
             <div x-cloak x-show="activeTab === 0" class="mt-6 space-y-6">
                 <!-- Featured Content / Sample Media -->
                 <div>
-                    <x-library::heading.4>{{ Trans::get('Featured Content') }}</x-library::heading.4>
-                    <p>{{ Trans::get('The content on this page will show up in the Featured Content section of your Team home page. You can use this feature as a perk of getting exclusive content by being a member of your Team.') }}</p>
+                    <x-library::heading.4>{{ Translate::get('Featured Content') }}</x-library::heading.4>
+                    <p>{{ Translate::get('The content on this page will show up in the Featured Content section of your Team home page. You can use this feature as a perk of getting exclusive content by being a member of your Team.') }}</p>
                 </div>
                 <div class="space-y-6">
                     <div>
-                        <x-library::heading.2>{{ Trans::get('Uploaded Content') }}</x-library::heading.2>
-                        <p>{{ Trans::get('You can upload images and media directly.') }}</p>
+                        <x-library::heading.2>{{ Translate::get('Uploaded Content') }}</x-library::heading.2>
+                        <p>{{ Translate::get('You can upload images and media directly.') }}</p>
                         <div class="col-span-2">
                             <div class="space-y-4 my-4">
                                 <div class="my-4">
@@ -150,14 +150,14 @@
                         </div>
                     </div>
 
-                    @if (Platform::isModuleEnabled('games'))
+                    @if (Catalyst::isModuleEnabled('games'))
                         <div class="space-y-4">
                             <div class="space-y-2">
                                 <x-library::heading.2
-                                        class="col-span-2">{{ Trans::get('Feeds') }}</x-library::heading.2>
+                                        class="col-span-2">{{ Translate::get('Feeds') }}</x-library::heading.2>
                                 <div>
-                                    <p>{{ Trans::get('You can also enter feeds, which will automatically fill out your Featured Content section from various sources such as your YouTube or Twitch Channels.') }}</p>
-                                    <p>{{ Trans::get('This can be a great way to provide content to your Team automatically by continuing to post to your favorite channels and platforms.') }}</p>
+                                    <p>{{ Translate::get('You can also enter feeds, which will automatically fill out your Featured Content section from various sources such as your YouTube or Twitch Channels.') }}</p>
+                                    <p>{{ Translate::get('This can be a great way to provide content to your Team automatically by continuing to post to your favorite channels and platforms.') }}</p>
                                 </div>
                             </div>
 
@@ -190,9 +190,9 @@
                 <div class="space-y-6">
                     <!-- Details -->
                     <div class="space-y-4">
-                        <x-library::heading.2>{{ Trans::get('Details') }}</x-library::heading.2>
+                        <x-library::heading.2>{{ Translate::get('Details') }}</x-library::heading.2>
                         <div class="flex-col">
-                            <x-library::input.label value="{{ Trans::get('Name') }}" class="inline"/>
+                            <x-library::input.label value="{{ Translate::get('Name') }}" class="inline"/>
                             <span class="text-red-600 text-sm">*</span>
                             <x-library::input.text id="name" wire:model="team.name" required/>
                             <x-library::input.error for="team.name"/>
@@ -200,30 +200,30 @@
                         <div class="flex-col">
                             <x-library::input.label value="Start Date"/>
                             <x-library::input.date id="startDate" wire:model="team.start_date"
-                                                   placeholder="{{ Trans::get('Team Launch Date') }}"/>
+                                                   placeholder="{{ Translate::get('Team Launch Date') }}"/>
                             <x-library::input.error for="startDate"/>
                         </div>
                         <div class="flex-col">
                             <x-library::input.label value="End Date"/>
                             <x-library::input.date id="endDate" wire:model="team.end_date"
-                                                   placeholder="{{ Trans::get('Team End Date') }}"/>
+                                                   placeholder="{{ Translate::get('Team End Date') }}"/>
                             <x-library::input.error for="endDate"/>
                         </div>
                         <div class="flex-col">
-                            <x-library::input.label value="{{ Trans::get('Summary') }}"/>
+                            <x-library::input.label value="{{ Translate::get('Summary') }}"/>
                             <x-library::input.textarea id="summary" wire:model="team.summary"/>
                             <x-library::input.error for="team.summary"/>
                         </div>
                         <div>
                             <div class="flex items-center">
-                                <x-library::input.label value="{{ Trans::get('What type of Team is this?') }}"
+                                <x-library::input.label value="{{ Translate::get('What type of Team is this?') }}"
                                                         class="inline"/>
-                                <span class="text-neutral-dark ml-1">{{ Trans::get('(you can choose more than one)') }}</span>
+                                <span class="text-neutral-dark ml-1">{{ Translate::get('(you can choose more than one)') }}</span>
                                 <span class="text-red-600 text-sm">*</span>
                             </div>
                             <x-library::input.selects wire:model.live="teamTypes" :options="$teamTags" hidden/>
                             <div>
-                                <p>{{ Trans::get('Current Team Types') }}:</p>
+                                <p>{{ Translate::get('Current Team Types') }}:</p>
                                 <div class="flex items-center space-x-3 mt-1">
                                     @foreach ($team->teamTypes as $tag)
                                         <div class="relative">
@@ -242,7 +242,7 @@
                             </div>
                         </div>
                         <div class="flex-col">
-                            <x-library::input.label value="{{ Trans::get('About this Team') }}"/>
+                            <x-library::input.label value="{{ Translate::get('About this Team') }}"/>
                             <x-library::input.error for="team.content"/>
                             <x-library::tiptap id="content" wire:model="team.content"
                                                word-count-type="character"
@@ -255,7 +255,7 @@
                 <div class="space-y-6">
                     <!-- Banner Image -->
                     <div class="flex-col space-y-4">
-                        <x-library::heading.2>{{ Trans::get('Banner') }}</x-library::heading.2>
+                        <x-library::heading.2>{{ Translate::get('Banner') }}</x-library::heading.2>
                         <div class="flex mt-4 space-x-2">
                             <div>
                                 @if ($team->bannerImage()->count())
@@ -286,7 +286,7 @@
                     </div>
                     <!-- Main Image -->
                     <div class="flex-col">
-                        <x-library::heading.2>{{ Trans::get('Main Image') }}</x-library::heading.2>
+                        <x-library::heading.2>{{ Translate::get('Main Image') }}</x-library::heading.2>
                         <div class="flex my-4 space-x-2">
                             <div>
                                 {{--                                <p>Current Main:</p>--}}
@@ -324,7 +324,7 @@
 
                     <!-- Profile Photo -->
                     <div class="flex-col">
-                        <x-library::heading.2>{{ Trans::get('Team Profile Photo') }}</x-library::heading.2>
+                        <x-library::heading.2>{{ Translate::get('Team Profile Photo') }}</x-library::heading.2>
                         <div class="flex my-4 space-x-2">
                             <div>
                                 {{--                                <p>Current Profile Photo:</p>--}}
@@ -345,7 +345,7 @@
                             @endif
                         </div>
                         {{--                        <div class="flex items-center">--}}
-                        {{--                            <x-library::input.label value="{{ Trans::get('Team') }} Profile Photo"/>--}}
+                        {{--                            <x-library::input.label value="{{ Translate::get('Team') }} Profile Photo"/>--}}
                         {{--                            <span class="text-red-600 text-sm ml-1">*</span>--}}
                         {{--                        </div>--}}
                         <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">
@@ -362,7 +362,7 @@
                     {{-- Location --}}
                     <div>
                         <div>
-                            <x-library::heading.2 class="text-lg">{{ Trans::get('Location') }}</x-library::heading.2>
+                            <x-library::heading.2 class="text-lg">{{ Translate::get('Location') }}</x-library::heading.2>
                             @if ($team->location()->exists())
                                 <div class="flex items-center space-x-4 py-4">
                                     <p class="{{ $removeAddress ? 'line-through' : '' }}">{{ $team->location }}</p>
@@ -377,13 +377,13 @@
                                         <x-library::button.destruction
                                                 wire:click.prevent="$set('removeAddress', true)"
                                                 class="p-1"
-                                        >{{ Trans::get('Remove') }}
+                                        >{{ Translate::get('Remove') }}
                                         </x-library::button.destruction>
                                     @endif
                                 </div>
                             @else
                                 <div>
-                                    <p>{{ Trans::get('No Location has been selected for this team.') }}</p>
+                                    <p>{{ Translate::get('No Location has been selected for this team.') }}</p>
                                 </div>
                             @endif
                         </div>
@@ -401,7 +401,7 @@
                         @if (!empty($newAddress))
                             <div>
                                 <x-library::heading.3
-                                        class="text-lg">{{ Trans::get('New Team Location') }}</x-library::heading.3>
+                                        class="text-lg">{{ Translate::get('New Team Location') }}</x-library::heading.3>
                                 <p>{{ $this->selectedAddress }}</p>
                                 <p class="text-2xs text-red-600">Please save changes to use this address</p>
                             </div>
@@ -425,7 +425,7 @@
                 </div>
             </div>
 
-            @if (\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
+            @if (\OmniaDigital\CatalystCore\Facades\Catalyst::isUsingTeamMemberSubscriptions())
                 <!-- Subscriptions -->
                 <div x-cloak x-show="activeTab === 4" class="mt-6 pb-12 space-y-6">
                     <div>

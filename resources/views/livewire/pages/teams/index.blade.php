@@ -8,7 +8,7 @@
                 <div class="flex-1 flex items-center space-x-2 -ml-1">
                     <x-library::icons.icon name="fa-regular fa-users" size="w-8 h-8" color="text-white-text-color"/>
                     <x-library::heading.1 class="py-4"
-                                          text-color="text-white-text-color">{{ $lens ? Trans::get('Teams') : Trans::get('Teams') }}
+                                          text-color="text-white-text-color">{{ $lens ? Translate::get('Teams') : Translate::get('Teams') }}
                     </x-library::heading.1>
                 </div>
             </a>
@@ -19,7 +19,7 @@
                                          text-color="text-primary"
                                          size="w-60 h-10" py="py-2 "
                                          class="hidden sm:block">
-                    {{ Trans::get('Create Team') }}
+                    {{ Translate::get('Create Team') }}
                 </x-library::button.index>
             @endcan
         </div>
@@ -48,7 +48,7 @@
                 @forelse ($teams as $team)
                     <livewire:social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
-                    <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No Teams Found') }}</p>
+                    <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Translate::get('No Teams Found') }}</p>
                 @endforelse
             </div>
             <div>

@@ -4,7 +4,7 @@
     <div x-data="" class="">
         <div class="mt-0">
             <x-social::page-heading>
-                <x-slot name="title">{{ Trans::get('Membership') }}</x-slot>
+                <x-slot name="title">{{ Translate::get('Membership') }}</x-slot>
                 Manage your membership plan and billing information.
             </x-social::page-heading>
 
@@ -83,21 +83,21 @@
         <!-- Cancel Subscriptions Confirmation Modal -->
         <x-confirmation-modal wire:model.live="confirmingSubscriptionCancellation">
             <x-slot name="title">
-                {{ Trans::get('Cancel Subscriptions') }}
+                {{ Translate::get('Cancel Subscriptions') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ Trans::get('Are you sure you would like to cancel your subscription?') }}
+                {{ Translate::get('Are you sure you would like to cancel your subscription?') }}
             </x-slot>
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="$toggle('confirmingSubscriptionCancellation')"
                                     wire:loading.attr="disabled">
-                    {{ Trans::get('Cancel') }}
+                    {{ Translate::get('Cancel') }}
                 </x-secondary-button>
 
                 <x-danger-button class="ml-2" wire:click="cancelSubscription" wire:loading.attr="disabled">
-                    {{ Trans::get('Confirm') }}
+                    {{ Translate::get('Confirm') }}
                 </x-danger-button>
             </x-slot>
         </x-confirmation-modal>
@@ -105,7 +105,7 @@
 @endsection
 @push('modals')
     <x-library::modal id="subscription-form" maxWidth="4xl" hideCancelButton>
-        <x-slot name="title">{{ Trans::get('New Subscriptions') }}</x-slot>
+        <x-slot name="title">{{ Translate::get('New Subscriptions') }}</x-slot>
 
         <x-slot name="content">
             <iframe src="{{ $this->iFrameURL($subscriptionForm) }}" width="100%" height="100%" frameborder="0"></iframe>
@@ -113,7 +113,7 @@
         </x-slot>
     </x-library::modal>
     <x-library::modal id="payment-method-form" maxWidth="4xl" hideCancelButton>
-        <x-slot name="title">{{ Trans::get('Change Payment Method') }}</x-slot>
+        <x-slot name="title">{{ Translate::get('Change Payment Method') }}</x-slot>
 
         <x-slot name="content">
             <iframe src="{{ $this->iFrameURL($paymentMethodForm) }}" width="100%" height="100%"

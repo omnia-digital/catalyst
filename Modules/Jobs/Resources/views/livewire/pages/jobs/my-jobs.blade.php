@@ -8,7 +8,7 @@
 
                 <a href="{{ route('jobs.home') }}">
                     <x-library::heading.1
-                            class="py-4 hover:cursor-pointer">{{ Trans::get('My Jobs') }}</x-library::heading.1>
+                            class="py-4 hover:cursor-pointer">{{ Translate::get('My Jobs') }}</x-library::heading.1>
                 </a>
             </div>
             <div class="flex items-center">
@@ -17,7 +17,7 @@
                         <x-library::button.link
                                 href="{{ route('jobs.job.create') }}"
                                 class="py-2 w-full h-10"
-                        >{{ Trans::get('+ Create Job') }}</x-library::button.link>
+                        >{{ Translate::get('+ Create Job') }}</x-library::button.link>
                         <livewire:resources::pages.resources.create/>
                     @else
                         <x-library::button
@@ -54,9 +54,9 @@
             </div>
 
             {{--  Tooltips  --}}
-            <x-jobs::tooltip trigger="company">{{ Trans::get('Company') }}</x-jobs::tooltip>
-            <x-jobs::tooltip trigger="location">{{ Trans::get('Location') }}</x-jobs::tooltip>
-            <x-jobs::tooltip trigger="payment-type-budget">{{ Trans::get('Payment Type & Budget') }}</x-jobs::tooltip>
+            <x-jobs::tooltip trigger="company">{{ Translate::get('Company') }}</x-jobs::tooltip>
+            <x-jobs::tooltip trigger="location">{{ Translate::get('Location') }}</x-jobs::tooltip>
+            <x-jobs::tooltip trigger="payment-type-budget">{{ Translate::get('Payment Type & Budget') }}</x-jobs::tooltip>
         </div>
     </div>
 @endsection

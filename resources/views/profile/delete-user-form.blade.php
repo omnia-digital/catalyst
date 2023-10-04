@@ -1,36 +1,36 @@
 <x-action-section>
     <x-slot name="title">
-        {{ Trans::get('Delete Account') }}
+        {{ Translate::get('Delete Account') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ Trans::get('Permanently delete your account.') }}
+        {{ Translate::get('Permanently delete your account.') }}
     </x-slot>
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-base-text-color">
-            {{ Trans::get('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
+            {{ Translate::get('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
         </div>
 
         <div class="mt-5">
             <x-danger-button wire:click="confirmUserDeletion" wire:loading.attr="disabled">
-                {{ Trans::get('Delete Account') }}
+                {{ Translate::get('Delete Account') }}
             </x-danger-button>
         </div>
 
         <!-- Delete User Confirmation Modal -->
         <x-dialog-modal wire:model.live="confirmingUserDeletion">
             <x-slot name="title">
-                {{ Trans::get('Delete Account') }}
+                {{ Translate::get('Delete Account') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ Trans::get('Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                {{ Translate::get('Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
 
                 <div class="mt-4" x-data="{}"
                      x-on:confirming-delete-user.window="setTimeout(() => $refs.password.focus(), 250)">
                     <x-input type="password" class="mt-1 block w-3/4"
-                             placeholder="{{ Trans::get('Password') }}"
+                             placeholder="{{ Translate::get('Password') }}"
                              x-ref="password"
                              wire:model.live="password"
                              wire:keydown.enter="deleteUser"/>
@@ -41,11 +41,11 @@
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="$toggle('confirmingUserDeletion')" wire:loading.attr="disabled">
-                    {{ Trans::get('Cancel') }}
+                    {{ Translate::get('Cancel') }}
                 </x-secondary-button>
 
                 <x-danger-button class="ml-2" wire:click="deleteUser" wire:loading.attr="disabled">
-                    {{ Trans::get('Delete Account') }}
+                    {{ Translate::get('Delete Account') }}
                 </x-danger-button>
             </x-slot>
         </x-dialog-modal>

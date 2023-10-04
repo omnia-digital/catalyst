@@ -2,10 +2,10 @@
 
 namespace Modules\Social\Http\Livewire\Components;
 
-use App\Support\Platform\Platform;
-use App\Support\Platform\WithGuestAccess;
 use Livewire\Component;
 use Modules\Social\Models\Post;
+use OmniaDigital\CatalystCore\Catalyst;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 
 use function view;
@@ -58,7 +58,7 @@ class PostCard extends Component
 
     public function toggleBookmark()
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Catalyst::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('social.posts.show', $this->post));
 
             return;

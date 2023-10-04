@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Str;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class PostWasRepostedNotification extends BaseNotification
 {
@@ -46,7 +46,7 @@ class PostWasRepostedNotification extends BaseNotification
 
     public function getMessage()
     {
-        return Trans::get($this->actionable->name . ' reposted your post');
+        return Translate::get($this->actionable->name . ' reposted your post');
     }
 
     public function getUrl()

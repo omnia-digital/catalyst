@@ -2,7 +2,7 @@
     <div class="fixed bottom-0 bg-white z-[70] w-full px-4">
         <div class="flex justify-around">
             @foreach (collect($navigation)->take(4) as $item)
-                @if (Platform::isModuleEnabled($item['module']))
+                @if (Catalyst::isModuleEnabled($item['module']))
                     <a href="{{ route($item['name']) }}"
                        class="{{ request()->routeIs($item['name']) ? 'text-primary' : 'text-light-text-color hover:text-white-text-color' }} {{
                                'group text-center
@@ -27,7 +27,7 @@
                         group-hover:text-light-text-color inline text-center"/>
                     <br/>
                     <span class="text-light-text-color group-hover:text-light-text-color text-center inline"
-                    >{{ Trans::get('Menu') }}</span>
+                    >{{ Translate::get('Menu') }}</span>
                     <span class="sr-only">Open sidebar</span>
                 </div>
             </a>

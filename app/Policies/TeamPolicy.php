@@ -4,12 +4,12 @@ namespace App\Policies;
 
 use App\Models\Team;
 use App\Models\User;
-use App\Support\Platform\Platform;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
 use App\Traits\Policies\HasDefaultPolicy;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Response;
 use Modules\Billing\Models\SubscriptionType;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class TeamPolicy
 {
@@ -17,7 +17,7 @@ class TeamPolicy
 
     public function apply(User $user, Team $team): bool
     {
-        if (! Platform::isUsingUserSubscriptions()) {
+        if (! Catalyst::isUsingUserSubscriptions()) {
             return true;
         } else {
             return false;
@@ -47,7 +47,7 @@ class TeamPolicy
     {
         //        return $user->can('create_team');
 
-        if (! Platform::isUsingUserSubscriptions()) {
+        if (! Catalyst::isUsingUserSubscriptions()) {
             return true;
         }
 
@@ -55,7 +55,7 @@ class TeamPolicy
 
         return in_array($user->chargentSubscription?->type?->slug, $subscriptions)
             ? Response::allow()
-            : Response::deny(Trans::get('You must at least be an Associate Evangelist to create a Team'));
+            : Response::deny(Translate::get('You must at least be an Associate Evangelist to create a Team'));
     }
 
     /**

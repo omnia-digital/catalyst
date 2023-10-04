@@ -23,10 +23,10 @@
         <div
                 x-on:click.prevent="openAwardsModal"
                 class="rounded-full bg-white border border-neutral p-2 cursor-pointer"
-                x-tooltip="'{{ Trans::get('Add Award') }}'"
+                x-tooltip="'{{ Translate::get('Add Award') }}'"
         >
             <x-heroicon-o-plus class="h-3 w-3"/>
-            <span class="sr-only">{{ Trans::get('Add Award') }}</span>
+            <span class="sr-only">{{ Translate::get('Add Award') }}</span>
         </div>
     @endcan
 </div>

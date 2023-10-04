@@ -1,15 +1,15 @@
 <x-action-section>
     <x-slot name="title">
-        {{ Trans::get('Browser Sessions') }}
+        {{ Translate::get('Browser Sessions') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ Trans::get('Manage and log out your active sessions on other browsers and devices.') }}
+        {{ Translate::get('Manage and log out your active sessions on other browsers and devices.') }}
     </x-slot>
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-base-text-color">
-            {{ Trans::get('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
+            {{ Translate::get('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
         </div>
 
         @if (count($this->sessions) > 0)
@@ -44,9 +44,9 @@
                                     {{ $session->ip_address }},
 
                                     @if ($session->is_current_device)
-                                        <span class="text-green-500 font-semibold">{{ Trans::get('This device') }}</span>
+                                        <span class="text-green-500 font-semibold">{{ Translate::get('This device') }}</span>
                                     @else
-                                        {{ Trans::get('Last active') }} {{ $session->last_active }}
+                                        {{ Translate::get('Last active') }} {{ $session->last_active }}
                                     @endif
                                 </div>
                             </div>
@@ -58,27 +58,27 @@
 
         <div class="flex items-center mt-5">
             <x-button wire:click="confirmLogout" wire:loading.attr="disabled">
-                {{ Trans::get('Log Out Other Browser Sessions') }}
+                {{ Translate::get('Log Out Other Browser Sessions') }}
             </x-button>
 
             <x-action-message class="ml-3" on="loggedOut">
-                {{ Trans::get('Done.') }}
+                {{ Translate::get('Done.') }}
             </x-action-message>
         </div>
 
         <!-- Log Out Other Devices Confirmation Modal -->
         <x-dialog-modal wire:model.live="confirmingLogout">
             <x-slot name="title">
-                {{ Trans::get('Log Out Other Browser Sessions') }}
+                {{ Translate::get('Log Out Other Browser Sessions') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ Trans::get('Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.') }}
+                {{ Translate::get('Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.') }}
 
                 <div class="mt-4" x-data="{}"
                      x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
                     <x-input type="password" class="mt-1 block w-3/4"
-                             placeholder="{{ Trans::get('Password') }}"
+                             placeholder="{{ Translate::get('Password') }}"
                              x-ref="password"
                              wire:model.live="password"
                              wire:keydown.enter="logoutOtherBrowserSessions"/>
@@ -89,13 +89,13 @@
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
-                    {{ Trans::get('Cancel') }}
+                    {{ Translate::get('Cancel') }}
                 </x-secondary-button>
 
                 <x-button class="ml-2"
                           wire:click="logoutOtherBrowserSessions"
                           wire:loading.attr="disabled">
-                    {{ Trans::get('Log Out Other Browser Sessions') }}
+                    {{ Translate::get('Log Out Other Browser Sessions') }}
                 </x-button>
             </x-slot>
         </x-dialog-modal>

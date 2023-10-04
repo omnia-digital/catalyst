@@ -209,7 +209,7 @@ return [
     | created using CREATE TYPE statement or imported using database plugin
     | / extension to a Doctrine type.
     |
-    | Each key in this array is a name of the Doctrine2 DBAL Platform. Currently valid names are:
+    | Each key in this array is a name of the Doctrine2 DBAL Catalyst. Currently valid names are:
     | 'postgresql', 'db2', 'drizzle', 'mysql', 'oracle', 'sqlanywhere', 'sqlite', 'mssql'
     |
     | This name is returned by getName() method of the specific Doctrine/DBAL/Platforms/AbstractPlatform descendant

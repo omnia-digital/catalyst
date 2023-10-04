@@ -2,7 +2,7 @@
 
 namespace Modules\Billing\Http\Middleware;
 
-use App\Support\Platform\Platform;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class UserSubscriptionCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (! Platform::isUsingUserSubscriptions()) {
+        if (! Catalyst::isUsingUserSubscriptions()) {
             return $next($request);
         }
 

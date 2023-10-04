@@ -8,7 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Modules\Forms\Models\FormNotification;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class FormReminderNotification extends Notification
 {
@@ -47,9 +47,9 @@ class FormReminderNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Reminder: ' . Trans::get($this->formNotification->name))
-            ->greeting(Trans::get($this->formNotification->name))
-            ->line(Trans::get($this->formNotification->message))
+            ->subject('Reminder: ' . Translate::get($this->formNotification->name))
+            ->greeting(Translate::get($this->formNotification->name))
+            ->line(Translate::get($this->formNotification->message))
             ->line('Team: ' . $this->team->name)
             ->line('Form: ' . $this->formNotification->form->name)
             ->action('Go to Team Page', route('social.teams.show', $this->team))
@@ -68,8 +68,8 @@ class FormReminderNotification extends Notification
 
         return NotificationCenter::make()
             ->icon('heroicon-o-clock')
-            ->info(Trans::get($this->formNotification->name))
-            ->subtitle(Trans::get($this->formNotification->message))
+            ->info(Translate::get($this->formNotification->name))
+            ->subtitle(Translate::get($this->formNotification->message))
             ->image($this->team->profile_photo_url)
             ->actionLink($url)
             ->actionText('Go to Team Page')

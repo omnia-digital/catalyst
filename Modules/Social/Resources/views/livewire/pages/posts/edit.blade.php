@@ -6,7 +6,7 @@
                 href="{{ route('social.posts.show', $post->id) }}"
                 class="mr-4 hover:bg-neutral-dark p-2 rounded-full bg-secondary hover:text-secondary"
         >Cancel</a>
-        <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Edit Post') }}</x-library::heading.1>
+        <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Translate::get('Edit Post') }}</x-library::heading.1>
     </div>
     <div
             x-data="post_edit_media_manager"
@@ -122,20 +122,20 @@
     <!-- Remove Media Confirmation Modal -->
     <x-confirmation-modal wire:model.live="confirmingMediaRemoval">
         <x-slot name="title">
-            {{ Trans::get('Remove Media') }}
+            {{ Translate::get('Remove Media') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ Trans::get('Are you sure you would like to remove this image? This cannot be undone.') }}
+            {{ Translate::get('Are you sure you would like to remove this image? This cannot be undone.') }}
         </x-slot>
 
         <x-slot name="footer">
             <x-secondary-button wire:click="$toggle('confirmingMediaRemoval')" wire:loading.attr="disabled">
-                {{ Trans::get('Cancel') }}
+                {{ Translate::get('Cancel') }}
             </x-secondary-button>
 
             <x-danger-button class="ml-2" wire:click="removeImage" wire:loading.attr="disabled">
-                {{ Trans::get('Remove') }}
+                {{ Translate::get('Remove') }}
             </x-danger-button>
         </x-slot>
     </x-confirmation-modal>

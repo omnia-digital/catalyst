@@ -2,8 +2,8 @@
 
 namespace Modules\Social\Http\Livewire\Partials;
 
-use App\Support\Platform\Platform;
-use App\Support\Platform\WithGuestAccess;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Modules\Social\Models\Post;
@@ -34,7 +34,7 @@ class LikeButton extends Component
 
     public function like()
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Catalyst::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('social.posts.show', $this->model));
 
             return;

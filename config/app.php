@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Platform Framework'),
+    'name' => env('APP_NAME', 'Catalyst Framework'),
     'abbr' => env('APP_ABBR', 'APP'),
     'slogan' => env('APP_SLOGAN', 'Welcome to the community'),
     'theme' => env('APP_THEME', 'default'),
@@ -185,7 +185,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
-        App\Providers\Filament\AdminPanelProvider::class,
+        OmniaDigital\CatalystSocialPlugin\Providers\Filament\SocialPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\VaporUiServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
@@ -209,8 +209,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Forrest' => Omniphx\Forrest\Providers\Laravel\Facades\Forrest::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
-        'Platform' => \App\Support\Platform\Facades\PlatformFacade::class,
-        'Trans' => \App\Support\Platform\Facades\TranslateFacade::class,
+        'Translate' => \OmniaDigital\CatalystCore\Facades\Translate::class,
+        'Catalyst' => \OmniaDigital\CatalystCore\Facades\Catalyst::class
     ])->toArray(),
 
 ];

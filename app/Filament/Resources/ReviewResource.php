@@ -11,7 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Modules\Reviews\Models\Review;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class ReviewResource extends Resource
 {
@@ -83,6 +83,6 @@ class ReviewResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return Trans::get('Teams');
+        return Translate::get('Teams');
     }
 }

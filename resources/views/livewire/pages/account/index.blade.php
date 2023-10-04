@@ -2,8 +2,8 @@
 
 @section('content')
     <x-social::page-heading>
-        <x-slot name="title">{{ Trans::get('Account Settings') }}</x-slot>
-        {{ Trans::get('Manage all your account settings in one place.') }}
+        <x-slot name="title">{{ Translate::get('Account Settings') }}</x-slot>
+        {{ Translate::get('Manage all your account settings in one place.') }}
     </x-social::page-heading>
     <x-vertical-tabs>
         <x-slot:items>
@@ -12,7 +12,7 @@
         </x-slot:items>
         <x-slot:panels>
             <x-vertical-tabs.panel>
-                <x-slot:title>{{ Trans::get('Account') }}</x-slot:title>
+                <x-slot:title>{{ Translate::get('Account') }}</x-slot:title>
                 <x-slot:description>Change your account settings.</x-slot:description>
                 <div class="mt-6 grid grid-cols-4 gap-6">
                     <div class="col-span-4 sm:col-span-2">
@@ -30,21 +30,21 @@
                 </div>
                 <x-slot:footer>
                     <x-action-message class="mr-3 text-success-600" on="account_saved">
-                        {{ Trans::get('Saved.') }}
+                        {{ Translate::get('Saved.') }}
                     </x-action-message>
 
                     <x-button wire:click="updateAccount" wire:loading.attr="disabled">
-                        <span wire:loading.remove wire:target="updateAccount">{{ Trans::get('Save') }}</span>
-                        <span wire:loading wire:target="updateAccount">{{ Trans::get('Saving...') }}</span>
+                        <span wire:loading.remove wire:target="updateAccount">{{ Translate::get('Save') }}</span>
+                        <span wire:loading wire:target="updateAccount">{{ Translate::get('Saving...') }}</span>
                     </x-button>
                 </x-slot:footer> {{-- Additional Cards --}}
                 <x-slot:additional>
                     <x-vertical-tabs.panel-section>
                         <x-slot:title>Password</x-slot:title>
-                        <x-slot:description>{{ Trans::get('Ensure your account is using a long, random password to stay secure.') }}</x-slot:description>
+                        <x-slot:description>{{ Translate::get('Ensure your account is using a long, random password to stay secure.') }}</x-slot:description>
                         <div class="mt-6 grid grid-cols-4 gap-6">
                             <div class="col-span-4">
-                                <x-label for="current_password" value="{{ Trans::get('Current Password') }}"/>
+                                <x-label for="current_password" value="{{ Translate::get('Current Password') }}"/>
                                 <x-input id="current_password" type="password" class="mt-1 block w-full"
                                          wire:model.live="state.current_password"
                                          autocomplete="current-password"/>
@@ -52,14 +52,14 @@
                             </div>
 
                             <div class="col-span-4">
-                                <x-label for="password" value="{{ Trans::get('New Password') }}"/>
+                                <x-label for="password" value="{{ Translate::get('New Password') }}"/>
                                 <x-input id="password" type="password" class="mt-1 block w-full"
                                          wire:model.live="state.password" autocomplete="new-password"/>
                                 <x-input-error for="password" class="mt-2"/>
                             </div>
 
                             <div class="col-span-4">
-                                <x-label for="password_confirmation" value="{{ Trans::get('Confirm Password') }}"/>
+                                <x-label for="password_confirmation" value="{{ Translate::get('Confirm Password') }}"/>
                                 <x-input id="password_confirmation" type="password" class="mt-1 block w-full"
                                          wire:model.live="state.password_confirmation"
                                          autocomplete="new-password"/>
@@ -68,29 +68,29 @@
                         </div>
                         <x-slot:footer>
                             <x-action-message class="mr-3 text-success-600" on="password_saved">
-                                {{ Trans::get('Saved.') }}
+                                {{ Translate::get('Saved.') }}
                             </x-action-message>
 
                             <x-button wire:click="updatePassword" wire:loading.attr="disabled">
-                                <span wire:loading.remove wire:target="updatePassword">{{ Trans::get('Save') }}</span>
-                                <span wire:loading wire:target="updatePassword">{{ Trans::get('Saving...') }}</span>
+                                <span wire:loading.remove wire:target="updatePassword">{{ Translate::get('Save') }}</span>
+                                <span wire:loading wire:target="updatePassword">{{ Translate::get('Saving...') }}</span>
                             </x-button>
                         </x-slot:footer>
                     </x-vertical-tabs.panel-section>
                 </x-slot:additional>
             </x-vertical-tabs.panel>
             <x-vertical-tabs.panel>
-                <x-slot:title>{{ Trans::get('Notification Settings') }}</x-slot:title>
-                <x-slot:description>{{ Trans::get('Change your notification settings.') }}</x-slot:description>
+                <x-slot:title>{{ Translate::get('Notification Settings') }}</x-slot:title>
+                <x-slot:description>{{ Translate::get('Change your notification settings.') }}</x-slot:description>
 
                 <x-slot:footer>
                     <x-action-message class="mr-3 text-success-600" on="account_saved">
-                        {{ Trans::get('Saved.') }}
+                        {{ Translate::get('Saved.') }}
                     </x-action-message>
                     <livewire:notification-manager/>
                     <x-button wire:click="updateAccount" wire:loading.attr="disabled">
-                        <span wire:loading.remove wire:target="updateAccount">{{ Trans::get('Save') }}</span>
-                        <span wire:loading wire:target="updateAccount">{{ Trans::get('Saving...') }}</span>
+                        <span wire:loading.remove wire:target="updateAccount">{{ Translate::get('Save') }}</span>
+                        <span wire:loading wire:target="updateAccount">{{ Translate::get('Saving...') }}</span>
                     </x-button>
                 </x-slot:footer>
             </x-vertical-tabs.panel>

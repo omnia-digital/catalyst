@@ -6,7 +6,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class ApplicationAcceptedToTeamNotification extends BaseNotification
 {
@@ -36,7 +36,7 @@ class ApplicationAcceptedToTeamNotification extends BaseNotification
 
         return NotificationCenter::make()
             ->icon('heroicon-o-check')
-            ->success(Trans::get('Your application to ' . $this->team->name . ' has been accepted'))
+            ->success(Translate::get('Your application to ' . $this->team->name . ' has been accepted'))
             ->image($this->team->profile_photo_url)
             ->actionLink($url)
             ->actionText('View')

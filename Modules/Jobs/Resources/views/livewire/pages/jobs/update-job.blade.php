@@ -9,7 +9,7 @@
         </div>
         <a href="{{ route('jobs.home') }}">
             <x-library::heading.1
-                    class="py-4 hover:cursor-pointer">{{ Trans::get('Update Job') }}</x-library::heading.1>
+                    class="py-4 hover:cursor-pointer">{{ Translate::get('Update Job') }}</x-library::heading.1>
         </a>
     </div>
     <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
@@ -163,10 +163,10 @@
                     <span class="inline-flex rounded-md shadow-sm">
                         <x-library::button.link
                                 href="{{ route('jobs.job.show', ['team' => $job->company->id, 'job' => $job]) }}"
-                                target="_blank">{{ Trans::get('Preview Job') }}</x-library::button.link>
+                                target="_blank">{{ Translate::get('Preview Job') }}</x-library::button.link>
                     </span>
                         <span class="inline-flex rounded-md shadow-sm">
-                        <x-library::button wire:click="save">{{ Trans::get('Save') }}</x-library::button>
+                        <x-library::button wire:click="save">{{ Translate::get('Save') }}</x-library::button>
                     </span>
                     </div>
                 </div>

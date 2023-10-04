@@ -19,11 +19,11 @@
                 @if (auth()->user()?->can('create', MediaFile::class))
                     @auth
                         <x-library::button wire:click="$set('showCreateModal', true)">
-                            <span class="whitespace-nowrap">{{ Trans::get('Create Media') }}</span>
+                            <span class="whitespace-nowrap">{{ Translate::get('Create Media') }}</span>
                         </x-library::button>
                     @else
                         <x-library::button wire:click="$set('showCreateModal', true)">
-                            <span class="whitespace-nowrap">{{ Trans::get('Create Media') }}</span>
+                            <span class="whitespace-nowrap">{{ Translate::get('Create Media') }}</span>
                         </x-library::button>
                         <livewire:authentication-modal/>
                     @endauth
@@ -39,7 +39,7 @@
                     <div class="flex justify-between gap-3 flex-wrap bg-secondary px-6 py-2 rounded-lg mb-2 border-t border-b border-gray-100 items-center">
                         <div class="flex justify-start items-center space-x-3">
                             <div class="font-bold">
-                                {{ Trans::get('Filters') }}
+                                {{ Translate::get('Filters') }}
                             </div>
 
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" hidden>

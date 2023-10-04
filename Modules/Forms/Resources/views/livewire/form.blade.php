@@ -14,7 +14,7 @@
             </x-forms::button>
         @else
             <div class="p-8 bg-white shadow">
-                <p>{{ Trans::get('Your form was submitted successfully.') }}</p>
+                <p>{{ Translate::get('Your form was submitted successfully.') }}</p>
             </div>
         @endunless
     </form>

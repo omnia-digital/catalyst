@@ -2,7 +2,7 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
-use App\Support\Platform\WithGuestAccess;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Support\Facades\App;
 use Livewire\Component;
@@ -46,7 +46,7 @@ class Index extends Component
 
     public function loginCheck()
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Catalyst::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('resources.home'));
 
             return;

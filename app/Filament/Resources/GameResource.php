@@ -78,6 +78,6 @@ class GameResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return Platform::isModuleEnabled('games') ? true : false;
+        return Catalyst::isModuleEnabled('games') ? true : false;
     }
 }

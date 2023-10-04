@@ -12,7 +12,7 @@ use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithPlace;
 use Platform;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class TeamAdmin extends Component
 {
@@ -162,7 +162,7 @@ class TeamAdmin extends Component
             }
         }
 
-        $this->success(Trans::get('Team Information Saved'));
+        $this->success(Translate::get('Team Information Saved'));
         $this->dispatch('changes_saved');
 
         $this->team->refresh();
@@ -238,13 +238,13 @@ class TeamAdmin extends Component
             'team.content' => ['nullable', 'max:65500'],
         ];
 
-        // if (Platform::hasGeneralSettingEnabled('team_require_start_date')) {
+        // if (Catalyst::hasGeneralSettingEnabled('team_require_start_date')) {
         //     $rules['team.start_date'] = ['required', 'date'];
         // } else {
         //     $rules['team.start_date'] = ['date'];
         // }
 
-        if (Platform::isModuleEnabled('games')) {
+        if (Catalyst::isModuleEnabled('games')) {
             $rules['team.youtube_channel_id'] = ['max:65500'];
             $rules['team.twitch_channel_id'] = ['max:65500'];
         }

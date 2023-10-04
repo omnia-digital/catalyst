@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <x-library::heading.2 class="font-semibold text-xl text-color-dark leading-tight">
-            {{ Trans::get('Dashboard') }}
+            {{ Translate::get('Dashboard') }}
         </x-library::heading.2>
     </x-slot>
 

@@ -18,7 +18,7 @@ use Modules\Social\Notifications\NewApplicationToTeamNotification;
 use Modules\Social\Notifications\NewMemberOfMyTeamNotification;
 use OmniaDigital\OmniaLibrary\Livewire\WithNotification;
 use Spatie\Permission\Models\Role;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 trait WithTeamManagement
 {
@@ -93,7 +93,7 @@ trait WithTeamManagement
         );
 
         $this->team->owner->notify(new NewApplicationToTeamNotification($this->team, $this->user));
-        $this->success(Trans::get('Application Submitted to Team'));
+        $this->success(Translate::get('Application Submitted to Team'));
         $this->dispatch('applied_to_team');
     }
 
@@ -114,7 +114,7 @@ trait WithTeamManagement
 
         $this->team = $this->team->fresh();
 
-        $this->success(Trans::get('Application Removed'));
+        $this->success(Translate::get('Application Removed'));
         $this->dispatch('application_removed');
     }
 
@@ -152,7 +152,7 @@ trait WithTeamManagement
 
         $this->team = $this->team->fresh();
 
-        $this->success(Trans::get('Team info saved!'));
+        $this->success(Translate::get('Team info saved!'));
         $this->dispatch('saved');
     }
 
@@ -187,7 +187,7 @@ trait WithTeamManagement
             $admin->notify(new NewMemberOfMyTeamNotification($this->team, $user));
         }
 
-        $this->success(Trans::get('Team member added!'));
+        $this->success(Translate::get('Team member added!'));
         $this->dispatch('member_added');
     }
 
@@ -219,7 +219,7 @@ trait WithTeamManagement
             TeamInvitation::find($invitationId)->delete();
         }
 
-        $this->success(Trans::get('Invitation removed.'));
+        $this->success(Translate::get('Invitation removed.'));
         $this->team = $this->team->fresh();
     }
 
@@ -239,7 +239,7 @@ trait WithTeamManagement
         $this->confirmingLeavingTeam = false;
 
         $this->team = $this->team->fresh();
-        $this->success(Trans::get('You left the team.'));
+        $this->success(Translate::get('You left the team.'));
     }
 
     /**
@@ -272,7 +272,7 @@ trait WithTeamManagement
 
         $this->teamMemberIdBeingRemoved = null;
 
-        $this->success(Trans::get('Team member removed.'));
+        $this->success(Translate::get('Team member removed.'));
         $this->team = $this->team->fresh();
     }
 

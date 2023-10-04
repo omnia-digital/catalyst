@@ -8,7 +8,7 @@ use App\Support\Notification\NotificationCenter;
 use Illuminate\Support\Str;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Mention;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class SomeoneMentionedYouNotification extends BaseNotification
 {
@@ -48,8 +48,8 @@ class SomeoneMentionedYouNotification extends BaseNotification
         $url = route('social.posts.show', $this->mention->postable);
 
         $message = $this->mention->mentionable::class === Team::class
-            ? Trans::get($this->mention->postable->user->name . ' mentioned your team, ' . $this->mention->mentionable->name . ' in their post')
-            : Trans::get($this->mention->postable->user->name . ' mentioned you in their post');
+            ? Translate::get($this->mention->postable->user->name . ' mentioned your team, ' . $this->mention->mentionable->name . ' in their post')
+            : Translate::get($this->mention->postable->user->name . ' mentioned you in their post');
 
         $subtitle = $this->mention->postable->type === PostType::ARTICLE->value
             ? Str::of($this->mention->postable->body)->stripTags()->limit(155)

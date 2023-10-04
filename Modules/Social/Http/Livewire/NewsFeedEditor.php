@@ -3,8 +3,8 @@
 namespace Modules\Social\Http\Livewire;
 
 use App\Models\Team;
-use App\Support\Platform\Platform;
-use App\Support\Platform\WithGuestAccess;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -31,7 +31,7 @@ class NewsFeedEditor extends Component
     #[On('post-editor:submitted')]
     public function createPost($editorId, $content, $images): void
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Catalyst::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal();
 
             return;

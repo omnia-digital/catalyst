@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Support\Platform\Platform;
-use App\Support\Platform\Translate;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
+use App\Support\Catalyst\Translate;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,7 +16,7 @@ class PlatformServiceProvider extends ServiceProvider
     public function register()
     {
         App::bind('platform', function () {
-            return new Platform;
+            return new Catalyst;
         });
         App::bind('trans', function () {
             return new Translate;

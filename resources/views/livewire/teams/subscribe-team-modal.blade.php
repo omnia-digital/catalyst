@@ -17,7 +17,7 @@
                     <legend class="text-base font-medium text-gray-900">Select a plan</legend>
 
                     @empty($teamPlans)
-                        <x-library::heading.4>{{ Trans::get('No Team plans found') }}</x-library::heading.4>
+                        <x-library::heading.4>{{ Translate::get('No Team plans found') }}</x-library::heading.4>
                     @else
                         <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
                             @foreach ($teamPlans as $teamPlan)
@@ -49,11 +49,11 @@
                 <x-library::input.error for="plan" class="mt-1"/>
             </div>
             <p class="py-1 text-sm text-neutral-dark">Your username ({{ Auth::user()->handle }}) and member status may
-                be publicly visible and shared by the {{ Trans::get('Team') }} with 3rd parties
+                be publicly visible and shared by the {{ Translate::get('Team') }} with 3rd parties
                 (to
                 provide
                 perks).</p>
-            <p class="py-1 text-sm text-neutral-dark">Recurring payment. Cancel anytime. {{ Trans::get('Team Owner') }}
+            <p class="py-1 text-sm text-neutral-dark">Recurring payment. Cancel anytime. {{ Translate::get('Team Owner') }}
                 may update perks.</p>
 
         </x-slot:content>

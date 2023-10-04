@@ -13,7 +13,7 @@
             }"
             class="w-full"
     >
-        <label for="search" class="sr-only">{{ Trans::get('Search ' . config('app.name')) }}</label>
+        <label for="search" class="sr-only">{{ Translate::get('Search ' . config('app.name')) }}</label>
         <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <x-library::icons.icon name="fa-duotone fa-magnifying-glass" class="h-5 w-5 text-light-text-color dark:text-light-text-color"
@@ -22,7 +22,7 @@
             <input x-model.debounce.500ms="search"
                    id="search" name="search"
                    class="block w-full pl-10 pr-3 py-2 border border-neutral bg-neutral rounded-md leading-5 dark:bg-gray-700 text-light-text-color placeholder-light-text-color focus:outline-none focus:ring-dark-text-color sm:text-sm"
-                   placeholder="{{ Trans::get('Search') }}" type="search"/>
+                   placeholder="{{ Translate::get('Search') }}" type="search"/>
 
             @if ($searchResults && !empty($search))
                 <ul x-show="show" x-on:click.away="show = false"

@@ -10,7 +10,7 @@
             </div>
             <a href="{{ route('articles.home') }}">
                 <x-library::heading.1
-                        class="py-4 hover:cursor-pointer">{{ Trans::get('Edit Article') }}</x-library::heading.1>
+                        class="py-4 hover:cursor-pointer">{{ Translate::get('Edit Article') }}</x-library::heading.1>
             </a>
         </div>
         <div class="w-full">

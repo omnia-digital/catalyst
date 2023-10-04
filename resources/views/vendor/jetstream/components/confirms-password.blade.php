@@ -1,4 +1,4 @@
-@props(['title' => Trans::get('Confirm Password'), 'content' => Trans::get('For your security, please confirm your password to continue.'), 'button' => Trans::get('Confirm')])
+@props(['title' => Translate::get('Confirm Password'), 'content' => Translate::get('For your security, please confirm your password to continue.'), 'button' => Translate::get('Confirm')])
 
 @php
     $confirmableId = md5($attributes->wire('then'));
@@ -25,7 +25,7 @@
 
             <div class="mt-4" x-data="{}"
                  x-on:confirming-password.window="setTimeout(() => $refs.confirmable_password.focus(), 250)">
-                <x-input type="password" class="mt-1 block w-3/4" placeholder="{{ Trans::get('Password') }}"
+                <x-input type="password" class="mt-1 block w-3/4" placeholder="{{ Translate::get('Password') }}"
                          x-ref="confirmable_password"
                          wire:model.live="confirmablePassword"
                          wire:keydown.enter="confirmPassword"/>
@@ -36,7 +36,7 @@
 
         <x-slot name="footer">
             <x-secondary-button wire:click="stopConfirmingPassword" wire:loading.attr="disabled">
-                {{ Trans::get('Cancel') }}
+                {{ Translate::get('Cancel') }}
             </x-secondary-button>
 
             <x-button class="ml-2" dusk="confirm-password-button" wire:click="confirmPassword"

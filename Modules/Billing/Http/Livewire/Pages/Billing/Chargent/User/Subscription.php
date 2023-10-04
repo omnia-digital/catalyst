@@ -2,7 +2,7 @@
 
 namespace Modules\Billing\Http\Livewire\Pages\Billing\Chargent\User;
 
-use App\Support\Platform\Platform;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
 use Livewire\Component;
 use Modules\Billing\Actions\Salesforce\CreateContactObjectAction;
 use Modules\Billing\Actions\Salesforce\GetChargentOrderInfoAction;
@@ -25,13 +25,13 @@ class Subscription extends Component
 
     public function mount()
     {
-        $platformIsUsingChargentPaymentGateway = Platform::isUsingPaymentGateway('chargent');
+        $platformIsUsingChargentPaymentGateway = Catalyst::isUsingPaymentGateway('chargent');
         if (! $platformIsUsingChargentPaymentGateway || ! config('forrest.credentials.consumerKey')) {
 //            $this->redirect(route('social.home'));
         }
 
-        $subscriptionFormSlug = Platform::getBillingSetting('user_subscription_form');
-        $changePaymentFormSlug = Platform::getBillingSetting('change_payment_method_form');
+        $subscriptionFormSlug = Catalyst::getBillingSetting('user_subscription_form');
+        $changePaymentFormSlug = Catalyst::getBillingSetting('change_payment_method_form');
 
         $this->subscriptionForm = FormAssemblyForm::findBySlug($subscriptionFormSlug);
         $this->paymentMethodForm = FormAssemblyForm::findBySlug($changePaymentFormSlug);

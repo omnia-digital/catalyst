@@ -6,11 +6,11 @@
 
         <div x-data="{ recovery: false }">
             <div class="mb-4 text-sm text-base-text-color" x-show="! recovery">
-                {{ Trans::get('Please confirm access to your account by entering the authentication code provided by your authenticator application.') }}
+                {{ Translate::get('Please confirm access to your account by entering the authentication code provided by your authenticator application.') }}
             </div>
 
             <div class="mb-4 text-sm text-base-text-color" x-show="recovery">
-                {{ Trans::get('Please confirm access to your account by entering one of your emergency recovery codes.') }}
+                {{ Translate::get('Please confirm access to your account by entering one of your emergency recovery codes.') }}
             </div>
 
             <x-validation-errors class="mb-4"/>
@@ -19,13 +19,13 @@
                 @csrf
 
                 <div class="mt-4" x-show="! recovery">
-                    <x-label for="code" value="{{ Trans::get('Code') }}"/>
+                    <x-label for="code" value="{{ Translate::get('Code') }}"/>
                     <x-input id="code" class="block mt-1 w-full" type="text" inputmode="numeric" name="code" autofocus
                              x-ref="code" autocomplete="one-time-code"/>
                 </div>
 
                 <div class="mt-4" x-show="recovery">
-                    <x-label for="recovery_code" value="{{ Trans::get('Recovery Code') }}"/>
+                    <x-label for="recovery_code" value="{{ Translate::get('Recovery Code') }}"/>
                     <x-input id="recovery_code" class="block mt-1 w-full" type="text" name="recovery_code"
                              x-ref="recovery_code" autocomplete="one-time-code"/>
                 </div>
@@ -38,7 +38,7 @@
                                         recovery = true;
                                         $nextTick(() => { $refs.recovery_code.focus() })
                                     ">
-                        {{ Trans::get('Use a recovery code') }}
+                        {{ Translate::get('Use a recovery code') }}
                     </button>
 
                     <button type="button"
@@ -48,11 +48,11 @@
                                         recovery = false;
                                         $nextTick(() => { $refs.code.focus() })
                                     ">
-                        {{ Trans::get('Use an authentication code') }}
+                        {{ Translate::get('Use an authentication code') }}
                     </button>
 
                     <x-button class="ml-4">
-                        {{ Trans::get('Log in') }}
+                        {{ Translate::get('Log in') }}
                     </x-button>
                 </div>
             </form>

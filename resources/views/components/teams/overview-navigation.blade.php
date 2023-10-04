@@ -38,9 +38,9 @@
                 @endforeach
                 @can('send-team-broadcast', $team)
                     <a href="#" x-data @click.prevent.stop="$openModal('notify-team-modal')"
-                       title="Send a message to the entire community">{{ Trans::get('Notify Team') }}</a>
+                       title="Send a message to the entire community">{{ Translate::get('Notify Team') }}</a>
                     <a href="{{ route('social.teams.admin', $team) }}"
-                       class="md:hidden hover:bg-neutral block w-full px-4 py-2 text-left text-sm">{{ Trans::get('Admin Panel') }}</a>
+                       class="md:hidden hover:bg-neutral block w-full px-4 py-2 text-left text-sm">{{ Translate::get('Admin Panel') }}</a>
                 @endcan
             </x-library::dropdown>
         </div>
@@ -50,7 +50,7 @@
             @if ($team->applicationsCount() > 0)
                 <a
                         class="flex items-center hover:underline" href="{{ route('social.teams.admin', $team) }}">
-                    <p>{{ Trans::get('Pending Applications: ') }}</p>
+                    <p>{{ Translate::get('Pending Applications: ') }}</p>
                     <span
                             class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-primary rounded-full hover:no-underline"
                     >{{ $team->applicationsCount() }}</span>
@@ -63,14 +63,14 @@
                     @click.prevent.stop="$openModal('notify-team-modal')"
                     title="Send a message to the entire community"
                     class="py-4 mx-[10px] hidden md:flex items-center"
-            >{{ Trans::get('Notify Team') }}</a>
+            >{{ Translate::get('Notify Team') }}</a>
             <a href="{{ route('social.teams.admin', $team) }}" class="bg-neutral rounded-lg px-4 py-2 border border-secondary hidden md:block font-bold hover:underline mx-4
             whitespace-nowrap">{{
-            Trans::get('Admin Panel')
+            Translate::get('Admin Panel')
             }}</a>
         @endcan
 
-        @if (\App\Support\Platform\Platform::isUsingTeamMemberSubscriptions())
+        @if (\OmniaDigital\CatalystCore\Facades\Catalyst::isUsingTeamMemberSubscriptions())
             <div>
                 @auth()
                     @if (!auth()->user()->subscribed("team_$team->id"))
@@ -100,7 +100,7 @@
             @can('update-team', $team)
                 <x-library::modal id="notify-team-modal" maxWidth="4xl">
                     <x-slot:title>
-                        {{ Trans::get('Send a message to the team') }}
+                        {{ Translate::get('Send a message to the team') }}
                     </x-slot:title>
                     <x-slot:content>
                         <x-library::input.textarea></x-library::input.textarea>

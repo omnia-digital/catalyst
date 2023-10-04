@@ -16,8 +16,8 @@
                                 class="font-normal text-lg sm:text-2xl text-white-text-color">{{ '@' .  $user->handle }}</x-library::heading.2>
                     </div>
                     <div class="flex flex-wrap space-x-2 items-center text-secondary text-sm">
-                        @if (Platform::isUsingUserSubscriptions()
-                            && Platform::isSubscriptionShownInProfileHeader()
+                        @if (Catalyst::isUsingUserSubscriptions()
+                            && Catalyst::isSubscriptionShownInProfileHeader()
                             && $user->chargentSubscription()->latest()->first()?->isActive)
                             <x-tag name="{{ $user->chargentSubscription()->latest()->first()->type->name }}"/>
                             <x-dot class="hidden sm:block"/>

@@ -3,7 +3,7 @@
 namespace Modules\Social\Http\Livewire\Layouts;
 
 use Livewire\Component;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class ModuleNavigation extends Component
 {
@@ -30,51 +30,51 @@ class ModuleNavigation extends Component
                 'module' => 'social',
             ],
             [
-                'label' => Trans::get('Resources'),
+                'label' => Translate::get('Resources'),
                 'name' => 'resources.home',
                 'icon' => 'fa-regular fa-photo-film-music',
                 'module' => 'resources',
             ],
             [
-                'label' => Trans::get('Articles'),
+                'label' => Translate::get('Articles'),
                 'name' => 'articles.home',
                 'icon' => 'fa-duotone fa-newspaper',
                 'module' => 'articles',
             ],
             [
-                'label' => Trans::get('Teams'),
+                'label' => Translate::get('Teams'),
                 'name' => 'social.teams.my-teams',
                 'icon' => 'fa-solid fa-users',
                 //                    'icon'    => 'heroicon-o-briefcase',
                 'module' => 'social',
             ],
             [
-                'label' => Trans::get('Map'),
+                'label' => Translate::get('Map'),
                 'name' => 'social.teams.map',
                 'icon' => 'fa-regular fa-map',
                 'module' => 'social',
             ],
             [
-                'label' => Trans::get('Calendar'),
+                'label' => Translate::get('Calendar'),
                 'name' => 'social.teams.calendar',
                 'icon' => 'fa-regular fa-calendar',
                 'module' => 'social',
             ],
             //                [
-            //                    'label'   => \Trans::get('Games'),
+            //                    'label'   => \Translate::get('Games'),
             //                    'name'    => 'games.home',
             //                    'icon'    => 'fa-regular fa-gamepad-modern',
             //                    'module'  => 'games',
             //                    'current' => false
             //                ],
             [
-                'label' => Trans::get('News'),
+                'label' => Translate::get('News'),
                 'name' => 'games.feeds',
                 'icon' => 'fa-regular fa-rss',
                 'module' => 'games',
             ],
             [
-                'label' => Trans::get('Media Library'),
+                'label' => Translate::get('Media Library'),
                 'name' => 'media.index',
                 'icon' => 'fa-regular fa-images',
             ],
@@ -91,7 +91,7 @@ class ModuleNavigation extends Component
             //                    'module'  => 'social',
             //                ],
             //                [
-            //                    'label'   => \Trans::get('Companies'),
+            //                    'label'   => \Translate::get('Companies'),
             //                    'name'    => 'social.companies.home',
             //                    'icon'    => 'fa-light fa-building',
             //                    //                    'icon'    => 'heroicon-o-bookmark',

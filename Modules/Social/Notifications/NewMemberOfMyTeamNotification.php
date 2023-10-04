@@ -6,7 +6,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Notifications\BaseNotification;
 use App\Support\Notification\NotificationCenter;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class NewMemberOfMyTeamNotification extends BaseNotification
 {
@@ -48,7 +48,7 @@ class NewMemberOfMyTeamNotification extends BaseNotification
 
         return NotificationCenter::make()
             ->icon('heroicon-o-user')
-            ->success(Trans::get($this->newMember->name . ' has been added to the team, ' . $this->team->name))
+            ->success(Translate::get($this->newMember->name . ' has been added to the team, ' . $this->team->name))
             ->image($this->newMember->profile_photo_url)
             ->actionLink($url)
             ->actionText('View')

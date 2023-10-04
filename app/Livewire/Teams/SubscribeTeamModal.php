@@ -4,7 +4,7 @@ namespace App\Livewire\Teams;
 
 use App\Models\Team;
 use App\Models\User;
-use App\Support\Platform\Platform;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Modules\Billing\Events\TeamMemberSubscriptionCreatedEvent;
@@ -55,7 +55,7 @@ class SubscribeTeamModal extends Component
             ->newSubscription('team_' . $this->team->id, $this->plan)
             ->teamId($this->team->id)
             ->create(subscriptionOptions: [
-                'application_fee_percent' => Platform::getAppFee(),
+                'application_fee_percent' => Catalyst::getAppFee(),
                 'transfer_data' => [
                     'destination' => $this->team->stripe_connect_id,
                 ],

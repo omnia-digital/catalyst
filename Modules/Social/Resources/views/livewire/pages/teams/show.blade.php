@@ -35,7 +35,7 @@
                     <div class="card p-1 col-span-12">
                         <div class="py-28 px-12 flex flex-col justify-center items-center text-center">
                             <x-heroicon-o-lock-closed class="w-20 h-20"/>
-                            <p class="text-lg">{{ Trans::get('You must be a member of this Team to view content and participate in discussions.') }}</p>
+                            <p class="text-lg">{{ Translate::get('You must be a member of this Team to view content and participate in discussions.') }}</p>
                             <div class="my-2">
                                 <x-teams.apply-button :team="$team"/>
                             </div>
@@ -123,7 +123,7 @@
 
                 @if ($team->content)
                     <div class="card p-4 col-span-12">
-                        <x-library::heading.3>{{ Trans::get('About') }}</x-library::heading.3>
+                        <x-library::heading.3>{{ Translate::get('About') }}</x-library::heading.3>
                         <div x-data="{readMore: false, longText: @js(strlen($team->content) > 410)}"
                              class="relative">
                             <p class="text-dark-text-color transition-all duration-300 overflow-y-hidden"
@@ -132,7 +132,7 @@
                                  class="bg-gradient-to-t from-white to-transparent absolute bottom-1 left-4 right-2 pt-8">
                                 <a class="block w-full text-right"
                                    href="#"
-                                   @click.prevent="readMore = !readMore">{{ Trans::get('Read More') }}</a>
+                                   @click.prevent="readMore = !readMore">{{ Translate::get('Read More') }}</a>
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                 {{-- Map --}}
                 {{--            <div>--}}
                 {{--                <div class="text-base-text-color font-semibold">--}}
-                {{--                    <x-library::heading.3>{{ \Trans::get('Location') }}</x-library::heading.3>--}}
+                {{--                    <x-library::heading.3>{{ \Translate::get('Location') }}</x-library::heading.3>--}}
                 {{--                </div>--}}
                 {{--                <div class="mt-4 bg-white">--}}
                 {{--                    --}}{{-- <x-library::map.google class="h-96" :places="$this->places"/> --}}
@@ -152,7 +152,7 @@
                 <!-- Team Languages -->
                 @if ($team->languages)
                     <div class="card col-span-6 p-4">
-                        <x-library::heading.3>{{ Trans::get('Languages') }}</x-library::heading.3>
+                        <x-library::heading.3>{{ Translate::get('Languages') }}</x-library::heading.3>
                         <div class="mt-2">
                             <p class="text-dark-text-color">{{ $team->languages }}</p>
                         </div>
@@ -162,9 +162,9 @@
                 {{-- Team Awards --}}
                 {{--            <div>--}}
                 {{--                <div class="flex justify-between items-center text-base-text-color font-semibold">--}}
-                {{--                    <x-library::heading.3>{{ \Trans::get('Awards') }}</x-library::heading.3>--}}
+                {{--                    <x-library::heading.3>{{ \Translate::get('Awards') }}</x-library::heading.3>--}}
                 {{--                    @if ($team->awards()->count())--}}
-                {{--                        <a href="{{ route('social.teams.awards', $team) }}" class="text-xs flex items-center">{{ \Trans::get('See all') }}--}}
+                {{--                        <a href="{{ route('social.teams.awards', $team) }}" class="text-xs flex items-center">{{ \Translate::get('See all') }}--}}
                 {{--                            <x-heroicon-s-chevron-right class="ml-2 w-4 h-4"/>--}}
                 {{--                        </a>--}}
                 {{--                    @endif--}}
@@ -174,7 +174,7 @@
                 {{--                        <x-awards-banner class="flex-1" :award="$award"/>--}}
                 {{--                    @empty--}}
                 {{--                        <div class="bg-white flex-1 p-4">--}}
-                {{--                            <p class="text-dark-text-color">{{ \Trans::get('No awards to show.') }}</p>--}}
+                {{--                            <p class="text-dark-text-color">{{ \Translate::get('No awards to show.') }}</p>--}}
                 {{--                        </div>--}}
                 {{--                    @endforelse--}}
                 {{--                </div>--}}
@@ -195,7 +195,7 @@
         @if ($this->canViewTeamContent)
             <div>
                 <x-library::modal id="add-awards-modal" maxWidth="2xl">
-                    <x-slot name="title">{{ Trans::get('Add Awards') }}</x-slot>
+                    <x-slot name="title">{{ Translate::get('Add Awards') }}</x-slot>
                     <x-slot name="content">
                         @if ($userToAddAwardsTo)
                             <div class="w-full flex flex-col">
@@ -212,7 +212,7 @@
                                     </div>
                                 @empty
                                     <div class="w-full px-4 py-2 text-sm bg-white p-2 flex items-center">
-                                        <p>{{ Trans::get('No other awards are available') }}</p>
+                                        <p>{{ Translate::get('No other awards are available') }}</p>
                                     </div>
                                 @endforelse
 
@@ -229,7 +229,7 @@
                     <x-slot name="actions">
                         @if ($userToAddAwardsTo)
                             <x-library::button
-                                    wire:click="addAward({{ $userToAddAwardsTo->id }})">{{ Trans::get('Add') }}</x-library::button>
+                                    wire:click="addAward({{ $userToAddAwardsTo->id }})">{{ Translate::get('Add') }}</x-library::button>
                         @endif
                     </x-slot>
                 </x-library::modal>

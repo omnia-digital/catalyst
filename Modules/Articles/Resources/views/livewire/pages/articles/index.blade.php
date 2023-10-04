@@ -3,20 +3,20 @@
 
 @section('content')
     <div class="mb-3 rounded-b-lg px-4 flex items-center justify-between bg-primary">
-        <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Articles') }}</x-library::heading.1>
+        <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Translate::get('Articles') }}</x-library::heading.1>
         <div class="flex items-center">
             @if (auth()->user()->can('create', Post::class))
                 @auth
                     <x-library::button.link
                             href="{{ route('articles.create') }}"
                             class="py-2 w-full h-10"
-                    >{{ Trans::get('Add Article') }}</x-library::button.link>
+                    >{{ Translate::get('Add Article') }}</x-library::button.link>
                     <livewire:articles::pages.articles.create/>
                 @else
                     <x-library::button
                             class="py-2 w-full h-10"
                             wire:click="loginCheck"
-                    >{{ Trans::get('Add Article') }}</x-library::button>
+                    >{{ Translate::get('Add Article') }}</x-library::button>
                     <livewire:authentication-modal/>
                 @endauth
             @endif
@@ -97,7 +97,7 @@
                         },
                         {
                             id: 1,
-                            title: 'Top '.{{ Platform::getTeamsWordUpper() }},
+                            title: 'Top '.{{ Catalyst::getTeamsWordUpper() }},
                             component: 'social.top-teams'
                         },
                         {

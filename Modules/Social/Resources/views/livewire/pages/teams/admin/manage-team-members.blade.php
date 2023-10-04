@@ -1,7 +1,7 @@
 @php use Spatie\Permission\Models\Role; @endphp
 <div class="mt-4 mx-6">
     <x-library::heading.2
-            class="text-base-text-color font-semibold text-2xl">{{ Trans::get('Members') }}</x-library::heading.2>
+            class="text-base-text-color font-semibold text-2xl">{{ Translate::get('Members') }}</x-library::heading.2>
 
     <div x-data="{
         activeMembersTab: 1,
@@ -94,7 +94,7 @@
                             @if ($this->user->id === $member->id)
                                 <button class="cursor-pointer ml-6 text-sm text-red-500 hover:underline focus:underline"
                                         wire:click="$toggle('confirmingLeavingTeam')">
-                                    {{ Trans::get('Leave') }}
+                                    {{ Translate::get('Leave') }}
                                 </button>
 
                                 <!-- Remove Team Member -->
@@ -102,7 +102,7 @@
                                 <button
                                         wire:click="confirmTeamMemberRemoval('{{ $member->id }}')"
                                         class="cursor-pointer ml-6 text-sm text-red-500 hover:underline focus:underline"
-                                >{{ Trans::get('Remove') }}</button>
+                                >{{ Translate::get('Remove') }}</button>
                             @endif
                         </div>
                     </div>
@@ -120,23 +120,23 @@
                     <div class="mt-10 sm:mt-0">
                         <x-form-section submit="addTeamMember">
                             <x-slot name="title">
-                                {{ Trans::get('Add Team Member') }}
+                                {{ Translate::get('Add Team Member') }}
                             </x-slot>
 
                             <x-slot name="description">
-                                {{ Trans::get('Add a new team member to your team, allowing them to collaborate with you.') }}
+                                {{ Translate::get('Add a new team member to your team, allowing them to collaborate with you.') }}
                             </x-slot>
 
                             <x-slot name="form">
                                 <div class="col-span-6">
                                     <div class="max-w-xl text-sm text-base-text-color">
-                                        {{ Trans::get('Please provide the email address of the person you would like to add to this team.') }}
+                                        {{ Translate::get('Please provide the email address of the person you would like to add to this team.') }}
                                     </div>
                                 </div>
 
                                 <!-- Member Email -->
                                 <div class="col-span-6 sm:col-span-4">
-                                    <x-label for="email" value="{{ Trans::get('Email') }}"/>
+                                    <x-label for="email" value="{{ Translate::get('Email') }}"/>
                                     <x-input id="email" type="email" class="mt-1 block w-full"
                                              wire:model="addTeamMemberForm.email"/>
                                     <x-input-error for="email" class="mt-2"/>
@@ -145,7 +145,7 @@
                                 <!-- Role -->
                                 @if (count($this->roles) > 0)
                                     <div class="col-span-6 lg:col-span-4">
-                                        <x-label for="role" value="{{ Trans::get('Role') }}"/>
+                                        <x-label for="role" value="{{ Translate::get('Role') }}"/>
                                         <x-input-error for="role" class="mt-2"/>
 
                                         <div class="relative z-0 mt-1 border border-neutral-light rounded-lg cursor-pointer">
@@ -183,7 +183,7 @@
 
                                 <!-- Invitation Message -->
                                 <div class="col-span-6 sm:col-span-4">
-                                    <x-label for="message" value="{{ Trans::get('Message') }}"/>
+                                    <x-label for="message" value="{{ Translate::get('Message') }}"/>
                                     <x-input id="message" type="text" class="mt-1 block w-full"
                                              wire:model="addTeamMemberForm.message"/>
                                     <x-input-error for="message" class="mt-2"/>
@@ -192,11 +192,11 @@
 
                             <x-slot name="actions">
                                 <x-action-message class="mr-3" on="saved">
-                                    {{ Trans::get('Added.') }}
+                                    {{ Translate::get('Added.') }}
                                 </x-action-message>
 
                                 <x-button>
-                                    {{ Trans::get('Add') }}
+                                    {{ Translate::get('Add') }}
                                 </x-button>
                             </x-slot>
                         </x-form-section>
@@ -210,11 +210,11 @@
                     <div class="mt-10 sm:mt-0">
                         <x-action-section>
                             <x-slot name="title">
-                                {{ Trans::get('Pending Team Invitations') }}
+                                {{ Translate::get('Pending Team Invitations') }}
                             </x-slot>
 
                             <x-slot name="description">
-                                {{ Trans::get('These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.') }}
+                                {{ Translate::get('These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.') }}
                             </x-slot>
 
                             <x-slot name="content">
@@ -228,7 +228,7 @@
                                                     <!-- Cancel Team Invitation -->
                                                     <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
                                                             wire:click="cancelTeamInvitation({{ $invitation->id }})">
-                                                        {{ Trans::get('Cancel') }}
+                                                        {{ Translate::get('Cancel') }}
                                                     </button>
                                                 @endif
                                             </div>
@@ -250,11 +250,11 @@
             <div class="mt-10 sm:mt-0">
                 <x-action-section>
                     <x-slot name="title">
-                        {{ Trans::get('Pending Team Applications') }}
+                        {{ Translate::get('Pending Team Applications') }}
                     </x-slot>
 
                     <x-slot name="description">
-                        {{ Trans::get('These people have applied to your team and may join after you accept their application.') }}
+                        {{ Translate::get('These people have applied to your team and may join after you accept their application.') }}
                     </x-slot>
 
                     <x-slot name="content">
@@ -277,7 +277,7 @@
                                             <!-- Deny Team Application -->
                                             <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
                                                     wire:click="denyTeamApplication({{ $application->id }})">
-                                                {{ Trans::get('Deny') }}
+                                                {{ Translate::get('Deny') }}
                                             </button>
                                         @endif
                                     </div>
@@ -304,7 +304,7 @@
         <!-- Role Management Modal -->
         <x-dialog-modal wire:model.live="currentlyManagingRole">
             <x-slot name="title">
-                {{ Trans::get('Manage User Role') }}
+                {{ Translate::get('Manage User Role') }}
             </x-slot>
 
             <x-slot name="content">
@@ -341,11 +341,11 @@
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="stopManagingRole" wire:loading.attr="disabled">
-                    {{ Trans::get('Cancel') }}
+                    {{ Translate::get('Cancel') }}
                 </x-secondary-button>
 
                 <x-button class="ml-2" wire:click="updateUserRole" wire:loading.attr="disabled">
-                    {{ Trans::get('Save') }}
+                    {{ Translate::get('Save') }}
                 </x-button>
             </x-slot>
         </x-dialog-modal>
@@ -353,20 +353,20 @@
         <!-- Leave Team Confirmation Modal -->
         <x-confirmation-modal wire:model.live="confirmingLeavingTeam">
             <x-slot name="title">
-                {{ Trans::get('Leave Team') }}
+                {{ Translate::get('Leave Team') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ Trans::get('Are you sure you would like to leave this team?') }}
+                {{ Translate::get('Are you sure you would like to leave this team?') }}
             </x-slot>
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="$toggle('confirmingLeavingTeam')" wire:loading.attr="disabled">
-                    {{ Trans::get('Cancel') }}
+                    {{ Translate::get('Cancel') }}
                 </x-secondary-button>
 
                 <x-danger-button class="ml-2" wire:click="leaveTeam" wire:loading.attr="disabled">
-                    {{ Trans::get('Leave') }}
+                    {{ Translate::get('Leave') }}
                 </x-danger-button>
             </x-slot>
         </x-confirmation-modal>
@@ -374,20 +374,20 @@
         <!-- Remove Team Member Confirmation Modal -->
         <x-confirmation-modal wire:model.live="confirmingTeamMemberRemoval">
             <x-slot name="title">
-                {{ Trans::get('Remove Team Member') }}
+                {{ Translate::get('Remove Team Member') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ Trans::get('Are you sure you would like to remove this person from the team?') }}
+                {{ Translate::get('Are you sure you would like to remove this person from the team?') }}
             </x-slot>
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="$toggle('confirmingTeamMemberRemoval')" wire:loading.attr="disabled">
-                    {{ Trans::get('Cancel') }}
+                    {{ Translate::get('Cancel') }}
                 </x-secondary-button>
 
                 <x-danger-button class="ml-2" wire:click="removeTeamMember" wire:loading.attr="disabled">
-                    {{ Trans::get('Remove') }}
+                    {{ Translate::get('Remove') }}
                 </x-danger-button>
             </x-slot>
         </x-confirmation-modal>

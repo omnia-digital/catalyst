@@ -2,8 +2,8 @@
 
 namespace Modules\Jobs\Http\Livewire\Pages;
 
-use App\Support\Platform\Platform;
-use App\Support\Platform\WithGuestAccess;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Jobs\Models\JobPosition;
@@ -26,10 +26,10 @@ class Home extends Component
     public function render()
     {
         $featuredJobs = JobPosition::with(['company', 'skills', 'addons'])
-            ->featured(Platform::getJobSetting('featured_days', 30))
+            ->featured(Catalyst::getJobSetting('featured_days', 30))
             ->active()
             ->latest()
-            ->when(Platform::getJobSetting('featured_jobs_limit'), fn ($query, $limit) => $query->take($limit))
+            ->when(Catalyst::getJobSetting('featured_jobs_limit'), fn ($query, $limit) => $query->take($limit))
             ->get();
 
         $jobs = JobPosition::with(['company', 'skills', 'addons'])

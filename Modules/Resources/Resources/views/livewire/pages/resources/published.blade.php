@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">
-        <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Trans::get('Resources') }}</x-library::heading.1>
+        <x-library::heading.1 class="py-4 hover:cursor-pointer">{{ Translate::get('Resources') }}</x-library::heading.1>
     </div>
 
     <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">

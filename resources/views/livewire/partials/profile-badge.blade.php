@@ -12,7 +12,7 @@
                             <p class="text-heading-default-color text-lg font-medium truncate">{{ $user->name }}</p>
                             <p class="-mt-1 text-heading-default-color text-md truncate">{{ '@'.$user?->handle }}</p>
                         </div>
-                        @if (Platform::isUsingUserSubscriptions() && Platform::isSubscriptionShownInNavigation())
+                        @if (Catalyst::isUsingUserSubscriptions() && Catalyst::isSubscriptionShownInNavigation())
                             <div class="flex mt-1">
                                 <div class="bg-neutral-dark flex items-center rounded-lg p-1">
                                     <div class="grow-0 text-white text-xs rounded-md p-1">

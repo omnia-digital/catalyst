@@ -2,7 +2,7 @@
 
 namespace Modules\Social\Http\Livewire;
 
-use App\Support\Platform\WithGuestAccess;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;

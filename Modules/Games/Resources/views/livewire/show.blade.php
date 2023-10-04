@@ -20,7 +20,7 @@
                         <span>
                         @if (!empty($game?->details?->platforms))
                                 @foreach ($game->details->platforms as $platform)
-                                    {{ \MarcReichel\IGDBLaravel\Models\Platform::firstOrFail($platform)->name }}
+                                    {{ \MarcReichel\IGDBLaravel\Models\Catalyst::firstOrFail($platform)->name }}
                                 @endforeach
                             @endif
                     </span>

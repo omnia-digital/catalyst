@@ -2,7 +2,7 @@
 
 @section('content')
     <x-social::page-heading>
-        <x-slot name="title">{{ Trans::get('Form Submissions') }}</x-slot>
+        <x-slot name="title">{{ Translate::get('Form Submissions') }}</x-slot>
         {{ $form->name }}
     </x-social::page-heading>
 
@@ -15,7 +15,7 @@
         <div class="space-y-6 p-4">
             <div class="text-right">
                 <a class="hover:underline focus:ring-1"
-                   href="{{ route('social.teams.admin', $team) }}">{{ Trans::get('Return to Team Admin Page') }}</a>
+                   href="{{ route('social.teams.admin', $team) }}">{{ Translate::get('Return to Team Admin Page') }}</a>
             </div>
             @forelse ($form->submissions as $submission)
                 <div class="flex items-center justify-between">
@@ -74,12 +74,12 @@
                             <button type="button"
                                     class="inline-flex items-center px-4 py-2 rounded-full bg-white text-base-text-color text-sm tracking-wide font-medium border border-black hover:bg-neutral-light"
                                     wire:click.prevent="addTeamMemberUsingID({{ $selectedSubmission->user->id }})"
-                            >{{ Trans::get('Accept') }}</button>
+                            >{{ Translate::get('Accept') }}</button>
                             @if (Gate::check('removeTeamMember', $team))
                                 <!-- Deny Team Application -->
                                 <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
                                         wire:click="denyTeamApplication({{ $selectedSubmission->teamApplication->id }})">
-                                    {{ Trans::get('Deny') }}
+                                    {{ Translate::get('Deny') }}
                                 </button>
                             @endif
                         </div>

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Str;
 use Modules\Social\Enums\PostType;
 use Modules\Social\Models\Post;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class PostWasBookmarkedNotification extends BaseNotification
 {
@@ -46,7 +46,7 @@ class PostWasBookmarkedNotification extends BaseNotification
 
     public function getMessage()
     {
-        return Trans::get($this->actionable->name . ' bookmarked your post');
+        return Translate::get($this->actionable->name . ' bookmarked your post');
     }
 
     public function getUrl()

@@ -9,7 +9,7 @@
         </div>
         <a href="{{ route('jobs.home') }}">
             <x-library::heading.1
-                    class="py-4 hover:cursor-pointer">{{ Trans::get('Job Detail') }}</x-library::heading.1>
+                    class="py-4 hover:cursor-pointer">{{ Translate::get('Job Detail') }}</x-library::heading.1>
         </a>
     </div>
 
@@ -35,7 +35,7 @@
                             <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mr-6">
                                 <x-heroicon-o-credit-card id="payment-type-budget"
                                                           class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"/>
-                                {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . Platform::money($job->budget) : '' }}
+                                {{ ucfirst($job->payment_type) }} {{ $job->budget ? ' - ' . Catalyst::money($job->budget) : '' }}
                             </div>
                             <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
                                 <x-heroicon-s-calendar id="posted-on"
@@ -57,14 +57,14 @@
                             <span class="mr-3 shadow-sm rounded-md">
                             <x-library::button.link href="{{ route('jobs.job.update', $job) }}" type="button"
                                                     class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out">
-                                <x-heroicon-s-pencil class="-ml-1 mr-2 h-5 w-5 text-gray-500"/> {{ Trans::get('Edit') }}
+                                <x-heroicon-s-pencil class="-ml-1 mr-2 h-5 w-5 text-gray-500"/> {{ Translate::get('Edit') }}
                             </x-library::button.link>
                         </span>
                         @elseif (auth()->check() && auth()->user()->can('apply', $job))
                             <span class="shadow-sm rounded-md">
                             <x-library::button.link href="{{ $job->applyLink }}" target="_blank"
                                                     class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-light-blue-600 hover:bg-light-blue-500 focus:outline-none focus:shadow-outline-light-blue focus:border-light-blue-700 active:bg-light-blue-700 transition duration-150 ease-in-out">
-                                <x-heroicon-s-cursor-click class="-ml-1 mr-2 h-5 w-5"/> {{ Trans::get('Apply') }}
+                                <x-heroicon-s-cursor-click class="-ml-1 mr-2 h-5 w-5"/> {{ Translate::get('Apply') }}
                             </x-library::button.link>
                         @endif
                     </span>
@@ -73,13 +73,13 @@
             </div>
             <div class="px-6">
                 <h3 class="text-base font-medium leading-7 text-gray-900 sm:text-xl sm:leading-9 sm:truncate">
-                    {{ Trans::get('Job Description') }}
+                    {{ Translate::get('Job Description') }}
                 </h3>
                 <p class="text-base text-gray-900 mt-2">{{ $job->description }}</p>
             </div>
             <div class="border-t border-gray-200 px-4 py-4 sm:px-6">
                 <h3 class="text-base font-medium leading-7 text-gray-900 sm:text-xl sm:leading-9 sm:truncate">
-                    {{ Trans::get('About') }} {{ $this->job->company->name }}
+                    {{ Translate::get('About') }} {{ $this->job->company->name }}
                 </h3>
                 <p class="text-base text-gray-900 mt-2">{{ $this->job->company->about }}</p>
             </div>
@@ -90,9 +90,9 @@
         {{--    </aside>--}}
 
         {{--  Tooltips  --}}
-        <x-jobs::tooltip trigger="company">{{ Trans::get('Company') }}</x-jobs::tooltip>
-        <x-jobs::tooltip trigger="location">{{ Trans::get('Location') }}</x-jobs::tooltip>
-        <x-jobs::tooltip trigger="payment-type-budget">{{ Trans::get('Payment Type & Budget') }}</x-jobs::tooltip>
+        <x-jobs::tooltip trigger="company">{{ Translate::get('Company') }}</x-jobs::tooltip>
+        <x-jobs::tooltip trigger="location">{{ Translate::get('Location') }}</x-jobs::tooltip>
+        <x-jobs::tooltip trigger="payment-type-budget">{{ Translate::get('Payment Type & Budget') }}</x-jobs::tooltip>
         <x-jobs::tooltip trigger="posted-on">{{ $job->created_at->format('Y-m-d') }}</x-jobs::tooltip>
     </div>
 @endsection

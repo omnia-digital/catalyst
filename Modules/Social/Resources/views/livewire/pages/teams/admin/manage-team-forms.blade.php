@@ -2,8 +2,8 @@
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
-                <h1 class="text-xl font-semibold text-gray-900">{{ Trans::get('Forms') }}</h1>
-                <p class="mt-2 text-sm text-gray-700">{{ Trans::get('These are forms that will be sent to members of your Team . You can choose which date these forms are sent out.') }}</p>
+                <h1 class="text-xl font-semibold text-gray-900">{{ Translate::get('Forms') }}</h1>
+                <p class="mt-2 text-sm text-gray-700">{{ Translate::get('These are forms that will be sent to members of your Team . You can choose which date these forms are sent out.') }}</p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                 <a
@@ -35,7 +35,7 @@
                 <tbody class="divide-y divide-gray-200 bg-white">
                 <tr class="border-t border-gray-200">
                     <th colspan="5" scope="colgroup"
-                        class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ Trans::get('Team Forms') }}</th>
+                        class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ Translate::get('Team Forms') }}</th>
                 </tr>
                 @forelse ($teamForms as $form)
                     <tr>
@@ -148,15 +148,15 @@
                 @empty
                     <tr>
                         <td colspan="5" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
-                            <span wire:target="loadForms" wire:loading.remove>{{ Trans::get('No Team Forms') }}</span>
-                            <span wire:target="loadForms" wire:loading>{{ Trans::get('Loading Forms...') }}</span>
+                            <span wire:target="loadForms" wire:loading.remove>{{ Translate::get('No Team Forms') }}</span>
+                            <span wire:target="loadForms" wire:loading>{{ Translate::get('Loading Forms...') }}</span>
                         </td>
                     </tr>
                 @endforelse
 
                 <tr class="border-t border-gray-200">
                     <th colspan="5" scope="colgroup"
-                        class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ Trans::get('Platform Forms') }}</th>
+                        class="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-black sm:px-6">{{ Translate::get('Catalyst Forms') }}</th>
                 </tr>
                 @forelse ($platformForms as $form)
                     <tr>
@@ -179,8 +179,8 @@
                         <td colspan="5"
                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                             <span wire:target="loadForms"
-                                  wire:loading.remove>{{ Trans::get('No Platform Forms') }}</span>
-                            <span wire:target="loadForms" wire:loading>{{ Trans::get('Loading Forms...') }}</span>
+                                  wire:loading.remove>{{ Translate::get('No Catalyst Forms') }}</span>
+                            <span wire:target="loadForms" wire:loading>{{ Translate::get('Loading Forms...') }}</span>
                         </td>
                     </tr>
                 @endforelse
@@ -192,40 +192,40 @@
     <!-- Publish/Draft Form Confirmation Modal -->
     <x-confirmation-modal wire:model.live="confirmingPublishform">
         <x-slot name="title">
-            {{ Trans::get('Change Form Status') }}
+            {{ Translate::get('Change Form Status') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ Trans::get("Are you sure you would like to {$newStatus} this form?") }}
+            {{ Translate::get("Are you sure you would like to {$newStatus} this form?") }}
         </x-slot>
 
         <x-slot name="footer">
             <x-secondary-button wire:click="$toggle('confirmingPublishform')" wire:loading.attr="disabled">
-                {{ Trans::get('Cancel') }}
+                {{ Translate::get('Cancel') }}
             </x-secondary-button>
 
             <x-button class="ml-2" wire:click="changeFormStatus" wire:loading.attr="disabled">
-                {{ Trans::get($newStatus) }}
+                {{ Translate::get($newStatus) }}
             </x-button>
         </x-slot>
     </x-confirmation-modal>
     <!-- Remove Form Confirmation Modal -->
     <x-confirmation-modal wire:model.live="confirmingFormRemoval">
         <x-slot name="title">
-            {{ Trans::get('Delete Form') }}
+            {{ Translate::get('Delete Form') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ Trans::get('Are you sure you would like to delete this form?') }}
+            {{ Translate::get('Are you sure you would like to delete this form?') }}
         </x-slot>
 
         <x-slot name="footer">
             <x-secondary-button wire:click="$toggle('confirmingFormRemoval')" wire:loading.attr="disabled">
-                {{ Trans::get('Cancel') }}
+                {{ Translate::get('Cancel') }}
             </x-secondary-button>
 
             <x-danger-button class="ml-2" wire:click="removeForm" wire:loading.attr="disabled">
-                {{ Trans::get('Delete') }}
+                {{ Translate::get('Delete') }}
             </x-danger-button>
         </x-slot>
     </x-confirmation-modal>
@@ -233,20 +233,20 @@
     <!-- Delete Form Notification Confirmation Modal -->
     <x-confirmation-modal wire:model.live="confirmingFormNotificationRemoval">
         <x-slot name="title">
-            {{ Trans::get('Delete Form Notification') }}
+            {{ Translate::get('Delete Form Notification') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ Trans::get('Are you sure you would like to delete this form notification?') }}
+            {{ Translate::get('Are you sure you would like to delete this form notification?') }}
         </x-slot>
 
         <x-slot name="footer">
             <x-secondary-button wire:click="$toggle('confirmingFormNotificationRemoval')" wire:loading.attr="disabled">
-                {{ Trans::get('Cancel') }}
+                {{ Translate::get('Cancel') }}
             </x-secondary-button>
 
             <x-danger-button class="ml-2" wire:click="removeFormNotification" wire:loading.attr="disabled">
-                {{ Trans::get('Delete') }}
+                {{ Translate::get('Delete') }}
             </x-danger-button>
         </x-slot>
     </x-confirmation-modal>
@@ -268,7 +268,7 @@
                         <div>
                             <x-library::input.label value="Timezone"/>
                             <x-library::input.select class="!bg-white" wire:model.live="editingNotification.timezone"
-                                                     :options="Platform::TimezoneList()"/>
+                                                     :options="Catalyst::TimezoneList()"/>
                             <x-library::input.error for="editingNotification.timezone"/>
                         </div>
                         <div>

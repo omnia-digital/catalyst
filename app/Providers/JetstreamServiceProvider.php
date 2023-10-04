@@ -12,7 +12,7 @@ use App\Contracts\InvitesTeamMembers;
 use App\Models\Membership;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -114,13 +114,13 @@ class JetstreamServiceProvider extends ServiceProvider
             'review-create',
             'review-read',
         ])
-            ->description(Trans::get($memberRoleDescription));
+            ->description(Translate::get($memberRoleDescription));
 
         if (! empty($usingTeamMemberSubs)) {
             Jetstream::role('subscriber', 'Subscriber', [
                 'feed-read',
             ])
-                ->description(Trans::get("Subscribers can view 'sub-only' content, including posts, chats, events and more. Assigning a new member this role is equivalent to giving a subscription for free."));
+                ->description(Translate::get("Subscribers can view 'sub-only' content, including posts, chats, events and more. Assigning a new member this role is equivalent to giving a subscription for free."));
         }
 
         Jetstream::role('moderator', 'Moderator', [
@@ -129,17 +129,17 @@ class JetstreamServiceProvider extends ServiceProvider
             'post-edit',
             'create',
         ])
-            ->description(Trans::get('Moderators can also can edit and delete posts.'));
+            ->description(Translate::get('Moderators can also can edit and delete posts.'));
 
         Jetstream::role('admin', 'Administrator', [
             ...$allPermissions,
         ])
-            ->description(Trans::get('Admins have access to everything except billing & subscription details.'));
+            ->description(Translate::get('Admins have access to everything except billing & subscription details.'));
 
         Jetstream::role('owner', 'Owner', [
             ...$allPermissions,
             'billing',
         ])
-            ->description(Trans::get('There can only be 1 Owner. The owner is the user that has their financial & billing accounts linked to this Team'));
+            ->description(Translate::get('There can only be 1 Owner. The owner is the user that has their financial & billing accounts linked to this Team'));
     }
 }

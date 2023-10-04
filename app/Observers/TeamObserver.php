@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Team;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 use function activity;
 
@@ -17,26 +17,26 @@ class TeamObserver
 //        ]);
 //        dd($team->owner);
 //
-//        activity()->by($team->owner)->on($team)->log(\Trans::get("Team $team->name created"));
+//        activity()->by($team->owner)->on($team)->log(\Translate::get("Team $team->name created"));
     }
 
     public function updated(Team $team)
     {
-        activity()->by($team->owner)->on($team)->log(Trans::get("Team {$team->name} updated"));
+        activity()->by($team->owner)->on($team)->log(Translate::get("Team {$team->name} updated"));
     }
 
     public function deleted(Team $team)
     {
-        activity()->by($team->owner)->on($team)->log(Trans::get("Team {$team->name} deleted"));
+        activity()->by($team->owner)->on($team)->log(Translate::get("Team {$team->name} deleted"));
     }
 
     public function restored(Team $team)
     {
-        activity()->by($team->owner)->on($team)->log(Trans::get("Team {$team->name} restored"));
+        activity()->by($team->owner)->on($team)->log(Translate::get("Team {$team->name} restored"));
     }
 
     public function forceDeleted(Team $team)
     {
-        activity()->by($team->owner)->on($team)->log(Trans::get("Team {$team->name} force deleted"));
+        activity()->by($team->owner)->on($team)->log(Translate::get("Team {$team->name} force deleted"));
     }
 }

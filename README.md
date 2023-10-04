@@ -1,6 +1,6 @@
 <p align="center"><a href="https://omniadigital.io" target="_blank"><img src="https://content.app-sources.com/s/91507677463936751/uploads/Logos/catalyst-logo-1070605.svg" width="400" alt="Catalyst Logo"></a></p>
 
-<p align="center"><a href="https://omniadigital.io" target="_blank"><h1>Catalyst - The Community Platform Framework</h1></a></p>
+<p align="center"><a href="https://omniadigital.io" target="_blank"><h1>Catalyst - The Community Catalyst Framework</h1></a></p>
 
 ![Catalyst social image](https://github.com/omnia-digital/catalyst/assets/5092957/ddf67169-cec4-4e7e-ad49-814194532834)
 

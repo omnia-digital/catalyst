@@ -41,19 +41,19 @@
     <div class="flex justify-between gap-3 flex-wrap bg-secondary px-6 py-2 rounded-lg mb-6 border-t border-b border-gray-100 items-center">
         <div class="flex justify-start items-center space-x-3">
             <div class="font-bold">
-                {{ Trans::get('Filters') }}
+                {{ Translate::get('Filters') }}
             </div>
             @unless (in_array('location', $skipFilters))
                 <div class="sm:min-w-[110px]">
                     <x-library::input.text wire:model.live.debounce.450ms="filters.location"
-                                           placeholder="{{ Trans::get('Location') }}"/>
+                                           placeholder="{{ Translate::get('Location') }}"/>
                 </div>
             @endunless
 
             @unless (in_array('date', $skipFilters))
                 <div class="sm:min-w-[110px]  relative">
                     <x-library::input.date class="pl-8" wire:model.live="dateFilter"
-                                           placeholder="{{ ($this->dateColumn === 'created_at' || $this->dateColumn === 'published_at') ? Trans::get('Date Created') : Trans::get('Launch Date') }}"/>
+                                           placeholder="{{ ($this->dateColumn === 'created_at' || $this->dateColumn === 'published_at') ? Translate::get('Date Created') : Translate::get('Launch Date') }}"/>
                     <div class="absolute top-0 flex items-center h-full ml-3">
                         <x-heroicon-o-calendar class="w-4 text-dark-text-color"/>
                     </div>
@@ -64,7 +64,7 @@
                 @auth
                     <div class="flex items-center space-x-2">
                         <x-library::input.label for="my_teams"
-                                                color="text-base-text-color">{{ Trans::get('My Teams Only') }}</x-library::input.label>
+                                                color="text-base-text-color">{{ Translate::get('My Teams Only') }}</x-library::input.label>
                         <x-library::input.checkbox wire:model.live="filters.my_teams" name="my_teams"/>
                     </div>
                 @endauth

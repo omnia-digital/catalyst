@@ -7,7 +7,7 @@
             <div class="flex-1 flex items-center space-x-2 -ml-1">
                 <x-library::icons.icon name="fa-regular fa-users" size="w-8 h-8" color="text-white-text-color"/>
                 <x-library::heading.1 class="py-4"
-                                      text-color="text-white-text-color">{{ $lens ? Trans::get('Companies') : Trans::get('Companies') }}
+                                      text-color="text-white-text-color">{{ $lens ? Translate::get('Companies') : Translate::get('Companies') }}
                 </x-library::heading.1>
             </div>
         </a>
@@ -18,7 +18,7 @@
                                      text-color="text-primary"
                                      size="w-60 h-10" py="py-2 "
                                      class="hidden sm:block">
-                {{ Trans::get('Create Company') }}
+                {{ Translate::get('Create Company') }}
             </x-library::button.index>
         @endcan
     </div>
@@ -46,7 +46,7 @@
                 <p class="font-bold">Sort</p>
                 <x-library::dropdown>
                     <x-slot name="trigger" class="flex items-center cursor-pointer text-gray-600">
-                        <span class="text-sm"> {{ Trans::get('By') . ' ' .  $sortField }}</span>
+                        <span class="text-sm"> {{ Translate::get('By') . ' ' .  $sortField }}</span>
 
                         @if ($sortDirection === 'asc')
                             <x-heroicon-s-arrow-down class="w-4 h-4 ml-1"/>
@@ -55,15 +55,15 @@
                         @endif
                     </x-slot>
 
-                    <x-library::dropdown.item wire:click.prevent="sortBy('name')">{{ Trans::get('By name') }}</x-library::dropdown.item>
-                    <x-library::dropdown.item wire:click.prevent="sortBy('members')">{{ Trans::get('By members') }}</x-library::dropdown.item>
+                    <x-library::dropdown.item wire:click.prevent="sortBy('name')">{{ Translate::get('By name') }}</x-library::dropdown.item>
+                    <x-library::dropdown.item wire:click.prevent="sortBy('members')">{{ Translate::get('By members') }}</x-library::dropdown.item>
                     {{--                        <x-library::dropdown.item wire:click.prevent="sortBy('rating')">By rating</x-library::dropdown.item>}}
                 </x-library::dropdown>
             </div>
             <div class="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
                 <div class="flex items-center px-6 py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
                     <div class="w-full">
-                        <label for="search" class="sr-only">{{ Trans::get('Search') }}</label>
+                        <label for="search" class="sr-only">{{ Translate::get('Search') }}</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <x-library::icons.icon name="fa-duotone fa-magnifying-glass" class="h-5 w-5 text-light-text-color dark:text-light-text-color" aria-hidden="true"/>
@@ -83,7 +83,7 @@
             @forelse ($companies as $company)
                 <livewire:social::components.company-card :company="$company" wire:key="company-{{ $company->id }}"/>
             @empty
-                <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No Companies Found') }}</p>
+                <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Translate::get('No Companies Found') }}</p>
             @endforelse
         </div>
         <livewire:companies.create-company-modal/>

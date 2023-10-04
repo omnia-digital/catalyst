@@ -9,7 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class AwardResource extends Resource
 {
@@ -72,6 +72,6 @@ class AwardResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return Trans::get('Teams');
+        return Translate::get('Teams');
     }
 }

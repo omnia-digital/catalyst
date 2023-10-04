@@ -3,8 +3,8 @@
 namespace Modules\Social\Http\Livewire;
 
 use App\Models\Location;
-use App\Support\Platform\Platform;
-use App\Support\Platform\WithGuestAccess;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use Livewire\Component;
 use Modules\Feeds\Models\FeedSource;
 use OmniaDigital\OmniaLibrary\Livewire\WithMap;
@@ -72,6 +72,6 @@ class Home extends Component
 
     public function getNewsRssFeeds()
     {
-        return Platform::isModuleEnabled('Feeds') ? FeedSource::first()->get() : collect();
+        return Catalyst::isModuleEnabled('Feeds') ? FeedSource::first()->get() : collect();
     }
 }

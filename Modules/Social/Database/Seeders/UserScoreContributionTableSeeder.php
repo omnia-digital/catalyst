@@ -5,7 +5,7 @@ namespace Modules\Social\Database\Seeders;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Modules\Social\Models\UserScoreContribution;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class UserScoreContributionTableSeeder extends Seeder
 {
@@ -24,7 +24,7 @@ class UserScoreContributionTableSeeder extends Seeder
         ]);
 
         UserScoreContribution::create([
-            'name' => Trans::get('Created Team'),
+            'name' => Translate::get('Created Team'),
             'points' => 100,
         ]);
     }

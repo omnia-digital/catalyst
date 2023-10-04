@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Jetstream\Mail\TeamInvitation;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class InviteTeamMember implements InvitesTeamMembers
 {
@@ -58,7 +58,7 @@ class InviteTeamMember implements InvitesTeamMembers
             'role' => $role,
             'message' => $message,
         ], $this->rules($team), [
-            'email.unique' => Trans::get('This user has already been invited to the team.'),
+            'email.unique' => Translate::get('This user has already been invited to the team.'),
         ])->after(
             $this->ensureUserIsNotAlreadyOnTeam($team, $email)
         )->validateWithBag('addTeamMember');
@@ -97,7 +97,7 @@ class InviteTeamMember implements InvitesTeamMembers
             $validator->errors()->addIf(
                 $team->hasUserWithEmail($email),
                 'email',
-                Trans::get('This user already belongs to the team.')
+                Translate::get('This user already belongs to the team.')
             );
         };
     }

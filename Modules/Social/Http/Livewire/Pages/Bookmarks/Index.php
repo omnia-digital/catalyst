@@ -2,8 +2,8 @@
 
 namespace Modules\Social\Http\Livewire\Pages\Bookmarks;
 
-use App\Support\Platform\Platform;
-use App\Support\Platform\WithGuestAccess;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use App\Traits\Filter\WithSortAndFilters;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -52,7 +52,7 @@ class Index extends Component
 
     public function showGuestAccessModal()
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Catalyst::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('social.bookmarks'));
         }
     }

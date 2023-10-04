@@ -48,7 +48,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top '.{{ Platform::getTeamsWordUpper() }},
+                        title: 'Top '.{{ Catalyst::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

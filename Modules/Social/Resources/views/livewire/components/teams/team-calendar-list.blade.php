@@ -30,11 +30,11 @@
                 showDetail = true;
             });
             @this.on('applied_to_team', () => {
-                message = '{{ Trans::get('Application Submitted') }}';
+                message = '{{ Translate::get('Application Submitted') }}';
                 setTimeout(() => { message = false; }, 3000);
             });
             @this.on('application_removed', () => {
-                message = '{{ Trans::get('Application Removed') }}';
+                message = '{{ Translate::get('Application Removed') }}';
                 setTimeout(() => { message = false; }, 3000);
             });
         "
@@ -44,7 +44,7 @@
         <div class="h-full flex flex-col">
             <div class="bg-secondary flex justify-between items-center text-xl min-h-[64px] pt-2 px-4">
                 <div class="font-medium">
-                    <div class="text-xl" x-show="!showDetail">{{ Trans::get('Teams') }}</div>
+                    <div class="text-xl" x-show="!showDetail">{{ Translate::get('Teams') }}</div>
                     <div x-show="showDetail" class="text-lg font-bold" x-text="title"></div>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                 @empty
-                    <div>No {{ Platform::getTeamsWordUpper() }} to show</div>
+                    <div>No {{ Catalyst::getTeamsWordUpper() }} to show</div>
                 @endforelse
             </div>
 

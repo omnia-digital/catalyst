@@ -3,7 +3,7 @@
 namespace Modules\Jobs\Http\Livewire\Pages\Jobs;
 
 use App\Models\Tag;
-use App\Support\Platform\Platform;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
 use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\StatefulGuard;
@@ -75,7 +75,7 @@ class NewJob extends Component
     public function mount()
     {
         $this->setTeamId();
-        $this->price = Platform::getJobSetting('posting_price');
+        $this->price = Catalyst::getJobSetting('posting_price');
     }
 
     public function updated($propertyName)
@@ -289,7 +289,7 @@ class NewJob extends Component
      */
     public function getTotalPriceProperty()
     {
-        return Platform::getJobSetting('posting_price') + $this->addonsPrice;
+        return Catalyst::getJobSetting('posting_price') + $this->addonsPrice;
     }
 
     public function getJobPositionSkillOptionsProperty()

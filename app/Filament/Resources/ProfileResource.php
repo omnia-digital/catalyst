@@ -17,7 +17,7 @@ use RalphJSmit\Filament\Components\Forms\CreatedAt;
 use RalphJSmit\Filament\Components\Forms\DeletedAt;
 use RalphJSmit\Filament\Components\Forms\Timestamp;
 use RalphJSmit\Filament\Components\Forms\UpdatedAt;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class ProfileResource extends Resource
 {
@@ -60,7 +60,7 @@ class ProfileResource extends Resource
                 Filter::make('has_team')->query(function (Builder $query) {
                     // where profile has team
                     $query->whereHas('user.teams');
-                })->label(Trans::get('Has Team'))->toggle(),
+                })->label(Translate::get('Has Team'))->toggle(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

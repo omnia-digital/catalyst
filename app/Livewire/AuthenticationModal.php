@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
-use App\Support\Platform\Platform;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Rules\Password;
@@ -36,7 +36,7 @@ class AuthenticationModal extends Component
 
     public function mount()
     {
-        $this->showLoginModal = Platform::shouldShowLoginOnGuestAccess();
+        $this->showLoginModal = Catalyst::shouldShowLoginOnGuestAccess();
     }
 
     public function handleShowAuthenticationModal($data)

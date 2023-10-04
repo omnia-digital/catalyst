@@ -11,9 +11,9 @@
             </div>
             <div class="relative px-4 py-8 md:py-16 sm:px-6 sm:py-16 lg:py-16 lg:px-8">
                 <x-library::heading.1 class="text-center uppercase" text-size="text-4xl md:text-5xl">
-                    {{ Trans::get('DISCOVER') }}
+                    {{ Translate::get('DISCOVER') }}
                 </x-library::heading.1>
-                <p class="mt-2 md:mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">{{ Trans::get('Find Teams and other resources') }}</p>
+                <p class="mt-2 md:mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">{{ Translate::get('Find Teams and other resources') }}</p>
             </div>
         </div>
     </div>
@@ -24,12 +24,12 @@
         @if (!empty($featuredTeams) && $featuredTeams->count() > 0)
             {{-- Featured Teams --}}
             <div>
-                <x-library::heading.3 class="uppercase">{{ Trans::get('Featured Teams') }}</x-library::heading.3>
+                <x-library::heading.3 class="uppercase">{{ Translate::get('Featured Teams') }}</x-library::heading.3>
                 <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
                     @forelse ($featuredTeams->take(4) as $team)
                         <livewire:social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                     @empty
-                        <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No Featured Teams Found') }}</p>
+                        <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Translate::get('No Featured Teams Found') }}</p>
                     @endforelse
                 </div>
             </div>
@@ -37,17 +37,17 @@
 
         {{-- New Teams --}}
         <div>
-            <x-library::heading.3 class="uppercase">{{ Trans::get('New Teams') }}</x-library::heading.3>
+            <x-library::heading.3 class="uppercase">{{ Translate::get('New Teams') }}</x-library::heading.3>
             <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
                 @forelse ($newTeams->take(4) as $team)
                     <livewire:social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
-                    <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Trans::get('No New Teams Found') }}</p>
+                    <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Translate::get('No New Teams Found') }}</p>
                 @endforelse
             </div>
         </div>
 
-        @if (Platform::isModuleEnabled('games'))
+        @if (Catalyst::isModuleEnabled('games'))
             {{--            <h2>Recommended YouTube Channels</h2>--}}
             {{--            <div class="space-y-6">--}}
             {{--                @foreach ($youtubeFeeds as $youtubeFeed)--}}
@@ -65,7 +65,7 @@
 
         @if (config('app.modules.social.map'))
             <div>
-                <x-library::heading.3 class="uppercase">{{ Trans::get('Team Map') }}</x-library::heading.3>
+                <x-library::heading.3 class="uppercase">{{ Translate::get('Team Map') }}</x-library::heading.3>
                 <livewire:social::components.teams.map class=""/>
             </div>
         @endif
@@ -73,7 +73,7 @@
         <div>
             @if ($trendingTeams->count())
                 <div class="flex items-center space-x-2">
-                    <x-library::heading.3 class="uppercase">{{ Trans::get('Trending') }}</x-library::heading.3>
+                    <x-library::heading.3 class="uppercase">{{ Translate::get('Trending') }}</x-library::heading.3>
                 </div>
                 <div class="px-4 sm:px-6 md:px-0">
                     <div class="py-4">
@@ -91,10 +91,10 @@
         @if (count($categories))
             <div>
                 <div class="flex items-center space-x-2">
-                    <x-library::heading.3 class="uppercase">{{ Trans::get('Categories') }} ({{ count($categories) }})
+                    <x-library::heading.3 class="uppercase">{{ Translate::get('Categories') }} ({{ count($categories) }})
                     </x-library::heading.3>
                     <a href="{{ route('social.teams.home') }}"
-                       class="text-gray-500 text-xs">{{ Trans::get('View All Teams') }}</a>
+                       class="text-gray-500 text-xs">{{ Translate::get('View All Teams') }}</a>
                 </div>
 
                 <div class="flex justify-between space-x-2 py-4">
@@ -112,7 +112,7 @@
                     <div>
                         <div class="flex items-center space-x-2">
                             <x-library::heading.3
-                                    class="uppercase">{{ Trans::get($category['name']) }}</x-library::heading.3>
+                                    class="uppercase">{{ Translate::get($category['name']) }}</x-library::heading.3>
                             <a href="{{ route('social.teams.home', ['tags[0]' => $category['slug']]) }}"
                                class="text-gray-500 text-xs">View All</a>
                         </div>
@@ -134,7 +134,7 @@
         {{--        <div>--}}
         {{--            @if ($curatedTeams->count())--}}
         {{--                <div class="flex items-center space-x-2">--}}
-        {{--                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Curated') }}</x-library::heading.3>--}}
+        {{--                    <x-library::heading.3 class="uppercase">{{ \Translate::get('Curated') }}</x-library::heading.3>--}}
         {{--                    <a href="{{ route('social.teams.home', ['tags[0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>--}}
         {{--                </div>--}}
 
@@ -152,7 +152,7 @@
 
         {{--        <div>--}}
         {{--            <div class="flex items-center space-x-2">--}}
-        {{--                <x-library::heading.3 class="uppercase">{{ \Trans::get('Popular Indies') }}</x-library::heading.3>--}}
+        {{--                <x-library::heading.3 class="uppercase">{{ \Translate::get('Popular Indies') }}</x-library::heading.3>--}}
         {{--                <a href="{{ route('social.teams.home', ['lens' => 'popular-indies']) }}" class="text-gray-500 text-xs">View All</a>--}}
         {{--            </div>--}}
 
@@ -170,8 +170,8 @@
         {{--        <div>--}}
         {{--            @if ($popularIndiesTeams->count())--}}
         {{--                <div class="flex items-center space-x-2">--}}
-        {{--                    <x-library::heading.3 class="uppercase">{{ \Trans::get('Popular Upcoming') }}</x-library::heading.3>--}}
-        {{--                    <a href="{{ route('social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">{{ \Trans::get('View All') }}</a>--}}
+        {{--                    <x-library::heading.3 class="uppercase">{{ \Translate::get('Popular Upcoming') }}</x-library::heading.3>--}}
+        {{--                    <a href="{{ route('social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">{{ \Translate::get('View All') }}</a>--}}
         {{--                </div>--}}
 
         {{--                <div class="px-4 sm:px-6 md:px-0">--}}

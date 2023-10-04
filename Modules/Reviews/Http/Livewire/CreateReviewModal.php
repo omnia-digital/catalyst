@@ -12,7 +12,7 @@ use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
 use Modules\Reviews\Models\Review;
 use OmniaDigital\OmniaLibrary\Livewire\WithModal;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class CreateReviewModal extends Component implements HasForms
 {
@@ -64,13 +64,13 @@ class CreateReviewModal extends Component implements HasForms
             );
 
             $this->dispatch('reviewUpdated')->to('reviews::review-card');
-            $this->dispatch('notify', message: Trans::get('Review updated'), type: 'success');
+            $this->dispatch('notify', message: Translate::get('Review updated'), type: 'success');
         } else {
             $this->review = $this->model->reviews()->create(
                 array_merge(['user_id' => auth()->id()], $this->form->getState())
             );
 
-            $this->dispatch('notify', message: Trans::get('Review created'), type: 'success');
+            $this->dispatch('notify', message: Translate::get('Review created'), type: 'success');
         }
 
         $this->dispatch('updateReviews', review: $this->review);
@@ -83,7 +83,7 @@ class CreateReviewModal extends Component implements HasForms
         if ($this->model->reviewedBy(auth()->user())) {
             $this->review->delete();
 
-            $this->dispatch('notify', message: Trans::get('Review removed'), type: 'success');
+            $this->dispatch('notify', message: Translate::get('Review removed'), type: 'success');
 
             $this->dispatch('updateReviews');
             $this->closeModal('review-modal-' . $this->model->id);
@@ -121,7 +121,7 @@ class CreateReviewModal extends Component implements HasForms
                 ->default(0)
                 ->label('Check this box if you joined for free'),
             Radio::make('recommend')
-                ->label(Trans::get('Do you recommend this Team?'))
+                ->label(Translate::get('Do you recommend this Team?'))
                 ->boolean()
                 ->required(),
         ];

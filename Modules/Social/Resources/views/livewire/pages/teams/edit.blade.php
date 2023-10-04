@@ -10,22 +10,22 @@
 
         <!-- Page Heading -->
         <div class="flex p-4 sticky items-center justify-between">
-            <x-library::heading.2>{{ Trans::get('Team Admin Panel') }}</x-library::heading.2>
+            <x-library::heading.2>{{ Translate::get('Team Admin Panel') }}</x-library::heading.2>
 
             <div class="flex justify-end items-center">
                 @if ($errors->any())
                     <div class="mr-auto">
-                        <p class="text-sm text-red-600">{{ Trans::get('This form has errors') }}:</p>
+                        <p class="text-sm text-red-600">{{ Translate::get('This form has errors') }}:</p>
                         @foreach ($errors->all() as $error)
                             <p class="text-sm text-red-600">{{ $error }}</p>
                         @endforeach
                     </div>
                 @endif
                 <div class="mr-4"><a href="{{ $team->profile() }}"
-                                     class="hover:underline">{{ Trans::get('Cancel') }}</a></div>
+                                     class="hover:underline">{{ Translate::get('Cancel') }}</a></div>
                 <x-library::button.index
                         wire:click.prevent="saveChanges"
-                >{{ Trans::get('Save Changes') }}</x-library::button.index>
+                >{{ Translate::get('Save Changes') }}</x-library::button.index>
             </div>
         </div>
 
@@ -51,7 +51,7 @@
 
             <!-- Edit Team Media -->
             <div x-cloak x-show="activeTab === 0" class="mt-6 grid grid-cols-2 gap-6">
-                <x-library::heading.3>{{ Trans::get('Featured Content') }}</x-library::heading.3>
+                <x-library::heading.3>{{ Translate::get('Featured Content') }}</x-library::heading.3>
                 <!-- Featured Content / Sample Media -->
                 <div class="col-span-2">
                     <div class="flex items-center">
@@ -137,8 +137,8 @@
                     </x-confirmation-modal>
                 </div>
 
-                @if (Platform::isModuleEnabled('games'))
-                    <x-library::heading.4 class="col-span-2">{{ Trans::get('Feeds') }}</x-library::heading.4>
+                @if (Catalyst::isModuleEnabled('games'))
+                    <x-library::heading.4 class="col-span-2">{{ Translate::get('Feeds') }}</x-library::heading.4>
                     <!-- YouTube Channel -->
                     <div class="flex-col">
                         <x-library::input.label value="YouTube Channel ID" class="inline"/>
@@ -155,7 +155,7 @@
                 @endif
 
                 <div class="col-span-2">
-                    <x-library::heading.3>{{ Trans::get('Team Home & Profile') }}</x-library::heading.3>
+                    <x-library::heading.3>{{ Translate::get('Team Home & Profile') }}</x-library::heading.3>
                 </div>
                 <!-- Banner Image -->
                 <div class="flex-col">
@@ -196,7 +196,7 @@
                 <!-- Profile Photo -->
                 <div class="flex-col">
                     <div class="flex items-center">
-                        <x-library::input.label value="{{ Trans::get('Team') }} Profile Photo"/>
+                        <x-library::input.label value="{{ Translate::get('Team') }} Profile Photo"/>
                         <span class="text-red-600 text-sm ml-1">*</span>
                     </div>
                     <div class="flex justify-between items-center relative min-w-0 w-full border-gray-300 placeholder-gray-500 bg-secondary rounded focus:ring-primary focus:border-primary text-sm p-2">
@@ -277,16 +277,16 @@
                 <div class="flex-col">
                     <x-library::input.label value="Start Date"/>
                     <x-library::input.date id="startDate" wire:model="team.start_date"
-                                           placeholder="{{ Trans::get('Team Launch Date') }}"/>
+                                           placeholder="{{ Translate::get('Team Launch Date') }}"/>
                     <x-library::input.error for="startDate"/>
                 </div>
                 <div class="flex-col">
-                    <x-library::input.label value="{{ Trans::get('Summary') }}"/>
+                    <x-library::input.label value="{{ Translate::get('Summary') }}"/>
                     <x-library::input.textarea id="summary" wire:model="team.summary"/>
                     <x-library::input.error for="team.summary"/>
                 </div>
                 <div class="flex-col">
-                    <x-library::input.label value="{{ Trans::get('About this Team') }}"/>
+                    <x-library::input.label value="{{ Translate::get('About this Team') }}"/>
                     <x-library::input.textarea id="content" wire:model="team.content" :rows="8"/>
                     <x-library::input.error for="team.content"/>
                 </div>

@@ -1,10 +1,10 @@
 <x-form-section submit="updateProfileInformation">
     <x-slot name="title">
-        {{ Trans::get('Profile Information') }}
+        {{ Translate::get('Profile Information') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ Trans::get('Update your account\'s profile information and email address.') }}
+        {{ Translate::get('Update your account\'s profile information and email address.') }}
     </x-slot>
 
     <x-slot name="form">
@@ -24,7 +24,7 @@
                                     reader.readAsDataURL($refs.photo.files[0]);
                             "/>
 
-                <x-label for="photo" value="{{ Trans::get('Photo') }}"/>
+                <x-label for="photo" value="{{ Translate::get('Photo') }}"/>
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
@@ -40,12 +40,12 @@
                 </div>
 
                 <x-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent.stop="$refs.photo.click()">
-                    {{ Trans::get('Select A New Photo') }}
+                    {{ Translate::get('Select A New Photo') }}
                 </x-secondary-button>
 
                 @if ($this->user->profile_photo_path)
                     <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ Trans::get('Remove Photo') }}
+                        {{ Translate::get('Remove Photo') }}
                     </x-secondary-button>
                 @endif
 
@@ -55,14 +55,14 @@
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ Trans::get('Name') }}"/>
+            <x-label for="name" value="{{ Translate::get('Name') }}"/>
             <x-input id="name" type="text" class="mt-1 block w-full" wire:model.live="state.name" autocomplete="name"/>
             <x-input-error for="name" class="mt-2"/>
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="email" value="{{ Trans::get('Email') }}"/>
+            <x-label for="email" value="{{ Translate::get('Email') }}"/>
             <x-input id="email" type="email" class="mt-1 block w-full" wire:model.live="state.email"/>
             <x-input-error for="email" class="mt-2"/>
         </div>
@@ -70,11 +70,11 @@
 
     <x-slot name="actions">
         <x-action-message class="mr-3" on="saved">
-            {{ Trans::get('Saved.') }}
+            {{ Translate::get('Saved.') }}
         </x-action-message>
 
         <x-button wire:loading.attr="disabled" wire:target="photo">
-            {{ Trans::get('Save') }}
+            {{ Translate::get('Save') }}
         </x-button>
     </x-slot>
 </x-form-section>

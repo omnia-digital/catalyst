@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <x-library::heading.2 class="font-semibold text-xl text-dark-text-color leading-tight">
-            {{ Trans::get('API Tokens') }}
+            {{ Translate::get('API Tokens') }}
         </x-library::heading.2>
     </x-slot>
 

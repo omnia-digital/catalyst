@@ -165,7 +165,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-2 flex text-sm leading-5 space-x-1 sm:mt-0 sm:block sm:space-x-0 sm:text-right">
-                                                        <div class="font-medium text-dark-text-color">{{ Platform::money($addon->price) }}</div>
+                                                        <div class="font-medium text-dark-text-color">{{ Catalyst::money($addon->price) }}</div>
                                                     </div>
                                                 </div>
                                                 <div
@@ -177,7 +177,7 @@
                                     <x-input.error class="mt-2" for="selected_addons"/>
                                 </fieldset>
 
-                                <p class="font-bold text-lg pt-5">Price: {{ Platform::money($price ?? 0) }}</p>
+                                <p class="font-bold text-lg pt-5">Price: {{ Catalyst::money($price ?? 0) }}</p>
                             </div>
 
                             <div class="col-span-3 space-y-1 sm:col-span-2">
@@ -358,7 +358,7 @@
 
                                         <div>
                                             <x-input.label for="country" value="Country"/>
-                                            <x-input.select x-model="country" :options="Platform::countries()"
+                                            <x-input.select x-model="country" :options="Catalyst::countries()"
                                                             id="country"/>
                                             <x-input.error for="country"/>
                                         </div>

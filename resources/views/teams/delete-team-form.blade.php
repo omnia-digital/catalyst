@@ -1,40 +1,40 @@
 <x-action-section>
     <x-slot name="title">
-        {{ Trans::get('Delete Team') }}
+        {{ Translate::get('Delete Team') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ Trans::get('Permanently delete this team.') }}
+        {{ Translate::get('Permanently delete this team.') }}
     </x-slot>
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-base-text-color">
-            {{ Trans::get('Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information regarding this team that you wish to retain.') }}
+            {{ Translate::get('Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information regarding this team that you wish to retain.') }}
         </div>
 
         <div class="mt-5">
             <x-danger-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
-                {{ Trans::get('Delete Team') }}
+                {{ Translate::get('Delete Team') }}
             </x-danger-button>
         </div>
 
         <!-- Delete Team Confirmation Modal -->
         <x-confirmation-modal wire:model.live="confirmingTeamDeletion">
             <x-slot name="title">
-                {{ Trans::get('Delete Team') }}
+                {{ Translate::get('Delete Team') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ Trans::get('Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted.') }}
+                {{ Translate::get('Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted.') }}
             </x-slot>
 
             <x-slot name="footer">
                 <x-secondary-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
-                    {{ Trans::get('Cancel') }}
+                    {{ Translate::get('Cancel') }}
                 </x-secondary-button>
 
                 <x-danger-button class="ml-2" wire:click="deleteTeam" wire:loading.attr="disabled">
-                    {{ Trans::get('Delete Team') }}
+                    {{ Translate::get('Delete Team') }}
                 </x-danger-button>
             </x-slot>
         </x-confirmation-modal>

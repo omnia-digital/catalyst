@@ -9,7 +9,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class TeamsRelationManager extends RelationManager
 {
@@ -19,12 +19,12 @@ class TeamsRelationManager extends RelationManager
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return Trans::get(Str::headline(static::getPluralModelLabel()));
+        return Translate::get(Str::headline(static::getPluralModelLabel()));
     }
 
     protected static function getRecordLabel(): ?string
     {
-        return Trans::get('Team');
+        return Translate::get('Team');
     }
 
     public function form(Form $form): Form

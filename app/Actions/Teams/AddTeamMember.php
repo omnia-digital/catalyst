@@ -10,7 +10,7 @@ use Laravel\Jetstream\Events\AddingTeamMember;
 use Laravel\Jetstream\Events\TeamMemberAdded;
 use Laravel\Jetstream\Jetstream;
 use Spatie\Permission\Models\Role;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class AddTeamMember implements AddsTeamMembers
 {
@@ -52,7 +52,7 @@ class AddTeamMember implements AddsTeamMembers
             'email' => $email,
             'role' => $role,
         ], $this->rules(), [
-            'email.exists' => Trans::get('We were unable to find a registered user with this email address.'),
+            'email.exists' => Translate::get('We were unable to find a registered user with this email address.'),
         ])->after(
             $this->ensureUserIsNotAlreadyOnTeam($team, $email)
         )->validateWithBag('addTeamMember');
@@ -83,7 +83,7 @@ class AddTeamMember implements AddsTeamMembers
             $validator->errors()->addIf(
                 $team->hasUserWithEmail($email),
                 'email',
-                Trans::get('This user already belongs to the team.')
+                Translate::get('This user already belongs to the team.')
             );
         };
     }

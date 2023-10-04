@@ -51,7 +51,7 @@
                         onclick="event.preventDefault();
                     this.closest('form').submit();"
                 >
-                    {{ Trans::get('Log Out') }}
+                    {{ Translate::get('Log Out') }}
                 </x-responsive-nav-link>
             </form>
         </x-library::dropdown>
