@@ -6,21 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
-        Schema::table('model_has_roles', function (Blueprint $table) {
+        Schema::table('model_has_permissions', function (Blueprint $table) {
             $table->dropPrimary('team_id');
             $table->dropColumn('team_id');
         });
-        Schema::table('model_has_roles', function (Blueprint $table) {
+        Schema::table('model_has_permissions', function (Blueprint $table) {
             $table->unsignedBigInteger('team_id')->nullable()->index();
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
-//        Schema::table('model_has_roles', function (Blueprint $table) {
-//            $table->unsignedBigInteger('team_id')->change();
-//        });
+        //
     }
 };
