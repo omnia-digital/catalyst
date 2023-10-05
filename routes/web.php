@@ -19,8 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-// Stripe Connect
-Route::get('teams/stripe-connect/refresh', HandleStripeConnectRefreshUrlController::class)->name('teams.stripe-connect.refresh');
+
 
 Route::get('/', function () {
     return redirect()->route('social.home');
