@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f4806109e80e40ebe38c1fd426cf1ca",
+    "content-hash": "407ed6f2291562cf946d7baf786147b9",
     "packages": [
         {
             "name": "ariaieboy/filament-jalali-datetime",
@@ -8184,24 +8184,16 @@
             "dist": {
                 "type": "path",
                 "url": "../modules/catalyst-core-plugin",
-                "reference": "c16465e123c439e9b5922ad74447e9877f426db7"
+                "reference": "513a4735a601efa3f224af9f170ec9e2fff60a61"
             },
             "require": {
-                "bezhansalleh/filament-shield": "^3.0",
                 "ext-intl": "*",
                 "filament/filament": "^3.0",
                 "filament/spatie-laravel-settings-plugin": "^3.0",
                 "illuminate/contracts": "^10.0",
-                "laravel/cashier": "^14.12",
-                "laravel/jetstream": "^4.0",
-                "omnia-digital/library": "*",
-                "overtrue/laravel-follow": "^5.1",
                 "php": "^8.1",
-                "spatie/laravel-medialibrary": "^10.13",
                 "spatie/laravel-package-tools": "^1.15.0",
-                "spatie/laravel-searchable": "^1.11",
-                "spatie/laravel-sluggable": "^3.5",
-                "spatie/laravel-tags": "^4.5"
+                "spatie/laravel-searchable": "^1.11"
             },
             "require-dev": {
                 "laravel/pint": "^1.0",
@@ -8223,8 +8215,9 @@
                         "OmniaDigital\\CatalystCore\\CatalystCoreServiceProvider"
                     ],
                     "aliases": {
-                        "Catalyst": "OmniaDigital\\CatalystCore\\Facades\\Catalyst",
-                        "Translate": "OmniaDigital\\CatalystCore\\Facades\\TranslateFacade"
+                        "CatalystCore": "OmniaDigital\\CatalystCore\\Facades\\CatalystCore",
+                        "Catalyst": "OmniaDigital\\CatalystCore\\Support\\Catalyst\\Facades\\Catalyst",
+                        "Translate": "OmniaDigital\\CatalystCore\\Support\\Catalyst\\Facades\\Translate"
                     }
                 }
             },
@@ -8282,16 +8275,18 @@
             }
         },
         {
-            "name": "omnia-digital/catalyst-forms-plugin",
+            "name": "omnia-digital/catalyst-location-plugin",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../modules/catalyst-forms-plugin",
-                "reference": "caf5a6f15ee95fbfda13e899b74625e2837d51cb"
+                "url": "../modules/catalyst-location-plugin",
+                "reference": "1320e9fb3e399a8704638bcfac454f1991058f7a"
             },
             "require": {
                 "filament/filament": "^3.0",
                 "illuminate/contracts": "^10.0",
+                "illuminate/database": "^10.0",
+                "illuminate/support": "^10.0",
                 "php": "^8.1",
                 "spatie/laravel-package-tools": "^1.15.0"
             },
@@ -8312,22 +8307,22 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "OmniaDigital\\CatalystFormsPlugin\\CatalystFormsPluginServiceProvider"
+                        "OmniaDigital\\CatalystLocation\\CatalystLocationServiceProvider"
                     ],
                     "aliases": {
-                        "CatalystFormsPlugin": "OmniaDigital\\CatalystFormsPlugin\\Facades\\CatalystFormsPlugin"
+                        "CatalystLocation": "OmniaDigital\\CatalystLocation\\Facades\\CatalystLocation"
                     }
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "OmniaDigital\\CatalystFormsPlugin\\": "src/",
-                    "OmniaDigital\\CatalystFormsPlugin\\Database\\Factories\\": "database/factories/"
+                    "OmniaDigital\\CatalystLocation\\": "src/",
+                    "OmniaDigital\\CatalystLocation\\Database\\Factories\\": "database/factories/"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "OmniaDigital\\CatalystFormsPlugin\\Tests\\": "tests/"
+                    "OmniaDigital\\CatalystLocation\\Tests\\": "tests/"
                 }
             },
             "scripts": {
@@ -8357,16 +8352,110 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Forms plugin for Catalyst",
-            "homepage": "https://github.com/omnia-digital/catalyst-forms-plugin",
+            "description": "Location plugin for Catalyst",
+            "homepage": "https://github.com/omnia-digital/catalyst-location-plugin",
             "keywords": [
-                "catalyst-forms-plugin",
+                "catalyst-location-plugin",
                 "laravel",
                 "omnia-digital"
             ],
             "support": {
-                "issues": "https://github.com/omnia-digital/catalyst-forms-plugin/issues",
-                "source": "https://github.com/omnia-digital/catalyst-forms-plugin"
+                "issues": "https://github.com/omnia-digital/catalyst-location-plugin/issues",
+                "source": "https://github.com/omnia-digital/catalyst-location-plugin"
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "omnia-digital/catalyst-social-plugin",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../modules/catalyst-social-plugin",
+                "reference": "836cbb6611b1f55af63e2de7312a0527ab3cb6cd"
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "illuminate/contracts": "^10.0",
+                "omnia-digital/catalyst-core-plugin": "dev-main",
+                "omnia-digital/catalyst-location-plugin": "dev-main",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OmniaDigital\\CatalystSocialPlugin\\CatalystSocialPluginServiceProvider",
+                        "OmniaDigital\\CatalystSocialPlugin\\Providers\\Filament\\SocialPanelProvider"
+                    ],
+                    "aliases": {
+                        "CatalystSocialPlugin": "OmniaDigital\\CatalystSocialPlugin\\Facades\\CatalystSocialPlugin"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OmniaDigital\\CatalystSocialPlugin\\": "src/",
+                    "OmniaDigital\\CatalystSocialPlugin\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "OmniaDigital\\CatalystSocialPlugin\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "post-autoload-dump": [
+                    "@php ./vendor/bin/testbench package:discover --ansi"
+                ],
+                "analyse": [
+                    "vendor/bin/phpstan analyse"
+                ],
+                "test": [
+                    "vendor/bin/pest"
+                ],
+                "test-coverage": [
+                    "vendor/bin/pest --coverage"
+                ],
+                "format": [
+                    "vendor/bin/pint"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Torres",
+                    "email": "josht@omniadigital.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Social plugin for Catalyst Framework",
+            "homepage": "https://github.com/omnia-digital/catalyst-social-plugin",
+            "keywords": [
+                "OmniaDigital",
+                "catalyst-social-plugin",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/omnia-digital/catalyst-social-plugin/issues",
+                "source": "https://github.com/omnia-digital/catalyst-social-plugin"
             },
             "transport-options": {
                 "relative": true
@@ -21244,6 +21333,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "omnia-digital/catalyst-social-plugin": 20,
+        "omnia-digital/library": 20,
         "omnia-digital/media-manager": 20
     },
     "prefer-stable": true,

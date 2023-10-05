@@ -14,6 +14,11 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
+    protected $observers = [
+        Team::class => [TeamObserver::class],
+        User::class => [UserObserver::class],
+        Membership::class => [MembershipObserver::class],
+    ];
     /**
      * The event to listener mappings for the application.
      *
