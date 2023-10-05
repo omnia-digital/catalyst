@@ -3,7 +3,7 @@
 namespace Modules\Resources\Http\Livewire\Components;
 
 
-use OmniaDigital\CatalystSocialPlugin\Http\Livewire\Components\PostCard;
+use OmniaDigital\CatalystCore\Http\Livewire\Components\PostCard;
 use function view;
 
 class ResourceMediaCard extends PostCard

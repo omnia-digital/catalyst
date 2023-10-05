@@ -173,7 +173,6 @@ return [
         /*
          * Package Service Providers...
          */
-        \App\Providers\PlatformServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
 
         /*
@@ -185,14 +184,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
-        OmniaDigital\CatalystSocialPlugin\Providers\Filament\SocialPanelProvider::class,
+//        OmniaDigital\CatalystSocialPlugin\Providers\Filament\SocialPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\VaporUiServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class,
-        App\Providers\JetstreamServiceProvider::class,
-        App\Providers\TeamLensesServiceProvider::class,
-        App\Providers\StripeConnectServiceProvider::class,
-        Omniphx\Forrest\Providers\Laravel\ForrestServiceProvider::class,
+//        App\Providers\VaporUiServiceProvider::class,
+//        App\Providers\FortifyServiceProvider::class,
+//        App\Providers\JetstreamServiceProvider::class,
+//        App\Providers\TeamLensesServiceProvider::class,
+//        App\Providers\StripeConnectServiceProvider::class,
+//        Omniphx\Forrest\Providers\Laravel\ForrestServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -207,7 +206,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Forrest' => Omniphx\Forrest\Providers\Laravel\Facades\Forrest::class,
+//        'Forrest' => Omniphx\Forrest\Providers\Laravel\Facades\Forrest::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
         'Translate' => \OmniaDigital\CatalystCore\Facades\Translate::class,
         'Catalyst' => \OmniaDigital\CatalystCore\Facades\Catalyst::class

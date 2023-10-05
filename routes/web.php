@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\HandleStripeConnectRefreshUrlController;
-use App\Livewire\Pages\Account\Index as AccountIndex;
-use App\Livewire\Pages\Media\Index as MediaIndex;
-use App\Livewire\UserNotifications;
 use Illuminate\Support\Facades\Route;
+use OmniaDigital\CatalystCore\Http\Controllers\HandleStripeConnectRefreshUrlController;
+use OmniaDigital\CatalystCore\Livewire\UserNotifications;
 
 Route::get('r/{url?}', function ($url) {
     return redirect($url);
@@ -15,9 +13,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
     Route::get('notifications', UserNotifications::class)->name('notifications');
-    Route::get('account', AccountIndex::class)->name('account');
+    Route::get('account', OmniaDigital\CatalystCore\Livewire\Pages\Account\Index::class)->name('account');
     Route::name('media.')->prefix('media')->group(function () {
-        Route::get('/', MediaIndex::class)->name('index');
+        Route::get('/', OmniaDigital\CatalystCore\Livewire\Pages\Media\Index::class)->name('index');
     });
 });
 

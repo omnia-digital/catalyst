@@ -2,12 +2,12 @@
 
 namespace Modules\Articles\Http\Livewire\Pages\Bookmarks;
 
-use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Modules\Social\Enums\PostType;
-use Modules\Social\Models\Bookmark;
+use OmniaDigital\CatalystCore\Enums\PostType;
+use OmniaDigital\CatalystCore\Models\Bookmark;
+use OmniaDigital\CatalystCore\Traits\Filter\WithSortAndFilters;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 
 class Index extends Component

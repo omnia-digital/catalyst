@@ -2,13 +2,14 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
+use OmniaDigital\CatalystCore\Enums\PostType;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
+use OmniaDigital\CatalystCore\Models\Post;
 use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
-use App\Traits\Filter\WithSortAndFilters;
 use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Modules\Social\Enums\PostType;
-use Modules\Social\Models\Post;
+use OmniaDigital\CatalystCore\Traits\Filter\WithSortAndFilters;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 use Platform;
 
