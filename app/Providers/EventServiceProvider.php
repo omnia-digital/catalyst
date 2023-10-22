@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
-use App\Models\Membership;
+use OmniaDigital\CatalystCore\Models\Membership;
 use App\Models\Team;
 use App\Models\User;
-use App\Observers\MembershipObserver;
-use App\Observers\TeamObserver;
-use App\Observers\UserObserver;
+use OmniaDigital\CatalystCore\Observers\MembershipObserver;
 use Illuminate\Auth\Events\Registered;
+use OmniaDigital\CatalystCore\Observers\TeamObserver;
+use OmniaDigital\CatalystCore\Observers\UserObserver;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 

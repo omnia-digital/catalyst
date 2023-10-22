@@ -10,7 +10,6 @@ use App\Filament\Resources\TeamResource\Pages\ListTeams;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Models\Award;
 use App\Models\Location;
-use App\Models\Role;
 use App\Models\Tag;
 use App\Models\Team;
 use App\Models\User;
@@ -18,6 +17,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Modules\Social\Models\Profile;
 use Tests\TestCase;
+use OmniaDigital\CatalystCore\Models\Role;
 
 class AdminTest extends TestCase
 {
