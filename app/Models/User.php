@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use OmniaDigital\CatalystCore\Models\User as CatalystUser;
 use OmniaDigital\CatalystCore\Traits\CatalystTraits;
 
-class User extends CatalystUser
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     use CatalystTraits;
 
