@@ -18,7 +18,7 @@
                     @endforeach
                 </div>
                 <div class="sm:hidden flex items-center">
-                    <livewire:social::partials.follow-button :model="$user"/>
+                    <livewire:catalyst-social::partials.follow-button :model="$user"/>
                 </div>
             </div>
             <div class="hidden sm:ml-6 sm:flex sm:items-center">
@@ -26,7 +26,7 @@
                     <a href="{{ route('social.profile.edit', $user->handle) }}"
                        class="py-4 mx-4 whitespace-nowrap">{{ Translate::get('Edit Profile') }}</a>
                 @endcan
-                <livewire:social::partials.follow-button :model="$user" class="py-4 mx-4"/>
+                <livewire:catalyst-social::partials.follow-button :model="$user" class="py-4 mx-4"/>
             </div>
             <div class="-mr-2 flex items-center sm:hidden">
                 <!-- Mobile menu button -->

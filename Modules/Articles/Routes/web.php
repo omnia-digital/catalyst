@@ -8,7 +8,7 @@ use Modules\Articles\Http\Livewire\Pages\Articles\Show;
 use Modules\Articles\Http\Livewire\Pages\Bookmarks\Index as BookmarkIndex;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
-use Modules\Social\Http\Middleware\GuestAccessMiddleware;
+use OmniaDigital\CatalystCore\Http\Middleware\GuestAccessMiddleware;
 
 Route::name('articles.')->prefix('articles')->middleware([GuestAccessMiddleware::class, 'verified'])->group(function (
 ) {

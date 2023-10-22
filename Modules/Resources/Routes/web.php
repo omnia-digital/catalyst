@@ -8,7 +8,7 @@ use Modules\Resources\Http\Livewire\Pages\Resources\Published as ResourcesPublis
 use Modules\Resources\Http\Livewire\Pages\Resources\Show;
 use Modules\Social\Actions\Posts\CreateNewPostAction;
 use Modules\Social\Enums\PostType;
-use Modules\Social\Http\Middleware\GuestAccessMiddleware;
+use OmniaDigital\CatalystCore\Http\Middleware\GuestAccessMiddleware;
 
 Route::name('resources.')->prefix('resources')->middleware([GuestAccessMiddleware::class, 'verified'])->group(function (
 ) {

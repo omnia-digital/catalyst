@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.pages.default-page-layout')
+@extends('catalyst-social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
     <div class="container mx-auto px-4">

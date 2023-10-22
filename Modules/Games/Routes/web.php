@@ -3,7 +3,7 @@
 use Modules\Games\Http\Livewire\Home;
 use Modules\Games\Http\Livewire\Igdb;
 use Modules\Games\Http\Livewire\Show;
-use Modules\Social\Http\Middleware\GuestAccessMiddleware;
+use OmniaDigital\CatalystCore\Http\Middleware\GuestAccessMiddleware;
 
 Route::name('games.')->prefix('games')->middleware([GuestAccessMiddleware::class, 'verified'])->group(function () {
 //    Route::get('/', Home::class)->name('home');

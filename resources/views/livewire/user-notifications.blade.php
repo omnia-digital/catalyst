@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.pages.default-page-layout')
+@extends('catalyst-social::livewire.layouts.pages.default-page-layout')
 
 @section('content')
     <div class="sticky top-[55px] z-40 mb-4 rounded-b-lg pl-4 flex items-center bg-primary items-center">

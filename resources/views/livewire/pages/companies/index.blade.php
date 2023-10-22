@@ -1,5 +1,5 @@
 @php use App\Models\Company; @endphp
-@extends('social::livewire.layouts.pages.full-page-layout')
+@extends('catalyst-social::livewire.layouts.pages.full-page-layout')
 
 @section('content')
     <div class="sticky top-[55px] z-40 rounded-b-lg px-4 flex items-center bg-primary items-center justify-between">
@@ -81,7 +81,7 @@
         @endif
         <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
             @forelse ($companies as $company)
-                <livewire:social::components.company-card :company="$company" wire:key="company-{{ $company->id }}"/>
+                <livewire:catalyst-social::components.company-card :company="$company" wire:key="company-{{ $company->id }}"/>
             @empty
                 <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Translate::get('No Companies Found') }}</p>
             @endforelse

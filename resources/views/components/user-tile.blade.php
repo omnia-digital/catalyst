@@ -15,7 +15,7 @@
                 </a>
             </div>
             <div class="flex justify-end items-center">
-                <livewire:social::partials.follow-button :model="$user" :key="'follow-user-' . $user->id"/>
+                <livewire:catalyst-social::partials.follow-button :model="$user" :key="'follow-user-' . $user->id"/>
                 @if ($team)
                     <div>
                         <x-library::dropdown>

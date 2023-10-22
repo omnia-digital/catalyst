@@ -83,7 +83,7 @@
                                             </a>
                                         @endcan
                                         @can('delete', $post)
-                                            <livewire:social::delete-post-dropdown-item :post="$post"
+                                            <livewire:catalyst-social::delete-post-dropdown-item :post="$post"
                                                                                         wire:key="delete-post-dropdown-item{{ $post->id }}"
                                                                                         :show="true"/>
                                         @endcan

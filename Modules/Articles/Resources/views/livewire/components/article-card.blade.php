@@ -91,7 +91,7 @@
     <!-- Social Actions -->
     @if ($showPostActions)
         <div class="z-20 w-full px-5">
-            <livewire:social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
+            <livewire:catalyst-catalyst-social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
         </div>
     @endif
 </article>

@@ -35,7 +35,7 @@
         <x-slot name="actions">
             <x-library::button wire:click="addArticle">Add Article</x-library::button>
 
-            {{--            <livewire:social::post-editor :title :wire:key="uniqid()" submit-text="Add Article"/>--}}
+            {{--            <livewire:catalyst-catalyst-social::post-editor :title :wire:key="uniqid()" submit-text="Add Article"/>--}}
         </x-slot>
     </x-library::modal>
 

@@ -94,7 +94,7 @@
                         </a>
                     @endcan
                     @can('delete', $post)
-                        <livewire:social::delete-post-dropdown-item :post="$post"
+                        <livewire:catalyst-social::delete-post-dropdown-item :post="$post"
                                                                     wire:key="delete-post-dropdown-item{{ $post->id }}"
                                                                     :show="true"/>
                     @endcan
@@ -151,7 +151,7 @@
 
     @if ($showPostActions)
         <div wire:click.prevent.stop="" class="z-20 px-5">
-            <livewire:social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
+            <livewire:catalyst-social::partials.post-actions wire:key="post-actions-{{ $post->id }}" :post="$post"/>
         </div>
     @endif
 </article>

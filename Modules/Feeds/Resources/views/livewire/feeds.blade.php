@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.pages.default-page-layout')
+@extends('catalyst-social::livewire.layouts.pages.default-page-layout')
 
 @section('banner-with-sidebar')
     <div class="w-full mb-4">

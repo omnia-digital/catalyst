@@ -38,8 +38,7 @@
         "pestphp/pest-plugin-laravel": "^2.0",
         "pusher/pusher-php-server": "^7.0",
         "sentry/sentry-laravel": "^3.0",
-        "squirephp/countries-en": "^3.3",
-        "vedmant/laravel-feed-reader": "^1.5"
+        "squirephp/countries-en": "^3.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -71,6 +70,15 @@
         {
             "type": "path",
             "url": "../modules/catalyst-core-plugin"
+        },
+        {
+            "type": "path",
+            "url": "../modules/catalyst-location-plugin"
+        },
+
+        {
+            "type": "path",
+            "url": "../modules/catalyst-reviews-plugin"
         }
     ],
     "autoload": {
@@ -97,7 +105,6 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi",
             "@php artisan vendor:publish --tag=library-assets --force",
-            "@php artisan vapor-ui:publish --ansi",
             "@php artisan filament:upgrade",
             "@php artisan config:clear",
             "@php artisan view:clear",

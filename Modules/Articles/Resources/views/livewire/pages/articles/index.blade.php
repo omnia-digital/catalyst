@@ -1,5 +1,5 @@
 @php use Modules\Social\Models\Post; @endphp
-@extends('social::livewire.layouts.pages.sidebar-page-layout')
+@extends('catalyst-catalyst-social::livewire.layouts.pages.sidebar-page-layout')
 
 @section('content')
     <div class="mb-3 rounded-b-lg px-4 flex items-center justify-between bg-primary">
@@ -24,7 +24,7 @@
     </div>
 
     {{--    <div class="mx-auto max-w-post-card-max-w">--}}
-    {{--        <livewire:social::news-feed-editor/>--}}
+    {{--        <livewire:catalyst-catalyst-social::news-feed-editor/>--}}
     {{--    </div>--}}
 
     <div class="bg-secondary px-6 py-2 rounded-lg border-t border-b border-gray-100 sm:flex sm:items-center sm:justify-between">
@@ -66,7 +66,7 @@
             @forelse ($articles as $post)
                 <div class="w-full break-inside mb-3">
                     <div class="">
-                        <livewire:social::components.post-card-dynamic :post="$post"
+                        <livewire:catalyst-catalyst-social::components.post-card-dynamic :post="$post"
                                                                        :wire:key="'post-card-' . $post->id"/>
                         {{--                        <livewire:articles::components.article-card--}}
                         {{--                                as="li"--}}
