@@ -1,5 +1,5 @@
 @php use App\Models\MediaFile; @endphp
-@extends('catalyst-social::livewire.layouts.pages.full-page-layout')
+@extends('catalyst::livewire.layouts.pages.full-page-layout')
 
 @section('content')
     <div class=" pr-4 sm:pr-6 lg:pr-4">

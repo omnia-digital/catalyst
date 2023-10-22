@@ -1,4 +1,4 @@
-@extends('catalyst-social::livewire.layouts.pages.sidebar-page-layout')
+@extends('catalyst::livewire.layouts.pages.sidebar-page-layout')
 
 @section('content')
     <div class="mb-3 rounded-b-lg pl-4 flex items-center bg-primary">

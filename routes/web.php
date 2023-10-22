@@ -22,5 +22,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 Route::get('/', function () {
-    return redirect()->route('catalyst-social.home');
+    return redirect()->route('filament.social.pages.home');
 });

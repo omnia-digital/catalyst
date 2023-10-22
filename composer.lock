@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1998d3f9ef7787e8d1a2ea6a1a7615a6",
+    "content-hash": "a0b9eafe1cbee3db39f8791ac64b4274",
     "packages": [
         {
             "name": "ariaieboy/filament-jalali-datetime",
@@ -7367,7 +7367,7 @@
             "dist": {
                 "type": "path",
                 "url": "../modules/catalyst-core-plugin",
-                "reference": "1947c3f617692695f3eebe91cedb9e16be238531"
+                "reference": "d46c9e5f160a8e640f78c75e9d0dd114386f2f48"
             },
             "require": {
                 "ariaieboy/filament-jalali-datetime": "^1.0",
@@ -7590,7 +7590,7 @@
             "dist": {
                 "type": "path",
                 "url": "../modules/catalyst-reviews-plugin",
-                "reference": "7ad8e464ac20ecef3d6fa16fb3660860b0855f44"
+                "reference": "28225954822da773ea0bd951787e96d4f1544735"
             },
             "require": {
                 "filament/filament": "^3.0",

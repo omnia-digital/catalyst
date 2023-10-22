@@ -1,4 +1,4 @@
-@extends('catalyst-social::livewire.layouts.pages.default-page-layout')
+@extends('catalyst::livewire.layouts.pages.default-page-layout')
 
 @section('content')
     @empty($resource)
@@ -79,7 +79,7 @@
                     @endif
 
                     <div>
-                        <livewire:catalyst-social::partials.post-actions wire:key="resource-actions-{{ $resource->id }}"
+                        <livewire:catalyst::partials.post-actions wire:key="resource-actions-{{ $resource->id }}"
                                                                 :post="$resource" :show-comment-button="false"
                                                                 :show-bookmark-button="true"/>
                     </div>
@@ -90,7 +90,7 @@
                 <div class="py-4 justify-center w-full xl:w-3/4 2xl:1/2 m-auto max-w-post-card-max-w">
                     <div class="max-w-post-card-max-w">
                         <x-library::heading.3>{{ Translate::get('Discussion') }}</x-library::heading.3>
-                        <livewire:catalyst-social::comment-section :post="$resource"
+                        <livewire:catalyst::comment-section :post="$resource"
                                                           :type="\Modules\Social\Enums\PostType::ARTICLE"/>
                     </div>
                 </div>

@@ -34,7 +34,7 @@
                 </nav>
             </div>
 
-            {{--            <livewire:catalyst-social::partials.applications/>--}}
+            {{--            <livewire:catalyst::partials.applications/>--}}
         </div>
     </div>
 </div>

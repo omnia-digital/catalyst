@@ -20973,6 +20973,18 @@
      
 }
 
+    namespace OmniaDigital\CatalystReviewsPlugin\Facades { 
+            /**
+     * 
+     *
+     * @see \OmniaDigital\CatalystReviewsPlugin\CatalystReviewsPlugin
+     */ 
+        class CatalystReviewsPlugin {
+         
+    }
+     
+}
+
     namespace Sentry\Laravel { 
             /**
      * 
@@ -23903,20 +23915,6 @@
      
 }
 
-    namespace Spatie\MediaLibrary\MediaCollections\Models\Collections { 
-            /**
-     * 
-     *
-     * @template TKey of array-key
-     * @template TModel of \Spatie\MediaLibrary\MediaCollections\Models\Media
-     * @extends Collection<TKey, TModel>
-     */ 
-        class MediaCollection {
-         
-    }
-     
-}
-
     namespace Illuminate\Console\Scheduling { 
             /**
      * 
@@ -23937,6 +23935,20 @@
         {
                         return \Illuminate\Console\Scheduling\Event::sentryMonitor($monitorSlug, $checkInMargin, $maxRuntime, $updateMonitorConfig);
         }
+         
+    }
+     
+}
+
+    namespace Spatie\MediaLibrary\MediaCollections\Models\Collections { 
+            /**
+     * 
+     *
+     * @template TKey of array-key
+     * @template TModel of \Spatie\MediaLibrary\MediaCollections\Models\Media
+     * @extends Collection<TKey, TModel>
+     */ 
+        class MediaCollection {
          
     }
      
@@ -28380,6 +28392,7 @@ namespace  {
             class Livewire extends \Livewire\Livewire {}
             class Module extends \Nwidart\Modules\Facades\Module {}
             class CatalystLocation extends \OmniaDigital\CatalystLocation\Facades\CatalystLocation {}
+            class CatalystReviewsPlugin extends \OmniaDigital\CatalystReviewsPlugin\Facades\CatalystReviewsPlugin {}
             class Sentry extends \Sentry\Laravel\Facade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class Signal extends \Spatie\SignalAwareCommand\Facades\Signal {}

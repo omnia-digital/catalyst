@@ -1,4 +1,4 @@
-@extends('catalyst-social::livewire.layouts.main-layout')
+@extends('catalyst::livewire.layouts.main-layout')
 
 
 @section('page-layout')

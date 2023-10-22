@@ -1,5 +1,5 @@
 @php use Modules\Social\Models\Post; @endphp
-@extends('catalyst-social::livewire.layouts.pages.full-page-layout')
+@extends('catalyst::livewire.layouts.pages.full-page-layout')
 
 @section('content')
     <div class="mr-4">
@@ -18,7 +18,7 @@
                                 class="py-2 w-full h-10"
                                 wire:click="$toggle('showPostEditor')"
                         >{{ Translate::get('Add New Resource') }}</x-library::button>
-                        <livewire:authentication-modal/>
+                        <livewire:catalyst::authentication-modal/>
                     @endauth
                 @endif
             </div>
@@ -27,7 +27,7 @@
         @if ($showPostEditor)
             <div class="my-4 mx-auto max-w-post-card-max-w">
                 <x-library::heading.2 class="mb-2">{{ Translate::get('Add New Resource') }}</x-library::heading.2>
-                <livewire:catalyst-social::news-feed-editor :postType="\Modules\Social\Enums\PostType::RESOURCE"
+                <livewire:catalyst::news-feed-editor :postType="\Modules\Social\Enums\PostType::RESOURCE"
                                                    submitButtonText="Add Resource"
                                                    placeholder="What do you want to call this resource?"/>
             </div>
@@ -72,7 +72,7 @@
                 @forelse ($resources as $post)
                     <div class="w-full break-inside">
                         <div class="">
-                            <livewire:catalyst-social::components.post-card-dynamic :post="$post"
+                            <livewire:catalyst::components.post-card-dynamic :post="$post"
                                                                            :wire:key="'post-card-' . $post->id"/>
                             {{--                        <livewire:resources::components.resource-card--}}
                             {{--                                as="li"--}}

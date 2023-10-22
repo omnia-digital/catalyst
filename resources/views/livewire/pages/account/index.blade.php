@@ -1,10 +1,10 @@
-@extends('catalyst-social::livewire.layouts.pages.account-page-layout')
+@extends('catalyst::livewire.layouts.pages.account-page-layout')
 
 @section('content')
-    <x-catalyst-social::page-heading>
+    <x-catalyst::page-heading>
         <x-slot name="title">{{ Translate::get('Account Settings') }}</x-slot>
         {{ Translate::get('Manage all your account settings in one place.') }}
-    </x-catalyst-social::page-heading>
+    </x-catalyst::page-heading>
     <x-vertical-tabs>
         <x-slot:items>
             <x-vertical-tabs.item icon="cog" class="text-lg font-medium">Account</x-vertical-tabs.item>

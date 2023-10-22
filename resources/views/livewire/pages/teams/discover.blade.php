@@ -1,4 +1,4 @@
-@extends('catalyst-social::livewire.layouts.pages.full-page-layout')
+@extends('catalyst::livewire.layouts.pages.full-page-layout')
 
 @section('full-width-header')
     <div class="w-full mb-4">
@@ -27,7 +27,7 @@
                 <x-library::heading.3 class="uppercase">{{ Translate::get('Featured Teams') }}</x-library::heading.3>
                 <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
                     @forelse ($featuredTeams->take(4) as $team)
-                        <livewire:catalyst-social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                        <livewire:catalyst::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                     @empty
                         <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Translate::get('No Featured Teams Found') }}</p>
                     @endforelse
@@ -40,7 +40,7 @@
             <x-library::heading.3 class="uppercase">{{ Translate::get('New Teams') }}</x-library::heading.3>
             <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
                 @forelse ($newTeams->take(4) as $team)
-                    <livewire:catalyst-social::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
+                    <livewire:catalyst::components.teams.team-card :team="$team" wire:key="team-{{ $team->id }}"/>
                 @empty
                     <p class="p-4 bg-secondary rounded-md text-base-text-color">{{ Translate::get('No New Teams Found') }}</p>
                 @endforelse
@@ -66,7 +66,7 @@
         @if (config('app.modules.social.map'))
             <div>
                 <x-library::heading.3 class="uppercase">{{ Translate::get('Team Map') }}</x-library::heading.3>
-                <livewire:catalyst-social::components.teams.map class=""/>
+                <livewire:catalyst::components.teams.map class=""/>
             </div>
         @endif
 
@@ -79,7 +79,7 @@
                     <div class="py-4">
                         <div class="col-span-2 grid grid-cols-5 gap-3">
                             @foreach ($trendingTeams as $team)
-                                <livewire:catalyst-social::components.teams.team-card :team="$team"
+                                <livewire:catalyst::components.teams.team-card :team="$team"
                                                                              wire:key="trending-team-{{ $team->id }}"/>
                             @endforeach
                         </div>
@@ -121,7 +121,7 @@
                             <div class="py-4">
                                 <div class="col-span-2 grid grid-cols-4 gap-3">
                                     @foreach ($this->getTeams($category['slug'])->take(4) as $team)
-                                        <livewire:catalyst-social::components.teams.team-card :team="$team"
+                                        <livewire:catalyst::components.teams.team-card :team="$team"
                                                                                      wire:key="curated-team-{{ $team->id }}"/>
                                     @endforeach
                                 </div>
@@ -142,7 +142,7 @@
         {{--                    <div class="py-4">--}}
         {{--                        <div class="col-span-2 grid grid-cols-4 gap-3">--}}
         {{--                            @foreach ($curatedTeams->take(4) as $team)--}}
-        {{--                                <livewire:catalyst-social::components.teams.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>--}}
+        {{--                                <livewire:catalyst::components.teams.team-card :team="$team" wire:key="curated-team-{{ $team->id }}"/>--}}
         {{--                            @endforeach--}}
         {{--                        </div>--}}
         {{--                    </div>--}}
@@ -178,7 +178,7 @@
         {{--                    <div class="py-4">--}}
         {{--                        <div class="col-span-2 grid grid-cols-5 gap-3">--}}
         {{--                            @foreach ($popularIndiesTeams as $team)--}}
-        {{--                                <livewire:catalyst-social::components.teams.team-card :team="$team" wire:key="popular-indies-team-{{ $team->id }}"/>--}}
+        {{--                                <livewire:catalyst::components.teams.team-card :team="$team" wire:key="popular-indies-team-{{ $team->id }}"/>--}}
         {{--                            @endforeach--}}
         {{--                        </div>--}}
         {{--                    </div>--}}

@@ -28,8 +28,8 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Modules\Billing\Http\Middleware\UserSubscriptionCheck;
 use Modules\Livestream\Http\Middleware\EnsureTeamInfoIsFilled;
+use OmniaDigital\CatalystCore\Http\Middleware\UserSubscriptionCheck;
 
 class Kernel extends HttpKernel
 {
