@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="sticky top-[55px] z-40 rounded-b-lg px-4 flex items-center bg-primary items-center justify-between">
-        <a href="{{ route('social.companies.home', []) }}">
+        <a href="{{ route('catalyst-social.companies.home', []) }}">
             <div class="flex-1 flex items-center space-x-2 -ml-1">
                 <x-library::icons.icon name="fa-regular fa-users" size="w-8 h-8" color="text-white-text-color"/>
                 <x-library::heading.1 class="py-4"
@@ -28,7 +28,7 @@
             <div class="flex justify-between space-x-2 pt-4 mb-4">
                 @foreach ($categories as $category)
                     <x-library::button.link
-                            :href="route('social.companies.home', ['lens' => str($category['slug'])->slug()->value()])"
+                            :href="route('catalyst-social.companies.home', ['lens' => str($category['slug'])->slug()->value()])"
                             class="w-full h-16 {{ str($lens) == str($category['slug'])->slug()
                 ->value() ? 'border-primary text-base-text-color' : 'text-base-text-color' }}">
                         {{ $category['name'] }}

@@ -93,13 +93,13 @@
                 <div class="flex items-center space-x-2">
                     <x-library::heading.3 class="uppercase">{{ Translate::get('Categories') }} ({{ count($categories) }})
                     </x-library::heading.3>
-                    <a href="{{ route('social.teams.home') }}"
+                    <a href="{{ route('catalyst-social.teams.home') }}"
                        class="text-gray-500 text-xs">{{ Translate::get('View All Teams') }}</a>
                 </div>
 
                 <div class="flex justify-between space-x-2 py-4">
                     @foreach ($categories as $category)
-                        <x-library::button.link :href="route('social.teams.home', ['lens' => $category['slug']])"
+                        <x-library::button.link :href="route('catalyst-social.teams.home', ['lens' => $category['slug']])"
                                                 class="w-full h-16 text-base-text-color">
                             {{ $category['name'] }}
                         </x-library::button.link>
@@ -113,7 +113,7 @@
                         <div class="flex items-center space-x-2">
                             <x-library::heading.3
                                     class="uppercase">{{ Translate::get($category['name']) }}</x-library::heading.3>
-                            <a href="{{ route('social.teams.home', ['tags[0]' => $category['slug']]) }}"
+                            <a href="{{ route('catalyst-social.teams.home', ['tags[0]' => $category['slug']]) }}"
                                class="text-gray-500 text-xs">View All</a>
                         </div>
 
@@ -135,7 +135,7 @@
         {{--            @if ($curatedTeams->count())--}}
         {{--                <div class="flex items-center space-x-2">--}}
         {{--                    <x-library::heading.3 class="uppercase">{{ \Translate::get('Curated') }}</x-library::heading.3>--}}
-        {{--                    <a href="{{ route('social.teams.home', ['tags[0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>--}}
+        {{--                    <a href="{{ route('catalyst-social.teams.home', ['tags[0]' => 'curated']) }}" class="text-gray-500 text-xs">View All</a>--}}
         {{--                </div>--}}
 
         {{--                <div class="px-4 sm:px-6 md:px-0">--}}
@@ -153,7 +153,7 @@
         {{--        <div>--}}
         {{--            <div class="flex items-center space-x-2">--}}
         {{--                <x-library::heading.3 class="uppercase">{{ \Translate::get('Popular Indies') }}</x-library::heading.3>--}}
-        {{--                <a href="{{ route('social.teams.home', ['lens' => 'popular-indies']) }}" class="text-gray-500 text-xs">View All</a>--}}
+        {{--                <a href="{{ route('catalyst-social.teams.home', ['lens' => 'popular-indies']) }}" class="text-gray-500 text-xs">View All</a>--}}
         {{--            </div>--}}
 
         {{--            <div class="px-4 sm:px-6 md:px-0">--}}
@@ -171,7 +171,7 @@
         {{--            @if ($popularIndiesTeams->count())--}}
         {{--                <div class="flex items-center space-x-2">--}}
         {{--                    <x-library::heading.3 class="uppercase">{{ \Translate::get('Popular Upcoming') }}</x-library::heading.3>--}}
-        {{--                    <a href="{{ route('social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">{{ \Translate::get('View All') }}</a>--}}
+        {{--                    <a href="{{ route('catalyst-social.teams.home', ['lens' => 'popular-upcoming']) }}" class="text-gray-500 text-xs">{{ \Translate::get('View All') }}</a>--}}
         {{--                </div>--}}
 
         {{--                <div class="px-4 sm:px-6 md:px-0">--}}

@@ -21,14 +21,14 @@
             @can('apply', $team)
                 <a
                         class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-primary text-white-text-color hover:opacity-75"
-                        href="{{ route('social.teams.application', $team) }}"
+                        href="{{ route('catalyst-social.teams.application', $team) }}"
                 >{{ \OmniaDigital\CatalystCore\Facades\Catalyst::applyButtonText() }}</a>
             @endcan
         @endif
     @else
         <button
                 class="py-2 px-4 mx-2 inline-flex items-center text-sm rounded-full bg-primary text-white-text-color hover:opacity-75"
-                wire:click.prevent="showAuthenticationModal('{{ route('social.teams.show', $team) }}')"
+                wire:click.prevent="showAuthenticationModal('{{ route('catalyst-social.teams.show', $team) }}')"
         >{{ \OmniaDigital\CatalystCore\Facades\Catalyst::applyButtonText() }}</button>
     @endauth
 </div>

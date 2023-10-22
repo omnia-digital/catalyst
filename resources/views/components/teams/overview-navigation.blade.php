@@ -3,7 +3,7 @@
         <div class="flex ml-auto md:ml-0">
             @foreach ($nav as $key => $item)
                 <a
-                        href="{{ route('social.teams.' . $key, $team) }}"
+                        href="{{ route('catalyst-social.teams.' . $key, $team) }}"
                         class="py-4 mx-[10px] hidden md:flex items-center border-b-2 border-b-transparent {{ $pageView === $key ? 'border-b-primary' : '' }} hover:border-b-primary">
                     {{ $item }}
                     @if ($key === 'members')
@@ -25,7 +25,7 @@
                 </x-slot>
                 @foreach ($nav as $key => $item)
                     <a
-                            href="{{ route('social.teams.' . $key, $team) }}"
+                            href="{{ route('catalyst-social.teams.' . $key, $team) }}"
                             class="md:hidden block w-full px-4 py-2 text-left text-sm disabled:text-base-text-color border-transparent bg-secondary {{ $pageView === $key ? 'bg-neutral text-primary' : '' }} hover:bg-neutral">
                         {{ $item }}
                         @if ($key === 'members')
@@ -39,7 +39,7 @@
                 @can('send-team-broadcast', $team)
                     <a href="#" x-data @click.prevent.stop="$openModal('notify-team-modal')"
                        title="Send a message to the entire community">{{ Translate::get('Notify Team') }}</a>
-                    <a href="{{ route('social.teams.admin', $team) }}"
+                    <a href="{{ route('catalyst-social.teams.admin', $team) }}"
                        class="md:hidden hover:bg-neutral block w-full px-4 py-2 text-left text-sm">{{ Translate::get('Admin Panel') }}</a>
                 @endcan
             </x-library::dropdown>
@@ -49,7 +49,7 @@
         @can('update', $team)
             @if ($team->applicationsCount() > 0)
                 <a
-                        class="flex items-center hover:underline" href="{{ route('social.teams.admin', $team) }}">
+                        class="flex items-center hover:underline" href="{{ route('catalyst-social.teams.admin', $team) }}">
                     <p>{{ Translate::get('Pending Applications: ') }}</p>
                     <span
                             class="ml-2 text-xs w-5 h-5 flex items-center justify-center text-white-text-color bg-primary rounded-full hover:no-underline"
@@ -64,7 +64,7 @@
                     title="Send a message to the entire community"
                     class="py-4 mx-[10px] hidden md:flex items-center"
             >{{ Translate::get('Notify Team') }}</a>
-            <a href="{{ route('social.teams.admin', $team) }}" class="bg-neutral rounded-lg px-4 py-2 border border-secondary hidden md:block font-bold hover:underline mx-4
+            <a href="{{ route('catalyst-social.teams.admin', $team) }}" class="bg-neutral rounded-lg px-4 py-2 border border-secondary hidden md:block font-bold hover:underline mx-4
             whitespace-nowrap">{{
             Translate::get('Admin Panel')
             }}</a>

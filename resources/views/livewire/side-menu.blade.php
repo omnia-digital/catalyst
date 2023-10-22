@@ -49,7 +49,7 @@
     <div class="hidden pt-16 w-24 bg-secondary md:flex md:flex-col md:fixed md:inset-y-0 shadow-lg">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex-1 flex flex-col min-h-0 ">
-            <a href="{{ route('social.home') }}">
+            <a href="{{ route('catalyst-social.home') }}">
                 <div class="flex-shrink-0 pl-6 flex p-4">
                     <div class="flex flex-col justify-center items-center">
                         <div>

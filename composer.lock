@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0b9eafe1cbee3db39f8791ac64b4274",
+    "content-hash": "1998d3f9ef7787e8d1a2ea6a1a7615a6",
     "packages": [
         {
             "name": "ariaieboy/filament-jalali-datetime",
@@ -4043,16 +4043,16 @@
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
-            "version": "3.2.4",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kirschbaum-development/eloquent-power-joins.git",
-                "reference": "fadc20d436b0693a34c4b611d07954818e46eb4d"
+                "reference": "9dd336b17cca5c82315365c5323895297fc35037"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kirschbaum-development/eloquent-power-joins/zipball/fadc20d436b0693a34c4b611d07954818e46eb4d",
-                "reference": "fadc20d436b0693a34c4b611d07954818e46eb4d",
+                "url": "https://api.github.com/repos/kirschbaum-development/eloquent-power-joins/zipball/9dd336b17cca5c82315365c5323895297fc35037",
+                "reference": "9dd336b17cca5c82315365c5323895297fc35037",
                 "shasum": ""
             },
             "require": {
@@ -4099,9 +4099,9 @@
             ],
             "support": {
                 "issues": "https://github.com/kirschbaum-development/eloquent-power-joins/issues",
-                "source": "https://github.com/kirschbaum-development/eloquent-power-joins/tree/3.2.4"
+                "source": "https://github.com/kirschbaum-development/eloquent-power-joins/tree/3.3.0"
             },
-            "time": "2023-09-12T17:02:05+00:00"
+            "time": "2023-10-22T13:00:50+00:00"
         },
         {
             "name": "lab404/laravel-impersonate",
@@ -7367,7 +7367,7 @@
             "dist": {
                 "type": "path",
                 "url": "../modules/catalyst-core-plugin",
-                "reference": "d46c9e5f160a8e640f78c75e9d0dd114386f2f48"
+                "reference": "46ee0219d558bdda8db86fdb08be8d056a54933d"
             },
             "require": {
                 "ariaieboy/filament-jalali-datetime": "^1.0",
@@ -7386,6 +7386,7 @@
                 "laravel/cashier": "^14.12",
                 "laravel/jetstream": "^4.0",
                 "laravel/passport": "^11.9",
+                "livewire/livewire": "^3.0",
                 "omnia-digital/catalyst-location-plugin": "dev-main",
                 "omnia-digital/catalyst-reviews-plugin": "dev-main",
                 "omnia-digital/library": "*",
@@ -7433,7 +7434,7 @@
                     ],
                     "aliases": {
                         "Catalyst": "OmniaDigital\\CatalystCore\\Facades\\Catalyst",
-                        "Translate": "OmniaDigital\\CatalystCore\\Facades\\TranslateFacade"
+                        "Translate": "OmniaDigital\\CatalystCore\\Facades\\Translate"
                     }
                 }
             },

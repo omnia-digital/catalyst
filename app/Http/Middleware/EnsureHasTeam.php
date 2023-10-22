@@ -10,7 +10,7 @@ class EnsureHasTeam
     public function handle(Request $request, Closure $next)
     {
         if (! auth()->user()->isMemberOfATeam()) {
-            return redirect()->route('social.home');
+            return redirect()->route('catalyst-social.home');
         }
         $this->ensureUserHasCurrentTeamSet();
 

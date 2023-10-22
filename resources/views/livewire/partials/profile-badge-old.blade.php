@@ -41,7 +41,7 @@
                     <span class="sr-only">Open user menu</span>
                 </div>
             </x-slot>
-            <x-responsive-nav-link href="{{ route('social.profile.show', ['profile'=> Auth::user()->profile]) }}">
+            <x-responsive-nav-link href="{{ route('catalyst-social.profile.show', ['profile'=> Auth::user()->profile]) }}">
                 My Profile
             </x-responsive-nav-link>
             <form method="POST" action="{{ route('logout') }}">

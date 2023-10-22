@@ -45,7 +45,7 @@
                         </div>
                         <div class="flex ml-2 space-x-2">
                             <p>by</p>
-                            <a href="{{ route('social.profile.show', $resource->user->handle) }}"
+                            <a href="{{ route('catalyst-social.profile.show', $resource->user->handle) }}"
                                class="hover:underline block text-base-text-color">{{ $resource->user->name }}</a>
                         </div>
                         @can('update', $resource)

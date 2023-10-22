@@ -18447,6 +18447,23 @@
             /**
      * 
      *
+     */ 
+        class Translate {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function get($string)
+        {
+                        /** @var \OmniaDigital\CatalystCore\Support\Translate $instance */
+                        return $instance->get($string);
+        }
+         
+    }
+            /**
+     * 
+     *
      * @see \OmniaDigital\CatalystCore\Catalyst
      */ 
         class Catalyst {
@@ -21886,11 +21903,12 @@
          * @param mixed $callback
          * @param mixed $alias
          * @param bool $disableExtraConditions
+         * @param string|null $morphable
          * @static 
          */ 
-        public static function performJoinForEloquentPowerJoins($builder, $joinType = 'leftJoin', $callback = null, $alias = null, $disableExtraConditions = false)
+        public static function performJoinForEloquentPowerJoins($builder, $joinType = 'leftJoin', $callback = null, $alias = null, $disableExtraConditions = false, $morphable = null)
         {
-                        return \Illuminate\Database\Eloquent\Relations\Relation::performJoinForEloquentPowerJoins($builder, $joinType, $callback, $alias, $disableExtraConditions);
+                        return \Illuminate\Database\Eloquent\Relations\Relation::performJoinForEloquentPowerJoins($builder, $joinType, $callback, $alias, $disableExtraConditions, $morphable);
         }
                     /**
          * 
@@ -21951,6 +21969,22 @@
         public static function performJoinForEloquentPowerJoinsForMorph($builder, $joinType, $callback = null, $alias = null, $disableExtraConditions = false)
         {
                         return \Illuminate\Database\Eloquent\Relations\Relation::performJoinForEloquentPowerJoinsForMorph($builder, $joinType, $callback, $alias, $disableExtraConditions);
+        }
+                    /**
+         * 
+         *
+         * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoinsForMorphTo()
+         * @param mixed $builder
+         * @param mixed $joinType
+         * @param mixed $callback
+         * @param mixed $alias
+         * @param bool $disableExtraConditions
+         * @param string|null $morphable
+         * @static 
+         */ 
+        public static function performJoinForEloquentPowerJoinsForMorphTo($builder, $joinType, $callback = null, $alias = null, $disableExtraConditions = false, $morphable = null)
+        {
+                        return \Illuminate\Database\Eloquent\Relations\Relation::performJoinForEloquentPowerJoinsForMorphTo($builder, $joinType, $callback, $alias, $disableExtraConditions, $morphable);
         }
                     /**
          * 
@@ -25683,11 +25717,12 @@ namespace  {
              * @param mixed $joinType
              * @param mixed $useAlias
              * @param bool $disableExtraConditions
+             * @param string|null $morphable
              * @static 
              */ 
-            public static function joinRelationship($relationName, $callback = null, $joinType = 'join', $useAlias = false, $disableExtraConditions = false)
+            public static function joinRelationship($relationName, $callback = null, $joinType = 'join', $useAlias = false, $disableExtraConditions = false, $morphable = null)
             {
-                                return \Illuminate\Database\Eloquent\Builder::joinRelationship($relationName, $callback, $joinType, $useAlias, $disableExtraConditions);
+                                return \Illuminate\Database\Eloquent\Builder::joinRelationship($relationName, $callback, $joinType, $useAlias, $disableExtraConditions, $morphable);
             }
              
                 /**
@@ -28381,6 +28416,7 @@ namespace  {
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
+            class Translate extends \OmniaDigital\CatalystCore\Facades\Translate {}
             class Catalyst extends \OmniaDigital\CatalystCore\Facades\Catalyst {}
             class Visits extends \Awssat\Visits\Visits {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}

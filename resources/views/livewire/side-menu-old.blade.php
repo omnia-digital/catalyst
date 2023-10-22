@@ -55,7 +55,7 @@
                      alt="Workflow">
                 <p class="text-green-500 text-3xl font-bold">IGD</p>
             </div>
-            <a href="{{ route('social.home') }}">
+            <a href="{{ route('catalyst-social.home') }}">
                 <div class="flex-shrink-0 pl-6 flex p-4">
                     <div class="flex items-center">
                         <div>

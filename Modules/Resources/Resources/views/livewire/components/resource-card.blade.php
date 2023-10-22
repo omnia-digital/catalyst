@@ -35,12 +35,12 @@
                 <div class="min-w-0">
                     <div class="font leading-5">
                         <a wire:click.prevent.stop="showProfile"
-                           href="{{ route('social.profile.show', $post->user->handle) }}"
+                           href="{{ route('catalyst-social.profile.show', $post->user->handle) }}"
                            class="hover:underline block font-bold text-post-card-title-color">{{ $post->user->name }}</a>
                     </div>
                     <div class="flex content-center space-x-1 items-center text-post-card-body-color">
                         <a wire:click.prevent.stop="showProfile"
-                           href="{{ route('social.profile.show', $post->user->handle) }}"
+                           href="{{ route('catalyst-social.profile.show', $post->user->handle) }}"
                            class="">{{ '@'. $post->user->handle }}</a>
                         <x-dot/>
                         <a href="{{ $post->getUrl() }}" class="hover:underline">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="text-post-card-body-color text-xs font-semibold mr-3">
                         <a wire:click.prevent.stop="showProfile('{{ $post->team->handle }}', true)"
-                           href="{{ route('social.teams.show', $post->team->handle) }}"
+                           href="{{ route('catalyst-social.teams.show', $post->team->handle) }}"
                            class="hover:underline">{{ $post->team->name }}</a>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                         <a
                                 x-data x-on:click.stop=""
                                 class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 disabled:text-base-text-color"
-                                href="{{ route('social.posts.edit', $post->id) }}"
+                                href="{{ route('catalyst-social.posts.edit', $post->id) }}"
                         >
                             <div class="flex items-center space-x-1">
                                 <x-heroicon-o-pencil-alt class="h-6 w-6" aria-hidden="true"/>
@@ -117,7 +117,7 @@
                             <div class="min-w-0 flex justify-start">
                                 <div class="font-bold text-dark-text-color mr-2">
                                     <a wire:click.prevent.stop="showProfile('{{ $post->repostOriginal->user->handle }}')"
-                                       href="{{ route('social.profile.show', $post->repostOriginal->user->handle) }}"
+                                       href="{{ route('catalyst-social.profile.show', $post->repostOriginal->user->handle) }}"
                                        class="hover:underline">{{ $post->repostOriginal->user->name }}</a>
                                 </div>
                                 <div class="text-base-text-color">

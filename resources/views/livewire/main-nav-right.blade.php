@@ -45,7 +45,7 @@
                                         {{ Translate::get('Current Team') }}
                                     </div>
                                     <x-dropdown-link
-                                            href="{{ route('social.teams.show', auth()->user()->currentTeam->handle) }}">
+                                            href="{{ route('catalyst-social.teams.show', auth()->user()->currentTeam->handle) }}">
                                         {{ auth()->user()->currentTeam->name }}
                                     </x-dropdown-link>
 
@@ -113,7 +113,7 @@
                                 {{ Translate::get('Manage Account') }}
                             </div>
 
-                            <x-dropdown-link href="{{ route('social.profile.show', auth()->user()->handle) }}">
+                            <x-dropdown-link href="{{ route('catalyst-social.profile.show', auth()->user()->handle) }}">
                                 {{ auth()->user()->name }}
                             </x-dropdown-link>
 
