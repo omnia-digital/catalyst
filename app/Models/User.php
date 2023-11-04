@@ -7,10 +7,11 @@ use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use OmniaDigital\CatalystCore\Traits\CatalystUserTraits;
+use Overtrue\LaravelFollow\Traits\Follower;
 
-class User extends Authenticatable implements FilamentUser, MustVerifyEmail
+class User extends \OmniaDigital\CatalystCore\Models\User implements FilamentUser, MustVerifyEmail
 {
-    use CatalystUserTraits;
+    use Follower;
 
     protected $casts = [
         'deleted_at' => 'datetime',

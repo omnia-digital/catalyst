@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.28.0.
+ * Generated for Laravel 10.30.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -435,6 +435,18 @@
         {
                         /** @var \Illuminate\Foundation\Application $instance */
                         return $instance->runningInConsole();
+        }
+                    /**
+         * Determine if the application is running any of the given console commands.
+         *
+         * @param string|array $commands
+         * @return bool 
+         * @static 
+         */ 
+        public static function runningConsoleCommand(...$commands)
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->runningConsoleCommand(...$commands);
         }
                     /**
          * Determine if the application is running unit tests.
@@ -5575,6 +5587,18 @@
                         return $instance->pretend($callback);
         }
                     /**
+         * Execute the given callback without "pretending".
+         *
+         * @param \Closure $callback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function withoutPretending($callback)
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        return $instance->withoutPretending($callback);
+        }
+                    /**
          * Bind values to their parameters in the given statement.
          *
          * @param \PDOStatement $statement
@@ -6500,6 +6524,18 @@
         {
                         /** @var \Illuminate\Events\Dispatcher $instance */
                         return $instance->setQueueResolver($resolver);
+        }
+                    /**
+         * Set the database transaction manager resolver implementation.
+         *
+         * @param callable $resolver
+         * @return \Illuminate\Events\Dispatcher 
+         * @static 
+         */ 
+        public static function setTransactionManagerResolver($resolver)
+        {
+                        /** @var \Illuminate\Events\Dispatcher $instance */
+                        return $instance->setTransactionManagerResolver($resolver);
         }
                     /**
          * Gets the raw, unprepared listeners.
@@ -14517,16 +14553,16 @@
                         return $instance->hasTable($table);
         }
                     /**
-         * Get the column listing for a given table.
+         * Get the columns for a given table.
          *
          * @param string $table
          * @return array 
          * @static 
          */ 
-        public static function getColumnListing($table)
+        public static function getColumns($table)
         {
                         /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->getColumnListing($table);
+                        return $instance->getColumns($table);
         }
                     /**
          * Drop all tables from the database.
@@ -14685,13 +14721,26 @@
          *
          * @param string $table
          * @param string $column
+         * @param bool $fullDefinition
          * @return string 
          * @static 
          */ 
-        public static function getColumnType($table, $column)
+        public static function getColumnType($table, $column, $fullDefinition = false)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
                         /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->getColumnType($table, $column);
+                        return $instance->getColumnType($table, $column, $fullDefinition);
+        }
+                    /**
+         * Get the column listing for a given table.
+         *
+         * @param string $table
+         * @return array 
+         * @static 
+         */ 
+        public static function getColumnListing($table)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->getColumnListing($table);
         }
                     /**
          * Modify a table on the schema.
@@ -14879,6 +14928,28 @@
         {
                         /** @var \Illuminate\Session\SessionManager $instance */
                         return $instance->blockDriver();
+        }
+                    /**
+         * Get the maximum number of seconds the session lock should be held for.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function defaultRouteBlockLockSeconds()
+        {
+                        /** @var \Illuminate\Session\SessionManager $instance */
+                        return $instance->defaultRouteBlockLockSeconds();
+        }
+                    /**
+         * Get the maximum number of seconds to wait while attempting to acquire a route block session lock.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function defaultRouteBlockWaitSeconds()
+        {
+                        /** @var \Illuminate\Session\SessionManager $instance */
+                        return $instance->defaultRouteBlockWaitSeconds();
         }
                     /**
          * Get the session configuration.
@@ -20978,6 +21049,66 @@
      
 }
 
+    namespace OmniaDigital\CatalystForms\Facades { 
+            /**
+     * 
+     *
+     * @see \OmniaDigital\CatalystForms\CatalystFormsPlugin
+     */ 
+        class CatalystFormsPlugin {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function make()
+        {
+                        return \OmniaDigital\CatalystForms\CatalystFormsPlugin::make();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function get()
+        {
+                        return \OmniaDigital\CatalystForms\CatalystFormsPlugin::get();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getId()
+        {
+                        /** @var \OmniaDigital\CatalystForms\CatalystFormsPlugin $instance */
+                        return $instance->getId();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function register($panel)
+        {
+                        /** @var \OmniaDigital\CatalystForms\CatalystFormsPlugin $instance */
+                        return $instance->register($panel);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function boot($panel)
+        {
+                        /** @var \OmniaDigital\CatalystForms\CatalystFormsPlugin $instance */
+                        return $instance->boot($panel);
+        }
+         
+    }
+     
+}
+
     namespace OmniaDigital\CatalystLocation\Facades { 
             /**
      * 
@@ -21143,13 +21274,9 @@
                         return $instance->captureLastError($hint);
         }
                     /**
-         * 
+         * {@inheritdoc}
          *
-         * @param string $slug Identifier of the Monitor
-         * @param \Sentry\CheckInStatus $status The status of the check-in
-         * @param int|float|null $duration The duration of the check-in
-         * @param \Sentry\MonitorConfig|null $monitorConfig Configuration of the Monitor
-         * @param string|null $checkInId A check-in ID from the previous check-in
+         * @param int|float|null $duration
          * @static 
          */ 
         public static function captureCheckIn($slug, $status, $duration = null, $monitorConfig = null, $checkInId = null)
@@ -22023,11 +22150,12 @@
          * @param mixed $builder
          * @param mixed $operator
          * @param mixed $count
+         * @param string|null $morphable
          * @static 
          */ 
-        public static function performHavingForEloquentPowerJoins($builder, $operator, $count)
+        public static function performHavingForEloquentPowerJoins($builder, $operator, $count, $morphable = null)
         {
-                        return \Illuminate\Database\Eloquent\Relations\Relation::performHavingForEloquentPowerJoins($builder, $operator, $count);
+                        return \Illuminate\Database\Eloquent\Relations\Relation::performHavingForEloquentPowerJoins($builder, $operator, $count, $morphable);
         }
                     /**
          * 
@@ -26025,13 +26153,14 @@ namespace  {
              * @param mixed $operator
              * @param mixed $count
              * @param mixed $boolean
-             * @param mixed $callback
+             * @param \Closure|array|null $callback
+             * @param string|null $morphable
              * @return static 
              * @static 
              */ 
-            public static function powerJoinHas($relation, $operator = '>=', $count = 1, $boolean = 'and', $callback = null)
+            public static function powerJoinHas($relation, $operator = '>=', $count = 1, $boolean = 'and', $callback = null, $morphable = null)
             {
-                                return \Illuminate\Database\Eloquent\Builder::powerJoinHas($relation, $operator, $count, $boolean, $callback);
+                                return \Illuminate\Database\Eloquent\Builder::powerJoinHas($relation, $operator, $count, $boolean, $callback, $morphable);
             }
              
                 /**
@@ -26042,7 +26171,7 @@ namespace  {
              * @param mixed $operator
              * @param mixed $count
              * @param mixed $boolean
-             * @param \Closure|null $callback
+             * @param \Closure|array|null $callback
              * @return static 
              * @static 
              */ 
@@ -28427,6 +28556,7 @@ namespace  {
             class Horizon extends \Laravel\Horizon\Horizon {}
             class Livewire extends \Livewire\Livewire {}
             class Module extends \Nwidart\Modules\Facades\Module {}
+            class CatalystFormsPlugin extends \OmniaDigital\CatalystForms\Facades\CatalystFormsPlugin {}
             class CatalystLocation extends \OmniaDigital\CatalystLocation\Facades\CatalystLocation {}
             class CatalystReviewsPlugin extends \OmniaDigital\CatalystReviewsPlugin\Facades\CatalystReviewsPlugin {}
             class Sentry extends \Sentry\Laravel\Facade {}
