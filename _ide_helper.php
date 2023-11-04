@@ -19512,8 +19512,6 @@
                     /**
          * Get localized widget label
          *
-         * @param string $page
-         * @return string|bool 
          * @static 
          */ 
         public static function getLocalizedWidgetLabel($widget)

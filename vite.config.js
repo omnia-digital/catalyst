@@ -5,6 +5,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'public/css/omnia-digital/catalyst-core-plugin/catalyst-core-social-styles.css',
                 'resources/css/app.css',
                 'resources/js/app.js',
             ],

@@ -1,11 +1,16 @@
 {
+  "public/css/omnia-digital/catalyst-core-plugin/catalyst-core-social-styles.css": {
+    "file": "assets/catalyst-core-social-styles-5792e214.css",
+    "isEntry": true,
+    "src": "public/css/omnia-digital/catalyst-core-plugin/catalyst-core-social-styles.css"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-e36d0279.css",
+    "file": "assets/app-4ed993c7.js",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-0d91dc04.js",
+    "file": "assets/app-513df117.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
