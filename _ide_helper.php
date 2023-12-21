@@ -19390,6 +19390,126 @@
      
 }
 
+    namespace BezhanSalleh\FilamentGoogleAnalytics\Facades { 
+            /**
+     * 
+     *
+     * @see \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics
+     */ 
+        class FilamentGoogleAnalytics {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function for($value = null)
+        {
+                        return \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics::for($value);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function previous($previous)
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->previous($previous);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function format($format)
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->format($format);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function compute()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->compute();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function trajectoryValue()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryValue();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function trajectoryValueAsTimeString()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryValueAsTimeString();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function trajectoryLabel()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryLabel();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function trajectoryColor()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryColor();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function trajectoryIcon()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryIcon();
+        }
+                    /**
+         * Undocumented function
+         *
+         * @static 
+         */ 
+        public static function trajectoryDescription()
+        {
+                        /** @var \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics $instance */
+                        return $instance->trajectoryDescription();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function thousandsFormater($value)
+        {
+                        return \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics::thousandsFormater($value);
+        }
+         
+    }
+     
+}
+
     namespace BezhanSalleh\FilamentShield\Facades { 
             /**
      * 
@@ -20133,6 +20253,137 @@
         {            //Method inherited from \Mobile_Detect         
                         /** @var \Jenssegers\Agent\Agent $instance */
                         return $instance->mobileGrade();
+        }
+         
+    }
+     
+}
+
+    namespace Jorenvh\Share { 
+            /**
+     * 
+     *
+     */ 
+        class ShareFacade {
+                    /**
+         * 
+         *
+         * @param string $url
+         * @param string|null $title
+         * @param array $options
+         * @param string|null $prefix
+         * @param string|null $suffix
+         * @return \Jorenvh\Share\Share 
+         * @static 
+         */ 
+        public static function page($url, $title = null, $options = [], $prefix = null, $suffix = null)
+        {
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->page($url, $title, $options, $prefix, $suffix);
+        }
+                    /**
+         * 
+         *
+         * @param string|null $title
+         * @param array $options
+         * @param string|null $prefix
+         * @param string|null $suffix
+         * @return \Jorenvh\Share\Share 
+         * @static 
+         */ 
+        public static function currentPage($title = null, $options = [], $prefix = null, $suffix = null)
+        {
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->currentPage($title, $options, $prefix, $suffix);
+        }
+                    /**
+         * Facebook share link
+         *
+         * @return \Jorenvh\Share\Share 
+         * @static 
+         */ 
+        public static function facebook()
+        {
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->facebook();
+        }
+                    /**
+         * Twitter share link
+         *
+         * @return \Jorenvh\Share\Share 
+         * @static 
+         */ 
+        public static function twitter()
+        {
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->twitter();
+        }
+                    /**
+         * Reddit share link
+         *
+         * @return \Jorenvh\Share\Share 
+         * @static 
+         */ 
+        public static function reddit()
+        {
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->reddit();
+        }
+                    /**
+         * Telegram share link
+         *
+         * @return \Jorenvh\Share\Share 
+         * @static 
+         */ 
+        public static function telegram()
+        {
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->telegram();
+        }
+                    /**
+         * Whatsapp share link
+         *
+         * @return \Jorenvh\Share\Share 
+         * @static 
+         */ 
+        public static function whatsapp()
+        {
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->whatsapp();
+        }
+                    /**
+         * Linked in share link
+         *
+         * @param string $summary
+         * @return \Jorenvh\Share\Share 
+         * @static 
+         */ 
+        public static function linkedin($summary = '')
+        {
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->linkedin($summary);
+        }
+                    /**
+         * Pinterest share link
+         *
+         * @return \Jorenvh\Share\Share 
+         * @static 
+         */ 
+        public static function pinterest()
+        {
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->pinterest();
+        }
+                    /**
+         * Get the raw generated links.
+         *
+         * @return string|array 
+         * @static 
+         */ 
+        public static function getRawLinks()
+        {
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->getRawLinks();
         }
          
     }
@@ -21131,6 +21382,439 @@
      
 }
 
+    namespace Omniphx\Forrest\Providers\Laravel\Facades { 
+            /**
+     * 
+     *
+     * @method static string|array chatter(string $resource, array $options = [])
+     * @method static string|array tabs(string $resource, array $options = [])
+     * @method static string|array appMenu(string $resource, array $options = [])
+     * @method static string|array quickActions(string $resource, array $options = [])
+     * @method static string|array commerce(string $resource, array $options = [])
+     * @method static string|array wave(string $resource, array $options = [])
+     * @method static string|array exchange-connect(string $resource, array $options = [])
+     * @method static string|array analytics(string $resource, array $options = [])
+     * @method static string|array composite(string $resource, array $options = [])
+     * @method static string|array theme(string $resource, array $options = [])
+     * @method static string|array nouns(string $resource, array $options = [])
+     * @method static string|array recent(string $resource, array $options = [])
+     * @method static string|array licensing(string $resource, array $options = [])
+     * @method static string|array async-queries(string $resource, array $options = [])
+     * @method static string|array emailConnect(string $resource, array $options = [])
+     * @method static string|array compactLayouts(string $resource, array $options = [])
+     * @method static string|array flexiPage(string $resource, array $options = [])
+     * @method static string|array knowledgeManagement(string $resource, array $options = [])
+     * @method static string|array sobjects(string $resource, array $options = [])
+     * @method static string|array actions(string $resource, array $options = [])
+     * @method static string|array support(string $resource, array $options = [])
+     */ 
+        class Forrest {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function authenticate($url = null)
+        {
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->authenticate($url);
+        }
+                    /**
+         * Refresh authentication token by re-authenticating.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function refresh()
+        {
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        $instance->refresh();
+        }
+                    /**
+         * Revokes access token from Salesforce. Will not flush token from storage.
+         *
+         * @return \Psr\Http\Message\ResponseInterface 
+         * @static 
+         */ 
+        public static function revoke()
+        {
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->revoke();
+        }
+                    /**
+         * Try requesting token, if token expired try refreshing token.
+         *
+         * @param string $url
+         * @param array $options
+         * @return string|array 
+         * @static 
+         */ 
+        public static function request($url, $options)
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->request($url, $options);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setCredentials($credentials)
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->setCredentials($credentials);
+        }
+                    /**
+         * GET method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function get($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->get($path, $requestBody, $options);
+        }
+                    /**
+         * POST method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function post($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->post($path, $requestBody, $options);
+        }
+                    /**
+         * PUT method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function put($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->put($path, $requestBody, $options);
+        }
+                    /**
+         * DELETE method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function delete($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->delete($path, $requestBody, $options);
+        }
+                    /**
+         * HEAD method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function head($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->head($path, $requestBody, $options);
+        }
+                    /**
+         * PATCH method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function patch($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->patch($path, $requestBody, $options);
+        }
+                    /**
+         * Request that returns all currently supported versions.
+         * 
+         * Includes the verison, label and link to each version's root.
+         * Formats: json, xml
+         * Methods: get.
+         *
+         * @param array $options
+         * @return array $versions
+         * @static 
+         */ 
+        public static function versions($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->versions($options);
+        }
+                    /**
+         * Lists availabe resources for specified API version.
+         * 
+         * Includes resource name and URI.
+         * Formats: json, xml
+         * Methods: get.
+         *
+         * @param array $options
+         * @return array $resources
+         * @static 
+         */ 
+        public static function resources($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->resources($options);
+        }
+                    /**
+         * Returns information about the logged-in user.
+         *
+         * @param array
+         * @return array $identity
+         * @static 
+         */ 
+        public static function identity($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->identity($options);
+        }
+                    /**
+         * Lists information about organizational limits.
+         * 
+         * Available for API version 29.0 and later.
+         * Returns limits for daily API calls, Data storage, etc.
+         *
+         * @param array $options
+         * @return array $limits
+         * @static 
+         */ 
+        public static function limits($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->limits($options);
+        }
+                    /**
+         * Describes all global objects available in the organization.
+         *
+         * @param string $object_name
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function describe($object_name = null, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->describe($object_name, $options);
+        }
+                    /**
+         * Executes a specified SOQL query.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array $queryResults
+         * @static 
+         */ 
+        public static function query($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->query($query, $options);
+        }
+                    /**
+         * Calls next query.
+         *
+         * @param $nextUrl
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function next($nextUrl, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->next($nextUrl, $options);
+        }
+                    /**
+         * Details how Salesforce will process your query.
+         * 
+         * Available for API verison 30.0 or later.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array $queryExplain
+         * @static 
+         */ 
+        public static function queryExplain($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->queryExplain($query, $options);
+        }
+                    /**
+         * Executes a SOQL query, but will also returned records that have
+         * been deleted.
+         * 
+         * Available for API version 29.0 or later.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array $queryResults
+         * @static 
+         */ 
+        public static function queryAll($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->queryAll($query, $options);
+        }
+                    /**
+         * Executes the specified SOSL query.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function search($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->search($query, $options);
+        }
+                    /**
+         * Returns an ordered list of objects in the default global search
+         * scope of a logged-in user. Global search keeps track of which
+         * objects the user interacts with and how often and arranges the
+         * search results accordingly. Objects used most frequently appear
+         * at the top of the list.
+         *
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function scopeOrder($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->scopeOrder($options);
+        }
+                    /**
+         * Returns search result layout information for the objects in the query string.
+         *
+         * @param array $objectList
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function searchLayouts($objectList, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->searchLayouts($objectList, $options);
+        }
+                    /**
+         * Returns a list of Salesforce Knowledge articles whose titles match the user’s
+         * search query. Provides a shortcut to navigate directly to likely
+         * relevant articles, before the user performs a search.
+         * 
+         * Available for API version 30.0 or later.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function suggestedArticles($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->suggestedArticles($query, $options);
+        }
+                    /**
+         * Returns a list of suggested searches based on the user’s query string text
+         * matching searches that other users have performed in Salesforce Knowledge.
+         * 
+         * Available for API version 30.0 or later.
+         * 
+         * Tested this and can't get it to work. I think the request is set up correctly.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function suggestedQueries($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->suggestedQueries($query, $options);
+        }
+                    /**
+         * Request to a custom Apex REST endpoint.
+         *
+         * @param string $customURI
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function custom($customURI, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->custom($customURI, $options);
+        }
+                    /**
+         * Public accessor to the Guzzle Client Object.
+         *
+         * @return \Omniphx\Forrest\HttpClientInterface 
+         * @static 
+         */ 
+        public static function getClient()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->getClient();
+        }
+                    /**
+         * Accessor to get instance URL
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getInstanceURL()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->getInstanceURL();
+        }
+                    /**
+         * Accessor to get the token object
+         *
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getToken()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->getToken();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getBaseUrl()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->getBaseUrl();
+        }
+         
+    }
+     
+}
+
     namespace Sentry\Laravel { 
             /**
      * 
@@ -21365,6 +22049,81 @@
         {
                         /** @var \Sentry\State\Hub $instance */
                         return $instance->getSpan();
+        }
+         
+    }
+     
+}
+
+    namespace Spatie\Health\Facades { 
+            /**
+     * 
+     *
+     * @mixin \Spatie\Health\Health
+     */ 
+        class Health {
+                    /**
+         * 
+         *
+         * @param array<int, Check> $checks
+         * @static 
+         */ 
+        public static function checks($checks)
+        {
+                        /** @var \Spatie\Health\Health $instance */
+                        return $instance->checks($checks);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function clearChecks()
+        {
+                        /** @var \Spatie\Health\Health $instance */
+                        return $instance->clearChecks();
+        }
+                    /**
+         * 
+         *
+         * @return \Spatie\Health\Collection<int, Check> 
+         * @static 
+         */ 
+        public static function registeredChecks()
+        {
+                        /** @var \Spatie\Health\Health $instance */
+                        return $instance->registeredChecks();
+        }
+                    /**
+         * 
+         *
+         * @return \Spatie\Health\Collection<int, ResultStore> 
+         * @static 
+         */ 
+        public static function resultStores()
+        {
+                        /** @var \Spatie\Health\Health $instance */
+                        return $instance->resultStores();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function inlineStylesheet($stylesheet)
+        {
+                        /** @var \Spatie\Health\Health $instance */
+                        return $instance->inlineStylesheet($stylesheet);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function assets()
+        {
+                        /** @var \Spatie\Health\Health $instance */
+                        return $instance->assets();
         }
          
     }
@@ -22266,6 +23025,20 @@
         {
                         return \Illuminate\Database\Eloquent\Relations\Relation::getPowerJoinExistenceCompareKey();
         }
+         
+    }
+     
+}
+
+    namespace Spatie\MediaLibrary\MediaCollections\Models\Collections { 
+            /**
+     * 
+     *
+     * @template TKey of array-key
+     * @template TModel of \Spatie\MediaLibrary\MediaCollections\Models\Media
+     * @extends Collection<TKey, TModel>
+     */ 
+        class MediaCollection {
          
     }
      
@@ -24095,20 +24868,6 @@
         {
                         return \Illuminate\Console\Scheduling\Event::sentryMonitor($monitorSlug, $checkInMargin, $maxRuntime, $updateMonitorConfig);
         }
-         
-    }
-     
-}
-
-    namespace Spatie\MediaLibrary\MediaCollections\Models\Collections { 
-            /**
-     * 
-     *
-     * @template TKey of array-key
-     * @template TModel of \Spatie\MediaLibrary\MediaCollections\Models\Media
-     * @extends Collection<TKey, TModel>
-     */ 
-        class MediaCollection {
          
     }
      
@@ -28548,16 +29307,20 @@ namespace  {
             class Visits extends \Awssat\Visits\Visits {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class FilamentExceptions extends \BezhanSalleh\FilamentExceptions\Facades\FilamentExceptions {}
+            class FilamentGoogleAnalytics extends \BezhanSalleh\FilamentGoogleAnalytics\Facades\FilamentGoogleAnalytics {}
             class FilamentShield extends \BezhanSalleh\FilamentShield\Facades\FilamentShield {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}
+            class Share extends \Jorenvh\Share\ShareFacade {}
             class Horizon extends \Laravel\Horizon\Horizon {}
             class Livewire extends \Livewire\Livewire {}
             class Module extends \Nwidart\Modules\Facades\Module {}
             class CatalystFormsPlugin extends \OmniaDigital\CatalystForms\Facades\CatalystFormsPlugin {}
             class CatalystLocation extends \OmniaDigital\CatalystLocation\Facades\CatalystLocation {}
             class CatalystReviewsPlugin extends \OmniaDigital\CatalystReviewsPlugin\Facades\CatalystReviewsPlugin {}
+            class Forrest extends \Omniphx\Forrest\Providers\Laravel\Facades\Forrest {}
             class Sentry extends \Sentry\Laravel\Facade {}
+            class Health extends \Spatie\Health\Facades\Health {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class Signal extends \Spatie\SignalAwareCommand\Facades\Signal {}
      

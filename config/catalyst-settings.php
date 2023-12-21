@@ -4,6 +4,7 @@ return [
 
     'models' => [
         'user' => App\Models\User::class,
+        'team' => App\Models\Team::class,
     ],
 
     /*
