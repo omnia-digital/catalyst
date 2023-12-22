@@ -18570,6 +18570,33 @@
          *
          * @static 
          */ 
+        public static function getProjectsWordUpper()
+        {
+                        return \OmniaDigital\CatalystCore\Catalyst::getProjectsWordUpper();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getProjectsWord()
+        {
+                        return \OmniaDigital\CatalystCore\Catalyst::getProjectsWord();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getProjectsLetter()
+        {
+                        return \OmniaDigital\CatalystCore\Catalyst::getProjectsLetter();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
         public static function getTeamsWordUpper()
         {
                         return \OmniaDigital\CatalystCore\Catalyst::getTeamsWordUpper();
