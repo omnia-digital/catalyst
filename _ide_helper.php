@@ -21502,6 +21502,27 @@
      
 }
 
+    namespace OmniaDigital\CatalystJobs\Facades { 
+            /**
+     * 
+     *
+     * @see \OmniaDigital\CatalystJobs\CatalystJobs
+     */ 
+        class CatalystJobs {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getJobSetting($setting)
+        {
+                        return \OmniaDigital\CatalystJobs\CatalystJobs::getJobSetting($setting);
+        }
+         
+    }
+     
+}
+
     namespace OmniaDigital\CatalystLocation\Facades { 
             /**
      * 
@@ -29475,6 +29496,7 @@ namespace  {
             class Livewire extends \Livewire\Livewire {}
             class Module extends \Nwidart\Modules\Facades\Module {}
             class CatalystFormsPlugin extends \OmniaDigital\CatalystForms\Facades\CatalystFormsPlugin {}
+            class CatalystJobs extends \OmniaDigital\CatalystJobs\Facades\CatalystJobs {}
             class CatalystLocation extends \OmniaDigital\CatalystLocation\Facades\CatalystLocation {}
             class CatalystReviewsPlugin extends \OmniaDigital\CatalystReviewsPlugin\Facades\CatalystReviewsPlugin {}
             class Forrest extends \Omniphx\Forrest\Providers\Laravel\Facades\Forrest {}

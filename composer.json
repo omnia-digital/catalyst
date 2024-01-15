@@ -32,7 +32,7 @@
         "marcreichel/igdb-laravel": "^3.6",
         "mhmiton/laravel-modules-livewire": "^2",
         "nwidart/laravel-modules": "^9.0",
-        "omnia-digital/catalyst-core-plugin": "*",
+        "omnia-digital/catalyst-core-plugin": "dev-main",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
         "pusher/pusher-php-server": "^7.0",
@@ -69,6 +69,22 @@
         {
             "type": "path",
             "url": "../modules/catalyst-core-plugin"
+        },
+        {
+            "type": "path",
+            "url": "../modules/catalyst-reviews-plugin"
+        },
+        {
+            "type": "path",
+            "url": "../modules/catalyst-forms-plugin"
+        },
+        {
+            "type": "path",
+            "url": "../modules/catalyst-jobs-plugin"
+        },
+        {
+            "type": "path",
+            "url": "../modules/catalyst-location-plugin"
         }
     ],
     "autoload": {

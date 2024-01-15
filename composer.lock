@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "691af2353235602f05d42cefa375f08d",
+    "content-hash": "cb30d2303b193c5226b48e362b94f72a",
     "packages": [
         {
             "name": "amphp/amp",
@@ -6308,6 +6308,67 @@
             "time": "2023-11-08T14:08:06+00:00"
         },
         {
+            "name": "laravel/slack-notification-channel",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/slack-notification-channel.git",
+                "reference": "e0d4be5e01d443a69fa89f0a4cac6bd2eda2be8f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/slack-notification-channel/zipball/e0d4be5e01d443a69fa89f0a4cac6bd2eda2be8f",
+                "reference": "e0d4be5e01d443a69fa89f0a4cac6bd2eda2be8f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "illuminate/notifications": "~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.1.3|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Illuminate\\Notifications\\SlackChannelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Notifications\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Slack Notification Channel for laravel.",
+            "keywords": [
+                "laravel",
+                "notifications",
+                "slack"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/slack-notification-channel/issues",
+                "source": "https://github.com/laravel/slack-notification-channel/tree/v2.5.0"
+            },
+            "time": "2023-01-12T16:21:26+00:00"
+        },
+        {
             "name": "laravel/tinker",
             "version": "v2.9.0",
             "source": {
@@ -7054,6 +7115,63 @@
                 "source": "https://github.com/thephpleague/glide/tree/2.3.0"
             },
             "time": "2023-07-08T06:26:07+00:00"
+        },
+        {
+            "name": "league/iso3166",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/iso3166.git",
+                "reference": "9976d382f270ad3f3df8a68719beb7a7179ffa1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/iso3166/zipball/9976d382f270ad3f3df8a68719beb7a7179ffa1e",
+                "reference": "9976d382f270ad3f3df8a68719beb7a7179ffa1e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\ISO3166\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Bast",
+                    "email": "rob.bast@gmail.com"
+                }
+            ],
+            "description": "ISO 3166-1 PHP Library",
+            "homepage": "https://github.com/thephpleague/iso3166",
+            "keywords": [
+                "3166",
+                "3166-1",
+                "ISO 3166",
+                "countries",
+                "iso",
+                "library"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/iso3166/issues",
+                "source": "https://github.com/thephpleague/iso3166"
+            },
+            "time": "2020-12-05T06:50:42+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -8891,7 +9009,7 @@
             "dist": {
                 "type": "path",
                 "url": "../modules/catalyst-core-plugin",
-                "reference": "33ba717965407c94a501c54b875fd053824696bf"
+                "reference": "3abd7ba301ac8dda581135e53260f7569011877f"
             },
             "require": {
                 "ariaieboy/filament-jalali-datetime": "*",
@@ -8923,6 +9041,7 @@
                 "liran-co/laravel-notification-subscriptions": "^1.7",
                 "livewire/livewire": "^3.0",
                 "omnia-digital/catalyst-forms-plugin": "dev-main",
+                "omnia-digital/catalyst-jobs-plugin": "dev-main",
                 "omnia-digital/catalyst-location-plugin": "dev-main",
                 "omnia-digital/catalyst-reviews-plugin": "dev-main",
                 "omnia-digital/library": "*",
@@ -9121,6 +9240,89 @@
             "support": {
                 "issues": "https://github.com/omnia-digital/catalyst-forms-plugin/issues",
                 "source": "https://github.com/omnia-digital/catalyst-forms-plugin"
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "omnia-digital/catalyst-jobs-plugin",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../modules/catalyst-jobs-plugin",
+                "reference": "b117087500714cea95386e8a61b96e6b6c23ba63"
+            },
+            "require": {
+                "calebporzio/sushi": "^2.1",
+                "ext-json": "*",
+                "filament/filament": "^3.0",
+                "google/apiclient": "^2.9",
+                "illuminate/contracts": "^10.0",
+                "laravel/cashier": "^14",
+                "laravel/framework": "^10.0",
+                "laravel/horizon": "^5.5",
+                "laravel/jetstream": "^4.0",
+                "laravel/sanctum": "^3.0",
+                "laravel/slack-notification-channel": "^2.3",
+                "league/iso3166": "^3.0.0",
+                "livewire/livewire": "^3.0",
+                "omnia-digital/library": "dev-main",
+                "php": "^8.1",
+                "spatie/data-transfer-object": "^2.6",
+                "spatie/laravel-package-tools": "^1.15.0",
+                "spatie/laravel-permission": "^5",
+                "spatie/laravel-sluggable": "^3.0",
+                "thomasjohnkane/snooze": "^2.3"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.9.1",
+                "mockery/mockery": "^1.4.2",
+                "nunomaduro/collision": "^7.9"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OmniaDigital\\CatalystJobs\\CatalystJobsServiceProvider",
+                        "OmniaDigital\\CatalystJobs\\Providers\\Filament\\JobsPanelProvider"
+                    ],
+                    "aliases": {
+                        "CatalystJobs": "OmniaDigital\\CatalystJobs\\Facades\\CatalystJobs"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OmniaDigital\\CatalystJobs\\": "src/",
+                    "OmniaDigital\\CatalystJobs\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "OmniaDigital\\CatalystJobs\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Torres",
+                    "email": "josht@omniadigital.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Jobs plugin for Catalyst",
+            "homepage": "https://github.com/omnia-digital/catalyst-jobs-plugin",
+            "keywords": [
+                "catalyst-jobs-plugin",
+                "laravel",
+                "omnia-digital"
+            ],
+            "support": {
+                "issues": "https://github.com/omnia-digital/catalyst-jobs-plugin/issues",
+                "source": "https://github.com/omnia-digital/catalyst-jobs-plugin"
             },
             "transport-options": {
                 "relative": true
@@ -14273,6 +14475,70 @@
                 }
             ],
             "time": "2022-12-18T12:58:32+00:00"
+        },
+        {
+            "name": "spatie/data-transfer-object",
+            "version": "2.8.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/data-transfer-object.git",
+                "reference": "167ebbe56ead65ef23abcfae7b75f932afd496a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/data-transfer-object/zipball/167ebbe56ead65ef23abcfae7b75f932afd496a4",
+                "reference": "167ebbe56ead65ef23abcfae7b75f932afd496a4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "suggest": {
+                "phpstan/phpstan": "Take advantage of checkUninitializedProperties with \\Spatie\\DataTransferObject\\PHPstan\\PropertiesAreAlwaysInitializedExtension"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\DataTransferObject\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Data transfer objects with batteries included",
+            "homepage": "https://github.com/spatie/data-transfer-object",
+            "keywords": [
+                "data-transfer-object",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/data-transfer-object/issues",
+                "source": "https://github.com/spatie/data-transfer-object/tree/2.8.4"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "abandoned": "spatie/laravel-data",
+            "time": "2021-12-07T05:41:11+00:00"
         },
         {
             "name": "spatie/db-dumper",
