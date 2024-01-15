@@ -69,18 +69,6 @@
         {
             "type": "path",
             "url": "../modules/catalyst-core-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-location-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-reviews-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-forms-plugin"
         }
     ],
     "autoload": {
