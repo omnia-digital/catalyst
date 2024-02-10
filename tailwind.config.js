@@ -14,10 +14,10 @@ module.exports = {
         // './app/**/*.{html,js,php}',
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
-        // './vendor/omnia-digital/library/resources/views/**/*.blade.php',
-        // './vendor/omnia-digital/library/resources/js/**/*.js',
-        // './vendor/omnia-digital/media-manager/resources/views/**/*.blade.php',
-        // './node_modules/tw-elements/dist/js/**/*.js'
+        './vendor/omnia-digital/library/resources/views/**/*.blade.php',
+        './vendor/omnia-digital/library/resources/js/**/*.js',
+        './vendor/omnia-digital/media-manager/resources/views/**/*.blade.php',
+        './node_modules/tw-elements/dist/js/**/*.js'
     ],
 
     theme: {
