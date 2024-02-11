@@ -77,8 +77,8 @@ module.exports = {
                     "200": "var(--primary-200)",
                     "300": "var(--primary-300)",
                     "400": "var(--primary-400)",
-                    "500": process.env.PRIMARY_COLOR_500 || process.env.PRIMARY_COLOR || "var(--primary-500)" || "var(--primary)",
-                    "600": "var(--primary-600)",
+                    "500": process.env.PRIMARY_COLOR || "var(--primary-500)",
+                    "600": "var(--primary)",
                     "700": "var(--primary-700)",
                     "800": "var(--primary-800)",
                     "900": "var(--primary-900)"
@@ -132,6 +132,19 @@ module.exports = {
                 'h4-color': 'var(--h4-color)',
                 'h5-color': 'var(--h5-color)',
                 'h6-color': 'var(--h6-color)',
+                custom: {
+                    50: 'var(--primary-50)',
+                    100: 'var(--primary-100)',
+                    200: 'var(--primary-200)',
+                    300: 'var(--primary-300)',
+                    400: 'var(--primary-400)',
+                    500: 'var(--secondary-500)',
+                    600: 'var(--primary-600)',
+                    700: 'var(--primary-700)',
+                    800: 'var(--primary-900)',
+                    900: 'var(--primary-900)',
+                    950: 'var(--primary-950)',
+                },
             }
         }
     },

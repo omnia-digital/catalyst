@@ -1,4 +1,5 @@
 @import '../../vendor/filament/filament/resources/css/theme.css';
+
 @config '../../tailwind.config.js';
 
 [x-cloak] {
@@ -17,16 +18,16 @@
         --neutral-dark: #6b7280;
         --neutral-hover: #eff0f2;
         --primary: #EB6B56;
-        --primary-50: #ff4f60;
-        --primary-100: #ff4556;
-        --primary-200: #f93b4c;
-        --primary-300: #ef3142;
-        --primary-400: #e52738;
-        --primary-500: var(--primary);
-        --primary-600: #d11324;
-        --primary-700: #c7091a;
-        --primary-800: #bd0010;
-        --primary-900: #b30006;
+        --primary-50: rgb(from var(--primary) r g b / .4);
+        --primary-100: rgb(from var(--primary) r g b / .5);
+        --primary-200: rgb(from var(--primary) r g b / .6);
+        --primary-300: rgb(from var(--primary) r g b / .7);
+        --primary-400: rgb(from var(--primary) r g b / .8);
+        --primary-500: rgb(from var(--primary) r g b / .9);
+        --primary-600: rgb(from var(--primary) r g b / 5);
+        --primary-700: rgb(from var(--primary) r g b / 1.2);
+        --primary-800: rgb(from var(--primary) r g b / 1.3);
+        --primary-900: rgb(from var(--primary) r g b / 1.4);
         --secondary: white;
         --secondary-50: white;
         --secondary-100: white;
