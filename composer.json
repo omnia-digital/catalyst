@@ -33,8 +33,6 @@
         "mhmiton/laravel-modules-livewire": "^2",
         "nwidart/laravel-modules": "^9.0",
         "omnia-digital/catalyst-core-plugin": "dev-main",
-        "pestphp/pest": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
         "pusher/pusher-php-server": "^7.0",
         "sentry/sentry-laravel": "^3.0",
         "squirephp/countries-en": "^3.3"
@@ -47,13 +45,12 @@
         "laracademy/generators": "^3.4",
         "laravel-lang/lang": "^13",
         "laravel-lang/publisher": "^14.0",
+        "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
-        "laravel/pint": "^1.0",
-        "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0",
         "tightenco/duster": "^1.1"
     },
