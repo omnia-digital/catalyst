@@ -89,6 +89,6 @@ class ModuleNavigation extends Component
 
     public function render()
     {
-        return view('social::livewire.layouts.module-navigation');
+        return view('catalyst::livewire.layouts.module-navigation');
     }
 }

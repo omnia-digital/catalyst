@@ -46,7 +46,7 @@
                                                 <a href="{{ route('feeds.index') }}" target="_self" class="flex
                                                 items-center
                                                 text-neutral-dark space-x-2 hover:underline">
-                                                    <p class="text-heading-default-color uppercase tracking-wide font-semibold">{{ Trans::get('See more News') }}</p>
+                                                    <p class="text-heading-default-color uppercase tracking-wide font-semibold">{{ Translate::get('See more News') }}</p>
                                                 </a>
                                             </div>
                                         @endif

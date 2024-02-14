@@ -27,7 +27,7 @@ use Modules\Livestream\Http\Livewire\Setting\VideoSetting;
 use Modules\Livestream\Http\Livewire\Stream\Streams;
 use Modules\Livestream\Http\Livewire\Stream\StreamTargets;
 use Modules\Livestream\Http\Livewire\Stream\UpdateStreamTarget;
-use Modules\Social\Http\Middleware\GuestAccessMiddleware;
+use OmniaDigital\CatalystCore\Http\Middleware\GuestAccessMiddleware;
 
 //Route::get('/', function () {
 //    return redirect()->route('dashboard');

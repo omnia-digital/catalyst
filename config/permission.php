@@ -24,7 +24,7 @@ return [
          * `Spatie\Permission\Contracts\Role` contract.
          */
 
-        'role' => \App\Models\Role::class,
+        'role' => OmniaDigital\CatalystCore\Models\Role::class,
 
     ],
 
@@ -119,7 +119,7 @@ return [
      * the default setting is false here for optimum safety.
      */
 
-    'display_permission_in_exception' => false,
+    'display_permission_in_exception' => env('APP_DEBUG', false),
 
     /*
      * When set to true, the required role names are added to the exception
@@ -127,7 +127,7 @@ return [
      * the default setting is false here for optimum safety.
      */
 
-    'display_role_in_exception' => false,
+    'display_role_in_exception' => env('APP_DEBUG', false),
 
     /*
      * By default wildcard permission lookups are disabled.

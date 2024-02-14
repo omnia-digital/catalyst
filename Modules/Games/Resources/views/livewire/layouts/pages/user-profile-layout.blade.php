@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.main-layout')
+@extends('catalyst::livewire.layouts.main-layout')
 
 @section('page-layout')
     <div class="flex space-x-4">

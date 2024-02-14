@@ -23,7 +23,7 @@ class Show extends Component
         }
 
         if (! empty($this->resource) && $this->resource->type !== PostType::ARTICLE) {
-            $this->redirectRoute('social.posts.show', $this->resource);
+            $this->redirectroute('catalyst-social.posts.show', $this->resource);
         }
     }
 

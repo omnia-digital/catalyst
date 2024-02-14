@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.pages.default-page-layout')
+@extends('catalyst::livewire.layouts.pages.default-page-layout')
 
 @section('content')
     <div class="container mx-auto px-4">
@@ -20,7 +20,7 @@
                         <span>
                         @if (!empty($game?->details?->platforms))
                                 @foreach ($game->details->platforms as $platform)
-                                    {{ \MarcReichel\IGDBLaravel\Models\Platform::firstOrFail($platform)->name }}
+                                    {{ \MarcReichel\IGDBLaravel\Models\Catalyst::firstOrFail($platform)->name }}
                                 @endforeach
                             @endif
                     </span>

@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.25.2.
+ * Generated for Laravel 10.43.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -435,6 +435,18 @@
         {
                         /** @var \Illuminate\Foundation\Application $instance */
                         return $instance->runningInConsole();
+        }
+                    /**
+         * Determine if the application is running any of the given console commands.
+         *
+         * @param string|array $commands
+         * @return bool 
+         * @static 
+         */ 
+        public static function runningConsoleCommand(...$commands)
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->runningConsoleCommand(...$commands);
         }
                     /**
          * Determine if the application is running unit tests.
@@ -3533,6 +3545,18 @@
                         $instance->assertDispatchedWithoutChain($command, $callback);
         }
                     /**
+         * Create a new assertion about a chained batch.
+         *
+         * @param \Closure $callback
+         * @return \Illuminate\Support\Testing\Fakes\ChainedBatchTruthTest 
+         * @static 
+         */ 
+        public static function chainedBatch($callback)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
+                        return $instance->chainedBatch($callback);
+        }
+                    /**
          * Assert if a batch was dispatched based on a truth-test callback.
          *
          * @param callable $callback
@@ -5080,6 +5104,20 @@
                         return $instance->connection($name);
         }
                     /**
+         * Get a database connection instance from the given configuration.
+         *
+         * @param string $name
+         * @param array $config
+         * @param bool $force
+         * @return \Illuminate\Database\MySqlConnection 
+         * @static 
+         */ 
+        public static function connectUsing($name, $config, $force = false)
+        {
+                        /** @var \Illuminate\Database\DatabaseManager $instance */
+                        return $instance->connectUsing($name, $config, $force);
+        }
+                    /**
          * Register a custom Doctrine type.
          *
          * @param string $class
@@ -5575,6 +5613,18 @@
                         return $instance->pretend($callback);
         }
                     /**
+         * Execute the given callback without "pretending".
+         *
+         * @param \Closure $callback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function withoutPretending($callback)
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        return $instance->withoutPretending($callback);
+        }
+                    /**
          * Bind values to their parameters in the given statement.
          *
          * @param \PDOStatement $statement
@@ -5669,6 +5719,18 @@
         {            //Method inherited from \Illuminate\Database\Connection         
                         /** @var \Illuminate\Database\MySqlConnection $instance */
                         $instance->reconnectIfMissingConnection();
+        }
+                    /**
+         * Register a hook to be run just before a database transaction is started.
+         *
+         * @param \Closure $callback
+         * @return \Illuminate\Database\MySqlConnection 
+         * @static 
+         */ 
+        public static function beforeStartingTransaction($callback)
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        return $instance->beforeStartingTransaction($callback);
         }
                     /**
          * Register a hook to be run just before a database query is executed.
@@ -6502,6 +6564,18 @@
                         return $instance->setQueueResolver($resolver);
         }
                     /**
+         * Set the database transaction manager resolver implementation.
+         *
+         * @param callable $resolver
+         * @return \Illuminate\Events\Dispatcher 
+         * @static 
+         */ 
+        public static function setTransactionManagerResolver($resolver)
+        {
+                        /** @var \Illuminate\Events\Dispatcher $instance */
+                        return $instance->setTransactionManagerResolver($resolver);
+        }
+                    /**
          * Gets the raw, unprepared listeners.
          *
          * @return array 
@@ -6845,13 +6919,14 @@
          *
          * @param string $path
          * @param string $data
+         * @param bool $lock
          * @return int 
          * @static 
          */ 
-        public static function append($path, $data)
+        public static function append($path, $data, $lock = false)
         {
                         /** @var \Illuminate\Filesystem\Filesystem $instance */
-                        return $instance->append($path, $data);
+                        return $instance->append($path, $data, $lock);
         }
                     /**
          * Get or set UNIX mode of a file or directory.
@@ -7455,9 +7530,9 @@
                         return $instance->after($callback);
         }
                     /**
-         * Determine if the given ability should be granted for the current user.
+         * Determine if all of the given abilities should be granted for the current user.
          *
-         * @param string $ability
+         * @param \Illuminate\Auth\Access\iterable|string $ability
          * @param array|mixed $arguments
          * @return bool 
          * @static 
@@ -7468,9 +7543,9 @@
                         return $instance->allows($ability, $arguments);
         }
                     /**
-         * Determine if the given ability should be denied for the current user.
+         * Determine if any of the given abilities should be denied for the current user.
          *
-         * @param string $ability
+         * @param \Illuminate\Auth\Access\iterable|string $ability
          * @param array|mixed $arguments
          * @return bool 
          * @static 
@@ -7876,7 +7951,7 @@
      * 
      *
      * @method static \Illuminate\Http\Client\PendingRequest baseUrl(string $url)
-     * @method static \Illuminate\Http\Client\PendingRequest withBody(string $content, string $contentType = 'application/json')
+     * @method static \Illuminate\Http\Client\PendingRequest withBody(\Psr\Http\Message\StreamInterface|string $content, string $contentType = 'application/json')
      * @method static \Illuminate\Http\Client\PendingRequest asJson()
      * @method static \Illuminate\Http\Client\PendingRequest asForm()
      * @method static \Illuminate\Http\Client\PendingRequest attach(string|array $name, string|resource $contents = '', string|null $filename = null, array $headers = [])
@@ -7975,6 +8050,18 @@
         {
                         /** @var \Illuminate\Http\Client\Factory $instance */
                         return $instance->globalResponseMiddleware($middleware);
+        }
+                    /**
+         * Set the options to apply to every request.
+         *
+         * @param array $options
+         * @return \Illuminate\Http\Client\Factory 
+         * @static 
+         */ 
+        public static function globalOptions($options)
+        {
+                        /** @var \Illuminate\Http\Client\Factory $instance */
+                        return $instance->globalOptions($options);
         }
                     /**
          * Create a new response instance for use during stubbing.
@@ -8168,6 +8255,17 @@
                         return $instance->getDispatcher();
         }
                     /**
+         * Get the array of global middleware.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getGlobalMiddleware()
+        {
+                        /** @var \Illuminate\Http\Client\Factory $instance */
+                        return $instance->getGlobalMiddleware();
+        }
+                    /**
          * Register a custom macro.
          *
          * @param string $name
@@ -8281,7 +8379,7 @@
          * Get a translation according to an integer value.
          *
          * @param string $key
-         * @param \Countable|int|array $number
+         * @param \Countable|int|float|array $number
          * @param array $replace
          * @param string|null $locale
          * @return string 
@@ -8319,6 +8417,18 @@
         {
                         /** @var \Illuminate\Translation\Translator $instance */
                         $instance->load($namespace, $group, $locale);
+        }
+                    /**
+         * Register a callback that is responsible for handling missing translation keys.
+         *
+         * @param callable|null $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function handleMissingKeysUsing($callback)
+        {
+                        /** @var \Illuminate\Translation\Translator $instance */
+                        return $instance->handleMissingKeysUsing($callback);
         }
                     /**
          * Add a new namespace to the loader.
@@ -8563,7 +8673,6 @@
      *
      * @method static void write(string $level, \Illuminate\Contracts\Support\Arrayable|\Illuminate\Contracts\Support\Jsonable|\Illuminate\Support\Stringable|array|string $message, array $context = [])
      * @method static \Illuminate\Log\Logger withContext(array $context = [])
-     * @method static \Illuminate\Log\Logger withoutContext()
      * @method static void listen(\Closure $callback)
      * @method static \Psr\Log\LoggerInterface getLogger()
      * @method static \Illuminate\Contracts\Events\Dispatcher getEventDispatcher()
@@ -8646,6 +8755,17 @@
                         return $instance->sharedContext();
         }
                     /**
+         * Flush the log context on all currently resolved channels.
+         *
+         * @return \Illuminate\Log\LogManager 
+         * @static 
+         */ 
+        public static function withoutContext()
+        {
+                        /** @var \Illuminate\Log\LogManager $instance */
+                        return $instance->withoutContext();
+        }
+                    /**
          * Flush the shared context.
          *
          * @return \Illuminate\Log\LogManager 
@@ -8718,7 +8838,7 @@
                     /**
          * System is unusable.
          *
-         * @param string $message
+         * @param string|\Stringable $message
          * @param array $context
          * @return void 
          * @static 
@@ -8734,7 +8854,7 @@
          * Example: Entire website down, database unavailable, etc. This should
          * trigger the SMS alerts and wake you up.
          *
-         * @param string $message
+         * @param string|\Stringable $message
          * @param array $context
          * @return void 
          * @static 
@@ -8749,7 +8869,7 @@
          * 
          * Example: Application component unavailable, unexpected exception.
          *
-         * @param string $message
+         * @param string|\Stringable $message
          * @param array $context
          * @return void 
          * @static 
@@ -8763,7 +8883,7 @@
          * Runtime errors that do not require immediate action but should typically
          * be logged and monitored.
          *
-         * @param string $message
+         * @param string|\Stringable $message
          * @param array $context
          * @return void 
          * @static 
@@ -8779,7 +8899,7 @@
          * Example: Use of deprecated APIs, poor use of an API, undesirable things
          * that are not necessarily wrong.
          *
-         * @param string $message
+         * @param string|\Stringable $message
          * @param array $context
          * @return void 
          * @static 
@@ -8792,7 +8912,7 @@
                     /**
          * Normal but significant events.
          *
-         * @param string $message
+         * @param string|\Stringable $message
          * @param array $context
          * @return void 
          * @static 
@@ -8807,7 +8927,7 @@
          * 
          * Example: User logs in, SQL logs.
          *
-         * @param string $message
+         * @param string|\Stringable $message
          * @param array $context
          * @return void 
          * @static 
@@ -8820,7 +8940,7 @@
                     /**
          * Detailed debug information.
          *
-         * @param string $message
+         * @param string|\Stringable $message
          * @param array $context
          * @return void 
          * @static 
@@ -8834,7 +8954,7 @@
          * Logs with an arbitrary level.
          *
          * @param mixed $level
-         * @param string $message
+         * @param string|\Stringable $message
          * @param array $context
          * @return void 
          * @static 
@@ -10279,6 +10399,18 @@
                         $instance->assertNotPushed($job, $callback);
         }
                     /**
+         * Assert the total count of jobs that were pushed.
+         *
+         * @param int $expectedCount
+         * @return void 
+         * @static 
+         */ 
+        public static function assertCount($expectedCount)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\QueueFake $instance */
+                        $instance->assertCount($expectedCount);
+        }
+                    /**
          * Assert that no jobs were pushed.
          *
          * @return void 
@@ -10481,6 +10613,18 @@
         {
                         /** @var \Illuminate\Support\Testing\Fakes\QueueFake $instance */
                         return $instance->setConnectionName($name);
+        }
+                    /**
+         * Get the maximum number of attempts for an object-based queue handler.
+         *
+         * @param mixed $job
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getJobTries($job)
+        {            //Method inherited from \Illuminate\Queue\Queue         
+                        /** @var \Illuminate\Queue\SyncQueue $instance */
+                        return $instance->getJobTries($job);
         }
                     /**
          * Get the backoff for an object-based queue handler.
@@ -13321,6 +13465,21 @@
                         return $instance->stream($callback, $status, $headers);
         }
                     /**
+         * Create a new streamed response instance.
+         *
+         * @param array $data
+         * @param int $status
+         * @param array $headers
+         * @param int $encodingOptions
+         * @return \Symfony\Component\HttpFoundation\StreamedJsonResponse 
+         * @static 
+         */ 
+        public static function streamJson($data, $status = 200, $headers = [], $encodingOptions = 15)
+        {
+                        /** @var \Illuminate\Routing\ResponseFactory $instance */
+                        return $instance->streamJson($data, $status, $headers, $encodingOptions);
+        }
+                    /**
          * Create a new streamed response instance as a file download.
          *
          * @param callable $callback
@@ -13500,6 +13659,7 @@
      * @method static \Illuminate\Routing\RouteRegistrar controller(string $controller)
      * @method static \Illuminate\Routing\RouteRegistrar domain(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
+     * @method static \Illuminate\Routing\RouteRegistrar missing(\Closure $missing)
      * @method static \Illuminate\Routing\RouteRegistrar name(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar namespace(string|null $value)
      * @method static \Illuminate\Routing\RouteRegistrar prefix(string $prefix)
@@ -13956,6 +14116,18 @@
         {
                         /** @var \Illuminate\Routing\Router $instance */
                         $instance->substituteImplicitBindings($route);
+        }
+                    /**
+         * Register a callback to to run after implicit bindings are substituted.
+         *
+         * @param callable $callback
+         * @return \Illuminate\Routing\Router 
+         * @static 
+         */ 
+        public static function substituteImplicitBindingsUsing($callback)
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        return $instance->substituteImplicitBindingsUsing($callback);
         }
                     /**
          * Register a route matched event listener.
@@ -14505,28 +14677,86 @@
                         return $instance->dropDatabaseIfExists($name);
         }
                     /**
-         * Determine if the given table exists.
+         * Get the tables for the database.
          *
-         * @param string $table
-         * @return bool 
+         * @return array 
          * @static 
          */ 
-        public static function hasTable($table)
+        public static function getTables()
         {
                         /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->hasTable($table);
+                        return $instance->getTables();
         }
                     /**
-         * Get the column listing for a given table.
+         * Get the views for the database.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getViews()
+        {
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->getViews();
+        }
+                    /**
+         * Get all of the table names for the database.
+         *
+         * @deprecated Will be removed in a future Laravel version.
+         * @return array 
+         * @static 
+         */ 
+        public static function getAllTables()
+        {
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->getAllTables();
+        }
+                    /**
+         * Get all of the view names for the database.
+         *
+         * @deprecated Will be removed in a future Laravel version.
+         * @return array 
+         * @static 
+         */ 
+        public static function getAllViews()
+        {
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->getAllViews();
+        }
+                    /**
+         * Get the columns for a given table.
          *
          * @param string $table
          * @return array 
          * @static 
          */ 
-        public static function getColumnListing($table)
+        public static function getColumns($table)
         {
                         /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->getColumnListing($table);
+                        return $instance->getColumns($table);
+        }
+                    /**
+         * Get the indexes for a given table.
+         *
+         * @param string $table
+         * @return array 
+         * @static 
+         */ 
+        public static function getIndexes($table)
+        {
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->getIndexes($table);
+        }
+                    /**
+         * Get the foreign keys for a given table.
+         *
+         * @param string $table
+         * @return array 
+         * @static 
+         */ 
+        public static function getForeignKeys($table)
+        {
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->getForeignKeys($table);
         }
                     /**
          * Drop all tables from the database.
@@ -14549,28 +14779,6 @@
         {
                         /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
                         $instance->dropAllViews();
-        }
-                    /**
-         * Get all of the table names for the database.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getAllTables()
-        {
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->getAllTables();
-        }
-                    /**
-         * Get all of the view names for the database.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getAllViews()
-        {
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->getAllViews();
         }
                     /**
          * Set the default string length for migrations.
@@ -14625,6 +14833,52 @@
         public static function useNativeSchemaOperationsIfPossible($value = true)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
                         \Illuminate\Database\Schema\MySqlBuilder::useNativeSchemaOperationsIfPossible($value);
+        }
+                    /**
+         * Determine if the given table exists.
+         *
+         * @param string $table
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasTable($table)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->hasTable($table);
+        }
+                    /**
+         * Determine if the given view exists.
+         *
+         * @param string $view
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasView($view)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->hasView($view);
+        }
+                    /**
+         * Get the names of the tables that belong to the database.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getTableListing()
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->getTableListing();
+        }
+                    /**
+         * Get the user-defined types that belong to the database.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getTypes()
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->getTypes();
         }
                     /**
          * Determine if the given table has a given column.
@@ -14685,13 +14939,52 @@
          *
          * @param string $table
          * @param string $column
+         * @param bool $fullDefinition
          * @return string 
          * @static 
          */ 
-        public static function getColumnType($table, $column)
+        public static function getColumnType($table, $column, $fullDefinition = false)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
                         /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->getColumnType($table, $column);
+                        return $instance->getColumnType($table, $column, $fullDefinition);
+        }
+                    /**
+         * Get the column listing for a given table.
+         *
+         * @param string $table
+         * @return array 
+         * @static 
+         */ 
+        public static function getColumnListing($table)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->getColumnListing($table);
+        }
+                    /**
+         * Get the names of the indexes for a given table.
+         *
+         * @param string $table
+         * @return array 
+         * @static 
+         */ 
+        public static function getIndexListing($table)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->getIndexListing($table);
+        }
+                    /**
+         * Determine if the given table has a given index.
+         *
+         * @param string $table
+         * @param string|array $index
+         * @param string|null $type
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasIndex($table, $index, $type = null)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->hasIndex($table, $index, $type);
         }
                     /**
          * Modify a table on the schema.
@@ -14850,6 +15143,52 @@
                         /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
                         $instance->blueprintResolver($resolver);
         }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        \Illuminate\Database\Schema\MySqlBuilder::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        \Illuminate\Database\Schema\MySqlBuilder::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        return \Illuminate\Database\Schema\MySqlBuilder::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        \Illuminate\Database\Schema\MySqlBuilder::flushMacros();
+        }
          
     }
             /**
@@ -14879,6 +15218,28 @@
         {
                         /** @var \Illuminate\Session\SessionManager $instance */
                         return $instance->blockDriver();
+        }
+                    /**
+         * Get the maximum number of seconds the session lock should be held for.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function defaultRouteBlockLockSeconds()
+        {
+                        /** @var \Illuminate\Session\SessionManager $instance */
+                        return $instance->defaultRouteBlockLockSeconds();
+        }
+                    /**
+         * Get the maximum number of seconds to wait while attempting to acquire a route block session lock.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function defaultRouteBlockWaitSeconds()
+        {
+                        /** @var \Illuminate\Session\SessionManager $instance */
+                        return $instance->defaultRouteBlockWaitSeconds();
         }
                     /**
          * Get the session configuration.
@@ -15040,6 +15401,18 @@
         {
                         /** @var \Illuminate\Session\Store $instance */
                         return $instance->only($keys);
+        }
+                    /**
+         * Get all the session data except for a specified array of items.
+         *
+         * @param array $keys
+         * @return array 
+         * @static 
+         */ 
+        public static function except($keys)
+        {
+                        /** @var \Illuminate\Session\Store $instance */
+                        return $instance->except($keys);
         }
                     /**
          * Checks if a key exists.
@@ -18174,6 +18547,18 @@
                         return $instance->useManifestFilename($filename);
         }
                     /**
+         * Resolve asset paths using the provided resolver.
+         *
+         * @param callable|null $urlResolver
+         * @return \Illuminate\Foundation\Vite 
+         * @static 
+         */ 
+        public static function createAssetPathsUsing($resolver)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->createAssetPathsUsing($resolver);
+        }
+                    /**
          * Get the Vite "hot" file path.
          *
          * @return string 
@@ -18386,6 +18771,13 @@
      * 
      *
      */ 
+        class Number {
+         
+    }
+            /**
+     * 
+     *
+     */ 
         class Str {
                     /**
          * 
@@ -18398,6 +18790,18 @@
         public static function sanitizeHtml($html)
         {
                         return \Illuminate\Support\Str::sanitizeHtml($html);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Support\SupportServiceProvider::packageBooted()
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function ucwords($value)
+        {
+                        return \Illuminate\Support\Str::ucwords($value);
         }
          
     }
@@ -18438,581 +18842,46 @@
         {
                         return \Illuminate\Support\Stringable::sanitizeHtml();
         }
-         
-    }
-     
-}
-
-        namespace Omniphx\Forrest\Providers\Laravel\Facades { 
-            /**
-     * 
-     *
-     * @method static string|array chatter(string $resource, array $options = [])
-     * @method static string|array tabs(string $resource, array $options = [])
-     * @method static string|array appMenu(string $resource, array $options = [])
-     * @method static string|array quickActions(string $resource, array $options = [])
-     * @method static string|array commerce(string $resource, array $options = [])
-     * @method static string|array wave(string $resource, array $options = [])
-     * @method static string|array exchange-connect(string $resource, array $options = [])
-     * @method static string|array analytics(string $resource, array $options = [])
-     * @method static string|array composite(string $resource, array $options = [])
-     * @method static string|array theme(string $resource, array $options = [])
-     * @method static string|array nouns(string $resource, array $options = [])
-     * @method static string|array recent(string $resource, array $options = [])
-     * @method static string|array licensing(string $resource, array $options = [])
-     * @method static string|array async-queries(string $resource, array $options = [])
-     * @method static string|array emailConnect(string $resource, array $options = [])
-     * @method static string|array compactLayouts(string $resource, array $options = [])
-     * @method static string|array flexiPage(string $resource, array $options = [])
-     * @method static string|array knowledgeManagement(string $resource, array $options = [])
-     * @method static string|array sobjects(string $resource, array $options = [])
-     * @method static string|array actions(string $resource, array $options = [])
-     * @method static string|array support(string $resource, array $options = [])
-     */ 
-        class Forrest {
                     /**
          * 
          *
+         * @see \Filament\Support\SupportServiceProvider::packageBooted()
+         * @return \Illuminate\Support\Stringable 
          * @static 
          */ 
-        public static function authenticate($url = null)
+        public static function ucwords()
         {
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->authenticate($url);
-        }
-                    /**
-         * Refresh authentication token by re-authenticating.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function refresh()
-        {
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        $instance->refresh();
-        }
-                    /**
-         * Revokes access token from Salesforce. Will not flush token from storage.
-         *
-         * @return \Psr\Http\Message\ResponseInterface 
-         * @static 
-         */ 
-        public static function revoke()
-        {
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->revoke();
-        }
-                    /**
-         * Try requesting token, if token expired try refreshing token.
-         *
-         * @param string $url
-         * @param array $options
-         * @return string|array 
-         * @static 
-         */ 
-        public static function request($url, $options)
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->request($url, $options);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function setCredentials($credentials)
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->setCredentials($credentials);
-        }
-                    /**
-         * GET method call using any custom path.
-         *
-         * @param string $path
-         * @param array $requestBody
-         * @param array $options
-         * @return mixed 
-         * @static 
-         */ 
-        public static function get($path, $requestBody = [], $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->get($path, $requestBody, $options);
-        }
-                    /**
-         * POST method call using any custom path.
-         *
-         * @param string $path
-         * @param array $requestBody
-         * @param array $options
-         * @return mixed 
-         * @static 
-         */ 
-        public static function post($path, $requestBody = [], $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->post($path, $requestBody, $options);
-        }
-                    /**
-         * PUT method call using any custom path.
-         *
-         * @param string $path
-         * @param array $requestBody
-         * @param array $options
-         * @return mixed 
-         * @static 
-         */ 
-        public static function put($path, $requestBody = [], $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->put($path, $requestBody, $options);
-        }
-                    /**
-         * DELETE method call using any custom path.
-         *
-         * @param string $path
-         * @param array $requestBody
-         * @param array $options
-         * @return mixed 
-         * @static 
-         */ 
-        public static function delete($path, $requestBody = [], $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->delete($path, $requestBody, $options);
-        }
-                    /**
-         * HEAD method call using any custom path.
-         *
-         * @param string $path
-         * @param array $requestBody
-         * @param array $options
-         * @return mixed 
-         * @static 
-         */ 
-        public static function head($path, $requestBody = [], $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->head($path, $requestBody, $options);
-        }
-                    /**
-         * PATCH method call using any custom path.
-         *
-         * @param string $path
-         * @param array $requestBody
-         * @param array $options
-         * @return mixed 
-         * @static 
-         */ 
-        public static function patch($path, $requestBody = [], $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->patch($path, $requestBody, $options);
-        }
-                    /**
-         * Request that returns all currently supported versions.
-         * 
-         * Includes the verison, label and link to each version's root.
-         * Formats: json, xml
-         * Methods: get.
-         *
-         * @param array $options
-         * @return array $versions
-         * @static 
-         */ 
-        public static function versions($options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->versions($options);
-        }
-                    /**
-         * Lists availabe resources for specified API version.
-         * 
-         * Includes resource name and URI.
-         * Formats: json, xml
-         * Methods: get.
-         *
-         * @param array $options
-         * @return array $resources
-         * @static 
-         */ 
-        public static function resources($options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->resources($options);
-        }
-                    /**
-         * Returns information about the logged-in user.
-         *
-         * @param array
-         * @return array $identity
-         * @static 
-         */ 
-        public static function identity($options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->identity($options);
-        }
-                    /**
-         * Lists information about organizational limits.
-         * 
-         * Available for API version 29.0 and later.
-         * Returns limits for daily API calls, Data storage, etc.
-         *
-         * @param array $options
-         * @return array $limits
-         * @static 
-         */ 
-        public static function limits($options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->limits($options);
-        }
-                    /**
-         * Describes all global objects available in the organization.
-         *
-         * @param string $object_name
-         * @param array $options
-         * @return array 
-         * @static 
-         */ 
-        public static function describe($object_name = null, $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->describe($object_name, $options);
-        }
-                    /**
-         * Executes a specified SOQL query.
-         *
-         * @param string $query
-         * @param array $options
-         * @return array $queryResults
-         * @static 
-         */ 
-        public static function query($query, $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->query($query, $options);
-        }
-                    /**
-         * Calls next query.
-         *
-         * @param $nextUrl
-         * @param array $options
-         * @return mixed 
-         * @static 
-         */ 
-        public static function next($nextUrl, $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->next($nextUrl, $options);
-        }
-                    /**
-         * Details how Salesforce will process your query.
-         * 
-         * Available for API verison 30.0 or later.
-         *
-         * @param string $query
-         * @param array $options
-         * @return array $queryExplain
-         * @static 
-         */ 
-        public static function queryExplain($query, $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->queryExplain($query, $options);
-        }
-                    /**
-         * Executes a SOQL query, but will also returned records that have
-         * been deleted.
-         * 
-         * Available for API version 29.0 or later.
-         *
-         * @param string $query
-         * @param array $options
-         * @return array $queryResults
-         * @static 
-         */ 
-        public static function queryAll($query, $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->queryAll($query, $options);
-        }
-                    /**
-         * Executes the specified SOSL query.
-         *
-         * @param string $query
-         * @param array $options
-         * @return array 
-         * @static 
-         */ 
-        public static function search($query, $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->search($query, $options);
-        }
-                    /**
-         * Returns an ordered list of objects in the default global search
-         * scope of a logged-in user. Global search keeps track of which
-         * objects the user interacts with and how often and arranges the
-         * search results accordingly. Objects used most frequently appear
-         * at the top of the list.
-         *
-         * @param array $options
-         * @return array 
-         * @static 
-         */ 
-        public static function scopeOrder($options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->scopeOrder($options);
-        }
-                    /**
-         * Returns search result layout information for the objects in the query string.
-         *
-         * @param array $objectList
-         * @param array $options
-         * @return array 
-         * @static 
-         */ 
-        public static function searchLayouts($objectList, $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->searchLayouts($objectList, $options);
-        }
-                    /**
-         * Returns a list of Salesforce Knowledge articles whose titles match the user’s
-         * search query. Provides a shortcut to navigate directly to likely
-         * relevant articles, before the user performs a search.
-         * 
-         * Available for API version 30.0 or later.
-         *
-         * @param string $query
-         * @param array $options
-         * @return array 
-         * @static 
-         */ 
-        public static function suggestedArticles($query, $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->suggestedArticles($query, $options);
-        }
-                    /**
-         * Returns a list of suggested searches based on the user’s query string text
-         * matching searches that other users have performed in Salesforce Knowledge.
-         * 
-         * Available for API version 30.0 or later.
-         * 
-         * Tested this and can't get it to work. I think the request is set up correctly.
-         *
-         * @param string $query
-         * @param array $options
-         * @return array 
-         * @static 
-         */ 
-        public static function suggestedQueries($query, $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->suggestedQueries($query, $options);
-        }
-                    /**
-         * Request to a custom Apex REST endpoint.
-         *
-         * @param string $customURI
-         * @param array $options
-         * @return mixed 
-         * @static 
-         */ 
-        public static function custom($customURI, $options = [])
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->custom($customURI, $options);
-        }
-                    /**
-         * Public accessor to the Guzzle Client Object.
-         *
-         * @return \Omniphx\Forrest\HttpClientInterface 
-         * @static 
-         */ 
-        public static function getClient()
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->getClient();
-        }
-                    /**
-         * Accessor to get instance URL
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getInstanceURL()
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->getInstanceURL();
-        }
-                    /**
-         * Accessor to get the token object
-         *
-         * @return mixed 
-         * @static 
-         */ 
-        public static function getToken()
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->getToken();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getBaseUrl()
-        {            //Method inherited from \Omniphx\Forrest\Client         
-                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
-                        return $instance->getBaseUrl();
+                        return \Illuminate\Support\Stringable::ucwords();
         }
          
     }
      
 }
 
-    namespace Jorenvh\Share { 
+        namespace OmniaDigital\CatalystCore\Facades { 
             /**
      * 
      *
      */ 
-        class ShareFacade {
+        class Translate {
                     /**
          * 
          *
-         * @param string $url
-         * @param string|null $title
-         * @param array $options
-         * @param string|null $prefix
-         * @param string|null $suffix
-         * @return \Jorenvh\Share\Share 
          * @static 
          */ 
-        public static function page($url, $title = null, $options = [], $prefix = null, $suffix = null)
+        public static function get($string)
         {
-                        /** @var \Jorenvh\Share\Share $instance */
-                        return $instance->page($url, $title, $options, $prefix, $suffix);
-        }
-                    /**
-         * 
-         *
-         * @param string|null $title
-         * @param array $options
-         * @param string|null $prefix
-         * @param string|null $suffix
-         * @return \Jorenvh\Share\Share 
-         * @static 
-         */ 
-        public static function currentPage($title = null, $options = [], $prefix = null, $suffix = null)
-        {
-                        /** @var \Jorenvh\Share\Share $instance */
-                        return $instance->currentPage($title, $options, $prefix, $suffix);
-        }
-                    /**
-         * Facebook share link
-         *
-         * @return \Jorenvh\Share\Share 
-         * @static 
-         */ 
-        public static function facebook()
-        {
-                        /** @var \Jorenvh\Share\Share $instance */
-                        return $instance->facebook();
-        }
-                    /**
-         * Twitter share link
-         *
-         * @return \Jorenvh\Share\Share 
-         * @static 
-         */ 
-        public static function twitter()
-        {
-                        /** @var \Jorenvh\Share\Share $instance */
-                        return $instance->twitter();
-        }
-                    /**
-         * Reddit share link
-         *
-         * @return \Jorenvh\Share\Share 
-         * @static 
-         */ 
-        public static function reddit()
-        {
-                        /** @var \Jorenvh\Share\Share $instance */
-                        return $instance->reddit();
-        }
-                    /**
-         * Telegram share link
-         *
-         * @return \Jorenvh\Share\Share 
-         * @static 
-         */ 
-        public static function telegram()
-        {
-                        /** @var \Jorenvh\Share\Share $instance */
-                        return $instance->telegram();
-        }
-                    /**
-         * Whatsapp share link
-         *
-         * @return \Jorenvh\Share\Share 
-         * @static 
-         */ 
-        public static function whatsapp()
-        {
-                        /** @var \Jorenvh\Share\Share $instance */
-                        return $instance->whatsapp();
-        }
-                    /**
-         * Linked in share link
-         *
-         * @param string $summary
-         * @return \Jorenvh\Share\Share 
-         * @static 
-         */ 
-        public static function linkedin($summary = '')
-        {
-                        /** @var \Jorenvh\Share\Share $instance */
-                        return $instance->linkedin($summary);
-        }
-                    /**
-         * Pinterest share link
-         *
-         * @return \Jorenvh\Share\Share 
-         * @static 
-         */ 
-        public static function pinterest()
-        {
-                        /** @var \Jorenvh\Share\Share $instance */
-                        return $instance->pinterest();
-        }
-                    /**
-         * Get the raw generated links.
-         *
-         * @return string|array 
-         * @static 
-         */ 
-        public static function getRawLinks()
-        {
-                        /** @var \Jorenvh\Share\Share $instance */
-                        return $instance->getRawLinks();
+                        /** @var \OmniaDigital\CatalystCore\Support\Translate $instance */
+                        return $instance->get($string);
         }
          
     }
-     
-}
-
-    namespace App\Support\Platform\Facades { 
             /**
      * 
      *
+     * @see \OmniaDigital\CatalystCore\Catalyst
      */ 
-        class PlatformFacade {
+        class Catalyst {
                     /**
          * 
          *
@@ -19020,7 +18889,7 @@
          */ 
         public static function hasGeneralSettingEnabled($setting)
         {
-                        return \App\Support\Platform\Platform::hasGeneralSettingEnabled($setting);
+                        return \OmniaDigital\CatalystCore\Catalyst::hasGeneralSettingEnabled($setting);
         }
                     /**
          * 
@@ -19029,7 +18898,7 @@
          */ 
         public static function applyButtonText()
         {
-                        return \App\Support\Platform\Platform::applyButtonText();
+                        return \OmniaDigital\CatalystCore\Catalyst::applyButtonText();
         }
                     /**
          * 
@@ -19038,52 +18907,16 @@
          */ 
         public static function getGeneralSetting($setting)
         {
-                        return \App\Support\Platform\Platform::getGeneralSetting($setting);
+                        return \OmniaDigital\CatalystCore\Catalyst::getGeneralSetting($setting);
         }
                     /**
          * 
          *
          * @static 
          */ 
-        public static function getTeamsWordUpper()
+        public static function getProjectsWordUpper()
         {
-                        return \App\Support\Platform\Platform::getTeamsWordUpper();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getTeamsWord()
-        {
-                        return \App\Support\Platform\Platform::getTeamsWord();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getTeamsLetter()
-        {
-                        return \App\Support\Platform\Platform::getTeamsLetter();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getUsersLetter()
-        {
-                        return \App\Support\Platform\Platform::getUsersLetter();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getUsersWord()
-        {
-                        return \App\Support\Platform\Platform::getUsersWord();
+                        return \OmniaDigital\CatalystCore\Catalyst::getProjectsWordUpper();
         }
                     /**
          * 
@@ -19092,7 +18925,70 @@
          */ 
         public static function getJobSetting($setting)
         {
-                        return \App\Support\Platform\Platform::getJobSetting($setting);
+                        return \OmniaDigital\CatalystCore\Catalyst::getJobSetting($setting);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getProjectsWord()
+        {
+                        return \OmniaDigital\CatalystCore\Catalyst::getProjectsWord();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getProjectsLetter()
+        {
+                        return \OmniaDigital\CatalystCore\Catalyst::getProjectsLetter();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getTeamsWordUpper()
+        {
+                        return \OmniaDigital\CatalystCore\Catalyst::getTeamsWordUpper();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getTeamsWord()
+        {
+                        return \OmniaDigital\CatalystCore\Catalyst::getTeamsWord();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getTeamsLetter()
+        {
+                        return \OmniaDigital\CatalystCore\Catalyst::getTeamsLetter();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getUsersLetter()
+        {
+                        return \OmniaDigital\CatalystCore\Catalyst::getUsersLetter();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getUsersWord()
+        {
+                        return \OmniaDigital\CatalystCore\Catalyst::getUsersWord();
         }
                     /**
          * 
@@ -19101,7 +18997,7 @@
          */ 
         public static function getAppFee()
         {
-                        return \App\Support\Platform\Platform::getAppFee();
+                        return \OmniaDigital\CatalystCore\Catalyst::getAppFee();
         }
                     /**
          * 
@@ -19110,7 +19006,7 @@
          */ 
         public static function getBillingSetting($setting)
         {
-                        return \App\Support\Platform\Platform::getBillingSetting($setting);
+                        return \OmniaDigital\CatalystCore\Catalyst::getBillingSetting($setting);
         }
                     /**
          * 
@@ -19119,7 +19015,7 @@
          */ 
         public static function isUsingUserSubscriptions()
         {
-                        return \App\Support\Platform\Platform::isUsingUserSubscriptions();
+                        return \OmniaDigital\CatalystCore\Catalyst::isUsingUserSubscriptions();
         }
                     /**
          * 
@@ -19128,7 +19024,7 @@
          */ 
         public static function hasBillingSettingEnabled($setting)
         {
-                        return \App\Support\Platform\Platform::hasBillingSettingEnabled($setting);
+                        return \OmniaDigital\CatalystCore\Catalyst::hasBillingSettingEnabled($setting);
         }
                     /**
          * 
@@ -19137,7 +19033,7 @@
          */ 
         public static function isUsingTeamSubscriptions()
         {
-                        return \App\Support\Platform\Platform::isUsingTeamSubscriptions();
+                        return \OmniaDigital\CatalystCore\Catalyst::isUsingTeamSubscriptions();
         }
                     /**
          * 
@@ -19146,7 +19042,7 @@
          */ 
         public static function isUsingTeamMemberSubscriptions()
         {
-                        return \App\Support\Platform\Platform::isUsingTeamMemberSubscriptions();
+                        return \OmniaDigital\CatalystCore\Catalyst::isUsingTeamMemberSubscriptions();
         }
                     /**
          * 
@@ -19155,7 +19051,7 @@
          */ 
         public static function isUsingStripe()
         {
-                        return \App\Support\Platform\Platform::isUsingStripe();
+                        return \OmniaDigital\CatalystCore\Catalyst::isUsingStripe();
         }
                     /**
          * 
@@ -19164,7 +19060,7 @@
          */ 
         public static function isUsingPaymentGateway($gateway)
         {
-                        return \App\Support\Platform\Platform::isUsingPaymentGateway($gateway);
+                        return \OmniaDigital\CatalystCore\Catalyst::isUsingPaymentGateway($gateway);
         }
                     /**
          * 
@@ -19173,7 +19069,7 @@
          */ 
         public static function isUsingChargent()
         {
-                        return \App\Support\Platform\Platform::isUsingChargent();
+                        return \OmniaDigital\CatalystCore\Catalyst::isUsingChargent();
         }
                     /**
          * 
@@ -19182,7 +19078,7 @@
          */ 
         public static function isAllowingGuestAccess()
         {
-                        return \App\Support\Platform\Platform::isAllowingGuestAccess();
+                        return \OmniaDigital\CatalystCore\Catalyst::isAllowingGuestAccess();
         }
                     /**
          * 
@@ -19191,7 +19087,7 @@
          */ 
         public static function shouldShowLoginOnGuestAccess()
         {
-                        return \App\Support\Platform\Platform::shouldShowLoginOnGuestAccess();
+                        return \OmniaDigital\CatalystCore\Catalyst::shouldShowLoginOnGuestAccess();
         }
                     /**
          * 
@@ -19200,7 +19096,7 @@
          */ 
         public static function isSubscriptionShownInNavigation()
         {
-                        return \App\Support\Platform\Platform::isSubscriptionShownInNavigation();
+                        return \OmniaDigital\CatalystCore\Catalyst::isSubscriptionShownInNavigation();
         }
                     /**
          * 
@@ -19209,7 +19105,7 @@
          */ 
         public static function isSubscriptionShownInProfileHeader()
         {
-                        return \App\Support\Platform\Platform::isSubscriptionShownInProfileHeader();
+                        return \OmniaDigital\CatalystCore\Catalyst::isSubscriptionShownInProfileHeader();
         }
                     /**
          * 
@@ -19218,7 +19114,7 @@
          */ 
         public static function timezoneList()
         {
-                        return \App\Support\Platform\Platform::timezoneList();
+                        return \OmniaDigital\CatalystCore\Catalyst::timezoneList();
         }
                     /**
          * 
@@ -19228,7 +19124,7 @@
          */ 
         public static function money($string)
         {
-                        return \App\Support\Platform\Platform::money($string);
+                        return \OmniaDigital\CatalystCore\Catalyst::money($string);
         }
                     /**
          * Get the list of country.
@@ -19238,7 +19134,7 @@
          */ 
         public static function countries()
         {
-                        return \App\Support\Platform\Platform::countries();
+                        return \OmniaDigital\CatalystCore\Catalyst::countries();
         }
                     /**
          * 
@@ -19247,7 +19143,7 @@
          */ 
         public static function isModuleEnabled($moduleName)
         {
-                        return \App\Support\Platform\Platform::isModuleEnabled($moduleName);
+                        return \OmniaDigital\CatalystCore\Catalyst::isModuleEnabled($moduleName);
         }
                     /**
          * 
@@ -19256,25 +19152,44 @@
          */ 
         public static function translate($string)
         {
-                        /** @var \App\Support\Platform\Platform $instance */
+                        /** @var \OmniaDigital\CatalystCore\Catalyst $instance */
                         return $instance->translate($string);
         }
          
     }
+     
+}
+
+    namespace AnourValar\EloquentSerialize\Facades { 
             /**
      * 
      *
      */ 
-        class TranslateFacade {
+        class EloquentSerializeFacade {
                     /**
-         * 
+         * Pack
          *
+         * @param \Illuminate\Database\Eloquent\Builder $builder
+         * @return string 
          * @static 
          */ 
-        public static function get($string)
+        public static function serialize($builder)
         {
-                        /** @var \App\Support\Platform\Translate $instance */
-                        return $instance->get($string);
+                        /** @var \AnourValar\EloquentSerialize\Service $instance */
+                        return $instance->serialize($builder);
+        }
+                    /**
+         * Unpack
+         *
+         * @param mixed $package
+         * @throws \LogicException
+         * @return \Illuminate\Database\Eloquent\Builder 
+         * @static 
+         */ 
+        public static function unserialize($package)
+        {
+                        /** @var \AnourValar\EloquentSerialize\Service $instance */
+                        return $instance->unserialize($package);
         }
          
     }
@@ -19372,12 +19287,13 @@
          *
          * @param string $name Internal name, used to stop the measure
          * @param string $label Public name
+         * @param string|null $collector
          * @static 
          */ 
-        public static function startMeasure($name, $label = null)
+        public static function startMeasure($name, $label = null, $collector = null)
         {
                         /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-                        return $instance->startMeasure($name, $label);
+                        return $instance->startMeasure($name, $label, $collector);
         }
                     /**
          * Stops a measure
@@ -19489,25 +19405,28 @@
          * @param string $label
          * @param float $start
          * @param float $end
+         * @param array|null $params
+         * @param string|null $collector
          * @static 
          */ 
-        public static function addMeasure($label, $start, $end)
+        public static function addMeasure($label, $start, $end, $params = [], $collector = null)
         {
                         /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-                        return $instance->addMeasure($label, $start, $end);
+                        return $instance->addMeasure($label, $start, $end, $params, $collector);
         }
                     /**
          * Utility function to measure the execution of a Closure
          *
          * @param string $label
          * @param \Closure $closure
+         * @param string|null $collector
          * @return mixed 
          * @static 
          */ 
-        public static function measure($label, $closure)
+        public static function measure($label, $closure, $collector = null)
         {
                         /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
-                        return $instance->measure($label, $closure);
+                        return $instance->measure($label, $closure, $collector);
         }
                     /**
          * Collect data in a CLI request
@@ -19839,26 +19758,35 @@
                     /**
          * 
          *
-         * @return void 
+         * @throws BindingResolutionException
          * @static 
          */ 
         public static function report($exception)
         {
-                        \BezhanSalleh\FilamentExceptions\FilamentExceptions::report($exception);
+                        return \BezhanSalleh\FilamentExceptions\FilamentExceptions::report($exception);
         }
                     /**
          * 
          *
-         * @return void 
+         * @static 
+         */ 
+        public static function getModel()
+        {
+                        return \BezhanSalleh\FilamentExceptions\FilamentExceptions::getModel();
+        }
+                    /**
+         * 
+         *
+         * @throws BindingResolutionException
          * @static 
          */ 
         public static function reportException($exception)
         {
                         /** @var \BezhanSalleh\FilamentExceptions\FilamentExceptions $instance */
-                        $instance->reportException($exception);
+                        return $instance->reportException($exception);
         }
                     /**
-         * Convert all items to string.
+         * 
          *
          * @static 
          */ 
@@ -19868,7 +19796,7 @@
                         return $instance->stringify($data);
         }
                     /**
-         * Store exception info to db.
+         * 
          *
          * @static 
          */ 
@@ -19876,15 +19804,6 @@
         {
                         /** @var \BezhanSalleh\FilamentExceptions\FilamentExceptions $instance */
                         return $instance->store($data);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function formatFileName($fileName)
-        {
-                        return \BezhanSalleh\FilamentExceptions\FilamentExceptions::formatFileName($fileName);
         }
          
     }
@@ -20005,6 +19924,392 @@
         public static function thousandsFormater($value)
         {
                         return \BezhanSalleh\FilamentGoogleAnalytics\FilamentGoogleAnalytics::thousandsFormater($value);
+        }
+         
+    }
+     
+}
+
+    namespace BezhanSalleh\PanelSwitch\Facades { 
+            /**
+     * 
+     *
+     * @see \BezhanSalleh\PanelSwitch\PanelSwitch
+     */ 
+        class PanelSwitch {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function make()
+        {
+                        return \BezhanSalleh\PanelSwitch\PanelSwitch::make();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function boot()
+        {
+                        return \BezhanSalleh\PanelSwitch\PanelSwitch::boot();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function canSwitchPanels($condition)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->canSwitchPanels($condition);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function excludes($panelIds)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->excludes($panelIds);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function modalHeading($modalHeading)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->modalHeading($modalHeading);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function icons($icons, $asImage = false)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->icons($icons, $asImage);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function iconSize($size = null)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->iconSize($size);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function labels($labels)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->labels($labels);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function modalWidth($width = null)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->modalWidth($width);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function renderHook($hook)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->renderHook($hook);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function slideOver($condition = true)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->slideOver($condition);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function simple($condition = true)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->simple($condition);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function visible($visible)
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->visible($visible);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getExcludes()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->getExcludes();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getModalHeading()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->getModalHeading();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getIcons()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->getIcons();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getIconSize()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->getIconSize();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getLabels()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->getLabels();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getModalWidth()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->getModalWidth();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isAbleToSwitchPanels()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->isAbleToSwitchPanels();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isModalSlideOver()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->isModalSlideOver();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isSimple()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->isSimple();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isVisible()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->isVisible();
+        }
+                    /**
+         * 
+         *
+         * @return array<string, Panel> 
+         * @static 
+         */ 
+        public static function getPanels()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->getPanels();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getCurrentPanel()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->getCurrentPanel();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getRenderHook()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->getRenderHook();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getRenderIconAsImage()
+        {
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->getRenderIconAsImage();
+        }
+                    /**
+         * Apply the callback if the given "value" is (or resolves to) truthy.
+         *
+         * @template TWhenParameter
+         * @template TWhenReturnType
+         * @param \Filament\Support\Components\(\Closure($this):  TWhenParameter)|TWhenParameter|null  $value
+         * @param \Filament\Support\Components\(callable($this,  TWhenParameter): TWhenReturnType)|null  $callback
+         * @param \Filament\Support\Components\(callable($this,  TWhenParameter): TWhenReturnType)|null  $default
+         * @return $this|\Filament\Support\Components\TWhenReturnType 
+         * @static 
+         */ 
+        public static function when($value = null, $callback = null, $default = null)
+        {            //Method inherited from \Filament\Support\Components\Component         
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->when($value, $callback, $default);
+        }
+                    /**
+         * Apply the callback if the given "value" is (or resolves to) falsy.
+         *
+         * @template TUnlessParameter
+         * @template TUnlessReturnType
+         * @param \Filament\Support\Components\(\Closure($this):  TUnlessParameter)|TUnlessParameter|null  $value
+         * @param \Filament\Support\Components\(callable($this,  TUnlessParameter): TUnlessReturnType)|null  $callback
+         * @param \Filament\Support\Components\(callable($this,  TUnlessParameter): TUnlessReturnType)|null  $default
+         * @return $this|\Filament\Support\Components\TUnlessReturnType 
+         * @static 
+         */ 
+        public static function unless($value = null, $callback = null, $default = null)
+        {            //Method inherited from \Filament\Support\Components\Component         
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->unless($value, $callback, $default);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function configureUsing($modifyUsing, $during = null, $isImportant = false)
+        {            //Method inherited from \Filament\Support\Components\Component         
+                        return \BezhanSalleh\PanelSwitch\PanelSwitch::configureUsing($modifyUsing, $during, $isImportant);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function configure()
+        {            //Method inherited from \Filament\Support\Components\Component         
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->configure();
+        }
+                    /**
+         * 
+         *
+         * @template T
+         * @param \Filament\Support\Components\T  | callable(): T  $value
+         * @param array<string, mixed> $namedInjections
+         * @param array<string, mixed> $typedInjections
+         * @return \Filament\Support\Components\T 
+         * @static 
+         */ 
+        public static function evaluate($value, $namedInjections = [], $typedInjections = [])
+        {            //Method inherited from \Filament\Support\Components\Component         
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->evaluate($value, $namedInjections, $typedInjections);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {            //Method inherited from \Filament\Support\Components\Component         
+                        return \BezhanSalleh\PanelSwitch\PanelSwitch::macro($name, $macro);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {            //Method inherited from \Filament\Support\Components\Component         
+                        return \BezhanSalleh\PanelSwitch\PanelSwitch::mixin($mixin, $replace);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function flushMacros()
+        {            //Method inherited from \Filament\Support\Components\Component         
+                        return \BezhanSalleh\PanelSwitch\PanelSwitch::flushMacros();
+        }
+                    /**
+         * Call the given Closure with this instance then return the instance.
+         *
+         * @param callable|null $callback
+         * @return $this|\Illuminate\Support\HigherOrderTapProxy 
+         * @static 
+         */ 
+        public static function tap($callback = null)
+        {            //Method inherited from \Filament\Support\Components\Component         
+                        /** @var \BezhanSalleh\PanelSwitch\PanelSwitch $instance */
+                        return $instance->tap($callback);
         }
          
     }
@@ -20133,8 +20438,6 @@
                     /**
          * Get localized widget label
          *
-         * @param string $page
-         * @return string|bool 
          * @static 
          */ 
         public static function getLocalizedWidgetLabel($widget)
@@ -20225,537 +20528,131 @@
      
 }
 
-    namespace Jenssegers\Agent\Facades { 
+    namespace Jorenvh\Share { 
             /**
      * 
      *
      */ 
-        class Agent {
+        class ShareFacade {
                     /**
-         * Get all detection rules. These rules include the additional
-         * platforms and browsers and utilities.
+         * 
          *
-         * @return array 
+         * @param string $url
+         * @param string|null $title
+         * @param array $options
+         * @param string|null $prefix
+         * @param string|null $suffix
+         * @return \Jorenvh\Share\Share 
          * @static 
          */ 
-        public static function getDetectionRulesExtended()
+        public static function page($url, $title = null, $options = [], $prefix = null, $suffix = null)
         {
-                        return \Jenssegers\Agent\Agent::getDetectionRulesExtended();
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->page($url, $title, $options, $prefix, $suffix);
         }
                     /**
          * 
          *
+         * @param string|null $title
+         * @param array $options
+         * @param string|null $prefix
+         * @param string|null $suffix
+         * @return \Jorenvh\Share\Share 
          * @static 
          */ 
-        public static function getRules()
+        public static function currentPage($title = null, $options = [], $prefix = null, $suffix = null)
         {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getRules();
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->currentPage($title, $options, $prefix, $suffix);
         }
                     /**
-         * 
+         * Facebook share link
          *
-         * @return \Jaybizzle\CrawlerDetect\CrawlerDetect 
+         * @return \Jorenvh\Share\Share 
          * @static 
          */ 
-        public static function getCrawlerDetect()
+        public static function facebook()
         {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getCrawlerDetect();
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->facebook();
         }
                     /**
-         * 
+         * Twitter share link
          *
+         * @return \Jorenvh\Share\Share 
          * @static 
          */ 
-        public static function getBrowsers()
+        public static function twitter()
         {
-                        return \Jenssegers\Agent\Agent::getBrowsers();
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->twitter();
         }
                     /**
-         * 
+         * Reddit share link
          *
+         * @return \Jorenvh\Share\Share 
          * @static 
          */ 
-        public static function getOperatingSystems()
+        public static function reddit()
         {
-                        return \Jenssegers\Agent\Agent::getOperatingSystems();
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->reddit();
         }
                     /**
-         * 
+         * Telegram share link
          *
+         * @return \Jorenvh\Share\Share 
          * @static 
          */ 
-        public static function getPlatforms()
+        public static function telegram()
         {
-                        return \Jenssegers\Agent\Agent::getPlatforms();
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->telegram();
         }
                     /**
-         * 
+         * Whatsapp share link
          *
+         * @return \Jorenvh\Share\Share 
          * @static 
          */ 
-        public static function getDesktopDevices()
+        public static function whatsapp()
         {
-                        return \Jenssegers\Agent\Agent::getDesktopDevices();
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->whatsapp();
         }
                     /**
-         * 
+         * Linked in share link
          *
+         * @param string $summary
+         * @return \Jorenvh\Share\Share 
          * @static 
          */ 
-        public static function getProperties()
+        public static function linkedin($summary = '')
         {
-                        return \Jenssegers\Agent\Agent::getProperties();
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->linkedin($summary);
         }
                     /**
-         * Get accept languages.
+         * Pinterest share link
          *
-         * @param string $acceptLanguage
-         * @return array 
+         * @return \Jorenvh\Share\Share 
          * @static 
          */ 
-        public static function languages($acceptLanguage = null)
+        public static function pinterest()
         {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->languages($acceptLanguage);
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->pinterest();
         }
                     /**
-         * Get the browser name.
+         * Get the raw generated links.
          *
-         * @param string|null $userAgent
-         * @return string|bool 
+         * @return string|array 
          * @static 
          */ 
-        public static function browser($userAgent = null)
+        public static function getRawLinks()
         {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->browser($userAgent);
-        }
-                    /**
-         * Get the platform name.
-         *
-         * @param string|null $userAgent
-         * @return string|bool 
-         * @static 
-         */ 
-        public static function platform($userAgent = null)
-        {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->platform($userAgent);
-        }
-                    /**
-         * Get the device name.
-         *
-         * @param string|null $userAgent
-         * @return string|bool 
-         * @static 
-         */ 
-        public static function device($userAgent = null)
-        {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->device($userAgent);
-        }
-                    /**
-         * Check if the device is a desktop computer.
-         *
-         * @param string|null $userAgent deprecated
-         * @param array $httpHeaders deprecated
-         * @return bool 
-         * @static 
-         */ 
-        public static function isDesktop($userAgent = null, $httpHeaders = null)
-        {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->isDesktop($userAgent, $httpHeaders);
-        }
-                    /**
-         * Check if the device is a mobile phone.
-         *
-         * @param string|null $userAgent deprecated
-         * @param array $httpHeaders deprecated
-         * @return bool 
-         * @static 
-         */ 
-        public static function isPhone($userAgent = null, $httpHeaders = null)
-        {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->isPhone($userAgent, $httpHeaders);
-        }
-                    /**
-         * Get the robot name.
-         *
-         * @param string|null $userAgent
-         * @return string|bool 
-         * @static 
-         */ 
-        public static function robot($userAgent = null)
-        {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->robot($userAgent);
-        }
-                    /**
-         * Check if device is a robot.
-         *
-         * @param string|null $userAgent
-         * @return bool 
-         * @static 
-         */ 
-        public static function isRobot($userAgent = null)
-        {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->isRobot($userAgent);
-        }
-                    /**
-         * Get the device type
-         *
-         * @param null $userAgent
-         * @param null $httpHeaders
-         * @return string 
-         * @static 
-         */ 
-        public static function deviceType($userAgent = null, $httpHeaders = null)
-        {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->deviceType($userAgent, $httpHeaders);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function version($propertyName, $type = 'text')
-        {
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->version($propertyName, $type);
-        }
-                    /**
-         * Get the current script version.
-         * 
-         * This is useful for the demo.php file,
-         * so people can check on what version they are testing
-         * for mobile devices.
-         *
-         * @return string The version number in semantic version format.
-         * @static 
-         */ 
-        public static function getScriptVersion()
-        {            //Method inherited from \Mobile_Detect         
-                        return \Jenssegers\Agent\Agent::getScriptVersion();
-        }
-                    /**
-         * Set the HTTP Headers. Must be PHP-flavored. This method will reset existing headers.
-         *
-         * @param array $httpHeaders The headers to set. If null, then using PHP's _SERVER to extract
-         *                           the headers. The default null is left for backwards compatibility.
-         * @static 
-         */ 
-        public static function setHttpHeaders($httpHeaders = null)
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->setHttpHeaders($httpHeaders);
-        }
-                    /**
-         * Retrieves the HTTP headers.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getHttpHeaders()
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getHttpHeaders();
-        }
-                    /**
-         * Retrieves a particular header. If it doesn't exist, no exception/error is caused.
-         * 
-         * Simply null is returned.
-         *
-         * @param string $header The name of the header to retrieve. Can be HTTP compliant such as
-         *                       "User-Agent" or "X-Device-User-Agent" or can be php-esque with the
-         *                       all-caps, HTTP_ prefixed, underscore separated awesomeness.
-         * @return string|null The value of the header.
-         * @static 
-         */ 
-        public static function getHttpHeader($header)
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getHttpHeader($header);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getMobileHeaders()
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getMobileHeaders();
-        }
-                    /**
-         * Get all possible HTTP headers that
-         * can contain the User-Agent string.
-         *
-         * @return array List of HTTP headers.
-         * @static 
-         */ 
-        public static function getUaHttpHeaders()
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getUaHttpHeaders();
-        }
-                    /**
-         * Set CloudFront headers
-         * http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web-device
-         *
-         * @param array $cfHeaders List of HTTP headers
-         * @return boolean If there were CloudFront headers to be set
-         * @static 
-         */ 
-        public static function setCfHeaders($cfHeaders = null)
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->setCfHeaders($cfHeaders);
-        }
-                    /**
-         * Retrieves the cloudfront headers.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getCfHeaders()
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getCfHeaders();
-        }
-                    /**
-         * Set the User-Agent to be used.
-         *
-         * @param string $userAgent The user agent string to set.
-         * @return string|null 
-         * @static 
-         */ 
-        public static function setUserAgent($userAgent = null)
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->setUserAgent($userAgent);
-        }
-                    /**
-         * Retrieve the User-Agent.
-         *
-         * @return string|null The user agent if it's set.
-         * @static 
-         */ 
-        public static function getUserAgent()
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getUserAgent();
-        }
-                    /**
-         * Set the detection type. Must be one of self::DETECTION_TYPE_MOBILE or
-         * self::DETECTION_TYPE_EXTENDED. Otherwise, nothing is set.
-         *
-         * @deprecated since version 2.6.9
-         * @param string $type The type. Must be a self::DETECTION_TYPE_* constant. The default
-         *                     parameter is null which will default to self::DETECTION_TYPE_MOBILE.
-         * @static 
-         */ 
-        public static function setDetectionType($type = null)
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->setDetectionType($type);
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getMatchingRegex()
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getMatchingRegex();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getMatchesArray()
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getMatchesArray();
-        }
-                    /**
-         * Retrieve the list of known phone devices.
-         *
-         * @return array List of phone devices.
-         * @static 
-         */ 
-        public static function getPhoneDevices()
-        {            //Method inherited from \Mobile_Detect         
-                        return \Jenssegers\Agent\Agent::getPhoneDevices();
-        }
-                    /**
-         * Retrieve the list of known tablet devices.
-         *
-         * @return array List of tablet devices.
-         * @static 
-         */ 
-        public static function getTabletDevices()
-        {            //Method inherited from \Mobile_Detect         
-                        return \Jenssegers\Agent\Agent::getTabletDevices();
-        }
-                    /**
-         * Alias for getBrowsers() method.
-         *
-         * @return array List of user agents.
-         * @static 
-         */ 
-        public static function getUserAgents()
-        {            //Method inherited from \Mobile_Detect         
-                        return \Jenssegers\Agent\Agent::getUserAgents();
-        }
-                    /**
-         * Retrieve the list of known utilities.
-         *
-         * @return array List of utilities.
-         * @static 
-         */ 
-        public static function getUtilities()
-        {            //Method inherited from \Mobile_Detect         
-                        return \Jenssegers\Agent\Agent::getUtilities();
-        }
-                    /**
-         * Method gets the mobile detection rules. This method is used for the magic methods $detect->is*().
-         *
-         * @deprecated since version 2.6.9
-         * @return array All the rules (but not extended).
-         * @static 
-         */ 
-        public static function getMobileDetectionRules()
-        {            //Method inherited from \Mobile_Detect         
-                        return \Jenssegers\Agent\Agent::getMobileDetectionRules();
-        }
-                    /**
-         * Method gets the mobile detection rules + utilities.
-         * 
-         * The reason this is separate is because utilities rules
-         * don't necessary imply mobile. This method is used inside
-         * the new $detect->is('stuff') method.
-         *
-         * @deprecated since version 2.6.9
-         * @return array All the rules + extended.
-         * @static 
-         */ 
-        public static function getMobileDetectionRulesExtended()
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->getMobileDetectionRulesExtended();
-        }
-                    /**
-         * Check the HTTP headers for signs of mobile.
-         * 
-         * This is the fastest mobile check possible; it's used
-         * inside isMobile() method.
-         *
-         * @return bool 
-         * @static 
-         */ 
-        public static function checkHttpHeadersForMobile()
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->checkHttpHeadersForMobile();
-        }
-                    /**
-         * Check if the device is mobile.
-         * 
-         * Returns true if any type of mobile device detected, including special ones
-         *
-         * @param null $userAgent deprecated
-         * @param null $httpHeaders deprecated
-         * @return bool 
-         * @static 
-         */ 
-        public static function isMobile($userAgent = null, $httpHeaders = null)
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->isMobile($userAgent, $httpHeaders);
-        }
-                    /**
-         * Check if the device is a tablet.
-         * 
-         * Return true if any type of tablet device is detected.
-         *
-         * @param string $userAgent deprecated
-         * @param array $httpHeaders deprecated
-         * @return bool 
-         * @static 
-         */ 
-        public static function isTablet($userAgent = null, $httpHeaders = null)
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->isTablet($userAgent, $httpHeaders);
-        }
-                    /**
-         * This method checks for a certain property in the
-         * userAgent.
-         *
-         * @todo : The httpHeaders part is not yet used.
-         * @param string $key
-         * @param string $userAgent deprecated
-         * @param string $httpHeaders deprecated
-         * @return bool|int|null 
-         * @static 
-         */ 
-        public static function is($key, $userAgent = null, $httpHeaders = null)
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->is($key, $userAgent, $httpHeaders);
-        }
-                    /**
-         * Some detection rules are relative (not standard),
-         * because of the diversity of devices, vendors and
-         * their conventions in representing the User-Agent or
-         * the HTTP headers.
-         * 
-         * This method will be used to check custom regexes against
-         * the User-Agent string.
-         *
-         * @param $regex
-         * @param string $userAgent
-         * @return bool 
-         * @todo : search in the HTTP headers too.
-         * @static 
-         */ 
-        public static function match($regex, $userAgent = null)
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->match($regex, $userAgent);
-        }
-                    /**
-         * Prepare the version number.
-         *
-         * @todo Remove the error supression from str_replace() call.
-         * @param string $ver The string version, like "2.6.21.2152";
-         * @return float 
-         * @static 
-         */ 
-        public static function prepareVersionNo($ver)
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->prepareVersionNo($ver);
-        }
-                    /**
-         * Retrieve the mobile grading, using self::MOBILE_GRADE_* constants.
-         *
-         * @deprecated This is no longer being maintained, it was an experiment at the time.
-         * @return string One of the self::MOBILE_GRADE_* constants.
-         * @static 
-         */ 
-        public static function mobileGrade()
-        {            //Method inherited from \Mobile_Detect         
-                        /** @var \Jenssegers\Agent\Agent $instance */
-                        return $instance->mobileGrade();
+                        /** @var \Jorenvh\Share\Share $instance */
+                        return $instance->getRawLinks();
         }
          
     }
@@ -20777,7 +20674,6 @@
             /**
      * 
      *
-     * @method static void setUpdateUri()
      * @see \Livewire\LivewireManager
      */ 
         class Livewire {
@@ -21046,6 +20942,36 @@
          *
          * @static 
          */ 
+        public static function withCookie($name, $value)
+        {
+                        /** @var \Livewire\LivewireManager $instance */
+                        return $instance->withCookie($name, $value);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function withCookies($cookies)
+        {
+                        /** @var \Livewire\LivewireManager $instance */
+                        return $instance->withCookies($cookies);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function withHeaders($headers)
+        {
+                        /** @var \Livewire\LivewireManager $instance */
+                        return $instance->withHeaders($headers);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
         public static function test($name, $params = [])
         {
                         /** @var \Livewire\LivewireManager $instance */
@@ -21150,6 +21076,82 @@
         {
                         /** @var \Livewire\LivewireManager $instance */
                         return $instance->originalMethod();
+        }
+         
+    }
+     
+}
+
+    namespace Monarobase\CountryList { 
+            /**
+     * CountryListFacade
+     *
+     * @author Monarobase <jonathan@monarobase.net>
+     */ 
+        class CountryListFacade {
+                    /**
+         * Get the country data directory.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getDataDir()
+        {
+                        /** @var \Monarobase\CountryList\CountryList $instance */
+                        return $instance->getDataDir();
+        }
+                    /**
+         * Returns one country.
+         *
+         * @param string $countryCode The country
+         * @param string $locale The locale (default: en)
+         * @return string 
+         * @throws CountryNotFoundException  If the country code doesn't match any country.
+         * @static 
+         */ 
+        public static function getOne($countryCode, $locale = 'en')
+        {
+                        /** @var \Monarobase\CountryList\CountryList $instance */
+                        return $instance->getOne($countryCode, $locale);
+        }
+                    /**
+         * Returns a list of countries.
+         *
+         * @param string $locale The locale (default: en)
+         * @param string $format The format (default: php)
+         * @return mixed An array (list) with country or raw data
+         * @static 
+         */ 
+        public static function getList($locale = 'en', $format = 'php')
+        {
+                        /** @var \Monarobase\CountryList\CountryList $instance */
+                        return $instance->getList($locale, $format);
+        }
+                    /**
+         * 
+         *
+         * @param string $locale The locale
+         * @param array $data An array (list) with country data
+         * @return \Monarobase\CountryList\CountryList The instance of CountryList to enable fluent interface
+         * @static 
+         */ 
+        public static function setList($locale, $data)
+        {
+                        /** @var \Monarobase\CountryList\CountryList $instance */
+                        return $instance->setList($locale, $data);
+        }
+                    /**
+         * Indicates whether or not a given $countryCode matches a country.
+         *
+         * @param string $countryCode A 2-letter country code
+         * @param string $locale The locale (default: en)
+         * @return bool <code>true</code> if a match was found, <code>false</code> otherwise
+         * @static 
+         */ 
+        public static function has($countryCode, $locale = 'en')
+        {
+                        /** @var \Monarobase\CountryList\CountryList $instance */
+                        return $instance->has($countryCode, $locale);
         }
          
     }
@@ -21651,6 +21653,523 @@
      
 }
 
+    namespace OmniaDigital\CatalystForms\Facades { 
+            /**
+     * 
+     *
+     * @see \OmniaDigital\CatalystForms\CatalystFormsPlugin
+     */ 
+        class CatalystFormsPlugin {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function make()
+        {
+                        return \OmniaDigital\CatalystForms\CatalystFormsPlugin::make();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function get()
+        {
+                        return \OmniaDigital\CatalystForms\CatalystFormsPlugin::get();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getId()
+        {
+                        /** @var \OmniaDigital\CatalystForms\CatalystFormsPlugin $instance */
+                        return $instance->getId();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function register($panel)
+        {
+                        /** @var \OmniaDigital\CatalystForms\CatalystFormsPlugin $instance */
+                        return $instance->register($panel);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function boot($panel)
+        {
+                        /** @var \OmniaDigital\CatalystForms\CatalystFormsPlugin $instance */
+                        return $instance->boot($panel);
+        }
+         
+    }
+     
+}
+
+    namespace OmniaDigital\CatalystLocation\Facades { 
+            /**
+     * 
+     *
+     * @see \OmniaDigital\CatalystLocation\CatalystLocation
+     */ 
+        class CatalystLocation {
+         
+    }
+     
+}
+
+    namespace OmniaDigital\CatalystReviewsPlugin\Facades { 
+            /**
+     * 
+     *
+     * @see \OmniaDigital\CatalystReviewsPlugin\CatalystReviewsPlugin
+     */ 
+        class CatalystReviewsPlugin {
+         
+    }
+     
+}
+
+    namespace Omniphx\Forrest\Providers\Laravel\Facades { 
+            /**
+     * 
+     *
+     * @method static string|array chatter(string $resource, array $options = [])
+     * @method static string|array tabs(string $resource, array $options = [])
+     * @method static string|array appMenu(string $resource, array $options = [])
+     * @method static string|array quickActions(string $resource, array $options = [])
+     * @method static string|array commerce(string $resource, array $options = [])
+     * @method static string|array wave(string $resource, array $options = [])
+     * @method static string|array exchange-connect(string $resource, array $options = [])
+     * @method static string|array analytics(string $resource, array $options = [])
+     * @method static string|array composite(string $resource, array $options = [])
+     * @method static string|array theme(string $resource, array $options = [])
+     * @method static string|array nouns(string $resource, array $options = [])
+     * @method static string|array recent(string $resource, array $options = [])
+     * @method static string|array licensing(string $resource, array $options = [])
+     * @method static string|array async-queries(string $resource, array $options = [])
+     * @method static string|array emailConnect(string $resource, array $options = [])
+     * @method static string|array compactLayouts(string $resource, array $options = [])
+     * @method static string|array flexiPage(string $resource, array $options = [])
+     * @method static string|array knowledgeManagement(string $resource, array $options = [])
+     * @method static string|array sobjects(string $resource, array $options = [])
+     * @method static string|array actions(string $resource, array $options = [])
+     * @method static string|array support(string $resource, array $options = [])
+     */ 
+        class Forrest {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function authenticate($url = null)
+        {
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->authenticate($url);
+        }
+                    /**
+         * Refresh authentication token by re-authenticating.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function refresh()
+        {
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        $instance->refresh();
+        }
+                    /**
+         * Revokes access token from Salesforce. Will not flush token from storage.
+         *
+         * @return \Psr\Http\Message\ResponseInterface 
+         * @static 
+         */ 
+        public static function revoke()
+        {
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->revoke();
+        }
+                    /**
+         * Try requesting token, if token expired try refreshing token.
+         *
+         * @param string $url
+         * @param array $options
+         * @return string|array 
+         * @static 
+         */ 
+        public static function request($url, $options)
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->request($url, $options);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setCredentials($credentials)
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->setCredentials($credentials);
+        }
+                    /**
+         * GET method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function get($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->get($path, $requestBody, $options);
+        }
+                    /**
+         * POST method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function post($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->post($path, $requestBody, $options);
+        }
+                    /**
+         * PUT method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function put($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->put($path, $requestBody, $options);
+        }
+                    /**
+         * DELETE method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function delete($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->delete($path, $requestBody, $options);
+        }
+                    /**
+         * HEAD method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function head($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->head($path, $requestBody, $options);
+        }
+                    /**
+         * PATCH method call using any custom path.
+         *
+         * @param string $path
+         * @param array $requestBody
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function patch($path, $requestBody = [], $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->patch($path, $requestBody, $options);
+        }
+                    /**
+         * Request that returns all currently supported versions.
+         * 
+         * Includes the verison, label and link to each version's root.
+         * Formats: json, xml
+         * Methods: get.
+         *
+         * @param array $options
+         * @return array $versions
+         * @static 
+         */ 
+        public static function versions($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->versions($options);
+        }
+                    /**
+         * Lists availabe resources for specified API version.
+         * 
+         * Includes resource name and URI.
+         * Formats: json, xml
+         * Methods: get.
+         *
+         * @param array $options
+         * @return array $resources
+         * @static 
+         */ 
+        public static function resources($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->resources($options);
+        }
+                    /**
+         * Returns information about the logged-in user.
+         *
+         * @param array
+         * @return array $identity
+         * @static 
+         */ 
+        public static function identity($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->identity($options);
+        }
+                    /**
+         * Lists information about organizational limits.
+         * 
+         * Available for API version 29.0 and later.
+         * Returns limits for daily API calls, Data storage, etc.
+         *
+         * @param array $options
+         * @return array $limits
+         * @static 
+         */ 
+        public static function limits($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->limits($options);
+        }
+                    /**
+         * Describes all global objects available in the organization.
+         *
+         * @param string $object_name
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function describe($object_name = null, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->describe($object_name, $options);
+        }
+                    /**
+         * Executes a specified SOQL query.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array $queryResults
+         * @static 
+         */ 
+        public static function query($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->query($query, $options);
+        }
+                    /**
+         * Calls next query.
+         *
+         * @param $nextUrl
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function next($nextUrl, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->next($nextUrl, $options);
+        }
+                    /**
+         * Details how Salesforce will process your query.
+         * 
+         * Available for API verison 30.0 or later.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array $queryExplain
+         * @static 
+         */ 
+        public static function queryExplain($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->queryExplain($query, $options);
+        }
+                    /**
+         * Executes a SOQL query, but will also returned records that have
+         * been deleted.
+         * 
+         * Available for API version 29.0 or later.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array $queryResults
+         * @static 
+         */ 
+        public static function queryAll($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->queryAll($query, $options);
+        }
+                    /**
+         * Executes the specified SOSL query.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function search($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->search($query, $options);
+        }
+                    /**
+         * Returns an ordered list of objects in the default global search
+         * scope of a logged-in user. Global search keeps track of which
+         * objects the user interacts with and how often and arranges the
+         * search results accordingly. Objects used most frequently appear
+         * at the top of the list.
+         *
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function scopeOrder($options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->scopeOrder($options);
+        }
+                    /**
+         * Returns search result layout information for the objects in the query string.
+         *
+         * @param array $objectList
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function searchLayouts($objectList, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->searchLayouts($objectList, $options);
+        }
+                    /**
+         * Returns a list of Salesforce Knowledge articles whose titles match the user’s
+         * search query. Provides a shortcut to navigate directly to likely
+         * relevant articles, before the user performs a search.
+         * 
+         * Available for API version 30.0 or later.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function suggestedArticles($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->suggestedArticles($query, $options);
+        }
+                    /**
+         * Returns a list of suggested searches based on the user’s query string text
+         * matching searches that other users have performed in Salesforce Knowledge.
+         * 
+         * Available for API version 30.0 or later.
+         * 
+         * Tested this and can't get it to work. I think the request is set up correctly.
+         *
+         * @param string $query
+         * @param array $options
+         * @return array 
+         * @static 
+         */ 
+        public static function suggestedQueries($query, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->suggestedQueries($query, $options);
+        }
+                    /**
+         * Request to a custom Apex REST endpoint.
+         *
+         * @param string $customURI
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function custom($customURI, $options = [])
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->custom($customURI, $options);
+        }
+                    /**
+         * Public accessor to the Guzzle Client Object.
+         *
+         * @return \Omniphx\Forrest\HttpClientInterface 
+         * @static 
+         */ 
+        public static function getClient()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->getClient();
+        }
+                    /**
+         * Accessor to get instance URL
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getInstanceURL()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->getInstanceURL();
+        }
+                    /**
+         * Accessor to get the token object
+         *
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getToken()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->getToken();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getBaseUrl()
+        {            //Method inherited from \Omniphx\Forrest\Client         
+                        /** @var \Omniphx\Forrest\Authentications\UserPassword $instance */
+                        return $instance->getBaseUrl();
+        }
+         
+    }
+     
+}
+
     namespace Sentry\Laravel { 
             /**
      * 
@@ -21792,13 +22311,9 @@
                         return $instance->captureLastError($hint);
         }
                     /**
-         * 
+         * {@inheritdoc}
          *
-         * @param string $slug Identifier of the Monitor
-         * @param \Sentry\CheckInStatus $status The status of the check-in
-         * @param int|float|null $duration The duration of the check-in
-         * @param \Sentry\MonitorConfig|null $monitorConfig Configuration of the Monitor
-         * @param string|null $checkInId A check-in ID from the previous check-in
+         * @param int|float|null $duration
          * @static 
          */ 
         public static function captureCheckIn($slug, $status, $duration = null, $monitorConfig = null, $checkInId = null)
@@ -22421,32 +22936,6 @@
      
 }
 
-    namespace Vedmant\FeedReader\Facades { 
-            /**
-     * 
-     *
-     */ 
-        class FeedReader {
-                    /**
-         * Used to parse an RSS feed.
-         *
-         * @param $url
-         * @param string $configuration
-         * @param array $options
-         * @return \SimplePie 
-         * @throws BindingResolutionException
-         * @static 
-         */ 
-        public static function read($url, $configuration = 'default', $options = [])
-        {
-                        /** @var \Vedmant\FeedReader\FeedReader $instance */
-                        return $instance->read($url, $configuration, $options);
-        }
-         
-    }
-     
-}
-
     namespace Illuminate\Http { 
             /**
      * 
@@ -22653,11 +23142,12 @@
          * @param mixed $callback
          * @param mixed $alias
          * @param bool $disableExtraConditions
+         * @param string|null $morphable
          * @static 
          */ 
-        public static function performJoinForEloquentPowerJoins($builder, $joinType = 'leftJoin', $callback = null, $alias = null, $disableExtraConditions = false)
+        public static function performJoinForEloquentPowerJoins($builder, $joinType = 'leftJoin', $callback = null, $alias = null, $disableExtraConditions = false, $morphable = null)
         {
-                        return \Illuminate\Database\Eloquent\Relations\Relation::performJoinForEloquentPowerJoins($builder, $joinType, $callback, $alias, $disableExtraConditions);
+                        return \Illuminate\Database\Eloquent\Relations\Relation::performJoinForEloquentPowerJoins($builder, $joinType, $callback, $alias, $disableExtraConditions, $morphable);
         }
                     /**
          * 
@@ -22722,6 +23212,22 @@
                     /**
          * 
          *
+         * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoinsForMorphTo()
+         * @param mixed $builder
+         * @param mixed $joinType
+         * @param mixed $callback
+         * @param mixed $alias
+         * @param bool $disableExtraConditions
+         * @param string|null $morphable
+         * @static 
+         */ 
+        public static function performJoinForEloquentPowerJoinsForMorphTo($builder, $joinType, $callback = null, $alias = null, $disableExtraConditions = false, $morphable = null)
+        {
+                        return \Illuminate\Database\Eloquent\Relations\Relation::performJoinForEloquentPowerJoinsForMorphTo($builder, $joinType, $callback, $alias, $disableExtraConditions, $morphable);
+        }
+                    /**
+         * 
+         *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoinsForHasMany()
          * @param mixed $builder
          * @param mixed $joinType
@@ -22756,11 +23262,12 @@
          * @param mixed $builder
          * @param mixed $operator
          * @param mixed $count
+         * @param string|null $morphable
          * @static 
          */ 
-        public static function performHavingForEloquentPowerJoins($builder, $operator, $count)
+        public static function performHavingForEloquentPowerJoins($builder, $operator, $count, $morphable = null)
         {
-                        return \Illuminate\Database\Eloquent\Relations\Relation::performHavingForEloquentPowerJoins($builder, $operator, $count);
+                        return \Illuminate\Database\Eloquent\Relations\Relation::performHavingForEloquentPowerJoins($builder, $operator, $count, $morphable);
         }
                     /**
          * 
@@ -22873,6 +23380,20 @@
         {
                         return \Illuminate\Database\Eloquent\Relations\Relation::getPowerJoinExistenceCompareKey();
         }
+         
+    }
+     
+}
+
+    namespace Spatie\MediaLibrary\MediaCollections\Models\Collections { 
+            /**
+     * 
+     *
+     * @template TKey of array-key
+     * @template TModel of \Spatie\MediaLibrary\MediaCollections\Models\Media
+     * @extends Collection<TKey, TModel>
+     */ 
+        class MediaCollection {
          
     }
      
@@ -23451,6 +23972,814 @@
                     /**
          * 
          *
+         * @see \Filament\Forms\Testing\TestsComponentActions::mountFormComponentAction()
+         * @param array|string $component
+         * @param array|string $name
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function mountFormComponentAction($component, $name, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::mountFormComponentAction($component, $name, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::unmountFormComponentAction()
+         * @return static 
+         * @static 
+         */ 
+        public static function unmountFormComponentAction()
+        {
+                        return \Livewire\Features\SupportTesting\Testable::unmountFormComponentAction();
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::setFormComponentActionData()
+         * @param array $data
+         * @return static 
+         * @static 
+         */ 
+        public static function setFormComponentActionData($data)
+        {
+                        return \Livewire\Features\SupportTesting\Testable::setFormComponentActionData($data);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionDataSet()
+         * @param array $data
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionDataSet($data)
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionDataSet($data);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::callFormComponentAction()
+         * @param array|string $component
+         * @param array|string $name
+         * @param array $data
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function callFormComponentAction($component, $name, $data = [], $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::callFormComponentAction($component, $name, $data, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::callMountedFormComponentAction()
+         * @param array $arguments
+         * @return static 
+         * @static 
+         */ 
+        public static function callMountedFormComponentAction($arguments = [])
+        {
+                        return \Livewire\Features\SupportTesting\Testable::callMountedFormComponentAction($arguments);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionExists()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionExists($component, $name, $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionExists($component, $name, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionDoesNotExist()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionDoesNotExist($component, $name, $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionDoesNotExist($component, $name, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionVisible()
+         * @param array|string $component
+         * @param array|string $name
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionVisible($component, $name, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionVisible($component, $name, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionHidden()
+         * @param array|string $component
+         * @param array|string $name
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionHidden($component, $name, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionHidden($component, $name, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionEnabled()
+         * @param array|string $component
+         * @param array|string $name
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionEnabled($component, $name, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionEnabled($component, $name, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionDisabled()
+         * @param array|string $component
+         * @param array|string $name
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionDisabled($component, $name, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionDisabled($component, $name, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionHasIcon()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $icon
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionHasIcon($component, $name, $icon, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionHasIcon($component, $name, $icon, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionDoesNotHaveIcon()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $icon
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionDoesNotHaveIcon($component, $name, $icon, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionDoesNotHaveIcon($component, $name, $icon, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionHasLabel()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $label
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionHasLabel($component, $name, $label, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionHasLabel($component, $name, $label, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionDoesNotHaveLabel()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $label
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionDoesNotHaveLabel($component, $name, $label, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionDoesNotHaveLabel($component, $name, $label, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionHasColor()
+         * @param array|string $component
+         * @param array|string $name
+         * @param array|string $color
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionHasColor($component, $name, $color, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionHasColor($component, $name, $color, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionDoesNotHaveColor()
+         * @param array|string $component
+         * @param array|string $name
+         * @param array|string $color
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionDoesNotHaveColor($component, $name, $color, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionDoesNotHaveColor($component, $name, $color, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionHasUrl()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $url
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionHasUrl($component, $name, $url, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionHasUrl($component, $name, $url, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionDoesNotHaveUrl()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $url
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionDoesNotHaveUrl($component, $name, $url, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionDoesNotHaveUrl($component, $name, $url, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionShouldOpenUrlInNewTab()
+         * @param array|string $component
+         * @param array|string $name
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionShouldOpenUrlInNewTab($component, $name, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionShouldOpenUrlInNewTab($component, $name, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionShouldNotOpenUrlInNewTab()
+         * @param array|string $component
+         * @param array|string $name
+         * @param array $arguments
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionShouldNotOpenUrlInNewTab($component, $name, $arguments = [], $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionShouldNotOpenUrlInNewTab($component, $name, $arguments, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionMounted()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionMounted($component, $name, $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionMounted($component, $name, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionNotMounted()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionNotMounted($component, $name, $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionNotMounted($component, $name, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertFormComponentActionMounted()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $formName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertFormComponentActionHalted($component, $name, $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertFormComponentActionHalted($component, $name, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertHasFormComponentActionErrors()
+         * @param array $keys
+         * @return static 
+         * @static 
+         */ 
+        public static function assertHasFormComponentActionErrors($keys = [])
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertHasFormComponentActionErrors($keys);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::assertHasNoFormComponentActionErrors()
+         * @param array $keys
+         * @return static 
+         * @static 
+         */ 
+        public static function assertHasNoFormComponentActionErrors($keys = [])
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertHasNoFormComponentActionErrors($keys);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::getNestedFormComponentActionComponentAndName()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $formName
+         * @param array $arguments
+         * @return array 
+         * @static 
+         */ 
+        public static function getNestedFormComponentActionComponentAndName($component, $name, $formName = 'form', $arguments = [])
+        {
+                        return \Livewire\Features\SupportTesting\Testable::getNestedFormComponentActionComponentAndName($component, $name, $formName, $arguments);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Forms\Testing\TestsComponentActions::parseNestedFormComponentActionComponentAndName()
+         * @param array|string $component
+         * @param array|string $name
+         * @param string $formName
+         * @return array 
+         * @static 
+         */ 
+        public static function parseNestedFormComponentActionComponentAndName($component, $name, $formName = 'form')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::parseNestedFormComponentActionComponentAndName($component, $name, $formName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::mountInfolistAction()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function mountInfolistAction($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::mountInfolistAction($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::unmountInfolistAction()
+         * @return static 
+         * @static 
+         */ 
+        public static function unmountInfolistAction()
+        {
+                        return \Livewire\Features\SupportTesting\Testable::unmountInfolistAction();
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::setInfolistActionData()
+         * @param array $data
+         * @return static 
+         * @static 
+         */ 
+        public static function setInfolistActionData($data)
+        {
+                        return \Livewire\Features\SupportTesting\Testable::setInfolistActionData($data);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionDataSet()
+         * @param array $data
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionDataSet($data)
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionDataSet($data);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::callInfolistAction()
+         * @param string $component
+         * @param array|string $name
+         * @param array $data
+         * @param array $arguments
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function callInfolistAction($component, $name, $data = [], $arguments = [], $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::callInfolistAction($component, $name, $data, $arguments, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::callMountedInfolistAction()
+         * @param array $arguments
+         * @return static 
+         * @static 
+         */ 
+        public static function callMountedInfolistAction($arguments = [])
+        {
+                        return \Livewire\Features\SupportTesting\Testable::callMountedInfolistAction($arguments);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionExists()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionExists($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionExists($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionDoesNotExist()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionDoesNotExist($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionDoesNotExist($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionVisible()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionVisible($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionVisible($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionHidden()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionHidden($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionHidden($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionEnabled()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionEnabled($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionEnabled($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionDisabled()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionDisabled($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionDisabled($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionHasIcon()
+         * @param string $component
+         * @param array|string $name
+         * @param string $icon
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionHasIcon($component, $name, $icon, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionHasIcon($component, $name, $icon, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionDoesNotHaveIcon()
+         * @param string $component
+         * @param array|string $name
+         * @param string $icon
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionDoesNotHaveIcon($component, $name, $icon, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionDoesNotHaveIcon($component, $name, $icon, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionHasLabel()
+         * @param string $component
+         * @param array|string $name
+         * @param string $label
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionHasLabel($component, $name, $label, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionHasLabel($component, $name, $label, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionDoesNotHaveLabel()
+         * @param string $component
+         * @param array|string $name
+         * @param string $label
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionDoesNotHaveLabel($component, $name, $label, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionDoesNotHaveLabel($component, $name, $label, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionHasColor()
+         * @param string $component
+         * @param array|string $name
+         * @param array|string $color
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionHasColor($component, $name, $color, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionHasColor($component, $name, $color, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionDoesNotHaveColor()
+         * @param string $component
+         * @param array|string $name
+         * @param array|string $color
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionDoesNotHaveColor($component, $name, $color, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionDoesNotHaveColor($component, $name, $color, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionHasUrl()
+         * @param string $component
+         * @param array|string $name
+         * @param string $url
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionHasUrl($component, $name, $url, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionHasUrl($component, $name, $url, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionDoesNotHaveUrl()
+         * @param string $component
+         * @param array|string $name
+         * @param string $url
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionDoesNotHaveUrl($component, $name, $url, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionDoesNotHaveUrl($component, $name, $url, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionShouldOpenUrlInNewTab()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionShouldOpenUrlInNewTab($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionShouldOpenUrlInNewTab($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionShouldNotOpenUrlInNewTab()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionShouldNotOpenUrlInNewTab($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionShouldNotOpenUrlInNewTab($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionMounted()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionMounted($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionMounted($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionNotMounted()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionNotMounted($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionNotMounted($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertInfolistActionMounted()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return static 
+         * @static 
+         */ 
+        public static function assertInfolistActionHalted($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertInfolistActionHalted($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertHasInfolistActionErrors()
+         * @param array $keys
+         * @return static 
+         * @static 
+         */ 
+        public static function assertHasInfolistActionErrors($keys = [])
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertHasInfolistActionErrors($keys);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::assertHasNoInfolistActionErrors()
+         * @param array $keys
+         * @return static 
+         * @static 
+         */ 
+        public static function assertHasNoInfolistActionErrors($keys = [])
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertHasNoInfolistActionErrors($keys);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Infolists\Testing\TestsActions::getNestedInfolistActionComponentAndName()
+         * @param string $component
+         * @param array|string $name
+         * @param string $infolistName
+         * @return array 
+         * @static 
+         */ 
+        public static function getNestedInfolistActionComponentAndName($component, $name, $infolistName = 'infolist')
+        {
+                        return \Livewire\Features\SupportTesting\Testable::getNestedInfolistActionComponentAndName($component, $name, $infolistName);
+        }
+                    /**
+         * 
+         *
          * @see \Filament\Notifications\Testing\TestsNotifications::assertNotified()
          * @param \Filament\Notifications\Notification|string|null $notification
          * @return static 
@@ -23459,6 +24788,18 @@
         public static function assertNotified($notification = null)
         {
                         return \Livewire\Features\SupportTesting\Testable::assertNotified($notification);
+        }
+                    /**
+         * 
+         *
+         * @see \Filament\Notifications\Testing\TestsNotifications::assertNotNotified()
+         * @param \Filament\Notifications\Notification|string|null $notification
+         * @return static 
+         * @static 
+         */ 
+        public static function assertNotNotified($notification = null)
+        {
+                        return \Livewire\Features\SupportTesting\Testable::assertNotNotified($notification);
         }
                     /**
          * 
@@ -24190,12 +25531,14 @@
          *
          * @see \Filament\Tables\Testing\TestsColumns::assertTableColumnExists()
          * @param string $name
+         * @param \Closure|null $checkColumnUsing
+         * @param mixed $record
          * @return static 
          * @static 
          */ 
-        public static function assertTableColumnExists($name)
+        public static function assertTableColumnExists($name, $checkColumnUsing = null, $record = null)
         {
-                        return \Livewire\Features\SupportTesting\Testable::assertTableColumnExists($name);
+                        return \Livewire\Features\SupportTesting\Testable::assertTableColumnExists($name, $checkColumnUsing, $record);
         }
                     /**
          * 
@@ -24655,6 +25998,17 @@
         {
                         return \Illuminate\View\View::layout($view, $params);
         }
+                    /**
+         * 
+         *
+         * @see \Livewire\Features\SupportPageComponents\SupportPageComponents::registerLayoutViewMacros()
+         * @param callable $callback
+         * @static 
+         */ 
+        public static function response($callback)
+        {
+                        return \Illuminate\View\View::response($callback);
+        }
          
     }
      
@@ -24691,27 +26045,6 @@
         {
                         return \Illuminate\Console\Scheduling\Event::sentryMonitor($monitorSlug, $checkInMargin, $maxRuntime, $updateMonitorConfig);
         }
-         
-    }
-            /**
-     * 
-     *
-     */ 
-        class CallbackEvent {
-         
-    }
-     
-}
-
-    namespace Spatie\MediaLibrary\MediaCollections\Models\Collections { 
-            /**
-     * 
-     *
-     * @template TKey of array-key
-     * @template TModel of \Spatie\MediaLibrary\MediaCollections\Models\Media
-     * @extends Collection<TKey, TModel>
-     */ 
-        class MediaCollection {
          
     }
      
@@ -25675,6 +27008,39 @@ namespace  {
             }
              
                 /**
+             * Chunk the results of a query by comparing IDs in descending order.
+             *
+             * @param int $count
+             * @param callable $callback
+             * @param string|null $column
+             * @param string|null $alias
+             * @return bool 
+             * @static 
+             */ 
+            public static function chunkByIdDesc($count, $callback, $column = null, $alias = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->chunkByIdDesc($count, $callback, $column, $alias);
+            }
+             
+                /**
+             * Chunk the results of a query by comparing IDs in a given order.
+             *
+             * @param int $count
+             * @param callable $callback
+             * @param string|null $column
+             * @param string|null $alias
+             * @param bool $descending
+             * @return bool 
+             * @static 
+             */ 
+            public static function orderedChunkById($count, $callback, $column = null, $alias = null, $descending = false)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->orderedChunkById($count, $callback, $column, $alias, $descending);
+            }
+             
+                /**
              * Execute a callback over each item while chunking by ID.
              *
              * @param callable $callback
@@ -26235,7 +27601,7 @@ namespace  {
              * Add subselect queries to include an aggregate value for a relationship.
              *
              * @param mixed $relations
-             * @param string $column
+             * @param \Illuminate\Contracts\Database\Query\Expression|string $column
              * @param string $function
              * @return \Illuminate\Database\Eloquent\Builder|static 
              * @static 
@@ -26263,7 +27629,7 @@ namespace  {
              * Add subselect queries to include the max of the relation's column.
              *
              * @param string|array $relation
-             * @param string $column
+             * @param \Illuminate\Contracts\Database\Query\Expression|string $column
              * @return \Illuminate\Database\Eloquent\Builder|static 
              * @static 
              */ 
@@ -26277,7 +27643,7 @@ namespace  {
              * Add subselect queries to include the min of the relation's column.
              *
              * @param string|array $relation
-             * @param string $column
+             * @param \Illuminate\Contracts\Database\Query\Expression|string $column
              * @return \Illuminate\Database\Eloquent\Builder|static 
              * @static 
              */ 
@@ -26291,7 +27657,7 @@ namespace  {
              * Add subselect queries to include the sum of the relation's column.
              *
              * @param string|array $relation
-             * @param string $column
+             * @param \Illuminate\Contracts\Database\Query\Expression|string $column
              * @return \Illuminate\Database\Eloquent\Builder|static 
              * @static 
              */ 
@@ -26305,7 +27671,7 @@ namespace  {
              * Add subselect queries to include the average of the relation's column.
              *
              * @param string|array $relation
-             * @param string $column
+             * @param \Illuminate\Contracts\Database\Query\Expression|string $column
              * @return \Illuminate\Database\Eloquent\Builder|static 
              * @static 
              */ 
@@ -26413,11 +27779,12 @@ namespace  {
              * @param mixed $joinType
              * @param mixed $useAlias
              * @param bool $disableExtraConditions
+             * @param string|null $morphable
              * @static 
              */ 
-            public static function joinRelationship($relationName, $callback = null, $joinType = 'join', $useAlias = false, $disableExtraConditions = false)
+            public static function joinRelationship($relationName, $callback = null, $joinType = 'join', $useAlias = false, $disableExtraConditions = false, $morphable = null)
             {
-                                return \Illuminate\Database\Eloquent\Builder::joinRelationship($relationName, $callback, $joinType, $useAlias, $disableExtraConditions);
+                                return \Illuminate\Database\Eloquent\Builder::joinRelationship($relationName, $callback, $joinType, $useAlias, $disableExtraConditions, $morphable);
             }
              
                 /**
@@ -26720,13 +28087,14 @@ namespace  {
              * @param mixed $operator
              * @param mixed $count
              * @param mixed $boolean
-             * @param mixed $callback
+             * @param \Closure|array|null $callback
+             * @param string|null $morphable
              * @return static 
              * @static 
              */ 
-            public static function powerJoinHas($relation, $operator = '>=', $count = 1, $boolean = 'and', $callback = null)
+            public static function powerJoinHas($relation, $operator = '>=', $count = 1, $boolean = 'and', $callback = null, $morphable = null)
             {
-                                return \Illuminate\Database\Eloquent\Builder::powerJoinHas($relation, $operator, $count, $boolean, $callback);
+                                return \Illuminate\Database\Eloquent\Builder::powerJoinHas($relation, $operator, $count, $boolean, $callback, $morphable);
             }
              
                 /**
@@ -26737,7 +28105,7 @@ namespace  {
              * @param mixed $operator
              * @param mixed $count
              * @param mixed $boolean
-             * @param \Closure|null $callback
+             * @param \Closure|array|null $callback
              * @return static 
              * @static 
              */ 
@@ -27526,7 +28894,7 @@ namespace  {
              * Add a "where date" statement to the query.
              *
              * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param string $operator
+             * @param \DateTimeInterface|string|null $operator
              * @param \DateTimeInterface|string|null $value
              * @param string $boolean
              * @return \Illuminate\Database\Query\Builder 
@@ -27542,7 +28910,7 @@ namespace  {
              * Add an "or where date" statement to the query.
              *
              * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param string $operator
+             * @param \DateTimeInterface|string|null $operator
              * @param \DateTimeInterface|string|null $value
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -27557,7 +28925,7 @@ namespace  {
              * Add a "where time" statement to the query.
              *
              * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param string $operator
+             * @param \DateTimeInterface|string|null $operator
              * @param \DateTimeInterface|string|null $value
              * @param string $boolean
              * @return \Illuminate\Database\Query\Builder 
@@ -27573,7 +28941,7 @@ namespace  {
              * Add an "or where time" statement to the query.
              *
              * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param string $operator
+             * @param \DateTimeInterface|string|null $operator
              * @param \DateTimeInterface|string|null $value
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -27588,7 +28956,7 @@ namespace  {
              * Add a "where day" statement to the query.
              *
              * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param string $operator
+             * @param \DateTimeInterface|string|int|null $operator
              * @param \DateTimeInterface|string|int|null $value
              * @param string $boolean
              * @return \Illuminate\Database\Query\Builder 
@@ -27604,7 +28972,7 @@ namespace  {
              * Add an "or where day" statement to the query.
              *
              * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param string $operator
+             * @param \DateTimeInterface|string|int|null $operator
              * @param \DateTimeInterface|string|int|null $value
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -27619,7 +28987,7 @@ namespace  {
              * Add a "where month" statement to the query.
              *
              * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param string $operator
+             * @param \DateTimeInterface|string|int|null $operator
              * @param \DateTimeInterface|string|int|null $value
              * @param string $boolean
              * @return \Illuminate\Database\Query\Builder 
@@ -27635,7 +29003,7 @@ namespace  {
              * Add an "or where month" statement to the query.
              *
              * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param string $operator
+             * @param \DateTimeInterface|string|int|null $operator
              * @param \DateTimeInterface|string|int|null $value
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -27650,7 +29018,7 @@ namespace  {
              * Add a "where year" statement to the query.
              *
              * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param string $operator
+             * @param \DateTimeInterface|string|int|null $operator
              * @param \DateTimeInterface|string|int|null $value
              * @param string $boolean
              * @return \Illuminate\Database\Query\Builder 
@@ -27666,7 +29034,7 @@ namespace  {
              * Add an "or where year" statement to the query.
              *
              * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param string $operator
+             * @param \DateTimeInterface|string|int|null $operator
              * @param \DateTimeInterface|string|int|null $value
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -28724,6 +30092,20 @@ namespace  {
             }
              
                 /**
+             * Insert new records into the table using a subquery while ignoring errors.
+             *
+             * @param array $columns
+             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|string $query
+             * @return int 
+             * @static 
+             */ 
+            public static function insertOrIgnoreUsing($columns, $query)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->insertOrIgnoreUsing($columns, $query);
+            }
+             
+                /**
              * Update records in a PostgreSQL database using the update from syntax.
              *
              * @param array $values
@@ -29095,6 +30477,7 @@ namespace  {
             class Log extends \Illuminate\Support\Facades\Log {}
             class Mail extends \Illuminate\Support\Facades\Mail {}
             class Notification extends \Illuminate\Support\Facades\Notification {}
+            class Number extends \Illuminate\Support\Number {}
             class Password extends \Illuminate\Support\Facades\Password {}
             class Process extends \Illuminate\Support\Facades\Process {}
             class Queue extends \Illuminate\Support\Facades\Queue {}
@@ -29111,25 +30494,29 @@ namespace  {
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
-            class Forrest extends \Omniphx\Forrest\Providers\Laravel\Facades\Forrest {}
-            class Share extends \Jorenvh\Share\ShareFacade {}
-            class Platform extends \App\Support\Platform\Facades\PlatformFacade {}
-            class Trans extends \App\Support\Platform\Facades\TranslateFacade {}
+            class Translate extends \OmniaDigital\CatalystCore\Facades\Translate {}
+            class Catalyst extends \OmniaDigital\CatalystCore\Facades\Catalyst {}
+            class EloquentSerialize extends \AnourValar\EloquentSerialize\Facades\EloquentSerializeFacade {}
             class Visits extends \Awssat\Visits\Visits {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class FilamentExceptions extends \BezhanSalleh\FilamentExceptions\Facades\FilamentExceptions {}
             class FilamentGoogleAnalytics extends \BezhanSalleh\FilamentGoogleAnalytics\Facades\FilamentGoogleAnalytics {}
+            class PanelSwitch extends \BezhanSalleh\PanelSwitch\Facades\PanelSwitch {}
             class FilamentShield extends \BezhanSalleh\FilamentShield\Facades\FilamentShield {}
             class Image extends \Intervention\Image\Facades\Image {}
-            class Agent extends \Jenssegers\Agent\Facades\Agent {}
+            class Share extends \Jorenvh\Share\ShareFacade {}
             class Horizon extends \Laravel\Horizon\Horizon {}
             class Livewire extends \Livewire\Livewire {}
+            class Countries extends \Monarobase\CountryList\CountryListFacade {}
             class Module extends \Nwidart\Modules\Facades\Module {}
+            class CatalystFormsPlugin extends \OmniaDigital\CatalystForms\Facades\CatalystFormsPlugin {}
+            class CatalystLocation extends \OmniaDigital\CatalystLocation\Facades\CatalystLocation {}
+            class CatalystReviewsPlugin extends \OmniaDigital\CatalystReviewsPlugin\Facades\CatalystReviewsPlugin {}
+            class Forrest extends \Omniphx\Forrest\Providers\Laravel\Facades\Forrest {}
             class Sentry extends \Sentry\Laravel\Facade {}
             class Health extends \Spatie\Health\Facades\Health {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class Signal extends \Spatie\SignalAwareCommand\Facades\Signal {}
-            class FeedReader extends \Vedmant\FeedReader\Facades\FeedReader {}
      
 }
 

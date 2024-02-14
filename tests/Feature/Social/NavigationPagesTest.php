@@ -47,7 +47,7 @@ class NavigationPagesTest extends TestCase
      */
     public function load_discover_page()
     {
-        $response = $this->get('/social/' . Platform::getTeamsWord() . '/discover');
+        $response = $this->get('/social/' . Catalyst::getTeamsWord() . '/discover');
 
         $response->assertStatus(200);
     }
@@ -57,7 +57,7 @@ class NavigationPagesTest extends TestCase
      */
     public function load_teams_page()
     {
-        $response = $this->get('/social/' . Platform::getTeamsWord());
+        $response = $this->get('/social/' . Catalyst::getTeamsWord());
 
         $response->assertStatus(200);
     }

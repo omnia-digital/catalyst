@@ -1,23 +1,25 @@
 const plugin = require('tailwindcss/plugin');
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors')
+import preset from './vendor/filament/filament/tailwind.config.preset'
 
 module.exports = {
+    presets: [preset],
     content: [
+        './vendor/omnia-digital/catalyst-core-plugin/resources/views/**/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
+        // './Modules/*/Resources/views/**/*.blade.php',
+        './vendor/filament/**/*.blade.php',
+        // './app/**/*.{html,js,php}',
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
         './vendor/omnia-digital/library/resources/views/**/*.blade.php',
         './vendor/omnia-digital/library/resources/js/**/*.js',
-        './vendor/omnia-digitl/media-manager/resources/views/**/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-        './Modules/*/Resources/views/**/*.blade.php',
-        './vendor/filament/**/*.blade.php',
-        './src/**/*.{html,js}',
+        './vendor/omnia-digital/media-manager/resources/views/**/*.blade.php',
         './node_modules/tw-elements/dist/js/**/*.js'
     ],
 
-    darkMode: 'class',
     theme: {
         themeVariants: [
             'default',
@@ -75,8 +77,8 @@ module.exports = {
                     "200": "var(--primary-200)",
                     "300": "var(--primary-300)",
                     "400": "var(--primary-400)",
-                    "500": process.env.PRIMARY_COLOR_500 || process.env.PRIMARY_COLOR || "var(--primary-500)",
-                    "600": "var(--primary-600)",
+                    "500": process.env.PRIMARY_COLOR || "var(--primary-500)",
+                    "600": "var(--primary)",
                     "700": "var(--primary-700)",
                     "800": "var(--primary-800)",
                     "900": "var(--primary-900)"
@@ -106,7 +108,7 @@ module.exports = {
                     "700": "var(--tertiary-700)",
                     "800": "var(--tertiary-800)",
                     "900": "var(--tertiary-900)"
-                  },
+                },
                 danger: colors.rose,
                 success: colors.green,
                 warning: colors.yellow,
@@ -130,8 +132,21 @@ module.exports = {
                 'h4-color': 'var(--h4-color)',
                 'h5-color': 'var(--h5-color)',
                 'h6-color': 'var(--h6-color)',
-            },
-        },
+                custom: {
+                    50: 'var(--primary-50)',
+                    100: 'var(--primary-100)',
+                    200: 'var(--primary-200)',
+                    300: 'var(--primary-300)',
+                    400: 'var(--primary-400)',
+                    500: 'var(--secondary-500)',
+                    600: 'var(--primary-600)',
+                    700: 'var(--primary-700)',
+                    800: 'var(--primary-900)',
+                    900: 'var(--primary-900)',
+                    950: 'var(--primary-950)',
+                },
+            }
+        }
     },
 
     variants: {
@@ -148,7 +163,7 @@ module.exports = {
         require('@tailwindcss/aspect-ratio'),
         require('tailwind-scrollbar-hide'),
         require('tw-elements/dist/plugin'),
-        plugin(function({ matchUtilities, theme }) {
+        plugin(function ({matchUtilities, theme}) {
             matchUtilities(
                 {
                     'h-full-minus': (value) => {

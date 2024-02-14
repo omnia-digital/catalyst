@@ -20,8 +20,8 @@
                     <div class="flex justify-end space-x-4">
                         @if ($game->details->platforms)
                             @foreach ($game?->details->platforms as $platform)
-                                @if (\MarcReichel\IGDBLaravel\Models\Platform::find($platform)->platform_logo)
-                                    <img src="{{ PlatformLogo::find(\MarcReichel\IGDBLaravel\Models\Platform::find
+                                @if (\MarcReichel\IGDBLaravel\Models\Catalyst::find($platform)->platform_logo)
+                                    <img src="{{ PlatformLogo::find(\MarcReichel\IGDBLaravel\Models\Catalyst::find
                         ($platform)?->platform_logo)?->url }}" alt=""
                                          class="w-6 h-6"/>
                                 @endif

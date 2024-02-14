@@ -15,7 +15,7 @@
                         <div class="flex content-center space-x-1 items-center text-post-card-body-color">
                             <p>by</p>
                             <a wire:click.prevent.stop="showProfile"
-                               href="{{ route('social.profile.show', $post->user->handle) }}"
+                               href="{{ route('catalyst-social.profile.show', $post->user->handle) }}"
                                class="hover:underline block font-bold text-post-card-title-color">{{ $post->user->name }}</a>
                             <x-dot/>
                             <a href="{{ $post->getUrl() }}" class="hover:underline">
@@ -91,7 +91,7 @@
     <!-- Social Actions -->
     @if ($showPostActions)
         <div class="z-20 w-full px-5">
-            <livewire:social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
+            <livewire:catalyst-catalyst-social::partials.post-actions :post="$post" :show-bookmark-button="true"/>
         </div>
     @endif
 </article>

@@ -1,4 +1,4 @@
-@extends('social::livewire.layouts.pages.default-page-layout')
+@extends('catalyst-catalyst::livewire.layouts.pages.default-page-layout')
 
 @section('content')
     @empty($article)
@@ -12,7 +12,7 @@
             </div>
             <a href="{{ route('articles.home') }}">
                 <x-library::heading.1
-                        class="py-4 hover:cursor-pointer">{{ Trans::get('Articles') }}</x-library::heading.1>
+                        class="py-4 hover:cursor-pointer">{{ Translate::get('Articles') }}</x-library::heading.1>
             </a>
         </div>
         <div class="w-full">
@@ -45,7 +45,7 @@
                         </div>
                         <div class="flex ml-2 space-x-2">
                             <p>by</p>
-                            <a href="{{ route('social.profile.show', $article->user->handle) }}"
+                            <a href="{{ route('catalyst-social.profile.show', $article->user->handle) }}"
                                class="hover:underline block text-base-text-color">{{ $article->user->name }}</a>
                         </div>
                         @can('update', $article)
@@ -79,7 +79,7 @@
                     @endif
 
                     <div>
-                        <livewire:social::partials.post-actions wire:key="article-actions-{{ $article->id }}"
+                        <livewire:catalyst-catalyst::partials.post-actions wire:key="article-actions-{{ $article->id }}"
                                                                 :post="$article" :show-comment-button="false"
                                                                 :show-bookmark-button="true"/>
                     </div>
@@ -89,8 +89,8 @@
             @if ($article->isParent())
                 <div class="py-4 justify-center w-full xl:w-3/4 2xl:1/2 m-auto max-w-post-card-max-w">
                     <div class="max-w-post-card-max-w">
-                        <x-library::heading.3>{{ Trans::get('Discussion') }}</x-library::heading.3>
-                        <livewire:social::comment-section :post="$article"
+                        <x-library::heading.3>{{ Translate::get('Discussion') }}</x-library::heading.3>
+                        <livewire:catalyst-catalyst::comment-section :post="$article"
                                                           :type="\Modules\Social\Enums\PostType::ARTICLE"/>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                     },
                     {
                         id: 1,
-                        title: 'Top '.{{ Platform::getTeamsWordUpper() }},
+                        title: 'Top '.{{ Catalyst::getTeamsWordUpper() }},
                         component: 'social.top-teams'
                     },
                     {

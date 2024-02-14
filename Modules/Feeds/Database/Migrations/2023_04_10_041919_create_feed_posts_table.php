@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Modules\Social\Models\Post;
+use OmniaDigital\CatalystCore\Models\Post;
 
 class CreateFeedPostsTable extends Migration
 {

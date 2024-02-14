@@ -2,13 +2,14 @@
 
 namespace Modules\Resources\Http\Livewire\Pages\Resources;
 
-use App\Support\Platform\WithGuestAccess;
-use App\Traits\Filter\WithSortAndFilters;
+use OmniaDigital\CatalystCore\Enums\PostType;
+use OmniaDigital\CatalystCore\Facades\Catalyst;
+use OmniaDigital\CatalystCore\Models\Post;
+use OmniaDigital\CatalystCore\Support\Auth\WithGuestAccess;
 use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Modules\Social\Enums\PostType;
-use Modules\Social\Models\Post;
+use OmniaDigital\CatalystCore\Traits\Filter\WithSortAndFilters;
 use OmniaDigital\OmniaLibrary\Livewire\WithCachedRows;
 use Platform;
 
@@ -46,7 +47,7 @@ class Index extends Component
 
     public function loginCheck()
     {
-        if (Platform::isAllowingGuestAccess() && ! auth()->check()) {
+        if (Catalyst::isAllowingGuestAccess() && ! auth()->check()) {
             $this->showAuthenticationModal(route('resources.home'));
 
             return;

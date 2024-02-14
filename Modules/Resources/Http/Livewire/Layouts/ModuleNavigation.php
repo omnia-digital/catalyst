@@ -3,7 +3,7 @@
 namespace Modules\Resources\Http\Livewire\Layouts;
 
 use Livewire\Component;
-use Trans;
+use OmniaDigital\CatalystCore\Facades\Translate;
 
 class ModuleNavigation extends Component
 {
@@ -23,7 +23,7 @@ class ModuleNavigation extends Component
                 'current' => false,
             ],
             [
-                'label' => Trans::get('Media'),
+                'label' => Translate::get('Media'),
                 'name' => 'resources.drafts',
                 'icon' => 'fa-regular fa-photo-film-music',
                 //                    'icon'    => 'heroicon-o-briefcase',
@@ -31,7 +31,7 @@ class ModuleNavigation extends Component
                 'current' => false,
             ],
             [
-                'label' => Trans::get('Articles'),
+                'label' => Translate::get('Articles'),
                 'name' => 'resources.drafts',
                 'icon' => 'fa-duotone fa-newspaper',
                 //                    'icon'    => 'heroicon-o-briefcase',

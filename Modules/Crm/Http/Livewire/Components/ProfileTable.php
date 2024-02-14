@@ -74,7 +74,7 @@ class ProfileTable extends Component implements HasTable
 
     //    protected function getTableRecordUrlUsing()
     //    {
-    //        return fn (Profile $record): string => route('social.profile.show', ['profile' => $record]);
+    //        return fn (Profile $record): string => route('catalyst-social.profile.show', ['profile' => $record]);
     //    }
 
     protected function getTableColumns(): array
@@ -99,10 +99,10 @@ class ProfileTable extends Component implements HasTable
     {
         return [
             ViewAction::make()
-                ->url(fn (Profile $record): string => route('social.profile.show', ['profile' => $record]))
+                ->url(fn (Profile $record): string => route('catalyst-social.profile.show', ['profile' => $record]))
                 ->openUrlInNewTab(),
             EditAction::make()
-                ->url(fn (Profile $record): string => route('social.profile.edit', ['profile' => $record]))
+                ->url(fn (Profile $record): string => route('catalyst-social.profile.edit', ['profile' => $record]))
                 ->openUrlInNewTab(),
         ];
     }
