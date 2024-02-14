@@ -62,26 +62,6 @@
         {
             "type": "composer",
             "url": "https://satis.spatie.be"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-core-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-reviews-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-forms-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-jobs-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-location-plugin"
         }
     ],
     "autoload": {
