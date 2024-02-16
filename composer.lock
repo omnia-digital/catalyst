@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "01892b8db91b33369fc27222d58059d2",
+    "content-hash": "99c2bfbd064e8c2b867e3be827bd79cf",
     "packages": [
         {
             "name": "amphp/amp",
@@ -4122,16 +4122,16 @@
         },
         {
             "name": "google/gax",
-            "version": "v1.27.2",
+            "version": "v1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "da805a00c3548ffc17a2b9ea844f666b413943e8"
+                "reference": "dfca60f46fed8d9a4d9d2ece7286f18d53d3ebad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/da805a00c3548ffc17a2b9ea844f666b413943e8",
-                "reference": "da805a00c3548ffc17a2b9ea844f666b413943e8",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/dfca60f46fed8d9a4d9d2ece7286f18d53d3ebad",
+                "reference": "dfca60f46fed8d9a4d9d2ece7286f18d53d3ebad",
                 "shasum": ""
             },
             "require": {
@@ -4171,9 +4171,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/gax-php/issues",
-                "source": "https://github.com/googleapis/gax-php/tree/v1.27.2"
+                "source": "https://github.com/googleapis/gax-php/tree/v1.28.0"
             },
-            "time": "2024-02-14T20:18:41+00:00"
+            "time": "2024-02-15T19:05:13+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -4266,16 +4266,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.25.2",
+            "version": "v3.25.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "83ea4c147718666ce6a9b9332ac2aa588c9211eb"
+                "reference": "983a87f4f8798a90ca3a25b0f300b8fda38df643"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/83ea4c147718666ce6a9b9332ac2aa588c9211eb",
-                "reference": "83ea4c147718666ce6a9b9332ac2aa588c9211eb",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/983a87f4f8798a90ca3a25b0f300b8fda38df643",
+                "reference": "983a87f4f8798a90ca3a25b0f300b8fda38df643",
                 "shasum": ""
             },
             "require": {
@@ -4304,9 +4304,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.25.2"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.25.3"
             },
-            "time": "2024-01-09T22:12:32+00:00"
+            "time": "2024-02-15T21:11:49+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -7951,41 +7951,41 @@
         },
         {
             "name": "moneyphp/money",
-            "version": "v4.4.0",
+            "version": "v4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moneyphp/money.git",
-                "reference": "5e60aebf09f709dd4ea16bf85e66d65301c0d172"
+                "reference": "a1daa7daf159b4044e3d0c34c41fe2be5860e850"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moneyphp/money/zipball/5e60aebf09f709dd4ea16bf85e66d65301c0d172",
-                "reference": "5e60aebf09f709dd4ea16bf85e66d65301c0d172",
+                "url": "https://api.github.com/repos/moneyphp/money/zipball/a1daa7daf159b4044e3d0c34c41fe2be5860e850",
+                "reference": "a1daa7daf159b4044e3d0c34c41fe2be5860e850",
                 "shasum": ""
             },
             "require": {
                 "ext-bcmath": "*",
                 "ext-filter": "*",
                 "ext-json": "*",
-                "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0"
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
             },
             "require-dev": {
                 "cache/taggable-cache": "^1.1.0",
-                "doctrine/coding-standard": "^9.0",
-                "doctrine/instantiator": "^1.4.0",
+                "doctrine/coding-standard": "^12.0",
+                "doctrine/instantiator": "^1.5.0 || ^2.0",
                 "ext-gmp": "*",
                 "ext-intl": "*",
-                "florianv/exchanger": "^2.6.3",
+                "florianv/exchanger": "^2.8.1",
                 "florianv/swap": "^4.3.0",
-                "moneyphp/crypto-currencies": "^1.0.0",
-                "moneyphp/iso-currencies": "^3.2.1",
-                "php-http/message": "^1.11.0",
-                "php-http/mock-client": "^1.4.1",
+                "moneyphp/crypto-currencies": "^1.1.0",
+                "moneyphp/iso-currencies": "^3.4",
+                "php-http/message": "^1.16.0",
+                "php-http/mock-client": "^1.6.0",
                 "phpbench/phpbench": "^1.2.5",
-                "phpunit/phpunit": "^9.5.4",
+                "phpunit/phpunit": "^10.5.9",
                 "psalm/plugin-phpunit": "^0.18.4",
                 "psr/cache": "^1.0.1 || ^2.0 || ^3.0",
-                "vimeo/psalm": "~5.15.0"
+                "vimeo/psalm": "~5.20.0"
             },
             "suggest": {
                 "ext-gmp": "Calculate without integer limits",
@@ -8033,9 +8033,9 @@
             ],
             "support": {
                 "issues": "https://github.com/moneyphp/money/issues",
-                "source": "https://github.com/moneyphp/money/tree/v4.4.0"
+                "source": "https://github.com/moneyphp/money/tree/v4.5.0"
             },
-            "time": "2024-01-24T08:29:16+00:00"
+            "time": "2024-02-15T19:47:21+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8767,12 +8767,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/omnia-digital/catalyst-core-plugin.git",
-                "reference": "07dc77c17214f4ac62b68ba7d7cb9c4b237fa2f4"
+                "reference": "50f66076b53c4b831f63e3eaac04056eedb84812"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/catalyst-core-plugin/zipball/07dc77c17214f4ac62b68ba7d7cb9c4b237fa2f4",
-                "reference": "07dc77c17214f4ac62b68ba7d7cb9c4b237fa2f4",
+                "url": "https://api.github.com/repos/omnia-digital/catalyst-core-plugin/zipball/50f66076b53c4b831f63e3eaac04056eedb84812",
+                "reference": "50f66076b53c4b831f63e3eaac04056eedb84812",
                 "shasum": ""
             },
             "require": {
@@ -8906,7 +8906,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-14T23:02:47+00:00"
+            "time": "2024-02-15T19:13:42+00:00"
         },
         {
             "name": "omnia-digital/catalyst-forms-plugin",
@@ -8914,12 +8914,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/omnia-digital/catalyst-forms-plugin.git",
-                "reference": "4597bc243c35f4994fbff9d2a249b08254adc641"
+                "reference": "5cfe9ea54bf870100fe5f028b19e0bfad847fac5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/catalyst-forms-plugin/zipball/4597bc243c35f4994fbff9d2a249b08254adc641",
-                "reference": "4597bc243c35f4994fbff9d2a249b08254adc641",
+                "url": "https://api.github.com/repos/omnia-digital/catalyst-forms-plugin/zipball/5cfe9ea54bf870100fe5f028b19e0bfad847fac5",
+                "reference": "5cfe9ea54bf870100fe5f028b19e0bfad847fac5",
                 "shasum": ""
             },
             "require": {
@@ -8993,7 +8993,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-01T00:08:35+00:00"
+            "time": "2024-02-15T18:27:22+00:00"
         },
         {
             "name": "omnia-digital/catalyst-location-plugin",
