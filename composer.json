@@ -32,7 +32,7 @@
         "marcreichel/igdb-laravel": "^3.6",
         "mhmiton/laravel-modules-livewire": "^2",
         "nwidart/laravel-modules": "^9.0",
-        "omnia-digital/catalyst-core-plugin": "dev-main",
+        "omnia-digital/catalyst-core-plugin": "*",
         "pusher/pusher-php-server": "^7.0",
         "sentry/sentry-laravel": "^3.0",
         "spatie/laravel-ignition": "^2.4",
