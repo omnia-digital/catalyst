@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc2bcf7045374a2e5f0075aee9dae8a2",
+    "content-hash": "99c2bfbd064e8c2b867e3be827bd79cf",
     "packages": [
         {
             "name": "amphp/amp",
@@ -8767,12 +8767,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/omnia-digital/catalyst-core-plugin.git",
-                "reference": "fdd4b2c5bdff45f541861014ff9a96ee0aa375cc"
+                "reference": "3e6512df032059a271e204fe71cf49870280476e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/catalyst-core-plugin/zipball/fdd4b2c5bdff45f541861014ff9a96ee0aa375cc",
-                "reference": "fdd4b2c5bdff45f541861014ff9a96ee0aa375cc",
+                "url": "https://api.github.com/repos/omnia-digital/catalyst-core-plugin/zipball/3e6512df032059a271e204fe71cf49870280476e",
+                "reference": "3e6512df032059a271e204fe71cf49870280476e",
                 "shasum": ""
             },
             "require": {
@@ -8906,7 +8906,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-21T06:18:22+00:00"
+            "time": "2024-02-22T16:42:57+00:00"
         },
         {
             "name": "omnia-digital/catalyst-forms-plugin",
