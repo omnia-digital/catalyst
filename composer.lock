@@ -8767,12 +8767,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/omnia-digital/catalyst-core-plugin.git",
-                "reference": "3e6512df032059a271e204fe71cf49870280476e"
+                "reference": "61487ffde47ce524a4f10a35134d137a155c713f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnia-digital/catalyst-core-plugin/zipball/3e6512df032059a271e204fe71cf49870280476e",
-                "reference": "3e6512df032059a271e204fe71cf49870280476e",
+                "url": "https://api.github.com/repos/omnia-digital/catalyst-core-plugin/zipball/61487ffde47ce524a4f10a35134d137a155c713f",
+                "reference": "61487ffde47ce524a4f10a35134d137a155c713f",
                 "shasum": ""
             },
             "require": {
@@ -8906,7 +8906,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-22T16:42:57+00:00"
+            "time": "2024-02-26T19:20:09+00:00"
         },
         {
             "name": "omnia-digital/catalyst-forms-plugin",
