@@ -35,6 +35,7 @@
         "omnia-digital/catalyst-core-plugin": "dev-main",
         "pusher/pusher-php-server": "^7.0",
         "sentry/sentry-laravel": "^3.0",
+        "spatie/laravel-ignition": "^2.4",
         "squirephp/countries-en": "^3.3"
     },
     "require-dev": {
@@ -51,7 +52,6 @@
         "nunomaduro/collision": "^7.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
-        "spatie/laravel-ignition": "^2.0",
         "tightenco/duster": "^1.1"
     },
     "repositories": [
@@ -62,26 +62,6 @@
         {
             "type": "composer",
             "url": "https://satis.spatie.be"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-core-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-reviews-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-forms-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-jobs-plugin"
-        },
-        {
-            "type": "path",
-            "url": "../modules/catalyst-location-plugin"
         }
     ],
     "autoload": {

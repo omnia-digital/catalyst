@@ -4,7 +4,7 @@ return [
 
     'tiptap' => [
         'toolbar' => [
-            'enabled' => false,
+            'enabled' => true,
 
             'items' => [
                 'bold' => true,
@@ -38,7 +38,7 @@ return [
         ],
 
         'bubble_menu' => [
-            'enabled' => false,
+            'enabled' => true,
         ],
 
         'floating_menu' => [
